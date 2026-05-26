@@ -1,6 +1,6 @@
 {
   "board": {
-    "active_layer": 25,
+    "active_layer": 0,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
@@ -53,7 +53,7 @@
       "board_outline_area",
       "ly_points"
     ],
-    "visible_layers": "ffffffff_ffffffff_ffffffff_ffffffff",
+    "visible_layers": "00000000_00000000_00002a8a_aaaaaaaf",
     "zone_display_mode": 0
   },
   "git": {
@@ -63,7 +63,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "equalizer.kicad_prl",
+    "filename": "AmpModule.kicad_prl",
     "version": 5
   },
   "net_inspector_panel": {
@@ -92,16 +92,16 @@
       9
     ],
     "col_widths": [
-      156,
-      141,
-      103,
-      85,
-      103,
-      103,
-      103,
-      60,
-      103,
-      103
+      162,
+      147,
+      89,
+      70,
+      89,
+      89,
+      89,
+      53,
+      89,
+      89
     ],
     "custom_group_rules": [],
     "expanded_rows": [],

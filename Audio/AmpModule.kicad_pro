@@ -39,9 +39,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 1.4,
-          "height": 2.4,
-          "width": 2.4
+          "drill": 0.8,
+          "height": 1.27,
+          "width": 2.54
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -50,16 +50,10 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.0
+          "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [
-        {
-          "gap": 0.0,
-          "via_gap": 0.0,
-          "width": 0.0
-        }
-      ],
+      "diff_pair_dimensions": [],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -193,11 +187,7 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [
-        0.0,
-        0.5,
-        1.0
-      ],
+      "track_widths": [],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -224,12 +214,7 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [
-        {
-          "diameter": 0.0,
-          "drill": 0.0
-        }
-      ],
+      "via_dimensions": [],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -259,12 +244,7 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [
-      [
-        "multiple_net_names|2476500|889000|303842e6-2502-43f9-b242-03704d63d738|58c124c1-9a0b-48c1-9a0f-0209870eddc9|/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b|/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b|/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b",
-        ""
-      ]
-    ],
+    "erc_exclusions": [],
     "meta": {
       "version": 0
     },
@@ -492,7 +472,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "AudioCase.kicad_pro",
+    "filename": "AmpModule.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -522,22 +502,17 @@
     },
     "net_colors": null,
     "netclass_assignments": {
-      "GND": [
+      "/A_GND": [
         "Default"
       ]
     },
-    "netclass_patterns": [
-      {
-        "netclass": "Default",
-        "pattern": "GND"
-      }
-    ]
+    "netclass_patterns": []
   },
   "pcbnew": {
     "last_paths": {
       "idf": "",
       "netlist": "",
-      "plot": "Gerber/",
+      "plot": "",
       "specctra_dsn": "",
       "vrml": ""
     },
@@ -611,56 +586,14 @@
           "label": "Datasheet",
           "name": "Datasheet",
           "show": true
-        },
-        {
-          "group_by": false,
-          "label": "Sim.Library",
-          "name": "Sim.Library",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Sim.Name",
-          "name": "Sim.Name",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Sim.Params",
-          "name": "Sim.Params",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Sim.Pins",
-          "name": "Sim.Pins",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Sim.Device",
-          "name": "Sim.Device",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "説明",
-          "name": "Description",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "#",
-          "name": "${ITEM_NUMBER}",
-          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
-      "name": "",
+      "name": "Default Editing",
       "sort_asc": true,
-      "sort_field": "Reference"
+      "sort_field": "リファレンス"
     },
     "bus_aliases": {},
     "connection_grid_size": 50.0,
@@ -698,32 +631,15 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "AudioCase.kicad_sch",
-        "name": "AudioCase",
-        "uuid": "760b9589-09e7-434e-9ca2-6e4136e3b7a2"
+        "filename": "AmpModule.kicad_sch",
+        "name": "AmpModule",
+        "uuid": "00000000-0000-0000-0000-000000000000"
       }
     ],
     "used_designators": "",
     "variants": []
   },
-  "sheets": [
-    [
-      "760b9589-09e7-434e-9ca2-6e4136e3b7a2",
-      "AudioCase"
-    ],
-    [
-      "c17b312b-fe0a-430c-8356-b220c9b28aff",
-      "PowerModule"
-    ],
-    [
-      "2b28f946-3cc3-4b39-916f-5bfe14900d1b",
-      "EQModule"
-    ],
-    [
-      "477be123-54b6-4d91-ae02-fb2ccb128622",
-      "AmpModule"
-    ]
-  ],
+  "sheets": [],
   "text_variables": {},
   "tuning_profiles": {
     "meta": {
