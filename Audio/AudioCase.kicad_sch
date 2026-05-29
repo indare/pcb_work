@@ -1260,6 +1260,12 @@
 		(uuid "051125b1-d22a-4d7a-aa03-c1ff1e71538b")
 	)
 	(junction
+		(at 71.12 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "07195d1d-1e07-42d1-a28a-3b5714e1bd7b")
+	)
+	(junction
 		(at 90.17 104.14)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1302,6 +1308,12 @@
 		(uuid "32e2cc23-7df4-4a86-8650-26e7988404dc")
 	)
 	(junction
+		(at 34.29 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "42a22eb8-55a7-4463-8cae-3027cdef8cb4")
+	)
+	(junction
 		(at 71.12 29.21)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1324,12 +1336,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "61f5162c-dacb-468b-8a95-54185e3fb7a0")
-	)
-	(junction
-		(at 31.75 35.56)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7c5ca862-bd75-4ebf-90e1-821ef985fe92")
 	)
 	(junction
 		(at 140.97 104.14)
@@ -1356,6 +1362,12 @@
 		(uuid "a46842dd-554c-409d-b9a1-d7f0af65160f")
 	)
 	(junction
+		(at 68.58 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ad784291-10c1-4c04-ac70-4eff349074db")
+	)
+	(junction
 		(at 80.01 104.14)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1368,16 +1380,10 @@
 		(uuid "d8080e03-3a56-4607-a0bb-76299f486b50")
 	)
 	(junction
-		(at 71.12 21.59)
+		(at 31.75 35.56)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "ddb7e6fd-f5ef-4d4d-af74-266aa6820672")
-	)
-	(junction
-		(at 31.75 36.83)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e46fe6ab-773d-4c85-bb6a-5a0b7178ede2")
+		(uuid "f899c35c-7552-45a6-9fa4-cdb38af9d192")
 	)
 	(wire
 		(pts
@@ -1591,7 +1597,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 35.56) (xy 35.56 35.56)
+			(xy 31.75 35.56) (xy 34.29 35.56)
 		)
 		(stroke
 			(width 0)
@@ -1691,7 +1697,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 35.56) (xy 31.75 36.83)
+			(xy 31.75 35.56) (xy 31.75 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1851,6 +1857,16 @@
 	)
 	(wire
 		(pts
+			(xy 34.29 35.56) (xy 35.56 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "82d72b85-2876-40a1-af27-4941bd89cdc6")
+	)
+	(wire
+		(pts
 			(xy 115.57 76.2) (xy 115.57 85.09)
 		)
 		(stroke
@@ -1988,16 +2004,6 @@
 			(type default)
 		)
 		(uuid "b990defc-b3e2-4031-8460-e2ea6e45cbc5")
-	)
-	(wire
-		(pts
-			(xy 31.75 36.83) (xy 31.75 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bb42a080-4c09-484a-83b7-358eb8ec1545")
 	)
 	(wire
 		(pts
@@ -2236,7 +2242,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "047e4cfe-a1f9-4e75-83ed-e6aa4f1b3649")
@@ -2316,7 +2322,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "09394ea4-10fc-4db7-9604-a817c0bce065")
@@ -2390,7 +2396,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 31.75 36.83 90)
+		(at 34.29 35.56 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2400,7 +2406,7 @@
 		(dnp no)
 		(uuid "1a641672-ec33-4f13-8237-fd1336f583dd")
 		(property "Reference" "#FLG01"
-			(at 29.845 36.83 0)
+			(at 34.29 37.465 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2411,7 +2417,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 26.67 36.83 0)
+			(at 24.892 38.608 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2421,7 +2427,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 31.75 36.83 0)
+			(at 34.29 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2432,7 +2438,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 31.75 36.83 0)
+			(at 34.29 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2443,7 +2449,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 31.75 36.83 0)
+			(at 34.29 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2551,7 +2557,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3d14efb9-4eb7-4652-9db3-0bec10bb0374")
@@ -2630,7 +2636,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -2714,7 +2720,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "79677624-ef42-4f43-821d-e67bca318fbe")
@@ -2796,7 +2802,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "8aa45d4b-fbe9-4eaf-9467-e4d78af13e12")
@@ -2879,7 +2885,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "aee18038-adf4-40c8-8f94-03c406c6f092")
@@ -2954,13 +2960,90 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 68.58 21.59 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "de56d356-a5c1-4114-978e-6feddeb6b328")
+		(property "Reference" "#FLG08"
+			(at 68.58 19.685 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 77.978 18.542 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 68.58 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 68.58 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 68.58 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8c006a9e-f57c-4cea-9b4c-c2486ec84ff6")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2"
+					(reference "#FLG08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Audio:AudioJack2_Ground")
 		(at 59.69 63.5 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -3043,7 +3126,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f55674a1-95a6-460e-8d30-24e739c10764")
@@ -3447,7 +3530,7 @@
 		(size 31.75 27.94)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(dnp no)
 		(stroke
 			(width 0.1524)

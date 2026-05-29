@@ -4907,7 +4907,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 80.01 99.822 90)
 			(hide yes)
 			(show_name no)
@@ -4950,12 +4950,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "R11")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R13")
 					(unit 1)
 				)
 			)
@@ -5108,12 +5102,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "RV3")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -5138,7 +5126,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "2000pF"
+		(property "Value" "2200pF"
 			(at 86.36 153.67 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5149,7 +5137,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W6.0mm_P10.00mm_FKS3_FKP3_MKS4"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 80.9752 160.02 0)
 			(hide yes)
 			(show_name no)
@@ -5195,12 +5183,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C9")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -5234,7 +5216,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W3.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 66.04 88.5952 0)
 			(hide yes)
 			(show_name no)
@@ -5277,12 +5259,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "C16")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C10")
 					(unit 1)
 				)
 			)
@@ -5397,7 +5373,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 156.21 91.1352 0)
 			(hide yes)
 			(show_name no)
@@ -5443,12 +5419,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C16")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -5484,7 +5454,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 128.27 117.602 90)
 			(hide yes)
 			(show_name no)
@@ -5530,12 +5500,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R15")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -5560,7 +5524,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "2000pF"
+		(property "Value" "2200pF"
 			(at 70.104 153.67 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5571,7 +5535,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W6.0mm_P10.00mm_FKS3_FKP3_MKS4"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 72.0852 160.02 0)
 			(hide yes)
 			(show_name no)
@@ -5614,12 +5578,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "C18")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -5771,12 +5729,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "RV2")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -5856,17 +5808,12 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "J1")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
 		(lib_id "Amplifier_Operational:NJM4558")
 		(at 168.91 137.16 0)
+		(mirror x)
 		(unit 2)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5886,7 +5833,7 @@
 			)
 		)
 		(property "Value" "NJM4558"
-			(at 168.91 146.05 0)
+			(at 168.91 145.034 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5959,12 +5906,6 @@
 					(unit 2)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "U6")
-					(unit 2)
-				)
-			)
 		)
 	)
 	(symbol
@@ -5998,7 +5939,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W3.0mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 49.8348 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -6044,12 +5985,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C2")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6085,7 +6020,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 173.99 91.1352 0)
 			(hide yes)
 			(show_name no)
@@ -6131,12 +6066,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C18")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6160,7 +6089,7 @@
 				)
 			)
 		)
-		(property "Value" "2000pF"
+		(property "Value" "2200pF"
 			(at 55.88 153.67 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6170,7 +6099,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W6.0mm_P10.00mm_FKS3_FKP3_MKS4"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 58.7248 152.4 0)
 			(hide yes)
 			(show_name no)
@@ -6213,12 +6142,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "C13")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -6319,12 +6242,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "U2")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6360,7 +6277,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 58.42 102.362 90)
 			(hide yes)
 			(show_name no)
@@ -6406,12 +6323,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R7")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6447,7 +6358,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 45.72 128.778 90)
 			(hide yes)
 			(show_name no)
@@ -6493,12 +6404,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R4")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6534,7 +6439,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 55.88 85.852 90)
 			(hide yes)
 			(show_name no)
@@ -6580,12 +6485,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R9")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6621,7 +6520,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 181.61 73.9648 0)
 			(hide yes)
 			(show_name no)
@@ -6667,12 +6566,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C17")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6708,7 +6601,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 40.64 81.788 90)
 			(hide yes)
 			(show_name no)
@@ -6754,12 +6647,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R3")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6795,7 +6682,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W3.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 58.1152 69.85 0)
 			(hide yes)
 			(show_name no)
@@ -6841,12 +6728,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C4")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6882,7 +6763,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 60.96 132.842 90)
 			(hide yes)
 			(show_name no)
@@ -6928,12 +6809,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R10")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -6969,7 +6844,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 88.9 143.002 90)
 			(hide yes)
 			(show_name no)
@@ -7012,12 +6887,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "R12")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R14")
 					(unit 1)
 				)
 			)
@@ -7101,12 +6970,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "J7")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -7210,12 +7073,6 @@
 					(unit 3)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "U3")
-					(unit 3)
-				)
-			)
 		)
 	)
 	(symbol
@@ -7249,7 +7106,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W3.0mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 71.12 135.5852 0)
 			(hide yes)
 			(show_name no)
@@ -7295,12 +7152,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C11")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -7336,7 +7187,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W3.0mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 72.0852 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -7382,12 +7233,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C8")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -7411,7 +7256,7 @@
 				)
 			)
 		)
-		(property "Value" "2000pF"
+		(property "Value" "2200pF"
 			(at 80.01 181.61 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7421,7 +7266,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W6.0mm_P10.00mm_FKS3_FKP3_MKS4"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 80.01 178.7652 0)
 			(hide yes)
 			(show_name no)
@@ -7464,12 +7309,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "C21")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C12")
 					(unit 1)
 				)
 			)
@@ -7570,12 +7409,6 @@
 					(unit 2)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "U2")
-					(unit 2)
-				)
-			)
 		)
 	)
 	(symbol
@@ -7661,12 +7494,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "J3")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -7702,7 +7529,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 53.34 55.372 90)
 			(hide yes)
 			(show_name no)
@@ -7745,12 +7572,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "R3")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -7903,12 +7724,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "RV1")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -8020,7 +7835,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 168.91 102.362 90)
 			(hide yes)
 			(show_name no)
@@ -8066,12 +7881,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R31")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -8105,7 +7914,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W3.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 44.7548 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -8148,12 +7957,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "C10")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C1")
 					(unit 1)
 				)
 			)
@@ -8235,12 +8038,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "#FLG02")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -8276,7 +8073,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 74.93 52.832 90)
 			(hide yes)
 			(show_name no)
@@ -8319,12 +8116,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "R10")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R12")
 					(unit 1)
 				)
 			)
@@ -8439,7 +8230,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 67.31 145.542 90)
 			(hide yes)
 			(show_name no)
@@ -8485,12 +8276,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R8")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -8526,7 +8311,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 163.83 73.9648 0)
 			(hide yes)
 			(show_name no)
@@ -8572,12 +8357,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C15")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -8613,7 +8392,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W3.0mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 63.1952 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -8659,12 +8438,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C5")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -8700,7 +8473,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 54.61 171.958 90)
 			(hide yes)
 			(show_name no)
@@ -8746,12 +8519,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R5")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -8787,7 +8554,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 128.27 141.732 90)
 			(hide yes)
 			(show_name no)
@@ -8833,17 +8600,12 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R16")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
 		(lib_id "Amplifier_Operational:NJM4558")
 		(at 168.91 113.03 0)
+		(mirror x)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8863,7 +8625,7 @@
 			)
 		)
 		(property "Value" "NJM4558"
-			(at 168.91 119.38 0)
+			(at 169.164 119.634 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8936,12 +8698,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "U6")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -8977,7 +8733,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 146.05 132.842 90)
 			(hide yes)
 			(show_name no)
@@ -9023,12 +8779,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R22")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -9064,7 +8814,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W3.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 67.0052 69.85 0)
 			(hide yes)
 			(show_name no)
@@ -9110,12 +8860,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "C7")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -9151,7 +8895,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 168.91 127.762 90)
 			(hide yes)
 			(show_name no)
@@ -9197,12 +8941,6 @@
 					(unit 1)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R32")
-					(unit 1)
-				)
-			)
 		)
 	)
 	(symbol
@@ -9238,7 +8976,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 69.85 176.022 90)
 			(hide yes)
 			(show_name no)
@@ -9281,12 +9019,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "R9")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -9365,12 +9097,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "#FLG04")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "#FLG01")
 					(unit 1)
 				)
 			)
@@ -9474,12 +9200,6 @@
 					(unit 3)
 				)
 			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "U2")
-					(unit 3)
-				)
-			)
 		)
 	)
 	(symbol
@@ -9515,7 +9235,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 146.05 108.712 90)
 			(hide yes)
 			(show_name no)
@@ -9558,12 +9278,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "R15")
-					(unit 1)
-				)
-			)
-			(project "EQModule"
-				(path "/7db6e9c1-73d8-40e7-8fd7-0477b4fd75da"
-					(reference "R21")
 					(unit 1)
 				)
 			)

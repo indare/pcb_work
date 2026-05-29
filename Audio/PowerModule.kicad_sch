@@ -2136,7 +2136,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_THT:L_Toroid_Horizontal_D11.2mm_P17.00mm_Diameter12-5mm_Amidon-T44"
+		(property "Footprint" "Inductor_SMD:L_12x12mm_H8mm"
 			(at 83.82 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -2298,7 +2298,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 111.4552 48.26 0)
 			(hide yes)
 			(show_name no)
@@ -2720,7 +2720,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_THT:L_Toroid_Horizontal_D11.2mm_P17.00mm_Diameter12-5mm_Amidon-T44"
+		(property "Footprint" "Inductor_SMD:L_12x12mm_H8mm"
 			(at 83.82 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -3116,7 +3116,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 111.4552 40.64 0)
 			(hide yes)
 			(show_name no)
