@@ -2150,7 +2150,7 @@
 		(uuid "f31b7455-551e-4ab6-bee7-47c014b95b30")
 	)
 	(hierarchical_label "A_GND"
-		(shape bidirectional)
+		(shape input)
 		(at 54.61 54.61 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2185,7 +2185,7 @@
 		(uuid "05c4698b-8a08-4577-9733-a19179c2cf71")
 	)
 	(hierarchical_label "A_GND"
-		(shape bidirectional)
+		(shape input)
 		(at 48.26 74.93 180)
 		(fields_autoplaced yes)
 		(effects
@@ -2209,7 +2209,7 @@
 		)
 	)
 	(hierarchical_label "A_GND"
-		(shape bidirectional)
+		(shape input)
 		(at 33.02 20.32 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2244,7 +2244,7 @@
 		(uuid "3ef97986-f452-4fe3-9062-d6a091831a85")
 	)
 	(hierarchical_label "A_GND"
-		(shape bidirectional)
+		(shape input)
 		(at 43.18 81.28 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2279,7 +2279,7 @@
 		(uuid "6752374e-1c28-4259-844b-2e39d07a1437")
 	)
 	(hierarchical_label "A_GND"
-		(shape bidirectional)
+		(shape input)
 		(at 25.4 35.56 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2303,7 +2303,7 @@
 		)
 	)
 	(hierarchical_label "A_GND"
-		(shape bidirectional)
+		(shape input)
 		(at 43.18 92.71 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2327,7 +2327,7 @@
 		)
 	)
 	(hierarchical_label "A_GND"
-		(shape bidirectional)
+		(shape input)
 		(at 33.02 52.07 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2351,7 +2351,7 @@
 		)
 	)
 	(hierarchical_label "A_GND"
-		(shape bidirectional)
+		(shape input)
 		(at 53.34 121.92 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2397,7 +2397,7 @@
 		(uuid "dd0493b9-f215-4ed5-92e0-c59eb6ddf6aa")
 	)
 	(hierarchical_label "A_GND"
-		(shape bidirectional)
+		(shape input)
 		(at 49.53 97.79 180)
 		(fields_autoplaced yes)
 		(effects
@@ -2523,7 +2523,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0a3138b5-02a8-4dfc-89ff-4ee333110565")
-		(property "Reference" "C31"
+		(property "Reference" "C27"
 			(at 38.1 110.49 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2587,7 +2587,13 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
-					(reference "C31")
+					(reference "C27")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -2626,7 +2632,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 53.34 76.708 90)
 			(hide yes)
 			(show_name no)
@@ -2648,7 +2654,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 53.34 74.93 0)
 			(hide yes)
 			(show_name no)
@@ -2680,6 +2686,12 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
 					(reference "R21")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -2799,7 +2811,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 56.388 59.69 90)
 			(hide yes)
 			(show_name no)
@@ -2821,7 +2833,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 54.61 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -2954,6 +2966,12 @@
 					(unit 1)
 				)
 			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "U1")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -2989,7 +3007,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 39.37 94.488 90)
 			(hide yes)
 			(show_name no)
@@ -3011,7 +3029,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 39.37 92.71 0)
 			(hide yes)
 			(show_name no)
@@ -3141,6 +3159,12 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
 					(reference "AMP1")
+					(unit 2)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "U1")
 					(unit 2)
 				)
 			)
@@ -3317,7 +3341,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "4001a95b-38b5-4f65-a342-84f4e14d6d28")
-		(property "Reference" "C28"
+		(property "Reference" "C24"
 			(at 35.56 58.42 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3381,7 +3405,13 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
-					(reference "C28")
+					(reference "C24")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -3420,7 +3450,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 55.118 116.84 90)
 			(hide yes)
 			(show_name no)
@@ -3442,7 +3472,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 53.34 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -3491,7 +3521,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "4fa04d2c-4fbb-4a6d-950f-194648929eac")
-		(property "Reference" "C33"
+		(property "Reference" "C29"
 			(at 88.9 105.41 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3555,7 +3585,13 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
-					(reference "C33")
+					(reference "C29")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "C8")
 					(unit 1)
 				)
 			)
@@ -3649,7 +3685,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5fbfb923-7a8f-42eb-a19f-c3cb39b3c4ac")
-		(property "Reference" "C30"
+		(property "Reference" "C26"
 			(at 38.1 102.87 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3713,7 +3749,13 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
-					(reference "C30")
+					(reference "C26")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -3752,7 +3794,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 82.55 74.168 90)
 			(hide yes)
 			(show_name no)
@@ -3774,7 +3816,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 82.55 72.39 0)
 			(hide yes)
 			(show_name no)
@@ -3809,6 +3851,12 @@
 					(unit 1)
 				)
 			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "R9")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -3823,7 +3871,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "826a4c25-705a-4877-a989-770966133081")
-		(property "Reference" "C27"
+		(property "Reference" "C23"
 			(at 30.48 53.34 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3845,7 +3893,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 32.0548 52.07 0)
 			(hide yes)
 			(show_name no)
@@ -3887,7 +3935,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
-					(reference "C27")
+					(reference "C23")
 					(unit 1)
 				)
 			)
@@ -3905,7 +3953,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "82713f62-fb45-4876-bbf5-322fff0a7e47")
-		(property "Reference" "C32"
+		(property "Reference" "C28"
 			(at 88.9 73.66 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3969,7 +4017,13 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
-					(reference "C32")
+					(reference "C28")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -4151,6 +4205,12 @@
 					(unit 3)
 				)
 			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "U1")
+					(unit 3)
+				)
+			)
 		)
 	)
 	(symbol
@@ -4186,7 +4246,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 67.31 84.328 90)
 			(hide yes)
 			(show_name no)
@@ -4208,7 +4268,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 67.31 82.55 0)
 			(hide yes)
 			(show_name no)
@@ -4240,6 +4300,12 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
 					(reference "R25")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -4278,7 +4344,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 54.61 100.838 90)
 			(hide yes)
 			(show_name no)
@@ -4300,7 +4366,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 54.61 99.06 0)
 			(hide yes)
 			(show_name no)
@@ -4349,7 +4415,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "bd4c4286-04ae-41c4-9fb9-215930ce746a")
-		(property "Reference" "C26"
+		(property "Reference" "C22"
 			(at 39.37 24.13 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4371,7 +4437,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 32.0548 27.94 0)
 			(hide yes)
 			(show_name no)
@@ -4413,7 +4479,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
-					(reference "C26")
+					(reference "C22")
 					(unit 1)
 				)
 			)
@@ -4430,7 +4496,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d96447f7-bce9-4215-ad04-2817b19d7135")
-		(property "Reference" "C29"
+		(property "Reference" "C25"
 			(at 35.56 72.39 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4494,7 +4560,13 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
-					(reference "C29")
+					(reference "C25")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -4609,7 +4681,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 82.55 105.918 90)
 			(hide yes)
 			(show_name no)
@@ -4631,7 +4703,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 82.55 104.14 0)
 			(hide yes)
 			(show_name no)
@@ -4663,6 +4735,12 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
 					(reference "R28")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "R10")
 					(unit 1)
 				)
 			)
@@ -4777,7 +4855,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 67.31 100.838 90)
 			(hide yes)
 			(show_name no)
@@ -4799,7 +4877,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 67.31 99.06 0)
 			(hide yes)
 			(show_name no)
@@ -4831,6 +4909,12 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/477be123-54b6-4d91-ae02-fb2ccb128622"
 					(reference "R26")
+					(unit 1)
+				)
+			)
+			(project "audio"
+				(path "/9b212568-aead-45da-960b-770311cd62c9"
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -4947,7 +5031,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 39.37 83.058 90)
 			(hide yes)
 			(show_name no)
@@ -4969,7 +5053,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" ""
 			(at 39.37 81.28 0)
 			(hide yes)
 			(show_name no)
