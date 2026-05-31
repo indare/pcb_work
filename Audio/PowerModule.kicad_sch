@@ -1711,6 +1711,12 @@
 		(uuid "bad4ca1c-5394-4101-aa2d-5c1948d8ad8d")
 	)
 	(junction
+		(at 48.26 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cb28240f-7b31-4d15-a028-f386d6fbb487")
+	)
+	(junction
 		(at 48.26 44.45)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1794,7 +1800,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 36.83) (xy 52.07 36.83)
+			(xy 45.72 36.83) (xy 48.26 36.83)
 		)
 		(stroke
 			(width 0)
@@ -2011,6 +2017,16 @@
 			(type default)
 		)
 		(uuid "dfc47134-c261-4d67-a32e-629c08690c11")
+	)
+	(wire
+		(pts
+			(xy 48.26 36.83) (xy 52.07 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e6ffb7af-1690-48d5-a227-2eec80c0027e")
 	)
 	(wire
 		(pts
@@ -3065,6 +3081,84 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/c17b312b-fe0a-430c-8356-b220c9b28aff"
 					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 48.26 36.83 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d7d35a8e-c519-4d78-a1a2-7915bed97541")
+		(property "Reference" "#FLG08"
+			(at 48.26 34.925 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 48.26 31.75 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 48.26 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 48.26 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 48.26 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7453473e-fba3-4754-9ceb-bbf7c0451907")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/c17b312b-fe0a-430c-8356-b220c9b28aff"
+					(reference "#FLG08")
 					(unit 1)
 				)
 			)

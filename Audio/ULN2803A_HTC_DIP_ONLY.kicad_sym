@@ -11,7 +11,7 @@
     (property "Value" "ULN2803A" (at 0 11.43 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "ULN2803A_HTC_DIP_ONLY:ULN2803A_DIP-18_W7.62mm" (at 0 -13.97 0)
+    (property "Footprint" "Library:ULN2803A_DIP-18_W7.62mm" (at 0 -13.97 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://akizukidenshi.com/goodsaffix/uln2803a.pdf" (at 0 -16.51 0)

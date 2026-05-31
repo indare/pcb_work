@@ -660,22 +660,10 @@
 		(uuid "4f6569b3-e46a-405a-9cad-519ad6c29ac8")
 	)
 	(junction
-		(at 140.97 104.14)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7f59bdc5-3076-4c45-9e3d-c8bab75323e8")
-	)
-	(junction
 		(at 59.69 104.14)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "837973de-e0f8-450b-92a0-226b042f27d7")
-	)
-	(junction
-		(at 134.62 96.52)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a46842dd-554c-409d-b9a1-d7f0af65160f")
 	)
 	(junction
 		(at 80.01 104.14)
@@ -694,22 +682,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f899c35c-7552-45a6-9fa4-cdb38af9d192")
-	)
-	(junction
-		(at 129.54 93.98)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f9f7377a-dc3e-48b0-9de5-a50e2fdd7e6a")
-	)
-	(wire
-		(pts
-			(xy 140.97 104.14) (xy 148.59 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "02858c93-e0b8-44b1-823b-440acafe1b02")
 	)
 	(wire
 		(pts
@@ -730,16 +702,6 @@
 			(type default)
 		)
 		(uuid "1a0f26ea-3485-4662-8d6d-94e6dea6bfc8")
-	)
-	(wire
-		(pts
-			(xy 129.54 96.52) (xy 134.62 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1a103812-9084-4783-ae53-07431341623d")
 	)
 	(wire
 		(pts
@@ -783,7 +745,7 @@
 	)
 	(wire
 		(pts
-			(xy 134.62 96.52) (xy 135.89 96.52)
+			(xy 129.54 96.52) (xy 135.89 96.52)
 		)
 		(stroke
 			(width 0)
@@ -873,16 +835,6 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 93.98) (xy 129.54 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "422a10b2-de1f-43de-8de8-20ed5929a20b")
-	)
-	(wire
-		(pts
 			(xy 31.75 35.56) (xy 34.29 35.56)
 		)
 		(stroke
@@ -930,16 +882,6 @@
 			(type default)
 		)
 		(uuid "4c182f85-5334-4c12-adf4-104fb04db0e7")
-	)
-	(wire
-		(pts
-			(xy 134.62 90.17) (xy 134.62 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4cc95ba6-45a4-48fc-9e54-f99fd99a926d")
 	)
 	(wire
 		(pts
@@ -1000,16 +942,6 @@
 			(type default)
 		)
 		(uuid "6ab0f857-d74a-4223-855d-ca103503ef9c")
-	)
-	(wire
-		(pts
-			(xy 130.81 90.17) (xy 134.62 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "72ef1cc6-ba69-4063-b6c9-1752a77f02c6")
 	)
 	(wire
 		(pts
@@ -1113,16 +1045,6 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 60.96) (xy 128.27 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a140ee84-5830-4e9f-b8cd-9e68f130acad")
-	)
-	(wire
-		(pts
 			(xy 120.65 60.96) (xy 120.65 85.09)
 		)
 		(stroke
@@ -1130,26 +1052,6 @@
 			(type default)
 		)
 		(uuid "a8ddda44-dd62-4a3c-bdb2-4159ded7a837")
-	)
-	(wire
-		(pts
-			(xy 130.81 60.96) (xy 130.81 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "abd60bcd-3e34-4dc8-a683-a5c7616212ac")
-	)
-	(wire
-		(pts
-			(xy 148.59 43.18) (xy 138.43 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b06b76ab-f2ef-462f-be16-d5e876cfe6cb")
 	)
 	(wire
 		(pts
@@ -1190,6 +1092,16 @@
 			(type default)
 		)
 		(uuid "bc5d70f9-4b4e-42a8-ab4e-5db2cd3aa410")
+	)
+	(wire
+		(pts
+			(xy 129.54 93.98) (xy 135.89 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d2f2e2f8-e05d-4a6f-ba9f-d5a8d85875db")
 	)
 	(wire
 		(pts
@@ -1273,16 +1185,6 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 93.98) (xy 135.89 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ea24800b-032a-48b2-b0b3-32e072cffb4f")
-	)
-	(wire
-		(pts
 			(xy 100.33 57.15) (xy 106.68 57.15)
 		)
 		(stroke
@@ -1290,16 +1192,6 @@
 			(type default)
 		)
 		(uuid "ee2b794d-24bc-4f03-bbb0-327534d2f901")
-	)
-	(wire
-		(pts
-			(xy 148.59 43.18) (xy 148.59 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f8db9518-084c-4f75-a82b-3d17751fd347")
 	)
 	(wire
 		(pts
@@ -2156,36 +2048,6 @@
 		(pin "AMP_V+_IN" input
 			(at 106.68 49.53 180)
 			(uuid "d9314e06-42f7-42bd-81c0-403f298f1fbc")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "A_GND" input
-			(at 138.43 43.18 0)
-			(uuid "d5602c64-80e3-4c4e-9940-3131259b185c")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "ANALYZE_L_IN" input
-			(at 128.27 60.96 270)
-			(uuid "0ecd894f-a277-4e7f-8dd8-bb30862141a8")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "ANALYZE_R_IN" input
-			(at 130.81 60.96 270)
-			(uuid "f0f80d63-2987-47f6-ba69-ba503ab61038")
 			(effects
 				(font
 					(size 1.27 1.27)
