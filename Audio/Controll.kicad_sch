@@ -3308,10 +3308,22 @@
 		(uuid "35b3c751-5cbb-41db-bf2e-576233a41feb")
 	)
 	(junction
+		(at 162.56 168.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3d9fa82e-eda4-4582-8997-53b51d722672")
+	)
+	(junction
 		(at 101.6 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4a2acf4f-6ad0-4824-a6a6-e1ff06c59634")
+	)
+	(junction
+		(at 162.56 167.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4dff55fc-7aeb-4a1d-a697-3a70efc6c65a")
 	)
 	(junction
 		(at 120.65 67.31)
@@ -3360,6 +3372,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "95c5ccc4-55c0-44a3-ac94-6c28d1c0e371")
+	)
+	(junction
+		(at 162.56 166.37)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "97047520-3fc7-480f-90ac-441366edcd8c")
 	)
 	(junction
 		(at 27.94 128.27)
@@ -3446,10 +3464,6 @@
 		(uuid "1bfca4a2-a5be-4e1b-96d9-52a1dc30d50e")
 	)
 	(no_connect
-		(at 166.37 171.45)
-		(uuid "206606ac-126e-4eeb-8049-7cb9d6bd59a0")
-	)
-	(no_connect
 		(at 226.06 64.77)
 		(uuid "23ac5cbc-19e8-448e-a01d-d7d3664c8fa3")
 	)
@@ -3468,10 +3482,6 @@
 	(no_connect
 		(at 74.93 107.95)
 		(uuid "2ff0a18d-c569-4557-aca3-3572752a1754")
-	)
-	(no_connect
-		(at 166.37 166.37)
-		(uuid "4c3ad306-0656-484d-ab34-7bc735cb4919")
 	)
 	(no_connect
 		(at 273.05 68.58)
@@ -3496,10 +3506,6 @@
 	(no_connect
 		(at 186.69 166.37)
 		(uuid "6207db4b-bcf1-4443-94aa-a1c0ddd7c2f9")
-	)
-	(no_connect
-		(at 166.37 163.83)
-		(uuid "693a57a9-e073-432d-9b85-939a8d2159c0")
 	)
 	(no_connect
 		(at 275.59 107.95)
@@ -3572,10 +3578,6 @@
 	(no_connect
 		(at 179.07 40.64)
 		(uuid "f2447d49-5757-4085-ab99-e68dc75c2ed9")
-	)
-	(no_connect
-		(at 166.37 168.91)
-		(uuid "f74510e2-c7fd-4bcb-ae4a-049482c3ff54")
 	)
 	(no_connect
 		(at 275.59 118.11)
@@ -3773,6 +3775,16 @@
 	)
 	(wire
 		(pts
+			(xy 166.37 168.91) (xy 162.56 168.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25e91273-8d88-4927-8c56-fd40e3841986")
+	)
+	(wire
+		(pts
 			(xy 49.53 41.91) (xy 52.07 41.91)
 		)
 		(stroke
@@ -3800,6 +3812,16 @@
 			(type default)
 		)
 		(uuid "2e2a7e82-11ea-4674-b0af-ed197bee6dda")
+	)
+	(wire
+		(pts
+			(xy 162.56 163.83) (xy 162.56 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30447770-ccf2-4f7e-9d9b-ad0447b0161a")
 	)
 	(wire
 		(pts
@@ -3943,6 +3965,16 @@
 	)
 	(wire
 		(pts
+			(xy 162.56 166.37) (xy 162.56 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "416b93e9-94b6-4655-b462-7901c7fe4aac")
+	)
+	(wire
+		(pts
 			(xy 82.55 74.93) (xy 82.55 73.66)
 		)
 		(stroke
@@ -3980,6 +4012,16 @@
 			(type default)
 		)
 		(uuid "4799ead9-f188-4f17-96ee-211750ec6fd3")
+	)
+	(wire
+		(pts
+			(xy 166.37 171.45) (xy 162.56 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "495f35e1-fa4e-4815-9ecc-5d94dbc25ee7")
 	)
 	(wire
 		(pts
@@ -4483,6 +4525,16 @@
 	)
 	(wire
 		(pts
+			(xy 162.56 167.64) (xy 162.56 168.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0643126-12c8-4dee-a010-dcf0122ae62f")
+	)
+	(wire
+		(pts
 			(xy 147.32 41.91) (xy 149.86 41.91)
 		)
 		(stroke
@@ -4710,6 +4762,16 @@
 			(type default)
 		)
 		(uuid "baa55796-8ccf-4ce6-9f2d-792f2d59c722")
+	)
+	(wire
+		(pts
+			(xy 166.37 163.83) (xy 162.56 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb8963be-3538-4e74-a341-bc1d5a8b48a6")
 	)
 	(wire
 		(pts
@@ -4943,6 +5005,26 @@
 	)
 	(wire
 		(pts
+			(xy 166.37 166.37) (xy 162.56 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e282c33e-a14d-4675-89da-ec200b083c59")
+	)
+	(wire
+		(pts
+			(xy 162.56 171.45) (xy 162.56 168.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2b6751d-2b6f-4f3e-a282-620100f1722e")
+	)
+	(wire
+		(pts
 			(xy 194.31 45.72) (xy 196.85 45.72)
 		)
 		(stroke
@@ -5050,6 +5132,16 @@
 			(type default)
 		)
 		(uuid "f8e7d9b4-9338-4c7a-a5d9-7e24e6572911")
+	)
+	(wire
+		(pts
+			(xy 158.75 167.64) (xy 162.56 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f91944dd-a1b5-440c-9337-46836bdefa45")
 	)
 	(wire
 		(pts
@@ -5630,6 +5722,16 @@
 			(justify left bottom)
 		)
 		(uuid "52e0b394-ed36-4a3b-a68a-ce8150ebd7d4")
+	)
+	(label "CTRL_GND"
+		(at 158.75 167.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "568db6c1-3e99-415e-baea-afb8915225e6")
 	)
 	(label "AUDIO_SET_RELAY_4"
 		(at 270.51 83.82 180)
