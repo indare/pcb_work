@@ -6,3 +6,8 @@
 *.kicad_prl
 *.bak
 __pycache__/
+
+# KiCad ERC/DRC reports (regenerate with kicad-cli)
+*-erc.rpt
+*-drc.rpt
+*-drc.json
