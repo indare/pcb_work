@@ -2841,6 +2841,12 @@
 		(uuid "7dd94705-7629-4215-9ccd-14469729c6a4")
 	)
 	(junction
+		(at 139.7 78.74)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7e3cf292-b54a-4e81-9f62-e5722f920bb4")
+	)
+	(junction
 		(at 177.8 137.16)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2923,12 +2929,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ee3d4455-c4e9-4510-be9e-3e1ec590582d")
-	)
-	(junction
-		(at 139.7 78.74)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ef7c53f5-d5ad-4f06-981e-ed6f5ed77a8b")
 	)
 	(junction
 		(at 67.31 152.4)
@@ -3594,6 +3594,16 @@
 	)
 	(wire
 		(pts
+			(xy 139.7 78.74) (xy 146.05 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6969fb79-c9b4-4ab0-9b98-1f2fbe8f1aee")
+	)
+	(wire
+		(pts
 			(xy 64.77 134.62) (xy 66.04 134.62)
 		)
 		(stroke
@@ -3921,16 +3931,6 @@
 			(type default)
 		)
 		(uuid "990f53cb-b5cd-40cd-8f95-66e4db84279b")
-	)
-	(wire
-		(pts
-			(xy 139.7 78.74) (xy 146.05 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "99bd479b-2d46-4d95-93b7-dbc377616582")
 	)
 	(wire
 		(pts
@@ -8198,6 +8198,84 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 139.7 78.74 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c4000ab8-6f73-452b-817a-1d5d467fb5a8")
+		(property "Reference" "#FLG04"
+			(at 139.7 76.835 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 139.7 73.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 139.7 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 139.7 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4ab04f4c-d9de-460a-aba9-c120de6e2b12")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
+					(reference "#FLG04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 67.31 147.32 270)
 		(unit 1)
@@ -9019,84 +9097,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
 					(reference "R9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 139.7 78.74 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f3b9bb7f-d3c4-4caa-8753-0ce46ea7b5b6")
-		(property "Reference" "#FLG04"
-			(at 139.7 76.835 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 139.7 73.66 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 139.7 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 139.7 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 139.7 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "7bf8bd5a-2181-40b0-bbee-2703c3708913")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/2b28f946-3cc3-4b39-916f-5bfe14900d1b"
-					(reference "#FLG04")
 					(unit 1)
 				)
 			)

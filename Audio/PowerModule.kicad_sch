@@ -2368,7 +2368,7 @@
 				)
 			)
 		)
-		(property "Value" ""
+		(property "Value" "MCW03"
 			(at 64.77 31.75 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3098,7 +3098,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d7d35a8e-c519-4d78-a1a2-7915bed97541")
-		(property "Reference" "#FLG08"
+		(property "Reference" "#FLG02"
 			(at 48.26 34.925 0)
 			(hide yes)
 			(show_name no)
@@ -3158,7 +3158,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/c17b312b-fe0a-430c-8356-b220c9b28aff"
-					(reference "#FLG08")
+					(reference "#FLG02")
 					(unit 1)
 				)
 			)

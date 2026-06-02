@@ -53,7 +53,7 @@
 				)
 			)
 		)
-		(property "Description" "ROHM BP5293-50, 5V 1A non-isolated buck DC/DC converter module, SIP-3. Pin 1=VIN, 2=GND, 3=VOUT."
+		(property "Description" "ROHM BP5293-33, 3.3V 1A non-isolated buck DC/DC converter module, SIP-3. Pin 1=VIN, 2=GND, 3=VOUT. Non-uniform pitch: 2.54mm (P1-P2), 5.08mm (P2-P3)."
 			(at 0 -12.7 0)
 			(show_name no)
 			(do_not_autoplace no)
