@@ -4093,6 +4093,12 @@
 		(uuid "70157a00-76ad-4d1c-92d9-412669f49fb5")
 	)
 	(junction
+		(at 30.48 66.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "74200bb8-1b35-4775-84ac-e7258f07ecb4")
+	)
+	(junction
 		(at 33.02 31.75)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4121,6 +4127,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "97047520-3fc7-480f-90ac-441366edcd8c")
+	)
+	(junction
+		(at 30.48 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "973d4014-0f11-4acc-a5e6-566d91db5bb9")
 	)
 	(junction
 		(at 80.01 25.4)
@@ -4392,6 +4404,16 @@
 	)
 	(wire
 		(pts
+			(xy 27.94 63.5) (xy 30.48 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b1dc18c-bb89-47ea-bb22-93e699e743ee")
+	)
+	(wire
+		(pts
 			(xy 120.65 115.57) (xy 124.46 115.57)
 		)
 		(stroke
@@ -4632,6 +4654,16 @@
 	)
 	(wire
 		(pts
+			(xy 30.48 66.04) (xy 33.02 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23c8bf90-e873-4674-8ecc-ba709baa0559")
+	)
+	(wire
+		(pts
 			(xy 166.37 168.91) (xy 162.56 168.91)
 		)
 		(stroke
@@ -4789,6 +4821,16 @@
 			(type default)
 		)
 		(uuid "33da676a-a48b-40b7-a1ec-e0993c2c1149")
+	)
+	(wire
+		(pts
+			(xy 27.94 66.04) (xy 30.48 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "351bf0e1-26d1-40f5-bcab-57bca63fad3e")
 	)
 	(wire
 		(pts
@@ -5119,6 +5161,16 @@
 			(type default)
 		)
 		(uuid "5ac22259-59df-465a-b8d0-22fc386f1b7f")
+	)
+	(wire
+		(pts
+			(xy 30.48 66.04) (xy 30.48 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5cad035b-9840-40b3-bd0f-1cff12e22c01")
 	)
 	(wire
 		(pts
@@ -5472,6 +5524,16 @@
 	)
 	(wire
 		(pts
+			(xy 30.48 60.96) (xy 30.48 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "81711e03-1975-4c88-a662-5af32d06d11c")
+	)
+	(wire
+		(pts
 			(xy 224.79 59.69) (xy 226.06 59.69)
 		)
 		(stroke
@@ -5639,16 +5701,6 @@
 			(type default)
 		)
 		(uuid "984210ae-0252-4eca-ac0e-cffc1baff505")
-	)
-	(wire
-		(pts
-			(xy 30.48 66.04) (xy 27.94 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9864ed96-ef01-40d1-96eb-db2ee1ebfd47")
 	)
 	(wire
 		(pts
@@ -5829,6 +5881,16 @@
 			(type default)
 		)
 		(uuid "b099b467-19f0-4e83-bc68-8d69ee23643f")
+	)
+	(wire
+		(pts
+			(xy 30.48 63.5) (xy 33.02 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2e895f4-cdfa-4dd1-8242-52512c3a6dc4")
 	)
 	(wire
 		(pts
@@ -6129,16 +6191,6 @@
 			(type default)
 		)
 		(uuid "caa5ad15-3790-4b50-b94d-2d773e59c74a")
-	)
-	(wire
-		(pts
-			(xy 30.48 63.5) (xy 27.94 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cb09d2d9-06f8-4bef-acb0-d93707f19eed")
 	)
 	(wire
 		(pts
@@ -6690,6 +6742,16 @@
 		)
 		(uuid "08f1b48b-8337-4465-aac1-d133eb3007e6")
 	)
+	(label "AUDIO_RESET_RELAY_5"
+		(at 186.69 153.67 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0bd84ddc-0fa6-4f12-927a-221589f27559")
+	)
 	(label "5V_+"
 		(at 130.81 67.31 0)
 		(effects
@@ -6820,6 +6882,16 @@
 		)
 		(uuid "2546860a-f4b3-47a8-a122-97dfa2a1d18c")
 	)
+	(label "PWR_SET_RELAY_5"
+		(at 186.69 161.29 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "26bf91bc-a903-4369-8725-f0fe2eb13494")
+	)
 	(label "R_IN"
 		(at 293.37 115.57 0)
 		(effects
@@ -6899,6 +6971,16 @@
 			(justify left bottom)
 		)
 		(uuid "2bdb41d7-4716-4557-92da-b2e49819dd74")
+	)
+	(label "AUDIO_RESET_GPIO_5"
+		(at 166.37 153.67 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2d24b971-fdcd-4a84-94d8-af658ed0b7a2")
 	)
 	(label "PWR_SET_GPIO_4"
 		(at 124.46 100.33 0)
@@ -7000,16 +7082,6 @@
 		)
 		(uuid "3cc8145a-428a-4643-9c26-7e48c8e23bbd")
 	)
-	(label "AUDIO_SET_RELAY_5"
-		(at 186.69 161.29 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3d591c4b-9973-4e26-91d0-f6d8688124dd")
-	)
 	(label "PWR_RESET_RELAY_1"
 		(at 185.42 82.55 0)
 		(effects
@@ -7070,16 +7142,6 @@
 		)
 		(uuid "43ce0e3e-0ed7-4d05-b9b3-f17354127133")
 	)
-	(label "PWR_SET_GPIO_5"
-		(at 166.37 156.21 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4415f06f-df2a-427f-ad5d-e384b52bda33")
-	)
 	(label "PWR_RESET_RELAY_4"
 		(at 186.69 119.38 0)
 		(effects
@@ -7119,26 +7181,6 @@
 			(justify left bottom)
 		)
 		(uuid "48fe7540-0051-452a-b816-63adeaedbbe7")
-	)
-	(label "AUDIO_SET_GPIO_5"
-		(at 166.37 161.29 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4ab0f4b8-5f40-4956-b979-f3a4d8472ccb")
-	)
-	(label "PWR_RESET_GPIO_5"
-		(at 166.37 153.67 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4bbb9443-5a09-43c8-8e0c-042a4087262f")
 	)
 	(label "5V_+"
 		(at 242.57 48.26 0)
@@ -7210,6 +7252,16 @@
 		)
 		(uuid "52e0b394-ed36-4a3b-a68a-ce8150ebd7d4")
 	)
+	(label "PWR_RESET_GPIO_5"
+		(at 166.37 158.75 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "554ac963-a930-4759-bce3-9a6bb317416e")
+	)
 	(label "CTRL_GND"
 		(at 158.75 167.64 180)
 		(effects
@@ -7259,16 +7311,6 @@
 			(justify left bottom)
 		)
 		(uuid "5980e256-35a6-4818-9328-d83607562ee6")
-	)
-	(label "PWR_RESET_RELAY_5"
-		(at 186.69 153.67 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5dffacc3-3615-4802-b2c7-b51d546ae1c2")
 	)
 	(label "PWR_RESET_GPIO_5"
 		(at 72.39 133.35 180)
@@ -7490,16 +7532,6 @@
 		)
 		(uuid "7e97db66-7f0b-4644-a7f8-fdfeed487724")
 	)
-	(label "AUDIO_RESET_RELAY_5"
-		(at 186.69 158.75 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7fc94b1f-edd7-4e9e-94c3-c721753121f9")
-	)
 	(label "5V_+"
 		(at 222.25 48.26 180)
 		(effects
@@ -7631,12 +7663,12 @@
 		(uuid "96531c18-8800-4b6e-af25-3429a7a8a2bd")
 	)
 	(label "AMP_V+_IN"
-		(at 30.48 63.5 0)
+		(at 30.48 69.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "97b2aa91-d083-48bf-85cf-b450ce520af7")
 	)
@@ -7649,16 +7681,6 @@
 			(justify left bottom)
 		)
 		(uuid "9ae44f04-6c74-42cc-b19e-fd4cc29960dd")
-	)
-	(label "AUDIO_RESET_GPIO_5"
-		(at 166.37 158.75 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9af0e77f-0935-4695-a979-c452275b09d1")
 	)
 	(label "PWR_RESET_GPIO_1"
 		(at 124.46 128.27 0)
@@ -7830,6 +7852,16 @@
 		)
 		(uuid "b266ab28-e527-48fb-860b-c65a250058b9")
 	)
+	(label "AUDIO_SET_RELAY_5"
+		(at 186.69 156.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b3d616ef-81b9-4329-b4f1-f0bed713a02e")
+	)
 	(label "5V_+"
 		(at 99.06 50.8 0)
 		(effects
@@ -7839,6 +7871,16 @@
 			(justify left bottom)
 		)
 		(uuid "b8712aad-fc34-4a7e-9992-73a17a80ca84")
+	)
+	(label "AUDIO_SET_GPIO_5"
+		(at 166.37 156.21 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b9b2f7b0-2d1d-48d9-9258-82fb6dea32d1")
 	)
 	(label "R_OUT"
 		(at 30.48 87.63 0)
@@ -7950,15 +7992,15 @@
 		)
 		(uuid "c68be661-c8e3-4e5e-b3ee-578abc98121e")
 	)
-	(label "PWR_SET_RELAY_5"
-		(at 186.69 156.21 0)
+	(label "PWR_RESET_RELAY_5"
+		(at 186.69 158.75 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "ca27477e-4140-4243-9868-38c165e2abe1")
+		(uuid "c97c0479-06f0-4b49-82f1-70a579e5d943")
 	)
 	(label "AUDIO_RESET_GPIO_3"
 		(at 166.37 134.62 180)
@@ -8091,12 +8133,12 @@
 		(uuid "d39d8039-c120-4011-a613-fe832f09cd19")
 	)
 	(label "AMP_V-_IN"
-		(at 30.48 66.04 0)
+		(at 30.48 60.96 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "d681ae6a-2ed1-4d32-828f-bb39e030d092")
 	)
@@ -8320,6 +8362,16 @@
 		)
 		(uuid "f420bea6-b2bf-4a62-8e3a-ec99b43586b1")
 	)
+	(label "PWR_SET_GPIO_5"
+		(at 166.37 161.29 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f4574334-3af9-4d9b-9c3d-181306ca02f3")
+	)
 	(label "R_IN"
 		(at 196.85 38.1 0)
 		(effects
@@ -8499,7 +8551,7 @@
 	)
 	(hierarchical_label "AMP_V-_IN"
 		(shape input)
-		(at 27.94 66.04 180)
+		(at 27.94 63.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8510,7 +8562,7 @@
 	)
 	(hierarchical_label "AMP_V+_IN"
 		(shape input)
-		(at 27.94 63.5 180)
+		(at 27.94 66.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8620,7 +8672,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0cb0cd60-8ccc-4747-80bd-28d2d457d341")
-		(property "Reference" "J22"
+		(property "Reference" "J23"
 			(at 223.52 99.822 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8682,7 +8734,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J22")
+					(reference "J23")
 					(unit 1)
 				)
 			)
@@ -8874,6 +8926,85 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
+		(at 38.1 66.04 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1b03123b-212a-41af-a3f0-6f9de8a6b1ea")
+		(property "Reference" "J14"
+			(at 35.56 69.85 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP_PWR_IN"
+			(at 40.64 67.818 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+			(at 38.1 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 38.1 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Amp board harness terminal, 2-pin 5.08mm"
+			(at 38.1 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f79b0221-5083-46cf-bdc1-f4dc57cbd0ea")
+		)
+		(pin "2"
+			(uuid "645532d7-bf40-45ab-a4e5-26e5aa382764")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "J14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
 		(at 218.44 63.5 0)
 		(unit 1)
 		(body_style 1)
@@ -8883,7 +9014,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "21b1c881-12d0-4055-8426-1ea8668ede7d")
-		(property "Reference" "J21"
+		(property "Reference" "J22"
 			(at 220.98 60.452 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8945,7 +9076,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J21")
+					(reference "J22")
 					(unit 1)
 				)
 			)
@@ -9926,7 +10057,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "639de61a-0666-445b-b6b1-2078ede2f22c")
-		(property "Reference" "J18"
+		(property "Reference" "J19"
 			(at 127 22.352 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9988,7 +10119,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J18")
+					(reference "J19")
 					(unit 1)
 				)
 			)
@@ -10276,7 +10407,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "8a8b10b4-8f93-4dd4-a1fd-78832c4da2bf")
-		(property "Reference" "J17"
+		(property "Reference" "J18"
 			(at 74.93 26.162 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10338,7 +10469,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J17")
+					(reference "J18")
 					(unit 1)
 				)
 			)
@@ -10872,7 +11003,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "bcb57d57-bc12-4184-9916-04433aade458")
-		(property "Reference" "J20"
+		(property "Reference" "J21"
 			(at 219.71 23.622 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10934,7 +11065,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J20")
+					(reference "J21")
 					(unit 1)
 				)
 			)
@@ -10951,7 +11082,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c02a558b-a15b-4498-9882-680d875e6f2f")
-		(property "Reference" "J14"
+		(property "Reference" "J15"
 			(at 41.91 147.32 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11013,7 +11144,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J14")
+					(reference "J15")
 					(unit 1)
 				)
 			)
@@ -11107,7 +11238,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c26628b6-acf7-4728-ab79-df536bbbc81e")
-		(property "Reference" "J16"
+		(property "Reference" "J17"
 			(at 56.515 86.36 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11175,7 +11306,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J16")
+					(reference "J17")
 					(unit 1)
 				)
 			)
@@ -11192,7 +11323,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c7864d32-e97f-415a-b061-60d44ba17bd3")
-		(property "Reference" "J19"
+		(property "Reference" "J20"
 			(at 173.99 26.162 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11254,7 +11385,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J19")
+					(reference "J20")
 					(unit 1)
 				)
 			)
@@ -11537,7 +11668,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d76339b7-f19a-4737-965a-f9b5dbe377a5")
-		(property "Reference" "J15"
+		(property "Reference" "J16"
 			(at 43.18 166.37 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11579,7 +11710,7 @@
 				)
 			)
 		)
-		(property "Description" "Amp board harness terminal, 2-pin 5.08mm"
+		(property "Description" "terminal_block/Phoenix"
 			(at 45.72 162.56 0)
 			(hide yes)
 			(show_name no)
@@ -11599,7 +11730,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J15")
+					(reference "J16")
 					(unit 1)
 				)
 			)
@@ -11720,7 +11851,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e5aa4941-4d87-42cf-a356-4e25253868c8")
-		(property "Reference" "J24"
+		(property "Reference" "J25"
 			(at 269.24 64.262 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11782,7 +11913,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J24")
+					(reference "J25")
 					(unit 1)
 				)
 			)
@@ -11799,7 +11930,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e97c0cbe-e0ef-4f0b-b59a-3ba07eb26e7f")
-		(property "Reference" "J23"
+		(property "Reference" "J24"
 			(at 266.7 27.432 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11861,7 +11992,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J23")
+					(reference "J24")
 					(unit 1)
 				)
 			)
@@ -12041,7 +12172,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f8f2afc1-1624-4224-a070-61b8c8404213")
-		(property "Reference" "J25"
+		(property "Reference" "J26"
 			(at 270.51 103.632 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12103,7 +12234,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J25")
+					(reference "J26")
 					(unit 1)
 				)
 			)
