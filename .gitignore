@@ -9,8 +9,11 @@ __pycache__/
 
 # KiCad ERC/DRC reports (regenerate with kicad-cli)
 *-erc.rpt
+*-erc.json
 *-drc.rpt
 *-drc.json
+DRC.rpt
+Audio/split/AudioCase_for_separate.kicad_pcb
 
 #vscode
 .vscode/
