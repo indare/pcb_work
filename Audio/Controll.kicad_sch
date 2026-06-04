@@ -588,6 +588,310 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Connector:Conn_01x05_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x05_Pin"
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x05, script generated"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_01x05_Pin_1_1"
+				(rectangle
+					(start 0.8636 5.207)
+					(end 0 4.953)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -4.953)
+					(end 0 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 5.08) (xy 0.8636 5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -5.08) (xy 0.8636 -5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 5.08 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -5.08 180)
+					(length 3.81)
+					(name "Pin_5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -1205,410 +1509,6 @@
 						)
 					)
 					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Device:RotaryEncoder_Switch"
-			(pin_names
-				(offset 0.254)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "SW"
-				(at 0 6.604 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "RotaryEncoder_Switch"
-				(at 0 -6.604 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at -3.81 4.064 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 6.604 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Rotary encoder, dual channel, incremental quadrate outputs, with switch"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "rotary switch encoder switch push button"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "RotaryEncoder*Switch*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "RotaryEncoder_Switch_0_1"
-				(rectangle
-					(start -5.08 5.08)
-					(end 5.08 -5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -5.08 2.54) (xy -3.81 2.54) (xy -3.81 2.032)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -5.08 0) (xy -3.81 0) (xy -3.81 -1.016) (xy -3.302 -2.032)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -5.08 -2.54) (xy -3.81 -2.54) (xy -3.81 -2.032)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -4.318 0) (xy -3.81 0) (xy -3.81 1.016) (xy -3.302 2.032)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center -3.81 0)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.635 -1.778) (xy -0.635 1.778)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center -0.381 0)
-					(radius 1.905)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.381 -1.778) (xy -0.381 1.778)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -0.381 -2.794)
-					(mid -3.0988 -0.0635)
-					(end -0.381 2.667)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.127 1.778) (xy -0.127 -1.778)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.254 2.921) (xy -0.508 2.667) (xy 0.127 2.286)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.254 -3.048) (xy -0.508 -2.794) (xy 0.127 -2.413)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 3.81 1.016) (xy 3.81 -1.016)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 3.81 0) (xy 3.429 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 4.318 1.016)
-					(radius 0.127)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 4.318 -1.016)
-					(radius 0.127)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 2.54) (xy 4.318 2.54) (xy 4.318 1.016)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 -2.54) (xy 4.318 -2.54) (xy 4.318 -1.016)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "RotaryEncoder_Switch_1_1"
-				(pin passive line
-					(at -7.62 2.54 0)
-					(length 2.54)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -7.62 -2.54 0)
-					(length 2.54)
-					(name "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -7.62 0 0)
-					(length 2.54)
-					(name "C"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "C"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 2.54 180)
-					(length 2.54)
-					(name "S1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "S1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 -2.54 180)
-					(length 2.54)
-					(name "S2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "S2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4582,16 +4482,6 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 107.95) (xy 40.64 107.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0fe1c5c4-1723-4c91-9cd7-35e6e38ede89")
-	)
-	(wire
-		(pts
 			(xy 30.48 85.09) (xy 27.94 85.09)
 		)
 		(stroke
@@ -4799,6 +4689,16 @@
 			(type default)
 		)
 		(uuid "2a9b2176-cf7f-481a-824d-25c4b23d91fc")
+	)
+	(wire
+		(pts
+			(xy 30.48 107.95) (xy 30.48 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ae9f67d-5eb2-4ac5-a4c8-f7a84a04f08a")
 	)
 	(wire
 		(pts
@@ -5272,16 +5172,6 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 110.49) (xy 40.64 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "658ce327-ce21-45c1-94df-687a44aaa82f")
-	)
-	(wire
-		(pts
 			(xy 274.32 109.22) (xy 274.32 113.03)
 		)
 		(stroke
@@ -5629,6 +5519,16 @@
 			(type default)
 		)
 		(uuid "897ff57d-211c-45ad-bdd2-109799dbf9e3")
+	)
+	(wire
+		(pts
+			(xy 25.4 107.95) (xy 25.4 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b85e23c-66e6-4ddd-b577-f6691597ac49")
 	)
 	(wire
 		(pts
@@ -6062,6 +5962,16 @@
 	)
 	(wire
 		(pts
+			(xy 33.02 107.95) (xy 33.02 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc596d54-39a8-4038-8c2d-b8ea3fd29cad")
+	)
+	(wire
+		(pts
 			(xy 60.96 99.06) (xy 63.5 99.06)
 		)
 		(stroke
@@ -6069,6 +5979,16 @@
 			(type default)
 		)
 		(uuid "bd020c1e-68ad-4544-b219-772120475f33")
+	)
+	(wire
+		(pts
+			(xy 35.56 107.95) (xy 35.56 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd989571-6149-4d76-98da-4b554c4b5598")
 	)
 	(wire
 		(pts
@@ -6142,16 +6062,6 @@
 	)
 	(wire
 		(pts
-			(xy 20.32 110.49) (xy 22.86 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c53f4241-fcbe-4fd3-ada9-14da028627db")
-	)
-	(wire
-		(pts
 			(xy 60.96 91.44) (xy 63.5 91.44)
 		)
 		(stroke
@@ -6179,16 +6089,6 @@
 			(type default)
 		)
 		(uuid "c799a5c7-11f7-447b-8644-c0a1513535f4")
-	)
-	(wire
-		(pts
-			(xy 20.32 105.41) (xy 22.86 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8584b5f-33a3-4dd2-a22c-791b8ff21221")
 	)
 	(wire
 		(pts
@@ -6269,6 +6169,16 @@
 			(type default)
 		)
 		(uuid "ccadbedb-f039-4119-b8b8-c01eaabfc583")
+	)
+	(wire
+		(pts
+			(xy 27.94 107.95) (xy 27.94 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ccfb8e0b-9bf6-4d13-a0ce-f9a45eff561d")
 	)
 	(wire
 		(pts
@@ -6602,16 +6512,6 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 105.41) (xy 40.64 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f3d916f6-b5d2-48bf-a36d-abdac511c8f3")
-	)
-	(wire
-		(pts
 			(xy 240.03 48.26) (xy 242.57 48.26)
 		)
 		(stroke
@@ -6750,6 +6650,16 @@
 		)
 		(uuid "007c1a81-276f-4ea5-925b-7800b0213be6")
 	)
+	(label "AUDIO_SET_GPIO_1"
+		(at 165.1 95.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "04bf1643-ccb2-4828-a3aa-059e94483180")
+	)
 	(label "AMP_V-_IN"
 		(at 243.84 72.39 0)
 		(effects
@@ -6760,16 +6670,6 @@
 		)
 		(uuid "050395ac-4f4a-470c-bd44-fda111db813c")
 	)
-	(label "AUDIO_RESET_GPIO_3"
-		(at 166.37 121.92 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "06aec919-008c-412f-a627-830329eb975e")
-	)
 	(label "AUDIO_SET_GPIO_5"
 		(at 72.39 125.73 180)
 		(effects
@@ -6779,6 +6679,16 @@
 			(justify right bottom)
 		)
 		(uuid "08967ea7-5c8a-44c3-9019-991c183eb899")
+	)
+	(label "AUDIO_SET_RELAY_1"
+		(at 185.42 80.01 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "08f1b48b-8337-4465-aac1-d133eb3007e6")
 	)
 	(label "5V_+"
 		(at 130.81 67.31 0)
@@ -6799,36 +6709,6 @@
 			(justify left bottom)
 		)
 		(uuid "113caa74-fe10-48e1-8846-0426fa62ac38")
-	)
-	(label "AUDIO_SET_RELAY_4"
-		(at 186.69 129.54 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "12972d0e-6e5d-4680-854f-6b49db2d12b9")
-	)
-	(label "AUDIO_RESET_RELAY_4"
-		(at 186.69 132.08 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "12ebc60f-0723-4435-b516-bf12a0f43ff1")
-	)
-	(label "AUDIO_RESET_RELAY_2"
-		(at 185.42 90.17 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "130976ce-e18e-49ce-a5c4-345a66d2da5a")
 	)
 	(label "PWR_SET_RELAY_3"
 		(at 222.25 43.18 180)
@@ -6860,16 +6740,6 @@
 		)
 		(uuid "152fdd74-f44b-4b05-94e2-5cdbc7ee552f")
 	)
-	(label "PWR_RESET_GPIO_3"
-		(at 166.37 127 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "1583adac-a407-4c0d-9174-b89ffc87427a")
-	)
 	(label "ENC_B"
 		(at 72.39 107.95 180)
 		(effects
@@ -6880,15 +6750,15 @@
 		)
 		(uuid "1643fed4-ad8c-4b1c-8e9f-05cbd0f5b5ad")
 	)
-	(label "PWR_RESET_RELAY_3"
-		(at 186.69 127 0)
+	(label "PWR_RESET_GPIO_3"
+		(at 166.37 129.54 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
-		(uuid "180b34b3-d365-4583-bac8-e079d4fd7329")
+		(uuid "174b7355-abe9-4135-b414-3c9679e0f6e5")
 	)
 	(label "AMP_V+_OUT"
 		(at 222.25 22.86 180)
@@ -6930,16 +6800,6 @@
 		)
 		(uuid "1e17a663-c10d-4829-8c25-4056ee988f10")
 	)
-	(label "PWR_SET_GPIO_1"
-		(at 165.1 82.55 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2123709d-1b20-4325-86e8-84fb3f39997a")
-	)
 	(label "CTRL_GND"
 		(at 177.8 142.24 0)
 		(effects
@@ -6949,16 +6809,6 @@
 			(justify left bottom)
 		)
 		(uuid "220a8c21-3455-4805-ae24-6a42e08b40a4")
-	)
-	(label "AUDIO_SET_RELAY_1"
-		(at 185.42 77.47 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "227a6bb1-9c7f-4bd7-948e-9b65e9e77b55")
 	)
 	(label "PWR_SET_RELAY_4"
 		(at 223.52 80.01 180)
@@ -6990,6 +6840,26 @@
 		)
 		(uuid "274c7930-fc0d-467c-849b-0eee733e0439")
 	)
+	(label "AUDIO_RESET_RELAY_4"
+		(at 186.69 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "27a05ce5-6730-4670-bc14-15f965faf8ad")
+	)
+	(label "AUDIO_SET_RELAY_4"
+		(at 186.69 127 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "27d1201a-cb80-4e9c-a199-ea13dc27da8d")
+	)
 	(label "AMP_V+_IN"
 		(at 243.84 62.23 0)
 		(effects
@@ -7009,6 +6879,16 @@
 			(justify left bottom)
 		)
 		(uuid "2a6c9a71-023b-484a-bcc5-60d781e0711c")
+	)
+	(label "PWR_SET_GPIO_1"
+		(at 165.1 90.17 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2b21b5d2-1bef-4e69-b3c6-0ac296b38fc2")
 	)
 	(label "PWR_SET_GPIO_2"
 		(at 124.46 120.65 0)
@@ -7041,7 +6921,7 @@
 		(uuid "3073f6f0-2828-4431-9fa9-24d2b12f3edd")
 	)
 	(label "CTRL_GND"
-		(at 20.32 105.41 180)
+		(at 25.4 107.95 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7049,16 +6929,6 @@
 			(justify right bottom)
 		)
 		(uuid "317313d6-d70f-4e63-8bbc-658aa611db44")
-	)
-	(label "PWR_RESET_RELAY_2"
-		(at 185.42 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "335b6868-6021-440b-bf35-dbe1b8b389bf")
 	)
 	(label "AUDIO_RESET_RELAY_2"
 		(at 196.85 45.72 0)
@@ -7071,12 +6941,12 @@
 		(uuid "33724ae3-4308-4933-804d-836da18c2af0")
 	)
 	(label "ENC_B"
-		(at 40.64 105.41 0)
+		(at 33.02 107.95 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "3424ef5c-c063-4bee-8831-0e4247b4bfff")
 	)
@@ -7100,15 +6970,25 @@
 		)
 		(uuid "355c2a5b-ce9d-4e2f-9c61-79e2b75d210b")
 	)
-	(label "PWR_RESET_GPIO_2"
-		(at 165.1 95.25 180)
+	(label "PWR_SET_GPIO_2"
+		(at 165.1 80.01 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "3a7f645d-d3e3-456d-bc62-c4dcc60f9dd0")
+		(uuid "382d1855-f4c6-4ad6-85ae-4c5d48673378")
+	)
+	(label "PWR_SET_GPIO_3"
+		(at 166.37 132.08 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "39056498-9619-4d69-b82d-940d00dd5ca9")
 	)
 	(label "L_IN"
 		(at 293.37 105.41 0)
@@ -7120,25 +7000,25 @@
 		)
 		(uuid "3cc8145a-428a-4643-9c26-7e48c8e23bbd")
 	)
-	(label "AUDIO_SET_RELAY_3"
-		(at 186.69 119.38 0)
+	(label "AUDIO_SET_RELAY_5"
+		(at 186.69 161.29 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "3db84642-283e-429f-bd6b-eacb594d4285")
+		(uuid "3d591c4b-9973-4e26-91d0-f6d8688124dd")
 	)
-	(label "PWR_RESET_RELAY_4"
-		(at 186.69 137.16 0)
+	(label "PWR_RESET_RELAY_1"
+		(at 185.42 82.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "41955be4-d916-4d09-8dc5-48a73a4b8cc4")
+		(uuid "3f16e94b-1a98-4395-a086-071b3f0acbc9")
 	)
 	(label "R_IN"
 		(at 99.06 38.1 0)
@@ -7149,16 +7029,6 @@
 			(justify left bottom)
 		)
 		(uuid "426b7632-bdd4-46f0-9276-a87c69cb8dcf")
-	)
-	(label "PWR_SET_GPIO_2"
-		(at 165.1 92.71 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "426e3f52-c318-4739-b825-5ccff87c3ca6")
 	)
 	(label "AUDIO_SET_GPIO_3"
 		(at 124.46 115.57 0)
@@ -7180,6 +7050,16 @@
 		)
 		(uuid "42b58003-2ea1-4336-80fa-a94e98781fe0")
 	)
+	(label "AUDIO_RESET_RELAY_1"
+		(at 185.42 77.47 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "43056d67-64b5-4095-85f7-740fd4190638")
+	)
 	(label "PWR_RESET_RELAY_5"
 		(at 246.38 119.38 0)
 		(effects
@@ -7190,15 +7070,35 @@
 		)
 		(uuid "43ce0e3e-0ed7-4d05-b9b3-f17354127133")
 	)
-	(label "PWR_RESET_RELAY_1"
-		(at 185.42 85.09 0)
+	(label "PWR_SET_GPIO_5"
+		(at 166.37 156.21 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4415f06f-df2a-427f-ad5d-e384b52bda33")
+	)
+	(label "PWR_RESET_RELAY_4"
+		(at 186.69 119.38 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "45628476-b4fa-4df2-91a6-e3273279209e")
+		(uuid "4669b7c3-a1e6-42fa-b420-d38df21cc073")
+	)
+	(label "AUDIO_RESET_GPIO_4"
+		(at 166.37 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "46dfbcd7-d0d1-47c1-be42-5f0982205f73")
 	)
 	(label "L_OUT"
 		(at 176.53 25.4 180)
@@ -7220,6 +7120,26 @@
 		)
 		(uuid "48fe7540-0051-452a-b816-63adeaedbbe7")
 	)
+	(label "AUDIO_SET_GPIO_5"
+		(at 166.37 161.29 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4ab0f4b8-5f40-4956-b979-f3a4d8472ccb")
+	)
+	(label "PWR_RESET_GPIO_5"
+		(at 166.37 153.67 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4bbb9443-5a09-43c8-8e0c-042a4087262f")
+	)
 	(label "5V_+"
 		(at 242.57 48.26 0)
 		(effects
@@ -7240,16 +7160,6 @@
 		)
 		(uuid "4de2d01c-0986-4748-98e7-9a191addd3af")
 	)
-	(label "PWR_SET_GPIO_3"
-		(at 166.37 124.46 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4e0c4956-b9df-4285-a3d1-49b89016e83a")
-	)
 	(label "SDA"
 		(at 72.39 123.19 180)
 		(effects
@@ -7269,6 +7179,16 @@
 			(justify right bottom)
 		)
 		(uuid "50a3aab5-4712-4045-b974-7268c3e3e426")
+	)
+	(label "AUDIO_SET_GPIO_3"
+		(at 166.37 137.16 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5202a36f-9492-4cde-ac3b-43666d2ed8ed")
 	)
 	(label "PWR_SET_RELAY_1"
 		(at 31.75 41.91 180)
@@ -7340,6 +7260,16 @@
 		)
 		(uuid "5980e256-35a6-4818-9328-d83607562ee6")
 	)
+	(label "PWR_RESET_RELAY_5"
+		(at 186.69 153.67 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5dffacc3-3615-4802-b2c7-b51d546ae1c2")
+	)
 	(label "PWR_RESET_GPIO_5"
 		(at 72.39 133.35 180)
 		(effects
@@ -7359,6 +7289,16 @@
 			(justify left bottom)
 		)
 		(uuid "5e572795-ca51-45a6-be6b-8ad37a587b2b")
+	)
+	(label "PWR_RESET_RELAY_2"
+		(at 185.42 92.71 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "609bc64e-ac9d-45da-b97d-344358d0c0e5")
 	)
 	(label "3V3"
 		(at 92.71 162.56 180)
@@ -7430,16 +7370,6 @@
 		)
 		(uuid "66fe8c94-8de6-4d94-89df-4a198696b0c8")
 	)
-	(label "AUDIO_RESET_GPIO_4"
-		(at 166.37 132.08 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6a560c58-4d4a-4f0a-99fa-48e4334284fa")
-	)
 	(label "ENC_SW"
 		(at 72.39 105.41 180)
 		(effects
@@ -7449,6 +7379,26 @@
 			(justify right bottom)
 		)
 		(uuid "6adfa351-feaa-402e-b624-4ee3d477c4ea")
+	)
+	(label "PWR_SET_RELAY_2"
+		(at 185.42 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6efff9b2-0863-4d5c-8877-c32c21f95dce")
+	)
+	(label "PWR_SET_RELAY_4"
+		(at 186.69 121.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6f0cfaa0-4088-48fd-ae0e-0d7d9160934f")
 	)
 	(label "PWR_SET_GPIO_1"
 		(at 124.46 130.81 0)
@@ -7469,6 +7419,16 @@
 			(justify right bottom)
 		)
 		(uuid "73e84aa7-c613-4acd-9ed8-13077fb19068")
+	)
+	(label "AUDIO_SET_RELAY_2"
+		(at 185.42 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "757ff750-6340-435e-9666-72b0dea5370f")
 	)
 	(label "5V_+"
 		(at 185.42 74.93 0)
@@ -7530,6 +7490,16 @@
 		)
 		(uuid "7e97db66-7f0b-4644-a7f8-fdfeed487724")
 	)
+	(label "AUDIO_RESET_RELAY_5"
+		(at 186.69 158.75 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7fc94b1f-edd7-4e9e-94c3-c721753121f9")
+	)
 	(label "5V_+"
 		(at 222.25 48.26 180)
 		(effects
@@ -7550,16 +7520,6 @@
 		)
 		(uuid "826ab9eb-fb05-4419-a456-5bdbc0d76194")
 	)
-	(label "PWR_SET_RELAY_4"
-		(at 186.69 134.62 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "82d3d450-f5a0-45ca-868d-a4fff7d2dd9f")
-	)
 	(label "PWR_RESET_GPIO_2"
 		(at 124.46 118.11 0)
 		(effects
@@ -7569,26 +7529,6 @@
 			(justify left bottom)
 		)
 		(uuid "840af300-761b-4611-a45c-3965b9065a8e")
-	)
-	(label "PWR_RESET_GPIO_5"
-		(at 166.37 161.29 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "853cfc9a-3a25-4310-992f-054c90bea593")
-	)
-	(label "PWR_SET_GPIO_4"
-		(at 166.37 134.62 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8546bf23-facb-4585-98fd-355503fbbde2")
 	)
 	(label "AMP_V-_OUT"
 		(at 222.25 34.29 180)
@@ -7600,16 +7540,6 @@
 		)
 		(uuid "866a807b-924e-48d6-87c1-7310a0e3026f")
 	)
-	(label "AUDIO_RESET_RELAY_3"
-		(at 186.69 121.92 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8871f0d4-3f31-42e4-bce2-581ad97256c8")
-	)
 	(label "AMP_V-_OUT"
 		(at 226.06 109.22 180)
 		(effects
@@ -7619,16 +7549,6 @@
 			(justify right bottom)
 		)
 		(uuid "89359e7a-09dc-4cef-b8c1-8f4e351ca10a")
-	)
-	(label "AUDIO_SET_GPIO_2"
-		(at 165.1 87.63 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "896345ed-171e-4b41-ac63-4367159a0e42")
 	)
 	(label "AMP_V+_IN"
 		(at 242.57 25.4 0)
@@ -7660,36 +7580,6 @@
 		)
 		(uuid "8b4bd36e-c21e-4f18-8f0f-1a95eac8a8f9")
 	)
-	(label "AUDIO_SET_GPIO_5"
-		(at 166.37 153.67 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8ba58267-1ebb-4f24-ad06-935e60862279")
-	)
-	(label "PWR_SET_GPIO_5"
-		(at 166.37 158.75 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8e06d497-40bf-4e6d-89cb-f7f36b4c886b")
-	)
-	(label "AUDIO_RESET_RELAY_1"
-		(at 185.42 80.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "909ca024-845a-46a1-9193-02811471e095")
-	)
 	(label "PWR_RESET_GPIO_4"
 		(at 124.46 97.79 0)
 		(effects
@@ -7720,6 +7610,16 @@
 		)
 		(uuid "95a2328f-7bc5-44a6-8dc6-c89a9c544ee5")
 	)
+	(label "AUDIO_RESET_RELAY_2"
+		(at 185.42 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "961cb980-6260-47c6-bca8-9d931c4f30f5")
+	)
 	(label "PWR_RESET_RELAY_4"
 		(at 243.84 80.01 0)
 		(effects
@@ -7739,6 +7639,26 @@
 			(justify left bottom)
 		)
 		(uuid "97b2aa91-d083-48bf-85cf-b450ce520af7")
+	)
+	(label "PWR_RESET_RELAY_3"
+		(at 186.69 129.54 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9ae44f04-6c74-42cc-b19e-fd4cc29960dd")
+	)
+	(label "AUDIO_RESET_GPIO_5"
+		(at 166.37 158.75 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9af0e77f-0935-4695-a979-c452275b09d1")
 	)
 	(label "PWR_RESET_GPIO_1"
 		(at 124.46 128.27 0)
@@ -7811,24 +7731,24 @@
 		(uuid "a413f503-424e-4ac3-bf3d-88f95f407162")
 	)
 	(label "ENC_A"
-		(at 40.64 110.49 0)
+		(at 35.56 107.95 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "a6fb9f4c-08c5-43e6-a39a-04f1709aa6db")
 	)
-	(label "PWR_RESET_RELAY_5"
-		(at 186.69 161.29 0)
+	(label "3V3"
+		(at 27.94 107.95 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
-		(uuid "a70ad59f-5e83-40d2-bfe5-caa6e4e4aceb")
+		(uuid "a8c7e1a7-04f6-44da-b904-cadd328b38b0")
 	)
 	(label "CTRL_GND"
 		(at 96.52 85.09 180)
@@ -7839,16 +7759,6 @@
 			(justify right bottom)
 		)
 		(uuid "a8f2bf0d-0ba7-4972-b161-eb9069e848bc")
-	)
-	(label "PWR_SET_RELAY_1"
-		(at 185.42 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "aa106341-1282-45f3-a52a-8f1f901c6433")
 	)
 	(label "R_IN"
 		(at 289.56 39.37 0)
@@ -7880,6 +7790,16 @@
 		)
 		(uuid "ae1d69e0-be84-4ee5-9cab-aba8e396c35f")
 	)
+	(label "PWR_SET_GPIO_4"
+		(at 166.37 121.92 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "afba964b-9301-4b78-a94c-dd8c95c1e6b2")
+	)
 	(label "5V_+"
 		(at 31.75 46.99 180)
 		(effects
@@ -7900,16 +7820,6 @@
 		)
 		(uuid "b1b355ba-290c-4ddc-a1b6-e2eea15bd1d9")
 	)
-	(label "PWR_SET_RELAY_5"
-		(at 186.69 158.75 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b1f6da79-06f3-4301-8d1c-0ab73dc57bbf")
-	)
 	(label "L_OUT"
 		(at 273.05 102.87 180)
 		(effects
@@ -7919,16 +7829,6 @@
 			(justify right bottom)
 		)
 		(uuid "b266ab28-e527-48fb-860b-c65a250058b9")
-	)
-	(label "PWR_SET_RELAY_3"
-		(at 186.69 124.46 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b34ff72e-a804-45fc-89a7-f362a07bf076")
 	)
 	(label "5V_+"
 		(at 99.06 50.8 0)
@@ -7950,15 +7850,15 @@
 		)
 		(uuid "bcf031f9-eb11-4cda-9261-20cec793cff9")
 	)
-	(label "CTRL_GND"
-		(at 40.64 107.95 0)
+	(label "AUDIO_SET_RELAY_3"
+		(at 186.69 137.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "bed77061-af92-47fe-b430-b5351d25eb8a")
+		(uuid "bee90a7a-7e17-43ec-a4da-6b37adfd51eb")
 	)
 	(label "5V_+"
 		(at 269.24 52.07 180)
@@ -7979,16 +7879,6 @@
 			(justify left bottom)
 		)
 		(uuid "c09938b2-a595-4759-a653-8160151069ee")
-	)
-	(label "PWR_SET_RELAY_2"
-		(at 185.42 92.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c0b66cd0-f680-4b82-ad68-1fcc123e0bb6")
 	)
 	(label "5V_+"
 		(at 226.06 124.46 180)
@@ -8060,6 +7950,26 @@
 		)
 		(uuid "c68be661-c8e3-4e5e-b3ee-578abc98121e")
 	)
+	(label "PWR_SET_RELAY_5"
+		(at 186.69 156.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ca27477e-4140-4243-9868-38c165e2abe1")
+	)
+	(label "AUDIO_RESET_GPIO_3"
+		(at 166.37 134.62 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ca3f3afe-64b4-4c68-b0fb-ff04fd27e8ea")
+	)
 	(label "CTRL_GND"
 		(at 130.81 74.93 0)
 		(effects
@@ -8099,6 +8009,16 @@
 			(justify left bottom)
 		)
 		(uuid "ce3f0a46-d780-4273-8bcf-d9d0c657a76c")
+	)
+	(label "AUDIO_RESET_GPIO_1"
+		(at 165.1 92.71 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ce945b06-144b-4061-a134-4eca8d6ab7cc")
 	)
 	(label "R_OUT"
 		(at 176.53 35.56 180)
@@ -8160,15 +8080,15 @@
 		)
 		(uuid "d23f2bff-fbea-46d6-81b1-6f7764515738")
 	)
-	(label "AUDIO_RESET_RELAY_5"
-		(at 186.69 156.21 0)
+	(label "AUDIO_SET_GPIO_4"
+		(at 166.37 127 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
-		(uuid "d31917e7-c380-41e3-baad-043ebcfa7ec5")
+		(uuid "d39d8039-c120-4011-a613-fe832f09cd19")
 	)
 	(label "AMP_V-_IN"
 		(at 30.48 66.04 0)
@@ -8181,24 +8101,14 @@
 		(uuid "d681ae6a-2ed1-4d32-828f-bb39e030d092")
 	)
 	(label "PWR_RESET_GPIO_1"
-		(at 165.1 85.09 180)
+		(at 165.1 87.63 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "d9e1dfde-0785-4feb-93d3-2ade1bbe5b69")
-	)
-	(label "AUDIO_SET_GPIO_3"
-		(at 166.37 119.38 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "da380a75-13d7-458b-b943-253358f999a0")
+		(uuid "da484ee7-2830-4d7f-8736-c9d9d506a3d1")
 	)
 	(label "5V_+"
 		(at 289.56 52.07 0)
@@ -8230,15 +8140,15 @@
 		)
 		(uuid "dd962ea2-5ffe-45eb-a180-a9cc298af74d")
 	)
-	(label "AUDIO_SET_RELAY_2"
-		(at 185.42 87.63 0)
+	(label "PWR_RESET_GPIO_4"
+		(at 166.37 119.38 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
-		(uuid "de192b27-b149-4d31-bd0a-d517ccb9c244")
+		(uuid "dea1d576-dfc8-49c8-b842-7ce5fe78e8cf")
 	)
 	(label "AUDIO_SET_RELAY_1"
 		(at 78.74 45.72 180)
@@ -8260,6 +8170,16 @@
 		)
 		(uuid "e0b165d1-75e9-43ba-bdb1-c25da383d118")
 	)
+	(label "AUDIO_RESET_GPIO_2"
+		(at 165.1 82.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e29c00f4-e896-4869-9116-4db364d62f01")
+	)
 	(label "AUDIO_SET_RELAY_5"
 		(at 273.05 123.19 180)
 		(effects
@@ -8270,35 +8190,15 @@
 		)
 		(uuid "e40c36e6-803f-4f21-ae21-ac5fc9f54337")
 	)
-	(label "AUDIO_SET_GPIO_1"
-		(at 165.1 77.47 180)
+	(label "AUDIO_SET_GPIO_2"
+		(at 165.1 85.09 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "e4958811-11bc-401b-8368-60a70ca3aef9")
-	)
-	(label "AUDIO_RESET_GPIO_5"
-		(at 166.37 156.21 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e4d441c8-d74f-4e68-be65-417168b9122e")
-	)
-	(label "AUDIO_SET_RELAY_5"
-		(at 186.69 153.67 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e6380ec2-9fa4-47b4-940d-528b1d83f7f2")
+		(uuid "e601a255-f495-4a4a-868a-51712b35405e")
 	)
 	(label "R_OUT"
 		(at 78.74 38.1 180)
@@ -8311,7 +8211,7 @@
 		(uuid "e7796085-805c-44ad-ba72-cb2f5d0fb161")
 	)
 	(label "ENC_SW"
-		(at 20.32 110.49 180)
+		(at 30.48 107.95 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8339,16 +8239,6 @@
 			(justify right bottom)
 		)
 		(uuid "eafc8d53-d7d4-4f72-b4d6-2f803d7ff81e")
-	)
-	(label "AUDIO_RESET_GPIO_1"
-		(at 165.1 80.01 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "eb345226-8052-4d8b-b91e-6c844b0e5ad1")
 	)
 	(label "5V_+"
 		(at 78.74 50.8 180)
@@ -8379,6 +8269,16 @@
 			(justify right bottom)
 		)
 		(uuid "ede43eb2-bcb6-4ef9-8147-9e22d37679ef")
+	)
+	(label "PWR_RESET_GPIO_2"
+		(at 165.1 77.47 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ee996954-f18e-433f-80ef-8ad2867ad7f3")
 	)
 	(label "PWR_SET_GPIO_5"
 		(at 72.39 130.81 180)
@@ -8420,16 +8320,6 @@
 		)
 		(uuid "f420bea6-b2bf-4a62-8e3a-ec99b43586b1")
 	)
-	(label "AUDIO_RESET_GPIO_2"
-		(at 165.1 90.17 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f448f1e7-cbce-4bcb-b492-fa85b9c300d9")
-	)
 	(label "R_IN"
 		(at 196.85 38.1 0)
 		(effects
@@ -8460,15 +8350,35 @@
 		)
 		(uuid "f59085e3-405b-4e16-8577-dcbc5387e5fc")
 	)
-	(label "AUDIO_SET_GPIO_4"
-		(at 166.37 129.54 180)
+	(label "AUDIO_RESET_RELAY_3"
+		(at 186.69 134.62 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
-		(uuid "f6cac67d-2bce-4368-a256-ac24d86c2f57")
+		(uuid "f9fce2cb-02fc-4e69-8a99-130bcafa5045")
+	)
+	(label "PWR_SET_RELAY_3"
+		(at 186.69 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fa896f62-f03e-4cdf-81f5-4369930c8ae9")
+	)
+	(label "PWR_SET_RELAY_1"
+		(at 185.42 85.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fb47d6cf-ba80-4e01-95fe-c066aca4cd9c")
 	)
 	(label "R_OUT"
 		(at 270.51 73.66 180)
@@ -8509,16 +8419,6 @@
 			(justify left bottom)
 		)
 		(uuid "fdddb64f-f01c-41e1-abcd-7da9d2e68312")
-	)
-	(label "PWR_RESET_GPIO_4"
-		(at 166.37 137.16 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "fdf41be3-a33f-412d-a9bf-1780cc949060")
 	)
 	(hierarchical_label "AMP_V-_OUT"
 		(shape output)
@@ -8720,7 +8620,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0cb0cd60-8ccc-4747-80bd-28d2d457d341")
-		(property "Reference" "J20"
+		(property "Reference" "J22"
 			(at 223.52 99.822 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8782,7 +8682,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J20")
+					(reference "J22")
 					(unit 1)
 				)
 			)
@@ -8983,7 +8883,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "21b1c881-12d0-4055-8426-1ea8668ede7d")
-		(property "Reference" "J19"
+		(property "Reference" "J21"
 			(at 220.98 60.452 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9045,7 +8945,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J19")
+					(reference "J21")
 					(unit 1)
 				)
 			)
@@ -10026,7 +9926,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "639de61a-0666-445b-b6b1-2078ede2f22c")
-		(property "Reference" "J16"
+		(property "Reference" "J18"
 			(at 127 22.352 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10088,7 +9988,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J16")
+					(reference "J18")
 					(unit 1)
 				)
 			)
@@ -10277,8 +10177,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:RotaryEncoder_Switch")
-		(at 30.48 107.95 180)
+		(lib_id "Connector:Conn_01x05_Pin")
+		(at 30.48 101.6 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10288,8 +10188,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "85a7cf28-732f-44f6-9300-d17e6e8b558d")
-		(property "Reference" "SW1"
-			(at 30.48 97.79 0)
+		(property "Reference" "J13"
+			(at 30.48 96.52 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10298,8 +10198,8 @@
 				)
 			)
 		)
-		(property "Value" "RotaryEncoder_Switch"
-			(at 30.48 100.33 0)
+		(property "Value" "ROTARY_SW"
+			(at 30.48 99.06 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10308,8 +10208,8 @@
 				)
 			)
 		)
-		(property "Footprint" "Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm"
-			(at 34.29 112.014 0)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical"
+			(at 30.48 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10320,7 +10220,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 30.48 114.554 0)
+			(at 30.48 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10330,8 +10230,8 @@
 				)
 			)
 		)
-		(property "Description" "Rotary encoder, dual channel, incremental quadrate outputs, with switch"
-			(at 30.48 107.95 0)
+		(property "Description" "Generic connector, single row, 01x05, script generated"
+			(at 30.48 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10341,25 +10241,25 @@
 				)
 			)
 		)
-		(pin "C"
+		(pin "1"
 			(uuid "e44603b4-164e-49b7-bea1-01a8ff4e2151")
 		)
-		(pin "S1"
+		(pin "4"
 			(uuid "422a80b2-282a-43a6-9c73-20da9cb7b17e")
 		)
-		(pin "B"
+		(pin "3"
 			(uuid "75718c2f-9eaa-4f61-92af-7c6455230842")
 		)
-		(pin "A"
+		(pin "2"
 			(uuid "a6d0badb-6703-46c9-bcf9-06d4e224a262")
 		)
-		(pin "S2"
+		(pin "5"
 			(uuid "ca3da301-6552-47dc-9bbf-0ce6458b87cd")
 		)
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "SW1")
+					(reference "J13")
 					(unit 1)
 				)
 			)
@@ -10376,7 +10276,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "8a8b10b4-8f93-4dd4-a1fd-78832c4da2bf")
-		(property "Reference" "J15"
+		(property "Reference" "J17"
 			(at 74.93 26.162 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10438,7 +10338,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J15")
+					(reference "J17")
 					(unit 1)
 				)
 			)
@@ -10972,7 +10872,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "bcb57d57-bc12-4184-9916-04433aade458")
-		(property "Reference" "J18"
+		(property "Reference" "J20"
 			(at 219.71 23.622 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11034,7 +10934,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J18")
+					(reference "J20")
 					(unit 1)
 				)
 			)
@@ -11051,7 +10951,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c02a558b-a15b-4498-9882-680d875e6f2f")
-		(property "Reference" "J13"
+		(property "Reference" "J14"
 			(at 41.91 147.32 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11113,7 +11013,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J13")
+					(reference "J14")
 					(unit 1)
 				)
 			)
@@ -11207,7 +11107,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c26628b6-acf7-4728-ab79-df536bbbc81e")
-		(property "Reference" "J24"
+		(property "Reference" "J16"
 			(at 56.515 86.36 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11227,7 +11127,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x04_P1.00mm_Vertical"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
 			(at 55.88 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -11275,7 +11175,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J24")
+					(reference "J16")
 					(unit 1)
 				)
 			)
@@ -11292,7 +11192,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c7864d32-e97f-415a-b061-60d44ba17bd3")
-		(property "Reference" "J17"
+		(property "Reference" "J19"
 			(at 173.99 26.162 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11354,7 +11254,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J17")
+					(reference "J19")
 					(unit 1)
 				)
 			)
@@ -11637,7 +11537,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d76339b7-f19a-4737-965a-f9b5dbe377a5")
-		(property "Reference" "J14"
+		(property "Reference" "J15"
 			(at 43.18 166.37 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11699,7 +11599,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J14")
+					(reference "J15")
 					(unit 1)
 				)
 			)
@@ -11820,7 +11720,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e5aa4941-4d87-42cf-a356-4e25253868c8")
-		(property "Reference" "J22"
+		(property "Reference" "J24"
 			(at 269.24 64.262 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11882,7 +11782,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J22")
+					(reference "J24")
 					(unit 1)
 				)
 			)
@@ -11899,7 +11799,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e97c0cbe-e0ef-4f0b-b59a-3ba07eb26e7f")
-		(property "Reference" "J21"
+		(property "Reference" "J23"
 			(at 266.7 27.432 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11961,7 +11861,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J21")
+					(reference "J23")
 					(unit 1)
 				)
 			)
@@ -12141,7 +12041,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f8f2afc1-1624-4224-a070-61b8c8404213")
-		(property "Reference" "J23"
+		(property "Reference" "J25"
 			(at 270.51 103.632 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12203,7 +12103,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
-					(reference "J23")
+					(reference "J25")
 					(unit 1)
 				)
 			)
