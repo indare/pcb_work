@@ -4207,6 +4207,12 @@
 		(uuid "f0fe8862-c873-47ec-88fd-33825703212b")
 	)
 	(junction
+		(at 102.87 160.02)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f499fa24-7cd3-48a5-8aba-a7c026ee15a0")
+	)
+	(junction
 		(at 179.07 25.4)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4454,6 +4460,16 @@
 	)
 	(wire
 		(pts
+			(xy 102.87 160.02) (xy 102.87 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0c969fb8-e459-4973-a874-25be7690b0b5")
+	)
+	(wire
+		(pts
 			(xy 176.53 29.21) (xy 179.07 29.21)
 		)
 		(stroke
@@ -4671,6 +4687,16 @@
 			(type default)
 		)
 		(uuid "25e91273-8d88-4927-8c56-fd40e3841986")
+	)
+	(wire
+		(pts
+			(xy 186.69 147.32) (xy 186.69 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2604462b-5339-4028-a961-f3591a9e4eab")
 	)
 	(wire
 		(pts
@@ -4894,7 +4920,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 158.75) (xy 102.87 162.56)
+			(xy 102.87 158.75) (xy 102.87 160.02)
 		)
 		(stroke
 			(width 0)
@@ -5734,6 +5760,16 @@
 	)
 	(wire
 		(pts
+			(xy 186.69 113.03) (xy 186.69 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9fcfad1e-507d-48ae-a13b-0832f8378d9c")
+	)
+	(wire
+		(pts
 			(xy 270.51 26.67) (xy 271.78 26.67)
 		)
 		(stroke
@@ -6194,6 +6230,16 @@
 	)
 	(wire
 		(pts
+			(xy 186.69 71.12) (xy 185.42 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cac4f4f5-726d-4ec2-bf41-46630472cdb6")
+	)
+	(wire
+		(pts
 			(xy 31.75 33.02) (xy 33.02 33.02)
 		)
 		(stroke
@@ -6494,6 +6540,16 @@
 	)
 	(wire
 		(pts
+			(xy 185.42 71.12) (xy 185.42 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8f7ccc7-f1da-4a6e-97ba-e797fd2c7381")
+	)
+	(wire
+		(pts
 			(xy 273.05 113.03) (xy 274.32 113.03)
 		)
 		(stroke
@@ -6722,6 +6778,16 @@
 		)
 		(uuid "050395ac-4f4a-470c-bd44-fda111db813c")
 	)
+	(label "CTRL_GND"
+		(at 194.31 147.32 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "07290ea6-e690-4834-951b-19e692442272")
+	)
 	(label "AUDIO_SET_GPIO_5"
 		(at 72.39 125.73 180)
 		(effects
@@ -6761,6 +6827,16 @@
 			(justify left bottom)
 		)
 		(uuid "0cca02f9-182d-4947-84f5-17bd56678f7d")
+	)
+	(label "CTRL_GND"
+		(at 110.49 160.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0da944ae-7254-46e2-9164-38b464e9c0f8")
 	)
 	(label "PWR_RESET_RELAY_1"
 		(at 52.07 41.91 0)
@@ -7071,6 +7147,16 @@
 			(justify right bottom)
 		)
 		(uuid "39056498-9619-4d69-b82d-940d00dd5ca9")
+	)
+	(label "CTRL_GND"
+		(at 194.31 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "39db7ab0-ef15-45c7-8189-b8b7725badac")
 	)
 	(label "L_IN"
 		(at 293.37 105.41 0)
@@ -8132,6 +8218,16 @@
 		)
 		(uuid "d39d8039-c120-4011-a613-fe832f09cd19")
 	)
+	(label "CTRL_GND"
+		(at 194.31 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d3e294a5-6ef1-479e-b97e-b46f9bd6fd02")
+	)
 	(label "AMP_V-_IN"
 		(at 30.48 60.96 180)
 		(effects
@@ -9083,6 +9179,88 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 190.5 113.03 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "2d9e01f1-43f3-4c29-b2fb-24e86807743e")
+		(property "Reference" "C36"
+			(at 185.42 110.49 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1μF"
+			(at 190.5 109.22 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 186.69 112.0648 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 190.5 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5c9805af-14da-4416-84b2-07a0f6d622c1")
+		)
+		(pin "2"
+			(uuid "da7ad5e9-41bf-4603-9671-48fc57572432")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "C36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Relay:AZ850P2-x")
 		(at 233.68 72.39 90)
 		(unit 1)
@@ -9548,6 +9726,88 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "H14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 190.5 71.12 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "472bf4fd-8edc-4adf-a3bd-4046fe2547df")
+		(property "Reference" "C37"
+			(at 185.42 68.58 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1μF"
+			(at 190.5 67.31 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 186.69 70.1548 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 190.5 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6b9219d8-87cb-4c4e-b754-1ab8a89e69d5")
+		)
+		(pin "2"
+			(uuid "971d7e54-cf1c-49ba-b2db-fec3c0483a8e")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "C37")
 					(unit 1)
 				)
 			)
@@ -10476,6 +10736,88 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 106.68 160.02 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "9b14883a-3673-42b0-afa8-9c498b763b52")
+		(property "Reference" "C34"
+			(at 101.6 157.48 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1μF"
+			(at 106.68 156.21 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 102.87 159.0548 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 106.68 160.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 106.68 160.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5539fb95-a954-4ca2-ab07-8ade8188d781")
+		)
+		(pin "2"
+			(uuid "32daa62b-a275-4283-868c-c6a06d859cf6")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "C34")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Relay:AZ850P2-x")
 		(at 232.41 35.56 90)
 		(unit 1)
@@ -10911,6 +11253,88 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "U7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 190.5 147.32 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b3b5f4bb-b916-4a38-aa0c-ddd6a11cc93a")
+		(property "Reference" "C35"
+			(at 185.42 144.78 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1μF"
+			(at 190.5 143.51 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 186.69 146.3548 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 190.5 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8ad73f08-d34f-4591-8263-0eb6e4871032")
+		)
+		(pin "2"
+			(uuid "8dc6373d-31e4-4045-ad38-ab998d9f0419")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "C35")
 					(unit 1)
 				)
 			)
