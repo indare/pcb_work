@@ -8,9 +8,24 @@ WIDTH = 128
 HEIGHT = 64
 SDA_PIN = 20  # Pico physical pin 26
 SCL_PIN = 21  # Pico physical pin 27
+ENC_A_PIN = 22  # Pico physical pin 29
+ENC_B_PIN = 26  # Pico physical pin 31
+ENC_SW_PIN = 27  # Pico physical pin 32
 PULSE_SEC = 0.1
 RESET_TO_SET_SEC = 0.5
-CHANNEL_HOLD_SEC = 20.0
+LOOP_DELAY_SEC = 0.01
+BUTTON_DEBOUNCE_MS = 250
+
+ENCODER_STEPS = {
+    (0, 1): 1,
+    (1, 3): 1,
+    (3, 2): 1,
+    (2, 0): 1,
+    (0, 2): -1,
+    (2, 3): -1,
+    (3, 1): -1,
+    (1, 0): -1,
+}
 
 CHANNELS = (
     {
@@ -73,23 +88,7 @@ def reset_all(title):
     pulse(relay_outputs, "reset")
 
 
-def reset_channel(channel):
-    target_outputs = [
-        output for output in relay_outputs if output["channel"] == channel["number"]
-    ]
-    for output in target_outputs:
-        output["state"] = "RESET"
-    update_display(
-        "Reset CH" + str(channel["number"]),
-        channel["audio"]["name"],
-        channel["pwr"]["name"],
-        "RESET pulse",
-        "Next in 0.5 sec",
-    )
-    pulse(target_outputs, "reset")
-
-
-def set_channel(channel):
+def apply_channel(channel):
     target_outputs = [
         output for output in relay_outputs if output["channel"] == channel["number"]
     ]
@@ -98,17 +97,34 @@ def set_channel(channel):
 
     led.on()
     update_display(
-        "CH" + str(channel["number"]) + " SET",
+        "Apply CH" + str(channel["number"]),
         channel["audio"]["name"],
         channel["pwr"]["name"],
-        "Others RESET",
-        "Hold 20 sec",
+        "RESET all",
+        "then SET",
     )
+    pulse(relay_outputs, "reset")
+    time.sleep(RESET_TO_SET_SEC)
     pulse(target_outputs, "set")
+
+
+def draw_channel_ui():
+    mark = "*" if selected_channel == active_channel else ">"
+    update_display(
+        "Select CH" + str(selected_channel),
+        "Active CH" + str(active_channel),
+        mark + " CH" + str(selected_channel),
+        "Turn: select",
+        "Push: apply",
+    )
 
 
 led = Pin("LED", Pin.OUT)
 led.off()
+
+enc_a = Pin(ENC_A_PIN, Pin.IN, Pin.PULL_UP)
+enc_b = Pin(ENC_B_PIN, Pin.IN, Pin.PULL_UP)
+enc_sw = Pin(ENC_SW_PIN, Pin.IN, Pin.PULL_UP)
 
 relay_outputs = []
 for channel in CHANNELS:
@@ -136,20 +152,47 @@ print("I2C devices:", [hex(device) for device in devices])
 oled = None
 if devices:
     oled = SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=devices[0])
-    draw_status(oled, "Relay test", "OLED OK", "Ready", "CH1-5")
+    draw_status(oled, "Encoder UI", "OLED OK", "Ready", "CH1-5")
 else:
     print("No I2C device found on GP20/GP21")
 
 reset_all("Power-on RESET")
 time.sleep(RESET_TO_SET_SEC)
 
-current_channel = None
-for channel in CHANNELS:
-    if current_channel:
-        reset_channel(current_channel)
-        time.sleep(RESET_TO_SET_SEC)
-    set_channel(channel)
-    current_channel = channel
-    time.sleep(CHANNEL_HOLD_SEC)
+selected_channel = 1
+active_channel = 1
+apply_channel(CHANNELS[0])
+draw_channel_ui()
 
-update_display("Final state", "CH5 SET", "K10 AUDIO", "K7 PWR", "Others RESET")
+last_encoder_state = (enc_a.value() << 1) | enc_b.value()
+encoder_accum = 0
+last_button_ms = time.ticks_ms()
+last_selected_channel = selected_channel
+last_active_channel = active_channel
+
+while True:
+    encoder_state = (enc_a.value() << 1) | enc_b.value()
+    if encoder_state != last_encoder_state:
+        encoder_accum += ENCODER_STEPS.get((last_encoder_state, encoder_state), 0)
+        last_encoder_state = encoder_state
+
+        if encoder_accum >= 4:
+            selected_channel = min(len(CHANNELS), selected_channel + 1)
+            encoder_accum = 0
+        elif encoder_accum <= -4:
+            selected_channel = max(1, selected_channel - 1)
+            encoder_accum = 0
+
+    now_ms = time.ticks_ms()
+    if enc_sw.value() == 0 and time.ticks_diff(now_ms, last_button_ms) > BUTTON_DEBOUNCE_MS:
+        last_button_ms = now_ms
+        if selected_channel != active_channel:
+            apply_channel(CHANNELS[selected_channel - 1])
+            active_channel = selected_channel
+
+    if selected_channel != last_selected_channel or active_channel != last_active_channel:
+        draw_channel_ui()
+        last_selected_channel = selected_channel
+        last_active_channel = active_channel
+
+    time.sleep(LOOP_DELAY_SEC)

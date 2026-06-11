@@ -52,18 +52,24 @@ OLED does not use the Pico ADC pins. In the current schematic:
 | 34 | GP28 / ADC2 | Unconnected |
 | 35 | ADC_VREF | Unconnected |
 
+## Rotary Encoder Connection
+
+| Pico physical pin | Pico signal | Encoder signal |
+| --- | --- | --- |
+| 29 | GP22 | ENC_A |
+| 31 | GP26 / ADC0 | ENC_B |
+| 32 | GP27 / ADC1 | ENC_SW |
+
 ## Current Test Program
 
 - `main.py` initializes I2C on GP20/GP21.
 - `ssd1306.py` provides the minimal I2C SSD1306 driver.
-- The current program runs an automatic channel 1-5 relay SET test after startup.
-- On startup, all relay channels receive a RESET pulse to establish a known state.
-- After startup, each channel is SET in order from channel 1 to channel 5.
-- Before moving to the next channel, only the previously SET channel's AUDIO/PWR relay pair receives a RESET pulse.
-- Channel SET states are held for 20.0 seconds before moving to the next channel, to allow continuity probing.
-- After the sequence completes, channel 5 remains SET and all other channels are RESET.
+- The current program runs a rotary encoder channel selector.
+- On startup, all relay channels receive a RESET pulse to establish a known state, then channel 1 is applied.
+- Turning the encoder changes the selected channel on the OLED.
+- Pressing the encoder switch applies the selected channel: all channels RESET, then the selected AUDIO/PWR relay pair SET.
 - Relay coils are pulsed for 0.1 seconds and are not held on.
-- The OLED shows the current relay sequence/state.
+- The OLED shows the selected channel and the currently active channel.
 
 ## Relay Test Mapping
 
