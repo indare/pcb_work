@@ -36,13 +36,68 @@ i2c = I2C(0, sda=Pin(20), scl=Pin(21), freq=400_000)
 - Valid pixel area is `x=0..127`, `y=0..63`.
 - Drawing at or beyond `x=128` / `y=64` is outside the visible area.
 - 8px text placed at `y=57` is clipped at the bottom, so safe text rows are `0, 8, 16, 24, 32, 40, 48, 56`.
+- Channel 5 relay SET test worked: K10/K7 moved to SET and continuity was confirmed at four contact points.
+- During probing, OLED `CH1` selected the AMP2 connector pair (`J19`/`J20`), so firmware channel numbering uses the probed connector order rather than the relay net suffix order for channels 1 and 2.
+- KiCad CLI netlist export confirmed the relay/GPIO mapping below.
+- KiCad CLI ERC reported 0 violations for `Audio/Controll.kicad_sch`.
+
+## Pico ADC Pin Status
+
+OLED does not use the Pico ADC pins. In the current schematic:
+
+| Pico physical pin | Pico signal | Current net |
+| --- | --- | --- |
+| 31 | GP26 / ADC0 | ENC_B |
+| 32 | GP27 / ADC1 | ENC_SW |
+| 34 | GP28 / ADC2 | Unconnected |
+| 35 | ADC_VREF | Unconnected |
 
 ## Current Test Program
 
 - `main.py` initializes I2C on GP20/GP21.
 - `ssd1306.py` provides the minimal I2C SSD1306 driver.
-- The current display output draws only a 1px border around the full OLED area.
-- The onboard LED is turned off after startup.
+- The current program runs an automatic channel 1-5 relay SET test after startup.
+- On startup, all relay channels receive a RESET pulse to establish a known state.
+- After startup, each channel is SET in order from channel 1 to channel 5.
+- Before moving to the next channel, only the previously SET channel's AUDIO/PWR relay pair receives a RESET pulse.
+- Channel SET states are held for 20.0 seconds before moving to the next channel, to allow continuity probing.
+- After the sequence completes, channel 5 remains SET and all other channels are RESET.
+- Relay coils are pulsed for 0.1 seconds and are not held on.
+- The OLED shows the current relay sequence/state.
+
+## Relay Test Mapping
+
+Relay pairs by channel:
+
+| Channel | AUDIO relay | PWR relay |
+| --- | --- | --- |
+| 1 | K4 | K3 |
+| 2 | K2 | K1 |
+| 3 | K8 | K5 |
+| 4 | K9 | K6 |
+| 5 | K10 | K7 |
+
+GPIO assignment by channel:
+
+| Channel | Relay | Reset signal | Reset GPIO | Reset physical pin | Set signal | Set GPIO | Set physical pin |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | K4 AUDIO | AUDIO_RESET_GPIO_2 | GP5 | 7 | AUDIO_SET_GPIO_2 | GP4 | 6 |
+| 1 | K3 PWR | PWR_RESET_GPIO_2 | GP7 | 10 | PWR_SET_GPIO_2 | GP6 | 9 |
+| 2 | K2 AUDIO | AUDIO_RESET_GPIO_1 | GP1 | 2 | AUDIO_SET_GPIO_1 | GP0 | 1 |
+| 2 | K1 PWR | PWR_RESET_GPIO_1 | GP3 | 5 | PWR_SET_GPIO_1 | GP2 | 4 |
+| 3 | K8 AUDIO | AUDIO_RESET_GPIO_3 | GP9 | 12 | AUDIO_SET_GPIO_3 | GP8 | 11 |
+| 3 | K5 PWR | PWR_RESET_GPIO_3 | GP11 | 15 | PWR_SET_GPIO_3 | GP10 | 14 |
+| 4 | K9 AUDIO | AUDIO_RESET_GPIO_4 | GP13 | 17 | AUDIO_SET_GPIO_4 | GP12 | 16 |
+| 4 | K6 PWR | PWR_RESET_GPIO_4 | GP15 | 20 | PWR_SET_GPIO_4 | GP14 | 19 |
+| 5 | K10 AUDIO | AUDIO_RESET_GPIO_5 | GP18 | 24 | AUDIO_SET_GPIO_5 | GP19 | 25 |
+| 5 | K7 PWR | PWR_RESET_GPIO_5 | GP16 | 21 | PWR_SET_GPIO_5 | GP17 | 22 |
+
+Previous channel 5 firmware test target:
+
+| Relay | Function | Reset signal | Set signal | Pico GPIO |
+| --- | --- | --- | --- | --- |
+| K10 | AUDIO relay 5 | AUDIO_RESET_GPIO_5 | AUDIO_SET_GPIO_5 | RESET=GP18, SET=GP19 |
+| K7 | PWR relay 5 | PWR_RESET_GPIO_5 | PWR_SET_GPIO_5 | RESET=GP16, SET=GP17 |
 
 ## Upload Commands
 
