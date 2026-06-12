@@ -65,11 +65,17 @@ OLED does not use the Pico ADC pins. In the current schematic:
 - `main.py` initializes I2C on GP20/GP21.
 - `ssd1306.py` provides the minimal I2C SSD1306 driver.
 - The current program runs a rotary encoder channel selector.
-- On startup, all relay channels receive a RESET pulse to establish a known state, then channel 1 is applied.
+- On startup, all relay channels receive split AUDIO/PWR RESET pulses to establish a known state, then channel 1 is applied.
 - Turning the encoder changes the selected channel on the OLED.
-- Pressing the encoder switch applies the selected channel: all channels RESET, then the selected AUDIO/PWR relay pair SET.
+- Pressing the encoder switch applies the selected channel with a pop-noise-aware sequence:
+  AUDIO RESET, 0.1 sec wait, PWR RESET, selected PWR SET, 0.3 sec wait, selected AUDIO SET.
+- Encoder decoding is based on the observed module transitions `11 -> 01 -> 00 -> 11` and `11 -> 10 -> 00 -> 11`.
 - Relay coils are pulsed for 0.1 seconds and are not held on.
 - The OLED shows the selected channel and the currently active channel.
+
+## Debug Tools
+
+- `encoder_debug.py` logs raw `ENC_A` / `ENC_B` / `ENC_SW` input changes for 30 seconds.
 
 ## Relay Test Mapping
 

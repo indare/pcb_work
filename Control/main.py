@@ -13,19 +13,10 @@ ENC_B_PIN = 26  # Pico physical pin 31
 ENC_SW_PIN = 27  # Pico physical pin 32
 PULSE_SEC = 0.1
 RESET_TO_SET_SEC = 0.5
+AUDIO_BREAK_SEC = 0.1
+POWER_SETTLE_SEC = 0.3
 LOOP_DELAY_SEC = 0.01
 BUTTON_DEBOUNCE_MS = 250
-
-ENCODER_STEPS = {
-    (0, 1): 1,
-    (1, 3): 1,
-    (3, 2): 1,
-    (2, 0): 1,
-    (0, 2): -1,
-    (2, 3): -1,
-    (3, 1): -1,
-    (1, 0): -1,
-}
 
 CHANNELS = (
     {
@@ -80,32 +71,52 @@ def pulse(outputs, coil_name):
         output[coil_name].off()
 
 
+def outputs_by_role(role):
+    return [output for output in relay_outputs if output["role"] == role]
+
+
+def outputs_by_channel_and_role(channel_number, role):
+    return [
+        output
+        for output in relay_outputs
+        if output["channel"] == channel_number and output["role"] == role
+    ]
+
+
 def reset_all(title):
     led.off()
     for output in relay_outputs:
         output["state"] = "RESET"
-    update_display(title, "All channels", "RESET pulse", "Coils 0.1 sec")
-    pulse(relay_outputs, "reset")
+    update_display(title, "All channels", "AUDIO RESET", "PWR RESET", "Split pulses")
+    pulse(outputs_by_role("audio"), "reset")
+    time.sleep(AUDIO_BREAK_SEC)
+    pulse(outputs_by_role("pwr"), "reset")
 
 
 def apply_channel(channel):
-    target_outputs = [
-        output for output in relay_outputs if output["channel"] == channel["number"]
-    ]
-    for output in relay_outputs:
-        output["state"] = "SET" if output in target_outputs else "RESET"
+    channel_number = channel["number"]
+    all_audio = outputs_by_role("audio")
+    all_pwr = outputs_by_role("pwr")
+    target_audio = outputs_by_channel_and_role(channel_number, "audio")
+    target_pwr = outputs_by_channel_and_role(channel_number, "pwr")
 
     led.on()
     update_display(
-        "Apply CH" + str(channel["number"]),
-        channel["audio"]["name"],
-        channel["pwr"]["name"],
-        "RESET all",
-        "then SET",
+        "Apply CH" + str(channel_number),
+        "AUDIO off",
+        "PWR switch",
+        "PWR settle",
+        "AUDIO on",
     )
-    pulse(relay_outputs, "reset")
-    time.sleep(RESET_TO_SET_SEC)
-    pulse(target_outputs, "set")
+    pulse(all_audio, "reset")
+    time.sleep(AUDIO_BREAK_SEC)
+    pulse(all_pwr, "reset")
+    pulse(target_pwr, "set")
+    time.sleep(POWER_SETTLE_SEC)
+    pulse(target_audio, "set")
+
+    for output in relay_outputs:
+        output["state"] = "SET" if output["channel"] == channel_number else "RESET"
 
 
 def draw_channel_ui():
@@ -137,6 +148,7 @@ for channel in CHANNELS:
         relay_outputs.append(
             {
                 "channel": channel["number"],
+                "role": role,
                 "name": relay["name"],
                 "reset": reset_output,
                 "set": set_output,
@@ -165,7 +177,7 @@ apply_channel(CHANNELS[0])
 draw_channel_ui()
 
 last_encoder_state = (enc_a.value() << 1) | enc_b.value()
-encoder_accum = 0
+encoder_direction = 0
 last_button_ms = time.ticks_ms()
 last_selected_channel = selected_channel
 last_active_channel = active_channel
@@ -173,15 +185,17 @@ last_active_channel = active_channel
 while True:
     encoder_state = (enc_a.value() << 1) | enc_b.value()
     if encoder_state != last_encoder_state:
-        encoder_accum += ENCODER_STEPS.get((last_encoder_state, encoder_state), 0)
-        last_encoder_state = encoder_state
+        if last_encoder_state == 3 and encoder_state == 1:
+            encoder_direction = 1
+        elif last_encoder_state == 3 and encoder_state == 2:
+            encoder_direction = -1
+        elif encoder_state == 3 and encoder_direction:
+            selected_channel = min(
+                len(CHANNELS), max(1, selected_channel + encoder_direction)
+            )
+            encoder_direction = 0
 
-        if encoder_accum >= 4:
-            selected_channel = min(len(CHANNELS), selected_channel + 1)
-            encoder_accum = 0
-        elif encoder_accum <= -4:
-            selected_channel = max(1, selected_channel - 1)
-            encoder_accum = 0
+        last_encoder_state = encoder_state
 
     now_ms = time.ticks_ms()
     if enc_sw.value() == 0 and time.ticks_diff(now_ms, last_button_ms) > BUTTON_DEBOUNCE_MS:
