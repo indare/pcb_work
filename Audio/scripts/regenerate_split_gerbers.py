@@ -51,7 +51,8 @@ BOARDS = [
     {
         "name": "02_rv_panel",
         "pcb": "AudioCase_2_rv_panel.kicad_pcb",
-        "source": "rectangle; tlx: 42.22mm; tly: 121.175mm; brx: 122.55mm; bry: 178.804748mm",
+        # Must match the RV panel gr_rect on Edge.Cuts (KiKit fails with GeometryCollection otherwise).
+        "source": "rectangle; tlx: 38.05mm; tly: 125.4mm; brx: 121.45mm; bry: 178.304748mm",
     },
     {
         "name": "03_power",
@@ -84,12 +85,12 @@ def quote_arg(arg: str) -> str:
 
 
 def find_tool(name: str, candidates: list[Path]) -> str:
-    found = shutil.which(name)
-    if found:
-        return found
     for candidate in candidates:
         if candidate.exists():
             return str(candidate)
+    found = shutil.which(name)
+    if found:
+        return found
     raise SystemExit(f"Could not find {name}. Install it or add it to PATH.")
 
 
@@ -183,6 +184,7 @@ def main() -> int:
     kikit = find_tool(
         "kikit",
         [
+            Path("/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/kikit"),
             Path.home() / "Documents/KiCad/10.0/3rdparty/Python311/Scripts/kikit.exe",
         ],
     )
@@ -190,6 +192,7 @@ def main() -> int:
         "kicad-cli",
         [
             Path("C:/Program Files/KiCad/10.0/bin/kicad-cli.exe"),
+            Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli"),
         ],
     )
 

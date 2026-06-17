@@ -4033,6 +4033,12 @@
 		(uuid "3d9fa82e-eda4-4582-8997-53b51d722672")
 	)
 	(junction
+		(at 29.21 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "458e87d1-20e0-4474-a2fe-f6a7f43299ec")
+	)
+	(junction
 		(at 36.83 162.56)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4051,6 +4057,12 @@
 		(uuid "4dff55fc-7aeb-4a1d-a697-3a70efc6c65a")
 	)
 	(junction
+		(at 30.48 114.3)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4e6af0a1-4c0d-4e38-bf24-49702392539d")
+	)
+	(junction
 		(at 120.65 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4063,16 +4075,34 @@
 		(uuid "5034338c-d853-45c5-8ccd-037bc0375c17")
 	)
 	(junction
+		(at 26.67 97.79)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "52127647-03fc-4d13-b25e-3525d80f6f9e")
+	)
+	(junction
 		(at 82.55 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "54fe9b44-bcfb-4a2d-85df-38c3a1db92fd")
 	)
 	(junction
+		(at 30.48 109.22)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "60775f1b-5238-400e-9557-f7953dc3baf8")
+	)
+	(junction
 		(at 223.52 33.02)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "60bbf23e-f6a6-4f4c-abe7-0b9405ce6995")
+	)
+	(junction
+		(at 29.21 81.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6698e697-e7af-4d8a-ab36-a6808743be82")
 	)
 	(junction
 		(at 88.9 67.31)
@@ -4093,7 +4123,7 @@
 		(uuid "70157a00-76ad-4d1c-92d9-412669f49fb5")
 	)
 	(junction
-		(at 30.48 66.04)
+		(at 15.24 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "74200bb8-1b35-4775-84ac-e7258f07ecb4")
@@ -4103,6 +4133,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7aae9297-075e-4376-82f9-bd310bcf6164")
+	)
+	(junction
+		(at 29.21 86.36)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7c4a60a1-faa3-4586-a29a-b0a042720d30")
 	)
 	(junction
 		(at 111.76 74.93)
@@ -4129,10 +4165,16 @@
 		(uuid "97047520-3fc7-480f-90ac-441366edcd8c")
 	)
 	(junction
-		(at 30.48 63.5)
+		(at 15.24 55.88)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "973d4014-0f11-4acc-a5e6-566d91db5bb9")
+	)
+	(junction
+		(at 26.67 100.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9b9e8336-c711-451b-ad88-ec29c2b08019")
 	)
 	(junction
 		(at 80.01 25.4)
@@ -4145,6 +4187,18 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a10e77e5-33da-4c40-a8f0-97df4d516fa2")
+	)
+	(junction
+		(at 29.21 72.39)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a271e232-7a34-478e-ad68-cad81a41201f")
+	)
+	(junction
+		(at 30.48 111.76)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a2c1df49-d2de-4136-b2af-0c29516796b1")
 	)
 	(junction
 		(at 270.51 36.83)
@@ -4171,10 +4225,28 @@
 		(uuid "aea7e228-dc67-4034-8db5-9979d5111d25")
 	)
 	(junction
+		(at 26.67 95.25)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b6c41731-e94e-488e-9380-b113992716d6")
+	)
+	(junction
 		(at 82.55 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c1f112d6-8838-4c1f-a2f6-5ddbeeaa4d4c")
+	)
+	(junction
+		(at 29.21 67.31)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c34a4a6c-df48-4e18-82fe-c970f753471f")
+	)
+	(junction
+		(at 29.21 83.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cdc01dff-de18-4bfc-b75e-1de29bf2c820")
 	)
 	(junction
 		(at 270.51 26.67)
@@ -4410,7 +4482,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 63.5) (xy 30.48 63.5)
+			(xy 12.7 55.88) (xy 15.24 55.88)
 		)
 		(stroke
 			(width 0)
@@ -4490,13 +4562,13 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 87.63) (xy 27.94 87.63)
+			(xy 29.21 78.74) (xy 31.75 78.74)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0ee6b4d7-1c2c-43f7-a34a-0ffcc7ca9f53")
+		(uuid "0e9867d3-6512-45e0-8efa-2a68058fc197")
 	)
 	(wire
 		(pts
@@ -4520,13 +4592,23 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 85.09) (xy 27.94 85.09)
+			(xy 29.21 88.9) (xy 31.75 88.9)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "10d16f93-49ba-4f66-8844-73d143af346c")
+		(uuid "0f98c35c-d1fc-47aa-8e2d-84663d3007de")
+	)
+	(wire
+		(pts
+			(xy 30.48 111.76) (xy 31.75 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12432965-d522-4ad0-a6bc-041b183e2eff")
 	)
 	(wire
 		(pts
@@ -4580,6 +4662,26 @@
 	)
 	(wire
 		(pts
+			(xy 17.78 97.79) (xy 26.67 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "16944225-3730-4f69-93dd-a19a9c2a7d2f")
+	)
+	(wire
+		(pts
+			(xy 29.21 88.9) (xy 29.21 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1752722a-dd7f-4a10-9019-0dab90122b40")
+	)
+	(wire
+		(pts
 			(xy 241.3 72.39) (xy 243.84 72.39)
 		)
 		(stroke
@@ -4597,6 +4699,16 @@
 			(type default)
 		)
 		(uuid "185dba71-3485-41a6-8835-b3860cedb71d")
+	)
+	(wire
+		(pts
+			(xy 29.21 81.28) (xy 31.75 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1887d0a1-f3b0-4d1e-9b2c-400e5357b80e")
 	)
 	(wire
 		(pts
@@ -4640,6 +4752,16 @@
 	)
 	(wire
 		(pts
+			(xy 26.67 102.87) (xy 29.21 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1e41a949-dec4-4f1d-b89c-4ec6ec7f7610")
+	)
+	(wire
+		(pts
 			(xy 120.65 67.31) (xy 130.81 67.31)
 		)
 		(stroke
@@ -4670,7 +4792,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 66.04) (xy 33.02 66.04)
+			(xy 15.24 58.42) (xy 17.78 58.42)
 		)
 		(stroke
 			(width 0)
@@ -4750,7 +4872,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 107.95) (xy 30.48 106.68)
+			(xy 21.59 130.81) (xy 21.59 129.54)
 		)
 		(stroke
 			(width 0)
@@ -4840,6 +4962,16 @@
 	)
 	(wire
 		(pts
+			(xy 29.21 83.82) (xy 30.48 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "327e36ad-d957-4011-9b25-6b87e53a3387")
+	)
+	(wire
+		(pts
 			(xy 96.52 85.09) (xy 97.79 85.09)
 		)
 		(stroke
@@ -4850,7 +4982,17 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 66.04) (xy 30.48 66.04)
+			(xy 30.48 116.84) (xy 33.02 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34a0b871-af07-4fc6-b767-80afbacd39e3")
+	)
+	(wire
+		(pts
+			(xy 12.7 58.42) (xy 15.24 58.42)
 		)
 		(stroke
 			(width 0)
@@ -4880,6 +5022,16 @@
 	)
 	(wire
 		(pts
+			(xy 26.67 97.79) (xy 26.67 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a944250-58f4-4bba-8d87-330eae540d06")
+	)
+	(wire
+		(pts
 			(xy 287.02 52.07) (xy 289.56 52.07)
 		)
 		(stroke
@@ -4887,6 +5039,16 @@
 			(type default)
 		)
 		(uuid "3ae468c3-f528-49ad-a822-e33e166df8b3")
+	)
+	(wire
+		(pts
+			(xy 29.21 69.85) (xy 29.21 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b6c1f8a-6f79-426e-a2e5-1e37425e3f1d")
 	)
 	(wire
 		(pts
@@ -4960,6 +5122,16 @@
 	)
 	(wire
 		(pts
+			(xy 26.67 102.87) (xy 26.67 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "433e004a-982c-48ac-b648-85839ad401b3")
+	)
+	(wire
+		(pts
 			(xy 82.55 74.93) (xy 82.55 73.66)
 		)
 		(stroke
@@ -5000,6 +5172,16 @@
 	)
 	(wire
 		(pts
+			(xy 22.86 111.76) (xy 30.48 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "456e3a6a-70d4-403b-86f3-3ca833953f4e")
+	)
+	(wire
+		(pts
 			(xy 290.83 128.27) (xy 293.37 128.27)
 		)
 		(stroke
@@ -5017,6 +5199,16 @@
 			(type default)
 		)
 		(uuid "4799ead9-f188-4f17-96ee-211750ec6fd3")
+	)
+	(wire
+		(pts
+			(xy 29.21 78.74) (xy 29.21 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48d4e17d-5059-49e0-aa6e-3c79646f3a7c")
 	)
 	(wire
 		(pts
@@ -5040,6 +5232,16 @@
 	)
 	(wire
 		(pts
+			(xy 34.29 100.33) (xy 36.83 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "498cbcea-de51-4b36-886c-ee591e41fbbd")
+	)
+	(wire
+		(pts
 			(xy 49.53 34.29) (xy 52.07 34.29)
 		)
 		(stroke
@@ -5047,6 +5249,16 @@
 			(type default)
 		)
 		(uuid "49a40897-e0da-40a9-9767-89958b977040")
+	)
+	(wire
+		(pts
+			(xy 26.67 97.79) (xy 27.94 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ab58645-548e-44e4-8a45-03b242eadd19")
 	)
 	(wire
 		(pts
@@ -5100,6 +5312,16 @@
 	)
 	(wire
 		(pts
+			(xy 30.48 109.22) (xy 30.48 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "506d4f65-220b-4721-8478-d8633317dced")
+	)
+	(wire
+		(pts
 			(xy 111.76 74.93) (xy 111.76 73.66)
 		)
 		(stroke
@@ -5107,6 +5329,16 @@
 			(type default)
 		)
 		(uuid "5342ee38-e79e-4d53-952b-41345e91d769")
+	)
+	(wire
+		(pts
+			(xy 33.02 97.79) (xy 36.83 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "534a2d9c-0257-4b1c-bb63-f63dda0d4b85")
 	)
 	(wire
 		(pts
@@ -5150,6 +5382,16 @@
 	)
 	(wire
 		(pts
+			(xy 30.48 106.68) (xy 30.48 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "56c985fc-d137-4d13-86f2-a45e2f965d8f")
+	)
+	(wire
+		(pts
 			(xy 29.21 148.59) (xy 26.67 148.59)
 		)
 		(stroke
@@ -5167,6 +5409,16 @@
 			(type default)
 		)
 		(uuid "576d1cc5-7d73-4d27-a7f5-743a24cac264")
+	)
+	(wire
+		(pts
+			(xy 35.56 69.85) (xy 36.83 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5770e21f-a83e-49db-94d3-326434432f35")
 	)
 	(wire
 		(pts
@@ -5190,7 +5442,17 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 66.04) (xy 30.48 69.85)
+			(xy 29.21 81.28) (xy 29.21 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5c4ff33b-144b-4c92-bf7a-5ebdba7314e6")
+	)
+	(wire
+		(pts
+			(xy 15.24 58.42) (xy 15.24 62.23)
 		)
 		(stroke
 			(width 0)
@@ -5207,6 +5469,16 @@
 			(type default)
 		)
 		(uuid "5cb93282-6ca1-483d-a421-66fbb58409de")
+	)
+	(wire
+		(pts
+			(xy 30.48 114.3) (xy 33.02 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d6e332c-9d60-494e-8e69-ed7be90add89")
 	)
 	(wire
 		(pts
@@ -5250,6 +5522,16 @@
 	)
 	(wire
 		(pts
+			(xy 22.86 83.82) (xy 29.21 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65ee7cd8-53fb-437a-a52f-a56acf0b38d8")
+	)
+	(wire
+		(pts
 			(xy 274.32 109.22) (xy 274.32 113.03)
 		)
 		(stroke
@@ -5257,16 +5539,6 @@
 			(type default)
 		)
 		(uuid "66cc6f7b-0802-426e-ad16-cf1661e6e15b")
-	)
-	(wire
-		(pts
-			(xy 30.48 77.47) (xy 27.94 77.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6825affb-cbd8-4277-bf1b-39dcd736bf70")
 	)
 	(wire
 		(pts
@@ -5297,6 +5569,26 @@
 			(type default)
 		)
 		(uuid "6b185f57-9228-447a-8a93-0ba03b6febd1")
+	)
+	(wire
+		(pts
+			(xy 29.21 69.85) (xy 30.48 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b7582a5-f719-46f3-a10a-4b4f0bc443d6")
+	)
+	(wire
+		(pts
+			(xy 34.29 102.87) (xy 36.83 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6bc1c7fd-1c08-4e1f-85bb-f51da5db3918")
 	)
 	(wire
 		(pts
@@ -5370,6 +5662,16 @@
 	)
 	(wire
 		(pts
+			(xy 29.21 83.82) (xy 29.21 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "704c3aae-33a6-49fc-8978-cb727137cd58")
+	)
+	(wire
+		(pts
 			(xy 223.52 29.21) (xy 223.52 33.02)
 		)
 		(stroke
@@ -5427,6 +5729,16 @@
 			(type default)
 		)
 		(uuid "72d15f01-84ef-4c0a-b423-bea4a9fae664")
+	)
+	(wire
+		(pts
+			(xy 30.48 106.68) (xy 33.02 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73f54762-f51a-4098-bb18-7846d79de152")
 	)
 	(wire
 		(pts
@@ -5540,6 +5852,16 @@
 	)
 	(wire
 		(pts
+			(xy 29.21 64.77) (xy 31.75 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7fbfcaf9-f0b1-412b-beff-e16af19bf272")
+	)
+	(wire
+		(pts
 			(xy 92.71 158.75) (xy 92.71 162.56)
 		)
 		(stroke
@@ -5550,7 +5872,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 60.96) (xy 30.48 63.5)
+			(xy 15.24 53.34) (xy 15.24 55.88)
 		)
 		(stroke
 			(width 0)
@@ -5580,6 +5902,16 @@
 	)
 	(wire
 		(pts
+			(xy 34.29 95.25) (xy 36.83 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "850a1702-0e6f-40d4-8c87-374cdcd4e564")
+	)
+	(wire
+		(pts
 			(xy 88.9 74.93) (xy 101.6 74.93)
 		)
 		(stroke
@@ -5587,6 +5919,16 @@
 			(type default)
 		)
 		(uuid "86e335c1-f1f3-486b-97f6-fa7fd88c68d7")
+	)
+	(wire
+		(pts
+			(xy 26.67 92.71) (xy 26.67 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87d9a1f9-d9c5-426f-b404-8a597ad77b5a")
 	)
 	(wire
 		(pts
@@ -5610,7 +5952,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 107.95) (xy 25.4 106.68)
+			(xy 16.51 130.81) (xy 16.51 129.54)
 		)
 		(stroke
 			(width 0)
@@ -5657,6 +5999,16 @@
 			(type default)
 		)
 		(uuid "8f515937-8357-4cfe-be2c-ddafc5f83b63")
+	)
+	(wire
+		(pts
+			(xy 34.29 92.71) (xy 36.83 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90e06250-56a0-4eb4-8b58-24a81349d7f2")
 	)
 	(wire
 		(pts
@@ -5830,6 +6182,16 @@
 	)
 	(wire
 		(pts
+			(xy 29.21 86.36) (xy 31.75 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a661c89c-a222-40ee-9616-627a9a7d5d85")
+	)
+	(wire
+		(pts
 			(xy 80.01 38.1) (xy 80.01 35.56)
 		)
 		(stroke
@@ -5837,6 +6199,16 @@
 			(type default)
 		)
 		(uuid "a7f2d64b-5a3f-497e-8338-b809012bdf90")
+	)
+	(wire
+		(pts
+			(xy 24.13 69.85) (xy 29.21 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a88df80d-4897-4424-9b87-6585328edb03")
 	)
 	(wire
 		(pts
@@ -5867,6 +6239,16 @@
 			(type default)
 		)
 		(uuid "a994c455-07ba-4453-8894-302152baf903")
+	)
+	(wire
+		(pts
+			(xy 35.56 83.82) (xy 36.83 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aaceafa7-f320-4542-b53e-4889e83f85e0")
 	)
 	(wire
 		(pts
@@ -5920,7 +6302,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 63.5) (xy 33.02 63.5)
+			(xy 15.24 55.88) (xy 17.78 55.88)
 		)
 		(stroke
 			(width 0)
@@ -5947,6 +6329,16 @@
 			(type default)
 		)
 		(uuid "b3bccc09-0c4f-4e5b-b34d-cdd6099811a8")
+	)
+	(wire
+		(pts
+			(xy 29.21 74.93) (xy 29.21 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b3c3fafe-f992-4999-95c8-a2837ca715f1")
 	)
 	(wire
 		(pts
@@ -5977,16 +6369,6 @@
 			(type default)
 		)
 		(uuid "b4d88622-7e15-48f8-b401-1536ca4f3000")
-	)
-	(wire
-		(pts
-			(xy 30.48 74.93) (xy 27.94 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b6f0d99f-00a6-4414-a2ef-3a3c69b80661")
 	)
 	(wire
 		(pts
@@ -6050,6 +6432,16 @@
 	)
 	(wire
 		(pts
+			(xy 26.67 100.33) (xy 29.21 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "baca90b7-7c11-4ea7-a115-19d3f3d448b7")
+	)
+	(wire
+		(pts
 			(xy 166.37 163.83) (xy 162.56 163.83)
 		)
 		(stroke
@@ -6060,13 +6452,23 @@
 	)
 	(wire
 		(pts
-			(xy 33.02 107.95) (xy 33.02 106.68)
+			(xy 24.13 130.81) (xy 24.13 129.54)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "bc596d54-39a8-4038-8c2d-b8ea3fd29cad")
+	)
+	(wire
+		(pts
+			(xy 29.21 74.93) (xy 31.75 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bcceddcb-61bd-4905-97bd-3d983a6e0326")
 	)
 	(wire
 		(pts
@@ -6080,7 +6482,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 107.95) (xy 35.56 106.68)
+			(xy 26.67 130.81) (xy 26.67 129.54)
 		)
 		(stroke
 			(width 0)
@@ -6190,6 +6592,16 @@
 	)
 	(wire
 		(pts
+			(xy 26.67 95.25) (xy 26.67 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8797c37-0ffe-4e4c-97a4-5703f9825f4f")
+	)
+	(wire
+		(pts
 			(xy 271.78 69.85) (xy 271.78 73.66)
 		)
 		(stroke
@@ -6270,7 +6682,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 107.95) (xy 27.94 106.68)
+			(xy 19.05 130.81) (xy 19.05 129.54)
 		)
 		(stroke
 			(width 0)
@@ -6430,6 +6842,16 @@
 	)
 	(wire
 		(pts
+			(xy 26.67 95.25) (xy 29.21 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dfd187dc-cc9a-426b-8ee7-df8c25c55dc8")
+	)
+	(wire
+		(pts
 			(xy 120.65 133.35) (xy 124.46 133.35)
 		)
 		(stroke
@@ -6490,6 +6912,16 @@
 	)
 	(wire
 		(pts
+			(xy 30.48 116.84) (xy 30.48 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4660dc2-4d01-4fe8-bb6c-4e2ee457f24c")
+	)
+	(wire
+		(pts
 			(xy 78.74 29.21) (xy 77.47 29.21)
 		)
 		(stroke
@@ -6540,6 +6972,16 @@
 	)
 	(wire
 		(pts
+			(xy 29.21 67.31) (xy 31.75 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8be3f52-053e-4d99-a577-337038c70161")
+	)
+	(wire
+		(pts
 			(xy 185.42 71.12) (xy 185.42 74.93)
 		)
 		(stroke
@@ -6570,6 +7012,16 @@
 	)
 	(wire
 		(pts
+			(xy 30.48 111.76) (xy 30.48 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "edc5142b-5e48-42d4-8e1a-126a2004875d")
+	)
+	(wire
+		(pts
 			(xy 120.65 113.03) (xy 124.46 113.03)
 		)
 		(stroke
@@ -6580,6 +7032,16 @@
 	)
 	(wire
 		(pts
+			(xy 29.21 67.31) (xy 29.21 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee48d6bb-0adf-49bb-9603-3e6372c5d8f4")
+	)
+	(wire
+		(pts
 			(xy 290.83 115.57) (xy 293.37 115.57)
 		)
 		(stroke
@@ -6587,6 +7049,26 @@
 			(type default)
 		)
 		(uuid "ee7417c0-f7d1-4cf1-80a8-9ceb8f6f929a")
+	)
+	(wire
+		(pts
+			(xy 29.21 72.39) (xy 31.75 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef1e80d8-c4e8-48ee-83e3-3e850f282f0c")
+	)
+	(wire
+		(pts
+			(xy 29.21 64.77) (xy 29.21 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "efd5fdfd-9fc8-4163-95f5-7d0e1e81acc0")
 	)
 	(wire
 		(pts
@@ -6627,6 +7109,16 @@
 			(type default)
 		)
 		(uuid "f5ae03b5-2f2b-4bdd-8576-8092037daea7")
+	)
+	(wire
+		(pts
+			(xy 36.83 111.76) (xy 38.1 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5c1bcbd-02d3-439c-beef-a2a1e730262b")
 	)
 	(wire
 		(pts
@@ -6677,6 +7169,16 @@
 			(type default)
 		)
 		(uuid "f9b3b7bb-a8b9-48f9-a21a-9fb5fa125e26")
+	)
+	(wire
+		(pts
+			(xy 26.67 92.71) (xy 29.21 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9ed0de0-9132-4feb-adf2-b4323b1ec03d")
 	)
 	(wire
 		(pts
@@ -6740,6 +7242,16 @@
 	)
 	(wire
 		(pts
+			(xy 30.48 109.22) (xy 33.02 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe2ace25-6a19-4fb0-a98c-09445050aa6e")
+	)
+	(wire
+		(pts
 			(xy 176.53 35.56) (xy 179.07 35.56)
 		)
 		(stroke
@@ -6757,6 +7269,16 @@
 			(justify left bottom)
 		)
 		(uuid "007c1a81-276f-4ea5-925b-7800b0213be6")
+	)
+	(label "AMP_2_V-_OUT"
+		(at 36.83 81.28 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "01c3deee-c7eb-4a05-977a-6487962f81db")
 	)
 	(label "AUDIO_SET_GPIO_1"
 		(at 165.1 95.25 180)
@@ -6888,6 +7410,16 @@
 		)
 		(uuid "1643fed4-ad8c-4b1c-8e9f-05cbd0f5b5ad")
 	)
+	(label "AMP_1_L_OUT"
+		(at 36.83 92.71 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "173483e2-6d62-4b9b-ac1e-4e18a7aa1a57")
+	)
 	(label "PWR_RESET_GPIO_3"
 		(at 166.37 129.54 180)
 		(effects
@@ -6898,7 +7430,7 @@
 		)
 		(uuid "174b7355-abe9-4135-b414-3c9679e0f6e5")
 	)
-	(label "AMP_V+_OUT"
+	(label "AMP_3_V+_OUT"
 		(at 222.25 22.86 180)
 		(effects
 			(font
@@ -6917,6 +7449,16 @@
 			(justify left bottom)
 		)
 		(uuid "19027324-0df9-4c07-bed2-1e5d9a1f4723")
+	)
+	(label "AMP_5_V+_OUT"
+		(at 36.83 74.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1c5e05c2-ba78-4d69-b1b7-44130c424610")
 	)
 	(label "SCL"
 		(at 72.39 120.65 180)
@@ -6948,6 +7490,16 @@
 		)
 		(uuid "220a8c21-3455-4805-ae24-6a42e08b40a4")
 	)
+	(label "AMP_5_R_OUT"
+		(at 38.1 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "233f9753-dda7-433a-84a3-7192bdbddfe5")
+	)
 	(label "PWR_SET_RELAY_4"
 		(at 223.52 80.01 180)
 		(effects
@@ -6978,7 +7530,7 @@
 		)
 		(uuid "273c4caf-9317-4429-bf6b-85db88fd8550")
 	)
-	(label "L_OUT"
+	(label "AMP_4_L_OUT"
 		(at 270.51 63.5 180)
 		(effects
 			(font
@@ -7068,6 +7620,16 @@
 		)
 		(uuid "2eca071d-d8bb-4dfd-b8d2-03d7d03475bd")
 	)
+	(label "AMP_4_L_OUT"
+		(at 36.83 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2ee67483-740e-41df-b694-87471ddbb99d")
+	)
 	(label "PWR_SET_RELAY_5"
 		(at 226.06 119.38 180)
 		(effects
@@ -7079,7 +7641,7 @@
 		(uuid "3073f6f0-2828-4431-9fa9-24d2b12f3edd")
 	)
 	(label "CTRL_GND"
-		(at 25.4 107.95 270)
+		(at 16.51 130.81 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7099,7 +7661,7 @@
 		(uuid "33724ae3-4308-4933-804d-836da18c2af0")
 	)
 	(label "ENC_B"
-		(at 33.02 107.95 270)
+		(at 24.13 130.81 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7117,16 +7679,6 @@
 			(justify left bottom)
 		)
 		(uuid "34895116-a628-4ab7-ac31-39e69a8878d6")
-	)
-	(label "L_OUT"
-		(at 30.48 85.09 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "355c2a5b-ce9d-4e2f-9c61-79e2b75d210b")
 	)
 	(label "PWR_SET_GPIO_2"
 		(at 165.1 80.01 180)
@@ -7158,6 +7710,16 @@
 		)
 		(uuid "39db7ab0-ef15-45c7-8189-b8b7725badac")
 	)
+	(label "AMP_1_R_OUT"
+		(at 38.1 106.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3c45a987-badf-4c04-a817-175011c29f07")
+	)
 	(label "L_IN"
 		(at 293.37 105.41 0)
 		(effects
@@ -7167,6 +7729,16 @@
 			(justify left bottom)
 		)
 		(uuid "3cc8145a-428a-4643-9c26-7e48c8e23bbd")
+	)
+	(label "AMP_1_V-_OUT"
+		(at 36.83 78.74 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3d2b970d-780f-4af6-bfbe-5b9093ca7b1d")
 	)
 	(label "PWR_RESET_RELAY_1"
 		(at 185.42 82.55 0)
@@ -7248,7 +7820,7 @@
 		)
 		(uuid "46dfbcd7-d0d1-47c1-be42-5f0982205f73")
 	)
-	(label "L_OUT"
+	(label "AMP_2_L_OUT"
 		(at 176.53 25.4 180)
 		(effects
 			(font
@@ -7368,6 +7940,16 @@
 		)
 		(uuid "56ba4799-1202-474e-94e4-96d42017646c")
 	)
+	(label "AMP_2_L_OUT"
+		(at 36.83 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5752ebac-f578-4d20-b3f8-e74302fcdd54")
+	)
 	(label "5V_+"
 		(at 223.52 85.09 180)
 		(effects
@@ -7397,6 +7979,16 @@
 			(justify left bottom)
 		)
 		(uuid "5980e256-35a6-4818-9328-d83607562ee6")
+	)
+	(label "AMP_3_V-_OUT"
+		(at 36.83 83.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "59dd8dda-7146-48bd-ac8a-dfecff2615dd")
 	)
 	(label "PWR_RESET_GPIO_5"
 		(at 72.39 133.35 180)
@@ -7448,7 +8040,17 @@
 		)
 		(uuid "623cb9c2-b7e7-4859-9564-ab0341addfae")
 	)
-	(label "AMP_V-_OUT"
+	(label "AMP_2_V+_OUT"
+		(at 36.83 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "62772adb-032b-42c3-a944-7de7dcde05bc")
+	)
+	(label "AMP_2_V-_OUT"
 		(at 129.54 31.75 180)
 		(effects
 			(font
@@ -7467,16 +8069,6 @@
 			(justify left bottom)
 		)
 		(uuid "65891114-7c1a-409d-8be6-b5c9746babae")
-	)
-	(label "AMP_V-_OUT"
-		(at 30.48 77.47 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6646fd24-9277-4e1d-8a4c-4446cf7e174d")
 	)
 	(label "5V_+"
 		(at 102.87 162.56 180)
@@ -7588,6 +8180,26 @@
 		)
 		(uuid "798bf54f-ed30-47b2-bbf7-ce0fd2ffe4ec")
 	)
+	(label "AMP_2_R_OUT"
+		(at 38.1 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "79a9cd37-bfa1-497b-a0e5-1db8a062643d")
+	)
+	(label "AMP_3_L_OUT"
+		(at 36.83 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7b591080-18fa-4c79-9d98-28d03f0942e5")
+	)
 	(label "CTRL_GND"
 		(at 69.85 74.93 180)
 		(effects
@@ -7608,7 +8220,7 @@
 		)
 		(uuid "7de30230-9e72-4408-a065-1f0f8391673a")
 	)
-	(label "AMP_V+_OUT"
+	(label "AMP_1_V+_OUT"
 		(at 31.75 20.32 180)
 		(effects
 			(font
@@ -7648,7 +8260,17 @@
 		)
 		(uuid "840af300-761b-4611-a45c-3965b9065a8e")
 	)
-	(label "AMP_V-_OUT"
+	(label "AMP_3_R_OUT"
+		(at 38.1 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "84be1523-f7b4-474b-a1ca-772a762e89f7")
+	)
+	(label "AMP_3_V-_OUT"
 		(at 222.25 34.29 180)
 		(effects
 			(font
@@ -7658,7 +8280,7 @@
 		)
 		(uuid "866a807b-924e-48d6-87c1-7310a0e3026f")
 	)
-	(label "AMP_V-_OUT"
+	(label "AMP_5_V-_OUT"
 		(at 226.06 109.22 180)
 		(effects
 			(font
@@ -7697,6 +8319,26 @@
 			(justify left bottom)
 		)
 		(uuid "8b4bd36e-c21e-4f18-8f0f-1a95eac8a8f9")
+	)
+	(label "AMP_4_R_OUT"
+		(at 38.1 114.3 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8e15b275-592a-4225-82d2-ef3faa2068f2")
+	)
+	(label "AMP_5_L_OUT"
+		(at 36.83 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9012ffda-a3e7-4560-a46a-c6827c90e2c3")
 	)
 	(label "PWR_RESET_GPIO_4"
 		(at 124.46 97.79 0)
@@ -7749,7 +8391,7 @@
 		(uuid "96531c18-8800-4b6e-af25-3429a7a8a2bd")
 	)
 	(label "AMP_V+_IN"
-		(at 30.48 69.85 180)
+		(at 15.24 62.23 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7778,7 +8420,7 @@
 		)
 		(uuid "9b5466cf-abef-46f9-adb3-67a9417593e1")
 	)
-	(label "R_OUT"
+	(label "AMP_5_R_OUT"
 		(at 273.05 113.03 180)
 		(effects
 			(font
@@ -7808,7 +8450,7 @@
 		)
 		(uuid "a03c9e66-87cd-4304-ae78-1801cbca8255")
 	)
-	(label "AMP_V+_OUT"
+	(label "AMP_4_V+_OUT"
 		(at 223.52 59.69 180)
 		(effects
 			(font
@@ -7839,7 +8481,7 @@
 		(uuid "a413f503-424e-4ac3-bf3d-88f95f407162")
 	)
 	(label "ENC_A"
-		(at 35.56 107.95 270)
+		(at 26.67 130.81 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7849,7 +8491,7 @@
 		(uuid "a6fb9f4c-08c5-43e6-a39a-04f1709aa6db")
 	)
 	(label "3V3"
-		(at 27.94 107.95 270)
+		(at 19.05 130.81 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7928,7 +8570,7 @@
 		)
 		(uuid "b1b355ba-290c-4ddc-a1b6-e2eea15bd1d9")
 	)
-	(label "L_OUT"
+	(label "AMP_5_L_OUT"
 		(at 273.05 102.87 180)
 		(effects
 			(font
@@ -7968,15 +8610,15 @@
 		)
 		(uuid "b9b2f7b0-2d1d-48d9-9258-82fb6dea32d1")
 	)
-	(label "R_OUT"
-		(at 30.48 87.63 0)
+	(label "AMP_1_V+_OUT"
+		(at 36.83 64.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "bcf031f9-eb11-4cda-9261-20cec793cff9")
+		(uuid "bc2a089a-e548-477a-9679-a23c2a2b289b")
 	)
 	(label "AUDIO_SET_RELAY_3"
 		(at 186.69 137.16 0)
@@ -8018,7 +8660,7 @@
 		)
 		(uuid "c1a92862-b69d-44ad-afa6-0be47352239c")
 	)
-	(label "AMP_V+_OUT"
+	(label "AMP_5_V+_OUT"
 		(at 226.06 99.06 180)
 		(effects
 			(font
@@ -8048,7 +8690,7 @@
 		)
 		(uuid "c4a0beee-3018-427c-885a-d04a7b57f28a")
 	)
-	(label "L_OUT"
+	(label "AMP_3_L_OUT"
 		(at 269.24 26.67 180)
 		(effects
 			(font
@@ -8077,6 +8719,16 @@
 			(justify right bottom)
 		)
 		(uuid "c68be661-c8e3-4e5e-b3ee-578abc98121e")
+	)
+	(label "AMP_5_V-_OUT"
+		(at 36.83 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c86db957-a41a-413e-b547-e0d4b24512af")
 	)
 	(label "PWR_RESET_RELAY_5"
 		(at 186.69 158.75 0)
@@ -8118,7 +8770,7 @@
 		)
 		(uuid "cc2e1765-8232-4422-8e6a-6e321164d0e5")
 	)
-	(label "AMP_V+_OUT"
+	(label "AMP_2_V+_OUT"
 		(at 129.54 21.59 180)
 		(effects
 			(font
@@ -8148,7 +8800,7 @@
 		)
 		(uuid "ce945b06-144b-4061-a134-4eca8d6ab7cc")
 	)
-	(label "R_OUT"
+	(label "AMP_2_R_OUT"
 		(at 176.53 35.56 180)
 		(effects
 			(font
@@ -8168,7 +8820,7 @@
 		)
 		(uuid "cf9215cf-653a-4209-ab4a-6ed2887336c2")
 	)
-	(label "R_OUT"
+	(label "AMP_3_R_OUT"
 		(at 269.24 36.83 180)
 		(effects
 			(font
@@ -8229,7 +8881,7 @@
 		(uuid "d3e294a5-6ef1-479e-b97e-b46f9bd6fd02")
 	)
 	(label "AMP_V-_IN"
-		(at 30.48 60.96 180)
+		(at 15.24 53.34 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8237,6 +8889,16 @@
 			(justify right bottom)
 		)
 		(uuid "d681ae6a-2ed1-4d32-828f-bb39e030d092")
+	)
+	(label "AMP_4_V+_OUT"
+		(at 36.83 72.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d9f3bc49-e1fe-4258-a83e-06f3dc67cfc0")
 	)
 	(label "PWR_RESET_GPIO_1"
 		(at 165.1 87.63 180)
@@ -8318,6 +8980,16 @@
 		)
 		(uuid "e29c00f4-e896-4869-9116-4db364d62f01")
 	)
+	(label "AMP_4_V-_OUT"
+		(at 36.83 86.36 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e2a8dacb-342f-4dbd-a54e-d16b90fba813")
+	)
 	(label "AUDIO_SET_RELAY_5"
 		(at 273.05 123.19 180)
 		(effects
@@ -8338,7 +9010,17 @@
 		)
 		(uuid "e601a255-f495-4a4a-868a-51712b35405e")
 	)
-	(label "R_OUT"
+	(label "AMP_3_V+_OUT"
+		(at 36.83 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e6815e17-f54d-4557-a076-e0f1dccb5850")
+	)
+	(label "AMP_1_R_OUT"
 		(at 78.74 38.1 180)
 		(effects
 			(font
@@ -8349,7 +9031,7 @@
 		(uuid "e7796085-805c-44ad-ba72-cb2f5d0fb161")
 	)
 	(label "ENC_SW"
-		(at 30.48 107.95 270)
+		(at 21.59 130.81 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8398,7 +9080,7 @@
 		)
 		(uuid "ec77d400-c36a-4bf2-a6a4-f371428e5a82")
 	)
-	(label "L_OUT"
+	(label "AMP_1_L_OUT"
 		(at 78.74 24.13 180)
 		(effects
 			(font
@@ -8428,7 +9110,7 @@
 		)
 		(uuid "ef737baf-5646-4c35-8127-49c30e464a2f")
 	)
-	(label "AMP_V-_OUT"
+	(label "AMP_1_V-_OUT"
 		(at 31.75 33.02 180)
 		(effects
 			(font
@@ -8438,7 +9120,7 @@
 		)
 		(uuid "f1e8cca7-2943-465d-b16f-c9af7d06c4ab")
 	)
-	(label "AMP_V-_OUT"
+	(label "AMP_4_V-_OUT"
 		(at 223.52 69.85 180)
 		(effects
 			(font
@@ -8488,16 +9170,6 @@
 		)
 		(uuid "f555b56d-2ee6-4277-a3c5-7a812d1ce510")
 	)
-	(label "AMP_V+_OUT"
-		(at 30.48 74.93 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f59085e3-405b-4e16-8577-dcbc5387e5fc")
-	)
 	(label "AUDIO_RESET_RELAY_3"
 		(at 186.69 134.62 0)
 		(effects
@@ -8528,7 +9200,7 @@
 		)
 		(uuid "fb47d6cf-ba80-4e01-95fe-c066aca4cd9c")
 	)
-	(label "R_OUT"
+	(label "AMP_4_R_OUT"
 		(at 270.51 73.66 180)
 		(effects
 			(font
@@ -8570,7 +9242,7 @@
 	)
 	(hierarchical_label "AMP_V-_OUT"
 		(shape output)
-		(at 27.94 77.47 180)
+		(at 22.86 83.82 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8581,7 +9253,7 @@
 	)
 	(hierarchical_label "L_OUT"
 		(shape output)
-		(at 27.94 85.09 180)
+		(at 17.78 97.79 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8592,7 +9264,7 @@
 	)
 	(hierarchical_label "R_OUT"
 		(shape output)
-		(at 27.94 87.63 180)
+		(at 22.86 111.76 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8647,7 +9319,7 @@
 	)
 	(hierarchical_label "AMP_V-_IN"
 		(shape input)
-		(at 27.94 63.5 180)
+		(at 12.7 55.88 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8658,7 +9330,7 @@
 	)
 	(hierarchical_label "AMP_V+_IN"
 		(shape input)
-		(at 27.94 66.04 180)
+		(at 12.7 58.42 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8669,7 +9341,7 @@
 	)
 	(hierarchical_label "AMP_V+_OUT"
 		(shape output)
-		(at 27.94 74.93 180)
+		(at 24.13 69.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8831,6 +9503,86 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "J23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 34.29 74.93 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0ed59d96-4619-4955-8aaa-09e561d9d727")
+		(property "Reference" "NT9"
+			(at 34.29 69.85 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 34.29 72.39 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 34.29 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "51c14ce6-96b5-4668-9c94-efb008bc658a")
+		)
+		(pin "1"
+			(uuid "6931a42f-c453-4dcc-b694-6827c8ece18f")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT9")
 					(unit 1)
 				)
 			)
@@ -9021,18 +9773,19 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Pin")
-		(at 38.1 66.04 180)
+		(lib_id "Device:NetTie_2")
+		(at 34.29 86.36 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
 		(dnp no)
-		(uuid "1b03123b-212a-41af-a3f0-6f9de8a6b1ea")
-		(property "Reference" "J14"
-			(at 35.56 69.85 0)
+		(fields_autoplaced yes)
+		(uuid "161d9979-21a8-4618-bf87-0b7d1cd4a803")
+		(property "Reference" "NT12"
+			(at 34.29 81.28 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9041,8 +9794,8 @@
 				)
 			)
 		)
-		(property "Value" "AMP_PWR_IN"
-			(at 40.64 67.818 0)
+		(property "Value" "NetTie_2"
+			(at 34.29 83.82 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9051,8 +9804,8 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
-			(at 38.1 66.04 0)
+		(property "Footprint" ""
+			(at 34.29 86.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9063,7 +9816,86 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 38.1 66.04 0)
+			(at 34.29 86.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 34.29 86.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "832d2993-55ff-4736-85d6-7e386af7f538")
+		)
+		(pin "1"
+			(uuid "1620d25f-f84d-4e36-a7de-f1277c87e3c4")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 22.86 58.42 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1b03123b-212a-41af-a3f0-6f9de8a6b1ea")
+		(property "Reference" "J14"
+			(at 20.32 62.23 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP_PWR_IN"
+			(at 25.4 60.198 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+			(at 22.86 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 22.86 58.42 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9074,7 +9906,7 @@
 			)
 		)
 		(property "Description" "Amp board harness terminal, 2-pin 5.08mm"
-			(at 38.1 66.04 0)
+			(at 22.86 58.42 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9173,6 +10005,166 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "J22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 34.29 64.77 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "25f3a5d5-7f3d-4a17-a16c-e4f704b1e1e5")
+		(property "Reference" "NT6"
+			(at 34.29 59.69 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 34.29 62.23 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 34.29 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "e5edb65d-e6f3-4945-b74b-6caff728c1ee")
+		)
+		(pin "1"
+			(uuid "338bbe5b-aa97-45ef-949a-7b57496b03cf")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 31.75 102.87 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2b7a1458-c490-40a5-a8f4-74a2a13219b3")
+		(property "Reference" "NT17"
+			(at 31.75 97.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 31.75 100.33 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 31.75 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 31.75 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 31.75 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "7b00df6e-7ec5-49ce-83fd-cea8320bb74b")
+		)
+		(pin "1"
+			(uuid "e18c40c3-469b-46f8-86a5-28682af5b209")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT17")
 					(unit 1)
 				)
 			)
@@ -9359,6 +10351,86 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "K6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 34.29 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "321efe3e-750b-419d-a5e0-b8cb799ef24a")
+		(property "Reference" "NT5"
+			(at 34.29 106.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 34.29 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 34.29 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "e0e016d8-39dd-4514-9011-7aaf3649ff26")
+		)
+		(pin "1"
+			(uuid "da71874a-965e-4f26-b481-49b8691bc01e")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT5")
 					(unit 1)
 				)
 			)
@@ -9726,6 +10798,86 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "H14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 35.56 109.22 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4355a02d-3d8a-464e-99fd-9483bc250104")
+		(property "Reference" "NT19"
+			(at 35.56 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 35.56 106.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 35.56 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 35.56 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 35.56 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "106b1d78-9a62-4b75-adfc-bbd9e9d5b065")
+		)
+		(pin "1"
+			(uuid "7a570500-c097-419d-9cac-4b545aa2f66d")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT19")
 					(unit 1)
 				)
 			)
@@ -10464,6 +11616,86 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 35.56 106.68 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7cbbaa31-eb7d-4fcd-9a5f-e7f2b32a69ba")
+		(property "Reference" "NT18"
+			(at 35.56 101.6 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 35.56 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 35.56 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 35.56 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 35.56 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "b6e0f4e9-d021-47ac-a5ba-9df7018f56ad")
+		)
+		(pin "1"
+			(uuid "21f93e83-5580-4f54-9739-dccfd64a6445")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Relay:AZ850P2-x")
 		(at 88.9 38.1 90)
 		(unit 1)
@@ -10569,7 +11801,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x05_Pin")
-		(at 30.48 101.6 270)
+		(at 21.59 124.46 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10580,7 +11812,7 @@
 		(fields_autoplaced yes)
 		(uuid "85a7cf28-732f-44f6-9300-d17e6e8b558d")
 		(property "Reference" "J13"
-			(at 30.48 96.52 90)
+			(at 21.59 119.38 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10590,7 +11822,7 @@
 			)
 		)
 		(property "Value" "ROTARY_SW"
-			(at 30.48 99.06 90)
+			(at 21.59 121.92 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10600,7 +11832,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical"
-			(at 30.48 101.6 0)
+			(at 21.59 124.46 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10611,7 +11843,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 30.48 101.6 0)
+			(at 21.59 124.46 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10622,7 +11854,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x05, script generated"
-			(at 30.48 101.6 0)
+			(at 21.59 124.46 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10730,6 +11962,166 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "J18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 30.48 97.79 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "910d515a-f4f6-467d-a64e-fb8e8718cdd2")
+		(property "Reference" "NT4"
+			(at 30.48 92.71 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 30.48 95.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 30.48 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 30.48 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 30.48 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "e8d8183f-4663-44a5-8827-e4e8f3a712e8")
+		)
+		(pin "1"
+			(uuid "603b596e-45c7-48c9-b662-c2efafd7d050")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 34.29 72.39 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "96f7f6cb-7e95-4535-9d8b-e1fbcf016111")
+		(property "Reference" "NT8"
+			(at 34.29 67.31 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 34.29 69.85 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 34.29 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "f224f46a-0903-499c-9a44-3d79ae44767c")
+		)
+		(pin "1"
+			(uuid "eb725b54-a783-4285-8012-e83a8b31b2e0")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT8")
 					(unit 1)
 				)
 			)
@@ -11341,6 +12733,86 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 35.56 116.84 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b3f0c6ac-3bbe-486b-a03e-e72bb5222f60")
+		(property "Reference" "NT21"
+			(at 35.56 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 35.56 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 35.56 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 35.56 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 35.56 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "c0b513bd-e4d6-4cd7-a131-6018a00c2da1")
+		)
+		(pin "1"
+			(uuid "6aa7724b-d19e-4af6-8d5e-cb2a7c86bde3")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Mechanical:MountingHole")
 		(at 17.78 191.77 0)
 		(unit 1)
@@ -11411,6 +12883,246 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "H16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 34.29 78.74 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b6c4581a-bb24-4458-9e39-26bdda41a53c")
+		(property "Reference" "NT10"
+			(at 34.29 73.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 34.29 76.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 34.29 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "43748768-03ba-438f-8aca-5534e63f5b29")
+		)
+		(pin "1"
+			(uuid "9c3e5a41-0321-4d7d-8497-0941fc7df022")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 33.02 69.85 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b7e5bf01-4d92-47a8-acda-7355fae68a55")
+		(property "Reference" "NT2"
+			(at 33.02 64.77 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 33.02 67.31 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 33.02 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 33.02 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "75f2242c-e7ab-4fa8-89f1-cf21830e1c03")
+		)
+		(pin "1"
+			(uuid "4fce0bf8-ca55-4714-8304-4d29b034f3a6")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 34.29 88.9 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "baac7a2a-29ba-40d8-bd76-5e94d6f25d10")
+		(property "Reference" "NT13"
+			(at 34.29 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 34.29 86.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 34.29 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "cef67872-4109-4e45-a319-82a7290a7dc2")
+		)
+		(pin "1"
+			(uuid "9364b8b8-8e6d-4ef5-986c-7cdaaf41b1c0")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT13")
 					(unit 1)
 				)
 			)
@@ -11490,6 +13202,86 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "J21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 31.75 95.25 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "be968644-5870-4044-863e-ac97c7a6fa88")
+		(property "Reference" "NT15"
+			(at 31.75 90.17 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 31.75 92.71 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 31.75 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 31.75 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 31.75 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "74cf0b8d-66d0-4c4a-8ab3-1c829ef5818e")
+		)
+		(pin "1"
+			(uuid "342583d2-da00-48f5-97de-6260f7cc7f99")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT15")
 					(unit 1)
 				)
 			)
@@ -11737,6 +13529,86 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 34.29 67.31 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c4c3643e-fbb8-407c-9254-898eda1aa55f")
+		(property "Reference" "NT7"
+			(at 34.29 62.23 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 34.29 64.77 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 34.29 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "fb0aeee7-cb75-46b0-b653-0e2eafbae511")
+		)
+		(pin "1"
+			(uuid "008e7686-1b24-4e9f-8755-6e50dafbdc21")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
 		(at 171.45 29.21 0)
 		(unit 1)
@@ -11896,6 +13768,86 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 33.02 83.82 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "caa1e322-ad34-4aa5-97ea-e151d2df90e6")
+		(property "Reference" "NT3"
+			(at 33.02 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 33.02 81.28 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 33.02 83.82 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 83.82 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 33.02 83.82 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "4781cb5b-55cd-4a95-8fe0-d5d8352d8761")
+		)
+		(pin "1"
+			(uuid "94bfe600-dc75-4131-87d9-29203f676264")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Relay:AZ850P2-x")
 		(at 236.22 111.76 90)
 		(unit 1)
@@ -11994,6 +13946,86 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "K7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 34.29 81.28 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ceb041f3-0982-4ab3-aeb4-9460947c53c2")
+		(property "Reference" "NT11"
+			(at 34.29 76.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 34.29 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 34.29 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "81060033-2c18-4470-ba79-d1cbb6095c09")
+		)
+		(pin "1"
+			(uuid "db2369b7-9011-46fa-9b0a-a7f918896163")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT11")
 					(unit 1)
 				)
 			)
@@ -12161,6 +14193,86 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 31.75 100.33 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d7b2957f-aa3e-4031-91d0-d5a0875eb643")
+		(property "Reference" "NT16"
+			(at 31.75 95.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 31.75 97.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 31.75 100.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 31.75 100.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 31.75 100.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "0378dc42-db11-4478-8af0-426464ca3635")
+		)
+		(pin "1"
+			(uuid "8fd7c706-cf2e-4aae-9bd2-a518fe3b63b8")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Relay:AZ850P2-x")
 		(at 280.67 76.2 90)
 		(unit 1)
@@ -12259,6 +14371,86 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "K9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 31.75 92.71 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "de906a0c-c4e8-49a2-a169-2f11f9418eeb")
+		(property "Reference" "NT14"
+			(at 31.75 87.63 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 31.75 90.17 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 31.75 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 31.75 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 31.75 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "5f174dbd-660f-47b0-a663-5ac123b68813")
+		)
+		(pin "1"
+			(uuid "e0d1b189-b828-486c-915e-2dfa4ac9e0c8")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT14")
 					(unit 1)
 				)
 			)
@@ -12659,6 +14851,86 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
 					(reference "J26")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 35.56 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f981aa6f-d819-41c1-a99f-a1054219b19f")
+		(property "Reference" "NT20"
+			(at 35.56 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NetTie_2"
+			(at 35.56 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 35.56 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 35.56 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 35.56 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "10f17aee-a5ac-40b5-8441-810dfdf59c2e")
+		)
+		(pin "1"
+			(uuid "3ffba6c6-8b60-4a26-8ff3-b5e43fe547e9")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e19c5b2a-a625-4260-8099-fc122fec1c7e"
+					(reference "NT20")
 					(unit 1)
 				)
 			)
