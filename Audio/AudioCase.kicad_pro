@@ -521,12 +521,7 @@
         "Default"
       ]
     },
-    "netclass_patterns": [
-      {
-        "netclass": "Default",
-        "pattern": "/EQModule/L_BUFF"
-      }
-    ]
+    "netclass_patterns": []
   },
   "pcbnew": {
     "last_paths": {
@@ -664,7 +659,7 @@
         "uuid": "760b9589-09e7-434e-9ca2-6e4136e3b7a2"
       }
     ],
-    "used_designators": "NT2-21",
+    "used_designators": "J27-30",
     "variants": []
   },
   "sheets": [
@@ -687,6 +682,10 @@
     [
       "e19c5b2a-a625-4260-8099-fc122fec1c7e",
       "Controll"
+    ],
+    [
+      "e27346ec-040d-41ba-b795-0891abf25329",
+      "RVConvert"
     ]
   ],
   "text_variables": {},

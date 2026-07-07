@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Regenerate split AudioCase boards and fabrication outputs.
 
-The source AudioCase board intentionally keeps four board outlines in one
+The source AudioCase board intentionally keeps five board outlines in one
 layout.  KiKit can separate them, but the standard RK097 potentiometer
 footprints contain open Edge.Cuts guide lines that make KiKit reject the
 outline.  This script creates a temporary copy where those footprint guide
@@ -63,6 +63,12 @@ BOARDS = [
         "name": "04_amp",
         "pcb": "AudioCase_4_amp.kicad_pcb",
         "source": "rectangle; tlx: 215.42mm; tly: 73.326743mm; brx: 278mm; bry: 115.826743mm",
+    },
+    {
+        "name": "05_rv_convert",
+        "pcb": "AudioCase_5_rv_convert.kicad_pcb",
+        # Must match the RVConvert gr_rect on Edge.Cuts.
+        "source": "rectangle; tlx: 129.625mm; tly: 167.6mm; brx: 138.425mm; bry: 183.15mm",
     },
 ]
 
