@@ -3599,41 +3599,28 @@
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "U"
-				(at 0 8.89 0)
+			(property "Reference" "U15"
+				(at -5.588 6.604 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "TPS3808DBV"
-				(at 0 6.35 0)
+			(property "Value" "TPS3808 3V3"
+				(at 7.112 6.35 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
-				(at -2.54 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/tps3808.pdf"
-				(at -2.54 0 0)
+			(property "Footprint" ""
+				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -3643,7 +3630,18 @@
 					)
 				)
 			)
-			(property "Description" "Low-Quiescent-Current, Programmable-Delay Supervisory Circuit, SOT-23-6"
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3745,7 +3743,7 @@
 					)
 				)
 				(pin input line
-					(at -10.16 -2.54 0)
+					(at -10.16 -3.81 0)
 					(length 2.54)
 					(name "CT"
 						(effects
@@ -3763,7 +3761,213 @@
 					)
 				)
 				(pin input line
-					(at -10.16 2.54 0)
+					(at -10.16 3.81 0)
+					(length 2.54)
+					(name "SENSE"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "TPS3808DBV_1"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U17"
+				(at -5.08 6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TPS3808 5V"
+				(at 6.35 6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "supply voltage supervisor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TPS3808DBV_1_0_1"
+				(rectangle
+					(start -7.62 5.08)
+					(end 7.62 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "TPS3808DBV_1_1_1"
+				(pin output line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "~{RESET}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "~{MR}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -3.81 0)
+					(length 2.54)
+					(name "CT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 3.81 0)
 					(length 2.54)
 					(name "SENSE"
 						(effects
@@ -4698,7 +4902,7 @@
 	)
 	(wire
 		(pts
-			(xy 328.93 143.51) (xy 331.47 143.51)
+			(xy 325.12 143.51) (xy 326.39 143.51)
 		)
 		(stroke
 			(width 0)
@@ -5228,6 +5432,16 @@
 	)
 	(wire
 		(pts
+			(xy 334.01 143.51) (xy 340.36 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3cc5a233-a7c8-4559-9654-88dbdb589b3b")
+	)
+	(wire
+		(pts
 			(xy 92.71 68.58) (xy 92.71 63.5)
 		)
 		(stroke
@@ -5605,6 +5819,16 @@
 			(type default)
 		)
 		(uuid "60e36ae3-0377-4c4e-b444-af23ad0d6457")
+	)
+	(wire
+		(pts
+			(xy 347.98 149.86) (xy 347.98 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61533f15-9397-42aa-9d1a-07a590a3a152")
 	)
 	(wire
 		(pts
@@ -6058,13 +6282,13 @@
 	)
 	(wire
 		(pts
-			(xy 347.98 148.59) (xy 347.98 151.13)
+			(xy 346.71 149.86) (xy 347.98 149.86)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9660ed5b-1dea-4236-a926-4a01596cf6cd")
+		(uuid "9586a6b4-a264-4596-bb4c-44c1de6ed655")
 	)
 	(wire
 		(pts
@@ -6125,16 +6349,6 @@
 			(type default)
 		)
 		(uuid "a20bdd11-1dee-430e-a9a8-6b8749fc0c33")
-	)
-	(wire
-		(pts
-			(xy 339.09 143.51) (xy 340.36 143.51)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a5ca5c9e-40f3-4564-973b-0939a7d12462")
 	)
 	(wire
 		(pts
@@ -6718,16 +6932,6 @@
 	)
 	(wire
 		(pts
-			(xy 347.98 134.62) (xy 347.98 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e0d8e795-4eea-4ed1-be73-546fab782feb")
-	)
-	(wire
-		(pts
 			(xy 45.72 40.64) (xy 36.83 40.64)
 		)
 		(stroke
@@ -6868,6 +7072,16 @@
 	)
 	(wire
 		(pts
+			(xy 347.98 137.16) (xy 347.98 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f0546174-09de-4725-a0da-38bfa6fc72a9")
+	)
+	(wire
+		(pts
 			(xy 248.92 182.88) (xy 248.32 182.85)
 		)
 		(stroke
@@ -6885,6 +7099,16 @@
 			(type default)
 		)
 		(uuid "f7ee86ad-a3eb-4518-86cd-9263e0b21348")
+	)
+	(wire
+		(pts
+			(xy 346.71 137.16) (xy 347.98 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f92633b3-64e0-434e-b817-86f3c3ea2764")
 	)
 	(wire
 		(pts
@@ -7037,12 +7261,12 @@
 		(uuid "0f6b17d9-94df-4691-b11d-c127c71eeecb")
 	)
 	(label "+5V_A"
-		(at 186.69 107.95 90)
+		(at 186.69 107.95 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "15aa3c8e-2c7b-47b6-9b14-b920ce1a33b7")
 	)
@@ -7077,12 +7301,12 @@
 		(uuid "1b29b0d5-7912-447b-aa60-564689aae466")
 	)
 	(label "+5V_A"
-		(at 204.47 107.95 90)
+		(at 204.47 107.95 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "1c22d375-58cd-4b9f-ad1d-f769d0aa37a3")
 	)
@@ -7367,7 +7591,7 @@
 		(uuid "3f5be61b-c749-47d4-be1a-5cd517801fee")
 	)
 	(label "LCD_VCC"
-		(at 347.98 134.62 180)
+		(at 346.71 137.16 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7857,7 +8081,7 @@
 		(uuid "8ae22167-b787-4a85-a6ca-46f17f01f0aa")
 	)
 	(label "+5V_D"
-		(at 347.98 151.13 180)
+		(at 346.71 149.86 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8147,7 +8371,7 @@
 		(uuid "b86de0e0-8845-41c7-9f50-7411a2760cd2")
 	)
 	(label "LCD_EN"
-		(at 328.93 143.51 180)
+		(at 325.12 143.51 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9396,7 +9620,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "18c8b0c7-8097-4ab4-84d2-d93d86135548")
-		(property "Reference" "C68"
+		(property "Reference" "C67"
 			(at 430.53 27.94 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9458,7 +9682,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C68")
+					(reference "C67")
 					(unit 1)
 				)
 			)
@@ -10046,7 +10270,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5700bc4e-0764-4f16-be5a-1a14890f2b59")
-		(property "Reference" "C66"
+		(property "Reference" "C69"
 			(at 440.69 142.24 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10108,7 +10332,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C66")
+					(reference "C69")
 					(unit 1)
 				)
 			)
@@ -10116,7 +10340,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 335.28 143.51 90)
+		(at 330.2 143.51 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10126,7 +10350,7 @@
 		(dnp no)
 		(uuid "5782578e-ad54-4193-a67a-1783f78f6f59")
 		(property "Reference" "R51"
-			(at 332.74 142.24 90)
+			(at 327.66 142.24 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10136,7 +10360,7 @@
 			)
 		)
 		(property "Value" "100k"
-			(at 337.82 144.78 90)
+			(at 332.74 144.78 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10146,7 +10370,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 335.28 143.51 0)
+			(at 330.2 143.51 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10157,7 +10381,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 335.28 143.51 0)
+			(at 330.2 143.51 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10168,7 +10392,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 335.28 143.51 0)
+			(at 330.2 143.51 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11381,6 +11605,7 @@
 		)
 	)
 	(symbol
+		(lib_name "TPS3808DBV_1")
 		(lib_id "Power_Supervisor:TPS3808DBV")
 		(at 405 130 0)
 		(unit 1)
@@ -11392,7 +11617,7 @@
 		(dnp no)
 		(uuid "8f72c88b-0377-4fcb-a2db-015c1c741be3")
 		(property "Reference" "U17"
-			(at 405 127.46 0)
+			(at 399.92 123.65 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11402,7 +11627,7 @@
 			)
 		)
 		(property "Value" "TPS3808 5V"
-			(at 405 124.92 0)
+			(at 411.35 123.65 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -12109,7 +12334,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ab84288d-5da3-4fc3-8c7b-0a6000708b16")
-		(property "Reference" "C67"
+		(property "Reference" "C66"
 			(at 407.7 121.92 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12171,7 +12396,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C67")
+					(reference "C66")
 					(unit 1)
 				)
 			)
@@ -12687,7 +12912,7 @@
 		(dnp no)
 		(uuid "c43db032-169e-40f6-a005-1c4b9f4d50fc")
 		(property "Reference" "U15"
-			(at 395 109.22 0)
+			(at 389.412 105.156 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -12697,7 +12922,7 @@
 			)
 		)
 		(property "Value" "TPS3808 3V3"
-			(at 395 106.68 0)
+			(at 402.112 105.41 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13761,7 +13986,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e7a6fa06-327d-46a3-878a-fd224b811ad6")
-		(property "Reference" "C69"
+		(property "Reference" "C68"
 			(at 436.88 72.39 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13823,7 +14048,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C69")
+					(reference "C68")
 					(unit 1)
 				)
 			)
