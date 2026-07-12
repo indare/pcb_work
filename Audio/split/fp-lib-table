@@ -1,6 +1,4 @@
 (fp_lib_table
 	(version 7)
-	(lib (name "Library") (type "KiCad") (uri "${KIPRJMOD}/../Library.pretty") (options "") (descr ""))
-	(lib (name "ULN2803A_HTC_DIP_ONLY") (type "KiCad") (uri "${KIPRJMOD}/../Library.pretty") (options "") (descr ""))
-	(lib (name "BP5293_ROHM") (type "KiCad") (uri "${KIPRJMOD}/../Library.pretty") (options "") (descr ""))
+	(lib (name "Library") (type "KiCad") (uri "${KIPRJMOD}/../Library.pretty") (options "") (descr "AudioCase project footprints"))
 )

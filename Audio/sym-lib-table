@@ -1,7 +1,9 @@
 (sym_lib_table
 	(version 7)
-	(lib (name "MCW03") (type "KiCad") (uri "${KIPRJMOD}/MCW03.kicad_sym") (options "") (descr ""))
-	(lib (name "BP5293_ROHM") (type "KiCad") (uri "${KIPRJMOD}/BP5293_ROHM.kicad_sym") (options "") (descr ""))
-	(lib (name "ULN2803A") (type "KiCad") (uri "${KIPRJMOD}/ULN2803A_HTC_DIP_ONLY.kicad_sym") (options "") (descr ""))
-	(lib (name "BP5293-33") (type "KiCad") (uri "${KIPRJMOD}/BP5293_30_ROHM.kicad_sym") (options "") (descr ""))
+	(lib (name "MCW03") (type "KiCad") (uri "${KIPRJMOD}/MCW03.kicad_sym") (options "") (descr "Mean Well MCW03-12D15 DC/DC"))
+	(lib (name "BP5293_ROHM") (type "KiCad") (uri "${KIPRJMOD}/BP5293_ROHM.kicad_sym") (options "") (descr "ROHM BP5293-50 5V buck"))
+	(lib (name "BP5293-33") (type "KiCad") (uri "${KIPRJMOD}/BP5293_30_ROHM.kicad_sym") (options "") (descr "ROHM BP5293-33 3.3V buck"))
+	(lib (name "ULN2803A") (type "KiCad") (uri "${KIPRJMOD}/ULN2803A_HTC_DIP_ONLY.kicad_sym") (options "") (descr "ULN2803A DIP-18 project symbol"))
+	(lib (name "MeasurementADC1804") (type "KiCad") (uri "${KIPRJMOD}/MeasurementADC1804.kicad_sym") (options "") (descr "ADC1804_F module + OPA1656"))
+	(lib (name "MeasurementADC_Extras") (type "KiCad") (uri "${KIPRJMOD}/MeasurementADC_Extras.kicad_sym") (options "") (descr "LT1763, MBC2596, ASFL1, WAVESHARE-29318"))
 )

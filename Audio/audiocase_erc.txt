@@ -1,0 +1,239 @@
+ERC report (2026-07-13T01:56:59, Encoding UTF8)
+Report includes: Errors, Warnings, Exclusions
+
+***** Sheet /
+[label_dangling]: Label not connected
+    ; error
+    @(360.68 mm, 113.03 mm): Label '+3V3_A'
+[label_dangling]: Label not connected
+    ; error
+    @(381.00 mm, 26.67 mm): Label '+6V7_PRE'
+[label_dangling]: Label not connected
+    ; error
+    @(386.08 mm, 71.12 mm): Label '+5V_D'
+[label_dangling]: Label not connected
+    ; error
+    @(389.92 mm, 82.55 mm): Label 'A_GND'
+[label_dangling]: Label not connected
+    ; error
+    @(461.01 mm, 77.47 mm): Label 'U13_FB'
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(179.07 mm, 72.39 mm): Vertical Wire, length 2.54 mm
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(185.42 mm, 72.39 mm): Vertical Wire, length 3.81 mm
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(191.77 mm, 72.39 mm): Vertical Wire, length 3.81 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(248.92 mm, 177.80 mm): Wire, length 0.601 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(248.92 mm, 180.34 mm): Wire, length 0.601 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(248.92 mm, 182.88 mm): Wire, length 0.601 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(248.92 mm, 185.42 mm): Wire, length 0.601 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(294.64 mm, 175.26 mm): Wire, length 0.601 mm
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(368.30 mm, 104.14 mm): Horizontal Wire, length 7.62 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(377.22 mm, 107.95 mm): Symbol R52 Pin 1 [Passive, Line]
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(381.00 mm, 104.14 mm): Horizontal Wire, length 5.08 mm
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(407.70 mm, 113.03 mm): Horizontal Wire, length 22.86 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(387.35 mm, 124.46 mm): Wire, length 8.068 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(440.69 mm, 132.08 mm): Horizontal Wire, length 45.85 mm
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(440.69 mm, 132.08 mm): Horizontal Wire, length 45.85 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(370.84 mm, 125.73 mm): Wire, length 24.947 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(397.51 mm, 139.70 mm): Vertical Wire, length 7.16 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(397.51 mm, 132.54 mm): Horizontal Wire, length 2.41 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(370.84 mm, 44.45 mm): Horizontal Wire, length 46.16 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(405.16 mm, 111.76 mm): Symbol U15 Pin 1 [~{RESET}, Output, Line]
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(397.51 mm, 132.54 mm): Horizontal Wire, length 2.41 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(407.70 mm, 113.03 mm): Vertical Wire, length 7.62 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(407.70 mm, 113.03 mm): Horizontal Wire, length 22.86 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(407.70 mm, 114.30 mm): Horizontal Wire, length 22.86 mm
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(407.70 mm, 114.30 mm): Horizontal Wire, length 22.86 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(407.70 mm, 120.65 mm): Symbol C67 Pin 1 [Passive, Line]
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(397.51 mm, 83.82 mm): Horizontal Wire, length 19.49 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(417.00 mm, 83.82 mm): Vertical Wire, length 39.37 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(440.69 mm, 148.59 mm): Wire, length 40.823 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(415.16 mm, 130.00 mm): Symbol U17 Pin 1 [~{RESET}, Output, Line]
+[unconnected_wire_endpoint]: 未接続の配線終端
+    ; warning
+    @(430.00 mm, 71.12 mm): Vertical Wire, length 2.54 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(407.67 mm, 71.12 mm): Horizontal Wire, length 22.33 mm
+[endpoint_off_grid]: Symbol pin or wire end off connection grid
+    ; warning
+    @(430.00 mm, 71.12 mm): Vertical Wire, length 2.54 mm
+
+***** Sheet /PowerModule/
+[pin_to_pin]: ピンのタイプ Power output と Power output が接続されています
+    ; error
+    @(48.26 mm, 36.83 mm): Symbol #FLG02 Pin 1 [Power output, Line]
+    @(271.78 mm, 203.20 mm): Symbol A3 Pin 3 [GND, Power output, Line]
+
+***** Sheet /EQModule/
+
+***** Sheet /AmpModule/
+
+***** Sheet /Controll/
+
+***** Sheet /RVConvert/
+
+***** Sheet /MeasurementADC/
+[pin_not_connected]: Pin not connected
+    ; error
+    @(185.42 mm, 74.93 mm): Symbol A2 Pin 13 [+3V3, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(185.42 mm, 74.93 mm): Symbol A2 Pin 13 [+3V3, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(191.77 mm, 74.93 mm): Symbol A2 Pin 14 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(191.77 mm, 74.93 mm): Symbol A2 Pin 14 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(196.85 mm, 153.67 mm): Symbol LCDDisplay1 Pin 1 [VCC, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(342.90 mm, 43.18 mm): Symbol C64 Pin 2 [Passive, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(342.90 mm, 50.80 mm): Symbol C64 Pin 1 [Passive, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(351.79 mm, 64.77 mm): Symbol C65 Pin 1 [Passive, Line]
+[pin_to_pin]: ピンのタイプ Power output と Power output が接続されています
+    ; error
+    @(358.14 mm, 24.13 mm): Symbol U13 Pin 3 [OUT+, Power output, Line]
+    @(358.14 mm, 34.29 mm): Symbol U13 Pin 4 [OUT-, Power output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(351.79 mm, 72.39 mm): Symbol C65 Pin 2 [Passive, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(397.51 mm, 39.37 mm): Symbol U14 Pin 6 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(397.51 mm, 39.37 mm): Symbol U14 Pin 6 [GND, Power input, Line]
+[pin_to_pin]: ピンのタイプ Power output と Power output が接続されています
+    ; error
+    @(405.13 mm, 24.13 mm): Symbol U14 Pin 1 [OUT, Power output, Line]
+    @(407.67 mm, 68.58 mm): Symbol U16 Pin 1 [OUT, Power output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(405.13 mm, 31.75 mm): Symbol U14 Pin 4 [BYP, Passive, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(400.05 mm, 83.82 mm): Symbol U16 Pin 6 [GND, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(400.05 mm, 83.82 mm): Symbol U16 Pin 6 [GND, Power input, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(407.67 mm, 76.20 mm): Symbol U16 Pin 4 [BYP, Passive, Line]
+[pin_to_pin]: ピンのタイプ Output と Output が接続されています
+    ; error
+    @(405.16 mm, 111.76 mm): Symbol U15 Pin 1 [~{RESET}, Output, Line]
+    @(415.16 mm, 130.00 mm): Symbol U17 Pin 1 [~{RESET}, Output, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(434.34 mm, 30.48 mm): Symbol C68 Pin 1 [Passive, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(434.34 mm, 38.10 mm): Symbol C68 Pin 2 [Passive, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(439.42 mm, 71.12 mm): Symbol C69 Pin 1 [Passive, Line]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(439.42 mm, 78.74 mm): Symbol C69 Pin 2 [Passive, Line]
+[multiple_net_names]: +3V3_A と +5V_A は、ともに同じ配線に接続されています; +3V3_A をネットリスト用ラベルとして選択しました
+    ; warning
+    @(222.25 mm, 104.14 mm): Label '+3V3_A'
+    @(186.69 mm, 107.95 mm): Label '+5V_A'
+[multiple_net_names]: +6V7_PRE と ADC_GND は、ともに同じ配線に接続されています; +6V7_PRE をネットリスト用ラベルとして選択しました
+    ; warning
+    @(370.84 mm, 24.13 mm): Label '+6V7_PRE'
+    @(240.03 mm, 116.84 mm): Label 'ADC_GND'
+[multiple_net_names]: ADC_GND_IN と D_GND は、ともに同じ配線に接続されています; ADC_GND_IN をネットリスト用ラベルとして選択しました
+    ; warning
+    @(328.93 mm, 34.29 mm): Label 'ADC_GND_IN'
+    @(269.24 mm, 204.47 mm): Label 'D_GND'
+[ground_pin_not_ground]: ピン GND がグランド ネットに接続されていません
+    ; warning
+    @(392.43 mm, 39.37 mm): Symbol U14 Pin 7 [GND, Power input, Line]
+[ground_pin_not_ground]: ピン GND がグランド ネットに接続されていません
+    ; warning
+    @(394.97 mm, 39.37 mm): Symbol U14 Pin 3 [GND, Power input, Line]
+[ground_pin_not_ground]: ピン GND がグランド ネットに接続されていません
+    ; warning
+    @(394.97 mm, 83.82 mm): Symbol U16 Pin 7 [GND, Power input, Line]
+[ground_pin_not_ground]: ピン GND がグランド ネットに接続されていません
+    ; warning
+    @(397.51 mm, 83.82 mm): Symbol U16 Pin 3 [GND, Power input, Line]
+[multiple_net_names]: ADC_nRST と U17_CT は、ともに同じ配線に接続されています; ADC_nRST をネットリスト用ラベルとして選択しました
+    ; warning
+    @(370.84 mm, 139.70 mm): Label 'ADC_nRST'
+    @(399.92 mm, 146.51 mm): Label 'U17_CT'
+
+ ** ERC messages: 69  Errors 28  Warnings 41
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters
