@@ -536,7 +536,7 @@
   "schematic": {
     "annotate_start_num": 0,
     "annotation": {
-      "method": 0,
+      "method": 1,
       "sort_order": 0
     },
     "bom_export_filename": "${PROJECTNAME}.csv",
@@ -659,7 +659,7 @@
         "uuid": "760b9589-09e7-434e-9ca2-6e4136e3b7a2"
       }
     ],
-    "used_designators": "LCDDisplay1,L1-2,C1-79,U1-19,K1-10,R1-53,H1-16,#FLG1-9,F1-2,RV1-3,Q1,AMP1,A1-3,Y1,#PWR1,J1-28,NT1-23",
+    "used_designators": "LCDDisplay1,LCDDisplay701,L1-2,C1-79,C701-736,U1-19,U701-709,K1-10,R1-53,R701-719,H1-16,#FLG1-9,#FLG701,F1-2,RV1-3,Q1,Q701,AMP1,A1-3,A701-702,Y1,Y701,#PWR1,J1-28,NT1-23,NT701",
     "variants": []
   },
   "sheets": [
