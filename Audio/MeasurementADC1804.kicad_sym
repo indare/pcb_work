@@ -277,7 +277,7 @@
 				)
 			)
 			(pin power_in line
-				(at -6.35 -22.86 90)
+				(at -6.35 -20.32 90)
 				(length 5.08)
 				(name "+5V"
 					(effects
@@ -295,7 +295,7 @@
 				)
 			)
 			(pin power_in line
-				(at 0 -22.86 90)
+				(at 0 -20.32 90)
 				(length 5.08)
 				(name "+3V3"
 					(effects
@@ -313,7 +313,7 @@
 				)
 			)
 			(pin power_in line
-				(at 6.35 -22.86 90)
+				(at 6.35 -20.32 90)
 				(length 5.08)
 				(name "GND"
 					(effects
