@@ -3779,7 +3779,7 @@
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Library:MBC2596-01_TAEJIN_43x21mm"
 				(at 0 -11.43 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -17715,7 +17715,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
+		(property "Footprint" "Library:MBC2596-01_TAEJIN_43x21mm"
 			(at 279.4 67.31 0)
 			(hide yes)
 			(show_name no)
@@ -17737,7 +17737,7 @@
 				)
 			)
 		)
-		(property "Description" "Akizuki MBC2596-01 — placeholder 1x04 pin header FP; replace with measured module FP before fab"
+		(property "Description" "MBC2596-01 measured FP: 43x21mm, corner pads 3.5mm from edges, module hole ~1.3mm"
 			(at 279.4 67.31 0)
 			(hide yes)
 			(show_name no)

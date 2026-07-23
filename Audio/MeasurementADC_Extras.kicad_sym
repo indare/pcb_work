@@ -632,7 +632,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Library:MBC2596-01_TAEJIN_43x21mm"
 			(at 0 -11.43 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -654,7 +654,7 @@
 				)
 			)
 		)
-		(property "Description" "Akizuki MBC2596-01 buck module 4-term IN+/IN-/OUT+/OUT-, set 6.6-6.8V"
+		(property "Description" "Akizuki/TAEJIN MBC2596-01 43x21mm; pads 3.5mm from corners; set 6.6-6.8V"
 			(at 0 -16.51 0)
 			(show_name no)
 			(do_not_autoplace no)
