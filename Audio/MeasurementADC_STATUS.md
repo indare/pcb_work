@@ -119,7 +119,7 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT702 か�
 ### フットプリント・基板
 
 - [x] `MBC2596-01` FP（実測: 43×21mm、四隅パッド中心=角から3.5mm、モジュール穴≈φ1.3 → 基板ドリル1.0）`Library:MBC2596-01_TAEJIN_43x21mm`
-- [ ] `ADC1804_F_MODULE` FP
+- [x] `ADC1804_F_MODULE` FP（実測 56×33）`Library:ADC1804_F_KYOHRITSU_56x33mm` — 親は2.54メス推奨
 - [x] R713–R716（47Ω）/ R719（10k）→ タクマン1/4W `R_Axial_DIN0309_…_P12.70mm_Horizontal`
 - [x] R717（100k）/ R718（33Ω）→ 中華1/4W `R_Axial_DIN0411_…_P12.70mm_Horizontal`
 - [x] 100nF ×18 / 10nF ×4 → 村田 RDE・50V X7R（P5.0mm）`C_Disc_D5.0mm_W2.5mm_P5.00mm`

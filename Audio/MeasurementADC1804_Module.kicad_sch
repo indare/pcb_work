@@ -2610,7 +2610,7 @@
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Library:ADC1804_F_KYOHRITSU_56x33mm"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -11074,7 +11074,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Library:ADC1804_F_KYOHRITSU_56x33mm"
 			(at 185.42 52.07 0)
 			(hide yes)
 			(show_name no)
@@ -11096,7 +11096,7 @@
 				)
 			)
 		)
-		(property "Description" "共立 ADC1804_F PCM1804 module — footprint TBD (module pinout FP not yet in Library.pretty)"
+		(property "Description" "共立 ADC1804_F PCM1804 module — Library:ADC1804_F_KYOHRITSU_56x33mm (measured)"
 			(at 185.42 52.07 0)
 			(hide yes)
 			(show_name no)
