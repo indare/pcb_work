@@ -12,323 +12,9 @@
 		(comment 1 "階層モジュール: アンバランス・ステレオ入力 → 差動 PCM1804 モジュール")
 		(comment 2 "共立 ADC_1804_F マニュアル p.7 の基準インターフェースに基づく")
 		(comment 3 "ASFL1 12.288MHz MCLK。ADCマスタ 48k/256fs。ジャンパ S/M=L, OSR2=L OSR1=H OSR0=H")
-		(comment 4 "電源: ADC_VIN→MBC2596(6.6-6.8V)→LT1763×2(+3V3_A先行/+5V_A)。+5V_D=BP5293。高精度時LCD OFF")
+		(comment 4 "電源: ADC_VIN→MBC2596(6.6-6.8V)→LT1763×2(+3V3_A先行/+5V_A)。+5V_D=BP5293。U710 XC8107 LCD_EN High=ON（初号は常時ON可）")
 	)
 	(lib_symbols
-		(symbol "AO3401A_1"
-			(pin_names
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "Q"
-				(at 5.08 1.905 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "AO3401A"
-				(at 5.08 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-				(at 5.08 -1.905 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(italic yes)
-					)
-					(justify left)
-				)
-			)
-			(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
-				(at 5.08 -3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "P-Channel MOSFET"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "SOT?23*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "AO3401A_1_0_1"
-				(polyline
-					(pts
-						(xy 0.254 1.905) (xy 0.254 -1.905)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.254 0) (xy -2.54 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 2.286) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 1.778) (xy 3.302 1.778) (xy 3.302 -1.778) (xy 0.762 -1.778)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 0.508) (xy 0.762 -0.508)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 -1.27) (xy 0.762 -2.286)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 1.651 0)
-					(radius 2.794)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.286 0) (xy 1.27 0.381) (xy 1.27 -0.381) (xy 2.286 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 2.54) (xy 2.54 1.778)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 2.54 1.778)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center 2.54 -1.778)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.794 -0.508) (xy 2.921 -0.381) (xy 3.683 -0.381) (xy 3.81 -0.254)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 3.302 -0.381) (xy 2.921 0.254) (xy 3.683 0.254) (xy 3.302 -0.381)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "AO3401A_1_1_1"
-				(pin input line
-					(at -5.08 0 0)
-					(length 2.54)
-					(name "G"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 -5.08 90)
-					(length 2.54)
-					(name "S"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 5.08 270)
-					(length 2.54)
-					(name "D"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "BP5293_ROHM:BP5293-50"
 			(pin_names
 				(offset 0.762)
@@ -5365,7 +5051,7 @@
 		)
 		(uuid "1c2b84b1-b2ef-4a07-a061-97e4efaa2c8e")
 	)
-	(text "POWER/DIGITAL: ADC_VIN->U15(6.6-6.8V)->U14(+3V3_A) then U13(+5V_A EN=+3V3_A). U12=+5V_D. Y1 ASFL1->R55->ADC_MCLK. U16/U17 OD wire-AND->ADC_nRST (CT~0.57s). Q1 LCD load-SW; precision mode LCD off."
+	(text "POWER/DIGITAL: ADC_VIN->U705(MBC2596 6.6-6.8V)->U706(+3V3_A) then U707(+5V_A EN=+3V3_A). U704=+5V_D. Y701 ASFL1->R718->ADC_MCLK. U708/U709 OD wire-AND->ADC_nRST (CT open≈20ms). U710 XC8107 LCD load-SW (LCD_EN High=ON); precision mode can leave LCD on."
 		(exclude_from_sim no)
 		(at 325.12 17.78 0)
 		(effects
@@ -5409,7 +5095,7 @@
 		)
 		(uuid "51385100-3953-4fa8-b1c9-741cc6e56e73")
 	)
-	(text "U13 EN=+3V3_A (3V3-first). AbsMax VCC-VDD protection."
+	(text "U707 EN=+3V3_A (3V3-first). AbsMax VCC-VDD protection."
 		(exclude_from_sim no)
 		(at 325.628 20.828 0)
 		(effects
@@ -5442,7 +5128,7 @@
 		)
 		(uuid "72910310-bb51-4e57-b94e-36eed2e97fe3")
 	)
-	(text "U16=G33(+3V3_A) U17=G50(+5V_A); SENSE=rail; CT 0.1uF~0.57s (open~20ms); OD ~RESET wire-AND+R53; VDD 0.1uF local."
+	(text "U708=G33(+3V3_A) U709=G50(+5V_A); SENSE=rail; CT open≈20ms (0.1uF≈0.57s if fitted); OD ~RESET wire-AND+R719; VDD 0.1uF local."
 		(exclude_from_sim no)
 		(at 385.318 59.69 0)
 		(effects
@@ -5541,7 +5227,7 @@
 		)
 		(uuid "cf7b8622-6606-4cee-b2e8-df99a8415dbd")
 	)
-	(text "U14 EN=+6V7_PRE. FB~3.3V (R51/R52). Place FB network to OUT/FB/GND."
+	(text "U706 LT1763-3.3 (+3V3_A). Fixed LDO; SHDN tied for always-on or as designed. Local CIN/COUT."
 		(exclude_from_sim no)
 		(at 325.628 23.368 0)
 		(effects
@@ -6006,6 +5692,24 @@
 		(uuid "c69a53f6-025f-4bf7-b520-29e133ff63e4")
 	)
 	(junction
+		(at 355.6 138.43)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8107010-0000-4a01-b001-000000000010")
+	)
+	(junction
+		(at 312.42 140.97)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8107011-0000-4a01-b001-000000000011")
+	)
+	(junction
+		(at 330.2 146.05)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8107012-0000-4a01-b001-000000000012")
+	)
+	(junction
 		(at 109.22 115.57)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6222,6 +5926,10 @@
 	(no_connect
 		(at 194.31 156.21)
 		(uuid "c1375874-89bc-4e11-be02-f7dd23ecd49e")
+	)
+	(no_connect
+		(at 355.6 146.05)
+		(uuid "c8107020-0000-4a01-b001-000000000020")
 	)
 	(no_connect
 		(at 294.64 154.94)
@@ -6808,158 +6516,6 @@
 			(type default)
 		)
 		(uuid "290a687e-d12e-4d91-9b46-aaebad103861")
-	)
-	(wire
-		(pts
-			(xy 355.6 138.43) (xy 367.03 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8107001-0000-4a01-b001-000000000001")
-	)
-	(wire
-		(pts
-			(xy 367.03 146.05) (xy 367.03 148.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8107002-0000-4a01-b001-000000000002")
-	)
-	(wire
-		(pts
-			(xy 367.03 148.59) (xy 372.11 148.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8107003-0000-4a01-b001-000000000003")
-	)
-	(wire
-		(pts
-			(xy 312.42 140.97) (xy 312.42 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8107004-0000-4a01-b001-000000000004")
-	)
-	(wire
-		(pts
-			(xy 312.42 149.86) (xy 312.42 151.13)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8107005-0000-4a01-b001-000000000005")
-	)
-	(wire
-		(pts
-			(xy 312.42 151.13) (xy 307.34 151.13)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8107006-0000-4a01-b001-000000000006")
-	)
-	(wire
-		(pts
-			(xy 330.2 146.05) (xy 330.2 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8107007-0000-4a01-b001-000000000007")
-	)
-	(wire
-		(pts
-			(xy 330.2 154.94) (xy 330.2 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8107008-0000-4a01-b001-000000000008")
-	)
-	(wire
-		(pts
-			(xy 330.2 156.21) (xy 325.12 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c8107009-0000-4a01-b001-000000000009")
-	)
-	(junction
-		(at 355.6 138.43)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c8107010-0000-4a01-b001-000000000010")
-	)
-	(junction
-		(at 312.42 140.97)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c8107011-0000-4a01-b001-000000000011")
-	)
-	(junction
-		(at 330.2 146.05)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c8107012-0000-4a01-b001-000000000012")
-	)
-	(no_connect
-		(at 355.6 146.05)
-		(uuid "c8107020-0000-4a01-b001-000000000020")
-	)
-	(label "D_GND"
-		(at 372.11 148.59 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c8107030-0000-4a01-b001-000000000030")
-	)
-	(label "D_GND"
-		(at 307.34 151.13 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "c8107031-0000-4a01-b001-000000000031")
-	)
-	(label "D_GND"
-		(at 325.12 156.21 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "c8107032-0000-4a01-b001-000000000032")
-	)
-	(label "D_GND"
-		(at 350.52 157.48 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c8107033-0000-4a01-b001-000000000033")
 	)
 	(wire
 		(pts
@@ -9043,6 +8599,96 @@
 	)
 	(wire
 		(pts
+			(xy 355.6 138.43) (xy 367.03 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107001-0000-4a01-b001-000000000001")
+	)
+	(wire
+		(pts
+			(xy 367.03 146.05) (xy 367.03 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107002-0000-4a01-b001-000000000002")
+	)
+	(wire
+		(pts
+			(xy 367.03 148.59) (xy 372.11 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107003-0000-4a01-b001-000000000003")
+	)
+	(wire
+		(pts
+			(xy 312.42 140.97) (xy 312.42 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107004-0000-4a01-b001-000000000004")
+	)
+	(wire
+		(pts
+			(xy 312.42 149.86) (xy 312.42 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107005-0000-4a01-b001-000000000005")
+	)
+	(wire
+		(pts
+			(xy 312.42 151.13) (xy 307.34 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107006-0000-4a01-b001-000000000006")
+	)
+	(wire
+		(pts
+			(xy 330.2 146.05) (xy 330.2 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107007-0000-4a01-b001-000000000007")
+	)
+	(wire
+		(pts
+			(xy 330.2 154.94) (xy 330.2 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107008-0000-4a01-b001-000000000008")
+	)
+	(wire
+		(pts
+			(xy 330.2 156.21) (xy 325.12 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107009-0000-4a01-b001-000000000009")
+	)
+	(wire
+		(pts
 			(xy 364.49 48.26) (xy 370.84 48.26)
 		)
 		(stroke
@@ -10719,6 +10365,46 @@
 			(justify right)
 		)
 		(uuid "c738b0aa-6b13-4215-9e64-77ca05d6d9c1")
+	)
+	(label "D_GND"
+		(at 372.11 148.59 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c8107030-0000-4a01-b001-000000000030")
+	)
+	(label "D_GND"
+		(at 307.34 151.13 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c8107031-0000-4a01-b001-000000000031")
+	)
+	(label "D_GND"
+		(at 325.12 156.21 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c8107032-0000-4a01-b001-000000000032")
+	)
+	(label "D_GND"
+		(at 350.52 157.48 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c8107033-0000-4a01-b001-000000000033")
 	)
 	(label "A_GND"
 		(at 53.34 102.87 90)
@@ -16520,6 +16206,164 @@
 	)
 	(symbol
 		(lib_id "Device:C")
+		(at 367.03 142.24 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c8107050-0000-4a01-b001-000000000050")
+		(property "Reference" "C739"
+			(at 364.744 140.208 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10uF"
+			(at 370.332 144.272 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 367.03 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 367.03 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "積セラ 10uF50V 3216（秋月 117338・購入済）。U710(XC8107) 出力コンデンサ CL。データシート推奨 1.0uF 以上、IC 直近に配置。"
+			(at 367.03 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c8107051-0000-4a01-b001-000000000051")
+		)
+		(pin "2"
+			(uuid "c8107052-0000-4a01-b001-000000000052")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "C739")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 312.42 146.05 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c8107060-0000-4a01-b001-000000000060")
+		(property "Reference" "C740"
+			(at 310.134 144.018 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10uF"
+			(at 315.722 148.082 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 312.42 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 312.42 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "積セラ 10uF50V 3216（秋月 117338・購入済）。U710(XC8107) 入力コンデンサ CIN。データシート推奨 1.0uF 以上、VIN-VSS 間を最短で。"
+			(at 312.42 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c8107061-0000-4a01-b001-000000000061")
+		)
+		(pin "2"
+			(uuid "c8107062-0000-4a01-b001-000000000062")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "C740")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
 		(at 419.1 97.79 90)
 		(unit 1)
 		(body_style 1)
@@ -16957,164 +16801,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "U710")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 367.03 142.24 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "c8107050-0000-4a01-b001-000000000050")
-		(property "Reference" "C739"
-			(at 364.744 140.208 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10uF"
-			(at 370.332 144.272 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 367.03 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 367.03 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "積セラ 10uF50V 3216（秋月 117338・購入済）。U710(XC8107) 出力コンデンサ CL。データシート推奨 1.0uF 以上、IC 直近に配置。"
-			(at 367.03 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c8107051-0000-4a01-b001-000000000051")
-		)
-		(pin "2"
-			(uuid "c8107052-0000-4a01-b001-000000000052")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C739")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 312.42 146.05 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "c8107060-0000-4a01-b001-000000000060")
-		(property "Reference" "C740"
-			(at 310.134 144.018 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10uF"
-			(at 315.722 148.082 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 312.42 146.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 312.42 146.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "積セラ 10uF50V 3216（秋月 117338・購入済）。U710(XC8107) 入力コンデンサ CIN。データシート推奨 1.0uF 以上、VIN-VSS 間を最短で。"
-			(at 312.42 146.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c8107061-0000-4a01-b001-000000000061")
-		)
-		(pin "2"
-			(uuid "c8107062-0000-4a01-b001-000000000062")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C740")
 					(unit 1)
 				)
 			)

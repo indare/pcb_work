@@ -1,6 +1,6 @@
 # MeasurementADC 進捗メモ
 
-最終更新: 2026-07-23（MBC2596-01 到着・実測FP作成。オーダー終了済）
+最終更新: 2026-07-26（U710 XC8107 置換・旧注記整理。初号は LCD 常時 ON でも可）
 
 Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM1804 + Pico2 + WAVESHARE LCD）。
 
@@ -26,7 +26,7 @@ D_GND   = BP5293 戻り（Pico / LCD）
 
 補足:
 
-- 高精度計測時は LCD OFF 想定。**U710 XC8107AC20MR-G ロードスイッチ**（旧 Q701 AO3401A を置換, 2026-07-26）。`LCD_EN` **High=ON / Low・Hi-Z=OFF**（Active High, VCEH 1.5V min なので Pico の 3.3V で確実に駆動できる）。R717 100k は CE プルダウンなので **起動時は LCD OFF がデフォルト**
+- **U710 XC8107AC20MR-G ロードスイッチ**（旧 Q701 AO3401A を置換, 2026-07-26）。`LCD_EN` **High=ON / Low・Hi-Z=OFF**（Active High, VCEH 1.5V min なので Pico の 3.3V で確実に駆動できる）。R717 100k は CE プルダウンなので起動時は LCD OFF がデフォルト。**初号は常時 ON（GP8=High 固定）でも可** — OFF 時の GPIO バックパワー対策は常時 ON なら不要
 - LCD 接続は Interface2（GH 付属ケーブルのメス端）→ 基板側 `PinHeader_1x15_P2.54mm_Vertical`
 - **Pico2: VSYS=`+5V_D`、GND=`D_GND`**（`A_GND` には載せない）
 
@@ -114,7 +114,7 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT702 か�
 - [ ] C707–C710 極性の最終確認（＋＝3.3k／VCOM 側）
 - [x] LCD ロード SW: U710 XC8107AC20MR-G（秋月 131334）に置換。ERC 0/0、ネットリスト確認済
 - [ ] ジャンパ注記に `FMT1=L FMT0=H`（24bit I²S）を追記
-- [ ] 古い注記の整理（POWER/DIGITAL ブロックの旧 Ref・CT 0.57s 表記など）
+- [x] 古い注記の整理（POWER/DIGITAL の U12–U17/Q1・CT 0.57s → U704–U710 / CT open≈20ms。未使用 AO3401 埋め込みシンボル削除, 2026-07-26）
 
 ### フットプリント・基板
 
@@ -155,7 +155,7 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT702 か�
 1. **MBC2596 FP 済**。次は ADC1804 実物到着後に FP → PCB レイアウト。
 2. C707–C710 極性確認
 3. PCB（D_GND 太線・星点配置）。U710 は SOT-23-5、C740(CIN)/C739(CL) を VIN/VOUT–VSS 間最短で配置
-4. ファーム: `LCD_EN` の論理反転（High=ON）に追従
+4. ファーム: `LCD_EN` は High=ON。初号は常時 ON でよい。OFF 運用するなら SPI/タッチ線も Low/Hi-Z に
 5. Pico ファーム（簡易スペアナ）
 
 ### MBC2596-01 実装メモ（2026-07-23）
