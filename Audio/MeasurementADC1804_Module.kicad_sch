@@ -10784,7 +10784,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "02ff94e0-89c6-4a68-8f21-b460f4515873")
-		(property "Reference" "C727"
+		(property "Reference" "C732"
 			(at 361.95 33.528 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10846,7 +10846,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C727")
+					(reference "C732")
 					(unit 1)
 				)
 			)
@@ -11497,7 +11497,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0f6e0500-0ae1-43be-a9a7-d5e25ebfc829")
-		(property "Reference" "C718"
+		(property "Reference" "C714"
 			(at 115.57 68.58 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11559,7 +11559,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C718")
+					(reference "C714")
 					(unit 1)
 				)
 			)
@@ -11754,7 +11754,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20521831-b44c-4d7a-830b-16a61b211268")
-		(property "Reference" "C737"
+		(property "Reference" "C724"
 			(at 313.944 34.798 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11816,7 +11816,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C737")
+					(reference "C724")
 					(unit 1)
 				)
 			)
@@ -11912,7 +11912,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "2d287ac5-b20b-4b85-85da-d5ff8cd9fd1f")
-		(property "Reference" "C729"
+		(property "Reference" "C735"
 			(at 373.761 36.7284 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11976,7 +11976,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C729")
+					(reference "C735")
 					(unit 1)
 				)
 			)
@@ -12074,7 +12074,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "32654ec1-240b-42a8-a39b-5f82acea4284")
-		(property "Reference" "C734"
+		(property "Reference" "C740"
 			(at 416.052 130.556 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12084,7 +12084,7 @@
 				)
 			)
 		)
-		(property "Value" "100nF"
+		(property "Value" "10uF 50V X7R"
 			(at 422.402 128.524 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12094,7 +12094,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 419.1 132.08 0)
 			(hide yes)
 			(show_name no)
@@ -12136,7 +12136,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C734")
+					(reference "C740")
 					(unit 1)
 				)
 			)
@@ -12153,7 +12153,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "332e65a9-ce3f-4def-9382-a233a8e03e3e")
-		(property "Reference" "C726"
+		(property "Reference" "C731"
 			(at 357.124 68.834 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12215,7 +12215,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C726")
+					(reference "C731")
 					(unit 1)
 				)
 			)
@@ -12391,7 +12391,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "353db7a0-36bd-4bd0-8837-5f49069b558c")
-		(property "Reference" "C724"
+		(property "Reference" "C727"
 			(at 322.834 62.738 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12453,7 +12453,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C724")
+					(reference "C727")
 					(unit 1)
 				)
 			)
@@ -12470,7 +12470,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "356a7dad-67f9-4ba1-960c-f320be36b2a7")
-		(property "Reference" "C713"
+		(property "Reference" "C712"
 			(at 97.028 195.58 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12534,7 +12534,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C713")
+					(reference "C712")
 					(unit 1)
 				)
 			)
@@ -12729,7 +12729,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3a7396a2-a5c4-4194-b8ca-b6a350e4650b")
-		(property "Reference" "C736"
+		(property "Reference" "C728"
 			(at 327.914 128.778 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12791,7 +12791,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C736")
+					(reference "C728")
 					(unit 1)
 				)
 			)
@@ -12820,7 +12820,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Screw_Terminal_01x02"
+		(property "Value" "V_IN"
 			(at 68.58 234.9499 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12969,7 +12969,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "40ab0be9-c15c-4b2c-84e9-91f0481c986f")
-		(property "Reference" "C732"
+		(property "Reference" "C738"
 			(at 396.494 132.334 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13031,7 +13031,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C732")
+					(reference "C738")
 					(unit 1)
 				)
 			)
@@ -13060,7 +13060,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Screw_Terminal_01x03"
+		(property "Value" "15_V_IN"
 			(at 111.76 234.9499 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13309,7 +13309,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "57583973-c917-4868-8c76-b9b6a8d78ebe")
-		(property "Reference" "C711"
+		(property "Reference" "C719"
 			(at 151.13 39.624 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13373,7 +13373,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C711")
+					(reference "C719")
 					(unit 1)
 				)
 			)
@@ -13724,7 +13724,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5c442e52-e6c7-4767-b4ac-6563b23a86a6")
-		(property "Reference" "C714"
+		(property "Reference" "C721"
 			(at 279.654 44.958 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13786,7 +13786,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C714")
+					(reference "C721")
 					(unit 1)
 				)
 			)
@@ -13803,7 +13803,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5e0009dd-bb98-444a-9e48-d4eb004e13d3")
-		(property "Reference" "C723"
+		(property "Reference" "C726"
 			(at 321.564 34.798 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13865,7 +13865,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C723")
+					(reference "C726")
 					(unit 1)
 				)
 			)
@@ -14061,7 +14061,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6227ce93-b5cb-48ac-bc39-1e917f5c6acf")
-		(property "Reference" "C728"
+		(property "Reference" "C733"
 			(at 363.22 61.468 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14123,7 +14123,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C728")
+					(reference "C733")
 					(unit 1)
 				)
 			)
@@ -14219,7 +14219,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6bda790d-621e-473f-8158-047362361eb7")
-		(property "Reference" "C725"
+		(property "Reference" "C730"
 			(at 354.584 40.894 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14281,7 +14281,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C725")
+					(reference "C730")
 					(unit 1)
 				)
 			)
@@ -14298,7 +14298,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "74d01550-40ae-4089-b867-6b89129e4cf4")
-		(property "Reference" "C715"
+		(property "Reference" "C720"
 			(at 151.13 59.944 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14362,7 +14362,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C715")
+					(reference "C720")
 					(unit 1)
 				)
 			)
@@ -14549,7 +14549,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Screw_Terminal_01x02"
+		(property "Value" "AUDIO"
 			(at 27.94 234.9499 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14619,7 +14619,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "792d62de-c8ee-4dd5-bd04-b06848ce4245")
-		(property "Reference" "C735"
+		(property "Reference" "C729"
 			(at 340.106 132.842 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14681,7 +14681,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C735")
+					(reference "C729")
 					(unit 1)
 				)
 			)
@@ -14698,7 +14698,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7a784e27-ca66-4d04-9709-68309a2b4bea")
-		(property "Reference" "C720"
+		(property "Reference" "C716"
 			(at 116.84 140.97 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14760,7 +14760,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C720")
+					(reference "C716")
 					(unit 1)
 				)
 			)
@@ -14777,7 +14777,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7ca43416-7357-4b2b-ada4-993e09640fc1")
-		(property "Reference" "U709"
+		(property "Reference" "U710"
 			(at 412.75 133.35 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14853,7 +14853,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "U709")
+					(reference "U710")
 					(unit 1)
 				)
 			)
@@ -15108,7 +15108,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "903bdd3a-0153-47f6-96b6-9ae74abd0890")
-		(property "Reference" "C717"
+		(property "Reference" "C713"
 			(at 116.84 45.72 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15170,7 +15170,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C717")
+					(reference "C713")
 					(unit 1)
 				)
 			)
@@ -15481,7 +15481,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "9f31cfbb-ba2c-46c8-bc76-d05457de7dfa")
-		(property "Reference" "C722"
+		(property "Reference" "C718"
 			(at 128.778 195.58 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15545,7 +15545,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C722")
+					(reference "C718")
 					(unit 1)
 				)
 			)
@@ -15562,7 +15562,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a0b51af4-3790-42f2-a772-8f4e1f905328")
-		(property "Reference" "C712"
+		(property "Reference" "C711"
 			(at 98.298 187.706 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15626,7 +15626,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C712")
+					(reference "C711")
 					(unit 1)
 				)
 			)
@@ -15643,7 +15643,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ae82703d-3338-4be6-bdb4-2805257d7030")
-		(property "Reference" "C731"
+		(property "Reference" "C737"
 			(at 396.494 101.854 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15705,7 +15705,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C731")
+					(reference "C737")
 					(unit 1)
 				)
 			)
@@ -15722,7 +15722,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "b06b5656-346b-4afa-8142-2d78f19c2a84")
-		(property "Reference" "C721"
+		(property "Reference" "C717"
 			(at 130.048 187.706 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15786,7 +15786,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C721")
+					(reference "C717")
 					(unit 1)
 				)
 			)
@@ -16041,7 +16041,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "be821087-3884-4a79-8418-646a0dc49dc0")
-		(property "Reference" "C730"
+		(property "Reference" "C736"
 			(at 375.031 64.6684 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16105,7 +16105,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C730")
+					(reference "C736")
 					(unit 1)
 				)
 			)
@@ -16122,7 +16122,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c43db032-169e-40f6-a005-1c4b9f4d50fc")
-		(property "Reference" "U708"
+		(property "Reference" "U709"
 			(at 412.75 102.87 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16198,7 +16198,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "U708")
+					(reference "U709")
 					(unit 1)
 				)
 			)
@@ -16215,7 +16215,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c8107050-0000-4a01-b001-000000000050")
-		(property "Reference" "C739"
+		(property "Reference" "C734"
 			(at 364.744 140.208 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16277,7 +16277,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C739")
+					(reference "C734")
 					(unit 1)
 				)
 			)
@@ -16294,7 +16294,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c8107060-0000-4a01-b001-000000000060")
-		(property "Reference" "C740"
+		(property "Reference" "C723"
 			(at 310.134 144.018 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16356,7 +16356,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C740")
+					(reference "C723")
 					(unit 1)
 				)
 			)
@@ -16373,7 +16373,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c9652032-36fb-4bad-8b12-dd3af7ea76ef")
-		(property "Reference" "C733"
+		(property "Reference" "C739"
 			(at 415.544 96.52 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16383,7 +16383,7 @@
 				)
 			)
 		)
-		(property "Value" "100nF"
+		(property "Value" "10uF 50V X7R"
 			(at 424.942 99.822 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16393,7 +16393,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 419.1 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -16435,7 +16435,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C733")
+					(reference "C739")
 					(unit 1)
 				)
 			)
@@ -16727,7 +16727,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d299dcff-f12f-4770-a1ff-d907fdaf30b4")
-		(property "Reference" "U710"
+		(property "Reference" "U708"
 			(at 356.87 151.13 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16800,7 +16800,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "U710")
+					(reference "U708")
 					(unit 1)
 				)
 			)
@@ -16817,7 +16817,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "dd9d069c-49ff-4f21-9902-9accbe4b3554")
-		(property "Reference" "C716"
+		(property "Reference" "C722"
 			(at 286.004 44.958 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16879,7 +16879,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C716")
+					(reference "C722")
 					(unit 1)
 				)
 			)
@@ -17471,7 +17471,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "eae47a1c-7cde-4293-bf4f-53d27721d479")
-		(property "Reference" "C719"
+		(property "Reference" "C715"
 			(at 115.57 119.38 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17533,7 +17533,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C719")
+					(reference "C715")
 					(unit 1)
 				)
 			)
@@ -17550,7 +17550,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ec4577a8-fd0f-4ffd-8598-09bd73fb184d")
-		(property "Reference" "C738"
+		(property "Reference" "C725"
 			(at 316.484 62.738 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17612,7 +17612,7 @@
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C738")
+					(reference "C725")
 					(unit 1)
 				)
 			)

@@ -3,7 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "Akizuki/TAEJIN MBC2596-01 LM2596 buck module. Body 43x21mm. Corner I/O pads: hole centers 3.5mm from each edge (pitch 36.0 x 14.0mm). Module PTH ~1.3mm. Mother drill 1.0mm for 2.54mm header pins through module. Pin1=IN+ (rect), 2=IN-, 3=OUT+, 4=OUT-.")
+	(descr "Akizuki/TAEJIN MBC2596-01 LM2596 buck module. Body 43x21mm. Corner I/O pads: hole centers 3.5mm from each edge (pitch 36.0 x 14.0mm). Module PTH ~1.3mm. Mother drill 1.0mm for 2.54mm header pins through module. Orientation 0deg: TL=IN+ (pad1 rect), BL=IN- (pad2), TR=OUT+ (pad3), BR=OUT- (pad4).")
 	(tags "MBC2596 MBC2596-01 LM2596 TAEJIN Akizuki buck module THT")
 	(property "Reference" "REF**"
 		(at 0 -12.5 0)
@@ -86,9 +86,9 @@
 	)
 	(fp_poly
 		(pts
-			(xy -21.5 10.5)
-			(xy -19.5 10.5)
-			(xy -21.5 8.5)
+			(xy -21.5 -10.5)
+			(xy -19.5 -10.5)
+			(xy -21.5 -8.5)
 		)
 		(stroke
 			(width 0.1)
@@ -98,16 +98,6 @@
 		(layer "F.Fab")
 	)
 	(fp_text user "IN+"
-		(at -18 5 0)
-		(layer "F.Fab")
-		(effects
-			(font
-				(size 0.8 0.8)
-				(thickness 0.12)
-			)
-		)
-	)
-	(fp_text user "IN-"
 		(at -18 -5 0)
 		(layer "F.Fab")
 		(effects
@@ -117,8 +107,18 @@
 			)
 		)
 	)
+	(fp_text user "IN-"
+		(at -18 5 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
 	(fp_text user "OUT+"
-		(at 18 5 0)
+		(at 18 -5 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -128,7 +128,7 @@
 		)
 	)
 	(fp_text user "OUT-"
-		(at 18 -5 0)
+		(at 18 5 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -174,8 +174,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_rect
-		(start -19.2 5.8)
-		(end -16.8 8.2)
+		(start -19.2 -8.2)
+		(end -16.8 -5.8)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -220,28 +220,28 @@
 		(layer "F.CrtYd")
 	)
 	(pad "1" thru_hole rect
-		(at -18 7)
-		(size 2.2 2.2)
-		(drill 1)
-		(layers "*.Cu" "*.Mask")
-		(remove_unused_layers no)
-	)
-	(pad "2" thru_hole circle
 		(at -18 -7)
 		(size 2.2 2.2)
 		(drill 1)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 	)
+	(pad "2" thru_hole circle
+		(at -18 7)
+		(size 2.2 2.2)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+	)
 	(pad "3" thru_hole circle
-		(at 18 7)
+		(at 18 -7)
 		(size 2.2 2.2)
 		(drill 1)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 	)
 	(pad "4" thru_hole circle
-		(at 18 -7)
+		(at 18 7)
 		(size 2.2 2.2)
 		(drill 1)
 		(layers "*.Cu" "*.Mask")

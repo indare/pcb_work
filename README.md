@@ -1,0 +1,64 @@
+# PCB Work
+
+KiCad 10 の基板・回路図リポジトリです。主な作業対象は `Audio/`（AudioCase / MeasurementADC）。
+
+## ディレクトリ
+
+| パス | 内容 |
+| --- | --- |
+| `Audio/` | AudioCase 本体・MeasurementADC シート・ライブラリ・ガーバー |
+| `Control/` | Pico 2 制御ファーム（MicroPython） |
+| `.cursor/` | Cursor 用ルール・MCP 設定 |
+
+## Cursor MCP（KiCad）
+
+プロジェクト設定: [`.cursor/mcp.json`](.cursor/mcp.json)  
+雛形: [`.cursor/mcp.json.example`](.cursor/mcp.json.example)
+
+個人の絶対パスはコミットしません。Cursor の変数展開を使います。
+
+```json
+{
+  "mcpServers": {
+    "kicad": {
+      "command": "uvx",
+      "args": ["kicad-mcp-pro"],
+      "env": {
+        "KICAD_MCP_PROJECT_DIR": "${workspaceFolder}/Audio",
+        "KICAD_MCP_PROFILE": "build",
+        "KICAD_MCP_OPERATING_MODE": "write"
+      }
+    }
+  }
+}
+```
+
+### 前提
+
+1. [uv](https://docs.astral.sh/uv/) を入れる（`uvx` が PATH に載ること）
+2. Cursor を再起動し、**Settings → Tools & MCP** で `kicad` を ON
+3. KiCad で基板を開くときは IPC API を有効にしておく（MCP のライブ連携用）
+
+### 変数
+
+| 値 | 意味 |
+| --- | --- |
+| `${workspaceFolder}` | このリポジトリのルート（`.cursor/mcp.json` がある側） |
+| `KICAD_MCP_PROJECT_DIR` | KiCad プロジェクトディレクトリ（`Audio/`） |
+| `KICAD_MCP_PROFILE` | `build`（配置・配線向け） |
+| `KICAD_MCP_OPERATING_MODE` | `write`（読み取り専用にしたい場合は `readonly`） |
+
+### PATH に `uvx` が無い場合
+
+ユーザー設定 `~/.cursor/mcp.json`（コミット対象外）にだけフルパスを書いてください。  
+ローカル上書き用: `.cursor/mcp.local.env`（gitignore 済み）。
+
+### Windows / Git Bash
+
+このリポジトリの KiCad CLI は Git Bash 経由を想定しています。`kicad-cli` は KiCad 10.0 の bin が PATH にあること。
+
+## MeasurementADC メモ
+
+- 進捗: `Audio/MeasurementADC_STATUS.md`
+- 発注: `Audio/MeasurementADC_ORDER.md`
+- MBC2596-01 FP（0°）: 左上 IN+ / 左下 IN- / 右上 OUT+ / 右下 OUT-

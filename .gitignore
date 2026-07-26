@@ -17,3 +17,7 @@ Audio/split/AudioCase_for_separate.kicad_pcb
 
 #vscode
 .vscode/
+
+# Cursor MCP local overrides / setup backups (no personal paths in git)
+.cursor/mcp.local.env
+.cursor/mcp.json.*.kicad-mcp.bak
