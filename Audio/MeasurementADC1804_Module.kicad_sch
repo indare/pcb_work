@@ -5249,7 +5249,7 @@
 		)
 		(uuid "e4bf9b7d-51ef-49fc-889c-a903e71bb899")
 	)
-	(text "U710 XC8107AC20MR-G ロードスイッチ: LCD_EN High=ON / Low・Hi-Z=OFF（Active High, VCEH 1.5V min → Pico 3.3V で直接駆動可）。R717 100k=CE プルダウンで起動時 OFF。ノイズ床測定は LCD_EN=Low のまま。ソフトスタート 0.6ms typ・短絡/逆流/過熱/UVLO 保護内蔵。C740=CIN, C739=CL は各 10uF/3216 を IC 直近へ（推奨 1uF 以上）。FLG は未使用（NC）。"
+	(text "U710 XC8107AC20MR-G ロードスイッチ: LCD_EN High=ON / Low・Hi-Z=OFF（Active High, VCEH 1.5V min → Pico 3.3V で直接駆動可）。R717 100k=CE プルダウンで起動時 OFF。初号は常時 ON 可。OFF 運用時は SPI/タッチを Low/Hi-Z に。ソフトスタート 0.6ms typ・短絡/逆流/過熱/UVLO 保護内蔵。C740=CIN, C739=CL は各 10uF/3216 を IC 直近へ。FLG は未使用（NC）。"
 		(exclude_from_sim no)
 		(at 312.42 163.83 0)
 		(effects
