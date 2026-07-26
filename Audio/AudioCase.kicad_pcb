@@ -195,7 +195,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "00faea50-12ef-47c3-b77d-0dbe3a55436c")
-		(at 235 260)
+		(at 235 315)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C720"
@@ -395,7 +395,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "015b099d-0eb5-49b5-972e-e0bfe43bfd45")
-		(at 185 225)
+		(at 272 222)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R709"
@@ -907,7 +907,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "08921095-9687-4866-a8bd-ed99cb69321f")
-		(at 185 180)
+		(at 214 262)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R703"
@@ -1419,7 +1419,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "09373265-0084-4ba1-a52b-fe134f28e22e")
-		(at 193 235)
+		(at 272 308)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R712"
@@ -1577,7 +1577,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "09e5ddad-a3b6-4ede-8546-f099f2271420")
-		(at 365 260)
+		(at 390 280)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C727"
@@ -1735,7 +1735,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "0a710123-0fc4-4377-ac2e-b7bdfaa447ea")
-		(at 365 270)
+		(at 390 290)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C733"
@@ -2309,7 +2309,7 @@
 	(footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 		(layer "F.Cu")
 		(uuid "0f7f17fc-1451-4d54-95c6-4425dbe08cca")
-		(at 210 240)
+		(at 255 300)
 		(descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf)")
 		(tags "SOIC SO")
 		(property "Reference" "U703"
@@ -2698,7 +2698,7 @@
 	(footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "10797784-3ac6-4809-b6a7-b8b41c643774")
-		(at 370 155)
+		(at 400 155)
 		(descr "Terminal Block Phoenix MKDS-1,5-2-5.08, 2 pins, pitch 5.08mm, size 10.2x9.8mm, drill diameter 1.3mm, pad diameter 2.6mm, http://www.farnell.com/datasheets/100425.pdf")
 		(tags "THT Terminal Block Phoenix MKDS-1,5-2-5.08 pitch 5.08mm size 10.2x9.8mm drill 1.3mm pad 2.6mm")
 		(property "Reference" "J702"
@@ -3795,7 +3795,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "179b4ed8-aab3-41b7-b222-d1c298be748e")
-		(at 235 200)
+		(at 250 241 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C712"
@@ -4405,7 +4405,7 @@
 	(footprint "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "1c8f86ad-a17f-438d-9f5d-87a5e5cfb6f3")
-		(at 340 185)
+		(at 355 245)
 		(descr "Resistor, Axial_DIN0411 series, Axial, Horizontal, pin pitch=12.7mm, 1W, length*diameter=9.9*3.6mm^2")
 		(tags "Resistor Axial_DIN0411 series Axial Horizontal pin pitch 12.7mm 1W length 9.9mm diameter 3.6mm")
 		(property "Reference" "R718"
@@ -4730,7 +4730,7 @@
 	(footprint "NetTie:NetTie-2_THT_Pad1.0mm"
 		(layer "F.Cu")
 		(uuid "1f163878-089d-417f-a54f-1615fabddd92")
-		(at 310 230)
+		(at 320 295)
 		(descr "Net tie, 2 pin, 1.0mm round THT pads")
 		(tags "net tie")
 		(property "Reference" "NT701"
@@ -4847,7 +4847,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "1f25b433-1313-4aeb-af6e-70eb094f3a7f")
-		(at 365 280)
+		(at 390 300)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C725"
@@ -5047,7 +5047,7 @@
 	(footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 		(layer "F.Cu")
 		(uuid "20823af4-7adb-4970-b5b0-bc7d9f1db6e3")
-		(at 210 210)
+		(at 255 230)
 		(descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf)")
 		(tags "SOIC SO")
 		(property "Reference" "U702"
@@ -5846,7 +5846,7 @@
 	(footprint "Library:BP5293-50_ROHM_SIP-3"
 		(layer "F.Cu")
 		(uuid "211b8ca7-d944-4667-9878-4e0e49397487")
-		(at 450 165)
+		(at 480 165)
 		(descr "ROHM BP5293-xx, 3-pin SIP DC/DC module. 2.54mm pitch. Pin1=VIN, 2=GND, 3=VOUT. Drill 0.9mm, land 2.0mm. Body outline is approximate keepout.")
 		(tags "ROHM BP5293 BP5293-50 DC-DC Buck SIP-3 2.54mm")
 		(property "Reference" "U704"
@@ -6118,7 +6118,7 @@
 	(footprint "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "21374c0a-9e6d-4b3a-9ca0-9294069754bd")
-		(at 275 215 90)
+		(at 284.5 267.4 90)
 		(descr "Resistor, Axial_DIN0309 series, Axial, Horizontal, pin pitch=12.7mm, 0.5W = 1/2W, length*diameter=9*3.2mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0309 series Axial Horizontal pin pitch 12.7mm 0.5W = 1/2W length 9mm diameter 3.2mm")
 		(property "Reference" "R715"
@@ -6309,7 +6309,7 @@
 	(footprint "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm"
 		(layer "F.Cu")
 		(uuid "23bd3dfc-0809-4e89-9eec-fb7b3d35b724")
-		(at 470 300)
+		(at 492 345)
 		(descr "CP, Radial series, Radial, pin pitch=2.50mm, diameter=6.3mm, height=7mm, Electrolytic Capacitor")
 		(tags "CP Radial series Radial pin pitch 2.50mm diameter 6.3mm height 7mm Electrolytic Capacitor")
 		(property "Reference" "C729"
@@ -7841,7 +7841,7 @@
 	(footprint "Package_TO_SOT_SMD:SOT-23-6"
 		(layer "F.Cu")
 		(uuid "23f9c0fe-6dde-422c-b7bf-3254035f747c")
-		(at 410 230)
+		(at 445 245)
 		(descr "SOT, 6 Pin (JEDEC MO-178 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U709"
@@ -12827,7 +12827,7 @@
 	(footprint "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "382e3a96-8d59-4dd0-8e53-49ca0c17018a")
-		(at 455 305)
+		(at 470 345)
 		(descr "Resistor, Axial_DIN0411 series, Axial, Horizontal, pin pitch=12.7mm, 1W, length*diameter=9.9*3.6mm^2")
 		(tags "Resistor Axial_DIN0411 series Axial Horizontal pin pitch 12.7mm 1W length 9.9mm diameter 3.6mm")
 		(property "Reference" "R717"
@@ -13047,7 +13047,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x15_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "3a4290f5-d726-4e31-96ed-a7ab78ad3578")
-		(at 490 210)
+		(at 495 280)
 		(descr "Through hole straight pin header, 1x15, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x15 2.54mm single row")
 		(property "Reference" "LCDDisplay701"
@@ -13431,7 +13431,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "3a8a0d0c-785a-431b-98a3-ea33abd9f11b")
-		(at 470 285)
+		(at 485 325)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C739"
@@ -15328,7 +15328,7 @@
 	(footprint "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "47a26cb4-988b-4180-a7f1-f679e37b050a")
-		(at 275 195 90)
+		(at 280.5 252.5 90)
 		(descr "Resistor, Axial_DIN0309 series, Axial, Horizontal, pin pitch=12.7mm, 0.5W = 1/2W, length*diameter=9*3.2mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0309 series Axial Horizontal pin pitch 12.7mm 0.5W = 1/2W length 9mm diameter 3.2mm")
 		(property "Reference" "R714"
@@ -15929,7 +15929,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "4930cdde-a629-47cb-bbeb-00fe33eaacbf")
-		(at 225 260)
+		(at 225 315)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C719"
@@ -19040,7 +19040,7 @@
 	(footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 		(layer "F.Cu")
 		(uuid "4fcfe141-8487-46a8-b46d-a2e53d734412")
-		(at 380 270)
+		(at 410 290)
 		(descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf)")
 		(tags "SOIC SO")
 		(property "Reference" "U707"
@@ -21295,7 +21295,7 @@
 	(footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "514593e5-12b3-4e04-8a02-7651cd8a0718")
-		(at 168 200 -90)
+		(at 172 355)
 		(descr "Terminal Block Phoenix MKDS-1,5-2-5.08, 2 pins, pitch 5.08mm, size 10.2x9.8mm, drill diameter 1.3mm, pad diameter 2.6mm, http://www.farnell.com/datasheets/100425.pdf")
 		(tags "THT Terminal Block Phoenix MKDS-1,5-2-5.08 pitch 5.08mm size 10.2x9.8mm drill 1.3mm pad 2.6mm")
 		(property "Reference" "J701"
@@ -23533,7 +23533,7 @@
 	(footprint "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "551ef0c1-ab0f-43f0-acd9-01a16b898f33")
-		(at 275 185 90)
+		(at 276.5 257.58 90)
 		(descr "Resistor, Axial_DIN0309 series, Axial, Horizontal, pin pitch=12.7mm, 0.5W = 1/2W, length*diameter=9*3.2mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0309 series Axial Horizontal pin pitch 12.7mm 0.5W = 1/2W length 9mm diameter 3.2mm")
 		(property "Reference" "R713"
@@ -24055,7 +24055,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "5a28a527-8058-4d33-a758-a8e8200e091e")
-		(at 395 260)
+		(at 425 280)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C731"
@@ -24255,7 +24255,7 @@
 	(footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "5b4bb923-239a-4d67-9932-df30d253db06")
-		(at 168 250 -90)
+		(at 250 150)
 		(descr "Terminal Block Phoenix MKDS-1,5-3-5.08, 3 pins, pitch 5.08mm, size 15.2x9.8mm, drill diameter 1.3mm, pad diameter 2.6mm, http://www.farnell.com/datasheets/100425.pdf")
 		(tags "THT Terminal Block Phoenix MKDS-1,5-3-5.08 pitch 5.08mm size 15.2x9.8mm drill 1.3mm pad 2.6mm")
 		(property "Reference" "J703"
@@ -26229,7 +26229,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "69172936-13bd-4736-919f-884478125f01")
-		(at 440 285)
+		(at 455 325)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C740"
@@ -26997,7 +26997,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "6bc212f7-47d9-4939-bc06-a9e2aeccae0b")
-		(at 365 220)
+		(at 390 235)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C726"
@@ -27155,7 +27155,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "6ce03770-2b95-4c47-b4b5-5b1ea4f554c8")
-		(at 395 230)
+		(at 425 245)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C735"
@@ -27627,7 +27627,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "6ddb746b-c4da-4714-b1a7-7f7d31b38102")
-		(at 395 270)
+		(at 425 290)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C736"
@@ -29478,7 +29478,7 @@
 	(footprint "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
 		(layer "F.Cu")
 		(uuid "7b9e1a09-4245-4884-9837-43c3835baaa1")
-		(at 365 175)
+		(at 390 185)
 		(descr "CP, Radial series, Radial, pin pitch=3.50mm, diameter=8mm, height=12mm, Electrolytic Capacitor")
 		(tags "CP Radial series Radial pin pitch 3.50mm diameter 8mm height 12mm Electrolytic Capacitor")
 		(property "Reference" "C721"
@@ -32298,7 +32298,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "82b24a93-011f-42ad-9c55-64b147e63ce9")
-		(at 250 215)
+		(at 272 314)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C716"
@@ -32456,7 +32456,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "840701dd-653e-4387-b9af-3cc65b79b0e8")
-		(at 195 245)
+		(at 268 162)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C701"
@@ -32656,7 +32656,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "848ffbb1-5b5f-421d-bded-9b325826f10e")
-		(at 225 200)
+		(at 257 219 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C711"
@@ -33378,7 +33378,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "8750c968-bf34-4b1f-98dc-effb1187a87a")
-		(at 395 220)
+		(at 425 235)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C730"
@@ -33578,7 +33578,7 @@
 	(footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 		(layer "F.Cu")
 		(uuid "89489cf2-3977-4a3a-b943-cb27fad37503")
-		(at 240 215)
+		(at 222 235 180)
 		(descr "CP, Radial series, Radial, pin pitch=2.00mm, diameter=5mm, height=7mm, Electrolytic Capacitor")
 		(tags "CP Radial series Radial pin pitch 2.00mm diameter 5mm height 7mm Electrolytic Capacitor")
 		(property "Reference" "C710"
@@ -36282,7 +36282,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "9573c071-495f-4453-9e5a-f928e6d4d7f0")
-		(at 185 235)
+		(at 272 292)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R711"
@@ -36599,7 +36599,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "959c5f09-e8a6-4a0c-b15f-c3126494580a")
-		(at 235 230)
+		(at 250 311 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C718"
@@ -37103,7 +37103,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "993643ca-e56a-4b93-80cf-95b17d89d63b")
-		(at 193 210)
+		(at 238 235 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R708"
@@ -37671,7 +37671,7 @@
 	(footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 		(layer "F.Cu")
 		(uuid "9a0f4125-d53c-43a1-9d5c-62dc2e83dafb")
-		(at 185 255)
+		(at 194 168)
 		(descr "CP, Radial series, Radial, pin pitch=2.00mm, diameter=5mm, height=7mm, Electrolytic Capacitor")
 		(tags "CP Radial series Radial pin pitch 2.00mm diameter 5mm height 7mm Electrolytic Capacitor")
 		(property "Reference" "C704"
@@ -39364,7 +39364,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "9a63951f-a28f-4bda-9149-e1c571b44a17")
-		(at 193 180)
+		(at 194 259)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R704"
@@ -39522,7 +39522,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "9a98bf7d-b11a-4142-b3f4-53aa8b4240da")
-		(at 185 210)
+		(at 238 225 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R707"
@@ -39680,7 +39680,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "9d037e19-fbae-4ca2-b183-38b18652830c")
-		(at 225 230)
+		(at 257 289 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C717"
@@ -39880,7 +39880,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "9dad8dc9-3be7-49f2-969d-61c1949f5518")
-		(at 193 200)
+		(at 238 305 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R706"
@@ -41841,7 +41841,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "a540caaf-085d-474a-9b02-53e4e29c0047")
-		(at 193 225)
+		(at 272 238)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R710"
@@ -41999,7 +41999,7 @@
 	(footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 		(layer "F.Cu")
 		(uuid "a612875a-07be-49e8-88b3-d13fff7d2465")
-		(at 380 230)
+		(at 410 245)
 		(descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf)")
 		(tags "SOIC SO")
 		(property "Reference" "U706"
@@ -42734,7 +42734,7 @@
 	(footprint "Package_TO_SOT_SMD:SOT-23-6"
 		(layer "F.Cu")
 		(uuid "acbfdf21-5d6a-4f71-afb3-b614fbcf4bcf")
-		(at 410 270)
+		(at 445 290)
 		(descr "SOT, 6 Pin (JEDEC MO-178 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U710"
@@ -43096,7 +43096,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "adffd7fa-ddfe-47c7-8e20-88c38c5f6ca0")
-		(at 250 175)
+		(at 272 216)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C713"
@@ -43254,7 +43254,7 @@
 	(footprint "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "aff60244-5f0f-40b5-b012-4464a05c7fbd")
-		(at 420 250 90)
+		(at 455 270 90)
 		(descr "Resistor, Axial_DIN0309 series, Axial, Horizontal, pin pitch=12.7mm, 0.5W = 1/2W, length*diameter=9*3.2mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0309 series Axial Horizontal pin pitch 12.7mm 0.5W = 1/2W length 9mm diameter 3.2mm")
 		(property "Reference" "R719"
@@ -43445,7 +43445,7 @@
 	(footprint "Package_TO_SOT_SMD:SOT-23-5_HandSoldering"
 		(layer "F.Cu")
 		(uuid "affa8365-8b61-4206-954b-0706ddb40bfb")
-		(at 455 290)
+		(at 470 330)
 		(descr "5-pin SOT23 package")
 		(tags "SOT-23-5 hand-soldering")
 		(property "Reference" "U708"
@@ -45067,7 +45067,7 @@
 	(footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 		(layer "F.Cu")
 		(uuid "b2816744-682e-4ee5-bea0-9f7510c16206")
-		(at 240 205)
+		(at 222 225 180)
 		(descr "CP, Radial series, Radial, pin pitch=2.00mm, diameter=5mm, height=7mm, Electrolytic Capacitor")
 		(tags "CP Radial series Radial pin pitch 2.00mm diameter 5mm height 7mm Electrolytic Capacitor")
 		(property "Reference" "C709"
@@ -46429,7 +46429,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "b5e8184d-fba7-4ab4-b2c1-ad7744aec520")
-		(at 185 170)
+		(at 214 267.635)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R701"
@@ -46587,7 +46587,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "b6090302-d2e1-4893-8767-be3190bbd318")
-		(at 250 185)
+		(at 272 244)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C714"
@@ -46891,7 +46891,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "b66f58a0-bf99-49ff-882a-a114e27e2a7a")
-		(at 465 160)
+		(at 495 160)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C723"
@@ -47777,7 +47777,7 @@
 	(footprint "Library:MBC2596-01_TAEJIN_43x21mm"
 		(layer "F.Cu")
 		(uuid "bba307a1-e6e8-4031-9823-43ebff3ca99c")
-		(at 390 190)
+		(at 420 200)
 		(descr "Akizuki/TAEJIN MBC2596-01 LM2596 buck module. Body 43x21mm. Corner I/O pads: hole centers 3.5mm from each edge (pitch 36.0 x 14.0mm). Module PTH ~1.3mm. Mother drill 1.0mm for 2.54mm header pins through module. Orientation 0deg: TL=IN+ (pad1 rect), BL=IN- (pad2), TR=OUT+ (pad3), BR=OUT- (pad4).")
 		(tags "MBC2596 MBC2596-01 LM2596 TAEJIN Akizuki buck module THT")
 		(property "Reference" "U705"
@@ -48427,7 +48427,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "bdcb62ab-bca4-40ca-877d-dccf846a324e")
-		(at 465 170)
+		(at 495 170)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C734"
@@ -49107,7 +49107,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "c2ecba60-39d2-4561-8995-0f6697a63ff7")
-		(at 193 170)
+		(at 194 266.365 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R702"
@@ -51012,7 +51012,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "c829ea98-394f-4f46-b4ea-d2fb77abaaae")
-		(at 185 200)
+		(at 238 295 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R705"
@@ -51641,7 +51641,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "cbdd01fd-ad37-4331-9ed5-2571ea251346")
-		(at 235 170)
+		(at 191 290)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C706"
@@ -51841,7 +51841,7 @@
 	(footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 		(layer "F.Cu")
 		(uuid "ce826702-d7b1-45c6-b815-4b14840d6c58")
-		(at 240 175)
+		(at 222 295 180)
 		(descr "CP, Radial series, Radial, pin pitch=2.00mm, diameter=5mm, height=7mm, Electrolytic Capacitor")
 		(tags "CP Radial series Radial pin pitch 2.00mm diameter 5mm height 7mm Electrolytic Capacitor")
 		(property "Reference" "C707"
@@ -53787,7 +53787,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "d331662c-d5a8-4b01-8b52-6efad4d4f9c7")
-		(at 420 230)
+		(at 455 245)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C737"
@@ -55442,7 +55442,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "d437efb1-5a6a-427a-bc5c-d79e9a926746")
-		(at 420 270)
+		(at 455 290)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C738"
@@ -56552,7 +56552,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "dc4b9f1a-7abc-489f-9ee5-c6e029137922")
-		(at 365 230)
+		(at 390 245)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C732"
@@ -56878,7 +56878,7 @@
 	(footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 		(layer "F.Cu")
 		(uuid "e0e94534-6481-4cf0-a211-312d109c12f5")
-		(at 185 245)
+		(at 268 150)
 		(descr "CP, Radial series, Radial, pin pitch=2.00mm, diameter=5mm, height=7mm, Electrolytic Capacitor")
 		(tags "CP Radial series Radial pin pitch 2.00mm diameter 5mm height 7mm Electrolytic Capacitor")
 		(property "Reference" "C703"
@@ -58240,7 +58240,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "e129daff-e0cf-4f20-9a03-290ced9edeb9")
-		(at 195 255)
+		(at 191 178)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C702"
@@ -58794,7 +58794,7 @@
 	(footprint "NetTie:NetTie-2_THT_Pad1.0mm"
 		(layer "F.Cu")
 		(uuid "e66e7b62-4938-428d-bdfa-fbd469f3cbd3")
-		(at 450 185)
+		(at 480 185)
 		(descr "Net tie, 2 pin, 1.0mm round THT pads")
 		(tags "net tie")
 		(property "Reference" "NT702"
@@ -58911,7 +58911,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "e6b02005-7942-419f-9ae7-b9eac6ee194e")
-		(at 365 190)
+		(at 390 200)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C722"
@@ -60306,7 +60306,7 @@
 	(footprint "Module:RaspberryPi_Pico_Common_Unspecified"
 		(layer "F.Cu")
 		(uuid "ea508e85-2838-4491-9595-4295670c3342")
-		(at 460 230)
+		(at 480 240)
 		(descr "Raspberry Pi Pico versatile common (Pico & Pico W) footprint for surface-mount or through-hole hand soldering, supports Raspberry Pi Pico 2, default socketed model has height of 8.51mm, https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf")
 		(tags "module usb pcb antenna")
 		(property "Reference" "A702"
@@ -64730,7 +64730,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "efde6cc5-0be3-4ae4-8290-7dcac57f5988")
-		(at 440 300)
+		(at 455 345)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C728"
@@ -65284,7 +65284,7 @@
 	(footprint "Library:ADC1804_F_KYOHRITSU_56x33mm"
 		(layer "F.Cu")
 		(uuid "f0af9a8e-a227-4190-8a8f-75883b2c94b7")
-		(at 310 200)
+		(at 320 260)
 		(descr "Kyohritsu ADC1804_F (PCM1804) 56x33mm measured FP. Origin=board center. Pitch 2.54. Header drill 1.0 / pad 1.8 for 0.6sq pins. M3 holes NPTH 3.2 (module hole φ3, edge-to-outer 2.2). CN1F(L bottom)=pads1-3, CN2F(R top)=4-6, CN3/4 2x5=7,8,9,10,14, CN6F RST=11+14, CN7/8 pwr 2x3=12,13,14. Mother: solder female 2.54 sockets into pads (recommended) or solder module male pins. OVFL/OVFR (CN5F) omitted (NC). JP1F on module only.")
 		(tags "ADC1804_F ADC1804 Kyohritsu PCM1804 module THT header")
 		(property "Reference" "A701"
@@ -65828,7 +65828,7 @@
 	(footprint "Library:Oscillator_SMD_Abracon_ASFL-4Pin_5.0x3.2mm_HandSoldering"
 		(layer "F.Cu")
 		(uuid "f1d22424-bdac-4594-8d47-ac7bdc2fd255")
-		(at 340 175)
+		(at 355 235)
 		(descr "Abracon ASFL / ASFL1 CMOS clock oscillator, 5.0x3.2mm SMD, hand-soldering pads. Pin1=Tri-State, 2=GND, 3=OUT, 4=Vdd. https://abracon.com/Oscillators/ASFL.pdf")
 		(tags "Abracon ASFL ASFL1 oscillator SMD 5.0x3.2 HandSoldering")
 		(property "Reference" "Y701"
@@ -67766,7 +67766,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "f370a55e-9c88-4571-a4dd-78ff9df8413e")
-		(at 365 240)
+		(at 390 255)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C724"
@@ -67966,7 +67966,7 @@
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "f4627b67-fa0b-45d8-9938-34c60bc6dc12")
-		(at 225 170)
+		(at 207 256 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, diameter*width=5*2.5mm^2, Capacitor, http://cdn-reichelt.de/documents/datenblatt/B300/DS_KERKO_TC.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm diameter 5mm width 2.5mm Capacitor")
 		(property "Reference" "C705"
@@ -73935,7 +73935,7 @@
 	(footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 		(layer "F.Cu")
 		(uuid "f821a33a-bf3e-4d9a-9ca9-faf8aeb4309b")
-		(at 210 180)
+		(at 205 267)
 		(descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf)")
 		(tags "SOIC SO")
 		(property "Reference" "U701"
@@ -74324,7 +74324,7 @@
 	(footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 		(layer "F.Cu")
 		(uuid "f9180da9-6d2a-41b0-986c-8eb260407d3a")
-		(at 240 185)
+		(at 222 305 180)
 		(descr "CP, Radial series, Radial, pin pitch=2.00mm, diameter=5mm, height=7mm, Electrolytic Capacitor")
 		(tags "CP Radial series Radial pin pitch 2.00mm diameter 5mm height 7mm Electrolytic Capacitor")
 		(property "Reference" "C708"
@@ -77036,7 +77036,7 @@
 	(footprint "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "fabd0091-eba2-4495-becf-a8ef2313fc2d")
-		(at 275 225 90)
+		(at 288.5 262.32 90)
 		(descr "Resistor, Axial_DIN0309 series, Axial, Horizontal, pin pitch=12.7mm, 0.5W = 1/2W, length*diameter=9*3.2mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0309 series Axial Horizontal pin pitch 12.7mm 0.5W = 1/2W length 9mm diameter 3.2mm")
 		(property "Reference" "R716"
@@ -80511,7 +80511,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "fb8160be-ce0b-4680-9b97-178927c0f7b5")
-		(at 250 205)
+		(at 272 286)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C715"
@@ -86442,8 +86442,8 @@
 			(justify left bottom mirror)
 		)
 	)
-	(gr_text "A: AUDIO/OPA"
-		(at 210 150 0)
+	(gr_text "TOP: +/-15V J703"
+		(at 220 145 0)
 		(layer "Cmts.User")
 		(uuid "98b93252-d1d9-46e6-8afa-4ff7cc857f01")
 		(effects
@@ -86454,8 +86454,8 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "B: ADC + NT701"
-		(at 310 150 0)
+	(gr_text "MID: OPA / AUDIO path"
+		(at 210 210 0)
 		(layer "Cmts.User")
 		(uuid "98b93252-d1d9-46e6-8afa-4ff7cc857f02")
 		(effects
@@ -86466,8 +86466,8 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "C: A-PWR MBC/LDO"
-		(at 385 150 0)
+	(gr_text "ADC + A-PWR"
+		(at 360 145 0)
 		(layer "Cmts.User")
 		(uuid "98b93252-d1d9-46e6-8afa-4ff7cc857f03")
 		(effects
@@ -86478,7 +86478,7 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "D: DIGITAL Pico/LCD"
+	(gr_text "DIGITAL | BOTTOM: AUDIO J701"
 		(at 450 145 0)
 		(layer "Cmts.User")
 		(uuid "98b93252-d1d9-46e6-8afa-4ff7cc857f04")
@@ -110896,5 +110896,397 @@
 			)
 			(checksum "242DFEC6A5FEDDDF62CD1949CD4C3FD0")
 		)
+	)
+	(segment
+		(start 172 355)
+		(end 172 235)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/MeasurementADC/AUDIO_L_IN")
+		(uuid "4a1bd8e9-4fc2-45c0-be58-b6332c221a52")
+	)
+	(segment
+		(start 172 266.365)
+		(end 192.45 266.365)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/MeasurementADC/AUDIO_L_IN")
+		(uuid "0de9773c-ed99-4930-a2d2-b01353ed0e4d")
+	)
+	(segment
+		(start 172 235)
+		(end 220 235)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/MeasurementADC/AUDIO_L_IN")
+		(uuid "5958bbfe-e2b1-43f5-a4a0-5e2e25624e3c")
+	)
+	(segment
+		(start 177.08 355)
+		(end 177.08 283)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/MeasurementADC/AUDIO_R_IN")
+		(uuid "802fa9cb-c10a-45e3-b813-8cb1d62149b0")
+	)
+	(segment
+		(start 177.08 305)
+		(end 220 305)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/MeasurementADC/AUDIO_R_IN")
+		(uuid "e80b3360-444a-4b9f-a0a7-7c364d1b4261")
+	)
+	(segment
+		(start 177.08 283)
+		(end 218 283)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/MeasurementADC/AUDIO_R_IN")
+		(uuid "e53b4d8d-1130-4976-b3d1-0996fbcfdb7b")
+	)
+	(segment
+		(start 218 283)
+		(end 218 267.635)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/MeasurementADC/AUDIO_R_IN")
+		(uuid "784b1b98-cc6b-4237-befa-94f8649c630a")
+	)
+	(segment
+		(start 218 267.635)
+		(end 215.55 267.635)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/MeasurementADC/AUDIO_R_IN")
+		(uuid "d3bd5d5d-d7a6-4697-a1f7-51b5fe8c1e32")
+	)
+	(segment
+		(start 250 150)
+		(end 250 142)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "76dd869b-c445-4144-b588-4d067fa8eda3")
+	)
+	(segment
+		(start 250 142)
+		(end 268 142)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "ec0cf467-5910-4c9a-a816-84c3db77918c")
+	)
+	(segment
+		(start 268 142)
+		(end 268 150)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "b9d2ccef-d886-46bd-be29-cc5fef0cdf4e")
+	)
+	(segment
+		(start 268 150)
+		(end 268 289)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "090a8a3d-93bb-4868-b81b-5babfba62612")
+	)
+	(segment
+		(start 268 219)
+		(end 257 219)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "fffe9336-9943-4030-9f2d-158f92483ed8")
+	)
+	(segment
+		(start 268 256)
+		(end 207 256)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "b017ede1-2804-4000-9d57-44ddb2e4b88d")
+	)
+	(segment
+		(start 268 289)
+		(end 257 289)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "43bc9b03-91a2-439a-9287-5b0110b0f355")
+	)
+	(segment
+		(start 207 256)
+		(end 210.5 256)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "46625b86-26b0-4bbd-a5e0-83e6c3da624b")
+	)
+	(segment
+		(start 210.5 256)
+		(end 210.5 263)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "c4b5c485-8e84-4820-8629-47d65edb310a")
+	)
+	(segment
+		(start 257 219)
+		(end 260.5 219)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "97a774c4-1b10-4abd-97a4-63d6f0f19cf9")
+	)
+	(segment
+		(start 260.5 219)
+		(end 260.5 226)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "fb052366-2bb5-4e51-b072-dae5150dfd8b")
+	)
+	(segment
+		(start 257 289)
+		(end 260.5 289)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "4b3ebf1d-29a5-4fb7-918c-a03df18d65f3")
+	)
+	(segment
+		(start 260.5 289)
+		(end 260.5 296)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "3005556f-98d0-4186-9375-be8bdb291ea6")
+	)
+	(segment
+		(start 210.5 263)
+		(end 210.5 265.095)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "1fefc049-9ab4-4bd1-9a14-9d06fb48334c")
+	)
+	(segment
+		(start 210.5 265.095)
+		(end 207.475 265.095)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "1f366f35-10d3-46d9-9cd2-ec42d453d85f")
+	)
+	(segment
+		(start 260.5 226)
+		(end 260.5 228.095)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "fea1cb94-1ed0-48c8-a62e-78387baedda9")
+	)
+	(segment
+		(start 260.5 228.095)
+		(end 257.475 228.095)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "15bcb3e5-3366-4484-b697-d9dd69364f8b")
+	)
+	(segment
+		(start 260.5 296)
+		(end 260.5 298.095)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "34054339-357d-4b7b-9bc3-796d349fe26f")
+	)
+	(segment
+		(start 260.5 298.095)
+		(end 257.475 298.095)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "76c81050-6951-4ab1-92c3-5426164914b5")
+	)
+	(segment
+		(start 260.16 150)
+		(end 260.16 159)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "be25405e-ea32-46e5-ae2e-b894b8aceba7")
+	)
+	(segment
+		(start 260.16 159)
+		(end 196 159)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "5fd10adb-a502-479f-b4bb-4592301be36b")
+	)
+	(segment
+		(start 196 159)
+		(end 196 311)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "5f74995a-27e7-4013-922a-22706b6e3b2e")
+	)
+	(segment
+		(start 196 241)
+		(end 245 241)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "d50cc255-53db-4dfe-b809-dc5db68b3426")
+	)
+	(segment
+		(start 196 271)
+		(end 199.5 271)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "b08f39c1-cb38-48d6-a644-022e1d901649")
+	)
+	(segment
+		(start 196 311)
+		(end 245 311)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "217c8371-7263-46ea-96ab-dc1585d7d601")
+	)
+	(segment
+		(start 245 241)
+		(end 245 233)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "29867843-d69b-47c7-9117-98b0e2b46046")
+	)
+	(segment
+		(start 245 233)
+		(end 250 233)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "0fd7fd09-396b-4809-bdd9-bbc7a855f843")
+	)
+	(segment
+		(start 245 311)
+		(end 245 303)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "21299462-05fa-4f54-b26d-f967c4aa1018")
+	)
+	(segment
+		(start 245 303)
+		(end 250 303)
+		(width 1)
+		(layer "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "a34e816c-c205-489d-ba91-154c69ec8272")
+	)
+	(segment
+		(start 199.5 271)
+		(end 199.5 268.905)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "3d24af0a-546b-4eb8-9843-dabd22da2521")
+	)
+	(segment
+		(start 199.5 268.905)
+		(end 202.525 268.905)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "8e4f0945-c131-42d6-a542-131fd8edee7b")
+	)
+	(segment
+		(start 250 233)
+		(end 250 231.905)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "67ef8abc-367c-49d4-8010-93e939f8b7ba")
+	)
+	(segment
+		(start 250 231.905)
+		(end 252.525 231.905)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "9b21bf8e-5a74-40f2-8d24-b8acecdbc597")
+	)
+	(segment
+		(start 250 303)
+		(end 250 301.905)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "0849bc04-4802-4714-b4df-64ef77c9459c")
+	)
+	(segment
+		(start 250 301.905)
+		(end 252.525 301.905)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "48676480-1657-42fe-b894-16f8bb4068bf")
+	)
+	(via
+		(at 210.5 263)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "5ff2aca2-8563-4910-8b29-40575160af2c")
+	)
+	(via
+		(at 260.5 226)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "30c27ad4-c16d-4341-9ee6-0ce0e753e3d8")
+	)
+	(via
+		(at 260.5 296)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "/Controll/AMP_V+_IN")
+		(uuid "81b041d1-195e-4885-b6e0-c8d50d2954d1")
+	)
+	(via
+		(at 199.5 271)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "d9e43106-fc3e-41e3-8947-112017a012a1")
+	)
+	(via
+		(at 250 233)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "047e7e5f-13dc-4521-8106-0d09dce6b057")
+	)
+	(via
+		(at 250 303)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "/Controll/AMP_V-_IN")
+		(uuid "f0da1570-7b91-40b8-8250-63f98e3ed70b")
 	)
 )
