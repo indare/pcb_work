@@ -2963,7 +2963,7 @@
 					)
 				)
 			)
-			(property "Description" "デュアル低ノイズ FET 入力オーディオ演算増幅器")
+			(property "Description" "デュアル低ノイズ FET 入力オーディオ演算増幅器"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3801,7 +3801,7 @@
 					)
 				)
 			)
-			(property "Description" "Akizuki MBC2596-01 buck module 4-term IN+/IN-/OUT+/OUT-, set 6.6-6.8V"
+			(property "Description" "Akizuki/TAEJIN MBC2596-01 43x21mm; pads 3.5mm from corners; set 6.6-6.8V"
 				(at 0 -16.51 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -4700,6 +4700,196 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "MeasurementADC_Extras:XC8107AC20MR-G"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 0 10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "XC8107AC20MR-G"
+				(at 0 7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5_HandSoldering"
+				(at -2.54 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://product.torexsemi.com/system/files/series/xc8107.pdf"
+				(at -2.54 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Torex XC8107AC20MR-G Pch load switch, SOT-25 (SOT-23-5); VIN 2.5-5.5V, 2.0A, RON 100mOhm typ. CE Active High, VCEH 1.5V min at VIN=5.5V so a 3.3V GPIO drives it directly. Soft-start 0.6ms typ, current limit 2.40A typ, short-circuit / reverse-current / thermal / UVLO protection, FLG Nch open drain. CE has NO internal pull-down: an external pull-down is mandatory."
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "load switch power switch XC8107 Torex Pch soft-start current limit reverse current blocking FLG"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "XC8107AC20MR-G_0_1"
+				(rectangle
+					(start -7.62 6.35)
+					(end 7.62 -6.35)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "XC8107AC20MR-G_1_1"
+				(pin passive line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -8.89 90)
+					(length 2.54)
+					(name "VSS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "FLG"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "CE"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "VIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Transistor_FET:TP0610T"
 			(pin_names
 				(hide yes)
@@ -5373,9 +5563,9 @@
 		)
 		(uuid "e4bf9b7d-51ef-49fc-889c-a903e71bb899")
 	)
-	(text "Q1 P-FET: LCD_EN low=ON. Precision: LCD_EN high cuts LCD/touch."
+	(text "U710 XC8107AC20MR-G ロードスイッチ: LCD_EN High=ON / Low・Hi-Z=OFF（Active High, VCEH 1.5V min → Pico 3.3V で直接駆動可）。R717 100k=CE プルダウンで起動時 OFF。ノイズ床測定は LCD_EN=Low のまま。ソフトスタート 0.6ms typ・短絡/逆流/過熱/UVLO 保護内蔵。C740=CIN, C739=CL は各 10uF/3216 を IC 直近へ（推奨 1uF 以上）。FLG は未使用（NC）。"
 		(exclude_from_sim no)
-		(at 315.722 154.178 0)
+		(at 312.42 163.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5720,12 +5910,6 @@
 		(uuid "a07992cf-174b-45d7-b3ec-63c8c9d37bda")
 	)
 	(junction
-		(at 356.87 31.75)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a1023afc-5e22-4597-8e70-0f6659daf5f7")
-	)
-	(junction
 		(at 63.5 224.79)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5828,6 +6012,12 @@
 		(uuid "cb0f4cf4-e460-46fb-a7d6-ac7a1455f1f5")
 	)
 	(junction
+		(at 356.87 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d155dfdd-60b8-4b4f-8c43-5e7b98079db9")
+	)
+	(junction
 		(at 398.78 138.43)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5850,12 +6040,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d5722937-a146-40d0-b15a-b2cd6f65d1da")
-	)
-	(junction
-		(at 359.41 59.69)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "de02d252-d4cd-467a-a860-0e97a4044289")
 	)
 	(junction
 		(at 66.04 224.79)
@@ -5898,6 +6082,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e26fbef9-25d3-4349-94f6-779cc4a7e8df")
+	)
+	(junction
+		(at 359.41 76.2)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e325374b-dd56-42a8-be53-61809ceddbec")
 	)
 	(junction
 		(at 354.33 59.69)
@@ -6251,16 +6441,6 @@
 	)
 	(wire
 		(pts
-			(xy 359.41 59.69) (xy 365.76 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0f3dda52-cd6f-44e0-8bfe-fe9e88344317")
-	)
-	(wire
-		(pts
 			(xy 123.19 143.51) (xy 130.81 143.51)
 		)
 		(stroke
@@ -6351,7 +6531,7 @@
 	)
 	(wire
 		(pts
-			(xy 356.87 31.75) (xy 364.49 31.75)
+			(xy 351.79 31.75) (xy 364.49 31.75)
 		)
 		(stroke
 			(width 0)
@@ -6621,13 +6801,165 @@
 	)
 	(wire
 		(pts
-			(xy 346.71 134.62) (xy 347.98 134.62)
+			(xy 346.71 134.62) (xy 355.6 134.62)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "290a687e-d12e-4d91-9b46-aaebad103861")
+	)
+	(wire
+		(pts
+			(xy 355.6 138.43) (xy 367.03 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107001-0000-4a01-b001-000000000001")
+	)
+	(wire
+		(pts
+			(xy 367.03 146.05) (xy 367.03 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107002-0000-4a01-b001-000000000002")
+	)
+	(wire
+		(pts
+			(xy 367.03 148.59) (xy 372.11 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107003-0000-4a01-b001-000000000003")
+	)
+	(wire
+		(pts
+			(xy 312.42 140.97) (xy 312.42 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107004-0000-4a01-b001-000000000004")
+	)
+	(wire
+		(pts
+			(xy 312.42 149.86) (xy 312.42 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107005-0000-4a01-b001-000000000005")
+	)
+	(wire
+		(pts
+			(xy 312.42 151.13) (xy 307.34 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107006-0000-4a01-b001-000000000006")
+	)
+	(wire
+		(pts
+			(xy 330.2 146.05) (xy 330.2 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107007-0000-4a01-b001-000000000007")
+	)
+	(wire
+		(pts
+			(xy 330.2 154.94) (xy 330.2 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107008-0000-4a01-b001-000000000008")
+	)
+	(wire
+		(pts
+			(xy 330.2 156.21) (xy 325.12 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8107009-0000-4a01-b001-000000000009")
+	)
+	(junction
+		(at 355.6 138.43)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8107010-0000-4a01-b001-000000000010")
+	)
+	(junction
+		(at 312.42 140.97)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8107011-0000-4a01-b001-000000000011")
+	)
+	(junction
+		(at 330.2 146.05)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8107012-0000-4a01-b001-000000000012")
+	)
+	(no_connect
+		(at 355.6 146.05)
+		(uuid "c8107020-0000-4a01-b001-000000000020")
+	)
+	(label "D_GND"
+		(at 372.11 148.59 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c8107030-0000-4a01-b001-000000000030")
+	)
+	(label "D_GND"
+		(at 307.34 151.13 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c8107031-0000-4a01-b001-000000000031")
+	)
+	(label "D_GND"
+		(at 325.12 156.21 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c8107032-0000-4a01-b001-000000000032")
+	)
+	(label "D_GND"
+		(at 350.52 157.48 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c8107033-0000-4a01-b001-000000000033")
 	)
 	(wire
 		(pts
@@ -6851,6 +7183,16 @@
 	)
 	(wire
 		(pts
+			(xy 356.87 48.26) (xy 364.49 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3519c903-60a3-4c36-8122-8b0c4970382b")
+	)
+	(wire
+		(pts
 			(xy 34.29 200.66) (xy 41.91 200.66)
 		)
 		(stroke
@@ -6858,6 +7200,16 @@
 			(type default)
 		)
 		(uuid "35639dd3-ab28-4563-8bc1-85c0c64adef4")
+	)
+	(wire
+		(pts
+			(xy 359.41 76.2) (xy 345.44 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "357bc8df-517a-4ae3-b183-d5f8c9ba74a1")
 	)
 	(wire
 		(pts
@@ -7001,7 +7353,7 @@
 	)
 	(wire
 		(pts
-			(xy 337.82 143.51) (xy 340.36 143.51)
+			(xy 335.28 146.05) (xy 326.39 146.05)
 		)
 		(stroke
 			(width 0)
@@ -7061,7 +7413,7 @@
 	)
 	(wire
 		(pts
-			(xy 325.12 143.51) (xy 330.2 143.51)
+			(xy 335.28 140.97) (xy 309.88 140.97)
 		)
 		(stroke
 			(width 0)
@@ -7341,7 +7693,7 @@
 	)
 	(wire
 		(pts
-			(xy 354.33 59.69) (xy 359.41 59.69)
+			(xy 354.33 59.69) (xy 365.76 59.69)
 		)
 		(stroke
 			(width 0)
@@ -7451,7 +7803,7 @@
 	)
 	(wire
 		(pts
-			(xy 347.98 149.86) (xy 347.98 148.59)
+			(xy 345.44 152.4) (xy 345.44 157.48)
 		)
 		(stroke
 			(width 0)
@@ -7518,6 +7870,16 @@
 			(type default)
 		)
 		(uuid "67b7c17b-7553-42a8-bf60-a90a8fa98f6f")
+	)
+	(wire
+		(pts
+			(xy 359.41 74.93) (xy 359.41 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68dd2f8b-7f77-4a68-a65d-2bcff2233cc7")
 	)
 	(wire
 		(pts
@@ -8041,7 +8403,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 76.2) (xy 345.44 76.2)
+			(xy 365.76 76.2) (xy 359.41 76.2)
 		)
 		(stroke
 			(width 0)
@@ -8071,7 +8433,7 @@
 	)
 	(wire
 		(pts
-			(xy 346.71 149.86) (xy 347.98 149.86)
+			(xy 345.44 157.48) (xy 350.52 157.48)
 		)
 		(stroke
 			(width 0)
@@ -8298,6 +8660,16 @@
 			(type default)
 		)
 		(uuid "a7ce6621-a481-4e18-ab40-da9b850e62f4")
+	)
+	(wire
+		(pts
+			(xy 356.87 46.99) (xy 356.87 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a91b5a41-0447-4dbe-8545-8daec29752e7")
 	)
 	(wire
 		(pts
@@ -8881,16 +9253,6 @@
 	)
 	(wire
 		(pts
-			(xy 351.79 31.75) (xy 356.87 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d46b3d87-3bd2-4de6-812c-7ac0435986cc")
-	)
-	(wire
-		(pts
 			(xy 247.65 147.32) (xy 248.92 147.32)
 		)
 		(stroke
@@ -9151,7 +9513,7 @@
 	)
 	(wire
 		(pts
-			(xy 342.9 48.26) (xy 364.49 48.26)
+			(xy 342.9 48.26) (xy 356.87 48.26)
 		)
 		(stroke
 			(width 0)
@@ -9301,7 +9663,7 @@
 	)
 	(wire
 		(pts
-			(xy 347.98 134.62) (xy 347.98 138.43)
+			(xy 355.6 134.62) (xy 355.6 140.97)
 		)
 		(stroke
 			(width 0)
@@ -10159,7 +10521,7 @@
 		(uuid "8c3a48d3-74e6-4248-bfb1-9350e6574f8d")
 	)
 	(label "+5V_D"
-		(at 346.71 149.86 180)
+		(at 309.88 140.97 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10319,7 +10681,7 @@
 		(uuid "b5f7eb39-fa39-4ef1-9acb-db5b9dfa3321")
 	)
 	(label "LCD_EN"
-		(at 325.12 143.51 180)
+		(at 326.39 146.05 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10880,85 +11242,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "C704")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 359.41 63.5 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "04f527f0-cc99-4494-8d9a-c85055cb1d81")
-		(property "Reference" "C726"
-			(at 357.124 61.214 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10nF"
-			(at 361.95 66.04 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
-			(at 359.41 63.5 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 359.41 63.5 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 359.41 63.5 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c4963314-74d5-4b6f-a63f-547a0ec74ef8")
-		)
-		(pin "2"
-			(uuid "5b8f0342-0661-40b2-ba49-55889ab93b1c")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C726")
 					(unit 1)
 				)
 			)
@@ -12174,6 +12457,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 359.41 71.12 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "332e65a9-ce3f-4def-9382-a233a8e03e3e")
+		(property "Reference" "C726"
+			(at 357.124 68.834 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10nF"
+			(at 361.95 73.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+			(at 359.41 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 359.41 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 359.41 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "64aa813d-bf0b-444f-9c2e-493bf9a78c8c")
+		)
+		(pin "2"
+			(uuid "ca0cf4e8-d27c-481e-9a3d-6058fff295e8")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "C726")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 443.23 125.73 270)
 		(unit 1)
@@ -13333,7 +13695,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 334.01 143.51 90)
+		(at 330.2 151.13 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -13343,7 +13705,7 @@
 		(dnp no)
 		(uuid "5782578e-ad54-4193-a67a-1783f78f6f59")
 		(property "Reference" "R717"
-			(at 331.47 142.24 90)
+			(at 332.486 151.13 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13353,7 +13715,7 @@
 			)
 		)
 		(property "Value" "100k"
-			(at 336.55 144.78 90)
+			(at 327.914 151.13 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13363,7 +13725,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal"
-			(at 334.01 143.51 0)
+			(at 330.2 151.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13374,7 +13736,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 334.01 143.51 0)
+			(at 330.2 151.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13384,8 +13746,8 @@
 				)
 			)
 		)
-		(property "Description" ""
-			(at 334.01 143.51 0)
+		(property "Description" "U710(XC8107) CE プルダウン。Active High なので Pico GPIO が Hi-Z の間は LCD OFF がデフォルト。CE に内部プルダウンは無いため必須。"
+			(at 330.2 151.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14155,6 +14517,85 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "C709")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 356.87 43.18 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6bda790d-621e-473f-8158-047362361eb7")
+		(property "Reference" "C725"
+			(at 354.584 40.894 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10nF"
+			(at 359.41 45.72 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+			(at 356.87 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 356.87 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 356.87 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "22fafd63-aa06-4f82-8256-816e03f504d5")
+		)
+		(pin "2"
+			(uuid "293ae758-fdba-486e-ac64-acfb3081e888")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "C725")
 					(unit 1)
 				)
 			)
@@ -16432,8 +16873,7 @@
 		)
 	)
 	(symbol
-		(lib_name "AO3401A_1")
-		(lib_id "Transistor_FET:AO3401A")
+		(lib_id "MeasurementADC_Extras:XC8107AC20MR-G")
 		(at 345.44 143.51 0)
 		(unit 1)
 		(body_style 1)
@@ -16442,10 +16882,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "d299dcff-f12f-4770-a1ff-d907fdaf30b4")
-		(property "Reference" "Q701"
-			(at 351.79 142.2399 0)
+		(property "Reference" "U710"
+			(at 356.87 151.13 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -16455,8 +16894,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "AO3401A"
-			(at 351.79 144.7799 0)
+		(property "Value" "XC8107AC20MR-G"
+			(at 356.87 153.67 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -16466,32 +16905,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 350.52 145.415 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-			)
-		)
-		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
-			(at 350.52 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5_HandSoldering"
 			(at 345.44 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -16502,8 +16916,27 @@
 				)
 			)
 		)
-		(pin "3"
-			(uuid "ceaf651e-176c-4c16-a6a8-c5d144c700e1")
+		(property "Datasheet" "https://product.torexsemi.com/system/files/series/xc8107.pdf"
+			(at 345.44 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "LCD/タッチ用ロードスイッチ。秋月 131334。CE=LCD_EN は Active High（VCEH 1.5V min なので Pico 3.3V で直接ON）。R717 100k で CE プルダウン＝起動時 OFF。ソフトスタート 0.6ms typ で LCD_VCC バルクへの突入電流を抑制。C740(CIN)/C739(CL) は 10uF 3216 を IC 直近に。FLG 未使用。"
+			(at 345.44 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(pin "1"
 			(uuid "3c7effdb-7e8e-4c1a-8885-726f3a41c67a")
@@ -16511,10 +16944,177 @@
 		(pin "2"
 			(uuid "0eca22a4-a553-48ed-bce5-18a866cd0a16")
 		)
+		(pin "3"
+			(uuid "ceaf651e-176c-4c16-a6a8-c5d144c700e1")
+		)
+		(pin "4"
+			(uuid "c8107041-0000-4a01-b001-000000000041")
+		)
+		(pin "5"
+			(uuid "c8107042-0000-4a01-b001-000000000042")
+		)
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "Q701")
+					(reference "U710")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 367.03 142.24 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c8107050-0000-4a01-b001-000000000050")
+		(property "Reference" "C739"
+			(at 364.744 140.208 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10uF"
+			(at 370.332 144.272 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 367.03 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 367.03 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "積セラ 10uF50V 3216（秋月 117338・購入済）。U710(XC8107) 出力コンデンサ CL。データシート推奨 1.0uF 以上、IC 直近に配置。"
+			(at 367.03 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c8107051-0000-4a01-b001-000000000051")
+		)
+		(pin "2"
+			(uuid "c8107052-0000-4a01-b001-000000000052")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "C739")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 312.42 146.05 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c8107060-0000-4a01-b001-000000000060")
+		(property "Reference" "C740"
+			(at 310.134 144.018 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10uF"
+			(at 315.722 148.082 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 312.42 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 312.42 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "積セラ 10uF50V 3216（秋月 117338・購入済）。U710(XC8107) 入力コンデンサ CIN。データシート推奨 1.0uF 以上、VIN-VSS 間を最短で。"
+			(at 312.42 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c8107061-0000-4a01-b001-000000000061")
+		)
+		(pin "2"
+			(uuid "c8107062-0000-4a01-b001-000000000062")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "C740")
 					(unit 1)
 				)
 			)
@@ -17169,85 +17769,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "C705")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 356.87 35.56 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "ea143189-8415-43cb-a805-ad54770cac6b")
-		(property "Reference" "C725"
-			(at 354.584 33.274 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10nF"
-			(at 359.41 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
-			(at 356.87 35.56 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 356.87 35.56 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 356.87 35.56 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "053fe1aa-5d63-48bb-abec-80b4ed63b128")
-		)
-		(pin "2"
-			(uuid "10400bb7-5b4b-402e-83ee-37f360dea760")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C725")
 					(unit 1)
 				)
 			)
