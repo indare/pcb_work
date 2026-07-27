@@ -192,7 +192,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "00faea50-12ef-47c3-b77d-0dbe3a55436c")
 		(at 423.05 141.15 90)
@@ -255,91 +255,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "24090292-d15a-49c8-8876-bf53c82c81a6")
 		)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "7cb76a97-5ac9-4de3-9258-ba4289213f51")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ec6e612e-d9ac-4acb-ba91-4093bb4c7941")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "609d90cb-0fe4-427d-94e5-f45d503f7059")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "348d4b78-bf03-4013-afc9-85556bdf9725")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "c888e55f-e571-44a0-8eee-8940fbe1bff4")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "2d919583-fcc0-4b62-99e3-75d0e24b918d")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "19d2bf3b-e49c-4f60-8adb-1a194e927a41")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 2.5 0 90)
+			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "7a928dab-5809-48b0-8fb4-9569000661f7")
 			(effects
 				(font
 					(size 1 1)
@@ -368,17 +359,6 @@
 			(uuid "6e45658c-a179-43ac-9eba-037dc0cd91db")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
@@ -3989,7 +3969,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "179b4ed8-aab3-41b7-b222-d1c298be748e")
 		(at 402.4 127.1 180)
@@ -4052,91 +4032,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "16b523da-af26-4073-aff1-2ac1baa42582")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "a3b8efa3-aca7-4afb-aca1-99b966c5c662")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "2817fd90-672b-458f-8a6c-5531d1806a43")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "aa94b3a4-bb17-44c5-bfe4-e3ab2f925944")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "27009122-5cd7-4536-97ee-2cd014564e0d")
 		)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "2349b109-805b-46fe-99fe-756276575315")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "faa4bb95-f457-4a12-ad74-e99acaf28349")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "2a75c217-c3dd-4262-84dd-3553d30d08c3")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "ad91583c-bc7e-4e44-bf49-7ad8d3d02f68")
 			(effects
 				(font
 					(size 1 1)
@@ -4165,17 +4136,6 @@
 			(uuid "8f629f7a-685b-4af5-ac1f-032314ceb3d3")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Relay_THT:Relay_DPDT_FRT5"
 		(layer "F.Cu")
@@ -5017,7 +4977,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "1f25b433-1313-4aeb-af6e-70eb094f3a7f")
 		(at 578.799944 171.95)
@@ -5080,91 +5040,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "52f4207a-70f2-4938-9e61-fbec27f2fd70")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ec441461-65e9-4ea5-9134-b11cffc52163")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "3e9ebbd4-c949-461f-986a-69722db356d6")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "3d68b8a7-5d6d-4006-b2d2-e52d6b0e288c")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "6ab6f7c8-c04e-415b-b8a9-0f8c71b4d856")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "13f0d19d-1943-47cb-bffd-813873d1bf33")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "682c44b6-9452-41c4-9f48-8d112c496b5b")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "d8e8304e-d5e5-4047-a044-91c3a95dc2a3")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "883fcaec-d445-4e1b-be0b-3d64a12fa8b3")
 			(effects
 				(font
 					(size 1 1)
@@ -5193,17 +5144,6 @@
 			(uuid "7247ca7e-565a-41ea-8f06-b28f5d0ff9d1")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "TestPoint:TestPoint_THTPad_1.0x1.0mm_Drill0.7mm"
 		(layer "F.Cu")
@@ -15838,7 +15778,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "4930cdde-a629-47cb-bbeb-00fe33eaacbf")
 		(at 423.2 121.25 -90)
@@ -15901,91 +15841,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "16412fe3-57df-4e7e-b802-4500ada474b5")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "e1e17729-17bb-4a8a-88ea-034221af8ba2")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "22b8e37e-b628-4953-a70b-9b7e9eae1bc6")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "f8bc165d-0265-4b5b-aa47-72b64feb6415")
 		)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "b12efa5a-2544-4c8b-9d95-245d8d7b253d")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "1b047459-3e13-4ea7-b289-e11f0768f8cf")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "51e96b33-3d3d-4d45-abf5-408c7209175a")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "1fe06da5-855c-42f9-93ab-dbb9905b1f84")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 2.5 0 90)
+			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "5295d0e9-cd85-4fa0-96a6-b849d2b013fb")
 			(effects
 				(font
 					(size 1 1)
@@ -16014,17 +15945,6 @@
 			(uuid "d938c05e-8c3b-4a13-8df9-2328f34701a4")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm"
 		(layer "F.Cu")
@@ -23916,7 +23836,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "5a28a527-8058-4d33-a758-a8e8200e091e")
 		(at 613.799944 151.95)
@@ -23979,91 +23899,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "9e528cac-b44a-4e78-ad29-0b4f4275eaa4")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "5db8b8e6-b624-4f2f-9c23-d76b48610975")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "f0a31b21-6844-4ed3-9017-17367dc863ee")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "e3213857-a439-4ae4-9f4f-fee197e19c34")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "81c7c9f0-6f9c-41a1-96ee-d0a1f7e7ba65")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "c28ec783-e29a-4b4e-a6f0-acd687e6eae6")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "18980615-bb66-497d-bc5a-588a4f78ce84")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "f4f7e7c9-a074-4704-a33f-cf0f1ea2c72f")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "c7482d2c-ca82-429d-9b32-3e23e5f0324d")
 			(effects
 				(font
 					(size 1 1)
@@ -24092,17 +24003,6 @@
 			(uuid "ea23e930-babc-42d7-af21-f1d8c88284e0")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
 		(layer "F.Cu")
@@ -27044,7 +26944,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "6ce03770-2b95-4c47-b4b5-5b1ea4f554c8")
 		(at 613.799944 116.95)
@@ -27107,91 +27007,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "64545efa-fba2-45c9-bf68-1c025ac114df")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "a53cf7d9-4b66-43e0-a144-c1a3370d7acc")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "84623d68-c16e-4571-ba18-08fa012dfeef")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "777aba66-8f6a-4561-a21c-4b3fab05adc0")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "737f29fc-b56d-450b-b33e-6ffb1d39fcb1")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "71942b92-7aad-48a7-88a9-55bde9ef0a94")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "ccf4ce55-68f0-4ad6-81f7-4b366652e065")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "1c69e26a-da5a-4354-b3cc-145d3867964e")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "989c1eb3-c0ef-4ca2-8a1a-6b5cfd083d15")
 			(effects
 				(font
 					(size 1 1)
@@ -27220,17 +27111,6 @@
 			(uuid "efdc47eb-fbc2-400a-8c27-8b83786b32ef")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Library:BP5293-50_ROHM_SIP-3"
 		(layer "F.Cu")
@@ -27504,7 +27384,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "6ddb746b-c4da-4714-b1a7-7f7d31b38102")
 		(at 613.799944 161.95)
@@ -27567,91 +27447,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "7be1ee41-b5fe-4c8d-ba31-e44058175306")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "05f04d56-62e6-4b6b-9633-4bcec1e938ab")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "b24c801f-d640-40ef-bb55-22bda6f71914")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "2937734c-b09a-4a4e-8f0d-2ab784407920")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "6b0c213b-9a7f-45ef-aa2c-063a5428b10d")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "6c9c92ff-770b-4632-9222-68c465e3c634")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "d261f425-b35b-46c5-8d19-26e6ba3f909c")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "3fbe2a70-ef47-45dd-815d-2b9ad56eb107")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "7a063492-35f9-417d-9f62-526d7cf8cd72")
 			(effects
 				(font
 					(size 1 1)
@@ -27680,17 +27551,6 @@
 			(uuid "6b0863ff-39fa-4f4a-a3fe-250f9bd7dda0")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Inductor_SMD:L_12x12mm_H8mm"
 		(layer "F.Cu")
@@ -32458,7 +32318,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "840701dd-653e-4387-b9af-3cc65b79b0e8")
 		(at 346.4 123.05)
@@ -32521,91 +32381,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "392eab20-9d5c-48fb-b058-76a6ea2b78a2")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "17b39c3e-055a-4e95-9728-3055a1944848")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "040a140c-320c-47be-bed5-ab093fb3a49f")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "dd26bac5-fa25-47df-a2f0-4d7f9951548d")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "a32174a3-1fe8-48e3-8cb2-ebca95d5fcef")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "fb976bb2-0316-428c-b4fb-d3175124bf5d")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "7b3a62a0-f0c2-4f72-9f59-af89d467a2f7")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "56499f34-3e54-49de-b941-2b7793fb2d8a")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "72db2839-061f-449c-b5e4-94578fe2bf54")
 			(effects
 				(font
 					(size 1 1)
@@ -32634,19 +32485,8 @@
 			(uuid "1afe8545-8397-4a65-88e0-cc52ff7da514")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "848ffbb1-5b5f-421d-bded-9b325826f10e")
 		(at 386.25 122.15 90)
@@ -32709,91 +32549,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "20980307-694a-412f-b1b1-a897a34936cd")
 		)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "689388b6-7cd7-4ada-b9ec-73aee5c9207c")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "7b3a9c24-444f-4a31-b116-25992dd16ad7")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "574bd743-a9ce-474f-8f8b-1d36abab3b91")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "25ef6372-1cc6-4e7a-a7da-ac965131b763")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "df1189f2-b37b-4cc0-9a4f-4b32b06c986f")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "25240d87-45b8-4fa8-9694-12f67bba5132")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "3e2c4634-5963-4d77-ac2a-366103f5fa73")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 2.5 0 90)
+			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "7f83e63a-0ac7-4ecd-8632-5fa37de7f95a")
 			(effects
 				(font
 					(size 1 1)
@@ -32822,17 +32653,6 @@
 			(uuid "8d75b6be-254f-41db-8715-98d27355e36c")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm"
 		(layer "F.Cu")
@@ -33356,7 +33176,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "8750c968-bf34-4b1f-98dc-effb1187a87a")
 		(at 613.799944 106.95)
@@ -33419,91 +33239,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "8a29a17a-9cac-4224-81c5-9a934d6fa7d8")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "64333caf-83c1-4b31-8248-ec1ccdbcf016")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "d223fbee-2062-414d-8e92-7642700c9bdb")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "41469a9f-2d20-4891-8cfb-531117141729")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "f1be15e1-5385-4300-b494-e49985c84bf5")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "9dc18542-e2c4-4f1f-8db6-4997dac99364")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "b5c45722-74c8-4cf6-bf4a-844658b9e791")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "6a923780-ae4a-4fdd-9a3b-21733d0f980c")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "7a2f488f-ea0e-43d2-897e-3317be270588")
 			(effects
 				(font
 					(size 1 1)
@@ -33532,17 +33343,6 @@
 			(uuid "b1229800-6014-440b-ac5e-61ffd11884d3")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 		(layer "F.Cu")
@@ -36541,7 +36341,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "959c5f09-e8a6-4a0c-b15f-c3126494580a")
 		(at 380.35 147.55)
@@ -36604,91 +36404,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "b57d5ada-86f4-433f-8b98-1975b90a71b0")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "6674fddc-2bcb-4a15-ac69-215576072a0f")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "b05308c8-811c-42f8-b35f-aa4ae9d3b8f3")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "db5330b0-02b2-48fe-a1fc-5e26bc9afaf4")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "d0a1f0a6-a534-4142-a411-c4b7ddba7afc")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4e5a38c0-b384-40f1-923f-2245bdeb8ba4")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "06366734-57db-496e-bae0-4d796bc7649f")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "a1de57f3-f4c6-48f3-9c6e-d85eb612fb2f")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "e9c15e01-b99c-4256-a093-3f7434907602")
 			(effects
 				(font
 					(size 1 1)
@@ -36717,17 +36508,6 @@
 			(uuid "9e1340a6-4cc2-4181-a505-66ff4930ec3b")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
@@ -39258,7 +39038,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "9d037e19-fbae-4ca2-b183-38b18652830c")
 		(at 396.2 150.2)
@@ -39321,91 +39101,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "94aa80b6-f5c8-4166-909a-177cf6be5fc8")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "c21bf057-9724-45ce-a6bd-3904ee742416")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "7c0e78f0-0842-4794-86b7-0982ce092d4d")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "fa6de962-24b6-4f7c-b747-37526acaa6d3")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "619c8b13-6cf4-44aa-a690-decd5a53c997")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "3e99f679-6e46-411b-89ee-39719d0ac050")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "78ee4aeb-44ff-44a2-8f75-b9ff331aa40c")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "7fedd03c-e1a8-4c36-9d42-e49f192b5ef1")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "bc268f6d-2ddd-4668-8f28-cd5fce3a14a2")
 			(effects
 				(font
 					(size 1 1)
@@ -39434,17 +39205,6 @@
 			(uuid "7b537768-58d8-46ac-8542-79cb79e26b59")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
@@ -51203,7 +50963,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "cbdd01fd-ad37-4331-9ed5-2571ea251346")
 		(at 361.9 139.5 90)
@@ -51266,91 +51026,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "92236663-9872-4706-b291-26e0b11abfe8")
 		)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "5c60bb86-5a39-49b4-90ff-8e8c9062d6d2")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "522d4b2f-c53e-4430-aea6-31690d42c601")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "30dcb4ac-3139-41a0-8844-51d413213868")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "a26b96d4-8a4d-40af-92ce-e234fbd17b96")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "6a9b6cc5-9271-450c-af72-bfbad677dde5")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "1de1c079-d4dd-48c4-96a3-92850b46ca9c")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "4352b30b-7dbe-4967-941d-a61f29ba327b")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 2.5 0 90)
+			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "df4007e8-7ee6-4202-9b53-dd01eea3b267")
 			(effects
 				(font
 					(size 1 1)
@@ -51379,17 +51130,6 @@
 			(uuid "96018dd2-9b70-41ed-820b-2801da598d91")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 		(layer "F.Cu")
@@ -53325,7 +53065,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "d331662c-d5a8-4b01-8b52-6efad4d4f9c7")
 		(at 643.799944 116.95)
@@ -53388,91 +53128,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "065f5df4-7fc2-4848-99b9-be80b2b103d3")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "874df6bf-3f07-443a-b293-8e6aa93f0fda")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "f9bafb55-f9aa-4361-86a1-65c48f7ee846")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "bb50415d-ccbe-455c-992b-0b8c663af8fe")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "7ba5382d-4ea1-4f86-8e57-8d9e5db4b3b6")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "47bba353-7473-446a-99e1-8e46d929d856")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "d2917051-b03d-4950-84e6-6187f305bdea")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "ca078b78-4cb7-447a-8f57-c04c16b33c72")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "9b8ad288-4bca-4199-b715-dc9aa101a8cf")
 			(effects
 				(font
 					(size 1 1)
@@ -53501,17 +53232,6 @@
 			(uuid "d8035897-8812-4d2a-9d84-8ef1d2a910e6")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "MountingHole:MountingHole_3.2mm_M3"
 		(layer "F.Cu")
@@ -55044,7 +54764,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "d437efb1-5a6a-427a-bc5c-d79e9a926746")
 		(at 643.799944 161.95)
@@ -55107,91 +54827,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "8022dd95-e906-4bc5-967d-8de1e0792e00")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "cef38872-fe3a-4bea-87c8-b63b79925314")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ce1408cd-f1a3-481e-b53c-fe618026cfea")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "6b6c0f71-8ab8-431e-b2af-85547341f2a4")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "83099f2e-82af-4ff5-86ab-6d4fadd851c9")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "289cc8a8-d380-4b08-9ec0-2a8e03df4dc9")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "595f2b7b-297a-4b7b-9a05-0aba75da7a46")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "78a3a4b1-3e33-4063-abb3-e311e256f635")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "412de593-c5d6-47e3-a47d-49acfa672026")
 			(effects
 				(font
 					(size 1 1)
@@ -55220,17 +54931,6 @@
 			(uuid "58ff6008-c26b-4c19-90b3-a111bba383bd")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
@@ -57577,7 +57277,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "e129daff-e0cf-4f20-9a03-290ced9edeb9")
 		(at 366.9 113.8 180)
@@ -57640,91 +57340,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "246850aa-8a26-4384-bd64-69b63e6544fc")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "5423ad27-89fa-490f-b5fe-991b7d38cf59")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "c1aa1563-6714-4e81-8aa7-a2f8848d3f11")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "be878274-44e0-44ed-bb27-dbcad8b82bc5")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "b2420c76-5ee4-4292-b8e4-f49af9ae6875")
 		)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4eb4cbab-6812-4666-9e99-e81e916afb39")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "0f5d85a1-ba80-4dbc-b79d-b563ea661341")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "26996c05-690e-43b0-a199-a52725b8eb92")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "3da265b1-3824-433d-be10-ba6ee937948b")
 			(effects
 				(font
 					(size 1 1)
@@ -57753,17 +57444,6 @@
 			(uuid "2d47a2e1-f8b3-4959-9369-2510b15f3376")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
 		(layer "F.Cu")
@@ -58236,7 +57916,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "e6b02005-7942-419f-9ae7-b9eac6ee194e")
 		(at 578.799944 71.95)
@@ -58299,91 +57979,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "40d6eb78-6b8f-42b5-a8c5-91397f5bfc13")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4aaba890-2fe4-4bdb-b456-1b3ea87c208d")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "0f8c7ba8-0e99-4fb2-b6a6-e2b82dca5622")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "8136270e-bfbe-4e5a-9689-80962cee522d")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "3ee4f3bf-84bd-4871-a4a0-1150652c9ef9")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "a86e0222-62bd-42dc-a56b-f58dd5b9a137")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "2b68e88f-358f-455f-9c3d-40db4a6507fe")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "77c26010-5935-4b33-b4e0-b7aa71f620bb")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "167ae6f2-6757-46fe-9b99-18ef2258e389")
 			(effects
 				(font
 					(size 1 1)
@@ -58412,17 +58083,6 @@
 			(uuid "cb9990e7-d9e5-4799-aa66-f0412ad976b9")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
@@ -64043,7 +63703,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "efde6cc5-0be3-4ae4-8290-7dcac57f5988")
 		(at 643.799944 216.95)
@@ -64106,91 +63766,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "057af183-84c6-4567-9eb3-68a636f1ae9b")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "655fa811-5161-4896-8c96-8a847eab074a")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "abaabf3d-91b3-41b7-8207-7c95e4d5fc12")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "061cb97b-4c5f-40c8-840d-4dfb1fc3a6d5")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "6d9f3f8c-e564-45c8-9ff5-30c49e46c311")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "a602cfb8-0d8c-41b1-bca8-1fc9dc1a9b3a")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "6601df13-f60b-4eff-89b1-e305e157aed2")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "991fdae7-91fe-43e3-873a-ad8e59bdba54")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "91361e03-aa4f-49af-8f1f-7fa556b26a64")
 			(effects
 				(font
 					(size 1 1)
@@ -64219,17 +63870,6 @@
 			(uuid "3f4b609e-b937-409c-bdd1-9b72aada4d71")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical"
 		(layer "F.Cu")
@@ -67360,7 +67000,7 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "f370a55e-9c88-4571-a4dd-78ff9df8413e")
 		(at 578.799944 126.95)
@@ -67423,91 +67063,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "73ffc481-35c6-4e29-9334-59e01799de9d")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "6bfdc21f-bce9-4aa5-89fb-5ae4d6d1b202")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "099011ea-3be3-442a-8eea-f6ad7d51c7d9")
 		)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "c9cc5c2e-63a5-438d-8334-e13cdbd34a18")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4e80921e-24df-4560-9fbd-5a26ee7c35d7")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ec88ab6b-d610-4509-8798-c91c012a316d")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "a897238e-642f-46bc-9a77-e046bda5f190")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "039b9347-088f-4b99-bb8a-9afbbbdf364a")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "10aa5a06-d3da-4f00-b6a7-397f110b1cc4")
 			(effects
 				(font
 					(size 1 1)
@@ -67536,19 +67167,8 @@
 			(uuid "be436993-701e-41fc-9ca2-014e21e7003a")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
-	(footprint "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm"
+	(footprint "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
 		(layer "F.Cu")
 		(uuid "f4627b67-fa0b-45d8-9938-34c60bc6dc12")
 		(at 375.15 139.7 90)
@@ -67611,91 +67231,82 @@
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start 5.12 -1.37)
-			(end 5.12 -1.033)
+			(start 0.38 -1.87)
+			(end 4.62 -1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "97f03a75-ca82-4e05-af1a-ed94326b0516")
 		)
 		(fp_line
-			(start -0.12 -1.37)
-			(end 5.12 -1.37)
+			(start 0.38 1.87)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "af22f237-a323-4822-887c-9502c68124b9")
 		)
 		(fp_line
-			(start -0.12 -1.033)
-			(end -0.12 -1.37)
+			(start 0.38 -1.87)
+			(end 0.38 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "a1ee2ff9-cc74-441f-9d67-a66aa350a8c0")
 		)
 		(fp_line
-			(start 5.12 1.033)
-			(end 5.12 1.37)
+			(start 0.38 1.2)
+			(end 0.38 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ce43785d-195f-4db9-8596-4f94dd539982")
 		)
 		(fp_line
-			(start 5.12 1.37)
-			(end -0.12 1.37)
+			(start 4.62 -1.87)
+			(end 4.62 -1.2)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ba5e8677-0ce9-4414-a26b-89a058bb96fb")
 		)
 		(fp_line
-			(start -0.12 1.37)
-			(end -0.12 1.033)
+			(start 4.62 1.2)
+			(end 4.62 1.87)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "8dc2a28a-96ac-4eba-b46a-707e474db0ca")
 		)
 		(fp_rect
-			(start -1.05 -1.5)
-			(end 6.05 1.5)
+			(start -1.05 -2)
+			(end 6.05 2)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "cf99e4f3-da63-4030-81c0-22612084578a")
 		)
 		(fp_rect
-			(start 0 -1.25)
-			(end 5 1.25)
+			(start 0.5 -1.75)
+			(end 4.5 1.75)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "610e9d45-d85a-44de-8f6e-1bee818d32e4")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 2.5 0 90)
+			(at 2.5 0 0)
 			(layer "F.Fab")
-			(uuid "28cacef3-0a25-45ed-9713-d1f4a5cd066a")
 			(effects
 				(font
 					(size 1 1)
@@ -67724,17 +67335,6 @@
 			(uuid "8ff2eb60-ae10-47ca-8470-7b4a3d5b4399")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
 		(layer "F.Cu")
