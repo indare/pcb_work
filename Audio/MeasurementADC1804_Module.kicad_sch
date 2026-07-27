@@ -9716,16 +9716,6 @@
 		)
 		(uuid "37ac762e-d967-4d4c-8bc4-5570a6314700")
 	)
-	(label "AUDIO_L_IN"
-		(at 27.94 226.06 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "390bbe9f-9c78-468a-89ab-1248c642d96e")
-	)
 	(label "ADC_BCK"
 		(at 207.01 46.99 0)
 		(effects
@@ -9765,16 +9755,6 @@
 			(justify left)
 		)
 		(uuid "3db970e4-c192-44b8-9c51-7bd7afd3291b")
-	)
-	(label "AUDIO_R_IN"
-		(at 20.32 226.06 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "3e7c1122-3fb4-43b9-bc76-37d4d4e67569")
 	)
 	(label "TP_SCL"
 		(at 194.31 184.15 180)
@@ -10266,6 +10246,16 @@
 		)
 		(uuid "9704a959-0a6b-479f-9852-62c420c1e007")
 	)
+	(label "AUDIO_L_IN"
+		(at 27.94 226.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "97f18620-9777-4ea8-8d66-2203dab1b96c")
+	)
 	(label "+3V3_A"
 		(at 331.47 68.58 90)
 		(effects
@@ -10355,6 +10345,16 @@
 			(justify right)
 		)
 		(uuid "c30eff4e-b26f-4e81-a5b0-309e6954e2ea")
+	)
+	(label "AUDIO_R_IN"
+		(at 20.32 226.06 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c70e2390-b13d-4804-89e0-c7fdb50493b4")
 	)
 	(label "A_GND"
 		(at 133.35 193.04 180)
@@ -10696,6 +10696,17 @@
 		)
 		(uuid "ff888934-757d-414a-b9b4-c31379bd725c")
 	)
+	(hierarchical_label "AUDIO_L_IN"
+		(shape input)
+		(at 25.4 219.71 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify left)
+		)
+		(uuid "06fdb8ca-0f57-4ff3-8280-bd6a9b9adef0")
+	)
 	(hierarchical_label "-15V_A"
 		(shape input)
 		(at 102.87 223.52 180)
@@ -10729,17 +10740,6 @@
 		)
 		(uuid "40851dd6-e734-4369-a799-fc985f53e1ad")
 	)
-	(hierarchical_label "AUDIO_L_IN"
-		(shape input)
-		(at 25.4 219.71 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "59ebb4e1-70ca-4329-9562-20b369c01caa")
-	)
 	(hierarchical_label "ADC_GND_IN"
 		(shape input)
 		(at 66.04 219.71 0)
@@ -10771,7 +10771,7 @@
 			)
 			(justify right)
 		)
-		(uuid "a497c45d-bc7b-4df9-9e70-ec27201ccc8c")
+		(uuid "b7d715cc-f6fd-4d1d-bbf3-c2efa2792a31")
 	)
 	(symbol
 		(lib_id "Device:C")
