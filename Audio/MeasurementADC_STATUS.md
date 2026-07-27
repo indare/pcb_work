@@ -1,8 +1,88 @@
 # MeasurementADC 進捗メモ
 
-最終更新: 2026-07-26（U710 XC8107 置換・旧注記整理。初号は LCD 常時 ON でも可）
+最終更新: **2026-07-27**（PCB 配置・VCOM/VIN 幹線の WIP を反映。他 Cursor agent 引き継ぎ用）
 
 Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM1804 + Pico2 + WAVESHARE LCD）。
+
+---
+
+## 他エージェントへの引き継ぎ（2026-07-27）
+
+### いまどこまでか（一言）
+
+回路図・FP・部品調達は概ね完了。**親 PCB `AudioCase.kicad_pcb` で MeasurementADC の OPA×3＋A701 周辺を配置し、VCOM/VIN 幹線を引き始めた WIP。** ADC_GND 星点配線・DRC クリーン・電源/デジタル配線はこれから。
+
+### 触るファイル
+
+| ファイル | 役割 |
+|---|---|
+| `Audio/AudioCase.kicad_pcb` | **主戦場**（親 PCB） |
+| `Audio/MeasurementADC1804_Module.kicad_sch` | 計測モジュール回路図 |
+| `Audio/AudioCase.kicad_sch` | 親・階層シート |
+| `Audio/route_preview_opamp_adc.png` | OPA→ADC 配線プレビュー（参考） |
+| `Audio/MeasurementADC_ORDER.md` | 発注・在庫・FP メモ |
+| 本ファイル | 方針・残タスク |
+
+### 最新コミット（main）
+
+- `de87cf0` — wip: OPA 周辺配置と VCOM/VIN 配線を途中保存
+- `76ee512` — wip: 配線作業前の状態を退避
+- `d404fbb` — 配置＋GND ベタ
+
+### PCB 現状スナップショット（2026-07-27 夜）
+
+**配置（概ね OK）**
+
+```
+左: J701/J703(±15V) → U701–U703(OPA) → …
+右寄り: R713–716(47Ω) / C719–720(VCOM bypass) → A701(ADC1804)
+電源デジ: U704–U710 / Pico / LCD（右側〜上）
+```
+
+| 項目 | 状態 |
+|---|---|
+| C719/C720 ↔ A701 VCOM ピン | 約 **9mm**（A701 側へ寄せ済） |
+| R713–716 ↔ A701 VIN ピン | 約 **11mm**（ADC 側へ寄せ済） |
+| U701↔U702 | 近接（入力ブロックまとめ済） |
+| C705(φ5 Disc) ↔ U701 | ボディ隙間 **+**（干渉解消） |
+| **C705 ↔ C707(φ5 電解)** | ボディ **約 −1.3mm 重なり → 要再配置** |
+| C706 ↔ R701 | 接近／重なり気味 → 要確認 |
+
+**配線**
+
+| ネット | 銅（目安） | メモ |
+|---|---|---|
+| `VCOML` | あり（〜40mm 級） | U702 側〜A701 方向。**パッド直結は DRC で要確認** |
+| `VCOMR` | あり（〜55mm 級） | 同上（U703） |
+| `VINL±` / `VINR±` | 各〜11mm | R713–716↔A701 幹線開始。OPA 出力側の接続も要確認 |
+| `ADC_GND` | **ほぼ未配線** | C719/C720 GND 足・A701・NT701 を星点で閉じる必要あり |
+| OPA ローカル（帰還・AUDIO・±15V） | U701/U702 中心に進捗 | U703 もローカルは進んでいる |
+
+**VCOM の正しい理解（取り違え注意）**
+
+- VCOM は **ADC（A701）が出す基準** → 2段目 OPA の **＋入力へ入れる**
+- U702: pin3=`INA+` と pin5=`INB+` を **同一 `VCOML` で短絡** → A701 pad2（＋ C719）
+- U703: 同様に pin3/5 → `VCOMR` → A701 pad5（＋ C720）
+- U701 の pin3/5 は **`GND`**（入力インバータ段）。VCOM ではない
+- OPA 出力（pin1/7）は VCOM ではなく **VIN± 側**（R713–716 経由）
+
+### すぐやる順（PCB）
+
+1. **C705 と C707 を離す**（中心同士 ≥6–7mm 目安、ボディ隙間 ≥0.5mm）
+2. **VCOML/R をパッドまで落とす**（U702/U703 pin3–5、C719/C720、A701）→ DRC 未接続ゼロ
+3. **VIN±**: R713–716 両端（OPA OUT ↔ A701）を閉じる
+4. **`ADC_GND` 星点**: A701 pad14 近傍で C719/C720 GND・NT701 を合流（太め・短く）
+5. 電源デジ配線（MCLK/I2S、±5V_A/+3V3_A、D_GND 太線）→ DRC 全体
+6. C707–C710 極性の最終目視（＋＝3.3k／VCOM 側、ネット上は整合済）
+
+### レビューで出た注意（2026-07-27・3視点）
+
+- 47Ω と VCOM バイパスは **A701 ピン近傍が本命**（OPA 側に置かない）— 配置は寄せ済、配線で完成させる
+- Disc φ5 は SOIC／電解と干渉しやすい → C705/C707 が残課題
+- R701–R712 = **SMD 1206**、THT タクマンは **R713–716**（＋R719）のみ
+- NT701/NT702 の **RefDes と役割は下表どおり（古い図と番号が逆だった）**
+
+---
 
 ## 目的
 
@@ -26,29 +106,31 @@ D_GND   = BP5293 戻り（Pico / LCD）
 
 補足:
 
-- **U710 XC8107AC20MR-G ロードスイッチ**（旧 Q701 AO3401A を置換, 2026-07-26）。`LCD_EN` **High=ON / Low・Hi-Z=OFF**（Active High, VCEH 1.5V min なので Pico の 3.3V で確実に駆動できる）。R717 100k は CE プルダウンなので起動時は LCD OFF がデフォルト。**初号は常時 ON（GP8=High 固定）でも可** — OFF 時の GPIO バックパワー対策は常時 ON なら不要
-- LCD 接続は Interface2（GH 付属ケーブルのメス端）→ 基板側 `PinHeader_1x15_P2.54mm_Vertical`
+- **U710 XC8107AC20MR-G ロードスイッチ**（旧 Q701 AO3401A を置換, 2026-07-26）。`LCD_EN` **High=ON / Low・Hi-Z=OFF**（Active High）。R717 100k は CE プルダウン。**初号は常時 ON（GP8=High 固定）でも可**
+- LCD 接続は Interface2 → 基板側 `PinHeader_1x15_P2.54mm_Vertical`
 - **Pico2: VSYS=`+5V_D`、GND=`D_GND`**（`A_GND` には載せない）
 
 ## GND 方針（Option A: 非絶縁完成）
 
-MCW03 による音声側ガルバニック絶縁は、**計測経路では PD 基準に寄せる**方針で確定。星点は二段。
+計測経路は PD 基準に寄せる。星点は二段。
 
 ```
-OPA / Amp タップ          A701 / LDO
-   A_GND ── NT702 ── ADC_GND     （アナログ星点・A701 近傍）
-                      │
-              MBC2596 IN-/OUT-（実モジュール内共通）
-                      │
-   PD 入口 ◄── NT701 ── D_GND / LCD_GND   （デジタルは太く短く）
+OPA / Amp タップ              A701 / LDO
+   A_GND / GND ── NT701 ── ADC_GND   （アナログ星点・A701 近傍）
+                              │
+                      MBC2596 IN-/OUT-（モジュール内共通）
+                              │
+   PD 入口 ◄── NT702 ── D_GND / LCD_GND   （デジタルは太く短く）
 ```
 
-| Ref | Value | 役割 | Footprint |
-|---|---|---|---|
-| **NT702** | `A_GND-ADC_GND` | アナログ星点（VCOM / OPA / ADC 基準を揃える） | `NetTie:NetTie-2_THT_Pad1.0mm` |
-| **NT701** | `ADC_GND_IN-D_GND` | PD 入口での系統合流 | 同上 |
+| Ref | Value（PCB） | 役割 | Footprint | おおよその位置 |
+|---|---|---|---|---|
+| **NT701** | `A_GND-ADC_GND` | アナログ星点（VCOM / OPA / ADC 基準） | `NetTie:NetTie-2_THT_Pad1.0mm` | A701 近傍（例: 421, 150） |
+| **NT702** | `ADC_GND_IN-D_GND` | PD 入口での系統合流 | 同上 | 電源入口側（例: 669, 57） |
 
-PCB では `D_GND` を太く短く、アナログ入力トレース・NT702 から離す。
+※ PCB 上 NT701 pad2 は現在グローバル `GND`。回路図の `A_GND` ラベルとの対応は配線時に再確認すること。
+
+PCB では `D_GND` を太く短く、アナログ入力トレース・NT701 から離す。
 
 **捨てるもの**: 計測モジュール上での MCW 二次側絶縁（相対スペアナ用途として許容）。  
 **維持するもの**: 本番 Amp/EQ 再生経路の MCW 絶縁（計測タップ以外）。
@@ -63,29 +145,19 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT702 か�
 
 | # | 指摘 | 判定 | 状態 |
 |---|---|---|---|
-| 1 | U707/U706 の LDO 型番がレールと逆 | 妥当 | **済** U706=`LT1763-3.3`→`+3V3_A` / U707=`LT1763-5`→`+5V_A`（SHDN=`+3V3_A`） |
-| 2 | VCOM が 0.1µF シリーズで OPA＋へ（DC経路なし） | 妥当・致命 | **済** VCOM→2段目 OPA の＋直結、デカップは VCOM↔`A_GND` |
+| 1 | U707/U706 の LDO 型番がレールと逆 | 妥当 | **済** |
+| 2 | VCOM が 0.1µF シリーズで OPA＋へ | 妥当・致命 | **済** VCOM→2段目 OPA の＋直結、デカップは VCOM↔ADC_GND（C719/C720） |
 | 3 | C707–C710 電解の極性（＋が音側） | 妥当の可能性大 | 要最終目視（＋は 3.3k／VCOM 側） |
-| 4 | Q701 AO3401A が 3.3V GPIO で切れない | 既知・妥当 | **済** U710 XC8107AC20MR-G に置換（2026-07-26）。CE Active High・R717 を CE プルダウンへ転用・C740/C739 追加 |
+| 4 | Q701 AO3401A が 3.3V GPIO で切れない | 既知・妥当 | **済** U710 XC8107（2026-07-26） |
 
 ### 追加指摘 → 対応状況
 
 | 指摘 | 状態 |
 |---|---|
-| `A_GND`─NetTie─`ADC_GND` を 1 点明示 | **済** NT702（A701 近傍） |
-| `ADC_GND_IN`─NetTie─`D_GND`（PD 入口） | **済** NT701 |
-| OPA 各電源に `±15V_A`─100nF─`A_GND` | **済** 入口 C701/C702 ＋ 各 OPA パッケージ |
-| TPS3808 `~RESET` を Open Collector、G33/G50 明記、CT≈20ms | **済**（プロジェクト用シンボル、CT 開放） |
-| SV VDD に 0.1µF | **済**（VDD–GND 直近） |
-| 監視 IC の VDD をレールから分離 | **任意**（初号スキップ可） |
-| ジャンパに FMT（24bit I²S）明記 | 推奨（シート注記拡充） |
-
-### レビューが「できている」とした点（維持）
-
-- ADC1804 → Pico I²S（DATA/BCK/LRCK、GP0–2）
-- ASFL1 12.288MHz ＋シリーズ R、ADC マスタ 48k/256fs
-- TPS3808 OD wire-AND ＋ R53 10k、CT 開放
-- LCD SPI／タッチ I²C、BP5293→Pico VSYS
+| `A_GND`─NetTie─`ADC_GND` を 1 点明示 | **済** **NT701**（A701 近傍）※旧文書の NT702 表記は誤り |
+| `ADC_GND_IN`─NetTie─`D_GND`（PD 入口） | **済** **NT702** |
+| OPA 各電源に ±15V ─100nF─GND | **済** 入口 C701/C702 ＋ 各 OPA パッケージ |
+| TPS3808・SV VDD・FMT 注記など | 概ね済／FMT 注記は残 |
 
 ### ERC
 
@@ -96,35 +168,29 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT702 か�
 ## 終わっていること（要約）
 
 - [x] MeasurementADC 階層を AudioCase に統合
-- [x] 電源ツリー（MBC2596 → LT1763×2、BP5293→デジ）
-- [x] `TPS3808G33DBVR` / `TPS3808G50DBVR`（`~RESET`=open_collector）
-- [x] WAVESHARE-29318 = Interface2・15pin ヘッダ FP
-- [x] VCOM 直結＋デカップ修正
-- [x] OPA ±15V 100nF（共通＋各パッケージ）
+- [x] 電源ツリー・TPS3808・LCD Interface2・VCOM 直結修正
 - [x] GND 星点 NT701 / NT702 ＋ FP 割当
-- [x] Pico GND=`D_GND` 注記修正
-- [x] ERC クリア（ユーザー確認）
+- [x] U710 XC8107 置換・注記整理
+- [x] MBC2596 / ADC1804 実測 FP、手持ち抵抗・Disc FP 割当
+- [x] OPA×3＋入力ブロックの PCB 配置（A701 側へ 47Ω・VCOM bypass 寄せ）
+- [x] VCOML/R・VIN± の幹線を引き始め（WIP コミット済）
 
 ---
 
 ## 終わっていないこと
 
+### PCB（優先）
+
+- [ ] C705↔C707 ボディ干渉の解消
+- [ ] VCOM / VIN / ADC_GND をパッドまで接続し DRC 未接続を消す
+- [ ] MCLK・I2S・アナログ/デジタル電源・D_GND 太線
+- [ ] DRC 全体クリーン（直近 WIP 時点で未接続多数は想定内）
+- [ ] C707–C710 極性の最終確認
+- [ ] U701 Reference シルク位置・電解「+」シルク（任意だが実装向き）
+
 ### レビュー残・仕上げ
 
-- [ ] C707–C710 極性の最終確認（＋＝3.3k／VCOM 側）
-- [x] LCD ロード SW: U710 XC8107AC20MR-G（秋月 131334）に置換。ERC 0/0、ネットリスト確認済
 - [ ] ジャンパ注記に `FMT1=L FMT0=H`（24bit I²S）を追記
-- [x] 古い注記の整理（POWER/DIGITAL の U12–U17/Q1・CT 0.57s → U704–U710 / CT open≈20ms。未使用 AO3401 埋め込みシンボル削除, 2026-07-26）
-
-### フットプリント・基板
-
-- [x] `MBC2596-01` FP（実測: 43×21mm、四隅パッド中心=角から3.5mm、モジュール穴≈φ1.3 → 基板ドリル1.0）`Library:MBC2596-01_TAEJIN_43x21mm`
-- [x] `ADC1804_F_MODULE` FP（実測 56×33）`Library:ADC1804_F_KYOHRITSU_56x33mm` — 親は2.54メス推奨
-- [x] R713–R716（47Ω）/ R719（10k）→ タクマン1/4W `R_Axial_DIN0309_…_P12.70mm_Horizontal`
-- [x] R717（100k）/ R718（33Ω）→ 中華1/4W `R_Axial_DIN0411_…_P12.70mm_Horizontal`
-- [x] 100nF ×18 / 10nF ×4 → 村田 RDE・50V X7R（P5.0mm）`C_Disc_D5.0mm_W2.5mm_P5.00mm`
-- [x] 残パッシブ FP 割当 完了（信号系=SMD精密 / デカップ=THTセラ / バルク=電解）
-- [ ] PCB 配置・配線・DRC（D_GND 太線・NT702 近傍レイアウト）
 
 ### 検証・ソフト
 
@@ -138,30 +204,26 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT702 か�
 | ファイル | 役割 |
 |---|---|
 | `MeasurementADC1804_Module.kicad_sch` | 計測モジュール回路図 |
-| `AudioCase.kicad_sch` | 親（階層シート） |
+| `AudioCase.kicad_sch` / `AudioCase.kicad_pcb` | 親 |
 | `MeasurementADC1804.kicad_sym` | ADC1804_F + OPA1656 |
-| `MeasurementADC_Extras.kicad_sym` | LT1763 / MBC2596 / ASFL1 / LCD / TPS3808G33/G50 |
+| `MeasurementADC_Extras.kicad_sym` | LT1763 / MBC2596 / ASFL1 / LCD / TPS3808… |
 | `Library.pretty/` | カスタム FP |
 | `sym-lib-table` / `fp-lib-table` | ライブラリ登録 |
 
 参考: [共立 ADC1804_F](https://www.kyohritsu.com/eclib/DIGIT/KIT/adc1804f.pdf) / [TPS3808](https://www.ti.com/lit/ds/symlink/tps3808.pdf)
 
-発注・在庫: [`MeasurementADC_ORDER.md`](MeasurementADC_ORDER.md)（秋月 / 共立エレショップ・2026-07-16 調査）
-
----
-
-## 次にやるとよい順
-
-1. **MBC2596 FP 済**。次は ADC1804 実物到着後に FP → PCB レイアウト。
-2. C707–C710 極性確認
-3. PCB（D_GND 太線・星点配置）。U710 は SOT-23-5、C740(CIN)/C739(CL) を VIN/VOUT–VSS 間最短で配置
-4. ファーム: `LCD_EN` は High=ON。初号は常時 ON でよい。OFF 運用するなら SPI/タッチ線も Low/Hi-Z に
-5. Pico ファーム（簡易スペアナ）
+発注・在庫: [`MeasurementADC_ORDER.md`](MeasurementADC_ORDER.md)
 
 ### MBC2596-01 実装メモ（2026-07-23）
 
-- 外形 **43×21mm**。四隅 I/O（IN+/IN-/OUT+/OUT-）。
+- 外形 **43×21mm**。四隅 I/O（上面: 左上 IN+ / 右上 OUT+ / 左下 IN- / 右下 OUT-）。
 - パッド中心 = **各辺から 3.5mm** → ピッチ **36.0 × 14.0mm**。
-- モジュール穴 ≈ **φ1.3mm**。基板側ドリル **1.0mm**（2.54ヘッダピン貫通想定）。
+- モジュール穴 ≈ **φ1.3mm**。基板側ドリル **1.0mm**。
 - FP: `Library:MBC2596-01_TAEJIN_43x21mm`
 - 出力は **6.6–6.8V** にトリマ調整（LT1763 前段）。
+
+### KiCad / MCP（作業環境メモ）
+
+- プロジェクト dir: `Audio/`
+- macOS では native `kicad-cli`、KiCad API 有効時は MCP（`kicad-mcp-pro`）利用可
+- 古い `~AudioCase.kicad_pcb.lck` が残ると編集阻害 → 実プロセス無しなら削除可
