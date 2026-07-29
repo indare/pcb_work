@@ -45,7 +45,7 @@ MCW03 専用化用の予備基板あり。
 
 **千石小計 ≒ ¥2,240**
 
-- 50V X7R ±10%、リード間隔 **P5.0mm**。FP=`Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm`（実寸 L4.0×W3.5×T2.5 max / P5）
+- 50V X7R ±10%、リード間隔 **P5.0mm**。FP=`Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm`（L4.0×W3.5×T2.5 max / F=5 / W1=6。上面視は L×T。3D=`Library.3dshapes/…step`）
 - 必要数は 100nF×18 / 10nF×4。残りは予備・他基板用。
 
 ---

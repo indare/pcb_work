@@ -951,6 +951,158 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:Fuse"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "F"
+				(at 2.032 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Fuse"
+				(at -1.905 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Fuse"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "fuse"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "*Fuse*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Fuse_0_1"
+				(rectangle
+					(start -0.762 -2.54)
+					(end 0.762 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Fuse_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:NetTie_2"
 			(pin_numbers
 				(hide yes)
@@ -5183,7 +5335,7 @@
 		)
 		(uuid "a948393a-e8c2-4fdf-9207-c38578b7c254")
 	)
-	(text "右チャンネル"
+	(text "左チャンネル"
 		(exclude_from_sim no)
 		(at 17.78 91.44 0)
 		(effects
@@ -5193,17 +5345,6 @@
 			(justify left bottom)
 		)
 		(uuid "ad5344b1-6f07-49cf-b638-79755f110f83")
-	)
-	(text "右チャンネル"
-		(exclude_from_sim no)
-		(at 17.78 91.44 0)
-		(effects
-			(font
-				(size 2.54 2.54)
-			)
-			(justify left bottom)
-		)
-		(uuid "ad5344b1-6f07-49cf-b638-79755f110f84")
 	)
 	(text "PATCH_V2"
 		(exclude_from_sim no)
@@ -5260,7 +5401,7 @@
 		)
 		(uuid "f03f9301-f333-4c9d-9dd7-2d4523d32f81")
 	)
-	(text "階層ポート / 左チャンネル"
+	(text "階層ポート / 右チャンネル"
 		(exclude_from_sim no)
 		(at 16.51 18.288 0)
 		(effects
@@ -5282,6 +5423,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0f84ed2c-0ee5-4bef-91fc-3c0636d8d895")
+	)
+	(junction
+		(at 63.5 217.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "11d13801-d243-4666-9ba9-7b9946db6780")
 	)
 	(junction
 		(at 340.36 76.2)
@@ -5368,6 +5515,12 @@
 		(uuid "405d26e4-47b6-47fd-864d-07d486417ec9")
 	)
 	(junction
+		(at 152.4 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4b784997-9286-40fb-94b5-c8e7be00c7ec")
+	)
+	(junction
 		(at 135.89 193.04)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5384,6 +5537,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4e0f6f90-5ef3-4ff5-ae68-811f90a8613f")
+	)
+	(junction
+		(at 247.65 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4ed2ff88-9c9a-4b8d-93f4-bb376b8f26f7")
 	)
 	(junction
 		(at 302.26 59.69)
@@ -5506,16 +5665,16 @@
 		(uuid "80e0f178-7b0f-4749-ade4-9dc6a8509ae4")
 	)
 	(junction
-		(at 152.4 58.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "81a903b1-bf7b-49d0-bf7e-85cef6f412ac")
-	)
-	(junction
 		(at 412.75 97.79)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "84643260-0ef5-4bb0-a135-8360a9cb46bd")
+	)
+	(junction
+		(at 66.04 217.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "84803ab0-e816-433d-961d-5a8442707a22")
 	)
 	(junction
 		(at 330.2 134.62)
@@ -5524,16 +5683,22 @@
 		(uuid "84c54a42-8d72-40c3-86a4-2afa834a3eec")
 	)
 	(junction
+		(at 254 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "84e3af1f-609e-4247-9a8d-fffa2e175582")
+	)
+	(junction
+		(at 247.65 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "84fbe243-640b-485a-93da-e000eac0bcb0")
+	)
+	(junction
 		(at 281.94 52.07)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8585e2a9-0f4b-4030-99da-281e8ecebebe")
-	)
-	(junction
-		(at 25.4 226.06)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "85ad7eae-5172-4dd2-94a7-37cfcb564c5d")
 	)
 	(junction
 		(at 74.93 105.41)
@@ -5596,16 +5761,16 @@
 		(uuid "a07992cf-174b-45d7-b3ec-63c8c9d37bda")
 	)
 	(junction
-		(at 63.5 224.79)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a4c747c0-3803-4dda-81c3-dbc43a58e67f")
-	)
-	(junction
 		(at 107.95 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a79bd287-4c5a-4f2e-931c-d541d0627bac")
+	)
+	(junction
+		(at 25.4 226.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a911338d-b0af-40ad-ad2e-452160f8b914")
 	)
 	(junction
 		(at 144.78 185.42)
@@ -5620,6 +5785,12 @@
 		(uuid "aa41920d-bf44-48e2-aea1-846177d95474")
 	)
 	(junction
+		(at 152.4 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ab84c9d5-eb25-485b-85c9-c607c86de039")
+	)
+	(junction
 		(at 41.91 193.04)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5630,6 +5801,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ac820a0a-93b0-42b9-925c-180ed7761252")
+	)
+	(junction
+		(at 254 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ad32bd03-064b-48ab-8bd3-8487e887f872")
 	)
 	(junction
 		(at 81.28 185.42)
@@ -5728,12 +5905,6 @@
 		(uuid "d1721403-fa5c-4e44-b2c5-4521c87cc4de")
 	)
 	(junction
-		(at 152.4 38.1)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d2022fd5-42ca-43ed-aa63-e1fbb5023845")
-	)
-	(junction
 		(at 191.77 73.66)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5744,12 +5915,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d5722937-a146-40d0-b15a-b2cd6f65d1da")
-	)
-	(junction
-		(at 66.04 224.79)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "de06680e-9823-485b-9b1c-2358c01c63dc")
 	)
 	(junction
 		(at 342.9 48.26)
@@ -6229,16 +6394,6 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 224.79) (xy 63.5 228.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "13674073-825e-44d8-9cfd-0e4fae13b407")
-	)
-	(wire
-		(pts
 			(xy 351.79 31.75) (xy 364.49 31.75)
 		)
 		(stroke
@@ -6299,7 +6454,17 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 224.79) (xy 68.58 224.79)
+			(xy 242.57 52.07) (xy 247.65 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1824c305-310c-4054-ba6b-a10d8161865b")
+	)
+	(wire
+		(pts
+			(xy 66.04 217.17) (xy 68.58 217.17)
 		)
 		(stroke
 			(width 0)
@@ -6346,6 +6511,16 @@
 			(type default)
 		)
 		(uuid "1a5fe816-c0cf-4ee8-a401-fac6995a7760")
+	)
+	(wire
+		(pts
+			(xy 152.4 58.42) (xy 157.48 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1bdfaba4-c01d-4cb7-899b-4d9d6c523c91")
 	)
 	(wire
 		(pts
@@ -6429,6 +6604,16 @@
 	)
 	(wire
 		(pts
+			(xy 247.65 41.91) (xy 247.65 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "24ff3ee1-7afa-484d-8d50-a8e62f7530f9")
+	)
+	(wire
+		(pts
 			(xy 429.26 125.73) (xy 429.26 142.24)
 		)
 		(stroke
@@ -6489,7 +6674,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 58.42) (xy 157.48 58.42)
+			(xy 144.78 58.42) (xy 152.4 58.42)
 		)
 		(stroke
 			(width 0)
@@ -6899,6 +7084,16 @@
 	)
 	(wire
 		(pts
+			(xy 254 50.8) (xy 254 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b73312c-6174-44fc-bc2c-e6bdd4fdebb0")
+	)
+	(wire
+		(pts
 			(xy 288.29 50.8) (xy 288.29 52.07)
 		)
 		(stroke
@@ -6999,16 +7194,6 @@
 	)
 	(wire
 		(pts
-			(xy 264.16 52.07) (xy 267.97 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "42ac5c23-a3d5-476a-908f-c82e2c5a01f6")
-	)
-	(wire
-		(pts
 			(xy 135.89 185.42) (xy 144.78 185.42)
 		)
 		(stroke
@@ -7016,6 +7201,16 @@
 			(type default)
 		)
 		(uuid "4339ad50-a6c6-4934-82c9-f057b5345763")
+	)
+	(wire
+		(pts
+			(xy 66.04 227.33) (xy 66.04 228.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "437978aa-367e-4a47-a664-7cf2270326fc")
 	)
 	(wire
 		(pts
@@ -7149,16 +7344,6 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 224.79) (xy 66.04 228.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "517bd1ba-644e-4567-a984-dcb7805a23c9")
-	)
-	(wire
-		(pts
 			(xy 365.76 59.69) (xy 372.11 59.69)
 		)
 		(stroke
@@ -7289,6 +7474,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 217.17) (xy 63.5 228.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5cec8eee-b597-41b6-825c-26b265fd351d")
+	)
+	(wire
+		(pts
 			(xy 130.81 127) (xy 137.16 127)
 		)
 		(stroke
@@ -7379,6 +7574,16 @@
 	)
 	(wire
 		(pts
+			(xy 247.65 41.91) (xy 260.35 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "62b201f7-a1b1-4363-8336-0a63b8902b7f")
+	)
+	(wire
+		(pts
 			(xy 340.36 48.26) (xy 340.36 52.07)
 		)
 		(stroke
@@ -7419,7 +7624,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 219.71) (xy 63.5 224.79)
+			(xy 63.5 212.09) (xy 63.5 217.17)
 		)
 		(stroke
 			(width 0)
@@ -7436,6 +7641,16 @@
 			(type default)
 		)
 		(uuid "68dd2f8b-7f77-4a68-a65d-2bcff2233cc7")
+	)
+	(wire
+		(pts
+			(xy 240.03 41.91) (xy 247.65 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69bd07e7-5581-431f-8ec7-650d20c0146d")
 	)
 	(wire
 		(pts
@@ -7486,16 +7701,6 @@
 			(type default)
 		)
 		(uuid "6dd44155-c8d8-489e-a0c5-2ad4f9c27adf")
-	)
-	(wire
-		(pts
-			(xy 157.48 38.1) (xy 152.4 38.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6efd4c75-3971-4c61-85ea-0ff76326541f")
 	)
 	(wire
 		(pts
@@ -7636,6 +7841,16 @@
 			(type default)
 		)
 		(uuid "79a86db0-0916-4a62-8808-f1d508821b58")
+	)
+	(wire
+		(pts
+			(xy 247.65 50.8) (xy 247.65 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c63849e-41e2-4bbc-96d6-4a9d16ebd317")
 	)
 	(wire
 		(pts
@@ -8149,16 +8364,6 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 41.91) (xy 260.35 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a5d91945-1f32-4606-aabe-de59d05a4ae2")
-	)
-	(wire
-		(pts
 			(xy 194.31 158.75) (xy 196.85 158.75)
 		)
 		(stroke
@@ -8199,7 +8404,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 224.79) (xy 63.5 224.79)
+			(xy 60.96 217.17) (xy 63.5 217.17)
 		)
 		(stroke
 			(width 0)
@@ -8436,6 +8641,16 @@
 			(type default)
 		)
 		(uuid "bbde14b4-a81f-4d35-8ab4-f0d16a3532b1")
+	)
+	(wire
+		(pts
+			(xy 152.4 38.1) (xy 157.48 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd075d3a-7a92-403e-acea-ed6c77b1679a")
 	)
 	(wire
 		(pts
@@ -8909,16 +9124,6 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 58.42) (xy 152.4 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d67ec293-09b8-440f-b514-67810b095795")
-	)
-	(wire
-		(pts
 			(xy 353.06 59.69) (xy 354.33 59.69)
 		)
 		(stroke
@@ -8986,6 +9191,16 @@
 			(type default)
 		)
 		(uuid "daa675fa-00a6-4e7f-ad59-3132657e7ce8")
+	)
+	(wire
+		(pts
+			(xy 254 43.18) (xy 254 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "daebf807-ef7c-4499-91b2-1794622d7d32")
 	)
 	(wire
 		(pts
@@ -9106,6 +9321,16 @@
 			(type default)
 		)
 		(uuid "e1420ae6-b3a6-4719-bad0-d252854c89e2")
+	)
+	(wire
+		(pts
+			(xy 247.65 52.07) (xy 267.97 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2078731-4a58-472a-9207-75e85bf930a8")
 	)
 	(wire
 		(pts
@@ -9249,7 +9474,7 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 219.71) (xy 66.04 224.79)
+			(xy 66.04 212.09) (xy 66.04 217.17)
 		)
 		(stroke
 			(width 0)
@@ -9429,6 +9654,16 @@
 	)
 	(wire
 		(pts
+			(xy 66.04 217.17) (xy 66.04 219.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb4bed18-f8bb-48c8-80b8-31a948dcd949")
+	)
+	(wire
+		(pts
 			(xy 412.75 119.38) (xy 412.75 123.19)
 		)
 		(stroke
@@ -9487,6 +9722,16 @@
 		)
 		(uuid "0213d002-3486-4650-ac3c-035b59bc8785")
 	)
+	(label "VINR-"
+		(at 148.59 30.48 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "05e9ed87-0c5f-43d9-9193-09fe25275ed9")
+	)
 	(label "LCD_RST"
 		(at 247.65 170.18 180)
 		(effects
@@ -9497,15 +9742,15 @@
 		)
 		(uuid "0882126d-9d15-4ea3-be31-ca935d9bd328")
 	)
-	(label "VCOMR"
-		(at 104.14 124.46 180)
+	(label "AUDIO_L_IN"
+		(at 30.48 100.33 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify right bottom)
 		)
-		(uuid "0c64eb3d-801b-4c57-85b9-08cf11a08c84")
+		(uuid "0c85f62e-66b5-43ac-8290-c42d0dc37e1b")
 	)
 	(label "-15V_A"
 		(at 30.48 200.66 180)
@@ -9577,16 +9822,6 @@
 		)
 		(uuid "112216af-db0e-4585-80c0-45d6e090ceeb")
 	)
-	(label "AUDIO_L_IN"
-		(at 33.02 26.67 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "141f18a2-4fb6-4da9-a550-3a72b1e366b8")
-	)
 	(label "ADC_GND"
 		(at 424.18 130.81 0)
 		(effects
@@ -9606,15 +9841,15 @@
 		)
 		(uuid "15d99d5f-73b3-4cd6-9a87-aab582c7959e")
 	)
-	(label "VINL+"
-		(at 148.59 53.34 0)
+	(label "AUDIO_R_IN"
+		(at 33.02 26.67 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right bottom)
 		)
-		(uuid "1eefeeb1-bbfd-4e48-a801-8728200e739c")
+		(uuid "22231354-c191-487d-9e14-65f266cfd018")
 	)
 	(label "PICO_3V3"
 		(at 247.65 144.78 180)
@@ -9696,16 +9931,6 @@
 		)
 		(uuid "324ce284-5dc2-4217-a181-d38d2e7d39c0")
 	)
-	(label "VINR+"
-		(at 147.32 127 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "33b4ce34-79f6-47ad-871b-08bb24623b7f")
-	)
 	(label "ADC_GND"
 		(at 191.77 77.47 0)
 		(effects
@@ -9725,6 +9950,16 @@
 			(justify right)
 		)
 		(uuid "37ac762e-d967-4d4c-8bc4-5570a6314700")
+	)
+	(label "ADC_V_IN"
+		(at 68.58 217.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3855afa3-b3a5-497f-918b-fd74d92b57c7")
 	)
 	(label "ADC_BCK"
 		(at 207.01 46.99 0)
@@ -9806,16 +10041,6 @@
 		)
 		(uuid "44ba8806-812d-4a1b-a1fc-8f0795403bcb")
 	)
-	(label "VINR-"
-		(at 147.32 104.14 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "4e0c3730-6a50-43a6-8405-28d6bb4515d0")
-	)
 	(label "TP_RST"
 		(at 194.31 189.23 180)
 		(effects
@@ -9835,6 +10060,26 @@
 			(justify right)
 		)
 		(uuid "5092b11e-7533-4317-b77a-5fb6b1f3060d")
+	)
+	(label "VCOML"
+		(at 104.14 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "51fdfd97-abd8-49c7-a809-d9bab1f03674")
+	)
+	(label "VCOMR"
+		(at 105.41 50.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "568c1118-4ab0-4cf3-8025-1f34d3db504c")
 	)
 	(label "+15V_A"
 		(at 29.21 185.42 180)
@@ -9876,6 +10121,16 @@
 		)
 		(uuid "5a2f3bbc-55e4-49bb-889d-50c356d88f1b")
 	)
+	(label "AUDIO_R_IN"
+		(at 27.94 226.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5ac9e54d-0b38-4a77-ab66-b1188d2054b5")
+	)
 	(label "+15V_A"
 		(at 148.59 181.61 0)
 		(effects
@@ -9906,26 +10161,6 @@
 		)
 		(uuid "5f595fcf-6339-4e39-ab35-d598b5964b75")
 	)
-	(label "ADC_V_IN"
-		(at 60.96 224.79 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "5fb70ffb-39af-4749-af0c-6445e4806127")
-	)
-	(label "VINL-"
-		(at 148.59 30.48 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "60033f7f-7935-4917-88ba-3004d37679c8")
-	)
 	(label "+3V3_A"
 		(at 449.58 125.73 0)
 		(effects
@@ -9945,6 +10180,16 @@
 			(justify right)
 		)
 		(uuid "684c6276-5ca1-4d62-8773-28d0c298bfc5")
+	)
+	(label "VCOML"
+		(at 104.14 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6bc0e72f-79d2-4c7f-895f-cae2b7e6434a")
 	)
 	(label "LCD_MOSI"
 		(at 194.31 163.83 180)
@@ -9975,6 +10220,16 @@
 			(justify left)
 		)
 		(uuid "6d6395ca-2d4a-421f-bbae-b89a7456becf")
+	)
+	(label "VINR+"
+		(at 148.59 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "70a694cf-20c8-4292-861b-be9542dada38")
 	)
 	(label "ADC_GND"
 		(at 425.45 97.79 0)
@@ -10066,16 +10321,6 @@
 		)
 		(uuid "7ec0476b-0c62-4c2d-aca4-cdb2f11e4347")
 	)
-	(label "VCOMR"
-		(at 104.14 101.6 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "83175d84-41f2-449b-bd55-d5bea907bdbc")
-	)
 	(label "LCD_RST"
 		(at 194.31 176.53 180)
 		(effects
@@ -10125,16 +10370,6 @@
 			(justify right)
 		)
 		(uuid "8908ac99-e281-4714-8141-c08449767e8c")
-	)
-	(label "ADC_GND_IN"
-		(at 68.58 224.79 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "89411ff2-1df0-4c57-a1b1-685c04508ae8")
 	)
 	(label "+5V_D"
 		(at 266.7 127 90)
@@ -10197,7 +10432,7 @@
 		(uuid "8fc78f41-79cb-4703-8360-f4fb12c105d5")
 	)
 	(label "ADC_GND_IN"
-		(at 264.16 52.07 180)
+		(at 242.57 52.07 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10246,16 +10481,6 @@
 		)
 		(uuid "9704a959-0a6b-479f-9852-62c420c1e007")
 	)
-	(label "AUDIO_L_IN"
-		(at 27.94 226.06 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "97f18620-9777-4ea8-8d66-2203dab1b96c")
-	)
 	(label "+3V3_A"
 		(at 331.47 68.58 90)
 		(effects
@@ -10286,15 +10511,35 @@
 		)
 		(uuid "a52c40cb-70d8-467b-9492-20cfc14fe387")
 	)
-	(label "AUDIO_R_IN"
-		(at 30.48 100.33 180)
+	(label "VCOMR"
+		(at 105.41 27.94 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify right)
 		)
-		(uuid "af07ecdd-0cda-4763-8601-cc757a3d2cc2")
+		(uuid "a61499f3-7ee6-40bc-ac40-9452fe5d4820")
+	)
+	(label "VINL-"
+		(at 147.32 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ab64d28c-df72-4908-bca6-dd97fe6e5fe7")
+	)
+	(label "ADC_GND_IN"
+		(at 60.96 217.17 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b095a751-3b9b-4984-ac11-00ed1bcef45a")
 	)
 	(label "+3V3_A"
 		(at 396.24 107.95 180)
@@ -10326,6 +10571,16 @@
 		)
 		(uuid "b95f4a42-a7d9-4e5b-9d96-121494dc2c0a")
 	)
+	(label "AUDIO_L_IN"
+		(at 20.32 226.06 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bd92a0d1-fe15-45c2-ad44-edf44133ca7a")
+	)
 	(label "LCD_RST"
 		(at 247.65 170.18 180)
 		(effects
@@ -10345,16 +10600,6 @@
 			(justify right)
 		)
 		(uuid "c30eff4e-b26f-4e81-a5b0-309e6954e2ea")
-	)
-	(label "AUDIO_R_IN"
-		(at 20.32 226.06 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c70e2390-b13d-4804-89e0-c7fdb50493b4")
 	)
 	(label "A_GND"
 		(at 133.35 193.04 180)
@@ -10466,16 +10711,6 @@
 		)
 		(uuid "d015968d-8565-47fe-8b39-bb6e0a4bf95c")
 	)
-	(label "VCOML"
-		(at 105.41 27.94 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d090718f-b371-49a9-afc4-d03e8d56d1fe")
-	)
 	(label "+3V3_A"
 		(at 402.59 77.47 180)
 		(effects
@@ -10535,16 +10770,6 @@
 			(justify right)
 		)
 		(uuid "daec6444-2717-4bee-b31a-828869318fcf")
-	)
-	(label "VCOML"
-		(at 105.41 50.8 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "dbed9cad-c49f-473b-a819-c00511035ed4")
 	)
 	(label "A_GND"
 		(at 203.2 73.66 0)
@@ -10627,7 +10852,7 @@
 		(uuid "ec295249-bdbc-4707-8427-e514bd596c8a")
 	)
 	(label "ADC_V_IN"
-		(at 257.81 41.91 180)
+		(at 240.03 41.91 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10676,6 +10901,16 @@
 		)
 		(uuid "fae2b033-91a9-46b8-8fa2-c330893a9fa6")
 	)
+	(label "VINL+"
+		(at 147.32 127 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "fb8b4a98-04a5-4036-9ac0-8cca00fa592c")
+	)
 	(label "LCD_VCC"
 		(at 195.58 153.67 180)
 		(effects
@@ -10696,16 +10931,16 @@
 		)
 		(uuid "ff888934-757d-414a-b9b4-c31379bd725c")
 	)
-	(hierarchical_label "AUDIO_L_IN"
+	(hierarchical_label "ADC_V_IN"
 		(shape input)
-		(at 25.4 219.71 0)
+		(at 66.04 212.09 0)
 		(effects
 			(font
 				(size 1.524 1.524)
 			)
 			(justify left)
 		)
-		(uuid "06fdb8ca-0f57-4ff3-8280-bd6a9b9adef0")
+		(uuid "088d7aac-7610-4ccb-9912-e9e28628e57d")
 	)
 	(hierarchical_label "A_GND"
 		(shape bidirectional)
@@ -10720,25 +10955,36 @@
 	)
 	(hierarchical_label "ADC_GND_IN"
 		(shape input)
-		(at 66.04 219.71 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "6e0a082f-c603-4155-9b4c-c39b3ebf9a77")
-	)
-	(hierarchical_label "ADC_V_IN"
-		(shape input)
-		(at 63.5 219.71 180)
+		(at 63.5 212.09 180)
 		(effects
 			(font
 				(size 1.524 1.524)
 			)
 			(justify right)
 		)
-		(uuid "81da0c22-a3ef-4624-948f-68aeed312502")
+		(uuid "35d5942d-07c1-48c8-88e9-4d8d450c280a")
+	)
+	(hierarchical_label "AUDIO_R_IN"
+		(shape input)
+		(at 25.4 219.71 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify left)
+		)
+		(uuid "640b57ad-3709-44ff-8829-8b32a357b082")
+	)
+	(hierarchical_label "AUDIO_L_IN"
+		(shape input)
+		(at 22.86 219.71 180)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right)
+		)
+		(uuid "acbbdafd-6d49-4c1d-8347-ec0331787fe5")
 	)
 	(hierarchical_label "-15V_A"
 		(shape input)
@@ -10750,17 +10996,6 @@
 			(justify left)
 		)
 		(uuid "b7a60c60-894d-4fb6-84da-64b8aff060d5")
-	)
-	(hierarchical_label "AUDIO_R_IN"
-		(shape input)
-		(at 22.86 219.71 180)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify right)
-		)
-		(uuid "b7d715cc-f6fd-4d1d-bbf3-c2efa2792a31")
 	)
 	(hierarchical_label "+15V_A"
 		(shape input)
@@ -11158,7 +11393,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Module:RaspberryPi_Pico_Common_Unspecified"
+		(property "Footprint" "Module:RaspberryPi_Pico_Common_THT"
 			(at 271.78 167.64 0)
 			(hide yes)
 			(show_name no)
@@ -11566,6 +11801,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:Fuse")
+		(at 66.04 223.52 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "16b59238-1063-4915-adc7-1f6580ad1428")
+		(property "Reference" "F701"
+			(at 61.722 223.52 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Fuse"
+			(at 63.754 223.52 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 67.818 223.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 66.04 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Fuse"
+			(at 66.04 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "50dffb63-8010-4175-aaf9-0abe0428f174")
+		)
+		(pin "1"
+			(uuid "9a492854-c724-451a-92b4-8c9ec60991a2")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "F701")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "MeasurementADC1804:OPA1656")
 		(at 81.28 193.04 0)
 		(unit 3)
@@ -11660,6 +11974,85 @@
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "U701")
 					(unit 3)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 140.97 53.34 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1a960558-cea4-4768-bfd7-0ae37d567ef3")
+		(property "Reference" "R714"
+			(at 140.97 50.8 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "47 Takman 1/4W"
+			(at 140.97 55.372 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
+			(at 140.97 53.34 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 53.34 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 140.97 53.34 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "dde7b657-6370-4c5d-95eb-a4168c1b967c")
+		)
+		(pin "2"
+			(uuid "9176776a-ba62-4a47-b8d5-ae49f7160109")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "R714")
+					(unit 1)
 				)
 			)
 		)
@@ -12015,7 +12408,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 72.39 196.85 0)
 			(hide yes)
 			(show_name no)
@@ -12332,7 +12725,7 @@
 				)
 			)
 		)
-		(property "Footprint" "NetTie:NetTie-2_THT_Pad1.0mm"
+		(property "Footprint" "NetTie:NetTie-2_SMD_Pad2.0mm"
 			(at 271.78 52.07 0)
 			(hide yes)
 			(show_name no)
@@ -12492,7 +12885,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 104.14 196.85 0)
 			(hide yes)
 			(show_name no)
@@ -13123,6 +13516,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 140.97 127 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "416031fe-dbb6-41cc-8a08-f9940033d82a")
+		(property "Reference" "R716"
+			(at 139.7 124.46 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "47 Takman 1/4W"
+			(at 140.97 129.54 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
+			(at 140.97 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 140.97 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b5e1154b-1b8c-423f-a241-07f6a39c4144")
+		)
+		(pin "2"
+			(uuid "d1e6eec4-8270-4da6-bf95-5a9f14b5a606")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "R716")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "MeasurementADC1804:OPA1656")
 		(at 62.23 105.41 0)
 		(unit 2)
@@ -13220,6 +13692,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C_Polarized")
+		(at 247.65 46.99 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "5596d274-07b2-4b11-9f37-0d06f9eac37e")
+		(property "Reference" "C741"
+			(at 245.364 44.958 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "47uF 35V"
+			(at 250.19 49.276 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
+			(at 247.65 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 247.65 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "BP5293/MBC2596 input bulk. 15V rail -> 35V rating. Return on ADC_GND_IN."
+			(at 247.65 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c008d9c6-9b40-4b52-a628-5a22d4cec8de")
+		)
+		(pin "2"
+			(uuid "aad2b477-c047-46bc-b665-0bcb6d56cfd6")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "C741")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 40.64 100.33 270)
 		(unit 1)
@@ -13293,87 +13844,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "R701")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 152.4 41.91 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "57583973-c917-4868-8c76-b9b6a8d78ebe")
-		(property "Reference" "C719"
-			(at 151.13 39.624 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100nF"
-			(at 147.066 42.164 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
-			(at 152.4 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 152.4 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "VCOML bypass to ADC_GND"
-			(at 152.4 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "f5d918de-a834-427e-a65a-b8e537ca0b8d")
-		)
-		(pin "2"
-			(uuid "bdfc3f6a-65a5-44df-80d9-b7150b8a6678")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C719")
 					(unit 1)
 				)
 			)
@@ -14210,6 +14680,85 @@
 	)
 	(symbol
 		(lib_id "Device:C")
+		(at 254 46.99 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "68bc57b6-4b15-4857-aa16-05a2ab717c58")
+		(property "Reference" "C742"
+			(at 251.714 44.958 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 256.54 49.276 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
+			(at 254 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 254 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "BP5293/MBC2596 input HF bypass, return on ADC_GND_IN."
+			(at 254 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "61b73bba-a20e-4f4f-8dc4-2d8d36d591d8")
+		)
+		(pin "2"
+			(uuid "3696b22a-ac6a-4ceb-af7d-e87a47addc76")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "C742")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
 		(at 356.87 43.18 0)
 		(unit 1)
 		(body_style 1)
@@ -14282,166 +14831,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "C730")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 152.4 62.23 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "74d01550-40ae-4089-b867-6b89129e4cf4")
-		(property "Reference" "C720"
-			(at 151.13 59.944 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100nF"
-			(at 147.066 62.484 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
-			(at 152.4 62.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 152.4 62.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "VCOMR bypass to ADC_GND"
-			(at 152.4 62.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "0eb911e7-3eb8-4527-af87-17878c8b7f42")
-		)
-		(pin "2"
-			(uuid "ea104bd3-b797-480f-88d4-3fddb34b4e89")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "C720")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 140.97 53.34 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "7503a1e9-d63e-4058-b568-e70f5def9135")
-		(property "Reference" "R714"
-			(at 140.97 50.8 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47 Takman 1/4W"
-			(at 140.97 53.34 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
-			(at 140.97 53.34 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 140.97 53.34 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 140.97 53.34 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "aea9f3a9-060a-4647-8409-a8115793a734")
-		)
-		(pin "2"
-			(uuid "f7df42c1-5d4e-42e1-91b0-a8d3eaea0115")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "R714")
 					(unit 1)
 				)
 			)
@@ -14854,85 +15243,6 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "U710")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 140.97 30.48 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "85253dd7-01c4-46f2-a786-e717454b1af6")
-		(property "Reference" "R713"
-			(at 140.97 27.94 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47 Takman 1/4W"
-			(at 140.97 30.48 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
-			(at 140.97 30.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 140.97 30.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 140.97 30.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "7d5bc7a3-240f-4f68-b841-d708e68e0b74")
-		)
-		(pin "2"
-			(uuid "8ae2dd75-b8ac-4398-8f04-30da7315ea14")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "R713")
 					(unit 1)
 				)
 			)
@@ -15503,7 +15813,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 135.89 196.85 0)
 			(hide yes)
 			(show_name no)
@@ -15584,7 +15894,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 104.14 189.23 0)
 			(hide yes)
 			(show_name no)
@@ -15744,7 +16054,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 135.89 189.23 0)
 			(hide yes)
 			(show_name no)
@@ -15982,7 +16292,7 @@
 				)
 			)
 		)
-		(property "Footprint" "NetTie:NetTie-2_THT_Pad1.0mm"
+		(property "Footprint" "NetTie:NetTie-2_SMD_Pad2.0mm"
 			(at 198.12 73.66 0)
 			(hide yes)
 			(show_name no)
@@ -16025,6 +16335,87 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "NT701")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 152.4 41.91 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b9e2a2aa-2443-45e1-9c28-8a90568d391c")
+		(property "Reference" "C720"
+			(at 151.13 39.624 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 147.066 42.164 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
+			(at 152.4 41.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 41.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "VCOMR bypass to ADC_GND"
+			(at 152.4 41.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "131acf9a-6a08-4b84-8cd3-731662295cfc")
+		)
+		(pin "2"
+			(uuid "b4b79a8b-e665-410e-9271-6bb91190a67f")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "C720")
 					(unit 1)
 				)
 			)
@@ -16541,85 +16932,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 140.97 104.14 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "cbba8a99-6540-426a-a4a2-08a755d39a23")
-		(property "Reference" "R715"
-			(at 139.7 101.6 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47 Takman 1/4W"
-			(at 140.97 106.68 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
-			(at 140.97 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 140.97 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 140.97 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "056fb471-1f4c-4db3-805c-48ed8c5597b2")
-		)
-		(pin "2"
-			(uuid "24d389ca-e3cd-4988-866f-ceb266efc8ca")
-		)
-		(instances
-			(project "AudioCase"
-				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "R715")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "MeasurementADC1804:OPA1656")
 		(at 119.38 127 0)
 		(unit 2)
@@ -16801,6 +17113,85 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "U708")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 140.97 30.48 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "dbe1a862-3d7d-4bfa-89c5-e905123fbd78")
+		(property "Reference" "R713"
+			(at 140.97 27.94 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "47 Takman 1/4W"
+			(at 140.97 32.512 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
+			(at 140.97 30.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 30.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 140.97 30.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "25eb72d4-d5eb-4e35-a36b-49252998eaa9")
+		)
+		(pin "2"
+			(uuid "5ac03217-ea5b-4944-81d4-71239fa7d20a")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "R713")
 					(unit 1)
 				)
 			)
@@ -17222,8 +17613,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 140.97 127 270)
+		(lib_id "Device:C")
+		(at 152.4 62.23 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -17231,29 +17622,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "e2c5d1f9-a5c6-497b-9801-d26623a187f0")
-		(property "Reference" "R716"
-			(at 140.97 124.46 90)
+		(uuid "e3229353-b1c1-46c2-9079-614db9cdf033")
+		(property "Reference" "C719"
+			(at 151.13 59.944 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Value" "47 Takman 1/4W"
-			(at 140.97 129.54 90)
+		(property "Value" "100nF"
+			(at 147.066 62.484 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
-			(at 140.97 127 0)
+		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
+			(at 152.4 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17264,7 +17657,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 140.97 127 0)
+			(at 152.4 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17274,8 +17667,8 @@
 				)
 			)
 		)
-		(property "Description" ""
-			(at 140.97 127 0)
+		(property "Description" "VCOML bypass to ADC_GND"
+			(at 152.4 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17286,15 +17679,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "44e91103-1d0f-47ca-ab49-0185fa493954")
+			(uuid "6e2f67ee-88bb-4aca-bc74-cc58e21a167e")
 		)
 		(pin "2"
-			(uuid "37b6dbb9-a31f-403d-a4c9-6eeb414e0a36")
+			(uuid "cc6724cc-5b00-451d-a0b7-ec48a3883282")
 		)
 		(instances
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
-					(reference "R716")
+					(reference "C719")
 					(unit 1)
 				)
 			)
@@ -17412,7 +17805,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 72.39 189.23 0)
 			(hide yes)
 			(show_name no)
@@ -17807,6 +18200,85 @@
 			(project "AudioCase"
 				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
 					(reference "U701")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 140.97 104.14 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f9e83a73-0e69-4b84-9a0a-dcc02a6fed44")
+		(property "Reference" "R715"
+			(at 140.97 101.6 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "47 Takman 1/4W"
+			(at 140.97 106.68 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
+			(at 140.97 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 140.97 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f6661c93-1ebf-497a-8e4f-bedaedf571f0")
+		)
+		(pin "2"
+			(uuid "a9688df1-b08b-4d18-923c-e7a47319fcb4")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/6d49c70d-b40d-4b21-ac6e-fba63bdae03e"
+					(reference "R715")
 					(unit 1)
 				)
 			)

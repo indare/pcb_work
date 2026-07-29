@@ -1,8 +1,35 @@
 # MeasurementADC 進捗メモ
 
-最終更新: **2026-07-28**（ムラタ RDE FP 実寸化。壊れた自動配線は破棄済み）
+最終更新: **2026-07-29**（電源島寄せ・CIN・+5V_D／U705 配置）
 
 Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM1804 + Pico2 + WAVESHARE LCD）。
+
+---
+
+## すぐやる（2026-07-29）
+
+### いまできていること
+
+- GND 案A（非絶縁）: `NT701` A_GND↔ADC_GND / `NT702` ADC_GND_IN↔D_GND（SMD Pad2.0mm）。ネットタイは **表銅ブリッジ**（貫通しない）
+- CIN: 回路図＋PCB に `C741`（47µF/35V）/`C742`（100nF）、戻り `ADC_GND_IN`。`+15_IN` は F701→CIN→U704 VIN まで配線済
+- `+5V_D` デジ幹線: U704→C723/C721/C722→Pico / U708 周辺まで人手配線（1mm）
+- U705 を U704/CIN 側へ寄せ済（入力パッド向き OK）。`+15_IN`→U705 pad1 接続済
+- NT702 周りに `ADC_GND_IN` / `D_GND` ステッチビア（各ネット両脇）
+- Pico2 は THT FP。`ADC_GND_IN` ベタ（priority 10）あり
+
+### 次やること（優先順）
+
+1. **U705 入力完了**: pad2 `ADC_GND_IN` を CIN/NT702 島へ（表またはベタ＋ビア）
+2. **案A 仕上げ（回路図→PCB）**: NT702 を COUT 右へ／`C721`/`C722`（必要なら方針確認のうえ `C723`）戻りを `ADC_GND_IN` に統一。現状 COUT 戻りはまだ `D_GND`
+3. **U705 出力**: `OUT+` → U706/U707 島、pad4 `ADC_GND` → ADC 島
+4. **残デジ**: `+3V3_A` / `+5V_A` / `D_GND` ベタ繋ぎ、MCLK・I2S（Pico↔A701）、LCD 信号
+5. **掃除**: NT702 近傍の dangling via／starved thermal、F701 回路図 Footprint 空欄、MeasurementADC 領域 DRC で short/crossing=0 維持
+6. **外形**: RV1/2/3 Edge.Cuts はノブ飛び出し用 → `invalid_outline` は意図どおり（無視で可）
+
+### 注意
+
+- MCP `pcb_add_track` / 一部 write は「成功」でも載らない・IPC 切断あり → 重要変更後は GUI とディスク件数を照合。ファイル直書き後は **Revert Board**（上書き保存注意）
+- 電源デジの一括オートルートは再禁止
 
 ---
 
@@ -11,7 +38,7 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
 ### いまどこまでか（一言）
 
 VCOM/VIN・OPA ローカルは導通済みの WIP ベース（`ab554d5` 系）。**ムラタ RDE（100nF/10nF）の FP を実寸に差し替え済み。**  
-自動投入した電源デジ幹線は品質が悪く **破棄**（`ab554d5` に戻したうえで RDE のみ載せ直し）。次は ADC_GND 延長とデジ配線を人手／慎重に。
+自動投入した電源デジ幹線は品質が悪く **破棄**（`ab554d5` に戻したうえで RDE のみ載せ直し）。電源島寄せは 2026-07-29 節を優先。
 
 ### 触るファイル
 
@@ -20,6 +47,7 @@ VCOM/VIN・OPA ローカルは導通済みの WIP ベース（`ab554d5` 系）�
 | `Audio/AudioCase.kicad_pcb` | **主戦場**（親 PCB） |
 | `Audio/MeasurementADC1804_Module.kicad_sch` | 計測モジュール回路図 |
 | `Audio/Library.pretty/C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm.kicad_mod` | RDE 実寸 FP |
+| `Audio/Library.3dshapes/C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm.step` | RDE 3D（3D ビューア用） |
 | `Audio/MeasurementADC_ORDER.md` | 発注・在庫・FP メモ |
 | `Audio/route_preview_opamp_adc.png` | OPA→ADC 配線プレビュー（参考） |
 | 本ファイル | 方針・残タスク |
@@ -44,9 +72,13 @@ OPA/音声: 〜x346–423 → ADCフロント: 〜x412–544 → 電源デジ: �
 **ムラタ RDE FP（2026-07-28）**
 
 - 発注品: `RDER71H104K0K1H03B`（100nF）/ `RDER71H103K0K1H03B`（10nF）
-- 実寸: **L4.0 × W3.5 × T2.5 mm max**、F=5.0±0.8mm（丸 Disc φ5 ではない）
-- 新 FP: `Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm`（パッド 0/5mm は旧 Disc と互換）
-- 適用: **C701 C702 C705 C706 C711 C712 C717 C718 C719 C720 C722 C724 C725 C728 C730 C731 C735 C736 C737 C738**（20個）
+- データシート寸法（[Murata 製品ページ](https://www.murata.com/products/productdetail?partno=RDER71H104K0K1H03B)）:
+  - **L=4.0 / Width W=3.5 / T=2.5 mm max**、**F=5.0±0.8**、**d=0.5±0.05**、**W1=6.0 mm max**（実装高さ）
+  - **上面視 Fab = L×T（4.0×2.5）**。W はボディ高さ（旧 FP が Fab に W=3.5 を使っていたのは誤り → 修正済）
+- FP: `Library:C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm`（パッド 0/5mm は旧 Disc と互換）
+- 3D: `${KIPRJMOD}/Library.3dshapes/C_Murata_RDE_….step`（RDE 残分に紐付け）
+- 適用: **C701 C702 C719 C720 C722 C724 C725 C728 C730 C731 C735 C736 C737 C738**（RDE）
+- **OPA 電源デカップ 100nF は SMD 1206（2026-07-28）**: C705 C706 C711 C712 C717 C718 → `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder`（回路図は既に1206。PCB 追従。購入が1208表記なら実寸確認）
 
 **C705 ↔ C707**
 

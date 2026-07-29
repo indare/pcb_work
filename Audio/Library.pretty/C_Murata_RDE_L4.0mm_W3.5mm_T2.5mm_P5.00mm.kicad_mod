@@ -3,10 +3,10 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "Murata RDE radial MLCC (e.g. RDER71H104K0K1H03B / RDER71H103K0K1H03B). Body L4.0 x W3.5 x T2.5mm max, lead pitch F=5.0±0.8mm, lead d=0.5mm. Pads kept at 0/5mm for drop-in vs Disc_D5 P5.")
+	(descr "Murata RDE radial MLCC (RDER71H104K0K1H03B / RDER71H103K0K1H03B). Datasheet: L=4.0mm max, W=3.5mm max (body height), T=2.5mm max, F=5.0±0.8mm, d=0.5±0.05mm, W1=6.0mm max. Top-view Fab = L x T; pads at 0/5mm for drop-in vs Disc_D5 P5.")
 	(tags "Murata RDE MLCC radial THT P5.00mm")
 	(property "Reference" "REF**"
-		(at 2.5 -2.9 0)
+		(at 2.5 -2.4 0)
 		(layer "F.SilkS")
 		(effects
 			(font
@@ -16,7 +16,7 @@
 		)
 	)
 	(property "Value" "C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm"
-		(at 2.5 2.9 0)
+		(at 2.5 2.4 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -38,8 +38,8 @@
 	)
 	(attr through_hole)
 	(fp_line
-		(start 0.38 -1.87)
-		(end 4.62 -1.87)
+		(start 0.9 -1.37)
+		(end 4.1 -1.37)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -47,8 +47,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 0.38 1.87)
-		(end 4.62 1.87)
+		(start 0.9 1.37)
+		(end 4.1 1.37)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -56,8 +56,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 0.38 -1.87)
-		(end 0.38 -1.2)
+		(start 0.9 -1.37)
+		(end 0.9 -1.0)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -65,8 +65,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 0.38 1.2)
-		(end 0.38 1.87)
+		(start 0.9 1.0)
+		(end 0.9 1.37)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -74,8 +74,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 4.62 -1.87)
-		(end 4.62 -1.2)
+		(start 4.1 -1.37)
+		(end 4.1 -1.0)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -83,8 +83,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 4.62 1.2)
-		(end 4.62 1.87)
+		(start 4.1 1.0)
+		(end 4.1 1.37)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -92,8 +92,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_rect
-		(start -1.05 -2)
-		(end 6.05 2)
+		(start -1.05 -1.5)
+		(end 6.05 1.5)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -102,8 +102,8 @@
 		(layer "F.CrtYd")
 	)
 	(fp_rect
-		(start 0.5 -1.75)
-		(end 4.5 1.75)
+		(start 0.5 -1.25)
+		(end 4.5 1.25)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -116,8 +116,8 @@
 		(layer "F.Fab")
 		(effects
 			(font
-				(size 1 1)
-				(thickness 0.15)
+				(size 0.8 0.8)
+				(thickness 0.12)
 			)
 		)
 	)
@@ -136,4 +136,15 @@
 		(remove_unused_layers no)
 	)
 	(embedded_fonts no)
+	(model "${KIPRJMOD}/Library.3dshapes/C_Murata_RDE_L4.0mm_W3.5mm_T2.5mm_P5.00mm.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )
