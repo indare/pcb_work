@@ -1,30 +1,48 @@
 # MeasurementADC 進捗メモ
 
-最終更新: **2026-07-29**（電源島寄せ・CIN・+5V_D／U705 配置）
+最終更新: **2026-07-31**（U705 入出力・DRC／LCDソフト制御・PICO_3V3方針を整理）
 
 Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM1804 + Pico2 + WAVESHARE LCD）。
 
 ---
 
-## すぐやる（2026-07-29）
+## すぐやる（2026-07-31）
 
 ### いまできていること
 
 - GND 案A（非絶縁）: `NT701` A_GND↔ADC_GND / `NT702` ADC_GND_IN↔D_GND（SMD Pad2.0mm）。ネットタイは **表銅ブリッジ**（貫通しない）
 - CIN: 回路図＋PCB に `C741`（47µF/35V）/`C742`（100nF）、戻り `ADC_GND_IN`。`+15_IN` は F701→CIN→U704 VIN まで配線済
 - `+5V_D` デジ幹線: U704→C723/C721/C722→Pico / U708 周辺まで人手配線（1mm）
-- U705 を U704/CIN 側へ寄せ済（入力パッド向き OK）。`+15_IN`→U705 pad1 接続済
+- U705 を U704/CIN 側へ寄せ済。`+15_IN`→U705 pad1 接続済
+- **U705 pad2 `ADC_GND_IN`**: `ADC_GND_IN` ベタ（priority 10）サーマル接続で **済**（明示トレース不要）
+- **U705 出力**: `OUT+`→U706/U707（配線済）、pad4 `ADC_GND`→`ADC_GND` ベタ内で **済**
 - NT702 周りに `ADC_GND_IN` / `D_GND` ステッチビア（各ネット両脇）
-- Pico2 は THT FP。`ADC_GND_IN` ベタ（priority 10）あり
+- Pico2 は THT FP。`ADC_GND_IN` / `D_GND` / `ADC_GND` ベタあり
+- **残デジ（概ね済）**: `+3V3_A`/`+5V_A` 配線、MCLK・I2S・LCD 信号に銅あり。直近 DRC で当該ネットの未配線なし
+- **A702 嵩上げ**: ボディコートヤードを `Dwgs.User` 化＋`allow_missing_courtyard`（下に部品可）
+- **A701↔H11 固定穴**: A701 コートヤードにノッチ（DRC courtyard error 解消）
+- **LCD**: **ソフト制御で確定**（U708 CE↔VIN ショートしない／R717 実装／GP8=`LCD_EN`／FW で High 固定）
+- **`PICO_3V3`**: 基板他部品未使用。pad 30/35/36/37 間の短絡は **不要**（DRC 未配線3件は無視可）
+- **ジャックまたぎ未配線**: 設置時ワイヤ想定。MeasurementADC 側の当該 DRC は解消済
+- **RV1/2/3** Edge.Cuts・警告: ノブ飛び出し用 → **無視で可**
+- MeasurementADC 領域: 直近 DRC **error=0** / short・crossing なし（警告は FP mismatch・ミラー文字程度）
+- **C707–C710 極性**: **OK**（`CP_Radial` pad1=+。いずれも + が 3.3k 側＝R705–R708、pad2 が信号／OPA／`AUDIO_*_IN` 側）
+- **F701** 回路図 FP: PCB と同じ `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` を記入済（軸型ヒューズ置き）
+- **SOIC クリアランス**: 直近 DRC で MeasurementADC の clearance/short **なし**。0.25mm ネックは再配線時の注意メモとして残す程度
+- **シルク**: C708 Ref をエッジから退避、U701 Ref を本体外へ。電解「+」は FP 標準表記に任せる（追加シルクなし）
+- **FMT 注記**: JP1F テキストに `FMT1=L（開放）FMT0=H（ショート）`＝24bit I²S を追記済
 
 ### 次やること（優先順）
 
-1. **U705 入力完了**: pad2 `ADC_GND_IN` を CIN/NT702 島へ（表またはベタ＋ビア）
-2. **案A 仕上げ（回路図→PCB）**: NT702 を COUT 右へ／`C721`/`C722`（必要なら方針確認のうえ `C723`）戻りを `ADC_GND_IN` に統一。現状 COUT 戻りはまだ `D_GND`
-3. **U705 出力**: `OUT+` → U706/U707 島、pad4 `ADC_GND` → ADC 島
-4. **残デジ**: `+3V3_A` / `+5V_A` / `D_GND` ベタ繋ぎ、MCLK・I2S（Pico↔A701）、LCD 信号
-5. **掃除**: NT702 近傍の dangling via／starved thermal、F701 回路図 Footprint 空欄、MeasurementADC 領域 DRC で short/crossing=0 維持
-6. **外形**: RV1/2/3 Edge.Cuts はノブ飛び出し用 → `invalid_outline` は意図どおり（無視で可）
+1. **仕上げ**: NT702 近傍 dangling via／starved thermal（任意）
+2. **OPA 側 GND ベタ**がパスコンまで十分か最終確認（ADC/LDO 島は現状ベタ接続）
+3. （任意）`PICO_3V3` ラベル整理
+4. **ソフト**: Pico FW（GP8 High、I2S、FFT、LCD/タッチ）→ 実機ノイズ比較
+
+### 方針メモ（案A／COUT）
+
+- `C721`/`C722`/`C723` の戻りが `D_GND` なのは **+5V_D デジ側として正しい**（`ADC_GND_IN` に無理に寄せない）
+- 入力側戻りは CIN/`ADC_GND_IN` ベタ＋NT702。これ以上の「案A 強制変更」は不要
 
 ### 注意
 
@@ -66,8 +84,10 @@ OPA/音声: 〜x346–423 → ADCフロント: 〜x412–544 → 電源デジ: �
 | `VCOML` / `VCOMR` | **完了**（U702/U703 pin3/5 ↔ C719/C720 ↔ A701） |
 | OPA 出力→47Ω | **完了** |
 | `AUDIO_L/R_IN`・`AMP_V±` | OPA 島内は繋がっている。基板またぎ未接続は想定どおり |
-| `ADC_GND` ベタ | `(420.5,100)–(562,178)`。**x>562 の LDO 群は未接続** |
-| GND ベタ | OPA 周りは未完（パスコン GND はベタ待ち） |
+| `ADC_GND` ベタ | 現状おおよそ `(394,85)–(458,169)`。U706/U707 は島内（**接続済**）。旧「x>562 LDO 未接続」は配置移動で outdated |
+| `ADC_GND_IN` ベタ | `(489,85)–(522,129)` priority 10。U705 IN- 接続済 |
+| `D_GND` ベタ | `(459,110)–(523,169)` |
+| GND ベタ（OPA） | パスコンまで十分か **要最終確認** |
 
 **ムラタ RDE FP（2026-07-28）**
 
@@ -139,7 +159,7 @@ D_GND   = BP5293 戻り（Pico / LCD）
 
 補足:
 
-- **U710 XC8107AC20MR-G ロードスイッチ**（旧 Q701 AO3401A を置換, 2026-07-26）。`LCD_EN` **High=ON / Low・Hi-Z=OFF**（Active High）。R717 100k は CE プルダウン。**初号は常時 ON（GP8=High 固定）でも可**
+- **U708 XC8107AC20MR-G ロードスイッチ**（旧 Q701／文書上 U710 表記あり, 2026-07-26）。`LCD_EN` **High=ON / Low・Hi-Z=OFF**（Active High）。R717 100k は CE プルダウン。**常時点灯はソフト制御で確定（GP8=High 固定）。CE↔VIN ハードショートはしない**
 - LCD 接続は Interface2 → 基板側 `PinHeader_1x15_P2.54mm_Vertical`
 - **Pico2: VSYS=`+5V_D`、GND=`D_GND`**（`A_GND` には載せない）
 
@@ -180,8 +200,8 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT701 か�
 |---|---|---|---|
 | 1 | U707/U706 の LDO 型番がレールと逆 | 妥当 | **済** |
 | 2 | VCOM が 0.1µF シリーズで OPA＋へ | 妥当・致命 | **済** VCOM→2段目 OPA の＋直結、デカップは VCOM↔ADC_GND（C719/C720） |
-| 3 | C707–C710 電解の極性（＋が音側） | 妥当の可能性大 | 要最終目視（＋は 3.3k／VCOM 側） |
-| 4 | Q701 AO3401A が 3.3V GPIO で切れない | 既知・妥当 | **済** U710 XC8107（2026-07-26） |
+| 3 | C707–C710 電解の極性（＋が音側） | 妥当の可能性大 | **済（2026-07-31）** +は 3.3k 側（R705–R708）。音側は pad2 |
+| 4 | Q701 AO3401A が 3.3V GPIO で切れない | 既知・妥当 | **済** U708 XC8107（2026-07-26）。LCD はソフト制御確定 |
 
 ### 追加指摘 → 対応状況
 
@@ -190,7 +210,7 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT701 か�
 | `A_GND`─NetTie─`ADC_GND` を 1 点明示 | **済** **NT701**（A701 近傍）※旧文書の NT702 表記は誤り |
 | `ADC_GND_IN`─NetTie─`D_GND`（PD 入口） | **済** **NT702** |
 | OPA 各電源に ±15V ─100nF─GND | **済** 入口 C701/C702 ＋ 各 OPA パッケージ |
-| TPS3808・SV VDD・FMT 注記など | 概ね済／FMT 注記は残 |
+| TPS3808・SV VDD・FMT 注記など | **済** FMT=24bit I²S を JP1F 注記に明記 |
 
 ### ERC
 
@@ -203,11 +223,14 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT701 か�
 - [x] MeasurementADC 階層を AudioCase に統合
 - [x] 電源ツリー・TPS3808・LCD Interface2・VCOM 直結修正
 - [x] GND 星点 NT701 / NT702 ＋ FP 割当
-- [x] U710 XC8107 置換・注記整理
+- [x] U708 XC8107 置換・注記整理（LCD ソフト制御確定）
 - [x] MBC2596 / ADC1804 実測 FP、手持ち抵抗・Disc FP 割当
 - [x] OPA×3＋入力ブロックの PCB 配置（A701 側へ 47Ω・VCOM bypass 寄せ）
 - [x] VCOML/R・VIN± 導通（WIP）
 - [x] ムラタ RDE（100nF/10nF×20）FP 実寸化
+- [x] U705 入力 `ADC_GND_IN`（ベタ）／出力 `OUT+`・`ADC_GND`（ベタ）
+- [x] A702 コートヤード緩和・A701/H11 ノッチ
+- [x] MeasurementADC DRC error=0（PICO_3V3 未配線は方針どおり無視）
 
 ---
 
@@ -217,21 +240,23 @@ PCB では `D_GND` を太く短く、アナログ入力トレース・NT701 か�
 
 - [x] ムラタ RDE FP を実寸に更新（Disc φ5 → `C_Murata_RDE_…_P5.00mm`）
 - [x] VCOM / VIN をパッドまで接続（WIP 時点）
-- [ ] `ADC_GND` ベタ延長（LDO 群）と OPA 側 GND ベタ
-- [ ] MCLK・I2S・アナログ/デジタル電源・D_GND 太線（自動一括配線は禁止／破棄済）
-- [ ] SOIC 近傍クリアランス（必要区間 0.25mm）
-- [ ] DRC 全体クリーン（基板またぎ未接続は想定内）
-- [ ] C707–C710 極性の最終確認
-- [ ] U701 Reference シルク位置・電解「+」シルク（任意だが実装向き）
+- [x] `ADC_GND` ベタと LDO 群（U706/U707 島内）
+- [x] MCLK・I2S・LCD・`+3V3_A`/`+5V_A` の主配線（DRC 上未配線なし。太さ・見た目の最終確認は残）
+- [ ] OPA 側 GND ベタ／パスコン接続の最終確認
+- [x] SOIC 近傍クリアランス（DRC 問題なし。再配線時のみ 0.25mm 注意）
+- [x] C707–C710 極性（pad1=+ → 3.3k／R705–R708 側）
+- [x] F701 回路図 Footprint（軸型 DIN0411 P12.7、PCB と一致）
+- [x] U701／C708 Reference シルク位置（任意の電解「+」追加シルクは見送り）
 
 ### レビュー残・仕上げ
 
-- [ ] ジャンパ注記に `FMT1=L FMT0=H`（24bit I²S）を追記
+- [x] ジャンパ注記に `FMT1=L FMT0=H`（24bit I²S）を追記
+- [ ] （任意）`PICO_3V3` ラベル整理で DRC 未配線も消す
 
 ### 検証・ソフト
 
-- [ ] フルスケール／LCD ON/OFF ノイズ比較
-- [ ] Pico ファーム（I2S・FFT・10バンド表示・タッチ UI）
+- [ ] Pico ファーム（**GP8=`LCD_EN` High 固定**、I2S・FFT・10バンド表示・タッチ UI）
+- [ ] フルスケール／（任意）LCD ON/OFF ノイズ比較
 
 ---
 

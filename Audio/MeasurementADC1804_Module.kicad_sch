@@ -5357,7 +5357,7 @@
 		)
 		(uuid "b095b59c-f7c0-4414-bb86-4861133b89c9")
 	)
-	(text "JP1F でマスタ/スレーブ、I2S フォーマット、OSR、HPF をモジュールマニュアルに従い設定。"
+	(text "JP1F: ショート=H / 開放=L。本設計は 24bit I²S → FMT1=L（開放）FMT0=H（ショート）。マスタ/スレーブ・OSR・HPF はモジュールマニュアルに従う。"
 		(exclude_from_sim no)
 		(at 173.99 85.09 0)
 		(effects
@@ -11831,7 +11831,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal"
 			(at 67.818 223.52 90)
 			(hide yes)
 			(show_name no)
