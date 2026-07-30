@@ -31,13 +31,13 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
 - **SOIC クリアランス**: 直近 DRC で MeasurementADC の clearance/short **なし**。0.25mm ネックは再配線時の注意メモとして残す程度
 - **シルク**: C708 Ref をエッジから退避、U701 Ref を本体外へ。電解「+」は FP 標準表記に任せる（追加シルクなし）
 - **FMT 注記**: JP1F テキストに `FMT1=L（開放）FMT0=H（ショート）`＝24bit I²S を追記済
+- **NT702 近傍掃除**: 微小スタブ削除、ビアを配線にスナップ、`ADC_GND*`/`D_GND`/`A_GND` サーマル幅 0.8mm、`ADC_GND_IN` パッドはベタ直結、U705 IN- 明示配線
 
 ### 次やること（優先順）
 
-1. **仕上げ**: NT702 近傍 dangling via／starved thermal（任意）
-2. **OPA 側 GND ベタ**がパスコンまで十分か最終確認（ADC/LDO 島は現状ベタ接続）
-3. （任意）`PICO_3V3` ラベル整理
-4. **ソフト**: Pico FW（GP8 High、I2S、FFT、LCD/タッチ）→ 実機ノイズ比較
+1. **OPA 側 GND ベタ**がパスコンまで十分か最終確認（ADC/LDO 島は現状ベタ接続）
+2. （任意）`PICO_3V3` ラベル整理
+3. **ソフト**: Pico FW（GP8 High、I2S、FFT、LCD/タッチ）→ 実機ノイズ比較
 
 ### 方針メモ（案A／COUT）
 
