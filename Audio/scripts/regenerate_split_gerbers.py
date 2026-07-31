@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Regenerate split AudioCase boards and fabrication outputs.
 
-The source AudioCase board intentionally keeps five board outlines in one
+The source AudioCase board intentionally keeps multiple board outlines in one
 layout.  KiKit can separate them, but the standard RK097 potentiometer
 footprints contain open Edge.Cuts guide lines that make KiKit reject the
 outline.  This script creates a temporary copy where those footprint guide
@@ -10,6 +10,8 @@ lines are moved to Dwgs.User, then regenerates:
   - Audio/split/AudioCase_*.kicad_pcb
   - Audio/split/Gerber/<board>/*
   - Audio/split/Gerber/<board>.zip
+
+Use --only NAME to rebuild a single board (e.g. --only 06_measurement_adc).
 """
 
 from __future__ import annotations
@@ -69,6 +71,12 @@ BOARDS = [
         "pcb": "AudioCase_5_rv_convert.kicad_pcb",
         # Must match the RVConvert gr_rect on Edge.Cuts.
         "source": "rectangle; tlx: 129.625mm; tly: 167.6mm; brx: 138.425mm; bry: 183.15mm",
+    },
+    {
+        "name": "06_measurement_adc",
+        "pcb": "AudioCase_6_measurement_adc.kicad_pcb",
+        # Must match the MeasurementADC gr_rect on Edge.Cuts.
+        "source": "rectangle; tlx: 339.87mm; tly: 85.32mm; brx: 522.47mm; bry: 169.02mm",
     },
 ]
 
@@ -182,10 +190,26 @@ def zip_directory(folder: Path) -> Path:
     return zip_path
 
 
+def select_boards(only: str | None) -> list[dict]:
+    if not only:
+        return BOARDS
+    selected = [b for b in BOARDS if b["name"] == only or b["pcb"] == only]
+    if not selected:
+        names = ", ".join(b["name"] for b in BOARDS)
+        raise SystemExit(f"Unknown board {only!r}. Choose one of: {names}")
+    return selected
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skip-gerbers", action="store_true", help="only regenerate split KiCad PCB files")
+    parser.add_argument(
+        "--only",
+        metavar="NAME",
+        help="regenerate a single board by name (e.g. 06_measurement_adc)",
+    )
     args = parser.parse_args()
+    boards = select_boards(args.only)
 
     kikit = find_tool(
         "kikit",
@@ -204,7 +228,7 @@ def main() -> int:
 
     prepare_temp_board()
 
-    for board in BOARDS:
+    for board in boards:
         out_pcb = SPLIT_DIR / board["pcb"]
         run([kikit, "separate", "--source", board["source"], str(TEMP_PCB), str(out_pcb)])
 
@@ -212,7 +236,7 @@ def main() -> int:
         return 0
 
     GERBER_DIR.mkdir(parents=True, exist_ok=True)
-    for board in BOARDS:
+    for board in boards:
         pcb = SPLIT_DIR / board["pcb"]
         out_dir = GERBER_DIR / board["name"]
         clean_output_dir(out_dir)
