@@ -1,50 +1,37 @@
 from machine import I2C, Pin
 import time
 
+from protocol import (
+    APPLY_TIMEOUT_MS,
+    CMD_APPLY_MAX,
+    CMD_APPLY_MIN,
+    CMD_PING,
+    CMD_RESET,
+    I2C_FREQ,
+    LOCAL_CHANNELS,
+    MAX_CHANNELS,
+    OLED_ADDR,
+    REG_CMD,
+    REG_DONE,
+    REG_STATUS,
+    SCL_PIN,
+    SDA_PIN,
+    SLAVE_ADDR,
+    STATUS_OK,
+    STATUS_PONG,
+)
+from relays import RelayBoard
 from ssd1306 import SSD1306_I2C
 
 
 WIDTH = 128
 HEIGHT = 64
-SDA_PIN = 20  # Pico physical pin 26
-SCL_PIN = 21  # Pico physical pin 27
 ENC_A_PIN = 22  # Pico physical pin 29
 ENC_B_PIN = 26  # Pico physical pin 31
 ENC_SW_PIN = 27  # Pico physical pin 32
-PULSE_SEC = 0.1
 RESET_TO_SET_SEC = 0.5
-AUDIO_BREAK_SEC = 0.1
-POWER_SETTLE_SEC = 0.3
 LOOP_DELAY_SEC = 0.01
 BUTTON_DEBOUNCE_MS = 250
-
-CHANNELS = (
-    {
-        "number": 1,
-        "audio": {"name": "K4 AUDIO", "reset_pin": 5, "set_pin": 4},
-        "pwr": {"name": "K3 PWR", "reset_pin": 7, "set_pin": 6},
-    },
-    {
-        "number": 2,
-        "audio": {"name": "K2 AUDIO", "reset_pin": 1, "set_pin": 0},
-        "pwr": {"name": "K1 PWR", "reset_pin": 3, "set_pin": 2},
-    },
-    {
-        "number": 3,
-        "audio": {"name": "K8 AUDIO", "reset_pin": 9, "set_pin": 8},
-        "pwr": {"name": "K5 PWR", "reset_pin": 11, "set_pin": 10},
-    },
-    {
-        "number": 4,
-        "audio": {"name": "K9 AUDIO", "reset_pin": 13, "set_pin": 12},
-        "pwr": {"name": "K6 PWR", "reset_pin": 15, "set_pin": 14},
-    },
-    {
-        "number": 5,
-        "audio": {"name": "K10 AUDIO", "reset_pin": 18, "set_pin": 19},
-        "pwr": {"name": "K7 PWR", "reset_pin": 16, "set_pin": 17},
-    },
-)
 
 
 def draw_status(display, title, line1="", line2="", line3="", line4=""):
@@ -63,60 +50,53 @@ def update_display(title, line1="", line2="", line3="", line4=""):
         draw_status(oled, title, line1, line2, line3, line4)
 
 
-def pulse(outputs, coil_name):
-    for output in outputs:
-        output[coil_name].on()
-    time.sleep(PULSE_SEC)
-    for output in outputs:
-        output[coil_name].off()
+def slave_done_seq():
+    return i2c.readfrom_mem(SLAVE_ADDR, REG_DONE, 1)[0]
 
 
-def outputs_by_role(role):
-    return [output for output in relay_outputs if output["role"] == role]
+def slave_send(cmd):
+    before = slave_done_seq()
+    i2c.writeto_mem(SLAVE_ADDR, REG_CMD, bytes([cmd]))
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < APPLY_TIMEOUT_MS:
+        if slave_done_seq() != before:
+            status = i2c.readfrom_mem(SLAVE_ADDR, REG_STATUS, 1)[0]
+            return status in (STATUS_OK, STATUS_PONG)
+        time.sleep_ms(20)
+    return False
 
 
-def outputs_by_channel_and_role(channel_number, role):
-    return [
-        output
-        for output in relay_outputs
-        if output["channel"] == channel_number and output["role"] == role
-    ]
+def ping_slave():
+    try:
+        return slave_send(CMD_PING)
+    except OSError as exc:
+        print("slave ping failed:", exc)
+        return False
 
 
-def reset_all(title):
-    led.off()
-    for output in relay_outputs:
-        output["state"] = "RESET"
-    update_display(title, "All channels", "AUDIO RESET", "PWR RESET", "Split pulses")
-    pulse(outputs_by_role("audio"), "reset")
-    time.sleep(AUDIO_BREAK_SEC)
-    pulse(outputs_by_role("pwr"), "reset")
+def apply_global_channel(channel):
+    if channel <= LOCAL_CHANNELS:
+        if has_expansion:
+            try:
+                if not slave_send(CMD_RESET):
+                    update_display("Exp timeout", "reset", "", "", "")
+            except OSError as exc:
+                print("slave reset failed:", exc)
+                update_display("Exp error", "reset failed", str(exc)[:15], "", "")
+        board.apply_channel(channel)
+        return
 
+    local = channel - LOCAL_CHANNELS
+    if local < CMD_APPLY_MIN or local > CMD_APPLY_MAX:
+        raise ValueError("expansion channel out of range")
 
-def apply_channel(channel):
-    channel_number = channel["number"]
-    all_audio = outputs_by_role("audio")
-    all_pwr = outputs_by_role("pwr")
-    target_audio = outputs_by_channel_and_role(channel_number, "audio")
-    target_pwr = outputs_by_channel_and_role(channel_number, "pwr")
-
-    led.on()
-    update_display(
-        "Apply CH" + str(channel_number),
-        "AUDIO off",
-        "PWR switch",
-        "PWR settle",
-        "AUDIO on",
-    )
-    pulse(all_audio, "reset")
-    time.sleep(AUDIO_BREAK_SEC)
-    pulse(all_pwr, "reset")
-    pulse(target_pwr, "set")
-    time.sleep(POWER_SETTLE_SEC)
-    pulse(target_audio, "set")
-
-    for output in relay_outputs:
-        output["state"] = "SET" if output["channel"] == channel_number else "RESET"
+    board.reset_all("Local RESET")
+    try:
+        if not slave_send(local):
+            update_display("Exp timeout", "CH" + str(channel), "slave busy?", "", "")
+    except OSError as exc:
+        print("slave apply failed:", exc)
+        update_display("Exp error", "CH" + str(channel), str(exc)[:15], "", "")
 
 
 def draw_channel_ui():
@@ -125,7 +105,7 @@ def draw_channel_ui():
         "Select CH" + str(selected_channel),
         "Active CH" + str(active_channel),
         mark + " CH" + str(selected_channel),
-        "Turn: select",
+        "Max CH" + str(channel_count),
         "Push: apply",
     )
 
@@ -137,43 +117,50 @@ enc_a = Pin(ENC_A_PIN, Pin.IN, Pin.PULL_UP)
 enc_b = Pin(ENC_B_PIN, Pin.IN, Pin.PULL_UP)
 enc_sw = Pin(ENC_SW_PIN, Pin.IN, Pin.PULL_UP)
 
-relay_outputs = []
-for channel in CHANNELS:
-    for role in ("audio", "pwr"):
-        relay = channel[role]
-        reset_output = Pin(relay["reset_pin"], Pin.OUT)
-        set_output = Pin(relay["set_pin"], Pin.OUT)
-        reset_output.off()
-        set_output.off()
-        relay_outputs.append(
-            {
-                "channel": channel["number"],
-                "role": role,
-                "name": relay["name"],
-                "reset": reset_output,
-                "set": set_output,
-                "state": "OFF",
-            }
-        )
-
-i2c = I2C(0, sda=Pin(SDA_PIN), scl=Pin(SCL_PIN), freq=400_000)
-
+i2c = I2C(0, sda=Pin(SDA_PIN), scl=Pin(SCL_PIN), freq=I2C_FREQ)
 devices = i2c.scan()
 print("I2C devices:", [hex(device) for device in devices])
 
 oled = None
-if devices:
-    oled = SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=devices[0])
-    draw_status(oled, "Encoder UI", "OLED OK", "Ready", "CH1-5")
+if OLED_ADDR in devices:
+    oled = SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=OLED_ADDR)
+elif devices:
+    # Fall back to the first non-slave device if address wiring differs.
+    for addr in devices:
+        if addr != SLAVE_ADDR:
+            oled = SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=addr)
+            break
 else:
     print("No I2C device found on GP20/GP21")
 
-reset_all("Power-on RESET")
+board = RelayBoard(led=led, on_status=update_display)
+
+has_expansion = SLAVE_ADDR in devices and ping_slave()
+channel_count = MAX_CHANNELS if has_expansion else LOCAL_CHANNELS
+print("expansion:", has_expansion, "channels:", channel_count)
+
+if has_expansion:
+    update_display("Boot", "OLED OK", "Exp found", "CH1-" + str(channel_count), "")
+else:
+    update_display("Boot", "OLED OK", "Solo mode", "CH1-" + str(channel_count), "")
+
+board.reset_all("Power-on RESET")
+if has_expansion:
+    try:
+        if not slave_send(CMD_RESET):
+            print("slave boot reset timeout")
+            has_expansion = False
+            channel_count = LOCAL_CHANNELS
+    except OSError as exc:
+        print("slave boot reset failed:", exc)
+        has_expansion = False
+        channel_count = LOCAL_CHANNELS
+
 time.sleep(RESET_TO_SET_SEC)
 
 selected_channel = 1
 active_channel = 1
-apply_channel(CHANNELS[0])
+apply_global_channel(1)
 draw_channel_ui()
 
 last_encoder_state = (enc_a.value() << 1) | enc_b.value()
@@ -191,7 +178,7 @@ while True:
             encoder_direction = -1
         elif encoder_state == 3 and encoder_direction:
             selected_channel = min(
-                len(CHANNELS), max(1, selected_channel + encoder_direction)
+                channel_count, max(1, selected_channel + encoder_direction)
             )
             encoder_direction = 0
 
@@ -201,7 +188,7 @@ while True:
     if enc_sw.value() == 0 and time.ticks_diff(now_ms, last_button_ms) > BUTTON_DEBOUNCE_MS:
         last_button_ms = now_ms
         if selected_channel != active_channel:
-            apply_channel(CHANNELS[selected_channel - 1])
+            apply_global_channel(selected_channel)
             active_channel = selected_channel
 
     if selected_channel != last_selected_channel or active_channel != last_active_channel:

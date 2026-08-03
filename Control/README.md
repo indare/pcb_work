@@ -5,12 +5,21 @@
 - Board: Raspberry Pi Pico 2
 - MCU: RP2350
 - Firmware: MicroPython v1.28.0
-- USB serial port during this test: COM3
-- Bootloader drive name before flashing: RP2350
+- Bootloader drive name before flashing: `RP2350`
+
+## Dual-board layout
+
+| | Parent | Expansion (child) |
+| --- | --- | --- |
+| Firmware | `main.py` | `slave.py`（書き込み時は `:main.py`） |
+| OLED | あり（J17） | なし |
+| Encoder | あり（J13） | なし |
+| Relays | UI CH1–5 | UI CH6–10（基板上はローカルCH1–5） |
+| I2C role | master `400kHz` | slave `0x42` |
+
+Parent J17（`GND` / `3V3` / `SCL` / `SDA`）を child J17 に延長する。エンコーダは親だけ。
 
 ## OLED Connection
-
-The OLED is connected by I2C.
 
 | Pico 2 physical pin | Pico 2 signal | OLED signal |
 | --- | --- | --- |
@@ -19,38 +28,40 @@ The OLED is connected by I2C.
 | 36 | 3V3 OUT | VCC |
 | GND | GND | GND |
 
-MicroPython I2C setup:
+## I2C expansion protocol
 
-```python
-i2c = I2C(0, sda=Pin(20), scl=Pin(21), freq=400_000)
-```
+Shared constants live in `protocol.py`.
 
-## Confirmed Results
+| Register | Meaning |
+| --- | --- |
+| 0 | command（親が書く） |
+| 1 | status |
+| 2 | completion counter（コマンド完了で +1） |
 
-- Pico 2 was visible as `RP2350` in BOOTSEL mode.
-- MicroPython firmware was copied to the RP2350 mass storage drive.
-- After reboot, Pico 2 appeared as USB serial `COM3`.
-- Onboard green LED blink test worked.
-- OLED I2C scan found address `0x3c`.
-- The OLED worked as an SSD1306-compatible `128x64` monochrome display.
-- Valid pixel area is `x=0..127`, `y=0..63`.
-- Drawing at or beyond `x=128` / `y=64` is outside the visible area.
-- 8px text placed at `y=57` is clipped at the bottom, so safe text rows are `0, 8, 16, 24, 32, 40, 48, 56`.
-- Channel 5 relay SET test worked: K10/K7 moved to SET and continuity was confirmed at four contact points.
-- During probing, OLED `CH1` selected the AMP2 connector pair (`J19`/`J20`), so firmware channel numbering uses the probed connector order rather than the relay net suffix order for channels 1 and 2.
-- KiCad CLI netlist export confirmed the relay/GPIO mapping below.
-- KiCad CLI ERC reported 0 violations for `Audio/Controll.kicad_sch`.
+| Command | Meaning |
+| --- | --- |
+| `0x00` | 全ローカルCH RESET |
+| `0x01`–`0x05` | ローカルCH apply（ポップ対策シーケンス込み） |
+| `0x10` | ping → status `0xA5` |
 
-## Pico ADC Pin Status
+バス速度は 400kHz。100kHz に落とすと SSD1306 の 1KB フレーム転送が I2C タイムアウトに掛かり、描画が砂嵐になる。カスケードで波形が厳しい場合は速度を下げるのではなく `show()` をページ分割すること。
 
-OLED does not use the Pico ADC pins. In the current schematic:
+親の挙動:
 
-| Pico physical pin | Pico signal | Current net |
-| --- | --- | --- |
-| 31 | GP26 / ADC0 | ENC_B |
-| 32 | GP27 / ADC1 | ENC_SW |
-| 34 | GP28 / ADC2 | Unconnected |
-| 35 | ADC_VREF | Unconnected |
+- 起動時に `0x42` を scan + ping。いなければ **CH1–5 のみ**
+- CH1–5 apply 時: 子へ RESET → 親ローカル apply
+- CH6–10 apply 時: 親ローカル RESET → 子へ apply(`CH-5`)
+
+## Files
+
+| File | Role |
+| --- | --- |
+| `main.py` | 親UI（エンコーダ / OLED / 振り分け） |
+| `slave.py` | 子I2Cスレーブ |
+| `relays.py` | リレーGPIOと切替シーケンス |
+| `protocol.py` | アドレス・コマンド定義 |
+| `ssd1306.py` | OLEDドライバ |
+| `encoder_debug.py` | エンコーダ生ログ |
 
 ## Rotary Encoder Connection
 
@@ -60,28 +71,12 @@ OLED does not use the Pico ADC pins. In the current schematic:
 | 31 | GP26 / ADC0 | ENC_B |
 | 32 | GP27 / ADC1 | ENC_SW |
 
-## Current Test Program
+J13 pinout: `1=ENC_A`, `2=ENC_B`, `3=ENC_SW`, `4=3V3`, `5=GND`  
+（逆挿しすると 3V3–GND 短絡でハングするので向き注意）
 
-- `main.py` initializes I2C on GP20/GP21.
-- `ssd1306.py` provides the minimal I2C SSD1306 driver.
-- The current program runs a rotary encoder channel selector.
-- On startup, all relay channels receive split AUDIO/PWR RESET pulses to establish a known state, then channel 1 is applied.
-- Turning the encoder changes the selected channel on the OLED.
-- Pressing the encoder switch applies the selected channel with a pop-noise-aware sequence:
-  AUDIO RESET, 0.1 sec wait, PWR RESET, selected PWR SET, 0.3 sec wait, selected AUDIO SET.
-- Encoder decoding is based on the observed module transitions `11 -> 01 -> 00 -> 11` and `11 -> 10 -> 00 -> 11`.
-- Relay coils are pulsed for 0.1 seconds and are not held on.
-- The OLED shows the selected channel and the currently active channel.
+## Relay mapping (local board)
 
-## Debug Tools
-
-- `encoder_debug.py` logs raw `ENC_A` / `ENC_B` / `ENC_SW` input changes for 30 seconds.
-
-## Relay Test Mapping
-
-Relay pairs by channel:
-
-| Channel | AUDIO relay | PWR relay |
+| Local CH | AUDIO | PWR |
 | --- | --- | --- |
 | 1 | K4 | K3 |
 | 2 | K2 | K1 |
@@ -89,36 +84,36 @@ Relay pairs by channel:
 | 4 | K9 | K6 |
 | 5 | K10 | K7 |
 
-GPIO assignment by channel:
+Apply sequence: AUDIO RESET → 0.1s → PWR RESET → selected PWR SET → 0.3s → selected AUDIO SET。コイルは 0.1s パルス。
 
-| Channel | Relay | Reset signal | Reset GPIO | Reset physical pin | Set signal | Set GPIO | Set physical pin |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | K4 AUDIO | AUDIO_RESET_GPIO_2 | GP5 | 7 | AUDIO_SET_GPIO_2 | GP4 | 6 |
-| 1 | K3 PWR | PWR_RESET_GPIO_2 | GP7 | 10 | PWR_SET_GPIO_2 | GP6 | 9 |
-| 2 | K2 AUDIO | AUDIO_RESET_GPIO_1 | GP1 | 2 | AUDIO_SET_GPIO_1 | GP0 | 1 |
-| 2 | K1 PWR | PWR_RESET_GPIO_1 | GP3 | 5 | PWR_SET_GPIO_1 | GP2 | 4 |
-| 3 | K8 AUDIO | AUDIO_RESET_GPIO_3 | GP9 | 12 | AUDIO_SET_GPIO_3 | GP8 | 11 |
-| 3 | K5 PWR | PWR_RESET_GPIO_3 | GP11 | 15 | PWR_SET_GPIO_3 | GP10 | 14 |
-| 4 | K9 AUDIO | AUDIO_RESET_GPIO_4 | GP13 | 17 | AUDIO_SET_GPIO_4 | GP12 | 16 |
-| 4 | K6 PWR | PWR_RESET_GPIO_4 | GP15 | 20 | PWR_SET_GPIO_4 | GP14 | 19 |
-| 5 | K10 AUDIO | AUDIO_RESET_GPIO_5 | GP18 | 24 | AUDIO_SET_GPIO_5 | GP19 | 25 |
-| 5 | K7 PWR | PWR_RESET_GPIO_5 | GP16 | 21 | PWR_SET_GPIO_5 | GP17 | 22 |
+## Upload
 
-Previous channel 5 firmware test target:
+macOS example（親）:
 
-| Relay | Function | Reset signal | Set signal | Pico GPIO |
-| --- | --- | --- | --- | --- |
-| K10 | AUDIO relay 5 | AUDIO_RESET_GPIO_5 | AUDIO_SET_GPIO_5 | RESET=GP18, SET=GP19 |
-| K7 | PWR relay 5 | PWR_RESET_GPIO_5 | PWR_SET_GPIO_5 | RESET=GP16, SET=GP17 |
-
-## Upload Commands
-
-Run from the repository root:
-
-```powershell
-py -3.13 -m mpremote connect COM3 fs cp "Control/ssd1306.py" ":/ssd1306.py"
-py -3.13 -m mpremote connect COM3 fs cp "Control/main.py" ":/main.py"
-py -3.13 -m mpremote connect COM3 reset
+```bash
+python3 -m mpremote connect /dev/cu.usbmodem* fs cp Control/protocol.py :protocol.py
+python3 -m mpremote connect /dev/cu.usbmodem* fs cp Control/relays.py :relays.py
+python3 -m mpremote connect /dev/cu.usbmodem* fs cp Control/ssd1306.py :ssd1306.py
+python3 -m mpremote connect /dev/cu.usbmodem* fs cp Control/main.py :main.py
+python3 -m mpremote connect /dev/cu.usbmodem* reset
 ```
 
-If the Pico 2 is in BOOTSEL mode, flash MicroPython first by copying the Pico 2 UF2 firmware to the `RP2350` drive.
+macOS example（子 / 拡張）:
+
+```bash
+python3 -m mpremote connect /dev/cu.usbmodem* fs cp Control/protocol.py :protocol.py
+python3 -m mpremote connect /dev/cu.usbmodem* fs cp Control/relays.py :relays.py
+python3 -m mpremote connect /dev/cu.usbmodem* fs cp Control/slave.py :main.py
+python3 -m mpremote connect /dev/cu.usbmodem* reset
+```
+
+Windows では `py -3.13 -m mpremote connect COMx ...`。
+
+BOOTSEL 時は Pico 2 の UF2 を `RP2350` ドライブへコピーして MicroPython を入れる。
+
+## Confirmed so far (single board)
+
+- MicroPython v1.28.0 on Pico 2
+- OLED `0x3c` SSD1306 128x64
+- Encoder channel select + relay apply on CH1–5
+- Controll schematic ERC 0
