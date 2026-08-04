@@ -74,6 +74,19 @@ def ping_slave():
         return False
 
 
+def wait_for_expansion(timeout_ms=3000):
+    """Child starts I2CTarget only after its local boot reset, so retry briefly."""
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < timeout_ms:
+        try:
+            if SLAVE_ADDR in i2c.scan() and ping_slave():
+                return True
+        except OSError as exc:
+            print("expansion probe:", exc)
+        time.sleep_ms(100)
+    return False
+
+
 def apply_global_channel(channel):
     if channel <= LOCAL_CHANNELS:
         if has_expansion:
@@ -135,7 +148,8 @@ else:
 
 board = RelayBoard(led=led, on_status=update_display)
 
-has_expansion = SLAVE_ADDR in devices and ping_slave()
+update_display("Boot", "OLED OK", "Wait exp...", "", "")
+has_expansion = wait_for_expansion()
 channel_count = MAX_CHANNELS if has_expansion else LOCAL_CHANNELS
 print("expansion:", has_expansion, "channels:", channel_count)
 

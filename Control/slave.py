@@ -70,8 +70,8 @@ led = Pin("LED", Pin.OUT)
 led.off()
 
 board = RelayBoard(led=None)
-board.reset_all("Slave boot")
 
+# Advertise on the bus before the local boot reset so the parent can find us.
 target = I2CTarget(
     0,
     SLAVE_ADDR,
@@ -81,9 +81,10 @@ target = I2CTarget(
     sda=Pin(SDA_PIN),
 )
 target.irq(irq_handler)
+mem[REG_STATUS] = STATUS_PONG
 print("expansion slave ready at", hex(SLAVE_ADDR))
 
-# Ready for parent discovery.
+board.reset_all("Slave boot")
 mem[REG_STATUS] = STATUS_PONG
 
 while True:
