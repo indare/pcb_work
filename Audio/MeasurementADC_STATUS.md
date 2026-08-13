@@ -1,6 +1,6 @@
 # MeasurementADC 進捗メモ
 
-最終更新: **2026-08-14**（初号ブリングアップ継続中）
+最終更新: **2026-08-14**（初号ブリングアップ継続中・Pico SCKI 代用切り分けを次手に）
 
 Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM1804 + Pico2 + WAVESHARE LCD）。
 
@@ -10,7 +10,9 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
 
 1. **初号実機**
    - `ADC_nRST` は応急構成で H まで確認済み（詳細は `MeasurementADC_BRINGUP.md`）
-   - **PCM1804 が BCK/LRCK を出さない** → 予備モジュール載せ替えが次手
+   - **PCM1804 が BCK/LRCK を出さない**
+   - **次手**: Y701 を Pico 空き GPIO で代用し SCKI を差し替え（オシロ無し切り分け）
+   - だめなら予備 ADC1804_F 載せ替え → オシロで SCKI 振幅
    - 出たら Pico から I2S / FFT / LCD
 2. **Pico ファームウェア**（クロック確認後）
    - GP8 = `LCD_EN` → High 固定
@@ -18,7 +20,7 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
    - FFT → おおよそ 10 バンド表示
    - LCD / タッチ UI
 
-ハード設計・分割 Gerber は初号として出済み。実機は上記で停止中。
+ハード設計・分割 Gerber は初号として出済み。実機は上記で停止中。手順は `MeasurementADC_BRINGUP.md` の「Pico で Y701 / SCKI を代用する切り分け」。
 
 ---
 
