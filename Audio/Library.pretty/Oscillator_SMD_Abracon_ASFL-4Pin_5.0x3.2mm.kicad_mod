@@ -135,7 +135,7 @@
 		)
 	)
 	(fp_text user "2 GND"
-		(at -2.05 -0.35 0)
+		(at 2.05 0.35 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -155,7 +155,7 @@
 		)
 	)
 	(fp_text user "4 VDD"
-		(at 2.05 0.35 0)
+		(at -2.05 -0.35 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -171,7 +171,7 @@
 		(roundrect_rratio 0.2)
 	)
 	(pad "2" smd roundrect
-		(at -2.05 -1.4)
+		(at 2.05 1.4)
 		(size 1.5 1.2)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.2)
@@ -183,7 +183,7 @@
 		(roundrect_rratio 0.2)
 	)
 	(pad "4" smd roundrect
-		(at 2.05 1.4)
+		(at -2.05 -1.4)
 		(size 1.5 1.2)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.2)
