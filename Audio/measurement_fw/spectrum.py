@@ -1,14 +1,14 @@
 """I2S 受信から 10 バンドスペクトルまでの実時間経路。
 
-1 フレームの内訳は n=2048 でおおよそ
-取り込み 43ms（48kHz で 2048 サンプル）＋ FFT 22ms×2ch ＋ 集計 5ms で
-約 90ms。LCD 表示は 10fps 前後になる見込み。
+`frame()` はダブルバッファで、次フレームの DMA 取り込みと FFT を重ねる。
+n=2048 の直列時は取り込み 43ms ＋ FFT 22ms×2ch ＋ 集計 5ms で約 90ms。
 """
 
 import math
 from array import array
 
-from fft import FFTFixed, ISO_CENTERS, band_power_i, interpolate_peak, octave_bins, peak_bin
+from fft import (FFTFixed, ISO_CENTERS, LowBandIir, band_power_i,
+                 interpolate_peak, octave_bins, peak_bin, iir_band_count)
 from i2s_rx import I2SReceiver
 
 FULL_SCALE = 1 << 23
@@ -24,9 +24,17 @@ class SpectrumAnalyzer:
         self.rx = I2SReceiver(data_pin=data_pin, reset_pin=reset_pin)
         self.fft = FFTFixed(n)
         self.bins = octave_bins(n, fs, centers)
-        self.raw = array('I', bytearray(8 * n))
+        self._bufs = (
+            array('I', bytearray(8 * n)),
+            array('I', bytearray(8 * n)),
+        )
+        self.raw = self._bufs[0]
+        self._i = 0
+        self._primed = False
         self.left = array('i', bytearray(4 * n))
         self.right = array('i', bytearray(4 * n))
+        self._iir_n = iir_band_count(n, fs, centers)
+        self.iir = LowBandIir(fs, centers[:self._iir_n]) if self._iir_n else None
 
     def reset_adc(self):
         self.rx.reset()
@@ -34,8 +42,8 @@ class SpectrumAnalyzer:
     def close(self):
         self.rx.close()
 
-    def _analyze(self, dst, offset):
-        self.fft.unpack(dst, self.raw, offset, 2)
+    def _analyze(self, dst, offset, raw, ch):
+        self.fft.unpack(dst, raw, offset, 2)
         pw = self.fft.power(dst)
         denom = self.fft.full_scale_power(FULL_SCALE)
         bands = []
@@ -44,12 +52,24 @@ class SpectrumAnalyzer:
         k = peak_bin(pw)
         peak_hz = interpolate_peak(pw, k) * self.fs / self.n
         peak_db = 10.0 * math.log10(pw[k] / denom) if pw[k] > 0 else FLOOR_DB
+        if self.iir is not None:
+            for i, db in enumerate(self.iir.block(dst, ch)):
+                bands[i] = db
         return bands, peak_hz, peak_db
 
     def frame(self):
-        """1 回取り込んで L/R それぞれの (バンド dBFS, ピーク Hz, ピーク dBFS)。"""
-        self.rx.read_into(self.raw)
-        return (self._analyze(self.left, 0), self._analyze(self.right, 1))
+        """1 回分を返す。次フレームの DMA は FFT 中に走らせる。"""
+        cur = self._bufs[self._i]
+        if not self._primed:
+            self.rx.read_into(cur)
+            self._primed = True
+        nxt = self._bufs[1 - self._i]
+        self.rx.start_into(nxt)
+        out = (self._analyze(self.left, 0, cur, 0), self._analyze(self.right, 1, cur, 1))
+        self.rx.wait()
+        self._i ^= 1
+        self.raw = self._bufs[self._i]
+        return out
 
     def levels(self):
         """バンドを介さない全体レベル。ピークとおおよその RMS を dBFS で。"""

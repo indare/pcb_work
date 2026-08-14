@@ -98,12 +98,8 @@ class I2SReceiver:
         self._sm = None
         self._dma = None
 
-    def read_into(self, buf, timeout_ms=1000):
-        """buf を L/R 交互の生 32bit ワードで埋める。先頭は必ず L。
-
-        毎回ステートマシンを止めて再スタートするので、フレーム境界が
-        バッファ先頭に揃う。連続録音ではなくスナップショット用。
-        """
+    def start_into(self, buf, timeout_ms=1000):
+        """DMA を起動して戻る。完了は `wait()`。先頭は必ず L。"""
         self.open()
         sm = self._sm
         dma = self._dma
@@ -116,12 +112,31 @@ class I2SReceiver:
         dma.config(read=PIO0_RXF0, write=buf, count=len(buf), ctrl=ctrl,
                    trigger=True)
         sm.active(1)
-        t0 = time.ticks_ms()
+        self._t0 = time.ticks_ms()
+        self._timeout_ms = timeout_ms
+        return buf
+
+    def wait(self):
+        """`start_into` の DMA 完了を待つ。"""
+        dma = self._dma
+        sm = self._sm
+        t0 = self._t0
+        timeout_ms = self._timeout_ms
         while dma.active():
             if time.ticks_diff(time.ticks_ms(), t0) > timeout_ms:
                 sm.active(0)
                 raise RuntimeError("I2S DMA タイムアウト（BCK/LRCK が出ていない）")
         sm.active(0)
+
+    def read_into(self, buf, timeout_ms=1000):
+        """buf を L/R 交互の生 32bit ワードで埋める。先頭は必ず L。
+
+        毎回ステートマシンを止めて再スタートするので、フレーム境界が
+        バッファ先頭に揃う。連続録音ではなくスナップショット用。
+        FFT と重ねる場合は `start_into` / `wait` を使う。
+        """
+        self.start_into(buf, timeout_ms)
+        self.wait()
         return buf
 
     def capture(self, nframe, timeout_ms=1000):

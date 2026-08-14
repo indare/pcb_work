@@ -395,3 +395,110 @@ def band_power_i(power, bins):
             sh += 1
         out.append(float(_band_sum(power, lo, hi, sh)) * (1 << sh))
     return out
+
+
+def _rbj_bp(f, fs, q):
+    """RBJ bandpass（ピーク 0dB）。戻り値は (b0, b2, a1, a2)。b1=0。"""
+    w0 = 2.0 * math.pi * f / fs
+    alpha = math.sin(w0) / (2.0 * q)
+    a0 = 1.0 + alpha
+    b0 = alpha / a0
+    return b0, -b0, -2.0 * math.cos(w0) / a0, (1.0 - alpha) / a0
+
+
+@micropython.viper
+def _decim16(src: ptr32, n: int, dst: ptr32) -> int:
+    m = n >> 4
+    i = 0
+    j = 0
+    while j < m:
+        s = 0
+        k = 0
+        while k < 16:
+            s += int(src[i])
+            i += 1
+            k += 1
+        dst[j] = s >> 4
+        j += 1
+    return m
+
+
+def iir_band_count(n, fs, centers, min_bins=2.5):
+    """FFT ビンが足りない先頭バンド数。2/3 oct 幅が min_bins 本未満なら IIR。"""
+    bin_hz = fs / n
+    r = 2.0 ** (1.0 / 3.0)
+    bw_ratio = r - 1.0 / r
+    k = 0
+    for c in centers:
+        if c * bw_ratio < min_bins * bin_hz:
+            k += 1
+        else:
+            break
+    return k
+
+
+@micropython.viper
+def _iir_ssq_q15(x: ptr32, n: int, b0: int, b2: int, a1: int, a2: int, st: ptr32) -> int:
+    s1 = int(st[0])
+    s2 = int(st[1])
+    acc = 0
+    i = 0
+    while i < n:
+        xi = int(x[i]) >> 8
+        w = xi - ((a1 * s1 + a2 * s2) >> 15)
+        if w > 32767:
+            w = 32767
+        elif w < -32767:
+            w = -32767
+        y = (b0 * w + b2 * s2) >> 15
+        s2 = s1
+        s1 = w
+        acc += (y * y) >> 6
+        i += 1
+    st[0] = s1
+    st[1] = s2
+    return acc
+
+
+class LowBandIir:
+    """低域専用。16 分の 1 に間引いてからバンドパスする。
+
+    同じ 1024 点 FFT では 25Hz と 40Hz が同じビンになる。IIR は状態が
+    フレームをまたぐので分離できる。Q は 2/3 オクターブ相当。
+    """
+
+    DEC = 16
+
+    def __init__(self, fs, centers, q=2.15):
+        self.n = len(centers)
+        fs_d = fs / self.DEC
+        self.coeff = []
+        for f in centers:
+            b0, b2, a1, a2 = _rbj_bp(f, fs_d, q)
+            self.coeff.append((
+                int(b0 * 32767.0), int(b2 * 32767.0),
+                int(a1 * 32767.0), int(a2 * 32767.0),
+            ))
+        self.st = [array('i', [0, 0]) for _ in range(2 * self.n)]
+        self.env = [0.0] * (2 * self.n)
+        self._buf = array('i', bytearray(4 * 512))
+
+    def block(self, samples, ch):
+        m = _decim16(samples, len(samples), self._buf)
+        out = []
+        for k in range(self.n):
+            b0, b2, a1, a2 = self.coeff[k]
+            idx = ch * self.n + k
+            acc = _iir_ssq_q15(self._buf, m, b0, b2, a1, a2, self.st[idx])
+            rms = math.sqrt(acc * 64.0 / m) * 256.0
+            e = self.env[idx]
+            if rms > e:
+                e = e * 0.35 + rms * 0.65
+            else:
+                e = e * 0.92 + rms * 0.08
+            self.env[idx] = e
+            if e > 0.0:
+                out.append(20.0 * math.log10(e / 8388608.0))
+            else:
+                out.append(-120.0)
+        return out
