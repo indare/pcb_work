@@ -64,6 +64,8 @@ class I2SReceiver:
         self._data = data_pin
         self._reset = reset_pin
         self._sm_id = sm_id
+        self._sm = None
+        self._dma = None
         for offset in range(3):
             Pin(data_pin + offset, Pin.IN, None)
         if reset_pin is not None:
@@ -78,30 +80,57 @@ class I2SReceiver:
         p.init(Pin.IN, None)
         time.sleep_ms(settle_ms)
 
+    def open(self):
+        """PIO と DMA を確保する。連続描画では毎フレーム作り直さない。"""
+        if self._sm is None:
+            self._sm = rp2.StateMachine(self._sm_id, _i2s_slave_rx,
+                                        freq=machine.freq(),
+                                        in_base=Pin(self._data))
+            self._dma = rp2.DMA()
+        return self
+
+    def close(self):
+        if self._sm is None:
+            return
+        self._sm.active(0)
+        self._dma.close()
+        rp2.PIO(0).remove_program(_i2s_slave_rx)
+        self._sm = None
+        self._dma = None
+
+    def read_into(self, buf, timeout_ms=1000):
+        """buf を L/R 交互の生 32bit ワードで埋める。先頭は必ず L。
+
+        毎回ステートマシンを止めて再スタートするので、フレーム境界が
+        バッファ先頭に揃う。連続録音ではなくスナップショット用。
+        """
+        self.open()
+        sm = self._sm
+        dma = self._dma
+        sm.active(0)
+        while sm.rx_fifo():
+            sm.get()
+        sm.restart()
+        ctrl = dma.pack_ctrl(size=2, inc_read=False, inc_write=True,
+                             treq_sel=DREQ_PIO0_RX0)
+        dma.config(read=PIO0_RXF0, write=buf, count=len(buf), ctrl=ctrl,
+                   trigger=True)
+        sm.active(1)
+        t0 = time.ticks_ms()
+        while dma.active():
+            if time.ticks_diff(time.ticks_ms(), t0) > timeout_ms:
+                sm.active(0)
+                raise RuntimeError("I2S DMA タイムアウト（BCK/LRCK が出ていない）")
+        sm.active(0)
+        return buf
+
     def capture(self, nframe, timeout_ms=1000):
         """L/R 交互に nframe*2 ワードを取得して生の 32bit 配列で返す。"""
-        n = nframe * 2
-        buf = array.array('I', bytearray(4 * n))
-        sm = rp2.StateMachine(self._sm_id, _i2s_slave_rx,
-                              freq=machine.freq(), in_base=Pin(self._data))
-        dma = rp2.DMA()
+        buf = array.array('I', bytearray(8 * nframe))
         try:
-            while sm.rx_fifo():
-                sm.get()
-            ctrl = dma.pack_ctrl(size=2, inc_read=False, inc_write=True,
-                                 treq_sel=DREQ_PIO0_RX0)
-            dma.config(read=PIO0_RXF0, write=buf, count=n, ctrl=ctrl,
-                       trigger=True)
-            sm.active(1)
-            t0 = time.ticks_ms()
-            while dma.active():
-                if time.ticks_diff(time.ticks_ms(), t0) > timeout_ms:
-                    raise RuntimeError("I2S DMA タイムアウト（BCK/LRCK が出ていない）")
-            return buf
+            return self.read_into(buf, timeout_ms)
         finally:
-            sm.active(0)
-            dma.close()
-            rp2.PIO(0).remove_program(_i2s_slave_rx)
+            self.close()
 
     def capture_channels(self, nframe, timeout_ms=1000):
         """L/R を分離した符号付き整数のリストを返す。"""
