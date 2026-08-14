@@ -1,6 +1,6 @@
 # MeasurementADC 進捗メモ
 
-最終更新: **2026-08-14**（初号ブリングアップ継続中・Pico SCKI 代用切り分けを次手に）
+最終更新: **2026-08-14**（**PCM1804 稼働。Y701 12.288MHz / LRCK 48.000kHz を確認**）
 
 Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM1804 + Pico2 + WAVESHARE LCD）。
 
@@ -8,19 +8,20 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
 
 ## 残作業
 
-1. **初号実機**
-   - `ADC_nRST` は応急構成で H まで確認済み（詳細は `MeasurementADC_BRINGUP.md`）
-   - **PCM1804 が BCK/LRCK を出さない**
-   - **次手**: Y701 を Pico 空き GPIO で代用し SCKI を差し替え（オシロ無し切り分け）
-   - だめなら予備 ADC1804_F 載せ替え → オシロで SCKI 振幅
-   - 出たら Pico から I2S / FFT / LCD
-2. **Pico ファームウェア**（クロック確認後）
+1. **初号実機**（応急構成で動作中・詳細は `MeasurementADC_BRINGUP.md`）
+   - `ADC_nRST` は U710 の 1番リフトで解決済み
+   - **PCM1804 稼働**: SCKI 12.288MHz / LRCK 48.000kHz / BCK 3.072MHz / DATA 出力
+   - SCKI は **Y701**（初号 FP 誤りのため空中配線だが発振確認済み）
+   - RST は **Pico GP15** から制御
+   - `GP9 → CN3F-1` は測定用に残置。**駆動すると Y701 と衝突するので入力専用**
+2. **Pico ファームウェア**
+   - **I2S スレーブ受信を PIO で実装**（ADC がマスタなので `machine.I2S` は使えない）
    - GP8 = `LCD_EN` → High 固定
-   - I2S 受信（FMT = 24bit I²S）
    - FFT → おおよそ 10 バンド表示
    - LCD / タッチ UI
+3. **アナログ入力側**（OPA 電源・VCOM）の立ち上げ
 
-ハード設計・分割 Gerber は初号として出済み。実機は上記で停止中。手順は `MeasurementADC_BRINGUP.md` の「Pico で Y701 / SCKI を代用する切り分け」。
+ハード設計・分割 Gerber は初号として出済み。
 
 ---
 
