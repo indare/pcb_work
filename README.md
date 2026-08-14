@@ -6,9 +6,16 @@ KiCad 10 の基板・回路図リポジトリです。主な作業対象は `Aud
 
 | パス | 内容 |
 | --- | --- |
-| `Audio/` | AudioCase 本体・MeasurementADC シート・ライブラリ・ガーバー |
-| `Control/` | Pico 2 制御ファーム（MicroPython） |
+| `Audio/` | AudioCase 本体・MeasurementADC・分割 Gerber・計測 FW。[案内](Audio/README.md) |
+| `Control/` | Controll 用 Pico2 ファーム（親／子） |
 | `.cursor/` | Cursor 用ルール・MCP 設定 |
+
+## いまの実機（要約）
+
+- **Amp → MeasurementADC（LCD スペアナ）** が接続して動作中
+- Controll 2 段は外している。EQ は今号では使わない
+- 次は MeasurementADC 初号ジャンパの次号解消 → 端子台／ケース
+- 詳細: [Audio/MeasurementADC_STATUS.md](Audio/MeasurementADC_STATUS.md)
 
 ## Cursor MCP（KiCad）
 
@@ -61,4 +68,5 @@ KiCad 10 の基板・回路図リポジトリです。主な作業対象は `Aud
 
 - 進捗: `Audio/MeasurementADC_STATUS.md`
 - 発注: `Audio/MeasurementADC_ORDER.md`
+- ブリングアップ履歴: `Audio/MeasurementADC_BRINGUP.md`
 - MBC2596-01 FP（0°）: 左上 IN+ / 左下 IN- / 右上 OUT+ / 右下 OUT-
