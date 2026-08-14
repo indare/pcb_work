@@ -1,6 +1,6 @@
 # MeasurementADC 進捗メモ
 
-最終更新: **2026-08-14**（**PCM1804 稼働。Y701 12.288MHz / LRCK 48.000kHz を確認**）
+最終更新: **2026-08-14**（**I2S 受信まで開通。24bit サンプルを DMA で連続取得**）
 
 Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM1804 + Pico2 + WAVESHARE LCD）。
 
@@ -14,12 +14,14 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
    - SCKI は **Y701**（初号 FP 誤りのため空中配線だが発振確認済み）
    - RST は **Pico GP15** から制御
    - `GP9 → CN3F-1` は測定用に残置。**駆動すると Y701 と衝突するので入力専用**
-2. **Pico ファームウェア**
-   - **I2S スレーブ受信を PIO で実装**（ADC がマスタなので `machine.I2S` は使えない）
+2. **Pico ファームウェア**（`measurement_fw/`）
+   - I2S スレーブ受信は **PIO + DMA で実装済み**。24bit 符号付きサンプルを取りこぼしなく取得
    - GP8 = `LCD_EN` → High 固定
    - FFT → おおよそ 10 バンド表示
    - LCD / タッチ UI
 3. **アナログ入力側**（OPA 電源・VCOM）の立ち上げ
+   - 現状は入力が浮いており、L 19%FS / R 14%FS のノイズを拾っているだけ
+   - ここを通電しないと FFT の結果を評価できない
 
 ハード設計・分割 Gerber は初号として出済み。
 
@@ -70,4 +72,5 @@ python3 scripts/regenerate_split_gerbers.py --only 06_measurement_adc
 | `AudioCase.kicad_pcb` | 親 PCB（MeasurementADC 島含む） |
 | `MeasurementADC_ORDER.md` | 発注・在庫メモ |
 | `MeasurementADC_BRINGUP.md` | 初号機ブリングアップ記録（現状の停止要因と次手順） |
+| `measurement_fw/` | 計測 Pico2 の MicroPython（PIO I2S 受信・確認スクリプト） |
 | `scripts/regenerate_split_gerbers.py` | 分割 Gerber（`06_measurement_adc`） |
