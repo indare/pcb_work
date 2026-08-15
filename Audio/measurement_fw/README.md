@@ -17,6 +17,7 @@
 | `fft_test.py` | `fft.py` の自己検証 |
 | `spectrum_monitor.py` | 10 バンドをシリアル表示 |
 | `lcd_test.py` | LCD 単体確認 |
+| `main.py` | 電源投入で `spectrum_lcd.main()` を起動 |
 
 ## 使い方
 
@@ -26,9 +27,9 @@ cd Audio/measurement_fw
 # ハード確認
 mpremote connect COMx cp i2s_rx.py : + run adc_check.py
 
-# LCD スペアナ（本番相当）
-mpremote connect COMx fs cp lcd.py touch.py fft.py i2s_rx.py spectrum.py spectrum_lcd.py :
-mpremote connect COMx exec "import spectrum_lcd; spectrum_lcd.main()"
+# LCD スペアナ一式＋起動用 main.py
+mpremote connect COMx fs cp lcd.py touch.py fft.py i2s_rx.py spectrum.py spectrum_lcd.py main.py :
+# 以降はリセット／電源投入でスペアナが自動起動する
 ```
 
 `adc_check.py` が正常ならおおよそ次のとおり。
