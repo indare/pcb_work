@@ -15,6 +15,8 @@ from i2s_rx import I2SReceiver
 
 FULL_SCALE = 1 << 23
 FLOOR_DB = -120.0
+# FFT バンドの下り平滑係数（フレームあたり）。~12fps で半減期 約 0.1 秒。
+FFT_RELEASE = 0.5
 
 try:
     import fft_q15
@@ -66,9 +68,17 @@ class SpectrumAnalyzer:
         self.bins = octave_bins(self.n, self.fs, centers, octaves=octaves)
         self._iir_n = iir_band_count(self.n, self.fs, centers, octaves=octaves)
         if self._iir_n:
-            self.iir = LowBandIir(self.fs, centers[:self._iir_n], q=_iir_q(octaves))
+            if isinstance(octaves, (tuple, list)):
+                q = [_iir_q(width) for width in octaves[:self._iir_n]]
+            else:
+                q = _iir_q(octaves)
+            self.iir = LowBandIir(self.fs, centers[:self._iir_n], q=q)
         else:
             self.iir = None
+        # FFT バンドの表示 envelope（dB）。attack は即時、release だけ緩める。
+        # 狭い 1/3 oct はビン平均本数が少なく素で暴れるので、IIR より軽めに掛ける。
+        n = len(centers)
+        self._env = [[FLOOR_DB] * n, [FLOOR_DB] * n]
 
     def reset_adc(self):
         self.rx.reset()
@@ -87,8 +97,18 @@ class SpectrumAnalyzer:
         unpack_i2s(dst, raw, self.n, offset, 2)
         pw, denom = self._power(dst)
         bands = []
-        for p in band_power_i(pw, self.bins):
-            bands.append(10.0 * math.log10(p / denom) if p > 0.0 else FLOOR_DB)
+        # 帯域密度: ビン平均パワーをフルスケール正弦波ピークと比較する。
+        # 合計のままだと広いバンドほど音楽で棒が伸びる。単音は属するバンドの
+        # ビン数ぶん 10·log10(nb) 低く見える（意図どおり）。
+        env = self._env[ch]
+        for i, ((lo, hi), p) in enumerate(zip(self.bins, band_power_i(pw, self.bins))):
+            dens = p / float(hi - lo + 1)
+            db = 10.0 * math.log10(dens / denom) if dens > 0.0 else FLOOR_DB
+            e = env[i]
+            # 上りは即時、下りだけ緩める（IIR バンドはこの後で上書きされる）。
+            e = db if db >= e else e * FFT_RELEASE + db * (1.0 - FFT_RELEASE)
+            env[i] = e
+            bands.append(e)
         k = peak_bin(pw)
         peak_hz = interpolate_peak(pw, k) * self.fs / self.n
         peak_db = 10.0 * math.log10(pw[k] / denom) if pw[k] > 0 else FLOOR_DB

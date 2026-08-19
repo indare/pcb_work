@@ -369,12 +369,15 @@ def octave_bins(n, fs, centers=ISO_CENTERS, octaves=1.0):
     """各バンドが占めるビン範囲。
 
     `octaves` はバンド幅（1.0=1/1 oct、1/3≈0.333=1/3 oct）。
+    バンドごとに幅を変える場合は centers と同じ長さの tuple/list も渡せる。
     端は中心 × 2^{±octaves/2}。
     """
     half = n >> 1
-    r = 2.0 ** (0.5 * octaves)
+    variable = isinstance(octaves, (tuple, list))
     out = []
-    for c in centers:
+    for i, c in enumerate(centers):
+        width = octaves[i] if variable else octaves
+        r = 2.0 ** (0.5 * width)
         lo = int(c / r * n / fs + 0.5)
         hi = int(c * r * n / fs + 0.5)
         if lo < 1:
@@ -447,11 +450,16 @@ def iir_band_count(n, fs, centers, min_bins=2.5, octaves=1.0):
     低域分離を確保する。
     """
     bin_hz = fs / n
-    width = (2.0 / 3.0) if octaves >= 0.9 else octaves
-    r = 2.0 ** (0.5 * width)
-    bw_ratio = r - 1.0 / r
+    variable = isinstance(octaves, (tuple, list))
     k = 0
-    for c in centers:
+    for i, c in enumerate(centers):
+        width = octaves[i] if variable else octaves
+        # 従来の固定 1/1 oct モードだけは、低域分離のため 2/3 oct 幅で判定する。
+        # 可変幅は実際の表示帯域幅をそのまま判定に使う。
+        if not variable and width >= 0.9:
+            width = 2.0 / 3.0
+        r = 2.0 ** (0.5 * width)
+        bw_ratio = r - 1.0 / r
         if c * bw_ratio < min_bins * bin_hz:
             k += 1
         else:
@@ -491,16 +499,25 @@ class LowBandIir:
 
     DEC = 16
 
-    def __init__(self, fs, centers, q=2.15):
+    def __init__(self, fs, centers, q=2.15, release_s=0.12, frame_s=0.07):
         self.n = len(centers)
         fs_d = fs / self.DEC
         self.coeff = []
-        for f in centers:
-            b0, b2, a1, a2 = _rbj_bp(f, fs_d, q)
+        # release はバンドごとに決める。バンドパスの整定時間は Q/f0（＝1/帯域幅）
+        # なので、それより速く落とすと本物の減衰ではなくフィルタのリンギングを
+        # 表示することになる。逆にそれより遅い分は表示の粘りでしかないので、
+        # 整定時間か release_s の遅いほうを時定数にする。
+        self.rel = []
+        for i, f in enumerate(centers):
+            qi = q[i] if isinstance(q, (tuple, list)) else q
+            b0, b2, a1, a2 = _rbj_bp(f, fs_d, qi)
             self.coeff.append((
                 int(b0 * 32767.0), int(b2 * 32767.0),
                 int(a1 * 32767.0), int(a2 * 32767.0),
             ))
+            settle = qi / f
+            self.rel.append(math.exp(-frame_s / (settle if settle > release_s
+                                                 else release_s)))
         self.st = [array('i', [0, 0]) for _ in range(2 * self.n)]
         self.env = [0.0] * (2 * self.n)
         self._buf = array('i', bytearray(4 * 512))
@@ -517,7 +534,8 @@ class LowBandIir:
             if rms > e:
                 e = e * 0.35 + rms * 0.65
             else:
-                e = e * 0.92 + rms * 0.08
+                a = self.rel[k]
+                e = e * a + rms * (1.0 - a)
             self.env[idx] = e
             if e > 0.0:
                 out.append(20.0 * math.log10(e / 8388608.0))

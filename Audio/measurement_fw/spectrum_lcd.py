@@ -1,7 +1,7 @@
-"""スペアナ UI（既定 1/3 oct 30 本 / 切替で 15 本）。
+"""スペアナ UI（既定は 1/3 oct 30 本・白パレット）。
 
 縦グリッド付きの棒。下端メニューはタッチで切替。
-レンジ / L+R / 色 / 30|15 / ピークホールド。
+レンジ / L+R / 色 / 30|H20|15 / ピークホールド。
 """
 import math
 import time
@@ -42,15 +42,31 @@ LABELS30 = (
     "", "", "4k", "", "", "8k", "", "", "16k", "",
 )
 
-# 既定は 30（1/3 oct）。切替は 15（2/3 oct 系 GEQ）↔ 30。
-# centers, octaves, menu label, bar labels, bar_w
+# 低域は 1/1 oct（40〜500 Hz）、800 Hz 以上は 1/3 oct。
+# 1/3 oct の 25 Hz は帯域幅 5.8 Hz しかなく応答が 170ms 級になる。1/1 oct なら
+# 40 Hz でも 28 Hz 幅（約 35ms）で追従する。IIR は 40〜125 Hz の 3 本だけ。
+HYBRID20 = (
+    40.0, 63.0, 125.0, 250.0, 500.0,
+    800.0, 1000.0, 1250.0, 1600.0, 2000.0, 2500.0, 3150.0,
+    4000.0, 5000.0, 6300.0, 8000.0, 10000.0, 12500.0, 16000.0, 20000.0,
+)
+HYBRID20_WIDTHS = (1.0,) * 5 + (1.0 / 3.0,) * 15
+LABELS20 = (
+    "40", "63", "125", "250", "500", "800", "", "", "2k", "",
+    "", "4k", "", "", "8k", "", "", "16k", "", "",
+)
+
+# centers, octaves（固定値またはバンド別 tuple）, menu label, bar labels, bar_w
+# 既定は 30（1/3 oct）。H20 は低域を 1 oct にした応答重視モード。
 BAND_MODES = (
     (GEQ30, 1.0 / 3.0, "30", LABELS30, 12),
+    (HYBRID20, HYBRID20_WIDTHS, "H20", LABELS20, 18),
     (GEQ15, 2.0 / 3.0, "15", LABELS15, 22),
 )
 
 GRID = 0x7BEF
 VGRID = 0x2104
+HGRID = 0x3186
 MENU_BG = 0x1082
 MENU_N = 5
 
@@ -62,11 +78,40 @@ RANGES = (
 )
 CH_LAB = ("L+R", "L", "R")
 PALETTES = (
+    ((WHITE, WHITE, WHITE), "WHT"),
     ((GREEN, YELLOW, RED), "GYR"),
     ((CYAN, 0x001F, WHITE), "CYN"),
-    ((WHITE, WHITE, WHITE), "WHT"),
     ((ORANGE, YELLOW, RED), "AMB"),
 )
+
+
+def _db_step(lo, hi):
+    """表示レンジに合わせて目盛間隔を選ぶ。"""
+    span = hi - lo
+    for step in (6.0, 12.0, 18.0, 24.0):
+        if span / step <= 5.0:
+            return step
+    return 30.0
+
+
+def _db_grid(ui, floor):
+    """(y, db) のリスト。床と天井は線を引かない。中間は最大 2 本。"""
+    lo = ui.db_lo()
+    hi = ui.db_hi()
+    step = _db_step(lo, hi)
+    out = []
+    db = lo + step
+    while db < hi - 0.5:
+        h = 2 + int((db - lo) / (hi - lo) * (MAX_H - 2))
+        out.append((floor - h, db))
+        db += step
+    # 描き直しコストを抑えるため、多いときは端の 2 本だけ残す。
+    # 既定 −60〜−18 なら −48/−36/−24 → −48/−24。
+    if len(out) > 2:
+        out = [out[0], out[-1]]
+    return out
+
+
 
 
 class Layout:
@@ -148,11 +193,21 @@ class Bars:
         self.ui = ui
         self.floor = floor_y
         self.layout = layout
+        # 目盛の y は毎フレーム引き直すので、ここで確定させておく。
+        # レンジやバンドを変えると Bars ごと作り直されるので取り違えない。
+        self.grid_y = tuple(y for y, _db in _db_grid(ui, floor_y))
         n = layout.n
         self.h = [0] * n
         self.col = [BG] * n
         self.peak = [0] * n
         self.hold = [0] * n
+
+    def _hgrid(self, x, w, y0, h):
+        """棒を消した矩形に重なる横目盛だけ描き直す。"""
+        y1 = y0 + h
+        for y in self.grid_y:
+            if y0 <= y < y1:
+                self.lcd.fill_rect(x, y, w, 1, HGRID)
 
     def set(self, i, db):
         h = _h_of(self.ui, db)
@@ -177,6 +232,7 @@ class Bars:
             if old_p > 0 and old_p != p and old_p > h:
                 self.lcd.fill_rect(x, self.floor - old_p, bw, PEAK_H, BG)
                 self.lcd.fill_rect(gx, self.floor - old_p, 1, PEAK_H, VGRID)
+                self._hgrid(x, bw, self.floor - old_p, PEAK_H)
         else:
             p = 0
             self.peak[i] = 0
@@ -184,6 +240,7 @@ class Bars:
         if h < old_h:
             self.lcd.fill_rect(x, self.floor - old_h, bw, old_h - h, BG)
             self.lcd.fill_rect(gx, self.floor - old_h, 1, old_h - h, VGRID)
+            self._hgrid(x, bw, self.floor - old_h, old_h - h)
         elif h > old_h:
             self.lcd.fill_rect(x, self.floor - h, bw, h - old_h, col)
         if col != self.col[i] and h > 0:
@@ -226,6 +283,17 @@ def _draw_menu(lcd, ui):
         lcd.text(lab, tx, MENU_Y + 6, WHITE, MENU_BG)
 
 
+def _draw_db_grid(lcd, ui, floor, top_y):
+    """横目盛と右端の dB ラベル。"""
+    for y, db in _db_grid(ui, floor):
+        if y < top_y:
+            continue
+        lcd.fill_rect(0, y, WIDTH, 1, HGRID)
+        lab = "%d" % int(db)
+        tx = WIDTH - len(lab) * 8
+        lcd.text(lab, tx, y - 4, GRID, BG)
+
+
 def _draw_static(lcd, ui, layout):
     lcd.fill(BG)
     lcd.fill_rect(0, DIV_Y, WIDTH, 3, WHITE)
@@ -247,6 +315,8 @@ def _draw_static(lcd, ui, layout):
             tx = WIDTH - len(lab) * 8
         lcd.text(lab, tx, L_LABEL_Y, GRID, BG)
         lcd.text(lab, tx, R_LABEL_Y, GRID, BG)
+    _draw_db_grid(lcd, ui, L_FLOOR, 8)
+    _draw_db_grid(lcd, ui, R_FLOOR, DIV_Y + 8)
     _draw_menu(lcd, ui)
 
 
