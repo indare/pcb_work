@@ -1,4 +1,4 @@
-"""I2S 受信から 10 バンドスペクトルまでの実時間経路。
+"""I2S 受信から N バンドスペクトルまでの実時間経路。
 
 `frame()` はダブルバッファで、次フレームの DMA 取り込みと FFT を重ねる。
 n=2048 の直列時は取り込み 43ms ＋ FFT 22ms×2ch ＋ 集計 5ms で約 90ms。
@@ -15,15 +15,18 @@ FULL_SCALE = 1 << 23
 FLOOR_DB = -120.0
 
 
+def _iir_q(octaves):
+    """RBJ バンドパスの Q。1/3 oct ≈4.32、1/1 系の低域分離は従来どおり 2.15。"""
+    return 4.32 if octaves < 0.5 else 2.15
+
+
 class SpectrumAnalyzer:
     def __init__(self, n=2048, fs=48000.0, data_pin=0, reset_pin=15,
-                 centers=ISO_CENTERS):
+                 centers=ISO_CENTERS, octaves=1.0):
         self.n = n
         self.fs = fs
-        self.centers = centers
         self.rx = I2SReceiver(data_pin=data_pin, reset_pin=reset_pin)
         self.fft = FFTFixed(n)
-        self.bins = octave_bins(n, fs, centers)
         self._bufs = (
             array('I', bytearray(8 * n)),
             array('I', bytearray(8 * n)),
@@ -33,8 +36,19 @@ class SpectrumAnalyzer:
         self._primed = False
         self.left = array('i', bytearray(4 * n))
         self.right = array('i', bytearray(4 * n))
-        self._iir_n = iir_band_count(n, fs, centers)
-        self.iir = LowBandIir(fs, centers[:self._iir_n]) if self._iir_n else None
+        self.iir = None
+        self.set_centers(centers, octaves)
+
+    def set_centers(self, centers, octaves=1.0):
+        """バンド定義だけ差し替える。FFT バッファは再利用する。"""
+        self.centers = centers
+        self.octaves = octaves
+        self.bins = octave_bins(self.n, self.fs, centers, octaves=octaves)
+        self._iir_n = iir_band_count(self.n, self.fs, centers, octaves=octaves)
+        if self._iir_n:
+            self.iir = LowBandIir(self.fs, centers[:self._iir_n], q=_iir_q(octaves))
+        else:
+            self.iir = None
 
     def reset_adc(self):
         self.rx.reset()

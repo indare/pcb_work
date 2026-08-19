@@ -19,6 +19,13 @@ from array import array
 ISO_CENTERS = (31.5, 63.0, 125.0, 250.0, 500.0,
                1000.0, 2000.0, 4000.0, 8000.0, 16000.0)
 
+# ISO 1/3 oct（25 Hz〜20 kHz）。詳細表示用。
+ISO_THIRD_CENTERS = (
+    25.0, 31.5, 40.0, 50.0, 63.0, 80.0, 100.0, 125.0, 160.0, 200.0,
+    250.0, 315.0, 400.0, 500.0, 630.0, 800.0, 1000.0, 1250.0, 1600.0, 2000.0,
+    2500.0, 3150.0, 4000.0, 5000.0, 6300.0, 8000.0, 10000.0, 12500.0, 16000.0, 20000.0,
+)
+
 Q = 15          # 回転因子と窓の小数ビット数
 NORM_BITS = 15  # 入力の正規化目標ビット数
 # 回転は複素振幅を保つので |xr*c + xi*s| <= |X| * 2^15 * sqrt(2)。
@@ -352,10 +359,14 @@ def interpolate_peak(power, k):
     return k + 0.5 * (a - c) / d
 
 
-def octave_bins(n, fs, centers=ISO_CENTERS):
-    """各オクターブバンドが占めるビン範囲。中心の 1/√2 〜 √2 倍。"""
+def octave_bins(n, fs, centers=ISO_CENTERS, octaves=1.0):
+    """各バンドが占めるビン範囲。
+
+    `octaves` はバンド幅（1.0=1/1 oct、1/3≈0.333=1/3 oct）。
+    端は中心 × 2^{±octaves/2}。
+    """
     half = n >> 1
-    r = 2.0 ** 0.5
+    r = 2.0 ** (0.5 * octaves)
     out = []
     for c in centers:
         lo = int(c / r * n / fs + 0.5)
@@ -423,10 +434,15 @@ def _decim16(src: ptr32, n: int, dst: ptr32) -> int:
     return m
 
 
-def iir_band_count(n, fs, centers, min_bins=2.5):
-    """FFT ビンが足りない先頭バンド数。2/3 oct 幅が min_bins 本未満なら IIR。"""
+def iir_band_count(n, fs, centers, min_bins=2.5, octaves=1.0):
+    """FFT ビンが足りない先頭バンド数。
+
+    既定は従来どおり 2/3 oct 幅で判定（1/1 表示でも低域分離に必要）。
+    1/3 oct 表示ではバンド幅そのもの（octaves）で判定する。
+    """
     bin_hz = fs / n
-    r = 2.0 ** (1.0 / 3.0)
+    width = (1.0 / 3.0) * 2.0 if octaves >= 0.9 else octaves
+    r = 2.0 ** (0.5 * width)
     bw_ratio = r - 1.0 / r
     k = 0
     for c in centers:
