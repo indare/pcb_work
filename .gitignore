@@ -22,6 +22,13 @@ Audio/split/AudioCase_for_separate.kicad_pcb
 .cursor/mcp.local.env
 .cursor/mcp.json.*.kicad-mcp.bak
 
+# Local build deps (MicroPython tree, ARM toolchain)
+.deps/
+
+# c_fft build outputs (rebuild: make test / ports/rp2 USER_C_MODULES)
+Audio/measurement_fw/c_fft/test_host
+Audio/measurement_fw/c_fft/*.uf2
+
 # Claude and MCP specific files
 .claude/
 .mcp.json.*.kicad-mcp.bak
