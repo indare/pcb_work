@@ -437,11 +437,11 @@ def _decim16(src: ptr32, n: int, dst: ptr32) -> int:
 def iir_band_count(n, fs, centers, min_bins=2.5, octaves=1.0):
     """FFT ビンが足りない先頭バンド数。
 
-    既定は従来どおり 2/3 oct 幅で判定（1/1 表示でも低域分離に必要）。
-    1/3 oct 表示ではバンド幅そのもの（octaves）で判定する。
+    判定幅は表示バンド幅 `octaves`。ただし 1/1 表示では従来どおり 2/3 oct 幅で
+    低域分離を確保する。
     """
     bin_hz = fs / n
-    width = (1.0 / 3.0) * 2.0 if octaves >= 0.9 else octaves
+    width = (2.0 / 3.0) if octaves >= 0.9 else octaves
     r = 2.0 ** (0.5 * width)
     bw_ratio = r - 1.0 / r
     k = 0

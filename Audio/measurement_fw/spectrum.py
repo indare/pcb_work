@@ -16,8 +16,12 @@ FLOOR_DB = -120.0
 
 
 def _iir_q(octaves):
-    """RBJ バンドパスの Q。1/3 oct ≈4.32、1/1 系の低域分離は従来どおり 2.15。"""
-    return 4.32 if octaves < 0.5 else 2.15
+    """RBJ バンドパスの Q。狭いバンドほど Q を上げる。"""
+    if octaves < 0.4:
+        return 4.32   # 1/3 oct
+    if octaves < 0.8:
+        return 2.15   # 2/3 oct 付近
+    return 1.41       # 1/1 oct
 
 
 class SpectrumAnalyzer:
