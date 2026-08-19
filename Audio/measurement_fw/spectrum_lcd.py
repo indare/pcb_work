@@ -282,7 +282,7 @@ def main():
         centers, octaves, lab, _labels, _bw = ui.band_mode()
         an = SpectrumAnalyzer(n=1024, centers=centers, octaves=octaves)
         an.reset_adc()
-        print("adc live bands", lab, "iir", an._iir_n)
+        print("adc live bands", lab, "iir", an._iir_n, "fft", an.fft_backend)
     except Exception as e:
         print("mock", e)
 

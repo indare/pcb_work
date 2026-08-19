@@ -1,18 +1,25 @@
 """I2S 受信から N バンドスペクトルまでの実時間経路。
 
 `frame()` はダブルバッファで、次フレームの DMA 取り込みと FFT を重ねる。
-n=2048 の直列時は取り込み 43ms ＋ FFT 22ms×2ch ＋ 集計 5ms で約 90ms。
+FFT はカスタム UF2 の `fft_q15` があればそれを使い、無ければ viper の
+`FFTFixed` にフォールバックする。
 """
 
 import math
 from array import array
 
 from fft import (FFTFixed, ISO_CENTERS, LowBandIir, band_power_i,
-                 interpolate_peak, octave_bins, peak_bin, iir_band_count)
+                 interpolate_peak, octave_bins, peak_bin, iir_band_count,
+                 unpack_i2s)
 from i2s_rx import I2SReceiver
 
 FULL_SCALE = 1 << 23
 FLOOR_DB = -120.0
+
+try:
+    import fft_q15
+except ImportError:
+    fft_q15 = None
 
 
 def _iir_q(octaves):
@@ -30,7 +37,6 @@ class SpectrumAnalyzer:
         self.n = n
         self.fs = fs
         self.rx = I2SReceiver(data_pin=data_pin, reset_pin=reset_pin)
-        self.fft = FFTFixed(n)
         self._bufs = (
             array('I', bytearray(8 * n)),
             array('I', bytearray(8 * n)),
@@ -40,6 +46,16 @@ class SpectrumAnalyzer:
         self._primed = False
         self.left = array('i', bytearray(4 * n))
         self.right = array('i', bytearray(4 * n))
+        if fft_q15 is not None:
+            self._cfft = fft_q15.FFT(n)
+            self._pw = array('i', bytearray(4 * ((n >> 1) + 1)))
+            self.fft = None
+            self.fft_backend = "c"
+        else:
+            self._cfft = None
+            self._pw = None
+            self.fft = FFTFixed(n)
+            self.fft_backend = "viper"
         self.iir = None
         self.set_centers(centers, octaves)
 
@@ -60,10 +76,16 @@ class SpectrumAnalyzer:
     def close(self):
         self.rx.close()
 
+    def _power(self, samples):
+        if self._cfft is not None:
+            self._cfft.power_into(samples, self._pw)
+            return self._pw, self._cfft.full_scale_power(FULL_SCALE)
+        pw = self.fft.power(samples)
+        return pw, self.fft.full_scale_power(FULL_SCALE)
+
     def _analyze(self, dst, offset, raw, ch):
-        self.fft.unpack(dst, raw, offset, 2)
-        pw = self.fft.power(dst)
-        denom = self.fft.full_scale_power(FULL_SCALE)
+        unpack_i2s(dst, raw, self.n, offset, 2)
+        pw, denom = self._power(dst)
         bands = []
         for p in band_power_i(pw, self.bins):
             bands.append(10.0 * math.log10(p / denom) if p > 0.0 else FLOOR_DB)
@@ -94,7 +116,7 @@ class SpectrumAnalyzer:
         self.rx.read_into(self.raw)
         out = []
         for dst, offset in ((self.left, 0), (self.right, 1)):
-            self.fft.unpack(dst, self.raw, offset, 2)
+            unpack_i2s(dst, self.raw, self.n, offset, 2)
             n = self.n
             s = 0
             for i in range(n):

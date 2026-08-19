@@ -327,6 +327,12 @@ class FFTFixed:
         return array('i', bytearray(4 * self.n))
 
 
+def unpack_i2s(dst, raw, n, offset, stride=2):
+    """PIO の I2S ワード列から 1ch を符号付き int32 に取り出す。"""
+    _unpack(dst, raw, n, offset, stride)
+    return dst
+
+
 # --------------------------------------------------------------------------
 # 共通ヘルパ
 # --------------------------------------------------------------------------
