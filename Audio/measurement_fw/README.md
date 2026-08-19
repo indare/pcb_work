@@ -15,7 +15,7 @@
 | `spectrum_lcd.py` | LCD 10 バンド UI＋下端タッチメニュー |
 | `adc_check.py` | クロック実測と I2S ブリングアップ |
 | `fft_test.py` | `fft.py` の自己検証 |
-| `c_fft/` | Q15 FFT の C 移植（USER_C_MODULE `fft_q15`。実機で viper の約 1.56 倍） |
+| `c_fft/` | Q15 FFT の C 移植（USER_C_MODULE `fft_q15`。実機で viper の約 5.4 倍） |
 | `spectrum_monitor.py` | 10 バンドをシリアル表示 |
 | `lcd_test.py` | LCD 単体確認 |
 | `main.py` | 電源投入で `spectrum_lcd.main()` を起動 |

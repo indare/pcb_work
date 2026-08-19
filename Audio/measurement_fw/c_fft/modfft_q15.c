@@ -8,8 +8,6 @@
  *   denom = f.full_scale_power(1 << 23)
  *   sh = f.shift()
  */
-#include <string.h>
-
 #include "py/obj.h"
 #include "py/runtime.h"
 
@@ -58,8 +56,7 @@ static mp_obj_t mp_fft_q15_power_into(mp_obj_t self_in, mp_obj_t samples_in, mp_
     if (!is_i32_buf(&dstinfo, (size_t)half1 * 4)) {
         mp_raise_ValueError(MP_ERROR_TEXT("out need n/2+1 int32"));
     }
-    const int32_t *pw = fft_q15_power(&self->fft, srcinfo.buf);
-    memcpy(dstinfo.buf, pw, (size_t)half1 * 4);
+    fft_q15_power_into(&self->fft, srcinfo.buf, dstinfo.buf);
     return out_in;
 }
 static MP_DEFINE_CONST_FUN_OBJ_3(mp_fft_q15_power_into_obj, mp_fft_q15_power_into);

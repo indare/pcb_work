@@ -119,34 +119,26 @@ static int32_t max_abs(const int32_t *src, int n, int32_t dc) {
     return m;
 }
 
-static void load_win(int32_t *dst, const int32_t *src, int32_t *imag, const int32_t *win,
-                     int n, int32_t dc, int sh) {
+static void load_win_bitrev(int32_t *dst, const int32_t *src, int32_t *imag,
+                            const int32_t *win, const int32_t *rev,
+                            int n, int32_t dc, int sh) {
     if (sh >= 0) {
         for (int i = 0; i < n; i++) {
-            dst[i] = (int32_t)(((((int64_t)(src[i] - dc) << sh) * win[i]) + 16384) >> 15);
-            imag[i] = 0;
+            /* Normalisation keeps the shifted sample within signed Q15, so
+             * this product is below 2^30 and a 32-bit multiply is exact. */
+            int32_t t = (src[i] - dc) * (1 << sh);
+            int j = rev[i];
+            dst[j] = (t * win[i] + 16384) >> 15;
+            imag[j] = 0;
         }
     } else {
         int r = -sh;
         int32_t rnd = 1 << (r - 1);
         for (int i = 0; i < n; i++) {
             int32_t t = (src[i] - dc + rnd) >> r;
-            dst[i] = (int32_t)(((int64_t)t * win[i] + 16384) >> 15);
-            imag[i] = 0;
-        }
-    }
-}
-
-static void bitrev(int32_t *re, int32_t *im, const int32_t *rev, int n) {
-    for (int i = 0; i < n; i++) {
-        int j = rev[i];
-        if (j > i) {
-            int32_t t = re[i];
-            re[i] = re[j];
-            re[j] = t;
-            t = im[i];
-            im[i] = im[j];
-            im[j] = t;
+            int j = rev[i];
+            dst[j] = (t * win[i] + 16384) >> 15;
+            imag[j] = 0;
         }
     }
 }
@@ -164,8 +156,11 @@ static void stages(int32_t *re, int32_t *im, const int32_t *coss, const int32_t 
                 int32_t s = sinn[k];
                 int32_t xr = re[l];
                 int32_t xi = im[l];
-                int32_t tr = (int32_t)(((int64_t)xr * c + (int64_t)xi * s + 16384) >> 15);
-                int32_t ti = (int32_t)(((int64_t)xi * c - (int64_t)xr * s + 16384) >> 15);
+                /* Every stage divides by two, preserving the initial Q15
+                 * magnitude bound. The sum of two Q15 products, including
+                 * rounding, therefore still fits signed int32. */
+                int32_t tr = (xr * c + xi * s + 16384) >> 15;
+                int32_t ti = (xi * c - xr * s + 16384) >> 15;
                 int32_t ar = re[j];
                 int32_t ai = im[j];
                 re[l] = (ar - tr + 1) >> 1;
@@ -182,21 +177,18 @@ static void stages(int32_t *re, int32_t *im, const int32_t *coss, const int32_t 
 
 static void power_side(int32_t *pw, const int32_t *re, const int32_t *im, int half1) {
     for (int i = 0; i < half1; i++) {
-        int64_t r = re[i];
-        int64_t m = im[i];
-        int64_t p = r * r + m * m;
-        /* match MicroPython int32 store; clamp if needed */
-        if (p > INT32_MAX) {
-            p = INT32_MAX;
-        }
-        pw[i] = (int32_t)p;
+        int32_t r = re[i];
+        int32_t m = im[i];
+        /* The per-stage half scaling keeps the complex magnitude within
+         * Q15, hence r*r + m*m is at most 32768^2 and fits int32. */
+        pw[i] = r * r + m * m;
     }
 }
 
-const int32_t *fft_q15_power(fft_q15_t *f, const int32_t *samples) {
+void fft_q15_power_into(fft_q15_t *f, const int32_t *samples, int32_t *pw) {
     int n = f->n;
     const int coarse = 5;
-    int32_t dc = (sum_coarse(samples, n, coarse) << coarse) / n;
+    int32_t dc = (sum_coarse(samples, n, coarse) * (1 << coarse)) / n;
     int32_t peak = max_abs(samples, n, dc);
 
     int sh = 0;
@@ -211,14 +203,21 @@ const int32_t *fft_q15_power(fft_q15_t *f, const int32_t *samples) {
     }
     f->shift = sh;
 
-    load_win(f->re, samples, f->im, f->win, n, dc, sh);
-    bitrev(f->re, f->im, f->rev, n);
+    /* Loading directly into bit-reversed slots removes a complete pass over
+     * re/im and all of the swap traffic. */
+    load_win_bitrev(f->re, samples, f->im, f->win, f->rev, n, dc, sh);
     stages(f->re, f->im, f->cos, f->sin, n);
-    power_side(f->pw, f->re, f->im, (n >> 1) + 1);
+    power_side(pw, f->re, f->im, (n >> 1) + 1);
+}
+
+const int32_t *fft_q15_power(fft_q15_t *f, const int32_t *samples) {
+    fft_q15_power_into(f, samples, f->pw);
     return f->pw;
 }
 
 double fft_q15_full_scale_power(const fft_q15_t *f, double ref) {
-    double a = ref * f->cg * pow(2.0, (double)(f->shift - 1));
+    /* The exponent is integral; ldexp is exact and avoids the general pow
+     * implementation on Cortex-M. */
+    double a = ldexp(ref * f->cg, f->shift - 1);
     return a * a;
 }

@@ -5,8 +5,10 @@
 #include "fft_q15.h"
 
 #include <math.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 #define FULL_SCALE (1 << 23)
@@ -33,6 +35,143 @@ static double to_dbfs(int32_t p, double denom) {
         return -200.0;
     }
     return 10.0 * log10((double)p / denom);
+}
+
+static uint32_t spectrum_hash(const fft_q15_t *f) {
+    uint32_t h = 2166136261u;
+    int half1 = (f->n >> 1) + 1;
+    for (int i = 0; i < half1; i++) {
+        h ^= (uint32_t)f->pw[i];
+        h *= 16777619u;
+    }
+    h ^= (uint32_t)f->shift;
+    h *= 16777619u;
+    return h;
+}
+
+static void fill_vector(int32_t *x, int n, int kind) {
+    memset(x, 0, (size_t)n * sizeof(*x));
+    if (kind == 0) {
+        x[17 % n] = FULL_SCALE / 2;
+    } else if (kind == 1) {
+        for (int i = 0; i < n; i++) {
+            double v = 0.45 * sin(2.0 * M_PI * 7 * i / n)
+                     + 0.12 * sin(2.0 * M_PI * 31 * i / n)
+                     + 0.01 * cos(2.0 * M_PI * 63 * i / n);
+            x[i] = (int32_t)(FULL_SCALE * v);
+        }
+    } else {
+        uint32_t s = 0x12345678u;
+        for (int i = 0; i < n; i++) {
+            s = s * 1664525u + 1013904223u;
+            x[i] = ((int32_t)(s >> 8) - 0x800000) / 2;
+        }
+    }
+}
+
+static int test_golden(void) {
+    static const struct {
+        int n;
+        int kind;
+        uint32_t hash;
+    } cases[] = {
+        {256, 0, 0xab192ae6u},
+        {256, 1, 0xb2f8caacu},
+        {256, 2, 0xc2d1a7c5u},
+        {1024, 0, 0x5f4b80b2u},
+        {1024, 1, 0x1b3a3711u},
+        {1024, 2, 0x5db5d172u},
+    };
+    int ok = 1;
+    for (size_t c = 0; c < sizeof(cases) / sizeof(cases[0]); c++) {
+        fft_q15_t f;
+        int32_t *x = calloc((size_t)cases[c].n, sizeof(*x));
+        int half1 = (cases[c].n >> 1) + 1;
+        int32_t *direct = calloc((size_t)half1, sizeof(*direct));
+        if (!x || !direct || fft_q15_init(&f, cases[c].n) != 0) {
+            free(x);
+            free(direct);
+            return 0;
+        }
+        fill_vector(x, cases[c].n, cases[c].kind);
+        fft_q15_power(&f, x);
+        uint32_t got = spectrum_hash(&f);
+        fft_q15_power_into(&f, x, direct);
+        int direct_equal = memcmp(direct, f.pw, (size_t)half1 * sizeof(*direct)) == 0;
+        int in_q15 = 1;
+        for (int i = 0; i < cases[c].n; i++) {
+            if (f.re[i] < -32768 || f.re[i] > 32767
+                || f.im[i] < -32768 || f.im[i] > 32767) {
+                in_q15 = 0;
+                break;
+            }
+        }
+        int pass = got == cases[c].hash && in_q15 && direct_equal;
+        printf("  n=%-4d vector=%d hash=%08x  %s\n",
+               cases[c].n, cases[c].kind, got, pass ? "OK" : "NG");
+        ok &= pass;
+        free(x);
+        free(direct);
+        fft_q15_free(&f);
+    }
+    return ok;
+}
+
+static int test_init_contract(void) {
+    int32_t store[fft_q15_store_words(16)];
+    fft_q15_t f;
+    int ok = fft_q15_store_words(3) == 0
+          && fft_q15_store_words(12) == 0
+          && fft_q15_init_with(&f, 16, store) == 0
+          && f.store == store
+          && f.owns_store == 0;
+    fft_q15_free(&f);
+    ok &= f.store == NULL && f.n == 0;
+    printf("  caller-owned store and invalid sizes  %s\n", ok ? "OK" : "NG");
+    return ok;
+}
+
+static int test_q15_stress(void) {
+    static const int sizes[] = {16, 64, 256, 1024};
+    uint32_t s = 0x6d2b79f5u;
+    int ok = 1;
+    for (size_t z = 0; z < sizeof(sizes) / sizeof(sizes[0]); z++) {
+        int n = sizes[z];
+        int half1 = (n >> 1) + 1;
+        fft_q15_t f;
+        int32_t *x = calloc((size_t)n, sizeof(*x));
+        int32_t *out = calloc((size_t)half1, sizeof(*out));
+        if (!x || !out || fft_q15_init(&f, n) != 0) {
+            free(x);
+            free(out);
+            return 0;
+        }
+        for (int trial = 0; trial < 32 && ok; trial++) {
+            for (int i = 0; i < n; i++) {
+                s = s * 1664525u + 1013904223u;
+                x[i] = (int32_t)(s >> 8) - 0x800000;
+            }
+            fft_q15_power_into(&f, x, out);
+            for (int i = 0; i < n; i++) {
+                if (f.re[i] < -32768 || f.re[i] > 32767
+                    || f.im[i] < -32768 || f.im[i] > 32767) {
+                    ok = 0;
+                    break;
+                }
+            }
+            for (int i = 0; i < half1; i++) {
+                if (out[i] < 0) {
+                    ok = 0;
+                    break;
+                }
+            }
+        }
+        free(x);
+        free(out);
+        fft_q15_free(&f);
+    }
+    printf("  random 24-bit inputs stay in Q15  %s\n", ok ? "OK" : "NG");
+    return ok;
 }
 
 static int test_levels(void) {
@@ -102,6 +241,18 @@ static int test_speed(void) {
 int main(void) {
     printf("c_fft host tests\n");
     int ok = 1;
+    printf("init contract:\n");
+    if (!test_init_contract()) {
+        ok = 0;
+    }
+    printf("golden spectra:\n");
+    if (!test_golden()) {
+        ok = 0;
+    }
+    printf("range stress:\n");
+    if (!test_q15_stress()) {
+        ok = 0;
+    }
     printf("levels:\n");
     if (!test_levels()) {
         ok = 0;

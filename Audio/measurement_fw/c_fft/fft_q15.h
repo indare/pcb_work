@@ -45,6 +45,10 @@ void fft_q15_free(fft_q15_t *f);
  * Returns pointer to f->pw (owned by fft_q15_t). */
 const int32_t *fft_q15_power(fft_q15_t *f, const int32_t *samples);
 
+/* Same transform, writing the n/2+1 powers directly into caller memory.
+ * This avoids a second copy in language bindings. */
+void fft_q15_power_into(fft_q15_t *f, const int32_t *samples, int32_t *pw);
+
 /* Denominator for dBFS: (ref * cg * 2^(shift-1))^2 */
 double fft_q15_full_scale_power(const fft_q15_t *f, double ref);
 
