@@ -1,7 +1,7 @@
 """ST7796S on MeasurementADC (Waveshare 29318).
 
 SCK/MOSI は初号ジャンパで GP18/GP19（SPI0）。ヘッダの GP3/GP4 は入力のまま。
-GP9（SCKI プローブ）と GP15（ADC_nRST）は触らない。
+GP9（SCKI プローブ）と GP15（ADC_nMR。TPS3307 の ~MR、H は駆動しない）は触らない。
 """
 import framebuf
 import time

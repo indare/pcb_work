@@ -1,6 +1,6 @@
 # MeasurementADC 進捗メモ
 
-最終更新: **2026-08-15**
+最終更新: **2026-08-20**
 
 Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM1804 + Pico2 + WAVESHARE-29318）。
 
@@ -20,28 +20,39 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
 | スペアナ FW | 10 バンド（低域 IIR）＋棒表示。DMA と FFT を重ねて約 18–20 fps |
 | 接続 | **Amp → スペアナ**。Controll 2 段は外している。EQ は今号では使わない |
 
-### 初号の応急配線（残置・次号で解消）
+### 初号の応急配線（実機は残置。回路図 rev 0.4 で解消済み）
 
-| 箇所 | 内容 |
-|---|---|
-| U710 1番 | リフト（RESET 出力 L 固定のため） |
-| Y701 ASFL | 初号 FP 誤りのため空中配線（発振確認済み） |
-| LCD SCK/MOSI | ヘッダ GP3/4 ではなく **GP18/GP19（SPI0）へ飛ばし** |
-| GP9 → CN3F-1 | SCKI センス専用。**駆動禁止** |
-| GP15 → `ADC_nRST` | オープンドレイン制御（H は駆動しない） |
+| 箇所 | 内容 | 回路図 rev 0.4 |
+|---|---|---|
+| U710 1番 | リフト（RESET 出力 L 固定のため） | U710 廃止。U709 を TPS3307-33D 1 個に置換 |
+| Y701 ASFL | 初号 FP 誤りのため空中配線（発振確認済み） | FP は `ef9d6d4` で修正済み。PCB 側の銅箔直しが残り |
+| LCD SCK/MOSI | ヘッダ GP3/4 ではなく **GP18/GP19（SPI0）へ飛ばし** | GP18/GP19 に正規配線。GP3/GP4 は NC |
+| GP9 → CN3F-1 | SCKI センス専用。**駆動禁止** | `MCLK_SENSE` として R720 1k 経由で `ADC_MCLK` へ |
+| GP15 → `ADC_nRST` | オープンドレイン制御（H は駆動しない） | GP15=`ADC_nMR`（TPS3307 の ~MR）。`~RESET` は PP で `ADC_nRST` へ |
+| （新規） | USB 挿すと `+5V_D` へ逆流 | D701 SOD-123 ショットキ `+5V_D`→VSYS で阻止 |
 
 ---
 
 ## 次の作業（優先順）
 
-1. **MeasurementADC 次号基板**（ジャンパ解消）
-   - ASFL FP の GND/VDD
-   - LCD SCK/MOSI をハード SPI 正規ピンへ
-   - U710 リセット周りを応急なしで動く回路に
-   - JP1F／Pico 向きなどの注記・その他洗い出し
+1. ~~**MeasurementADC 次号 回路図**~~ → **完了（rev 0.4, 2026-08-20）**
+   - 追加部品: D701（RB160M-30 / SOD-123）、R720 1k、TP701、U709=TPS3307-33D（SO-8）
+   - 廃止: U710 / R721 / R722（TPS3808 対）。C743 100nF・C744 10nF は U709 の
+     `+3V3_A` デカップとして残置（C745 は使わない）
+   - ERC の error は `A702 pin39 VSYS: Input Power pin not driven` のみ
+     （D701 直列のため。この図は元から PWR_FLAG を使っていない）
+   - ネットリストで確認済み: `VSYS` と `+5V_D` は別ネット、`LCD_SCK`=GP18 / `LCD_MOSI`=GP19、
+     `ADC_nRST`=U709.~RESET + R719 + A701、`ADC_nMR`=GP15、`MCLK_SENSE`=GP9、GP3/GP4 は NC
+   - **U709 の VDD が `~MR` に短絡していたのを修正**（VDD→`+3V3_A`）。
+     短絡したままだと監視 IC が動かず、GP15 を L に引くと IC の電源ごと落ちる
+   - 電源レールはローカルラベルのまま。U705→U706/U707 までは線で追えるが、その先の分配順は基板設計時の課題
+2. **MeasurementADC 次号 PCB**（回路図に追従）
+   - ASFL FP の GND/VDD を銅箔へ反映
+   - LCD SCK/MOSI を GP18/GP19 のパターンへ
+   - D701・R720・C745・TP701・TPS3307-33D（SO-8）の配置。旧 G33/G50 ランドは削除
    - 分割 Gerber `06_measurement_adc` 再生成
-2. **親シート**にボリューム＋手前端子台（L/R/`A_GND`）とタップ注記
-3. **箱内配線方針の図面化**（下記）とケース編成
+3. **親シート**にボリューム＋手前端子台（L/R/`A_GND`）とタップ注記
+4. **箱内配線方針の図面化**（下記）とケース編成
 
 ---
 
@@ -80,11 +91,27 @@ python3 scripts/regenerate_split_gerbers.py --only 06_measurement_adc
 
 ---
 
+## 回路図の電源表記（2026-08-20 時点）
+
+電源レールはすべてローカルラベル（パワーシンボルは未使用）。
+U705→U706/U707 までは線で追えるが、その先はラベルで飛ぶので分配順は読み取れない。
+基板の電源レーンを引くときの課題として残っている。
+
+一度パワーシンボル化とアナログ分配バスの明示配線を試したが、rev 0.4 に巻き戻した。
+再挑戦する場合は `scripts/make_power_symbols.py` と `scripts/labels_to_power.py` を使う。
+
+ネット構成は 235 ネット / 808 ピン。ERC の error は VSYS のダイオード直列のみ。
+
+---
+
 ## 確定方針（要約）
 
 - GND 案A（非絶縁）: 板上で `A_GND↔ADC_GND` / `ADC_GND_IN↔D_GND`
-- Pico: VSYS=`+5V_D`、GND=`D_GND`
-- LCD: U708 XC8107、`LCD_EN`=GP8（Active High）
+- Pico: VSYS は D701 ショットキ経由で `+5V_D` から。VBUS(pin40) は NC、GND=`D_GND`
+  - USB だけ挿すと Pico は動くが LCD は消える（`+5V_D` へは逆流しない）
+- LCD: U708 XC8107、`LCD_EN`=GP8（Active High）。SPI は SPI0（GP18/GP19）
+- 監視 IC: U709=TPS3307-33D（SO-8）。SENSE1=`+5V_A`（4.55 V）、SENSE2/SENSE3/VDD=`+3V3_A`、
+  `~RESET` PP → `ADC_nRST`+R719、GP15 OD → `~MR`（H は駆動しない）。RESET ピンは NC
 - VCOM: ADC → 2 段目 OPA の＋、デカップは `VCOM↔ADC_GND`
 - 電源デジの一括オートルートは再禁止
 
@@ -100,4 +127,7 @@ python3 scripts/regenerate_split_gerbers.py --only 06_measurement_adc
 | `MeasurementADC_BRINGUP.md` | 初号ブリングアップ記録（履歴） |
 | `measurement_fw/` | Pico2 MicroPython（I2S / FFT / LCD スペアナ） |
 | `scripts/regenerate_split_gerbers.py` | 分割 Gerber |
+| `scripts/netcmp.py` | 回路図編集の前後でネット構成を照合 |
+| `scripts/make_power_symbols.py` | 電源レール用パワーシンボルの生成（現在未使用） |
+| `scripts/labels_to_power.py` | 電源ラベル → パワーシンボル置換（現在未使用） |
 | `../Control/` | Controll 用ファーム（親／子） |

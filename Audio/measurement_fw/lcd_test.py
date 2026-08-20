@@ -1,7 +1,7 @@
 """ST7796S bring-up on MeasurementADC (Waveshare 29318).
 
 Pins are not a hardware SPI pair (SCK=GP3, MOSI=GP4), so this uses SoftSPI.
-Do not touch GP9 (SCKI sense) or GP15 (ADC_nRST).
+Do not touch GP9 (SCKI sense) or GP15 (ADC_nMR; OD only, do not drive H).
 """
 import time
 from machine import Pin, SoftSPI

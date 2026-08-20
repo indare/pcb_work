@@ -56,8 +56,8 @@ class I2SReceiver:
     """PCM1804 が出す 24bit I2S を DMA で連続取得する。
 
     `data_pin` から連番で BCK / LRCK が並んでいること。
-    `reset_pin` を渡すと `reset()` で ADC の RST を L→H できる。
-    H は駆動せず R719 のプルアップに任せる（監視 IC とワイヤ AND のため）。
+    `reset_pin` を渡すと `reset()` で TPS3307 の ~MR を L にして ADC を落とす。
+    H は駆動せず IC 内部プルアップに任せる（~RESET はプッシュプルなのでワイヤ AND しない）。
     """
 
     def __init__(self, data_pin=0, reset_pin=None, sm_id=0):
