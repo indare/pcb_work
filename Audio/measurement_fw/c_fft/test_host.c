@@ -117,6 +117,46 @@ static int test_golden(void) {
     return ok;
 }
 
+static int test_reuse_store(void) {
+    const int n_max = 2048;
+    const int n_min = 1024;
+    int32_t *store = calloc((size_t)fft_q15_store_words(n_max), sizeof(int32_t));
+    int32_t *x = calloc((size_t)n_max, sizeof(int32_t));
+    fft_q15_t f;
+    int ok = store && x
+          && fft_q15_store_words(n_min) < fft_q15_store_words(n_max)
+          && fft_q15_init_with(&f, n_max, store) == 0;
+    if (!ok) {
+        free(store);
+        free(x);
+        printf("  reuse 2048 store for 1024  NG\n");
+        return 0;
+    }
+    sine(x, n_max, 21, 0.5);
+    fft_q15_power(&f, x);
+    ok &= peak_bin(f.pw, (n_max >> 1) + 1, 1) == 21;
+
+    ok &= fft_q15_init_with(&f, n_min, store) == 0 && f.n == n_min;
+    fill_vector(x, n_min, 1);
+    fft_q15_power(&f, x);
+    ok &= spectrum_hash(&f) == 0x1b3a3711u;
+
+    sine(x, n_min, 21, 0.5);
+    fft_q15_power(&f, x);
+    ok &= peak_bin(f.pw, (n_min >> 1) + 1, 1) == 21;
+
+    ok &= fft_q15_init_with(&f, n_max, store) == 0 && f.n == n_max;
+    sine(x, n_max, 21, 0.5);
+    fft_q15_power(&f, x);
+    ok &= peak_bin(f.pw, (n_max >> 1) + 1, 1) == 21;
+
+    fft_q15_free(&f);
+    free(store);
+    free(x);
+    printf("  reuse 2048 store for 1024  %s\n", ok ? "OK" : "NG");
+    return ok;
+}
+
 static int test_init_contract(void) {
     int32_t store[fft_q15_store_words(16)];
     fft_q15_t f;
@@ -243,6 +283,10 @@ int main(void) {
     int ok = 1;
     printf("init contract:\n");
     if (!test_init_contract()) {
+        ok = 0;
+    }
+    printf("reuse store:\n");
+    if (!test_reuse_store()) {
         ok = 0;
     }
     printf("golden spectra:\n");

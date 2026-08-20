@@ -16,6 +16,8 @@
 typedef struct _mp_fft_q15_obj_t {
     mp_obj_base_t base;
     fft_q15_t fft;
+    int32_t *store;
+    size_t store_words;
 } mp_fft_q15_obj_t;
 
 static mp_obj_t mp_fft_q15_make_new(const mp_obj_type_t *type, size_t n_args, size_t n_kw, const mp_obj_t *args) {
@@ -29,6 +31,8 @@ static mp_obj_t mp_fft_q15_make_new(const mp_obj_type_t *type, size_t n_args, si
     /* The GC heap owns nearly all RAM here, so libc calloc would return memory
      * overlapping it and lock the chip on the first table write. */
     int32_t *store = m_new(int32_t, words);
+    self->store = store;
+    self->store_words = words;
     if (fft_q15_init_with(&self->fft, n, store) != 0) {
         mp_raise_ValueError(MP_ERROR_TEXT("n must be power of 2 (>=4)"));
     }
@@ -79,11 +83,26 @@ static mp_obj_t mp_fft_q15_n(mp_obj_t self_in) {
 }
 static MP_DEFINE_CONST_FUN_OBJ_1(mp_fft_q15_n_obj, mp_fft_q15_n);
 
+static mp_obj_t mp_fft_q15_set_n(mp_obj_t self_in, mp_obj_t n_in) {
+    mp_fft_q15_obj_t *self = MP_OBJ_TO_PTR(self_in);
+    int n = mp_obj_get_int(n_in);
+    size_t need = fft_q15_store_words(n);
+    if (need == 0 || need > self->store_words) {
+        mp_raise_ValueError(MP_ERROR_TEXT("n exceeds preallocated store"));
+    }
+    if (fft_q15_init_with(&self->fft, n, self->store) != 0) {
+        mp_raise_ValueError(MP_ERROR_TEXT("n must be power of 2 (>=4)"));
+    }
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_2(mp_fft_q15_set_n_obj, mp_fft_q15_set_n);
+
 static const mp_rom_map_elem_t mp_fft_q15_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_power_into), MP_ROM_PTR(&mp_fft_q15_power_into_obj) },
     { MP_ROM_QSTR(MP_QSTR_full_scale_power), MP_ROM_PTR(&mp_fft_q15_full_scale_power_obj) },
     { MP_ROM_QSTR(MP_QSTR_shift), MP_ROM_PTR(&mp_fft_q15_shift_obj) },
     { MP_ROM_QSTR(MP_QSTR_n), MP_ROM_PTR(&mp_fft_q15_n_obj) },
+    { MP_ROM_QSTR(MP_QSTR_set_n), MP_ROM_PTR(&mp_fft_q15_set_n_obj) },
 };
 static MP_DEFINE_CONST_DICT(mp_fft_q15_locals_dict, mp_fft_q15_locals_dict_table);
 

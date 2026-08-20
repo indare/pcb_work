@@ -22,6 +22,16 @@ CYAN = 0x07FF
 ORANGE = 0xFD20
 NAVY = 0x0010
 
+# スペアナ棒幅など、よく使う幅の 1 行バッファを先に持てるようにする。
+_COMMON_WIDTHS = (1, 5, 8, 12, 18, 22, 32)
+
+# 塗りバッファのキャッシュ上限。ここが太ると I2S / FFT の確保が MemoryError になる。
+# 全画面塗りの 1 塊だけで 480*32*2 = 30720 byte あるので、大物は使い捨てる。
+_CACHE_BUDGET = 24576
+_CACHE_MAX_ENTRY = 8192
+# 1 回の SPI 転送で作る塗り塊の上限。棒（幅 12〜22）は 1 回で収まる。
+_MAX_BLOCK_BYTES = 4096
+
 
 def _u16(c):
     return bytes((c >> 8, c & 0xFF))
@@ -37,23 +47,99 @@ class Lcd:
         Pin(4, Pin.IN)
         self.spi = SPI(
             0,
-            baudrate=20_000_000,
+            baudrate=40_000_000,
             polarity=0,
             phase=0,
             sck=Pin(18),
             mosi=Pin(19),
             miso=Pin(16),
         )
+        # color -> 2byte, (color, w) -> 1 行 bytes。fill_rect の毎回生成を避ける。
+        self._pix = {}
+        self._row = {}
+        self._row_bytes = 0
+        self._cmd1 = bytearray(1)
+        self._cas = bytearray(4)
+        self._ras = bytearray(4)
         self._init()
 
+    def _pix_of(self, color):
+        pix = self._pix.get(color)
+        if pix is None:
+            pix = _u16(color)
+            self._pix[color] = pix
+        return pix
+
+    def _cache_put(self, key, buf):
+        n = len(buf)
+        if n > _CACHE_MAX_ENTRY:
+            return
+        if self._row_bytes + n > _CACHE_BUDGET:
+            self._row.clear()
+            self._row_bytes = 0
+        self._row[key] = buf
+        self._row_bytes += n
+
+    def _row_of(self, color, w):
+        key = (color, w)
+        row = self._row.get(key)
+        if row is None:
+            row = self._pix_of(color) * w
+            self._cache_put(key, row)
+        return row
+
     def _cmd(self, c, data=b""):
+        cmd = self._cmd1
+        cmd[0] = c
         self.dc(0)
         self.cs(0)
-        self.spi.write(bytes((c,)))
+        self.spi.write(cmd)
         if data:
             self.dc(1)
             self.spi.write(data if isinstance(data, (bytes, bytearray)) else bytes(data))
         self.cs(1)
+
+    def _block_of(self, color, w, h):
+        """高さ h の塗りつぶしバッファ。h=1 は 1 行そのもの。"""
+        if h <= 1:
+            return self._row_of(color, w)
+        bkey = (color, w, h)
+        block = self._row.get(bkey)
+        if block is None:
+            block = self._row_of(color, w) * h
+            self._cache_put(bkey, block)
+        return block
+
+    def _begin_window(self, x0, y0, x1, y1):
+        """CS を下げたまま CASET/RASET/RAMWR。呼び出し側が画素を書いて cs(1)。"""
+        cas = self._cas
+        ras = self._ras
+        cmd = self._cmd1
+        cas[0] = x0 >> 8
+        cas[1] = x0 & 0xFF
+        cas[2] = x1 >> 8
+        cas[3] = x1 & 0xFF
+        ras[0] = y0 >> 8
+        ras[1] = y0 & 0xFF
+        ras[2] = y1 >> 8
+        ras[3] = y1 & 0xFF
+        spi = self.spi
+        dc = self.dc
+        self.cs(0)
+        dc(0)
+        cmd[0] = 0x2A
+        spi.write(cmd)
+        dc(1)
+        spi.write(cas)
+        dc(0)
+        cmd[0] = 0x2B
+        spi.write(cmd)
+        dc(1)
+        spi.write(ras)
+        dc(0)
+        cmd[0] = 0x2C
+        spi.write(cmd)
+        dc(1)
 
     def _init(self):
         self.rst(0)
@@ -80,27 +166,34 @@ class Lcd:
         time.sleep_ms(120)
         self._cmd(0x21)
         self._cmd(0x29)
+        # 棒描画で使う幅を温めておく
+        for w in _COMMON_WIDTHS:
+            self._row_of(BLACK, w)
+            self._row_of(WHITE, w)
 
     def window(self, x0, y0, x1, y1):
-        self._cmd(0x2A, bytes((x0 >> 8, x0 & 0xFF, x1 >> 8, x1 & 0xFF)))
-        self._cmd(0x2B, bytes((y0 >> 8, y0 & 0xFF, y1 >> 8, y1 & 0xFF)))
-        self._cmd(0x2C)
+        self._begin_window(x0, y0, x1, y1)
+        self.cs(1)
 
     def fill_rect(self, x, y, w, h, color):
         if w <= 0 or h <= 0:
             return
-        self.window(x, y, x + w - 1, y + h - 1)
-        pix = _u16(color)
-        row = pix * w
-        block_h = 32 if h >= 32 else h
-        block = row * block_h
-        self.dc(1)
-        self.cs(0)
-        n, rem = divmod(h, block_h)
-        for _ in range(n):
-            self.spi.write(block)
-        if rem:
-            self.spi.write(row * rem)
+        self._begin_window(x, y, x + w - 1, y + h - 1)
+        write = self.spi.write
+        # 一度に作る塊を byte で縛る。全画面塗りの 30KB 一時確保が
+        # 解析用の RAM とぶつかって MemoryError になっていた。
+        rows = _MAX_BLOCK_BYTES // (w * 2)
+        if rows < 1:
+            rows = 1
+        if h <= rows:
+            write(self._block_of(color, w, h))
+        else:
+            block = self._block_of(color, w, rows)
+            n, rem = divmod(h, rows)
+            for _ in range(n):
+                write(block)
+            if rem:
+                write(self._block_of(color, w, rem))
         self.cs(1)
 
     def fill(self, color):
@@ -114,8 +207,6 @@ class Lcd:
         fb = framebuf.FrameBuffer(buf, w, 8, framebuf.RGB565)
         fb.fill(bg)
         fb.text(s, 0, 0, color)
-        self.window(x, y, x + w - 1, y + 7)
-        self.dc(1)
-        self.cs(0)
+        self._begin_window(x, y, x + w - 1, y + 7)
         self.spi.write(buf)
         self.cs(1)

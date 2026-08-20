@@ -1,12 +1,16 @@
 """スペアナ UI（既定は 1/3 oct 30 本・白パレット）。
 
-縦グリッド付きの棒。下端メニューはタッチで切替。
-レンジ / L+R / 色 / 30|H20|15 / ピークホールド。
+縦・横目盛はガター（棒の隙間）に静的描画。棒更新時は復元しない。
+下端メニューはタッチで切替。レンジ / L+R / 色 / 30|20|15 / 1k|2k / ピークホールド。
 """
-import math
 import time
 
 from lcd import Lcd, BLACK, GREEN, YELLOW, RED, WHITE, CYAN, ORANGE, WIDTH, HEIGHT
+
+try:
+    import _thread
+except ImportError:
+    _thread = None
 
 MAX_H = 108
 BG = BLACK
@@ -57,10 +61,10 @@ LABELS20 = (
 )
 
 # centers, octaves（固定値またはバンド別 tuple）, menu label, bar labels, bar_w
-# 既定は 30（1/3 oct）。H20 は低域を 1 oct にした応答重視モード。
+# 既定は 30（1/3 oct）。20 は低域を 1 oct にした応答重視モード。
 BAND_MODES = (
     (GEQ30, 1.0 / 3.0, "30", LABELS30, 12),
-    (HYBRID20, HYBRID20_WIDTHS, "H20", LABELS20, 18),
+    (HYBRID20, HYBRID20_WIDTHS, "20", LABELS20, 18),
     (GEQ15, 2.0 / 3.0, "15", LABELS15, 22),
 )
 
@@ -68,7 +72,14 @@ GRID = 0x7BEF
 VGRID = 0x2104
 HGRID = 0x3186
 MENU_BG = 0x1082
-MENU_N = 5
+MENU_N = 6
+
+# 解析が落ちたあと作り直すまでの待ち。
+RETRY_MS = 2000
+
+# FFT 点数。2k は低域分解能が良いが取り込みが約 43ms になり fps が落ちる。
+FFT_SIZES = (1024, 2048)
+FFT_LABS = ("1k", "2k")
 
 RANGES = (
     (-48.0, -12.0, "-48"),
@@ -131,6 +142,7 @@ class Ui:
         self.ci = 0
         self.pi = 0
         self.bi = 0
+        self.ni = 0
         self.peak = False
 
     def db_lo(self):
@@ -145,15 +157,19 @@ class Ui:
     def band_mode(self):
         return BAND_MODES[self.bi]
 
+    def fft_n(self):
+        return FFT_SIZES[self.ni]
+
     def layout(self):
         centers, _oct, _lab, _labs, bar_w = self.band_mode()
         return Layout(len(centers), bar_w)
 
     def tap(self, x, y):
         if y < MENU_Y:
-            return False, False
+            return False, False, False
         slot = x // (WIDTH // MENU_N)
         band_changed = False
+        n_changed = False
         if slot == 0:
             self.ri = (self.ri + 1) % len(RANGES)
         elif slot == 1:
@@ -163,9 +179,12 @@ class Ui:
         elif slot == 3:
             self.bi = (self.bi + 1) % len(BAND_MODES)
             band_changed = True
+        elif slot == 4:
+            self.ni = (self.ni + 1) % len(FFT_SIZES)
+            n_changed = True
         else:
             self.peak = not self.peak
-        return True, band_changed
+        return True, band_changed, n_changed
 
 
 def _h_of(ui, db):
@@ -175,7 +194,9 @@ def _h_of(ui, db):
         return 2
     if db >= hi:
         return MAX_H
-    return 2 + int((db - lo) / (hi - lo) * (MAX_H - 2))
+    # 1px ジッタで fill_rect が走らないよう偶数に揃える。MAX_H も偶数。
+    h = 2 + int((db - lo) / (hi - lo) * (MAX_H - 2))
+    return h - (h & 1)
 
 
 def _color(ui, db):
@@ -193,33 +214,22 @@ class Bars:
         self.ui = ui
         self.floor = floor_y
         self.layout = layout
-        # 目盛の y は毎フレーム引き直すので、ここで確定させておく。
-        # レンジやバンドを変えると Bars ごと作り直されるので取り違えない。
-        self.grid_y = tuple(y for y, _db in _db_grid(ui, floor_y))
         n = layout.n
+        # 棒座標は固定。毎フレーム bar_x を計算しない。
+        self.xs = [layout.bar_x(i) for i in range(n)]
+        self.bw = layout.bar_w
         self.h = [0] * n
         self.col = [BG] * n
         self.peak = [0] * n
         self.hold = [0] * n
 
-    def _hgrid(self, x, w, y0, h):
-        """棒を消した矩形に重なる横目盛だけ描き直す。"""
-        y1 = y0 + h
-        for y in self.grid_y:
-            if y0 <= y < y1:
-                self.lcd.fill_rect(x, y, w, 1, HGRID)
-
     def set(self, i, db):
         h = _h_of(self.ui, db)
         col = _color(self.ui, db)
-        lay = self.layout
-        x = lay.bar_x(i)
-        bw = lay.bar_w
         old_h = self.h[i]
-        gx = x + bw // 2
         use_pk = self.ui.peak
-        now = time.ticks_ms()
         old_p = self.peak[i]
+        now = time.ticks_ms()
 
         if use_pk:
             if h >= self.peak[i]:
@@ -229,18 +239,23 @@ class Bars:
                 nxt = self.peak[i] - PEAK_FALL
                 self.peak[i] = h if nxt < h else nxt
             p = self.peak[i]
-            if old_p > 0 and old_p != p and old_p > h:
-                self.lcd.fill_rect(x, self.floor - old_p, bw, PEAK_H, BG)
-                self.lcd.fill_rect(gx, self.floor - old_p, 1, PEAK_H, VGRID)
-                self._hgrid(x, bw, self.floor - old_p, PEAK_H)
         else:
             p = 0
             self.peak[i] = 0
 
+        # 見た目が変わらないなら SPI しない。
+        if h == old_h and col == self.col[i] and p == old_p:
+            return
+
+        x = self.xs[i]
+        bw = self.bw
+
+        if use_pk and old_p > 0 and old_p != p and old_p > h:
+            # 目盛は棒の下に置いていないので、BG だけで足りる。
+            self.lcd.fill_rect(x, self.floor - old_p, bw, PEAK_H, BG)
+
         if h < old_h:
             self.lcd.fill_rect(x, self.floor - old_h, bw, old_h - h, BG)
-            self.lcd.fill_rect(gx, self.floor - old_h, 1, old_h - h, VGRID)
-            self._hgrid(x, bw, self.floor - old_h, old_h - h)
         elif h > old_h:
             self.lcd.fill_rect(x, self.floor - h, bw, h - old_h, col)
         if col != self.col[i] and h > 0:
@@ -253,19 +268,96 @@ class Bars:
         self.col[i] = col
 
 
-def _mock_pair(t_ms, n):
-    t = t_ms * 0.001
-    left = []
-    right = []
-    for i in range(n):
-        left.append(-55.0 + 28.0 * math.sin(t * 1.7 + i * 0.45) + 8.0 * math.sin(t * 3.1 + i))
-        right.append(-58.0 + 26.0 * math.sin(t * 1.4 + i * 0.5 + 1.1) + 7.0 * math.sin(t * 2.6 + i))
-    return left, right
-
-
 def _live_pair(an):
     (lb, _, _), (rb, _, _) = an.frame()
     return lb, rb
+
+
+class BandWorker:
+    """解析を第2コアで回し、最新の L/R バンドだけ渡す。
+
+    Pico 2 の `_thread` はもう一方のコアで動く。LCD SPI は core0 のまま。
+    """
+
+    def __init__(self):
+        self._lock = _thread.allocate_lock() if _thread is not None else None
+        self._keep = True
+        self._run = False
+        self._idle = True
+        self._started = False
+        self._an = None
+        self.lb = None
+        self.rb = None
+        self.gen = 0
+        self.err = None
+
+    def start(self, an):
+        self._an = an
+        self.err = None
+        self._run = an is not None
+        if _thread is None or an is None:
+            return False
+        if not self._started:
+            _thread.start_new_thread(self._loop, ())
+            self._started = True
+            print("analyzer thread")
+        return True
+
+    def set_analyzer(self, an):
+        self._an = an
+        self.lb = None
+        self.rb = None
+        self.gen = 0
+        self.err = None
+
+    def pause(self):
+        self._run = False
+        if not self._started:
+            self._idle = True
+            return
+        t0 = time.ticks_ms()
+        while not self._idle:
+            if time.ticks_diff(time.ticks_ms(), t0) > 800:
+                break
+            time.sleep_ms(2)
+
+    def resume(self):
+        if self._an is not None:
+            self._run = True
+
+    def snapshot(self):
+        lock = self._lock
+        if lock is None:
+            return self.lb, self.rb, self.gen, self.err
+        lock.acquire()
+        try:
+            return self.lb, self.rb, self.gen, self.err
+        finally:
+            lock.release()
+
+    def _loop(self):
+        while self._keep:
+            if (not self._run) or self._an is None:
+                self._idle = True
+                time.sleep_ms(2)
+                continue
+            self._idle = False
+            try:
+                (lb, _, _), (rb, _, _) = self._an.frame()
+            except Exception as e:
+                lock = self._lock
+                lock.acquire()
+                self.err = e
+                lock.release()
+                self._run = False
+                continue
+            lock = self._lock
+            lock.acquire()
+            self.lb = lb
+            self.rb = rb
+            self.gen += 1
+            self.err = None
+            lock.release()
 
 
 def _draw_menu(lcd, ui):
@@ -275,6 +367,7 @@ def _draw_menu(lcd, ui):
         CH_LAB[ui.ci],
         PALETTES[ui.pi][1],
         ui.band_mode()[2],
+        FFT_LABS[ui.ni],
         "PK" if ui.peak else "--",
     )
     slot = WIDTH // MENU_N
@@ -283,12 +376,31 @@ def _draw_menu(lcd, ui):
         lcd.text(lab, tx, MENU_Y + 6, WHITE, MENU_BG)
 
 
-def _draw_db_grid(lcd, ui, floor, top_y):
-    """横目盛と右端の dB ラベル。"""
+def _draw_hgrid_gutters(lcd, layout, y):
+    """横目盛は棒の下を避け、スロット隙間と右端だけ描く。"""
+    slot = layout.slot
+    bw = layout.bar_w
+    x0 = layout.x0
+    for i in range(layout.n):
+        slot_l = x0 + i * slot
+        bx = slot_l + (slot - bw) // 2
+        if bx > slot_l:
+            lcd.fill_rect(slot_l, y, bx - slot_l, 1, HGRID)
+        be = bx + bw
+        slot_r = slot_l + slot
+        if slot_r > be:
+            lcd.fill_rect(be, y, slot_r - be, 1, HGRID)
+    end = x0 + layout.n * slot
+    if end < WIDTH:
+        lcd.fill_rect(end, y, WIDTH - end, 1, HGRID)
+
+
+def _draw_db_grid(lcd, ui, layout, floor, top_y):
+    """横目盛（ガターのみ）と右端の dB ラベル。"""
     for y, db in _db_grid(ui, floor):
         if y < top_y:
             continue
-        lcd.fill_rect(0, y, WIDTH, 1, HGRID)
+        _draw_hgrid_gutters(lcd, layout, y)
         lab = "%d" % int(db)
         tx = WIDTH - len(lab) * 8
         lcd.text(lab, tx, y - 4, GRID, BG)
@@ -299,11 +411,14 @@ def _draw_static(lcd, ui, layout):
     lcd.fill_rect(0, DIV_Y, WIDTH, 3, WHITE)
     lcd.text("L", 0, 2, CYAN, BG)
     lcd.text("R", 0, DIV_Y + 6, YELLOW, BG)
+    # 縦グリッドは棒中央ではなくスロット境界（ガター）に静的描画する。
+    for i in range(1, layout.n):
+        gx = layout.x0 + i * layout.slot
+        lcd.fill_rect(gx, 8, 1, L_FLOOR - 8, VGRID)
+        lcd.fill_rect(gx, DIV_Y + 8, 1, R_FLOOR - DIV_Y - 8, VGRID)
     labels = ui.band_mode()[3]
     for i, lab in enumerate(labels):
         x = layout.bar_x(i) + layout.bar_w // 2
-        lcd.fill_rect(x, 8, 1, L_FLOOR - 8, VGRID)
-        lcd.fill_rect(x, DIV_Y + 8, 1, R_FLOOR - DIV_Y - 8, VGRID)
         lcd.fill_rect(x - 2, L_FLOOR, 5, 1, GRID)
         lcd.fill_rect(x - 2, R_FLOOR, 5, 1, GRID)
         if not lab:
@@ -315,8 +430,8 @@ def _draw_static(lcd, ui, layout):
             tx = WIDTH - len(lab) * 8
         lcd.text(lab, tx, L_LABEL_Y, GRID, BG)
         lcd.text(lab, tx, R_LABEL_Y, GRID, BG)
-    _draw_db_grid(lcd, ui, L_FLOOR, 8)
-    _draw_db_grid(lcd, ui, R_FLOOR, DIV_Y + 8)
+    _draw_db_grid(lcd, ui, layout, L_FLOOR, 8)
+    _draw_db_grid(lcd, ui, layout, R_FLOOR, DIV_Y + 8)
     _draw_menu(lcd, ui)
 
 
@@ -326,8 +441,46 @@ def _apply_band_mode(an, ui):
     if an is not None:
         gc.collect()
         an.set_centers(centers, octaves)
-        print("bands", lab, "n", len(centers), "iir", an._iir_n, "free", gc.mem_free())
+        print("bands", lab, "n", len(centers), "fft_n", an.n,
+              "iir", an._iir_n, "free", gc.mem_free())
     return ui.layout()
+
+
+def _make_analyzer(ui):
+    """2k 分の領域を一度確保する。1k/2k 切替は set_n で使い回す。"""
+    import gc
+    from spectrum import SpectrumAnalyzer
+    gc.collect()
+    gc.collect()
+    centers, octaves, lab, _labels, _bw = ui.band_mode()
+    n = ui.fft_n()
+    an = SpectrumAnalyzer(n=n, max_n=max(FFT_SIZES),
+                          centers=centers, octaves=octaves)
+    an.reset_adc()
+    print("adc live bands", lab, "cap", an.n, "fft_n", an._fft_n(),
+          "iir", an._iir_n, "fft", an.fft_backend, "free", gc.mem_free())
+    return an
+
+
+def _drop_analyzer(worker, an):
+    """ワーカーとローカルの参照を切ってから GC。2k 確保の前に必須。"""
+    import gc
+    worker.pause()
+    worker.set_analyzer(None)
+    if an is not None:
+        try:
+            an.close()
+        except Exception:
+            pass
+        del an
+    gc.collect()
+    gc.collect()
+    return None
+
+
+def _rebuild_analyzer(worker, an, ui):
+    _drop_analyzer(worker, an)
+    return _make_analyzer(ui)
 
 
 def main():
@@ -346,31 +499,57 @@ def main():
     except Exception as e:
         print("touch fail", e)
 
+    worker = BandWorker()
     an = None
+    use_worker = False
+    retry_at = None
     try:
-        from spectrum import SpectrumAnalyzer
-        centers, octaves, lab, _labels, _bw = ui.band_mode()
-        an = SpectrumAnalyzer(n=1024, centers=centers, octaves=octaves)
-        an.reset_adc()
-        print("adc live bands", lab, "iir", an._iir_n, "fft", an.fft_backend)
+        an = _make_analyzer(ui)
+        use_worker = worker.start(an)
     except Exception as e:
-        print("mock", e)
+        print("analyzer fail", repr(e))
+        retry_at = time.ticks_add(time.ticks_ms(), RETRY_MS)
 
     n = 0
     t0 = time.ticks_ms()
+    last_gen = -1
+    lb = rb = None
     while True:
+        if an is None and retry_at is not None and \
+                time.ticks_diff(time.ticks_ms(), retry_at) >= 0:
+            retry_at = None
+            try:
+                an = _make_analyzer(ui)
+                worker.set_analyzer(an)
+                use_worker = worker.start(an)
+                last_gen = -1
+                print("analyzer back")
+            except Exception as e:
+                print("retry fail", repr(e))
+                retry_at = time.ticks_add(time.ticks_ms(), RETRY_MS)
         if tp is not None:
             hit = tp.read()
             if hit is not None:
                 x, y, tx, ty = hit
                 print("tap", x, y, "raw", tx, ty)
-                changed, band_changed = ui.tap(x, y)
+                changed, band_changed, n_changed = ui.tap(x, y)
                 if changed:
                     try:
-                        if band_changed:
+                        worker.pause()
+                        if n_changed:
+                            if an is None:
+                                an = _make_analyzer(ui)
+                                worker.set_analyzer(an)
+                                use_worker = worker.start(an)
+                            else:
+                                an.set_n(ui.fft_n())
+                            layout = ui.layout()
+                            print("cap", an.n, "fft_n", an._fft_n())
+                        elif band_changed:
                             layout = _apply_band_mode(an, ui)
                         else:
                             layout = ui.layout()
+                        last_gen = -1
                         _draw_static(lcd, ui, layout)
                         left_bars = Bars(lcd, ui, L_FLOOR, layout)
                         right_bars = Bars(lcd, ui, R_FLOOR, layout)
@@ -382,9 +561,23 @@ def main():
                         _draw_static(lcd, ui, layout)
                         left_bars = Bars(lcd, ui, L_FLOOR, layout)
                         right_bars = Bars(lcd, ui, R_FLOOR, layout)
+                    worker.resume()
         try:
             nb = layout.n
-            lb, rb = _live_pair(an) if an else _mock_pair(time.ticks_ms(), nb)
+            if use_worker:
+                lb, rb, gen, err = worker.snapshot()
+                if err is not None:
+                    raise err
+                if lb is None or gen == last_gen:
+                    time.sleep_ms(1)
+                    continue
+                last_gen = gen
+            elif an is not None:
+                lb, rb = _live_pair(an)
+            else:
+                # 解析が無いときにモックを描くと、実測との区別がつかない。
+                time.sleep_ms(20)
+                continue
             if len(lb) != nb or len(rb) != nb:
                 raise ValueError("bands %d/%d want %d" % (len(lb), len(rb), nb))
             for i in range(nb):
@@ -393,21 +586,37 @@ def main():
                 if ui.ci != 1:
                     right_bars.set(i, rb[i])
         except Exception as e:
-            print("live fail", e)
-            an = None
-            lb, rb = _mock_pair(time.ticks_ms(), layout.n)
+            import sys
+            print("live fail", repr(e))
+            sys.print_exception(e)
+            worker.pause()
+            an = _drop_analyzer(worker, an)
+            use_worker = False
+            last_gen = -1
+            retry_at = time.ticks_add(time.ticks_ms(), RETRY_MS)
+            floor = ui.db_lo()
             for i in range(layout.n):
                 if ui.ci != 2:
-                    left_bars.set(i, lb[i])
+                    left_bars.set(i, floor)
                 if ui.ci != 1:
-                    right_bars.set(i, rb[i])
+                    right_bars.set(i, floor)
+            continue
         n += 1
-        if n % 5 == 0:
+        if n % 15 == 0:
             dt = time.ticks_diff(time.ticks_ms(), t0)
-            fps = (5000.0 / dt) if dt else 0.0
+            fps = (15000.0 / dt) if dt else 0.0
             t0 = time.ticks_ms()
-            print("fps", round(fps, 2), "bands", layout.n,
-                  "L", [round(v, 1) for v in lb[: min(6, len(lb))]])
+            pk_l = 0
+            pk_r = 0
+            for i in range(1, len(lb)):
+                if lb[i] > lb[pk_l]:
+                    pk_l = i
+                if rb[i] > rb[pk_r]:
+                    pk_r = i
+            # 1 行を短く保つ。CDC が詰まると print がブロックし、描画ごと止まる。
+            print("fps", round(fps, 1), "n", layout.n, "fft", ui.fft_n(),
+                  "pkL", pk_l, round(lb[pk_l], 1),
+                  "pkR", pk_r, round(rb[pk_r], 1))
 
 
 if __name__ == "__main__":

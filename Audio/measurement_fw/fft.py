@@ -522,8 +522,10 @@ class LowBandIir:
         self.env = [0.0] * (2 * self.n)
         self._buf = array('i', bytearray(4 * 512))
 
-    def block(self, samples, ch):
-        m = _decim16(samples, len(samples), self._buf)
+    def block(self, samples, ch, n=None):
+        if n is None:
+            n = len(samples)
+        m = _decim16(samples, n, self._buf)
         out = []
         for k in range(self.n):
             b0, b2, a1, a2 = self.coeff[k]

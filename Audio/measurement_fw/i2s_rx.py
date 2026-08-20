@@ -98,8 +98,12 @@ class I2SReceiver:
         self._sm = None
         self._dma = None
 
-    def start_into(self, buf, timeout_ms=1000):
-        """DMA を起動して戻る。完了は `wait()`。先頭は必ず L。"""
+    def start_into(self, buf, timeout_ms=1000, count=None):
+        """DMA を起動して戻る。完了は `wait()`。先頭は必ず L。
+
+        count は 32bit ワード数。省略時はバッファ全体。2k 確保のまま
+        1k だけ取りたいときに使う。
+        """
         self.open()
         sm = self._sm
         dma = self._dma
@@ -107,9 +111,11 @@ class I2SReceiver:
         while sm.rx_fifo():
             sm.get()
         sm.restart()
+        if count is None:
+            count = len(buf)
         ctrl = dma.pack_ctrl(size=2, inc_read=False, inc_write=True,
                              treq_sel=DREQ_PIO0_RX0)
-        dma.config(read=PIO0_RXF0, write=buf, count=len(buf), ctrl=ctrl,
+        dma.config(read=PIO0_RXF0, write=buf, count=count, ctrl=ctrl,
                    trigger=True)
         sm.active(1)
         self._t0 = time.ticks_ms()
@@ -126,16 +132,18 @@ class I2SReceiver:
             if time.ticks_diff(time.ticks_ms(), t0) > timeout_ms:
                 sm.active(0)
                 raise RuntimeError("I2S DMA タイムアウト（BCK/LRCK が出ていない）")
+            # ビジーループだと GIL を握ったままになり、他コアの描画が止まる。
+            time.sleep_us(50)
         sm.active(0)
 
-    def read_into(self, buf, timeout_ms=1000):
+    def read_into(self, buf, timeout_ms=1000, count=None):
         """buf を L/R 交互の生 32bit ワードで埋める。先頭は必ず L。
 
         毎回ステートマシンを止めて再スタートするので、フレーム境界が
         バッファ先頭に揃う。連続録音ではなくスナップショット用。
         FFT と重ねる場合は `start_into` / `wait` を使う。
         """
-        self.start_into(buf, timeout_ms)
+        self.start_into(buf, timeout_ms, count)
         self.wait()
         return buf
 
