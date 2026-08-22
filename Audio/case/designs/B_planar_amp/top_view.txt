@@ -1,0 +1,65 @@
+AudioCase Variant B — Planar Amp Floor (top view, mm)
+Recommended internal: W250 × D280 × H95
+Origin: inner front-left. +X right, +Y toward rear.
+
+================================================================
+OUTER INNER BOX
+  (0,0) ---- W=250 ---- (250,0)     FRONT
+    |                         |
+    D=280                     |
+    |                         |
+  (0,280) --------------- (250,280) REAR
+
+----------------------------------------------------------------
+1F (service floor)
+----------------------------------------------------------------
+MeasurementADC  182.60 × 83.70
+  place: x= (250-182.6)/2 = 33.7  →  33.7 .. 216.3
+         y= 8.0               →   8.0 ..  91.7
+  M3 local: (3.50,3.50)(77.64,3.51)(179.08,3.51)
+            (3.47,80.20)(89.39,80.22)(179.09,80.18)
+
+Controll child (rotated 90°: footprint 98.20 wide × 162.95 deep)
+  place: x= 20.0 .. 118.2
+         y= 95.7 .. 258.65
+
+Controll parent (rotated 90°)
+  place: x= 122.2 .. 220.4
+         y= 95.7 .. 258.65
+
+I2C cable: parent ↔ child ≈ 80–120 mm along the gap at x≈120
+
+----------------------------------------------------------------
+2F (Amp planar deck) — overlay above 1F
+----------------------------------------------------------------
+Amp cell: 41.50 (X) × 58.18 (Y), gap=4.0
+Array origin (front-left of A1): x0=13.25, y0=30.0
+
+  Col j=0..4:  x = x0 + j*(41.50+4.0)
+  Row i=0..1:  y = y0 + i*(58.18+4.0)
+
+  Front row (i=0): A1 A2 A3 A4 A5
+  Rear  row (i=1): A6 A7 A8 A9 A10
+
+  Array span: 223.5 × 120.36
+  Array box:  x 13.25 .. 236.75
+              y 30.00 .. 150.36
+
+Amp M3 (local, each board):
+  (3.48,3.47)(54.73,3.42)(3.48,38.02)(54.63,37.97)
+
+Cable duct (between Amp array and Power):
+  y ≈ 154 .. 174
+
+Power 55.27 × 44.01 at 2F rear end:
+  place: x= 20.0 .. 75.27
+         y= 180.0 .. 224.01
+  M3 local: (3.52,3.51)(51.77,3.51)(3.52,40.51)(51.77,40.51)
+
+Distributor zone: x= 90 .. 230, y= 175 .. 230 (approx)
+
+----------------------------------------------------------------
+FALLBACK if W must be ≤220: 8 planar (4×2) + 2 light-stack
+  Array span: 178.0 × 120.4  (x0≈26)
+  Stack A9/A10 on A4/A5 with 12–15 mm spacers
+================================================================
