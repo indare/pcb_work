@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 380" width="880" height="760">
+  <title>AudioCase Variant C  Floor Plan (Service / Hinged Lid)</title>
+  <desc>1F Controll+MeasurementADC front; 2F Amp 2x5 rear. Internal W380 x D310.</desc>
+  <style>
+    .box { fill:#f7f7f4; stroke:#222; stroke-width:1.2; }
+    .amp { fill:#e8eef5; stroke:#234; stroke-width:1; }
+    .power { fill:#f5efe6; stroke:#543; stroke-width:1; }
+    .meas { fill:#e9f5ea; stroke:#245; stroke-width:1.2; }
+    .ctrl { fill:#f3e9f0; stroke:#523; stroke-width:1.2; }
+    .label { font: 11px sans-serif; fill:#111; }
+    .small { font: 9px sans-serif; fill:#333; }
+    .title { font: 14px sans-serif; font-weight:700; fill:#111; }
+    .dim { font: 10px sans-serif; fill:#555; }
+    .hinge { stroke:#888; stroke-width:2; stroke-dasharray:4 3; }
+    .aisle { fill:#fff8dc; stroke:#aa8; stroke-width:1; stroke-dasharray:3 2; }
+  </style>
+
+  <text x="12" y="22" class="title">C_service_hinge  Õí¢sb…ø W380 × D310	</text>
+  <text x="12" y="40" class="dim">Ÿ¹=æM… / +Xó / +YeÒó¸	 / XMmmóo.¹±üë H1px/mm	</text>
+
+  <!-- Outer case inner wall -->
+  <rect x="20" y="55" width="380" height="310" class="box" fill="#fafafa"/>
+  <text x="24" y="70" class="small">MÑÍë Y=0</text>
+
+  <!-- Front panel strip -->
+  <rect x="20" y="55" width="380" height="28" fill="#ddd" stroke="#222" stroke-width="1"/>
+  <text x="30" y="73" class="small">IN L/R · VOL×2 · OUT×2 · SW · LEDH6.5 · ENC</text>
+
+  <!-- Controll zone -->
+  <rect x="30" y="95" width="163" height="98" class="ctrl"/>
+  <text x="40" y="115" class="label">Controll ª
+µ	</text>
+  <text x="40" y="130" class="small">163×98 / OLED·ENC KM</text>
+  <text x="40" y="145" class="small">Pµ M3 ¹Úüµ</text>
+  <text x="40" y="160" class="small">J17 I2C ±üÖën</text>
+  <text x="40" y="180" class="dim">M3: (3.5,3.5)&Û…</text>
+
+  <!-- Gap / I2C -->
+  <text x="198" y="145" class="small">J17</text>
+  <text x="190" y="158" class="dim">80120</text>
+  <line x1="193" y1="140" x2="208" y2="140" stroke="#523" stroke-width="1.5"/>
+
+  <!-- MeasurementADC -->
+  <rect x="208" y="95" width="183" height="84" class="meas"/>
+  <text x="218" y="115" class="label">MeasurementADC</text>
+  <text x="218" y="130" class="small">183×84 / LCD‘</text>
+  <text x="218" y="145" class="small">Pico USB ’ eûï</text>
+  <rect x="250" y="152" width="62" height="20" fill="#cfe8d0" stroke="#245" stroke-width="1"/>
+  <text x="258" y="166" class="small">LCD 61×92</text>
+
+  <!-- Service aisle -->
+  <rect x="30" y="200" width="360" height="25" class="aisle"/>
+  <text x="120" y="216" class="small">µüÓ¹ïË‹g Pico / J17 / OLED kôT	</text>
+
+  <!-- 2F Amp deck -->
+  <text x="30" y="245" class="label">2F Amp ÇÃ­ŒJnû1F
+k	[jD	</text>
+
+  <!-- Amp lower row -->
+  <g id="amp-lower">
+    <rect x="40" y="255" width="58" height="42" class="amp"/><text x="48" y="280" class="small">A1</text>
+    <rect x="106" y="255" width="58" height="42" class="amp"/><text x="114" y="280" class="small">A2</text>
+    <rect x="172" y="255" width="58" height="42" class="amp"/><text x="180" y="280" class="small">A3</text>
+    <rect x="238" y="255" width="58" height="42" class="amp"/><text x="246" y="280" class="small">A4</text>
+    <rect x="304" y="255" width="58" height="42" class="amp"/><text x="312" y="280" class="small">A5</text>
+  </g>
+  <text x="40" y="312" class="dim">µ A1A5
+µ A6A10 o¹ÚüµH20mm 
+ûÃ M3	</text>
+
+  <!-- Power -->
+  <rect x="330" y="320" width="55" height="34" class="power"/>
+  <text x="335" y="340" class="small">Power</text>
+  <text x="335" y="350" class="dim">+Mh</text>
+
+  <!-- Hinge -->
+  <line x1="20" y1="365" x2="400" y2="365" class="hinge"/>
+  <text x="150" y="360" class="small">Òó¸Œ	</text>
+
+  <!-- Dimensions -->
+  <text x="175" y="378" class="dim">…ø W=380</text>
+</svg>
