@@ -10,6 +10,7 @@ KiCad プロジェクトと関連ドキュメント。
 | [MeasurementADC_BRINGUP.md](MeasurementADC_BRINGUP.md) | 初号機の切り分けログ（履歴） |
 | [MeasurementADC_ORDER.md](MeasurementADC_ORDER.md) | 発注・在庫 |
 | [measurement_fw/README.md](measurement_fw/README.md) | 計測 Pico2 ファーム |
+| [measurement_fw/OVERLAP_FFT_NOTES.md](measurement_fw/OVERLAP_FFT_NOTES.md) | スペアナ分解能／fps（オーバーラップ）方針メモ |
 | [../Control/README.md](../Control/README.md) | Controll 親／子ファーム |
 | [../README.md](../README.md) | リポジトリ全体・KiCad MCP |
 

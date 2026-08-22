@@ -18,6 +18,8 @@
 | `c_fft/` | Q15 FFT の C 移植（USER_C_MODULE `fft_q15`。実機で viper の約 5.4 倍） |
 | `spectrum_monitor.py` | 10 バンドをシリアル表示 |
 | `lcd_test.py` | LCD 単体確認 |
+| `OVERLAP_FFT_NOTES.md` | 分解能↑＋fps↑（オーバーラップ）方針・ボトルネック共有 |
+| `overlap_budget.py` | 上記のホスト用予算モック／自己テスト（実機不要） |
 | `main.py` | 電源投入で `spectrum_lcd.main()` を起動 |
 
 ## 使い方
