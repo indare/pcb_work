@@ -1,0 +1,51 @@
+* MeasurementADC analog FE (1 ch) — constants check
+* Schematic: J701 -> U701 invert 4.7k/4.7k -> AC 10u -> U703 3.3k/1k + 1.8nF
+*             and J701 -> AC 10u -> U703 other half (differential)
+* Ideal opamps (same AC math as KiCad/ngspice .ac). Not layout / switching noise.
+
+.param R1=4.7k Rf1=4.7k
+.param Rin=3.3k Rf=1k Cf=1.8n Cac=10u
+.param Vcom=2.5
+
+* --- ideal opamp (open-loop 1e6). Isolates R/C constants from GBW. ---
+.subckt opamp inn inp out
+Eamp out 0 inp inn 1e6
+.ends
+
+Vin audio 0 DC 0 AC 1
+
+* U701 inverting unity, + at 0
+R701 audio n701  {R1}
+R703 n701  u701o {Rf1}
+Xu701 n701 0 u701o opamp
+
+* Path A (VIN-): from U701 out
+C707 u701o n705 {Cac}
+R705 n705 n703a {Rin}
+R711 n703a vinm {Rf}
+C715 n703a vinm {Cf}
+Xu703a n703a vcom vinm opamp
+
+* Path B (VIN+): from input
+C708 audio n706 {Cac}
+R706 n706 n703b {Rin}
+R712 n703b vinp {Rf}
+C716 n703b vinp {Cf}
+Xu703b n703b vcom vinp opamp
+
+Vcom vcom 0 DC {Vcom}
+
+* Differential at ADC (unloaded; R713-716 47 ohm omitted)
+Ediff vdiff 0 vinp vinm 1
+
+.control
+set units=degrees
+op
+print v(vinp) v(vinm) v(u701o)
+ac dec 20 0.1 1e6
+wrdata analog_fe_ac.dat vdb(vdiff) vp(vdiff)
+noise v(vdiff) Vin dec 20 20 20k
+print inoise_total onoise_total
+quit
+.endc
+.end

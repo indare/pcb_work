@@ -1,0 +1,1280 @@
+{
+ "/AmpModule/L_IN": [
+  "C32.2",
+  "C33.2",
+  "J10.2",
+  "NT14.1",
+  "NT15.1",
+  "NT16.1",
+  "NT17.1",
+  "NT4.1",
+  "R26.1"
+ ],
+ "/AmpModule/R_IN": [
+  "C30.2",
+  "C31.2",
+  "J10.1",
+  "NT18.1",
+  "NT19.1",
+  "NT20.1",
+  "NT21.1",
+  "NT5.1",
+  "R25.1"
+ ],
+ "/AmpModule/V+_IN": [
+  "AMP1.8",
+  "C28.2",
+  "J9.1",
+  "NT2.1",
+  "NT6.1",
+  "NT7.1",
+  "NT8.1",
+  "NT9.1"
+ ],
+ "/AmpModule/V-_IN": [
+  "AMP1.4",
+  "C29.1",
+  "J9.3",
+  "NT10.1",
+  "NT11.1",
+  "NT12.1",
+  "NT13.1",
+  "NT3.1"
+ ],
+ "/Controll/+15_IN": [
+  "C723.1",
+  "C724.1",
+  "C725.1",
+  "F1.1",
+  "F2.1",
+  "F701.2",
+  "J1.1",
+  "J15.2",
+  "J4.2",
+  "U704.1",
+  "U705.1"
+ ],
+ "/Controll/3V3": [
+  "A1.36",
+  "J13.4",
+  "J17.2"
+ ],
+ "/Controll/5V_+": [
+  "A1.39",
+  "C38.2",
+  "C39.1",
+  "C40.1",
+  "C41.2",
+  "C42.2",
+  "C43.2",
+  "K1.1",
+  "K1.10",
+  "K10.1",
+  "K10.10",
+  "K2.1",
+  "K2.10",
+  "K3.1",
+  "K3.10",
+  "K4.1",
+  "K4.10",
+  "K5.1",
+  "K5.10",
+  "K6.1",
+  "K6.10",
+  "K7.1",
+  "K7.10",
+  "K8.1",
+  "K8.10",
+  "K9.1",
+  "K9.10",
+  "U5.3",
+  "U6.10",
+  "U7.10",
+  "U8.10"
+ ],
+ "/Controll/AMP_1_L_OUT": [
+  "J18.1",
+  "K2.7",
+  "NT14.2"
+ ],
+ "/Controll/AMP_1_R_OUT": [
+  "J18.2",
+  "K2.4",
+  "NT18.2"
+ ],
+ "/Controll/AMP_1_V+_OUT": [
+  "J12.1",
+  "K1.7",
+  "NT6.2"
+ ],
+ "/Controll/AMP_1_V-_OUT": [
+  "J12.2",
+  "K1.4",
+  "NT10.2"
+ ],
+ "/Controll/AMP_2_L_OUT": [
+  "J20.1",
+  "K4.7",
+  "NT15.2"
+ ],
+ "/Controll/AMP_2_R_OUT": [
+  "J20.2",
+  "K4.4",
+  "NT19.2"
+ ],
+ "/Controll/AMP_2_V+_OUT": [
+  "J19.1",
+  "K3.7",
+  "NT7.2"
+ ],
+ "/Controll/AMP_2_V-_OUT": [
+  "J19.2",
+  "K3.4",
+  "NT11.2"
+ ],
+ "/Controll/AMP_3_L_OUT": [
+  "J24.1",
+  "K8.7",
+  "NT4.2"
+ ],
+ "/Controll/AMP_3_R_OUT": [
+  "J24.2",
+  "K8.4",
+  "NT5.2"
+ ],
+ "/Controll/AMP_3_V+_OUT": [
+  "J21.1",
+  "K5.7",
+  "NT2.2"
+ ],
+ "/Controll/AMP_3_V-_OUT": [
+  "J21.2",
+  "K5.4",
+  "NT3.2"
+ ],
+ "/Controll/AMP_4_L_OUT": [
+  "J25.1",
+  "K9.7",
+  "NT16.2"
+ ],
+ "/Controll/AMP_4_R_OUT": [
+  "J25.2",
+  "K9.4",
+  "NT20.2"
+ ],
+ "/Controll/AMP_4_V+_OUT": [
+  "J22.1",
+  "K6.7",
+  "NT8.2"
+ ],
+ "/Controll/AMP_4_V-_OUT": [
+  "J22.2",
+  "K6.4",
+  "NT12.2"
+ ],
+ "/Controll/AMP_5_L_OUT": [
+  "J26.1",
+  "K10.7",
+  "NT17.2"
+ ],
+ "/Controll/AMP_5_R_OUT": [
+  "J26.2",
+  "K10.4",
+  "NT21.2"
+ ],
+ "/Controll/AMP_5_V+_OUT": [
+  "J23.1",
+  "K7.7",
+  "NT9.2"
+ ],
+ "/Controll/AMP_5_V-_OUT": [
+  "J23.2",
+  "K7.4",
+  "NT13.2"
+ ],
+ "/Controll/AMP_V+_IN": [
+  "C2.1",
+  "C22.1",
+  "C24.1",
+  "C26.1",
+  "C4.1",
+  "C701.1",
+  "C703.1",
+  "C705.1",
+  "C711.1",
+  "C717.1",
+  "J14.1",
+  "J5.1",
+  "J7.1",
+  "J703.3",
+  "K1.8",
+  "K3.8",
+  "K5.8",
+  "K6.8",
+  "K7.8",
+  "L1.1",
+  "U2.8",
+  "U3.8",
+  "U4.8",
+  "U701.8",
+  "U702.8",
+  "U703.8"
+ ],
+ "/Controll/AMP_V-_IN": [
+  "C23.2",
+  "C25.2",
+  "C27.2",
+  "C3.2",
+  "C5.2",
+  "C702.2",
+  "C704.2",
+  "C706.2",
+  "C712.2",
+  "C718.2",
+  "J14.2",
+  "J5.3",
+  "J7.3",
+  "J703.1",
+  "K1.3",
+  "K3.3",
+  "K5.3",
+  "K6.3",
+  "K7.3",
+  "L2.2",
+  "U2.4",
+  "U3.4",
+  "U4.4",
+  "U701.4",
+  "U702.4",
+  "U703.4"
+ ],
+ "/Controll/AUDIO_RESET_GPIO_1": [
+  "A1.2",
+  "U6.7"
+ ],
+ "/Controll/AUDIO_RESET_GPIO_2": [
+  "A1.7",
+  "U6.3"
+ ],
+ "/Controll/AUDIO_RESET_GPIO_3": [
+  "A1.12",
+  "U7.7"
+ ],
+ "/Controll/AUDIO_RESET_GPIO_4": [
+  "A1.17",
+  "U7.3"
+ ],
+ "/Controll/AUDIO_RESET_GPIO_5": [
+  "A1.24",
+  "U8.1"
+ ],
+ "/Controll/AUDIO_RESET_RELAY_1": [
+  "K2.6",
+  "U6.18"
+ ],
+ "/Controll/AUDIO_RESET_RELAY_2": [
+  "K4.6",
+  "U6.14"
+ ],
+ "/Controll/AUDIO_RESET_RELAY_3": [
+  "K8.6",
+  "U7.12"
+ ],
+ "/Controll/AUDIO_RESET_RELAY_4": [
+  "K9.6",
+  "U7.16"
+ ],
+ "/Controll/AUDIO_RESET_RELAY_5": [
+  "K10.6",
+  "U8.18"
+ ],
+ "/Controll/AUDIO_SET_GPIO_1": [
+  "A1.1",
+  "U6.8"
+ ],
+ "/Controll/AUDIO_SET_GPIO_2": [
+  "A1.6",
+  "U6.4"
+ ],
+ "/Controll/AUDIO_SET_GPIO_3": [
+  "A1.11",
+  "U7.8"
+ ],
+ "/Controll/AUDIO_SET_GPIO_4": [
+  "A1.16",
+  "U7.4"
+ ],
+ "/Controll/AUDIO_SET_GPIO_5": [
+  "A1.25",
+  "U8.2"
+ ],
+ "/Controll/AUDIO_SET_RELAY_1": [
+  "K2.5",
+  "U6.17"
+ ],
+ "/Controll/AUDIO_SET_RELAY_2": [
+  "K4.5",
+  "U6.13"
+ ],
+ "/Controll/AUDIO_SET_RELAY_3": [
+  "K8.5",
+  "U7.11"
+ ],
+ "/Controll/AUDIO_SET_RELAY_4": [
+  "K9.5",
+  "U7.15"
+ ],
+ "/Controll/AUDIO_SET_RELAY_5": [
+  "K10.5",
+  "U8.17"
+ ],
+ "/Controll/CTRL_GND": [
+  "A1.13",
+  "A1.18",
+  "A1.23",
+  "A1.28",
+  "A1.3",
+  "A1.38",
+  "A1.8",
+  "C36.2",
+  "C37.2",
+  "C38.1",
+  "C39.2",
+  "C40.2",
+  "C41.1",
+  "C42.1",
+  "C43.1",
+  "J13.5",
+  "J17.1",
+  "NT1.2",
+  "U5.2",
+  "U6.9",
+  "U7.9",
+  "U8.5",
+  "U8.6",
+  "U8.7",
+  "U8.8",
+  "U8.9"
+ ],
+ "/Controll/ENC_A": [
+  "A1.29",
+  "J13.1"
+ ],
+ "/Controll/ENC_B": [
+  "A1.31",
+  "J13.2"
+ ],
+ "/Controll/ENC_SW": [
+  "A1.32",
+  "J13.3"
+ ],
+ "/Controll/L_IN": [
+  "J16.2",
+  "J8.1",
+  "K10.8",
+  "K2.8",
+  "K4.8",
+  "K8.8",
+  "K9.8",
+  "R24.1",
+  "U4.7"
+ ],
+ "/Controll/PWR_RESET_GPIO_1": [
+  "A1.5",
+  "U6.5"
+ ],
+ "/Controll/PWR_RESET_GPIO_2": [
+  "A1.10",
+  "U6.1"
+ ],
+ "/Controll/PWR_RESET_GPIO_3": [
+  "A1.15",
+  "U7.5"
+ ],
+ "/Controll/PWR_RESET_GPIO_4": [
+  "A1.20",
+  "U7.1"
+ ],
+ "/Controll/PWR_RESET_GPIO_5": [
+  "A1.21",
+  "U8.3"
+ ],
+ "/Controll/PWR_RESET_RELAY_1": [
+  "K1.6",
+  "U6.16"
+ ],
+ "/Controll/PWR_RESET_RELAY_2": [
+  "K3.6",
+  "U6.12"
+ ],
+ "/Controll/PWR_RESET_RELAY_3": [
+  "K5.6",
+  "U7.14"
+ ],
+ "/Controll/PWR_RESET_RELAY_4": [
+  "K6.6",
+  "U7.18"
+ ],
+ "/Controll/PWR_RESET_RELAY_5": [
+  "K7.6",
+  "U8.16"
+ ],
+ "/Controll/PWR_SET_GPIO_1": [
+  "A1.4",
+  "U6.6"
+ ],
+ "/Controll/PWR_SET_GPIO_2": [
+  "A1.9",
+  "U6.2"
+ ],
+ "/Controll/PWR_SET_GPIO_3": [
+  "A1.14",
+  "U7.6"
+ ],
+ "/Controll/PWR_SET_GPIO_4": [
+  "A1.19",
+  "U7.2"
+ ],
+ "/Controll/PWR_SET_GPIO_5": [
+  "A1.22",
+  "U8.4"
+ ],
+ "/Controll/PWR_SET_RELAY_1": [
+  "K1.5",
+  "U6.15"
+ ],
+ "/Controll/PWR_SET_RELAY_2": [
+  "K3.5",
+  "U6.11"
+ ],
+ "/Controll/PWR_SET_RELAY_3": [
+  "K5.5",
+  "U7.13"
+ ],
+ "/Controll/PWR_SET_RELAY_4": [
+  "K6.5",
+  "U7.17"
+ ],
+ "/Controll/PWR_SET_RELAY_5": [
+  "K7.5",
+  "U8.15"
+ ],
+ "/Controll/R_IN": [
+  "J16.1",
+  "J8.3",
+  "K10.3",
+  "K2.3",
+  "K4.3",
+  "K8.3",
+  "K9.3",
+  "R23.1",
+  "U4.1"
+ ],
+ "/Controll/SCL": [
+  "A1.27",
+  "J17.3"
+ ],
+ "/Controll/SDA": [
+  "A1.26",
+  "J17.4"
+ ],
+ "/EQModule/L_BAX_SUM": [
+  "R12.2",
+  "R20.2",
+  "R8.2",
+  "R9.2",
+  "U3.6"
+ ],
+ "/EQModule/L_BUFF": [
+  "R11.2",
+  "R17.1",
+  "R6.2",
+  "R7.2"
+ ],
+ "/EQModule/L_BUFF_IN": [
+  "C20.1",
+  "C21.1",
+  "R16.1",
+  "U2.3"
+ ],
+ "/EQModule/L_IN": [
+  "C20.2",
+  "C21.2",
+  "J2.S",
+  "J6.2"
+ ],
+ "/EQModule/R_BAX_SUM": [
+  "R10.2",
+  "R19.2",
+  "R3.2",
+  "R4.2",
+  "U3.2"
+ ],
+ "/EQModule/R_BUFF": [
+  "R1.1",
+  "R18.1",
+  "R2.1",
+  "R5.1"
+ ],
+ "/EQModule/R_BUFF_IN": [
+  "C18.1",
+  "C19.1",
+  "R15.1",
+  "U2.5"
+ ],
+ "/EQModule/R_IN": [
+  "C18.2",
+  "C19.2",
+  "J2.T",
+  "J6.1"
+ ],
+ "/MeasurementADC/+3V3_A": [
+  "A701.13",
+  "C722.2",
+  "C737.1",
+  "C740.1",
+  "C742.2",
+  "C743.1",
+  "R719.1",
+  "U706.1",
+  "U706.2",
+  "U707.5",
+  "U709.2",
+  "U709.3",
+  "U709.8",
+  "Y701.1",
+  "Y701.4"
+ ],
+ "/MeasurementADC/+5V_A": [
+  "A701.12",
+  "C721.1",
+  "C738.1",
+  "C741.1",
+  "U707.1",
+  "U707.2",
+  "U709.1"
+ ],
+ "/MeasurementADC/+5V_D": [
+  "C726.1",
+  "C727.1",
+  "C728.1",
+  "D701.2",
+  "U704.3",
+  "U708.5"
+ ],
+ "/MeasurementADC/ADC_BCK": [
+  "A701.9",
+  "A702.2"
+ ],
+ "/MeasurementADC/ADC_DATA": [
+  "A701.10",
+  "A702.1"
+ ],
+ "/MeasurementADC/ADC_GND": [
+  "A701.14",
+  "C719.1",
+  "C720.1",
+  "C721.2",
+  "C722.1",
+  "C729.2",
+  "C730.2",
+  "C731.2",
+  "C732.2",
+  "C735.2",
+  "C736.2",
+  "C737.2",
+  "C738.2",
+  "C740.2",
+  "C741.2",
+  "C742.1",
+  "C743.2",
+  "NT701.1",
+  "U705.4",
+  "U706.3",
+  "U706.6",
+  "U706.7",
+  "U707.3",
+  "U707.6",
+  "U707.7",
+  "U709.4",
+  "Y701.2"
+ ],
+ "/MeasurementADC/ADC_GND_IN": [
+  "C1.2",
+  "C723.2",
+  "C724.2",
+  "C725.2",
+  "J1.2",
+  "J15.1",
+  "J4.1",
+  "J702.2",
+  "NT1.1",
+  "NT702.1",
+  "U1.1",
+  "U704.2",
+  "U705.2"
+ ],
+ "/MeasurementADC/ADC_LRCK": [
+  "A701.8",
+  "A702.4"
+ ],
+ "/MeasurementADC/ADC_MCLK": [
+  "A701.7",
+  "R718.2",
+  "R720.1",
+  "TP701.1"
+ ],
+ "/MeasurementADC/ADC_nMR": [
+  "A702.20",
+  "U709.7"
+ ],
+ "/MeasurementADC/ADC_nRST": [
+  "A701.11",
+  "R719.2",
+  "U709.5"
+ ],
+ "/MeasurementADC/AUDIO_L_IN": [
+  "C35.2",
+  "C708.2",
+  "J11.1",
+  "J3.S",
+  "J701.2",
+  "R701.2"
+ ],
+ "/MeasurementADC/AUDIO_R_IN": [
+  "C34.2",
+  "C710.2",
+  "J11.2",
+  "J3.T",
+  "J701.1",
+  "R702.2"
+ ],
+ "/MeasurementADC/D_GND": [
+  "A702.13",
+  "A702.18",
+  "A702.23",
+  "A702.28",
+  "A702.3",
+  "A702.38",
+  "A702.8",
+  "C726.2",
+  "C727.2",
+  "C728.2",
+  "C733.1",
+  "C734.2",
+  "C739.2",
+  "LCDDisplay701.3",
+  "NT702.2",
+  "R717.2",
+  "U708.2"
+ ],
+ "/MeasurementADC/LCD_CS": [
+  "A702.7",
+  "LCDDisplay701.8"
+ ],
+ "/MeasurementADC/LCD_DC": [
+  "A702.9",
+  "LCDDisplay701.9"
+ ],
+ "/MeasurementADC/LCD_EN": [
+  "A702.11",
+  "R717.1",
+  "U708.4"
+ ],
+ "/MeasurementADC/LCD_MOSI": [
+  "A702.25",
+  "LCDDisplay701.5"
+ ],
+ "/MeasurementADC/LCD_RST": [
+  "A702.10",
+  "LCDDisplay701.10"
+ ],
+ "/MeasurementADC/LCD_SCK": [
+  "A702.24",
+  "LCDDisplay701.6"
+ ],
+ "/MeasurementADC/LCD_VCC": [
+  "C733.2",
+  "C734.1",
+  "C739.1",
+  "LCDDisplay701.1",
+  "LCDDisplay701.11",
+  "U708.1"
+ ],
+ "/MeasurementADC/MCLK_SENSE": [
+  "A702.12",
+  "R720.2"
+ ],
+ "/MeasurementADC/PICO_3V3": [
+  "A702.30",
+  "A702.35",
+  "A702.36",
+  "A702.37"
+ ],
+ "/MeasurementADC/TP_INT": [
+  "A702.16",
+  "LCDDisplay701.14"
+ ],
+ "/MeasurementADC/TP_RST": [
+  "A702.17",
+  "LCDDisplay701.15"
+ ],
+ "/MeasurementADC/TP_SCL": [
+  "A702.15",
+  "LCDDisplay701.13"
+ ],
+ "/MeasurementADC/TP_SDA": [
+  "A702.14",
+  "LCDDisplay701.12"
+ ],
+ "/MeasurementADC/VCOML": [
+  "A701.2",
+  "C719.2",
+  "U703.3",
+  "U703.5"
+ ],
+ "/MeasurementADC/VCOMR": [
+  "A701.5",
+  "C720.2",
+  "U702.3",
+  "U702.5"
+ ],
+ "/MeasurementADC/VINL+": [
+  "A701.1",
+  "R716.1"
+ ],
+ "/MeasurementADC/VINL-": [
+  "A701.3",
+  "R715.1"
+ ],
+ "/MeasurementADC/VINR+": [
+  "A701.6",
+  "R714.1"
+ ],
+ "/MeasurementADC/VINR-": [
+  "A701.4",
+  "R713.1"
+ ],
+ "GND": [
+  "C2.2",
+  "C22.2",
+  "C23.1",
+  "C24.2",
+  "C25.1",
+  "C26.2",
+  "C27.1",
+  "C28.1",
+  "C29.2",
+  "C3.1",
+  "C4.2",
+  "C5.1",
+  "C701.2",
+  "C702.1",
+  "C703.2",
+  "C704.1",
+  "C705.2",
+  "C706.1",
+  "C711.2",
+  "C712.1",
+  "C717.2",
+  "C718.1",
+  "J2.G",
+  "J3.G",
+  "J5.2",
+  "J7.2",
+  "J703.2",
+  "J8.2",
+  "J9.2",
+  "NT701.2",
+  "R15.2",
+  "R16.2",
+  "R25.2",
+  "R26.2",
+  "R27.1",
+  "R28.1",
+  "R29.2",
+  "R30.1",
+  "U1.7",
+  "U3.3",
+  "U3.5",
+  "U4.3",
+  "U4.5",
+  "U701.3",
+  "U701.5"
+ ],
+ "Net-(A702-VSYS)": [
+  "A702.39",
+  "D701.1"
+ ],
+ "Net-(AMP1-Pad1)": [
+  "AMP1.1",
+  "R31.2",
+  "R33.1"
+ ],
+ "Net-(AMP1-Pad7)": [
+  "AMP1.7",
+  "R32.2",
+  "R34.1"
+ ],
+ "Net-(AMP1A-+)": [
+  "AMP1.3",
+  "C30.1",
+  "C31.1",
+  "R29.1"
+ ],
+ "Net-(AMP1A--)": [
+  "AMP1.2",
+  "R27.2",
+  "R31.1"
+ ],
+ "Net-(AMP1B-+)": [
+  "AMP1.5",
+  "C32.1",
+  "C33.1",
+  "R28.2"
+ ],
+ "Net-(AMP1B--)": [
+  "AMP1.6",
+  "R30.2",
+  "R32.1"
+ ],
+ "Net-(C10-Pad1)": [
+  "C10.1",
+  "C13.2",
+  "R8.1",
+  "RV1.5"
+ ],
+ "Net-(C10-Pad2)": [
+  "C10.2",
+  "R6.1",
+  "RV1.4"
+ ],
+ "Net-(C11-Pad1)": [
+  "C11.1",
+  "C7.2",
+  "R4.1",
+  "RV2.2"
+ ],
+ "Net-(C11-Pad2)": [
+  "C11.2",
+  "RV2.3"
+ ],
+ "Net-(C12-Pad1)": [
+  "C12.1",
+  "C16.1",
+  "R9.1",
+  "RV2.5"
+ ],
+ "Net-(C12-Pad2)": [
+  "C12.2",
+  "R7.1",
+  "RV2.4"
+ ],
+ "Net-(C13-Pad1)": [
+  "C13.1",
+  "RV1.6"
+ ],
+ "Net-(C14-Pad1)": [
+  "C14.1",
+  "C9.2",
+  "R10.1",
+  "RV3.2"
+ ],
+ "Net-(C14-Pad2)": [
+  "C14.2",
+  "RV3.3"
+ ],
+ "Net-(C15-Pad1)": [
+  "C15.1",
+  "C17.1",
+  "R12.1",
+  "RV3.5"
+ ],
+ "Net-(C15-Pad2)": [
+  "C15.2",
+  "R11.1",
+  "RV3.4"
+ ],
+ "Net-(C16-Pad2)": [
+  "C16.2",
+  "RV2.6"
+ ],
+ "Net-(C17-Pad2)": [
+  "C17.2",
+  "RV3.6"
+ ],
+ "Net-(C34-Pad1)": [
+  "C34.1",
+  "R33.2"
+ ],
+ "Net-(C35-Pad1)": [
+  "C35.1",
+  "R34.2"
+ ],
+ "Net-(C6-Pad1)": [
+  "C6.1",
+  "R1.2",
+  "RV1.1"
+ ],
+ "Net-(C6-Pad2)": [
+  "C6.2",
+  "C8.1",
+  "R3.1",
+  "RV1.2"
+ ],
+ "Net-(C7-Pad1)": [
+  "C7.1",
+  "R2.2",
+  "RV2.1"
+ ],
+ "Net-(C707-Pad1)": [
+  "C707.1",
+  "R705.2"
+ ],
+ "Net-(C708-Pad1)": [
+  "C708.1",
+  "R706.2"
+ ],
+ "Net-(C709-Pad1)": [
+  "C709.1",
+  "R707.2"
+ ],
+ "Net-(C710-Pad1)": [
+  "C710.1",
+  "R708.2"
+ ],
+ "Net-(C8-Pad2)": [
+  "C8.2",
+  "RV1.3"
+ ],
+ "Net-(C9-Pad1)": [
+  "C9.1",
+  "R5.2",
+  "RV3.1"
+ ],
+ "Net-(J29-Pin_1)": [
+  "J29.1",
+  "J30.3"
+ ],
+ "Net-(J29-Pin_2)": [
+  "J29.2",
+  "J30.2"
+ ],
+ "Net-(J29-Pin_3)": [
+  "J29.3",
+  "J30.1"
+ ],
+ "Net-(J29-Pin_4)": [
+  "J29.4",
+  "J30.6"
+ ],
+ "Net-(J29-Pin_5)": [
+  "J29.5",
+  "J30.5"
+ ],
+ "Net-(J29-Pin_6)": [
+  "J29.6",
+  "J30.4"
+ ],
+ "Net-(J702-Pin_1)": [
+  "F701.1",
+  "J702.1"
+ ],
+ "Net-(R13-Pad1)": [
+  "R13.1",
+  "R17.2",
+  "U2.1"
+ ],
+ "Net-(R14-Pad1)": [
+  "R14.1",
+  "R18.2",
+  "U2.7"
+ ],
+ "Net-(R19-Pad1)": [
+  "R19.1",
+  "R21.2",
+  "U3.1"
+ ],
+ "Net-(R20-Pad1)": [
+  "R20.1",
+  "R22.2",
+  "U3.7"
+ ],
+ "Net-(U1-+Vin)": [
+  "C1.1",
+  "F1.2",
+  "U1.2"
+ ],
+ "Net-(U1-+Vout)": [
+  "L1.2",
+  "U1.6"
+ ],
+ "Net-(U1--Vout)": [
+  "L2.1",
+  "U1.8"
+ ],
+ "Net-(U2A--)": [
+  "R13.2",
+  "U2.2"
+ ],
+ "Net-(U2B--)": [
+  "R14.2",
+  "U2.6"
+ ],
+ "Net-(U4A--)": [
+  "R21.1",
+  "R23.2",
+  "U4.2"
+ ],
+ "Net-(U4B--)": [
+  "R22.1",
+  "R24.2",
+  "U4.6"
+ ],
+ "Net-(U5-VIN)": [
+  "C36.1",
+  "C37.1",
+  "F2.2",
+  "U5.1"
+ ],
+ "Net-(U701A-INA-)": [
+  "R702.1",
+  "R704.2",
+  "U701.2"
+ ],
+ "Net-(U701A-OUTA)": [
+  "C709.2",
+  "R704.1",
+  "U701.1"
+ ],
+ "Net-(U701B-INB-)": [
+  "R701.1",
+  "R703.2",
+  "U701.6"
+ ],
+ "Net-(U701B-OUTB)": [
+  "C707.2",
+  "R703.1",
+  "U701.7"
+ ],
+ "Net-(U702A-INA-)": [
+  "C713.2",
+  "R707.1",
+  "R709.2",
+  "U702.2"
+ ],
+ "Net-(U702A-OUTA)": [
+  "C713.1",
+  "R709.1",
+  "R713.2",
+  "U702.1"
+ ],
+ "Net-(U702B-INB-)": [
+  "C714.2",
+  "R708.1",
+  "R710.2",
+  "U702.6"
+ ],
+ "Net-(U702B-OUTB)": [
+  "C714.1",
+  "R710.1",
+  "R714.2",
+  "U702.7"
+ ],
+ "Net-(U703A-INA-)": [
+  "C715.2",
+  "R705.1",
+  "R711.2",
+  "U703.2"
+ ],
+ "Net-(U703A-OUTA)": [
+  "C715.1",
+  "R711.1",
+  "R715.2",
+  "U703.1"
+ ],
+ "Net-(U703B-INB-)": [
+  "C716.2",
+  "R706.1",
+  "R712.2",
+  "U703.6"
+ ],
+ "Net-(U703B-OUTB)": [
+  "C716.1",
+  "R712.1",
+  "R716.2",
+  "U703.7"
+ ],
+ "Net-(U705-OUT+)": [
+  "C729.1",
+  "C730.1",
+  "C731.1",
+  "C732.1",
+  "U705.3",
+  "U706.5",
+  "U706.8",
+  "U707.8"
+ ],
+ "Net-(U706-BYP)": [
+  "C735.1",
+  "U706.4"
+ ],
+ "Net-(U707-BYP)": [
+  "C736.1",
+  "U707.4"
+ ],
+ "Net-(Y701-OUT)": [
+  "R718.1",
+  "Y701.3"
+ ],
+ "unconnected-(A1-3V3_EN-Pad37)": [
+  "A1.37"
+ ],
+ "unconnected-(A1-ADC_VREF-Pad35)": [
+  "A1.35"
+ ],
+ "unconnected-(A1-AGND-Pad33)": [
+  "A1.33"
+ ],
+ "unconnected-(A1-GPIO28_ADC2-Pad34)": [
+  "A1.34"
+ ],
+ "unconnected-(A1-RUN-Pad30)": [
+  "A1.30"
+ ],
+ "unconnected-(A1-VBUS-Pad40)": [
+  "A1.40"
+ ],
+ "unconnected-(A702-AGND-Pad33)": [
+  "A702.33"
+ ],
+ "unconnected-(A702-GPIO14-Pad19)": [
+  "A702.19"
+ ],
+ "unconnected-(A702-GPIO16-Pad21)": [
+  "A702.21"
+ ],
+ "unconnected-(A702-GPIO17-Pad22)": [
+  "A702.22"
+ ],
+ "unconnected-(A702-GPIO20-Pad26)": [
+  "A702.26"
+ ],
+ "unconnected-(A702-GPIO21-Pad27)": [
+  "A702.27"
+ ],
+ "unconnected-(A702-GPIO22-Pad29)": [
+  "A702.29"
+ ],
+ "unconnected-(A702-GPIO26_ADC0-Pad31)": [
+  "A702.31"
+ ],
+ "unconnected-(A702-GPIO27_ADC1-Pad32)": [
+  "A702.32"
+ ],
+ "unconnected-(A702-GPIO28_ADC2-Pad34)": [
+  "A702.34"
+ ],
+ "unconnected-(A702-GPIO3-Pad5)": [
+  "A702.5"
+ ],
+ "unconnected-(A702-GPIO4-Pad6)": [
+  "A702.6"
+ ],
+ "unconnected-(A702-VBUS-Pad40)": [
+  "A702.40"
+ ],
+ "unconnected-(K1-Pad2)": [
+  "K1.2"
+ ],
+ "unconnected-(K1-Pad9)": [
+  "K1.9"
+ ],
+ "unconnected-(K10-Pad2)": [
+  "K10.2"
+ ],
+ "unconnected-(K10-Pad9)": [
+  "K10.9"
+ ],
+ "unconnected-(K2-Pad2)": [
+  "K2.2"
+ ],
+ "unconnected-(K2-Pad9)": [
+  "K2.9"
+ ],
+ "unconnected-(K3-Pad2)": [
+  "K3.2"
+ ],
+ "unconnected-(K3-Pad9)": [
+  "K3.9"
+ ],
+ "unconnected-(K4-Pad2)": [
+  "K4.2"
+ ],
+ "unconnected-(K4-Pad9)": [
+  "K4.9"
+ ],
+ "unconnected-(K5-Pad2)": [
+  "K5.2"
+ ],
+ "unconnected-(K5-Pad9)": [
+  "K5.9"
+ ],
+ "unconnected-(K6-Pad2)": [
+  "K6.2"
+ ],
+ "unconnected-(K6-Pad9)": [
+  "K6.9"
+ ],
+ "unconnected-(K7-Pad2)": [
+  "K7.2"
+ ],
+ "unconnected-(K7-Pad9)": [
+  "K7.9"
+ ],
+ "unconnected-(K8-Pad2)": [
+  "K8.2"
+ ],
+ "unconnected-(K8-Pad9)": [
+  "K8.9"
+ ],
+ "unconnected-(K9-Pad2)": [
+  "K9.2"
+ ],
+ "unconnected-(K9-Pad9)": [
+  "K9.9"
+ ],
+ "unconnected-(LCDDisplay701-3V3-Pad2)": [
+  "LCDDisplay701.2"
+ ],
+ "unconnected-(LCDDisplay701-MISO-Pad4)": [
+  "LCDDisplay701.4"
+ ],
+ "unconnected-(LCDDisplay701-SD_CS-Pad7)": [
+  "LCDDisplay701.7"
+ ],
+ "unconnected-(U1-NC-Pad5)": [
+  "U1.5"
+ ],
+ "unconnected-(U1-Remote_On/Off-Pad3)": [
+  "U1.3"
+ ],
+ "unconnected-(U708-FLG-Pad3)": [
+  "U708.3"
+ ],
+ "unconnected-(U709-RESET-Pad6)": [
+  "U709.6"
+ ],
+ "unconnected-(U8-O5-Pad14)": [
+  "U8.14"
+ ],
+ "unconnected-(U8-O6-Pad13)": [
+  "U8.13"
+ ],
+ "unconnected-(U8-O7-Pad12)": [
+  "U8.12"
+ ],
+ "unconnected-(U8-O8-Pad11)": [
+  "U8.11"
+ ]
+}
