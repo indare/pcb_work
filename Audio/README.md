@@ -8,6 +8,7 @@ KiCad プロジェクトと関連ドキュメント。
 |---|---|
 | [MeasurementADC_STATUS.md](MeasurementADC_STATUS.md) | **現状・次作業・箱内配線方針**（まずここ） |
 | [MeasurementADC_BRINGUP.md](MeasurementADC_BRINGUP.md) | 初号機の切り分けログ（履歴） |
+| [MeasurementADC_ZT703S_NOISE.md](MeasurementADC_ZT703S_NOISE.md) | ZT-703S で 1175 Hz 残差を測る手順 |
 | [MeasurementADC_ORDER.md](MeasurementADC_ORDER.md) | 発注・在庫 |
 | [measurement_fw/README.md](measurement_fw/README.md) | 計測 Pico2 ファーム |
 | [../Control/README.md](../Control/README.md) | Controll 親／子ファーム |

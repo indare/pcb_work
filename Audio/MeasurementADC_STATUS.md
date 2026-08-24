@@ -1,10 +1,11 @@
 # MeasurementADC 進捗メモ
 
-最終更新: **2026-08-20**
+最終更新: **2026-08-24**
 
 Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM1804 + Pico2 + WAVESHARE-29318）。
 
-ブリングアップの詳細ログは `MeasurementADC_BRINGUP.md`。ファームは `measurement_fw/`。
+ブリングアップの詳細ログは `MeasurementADC_BRINGUP.md`。ファームは `measurement_fw/`。  
+**いまの実機ノイズ切り分け**は `MeasurementADC_ZT703S_NOISE.md`（ZT-703S 2ch）。
 
 ---
 
@@ -14,7 +15,8 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
 |---|---|
 | PCM1804 | 稼働（SCKI 12.288 MHz / LRCK 48 kHz / BCK 3.072 MHz） |
 | アナログ FE | J703 ±15V 通電済み。開放時の 1196 Hz 過負荷は解消 |
-| 残差 | 約 1175 Hz 系の弱い混入（実用上は許容） |
+| 残差 | 約 1175 Hz 系の弱い混入（実用上は許容）。**ZT-703S で電源／VCOM／GND を計測中** |
+| 計測機材 | ZT-703S ＋プローブ 2 本 到着済み（2026-08-24） |
 | LCD | ST7796S、MADCTL `0xE8`、480×320。バックライトは GP8=`LCD_EN` |
 | タッチ | FT6336U（I2C1 GP10/11）。下端メニューでレンジ／L+R／色／ピーク |
 | スペアナ FW | 10 バンド（低域 IIR）＋棒表示。DMA と FFT を重ねて約 18–20 fps |
@@ -35,6 +37,10 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
 
 ## 次の作業（優先順）
 
+0. **ZT-703S で 1175 Hz 残差を計測** ← **いまここ**（手順: `MeasurementADC_ZT703S_NOISE.md`）
+   - A1: J703 ±15 リプル → A2: VCOMR/L → A3: 相関 → A4: GND 電位差
+   - 仮説優先: MCW03 経由リプル → 星点（NT701 位置）→ VCOM →（保険）バルク/RC
+   - 結果（周波数・Vpp・スクショ要約）を同ファイル末尾または本 STATUS に追記する
 1. ~~**MeasurementADC 次号 回路図**~~ → **完了（rev 0.4, 2026-08-20）**
    - 追加部品: D701（RB160M-30 / SOD-123）、R720 1k、TP701、U709=TPS3307-33D（SO-8）
    - 廃止: U710 / R721 / R722（TPS3808 対）。C743 100nF・C744 10nF は U709 の
@@ -46,7 +52,7 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
    - **U709 の VDD が `~MR` に短絡していたのを修正**（VDD→`+3V3_A`）。
      短絡したままだと監視 IC が動かず、GP15 を L に引くと IC の電源ごと落ちる
    - 電源レールはローカルラベルのまま。U705→U706/U707 までは線で追えるが、その先の分配順は基板設計時の課題
-2. **MeasurementADC 次号 PCB**（回路図に追従）
+2. **MeasurementADC 次号 PCB**（回路図に追従。計測結果で星点／電源を反映）
    - ASFL FP の GND/VDD を銅箔へ反映
    - LCD SCK/MOSI を GP18/GP19 のパターンへ
    - D701・R720・C745・TP701・TPS3307-33D（SO-8）の配置。旧 G33/G50 ランドは削除
@@ -125,6 +131,7 @@ U705→U706/U707 までは線で追えるが、その先はラベルで飛ぶの
 | `AudioCase.kicad_pcb` / `.kicad_sch` | 親 PCB・階層シート |
 | `MeasurementADC_ORDER.md` | 発注・在庫メモ |
 | `MeasurementADC_BRINGUP.md` | 初号ブリングアップ記録（履歴） |
+| `MeasurementADC_ZT703S_NOISE.md` | ZT-703S 2ch による 1175 Hz 残差の計測手順・結果欄 |
 | `measurement_fw/` | Pico2 MicroPython（I2S / FFT / LCD スペアナ） |
 | `scripts/regenerate_split_gerbers.py` | 分割 Gerber |
 | `scripts/netcmp.py` | 回路図編集の前後でネット構成を照合 |
