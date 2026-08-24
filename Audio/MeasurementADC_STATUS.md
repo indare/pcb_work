@@ -45,7 +45,8 @@ Amp 調整用の基準計測モジュール（OPA1656 + 共立 ADC1804_F / PCM18
    - A2 1回目: どちらも CH1。VCOMR/L とも約 250 mVpp。**GND は J703 0V** なので星点間 HF が乗っている
    - A2-local: CH2 GND を C719 → 青約 100 mVpp、黄（J703 GND）約 250 mVpp。2ch GND 共通なので J703–C719 が短絡しうる
    - A2-local 2: 黄が細く青が太い。**青先端は未接続（アンテナ拾い）。無視**
-   - **次: CH1 のみ。** VCOMR × C719、CH2 表示 OFF、500 µs / 50 mV
+   - A2-local 3: **CH1 のみ** VCOMR×C719 でも 150–250 mVpp HF。局所 GND では消えず
+   - **次: C719 の南パッド＝ADC_GND（北は VCOM）。キャップ両端を最短で測る**
 1. ~~**MeasurementADC 次号 回路図**~~ → **完了（rev 0.4, 2026-08-20）**
    - 追加部品: D701（RB160M-30 / SOD-123）、R720 1k、TP701、U709=TPS3307-33D（SO-8）
    - 廃止: U710 / R721 / R722（TPS3808 対）。C743 100nF・C744 10nF は U709 の
