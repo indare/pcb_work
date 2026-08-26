@@ -28,13 +28,26 @@
 電流は両方 ±100mA。**1ch Amp + 計測常時**なら同クラスで足りる想定。  
 主目的は **Amp SMD 100µF を Cout 仕様内に入れること**。
 
-ピン（dual）:
+### ピン配置（2026-08-26 DS 突合せ済み）
 
-```text
-1 –Vin / 2 +Vin / 3 Remote / 5 NC / 6 +Vout / 7 Common / 8 –Vout
-```
+出典: `datasheets/TEC3_Datasheet.pdf`（Traco TEC 3 Series Rev. 2026-07-02）Pinout Dual 列。  
+秋月 MCW03 DS も **同じ SIP-8 並び**（1=–Vin … 8=–Vout）。
 
-旧シンボルも同並びだったが、**実機 MCW03 とピンが逆の系統がある**ので、PCB 差し替え前に DS 突合せ必須。
+| Pin | TEC Dual（DS） | 本シンボル | PowerModule 配線 |
+|---|---|---|---|
+| 1 | –Vin (GND) | –Vin | PD_GND / Vin− |
+| 2 | +Vin (Vcc) | +Vin | F1/C1 側 +Vin |
+| 3 | Remote On/Off | Remote | **N.C.（open = ON）** ※DS: passive on |
+| 5 | NC | NC | N.C. |
+| 6 | +Vout | +Vout | L1 → +15 |
+| 7 | Common | Common | A_GND |
+| 8 | –Vout | –Vout | L2 → −15 |
+
+回路図 Datasheet プロパティ:
+
+- URL: `https://www.tracopower.com/sites/default/files/products/datasheets/tec3_datasheet.pdf`
+- ローカル: `Audio/datasheets/TEC3_Datasheet.pdf`
+- EMI AN: `Audio/datasheets/TEC3_EMC_Consideration.pdf`
 
 ---
 

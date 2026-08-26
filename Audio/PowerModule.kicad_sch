@@ -1299,7 +1299,7 @@
 					)
 				)
 			)
-			(property "Description" "Traco TEC 3-1223 isolated DC/DC, 9-18Vin, ±15V/±100mA, SIP-8, Cout 440uF/rail"
+			(property "Description" "Traco TEC 3-1223 isolated DC/DC, 9-18Vin, ±15V/±100mA, SIP-8, Cout 440uF/rail; local DS datasheets/TEC3_Datasheet.pdf; pinout Dual verified"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1765,6 +1765,10 @@
 		(uuid "f9c892db-ad24-432b-a90b-a73a00d106d9")
 	)
 	(no_connect
+		(at 77.47 35.56)
+		(uuid "b0a0tec3-0002-4000-8000-000000000002")
+	)
+	(no_connect
 		(at 52.07 45.72)
 		(uuid "1a8cda1b-5297-4b35-a6fa-5fe8ecba0a7f")
 	)
@@ -2078,7 +2082,7 @@
 		)
 		(uuid "fc9a31bd-bfd6-426b-8570-841c63fd3b75")
 	)
-	(text "TEC 3-1223 redesign (calc)\nVin 9-18V / ±15V ±100mA / Cout max 440µF/rail / ripple 55mVpp\nSecondary LC: L1=L2=10µH, C2=C3=22µF → fc≈10.7kHz; ~40dB@100kHz (ideal 2nd-order)\nCout budget (1 Amp ON): local22 + Amp100 + Meas47 ≈ 170µF << 440µF (MCW was 47µF)\nInput EMI (PCB): Traco Class A — L=4.7µH (TCK-154), C=10µF+4.7µF/25V MLCC, Y=150pF/2kV\nAmp: SMD 100µF/35V polymer on Amp J9 (Controll relays 1ch only)\nDetails: PowerModule_TEC3_REDESIGN.md"
+	(text "TEC 3-1223 redesign (calc)\nVin 9-18V / ±15V ±100mA / Cout max 440µF/rail / ripple 55mVpp\nSecondary LC: L1=L2=10µH, C2=C3=22µF → fc≈10.7kHz; ~40dB@100kHz (ideal 2nd-order)\nCout budget (1 Amp ON): local22 + Amp100 + Meas47 ≈ 170µF << 440µF (MCW was 47µF)\nInput EMI (PCB): Traco Class A — L=4.7µH (TCK-154), C=10µF+4.7µF/25V MLCC, Y=150pF/2kV\nAmp: SMD 100µF/35V polymer on Amp J9 (Controll relays 1ch only)\nPinout OK vs DS Dual (1=-Vin 2=+Vin 3=Remote NC-openON 5=NC 6=+Vo 7=Com 8=-Vo)\nDS: datasheets/TEC3_Datasheet.pdf\nDetails: PowerModule_TEC3_REDESIGN.md"
 		(exclude_from_sim no)
 		(at 15.24 26.67 0)
 		(effects
@@ -2441,7 +2445,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Traco TEC 3-1223; DS: datasheets/TEC3_Datasheet.pdf / https://www.tracopower.com/sites/default/files/products/datasheets/tec3_datasheet.pdf; pins verified Dual SIP-8"
 			(at 64.77 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -2450,6 +2454,28 @@
 				(font
 					(size 1.27 1.27)
 				)
+		(property "Manufacturer" "Traco Power"
+			(at 64.77 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "TEC 3-1223"
+			(at 64.77 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 			)
 		)
 		(pin "3"
