@@ -2203,7 +2203,7 @@
 				)
 			)
 		)
-		(property "Description" "Secondary LC +15: 10uH, Isat>=0.3A. fc~10.7kHz with C2=22uF"
+		(property "Description" "Secondary LC +15: shielded 10uH, Isat>=0.3A. fc~10.7kHz with C2=22uF"
 			(at 83.82 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -2731,7 +2731,7 @@
 				)
 			)
 		)
-		(property "Description" "Secondary LC -15: 10uH, Isat>=0.3A. fc~10.7kHz with C3=22uF"
+		(property "Description" "Secondary LC -15: shielded 10uH, Isat>=0.3A. fc~10.7kHz with C3=22uF"
 			(at 83.82 43.18 0)
 			(hide yes)
 			(show_name no)
