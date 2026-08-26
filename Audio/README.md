@@ -17,7 +17,7 @@ KiCad プロジェクトと関連ドキュメント。
 
 | シート | 役割 | いまの扱い |
 |---|---|---|
-| PowerModule | MCW03 ±15 / A_GND | 箱に入れる |
+| PowerModule | **TEC 3-1223** ±15 / A_GND（旧 MCW03）。計算メモ: [PowerModule_TEC3_REDESIGN.md](PowerModule_TEC3_REDESIGN.md) | 箱に入れる |
 | AmpModule | NE5532 Amp（×10 想定） | Amp→スペアナ接続中 |
 | Controll | CH1–10 リレー（親＋子） | 実機では外している |
 | MeasurementADC | 計測＋LCD | 初号応急配線で稼働 |

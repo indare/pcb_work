@@ -1248,7 +1248,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "MCW03:MCW03-12D15"
+		(symbol "TEC3:TEC3-1223"
 			(pin_names
 				(offset 1)
 			)
@@ -1258,7 +1258,7 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "U"
-				(at 0 0 0)
+				(at 0 -1.27 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1267,8 +1267,8 @@
 					)
 				)
 			)
-			(property "Value" ""
-				(at 0 0 0)
+			(property "Value" "TEC 3-1223"
+				(at 0 -18.415 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1277,7 +1277,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Library:MCW03-12D15_SIP7_THT"
+			(property "Footprint" "Library:TEC3-1223_SIP8_THT"
 				(at 1.27 3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1288,7 +1288,7 @@
 					)
 				)
 			)
-			(property "Datasheet" "file://C:\\Users\\masas\\Desktop\\PCB\\equalizer\\MCW03.pdf"
+			(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tec3_datasheet.pdf"
 				(at 0.508 1.778 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1299,7 +1299,7 @@
 					)
 				)
 			)
-			(property "Description" ""
+			(property "Description" "Traco TEC 3-1223 isolated DC/DC, 9-18Vin, ±15V/±100mA, SIP-8, Cout 440uF/rail"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1310,7 +1310,29 @@
 					)
 				)
 			)
-			(symbol "MCW03-12D15_0_1"
+			(property "Manufacturer" "Traco Power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "MPN" "TEC 3-1223"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TEC3-1223_0_1"
 				(rectangle
 					(start -10.16 -2.54)
 					(end 10.16 -16.51)
@@ -1319,15 +1341,23 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type background)
+					)
+				)
+				(text "TEC 3-1223"
+					(at 0 -9.525 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
 					)
 				)
 			)
-			(symbol "MCW03-12D15_1_1"
+			(symbol "TEC3-1223_1_1"
 				(pin power_in line
 					(at -12.7 -5.08 0)
 					(length 2.54)
-					(name "GND"
+					(name "-Vin"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1363,7 +1393,7 @@
 				(pin passive line
 					(at -12.7 -13.97 0)
 					(length 2.54)
-					(name "Remote_On/Off"
+					(name "Remote"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2048,6 +2078,17 @@
 		)
 		(uuid "fc9a31bd-bfd6-426b-8570-841c63fd3b75")
 	)
+	(text "TEC 3-1223 redesign (calc)\nVin 9-18V / ±15V ±100mA / Cout max 440µF/rail / ripple 55mVpp\nSecondary LC: L1=L2=10µH, C2=C3=22µF → fc≈10.7kHz; ~40dB@100kHz (ideal 2nd-order)\nCout budget (1 Amp ON): local22 + Amp100 + Meas47 ≈ 170µF << 440µF (MCW was 47µF)\nInput EMI (PCB): Traco Class A — L=4.7µH (TCK-154), C=10µF+4.7µF/25V MLCC, Y=150pF/2kV\nAmp: SMD 100µF/35V polymer on Amp J9 (Controll relays 1ch only)\nDetails: PowerModule_TEC3_REDESIGN.md"
+		(exclude_from_sim no)
+		(at 15.24 26.67 0)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify left top)
+		)
+		(uuid "b0a0tec3-0001-4000-8000-000000000001")
+	)
 	(hierarchical_label "A_GND"
 		(shape input)
 		(at 127 36.83 180)
@@ -2126,7 +2167,7 @@
 				)
 			)
 		)
-		(property "Value" "L"
+		(property "Value" "10µH"
 			(at 83.82 35.56 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2136,7 +2177,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_12x12mm_H8mm"
+		(property "Footprint" "Inductor_SMD:L_1210_3225Metric"
 			(at 83.82 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -2158,7 +2199,7 @@
 				)
 			)
 		)
-		(property "Description" "Inductor"
+		(property "Description" "Secondary LC +15: 10uH, Isat>=0.3A. fc~10.7kHz with C2=22uF"
 			(at 83.82 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -2206,7 +2247,7 @@
 				)
 			)
 		)
-		(property "Value" "47μF"
+		(property "Value" "47µF"
 			(at 42.926 40.64 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2238,7 +2279,7 @@
 				)
 			)
 		)
-		(property "Description" "Polarized capacitor, small symbol"
+		(property "Description" "12V input bulk after fuse. PCB: add Traco Class-A L=4.7uH + 10uF/4.7uF MLCC at U1 Vin"
 			(at 45.72 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -2287,7 +2328,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.1μF"
+		(property "Value" "0.1µF"
 			(at 114.3 45.7199 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2320,7 +2361,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "-15 HF ceramic at bus"
 			(at 110.49 44.45 0)
 			(hide yes)
 			(show_name no)
@@ -2347,7 +2388,7 @@
 		)
 	)
 	(symbol
-		(lib_id "MCW03:MCW03-12D15")
+		(lib_id "TEC3:TEC3-1223")
 		(at 64.77 31.75 0)
 		(unit 1)
 		(body_style 1)
@@ -2368,7 +2409,7 @@
 				)
 			)
 		)
-		(property "Value" "MCW03"
+		(property "Value" "TEC 3-1223"
 			(at 64.77 31.75 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2378,7 +2419,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Library:MCW03-12D15_SIP7_THT"
+		(property "Footprint" "Library:TEC3-1223_SIP8_THT"
 			(at 66.04 27.94 0)
 			(hide yes)
 			(show_name no)
@@ -2389,7 +2430,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "file://C:\\Users\\masas\\Desktop\\PCB\\equalizer\\MCW03.pdf"
+		(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tec3_datasheet.pdf"
 			(at 65.278 29.972 0)
 			(hide yes)
 			(show_name no)
@@ -2464,7 +2505,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7μF"
+		(property "Value" "22µF"
 			(at 102.87 37.2109 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2475,7 +2516,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_5x5.3"
 			(at 100.0252 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -2497,7 +2538,7 @@
 				)
 			)
 		)
-		(property "Description" "Polarized capacitor"
+		(property "Description" "+15 after L1: polymer/OS-CON 22uF 35V. Part of Cout budget"
 			(at 99.06 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -2632,7 +2673,7 @@
 				)
 			)
 		)
-		(property "Value" "L"
+		(property "Value" "10µH"
 			(at 83.82 45.72 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2642,7 +2683,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_12x12mm_H8mm"
+		(property "Footprint" "Inductor_SMD:L_1210_3225Metric"
 			(at 83.82 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -2664,7 +2705,7 @@
 				)
 			)
 		)
-		(property "Description" "Inductor"
+		(property "Description" "Secondary LC -15: 10uH, Isat>=0.3A. fc~10.7kHz with C3=22uF"
 			(at 83.82 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -2789,7 +2830,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7μF"
+		(property "Value" "22µF"
 			(at 102.87 44.8309 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2800,7 +2841,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_5x5.3"
 			(at 100.0252 48.26 0)
 			(hide yes)
 			(show_name no)
@@ -2822,7 +2863,7 @@
 				)
 			)
 		)
-		(property "Description" "Polarized capacitor"
+		(property "Description" "-15 after L2: polymer/OS-CON 22uF 35V. Part of Cout budget"
 			(at 99.06 44.45 0)
 			(hide yes)
 			(show_name no)
@@ -3027,7 +3068,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.1μF"
+		(property "Value" "0.1µF"
 			(at 114.3 38.0999 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3060,7 +3101,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "+15 HF ceramic at bus"
 			(at 110.49 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -3262,7 +3303,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1A"
+		(property "Value" "800mA"
 			(at 40.64 46.99 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3295,7 +3336,7 @@
 				)
 			)
 		)
-		(property "Description" "Fuse"
+		(property "Description" "Traco TEC3-12xx recommended input fuse 0.8A slow-blow"
 			(at 39.37 44.45 0)
 			(hide yes)
 			(show_name no)
