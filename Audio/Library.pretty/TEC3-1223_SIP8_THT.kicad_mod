@@ -3,10 +3,10 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "Traco TEC 3-1223 SIP-8 dual DC/DC, body 21.8x9.1x11.2mm, pins 1 2 3 5 6 7 8 @2.54mm")
-	(tags "TEC3 Traco DCDC SIP8 dual output")
+	(descr "Traco TEC 3 Series SIP-8 (TEC 3-1223). Body 21.8x9.1x11.2mm. Pins 1,2,3,5,6,7,8: pitch 2.54 with 5.08 gap (no pin4). Pin Ø0.5x0.25. DS Rev 2026-07-02.")
+	(tags "TEC3 Traco DCDC SIP8 dual")
 	(property "Reference" "U"
-		(at -8.89 8.89 90)
+		(at -7 8.9 90)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "a1111111-1111-4111-8111-111111111101")
@@ -18,7 +18,7 @@
 		)
 	)
 	(property "Value" "TEC 3-1223"
-		(at 8.89 10.16 90)
+		(at 5.5 8.9 90)
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "a1111111-1111-4111-8111-111111111102")
@@ -42,7 +42,7 @@
 			)
 		)
 	)
-	(property "Description" "Traco TEC 3-1223 ±15V 3W SIP-8"
+	(property "Description" "Traco TEC 3-1223 ±15V 3W SIP-8; local DS datasheets/TEC3_Datasheet.pdf"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
@@ -58,8 +58,8 @@
 	(attr through_hole)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_rect
-		(start -4.55 -1.5)
-		(end 4.55 20.3)
+		(start -5.6 -2)
+		(end 3.5 19.8)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -69,8 +69,19 @@
 		(uuid "a1111111-1111-4111-8111-111111111110")
 	)
 	(fp_rect
-		(start -5.3 -2.2)
-		(end 5.3 21.0)
+		(start -5.6 -2)
+		(end 3.5 19.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "a1111111-1111-4111-8111-111111111113")
+	)
+	(fp_rect
+		(start -6.1 -2.5)
+		(end 4 20.3)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -80,13 +91,25 @@
 		(uuid "a1111111-1111-4111-8111-111111111111")
 	)
 	(fp_text user "1"
-		(at -3.2 0 0)
+		(at 2.2 0 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "a1111111-1111-4111-8111-111111111112")
 		(effects
 			(font
 				(size 0.8 0.8)
+				(thickness 0.1)
+			)
+		)
+	)
+	(fp_text user "DS: avoid Cu under body"
+		(at -1.05 21.5 0)
+		(unlocked yes)
+		(layer "Cmts.User")
+		(uuid "a1111111-1111-4111-8111-111111111114")
+		(effects
+			(font
+				(size 0.7 0.7)
 				(thickness 0.1)
 			)
 		)
