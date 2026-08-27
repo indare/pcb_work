@@ -2082,7 +2082,7 @@
 		)
 		(uuid "fc9a31bd-bfd6-426b-8570-841c63fd3b75")
 	)
-	(text "TEC 3-1223 redesign (calc)\nVin 9-18V / ±15V ±100mA / Cout max 440µF/rail / ripple 55mVpp\nSecondary LC: L1=L2=10µH, C2=C3=22µF → fc≈10.7kHz; ~40dB@100kHz (ideal 2nd-order)\nCout budget (1 Amp ON): local22 + Amp100 + Meas47 ≈ 170µF << 440µF (MCW was 47µF)\nInput EMI (PCB): Traco Class A — L=4.7µH (TCK-154), C=10µF+4.7µF/25V MLCC, Y=150pF/2kV\nAmp: SMD 100µF/35V polymer on Amp J9 (Controll relays 1ch only)\nPinout OK vs DS Dual (1=-Vin 2=+Vin 3=Remote NC-openON 5=NC 6=+Vo 7=Com 8=-Vo)\nDS: datasheets/TEC3_Datasheet.pdf\nDetails: PowerModule_TEC3_REDESIGN.md"
+	(text "TEC 3-1223 redesign (calc)\nVin 9-18V / ±15V ±100mA / Cout max 440µF/rail / ripple 55mVpp\nSecondary LC: L1=L2=10µH DFE322512F-100M (Akizuki 114977), C2=C3=22µF → fc≈10.7kHz\nCout budget (1 Amp ON): local22 + Amp100 + Meas47 ≈ 170µF << 440µF (MCW was 47µF)\nInput EMI (PCB): Traco Class A — L=4.7µH (TCK-154), C=10µF+4.7µF/25V MLCC, Y=150pF/2kV\nAmp: SMD 100µF/35V polymer on Amp J9 (Controll relays 1ch only)\nPinout OK vs DS Dual (1=-Vin 2=+Vin 3=Remote NC-openON 5=NC 6=+Vo 7=Com 8=-Vo)\nDS: datasheets/TEC3_Datasheet.pdf\nDetails: PowerModule_TEC3_REDESIGN.md"
 		(exclude_from_sim no)
 		(at 15.24 26.67 0)
 		(effects
@@ -2181,7 +2181,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_1210_3225Metric"
+		(property "Footprint" "Library:L_Murata_DFE322512F"
 			(at 83.82 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -2192,7 +2192,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g114977/"
 			(at 83.82 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -2203,7 +2203,29 @@
 				)
 			)
 		)
-		(property "Description" "Secondary LC +15: shielded 10uH, Isat>=0.3A. fc~10.7kHz with C2=22uF"
+		(property "Description" "Akizuki 114977 Murata DFE322512F-100M 10uH 1.1A DCR 324mOhm metal shielded. Secondary LC +15, fc~10.7kHz with C2=22uF"
+			(at 83.82 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Murata"
+			(at 83.82 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "DFE322512F-100M"
 			(at 83.82 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -2709,7 +2731,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_1210_3225Metric"
+		(property "Footprint" "Library:L_Murata_DFE322512F"
 			(at 83.82 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -2720,7 +2742,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g114977/"
 			(at 83.82 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -2731,7 +2753,29 @@
 				)
 			)
 		)
-		(property "Description" "Secondary LC -15: shielded 10uH, Isat>=0.3A. fc~10.7kHz with C3=22uF"
+		(property "Description" "Akizuki 114977 Murata DFE322512F-100M 10uH 1.1A DCR 324mOhm metal shielded. Secondary LC -15, fc~10.7kHz with C3=22uF"
+			(at 83.82 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Murata"
+			(at 83.82 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "DFE322512F-100M"
 			(at 83.82 43.18 0)
 			(hide yes)
 			(show_name no)

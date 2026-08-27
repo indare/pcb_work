@@ -91,7 +91,11 @@ TEC: スイッチング **≥100 kHz（PFM）**。
 
 選定:
 
-- **L1 = L2 = 10µH シールドタイプ**（Isat ≥ 0.3 A、DCR 小さめ。オープンコア不可）
+- **L1 = L2 = 10µH シールド**
+  - 指定: **秋月 114977 / Murata DFE322512F-100M**
+  - メタルコンポジット、ΔT **1.1 A** / ΔL 1.7 A、DCR **324 mΩ max**
+  - FP: `Library:L_Murata_DFE322512F`（本体 3.2×2.5×1.2、推奨ランド pad 1.05×2.70 / ギャップ 1.10）
+  - DCR は 0.1 A で約 32 mV。二次 LC の Q を抑える方向で、115628（127 mΩ）よりこちらを採用
 - **C2 = C3 = 22µF / 35V**（高分子 or OS-CON 相当）
 
 共振:
@@ -147,7 +151,7 @@ J4 12V
   → C1 47µF bulk
   → [L_EMI 4.7µH] → [10µF + 4.7µF MLCC]   … PCB で追加
   → U1 TEC 3-1223
-  → L1/L2 10µH
+  → L1/L2 10µH（DFE322512F-100M / 秋月 114977）
   → C2/C3 22µF + C4/C5 0.1µF
   → J5 ±15 / A_GND
        ├─ MeasurementADC（常時）
@@ -161,7 +165,7 @@ J4 12V
 | Ref | 旧 | 新 |
 |---|---|---|
 | U1 | MCW03-12D15 | **TEC 3-1223**（`Library:TEC3-1223_SIP8_THT`） |
-| L1/L2 | 値なし / 大 FP | **10µH** / L_1210 |
+| L1/L2 | 値なし / 大 FP | **10µH DFE322512F-100M**（秋月 114977）/ `Library:L_Murata_DFE322512F` |
 | C2/C3 | 4.7µF THT | **22µF**（35V 想定） |
 | F1 | 1A | **800mA** |
 | C1 | 47µF | 47µF（入力バルク、EMI 追記） |
@@ -170,6 +174,7 @@ J4 12V
 
 - `TEC3.kicad_sym`
 - `Library.pretty/TEC3-1223_SIP8_THT.kicad_mod`
+- `Library.pretty/L_Murata_DFE322512F.kicad_mod`
 
 ---
 
