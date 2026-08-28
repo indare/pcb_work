@@ -97,7 +97,7 @@ Amp×10 を 5532 のまま同時通電しても ≈111 mA。DKMW20 なら定格�
 
 **再設計するなら DKMW20F-15（小さい）か REC15 / DKA15A-15（2″×1″）。** THN 20 は Cout が薄いので次点。
 
-SIP-8 のまま 6 W にするなら TMR 6 以外に **RS6-1215D / AM6G-1215DZ / PDL06-12D15**（Cout ±660 µF）。国内は秋月に 6 W SIP は無く、**Cosel MGW61215**（ピンは同じ、Remote は L=ON）が近い。千石・共立の CCG6-12-15DF は DIP でピン非互換。
+SIP-8 のまま 6 W にするなら TMR 6 以外に **RS6-1215D / AM6G-1215DZ / PDL06-12D15**（Cout ±660 µF）。国内は秋月に 6 W SIP は無く、**Cosel MGW61215**（ピンは同じ、Remote は L=ON）が近い。千石・共立の CCG6-12-15DF は DIP でピン非互換。**Mean Well DPB09A-15** は SIP-8 で ±300 mA だが Cout **47 µF** なのでこの島バルクでは使わない。
 
 ---
 
