@@ -1248,7 +1248,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "TEC3:TEC3-1223"
+		(symbol "DKMW20:DKMW20F-15"
 			(pin_names
 				(offset 1)
 			)
@@ -1267,7 +1267,7 @@
 					)
 				)
 			)
-			(property "Value" "TMR 6-1223"
+			(property "Value" "DKMW20F-15"
 				(at 0 -18.415 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1277,7 +1277,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Library:TEC3-1223_SIP8_THT"
+			(property "Footprint" "Library:DKMW20F-15_1in_THT"
 				(at 1.27 3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1288,7 +1288,7 @@
 					)
 				)
 			)
-			(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tmr6_datasheet.pdf"
+			(property "Datasheet" "https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20"
 				(at 0.508 1.778 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1299,7 +1299,7 @@
 					)
 				)
 			)
-			(property "Description" "Traco TMR 6-1223 isolated DC/DC, 9-18Vin, ±15V/±200mA, SIP-8, Cout 660uF/rail; Dual pinout same as TEC 3-1223; DS datasheets/TMR6_Datasheet.pdf"
+			(property "Description" "Mean Well DKMW20F-15 isolated DC/DC, 9-36Vin, ±15V/±660mA, DIP 1in x 1in, Cout 650uF/rail; DS datasheets/SKMW20_DKMW20_Datasheet.pdf"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1310,7 +1310,7 @@
 					)
 				)
 			)
-			(property "Manufacturer" "Traco Power"
+			(property "Manufacturer" "MEAN WELL"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1321,7 +1321,7 @@
 					)
 				)
 			)
-			(property "MPN" "TMR 6-1223"
+			(property "MPN" "DKMW20F-15"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1332,7 +1332,7 @@
 					)
 				)
 			)
-			(symbol "TEC3-1223_0_1"
+			(symbol "DKMW20F-15_0_1"
 				(rectangle
 					(start -10.16 -2.54)
 					(end 10.16 -16.51)
@@ -1344,7 +1344,7 @@
 						(type background)
 					)
 				)
-				(text "TMR 6-1223"
+				(text "DKMW20F-15"
 					(at 0 -9.525 0)
 					(effects
 						(font
@@ -1353,7 +1353,7 @@
 					)
 				)
 			)
-			(symbol "TEC3-1223_1_1"
+			(symbol "DKMW20F-15_1_1"
 				(pin power_in line
 					(at -12.7 -5.08 0)
 					(length 2.54)
@@ -1364,7 +1364,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1382,7 +1382,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1393,32 +1393,14 @@
 				(pin passive line
 					(at -12.7 -13.97 0)
 					(length 2.54)
-					(name "Remote"
+					(name "R.C."
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 12.7 -3.81 180)
-					(length 2.54)
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1436,7 +1418,7 @@
 							)
 						)
 					)
-					(number "6"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1454,7 +1436,7 @@
 							)
 						)
 					)
-					(number "7"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1472,7 +1454,7 @@
 							)
 						)
 					)
-					(number "8"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1763,10 +1745,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f9c892db-ad24-432b-a90b-a73a00d106d9")
-	)
-	(no_connect
-		(at 77.47 35.56)
-		(uuid "b0a0tec3-0002-4000-8000-000000000002")
 	)
 	(no_connect
 		(at 52.07 45.72)
@@ -2082,7 +2060,7 @@
 		)
 		(uuid "fc9a31bd-bfd6-426b-8570-841c63fd3b75")
 	)
-	(text "TMR 6-1223 (±200mA). TEC 3 (±100mA) is Cout-OK but current is tight.\nVin 9-18V / ±15V ±200mA / Cout 660µF/rail / ripple 50mVpp / F1 1.6A SB\nTEC3-only: F1 0.8A. Amp×10 or Controll bypassed or hungry DIP can exceed 100mA.\nSecondary LC: L1=L2=10µH DFE322512F-100M, C2=C3=22µF, fc≈10.7kHz\nCout (1 Amp ON) ~170µF << 660. Pinout Dual SIP-8 same as TEC3.\nDS: datasheets/TMR6_Datasheet.pdf / PowerModule_TEC3_REDESIGN.md"
+	(text "U1 MEAN WELL DKMW20F-15 (not SIP-8). 9-36Vin / ±15V ±660mA / Cout 650µF/rail\nF1 3A delay (DS F-type). PD 15V in range; 20V USB-PD also OK. R.C. open = ON.\nPin: 1=+Vin 2=-Vin 3=+Vo 4=Com 5=-Vo 6=R.C.  (SIP-8 numbers do NOT apply)\nSecondary LC kept: L1/L2 10µH DFE322512F-100M + C2/C3 22µF (fc≈10.7kHz; SW ~330kHz)\nCout: Power 22 + Meas ~47 + optional Amp 100 << 650. Amp×10 5532 ~111mA << 660mA.\nDS: datasheets/SKMW20_DKMW20_Datasheet.pdf / PowerModule_TEC3_REDESIGN.md"
 		(exclude_from_sim no)
 		(at 15.24 26.67 0)
 		(effects
@@ -2305,7 +2283,7 @@
 				)
 			)
 		)
-		(property "Description" "12V input bulk after fuse. PCB: add Traco Class-A L=4.7uH + 10uF/4.7uF MLCC at U1 Vin"
+		(property "Description" "15V PD input bulk after fuse. PCB: keep Vin MLCC near U1; module is EMI Class A without extra parts"
 			(at 45.72 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -2414,7 +2392,7 @@
 		)
 	)
 	(symbol
-		(lib_id "TEC3:TEC3-1223")
+		(lib_id "DKMW20:DKMW20F-15")
 		(at 64.77 31.75 0)
 		(unit 1)
 		(body_style 1)
@@ -2435,7 +2413,7 @@
 				)
 			)
 		)
-		(property "Value" "TMR 6-1223"
+		(property "Value" "DKMW20F-15"
 			(at 64.77 31.75 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2445,7 +2423,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Library:TEC3-1223_SIP8_THT"
+		(property "Footprint" "Library:DKMW20F-15_1in_THT"
 			(at 66.04 27.94 0)
 			(hide yes)
 			(show_name no)
@@ -2456,7 +2434,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tmr6_datasheet.pdf"
+		(property "Datasheet" "https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20"
 			(at 65.278 29.972 0)
 			(hide yes)
 			(show_name no)
@@ -2467,7 +2445,7 @@
 				)
 			)
 		)
-		(property "Description" "Traco TMR 6-1223 ±15V/±200mA SIP-8; same Dual pinout as TEC 3-1223; DS: datasheets/TMR6_Datasheet.pdf"
+		(property "Description" "MEAN WELL DKMW20F-15 ±15V/±660mA 1in DIP; pinout NOT SIP-8; DS: datasheets/SKMW20_DKMW20_Datasheet.pdf"
 			(at 64.77 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -2478,7 +2456,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Traco Power"
+		(property "Manufacturer" "MEAN WELL"
 			(at 64.77 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -2489,7 +2467,7 @@
 				)
 			)
 		)
-		(property "MPN" "TMR 6-1223"
+		(property "MPN" "DKMW20F-15"
 			(at 64.77 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -2499,26 +2477,23 @@
 					(size 1.27 1.27)
 				)
 			)
-		)
-		(pin "3"
-			(uuid "97d5564d-53ff-4eb4-96c0-f1c97b28b1da")
-		)
-		(pin "1"
-			(uuid "f7d86176-7e6f-4e00-baf8-51fded565db5")
-		)
-		(pin "5"
-			(uuid "2b79ae29-d521-43ad-8e75-c39f724518d0")
-		)
-		(pin "7"
-			(uuid "870d4d83-396d-41d2-9cf5-1775045f460c")
-		)
-		(pin "2"
-			(uuid "b52a26c9-dd0e-41c5-a0d0-cb5ac0ecd072")
-		)
-		(pin "8"
-			(uuid "74f8c620-49ae-4bce-a203-e9fdb38a1eff")
 		)
 		(pin "6"
+			(uuid "97d5564d-53ff-4eb4-96c0-f1c97b28b1da")
+		)
+		(pin "2"
+			(uuid "f7d86176-7e6f-4e00-baf8-51fded565db5")
+		)
+		(pin "1"
+			(uuid "b52a26c9-dd0e-41c5-a0d0-cb5ac0ecd072")
+		)
+		(pin "4"
+			(uuid "870d4d83-396d-41d2-9cf5-1775045f460c")
+		)
+		(pin "5"
+			(uuid "74f8c620-49ae-4bce-a203-e9fdb38a1eff")
+		)
+		(pin "3"
 			(uuid "cd9e35b8-5302-41c9-9a2f-b502189202bb")
 		)
 		(instances
@@ -3373,7 +3348,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1.6A"
+		(property "Value" "3A"
 			(at 40.64 46.99 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3406,7 +3381,7 @@
 				)
 			)
 		)
-		(property "Description" "Traco TMR 6-12xx recommended input fuse 1.6A slow-blow (TEC 3-12xx was 0.8A)"
+		(property "Description" "MEAN WELL DKMW20 F-type recommended input fuse 3A delay (slow-blow)"
 			(at 39.37 44.45 0)
 			(hide yes)
 			(show_name no)

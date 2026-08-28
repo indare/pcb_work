@@ -114,7 +114,7 @@ MCW03 専用化用の予備基板あり。
 - R713–R716（47Ω）・R719（10k）は**タクマン1/4W手持ち**。SMDではなく THT（DIN0309 P12.7）に変更済み。追加購入不要。
 - ±15V 共有レール: C703/C704 は **10µF のまま**（専用MCW03化するなら余裕は増えるが、容量はそのままでOK）。
 
-> **±15V 共有**: PowerModule は **TMR 6-1223**（±200mA、Cout **660µF/出力**）。TEC 3-1223 は Cout は足りるが **±100mA では Amp 複数・Controll なし・DIP 差し替えが危険**。Amp 島バルクは **SMD 100µF** 想定。旧 MCW03（47µF/出力）では Amp 100µF が仕様外。計算: `PowerModule_TEC3_REDESIGN.md`。
+> **±15V 共有**: PowerModule は **DKMW20F-15**（±660mA、Cout **650µF/出力**、1″×1″）。TMR 6-1223（±200mA / SIP-8）は電流の次点。Amp 島バルク 100µF は任意。旧 MCW03（47µF）では Amp 100µF が仕様外。計算: `PowerModule_TEC3_REDESIGN.md`。
 
 ---
 
