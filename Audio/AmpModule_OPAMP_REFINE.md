@@ -261,7 +261,7 @@ GBW 40〜70 MHz 級を挿すなら、ピン直近に 1〜10 nF を 0.1 µF と�
 
 AdcBuffer `AMP501` は Amp 島の差し替え候補とは別。**共立 Q5M411（OPA1652AID-DIP）** を DIP-8 ソケットに挿す。
 
-- 回路はゲイン 1 のボルテージフォロワ。OPA1652 は unity-gain 安定（GBW 18 MHz、JFET）。
+- 回路の既定はゲイン 1（R505/R506=0Ω、Rf=0Ω、Rg=DNP）。OPA1652 は unity-gain 安定（GBW 18 MHz、JFET）。減衰は入力分圧（R505 vs R501）、ゲイン>1 は Rf/Rg パッド。
 - **OPA1612 は使わない。** 4.1 と同じ理由で、入力網が kΩ 級だと電流ノイズが en の低さを打ち消す。バッファの入力は Amp の 10 kΩ 級出力＋100 kΩ バイアスなので、FET の OPA1652 の方が合う。
 - Iq typ 約 2 mA/ch → デュアルで **約 4 mA**（NE5532 の約 8 mA より軽い）。
 - MeasurementADC の U701–U703 は従来どおり **OPA1656ID（SOP8）**。DIP 化モジュールを計測基板に載せる話ではない。
