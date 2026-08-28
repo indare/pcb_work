@@ -19,7 +19,7 @@ KiCad プロジェクトと関連ドキュメント。
 |---|---|---|
 | PowerModule | **DKMW20F-15** ±15 / ±660mA（1″×1″。TMR 6 は電流不足の次点）。計算メモ: [PowerModule_TEC3_REDESIGN.md](PowerModule_TEC3_REDESIGN.md) | 箱に入れる |
 | AmpModule | NE5532 Amp（×10 想定） | ラインアウト（J11）。ADC へは AdcBuffer 経由 |
-| AdcBuffer | ゲイン1バッファ。実装は **OPA1652AID-DIP**（共立 Q5M411） | Amp L/R_OUT → MeasurementADC AUDIO |
+| AdcBuffer | 既定はゲイン1。入力分圧（R505/R501）で減衰、Rf/Rg パッドでゲイン>1も可。実装は **OPA1652AID-DIP**（共立 Q5M411） | Amp L/R_OUT → MeasurementADC AUDIO |
 | Controll | CH1–10 リレー（親＋子） | 実機では外している |
 | MeasurementADC | 計測＋LCD | 初号応急配線で稼働 |
 | EQModule | EQ | 今号では使わない |
