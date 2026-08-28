@@ -6,10 +6,10 @@
 	(paper "A4")
 	(title_block
 		(title "AdcBufferModule")
-		(date "2026-08-27")
-		(rev "0.1")
+		(date "2026-08-28")
+		(rev "0.2")
 		(company "")
-		(comment 1 "Unity-gain buffer for MeasurementADC; line out remains on AmpModule")
+		(comment 1 "Unity-gain buffer; stuffing AMP501 = Kyohritsu Q5M411 OPA1652AID-DIP")
 	)
 	(lib_symbols
 		(symbol "Amplifier_Operational:NE5532"
@@ -581,7 +581,7 @@
 		)
 	)
 
-	(text "ADC buffer: unity-gain followers (DIP-8). OPA1652 DIP module pin-compatible."
+	(text "ADC buffer: unity-gain followers (DIP-8). Stuff AMP501 with OPA1652AID-DIP (Q5M411). Do not use OPA1612."
 		(exclude_from_sim no)
 		(at 25.4 20.32 0)
 		(effects
@@ -1106,7 +1106,7 @@
 				)
 			)
 		)
-		(property "Value" "NE5532"
+		(property "Value" "OPA1652"
 			(at 76.2 35.56 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1127,7 +1127,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ne5532.pdf"
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa1652.pdf"
 			(at 76.2 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -1138,7 +1138,29 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Dual JFET audio op-amp, DIP-8 module (unity-gain buffer)"
+			(at 76.2 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Texas Instruments")
+			(at 76.2 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "OPA1652AID-DIP"
 			(at 76.2 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -1203,7 +1225,7 @@
 				)
 			)
 		)
-		(property "Value" "NE5532"
+		(property "Value" "OPA1652"
 			(at 76.2 66.04 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1224,7 +1246,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ne5532.pdf"
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa1652.pdf"
 			(at 76.2 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -1235,7 +1257,29 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Dual JFET audio op-amp, DIP-8 module (unity-gain buffer)"
+			(at 76.2 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Texas Instruments")
+			(at 76.2 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "OPA1652AID-DIP"
 			(at 76.2 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -1300,7 +1344,7 @@
 				)
 			)
 		)
-		(property "Value" "NE5532"
+		(property "Value" "OPA1652"
 			(at 55.88 123.19 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1321,7 +1365,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ne5532.pdf"
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa1652.pdf"
 			(at 55.88 110.49 0)
 			(hide yes)
 			(show_name no)
@@ -1332,7 +1376,29 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Dual JFET audio op-amp, DIP-8 module (unity-gain buffer)"
+			(at 55.88 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Texas Instruments")
+			(at 55.88 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "OPA1652AID-DIP"
 			(at 55.88 110.49 0)
 			(hide yes)
 			(show_name no)
