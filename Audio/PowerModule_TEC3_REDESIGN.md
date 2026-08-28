@@ -85,7 +85,7 @@ TMR 6 の次を SIP 穴に無理に載せると Cout が減る（§1.2）。**Po
 | **Mean Well DKMW20F-15** | **±660 mA** | **650 µF**（各レール） | **1″×1″** | 9–36Vin。小ささと Cout の両立が一番良い |
 | **Mean Well DKMW30F-15** | **±1000 mA** | **1000 µF** | 1″×1″ | 余裕最大。入力電流も大きい |
 | **Recom REC15-1215D/H2/M** | ±500 mA | **±1000 µF** | 2″×1″ / DIP-24 相当 | Cout は厚い。突入 150% 可 |
-| Mean Well DKA15B-15 | ±500 mA | 680 µF | 50.8×25.4×10.2 | 内蔵 EMI Class A。ヒューズ推奨 |
+| Mean Well **DKA15A-15** | ±500 mA | 680 µF | 50.8×25.4×10.2 | **A = 9–18Vin**（B は 18–36V なので 12V 系では使わない）。内蔵 EMI Class A |
 | XP JCA1012D03 | ±330 mA | 470 µF | 1″×0.8″ | 電流は Amp×10 には足りるが差し替え余裕は薄い |
 | Traco THN 20-1223 | ±667 mA | 350 µF | 1″×1″ | Cout 不足（400 µF 基準）。1 Amp 構成（≈170 µF）なら可 |
 | Traco THN 15-1223N | ±500 mA | 250 µF | 1″×1″ | THN 15 無印は NRND |
@@ -95,7 +95,9 @@ Amp×10 を 5532 のまま同時通電しても ≈111 mA。DKMW20 なら定格�
 
 ピンは SIP-8 と違う。二次 LC・F1（DKMW20 は 12Vin フルで約 1 A 入力 → **2 A SB 前後**、DKMW30 はそれ以上）・FP を取り直す。
 
-**再設計するなら DKMW20F-15（小さい）か REC15 / DKA15（2″×1″）。** THN 20 は Cout が薄いので次点。
+**再設計するなら DKMW20F-15（小さい）か REC15 / DKA15A-15（2″×1″）。** THN 20 は Cout が薄いので次点。
+
+SIP-8 のまま 6 W にするなら TMR 6 以外に **RS6-1215D / AM6G-1215DZ / PDL06-12D15**（Cout ±660 µF）。国内は秋月に 6 W SIP は無く、**Cosel MGW61215**（ピンは同じ、Remote は L=ON）が近い。千石・共立の CCG6-12-15DF は DIP でピン非互換。
 
 ---
 
@@ -256,7 +258,7 @@ J4 12V
 2. `split/AudioCase_3_power` PCB を TEC FP + EMI 配置に追従
 3. AmpModule の入口バルクを **SMD 100µF/35V** に揃える（現状 120µF OS-CON THT でも Cout 的には TEC で可）
 4. 実機: TMR 6 単体の ±15 リップルを ZT-703S で A1 再測
-5. 基板再設計可なら **DKMW20F-15**（1″×1″）または **REC15 / DKA15**（2″×1″）。SIP の TMR 9/12 は Cout が減るので使わない（§1.2）
+5. 基板再設計可なら **DKMW20F-15**（1″×1″）または **REC15 / DKA15A-15**（2″×1″）。SIP の TMR 9/12 は Cout が減るので使わない（§1.2）
 6. **計測 / Amp の 2 台分け・Single×2・ポストレギュ**の具体 MPN・Cout・面積: [`PowerModule_TWO_MODULE_SPLITS.md`](PowerModule_TWO_MODULE_SPLITS.md)
 
 ---
