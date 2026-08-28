@@ -1267,7 +1267,7 @@
 					)
 				)
 			)
-			(property "Value" "TEC 3-1223"
+			(property "Value" "TMR 6-1223"
 				(at 0 -18.415 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1288,7 +1288,7 @@
 					)
 				)
 			)
-			(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tec3_datasheet.pdf"
+			(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tmr6_datasheet.pdf"
 				(at 0.508 1.778 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1299,7 +1299,7 @@
 					)
 				)
 			)
-			(property "Description" "Traco TEC 3-1223 isolated DC/DC, 9-18Vin, ±15V/±100mA, SIP-8, Cout 440uF/rail; local DS datasheets/TEC3_Datasheet.pdf; pinout Dual verified"
+			(property "Description" "Traco TMR 6-1223 isolated DC/DC, 9-18Vin, ±15V/±200mA, SIP-8, Cout 660uF/rail; Dual pinout same as TEC 3-1223; DS datasheets/TMR6_Datasheet.pdf"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1321,7 +1321,7 @@
 					)
 				)
 			)
-			(property "MPN" "TEC 3-1223"
+			(property "MPN" "TMR 6-1223"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1344,7 +1344,7 @@
 						(type background)
 					)
 				)
-				(text "TEC 3-1223"
+				(text "TMR 6-1223"
 					(at 0 -9.525 0)
 					(effects
 						(font
@@ -2082,7 +2082,7 @@
 		)
 		(uuid "fc9a31bd-bfd6-426b-8570-841c63fd3b75")
 	)
-	(text "TEC 3-1223 redesign (calc)\nVin 9-18V / ±15V ±100mA / Cout max 440µF/rail / ripple 55mVpp\nSecondary LC: L1=L2=10µH DFE322512F-100M (Akizuki 114977), C2=C3=22µF → fc≈10.7kHz\nCout budget (1 Amp ON): local22 + Amp100 + Meas47 ≈ 170µF << 440µF (MCW was 47µF)\nInput EMI (PCB): Traco Class A — L=4.7µH (TCK-154), C=10µF+4.7µF/25V MLCC, Y=150pF/2kV\nAmp: SMD 100µF/35V polymer on Amp J9 (Controll relays 1ch only)\nPinout OK vs DS Dual (1=-Vin 2=+Vin 3=Remote NC-openON 5=NC 6=+Vo 7=Com 8=-Vo)\nDS: datasheets/TEC3_Datasheet.pdf\nDetails: PowerModule_TEC3_REDESIGN.md"
+	(text "TMR 6-1223 (±200mA). TEC 3 (±100mA) is Cout-OK but current is tight.\nVin 9-18V / ±15V ±200mA / Cout 660µF/rail / ripple 50mVpp / F1 1.6A SB\nTEC3-only: F1 0.8A. Amp×10 or Controll bypassed or hungry DIP can exceed 100mA.\nSecondary LC: L1=L2=10µH DFE322512F-100M, C2=C3=22µF, fc≈10.7kHz\nCout (1 Amp ON) ~170µF << 660. Pinout Dual SIP-8 same as TEC3.\nDS: datasheets/TMR6_Datasheet.pdf / PowerModule_TEC3_REDESIGN.md"
 		(exclude_from_sim no)
 		(at 15.24 26.67 0)
 		(effects
@@ -2435,7 +2435,7 @@
 				)
 			)
 		)
-		(property "Value" "TEC 3-1223"
+		(property "Value" "TMR 6-1223"
 			(at 64.77 31.75 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2456,7 +2456,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tec3_datasheet.pdf"
+		(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tmr6_datasheet.pdf"
 			(at 65.278 29.972 0)
 			(hide yes)
 			(show_name no)
@@ -2467,7 +2467,7 @@
 				)
 			)
 		)
-		(property "Description" "Traco TEC 3-1223; DS: datasheets/TEC3_Datasheet.pdf / https://www.tracopower.com/sites/default/files/products/datasheets/tec3_datasheet.pdf; pins verified Dual SIP-8"
+		(property "Description" "Traco TMR 6-1223 ±15V/±200mA SIP-8; same Dual pinout as TEC 3-1223; DS: datasheets/TMR6_Datasheet.pdf"
 			(at 64.77 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -2489,7 +2489,7 @@
 				)
 			)
 		)
-		(property "MPN" "TEC 3-1223"
+		(property "MPN" "TMR 6-1223"
 			(at 64.77 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -3373,7 +3373,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "800mA"
+		(property "Value" "1.6A"
 			(at 40.64 46.99 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3406,7 +3406,7 @@
 				)
 			)
 		)
-		(property "Description" "Traco TEC3-12xx recommended input fuse 0.8A slow-blow"
+		(property "Description" "Traco TMR 6-12xx recommended input fuse 1.6A slow-blow (TEC 3-12xx was 0.8A)"
 			(at 39.37 44.45 0)
 			(hide yes)
 			(show_name no)

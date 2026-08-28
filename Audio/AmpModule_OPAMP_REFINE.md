@@ -256,8 +256,8 @@ DRC は基板全体 142 違反 / 87 未接続で移動前と同一。AMP 島内�
 
 2. **島内に電源バルクを追加**（空いた 208 mm² の使い道）
    J9 直近に **SMD 100 µF / 35 V 高分子**を 1 組（方針 2026-08-26）。
-   PowerModule を **TEC 3-1223（Cout 440 µF/rail）** に替える前提なら仕様内。
-   旧 MCW03（47 µF/rail）のままでは不可。詳細: `PowerModule_TEC3_REDESIGN.md`。
+   PowerModule を **TMR 6-1223（Cout 660µF/rail、±200mA）** に替える前提なら仕様内。
+   TEC 3-1223（440µF）でも Cout は足りるが電流は 1ch 専用。旧 MCW03（47µF/rail）のままでは不可。詳細: `PowerModule_TEC3_REDESIGN.md`。
 
 3. **0.1 µF（C28/C29）を AMP1 のピンへ寄せる**
    現状パッド間 1.24 / 1.53 mm。クリアランス制約下の下限は 0.75 mm。

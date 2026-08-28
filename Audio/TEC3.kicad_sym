@@ -21,7 +21,7 @@
 				)
 			)
 		)
-		(property "Value" "TEC 3-1223"
+		(property "Value" "TMR 6-1223"
 			(at 0 -18.415 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42,7 +42,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tec3_datasheet.pdf"
+		(property "Datasheet" "https://www.tracopower.com/sites/default/files/products/datasheets/tmr6_datasheet.pdf"
 			(at 0.508 1.778 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -53,7 +53,7 @@
 				)
 			)
 		)
-		(property "Description" "Traco TEC 3-1223 isolated DC/DC, 9-18Vin, ±15V/±100mA, SIP-8, Cout 440uF/rail; local DS datasheets/TEC3_Datasheet.pdf"
+		(property "Description" "Traco TMR 6-1223 isolated DC/DC, 9-18Vin, ±15V/±200mA, SIP-8, Cout 660uF/rail; Dual pinout same as TEC 3-1223; DS datasheets/TMR6_Datasheet.pdf"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -75,7 +75,7 @@
 				)
 			)
 		)
-		(property "MPN" "TEC 3-1223"
+		(property "MPN" "TMR 6-1223"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -98,7 +98,7 @@
 					(type background)
 				)
 			)
-			(text "TEC 3-1223"
+			(text "TMR 6-1223"
 				(at 0 -9.525 0)
 				(effects
 					(font
