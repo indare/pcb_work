@@ -170,13 +170,13 @@ Amp 1 枚 ON 時の **1 レール**概算:
 
 | 位置 | 容量 | 備考 |
 |---|---|---|
-| PowerModule 二次（L 後） | **22µF**（C2/C3） | 本改修 |
+| PowerModule 二次（L 後） | **47µF**（C2/C3、DS リップル条件） | DKMW20 測定は 0.1µF+47µF |
 | HF セラミック | 0.1µF（C4/C5） | 無視してよい |
 | MeasurementADC 常時 | **≈47µF** | J703 側（現行） |
 | Amp（任意） | **0 or 100µF SMD** | ピン 0.1µF は残す |
-| **合計** | **≈70µF（バルク無し）〜 169µF** | |
+| **合計** | **≈94µF（Amp バルク無し）〜 194µF** | |
 
-- DKMW20 上限 **650µF** → バルク無しでも余裕 **≈580µF**
+- DKMW20 上限 **650µF** → 二次 47µF でも余裕 **≈550µF**
 - MCW 上限 **47µF** → **約 122µF オーバー**（仕様外）
 
 起動時はリレー OFF なので Amp 100µF は未接続。  
@@ -186,7 +186,7 @@ Amp 1 枚 ON 時の **1 レール**概算:
 
 ## 3. 二次 LC（L1/L2 + C2/C3）
 
-DKMW20 Dual はスイッチング **約 330 kHz**。二次 LC（10 µH + 22 µF）はそのまま。
+DKMW20 Dual はスイッチング **約 330 kHz**。二次 LC は 10 µH + **47 µF**（DS リップル条件に合わせた）。
 
 選定:
 
@@ -194,15 +194,15 @@ DKMW20 Dual はスイッチング **約 330 kHz**。二次 LC（10 µH + 22 µF�
   - 指定: **秋月 114977 / Murata DFE322512F-100M**
   - メタルコンポジット、ΔT **1.1 A** / ΔL 1.7 A、DCR **324 mΩ max**
   - FP: `Library:L_Murata_DFE322512F`（本体 3.2×2.5×1.2、推奨ランド pad 1.05×2.70 / ギャップ 1.10）
-  - DCR は 0.1 A で約 32 mV。二次 LC の Q を抑える方向で、115628（127 mΩ）よりこちらを採用
-- **C2 = C3 = 22µF / 35V**（高分子 or OS-CON 相当）
+  - DCR は 0.66 A で約 214 mV。Irms 1.1 A は ±660 mA を超える。115628（127 mΩ）より損失は大きいがシールド金属で採用
+- **C2 = C3 = 47µF / 35V**（高分子。DS リップル測定と同じ 47µF。Cout 上限 650µF には十分小さい）
 
 共振:
 
 \[
 f_c = \frac{1}{2\pi\sqrt{LC}}
-= \frac{1}{2\pi\sqrt{10\times10^{-6}\cdot 22\times10^{-6}}}
-\approx 10.7\,\mathrm{kHz}
+= \frac{1}{2\pi\sqrt{10\times10^{-6}\cdot 47\times10^{-6}}}
+\approx 7.3\,\mathrm{kHz}
 \]
 
 理想 2 次 LC の減衰（ラフ）:
@@ -210,7 +210,7 @@ f_c = \frac{1}{2\pi\sqrt{LC}}
 \[
 A(f) \approx 40\log_{10}\!\left(\frac{f}{f_c}\right)
 \quad\Rightarrow\quad
-A(100\,\mathrm{kHz}) \approx 39\,\mathrm{dB}
+A(330\,\mathrm{kHz}) \approx 40\log_{10}(330/7.3) \approx 66\,\mathrm{dB}
 \]
 
 狙い:
@@ -235,8 +235,7 @@ L を 4.7µH に落とすと \(f_c\approx 15.6\,\mathrm{kHz}\)。PCB で定数�
 | Cy | **150pF / 2kV** | 一次–二次（CM） |
 
 Class B は C を厚くする（同 AN）。  
-回路図上の **C1=47µF** はヒューズ後のバルクとして残置。  
-**L_EMI + MLCC は PCB レイアウト時に U1 の Vin 直近へ追加**（シート注記済み）。
+回路図上の **C1=47µF/50V** はヒューズ後のバルク（Vin max 36 V なので 50 V 以上）。DKMW は追加 EMI コイルなしで放射 Class A。
 
 推奨ヒューズ: DKMW20 F タイプは **3 A delay**（F1 済み）。TMR 6 に戻すなら 1.6 A、TEC 3 なら 0.8 A。
 
@@ -246,11 +245,11 @@ Class B は C を厚くする（同 AN）。
 
 ```text
 J4 15V PD
-  → F1 3A delay
-  → C1 47µF bulk
+  → F1 3A T（5x20 ホルダ、Littelfuse 0215003.MXP）
+  → C1 47µF/50V bulk
   → U1 DKMW20F-15（1″×1″ Dual。R.C. open=ON）
-  → L1/L2 10µH（DFE322512F-100M / 秋月 114977）
-  → C2/C3 22µF + C4/C5 0.1µF
+  → L1/L2 10µH（DFE322512F-100M / 秋月 114977、1.1 A > 660 mA）
+  → C2/C3 47µF/35V + C4/C5 0.1µF/50V
   → J5 ±15 / A_GND
        ├─ MeasurementADC（常時）
        ├─ AdcBuffer（OPA1652 DIP）
@@ -264,10 +263,11 @@ J4 15V PD
 | Ref | 旧 | 新 |
 |---|---|---|
 | U1 | MCW03 → TEC 3 → TMR 6 | **DKMW20F-15**（`DKMW20:DKMW20F-15` / `Library:DKMW20F-15_1in_THT`） |
-| L1/L2 | 値なし / 大 FP | **10µH DFE322512F-100M**（秋月 114977）/ `Library:L_Murata_DFE322512F` |
-| C2/C3 | 4.7µF THT | **22µF**（35V 想定） |
-| F1 | 1A → 0.8A → 1.6A | **3A delay**（DKMW20 F-type） |
-| C1 | 47µF | 47µF（入力バルク） |
+| F1 | 1A → 0.8A → 1.6A 軸 | **3A T / 5x20**（`Fuse:Fuseholder_Cylinder-5x20mm`、0215003.MXP） |
+| C1 | 47µF | **47µF/50V**（Vin 36 V まで。Rubycon 50YXJ47M 級） |
+| C2/C3 | 4.7µF THT → 22µF | **47µF/35V 高分子**（35SVP47M / `CP_Elec_6.3x5.8`）。DS リップル 0.1+47 |
+| C4/C5 | 0.1µF | **0.1µF/50V X7R** |
+| L1/L2 | 10µH DFE322512F-100M | **同じ**（1.1 A > 660 mA/rail、C=47µF で fc≈7.3 kHz） |
 
 追加ファイル:
 
