@@ -1,17 +1,43 @@
-# PowerModule リファイン — TEC 3-1223 → TMR 6-1223
+# PowerModule リファイン — TEC 3 / TMR 6 → **DKMW20F-15**
 
 最終更新: **2026-08-28**
+
+**いまの U1 は MEAN WELL DKMW20F-15**（1″×1″、±15 V / ±660 mA、Cout 650 µF/rail）。TMR 6-1223 は SIP-8 の次点。TEC 3-1223 は Cout だけ見て一度入れたが電流不足。
 
 前提:
 
 - Controll リレーで **Amp は常時 1 枚だけ**通電、というのが元の箱計画
 - **実機は Controll を外している**（`MeasurementADC_STATUS.md`）。±15 が Amp に直結だと枚数分が同時通電になる
-- Amp 島の電源バッファは **SMD 100µF / 35V 級（高分子）**
+- Amp 島の 100 µF 高分子バルクは **任意**（ピン直近 0.1 µF は残す）
+- PD 入力は **15 V**（F タイプは 9–36 V。誤って 20 V PD でも入る）
 - MCW03-12D15 の **Cout 上限 47µF/出力** では Amp 100µF を仕様内に載せられない
-- Cout のために入れた **TEC 3-1223（±100mA）は電流が足りない**。U1 は同じ SIP-8 Dual の **TMR 6-1223（±200mA）** にする
 
-回路図: `PowerModule.kicad_sch`（本メモの値に合わせて更新済み）  
-一次ソース: [TMR 6 datasheet](https://www.tracopower.com/sites/default/files/products/datasheets/tmr6_datasheet.pdf)（ローカル `datasheets/TMR6_Datasheet.pdf`） / [TEC 3 datasheet](https://www.tracopower.com/sites/default/files/products/datasheets/tec3_datasheet.pdf) / [EMI AN](https://www.tracopower.com/sites/default/files/products/application_notes/tec3_emc_consideration.pdf)
+回路図: `PowerModule.kicad_sch`（DKMW20F-15 / F1 3 A delay）  
+一次ソース: ローカル `datasheets/SKMW20_DKMW20_Datasheet.pdf`（SPEC 2023-02-09） / [製品ページ](https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20)
+
+---
+
+## 0. 採用: DKMW20F-15
+
+| 項目 | 値 |
+|---|---|
+| MPN | **DKMW20F-15**（F = 9–36 V。G = 18–75 V は 15 V PD では起動しない） |
+| 出力 | ±15 V **±660 mA**、20 W |
+| Cout | **650 µF / rail**（DS `*` = each output） |
+| 外形 | **25.4 × 25.4 × 10.2 mm** |
+| ヒューズ | F タイプ **3 A delay**（F1） |
+| UVLO | 起動 8.8 V / 停止 8 V |
+| Remote | R.C. 対 −Vin：open または >3.5 V = ON / short または <1.2 V = OFF |
+| Dual ピン | **1=+Vin, 2=−Vin, 3=+Vout, 4=Common, 5=−Vout, 6=R.C.** |
+| スイッチ | 約 330 kHz。放射 EMI Class A は追加部品なし（最終機器では再確認） |
+| 入力電流 | 24 V フル 936 mA。15 V・20 W・η87% なら約 **1.5 A** → 3 A fuse |
+| シンボル / FP | `DKMW20:DKMW20F-15` / `Library:DKMW20F-15_1in_THT` |
+
+**SIP-8 のピン番号は使えない。** 配線は機能で追う（+Vin=ヒューズ後、−Vin=PD_GND、±Vout=L1/L2、Common=A_GND、R.C.=N.C.=ON）。
+
+二次 LC（10 µH + 22 µF）は残す。Amp×10（5532）+ 計測 + AdcBuffer OPA1652 でも typ ≈ **107 mA** ≪ 660 mA。Cout は Amp バルク無しでも ≈70 µF ≪ 650 µF。
+
+**使わない:** DPB09A-15（Cout 47 µF）。DKA15**B**-15 は 18–36 V（15 V PD なら DKA15**A**-15）。
 
 ---
 
@@ -38,24 +64,24 @@ TEC 3 は **Cout だけ**見れば正解。電流は下記で危険側。
 | 負荷 | 石 | Iq typ | 備考 |
 |---|---|---|---|
 | MeasurementADC 常時 | OPA1656 ×3 | **≈23 mA** | 3.9 mA/ch × 6 |
-| AdcBuffer | NE5532 ×1 | **8 mA** | Amp 側レール（現状） |
+| AdcBuffer | OPA1652 DIP ×1 | **≈4 mA** | AMP501 = Q5M411。Amp 側レール |
 | Amp ×1 | NE5532 | **8 mA** | |
 | Amp ×2 | NE5532 | 16 mA | Controll なしの今号 |
 | Amp ×10 | NE5532 | 80 mA | 箱の最終枚数。リレー無しだと全部乗る |
 | HP バッファ（予定） | NE5532 級 | ≈8 mA | 未製 |
 
-| シナリオ | 合計 typ | TEC 3 ±100 mA | TMR 6 ±200 mA |
-|---|---|---|---|
-| 計測のみ | 23 mA | 余裕 | 余裕 |
-| **計画どおり 1ch + 計測 + Buffer** | **39 mA** | 39%。アナログならギリギリ許容 | 余裕 |
-| **Controll 外・Amp×2 + 計測 + Buffer** | **47 mA** | 半分近く。差し替えですぐ逼迫 | 余裕 |
-| Controll 外・Amp×10 + 計測 + Buffer | **111 mA** | **超過** | 56% |
-| Amp 1 枚が AK05/LC5 の 150 mA 説 | ≥150 mA + 計測 | **超過** | **超過** |
-| Amp 2 枚が AD797×2（≈16 mA/枚） | ≈63 mA +… | きつい | 余裕 |
+| シナリオ | 合計 typ | TEC 3 ±100 mA | TMR 6 ±200 mA | **DKMW20 ±660 mA** |
+|---|---|---|---|---|
+| 計測のみ | 23 mA | 余裕 | 余裕 | 余裕 |
+| **計画どおり 1ch + 計測 + Buffer** | **≈35 mA** | きつい | 余裕 | 余裕 |
+| **Controll 外・Amp×2 + 計測 + Buffer** | **≈43 mA** | 半分近く | 余裕 | 余裕 |
+| Controll 外・Amp×10 + 計測 + Buffer | **≈107 mA** | **超過** | 54% | **16%** |
+| Amp 1 枚が AK05/LC5 の 150 mA 説 | ≥150 mA + 計測 | **超過** | **超過** | 余裕 |
+| Amp 2 枚が AD797×2（≈16 mA/枚） | ≈63 mA +… | きつい | 余裕 | 余裕 |
 
 アナログ電源は定格の半分を常用上限にしたい。**TEC 3 単体は「1ch・5532・Controll あり」専用**で、今号の使い方（Controll なし、Amp 複数、DIP 差し替え、将来 10 枚）には足りない。
 
-TMR 6 でも **Amp×10 同時 + 大電流 DIP** は厳しい。10 枚同時は Controll で 1 枚だけ通電するか、Amp 専用にもう 1 台（計測は TEC 3 のまま分ける）が次の手。
+TMR 6 だと **Amp×10 同時 + 大電流 DIP** は厳しい。**DKMW20 なら 5532 級の 10 枚同時は定格の 2 割弱。** AK05 150 mA 説でも 1 枚なら入る。
 
 ### 1.2 TMR 6 の上（9 W / 12 W）— 電流は増えるが Cout が減る
 
@@ -93,9 +119,9 @@ TMR 6 の次を SIP 穴に無理に載せると Cout が減る（§1.2）。**Po
 
 Amp×10 を 5532 のまま同時通電しても ≈111 mA。DKMW20 なら定格の 17%。AK05 150 mA 説でも 1 枚なら入る。
 
-ピンは SIP-8 と違う。二次 LC・F1（DKMW20 は 12Vin フルで約 1 A 入力 → **2 A SB 前後**、DKMW30 はそれ以上）・FP を取り直す。
+ピンは SIP-8 と違う。**回路図は DKMW20F-15 に載せ替え済み**（F1 = **3 A delay**、FP `DKMW20F-15_1in_THT`）。PCB `split/AudioCase_3_power` はまだ SIP 外形のまま。
 
-**再設計するなら DKMW20F-15（小さい）か REC15 / DKA15A-15（2″×1″）。** THN 20 は Cout が薄いので次点。
+THN 20 は Cout が薄いので次点。REC15 / DKA15A-15 は 2″×1″ で大きい。
 
 SIP-8 のまま 6 W にするなら TMR 6 以外に **RS6-1215D / AM6G-1215DZ / PDL06-12D15**（Cout ±660 µF）。国内は秋月に 6 W SIP は無く、**Cosel MGW61215**（ピンは同じ、Remote は L=ON）が近い。千石・共立の CCG6-12-15DF は DIP でピン非互換。**Mean Well DPB09A-15** は SIP-8 で ±300 mA だが Cout **47 µF** なのでこの島バルクでは使わない。
 
@@ -147,10 +173,10 @@ Amp 1 枚 ON 時の **1 レール**概算:
 | PowerModule 二次（L 後） | **22µF**（C2/C3） | 本改修 |
 | HF セラミック | 0.1µF（C4/C5） | 無視してよい |
 | MeasurementADC 常時 | **≈47µF** | J703 側（現行） |
-| Amp（リレー後） | **100µF SMD** | 方針 |
-| **合計** | **≈169µF** | |
+| Amp（任意） | **0 or 100µF SMD** | ピン 0.1µF は残す |
+| **合計** | **≈70µF（バルク無し）〜 169µF** | |
 
-- TMR 6 上限 **660µF** → 余裕 **≈490µF**（TEC 3 なら 440µF で余裕 ≈270µF）
+- DKMW20 上限 **650µF** → バルク無しでも余裕 **≈580µF**
 - MCW 上限 **47µF** → **約 122µF オーバー**（仕様外）
 
 起動時はリレー OFF なので Amp 100µF は未接続。  
@@ -160,7 +186,7 @@ Amp 1 枚 ON 時の **1 レール**概算:
 
 ## 3. 二次 LC（L1/L2 + C2/C3）
 
-TMR 6 / TEC 3 ともスイッチング **≥100 kHz（PFM）**。二次 LC はそのまま。
+DKMW20 Dual はスイッチング **約 330 kHz**。二次 LC（10 µH + 22 µF）はそのまま。
 
 選定:
 
@@ -212,23 +238,23 @@ Class B は C を厚くする（同 AN）。
 回路図上の **C1=47µF** はヒューズ後のバルクとして残置。  
 **L_EMI + MLCC は PCB レイアウト時に U1 の Vin 直近へ追加**（シート注記済み）。
 
-推奨ヒューズ: TMR 6-12xx は **1.6 A slow-blow**（F1 を 1.6A に変更済み）。TEC 3 だけ載せる場合は DS どおり 0.8 A。
+推奨ヒューズ: DKMW20 F タイプは **3 A delay**（F1 済み）。TMR 6 に戻すなら 1.6 A、TEC 3 なら 0.8 A。
 
 ---
 
 ## 5. 目標トポロジ
 
 ```text
-J4 12V
-  → F1 1.6A SB
-  → C1 47µF bulk（TMR 6 の surge 試験は 220µF KY。PCB で増やす候補）
-  → [L_EMI 4.7µH] → [10µF + 4.7µF MLCC]   … PCB で追加
-  → U1 TMR 6-1223（SIP-8 Dual、TEC 3 とピン互換）
+J4 15V PD
+  → F1 3A delay
+  → C1 47µF bulk
+  → U1 DKMW20F-15（1″×1″ Dual。R.C. open=ON）
   → L1/L2 10µH（DFE322512F-100M / 秋月 114977）
   → C2/C3 22µF + C4/C5 0.1µF
   → J5 ±15 / A_GND
        ├─ MeasurementADC（常時）
-       └─ Controll → リレー → Amp（SMD 100µF）
+       ├─ AdcBuffer（OPA1652 DIP）
+       └─ Amp ×N（Controll なしなら同時。島バルク 100µF は任意）
 ```
 
 ---
@@ -237,29 +263,27 @@ J4 12V
 
 | Ref | 旧 | 新 |
 |---|---|---|
-| U1 | MCW03-12D15 → TEC 3-1223 | **TMR 6-1223**（同じ `Library:TEC3-1223_SIP8_THT`） |
+| U1 | MCW03 → TEC 3 → TMR 6 | **DKMW20F-15**（`DKMW20:DKMW20F-15` / `Library:DKMW20F-15_1in_THT`） |
 | L1/L2 | 値なし / 大 FP | **10µH DFE322512F-100M**（秋月 114977）/ `Library:L_Murata_DFE322512F` |
 | C2/C3 | 4.7µF THT | **22µF**（35V 想定） |
-| F1 | 1A → 800mA（TEC 3） | **1.6A SB**（TMR 6-12xx） |
-| C1 | 47µF | 47µF（入力バルク、EMI 追記） |
+| F1 | 1A → 0.8A → 1.6A | **3A delay**（DKMW20 F-type） |
+| C1 | 47µF | 47µF（入力バルク） |
 
 追加ファイル:
 
-- `TEC3.kicad_sym`（表示値は TMR 6-1223。lib_id / FP 名は TEC3 のままピン互換）
-- `datasheets/TMR6_Datasheet.pdf`
-- `Library.pretty/TEC3-1223_SIP8_THT.kicad_mod`
-- `Library.pretty/L_Murata_DFE322512F.kicad_mod`
+- `DKMW20.kicad_sym`
+- `Library.pretty/DKMW20F-15_1in_THT.kicad_mod`
+- `datasheets/SKMW20_DKMW20_Datasheet.pdf`
 
 ---
 
 ## 7. まだやっていない（次）
 
-1. **入力 EMI 部品を回路図ネットに正式配線**（L_EMI / MLCC / Cy）
-2. `split/AudioCase_3_power` PCB を TEC FP + EMI 配置に追従
-3. AmpModule の入口バルクを **SMD 100µF/35V** に揃える（現状 120µF OS-CON THT でも Cout 的には TEC で可）
-4. 実機: TMR 6 単体の ±15 リップルを ZT-703S で A1 再測
-5. 基板再設計可なら **DKMW20F-15**（1″×1″）または **REC15 / DKA15A-15**（2″×1″）。SIP の TMR 9/12 は Cout が減るので使わない（§1.2）
-6. **計測 / Amp の 2 台分け・Single×2・ポストレギュ**の具体 MPN・Cout・面積: [`PowerModule_TWO_MODULE_SPLITS.md`](PowerModule_TWO_MODULE_SPLITS.md)
+1. **入力 EMI 部品を回路図ネットに正式配線**（モジュール単体は Class A。最終箱では再確認）
+2. `split/AudioCase_3_power` PCB を **1″×1″ DKMW FP** に追従（SIP-8 穴は使えない）
+3. Amp 島 100µF は任意。載せるなら SMD 35V 高分子
+4. 実機: DKMW20 単体の ±15 リップルを再測
+5. SIP の TMR 9/12 は Cout が減るので使わない（§1.2）
 
 ---
 
@@ -267,8 +291,9 @@ J4 12V
 
 | リスク | 見方 |
 |---|---|
-| 電流 | TEC 3 ±100mA は 1ch・5532 専用。TMR 6 ±200mA なら Amp×10 同時（5532）まで。AK05 150mA 説はどちらでも不可 |
-| Amp×10 | Controll なしでは TMR 6 でも差し替え次第で逼迫。リレー復帰が本命 |
-| PFM ≥100kHz | リップル形状が変わる。L/C で整える |
-| クロスレギュ 5% | ±非対称負荷に注意。1ch Amp なら軽め |
-| ピン互換 | **DS Dual と一致を確認済み**（上表）。FP ピッチ 2.54 / skip4 も DS 寸法どおり |
+| 電流 | DKMW20 ±660mA なら Amp×10（5532）+ 計測 + Buffer は余裕 |
+| Amp×10 | Controll なしでも電流は足りる。クロスレギュと熱を見る |
+| 330 kHz | 二次 LC の fc 10.7 kHz で落ちる想定 |
+| クロスレギュ Dual ±1% | ±非対称負荷に注意 |
+| ピン | **SIP-8 非互換**。FP は DS Bottom View を X 反転して top 置き（実物でピン1確認） |
+| 本体下配線 | 底面は非導電だがケースは銅。CrtYd 内の不要 Cu は避ける |
