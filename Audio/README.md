@@ -17,7 +17,7 @@ KiCad プロジェクトと関連ドキュメント。
 
 | シート | 役割 | いまの扱い |
 |---|---|---|
-| PowerModule | **TEC 3-1223** ±15 / A_GND（旧 MCW03）。計算メモ: [PowerModule_TEC3_REDESIGN.md](PowerModule_TEC3_REDESIGN.md) | 箱に入れる |
+| PowerModule | **TMR 6-1223** ±15 / ±200mA（Cout 用に一度 TEC 3-1223 としたが電流不足）。計算メモ: [PowerModule_TEC3_REDESIGN.md](PowerModule_TEC3_REDESIGN.md) | 箱に入れる |
 | AmpModule | NE5532 Amp（×10 想定） | ラインアウト（J11）。ADC へは AdcBuffer 経由 |
 | AdcBuffer | ゲイン1バッファ。実装は **OPA1652AID-DIP**（共立 Q5M411） | Amp L/R_OUT → MeasurementADC AUDIO |
 | Controll | CH1–10 リレー（親＋子） | 実機では外している |
