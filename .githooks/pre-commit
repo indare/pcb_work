@@ -1,0 +1,47 @@
+#!/bin/sh
+# ステージされた KiCad ファイルの S式 / JSON が壊れていないか確認する。
+# 有効化: git config core.hooksPath .githooks
+# 一時的に飛ばす: git commit --no-verify
+
+root=$(git rev-parse --show-toplevel) || exit 1
+checker="$root/Audio/scripts/check_sexpr.py"
+[ -f "$checker" ] || exit 0
+
+if command -v python3 >/dev/null 2>&1; then
+	py=python3
+elif command -v python >/dev/null 2>&1; then
+	py=python
+else
+	echo "pre-commit: python が見つからないため S式チェックを飛ばします" >&2
+	exit 0
+fi
+
+files=$(git diff --cached --name-only --diff-filter=ACM \
+	| grep -E '\.(kicad_sch|kicad_pcb|kicad_sym|kicad_mod|kicad_dru|kicad_pro)$')
+[ -n "$files" ] || exit 0
+
+tmp=$(mktemp -d) || exit 1
+trap 'rm -rf "$tmp"' EXIT INT TERM
+
+status=0
+for f in $files; do
+	dest="$tmp/$f"
+	mkdir -p "$(dirname "$dest")"
+	# ワークツリーではなくステージされた内容を検査する
+	git show ":$f" > "$dest" || { echo "pre-commit: $f を取り出せません" >&2; status=1; continue; }
+	if ! out=$("$py" "$checker" -q "$dest" 2>&1); then
+		printf '%s\n' "$out" | sed "s|$dest|$f|g" >&2
+		status=1
+	fi
+done
+
+if [ "$status" -ne 0 ]; then
+	cat >&2 <<'MSG'
+
+pre-commit: KiCad ファイルが壊れています。KiCad が開けなくなるのでコミットを中止しました。
+  自動修復を試す:  python3 Audio/scripts/check_sexpr.py --fix <ファイル>
+  どうしても通す:  git commit --no-verify
+MSG
+fi
+
+exit "$status"

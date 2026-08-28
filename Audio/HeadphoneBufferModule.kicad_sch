@@ -1,0 +1,2142 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "45836f1c-2db6-4a77-8d91-e7cbbced6bc0")
+	(paper "A4")
+	(title_block
+		(title "HeadphoneBufferModule")
+		(date "2026-08-28")
+		(rev "1.0")
+		(comment 1 "NJM4556A unity-gain headphone buffer; DIP-8 socket")
+	)
+	(lib_symbols
+		(symbol "Amplifier_Operational:NE5532"
+			(pin_names
+				(offset 0.127)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "NE5532"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ne5532.pdf"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Dual Low-Noise Operational Amplifiers, DIP-8/SOIC-8"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "dual opamp"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "NE5532_1_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "NE5532_2_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "NE5532_3_1"
+				(pin power_in line
+					(at -2.54 -7.62 90)
+					(length 3.81)
+					(name "V-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 7.62 270)
+					(length 3.81)
+					(name "V+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(text "PHONE buffer: NJM4556A is the default DIP-8 device. OPA1642 adapter may be tried only with high-impedance loads."
+		(exclude_from_sim no)
+		(at 25.4 20.32 0)
+		(effects
+			(font
+				(size 1 1)
+			)
+			(justify left bottom)
+		)
+		(uuid "022abe69-102b-4aa3-b979-87e05159cf84")
+	)
+	(text "Signal order: SW101 -> fixed pad -> RV101 A50k dual -> this buffer -> J103 TRS. A_GND return goes directly to star ground."
+		(exclude_from_sim no)
+		(at 25.4 27.94 0)
+		(effects
+			(font
+				(size 1 1)
+			)
+			(justify left bottom)
+		)
+		(uuid "40ea7da6-d0a0-4525-bab6-68974c3481c0")
+	)
+	(text "Socket policy: AMP901 = NJM4556A only. MUSES8820D / OPA1642 belong in AMP401 (preamp), not here."
+		(exclude_from_sim no)
+		(at 25.4 34.29 0)
+		(effects
+			(font
+				(size 1 1)
+			)
+			(justify left bottom)
+		)
+		(uuid "9ed87140-a159-4001-9dd8-597ac36880fa")
+	)
+	(text "32-80 ohm load: OPA1642 is not guaranteed; current limit may cause clipping. Output R901/R903 = 10 ohm."
+		(exclude_from_sim no)
+		(at 25.4 24.13 0)
+		(effects
+			(font
+				(size 1 1)
+			)
+			(justify left bottom)
+		)
+		(uuid "e5b504c7-e4fe-432e-880f-05e6a9ff4eb9")
+	)
+	(text "C901/C902 470uF bipolar block DC at the jack; R902/R904 100k bleed the node with no headphone plugged."
+		(exclude_from_sim no)
+		(at 25.4 31.75 0)
+		(effects
+			(font
+				(size 1 1)
+			)
+			(justify left bottom)
+		)
+		(uuid "f577c48b-8483-4bb0-92ac-dccc1750e6b5")
+	)
+	(junction
+		(at 45.72 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "15afecba-4f9f-48b6-ae3a-3202711b7f27")
+	)
+	(junction
+		(at 45.72 99.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1ba33a68-d892-45d3-b1dc-17afe1a3d411")
+	)
+	(junction
+		(at 105.41 71.12)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "486829be-d9c6-45f6-b943-771c4a1eddf0")
+	)
+	(junction
+		(at 53.34 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "58b1eba9-e1c9-4af0-8904-751ec753e8b5")
+	)
+	(junction
+		(at 105.41 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "66dd6d60-2b90-4c89-bdeb-efb9c202f237")
+	)
+	(junction
+		(at 71.12 71.12)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "67f1ccf9-3526-41c2-8883-24e278743274")
+	)
+	(junction
+		(at 45.72 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7de8e08e-c71a-4959-8dd4-51fb6d969a23")
+	)
+	(junction
+		(at 53.34 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b79571f2-ce12-48fe-a561-cff670466c59")
+	)
+	(junction
+		(at 71.12 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b9613ec7-ffe5-4706-9352-e021c616d8bd")
+	)
+	(junction
+		(at 53.34 99.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bc9d5423-ce8e-47fb-b2d5-c84b6441dd5f")
+	)
+	(wire
+		(pts
+			(xy 53.34 106.68) (xy 62.23 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "04976b7d-93cc-46c6-a265-ae894387ea37")
+	)
+	(wire
+		(pts
+			(xy 27.94 99.06) (xy 45.72 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "10085b4b-06e1-42d0-9b92-755ae6596cb2")
+	)
+	(wire
+		(pts
+			(xy 85.09 71.12) (xy 88.9 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "120bfbcf-e7ca-45bd-bfdc-c08590ebd69f")
+	)
+	(wire
+		(pts
+			(xy 53.34 48.26) (xy 53.34 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12cd6e4c-f148-4937-acac-dbd7fcd6cf8a")
+	)
+	(wire
+		(pts
+			(xy 96.52 40.64) (xy 114.3 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1797e850-486c-4fe0-8b98-36cea3464388")
+	)
+	(wire
+		(pts
+			(xy 83.82 40.64) (xy 88.9 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1a78b623-5425-4f5b-ba37-4af86c8b943e")
+	)
+	(wire
+		(pts
+			(xy 96.52 71.12) (xy 114.3 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f8c298f-76f3-4ac4-b646-cacd007bfafd")
+	)
+	(wire
+		(pts
+			(xy 105.41 48.26) (xy 101.6 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "38fe636f-2070-4503-87ac-babd6ad8dd89")
+	)
+	(wire
+		(pts
+			(xy 45.72 99.06) (xy 53.34 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40aa9d0e-7dbe-4a7b-baeb-5b5012a3de1a")
+	)
+	(wire
+		(pts
+			(xy 105.41 78.74) (xy 104.14 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "422bf70e-f548-4251-91af-46afba188cad")
+	)
+	(wire
+		(pts
+			(xy 27.94 91.44) (xy 45.72 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "44f3965e-2e4f-4bdb-9352-8f178de6b4d5")
+	)
+	(wire
+		(pts
+			(xy 68.58 40.64) (xy 71.12 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "47780f42-a082-41e7-9c71-a680b189149b")
+	)
+	(wire
+		(pts
+			(xy 71.12 71.12) (xy 77.47 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c31ebfc-f499-4ddd-94eb-c1ffcb4e0f22")
+	)
+	(wire
+		(pts
+			(xy 53.34 91.44) (xy 45.72 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "711ea3aa-3796-4ce8-8a7f-a0ac49504352")
+	)
+	(wire
+		(pts
+			(xy 53.34 48.26) (xy 71.12 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90f2ad91-7083-4dc2-80f4-4c85ce209e8d")
+	)
+	(wire
+		(pts
+			(xy 71.12 40.64) (xy 76.2 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a014711c-1a49-4a12-909d-ce7bcb87c8a7")
+	)
+	(wire
+		(pts
+			(xy 53.34 78.74) (xy 53.34 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aff88e25-f603-47c6-8883-eb23f9e8565b")
+	)
+	(wire
+		(pts
+			(xy 71.12 48.26) (xy 71.12 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b7804259-afcf-4404-8433-3834e0721441")
+	)
+	(wire
+		(pts
+			(xy 53.34 78.74) (xy 71.12 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc37e4fd-0b77-44d7-9de6-cf3a7ef5eec4")
+	)
+	(wire
+		(pts
+			(xy 46.99 38.1) (xy 53.34 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c792b0c5-12f6-4f2c-9839-3e8110955ee2")
+	)
+	(wire
+		(pts
+			(xy 27.94 106.68) (xy 45.72 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dc2c7c49-e04d-48e4-b19f-6a46fc47abf9")
+	)
+	(wire
+		(pts
+			(xy 53.34 91.44) (xy 62.23 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1974207-763f-494e-8090-feaf3921c9d3")
+	)
+	(wire
+		(pts
+			(xy 45.72 106.68) (xy 53.34 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e6537168-ba03-4b75-b7be-429b6b7eb0f0")
+	)
+	(wire
+		(pts
+			(xy 71.12 78.74) (xy 71.12 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f1623e00-8e45-44d2-a700-3330a032a333")
+	)
+	(wire
+		(pts
+			(xy 46.99 68.58) (xy 53.34 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f3fdb996-8c17-4974-8eb5-008ba1b96bff")
+	)
+	(wire
+		(pts
+			(xy 68.58 71.12) (xy 71.12 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f87f43f0-e092-4d29-a0b4-1d3268c8c29a")
+	)
+	(hierarchical_label "L_OUT"
+		(shape output)
+		(at 114.3 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2ea8bcfc-333f-4047-9425-0b4c32d1a729")
+	)
+	(hierarchical_label "R_IN"
+		(shape input)
+		(at 46.99 68.58 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "439fee79-a316-4153-99cc-4b539b3afd57")
+	)
+	(hierarchical_label "A_GND"
+		(shape input)
+		(at 27.94 99.06 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "89709d12-adab-453e-9f39-83d269033c11")
+	)
+	(hierarchical_label "V-_IN"
+		(shape input)
+		(at 27.94 106.68 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8cfd0b92-cffb-4e27-886b-681b9e1ca99d")
+	)
+	(hierarchical_label "A_GND"
+		(shape input)
+		(at 104.14 78.74 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a11fa870-e7d5-4cf9-8f39-f55ed93ecd3b")
+	)
+	(hierarchical_label "V+_IN"
+		(shape input)
+		(at 27.94 91.44 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a55d5383-e36e-4c5e-81e2-4b0c3b762e88")
+	)
+	(hierarchical_label "R_OUT"
+		(shape output)
+		(at 114.3 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "af8dc795-8aad-481c-84f3-071892daf444")
+	)
+	(hierarchical_label "L_IN"
+		(shape input)
+		(at 46.99 38.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d1ddffec-5974-4b52-bf52-bd2f2a393fbb")
+	)
+	(hierarchical_label "A_GND"
+		(shape input)
+		(at 101.6 48.26 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f8f862a8-1dea-48ff-80a0-dce8ef58400e")
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 53.34 102.87 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "003cc93c-cd9e-49e5-9fc4-fb3e8e2180a2")
+		(property "Reference" "C906"
+			(at 51.054 101.346 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.1µF"
+			(at 55.88 105.41 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 53.34 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 53.34 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Local V- decoupling"
+			(at 53.34 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b1b47cb0-9891-422d-8718-a90fa4645696")
+		)
+		(pin "2"
+			(uuid "69dd93fb-2ecb-4b71-9da1-f89e5bb7615e")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "C906")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 105.41 74.93 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "24ef0bde-e2ca-4af3-9562-9341fe3cd12e")
+		(property "Reference" "R904"
+			(at 101.854 72.644 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100kΩ"
+			(at 110.49 76.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 105.41 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Output node bleed to A_GND"
+			(at 105.41 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "eac8cfed-cc2d-40db-b98f-7e2e76ce3ea8")
+		)
+		(pin "2"
+			(uuid "6b2dd16a-6de6-44cc-9e28-388da0402bad")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "R904")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 105.41 44.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "44850153-e53d-4f45-8411-2ad0aa6e18c8")
+		(property "Reference" "R902"
+			(at 101.854 42.418 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100kΩ"
+			(at 109.474 45.974 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 105.41 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Output node bleed to A_GND"
+			(at 105.41 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "87e2dd65-4ab1-4842-8614-baaa54fe9c53")
+		)
+		(pin "2"
+			(uuid "9c9edc34-0c50-4b4b-9427-0b57a8d8c0e8")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "R902")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 60.96 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4ee5d89d-9d64-4d41-9c45-50180e8d3825")
+		(property "Reference" "AMP901"
+			(at 60.96 32.64 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NJM4556A"
+			(at 60.96 35.64 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
+			(at 60.96 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.nisshinbo-microdevices.co.jp/en/pdf/datasheet/NJM4556A_E.pdf"
+			(at 60.96 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Dual high-current headphone amplifier; DIP-8 socket. OPA1642 adapter is optional for high-impedance loads only."
+			(at 60.96 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9ca54f72-c95c-47ff-8234-ba2c456a3b2b")
+		)
+		(pin "2"
+			(uuid "d3c29e27-1031-4d8f-b49e-f5e1f27998be")
+		)
+		(pin "3"
+			(uuid "392ab7a4-3165-41d6-ac87-dd92fbd23fba")
+		)
+		(pin "4"
+			(uuid "d7e7d506-9ef4-4025-9054-b0c382fe49a2")
+		)
+		(pin "5"
+			(uuid "0dae953d-80b2-4b1e-a83f-4d910008bd11")
+		)
+		(pin "6"
+			(uuid "4ceb0c06-923a-4b54-b91c-5d8ee3e7f5b8")
+		)
+		(pin "7"
+			(uuid "0fd8de2e-85d6-4534-9154-9ccaf48eaf64")
+		)
+		(pin "8"
+			(uuid "a2e43288-5f7e-4586-808b-dbc6cce6aec1")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "AMP901")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 81.28 71.12 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "698cc3df-dfd5-4acb-8f1c-7543f5182904")
+		(property "Reference" "R903"
+			(at 77.978 68.58 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10Ω"
+			(at 83.82 68.58 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 81.28 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 81.28 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Headphone output isolation resistor"
+			(at 81.28 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "00852dd7-2da6-43a7-bcaf-f25586c5ccc5")
+		)
+		(pin "2"
+			(uuid "64046d85-cb69-4f38-a514-2261d97aa898")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "R903")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 60.96 71.12 0)
+		(unit 2)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "70f82042-0591-4a66-a8a1-ab578308e409")
+		(property "Reference" "AMP901"
+			(at 60.96 63.12 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NJM4556A"
+			(at 60.96 66.12 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
+			(at 60.96 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.nisshinbo-microdevices.co.jp/en/pdf/datasheet/NJM4556A_E.pdf"
+			(at 60.96 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Dual high-current headphone amplifier; DIP-8 socket. OPA1642 adapter is optional for high-impedance loads only."
+			(at 60.96 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "5"
+			(uuid "ce29cae8-804f-4b2f-afb4-a04e25f9d3a5")
+		)
+		(pin "6"
+			(uuid "f76c6a52-d4dd-46c9-8f69-5bcea2a38c1a")
+		)
+		(pin "7"
+			(uuid "f2da9e45-a783-4a0e-ad10-b7360077340c")
+		)
+		(pin "1"
+			(uuid "949520ca-cca7-4c09-a990-6ab420597883")
+		)
+		(pin "2"
+			(uuid "29436306-94c5-48ec-ae17-8c6a1130685c")
+		)
+		(pin "3"
+			(uuid "c78c0e10-420e-4f09-938f-78ecab60ce27")
+		)
+		(pin "4"
+			(uuid "106773ac-d536-4c5c-9a83-05210a27ccd4")
+		)
+		(pin "8"
+			(uuid "ff6f122b-4b6b-4ddf-8446-e242fcd850c1")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "AMP901")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 45.72 95.25 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "79f0ddc4-549b-489e-a585-73a204842b88")
+		(property "Reference" "C903"
+			(at 42.164 93.218 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10µF 25V X7R"
+			(at 38.1 97.536 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 45.72 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "V+ local bulk decoupling"
+			(at 45.72 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8f69f698-19fd-4b96-aef7-cdc4818fd770")
+		)
+		(pin "2"
+			(uuid "6b49126b-a55a-4f4c-b8d6-4a4d00f01773")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "C903")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 92.71 71.12 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "80b5c96c-ba85-46f7-8f62-09ffa71c72cc")
+		(property "Reference" "C902"
+			(at 92.456 66.548 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "470µF 25V NP"
+			(at 94.234 74.93 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+			(at 92.71 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 92.71 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Output DC blocking, bipolar (non-polar) electrolytic"
+			(at 92.71 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "43658d2a-f0e5-42d4-a1af-488b324fc219")
+		)
+		(pin "2"
+			(uuid "e8e65282-c1a4-4e24-b365-1672fec1657a")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "C902")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 64.77 99.06 0)
+		(unit 3)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "97fec958-0a6b-42ac-94c9-f497ab38ab54")
+		(property "Reference" "AMP901"
+			(at 64.77 109.06 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "NJM4556A"
+			(at 64.77 111.56 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
+			(at 64.77 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.nisshinbo-microdevices.co.jp/en/pdf/datasheet/NJM4556A_E.pdf"
+			(at 64.77 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Dual high-current headphone amplifier; DIP-8 socket. OPA1642 adapter is optional for high-impedance loads only."
+			(at 64.77 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "4"
+			(uuid "63b493aa-505d-441f-bae4-c97ebc00b6e9")
+		)
+		(pin "8"
+			(uuid "f28c1d4e-924b-4a52-a4d3-9e073a24af57")
+		)
+		(pin "1"
+			(uuid "1762eadf-a6e4-4b2c-becf-39ab6a50ebff")
+		)
+		(pin "2"
+			(uuid "ad5b064a-471b-455c-9be5-ffc7e30ceac4")
+		)
+		(pin "3"
+			(uuid "29872f14-9527-4520-a715-52323eb6a66b")
+		)
+		(pin "5"
+			(uuid "e155d229-b80c-4ecf-924c-67e35120b24a")
+		)
+		(pin "6"
+			(uuid "f2eb50a3-e78d-4b33-a604-15589f8b9f3d")
+		)
+		(pin "7"
+			(uuid "e71061ac-4a59-45bb-9631-42326d3f89ff")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "AMP901")
+					(unit 3)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 45.72 102.87 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c644a32f-74cf-403f-a279-5fc38a78e5b4")
+		(property "Reference" "C905"
+			(at 42.672 100.838 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10µF 25V X7R"
+			(at 38.608 105.41 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 45.72 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "V- local bulk decoupling"
+			(at 45.72 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "aa5e6c0e-9040-4ae6-a13f-96c126454eba")
+		)
+		(pin "2"
+			(uuid "f95f99ba-59eb-485e-8e46-eb448ce2f46d")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "C905")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 80.01 40.64 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c981b6d1-6b25-47d6-b802-a1ed84cd4236")
+		(property "Reference" "R901"
+			(at 76.454 38.1 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10Ω"
+			(at 81.788 38.1 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 80.01 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 80.01 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Headphone output isolation resistor"
+			(at 80.01 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "34f97640-f678-4c97-9f06-4788b3336e55")
+		)
+		(pin "2"
+			(uuid "82006f91-e9f9-487d-9fb4-fe7be038898c")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "R901")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 53.34 95.25 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d0b20304-fcd0-4d16-8d7f-242583c3a0aa")
+		(property "Reference" "C904"
+			(at 50.038 92.964 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.1µF"
+			(at 56.388 97.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 53.34 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 53.34 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Local V+ decoupling"
+			(at 53.34 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e591b57a-f269-4697-a7db-586b2af2a912")
+		)
+		(pin "2"
+			(uuid "b9dac398-cb7e-4b49-919d-99712747bade")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "C904")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 92.71 40.64 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "fcab7af2-c0b2-44c0-a564-8d8e56de328b")
+		(property "Reference" "C901"
+			(at 92.202 36.576 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "470µF 25V NP"
+			(at 92.71 45.466 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+			(at 92.71 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 92.71 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Output DC blocking, bipolar (non-polar) electrolytic"
+			(at 92.71 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4dcf549c-7aec-4a1f-839d-7f2e53a0b531")
+		)
+		(pin "2"
+			(uuid "4773bdce-46a7-4a8c-a87c-2a399227a168")
+		)
+		(instances
+			(project "AudioCase"
+				(path "/760b9589-09e7-434e-9ca2-6e4136e3b7a2/e1184ac8-296d-4666-98cd-ee22bcec7ee8"
+					(reference "C901")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
