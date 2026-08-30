@@ -31,7 +31,7 @@
 |---|---|---|---|
 | **SSD1306** | OLED ×2 | [Solomon_SSD1306.pdf](Solomon_SSD1306.pdf) | [Solomon Systech SSD1306](https://www.solomon-systech.com/product/ssd1306/) |
 | **RP2350** | Pico 2 | [RaspberryPi_RP2350.pdf](RaspberryPi_RP2350.pdf) | [Raspberry Pi RP2350](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf) |
-| **ロータリ ENC ×6** | 操作パネル | [RotaryEncoder_EC11_generic.md](RotaryEncoder_EC11_generic.md) | 汎用 EC11 系（固定足東西・D カット）。PDF 不要 |
+| **ロータリ ENC ×6** | 操作パネル | [RotaryEncoder_EC11_generic.md](RotaryEncoder_EC11_generic.md) | **GPIO 直結**（§10）。I²C 集約なし |
 
 ## 計測（独立・参考）
 
@@ -53,4 +53,4 @@
 
 - 2026-08-30: 初回一括取得
 - 2026-08-30: CH224 [50224]、ENC 機械仕様、Amp/HP 流用方針。OPA1656 削除
-- 2026-08-30: `ch224k-manual.pdf` を `StrawberryLinux_CH224K_manual.pdf` としてローカル保存
+- 2026-08-30: ENC×6 **GPIO 直結**確定（§10）

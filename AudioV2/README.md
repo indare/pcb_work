@@ -7,7 +7,7 @@
 - **操作 Pico は 1 台**＋リレー盤は **I²C GPIO 拡張**
 - **電源: ±12 V**（DKMW20F-12）、PD デフォルト **[50224] CH224**（差し替え可）
 - 音量: PGA2310PA ×2（SPI）、トーン: PT2314（I²C、Amp 前）
-- 回路図の本起こしは、**ENC 配線**を決めてから
+- 回路図の本起こしは、**起こし範囲（D1/D2）**を決めてから
 
 詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較（決定済み）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。予定部品のデータシートは [datasheets/](datasheets/)。
 
