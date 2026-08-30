@@ -5,7 +5,7 @@
 	(uuid "b2000002-0002-4002-8002-000000000002")
 	(paper "A4")
 	(lib_symbols)
-	(text "AudioV2 PowerModule — DRAFT (§8/§9)\nU1 DKMW20F-12 ±12V / U2 50224 CH224 USB-C PD\nF1 → DKMW20 +Vin. PD_12V → panel PWR SW → PD_12V_SW\nU3 LDO TODO: VCC_TONE for PT2314 (+9V or +5V — DS pending)"
+	(text "AudioV2 PowerModule — DRAFT (§8/§9)\nU1 DKMW20F-12 ±12V / U2 50224 CH224 USB-C PD\nF1 → DKMW20 +Vin. PD_12V → panel PWR SW → PD_12V_SW\nU3 LM7809 +9V → VCC_TONE (PT2314 typ 9V, see CIRCUIT_DESIGN.md)"
 		(at 25.4 25.4 0)
 		(effects
 			(font
@@ -301,7 +301,7 @@
 			)
 		)
 
-		(property "Value" "3A T DNP"
+		(property "Value" "3A slow"
 			(at 68.58 53.339999999999996 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -379,7 +379,7 @@
 			)
 		)
 
-		(property "Value" "LDO_VCC_TONE TODO"
+		(property "Value" "LM7809 +9V"
 			(at 127.0 53.339999999999996 0)
 			(show_name no)
 			(do_not_autoplace no)
