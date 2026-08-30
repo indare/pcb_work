@@ -126,7 +126,10 @@ TI SBOS207C §5「Top View」どおり。**AudioV2 は ±12 V アナログ、VD+
 | F1 | ヒューズ | **3 A slow** | Audio PowerModule 同型（12 V PD ≈1.5 A） |
 | U3 | LM7809 | +9 V / ≥100 mA | PT2314 VDD |
 | C7809 in/out | 10 µF + 0.1 µF | 7809 定番 |
-| DKMW20 Cout | **820 µF/rail** | DS 800 µF each |
+| C101 | **47 µF** | DKMW20 +Vin bulk（Audio 同型） |
+| C102/C103 | **47 µF** | ±12 V 出力（DS 800 µF/rail は後追い） |
+| C104 | **0.1 µF** | +12 V HF |
+| DKMW20 Cout | **820 µF/rail** | DS 800 µF each — **次段で LC 追加** |
 
 **PD 配線（§9）:** CH224 12 V → 端子 `PD_12V` → パネル PWR SW → `PD_12V_SW` → F1 → DKMW20 +Vin。
 
@@ -160,7 +163,7 @@ TI SBOS207C §5「Top View」どおり。**AudioV2 は ±12 V アナログ、VD+
 - [x] PGA2310PA シンボル — 16pin DS 一致
 - [x] PT2314 シンボル — 28pin DIP 全ピン
 - [x] ControlPanel — PT2314 周辺 C/R 配置（`wire_circuit_design.py`）
-- [x] PowerModule — LM7809 + F1 3A、配線
+- [x] PowerModule — §9 配線（USB→CH224→PD_12V/J_PD→PD_12V_SW→F1→DKMW、7809→VCC_TONE）
 - [x] 親シート — グローバルバス ↔ 子シート pin 配線
 - [ ] ERC — 未接続・未使用入力の整理
 - [ ] RelayBoard / OutputStage 配線
