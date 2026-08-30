@@ -8,6 +8,7 @@
 - 回路図の本起こしは、残りの判断（音量位置など）が固まってから
 
 詳細な選択肢とメリデメは [DECISIONS.md](DECISIONS.md)。
+音量 IC（MCP45HV51 か PGA231x か）の比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。
 
 ## いまの `Audio/` からの参照元
 
