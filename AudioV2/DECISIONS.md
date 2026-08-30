@@ -12,7 +12,7 @@
 
 | 項目 | 状態 | 内容 |
 |---|---|---|
-| 基板の切り方 | **論理確定** | **B**: リレー vs 操作。**物理枚数・コネクタは §11 未決** |
+| 基板の切り方 | **確定** | **B** 論理分割。**物理: Relay 5+5×2、Control+Output 同居**（§11） |
 | 切替信号の渡し方 | **確定** | Pico 1 台 + **I²C GPIO 拡張（B2-exp）** + ULN |
 | CH / 電源 / 音声切替 | **確定** | ラッチングリレー（1 系統のみ有効） |
 | CH 操作 | **確定** | **ENC_CH**（現行どおり）。**回して候補変更、押して確定**（確定で音声＋電源リレー適用） |
@@ -100,9 +100,8 @@
 
 1. ~~12V LED の取り出し元~~ → **§9 確定**
 2. ~~ENC×6 の配線~~ → **§10 確定（GPIO 直結）**
-3. **物理基板分割・基板間接続**（端子台 vs コネクタ）→ **§11**
-4. 出力段ラッチングのコイル電源と GPIO 拡張のバス配線（§11 Q3 と関連）
-5. PT2314 外部 C/R（トーン）
+3. ~~物理基板分割~~ → **§11 Q1=B, Q2=A**。I²C 拓扑（Q3）・端子詳細は **設計時**
+4. PT2314 外部 C/R（トーン）
 5. ~~±12 V 化に伴う HP 固定パッド~~ → **§9 確定（廃止）**
 
 ---
@@ -499,15 +498,15 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 
 ### 6.9 AudioV2 で起こす KiCad（確定リスト）
 
-| # | シート | 内容 |
-|---|---|---|
-| 1 | `RelayBoard.kicad_sch` | ラッチング + ULN + MCP23017 + 端子台（`Controll` 参照、子 Pico 削除） |
-| 2 | `ControlPanel.kicad_sch` | Pico2 / ENC×6 / OLED / PGA2310×2 / PT2314 / PWR SW / 12 V LED |
-| 3 | `OutputStage.kicad_sch` | DEST ラッチング（LINE / PHONE / MUTE） |
-| 4 | `PowerModule.kicad_sch` | **再設計** — USB-C、CH224K、F1、DKMW20F-12、±12 V 端子、`PD_12V`↔パネル SW |
-| 5 | `AudioV2Case.kicad_sch` | 上記階層 ＋ 箱配線注記（**Amp はテキスト参照のみ**） |
+| # | シート | 物理 PCB | 内容 |
+|---|---|---|---|
+| 1 | `RelayBoard.kicad_sch` | **×2**（5+5） | ラッチ + ULN + MCP23017 + 端子台 + **COMMON_LR_OUT** |
+| 2 | `ControlPanel.kicad_sch` | **×1** | Pico2 / ENC×6 / OLED / PGA2310×2 / PT2314 / PWR SW / 12 V LED |
+| 3 | `OutputStage.kicad_sch` | **Control と同一 PCB** | DEST ラッチング（論理シートは分離） |
+| 4 | `PowerModule.kicad_sch` | **×1** | 再設計 — USB-C、CH224K、F1、DKMW20F-12 |
+| 5 | `AudioV2Case.kicad_sch` | — | 階層親 + 箱配線（Amp はテキストのみ） |
 
-**載せない:** `AmpModule` / `HeadphoneBufferModule` / `MeasurementADC`（実物は `Audio/` + 計測モジュール）。
+**新規発注 PCB: 4 枚**（Relay×2 + Control×1 + Power×1）。
 
 **ファーム:** 新規 `AudioV2/control_fw/`（`Control/` は現行機用に凍結）。
 
@@ -639,9 +638,45 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 
 ---
 
-## 11. 物理基板分割・基板間接続 — **ユーザー選択待ち**
+## 11. 物理基板分割・基板間接続 — **一部確定**
 
-**論理分割 B**（リレー機能 vs 操作 UI）は確定。**物理 PCB を何枚にするか**、**基板間を端子台かコネクタか**は別問題。KiCad 起こし前に決める。
+**論理分割 B** は確定。**Q1・Q2 は確定、Q3（I²C 拓扑）は回路・基板設計まで保留。**
+
+### 11.7 確定内容（ユーザー 2026-08-30）
+
+| 項目 | 決定 |
+|---|---|
+| **Q1 Relay 物理枚数** | **B — 5ch × 2 枚**（現 Controll 2 段型。ケーシング向き） |
+| **Q2 OutputStage 物理位置** | **A — ControlPanel と同一 PCB**（PGA2310 直後。ノイズ優先） |
+| **Q3 I²C 拓扑** | **保留** — 回路・基板レイアウト時に決定 |
+| **物理分割全体** | **PC + PB** — Relay **2 枚** + Control **1 枚**（Output は Control 上）+ Power **1 枚** → **新規 4 PCB** |
+
+KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロック）。物理実装は **ControlPanel PCB 上**。
+
+| 新規 PCB | 枚数 | 内容 |
+|---|---:|---|
+| PowerModule | 1 | ±12 V、CH224 内蔵 |
+| RelayBoard | **2** | 5ch ずつ。MCP23017 + ULN + ラッチ + Amp 端子台 |
+| ControlPanel | 1 | Pico / ENC / OLED / PT2314 / PGA2310 / **DEST リレー** |
+| **合計** | **4** | Amp / HP / 計測は `Audio/` 流用 |
+
+---
+
+### 11.8 CH 選択 — 音声 **共通バス**（ユーザー提案・採用方向）
+
+ラッチングリレーで **常に 1 系統だけ ON** とする前提なら、各 CH の **リレー接点出力を L/R 共通バスに合流**してよい。
+
+| 項目 | 内容 |
+|---|---|
+| 根拠 | 非選択系は接点が開く（または MUTE 側）。**逆流を考えない**＝他系統 Amp 出力がバスへ戻らない配線（Controll 同型の **選択後共通**） |
+| メリット | RelayBoard → 後段（PT2314 / 操作板）が **L/R 1 対**で済む。端子・ケーブル削減 |
+| 電源リレー | 音声と同様、**選択後共通**で Amp 電源バスへ（現行 `AMP_PWR_IN` → リレー → 各 Amp 型） |
+| ファーム | **排他** — 新 CH 確定時に他 CH コイルを Reset。起動デフォルト CH も規定 |
+| 起こし時 | RelayBoard 各 5ch 盤に **COMMON_LR_OUT**（2P 端子 or コネクタ）→ ControlPanel PT2314 入力 |
+
+測定タップ（Amp 後 AdcBuffer）は **リレー前**または分配器で別系統 — 箱配線 MD で位置を固定。
+
+---
 
 ### 11.0 用語
 
@@ -690,8 +725,9 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 |---|---|---|
 | PowerModule → 箱内星型 | **端子台 3P** | +12, −12, A_GND |
 | PowerModule ↔ 操作パネル（PD SW） | **端子 2P×2** or **JST 4P** | PD_12V, SW 戻り, GND |
-| ControlPanel ↔ RelayBoard | **コネクタ 4〜6P** | SDA, SCL, 3V3, GND（+ INT 任意） |
-| ControlPanel ↔ OutputStage | **コネクタ 6〜8P** or **基板内** | HP/LINE L/R, A_GND |
+| ControlPanel ↔ RelayBoard（×2） | **コネクタ 4〜6P** ×2 枚 | SDA, SCL, 3V3, GND — **Q3 保留**（daisy / スターは設計時） |
+| RelayBoard → ControlPanel | **コネクタ 4P** or **端子 2P** | **COMMON_LR_OUT**（§11.8）— 1 対 + GND |
+| ControlPanel 内 OutputStage | **基板内** | Q2-A。PGA2310 → DEST リレー → 外部端子 |
 | RelayBoard ↔ Amp×10 | **端子台** | 電源 2P×10 + 音声 2P×10 級 |
 | 外部入力 L/R | **端子台 2〜3P** | STATUS「手前端子台」型 |
 | OutputStage → HP Buffer / LINE | **端子台 2〜3P** | Audio 流用先 |
@@ -712,38 +748,21 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 
 ---
 
-### 11.5 あなたへの質問（返信で選んでください）
+### 11.5 質問（→ §11.7）
 
-**Q1. RelayBoard（CH 選択）の物理枚数**
-
-- **A)** **1 枚**に 10ch 集約（端子台大型 1 板）
-- **B)** **2 枚**（5+5）。現 Controll 2 段に近い。MCP23017×2
-
-**Q2. OutputStage（DEST リレー）の物理位置**
-
-- **A)** ControlPanel **と同一 PCB**
-- **B)** **出力近傍**の独立 PCB（HP Buffer / LINE OUT 側）
-- **C)** RelayBoard と**同一 PCB**
-
-**Q3. 基板間 I²C（MCP23017）**
-
-- **A)** ControlPanel → Relay →（Output）**daisy 1 本**
-- **B)** ControlPanel から **スター 2 本**（Relay 用 / Output 用）
-- **C)** Q2-A なら Relay **のみ 1 本 4P**（Output は Control 上の MCP 不要 or 別 GPIO）
-
-**（任意）Q4. 物理分割の全体:** **PA / PB / PC / PD** のどれが近いか — Q1〜Q3 から自動で決まるが、明示したい場合
-
-返信例: `Q1=B, Q2=B, Q3=A`
+~~Q1=B, Q2=A。Q3 は回路・基板設計まで保留。~~
 
 ---
 
-### 11.6 エージェント所見（参考）
+### 11.6 エージェント所見（更新）
 
-- **端子台だらけを避けたい基板間** → I²C・短アナログ幹線は **コネクタ化**、Amp×10・電源分配は **端子台のまま**が現実的
-- **PC（Relay 5+5）+ Q2-B（出力独立）+ Q3-A** は Audio 箱物実績に最も近い
-- **PB（Output を Control に同居）** は初号が早いが、ラッチングノイズと前面 PCB サイズがトレードオフ
+- 確定組み合わせ **Q1=B + Q2-A** → Relay 2 枚 + Control 1 枚（Output 同居）。**PC + PB**
+- **§11.8 共通バス**で Relay → Control のアナログは **4P 級**に収まる見込み
+- **Q3** は MCP23017×2（Relay 2 枚）+ OLED + PT2314 の **I²C 配線長・プルアップ**をレイアウト時に決める
 
 ---
+
+## 7. GND
 
 計測側の型を踏襲する前提で、操作系だけ決める。
 
@@ -762,8 +781,10 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 2. ~~12V LED・HP パッド~~ → **§9 確定**
 3. ~~ENC 配線~~ → **§10 確定**
 4. ~~起こし範囲（§6）~~ → **D1.5 確定**
-5. **物理基板・接続（§11）** ← ユーザー選択待ち
-6. KiCad 起こし（§6.9 + §11 確定後）
+5. ~~起こし範囲（§6）~~ → **D1.5 確定**
+6. ~~物理基板（§11 Q1/Q2）~~ → **確定**
+7. **I²C 拓扑（§11 Q3）** — 回路・基板設計時
+8. KiCad 起こし
 
 ---
 
@@ -786,6 +807,8 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 - [x] HP 固定パッド: **廃止（0 Ω）**。DNP で −10 dB 後付け可
 - [x] ENC 配線: **GPIO 直結 ×6**（§10 ピン表）
 - [x] **起こし範囲: D1.5** — 操作系 + **PowerModule 再設計**（CH224 内蔵）。Amp/HP/計測は `Audio/` 流用・**図に載せない**
-- [ ] **物理基板分割（§11 Q1）:** ☐ Relay 1 枚 ☐ Relay 5+5
-- [ ] **OutputStage 位置（§11 Q2）:** ☐ Control 同居 ☐ 出力近傍独立 ☐ Relay 同居
-- [ ] **I²C 拓扑（§11 Q3）:** ☐ daisy ☐ スター2 ☐ Control 同居時1本
+- [x] CH224: **PowerModule 基板内蔵**
+- [x] **Relay 物理: 5+5 ×2 枚**（§11 Q1-B）
+- [x] **OutputStage: ControlPanel 同一 PCB**（§11 Q2-A）
+- [x] **CH 音声: リレー後共通 L/R バス**（§11.8）
+- [ ] **I²C 拓扑（§11 Q3）:** 回路・基板設計まで保留
