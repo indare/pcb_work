@@ -14,8 +14,8 @@
 ## 1. いま何をしているか（一言）
 
 **PowerModule を実配線寄りに整理した**（PD 入口・パネル SW・VCC_TONE 端子）。  
-ControlPanel に PWR SW + 12V LED を戻し、Case は論理橋のまま。  
-次の話題候補: PD 往復端子の要否（入口 A vs B）、RelayBoard 本配線、ERC 残り。
+手持ち OPA の DS を `Audio/datasheets/opamps/` に保管済み。  
+次の話題候補: RelayBoard 本配線、ERC 残り（PD 入口 A vs B は打ち切り）。
 
 ---
 
@@ -74,9 +74,11 @@ U201 → ±12 / A_GND → J201（星型幹線 3P）
 
 ### 2.4 手持ちオペアンプ（2026-08-31 申告）
 
-正本: **[`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)**
+正本: **[`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)**  
+DS PDF: **[`Audio/datasheets/opamps/`](../Audio/datasheets/opamps/README.md)**（全石ローカル保管済み）
 
-NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364CN8 / **MUSE01**（2石→1DIP変換）・MUSES02D、および OPA828・OPA627AU・OPA1612・OPA2140・OPA1652 の DIP 化モジュール等。
+NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364CN8 / **MUSE01**（2石→1DIP変換）・MUSES02D、および OPA828・OPA627AU・OPA1612・OPA2140・OPA1652 の DIP 化モジュール等。  
+±12 V（DKMW）電源定格は **全石 OK**（詳細は在庫表）。
 
 ---
 

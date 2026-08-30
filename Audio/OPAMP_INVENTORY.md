@@ -3,26 +3,27 @@
 **更新:** 2026-08-31  
 **用途:** AmpModule DIP 差し替え比較・計測まわりの候補把握。数量は未記入（都度確認）。
 
-標準実装（基板に載っている／載せる前提）は [README.md](README.md) のソケット表を正とする。
+標準実装（基板に載っている／載せる前提）は [README.md](README.md) のソケット表を正とする。  
+データシート PDF: [datasheets/opamps/](datasheets/opamps/README.md)
 
 ## 手持ちリスト
 
-| 表記（手元） | 解釈・備考 | Amp DIP-8 差し替え |
-|---|---|---|
-| OPA828 のデュアル実装 DIP 版 | OPA828×2 を DIP 化した完成基板／モジュール想定 | 可（高速・安定性注意） |
-| **NJM5532DD** | 5532 系 DIP | 可（NE5532 相当） |
-| **NJM4580DD** | DIP | 可 |
-| **OPA2134PA** | DIP（デュアル JFET） | 可 |
-| **OPA1656ID** | SOIC-8（MeasurementADC 用石。DIP ソケット直挿し不可） | 要変換 or SOP 実装のみ |
-| **OPA2604AQ** | （表記 AQ — パッケージ要実物確認） | 要確認 |
-| **LME49860NA** | DIP | 可（高速・電流ノイズ注意） |
-| **「OPA1652」DIP 化モジュール** | 共立 Q5M411 系。AdcBuffer 標準 | Amp にも挿せるが測定基準は固定推奨 |
-| **OPA627AU** 2 回路 DIP 化完成基板 | シングル×2 の DIP 化モジュール | 可 |
-| **MUSES02D** | DIP | 可 |
-| **OPA1612** 2 回路 8Pin DIP 化完成基板 | DIP 化モジュール | 可（10kΩ 級では電流ノイズ不利） |
-| **LT1364CN8** | DIP | 可（GBW 高くデカップ／帰還注意） |
-| **OPA2140AIDR** 2 回路 JFET DIP | DIP 化／変換実装 | 可 |
-| **MUSE01**（×2 → 1×DIP 変換） | シングル相当 **2 個**を 1 個の DIP-8 に挿す変換基板。表記は MUSE01（MUSES01 ではない） | 可（変換ごと Amp ソケットへ） |
+| 表記（手元） | 解釈・備考 | Amp DIP-8 差し替え | DS |
+|---|---|---|---|
+| OPA828 のデュアル実装 DIP 版 | OPA828×2 を DIP 化した完成基板／モジュール想定 | 可（高速・安定性注意） | [PDF](datasheets/opamps/TI_OPA828.pdf) |
+| **NJM5532DD** | 5532 系 DIP | 可（NE5532 相当） | [PDF](datasheets/opamps/NJR_NJM5532.pdf) |
+| **NJM4580DD** | DIP | 可 | [PDF](datasheets/opamps/NJR_NJM4580.pdf) |
+| **OPA2134PA** | DIP（デュアル JFET） | 可 | [PDF](datasheets/opamps/TI_OPA2134.pdf) |
+| **OPA1656ID** | SOIC-8（MeasurementADC 用石。DIP ソケット直挿し不可） | 要変換 or SOP 実装のみ | [PDF](datasheets/opamps/TI_OPA1656.pdf) |
+| **OPA2604AQ** | （表記 AQ — パッケージ要実物確認） | 要確認 | [PDF](datasheets/opamps/TI_OPA2604.pdf) |
+| **LME49860NA** | DIP | 可（高速・電流ノイズ注意） | [PDF](datasheets/opamps/TI_LME49860.pdf) |
+| **「OPA1652」DIP 化モジュール** | 共立 Q5M411 系。AdcBuffer 標準 | Amp にも挿せるが測定基準は固定推奨 | [PDF](datasheets/opamps/TI_OPA1652.pdf) |
+| **OPA627AU** 2 回路 DIP 化完成基板 | シングル×2 の DIP 化モジュール | 可 | [PDF](datasheets/opamps/TI_OPA627.pdf) |
+| **MUSES02D** | DIP | 可 | [PDF](datasheets/opamps/NJR_MUSES02.pdf) |
+| **OPA1612** 2 回路 8Pin DIP 化完成基板 | DIP 化モジュール | 可（10kΩ 級では電流ノイズ不利） | [PDF](datasheets/opamps/TI_OPA1612.pdf) |
+| **LT1364CN8** | DIP | 可（GBW 高くデカップ／帰還注意） | [PDF](datasheets/opamps/AD_LT1364.pdf) |
+| **OPA2140AIDR** 2 回路 JFET DIP | DIP 化／変換実装 | 可 | [PDF](datasheets/opamps/TI_OPA2140.pdf) |
+| **MUSE01**（×2 → 1×DIP 変換） | シングル相当 **2 個**を 1 個の DIP-8 に挿す変換基板。表記は MUSE01（MUSES01 ではない） | 可（変換ごと Amp ソケットへ） | [PDF](datasheets/opamps/NJR_MUSES01.pdf) |
 
 ## AudioV2 ±12 V 電源での可否（DKMW20F-12）
 
@@ -75,3 +76,5 @@
 |---|---|
 | 2026-08-31 | ユーザー申告リストで初版 |
 | 2026-08-31 | MUSE01 = 2 石→1 DIP 変換と訂正 |
+| 2026-08-31 | AudioV2 ±12 V 電源可否表を追加（全石 OK） |
+| 2026-08-31 | 手持ち全石の DS を `datasheets/opamps/` に保管・索引リンク | |

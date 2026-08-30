@@ -44,8 +44,8 @@
 
 ## AudioV2 に置かないもの（`Audio/` 流用）
 
-- **AmpModule / HeadphoneBuffer** のオペアンプ → 現行 `Audio/` 参照。ローカル DS 不要
-- 計測フロントの **OPA1656** も MeasurementADC 流用のため AudioV2 では未収録
+- **AmpModule / HeadphoneBuffer** のオペアンプ → [Audio/datasheets/opamps/](../../Audio/datasheets/opamps/README.md)（手持ち在庫のローカル PDF）
+- 計測フロントの **OPA1656** も同ディレクトリ（`TI_OPA1656.pdf`）。AudioV2 には複製しない
 
 ## 未収録（回路起こし時に追加）
 
@@ -59,3 +59,4 @@
 - 2026-08-30: CH224 [50224]、ENC 機械仕様、Amp/HP 流用方針。OPA1656 削除
 - 2026-08-30: ENC×3 **GPIO 直結**確定（§10）
 - 2026-08-30: 表示 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）
+- 2026-08-31: Amp/HP OPA DS は `Audio/datasheets/opamps/` を正と明記
