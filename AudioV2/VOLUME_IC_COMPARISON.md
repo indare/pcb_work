@@ -6,8 +6,9 @@
 
 ## 0. 先に結論
 
-**推奨: C 系。ただし品種は PGA2311 ではなく [PGA2310PA](https://www.ti.com/lit/ds/symlink/pga2310.pdf)（DIP-16・±15 V）。**
-次点は B（MCP45HV51 ×4）で、これは「部品代を最優先する」場合にだけ選ぶ。
+**確定: C 系 — [PGA2310PA](https://www.ti.com/lit/ds/symlink/pga2310.pdf) ×2（DIP-16・±15 V）。** B（MCP45HV51 ×4）は見送り。
+
+±15 V レール上限は **PowerModule / DC-DC 側**で管理する方針（2026-08 確定）。
 
 判断を動かした事実は 2 つある。どちらも今の DECISIONS.md の記述と食い違う。
 
