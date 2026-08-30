@@ -1,7 +1,8 @@
 # AmpModule リファイン案 — オペアンプと結合コンデンサ
 
 対象: `Audio/AudioCase.kicad_pcb` の AMP 島（AMP1・C28〜C35・R25〜R34・J9〜J11・H9〜H12）
-検討日: 2026-08-25 / 検証: KiCad 10.0.1（kicad-cli DRC + pcbnew 実測）
+検討日: 2026-08-25 / 検証: KiCad 10.0.1（kicad-cli DRC + pcbnew 実測）  
+手持ち石: [`OPAMP_INVENTORY.md`](OPAMP_INVENTORY.md)（2026-08-31 申告）
 
 この文書は「C34/C35 の 470µF が大きい」という話から始めて、耐圧・銘柄・オペアンプ選定まで
 追いかけた結果をまとめたもの。**結論だけ読むなら「6. リファイン案」へ。**
