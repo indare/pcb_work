@@ -71,9 +71,12 @@ AMP_SEL_L/R ── SW101 (DP3T)
 
 | 項目 | 値 |
 |---|---|
-| ポット | **A カーブ 50 kΩ デュアル** ×2 |
+| ポット | **Alps RK27112A00CF** ×2（A50k Dual / RK27）。パネル＋ヘッダ |
+| DEST SW | **C&K 7303SYZQE**（3PDT ON-OFF-ON）。論理シンボルは DP3T+SP3T |
 | 固定パッド | **0 Ω**（§9）。DNP で −10 dB 後付け可 |
-| DEST センス | ControlPanel の SW2 + 10k/10k/1k（別極） |
+| DEST センス | 同一 SW の 3 極目 + 10k/10k/1k |
+
+品番の根拠・代替: [PARTS.md](PARTS.md)。
 
 ---
 
@@ -102,6 +105,7 @@ USB-C → CH224 → PD_12V → PWR SW → F1 → DKMW20F-12 → ±12 V / A_GND�
 - [x] ControlPanel — ENC×3 + DEST ラダー + LED
 - [x] `check_sexpr.py -q AudioV2` — OK
 - [x] `kicad-cli sch export netlist` — OK（annotation 警告はドラフト）
+- [x] 3PDT / A50k 具体型番 — [PARTS.md](PARTS.md)
 - [ ] ERC 整理（未接続・未使用 PT2314 入力）
 - [ ] RelayBoard 本配線
 - [ ] 未使用 PT2314 入力の AC-GND 実装
@@ -121,3 +125,4 @@ python3 Audio/scripts/check_sexpr.py -q AudioV2
 |---|---|
 | 2026-08-30 | 初版 — 素案ピン監査 |
 | 2026-08-30 | **手回し化** — PGA 削除、PT2314 28pin 再作成、OutputStage ポット+トグル |
+| 2026-08-30 | **品番** — SW_DEST=7303SYZQE、RV=RK27112A00CF（[PARTS.md](PARTS.md)） |

@@ -87,13 +87,13 @@
 | LED | Pico が ADC に合わせて **LINE LED / PHONE LED** を点灯。MUTE = 消灯 |
 | 起動 | トグルの物理位置がそのまま DEST（ラッチング復帰不要） |
 | その他表示 | CH / Bass / Treble はループ表示可。**音量は OLED に出さない** |
-| 極数 | **3PDT**（L/R 音声 + センス 1 極）。DPDT のみならセンス極を別途検討 |
+| 極数 | **3PDT**（L/R 音声 + センス 1 極）。第一: **C&K 7303SYZQE**（[PARTS.md](PARTS.md)）。欠品時は DPDT+SPDT 分割 |
 
 ### 出力先にリレーは必要か → **不要（機械 SW 確定）**
 
 | 項目 | 内容 |
 |---|---|
-| 素子 | **2P3T / DP3T**（パネル実装。基板は 2×4 ヘッダ + リード線可） |
+| 素子 | **3PDT ON-OFF-ON**（第一: C&K **7303SYZQE**）。パネル実装。基板は 2×4（音声）+ センス 3P + リード |
 | 置き場所 | **出力段 / 前面パネル**（旧 SW101） |
 | 役割 | `A_GND` は共有のまま、**音声の出口**だけ切替 |
 | MUTE | 中央位置＝両経路オフ（接点オープン） |
@@ -106,11 +106,11 @@ ENC_DEST + DEST ラッチングリレー案は **見送り**。
 1. ~~12V LED の取り出し元~~ → **§9 確定**
 2. ~~ENC 配線~~ → **§10 確定（GPIO 直結・×3）**
 3. ~~物理基板分割~~ → **§11 Q1=B, Q2=A**。I²C 拓扑（Q3）・端子詳細は **設計時**
-4. PT2314 外部 C/R（トーン）
+4. ~~PT2314 外部 C/R（トーン）~~ → DS 値（2.4 k / 2.7 nF / 100 n / 2.2 µF / REF 5.6 k+22 µ）を [CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md) に反映済み
 5. ~~±12 V 化に伴う HP 固定パッド~~ → **§9 確定（0 Ω。ポット回転域を実機で確認）**
-6. ~~**SW_DEST 品種**~~ → **トグル ON-OFF-ON（3PDT）**。抵抗ラダー **10k/10k/1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)）
-7. ~~**RV_HP / RV_LINE**~~ → **A50k デュアル**（第一候補）。具体足・軸は設計時
-8. **KiCad 素案の PGA / ENC×6 / DEST リレーを手回し構成へ改訂** — 次作業
+6. ~~**SW_DEST 品種**~~ → **C&K 7303SYZQE**（3PDT ON-OFF-ON）。ラダー **10k/10k/1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) / [PARTS.md](PARTS.md)）
+7. ~~**RV_HP / RV_LINE**~~ → **Alps RK27112A00CF** ×2（A50k Dual / パネル＋ヘッダ）
+8. **KiCad** — 手回し構成へ改訂済み（素案）。ERC・未使用 PT2314 入力は残り
 
 ---
 
@@ -158,7 +158,7 @@ CH ──► PT2314 ──► Amp(×10) ──► SW_DEST ──┬─ RV_HP ─
 
 | 項目 | 内容 |
 |---|---|
-| 品種 | 汎用 EC11 系（秋月等）。**固定足は東西、A/B(/SW) は南北、垂直 D カット軸** |
+| 品種 | 秋月 **EC11 系・押し SW 付き**（固定足東西、A/B/SW 南北、垂直 D カット）。正確な販売コードは在庫次第 |
 | 本数 | **ENC_CH / ENC_BASS / ENC_TREBLE**（HP / LINE / DEST は手回し） |
 | 資料 | 機械図のみ（販売ページ）。[datasheets/RotaryEncoder_EC11_generic.md](datasheets/RotaryEncoder_EC11_generic.md) |
 
@@ -174,8 +174,8 @@ CH ──► PT2314 ──► Amp(×10) ──► SW_DEST ──┬─ RV_HP ─
 | 配線 | 板上 CH224 出力 → 端子 **`PD_12V`** → **操作パネル PWR SW** → 戻り **`PD_12V_SW`** → 板上 **F1** → DKMW20 |
 | LED | SW 後段で **12 V パネル LED** → `PD_GND`（SW と LED を並列分岐しても可） |
 | GND | **`PD_GND`**（CH224 = DKMW20 `−Vin`）。`A_GND` とは NetTie 一点 |
-| LED 部品 | **12 V 内蔵抵抗付き**（≈10–15 mA）。素 LED なら **680 Ω–1 kΩ** |
-| SW | **ON** = 一次＋LED。**OFF** = ±12 V 負荷切（USB 挿入時 CH224 は生きうる） |
+| LED 部品 | **12 V 内蔵抵抗付き 5 mm**（≈10–15 mA）。素 LED なら **680 Ω–1 kΩ** |
+| SW | **C&K 7101SYZQE**（5 A SPDT を SPST として使用）。**ON** = 一次＋LED。**OFF** = ±12 V 負荷切（USB 挿入時 CH224 は生きうる） |
 
 CH224 の **PG** 端子は「PD ネゴシエーション成功」用。**電源 ON 表示は PWR SW 後の 12 V LED** と役割分担（PG を別 LED にしてもよいが必須ではない）。
 
@@ -402,7 +402,7 @@ Amp は ×10・**±12 V** 系（旧 Audio は ±15 V）。
 | カーブ | **A（オーディオ / 対数）** — 聴感が対数なのでボリュームは A。B（リニア）はトーンやバランス向き |
 | 抵抗値 | **50 kΩ デュアル**（第一候補）。100 kΩ も可だが Amp 負荷は軽い一方、中点 Zout が約 25 kΩ と高くノイズ拾いやすい。10 kΩ は Amp にやや重い |
 | 入手性 | パネル用 **A50k / A100k デュアル**はどちらも流通多い。AudioV2 は旧機踏襲で **A50k** |
-| 品種例 | ALPS RK27 系など（設計時に足・軸・立体を確定） |
+| 品種 | **第一: Alps RK27112A00CF**（A50k Dual / RK27 27 mm）。代替は [PARTS.md](PARTS.md) |
 | 固定パッド | **0 Ω**（§9）。回転下端しか使えない実機なら −10 dB DNP |
 
 ### なぜ IC をやめたか
@@ -834,8 +834,9 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 - [x] **Relay 物理: 5+5 ×2 枚**（§11 Q1-B）
 - [x] **OutputStage: ControlPanel 同一 PCB**（§11 Q2-A）
 - [x] **CH 音声: リレー後共通 L/R バス**（§11.8）
-- [x] **ポット: A50k デュアル**（第一候補）
+- [x] **ポット: Alps RK27112A00CF**（A50k Dual / RK27）×2 — [PARTS.md](PARTS.md)
 - [x] **DEST ラダー: Rh=Rl=10k, Rs=1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)）
+- [x] **SW_DEST 型番: C&K 7303SYZQE**（3PDT ON-OFF-ON）
+- [x] **AZ850 コイル: AZ850P2-5**（5 V、秋月 118017）
 - [ ] **I²C 拓扑（§11 Q3）:** 回路・基板設計まで保留
-- [ ] **3PDT ON-OFF-ON / A50k 具体型番** — 設計時
-- [ ] **KiCad 素案の PGA / ENC×6 / DEST リレーを手回し構成へ改訂** — 次作業
+- [ ] **KiCad ERC / 未使用 PT2314 入力 / RelayBoard 本配線**

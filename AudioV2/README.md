@@ -9,7 +9,8 @@
 - 音量: **手回しデュアルポット ×2**（HP / LINE）。DEST: 機械 SW + ADC + LED + OLED。トーン: PT2314（I²C、Amp 前）
 - **物理 PCB:** Relay **5+5×2**、Control+Output **1 枚**（Q2-B なら Output **+1**）、Power **1 枚**（§11）
 - **KiCad 素案** — 手回し音量構成（PT2314 28pin / SW_DP3T / A50k Dual）。[CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md)
-- **次:** ERC 整理、未使用 PT2314 入力、RelayBoard 本配線、3PDT/A50k 型番
+- **品番:** [PARTS.md](PARTS.md) — DEST **C&K 7303SYZQE**、音量 **Alps RK27112A00CF** ×2
+- **次:** ERC 整理、未使用 PT2314 入力、RelayBoard 本配線
 
 詳細は [DECISIONS.md](DECISIONS.md)。DEST ラダーは [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。過去の音量 IC 比較（アーカイブ）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
 
