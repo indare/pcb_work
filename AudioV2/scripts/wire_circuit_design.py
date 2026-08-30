@@ -169,23 +169,24 @@ def pt2314_pin(sx: float, sy: float, index: int) -> tuple[float, float]:
 
 
 def pga2310_pin(sx: float, sy: float, num: str) -> tuple[float, float]:
+    """Pin offsets for KiCad standard lib Audio:PGA2310PA (extends PGA2310UA)."""
     table = {
-        "1": (-10.16, 7.62),
-        "2": (-10.16, 5.08),
-        "3": (-10.16, 2.54),
-        "4": (-10.16, 0),
-        "5": (-10.16, -2.54),
-        "6": (-10.16, -5.08),
-        "7": (10.16, 7.62),
-        "8": (10.16, 5.08),
-        "9": (10.16, 2.54),
-        "10": (10.16, 0),
-        "11": (10.16, -2.54),
-        "12": (10.16, -5.08),
-        "13": (10.16, -7.62),
-        "14": (-10.16, -7.62),
-        "15": (-10.16, -10.16),
-        "16": (-10.16, -12.7),
+        "1": (-12.7, 5.08),  # ZCEN
+        "2": (-12.7, -2.54),  # ~CS
+        "3": (-12.7, 0),  # SDI
+        "4": (-5.08, 27.94),  # V_D+
+        "5": (-5.08, -27.94),  # DGND
+        "6": (-12.7, 2.54),  # SCLK
+        "7": (-12.7, -7.62),  # SDO
+        "8": (-12.7, 7.62),  # ~MUTE
+        "9": (-12.7, -12.7),  # V_INR
+        "10": (-12.7, -17.78),  # AGNDR
+        "11": (12.7, -15.24),  # V_OUTR
+        "12": (5.08, 27.94),  # V_A+
+        "13": (5.08, -27.94),  # V_A-
+        "14": (12.7, 15.24),  # V_OUTL
+        "15": (-12.7, 17.78),  # AGNDL
+        "16": (-12.7, 12.7),  # V_INL
     }
     px, py = table[num]
     return pin(sx, sy, px, py)
@@ -421,16 +422,16 @@ def control_panel_wired() -> str:
     wires.append(wire(177.8, 150.32, 200.66, 150.32))
 
     encs = [
-        ("ENC_CH", "J_ENC1", "GP0/1/12", 40.64),
-        ("ENC_HP", "J_ENC2", "GP2/3/13", 55.88),
-        ("ENC_LINE", "J_ENC3", "GP4/5/14", 71.12),
-        ("ENC_DEST", "J_ENC4", "GP6/7/15", 86.36),
-        ("ENC_BASS", "J_ENC5", "GP8/9/26", 101.6),
-        ("ENC_TREBLE", "J_ENC6", "GP10/11/27", 116.84),
+        ("ENC_CH", "ENC1", "GP0/1/12", 40.64),
+        ("ENC_HP", "ENC2", "GP2/3/13", 55.88),
+        ("ENC_LINE", "ENC3", "GP4/5/14", 71.12),
+        ("ENC_DEST", "ENC4", "GP6/7/15", 86.36),
+        ("ENC_BASS", "ENC5", "GP8/9/26", 101.6),
+        ("ENC_TREBLE", "ENC6", "GP10/11/27", 116.84),
     ]
     enc_syms = "\n".join(
-        symbol_inst("Connector:Conn_01x05_Pin", j, f"{name} {gps}", 35.56, y, 0, PATH_CTRL)
-        for name, j, gps, y in encs
+        symbol_inst("Device:RotaryEncoder_Switch", ref, f"EC11 {name} {gps}", 35.56, y, 0, PATH_CTRL)
+        for name, ref, gps, y in encs
     )
 
     body = f"""\t(lib_symbols)
@@ -447,8 +448,8 @@ def control_panel_wired() -> str:
 {wire(30.48, 137.62, 50.0, 137.62)}
 {symbol_inst("MCU_Module:Raspberry_Pi_Pico", "U1", "Pico 2 / RP2350", picox, picoy, 0, PATH_CTRL)}
 {symbol_inst("AudioV2:PT2314", "U2", "PT2314", u2x, u2y, 0, PATH_CTRL)}
-{symbol_inst("AudioV2:PGA2310PA", "U3", "PGA2310 HP", u3x, u3y, 0, PATH_CTRL)}
-{symbol_inst("AudioV2:PGA2310PA", "U4", "PGA2310 LINE", u4x, u4y, 0, PATH_CTRL)}
+{symbol_inst("Audio:PGA2310PA", "U3", "PGA2310PA HP", u3x, u3y, 0, PATH_CTRL)}
+{symbol_inst("Audio:PGA2310PA", "U4", "PGA2310PA LINE", u4x, u4y, 0, PATH_CTRL)}
 {symbol_inst("Display_Graphic:SSD1306-128x64", "U6", "OLED ctrl I2C", 101.6, 78.0, 0, PATH_CTRL)}
 {symbol_inst("Switch:SW_SPST", "SW1", "PWR SW", 165.1, 150.32, 0, PATH_CTRL)}
 {symbol_inst("Device:LED", "D1", "12V panel LED", 177.8, 152.86, 0, PATH_CTRL)}

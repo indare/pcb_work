@@ -2,7 +2,23 @@
 
 **目的:** 素案 KiCad の **ピン番号・部品値**をデータシートと突き合わせ、机上で確定してから ERC/配線を詰める。
 
-**参照 DS:** `datasheets/` ローカル PDF。KiCad シンボルは `AudioV2.kicad_sym` + 標準 lib。
+**参照 DS:** `datasheets/` ローカル PDF。KiCad シンボルは **KiCad 標準 lib を優先**（`Audio:PGA2310PA`, `Transistor_Array:ULN2803A`, `Device:RotaryEncoder_Switch` 等）。標準に無いもののみ `AudioV2.kicad_sym`（PT2314 / DKMW20F-12 / 50224 CH224 モジュール枠）と `Audio/` プロジェクト lib（BP5293）。
+
+---
+
+## 0. シンボル lib 方針（2026-08）
+
+| 部品 | lib_id | 備考 |
+|---|---|---|
+| PGA2310PA×2 | `Audio:PGA2310PA` | KiCad 標準（TI PDIP-16） |
+| ULN2803A | `Transistor_Array:ULN2803A` | KiCad 標準 |
+| ENC×6 | `Device:RotaryEncoder_Switch` | KiCad 標準（EC11 相当） |
+| MCP23017 | `Interface_Expansion:MCP23017-E/SP` | 既に標準 |
+| Pico / SSD1306 / LM7809 / AZ850 等 | 各標準 lib | 変更なし |
+| PT2314 | `AudioV2:PT2314` | **標準 lib 無し** — 28pin カスタム維持 |
+| DKMW20F-12 | `AudioV2:DKMW20F-12` | **標準 lib 無し** |
+| 50224 CH224 | `AudioV2:CH224_50224` | **モジュール抽象**（`Interface_USB:CH224K` は IC 直付け用） |
+| BP5293-50 | `BP5293_ROHM:BP5293-50` | Audio/ プロジェクト lib |
 
 ---
 

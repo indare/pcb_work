@@ -883,7 +883,7 @@ def write_symbols() -> None:
         "\t(generator \"kicad_symbol_editor\")\n"
         "\t(generator_version \"10.0\")\n"
     )
-    for maker in (make_dkmw20f12_sym, make_pt2314_sym, make_pga2310_sym, make_ch224_module_sym):
+    for maker in (make_dkmw20f12_sym, make_pt2314_sym, make_ch224_module_sym):
         merged += _sym_body(maker())
     merged += "\t(embedded_fonts no)\n)\n"
     (ROOT / "AudioV2.kicad_sym").write_text(merged, encoding="utf-8")
@@ -943,7 +943,7 @@ def relay_board_sch() -> str:
 {hier_label("A_GND", "bidirectional", 200.66, 93.98, 0)}
 {"".join(labels)}
 {symbol_inst("Interface_Expansion:MCP23017-E/SP", "U1", "MCP23017 addr0x20", 63.5, 50.8, 0, path_a, [("Addr", "0x20 A / 0x21 B")])}
-{symbol_inst("ULN2803A:ULN2803A", "U2", "ULN2803A", 88.9, 50.8, 0, path_a)}
+{symbol_inst("Transistor_Array:ULN2803A", "U2", "ULN2803A", 88.9, 50.8, 0, path_a)}
 {symbol_inst("Relay:AZ850P2-x", "K1", "AZ850 CH1 audio", 114.3, 40.64, 0, path_a)}
 {symbol_inst("Relay:AZ850P2-x", "K2", "AZ850 CH1 pwr", 114.3, 50.8, 0, path_a)}
 {symbol_inst("Relay:AZ850P2-x", "K3", "AZ850 CH2 audio", 127.0, 40.64, 0, path_a)}
@@ -961,16 +961,16 @@ def relay_board_sch() -> str:
 def control_panel_sch() -> str:
     path = f"/{PARENT}/{UUID_CONTROL_INST}"
     encs = [
-        ("ENC_CH", "J_ENC1", "GP0/1/12", 40.64),
-        ("ENC_HP", "J_ENC2", "GP2/3/13", 55.88),
-        ("ENC_LINE", "J_ENC3", "GP4/5/14", 71.12),
-        ("ENC_DEST", "J_ENC4", "GP6/7/15", 86.36),
-        ("ENC_BASS", "J_ENC5", "GP8/9/26", 101.6),
-        ("ENC_TREBLE", "J_ENC6", "GP10/11/27", 116.84),
+        ("ENC_CH", "ENC1", "GP0/1/12", 40.64),
+        ("ENC_HP", "ENC2", "GP2/3/13", 55.88),
+        ("ENC_LINE", "ENC3", "GP4/5/14", 71.12),
+        ("ENC_DEST", "ENC4", "GP6/7/15", 86.36),
+        ("ENC_BASS", "ENC5", "GP8/9/26", 101.6),
+        ("ENC_TREBLE", "ENC6", "GP10/11/27", 116.84),
     ]
     enc_syms = "\n".join(
-        symbol_inst("Connector:Conn_01x05_Pin", j, f"{name} {gps}", 35.56, y, 0, path)
-        for name, j, gps, y in encs
+        symbol_inst("Device:RotaryEncoder_Switch", ref, f"EC11 {name} {gps}", 35.56, y, 0, path)
+        for name, ref, gps, y in encs
     )
     body = f"""\t(lib_symbols)
 {text_note(25.4, 25.4, [
@@ -997,8 +997,8 @@ def control_panel_sch() -> str:
 {hier_label("VCC_TONE", "input", 30.48, 155.42, 180)}
 {symbol_inst("MCU_Module:Raspberry_Pi_Pico", "U1", "Pico 2 / RP2350", 88.9, 88.9, 0, path)}
 {symbol_inst("AudioV2:PT2314", "U2", "PT2314 tone", 127.0, 130.0, 0, path)}
-{symbol_inst("AudioV2:PGA2310PA", "U3", "PGA2310 HP", 127.0, 88.9, 0, path)}
-{symbol_inst("AudioV2:PGA2310PA", "U4", "PGA2310 LINE", 127.0, 101.6, 0, path)}
+{symbol_inst("Audio:PGA2310PA", "U3", "PGA2310PA HP", 127.0, 88.9, 0, path)}
+{symbol_inst("Audio:PGA2310PA", "U4", "PGA2310PA LINE", 127.0, 101.6, 0, path)}
 {symbol_inst("BP5293_ROHM:BP5293-50", "U5", "BP5293-50 +5V", 63.5, 88.9, 0, path)}
 {symbol_inst("Display_Graphic:SSD1306-128x64", "U6", "OLED ctrl I2C", 101.6, 88.9, 0, path)}
 {symbol_inst("Switch:SW_SPST", "SW1", "PWR SW", 165.1, 150.32, 0, path)}
@@ -1034,7 +1034,7 @@ def output_stage_sch() -> str:
 {symbol_inst("Relay:AZ850P2-x", "K1", "DEST LINE", 88.9, 50.8, 0, path)}
 {symbol_inst("Relay:AZ850P2-x", "K2", "DEST PHONE", 101.6, 50.8, 0, path)}
 {symbol_inst("Relay:AZ850P2-x", "K3", "DEST MUTE", 114.3, 50.8, 0, path)}
-{symbol_inst("ULN2803A:ULN2803A", "U1", "ULN spare/TODO", 63.5, 50.8, 0, path)}
+{symbol_inst("Transistor_Array:ULN2803A", "U1", "ULN spare/TODO", 63.5, 50.8, 0, path)}
 {symbol_inst("Connector:Screw_Terminal_01x02", "J_HP", "to Audio HP Buffer", 165.1, 45.72, 0, path)}
 {symbol_inst("Connector:Screw_Terminal_01x02", "J_LINE", "LINE OUT", 165.1, 50.8, 0, path)}
 """

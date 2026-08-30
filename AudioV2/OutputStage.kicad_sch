@@ -13,7 +13,7 @@
 			)
 			(justify left top)
 		)
-		(uuid "0684b5d2-28ce-4899-8a84-ae07fc45c813")
+		(uuid "83ba2a39-d983-4699-b644-d463db9280ad")
 	)
 
 	(hierarchical_label "PGA_HP_L"
@@ -25,7 +25,7 @@
 			)
 			(justify right)
 		)
-		(uuid "0f83ea73-e7cf-45e1-aa35-d95894417337")
+		(uuid "1cf73586-82ca-477e-97f8-d0a209aff045")
 	)
 
 	(hierarchical_label "PGA_HP_R"
@@ -37,7 +37,7 @@
 			)
 			(justify right)
 		)
-		(uuid "8a809b89-5c22-4dd9-9219-c976ee4116ba")
+		(uuid "fadad425-4ee4-4f48-807e-4f8d94af75e4")
 	)
 
 	(hierarchical_label "PGA_LINE_L"
@@ -49,7 +49,7 @@
 			)
 			(justify right)
 		)
-		(uuid "f8304dbe-bb39-4dbe-8b1f-793e2579829d")
+		(uuid "55d8833e-9f85-4989-8eda-3d05d0d8dd90")
 	)
 
 	(hierarchical_label "PGA_LINE_R"
@@ -61,7 +61,7 @@
 			)
 			(justify right)
 		)
-		(uuid "e1ae7762-05b5-42cd-ac77-12cb16977f9e")
+		(uuid "4458d0d0-ab5c-4a84-b64c-ff4ce5a5957c")
 	)
 
 	(hierarchical_label "+12V"
@@ -73,7 +73,7 @@
 			)
 			(justify right)
 		)
-		(uuid "14a94431-5124-48e9-be40-b75ea1403c05")
+		(uuid "a1360677-8ba5-466e-8ea0-66744e4f33c1")
 	)
 
 	(hierarchical_label "-12V"
@@ -85,7 +85,7 @@
 			)
 			(justify right)
 		)
-		(uuid "ba02f91f-f8a2-4dab-a024-f75adf767fa0")
+		(uuid "30fdec30-cf18-4bb9-b4e1-b2fc0f064cf2")
 	)
 
 	(hierarchical_label "A_GND"
@@ -97,7 +97,7 @@
 			)
 			(justify right)
 		)
-		(uuid "bbce4776-baa9-4c96-bdf8-7e14924f49ac")
+		(uuid "10dd7e60-dd12-4cd1-ae8f-e9ab2eb9a2af")
 	)
 
 	(hierarchical_label "PHONE_L"
@@ -109,7 +109,7 @@
 			)
 			(justify left)
 		)
-		(uuid "3877452d-8e5e-4b77-bce9-0cb47d5cf6da")
+		(uuid "d25ee4e3-b90a-40cf-8b92-69d0e7a3e787")
 	)
 
 	(hierarchical_label "PHONE_R"
@@ -121,7 +121,7 @@
 			)
 			(justify left)
 		)
-		(uuid "ac9aa136-ffbc-48c2-978d-2de2caa16189")
+		(uuid "73d4c05f-710b-4d1e-bae6-d0947575eca8")
 	)
 
 	(hierarchical_label "LINE_L"
@@ -133,7 +133,7 @@
 			)
 			(justify left)
 		)
-		(uuid "21e3504b-017d-435b-9e9c-7304433014cf")
+		(uuid "0fbef127-db3a-4f07-8eb3-c8944f63636b")
 	)
 
 	(hierarchical_label "LINE_R"
@@ -145,7 +145,7 @@
 			)
 			(justify left)
 		)
-		(uuid "6a5ba8a6-b1c0-4e03-9a14-43c6157e90ce")
+		(uuid "b4c132e6-c1f3-4cda-84f1-681a3d24f5a6")
 	)
 
 	(hierarchical_label "MUTE"
@@ -157,7 +157,7 @@
 			)
 			(justify left)
 		)
-		(uuid "db7cff1f-1452-4c95-ad0c-e1a2a8f13513")
+		(uuid "54a94ed7-faf8-4cfe-896a-e9b3b5881eb8")
 	)
 
 	(symbol
@@ -169,7 +169,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "0ce83971-6f52-4dad-a84a-7b16520d4c38")
+		(uuid "7fb54559-c0ad-4ec6-ae9a-e401068639bd")
 		(property "Reference" "K1"
 			(at 88.9 48.26 0)
 			(show_name no)
@@ -247,7 +247,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "ab45cfb2-2252-4784-b1b3-f790e353d4ea")
+		(uuid "efb001a4-cd79-41d7-bec6-f39a96ca0fac")
 		(property "Reference" "K2"
 			(at 101.6 48.26 0)
 			(show_name no)
@@ -325,7 +325,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "c8fe430d-6dfd-4d6e-aa5e-67e50d847bca")
+		(uuid "81027624-c20c-4ad6-9db8-9dda65d944a5")
 		(property "Reference" "K3"
 			(at 114.3 48.26 0)
 			(show_name no)
@@ -395,7 +395,7 @@
 	)
 
 	(symbol
-		(lib_id "ULN2803A:ULN2803A")
+		(lib_id "Transistor_Array:ULN2803A")
 		(at 63.5 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -403,7 +403,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "29248e3a-a100-4e1c-9025-50f0ae6fcea5")
+		(uuid "1d8e133a-f76e-4fb5-8a8e-371880f00f59")
 		(property "Reference" "U1"
 			(at 63.5 48.26 0)
 			(show_name no)
@@ -481,7 +481,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "9d491b03-22bd-4082-bf84-f59caff4632e")
+		(uuid "22fcdd28-d1c2-47bb-8c16-d70d2df3b5b8")
 		(property "Reference" "J_HP"
 			(at 165.1 43.18 0)
 			(show_name no)
@@ -559,7 +559,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "abb51c98-0826-4d5a-9c3f-f50d6d6db512")
+		(uuid "307bc82d-7a5a-4328-983e-0d80de03c0d0")
 		(property "Reference" "J_LINE"
 			(at 165.1 48.26 0)
 			(show_name no)
