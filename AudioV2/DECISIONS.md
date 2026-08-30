@@ -16,8 +16,8 @@
 | 切替信号の渡し方 | **確定** | Pico 1 台 + **I²C GPIO 拡張（B2-exp）** + ULN |
 | CH / 電源 / 音声切替 | **確定** | ラッチングリレー（1 系統のみ有効） |
 | CH 操作 | **確定** | **ENC_CH**（現行どおり）。**回して候補変更、押して確定**（確定で音声＋電源リレー適用） |
-| 音量 | **確定** | Amp 後。**手回しデュアルポット ×2**（HP=`RV101` / LINE=`RV102` 相当）。**OLED に音量は出さない**（物理ノブがインジケータ） |
-| 出力先 | **確定** | **機械 SW（旧 SW101 相当）** で音声切替。**位置検知 = 抵抗ラダー → Pico ADC（A 案）**。**DEST LED ×2**（LINE / PHONE）+ **OLED 表示**。MUTE = 両 LED 消灯。**DEST 用ラッチングリレーは不要** |
+| 音量 | **確定** | Amp 後。**A50k デュアルポット ×2**（HP / LINE）。**OLED に音量は出さない**（物理ノブがインジケータ） |
+| 出力先 | **確定** | **トグル ON-OFF-ON（3PDT）**。センス: **Rh/Rl=10k, Rs=1k → ADC** + **LED×2** + OLED。[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。**DEST ラッチング不要** |
 | トーン | **確定** | **T1: PT2314 系**（Amp 前）。ENC_BASS / ENC_TREBLE → I²C |
 | 音量 IC | **見送り** | PGA2310 / digipot は **採用しない**（手回しに変更）。過去比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) |
 | 電源レール | **確定** | アナログ **±12 V**（例: **DKMW20F-12**、1″×1″ 同系） |
@@ -52,7 +52,7 @@
 | **ENC_CH** | CH 選択。**回す＝候補、押す＝確定**（確定時に音声＋電源ラッチング適用） |
 | **RV_HP**（目立つ物理ノブ） | HP 音量。**OLED 非表示** |
 | **RV_LINE**（目立つ物理ノブ） | LINE 音量。**OLED 非表示** |
-| **SW_DEST** | 出力先。**LINE / MUTE / PHONE**（旧 SW101 相当。トグル ON-OFF-ON または 2P3T ロータリー） |
+| **SW_DEST** | 出力先。**トグル ON-OFF-ON（3PDT 推奨）**。上=LINE / 中=MUTE / 下=PHONE |
 | **DEST LED ×2** | **LINE** / **PHONE**。MUTE = 両方消灯。Pico GPIO 駆動（ADC 読取と連動） |
 | **ENC_BASS** | トーン Bass。制御 OLED に表示 |
 | **ENC_TREBLE** | トーン Treble。制御 OLED に表示 |
@@ -80,13 +80,14 @@
 
 | 項目 | 内容 |
 |---|---|
-| 音声切替 | **機械 SW**（接点が音声を切る）。旧 `Audio/` SW101 と同じ |
-| 並び | **LINE / MUTE / PHONE**（中央 MUTE 推奨） |
-| 位置検知 | **A 案: 抵抗ラダー → Pico ADC 1 ch**（音声接点とは別系統） |
+| 音声切替 | **トグル ON-OFF-ON**（接点が音声を切る）。旧 `Audio/` SW101 の 3 択をトグル化 |
+| 並び | **上 LINE / 中 MUTE / 下 PHONE**（中央オープン＝MUTE） |
+| 位置検知 | **A 案: Rh/Rl/Rs ラダー → Pico ADC** — 詳細 [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。**採用: Rh=Rl=10k, Rs=1k** |
 | OLED | ADC 結果を **DEST: LINE / MUTE / PHONE** として表示 |
 | LED | Pico が ADC に合わせて **LINE LED / PHONE LED** を点灯。MUTE = 消灯 |
-| 起動 | 機械 SW の物理位置がそのまま DEST（ラッチング復帰不要） |
+| 起動 | トグルの物理位置がそのまま DEST（ラッチング復帰不要） |
 | その他表示 | CH / Bass / Treble はループ表示可。**音量は OLED に出さない** |
+| 極数 | **3PDT**（L/R 音声 + センス 1 極）。DPDT のみならセンス極を別途検討 |
 
 ### 出力先にリレーは必要か → **不要（機械 SW 確定）**
 
@@ -107,8 +108,9 @@ ENC_DEST + DEST ラッチングリレー案は **見送り**。
 3. ~~物理基板分割~~ → **§11 Q1=B, Q2=A**。I²C 拓扑（Q3）・端子詳細は **設計時**
 4. PT2314 外部 C/R（トーン）
 5. ~~±12 V 化に伴う HP 固定パッド~~ → **§9 確定（0 Ω。ポット回転域を実機で確認）**
-6. **SW_DEST 品種**（トグル ON-OFF-ON DP vs 2P3T ロータリー）と **抵抗ラダー値** — 設計時
-7. **RV_HP / RV_LINE** 品種（ALPS RK27 等 A カーブ 50 kΩ デュアル想定）— 設計時
+6. ~~**SW_DEST 品種**~~ → **トグル ON-OFF-ON（3PDT）**。抵抗ラダー **10k/10k/1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)）
+7. ~~**RV_HP / RV_LINE**~~ → **A50k デュアル**（第一候補）。具体足・軸は設計時
+8. **KiCad 素案の PGA / ENC×6 / DEST リレーを手回し構成へ改訂** — 次作業
 
 ---
 
@@ -242,23 +244,28 @@ LINE 経路に固定パッドはもともと無し（`SW_DEST → RV_LINE → LI
 
 **ENC×3 = 9 本 + I²C 2 + DEST ADC 1 + LED 2 ≈ 14 / 26 本。** SPI（旧 PGA）は不要。空きが多い。
 
-### DEST 検知（A 案）— 設計メモ
+### DEST 検知（A 案）— **確定: 10k / 10k / 1k**
+
+詳細・シミュレーション: [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) / `scripts/dest_ladder_sim.py`
 
 ```text
-3V3 ── R1 ──●── R2 ──●── R3 ── GND
-              │        │
-           (LINE)   (MUTE)   … SW 補助接点 or 別極で短絡
-              │        │
-              └────────┴──► Pico ADC（GP26）
+3V3 ── Rh(10k) ──●── Rl(10k) ── GND
+                 │
+                ADC GP26
+                 │
+                 ├── Rs(1k) ── SW_LINE  ── 3V3
+                 └── Rs(1k) ── SW_PHONE ── GND
 ```
 
-| 位置 | 目安 ADC | LED | OLED |
+| 位置 | 公称 ADC | LED | OLED |
 |---|---|---|---|
-| LINE | 高 | LINE ON | `DEST: LINE` |
-| MUTE | 中 | 両方 OFF | `DEST: MUTE` |
-| PHONE | 低 | PHONE ON | `DEST: PHONE` |
+| LINE | **3.03 V** | LINE ON | `DEST: LINE` |
+| MUTE | **1.65 V** | 両方 OFF | `DEST: MUTE` |
+| PHONE | **0.28 V** | PHONE ON | `DEST: PHONE` |
 
-抵抗値・しきい値は設計時に確定。音声接点とは **電気的に分離**（別極 or 補助 SW）。
+しきい値（±5% 抵抗でも間隔 ≈1.3 V）: `>2.37 V`→LINE / `<0.93 V`→PHONE / 他→MUTE。
+
+音声接点とは **別極**（3PDT の 3 極目）。
 
 ### 基板・ケーブル
 
@@ -382,11 +389,21 @@ Amp は ×10・**±12 V** 系（旧 Audio は ±15 V）。
 
 | 項目 | 内容 |
 |---|---|
-| 方式 | **デュアルポット ×2**（HP / LINE）。ALPS RK27 等 A カーブ **50 kΩ** 想定（旧 Audio と同じ） |
+| 方式 | **デュアルポット ×2**（HP / LINE）。**A カーブ（ログ）50 kΩ** 想定（旧 Audio `A50k_Dual` と同系） |
 | 配置 | Amp 出力後・`SW_DEST` 後。HP は HeadphoneBuffer **前** |
 | OLED | **音量は表示しない**（物理ノブを目立たせる） |
-| DEST | 機械 SW + **抵抗ラダー ADC** + LED×2 + OLED（§0・§10） |
+| DEST | **トグル ON-OFF-ON** + 抵抗ラダー ADC + LED×2 + OLED（§0・§10・[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)） |
 | 見送り | PGA2310PA、PGA2311、MCP45HV51、ENC_HP / ENC_LINE / ENC_DEST |
+
+### ポット選定（2026-08-30）
+
+| 項目 | 決定 |
+|---|---|
+| カーブ | **A（オーディオ / 対数）** — 聴感が対数なのでボリュームは A。B（リニア）はトーンやバランス向き |
+| 抵抗値 | **50 kΩ デュアル**（第一候補）。100 kΩ も可だが Amp 負荷は軽い一方、中点 Zout が約 25 kΩ と高くノイズ拾いやすい。10 kΩ は Amp にやや重い |
+| 入手性 | パネル用 **A50k / A100k デュアル**はどちらも流通多い。AudioV2 は旧機踏襲で **A50k** |
+| 品種例 | ALPS RK27 系など（設計時に足・軸・立体を確定） |
+| 固定パッド | **0 Ω**（§9）。回転下端しか使えない実機なら −10 dB DNP |
 
 ### なぜ IC をやめたか
 
@@ -801,7 +818,7 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 - [x] CH/電源/音声: **ラッチングリレー**
 - [x] CH 操作: **ENC_CH**（回して変更、押して確定）
 - [x] 音量: **手回しデュアルポット ×2**（RV_HP / RV_LINE）。**OLED 非表示**
-- [x] 出力先操作: **機械 SW_DEST** + **抵抗ラダー ADC（A 案）** + **LED×2** + OLED
+- [x] 出力先操作: **トグル ON-OFF-ON（3PDT）** + **ラダー 10k/10k/1k → ADC** + **LED×2** + OLED
 - [x] DEST 切替: **機械接点**（ラッチングリレー **不要**）
 - [x] トーン: **T1 PT2314 系**（Amp 前）
 - [x] 音量 IC: **見送り**（PGA / digipot 不採用）
@@ -817,6 +834,8 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 - [x] **Relay 物理: 5+5 ×2 枚**（§11 Q1-B）
 - [x] **OutputStage: ControlPanel 同一 PCB**（§11 Q2-A）
 - [x] **CH 音声: リレー後共通 L/R バス**（§11.8）
+- [x] **ポット: A50k デュアル**（第一候補）
+- [x] **DEST ラダー: Rh=Rl=10k, Rs=1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)）
 - [ ] **I²C 拓扑（§11 Q3）:** 回路・基板設計まで保留
-- [ ] **SW_DEST 品種**（トグル vs 2P3T）・抵抗ラダー値・ポット品種 — 設計時
+- [ ] **3PDT ON-OFF-ON / A50k 具体型番** — 設計時
 - [ ] **KiCad 素案の PGA / ENC×6 / DEST リレーを手回し構成へ改訂** — 次作業

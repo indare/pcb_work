@@ -11,7 +11,7 @@
 - **KiCad 素案あり** — `AudioV2Case.kicad_pro` + 子シート 4 枚（**draft・手回し化前の PGA 構成。要改訂**）
 - **次:** [DECISIONS.md](DECISIONS.md) 手回し確定に合わせ KiCad / CIRCUIT_DESIGN を改訂
 
-詳細は [DECISIONS.md](DECISIONS.md)。過去の音量 IC 比較（アーカイブ）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
+詳細は [DECISIONS.md](DECISIONS.md)。DEST ラダーは [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。過去の音量 IC 比較（アーカイブ）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
 
 ## いまの `Audio/` からの参照元
 
