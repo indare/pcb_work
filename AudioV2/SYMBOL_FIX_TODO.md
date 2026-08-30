@@ -26,9 +26,9 @@ cd AudioV2 && kicad-cli sch export netlist -o /tmp/audiov2.net AudioV2Case.kicad
 
 | ID | 作業 | Done |
 |---|---|---|
-| A1 | ライブラリ末尾の **二重 `(embedded_fonts no)`** を除去（シンボル内の 1 個は残す）。`kicad-cli sym export svg` が **3 シンボルとも成功**すること | [ ] |
-| A2 | PT2314 の float 座標（例 `13.970000000000002`）を **2.54 グリッドの有限小数**に正規化 | [ ] |
-| A3 | 可能なら property に KiCad 10 系の `(show_name no)` 等を他カスタムシンボルと揃える（任意） | [ ] |
+| A1 | ライブラリ末尾の **二重 `(embedded_fonts no)`** を除去（シンボル内の 1 個は残す）。`kicad-cli sym export svg` が **3 シンボルとも成功**すること | [x] |
+| A2 | PT2314 の float 座標（例 `13.970000000000002`）を **2.54 グリッドの有限小数**に正規化 | [x] |
+| A3 | 可能なら property に KiCad 10 系の `(show_name no)` 等を他カスタムシンボルと揃える（任意） | [x] |
 
 **完了条件:** `kicad-cli sym export svg … AudioV2.kicad_sym` exit 0。sexpr OK。
 
