@@ -304,7 +304,7 @@
 				)
 			)
 			(pin power_in line
-				(at -12.7 13.970000000000002 0)
+				(at -12.7 13.97 0)
 				(length 2.54)
 				(name "AGND"
 					(effects
@@ -322,7 +322,7 @@
 				)
 			)
 			(pin passive line
-				(at -12.7 11.430000000000001 0)
+				(at -12.7 11.43 0)
 				(length 2.54)
 				(name "TREB_L"
 					(effects
@@ -358,7 +358,7 @@
 				)
 			)
 			(pin passive line
-				(at -12.7 6.350000000000001 0)
+				(at -12.7 6.35 0)
 				(length 2.54)
 				(name "RIN"
 					(effects
@@ -376,7 +376,7 @@
 				)
 			)
 			(pin passive line
-				(at -12.7 3.8100000000000023 0)
+				(at -12.7 3.81 0)
 				(length 2.54)
 				(name "ROUT"
 					(effects
@@ -394,7 +394,7 @@
 				)
 			)
 			(pin passive line
-				(at -12.7 1.2700000000000014 0)
+				(at -12.7 1.27 0)
 				(length 2.54)
 				(name "LOUD_R"
 					(effects
@@ -412,7 +412,7 @@
 				)
 			)
 			(pin passive line
-				(at -12.7 -1.2699999999999996 0)
+				(at -12.7 -1.27 0)
 				(length 2.54)
 				(name "RIN4"
 					(effects
@@ -430,7 +430,7 @@
 				)
 			)
 			(pin passive line
-				(at -12.7 -3.8099999999999987 0)
+				(at -12.7 -3.81 0)
 				(length 2.54)
 				(name "RIN3"
 					(effects
@@ -448,7 +448,7 @@
 				)
 			)
 			(pin passive line
-				(at -12.7 -6.349999999999998 0)
+				(at -12.7 -6.35 0)
 				(length 2.54)
 				(name "RIN2"
 					(effects
@@ -466,7 +466,7 @@
 				)
 			)
 			(pin passive line
-				(at -12.7 -8.889999999999997 0)
+				(at -12.7 -8.89 0)
 				(length 2.54)
 				(name "RIN1"
 					(effects
@@ -502,7 +502,7 @@
 				)
 			)
 			(pin passive line
-				(at -12.7 -13.969999999999999 0)
+				(at -12.7 -13.97 0)
 				(length 2.54)
 				(name "LIN4"
 					(effects
@@ -556,7 +556,7 @@
 				)
 			)
 			(pin input line
-				(at 12.7 13.970000000000002 180)
+				(at 12.7 13.97 180)
 				(length 2.54)
 				(name "CLK"
 					(effects
@@ -574,7 +574,7 @@
 				)
 			)
 			(pin input line
-				(at 12.7 11.430000000000001 180)
+				(at 12.7 11.43 180)
 				(length 2.54)
 				(name "DATA"
 					(effects
@@ -610,7 +610,7 @@
 				)
 			)
 			(pin passive line
-				(at 12.7 6.350000000000001 180)
+				(at 12.7 6.35 180)
 				(length 2.54)
 				(name "OUT_L"
 					(effects
@@ -628,7 +628,7 @@
 				)
 			)
 			(pin passive line
-				(at 12.7 3.8100000000000023 180)
+				(at 12.7 3.81 180)
 				(length 2.54)
 				(name "OUT_R"
 					(effects
@@ -646,7 +646,7 @@
 				)
 			)
 			(pin passive line
-				(at 12.7 1.2700000000000014 180)
+				(at 12.7 1.27 180)
 				(length 2.54)
 				(name "BOUT_R"
 					(effects
@@ -664,7 +664,7 @@
 				)
 			)
 			(pin passive line
-				(at 12.7 -1.2699999999999996 180)
+				(at 12.7 -1.27 180)
 				(length 2.54)
 				(name "BIN_R"
 					(effects
@@ -682,7 +682,7 @@
 				)
 			)
 			(pin passive line
-				(at 12.7 -3.8099999999999987 180)
+				(at 12.7 -3.81 180)
 				(length 2.54)
 				(name "BOUT_L"
 					(effects
@@ -700,7 +700,7 @@
 				)
 			)
 			(pin passive line
-				(at 12.7 -6.349999999999998 180)
+				(at 12.7 -6.35 180)
 				(length 2.54)
 				(name "BIN_L"
 					(effects
@@ -718,7 +718,7 @@
 				)
 			)
 			(pin passive line
-				(at 12.7 -8.889999999999997 180)
+				(at 12.7 -8.89 180)
 				(length 2.54)
 				(name "LOUT"
 					(effects
@@ -754,7 +754,7 @@
 				)
 			)
 			(pin passive line
-				(at 12.7 -13.969999999999999 180)
+				(at 12.7 -13.97 180)
 				(length 2.54)
 				(name "LIN1"
 					(effects
@@ -916,5 +916,4 @@
 		)
 		(embedded_fonts no)
 	)
-	(embedded_fonts no)
 )

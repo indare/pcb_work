@@ -53,13 +53,11 @@ CTRL_LIBS = [
     "Device:R",
     "Device:LED",
     "Device:RotaryEncoder_Switch",
-    "Device:R_Potentiometer_Dual",
     "Switch:SW_SPST",
-    "Switch:SW_DP3T",
     "Switch:SW_SP3T",
     "AudioV2:PT2314",
     "MCU_Module:RaspberryPi_Pico",
-    "Display_Graphic:SSD1306-128x64",
+    "Connector:Conn_01x04_Pin",  # 2.42″ OLED I2C header (not ER_OLEDM0.91)
     "BP5293_ROHM:BP5293-50",
 ]
 
@@ -73,11 +71,8 @@ RELAY_LIBS = [
 ]
 
 OUTPUT_LIBS = [
-    "Device:C",
-    "Device:R",
     "Device:R_Potentiometer_Dual",
     "Switch:SW_DP3T",
-    "Switch:SW_SP3T",
     "Connector:Screw_Terminal_01x02",
 ]
 
@@ -311,7 +306,11 @@ def _cap_to_rail(
 
 
 def power_module_wired() -> str:
-    """Simplified PowerModule per DECISIONS §9 / CIRCUIT_DESIGN §4."""
+    """Simplified PowerModule per DECISIONS §9 / CIRCUIT_DESIGN §4.
+
+    Primary (PD_*) and secondary (A_GND / ±12V / VCC_TONE) stay isolated.
+    DKMW R.C. left open (= ON per DS). LM7809 GND on A_GND only.
+    """
     wires: list[str] = []
     parts: list[str] = []
 
@@ -329,9 +328,10 @@ def power_module_wired() -> str:
     j1x, j1y = grid(25.4), grid(50.8)
     u2x, u2y = grid(55.88), grid(48.26)
     u1x, u1y = grid(110.0), grid(53.34)
-    u3x, u3y = grid(140.0), grid(66.0)
-    j_pdx, j_pdy = grid(155.0), grid(58.0)
-    j202x, j202y = grid(155.0), grid(46.0)
+    u3x, u3y = grid(155.0), grid(66.0)
+    # Keep J_PD pins off the PD_12V_SW / F1 Y (y_pd) to avoid accidental co-linear shorts.
+    j_pdx, j_pdy = grid(175.0), grid(33.0)
+    j202x, j202y = grid(175.0), grid(55.0)
 
     pch = ch224_pins(u2x, u2y)
     pdk = dkmw_pins(u1x, u1y)
@@ -340,7 +340,8 @@ def power_module_wired() -> str:
 
     y_pd = pch["12V"][1]
     y_gnd = pch["GND"][1]
-    y_sw = grid(y_pd + 2.54)
+    # Switched 12V rail must NOT share Y with PD_GND (was the 83.82,45.72 short).
+    y_sw = y_pd
 
     f1x, f1y = grid(81.28), y_sw
     f1_in, f1_out = fuse_pins(f1x, f1y, 90)
@@ -350,10 +351,13 @@ def power_module_wired() -> str:
     jpd1, jpd2 = conn02_pins(j_pdx, j_pdy)
     j12, jm12, jagnd = conn03_pins(j202x, j202y)
 
-    hier_x = grid(200.66)
+    hier_x = grid(210.0)
     pd_bus_x = grid(72.0)
-    gnd_bus_x = grid(u1x - 25.4)
-    tone_bus_x = grid(185.0)
+    # Primary GND bus X clear of F1 tip (F1 out ≈ f1x+2.54).
+    gnd_bus_x = grid(92.0)
+    tone_bus_x = grid(195.0)
+    agnd_y = pdk["4"][1]
+    agnd_bus_x = grid(pdk["4"][0] + 5.08)
 
     # USB-C → CH224
     wires.append(wire(*pusb["VBUS"], *pch["VBUS"]))
@@ -365,21 +369,28 @@ def power_module_wired() -> str:
     wires.append(wire(pd_bus_x, y_pd, *jpd1))
     wires.append(label("PD_12V", grid(90), y_pd - 1.27))
 
-    # Panel return PD_12V_SW → F1 → DKMW +Vin
+    # Panel return PD_12V_SW → F1 → DKMW +Vin (primary hot only)
     wires.append(wire(30.48, y_sw, *f1_in))
     wires.append(label("PD_12V_SW", grid(32), y_sw - 1.27))
-    wires.append(wire(*f1_out, *pdk["1"]))
-    _cap_to_rail(wires, parts, "C101", "47u", grid(f1_out[0] + 7.62), f1_out[1], f1_out, y_gnd, PATH_PWR)
+    wires.append(wire(*f1_out, f1_out[0], pdk["1"][1]))
+    wires.append(junction(f1_out[0], pdk["1"][1]))
+    wires.append(wire(f1_out[0], pdk["1"][1], *pdk["1"]))
+    _cap_to_rail(
+        wires, parts, "C101", "47u", grid(f1_out[0] + 7.62), grid((f1_out[1] + pdk["1"][1]) / 2),
+        (f1_out[0], pdk["1"][1]), y_gnd, PATH_PWR,
+    )
 
-    # PD_GND: CH224, DKMW -Vin, R.C., panel return, LM7809 GND
+    # PD_GND primary: CH224 GND, DKMW -Vin, panel return — NOT R.C., NOT 7809
     wires.append(wire(*pch["GND"], gnd_bus_x, y_gnd))
     wires.append(junction(gnd_bus_x, y_gnd))
-    wires.append(wire(gnd_bus_x, y_gnd, *pdk["2"]))
-    wires.append(wire(gnd_bus_x, y_gnd, *pdk["6"]))
+    wires.append(wire(gnd_bus_x, y_gnd, pdk["2"][0], y_gnd))
+    wires.append(junction(pdk["2"][0], y_gnd))
+    wires.append(wire(pdk["2"][0], y_gnd, *pdk["2"]))
     wires.append(wire(gnd_bus_x, y_gnd, *jpd2))
-    wires.append(wire(gnd_bus_x, y_gnd, *u3["GND"]))
+    # R.C. (pin 6) open = ON (DKMW DS) — label only, no net join
+    wires.append(label("R.C. open=ON", pdk["6"][0] - 12.7, pdk["6"][1] - 1.27))
 
-    # ±12 V / A_GND outputs
+    # ±12 V / A_GND outputs (secondary)
     wires.append(wire(*pdk["3"], *j12))
     wires.append(wire(*pdk["5"], *jm12))
     wires.append(wire(*pdk["4"], *jagnd))
@@ -387,17 +398,22 @@ def power_module_wired() -> str:
     wires.append(label("-12V_OUT", grid(125), pdk["5"][1] - 1.27))
     wires.append(label("A_GND", grid(125), pdk["4"][1] - 1.27))
 
-    agnd_y = pdk["4"][1]
+    wires.append(wire(*pdk["4"], agnd_bus_x, agnd_y))
+    wires.append(junction(agnd_bus_x, agnd_y))
+
     _cap_to_rail(wires, parts, "C102", "47u", grid(pdk["3"][0] + 10.16), pdk["3"][1], pdk["3"], agnd_y, PATH_PWR)
     _cap_to_rail(wires, parts, "C103", "47u", grid(pdk["5"][0] + 10.16), pdk["5"][1], pdk["5"], agnd_y, PATH_PWR)
     _cap_to_rail(wires, parts, "C104", "0.1u", grid(pdk["3"][0] + 20.32), pdk["3"][1], pdk["3"], agnd_y, PATH_PWR)
 
-    # LM7809 → VCC_TONE (+9 V for PT2314)
+    # LM7809 from +12V secondary → VCC_TONE; GND on A_GND only
     wires.append(wire(*j12, *u3["VI"]))
+    wires.append(wire(*u3["GND"], u3["GND"][0], agnd_y))
+    wires.append(junction(u3["GND"][0], agnd_y))
+    wires.append(wire(u3["GND"][0], agnd_y, agnd_bus_x, agnd_y))
     wires.append(wire(*u3["VO"], tone_bus_x, u3["VO"][1]))
-    wires.append(label("VCC_TONE", grid(170), u3["VO"][1] - 1.27))
-    _cap_to_rail(wires, parts, "C301", "10u", grid(u3x - 10.16), grid(u3y + 10.16), u3["VI"], y_gnd, PATH_PWR)
-    _cap_to_rail(wires, parts, "C302", "0.1u", grid(u3x + 10.16), grid(u3y + 10.16), u3["VO"], y_gnd, PATH_PWR)
+    wires.append(label("VCC_TONE", grid(180), u3["VO"][1] - 1.27))
+    _cap_to_rail(wires, parts, "C301", "10u", grid(u3x - 10.16), grid(u3y + 10.16), u3["VI"], agnd_y, PATH_PWR)
+    _cap_to_rail(wires, parts, "C302", "0.1u", grid(u3x + 10.16), grid(u3y + 10.16), u3["VO"], agnd_y, PATH_PWR)
 
     # CH224 PG (open drain) — pull-up TBD
     wires.append(label("PG_noconn", pch["PG"][0] + 2.54, pch["PG"][1] - 1.27))
@@ -418,6 +434,7 @@ def power_module_wired() -> str:
 {text_note(25.4, 20.32, [
     "AudioV2 PowerModule — simplified wired (§9 / CIRCUIT_DESIGN §4)",
     "USB-C → 50224 CH224 → PD_12V/J_PD → (panel SW) → PD_12V_SW → F1 → DKMW20F-12",
+    "Primary PD_GND ≠ secondary A_GND. DKMW R.C. open=ON. LM7809 GND → A_GND.",
     "±12V + A_GND → J202 / hier.  LM7809 → VCC_TONE (+9V).  Bench +12V_IN: TBD.",
 ])}
 {hier_label("PD_12V_SW", "input", 30.48, y_sw, 180)}
@@ -582,7 +599,8 @@ def control_panel_wired() -> str:
     body = f"""{embed_lib_symbols(CTRL_LIBS)}
 {text_note(25.4, 25.4, [
     "ControlPanel — DECISIONS manual volume (2026-08-30)",
-    "PT2314 28pin DS / Pico2 / ENC×3 (CH BASS TREBLE) / OLED",
+    "PT2314 28pin DS / Pico2 / ENC×3 (CH BASS TREBLE) / 2.42″ OLED I2C",
+    "J_OLED Conn_01x04: 1=GND 2=3V3 3=SCL 4=SDA (2.42″ SSD1309 128×64 I2C header)",
     "DEST sense: Rh Rl=10k Rs=1k → ADC GP26 + LED GP14/15",
     "Audio DEST SW + A50k pots → OutputStage sheet (same PCB)",
     "Unused PT2314 inputs (LIN1-4/RIN1-4/LOUD): AC-GND or NC — layout TBD",
@@ -595,7 +613,7 @@ def control_panel_wired() -> str:
 {wire(30.48, 137.62, 50.0, 137.62)}
 {sym("MCU_Module:RaspberryPi_Pico", "U1", "Pico 2 / RP2350", picox, picoy, 0, PATH_CTRL)}
 {sym("AudioV2:PT2314", "U2", "PT2314-D", u2x, u2y, 0, PATH_CTRL)}
-{sym("Display_Graphic:SSD1306-128x64", "U6", "OLED ctrl I2C", 101.6, 78.0, 0, PATH_CTRL)}
+{sym("Connector:Conn_01x04_Pin", "J_OLED", "2.42 OLED I2C GND/3V3/SCL/SDA", 101.6, 78.0, 0, PATH_CTRL)}
 {sym("Switch:SW_SPST", "SW1", "PWR SW", 165.1, 150.32, 0, PATH_CTRL)}
 {sym("Device:LED", "D1", "12V panel LED", 177.8, 152.86, 0, PATH_CTRL)}
 {sense_sw}

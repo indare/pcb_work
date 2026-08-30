@@ -183,6 +183,7 @@ PIN_COUNTS: dict[str, list[str]] = {
 }
 
 # Schematic lib_id -> (source_lib, source_sym, extends chain base-first)
+# OLED: do NOT map SSD1306/ER_OLEDM0.91 (128×32). Control uses Conn_01x04 header.
 SYMBOL_SOURCES: dict[str, tuple[str, str, list[tuple[str, str]]]] = {
     "Interface_Expansion:MCP23017-E/SP": (
         "Interface_Expansion",
@@ -191,7 +192,6 @@ SYMBOL_SOURCES: dict[str, tuple[str, str, list[tuple[str, str]]]] = {
     ),
     "MCU_Module:Raspberry_Pi_Pico": ("MCU_Module", "RaspberryPi_Pico", []),
     "MCU_Module:RaspberryPi_Pico": ("MCU_Module", "RaspberryPi_Pico", []),
-    "Display_Graphic:SSD1306-128x64": ("Display_Graphic", "ER_OLEDM0.91_1x-I2C", []),
     "Audio:PGA2310PA": ("Audio", "PGA2310PA", [("Audio", "PGA2310UA")]),
     "Regulator_Linear:LM7809_TO220": (
         "Regulator_Linear",
@@ -305,8 +305,130 @@ def _indent_symbol_body(body: str) -> str:
     return "\n".join(("\t" + ln if ln.strip() else ln) for ln in body.splitlines())
 
 
+def _extract_raw_symbol(kicad_sym_text: str, sym_name: str) -> str:
+    """Extract raw (symbol \"NAME\" ...) including extends-only stubs."""
+    m = re.search(rf'\(symbol "{re.escape(sym_name)}"', kicad_sym_text)
+    if not m:
+        raise ValueError(f"symbol {sym_name} not found")
+    start = m.start()
+    depth = 0
+    for i in range(start, len(kicad_sym_text)):
+        if kicad_sym_text[i] == "(":
+            depth += 1
+        elif kicad_sym_text[i] == ")":
+            depth -= 1
+            if depth == 0:
+                return kicad_sym_text[start : i + 1]
+    raise ValueError(f"unbalanced symbol {sym_name}")
+
+
+def _property_blocks(sym_body: str) -> dict[str, str]:
+    """Map property name -> full (property \"Name\" ...) s-expr."""
+    out: dict[str, str] = {}
+    for m in re.finditer(r'\(property "', sym_body):
+        start = m.start()
+        depth = 0
+        for i in range(start, len(sym_body)):
+            if sym_body[i] == "(":
+                depth += 1
+            elif sym_body[i] == ")":
+                depth -= 1
+                if depth == 0:
+                    block = sym_body[start : i + 1]
+                    nm = re.match(r'\(property "([^"]+)"', block)
+                    if nm:
+                        out[nm.group(1)] = block
+                    break
+    return out
+
+
+def _replace_or_insert_properties(body: str, props: dict[str, str]) -> str:
+    """Replace existing properties by name; append any missing before unit symbols."""
+    for name, block in props.items():
+        pat = re.compile(
+            rf'\(property "{re.escape(name)}"(?:\s|(?:.|\n)*?\n\t\t\))',
+            re.MULTILINE,
+        )
+        # Match balanced property via scan
+        m = re.search(rf'\(property "{re.escape(name)}"', body)
+        if m:
+            start = m.start()
+            depth = 0
+            end = start
+            for i in range(start, len(body)):
+                if body[i] == "(":
+                    depth += 1
+                elif body[i] == ")":
+                    depth -= 1
+                    if depth == 0:
+                        end = i + 1
+                        break
+            body = body[:start] + block + body[end:]
+        else:
+            # Insert before first nested (symbol "…_ or (embedded_fonts
+            ins = re.search(r'\n(\t+)\(symbol "[^"]+_\d', body)
+            if not ins:
+                ins = re.search(r'\n(\t+)\(embedded_fonts', body)
+            if ins:
+                indent = ins.group(1)
+                # normalize block indent to match sibling properties (two tabs inside symbol)
+                blk = block
+                body = body[: ins.start()] + "\n" + blk + body[ins.start() :]
+            else:
+                # before final closing paren
+                body = body.rstrip()
+                if body.endswith(")"):
+                    body = body[:-1] + block + "\n)"
+    return body
+
+
+def _flatten_extends_symbol(
+    file_lib: str,
+    file_name: str,
+    embed_lib: str,
+    embed_name: str,
+    extends: list[tuple[str, str]],
+) -> str:
+    """Merge pin-bearing parent into child; emit one (symbol \"Lib:Name\" ...) without extends."""
+    if not extends:
+        text = _read_symbol_text(file_lib, file_name)
+        return _extract_symbol_body(text, embed_lib, embed_name, file_name)
+
+    # Base of chain is the pin-bearing definition (extends listed base-first).
+    base_lib, base_name = extends[0]
+    parent_text = _read_symbol_text(base_lib, base_name)
+    parent_body = _extract_raw_symbol(parent_text, base_name)
+
+    child_text = _read_symbol_text(file_lib, file_name)
+    child_body = _extract_raw_symbol(child_text, file_name)
+    child_props = _property_blocks(child_body)
+
+    # Start from parent; drop extends if any; rename to embed id.
+    body = parent_body
+    body = re.sub(r"\n\t*\(extends \"[^\"]+\"\)", "", body)
+    body = body.replace(f'(symbol "{base_name}"', f'(symbol "{embed_lib}:{embed_name}"', 1)
+    body = body.replace(f'"{base_name}_', f'"{embed_name}_')
+
+    # Intermediate extends (rare): overlay their property overrides too.
+    for elib, ename in extends[1:]:
+        mid = _extract_raw_symbol(_read_symbol_text(elib, ename), ename)
+        body = _replace_or_insert_properties(body, _property_blocks(mid))
+
+    body = _replace_or_insert_properties(body, child_props)
+
+    # Ensure no leftover extends and Value defaults to embed name if still base.
+    body = re.sub(r"\n\t*\(extends \"[^\"]+\"\)", "", body)
+    if f'(property "Value" "{base_name}"' in body and embed_name != base_name:
+        body = body.replace(
+            f'(property "Value" "{base_name}"',
+            f'(property "Value" "{embed_name}"',
+            1,
+        )
+    return body
+
+
 def embed_lib_symbols(lib_ids: list[str]) -> str:
-    """Build (lib_symbols ...) block with embedded symbol definitions."""
+    """Build (lib_symbols ...) with pin-complete definitions (extends flattened)."""
     chunks: list[str] = ["\t(lib_symbols"]
     seen: set[str] = set()
 
@@ -320,16 +442,16 @@ def embed_lib_symbols(lib_ids: list[str]) -> str:
         else:
             file_lib, file_name = lib, embed_name
             extends = []
-        for elib, ename in extends:
-            ext_key = f"{elib}:{ename}"
-            if ext_key in seen:
-                continue
-            seen.add(ext_key)
-            text = _read_symbol_text(elib, ename)
-            body = _extract_symbol_body(text, elib, ename)
-            chunks.append(_indent_symbol_body(_sanitize_embed_body(body)))
-        text = _read_symbol_text(file_lib, file_name)
-        body = _extract_symbol_body(text, lib, embed_name, file_name)
+        if extends:
+            body = _flatten_extends_symbol(file_lib, file_name, lib, embed_name, extends)
+        else:
+            text = _read_symbol_text(file_lib, file_name)
+            body = _extract_symbol_body(text, lib, embed_name, file_name)
+        # Flattened body must contain pins for netlist/BOM.
+        if "(pin " not in body and "(pin\n" not in body and "(pin\t" not in body:
+            # also match "(pin power_in" etc.
+            if not re.search(r"\(pin\s+\w+", body):
+                raise ValueError(f"embed {lib_id}: flattened body has no pins")
         chunks.append(_indent_symbol_body(_sanitize_embed_body(body)))
 
     chunks.append("\t)")
