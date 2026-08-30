@@ -70,13 +70,28 @@ cd AudioV2 && kicad-cli sch export netlist -o /tmp/audiov2.net AudioV2Case.kicad
 
 | ID | 確認 | Done |
 |---|---|---|
-| D1 | `AudioV2.kicad_sym` が load できる | [ ] |
-| D2 | PowerModule に一次短絡ジャンクションが無い（ネットリスト or 座標検査） | [ ] |
-| D3 | LM7809 / MCP23017 埋め込みにピンがある | [ ] |
-| D4 | OLED 埋め込みが 0.91/128×32 でない | [ ] |
-| D5 | 残リスク一覧（Relay 未配線・親 hier・ENC 未結線等）を更新 | [ ] |
+| D1 | `AudioV2.kicad_sym` が load できる | [x] |
+| D2 | PowerModule に一次短絡ジャンクションが無い（ネットリスト or 座標検査） | [x] |
+| D3 | LM7809 / MCP23017 埋め込みにピンがある | [x] |
+| D4 | OLED 埋め込みが 0.91/128×32 でない | [x] |
+| D5 | 残リスク一覧（Relay 未配線・親 hier・ENC 未結線等）を更新 | [x] |
 
-**判定:** `PASS` / `CONDITIONAL` / `FAIL` を一言で。FAIL ならブロッカーを最大 3 つ。
+**判定:** **CONDITIONAL**
+
+再検ツリー: `ee5b992`（`cursor/audiov2-embed-wire-fix-2c9e`）。会話主張は使わず、`kicad-cli` 10.0.6 と sexpr/ネットリストを再実行。
+
+- D1: `kicad-cli sym export svg` exit 0。CH224_50224 / DKMW20F-12 / PT2314 の SVG 3 本。ライブラリ末尾の二重 `embedded_fonts` なし。
+- D2: ジャンクション `(83.82, 45.72)` は無い。ネットリストで F1 / DKMW ±Vin / R.C. / U3 GND は **同一ネットではない**（各 `unconnected-(…)`）。一次短絡としては消えている。ただし配線がピン先端に届いておらず、短絡の代わりに開放になっている（D5）。
+- D3: 埋め込み `LM7809_TO220` に `(pin` 3 本（VI/GND/VO）。`MCP23017-E/SP` に 28 本。`extends` なし。ネットリスト libpart も空ピンではない。
+- D4: ControlPanel 埋め込みに `0.91` / `128x32` / `ER_OLEDM0.91` ゼロ。実体は `J_OLED` = `Connector:Conn_01x04_Pin`（Value: 2.42 OLED I2C）。
+- D5: 下記。製造可ではない。
+
+**残リスク（更新）:**
+1. PowerModule の `pin_connect` がピン先端を外している — ネットリスト: F1 Pad1/2、U1 ±Vin/±Vout/Common/R.C.、U3 VI/GND/VO がすべて unconnected。USB-C GND も PD_GND ラベルと未接続。
+2. RelayBoard `(wire` 0。AZ850/ULN/MCP は置いてあるが未配線。
+3. 親 hier: PowerModule に子の無い `+12V_IN`/`-12V_IN`。ControlPanel 子 `+3V3` が親ピンに無い。Relay 子 AMP1–5 ラベルが親に無い。
+4. ENC1–3 全パッド unconnected（ネットリスト 15）。J_OLED 4 ピンも unconnected。
+5. 既知のまま: MCP pin12 名称 `SCK`（正: SCL）、PARTS MPN 未記載、7303 実物と SW_DP3T/SP3T の差、WP-C 未着手。
 
 ---
 
@@ -96,5 +111,6 @@ WP-A と WP-B が両方 `*.kicad_sch` の埋め込みを触る場合は **B が 
 
 | 日付 | 内容 |
 |---|---|
+| 2026-08-30 | WP-D 再検 — **CONDITIONAL**（旧4ブロッカーは消えた。電源ピン未接続・Relay/ENC/hier は残） |
 | 2026-08-30 | WP-B（+ WP-A A1/A2）完了 — embed flatten / OLED header / PowerModule 一次・二次分離 |
 | 2026-08-30 | 初版 — 4視点レビュー後の修正 TODO |

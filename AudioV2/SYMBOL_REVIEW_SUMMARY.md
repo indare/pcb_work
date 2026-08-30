@@ -92,8 +92,21 @@ cd AudioV2 && kicad-cli sch export netlist -o /tmp/audiov2.net AudioV2Case.kicad
 
 ---
 
+## WP-D 再検結果（2026-08-30）
+
+対象 tip: `ee5b992`（`cursor/audiov2-embed-wire-fix-2c9e`）。否定レビュー・コンテキストなし。`kicad-cli` 10.0.6。
+
+**判定: CONDITIONAL**
+
+旧ブロッカー4件は再実行で消えた: sym load OK（SVG×3）、LM7809 3pin / MCP 28pin、OLED 0.91/128×32/ER_OLEDM なし、`(83.82, 45.72)` 一次短絡ジャンクションなし（F1/DKMW/7809 GND は同一ネットではない）。
+
+ただし PowerModule は短絡解消が **ピン未接続** になっている（F1・DKMW 全ピン・7809 が netlist 上 unconnected）。RelayBoard wire 0、親 hier 幽霊ピン、ENC 全未結線は未解消。製造不可のまま。詳細は [SYMBOL_FIX_TODO.md](SYMBOL_FIX_TODO.md) WP-D。
+
+---
+
 ## 変更履歴
 
 | 日付 | 内容 |
 |---|---|
+| 2026-08-30 | WP-D 再検追記 — CONDITIONAL |
 | 2026-08-30 | 初版 — 4視点レビュー統合 |
