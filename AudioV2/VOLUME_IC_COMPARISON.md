@@ -6,9 +6,9 @@
 
 ## 0. 先に結論
 
-**確定: C 系 — [PGA2310PA](https://www.ti.com/lit/ds/symlink/pga2310.pdf) ×2（DIP-16・±15 V）。** B（MCP45HV51 ×4）は見送り。
+**確定: C 系 — [PGA2310PA](https://www.ti.com/lit/ds/symlink/pga2310.pdf) ×2（DIP-16）。** B（MCP45HV51 ×4）は見送り。
 
-±15 V レール上限は **PowerModule / DC-DC 側**で管理する方針（2026-08 確定）。
+**電源: アナログ ±12 V**（例: DKMW20F-12）。PD 給電モジュールは差し替え可（2026-08 確定）。
 
 判断を動かした事実は 2 つある。どちらも今の DECISIONS.md の記述と食い違う。
 
@@ -200,7 +200,7 @@ LINE の常用域（−3〜−29 dB）は MCP45HV51 のタップで **0.05〜0.9
 
 | 条件 | 何が起きるか | どうするか |
 |---|---|---|
-| **±15 V レールの実測が ±15.5 V を超える** | PGA2310 の推奨動作範囲外（絶対最大 ±16 V）。`Audio/README.md` の MUSES8820 と同じ「上限まで 1 V」問題 | **DKMW20F-15 の無負荷/軽負荷時の実測を先にやる**。超えるなら B、または PGA 用に ±12 V を別途作る |
+| **±12 V レールに変更** | PGA2310 に余裕。Amp 最大出力は ≈6〜7 Vrms（−2〜3 dB）。HP パッド見直し | **AudioV2 確定**。±15 V へ戻すなら PGA2310 上限問題が再発 |
 | **PGA2310PA の入手が切れた / 価格が倍になった** | C 系が成立しない | ピン互換の **PGA2311PA + 前段 −14 dB パッド**（LINE / HP 両方に 2 抵抗ずつ）に落とす。または CS3310（DIP-16、±5 V、同じくパッド前提） |
 | **音量を Amp 前（小信号）に移す判断に変える** | **HV 要件が丸ごと消える**。この比較の前提が全部崩れる | 小信号なら **PGA2311PA が最有力**（安い・DIP・±5 V で足りる）。B 側も MCP4251 級の普通の digipot でよくなり、価格差もほぼ消える。**これが一番大きいレバー**。DECISIONS.md §2 で B（Amp 後）を確定済みなので、覆すなら §2 から |
 | **音量チャンネルを増やしたくなった**（バランス、CH 個別トリム、サブアウト） | B は **4 アドレスで打ち止め**。5 個目は I²C マルチプレクサ（PCA9548A）が要る | C は **SDO→SDI でデイジーチェーンするだけ、GPIO 追加ゼロ**。拡張予定があるなら C 一択 |
@@ -218,5 +218,5 @@ LINE の常用域（−3〜−29 dB）は MCP45HV51 のタップで **0.05〜0.9
 | PGA2311 | [データシート SBOS220D](https://www.ti.com/lit/ds/symlink/pga2311.pdf)。±5 V 固定、最大 7.5 Vpp |
 | PGA2320 | [データシート SBOS273B](https://www.ti.com/lit/ds/symlink/pga2320.pdf)。±15 V、SOIC-16 のみ |
 | 現行の音量段・パッド | [`Audio/README.md`](../Audio/README.md)「出力切り替えとヘッドホン出力」 |
-| 電源 | [`Audio/PowerModule_TEC3_REDESIGN.md`](../Audio/PowerModule_TEC3_REDESIGN.md)（DKMW20F-15 / ±15 V ±660 mA） |
+| 電源 | AudioV2: **DKMW20F-12 / ±12 V ±830 mA**（PD モジュール差し替え可）。参考: [`Audio/PowerModule_TEC3_REDESIGN.md`](../Audio/PowerModule_TEC3_REDESIGN.md)（旧 ±15 V） |
 | 現行の I²C ピン・速度 | [`Control/protocol.py`](../Control/protocol.py) / [`Control/README.md`](../Control/README.md) |
