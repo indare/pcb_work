@@ -4,11 +4,11 @@
 
 - **計測 / スペアナ**（`MeasurementADC` + 計測 Pico 2）は現行どおり独立のまま想定
 - **ラッチングリレーで多系統 Amp のうち 1 つだけ有効**する構成は残す
-- **操作 Pico は 1 台**＋リレー盤は **I²C GPIO 拡張**（子 MCU なし）
-- 回路図の本起こしは、残りの判断（音量位置など）が固まってから
+- **操作 Pico は 1 台**＋リレー盤は **I²C GPIO 拡張**
+- **音量: PGA2310PA ×2**（SPI）、**トーン: PT2314**（I²C、Amp 前）
+- 回路図の本起こしは、12V LED・ENC 配線を決めてから
 
-詳細な選択肢とメリデメは [DECISIONS.md](DECISIONS.md)。
-音量 IC（MCP45HV51 か PGA231x か）の比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。
+詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較（決定済み）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。
 
 ## いまの `Audio/` からの参照元
 

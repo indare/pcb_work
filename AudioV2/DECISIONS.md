@@ -18,16 +18,16 @@
 | CH 操作 | **確定** | **ENC_CH**（現行どおり）。**回して候補変更、押して確定**（確定で音声＋電源リレー適用） |
 | 音量 | **確定** | Amp 後。**ENC_HP / ENC_LINE は独立**（別 digipot） |
 | 出力先 | **確定** | **ENC_DEST**: 回して候補、押して確定。**LINE → PHONE → MUTE** ループ。**起動時 LINE**。切替は **出力段のラッチングリレー**（CH と同系）。`A_GND` は共有のまま音声出口だけ切替 |
-| トーン | **確定** | **ENC_BASS / ENC_TREBLE** の 2 個（独立）。制御 OLED にも表示。バクサンドール系の回路方式は後続 |
+| トーン | **確定** | **T1: PT2314 系**（Amp 前）。ENC_BASS / ENC_TREBLE → I²C |
+| 音量 IC | **確定** | **C: PGA2310PA ×2**（HP / LINE、SPI デイジーチェーン）。Amp 後。詳細 [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) |
+| 電源レール | **方針** | ±15 V の上限余裕は **DC-DC（PowerModule）側の問題**として扱う。音量 IC 選定は C で確定 |
 | OLED | **確定** | **2 枚**。計測＝スペアナ用／操作＝制御用 |
-| 電源 UI | **確定** | **パワースイッチ＋12V LED**（電源投入の視認用） |
+| 電源 UI | **確定** | **パワースイッチ＋12V LED** |
 | ULN2803 | 役割固定 | コイル電流増幅のみ |
-| トーン | **確定** | **T1: PT2314 系**（Princeton / TDA7313 互換）。**Amp 前**（小信号）。ENC_BASS / ENC_TREBLE → I²C |
-| 音量 digipot | **推奨 C（要確定）** | 下記 §3 →詳細は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。**C の品種は PGA2311 ではなく PGA2310PA**（±15 V / DIP-16）。DS1882 案は見送り |
 
 ---
 
-## 0. 操作系統まとめ（いまここを先に固める）
+## 0. 操作系統まとめ（確定）
 
 ### アクチュエータ（何が動くか）
 
@@ -36,8 +36,8 @@
 | CH 選択（どの Amp を活かすか） | ラッチングリレー（音声） |
 | その系統の電源 | ラッチングリレー（電源） |
 | 出力先 PHONE / LINE / MUTE | **出力段**のラッチングリレー（CH と同系）。`A_GND` 共有のまま音声出口を切替 |
-| HP 音量 | digipot（Amp 後 → パッド → HeadphoneBuffer 前） |
-| LINE 音量 | digipot（Amp 後 → LINE） |
+| HP 音量 | **PGA2310PA**（SPI）。Amp 後 → −20 dB パッド → HeadphoneBuffer 前 |
+| LINE 音量 | **PGA2310PA**（SPI）。Amp 後 → LINE |
 | バクサンドール（Bass/Treble 等） | デジタル制御（後続で方式決定）。**制御 OLED に状態表示** |
 | スペアナ表示 | 計測 Pico 側（独立） |
 
@@ -64,7 +64,7 @@
                        | I2C
        +--------+------+------+----------+-----------+
        |        |      |      |          |           |
-  digipot_HP  digipot_LINE  トーン系   GPIO拡張    OLED
+  PGA2310_HP  PGA2310_LINE  トーン系   GPIO拡張    OLED
                                       |
                                     ULN→ラッチング
 ```
@@ -94,10 +94,10 @@
 
 ### 操作系統の残り穴
 
-1. digipot / トーン回路の品種
-2. 12V LED の取り出し元
-3. ENC×6 の配線（GPIO 直結 / I²C 集約）
-4. 出力段ラッチングのコイル電源と、GPIO 拡張を操作側バスへどう乗せるか
+1. 12V LED の取り出し元
+2. ENC×6 の配線（GPIO 直結 / I²C 集約）
+3. 出力段ラッチングのコイル電源と GPIO 拡張のバス配線
+4. PT2314 外部 C/R（トーン）
 ---
 
 ## 1. 基板の切り方（いちばん大きい判断）
@@ -192,9 +192,22 @@ Amp は ×10・±15 V 系。digipot の耐圧と配置はセットで決める�
 
 ---
 
-## 3. 音量 digipot 品種
+## 3. 音量 IC 品種 — **確定: C（PGA2310PA ×2）**
 
-**絞り込み:** **B（MCP45HV51）** か **C（PGA231x 系）**。DS1882 等の ±7 V 級は LINE 無パッドと相性が悪く見送り。
+**B（MCP45HV51）は見送り。** 比較根拠は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。
+
+### 確定内容
+
+| 項目 | 内容 |
+|---|---|
+| 品種 | **PGA2310PA** ×2（PDIP-16 ソケット）。PGA2311（±5 V）は不可 |
+| 配置 | HP 用 1 + LINE 用 1。Amp 出力後 |
+| バス | **SPI0** デイジーチェーン（SCLK / SDI / CS）+ MUTE 1 本。I²C0 は OLED / MCP23017 / PT2314 |
+| HP 経路 | Amp → PGA2310 → **−20 dB パッド** → HeadphoneBuffer |
+| LINE 経路 | Amp → PGA2310 → LINE OUT（出力バッファ不要） |
+| ±15 V | レール上限は **PowerModule / DC-DC 側**で管理（ユーザー方針） |
+
+### B vs C 比較（参考・決定済み）
 
 **満点の比較・数字・決定木は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。以下は要約。**
 
@@ -240,7 +253,7 @@ Amp は ×10・±15 V 系。digipot の耐圧と配置はセットで決める�
 | **Pico ピン** | **22 / 26** | **24 / 26** | **差は 1 本**（B の優位はほぼ無い） |
 | コスト | **US$10〜20** | US$30〜44 | **B** |
 
-**推奨: C（PGA2310PA ×2）。** 次点は B で、**部品代の差額 US$20〜30 が判断を決める場合にだけ**選ぶ。
+**確定: C（PGA2310PA ×2）。** B は部品代優先時のみの次点。
 
 **SPI とアナログの同居は問題ない。** PGA2310 の SPI は音量変更時だけ 32 clk 動くバーストで、聴取中は静止している。一方 I²C は制御 OLED の 1 KB フレーム（400 kHz で ≈25 ms 連続）を常時抱える。**アナログの足元で動くデジタル活動は B の方が多い。**
 
@@ -331,11 +344,9 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 
 ## 決めたい順番（提案）
 
-1. ~~操作系統・DEST~~ → 確定
-2. ~~トーン~~ → **T1 PT2314（Amp 前）確定**
-3. **digipot: B か C** ← いまここ。**推奨は C（PGA2310PA ×2）**、根拠は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。確定前に **DKMW20F-15 の実レール電圧（±15.5 V を超えないか）を実測**する
-4. 12V LED 取り出し、ENC 配線
-5. コピー範囲 → 回路起こし
+1. ~~操作系統・DEST・トーン・音量 IC~~ → **確定**
+2. **12V LED 取り出し**、**ENC 配線**
+3. **コピー範囲 → 回路起こし**（PGA2310 + PT2314 + 出力段ラッチング）
 
 ---
 
@@ -348,13 +359,11 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 - [x] 音量: **ENC_HP / ENC_LINE**
 - [x] 出力先操作: **ENC_DEST**（回して確定、LINE→PHONE→MUTE ループ、起動 LINE）
 - [x] DEST 切替: **出力段のラッチングリレー**
-- [x] トーン: **T1 PT2314 系**（Amp 前、ENC_BASS/TREBLE）
-- [ ] digipot: **B MCP45HV51 ×4** / **C PGA2310PA ×2**（推奨 C。PGA2311 は ±5 V なので不可）
-- [ ] ±15 V レール実測（PGA2310 の推奨上限 ±15.5 V を超えないか）
-- [x] OLED: **制御用追加**（スペアナ用と分離）
-- [x] 表示ループ: **すべてループ**
-- [x] 電源 UI: **PWR SW + 12V LED**
+- [x] トーン: **T1 PT2314 系**（Amp 前）
+- [x] 音量 IC: **C PGA2310PA ×2**（SPI デイジーチェーン）
+- [x] ±15 V: **DC-DC 側で管理**（PowerModule）
+- [x] OLED: **制御用追加**
+- [x] 表示ループ / 電源 UI PWR+12V LED
 - [ ] 12V LED 取り出し:
-- [ ] ENC 6 個の配線（GPIO 直結 / I²C 集約）:
+- [ ] ENC 6 個の配線:
 - [ ] 起こし範囲: D1 / D2
-- [ ] プロジェクト名:
