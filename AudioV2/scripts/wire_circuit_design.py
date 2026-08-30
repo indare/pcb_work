@@ -27,6 +27,19 @@ from generate_kicad_scaffold import (  # noqa: E402
     uid,
     global_label,
 )
+from sch_helpers import (  # noqa: E402
+    cap_pins,
+    ch224_pins,
+    conn02_pins,
+    conn03_pins,
+    dkmw_pins,
+    embed_lib_symbols,
+    fuse_pins,
+    grid,
+    lm7809_pins,
+    symbol_inst_v10,
+    usb16_pins,
+)
 
 PATH_CTRL = f"/{PARENT}/{UUID_CONTROL_INST}"
 PATH_PWR = f"/{PARENT}/{UUID_POWER_INST}"
@@ -153,10 +166,6 @@ def pwr_flag(x: float, y: float) -> str:
 """
 
 
-def cap(ref: str, val: str, x: float, y: float, path: str) -> str:
-    return symbol_inst("Device:C", ref, val, x, y, 0, path)
-
-
 def res(ref: str, val: str, x: float, y: float, path: str) -> str:
     return symbol_inst("Device:R", ref, val, x, y, 0, path)
 
@@ -202,188 +211,153 @@ def bus_hier(name: str, hy: float, bx: float = 55.0, shape: str = "input") -> st
     )
 
 
-def dkmw_pin(sx: float, sy: float, num: str) -> tuple[float, float]:
-    table = {
-        "1": (-12.7, -8.89),  # +Vin
-        "2": (-12.7, -5.08),  # -Vin
-        "3": (12.7, -6.35),  # +Vout
-        "4": (12.7, -8.89),  # Common
-        "5": (12.7, -11.43),  # -Vout
-        "6": (-12.7, -13.97),  # R.C.
-    }
-    px, py = table[num]
-    return pin(sx, sy, px, py)
+def cap(ref: str, val: str, x: float, y: float, path: str) -> str:
+    return symbol_inst_v10("Device:C", ref, val, x, y, 0, path)
 
 
-def ch224_pin(sx: float, sy: float, name: str) -> tuple[float, float]:
-    table = {
-        "VBUS": (-12.7, 5.08),
-        "GND": (-12.7, 2.54),
-        "12V": (12.7, 5.08),
-        "PG": (12.7, 2.54),
-    }
-    px, py = table[name]
-    return pin(sx, sy, px, py)
-
-
-def fuse_pin(fx: float, fy: float, end: int, rot: int = 90) -> tuple[float, float]:
-    """Device:Fuse — rot=90 → pin1 left, pin2 right."""
-    if rot == 90:
-        return (fx - 3.81, fy) if end == 1 else (fx + 3.81, fy)
-    return (fx, fy - 3.81) if end == 1 else (fx, fy + 3.81)
-
-
-def lm7809_pin(ux: float, uy: float, name: str) -> tuple[float, float]:
-    table = {"VI": (-7.62, 0), "GND": (0, -7.62), "VO": (7.62, 0)}
-    px, py = table[name]
-    return pin(ux, uy, px, py)
-
-
-def conn02_pin(cx: float, cy: float, n: int) -> tuple[float, float]:
-    return cx + 5.08, cy + (1.5 - n) * 2.54
-
-
-def conn03_pin(cx: float, cy: float, n: int) -> tuple[float, float]:
-    return cx + 5.08, cy + (n - 2) * 2.54
-
-
-def usb_vbus_pin(jx: float, jy: float) -> tuple[float, float]:
-    return pin(jx, jy, 15.24, 15.24)
-
-
-def usb_gnd_pin(jx: float, jy: float) -> tuple[float, float]:
-    return pin(jx, jy, 0, -22.86)
+def _cap_to_rail(
+    wires: list[str],
+    parts: list[str],
+    ref: str,
+    val: str,
+    cx: float,
+    cy: float,
+    rail: tuple[float, float],
+    gnd_y: float,
+    path: str,
+) -> None:
+    """Place C symbol; top pin to rail, bottom pin to gnd_y."""
+    top, bot = cap_pins(cx, cy)
+    parts.append(cap(ref, val, cx, cy, path))
+    wires.append(wire(rail[0], rail[1], top[0], top[1]))
+    wires.append(wire(bot[0], bot[1], bot[0], gnd_y))
+    wires.append(junction(bot[0], gnd_y))
 
 
 def power_module_wired() -> str:
     """Simplified PowerModule per DECISIONS §9 / CIRCUIT_DESIGN §4."""
     wires: list[str] = []
+    parts: list[str] = []
 
-    # --- placement (left → right) ---
-    j1x, j1y = 25.4, 50.8
-    u2x, u2y = 55.88, 48.26
-    u1x, u1y = 110.0, 53.34
-    u3x, u3y = 140.0, 66.0
-    j_pdx, j_pdy = 155.0, 58.0
-    j202x, j202y = 155.0, 46.0
+    lib_ids = [
+        "Connector:USB_C_Receptacle_USB2.0_16P",
+        "AudioV2:CH224_50224",
+        "Device:Fuse",
+        "AudioV2:DKMW20F-12",
+        "Regulator_Linear:LM7809_TO220",
+        "Connector:Conn_01x02_Pin",
+        "Connector:Conn_01x03_Pin",
+        "Device:C",
+    ]
 
-    y_pd = ch224_pin(u2x, u2y, "12V")[1]
-    y_gnd = ch224_pin(u2x, u2y, "GND")[1]
-    y_sw = y_pd + 3.56  # PD_12V_SW path — off PD_12V bus
+    j1x, j1y = grid(25.4), grid(50.8)
+    u2x, u2y = grid(55.88), grid(48.26)
+    u1x, u1y = grid(110.0), grid(53.34)
+    u3x, u3y = grid(140.0), grid(66.0)
+    j_pdx, j_pdy = grid(155.0), grid(58.0)
+    j202x, j202y = grid(155.0), grid(46.0)
 
-    f1x, f1y = 81.28, y_sw
+    pch = ch224_pins(u2x, u2y)
+    pdk = dkmw_pins(u1x, u1y)
+    pusb = usb16_pins(j1x, j1y)
+    u3 = lm7809_pins(u3x, u3y)
 
-    p12 = ch224_pin(u2x, u2y, "12V")
-    pgnd = ch224_pin(u2x, u2y, "GND")
-    pvbus = ch224_pin(u2x, u2y, "VBUS")
-    p_pg = ch224_pin(u2x, u2y, "PG")
+    y_pd = pch["12V"][1]
+    y_gnd = pch["GND"][1]
+    y_sw = grid(y_pd + 2.54)
 
-    p_vin = dkmw_pin(u1x, u1y, "1")
-    p_vin_n = dkmw_pin(u1x, u1y, "2")
-    p_vout_p = dkmw_pin(u1x, u1y, "3")
-    p_com = dkmw_pin(u1x, u1y, "4")
-    p_vout_n = dkmw_pin(u1x, u1y, "5")
-    p_rc = dkmw_pin(u1x, u1y, "6")
+    f1x, f1y = grid(81.28), y_sw
+    f1_in, f1_out = fuse_pins(f1x, f1y, 90)
+    if f1_in[0] > f1_out[0]:
+        f1_in, f1_out = f1_out, f1_in
 
-    f1_in = fuse_pin(f1x, f1y, 1, 90)
-    f1_out = fuse_pin(f1x, f1y, 2, 90)
+    jpd1, jpd2 = conn02_pins(j_pdx, j_pdy)
+    j12, jm12, jagnd = conn03_pins(j202x, j202y)
 
-    jpd1 = conn02_pin(j_pdx, j_pdy, 1)
-    jpd2 = conn02_pin(j_pdx, j_pdy, 2)
-    j12 = conn03_pin(j202x, j202y, 1)
-    jm12 = conn03_pin(j202x, j202y, 2)
-    jagnd = conn03_pin(j202x, j202y, 3)
+    hier_x = grid(200.66)
+    pd_bus_x = grid(72.0)
+    gnd_bus_x = grid(u1x - 25.4)
+    tone_bus_x = grid(185.0)
 
-    u3_vi = lm7809_pin(u3x, u3y, "VI")
-    u3_gnd = lm7809_pin(u3x, u3y, "GND")
-    u3_vo = lm7809_pin(u3x, u3y, "VO")
-
-    # USB-C → CH224 module
-    wires.append(wire(*usb_vbus_pin(j1x, j1y), *pvbus))
-    wires.append(wire(*usb_gnd_pin(j1x, j1y), *pgnd))
-    wires.append(label("VBUS", 34, y_pd - 2))
-    wires.append(label("PD_GND", 34, y_gnd - 2))
+    # USB-C → CH224
+    wires.append(wire(*pusb["VBUS"], *pch["VBUS"]))
+    wires.append(wire(*pusb["GND"], *pch["GND"]))
 
     # CH224 12V → PD_12V (panel feed, before PWR SW) → J_PD / hier
-    pd_bus_x = 72.0
-    wires.append(wire(*p12, pd_bus_x, y_pd))
+    wires.append(wire(*pch["12V"], pd_bus_x, y_pd))
     wires.append(junction(pd_bus_x, y_pd))
-    wires.append(wire(pd_bus_x, y_pd, jpd1[0], jpd1[1]))
-    wires.append(label("PD_12V", 90, y_pd - 1.5))
+    wires.append(wire(pd_bus_x, y_pd, *jpd1))
+    wires.append(label("PD_12V", grid(90), y_pd - 1.27))
 
-    # Panel return PD_12V_SW → F1 → DKMW +Vin (separate net from PD_12V)
+    # Panel return PD_12V_SW → F1 → DKMW +Vin
     wires.append(wire(30.48, y_sw, *f1_in))
-    wires.append(label("PD_12V_SW", 32, y_sw - 1.5))
-    wires.append(wire(*f1_out, *p_vin))
-    wires.append(cap("C101", "47u", f1_out[0] + 5, f1_out[1] + 6, PATH_PWR))
-    wires.append(wire(f1_out[0] + 5, f1_out[1] + 3.5, f1_out[0], f1_out[1]))
-    wires.append(wire(f1_out[0] + 5, f1_out[1] + 8.5, f1_out[0] + 5, y_gnd))
-    wires.append(junction(f1_out[0] + 5, y_gnd))
+    wires.append(label("PD_12V_SW", grid(32), y_sw - 1.27))
+    wires.append(wire(*f1_out, *pdk["1"]))
+    _cap_to_rail(wires, parts, "C101", "47u", grid(f1_out[0] + 7.62), f1_out[1], f1_out, y_gnd, PATH_PWR)
 
-    # PD_GND: CH224, DKMW -Vin, R.C., panel return
-    wires.append(wire(*pgnd, u1x - 25, y_gnd))
-    wires.append(junction(u1x - 25, y_gnd))
-    wires.append(wire(u1x - 25, y_gnd, *p_vin_n))
-    wires.append(wire(u1x - 25, y_gnd, *p_rc))
-    wires.append(wire(u1x - 25, y_gnd, jpd2[0], jpd2[1]))
-    wires.append(wire(u1x - 25, y_gnd, u3_gnd[0], u3_gnd[1]))
+    # PD_GND: CH224, DKMW -Vin, R.C., panel return, LM7809 GND
+    wires.append(wire(*pch["GND"], gnd_bus_x, y_gnd))
+    wires.append(junction(gnd_bus_x, y_gnd))
+    wires.append(wire(gnd_bus_x, y_gnd, *pdk["2"]))
+    wires.append(wire(gnd_bus_x, y_gnd, *pdk["6"]))
+    wires.append(wire(gnd_bus_x, y_gnd, *jpd2))
+    wires.append(wire(gnd_bus_x, y_gnd, *u3["GND"]))
 
     # ±12 V / A_GND outputs
-    wires.append(wire(*p_vout_p, j12[0], j12[1]))
-    wires.append(wire(*p_vout_n, jm12[0], jm12[1]))
-    wires.append(wire(*p_com, jagnd[0], jagnd[1]))
-    wires.append(label("+12V_OUT", 125, p_vout_p[1] - 1.5))
-    wires.append(label("-12V_OUT", 125, p_vout_n[1] - 1.5))
-    wires.append(label("A_GND", 125, p_com[1] - 1.5))
-    wires.append(cap("C102", "47u", p_vout_p[0] + 8, p_vout_p[1], PATH_PWR))
-    wires.append(cap("C103", "47u", p_vout_n[0] + 8, p_vout_n[1], PATH_PWR))
-    wires.append(cap("C104", "0.1u", p_vout_p[0] + 16, p_vout_p[1], PATH_PWR))
-    wires.append(wire(p_vout_p[0] + 8, p_vout_p[1] + 2.5, p_vout_p[0], p_vout_p[1]))
-    wires.append(wire(p_vout_p[0] + 16, p_vout_p[1] + 2.5, p_vout_p[0], p_vout_p[1]))
-    wires.append(wire(p_vout_n[0] + 8, p_vout_n[1] + 2.5, p_vout_n[0], p_vout_n[1]))
-    wires.append(wire(p_vout_p[0] + 8, p_vout_p[1] + 5, p_vout_p[0] + 8, p_com[1]))
-    wires.append(wire(p_vout_n[0] + 8, p_vout_n[1] + 5, p_vout_n[0] + 8, p_com[1]))
+    wires.append(wire(*pdk["3"], *j12))
+    wires.append(wire(*pdk["5"], *jm12))
+    wires.append(wire(*pdk["4"], *jagnd))
+    wires.append(label("+12V_OUT", grid(125), pdk["3"][1] - 1.27))
+    wires.append(label("-12V_OUT", grid(125), pdk["5"][1] - 1.27))
+    wires.append(label("A_GND", grid(125), pdk["4"][1] - 1.27))
+
+    agnd_y = pdk["4"][1]
+    _cap_to_rail(wires, parts, "C102", "47u", grid(pdk["3"][0] + 10.16), pdk["3"][1], pdk["3"], agnd_y, PATH_PWR)
+    _cap_to_rail(wires, parts, "C103", "47u", grid(pdk["5"][0] + 10.16), pdk["5"][1], pdk["5"], agnd_y, PATH_PWR)
+    _cap_to_rail(wires, parts, "C104", "0.1u", grid(pdk["3"][0] + 20.32), pdk["3"][1], pdk["3"], agnd_y, PATH_PWR)
 
     # LM7809 → VCC_TONE (+9 V for PT2314)
-    wires.append(wire(j12[0], j12[1], u3_vi[0], u3_vi[1]))
-    wires.append(wire(*u3_vo, 185.0, u3_vo[1]))
-    wires.append(label("VCC_TONE", 170, u3_vo[1] - 1.5))
-    wires.append(cap("C301", "10u", u3x - 10, u3y + 8, PATH_PWR))
-    wires.append(cap("C302", "0.1u", u3x + 10, u3y + 8, PATH_PWR))
-    wires.append(wire(u3x - 10, u3y + 10.5, *u3_vi))
-    wires.append(wire(u3x + 10, u3y + 10.5, *u3_vo))
-    wires.append(wire(u3x - 10, u3y + 13, u3x - 10, y_gnd))
-    wires.append(wire(u3x + 10, u3y + 13, u3x + 10, y_gnd))
+    wires.append(wire(*j12, *u3["VI"]))
+    wires.append(wire(*u3["VO"], tone_bus_x, u3["VO"][1]))
+    wires.append(label("VCC_TONE", grid(170), u3["VO"][1] - 1.27))
+    _cap_to_rail(wires, parts, "C301", "10u", grid(u3x - 10.16), grid(u3y + 10.16), u3["VI"], y_gnd, PATH_PWR)
+    _cap_to_rail(wires, parts, "C302", "0.1u", grid(u3x + 10.16), grid(u3y + 10.16), u3["VO"], y_gnd, PATH_PWR)
 
-    # CH224 PG (open drain) — pull-up note only; leave pin visible
-    wires.append(label("PG_noconn", p_pg[0] + 2, p_pg[1] - 1.5))
+    # CH224 PG (open drain) — pull-up TBD
+    wires.append(label("PG_noconn", pch["PG"][0] + 2.54, pch["PG"][1] - 1.27))
 
-    body = f"""\t(lib_symbols)
+    parts.extend(
+        [
+            symbol_inst_v10("Connector:USB_C_Receptacle_USB2.0_16P", "J1", "USB-C PD in", j1x, j1y, 0, PATH_PWR),
+            symbol_inst_v10("AudioV2:CH224_50224", "U2", "50224_CH224 12V", u2x, u2y, 0, PATH_PWR),
+            symbol_inst_v10("Device:Fuse", "F1", "3A slow", f1x, f1y, 90, PATH_PWR),
+            symbol_inst_v10("AudioV2:DKMW20F-12", "U1", "DKMW20F-12", u1x, u1y, 0, PATH_PWR),
+            symbol_inst_v10("Regulator_Linear:LM7809_TO220", "U3", "LM7809 +9V", u3x, u3y, 0, PATH_PWR),
+            symbol_inst_v10("Connector:Conn_01x02_Pin", "J_PD", "PD_12V/GND to panel", j_pdx, j_pdy, 0, PATH_PWR),
+            symbol_inst_v10("Connector:Conn_01x03_Pin", "J202", "+12/-12/A_GND out", j202x, j202y, 0, PATH_PWR),
+        ]
+    )
+
+    body = f"""{embed_lib_symbols(lib_ids)}
 {text_note(25.4, 20.32, [
     "AudioV2 PowerModule — simplified wired (§9 / CIRCUIT_DESIGN §4)",
     "USB-C → 50224 CH224 → PD_12V/J_PD → (panel SW) → PD_12V_SW → F1 → DKMW20F-12",
     "±12V + A_GND → J202 / hier.  LM7809 → VCC_TONE (+9V).  Bench +12V_IN: TBD.",
 ])}
 {hier_label("PD_12V_SW", "input", 30.48, y_sw, 180)}
-{hier_label("PD_12V", "output", 200.66, jpd1[1], 0)}
-{wire(jpd1[0], jpd1[1], 200.66, jpd1[1])}
-{hier_label("PD_GND", "bidirectional", 200.66, jpd2[1], 0)}
-{wire(jpd2[0], jpd2[1], 200.66, jpd2[1])}
-{hier_label("+12V_OUT", "output", 200.66, j12[1], 0)}
-{wire(j12[0], j12[1], 200.66, j12[1])}
-{hier_label("-12V_OUT", "output", 200.66, jm12[1], 0)}
-{wire(jm12[0], jm12[1], 200.66, jm12[1])}
-{hier_label("A_GND", "bidirectional", 200.66, jagnd[1], 0)}
-{wire(jagnd[0], jagnd[1], 200.66, jagnd[1])}
-{hier_label("VCC_TONE", "output", 200.66, u3_vo[1], 0)}
-{wire(185.0, u3_vo[1], 200.66, u3_vo[1])}
-{symbol_inst("Connector:USB_C_Receptacle_USB2.0", "J1", "USB-C PD in", j1x, j1y, 0, PATH_PWR)}
-{symbol_inst("AudioV2:CH224_50224", "U2", "50224_CH224 12V", u2x, u2y, 0, PATH_PWR)}
-{symbol_inst("Device:Fuse", "F1", "3A slow", f1x, f1y, 90, PATH_PWR)}
-{symbol_inst("AudioV2:DKMW20F-12", "U1", "DKMW20F-12", u1x, u1y, 0, PATH_PWR)}
-{symbol_inst("Regulator_Linear:LM7809_TO220", "U3", "LM7809 +9V", u3x, u3y, 0, PATH_PWR)}
-{symbol_inst("Connector:Conn_01x02_Pin", "J_PD", "PD_12V/GND to panel", j_pdx, j_pdy, 0, PATH_PWR)}
-{symbol_inst("Connector:Conn_01x03_Pin", "J202", "+12/-12/A_GND out", j202x, j202y, 0, PATH_PWR)}
+{hier_label("PD_12V", "output", hier_x, jpd1[1], 0)}
+{wire(jpd1[0], jpd1[1], hier_x, jpd1[1])}
+{hier_label("PD_GND", "bidirectional", hier_x, jpd2[1], 0)}
+{wire(jpd2[0], jpd2[1], hier_x, jpd2[1])}
+{hier_label("+12V_OUT", "output", hier_x, j12[1], 0)}
+{wire(j12[0], j12[1], hier_x, j12[1])}
+{hier_label("-12V_OUT", "output", hier_x, jm12[1], 0)}
+{wire(jm12[0], jm12[1], hier_x, jm12[1])}
+{hier_label("A_GND", "bidirectional", hier_x, jagnd[1], 0)}
+{wire(jagnd[0], jagnd[1], hier_x, jagnd[1])}
+{hier_label("VCC_TONE", "output", hier_x, u3["VO"][1], 0)}
+{wire(tone_bus_x, u3["VO"][1], hier_x, u3["VO"][1])}
+{"".join(parts)}
 {"".join(wires)}
 """
     return sch_open(UUID_POWER_FILE, body)
