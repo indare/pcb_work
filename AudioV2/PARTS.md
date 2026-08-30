@@ -20,12 +20,52 @@
 | **12 V LED** | SW 後 12 V、内蔵抵抗 ~10–15 mA | パネル 5 mm |
 | **PT2314** | VDD 9 V、I²C、28 pin | **DIP-28**（ソケット可） |
 | **AZ850** | コイルは盤上 **+5 V**（BP5293 + ULN2803） | 2 コイル・ラッチ DPDT |
+| **OLED 制御** | I²C 0x3C、128×64、3.3 V、**SSD1306 互換**（実機は SSD1309 可） | 4 線（VCC/GND/SCL/SDA）。パネル or ヘッダ |
+| **LCD スペアナ** | SPI（ST7796S）+ I²C タッチ（FT6336U）、5 V 可 | Waveshare **29318**。計測盤のみ |
 
 ---
 
-## 1. 今回決めた第一候補（未定だったもの）
+## 1. 表示デバイス（v1 実装あり・確定）
 
-### 1.1 SW_DEST — **C&K 7303SYZQE**
+AudioV2 は **表示が 2 系統**。DECISIONS の「OLED×2」は言い方が粗い — 実体は次。
+
+| 役割 | 部品 | v1 実装 | AudioV2 での置き場 |
+|---|---|---|---|
+| **操作 UI** | **2.42″ OLED 128×64 I²C** | `Control/ssd1306.py` + `main.py`（`WIDTH=128 HEIGHT=64`、addr 0x3C、I2C0 GP20/21） | **ControlPanel** |
+| **スペアナ** | **Waveshare 3.5″ タッチ LCD 320×480** | `Audio/measurement_fw/`（`lcd.py` ST7796S / `touch.py` FT6336U） | **MeasurementADC（`Audio/` 流用）**。AudioV2 KiCad には載せない |
+
+### 1.0a 制御 OLED — AliExpress 2.42″（SSD1309 / SSD1306 互換）
+
+| | |
+|---|---|
+| 例リンク | [a.aliexpress.com/_c3yp3JiX](https://a.aliexpress.com/_c3yp3JiX) → item **4000002579405** |
+| 解像度 | **128×64**（v1 ファームと一致。**128×32 / 0.91″ は不可**） |
+| コントローラ | 表記は **SSD1309** が多い。コマンドは SSD1306 と同系 → **既存 `ssd1306.py` のまま** |
+| 配線 | Controll J17 と同型: **GND / 3V3 / SCL / SDA** → Pico GP21 / GP20 |
+| バス | I²C0 **400 kHz**（100 kHz だと 1 KB フレームがタイムアウト — `Control/README.md`） |
+| 表示内容 | CH / DEST / Bass / Treble。**音量は出さない** |
+
+**代替:** 同ピン配列の **0.96″ SSD1306 128×64 I²C**（4 ピン）。ソフト変更なし。パネル穴・見た目だけ変わる。
+
+**KiCad 注意:** 素案の `Display_Graphic:SSD1306-128x64` は埋め込み元が **ER_OLEDM0.91（128×32）** になっている。ピンは 4 本で足りるが **FP・寸法は 2.42″ 用に差し替え**（当面は `PinHeader_1x04` + 注記で可）。
+
+### 1.0b スペアナ LCD — Waveshare **29318**（スイッチサイエンス）
+
+| | |
+|---|---|
+| 販売 | [スイッチサイエンス 10138](https://www.switch-science.com/products/10138) / メーカー SKU **29318** |
+| 表示 | 3.5″ IPS **320×480**、ST7796S、**4 線 SPI** |
+| タッチ | FT6336U、**I²C**（静電容量） |
+| 接続 | GH1.25 15P 付属 → 基板側 **1×15 ピンヘッダ**（`Audio/MeasurementADC_Extras:WAVESHARE-29318`） |
+| 電源 | 3.3 / 5 V（オンボード LDO・レベルシフタ）。計測盤では `LCD_EN` で VCC 切 |
+
+AudioV2 では **計測 Pico 配下のまま**。操作 Pico の I²C0 / SPI には載せない（DECISIONS §6・独立計測）。
+
+---
+
+## 2. 今回決めた第一候補（未定だったパネル部品）
+
+### 2.1 SW_DEST — **C&K 7303SYZQE**
 
 | | |
 |---|---|
@@ -63,7 +103,7 @@
 
 4PDT（C&K 7403）は余 1 極を NC にして使ってよい（将来アース切等）。
 
-### 1.2 RV_HP / RV_LINE — **Alps RK27112A00CF** ×2
+### 2.2 RV_HP / RV_LINE — **Alps RK27112A00CF** ×2
 
 | | |
 |---|---|
@@ -84,13 +124,14 @@
 
 RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュアルは RK27 の方が型番が取りやすい**。
 
-### 1.3 その他・回路上まだ曖昧だったもの
+### 2.3 その他・回路上まだ曖昧だったもの
 
 | 用途 | 第一候補 | 理由 |
 |---|---|---|
 | **ENC×3** | 秋月 **EC11 系・押し SW 付き**（D カット、固定足東西） | DECISIONS どおり。PPR は CH/Bass/Treble では何周でも可。購入品の寸法で FP を切る |
 | **操作 Pico** | **Raspberry Pi Pico 2**（RP2350、**W なし**、SC0915 相当） | Wi-Fi 不要。ヘッダ後付け可 |
-| **OLED（制御）** | **0.96″ SSD1306 128×64 I²C**（4 ピン、アドレス 0x3C） | 回路の `SSD1306-128x64` に合わせる。**0.91″（128×32）は使わない** |
+| **OLED（制御）** | **2.42″ 128×64 I²C**（SSD1309、SSD1306 互換）— [AliExpress 例](https://a.aliexpress.com/_c3yp3JiX) / item `4000002579405` | v1 `Control/` と同じ。`WIDTH=128 HEIGHT=64`、addr **0x3C**、GP20/21。**0.96″ でも動くが、現行機は 2.42″** |
+| **LCD（スペアナ）** | **Waveshare 29318**（スイッチサイエンス [10138](https://www.switch-science.com/products/10138)） | v1 `Audio/measurement_fw/`。ST7796S SPI + FT6336U I²C。**MeasurementADC 流用**（AudioV2 Control には載せない） |
 | **PWR SW** | **C&K 7101SYZQE**（SPDT ON-ON、5 A、ラグ）を SPST として使用 | 12 V / ~2 A。ミニ信号 SW 禁止 |
 | **12 V LED** | **12 V 内蔵抵抗付き 5 mm**（緑または青、~10 mA） | DECISIONS §9。素 LED なら 680 Ω–1 kΩ |
 | **DEST LED×2** | 3 mm 通常 LED（Vf≈2 V）+ 既存 **1 kΩ** | 3.3 V で ~1.3 mA。暗ければ 330 Ω に落とす |
@@ -107,7 +148,7 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 
 ---
 
-## 2. ピン・配線メモ（購入後に間違えないため）
+## 3. ピン・配線メモ（購入後に間違えないため）
 
 ```text
 Amp 選択後 L/R
@@ -124,7 +165,7 @@ Amp 選択後 L/R
 
 ---
 
-## 3. まだ買わなくてよい / レイアウト時
+## 4. まだ買わなくてよい / レイアウト時
 
 | 項目 | 状態 |
 |---|---|
@@ -140,3 +181,4 @@ Amp 選択後 L/R
 | 日付 | 内容 |
 |---|---|
 | 2026-08-30 | 初版 — 回路制約から SW_DEST / RV / 周辺の第一候補を固定 |
+| 2026-08-30 | 表示 — 制御 OLED=2.42″ SSD1309（AliExpress）、スペアナ=Waveshare 29318（v1 実装） |

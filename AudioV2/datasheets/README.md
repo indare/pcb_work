@@ -31,7 +31,8 @@
 
 | 部品 | 用途 | ローカル | 取得元 |
 |---|---|---|---|
-| **SSD1306** | OLED ×2 | [Solomon_SSD1306.pdf](Solomon_SSD1306.pdf) | [Solomon Systech SSD1306](https://www.solomon-systech.com/product/ssd1306/) |
+| **SSD1306 / SSD1309** | 制御 OLED 128×64 I²C（**2.42″** 第一） | [Solomon_SSD1306.pdf](Solomon_SSD1306.pdf) | v1 `Control/`。[PARTS.md](../PARTS.md) AliExpress 例 |
+| **WAVESHARE-29318** | スペアナ 3.5″ タッチ LCD（ST7796S + FT6336U） | （Wiki） | [スイッチサイエンス 10138](https://www.switch-science.com/products/10138)。`Audio/measurement_fw/` |
 | **RP2350** | Pico 2 | [RaspberryPi_RP2350.pdf](RaspberryPi_RP2350.pdf) | [Raspberry Pi RP2350](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf) |
 | **ロータリ ENC ×3** | CH / BASS / TREBLE | [RotaryEncoder_EC11_generic.md](RotaryEncoder_EC11_generic.md) | **GPIO 直結**（§10）。押し SW 付き EC11 |
 
@@ -57,4 +58,4 @@
 - 2026-08-30: 初回一括取得
 - 2026-08-30: CH224 [50224]、ENC 機械仕様、Amp/HP 流用方針。OPA1656 削除
 - 2026-08-30: ENC×3 **GPIO 直結**確定（§10）
-- 2026-08-30: 手回し品番 — RK27112A00CF / 7303SYZQE / AZ850P2-5（[PARTS.md](../PARTS.md)）
+- 2026-08-30: 表示 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）

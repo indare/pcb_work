@@ -25,7 +25,7 @@
 | エンコーダー | **確定** | 汎用 **EC11 系**。**×3**（CH / BASS / TREBLE）。HP / LINE / DEST は手回し |
 | ENC 配線 | **確定** | **A/B/SW すべて Pico GPIO 直結**（§10）。I²C 集約は見送り |
 | Amp / HP | **確定** | **`Audio/` 基板を物理流用**。入出力は電源電圧に**ほぼ非依存** → AudioV2 回路図では **載せない** |
-| OLED | **確定** | **2 枚**。計測＝スペアナ用／操作＝制御用（**CH / DEST / Bass / Treble**。音量なし） |
+| 表示 | **確定** | **制御 = 2.42″ OLED 128×64 I²C**（SSD1309 / SSD1306 互換）。**スペアナ = Waveshare 29318 LCD**（計測盤・独立）。[PARTS.md](PARTS.md) |
 | 電源 UI | **確定** | **パワースイッチ＋12V LED** |
 | ULN2803 | 役割固定 | コイル電流増幅のみ（**CH 系統のみ**。DEST は機械 SW） |
 
@@ -56,8 +56,8 @@
 | **DEST LED ×2** | **LINE** / **PHONE**。MUTE = 両方消灯。Pico GPIO 駆動（ADC 読取と連動） |
 | **ENC_BASS** | トーン Bass。制御 OLED に表示 |
 | **ENC_TREBLE** | トーン Treble。制御 OLED に表示 |
-| **OLED 制御用** | **CH / DEST / Bass / Treble**（音量なし）。操作 Pico 配下 |
-| **OLED スペアナ用** | 計測専用。計測 Pico 配下 |
+| **OLED 制御用** | **2.42″ 128×64 I²C**（v1 `Control/`）。CH / DEST / Bass / Treble。音量なし |
+| **LCD スペアナ** | **Waveshare 29318**（v1 `measurement_fw/`）。計測 Pico 配下。AudioV2 図には載せない |
 | **PWR SW + 12V LED** | 本体電源スイッチ。12V LED で ON 視認 |
 
 ```text
@@ -825,7 +825,7 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 - [x] 電源: **±12 V**（DKMW20F-12）、PD **50224 CH224**（差し替え可）
 - [x] エンコーダー: **EC11 系 ×3**（CH / BASS / TREBLE）
 - [x] Amp / HP: **`Audio/` 物理流用**（KiCad には載せない）
-- [x] OLED / 表示ループ / PWR+12V LED（表示は **CH / DEST / Bass / Treble**）
+- [x] OLED / 表示ループ / PWR+12V LED（表示は **CH / DEST / Bass / Treble**）。制御 = **2.42″ OLED**、スペアナ = **Waveshare 29318**（計測・流用）
 - [x] 12V LED: **CH224 12V → PWR SW 後 → LED + DKMW20**（`PD_GND`）
 - [x] HP 固定パッド: **廃止（0 Ω）**。DNP で −10 dB 後付け可
 - [x] ENC 配線: **GPIO 直結 ×3**（§10 ピン表）

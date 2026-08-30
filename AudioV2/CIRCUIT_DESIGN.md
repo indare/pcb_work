@@ -17,7 +17,7 @@
 | SW_DEST 音声 | `Switch:SW_DP3T` | unit1=L / unit2=R。MUTE 投げは NC |
 | SW_DEST センス | `Switch:SW_SP3T` | 3PDT の 3 極目。COM→ADC |
 | ENC×3 | `Device:RotaryEncoder_Switch` | CH / BASS / TREBLE |
-| Pico / OLED / LED / R / C | 各標準 lib | |
+| Pico / OLED / LED / R / C | 各標準 lib | OLED は論理 `SSD1306-128x64`。**実物は 2.42″（[PARTS.md](PARTS.md)）。埋め込み元 0.91″ FP は差し替え予定** |
 | ULN2803A / AZ850 | 標準（**RelayBoard のみ**） | DEST ラッチングは廃止 |
 | DKMW20F-12 / CH224 / BP5293 | カスタム / プロジェクト | |
 
@@ -106,6 +106,8 @@ USB-C → CH224 → PD_12V → PWR SW → F1 → DKMW20F-12 → ±12 V / A_GND�
 - [x] `check_sexpr.py -q AudioV2` — OK
 - [x] `kicad-cli sch export netlist` — OK（annotation 警告はドラフト）
 - [x] 3PDT / A50k 具体型番 — [PARTS.md](PARTS.md)
+- [x] 表示品番 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）
+- [ ] OLED KiCad FP — 0.91″ 埋め込みを 2.42″ or 1×4 ヘッダに差し替え
 - [ ] ERC 整理（未接続・未使用 PT2314 入力）
 - [ ] RelayBoard 本配線
 - [ ] 未使用 PT2314 入力の AC-GND 実装
