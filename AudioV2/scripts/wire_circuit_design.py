@@ -29,7 +29,6 @@ from generate_kicad_scaffold import (  # noqa: E402
     sheet_block,
     text_note,
     uid,
-    global_label,
 )
 from sch_helpers import (  # noqa: E402
     cap_pins,
