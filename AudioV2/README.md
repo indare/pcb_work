@@ -5,7 +5,8 @@
 - **計測 / スペアナ**（`MeasurementADC` + 計測 Pico 2）は現行どおり独立のまま想定
 - **ラッチングリレーで多系統 Amp のうち 1 つだけ有効**する構成は残す
 - **操作 Pico は 1 台**＋リレー盤は **I²C GPIO 拡張**
-- **音量: PGA2310PA ×2**（SPI）、**トーン: PT2314**（I²C、Amp 前）
+- **電源: ±12 V**（DKMW20F-12 想定）、**PD 給電モジュールは差し替え可**
+- 音量: PGA2310PA ×2（SPI）、トーン: PT2314（I²C、Amp 前）
 - 回路図の本起こしは、12V LED・ENC 配線を決めてから
 
 詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較（決定済み）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。
