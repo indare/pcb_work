@@ -1,0 +1,886 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "a1000001-0001-4001-8001-000000000001")
+	(paper "A4")
+	(lib_symbols)
+	(text "AudioV2Case — hierarchy parent (D1.5 draft)\nAmp×10 / HeadphoneBuffer / MeasurementADC = Audio/ manufactured — NOT on this schematic\nSee WIRING.md for off-sheet terminal connections\nDRAFT — circuit review pending (Q3 I2C topology, etc.)"
+		(at 25.4 20.32 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "8e877264-b082-4631-95af-b882b5416887")
+	)
+
+	(global_label "+12V"
+		(shape input)
+		(at 127.0 100.0 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "af0f3d30-fe35-415e-bf37-5051403245c7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 127.0 100.0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+
+	(global_label "-12V"
+		(shape input)
+		(at 127.0 102.54 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "fa4d7d63-fbc8-4d70-84a6-2145a4851e3a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 127.0 102.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+
+	(global_label "A_GND"
+		(shape input)
+		(at 127.0 105.08 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "87996366-b56f-44dd-b314-37f4fffcefcc")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 127.0 105.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+
+	(global_label "I2C_SDA"
+		(shape input)
+		(at 127.0 107.62 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4f5b877a-0fc2-4173-8bad-91f7b35a6db6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 127.0 107.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+
+	(global_label "I2C_SCL"
+		(shape input)
+		(at 127.0 110.16 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e597a94b-aa4c-4dbd-9d1e-5c1c616a93b5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 127.0 110.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+
+	(sheet
+		(at 35.56 35.56)
+		(size 30.48 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "a1000002-0002-4002-8002-000000000002")
+		(property "Sheetname" "PowerModule"
+			(at 35.56 34.6884 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "PowerModule.kicad_sch"
+			(at 50.800000000000004 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "+12V_IN" input
+			(at 40.64 50.8 180)
+			(uuid "9fef3070-4713-49fa-a505-a158bf9048ba")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "-12V_IN" input
+			(at 40.64 53.34 180)
+			(uuid "b3a60e08-28c8-420d-91e4-9e300d12293b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PD_12V" output
+			(at 60.96 45.72 0)
+			(uuid "24cf6f34-d380-4f45-991c-ffae71abb7b4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "PD_GND" bidirectional
+			(at 60.96 48.26 0)
+			(uuid "058b07c9-65f0-4649-8b63-c14dabce3ea8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "PD_12V_SW" input
+			(at 40.64 55.88 180)
+			(uuid "1d2214be-8e02-4b6f-b859-7e53141742d7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "+12V_OUT" output
+			(at 60.96 35.56 0)
+			(uuid "f921b3c1-e3a4-47b9-86cf-0d1537ddfccf")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "-12V_OUT" output
+			(at 60.96 38.1 0)
+			(uuid "2bbc0be2-3c61-4863-84d7-36be65a40855")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "A_GND" bidirectional
+			(at 60.96 40.64 0)
+			(uuid "946edd6a-b4bf-4f09-aeee-494003914418")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "VCC_TONE" output
+			(at 60.96 43.18 0)
+			(uuid "8a1bad3e-5b72-40a7-b8bd-d6d8695133ab")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 35.56)
+		(size 55.88 30.48)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "a1000004-0004-4004-8004-000000000004")
+		(property "Sheetname" "RelayBoard_A"
+			(at 88.9 34.6884 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "RelayBoard.kicad_sch"
+			(at 116.84 68.58000000000001 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 110.0 40.0 180)
+			(uuid "519cca6b-4ba5-49d7-834d-8b0fc965b5be")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 110.0 42.54 180)
+			(uuid "331534fe-a7ef-4d63-97bc-6f89cdcf70fb")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "3V3" input
+			(at 110.0 45.08 180)
+			(uuid "29dd83b3-89f5-4093-9533-16a219f81387")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "D_GND" input
+			(at 110.0 47.62 180)
+			(uuid "cf49946b-0aa7-4217-9b91-f1121dcc6927")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "COMMON_L" output
+			(at 140.0 40.0 0)
+			(uuid "6fb1dce8-1ed4-41e0-8fbc-983a0d4bda08")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "COMMON_R" output
+			(at 140.0 42.54 0)
+			(uuid "f1900737-a588-4a09-967d-b5fc5cf86419")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "A_GND" bidirectional
+			(at 140.0 45.08 0)
+			(uuid "dba89ea9-1863-4908-ba01-5fcd51bb24da")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 73.66)
+		(size 55.88 30.48)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "a1000005-0005-4005-8005-000000000005")
+		(property "Sheetname" "RelayBoard_B"
+			(at 88.9 72.7884 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "RelayBoard.kicad_sch"
+			(at 116.84 106.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 110.0 40.0 180)
+			(uuid "a33f7138-a013-47c3-a363-dea12745f1e5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 110.0 42.54 180)
+			(uuid "550daa66-cf54-4d87-82c5-fe8d016d5500")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "3V3" input
+			(at 110.0 45.08 180)
+			(uuid "7cb4533b-1478-476d-81d9-5034edae8d78")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "D_GND" input
+			(at 110.0 47.62 180)
+			(uuid "cc6786ea-b226-4f0d-85ac-afac853ebb4b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "COMMON_L" output
+			(at 140.0 40.0 0)
+			(uuid "54dc791d-5b61-4d1e-adf5-f4ccb25a2a0e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "COMMON_R" output
+			(at 140.0 42.54 0)
+			(uuid "ac31e10b-644c-4a34-b026-0eb33165284a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "A_GND" bidirectional
+			(at 140.0 45.08 0)
+			(uuid "89dc302b-fb11-4718-801f-893bbf9d34a9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 35.56)
+		(size 55.88 35.56)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "a1000006-0006-4006-8006-000000000006")
+		(property "Sheetname" "ControlPanel"
+			(at 152.4 34.6884 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ControlPanel.kicad_sch"
+			(at 180.34 73.66000000000001 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "COMMON_L" input
+			(at 170.0 40.0 180)
+			(uuid "ff0754ce-d508-4742-9992-4c7459825bb8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "COMMON_R" input
+			(at 170.0 42.54 180)
+			(uuid "c4874fca-4e62-4ba0-96d1-144e1f91233a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 170.0 45.08 180)
+			(uuid "e47c4007-c242-427f-8539-f3bd28db1411")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 170.0 47.62 180)
+			(uuid "2ea3ffb8-c06a-4247-a499-8d5fe00ee20d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "+12V" input
+			(at 170.0 50.16 180)
+			(uuid "f4aba313-44da-4ba7-aadc-e795b438e4c1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "-12V" input
+			(at 170.0 52.7 180)
+			(uuid "2d8a3f3e-7b7f-4edb-9682-cf91b33db578")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "A_GND" bidirectional
+			(at 170.0 55.24 180)
+			(uuid "66ee27ba-e7fc-449c-94b1-161473fe0d4a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "D_GND" input
+			(at 170.0 57.78 180)
+			(uuid "f71925fe-3aab-4ab9-9079-62432ad355b0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PD_12V" input
+			(at 170.0 60.32 180)
+			(uuid "28e6341c-e809-49d2-9012-8c6ed0ce383a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PD_12V_SW" output
+			(at 200.0 60.32 0)
+			(uuid "ebe4cb2a-e474-4db4-9837-d9946a3d1e0e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "PD_GND" bidirectional
+			(at 200.0 62.86 0)
+			(uuid "4d852c5f-08e7-4b76-aa18-fc844a4984ab")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "PGA_HP_L" output
+			(at 200.0 40.0 0)
+			(uuid "d671b365-41b1-4f9d-a16e-df64a7784cb4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "PGA_HP_R" output
+			(at 200.0 42.54 0)
+			(uuid "e10b8de5-1c50-4689-8b50-17e803c3c207")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "PGA_LINE_L" output
+			(at 200.0 45.08 0)
+			(uuid "6e411297-12e8-4d59-8655-46fd95224722")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "PGA_LINE_R" output
+			(at 200.0 47.62 0)
+			(uuid "d9003bba-d169-487c-ad04-5b14b9b169f2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "VCC_TONE" input
+			(at 170.0 65.0 180)
+			(uuid "1c0f5a73-40b8-48e5-a11c-82e2a843d516")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 215.9 35.56)
+		(size 50.8 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "a1000007-0007-4007-8007-000000000007")
+		(property "Sheetname" "OutputStage"
+			(at 215.9 34.6884 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "OutputStage.kicad_sch"
+			(at 241.3 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "PGA_HP_L" input
+			(at 230.0 40.0 180)
+			(uuid "10756079-0c48-4f44-a249-fd8128057a20")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PGA_HP_R" input
+			(at 230.0 42.54 180)
+			(uuid "49d00755-3e1b-4ebb-a4e9-5a797620e7cd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PGA_LINE_L" input
+			(at 230.0 45.08 180)
+			(uuid "2720db27-9a6c-4011-854b-96b4b432a4d6")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PGA_LINE_R" input
+			(at 230.0 47.62 180)
+			(uuid "dfda3735-d77b-410d-9cc8-04884d654f0d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "+12V" input
+			(at 230.0 50.16 180)
+			(uuid "8fadead5-bf63-4a48-bec9-f2cb630111b2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "-12V" input
+			(at 230.0 52.7 180)
+			(uuid "c1b1a09f-379a-41a6-9168-05e1f27ea741")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "A_GND" bidirectional
+			(at 230.0 55.24 180)
+			(uuid "d40ef27e-c4a8-468b-a55b-43239fcf1fce")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PHONE_L" output
+			(at 260.0 40.0 0)
+			(uuid "562943a9-5ac9-4e25-8021-d8bfd8ebb4eb")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "PHONE_R" output
+			(at 260.0 42.54 0)
+			(uuid "41d36152-100e-4d58-868d-4e1b9d02c374")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "LINE_L" output
+			(at 260.0 45.08 0)
+			(uuid "4103e4ee-001f-4b53-8a62-85b79886e88e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "LINE_R" output
+			(at 260.0 47.62 0)
+			(uuid "6980397c-8d69-4d76-bdf6-df8f2f6c15a8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "MUTE" output
+			(at 260.0 50.16 0)
+			(uuid "21a647f5-18ad-40c3-993b-109d5bf84031")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001"
+					(page "6")
+				)
+			)
+		)
+	)
+
+
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

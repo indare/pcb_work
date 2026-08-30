@@ -8,7 +8,7 @@
 - **Amp / HP** — `Audio/` 製造済み基板を **物理流用**（電源電圧にほぼ非依存。AudioV2 回路図には載せない）
 - 音量: PGA2310PA ×2（SPI）、トーン: PT2314（I²C、Amp 前）
 - **物理 PCB:** Relay **5+5×2**、Control+Output **1 枚**（Q2-B なら Output **+1**）、Power **1 枚**（§11）
-- **次:** KiCad 起こし可（Q3 I²C・Q2 物理はレイアウト時）
+- **次:** 回路レビュー（Q3 I²C・ピンアサイン・ERC）
 
 詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
 
@@ -24,4 +24,5 @@
 
 ## このディレクトリの置き方
 
-回路図（`.kicad_sch` / `.kicad_pro`）は未作成。判断確定済み — ここに新規プロジェクトとして起こす（`Audio/` 直編集はしない）。
+- **KiCad 素案あり** — `AudioV2Case.kicad_pro` + 子シート 4 枚（draft・要レビュー）
+判断確定済み — ここに新規プロジェクトとして起こす（`Audio/` 直編集はしない）。
