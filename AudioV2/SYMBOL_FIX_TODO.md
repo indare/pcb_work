@@ -1,8 +1,7 @@
 # AudioV2 シンボル／回路図 修正 TODO（クラウドエージェント用）
 
-**ベースブランチ:** `cursor/manual-volume-kicad-2c9e`（remote 最新）  
-**親 PR:** https://github.com/indare/pcb_work/pull/23  
-**根拠:** [SYMBOL_REVIEW_SUMMARY.md](SYMBOL_REVIEW_SUMMARY.md)（4視点レビュー統合）
+**ベースブランチ:** `main`  
+**根拠:** [SYMBOL_REVIEW_SUMMARY.md](SYMBOL_REVIEW_SUMMARY.md)。WP-A/B/C は `main` マージ済み。再開時は [AGENT_HANDOFF.md](AGENT_HANDOFF.md)。
 
 **禁止:** `Audio/` 直下の既存 `.kicad_sch` を改変しない。`--no-verify` でコミットしない。
 
@@ -16,7 +15,7 @@ kicad-cli sym export svg -o /tmp/audiov2-sym AudioV2/AudioV2.kicad_sym
 cd AudioV2 && kicad-cli sch export netlist -o /tmp/audiov2.net AudioV2Case.kicad_sch
 ```
 
-ブランチ名は `cursor/<descriptive>-2c9e`。完了したら commit → push → PR（base=`cursor/manual-volume-kicad-2c9e` または `main` に積み上げる場合は親 PR と調整）。
+新規作業のブランチ名は `cursor/<descriptive>-2c9e`（**base は常に `main`**）。
 
 ---
 
@@ -82,11 +81,11 @@ cd AudioV2 && kicad-cli sch export netlist -o /tmp/audiov2.net AudioV2Case.kicad
 
 ## 作業分担（推奨）
 
-| エージェント | 担当 | ブランチ例 |
+| エージェント | 担当 | ブランチ |
 |---|---|---|
-| Cloud-A | **WP-A** | `cursor/audiov2-sym-lib-fix-2c9e` |
-| Cloud-B | **WP-B** | `cursor/audiov2-embed-wire-fix-2c9e` |
-| 親（本ラン） | TODO/要約のメンテ、WP-C の一部、完了後に **WP-D をコンテキストなしで起動** | — |
+| Cloud-A | **WP-A** | 完了（`main`） |
+| Cloud-B | **WP-B** | 完了（`main`） |
+| 親 | メンテ / ERC / Relay | `main` |
 
 WP-A と WP-B が両方 `*.kicad_sch` の埋め込みを触る場合は **B が A の後に再生成**するか、B が A の sym 修正を取り込んでから `wire_circuit_design.py all`。
 

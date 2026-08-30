@@ -5,7 +5,698 @@
 	(uuid "b2000003-0003-4003-8003-000000000003")
 	(paper "A4")
 	(lib_symbols
-	(symbol "Interface_Expansion:MCP23017-E/SP"
+		(symbol "Connector:Conn_01x03_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x03_Pin"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x03, script generated"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_01x03_Pin_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector:Conn_01x04_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x04_Pin"
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x04, script generated"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_01x04_Pin_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -4.953)
+					(end 0 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -5.08) (xy 0.8636 -5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -5.08 180)
+					(length 3.81)
+					(name "Pin_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector:Screw_Terminal_01x02"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Screw_Terminal_01x02"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "screw terminal"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "TerminalBlock*:*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Screw_Terminal_01x02_1_1"
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.5334 0.3302) (xy 0.3302 -0.508)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.5334 -2.2098) (xy 0.3302 -3.048)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.3556 0.508) (xy 0.508 -0.3302)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.3556 -2.032) (xy 0.508 -2.8702)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 0)
+					(radius 0.635)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 -2.54)
+					(radius 0.635)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Interface_Expansion:MCP23017-E/SP"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -611,557 +1302,7 @@
 			)
 			(embedded_fonts no)
 		)
-	(symbol "Transistor_Array:ULN2803A"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "U"
-				(at 0 13.335 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "ULN2803A"
-				(at 0 11.43 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 1.27 -16.51 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/uln2803a.pdf"
-				(at 2.54 -5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Darlington Transistor Arrays, SOIC18/DIP18"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "Darlington transistor array"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "DIP*W7.62mm* SOIC*7.5x11.6mm*P1.27mm*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "ULN2803A_0_1"
-				(rectangle
-					(start -7.62 -15.24)
-					(end 7.62 10.16)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -4.572 5.08) (xy -3.556 5.08)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.556 6.096) (xy -3.556 4.064) (xy -2.032 5.08) (xy -3.556 6.096)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center -1.778 5.08)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.524 5.08) (xy 4.064 5.08)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center -1.27 2.54)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center -1.27 0)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center -1.27 -2.286)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center -0.508 5.08)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.508 5.08) (xy -0.508 7.62) (xy 2.286 7.62)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 6.731) (xy -1.016 6.731)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 5.969) (xy -1.016 5.969) (xy -0.508 6.731) (xy 0 5.969)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "ULN2803A_1_1"
-				(pin input line
-					(at -10.16 5.08 0)
-					(length 2.54)
-					(name "I1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 2.54 0)
-					(length 2.54)
-					(name "I2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 0 0)
-					(length 2.54)
-					(name "I3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 -2.54 0)
-					(length 2.54)
-					(name "I4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 -5.08 0)
-					(length 2.54)
-					(name "I5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 -7.62 0)
-					(length 2.54)
-					(name "I6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 -10.16 0)
-					(length 2.54)
-					(name "I7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 -12.7 0)
-					(length 2.54)
-					(name "I8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -17.78 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 10.16 7.62 180)
-					(length 2.54)
-					(name "COM"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 -12.7 180)
-					(length 2.54)
-					(name "O8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 -10.16 180)
-					(length 2.54)
-					(name "O7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 -7.62 180)
-					(length 2.54)
-					(name "O6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 -5.08 180)
-					(length 2.54)
-					(name "O5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 -2.54 180)
-					(length 2.54)
-					(name "O4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 0 180)
-					(length 2.54)
-					(name "O3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 2.54 180)
-					(length 2.54)
-					(name "O2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 5.08 180)
-					(length 2.54)
-					(name "O1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-	(symbol "Relay:AZ850P2-x"
+		(symbol "Relay:AZ850P2-x"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1810,18 +1951,14 @@
 			)
 			(embedded_fonts no)
 		)
-	(symbol "Connector:Conn_01x04_Pin"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
+		(symbol "Transistor_Array:ULN2803A"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "J"
-				(at 0 5.08 0)
+			(property "Reference" "U"
+				(at 0 13.335 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1830,8 +1967,8 @@
 					)
 				)
 			)
-			(property "Value" "Conn_01x04_Pin"
-				(at 0 -7.62 0)
+			(property "Value" "ULN2803A"
+				(at 0 11.43 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1841,6 +1978,29 @@
 				)
 			)
 			(property "Footprint" ""
+				(at 1.27 -16.51 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/uln2803a.pdf"
+				(at 2.54 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Darlington Transistor Arrays, SOIC18/DIP18"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1851,7 +2011,7 @@
 					)
 				)
 			)
-			(property "Datasheet" ""
+			(property "ki_keywords" "Darlington transistor array"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1862,7 +2022,7 @@
 					)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x04, script generated"
+			(property "ki_fp_filters" "DIP*W7.62mm* SOIC*7.5x11.6mm*P1.27mm*"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1873,89 +2033,24 @@
 					)
 				)
 			)
-			(property "ki_locked" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "Conn_01x04_Pin_1_1"
+			(symbol "ULN2803A_0_1"
 				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
+					(start -7.62 -15.24)
+					(end 7.62 10.16)
 					(stroke
-						(width 0.1524)
+						(width 0.254)
 						(type default)
 					)
 					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 -4.953)
-					(end 0 -5.207)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
+						(type background)
 					)
 				)
 				(polyline
 					(pts
-						(xy 1.27 2.54) (xy 0.8636 2.54)
+						(xy -4.572 5.08) (xy -3.556 5.08)
 					)
 					(stroke
-						(width 0.1524)
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -1964,10 +2059,21 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 0) (xy 0.8636 0)
+						(xy -3.556 6.096) (xy -3.556 4.064) (xy -2.032 5.08) (xy -3.556 6.096)
 					)
 					(stroke
-						(width 0.1524)
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center -1.778 5.08)
+					(radius 0.254)
+					(stroke
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -1976,10 +2082,66 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+						(xy -1.524 5.08) (xy 4.064 5.08)
 					)
 					(stroke
-						(width 0.1524)
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center -1.27 2.54)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center -1.27 0)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center -1.27 -2.286)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center -0.508 5.08)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 5.08) (xy -0.508 7.62) (xy 2.286 7.62)
+					)
+					(stroke
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -1988,20 +2150,34 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -5.08) (xy 0.8636 -5.08)
+						(xy 0 6.731) (xy -1.016 6.731)
 					)
 					(stroke
-						(width 0.1524)
+						(width 0)
 						(type default)
 					)
 					(fill
 						(type none)
 					)
 				)
-				(pin passive line
-					(at 5.08 2.54 180)
-					(length 3.81)
-					(name "Pin_1"
+				(polyline
+					(pts
+						(xy 0 5.969) (xy -1.016 5.969) (xy -0.508 6.731) (xy 0 5.969)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "ULN2803A_1_1"
+				(pin input line
+					(at -10.16 5.08 0)
+					(length 2.54)
+					(name "I1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2016,10 +2192,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 3.81)
-					(name "Pin_2"
+				(pin input line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "I2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2034,10 +2210,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 5.08 -2.54 180)
-					(length 3.81)
-					(name "Pin_3"
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "I3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2052,10 +2228,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 5.08 -5.08 180)
-					(length 3.81)
-					(name "Pin_4"
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "I4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2070,185 +2246,89 @@
 						)
 					)
 				)
-			)
-			(embedded_fonts no)
-		)
-	(symbol "Connector:Conn_01x03_Pin"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "J"
-				(at 0 5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_01x03_Pin"
-				(at 0 -5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Generic connector, single row, 01x03, script generated"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_locked" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "Conn_01x03_Pin_1_1"
-				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 2.54) (xy 0.8636 2.54)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 0) (xy 0.8636 0)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at 5.08 2.54 180)
-					(length 3.81)
-					(name "Pin_1"
+				(pin input line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "I5"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -7.62 0)
+					(length 2.54)
+					(name "I6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -10.16 0)
+					(length 2.54)
+					(name "I7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -12.7 0)
+					(length 2.54)
+					(name "I8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -17.78 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2257,34 +2337,16 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 0 180)
-					(length 3.81)
-					(name "Pin_2"
+					(at 10.16 7.62 180)
+					(length 2.54)
+					(name "COM"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 -2.54 180)
-					(length 3.81)
-					(name "Pin_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2292,187 +2354,17 @@
 						)
 					)
 				)
-			)
-			(embedded_fonts no)
-		)
-	(symbol "Connector:Screw_Terminal_01x02"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "J"
-				(at 0 2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Screw_Terminal_01x02"
-				(at 0 -5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "screw terminal"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "TerminalBlock*:*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "Screw_Terminal_01x02_1_1"
-				(rectangle
-					(start -1.27 1.27)
-					(end 1.27 -3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.5334 0.3302) (xy 0.3302 -0.508)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.5334 -2.2098) (xy 0.3302 -3.048)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.3556 0.508) (xy 0.508 -0.3302)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.3556 -2.032) (xy 0.508 -2.8702)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 0 0)
-					(radius 0.635)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 0 -2.54)
-					(radius 0.635)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_1"
+				(pin open_collector line
+					(at 10.16 -12.7 180)
+					(length 2.54)
+					(name "O8"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
+					(number "11"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2480,17 +2372,125 @@
 						)
 					)
 				)
-				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 3.81)
-					(name "Pin_2"
+				(pin open_collector line
+					(at 10.16 -10.16 180)
+					(length 2.54)
+					(name "O7"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "2"
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -7.62 180)
+					(length 2.54)
+					(name "O6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -5.08 180)
+					(length 2.54)
+					(name "O5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "O4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "O3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "O2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 5.08 180)
+					(length 2.54)
+					(name "O1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2503,6 +2503,7 @@
 		)
 	)
 	(text "RelayBoard — 5ch template (§11 Q1-B)\nMCP23017 @0x20 (Board A) / @0x21 (Board B — same sch, addr strap note)\nAZ850 latching + ULN2803. NO child Pico.\nCOMMON_LR_OUT → ControlPanel PT2314 input"
+		(exclude_from_sim no)
 		(at 25.4 25.4 0)
 		(effects
 			(font
@@ -2512,31 +2513,6 @@
 		)
 		(uuid "a140815a-2b29-4ef0-bdee-78ca9974d1c1")
 	)
-
-	(hierarchical_label "I2C_SDA"
-		(shape bidirectional)
-		(at 30.48 40.64 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "62ba79aa-63dc-4b83-9e40-4da7dad29b6c")
-	)
-
-	(hierarchical_label "I2C_SCL"
-		(shape bidirectional)
-		(at 30.48 43.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "e09c3602-ae1d-49b3-8cf1-0894660d9d57")
-	)
-
 	(hierarchical_label "3V3"
 		(shape input)
 		(at 30.48 45.72 180)
@@ -2547,132 +2523,6 @@
 			(justify right)
 		)
 		(uuid "03ed27e4-85dd-472d-a752-3e4e8ccddc8b")
-	)
-
-	(hierarchical_label "D_GND"
-		(shape input)
-		(at 30.48 48.26 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "b4aca8c8-94ef-4025-97db-3894e25f6c9d")
-	)
-
-	(hierarchical_label "COMMON_L"
-		(shape output)
-		(at 200.66 88.9 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "5fe74eca-725f-4bc5-bd29-13a2b2a4f1c6")
-	)
-
-	(hierarchical_label "COMMON_R"
-		(shape output)
-		(at 200.66 91.44 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "b1946d5f-1ba5-4cff-847f-c0895cff6a2b")
-	)
-
-	(hierarchical_label "A_GND"
-		(shape bidirectional)
-		(at 200.66 93.98 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "172e9b8f-3ecc-473f-aafa-2b49bf6b3acd")
-	)
-
-	(hierarchical_label "AMP1_L"
-		(shape bidirectional)
-		(at 200.66 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "df2fd576-d7c8-4bda-b465-07a501b90fcd")
-	)
-	(hierarchical_label "AMP1_R"
-		(shape bidirectional)
-		(at 210.82 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a0019723-0287-4262-9383-915ccd8896c8")
-	)
-	(hierarchical_label "AMP1_V+"
-		(shape output)
-		(at 220.98 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "f4f4d2a9-2a74-409f-b879-8b5543c486c5")
-	)
-	(hierarchical_label "AMP1_V-"
-		(shape output)
-		(at 231.14 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "42715318-e734-4c50-b7dc-006ba847cd51")
-	)
-	(hierarchical_label "AMP2_L"
-		(shape bidirectional)
-		(at 200.66 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "9283aed4-d40c-4f94-b847-7c6dfe691553")
-	)
-	(hierarchical_label "AMP2_R"
-		(shape bidirectional)
-		(at 210.82 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "e3df4cdb-e7d2-422d-999e-9d4aedb47a4a")
-	)
-	(hierarchical_label "AMP2_V+"
-		(shape output)
-		(at 220.98 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "1df78816-8cce-403b-a61f-d48dcdf102db")
 	)
 	(hierarchical_label "AMP2_V-"
 		(shape output)
@@ -2685,6 +2535,28 @@
 		)
 		(uuid "0c57e449-4f85-4a8e-a1c2-0b93ae0fb1a6")
 	)
+	(hierarchical_label "A_GND"
+		(shape bidirectional)
+		(at 200.66 93.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "172e9b8f-3ecc-473f-aafa-2b49bf6b3acd")
+	)
+	(hierarchical_label "AMP2_V+"
+		(shape output)
+		(at 220.98 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1df78816-8cce-403b-a61f-d48dcdf102db")
+	)
 	(hierarchical_label "AMP3_L"
 		(shape bidirectional)
 		(at 200.66 45.72 0)
@@ -2695,6 +2567,17 @@
 			(justify left)
 		)
 		(uuid "400fd0ec-f474-4d0d-82dc-757277668e73")
+	)
+	(hierarchical_label "AMP1_V-"
+		(shape output)
+		(at 231.14 35.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "42715318-e734-4c50-b7dc-006ba847cd51")
 	)
 	(hierarchical_label "AMP3_R"
 		(shape bidirectional)
@@ -2707,16 +2590,38 @@
 		)
 		(uuid "4fe53a35-2f2c-4739-9bd9-8d916bd785c8")
 	)
-	(hierarchical_label "AMP3_V+"
+	(hierarchical_label "COMMON_L"
 		(shape output)
-		(at 220.98 45.72 0)
+		(at 200.66 88.9 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "b7aada62-519d-4823-bd64-559233f2f602")
+		(uuid "5fe74eca-725f-4bc5-bd29-13a2b2a4f1c6")
+	)
+	(hierarchical_label "I2C_SDA"
+		(shape bidirectional)
+		(at 30.48 40.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "62ba79aa-63dc-4b83-9e40-4da7dad29b6c")
+	)
+	(hierarchical_label "AMP5_L"
+		(shape bidirectional)
+		(at 200.66 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6e1c1cd9-785d-49f9-a585-7c1f4a494a77")
 	)
 	(hierarchical_label "AMP3_V-"
 		(shape output)
@@ -2729,16 +2634,60 @@
 		)
 		(uuid "72e8eaa9-365b-4315-8b85-06c78919815f")
 	)
-	(hierarchical_label "AMP4_L"
+	(hierarchical_label "AMP2_L"
 		(shape bidirectional)
-		(at 200.66 50.8 0)
+		(at 200.66 40.64 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "e6d79fc5-fa36-4192-8b81-a20807f57da9")
+		(uuid "9283aed4-d40c-4f94-b847-7c6dfe691553")
+	)
+	(hierarchical_label "AMP1_R"
+		(shape bidirectional)
+		(at 210.82 35.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a0019723-0287-4262-9383-915ccd8896c8")
+	)
+	(hierarchical_label "COMMON_R"
+		(shape output)
+		(at 200.66 91.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b1946d5f-1ba5-4cff-847f-c0895cff6a2b")
+	)
+	(hierarchical_label "D_GND"
+		(shape input)
+		(at 30.48 48.26 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b4aca8c8-94ef-4025-97db-3894e25f6c9d")
+	)
+	(hierarchical_label "AMP3_V+"
+		(shape output)
+		(at 220.98 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b7aada62-519d-4823-bd64-559233f2f602")
 	)
 	(hierarchical_label "AMP4_R"
 		(shape bidirectional)
@@ -2751,6 +2700,17 @@
 		)
 		(uuid "c2893103-d7dd-40d1-9eef-23a4cb13fa3c")
 	)
+	(hierarchical_label "AMP5_V-"
+		(shape output)
+		(at 231.14 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d043a26c-db20-4abf-a2d5-242d602a6751")
+	)
 	(hierarchical_label "AMP4_V+"
 		(shape output)
 		(at 220.98 50.8 0)
@@ -2761,6 +2721,72 @@
 			(justify left)
 		)
 		(uuid "d35b05d1-01e5-40b7-affc-00527750692c")
+	)
+	(hierarchical_label "AMP5_R"
+		(shape bidirectional)
+		(at 210.82 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d3fc7fd7-ffaa-49e7-889d-703478de13a3")
+	)
+	(hierarchical_label "AMP1_L"
+		(shape bidirectional)
+		(at 200.66 35.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "df2fd576-d7c8-4bda-b465-07a501b90fcd")
+	)
+	(hierarchical_label "I2C_SCL"
+		(shape bidirectional)
+		(at 30.48 43.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e09c3602-ae1d-49b3-8cf1-0894660d9d57")
+	)
+	(hierarchical_label "AMP2_R"
+		(shape bidirectional)
+		(at 210.82 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e3df4cdb-e7d2-422d-999e-9d4aedb47a4a")
+	)
+	(hierarchical_label "AMP4_L"
+		(shape bidirectional)
+		(at 200.66 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e6d79fc5-fa36-4192-8b81-a20807f57da9")
+	)
+	(hierarchical_label "AMP1_V+"
+		(shape output)
+		(at 220.98 35.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f4f4d2a9-2a74-409f-b879-8b5543c486c5")
 	)
 	(hierarchical_label "AMP4_V-"
 		(shape output)
@@ -2773,31 +2799,9 @@
 		)
 		(uuid "f811f5d6-5a5a-4eb4-934d-927d58322ed8")
 	)
-	(hierarchical_label "AMP5_L"
-		(shape bidirectional)
-		(at 200.66 55.879999999999995 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "6e1c1cd9-785d-49f9-a585-7c1f4a494a77")
-	)
-	(hierarchical_label "AMP5_R"
-		(shape bidirectional)
-		(at 210.82 55.879999999999995 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "d3fc7fd7-ffaa-49e7-889d-703478de13a3")
-	)
 	(hierarchical_label "AMP5_V+"
 		(shape output)
-		(at 220.98 55.879999999999995 0)
+		(at 220.98 55.88 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2806,18 +2810,222 @@
 		)
 		(uuid "fb630acb-20b0-4805-af8a-95e7f13878fe")
 	)
-	(hierarchical_label "AMP5_V-"
-		(shape output)
-		(at 231.14 55.879999999999995 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 114.3 50.8 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0cd54ff5-da36-4149-9fff-68e6f12bc3d6")
+		(property "Reference" "K304"
+			(at 114.3 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
-			(justify left)
 		)
-		(uuid "d043a26c-db20-4abf-a2d5-242d602a6751")
+		(property "Value" "AZ850 CH1 pwr"
+			(at 114.3 53.34 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2ca0a6f8-51cc-4d93-ae73-ba9aa5b09476")
+		)
+		(pin "2"
+			(uuid "c210003d-0cef-489b-8e13-180ce5ef880b")
+		)
+		(pin "3"
+			(uuid "967d275f-e933-438b-b6db-e4a1148d41bc")
+		)
+		(pin "4"
+			(uuid "9bb721b5-3bc9-47fc-848e-c0141ca483cd")
+		)
+		(pin "5"
+			(uuid "62eb9841-1db9-4e43-8b71-af781243805e")
+		)
+		(pin "6"
+			(uuid "f25924db-e06f-4008-aa6c-1ea54a2a6f09")
+		)
+		(pin "7"
+			(uuid "f1fcf71f-9a39-4a19-80bf-6b60e232b549")
+		)
+		(pin "8"
+			(uuid "83067fb3-99f7-4c59-984f-3421fae6eb26")
+		)
+		(pin "9"
+			(uuid "66ea823f-e29e-4047-81e8-6c920efff32c")
+		)
+		(pin "10"
+			(uuid "00efe65d-32e4-4d47-853a-b6fa1a2cb800")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K304")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K404")
+					(unit 1)
+				)
+			)
+		)
 	)
-
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 139.7 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "13f502ef-598d-4d86-9e05-3f0c2ea014b2")
+		(property "Reference" "K303"
+			(at 139.7 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AZ850 CH3 audio"
+			(at 139.7 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "3366d710-8ed3-47a4-a5ac-fa34b26a77f2")
+		)
+		(pin "2"
+			(uuid "01cb6bde-c9f0-4e8c-9d5b-f0dddc7dd819")
+		)
+		(pin "3"
+			(uuid "9384f71c-116d-47b9-b13a-37bcdc1b9024")
+		)
+		(pin "4"
+			(uuid "7cbbcedd-ce2f-4633-9065-de5e4a60414b")
+		)
+		(pin "5"
+			(uuid "d7e583d6-ffb1-4737-9bae-29630a2eeb95")
+		)
+		(pin "6"
+			(uuid "82341469-ba5a-491d-867a-13561e1605b7")
+		)
+		(pin "7"
+			(uuid "e51d1a8c-9888-4fd9-847e-2362525b61c4")
+		)
+		(pin "8"
+			(uuid "7aee62c6-cd18-4fe7-938a-c57bac07dfd5")
+		)
+		(pin "9"
+			(uuid "db453096-289c-4d34-b49d-9961566793b4")
+		)
+		(pin "10"
+			(uuid "10e06922-cf16-40a0-9f2e-0b247b1b1d81")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K303")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K403")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(symbol
 		(lib_id "Interface_Expansion:MCP23017-E/SP")
 		(at 63.5 50.8 0)
@@ -2830,7 +3038,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "171be4ea-b27d-4fea-a935-cd38994e62db")
-		(property "Reference" "U1"
+		(property "Reference" "U301"
 			(at 63.5 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2840,9 +3048,8 @@
 				)
 			)
 		)
-
 		(property "Value" "MCP23017 addr0x20"
-			(at 63.5 53.339999999999996 0)
+			(at 63.5 53.34 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2851,55 +3058,50 @@
 				)
 			)
 		)
-
 		(property "Footprint" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(property "Datasheet" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(property "Description" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(property "Addr" "0x20 A / 0x21 B"
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(pin "1"
 			(uuid "f21ec086-bf84-427c-9ad9-17f6ca2f7432")
 		)
@@ -2987,13 +3189,430 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "U1")
+					(reference "U301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "U401")
 					(unit 1)
 				)
 			)
 		)
 	)
-
+	(symbol
+		(lib_id "Connector:Conn_01x04_Pin")
+		(at 25.4 43.18 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1c2899de-95ab-415f-be4d-5f843a8ec56d")
+		(property "Reference" "J_I2C301"
+			(at 25.4 40.64 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "I2C to Control"
+			(at 25.4 45.72 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "40b2df9c-a65a-4e71-8bc5-8cb4d124253c")
+		)
+		(pin "2"
+			(uuid "6f6ee579-3e36-4ee4-bbc5-de6abf9b6b78")
+		)
+		(pin "3"
+			(uuid "8c86da84-9d90-477b-b734-eb788077e039")
+		)
+		(pin "4"
+			(uuid "9656fdc0-3932-47b9-9d5f-8ef2fed0353b")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_I2C301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_I2C401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 114.3 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3d7e9583-e844-4a99-b276-7ceb2dc36518")
+		(property "Reference" "K301"
+			(at 114.3 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AZ850 CH1 audio"
+			(at 114.3 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e8d93524-c19d-4684-b11a-6750096e9383")
+		)
+		(pin "2"
+			(uuid "0eaf04a4-528d-4e5a-9012-3793d1eb0289")
+		)
+		(pin "3"
+			(uuid "5408222d-b867-48f4-9e83-c2aab9c41f08")
+		)
+		(pin "4"
+			(uuid "eb086a4f-d93a-4512-b47f-273e3c142fcc")
+		)
+		(pin "5"
+			(uuid "176fc480-5a39-4215-981d-d354e347e9b6")
+		)
+		(pin "6"
+			(uuid "e0093efa-f783-4e94-baaf-2c26a265dc24")
+		)
+		(pin "7"
+			(uuid "7fd3ee00-5142-45f1-ba1b-6a2f83603bf9")
+		)
+		(pin "8"
+			(uuid "245952d6-526f-4f5f-929f-c027f2fa171d")
+		)
+		(pin "9"
+			(uuid "bc2bc76c-b42e-485c-97d5-a8bbfd159ff6")
+		)
+		(pin "10"
+			(uuid "880d9b87-1c6f-4318-932d-ca33e44b3552")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 127 50.8 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "47f86028-2c5d-48ec-ab85-56ca4f6ca222")
+		(property "Reference" "K305"
+			(at 127 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AZ850 CH2 pwr"
+			(at 127 53.34 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6f0b24a6-dcd0-4639-84a7-4b525cfda6a5")
+		)
+		(pin "2"
+			(uuid "bd9becad-3bab-4845-bb04-263339449eb5")
+		)
+		(pin "3"
+			(uuid "2175dd45-69ea-419b-aa27-3f912ac1edc7")
+		)
+		(pin "4"
+			(uuid "33404e2c-c9a7-48aa-a66d-159a08aad1d7")
+		)
+		(pin "5"
+			(uuid "6ee3852f-22f1-47be-92da-7317ac8765ba")
+		)
+		(pin "6"
+			(uuid "838bcb3f-aae3-4b2c-8d1b-1d8db8e00e26")
+		)
+		(pin "7"
+			(uuid "1172d5f7-2666-4af7-8458-c92a2f6b78d2")
+		)
+		(pin "8"
+			(uuid "00e464e8-481e-4691-bce6-2d62962037cc")
+		)
+		(pin "9"
+			(uuid "c4382236-c30c-4077-bc07-f265db4ffeb4")
+		)
+		(pin "10"
+			(uuid "9d0f0abe-5895-4167-b9d0-46940a327eb7")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K305")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K405")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 127 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8a554a9f-1f90-4b78-a8e4-ed2fb6663139")
+		(property "Reference" "K302"
+			(at 127 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AZ850 CH2 audio"
+			(at 127 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e010d3f2-f027-4c5e-949c-85606c2df12c")
+		)
+		(pin "2"
+			(uuid "1cdd4203-5288-43d9-86da-aa0f042e517d")
+		)
+		(pin "3"
+			(uuid "da950005-7920-4bb8-bcbf-29ad63fb8eb5")
+		)
+		(pin "4"
+			(uuid "a6a4595b-af20-480f-b86c-06de6038f005")
+		)
+		(pin "5"
+			(uuid "bb186edf-605c-4b34-babe-7e9a97766984")
+		)
+		(pin "6"
+			(uuid "0238cd98-9f1b-4fab-abf4-7cc07898e186")
+		)
+		(pin "7"
+			(uuid "762a58ef-8d05-4653-a92c-d549e44f0178")
+		)
+		(pin "8"
+			(uuid "240d511c-396f-4085-a009-005fd32c1f56")
+		)
+		(pin "9"
+			(uuid "3bad5066-a3dc-426c-92fc-53147f66ed0e")
+		)
+		(pin "10"
+			(uuid "38c4796b-a280-42e3-9e91-6c229ec4383e")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K302")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K402")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(symbol
 		(lib_id "Transistor_Array:ULN2803A")
 		(at 88.9 50.8 0)
@@ -3006,7 +3625,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "96e3cefd-9710-4f6e-a7e0-0c3daf68f6f6")
-		(property "Reference" "U2"
+		(property "Reference" "U302"
 			(at 88.9 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3016,9 +3635,8 @@
 				)
 			)
 		)
-
 		(property "Value" "ULN2803A"
-			(at 88.9 53.339999999999996 0)
+			(at 88.9 53.34 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3027,43 +3645,39 @@
 				)
 			)
 		)
-
 		(property "Footprint" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(property "Datasheet" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(property "Description" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(pin "1"
 			(uuid "fb44f593-bfb9-455b-91b1-9feaff8b3d6e")
 		)
@@ -3121,655 +3735,16 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "U2")
+					(reference "U302")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "U402")
 					(unit 1)
 				)
 			)
 		)
 	)
-
-	(symbol
-		(lib_id "Relay:AZ850P2-x")
-		(at 114.3 40.64 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3d7e9583-e844-4a99-b276-7ceb2dc36518")
-		(property "Reference" "K1"
-			(at 114.3 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Value" "AZ850 CH1 audio"
-			(at 114.3 43.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Description" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(pin "1"
-			(uuid "e8d93524-c19d-4684-b11a-6750096e9383")
-		)
-		(pin "2"
-			(uuid "0eaf04a4-528d-4e5a-9012-3793d1eb0289")
-		)
-		(pin "3"
-			(uuid "5408222d-b867-48f4-9e83-c2aab9c41f08")
-		)
-		(pin "4"
-			(uuid "eb086a4f-d93a-4512-b47f-273e3c142fcc")
-		)
-		(pin "5"
-			(uuid "176fc480-5a39-4215-981d-d354e347e9b6")
-		)
-		(pin "6"
-			(uuid "e0093efa-f783-4e94-baaf-2c26a265dc24")
-		)
-		(pin "7"
-			(uuid "7fd3ee00-5142-45f1-ba1b-6a2f83603bf9")
-		)
-		(pin "8"
-			(uuid "245952d6-526f-4f5f-929f-c027f2fa171d")
-		)
-		(pin "9"
-			(uuid "bc2bc76c-b42e-485c-97d5-a8bbfd159ff6")
-		)
-		(pin "10"
-			(uuid "880d9b87-1c6f-4318-932d-ca33e44b3552")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "K1")
-					(unit 1)
-				)
-			)
-		)
-	)
-
-	(symbol
-		(lib_id "Relay:AZ850P2-x")
-		(at 114.3 50.8 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0cd54ff5-da36-4149-9fff-68e6f12bc3d6")
-		(property "Reference" "K2"
-			(at 114.3 48.26 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Value" "AZ850 CH1 pwr"
-			(at 114.3 53.339999999999996 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Description" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(pin "1"
-			(uuid "2ca0a6f8-51cc-4d93-ae73-ba9aa5b09476")
-		)
-		(pin "2"
-			(uuid "c210003d-0cef-489b-8e13-180ce5ef880b")
-		)
-		(pin "3"
-			(uuid "967d275f-e933-438b-b6db-e4a1148d41bc")
-		)
-		(pin "4"
-			(uuid "9bb721b5-3bc9-47fc-848e-c0141ca483cd")
-		)
-		(pin "5"
-			(uuid "62eb9841-1db9-4e43-8b71-af781243805e")
-		)
-		(pin "6"
-			(uuid "f25924db-e06f-4008-aa6c-1ea54a2a6f09")
-		)
-		(pin "7"
-			(uuid "f1fcf71f-9a39-4a19-80bf-6b60e232b549")
-		)
-		(pin "8"
-			(uuid "83067fb3-99f7-4c59-984f-3421fae6eb26")
-		)
-		(pin "9"
-			(uuid "66ea823f-e29e-4047-81e8-6c920efff32c")
-		)
-		(pin "10"
-			(uuid "00efe65d-32e4-4d47-853a-b6fa1a2cb800")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "K2")
-					(unit 1)
-				)
-			)
-		)
-	)
-
-	(symbol
-		(lib_id "Relay:AZ850P2-x")
-		(at 127.0 40.64 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8a554a9f-1f90-4b78-a8e4-ed2fb6663139")
-		(property "Reference" "K3"
-			(at 127.0 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Value" "AZ850 CH2 audio"
-			(at 127.0 43.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Description" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(pin "1"
-			(uuid "e010d3f2-f027-4c5e-949c-85606c2df12c")
-		)
-		(pin "2"
-			(uuid "1cdd4203-5288-43d9-86da-aa0f042e517d")
-		)
-		(pin "3"
-			(uuid "da950005-7920-4bb8-bcbf-29ad63fb8eb5")
-		)
-		(pin "4"
-			(uuid "a6a4595b-af20-480f-b86c-06de6038f005")
-		)
-		(pin "5"
-			(uuid "bb186edf-605c-4b34-babe-7e9a97766984")
-		)
-		(pin "6"
-			(uuid "0238cd98-9f1b-4fab-abf4-7cc07898e186")
-		)
-		(pin "7"
-			(uuid "762a58ef-8d05-4653-a92c-d549e44f0178")
-		)
-		(pin "8"
-			(uuid "240d511c-396f-4085-a009-005fd32c1f56")
-		)
-		(pin "9"
-			(uuid "3bad5066-a3dc-426c-92fc-53147f66ed0e")
-		)
-		(pin "10"
-			(uuid "38c4796b-a280-42e3-9e91-6c229ec4383e")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "K3")
-					(unit 1)
-				)
-			)
-		)
-	)
-
-	(symbol
-		(lib_id "Relay:AZ850P2-x")
-		(at 127.0 50.8 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "47f86028-2c5d-48ec-ab85-56ca4f6ca222")
-		(property "Reference" "K4"
-			(at 127.0 48.26 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Value" "AZ850 CH2 pwr"
-			(at 127.0 53.339999999999996 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Description" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(pin "1"
-			(uuid "6f0b24a6-dcd0-4639-84a7-4b525cfda6a5")
-		)
-		(pin "2"
-			(uuid "bd9becad-3bab-4845-bb04-263339449eb5")
-		)
-		(pin "3"
-			(uuid "2175dd45-69ea-419b-aa27-3f912ac1edc7")
-		)
-		(pin "4"
-			(uuid "33404e2c-c9a7-48aa-a66d-159a08aad1d7")
-		)
-		(pin "5"
-			(uuid "6ee3852f-22f1-47be-92da-7317ac8765ba")
-		)
-		(pin "6"
-			(uuid "838bcb3f-aae3-4b2c-8d1b-1d8db8e00e26")
-		)
-		(pin "7"
-			(uuid "1172d5f7-2666-4af7-8458-c92a2f6b78d2")
-		)
-		(pin "8"
-			(uuid "00e464e8-481e-4691-bce6-2d62962037cc")
-		)
-		(pin "9"
-			(uuid "c4382236-c30c-4077-bc07-f265db4ffeb4")
-		)
-		(pin "10"
-			(uuid "9d0f0abe-5895-4167-b9d0-46940a327eb7")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "K4")
-					(unit 1)
-				)
-			)
-		)
-	)
-
-	(symbol
-		(lib_id "Relay:AZ850P2-x")
-		(at 139.7 40.64 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "13f502ef-598d-4d86-9e05-3f0c2ea014b2")
-		(property "Reference" "K5"
-			(at 139.7 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Value" "AZ850 CH3 audio"
-			(at 139.7 43.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Description" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(pin "1"
-			(uuid "3366d710-8ed3-47a4-a5ac-fa34b26a77f2")
-		)
-		(pin "2"
-			(uuid "01cb6bde-c9f0-4e8c-9d5b-f0dddc7dd819")
-		)
-		(pin "3"
-			(uuid "9384f71c-116d-47b9-b13a-37bcdc1b9024")
-		)
-		(pin "4"
-			(uuid "7cbbcedd-ce2f-4633-9065-de5e4a60414b")
-		)
-		(pin "5"
-			(uuid "d7e583d6-ffb1-4737-9bae-29630a2eeb95")
-		)
-		(pin "6"
-			(uuid "82341469-ba5a-491d-867a-13561e1605b7")
-		)
-		(pin "7"
-			(uuid "e51d1a8c-9888-4fd9-847e-2362525b61c4")
-		)
-		(pin "8"
-			(uuid "7aee62c6-cd18-4fe7-938a-c57bac07dfd5")
-		)
-		(pin "9"
-			(uuid "db453096-289c-4d34-b49d-9961566793b4")
-		)
-		(pin "10"
-			(uuid "10e06922-cf16-40a0-9f2e-0b247b1b1d81")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "K5")
-					(unit 1)
-				)
-			)
-		)
-	)
-
-	(symbol
-		(lib_id "Connector:Conn_01x04_Pin")
-		(at 25.4 43.18 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1c2899de-95ab-415f-be4d-5f843a8ec56d")
-		(property "Reference" "J_I2C"
-			(at 25.4 40.64 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Value" "I2C to Control"
-			(at 25.4 45.72 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Description" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(pin "1"
-			(uuid "40b2df9c-a65a-4e71-8bc5-8cb4d124253c")
-		)
-		(pin "2"
-			(uuid "6f6ee579-3e36-4ee4-bbc5-de6abf9b6b78")
-		)
-		(pin "3"
-			(uuid "8c86da84-9d90-477b-b734-eb788077e039")
-		)
-		(pin "4"
-			(uuid "9656fdc0-3932-47b9-9d5f-8ef2fed0353b")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "J_I2C")
-					(unit 1)
-				)
-			)
-		)
-	)
-
 	(symbol
 		(lib_id "Connector:Conn_01x03_Pin")
 		(at 165.1 91.44 0)
@@ -3782,7 +3757,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ab0191db-bb58-45c5-9822-f6d3001fa480")
-		(property "Reference" "J_COMMON"
+		(property "Reference" "J_COMMON301"
 			(at 165.1 87.63 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3792,9 +3767,8 @@
 				)
 			)
 		)
-
 		(property "Value" "COMMON_LR_OUT"
-			(at 165.1 92.71000000000001 0)
+			(at 165.1 92.71 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3803,43 +3777,39 @@
 				)
 			)
 		)
-
 		(property "Footprint" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(property "Datasheet" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(property "Description" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(pin "1"
 			(uuid "d24edf92-2e69-4b4f-8c32-d410e5fd8465")
 		)
@@ -3852,13 +3822,16 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "J_COMMON")
+					(reference "J_COMMON301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_COMMON401")
 					(unit 1)
 				)
 			)
 		)
 	)
-
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
 		(at 165.1 35.56 0)
@@ -3871,7 +3844,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f44c51a9-e3dc-4764-adb6-9f6604e4dc13")
-		(property "Reference" "J_AMP1"
+		(property "Reference" "J_AMP301"
 			(at 165.1 33.02 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3881,7 +3854,6 @@
 				)
 			)
 		)
-
 		(property "Value" "AMP1 L/R"
 			(at 165.1 38.1 0)
 			(show_name no)
@@ -3892,43 +3864,39 @@
 				)
 			)
 		)
-
 		(property "Footprint" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(property "Datasheet" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(property "Description" ""
 			(at 0 0 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-
 		(pin "1"
 			(uuid "d35eb7a5-149c-4ef9-945c-58f8d2317bf4")
 		)
@@ -3938,17 +3906,14 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "J_AMP1")
+					(reference "J_AMP301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_AMP401")
 					(unit 1)
 				)
 			)
-		)
-	)
-
-
-	(sheet_instances
-		(path "/"
-			(page "1")
 		)
 	)
 )

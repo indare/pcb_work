@@ -6,13 +6,14 @@
 
 | Net | 源 | 先 | 形式 |
 |---|---|---|---|
-| `+12V` | PowerModule J202-1 | RelayBoard×2, ControlPanel, Amp×10 `V+` 端子 | 端子台 3P 幹線 |
-| `-12V` | PowerModule J202-2 | 同上 `V-` | 同上 |
-| `A_GND` | PowerModule J202-3 | 全アナログ島（NetTie 一点 — **位置未決**） | 端子台 |
-| `PD_12V` | PowerModule J_PD | ControlPanel PWR SW 入力 | 2P ケーブル |
-| `PD_12V_SW` | ControlPanel SW 出力 | PowerModule F1/DKMW20 +Vin | 2P 戻り |
-| `PD_GND` | CH224/DKMW −Vin | Panel LED 戻り | 2P |
-| `VCC_TONE` | PowerModule LDO | ControlPanel PT2314 | 2P or 同一 PCB |
+| `+12V` | PowerModule **J201**-1 | RelayBoard×2, ControlPanel, Amp×10 `V+` 端子 | 端子台 3P 幹線 |
+| `-12V` | PowerModule **J201**-2 | 同上 `V-` | 同上 |
+| `A_GND` | PowerModule **J201**-3 | 全アナログ島（NetTie 一点 — **位置未決**） | 端子台 |
+| PD 入 | 外付け **50224 等** → Power **J202**（1=GND 2=+12） | 板上 `PD_12V` / `PD_GND` | 2P（トポロジ A） |
+| `PD_12V` | Power（J202 後） | ControlPanel PWR SW 入力 | **往復用端子まだ**（A のまま要追加） |
+| `PD_12V_SW` | ControlPanel SW1 出力 | Power F1 → DKMW +Vin | 2P 戻り |
+| `PD_GND` | J202 / DKMW −Vin | Panel LED 戻り | 上記とセット |
+| `VCC_TONE` | Power LM7809 → **J203**（1=A_GND 2=+9） | ControlPanel PT2314 | 2P（星型 A_GND と二重ループにしない） |
 
 ## デジタル / I²C（Q3 拓扑 **保留**）
 
@@ -45,5 +46,6 @@
 
 - **Q3** I²C 拓扑（daisy / スター）
 - GND NetTie 物理位置
+- PD 入口トポロジ **A（いまの図）vs B（パネル入口）** — 議論打ち切り。A なら Power↔Panel 往復端子が追加で必要
 - ENC / ノブの正確な秋月コード（在庫次第）
 - ERC / ネットリスト整合

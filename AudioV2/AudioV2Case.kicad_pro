@@ -576,7 +576,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "AudioCase.kicad_pro",
+    "filename": "AudioV2Case.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -605,11 +605,7 @@
       "version": 5
     },
     "net_colors": null,
-    "netclass_assignments": {
-      "GND": [
-        "Default"
-      ]
-    },
+    "netclass_assignments": null,
     "netclass_patterns": [
       {
         "netclass": "Default",
@@ -735,7 +731,7 @@
         },
         {
           "group_by": false,
-          "label": "\u8aac\u660e",
+          "label": "説明",
           "name": "Description",
           "show": false
         },
@@ -802,7 +798,7 @@
         "uuid": "a1000001-0001-4001-8001-000000000001"
       }
     ],
-    "used_designators": "",
+    "used_designators": "C201-208,C213-220,C501-512,J_PD101,J_PD201-202,RV601-602,F201,J201-203,R501-515,#FLG201-202,#FLG501,U201-203,U301-302,U401-402,U501-503,D201,D501-502,#PWR201-202,SW201,SW501,SW601-602,ENC501-503,J_AMP301,J_AMP401,J_COMMON301,J_COMMON401,J_HP601,J_I2C301,J_I2C401,J_LINE601,J_OLED501,K301-305,K401-405,J_201-202",
     "variants": []
   },
   "sheets": [

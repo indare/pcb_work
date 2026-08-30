@@ -11,6 +11,7 @@
 - **KiCad 素案** — 手回し音量構成（PT2314 28pin / SW_DP3T / A50k Dual）。[CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md)
 - **品番:** [PARTS.md](PARTS.md) — DEST **C&K 7303SYZQE**、音量 **Alps RK27112A00CF** ×2、制御 OLED **2.42″**、スペアナ **Waveshare 29318**
 - **次:** ERC 整理、OLED FP 差し替え、未使用 PT2314 入力、RelayBoard 本配線
+- **エージェント再開:** [AGENT_HANDOFF.md](AGENT_HANDOFF.md)（クラウド会話の長期記憶）
 
 詳細は [DECISIONS.md](DECISIONS.md)。DEST ラダーは [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。過去の音量 IC 比較（アーカイブ）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
 

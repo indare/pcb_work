@@ -117,4 +117,4 @@ python3 Audio/scripts/check_sexpr.py -q AudioV2
 
 ## ブランチ
 
-`cursor/audiov2-kicad-scaffold-2c9e`（`cursor/audiov2-scaffold-2c9e` から分岐可）
+素案は `main` にマージ済み。以降は `main` から（歴史ブランチは使わない）。再開: [AGENT_HANDOFF.md](AGENT_HANDOFF.md)。
