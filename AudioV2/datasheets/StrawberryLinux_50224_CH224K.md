@@ -4,9 +4,8 @@
 
 - 商品: [50224 CH224 USB-PD電源モジュール](https://strawberry-linux.com/catalog/items?code=50224)
 - コントローラ: WCH **CH224K**（昇降圧なし・PD/QC ネゴシエーションのみ）
-- ローカル PDF: [WCH_CH224.pdf](WCH_CH224.pdf)（チップ DS）
-
-> モジュール説明書 PDF（`ch224k-manual.pdf`）は [商品ページ](https://strawberry-linux.com/catalog/items?code=50224) から取得。クラウド環境からの直接 DL は 403 になることがある。
+- モジュール説明書: [StrawberryLinux_CH224K_manual.pdf](StrawberryLinux_CH224K_manual.pdf)（[ch224k-manual.pdf](https://strawberry-linux.com/pub/ch224k-manual.pdf) と同内容）
+- チップ DS: [WCH_CH224.pdf](WCH_CH224.pdf)
 
 ## 仕様（メーカー記載）
 

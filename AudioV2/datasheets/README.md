@@ -6,7 +6,7 @@
 
 | 部品 | 用途 | ローカル | 取得元 |
 |---|---|---|---|
-| **[50224] CH224** | USB-PD 入力（デフォルト） | [StrawberryLinux_50224_CH224K.md](StrawberryLinux_50224_CH224K.md) + [WCH_CH224.pdf](WCH_CH224.pdf) | [ストロベリー・リナックス 50224](https://strawberry-linux.com/catalog/items?code=50224)。モジュール説明書 PDF は商品ページから |
+| **[50224] CH224** | USB-PD 入力（デフォルト） | [StrawberryLinux_CH224K_manual.pdf](StrawberryLinux_CH224K_manual.pdf) / [50224 メモ](StrawberryLinux_50224_CH224K.md) / [WCH_CH224.pdf](WCH_CH224.pdf) | [50224 商品](https://strawberry-linux.com/catalog/items?code=50224) / [説明書 PDF](https://strawberry-linux.com/pub/ch224k-manual.pdf) |
 | **DKMW20F-12** | ±12 V DC-DC（AudioV2 PowerModule） | [MeanWell_SKMW20_DKMW20.pdf](MeanWell_SKMW20_DKMW20.pdf) | [Mean Well SKMW20/DKMW20](https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20)。F-12 は ±12 V / ±830 mA |
 | **BP5293-50** | 操作板 +5 V（Controll 系） | [ROHM_BP5293-xx.pdf](ROHM_BP5293-xx.pdf) | [ROHM BP5293-xx](https://www.rohm.com/products/power-management/switching-regulators-integrated-fet/bp5293-xx-series) |
 
@@ -53,3 +53,4 @@
 
 - 2026-08-30: 初回一括取得
 - 2026-08-30: CH224 [50224]、ENC 機械仕様、Amp/HP 流用方針。OPA1656 削除
+- 2026-08-30: `ch224k-manual.pdf` を `StrawberryLinux_CH224K_manual.pdf` としてローカル保存
