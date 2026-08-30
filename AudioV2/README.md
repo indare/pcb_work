@@ -7,7 +7,7 @@
 - **電源: ±12 V** — **PowerModule 再設計**（DKMW20F-12 + **USB-C / CH224 内蔵**）
 - **Amp / HP** — `Audio/` 製造済み基板を **物理流用**（電源電圧にほぼ非依存。AudioV2 回路図には載せない）
 - 音量: PGA2310PA ×2（SPI）、トーン: PT2314（I²C、Amp 前）
-- **次:** KiCad 起こし（§6.9 の 5 シート）
+- **次:** **§11** 物理基板分割・基板間接続（端子台 vs コネクタ）→ その後 KiCad
 
 詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
 
