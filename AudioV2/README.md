@@ -2,25 +2,25 @@
 
 `Audio/`（AudioCase）を参考に、操作系を Pico 2 前提で再構成する作業用ディレクトリ。
 
-- **計測 / スペアナ**（`MeasurementADC` + 計測 Pico 2）は現行どおり独立のまま想定
-- **ラッチングリレーで多系統 Amp のうち 1 つだけ有効**する構成は残す
-- **操作 Pico は 1 台**＋リレー盤は **I²C GPIO 拡張**
-- **電源: ±12 V**（DKMW20F-12）、PD デフォルト **[50224] CH224**（差し替え可）
+- **計測 / スペアナ**（`MeasurementADC` + 計測 Pico 2）は現行どおり独立
+- **操作 Pico 1 台**＋リレー盤は **I²C GPIO 拡張（MCP23017）**
+- **電源: ±12 V** — **PowerModule 再設計**（DKMW20F-12 + **USB-C / CH224 内蔵**）
+- **Amp / HP** — `Audio/` 製造済み基板を **物理流用**（電源電圧にほぼ非依存。AudioV2 回路図には載せない）
 - 音量: PGA2310PA ×2（SPI）、トーン: PT2314（I²C、Amp 前）
-- 回路図は **§6 起こし範囲**を選んでから（候補: **D1.5** 推奨）
+- **次:** KiCad 起こし（§6.9 の 5 シート）
 
-詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較（決定済み）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。予定部品のデータシートは [datasheets/](datasheets/)。
+詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
 
 ## いまの `Audio/` からの参照元
 
-| 流用したいもの | 参照 |
+| 流用・参照 | 内容 |
 |---|---|
-| リレー＋端子台＋ULN＋PD 5V | `Audio/Controll.kicad_sch` |
-| 親 UI ファーム（ENC / OLED / リレー） | `Control/` |
-| Amp / HP バッファ / 電源 | `AmpModule` / `HeadphoneBuffer` / `PowerModule` |
-| GND 分離の型 | `MeasurementADC` の NetTie（`A_GND`↔`ADC_GND`↔`D_GND`） |
-| 現行音量位置 | 親シートの `RV101` / `RV102` |
+| Amp / HP バッファ | **実基板のみ**流用。KiCad には載せない |
+| PowerModule | **再設計**の参考（`Audio/PowerModule.kicad_sch` は F-15） |
+| リレー＋端子台＋ULN | `Audio/Controll.kicad_sch` |
+| 親 UI ファーム（原型） | `Control/` → 新規 `AudioV2/control_fw/` |
+| GND 分離の型 | `MeasurementADC` の NetTie |
 
 ## このディレクトリの置き方
 
-回路図（`.kicad_sch` / `.kicad_pro`）は未作成。判断が決まったらここに新規プロジェクトとして起こす（`Audio/` 直編集はしない）。
+回路図（`.kicad_sch` / `.kicad_pro`）は未作成。判断確定済み — ここに新規プロジェクトとして起こす（`Audio/` 直編集はしない）。

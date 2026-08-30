@@ -6,7 +6,7 @@
 
 | 部品 | 用途 | ローカル | 取得元 |
 |---|---|---|---|
-| **[50224] CH224** | USB-PD 入力 | [StrawberryLinux_CH224K_manual.pdf](StrawberryLinux_CH224K_manual.pdf) 他 | ジャンパ **12 V** → PWR SW → DKMW20 + パネル LED（§9） |
+| **[50224] CH224** | USB-PD（PowerModule 内蔵） | [StrawberryLinux_CH224K_manual.pdf](StrawberryLinux_CH224K_manual.pdf) 他 | AudioV2 PowerModule **再設計**に統合 |
 | **DKMW20F-12** | ±12 V DC-DC（AudioV2 PowerModule） | [MeanWell_SKMW20_DKMW20.pdf](MeanWell_SKMW20_DKMW20.pdf) | [Mean Well SKMW20/DKMW20](https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20)。F-12 は ±12 V / ±830 mA |
 | **BP5293-50** | 操作板 +5 V（Controll 系） | [ROHM_BP5293-xx.pdf](ROHM_BP5293-xx.pdf) | [ROHM BP5293-xx](https://www.rohm.com/products/power-management/switching-regulators-integrated-fet/bp5293-xx-series) |
 
