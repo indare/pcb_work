@@ -4,7 +4,1413 @@
 	(generator_version "10.0")
 	(uuid "b2000007-0007-4007-8007-000000000007")
 	(paper "A4")
-	(lib_symbols)
+	(lib_symbols
+	(symbol "Relay:AZ850P2-x"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "K"
+				(at 16.51 3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "AZ850P2-x"
+				(at 16.51 1.27 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Relay_THT:Relay_DPDT_FRT5"
+				(at 13.97 1.27 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "http://www.azettler.com/pdfs/az850.pdf"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "American Zettler, Microminiature Polarised Dual Pole Relay Bistable"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "Miniature Polarised Relay Dual Pole Bistable"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Relay*DPDT*FRT5*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "AZ850P2-x_0_0"
+				(polyline
+					(pts
+						(xy -2.54 5.08) (xy -2.54 2.54) (xy -1.905 3.175) (xy -2.54 3.81)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 5.08) (xy 2.54 2.54) (xy 1.905 3.175) (xy 2.54 3.81)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 5.08) (xy 7.62 2.54) (xy 8.255 3.175) (xy 7.62 3.81)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 5.08) (xy 12.7 2.54) (xy 12.065 3.175) (xy 12.7 3.81)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "+"
+					(at -12.065 2.667 0)
+					(effects
+						(font
+							(size 0.762 0.762)
+						)
+					)
+				)
+				(text "+"
+					(at -12.065 -2.413 0)
+					(effects
+						(font
+							(size 0.762 0.762)
+						)
+					)
+				)
+				(text "S"
+					(at -10.033 2.794 0)
+					(effects
+						(font
+							(size 1.016 1.016)
+						)
+					)
+				)
+				(text "R"
+					(at -10.033 -2.921 0)
+					(effects
+						(font
+							(size 1.016 1.016)
+						)
+					)
+				)
+			)
+			(symbol "AZ850P2-x_0_1"
+				(rectangle
+					(start -15.24 5.08)
+					(end 15.24 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -13.335 1.905)
+					(end -6.985 -1.905)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -13.335 0) (xy -6.35 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -13.081 0) (xy -7.366 1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -13.081 -1.905) (xy -7.493 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -12.7 5.08) (xy -12.7 1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -12.7 -5.08) (xy -12.7 -1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -7.62 5.08) (xy -7.62 1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -7.62 -5.08) (xy -7.62 -1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.715 0) (xy -5.08 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -4.445 0) (xy -3.81 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -3.175 0) (xy -2.54 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.905 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 0) (xy 0 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -2.54) (xy -1.905 3.81)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -2.54) (xy 0 -5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.635 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.905 0) (xy 2.54 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.175 0) (xy 3.81 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.445 0) (xy 5.08 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.715 0) (xy 6.35 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 6.985 0) (xy 7.62 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 8.255 0) (xy 8.89 0)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.16 -2.54) (xy 8.255 3.81)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.16 -2.54) (xy 10.16 -5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "AZ850P2-x_1_1"
+				(pin passive line
+					(at -12.7 7.62 270)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -2.54 7.62 270)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 7.62 270)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -7.62 7.62 270)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -7.62 -7.62 90)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 7.62 270)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 10.16 -7.62 90)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 7.62 270)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -12.7 -7.62 90)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	(symbol "Transistor_Array:ULN2803A"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 0 13.335 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "ULN2803A"
+				(at 0 11.43 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 1.27 -16.51 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/uln2803a.pdf"
+				(at 2.54 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Darlington Transistor Arrays, SOIC18/DIP18"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "Darlington transistor array"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "DIP*W7.62mm* SOIC*7.5x11.6mm*P1.27mm*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "ULN2803A_0_1"
+				(rectangle
+					(start -7.62 -15.24)
+					(end 7.62 10.16)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -4.572 5.08) (xy -3.556 5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -3.556 6.096) (xy -3.556 4.064) (xy -2.032 5.08) (xy -3.556 6.096)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center -1.778 5.08)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.524 5.08) (xy 4.064 5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center -1.27 2.54)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center -1.27 0)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center -1.27 -2.286)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center -0.508 5.08)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 5.08) (xy -0.508 7.62) (xy 2.286 7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 6.731) (xy -1.016 6.731)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 5.969) (xy -1.016 5.969) (xy -0.508 6.731) (xy 0 5.969)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "ULN2803A_1_1"
+				(pin input line
+					(at -10.16 5.08 0)
+					(length 2.54)
+					(name "I1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "I2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "I3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "I4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "I5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -7.62 0)
+					(length 2.54)
+					(name "I6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -10.16 0)
+					(length 2.54)
+					(name "I7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -12.7 0)
+					(length 2.54)
+					(name "I8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -17.78 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 10.16 7.62 180)
+					(length 2.54)
+					(name "COM"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -12.7 180)
+					(length 2.54)
+					(name "O8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -10.16 180)
+					(length 2.54)
+					(name "O7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -7.62 180)
+					(length 2.54)
+					(name "O6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -5.08 180)
+					(length 2.54)
+					(name "O5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "O4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "O3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "O2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 5.08 180)
+					(length 2.54)
+					(name "O1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	(symbol "Connector:Screw_Terminal_01x02"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Screw_Terminal_01x02"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "screw terminal"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "TerminalBlock*:*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Screw_Terminal_01x02_1_1"
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.5334 0.3302) (xy 0.3302 -0.508)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.5334 -2.2098) (xy 0.3302 -3.048)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.3556 0.508) (xy 0.508 -0.3302)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.3556 -2.032) (xy 0.508 -2.8702)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 0)
+					(radius 0.635)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 -2.54)
+					(radius 0.635)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
 	(text "OutputStage — DRAFT (§11 Q2-A, same PCB as ControlPanel)\nDEST latching relays: LINE / PHONE / MUTE (AZ850 ×2~3)\nDrive: MCP23017/ULN on RelayBoard OR spare ULN on Control — TODO review\nStartup default: LINE"
 		(at 25.4 25.4 0)
 		(effects
@@ -13,7 +1419,7 @@
 			)
 			(justify left top)
 		)
-		(uuid "83ba2a39-d983-4699-b644-d463db9280ad")
+		(uuid "1b5e954a-8c49-4044-b8dc-3203dc8a738e")
 	)
 
 	(hierarchical_label "PGA_HP_L"
@@ -25,7 +1431,7 @@
 			)
 			(justify right)
 		)
-		(uuid "1cf73586-82ca-477e-97f8-d0a209aff045")
+		(uuid "e976504e-a265-4e97-b699-58fe69002863")
 	)
 
 	(hierarchical_label "PGA_HP_R"
@@ -37,7 +1443,7 @@
 			)
 			(justify right)
 		)
-		(uuid "fadad425-4ee4-4f48-807e-4f8d94af75e4")
+		(uuid "1b09c9e5-eb60-47e0-a90d-5bd923212b5d")
 	)
 
 	(hierarchical_label "PGA_LINE_L"
@@ -49,7 +1455,7 @@
 			)
 			(justify right)
 		)
-		(uuid "55d8833e-9f85-4989-8eda-3d05d0d8dd90")
+		(uuid "b2a987c7-bacf-4af8-872d-38388b5c132c")
 	)
 
 	(hierarchical_label "PGA_LINE_R"
@@ -61,7 +1467,7 @@
 			)
 			(justify right)
 		)
-		(uuid "4458d0d0-ab5c-4a84-b64c-ff4ce5a5957c")
+		(uuid "4843fc83-625f-4295-bce3-1514d17a6cb5")
 	)
 
 	(hierarchical_label "+12V"
@@ -73,7 +1479,7 @@
 			)
 			(justify right)
 		)
-		(uuid "a1360677-8ba5-466e-8ea0-66744e4f33c1")
+		(uuid "cfdcebb4-30ac-421e-9f1b-927f0a198277")
 	)
 
 	(hierarchical_label "-12V"
@@ -85,7 +1491,7 @@
 			)
 			(justify right)
 		)
-		(uuid "30fdec30-cf18-4bb9-b4e1-b2fc0f064cf2")
+		(uuid "4347425c-282a-4013-a29e-00cebfcbb819")
 	)
 
 	(hierarchical_label "A_GND"
@@ -97,7 +1503,7 @@
 			)
 			(justify right)
 		)
-		(uuid "10dd7e60-dd12-4cd1-ae8f-e9ab2eb9a2af")
+		(uuid "9b5afb19-9214-416a-83ae-978e0fafb8d3")
 	)
 
 	(hierarchical_label "PHONE_L"
@@ -109,7 +1515,7 @@
 			)
 			(justify left)
 		)
-		(uuid "d25ee4e3-b90a-40cf-8b92-69d0e7a3e787")
+		(uuid "136a3a4a-e5df-4802-9d34-bbbdd899a62c")
 	)
 
 	(hierarchical_label "PHONE_R"
@@ -121,7 +1527,7 @@
 			)
 			(justify left)
 		)
-		(uuid "73d4c05f-710b-4d1e-bae6-d0947575eca8")
+		(uuid "4093af52-eb00-44d2-a795-ab86f03d4d39")
 	)
 
 	(hierarchical_label "LINE_L"
@@ -133,7 +1539,7 @@
 			)
 			(justify left)
 		)
-		(uuid "0fbef127-db3a-4f07-8eb3-c8944f63636b")
+		(uuid "0dc6a743-ad9c-43fa-8cc2-abca351a78c7")
 	)
 
 	(hierarchical_label "LINE_R"
@@ -145,7 +1551,7 @@
 			)
 			(justify left)
 		)
-		(uuid "b4c132e6-c1f3-4cda-84f1-681a3d24f5a6")
+		(uuid "4b70b0f8-3873-47e0-b1e1-18927b1434d4")
 	)
 
 	(hierarchical_label "MUTE"
@@ -157,19 +1563,21 @@
 			)
 			(justify left)
 		)
-		(uuid "54a94ed7-faf8-4cfe-896a-e9b3b5881eb8")
+		(uuid "57c742be-52ff-4644-9fd5-5ec541f77ab2")
 	)
 
 	(symbol
 		(lib_id "Relay:AZ850P2-x")
 		(at 88.9 50.8 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "7fb54559-c0ad-4ec6-ae9a-e401068639bd")
+		(uuid "9fb69e23-13e2-46ba-b044-f7f1c28bd3d8")
 		(property "Reference" "K1"
 			(at 88.9 48.26 0)
 			(show_name no)
@@ -216,7 +1624,7 @@
 			)
 		)
 
-		(property "Description" "AudioV2 draft placeholder"
+		(property "Description" ""
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -228,6 +1636,36 @@
 			)
 		)
 
+		(pin "1"
+			(uuid "c87701a1-2f7a-4780-bcf9-352d6d6d3af2")
+		)
+		(pin "2"
+			(uuid "13234273-cbf5-4f8a-9036-bfb4441d7da8")
+		)
+		(pin "3"
+			(uuid "3e2567e9-d7ea-4468-a58a-5af91e32f98c")
+		)
+		(pin "4"
+			(uuid "4237b648-5f9c-4f0b-bc7a-e7a55fc7fb82")
+		)
+		(pin "5"
+			(uuid "808954f9-2789-4f90-b793-afeaa37937dc")
+		)
+		(pin "6"
+			(uuid "bada873a-7a8a-4b41-8002-9a1e16550a67")
+		)
+		(pin "7"
+			(uuid "1466d6dd-19b8-467c-bb8c-46982a3688d7")
+		)
+		(pin "8"
+			(uuid "cf0ab45e-ef7a-4012-b091-4836d0a930cd")
+		)
+		(pin "9"
+			(uuid "85a73a07-19a7-458d-9db1-b62e3c396c8a")
+		)
+		(pin "10"
+			(uuid "015c8695-0131-4b7e-b9d7-4341d6af79c3")
+		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
@@ -242,12 +1680,14 @@
 		(lib_id "Relay:AZ850P2-x")
 		(at 101.6 50.8 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "efb001a4-cd79-41d7-bec6-f39a96ca0fac")
+		(uuid "261016af-7448-47d6-bf0b-027884e97613")
 		(property "Reference" "K2"
 			(at 101.6 48.26 0)
 			(show_name no)
@@ -294,7 +1734,7 @@
 			)
 		)
 
-		(property "Description" "AudioV2 draft placeholder"
+		(property "Description" ""
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -306,6 +1746,36 @@
 			)
 		)
 
+		(pin "1"
+			(uuid "37a64f50-e511-47fd-ae52-920ff217897a")
+		)
+		(pin "2"
+			(uuid "f36091a6-821e-4b84-a6a2-7e4596ce93b9")
+		)
+		(pin "3"
+			(uuid "37c828f4-abe6-4d29-9636-25e7473125cf")
+		)
+		(pin "4"
+			(uuid "1294873c-46a2-4ea0-8154-3dd9d8fd4540")
+		)
+		(pin "5"
+			(uuid "541133c0-399f-4967-be98-4bce9c1fb3ee")
+		)
+		(pin "6"
+			(uuid "5b96b0af-70e4-4e24-b586-6dc35c436a0a")
+		)
+		(pin "7"
+			(uuid "0987ebcc-f8f0-490c-95f1-9676b0cdb68a")
+		)
+		(pin "8"
+			(uuid "76994ff6-6f20-4044-bbfd-c11867902c0a")
+		)
+		(pin "9"
+			(uuid "d042558e-b422-4043-854c-352338db2080")
+		)
+		(pin "10"
+			(uuid "8e3e59b0-5b64-4aa2-a43d-6c8b5d428ad8")
+		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
@@ -320,12 +1790,14 @@
 		(lib_id "Relay:AZ850P2-x")
 		(at 114.3 50.8 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "81027624-c20c-4ad6-9db8-9dda65d944a5")
+		(uuid "9acbbe91-74b5-4b10-9d85-399a02b88c39")
 		(property "Reference" "K3"
 			(at 114.3 48.26 0)
 			(show_name no)
@@ -372,7 +1844,7 @@
 			)
 		)
 
-		(property "Description" "AudioV2 draft placeholder"
+		(property "Description" ""
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -384,6 +1856,36 @@
 			)
 		)
 
+		(pin "1"
+			(uuid "d7c88c12-5742-41f9-969d-98dad0158c5d")
+		)
+		(pin "2"
+			(uuid "602f6b69-3e23-4842-9986-69449a20f48e")
+		)
+		(pin "3"
+			(uuid "3a8a5cb2-78a7-43d9-a5f4-7bd749045332")
+		)
+		(pin "4"
+			(uuid "ed31acd9-9120-4569-bc82-23bcdb9ea5a9")
+		)
+		(pin "5"
+			(uuid "ae17e8c8-9e3d-4fa3-b7a8-33b34d2c3fc2")
+		)
+		(pin "6"
+			(uuid "20fe6290-411a-4294-b3ea-9aca5e9606fc")
+		)
+		(pin "7"
+			(uuid "f6ef9102-a402-478d-af29-e7eb0fd123f1")
+		)
+		(pin "8"
+			(uuid "228edff8-cfaf-4af7-857c-94e1141d8e2e")
+		)
+		(pin "9"
+			(uuid "28b8f68d-d3fd-4b65-b35d-194d6e104dfe")
+		)
+		(pin "10"
+			(uuid "2515c10e-0f20-4ca8-aa0c-6521a015f087")
+		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
@@ -398,12 +1900,14 @@
 		(lib_id "Transistor_Array:ULN2803A")
 		(at 63.5 50.8 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "1d8e133a-f76e-4fb5-8a8e-371880f00f59")
+		(uuid "41a6e024-0f57-419f-8899-b03f2c9316db")
 		(property "Reference" "U1"
 			(at 63.5 48.26 0)
 			(show_name no)
@@ -450,7 +1954,7 @@
 			)
 		)
 
-		(property "Description" "AudioV2 draft placeholder"
+		(property "Description" ""
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -462,6 +1966,60 @@
 			)
 		)
 
+		(pin "1"
+			(uuid "6bfc4887-ca79-4743-ac61-7b7e5014959a")
+		)
+		(pin "2"
+			(uuid "e5cd5553-fe29-4424-b143-f059d877468b")
+		)
+		(pin "3"
+			(uuid "93d99674-56ec-4cad-ac1a-4485f1535e61")
+		)
+		(pin "4"
+			(uuid "f993e278-bda1-4c43-aef0-eeb866516904")
+		)
+		(pin "5"
+			(uuid "d1a7b965-7cb8-404d-8ecf-ba63a27f2d0a")
+		)
+		(pin "6"
+			(uuid "80de6501-77bd-49ad-907d-a3251ddb6634")
+		)
+		(pin "7"
+			(uuid "9baacf17-adcd-4843-a39a-49d1ae48a80e")
+		)
+		(pin "8"
+			(uuid "70eac5cf-3f43-4ad7-97b3-a334b7a54e79")
+		)
+		(pin "9"
+			(uuid "677fa6ad-e1fe-4102-8fbe-1d63186f4fc3")
+		)
+		(pin "10"
+			(uuid "12273d94-982e-46dc-81c0-f4d2dc996d06")
+		)
+		(pin "11"
+			(uuid "2e64ae9c-69b7-4349-be5b-68ff3a0a8f71")
+		)
+		(pin "12"
+			(uuid "8965b0de-3bf3-4920-9f29-e6674f6ac7fe")
+		)
+		(pin "13"
+			(uuid "6a8645c9-f9ef-4c90-ac6e-1f6028a92f70")
+		)
+		(pin "14"
+			(uuid "77f54a1d-51e6-4155-8187-49d339dc8e50")
+		)
+		(pin "15"
+			(uuid "6e3e2e65-bc3e-49f0-bab0-6f691f813457")
+		)
+		(pin "16"
+			(uuid "8905ea95-e25c-40f1-b926-ba5063318366")
+		)
+		(pin "17"
+			(uuid "8ad3cb89-5dd7-4724-9b8a-5723b1852fd2")
+		)
+		(pin "18"
+			(uuid "4400a472-64f3-4728-b7f4-1f8b713651c3")
+		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
@@ -476,12 +2034,14 @@
 		(lib_id "Connector:Screw_Terminal_01x02")
 		(at 165.1 45.72 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "22fcdd28-d1c2-47bb-8c16-d70d2df3b5b8")
+		(uuid "fecc732f-a024-4074-ba6d-3408c1d18e42")
 		(property "Reference" "J_HP"
 			(at 165.1 43.18 0)
 			(show_name no)
@@ -528,7 +2088,7 @@
 			)
 		)
 
-		(property "Description" "AudioV2 draft placeholder"
+		(property "Description" ""
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -540,6 +2100,12 @@
 			)
 		)
 
+		(pin "1"
+			(uuid "62fadbe8-ba56-400c-ab26-a3ee1e026275")
+		)
+		(pin "2"
+			(uuid "42654ff0-05eb-4495-9f14-1bb82c2cc2f3")
+		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
@@ -554,12 +2120,14 @@
 		(lib_id "Connector:Screw_Terminal_01x02")
 		(at 165.1 50.8 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "307bc82d-7a5a-4328-983e-0d80de03c0d0")
+		(uuid "eebc1cc6-754f-4285-ab85-3806a7561f3b")
 		(property "Reference" "J_LINE"
 			(at 165.1 48.26 0)
 			(show_name no)
@@ -606,7 +2174,7 @@
 			)
 		)
 
-		(property "Description" "AudioV2 draft placeholder"
+		(property "Description" ""
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -618,6 +2186,12 @@
 			)
 		)
 
+		(pin "1"
+			(uuid "fb937bfb-c05e-4557-9d89-3cb1b4643455")
+		)
+		(pin "2"
+			(uuid "79b787af-2442-467e-a092-892d8403c2cd")
+		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"

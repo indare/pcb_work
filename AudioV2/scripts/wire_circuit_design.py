@@ -19,6 +19,8 @@ from generate_kicad_scaffold import (  # noqa: E402
     UUID_OUTPUT_INST,
     UUID_POWER_FILE,
     UUID_POWER_INST,
+    UUID_RELAY_A,
+    UUID_RELAY_FILE,
     hier_label,
     sch_open,
     sheet_block,
@@ -44,6 +46,35 @@ from sch_helpers import (  # noqa: E402
 PATH_CTRL = f"/{PARENT}/{UUID_CONTROL_INST}"
 PATH_PWR = f"/{PARENT}/{UUID_POWER_INST}"
 PATH_OUT = f"/{PARENT}/{UUID_OUTPUT_INST}"
+PATH_RELAY = f"/{PARENT}/{UUID_RELAY_A}"
+
+CTRL_LIBS = [
+    "Device:C",
+    "Device:R",
+    "Device:LED",
+    "Device:RotaryEncoder_Switch",
+    "Switch:SW_SPST",
+    "AudioV2:PT2314",
+    "Audio:PGA2310PA",
+    "MCU_Module:RaspberryPi_Pico",
+    "Display_Graphic:SSD1306-128x64",
+    "BP5293_ROHM:BP5293-50",
+]
+
+RELAY_LIBS = [
+    "Interface_Expansion:MCP23017-E/SP",
+    "Transistor_Array:ULN2803A",
+    "Relay:AZ850P2-x",
+    "Connector:Conn_01x04_Pin",
+    "Connector:Conn_01x03_Pin",
+    "Connector:Screw_Terminal_01x02",
+]
+
+OUTPUT_LIBS = [
+    "Relay:AZ850P2-x",
+    "Transistor_Array:ULN2803A",
+    "Connector:Screw_Terminal_01x02",
+]
 
 
 def pin(sx: float, sy: float, px: float, py: float) -> tuple[float, float]:
@@ -166,8 +197,25 @@ def pwr_flag(x: float, y: float) -> str:
 """
 
 
+def cap(ref: str, val: str, x: float, y: float, path: str) -> str:
+    return symbol_inst_v10("Device:C", ref, val, x, y, 0, path)
+
+
 def res(ref: str, val: str, x: float, y: float, path: str) -> str:
-    return symbol_inst("Device:R", ref, val, x, y, 0, path)
+    return symbol_inst_v10("Device:R", ref, val, x, y, 0, path)
+
+
+def sym(
+    lib_id: str,
+    ref: str,
+    val: str,
+    x: float,
+    y: float,
+    rot: int,
+    path: str,
+    extra: list[tuple[str, str]] | None = None,
+) -> str:
+    return symbol_inst_v10(lib_id, ref, val, x, y, rot, path, extra_props=extra)
 
 
 def pt2314_pin(sx: float, sy: float, index: int) -> tuple[float, float]:
@@ -209,10 +257,6 @@ def bus_hier(name: str, hy: float, bx: float = 55.0, shape: str = "input") -> st
         + label(name, bx + 2, hy - 0.5)
         + junction(bx, hy)
     )
-
-
-def cap(ref: str, val: str, x: float, y: float, path: str) -> str:
-    return symbol_inst_v10("Device:C", ref, val, x, y, 0, path)
 
 
 def _cap_to_rail(
@@ -389,7 +433,8 @@ def control_panel_wired() -> str:
         wires.append(bus_hier(name, hy, 50.0, shape))
 
     # BP5293 +5V from +12V (simplified)
-    wires.append(symbol_inst("BP5293_ROHM:BP5293-50", "U5", "BP5293-50 +5V", 50.8, 115.0, 0, PATH_CTRL))
+    parts_bp: list[str] = []
+    parts_bp.append(sym("BP5293_ROHM:BP5293-50", "U5", "BP5293-50 +5V", 50.8, 115.0, 0, PATH_CTRL))
     wires.append(wire(50.0, 131.0, 50.8 - 7.62, 115.0 + 1.27))
     wires.append(wire(50.8 + 7.62, 115.0, 50.0, 115.0))
     wires.append(label("+5V", 52, 114))
@@ -528,11 +573,11 @@ def control_panel_wired() -> str:
         ("ENC_TREBLE", "ENC6", "GP10/11/27", 116.84),
     ]
     enc_syms = "\n".join(
-        symbol_inst("Device:RotaryEncoder_Switch", ref, f"EC11 {name} {gps}", 35.56, y, 0, PATH_CTRL)
+        sym("Device:RotaryEncoder_Switch", ref, f"EC11 {name} {gps}", 35.56, y, 0, PATH_CTRL)
         for name, ref, gps, y in encs
     )
 
-    body = f"""\t(lib_symbols)
+    body = f"""{embed_lib_symbols(CTRL_LIBS)}
 {text_note(25.4, 25.4, [
     "ControlPanel — CIRCUIT_DESIGN wired (§10 + §3)",
     "PT2314 @9V / PGA2310PA×2 / Pico2 / ENC×6",
@@ -544,17 +589,87 @@ def control_panel_wired() -> str:
 {hier_label("I2C_SCL", "bidirectional", 30.48, 137.62, 180)}
 {wire(30.48, 135.08, 50.0, 135.08)}
 {wire(30.48, 137.62, 50.0, 137.62)}
-{symbol_inst("MCU_Module:Raspberry_Pi_Pico", "U1", "Pico 2 / RP2350", picox, picoy, 0, PATH_CTRL)}
-{symbol_inst("AudioV2:PT2314", "U2", "PT2314", u2x, u2y, 0, PATH_CTRL)}
-{symbol_inst("Audio:PGA2310PA", "U3", "PGA2310PA HP", u3x, u3y, 0, PATH_CTRL)}
-{symbol_inst("Audio:PGA2310PA", "U4", "PGA2310PA LINE", u4x, u4y, 0, PATH_CTRL)}
-{symbol_inst("Display_Graphic:SSD1306-128x64", "U6", "OLED ctrl I2C", 101.6, 78.0, 0, PATH_CTRL)}
-{symbol_inst("Switch:SW_SPST", "SW1", "PWR SW", 165.1, 150.32, 0, PATH_CTRL)}
-{symbol_inst("Device:LED", "D1", "12V panel LED", 177.8, 152.86, 0, PATH_CTRL)}
+{sym("MCU_Module:RaspberryPi_Pico", "U1", "Pico 2 / RP2350", picox, picoy, 0, PATH_CTRL)}
+{sym("AudioV2:PT2314", "U2", "PT2314", u2x, u2y, 0, PATH_CTRL)}
+{sym("Audio:PGA2310PA", "U3", "PGA2310PA HP", u3x, u3y, 0, PATH_CTRL)}
+{sym("Audio:PGA2310PA", "U4", "PGA2310PA LINE", u4x, u4y, 0, PATH_CTRL)}
+{sym("Display_Graphic:SSD1306-128x64", "U6", "OLED ctrl I2C", 101.6, 78.0, 0, PATH_CTRL)}
+{sym("Switch:SW_SPST", "SW1", "PWR SW", 165.1, 150.32, 0, PATH_CTRL)}
+{sym("Device:LED", "D1", "12V panel LED", 177.8, 152.86, 0, PATH_CTRL)}
+{"".join(parts_bp)}
 {enc_syms}
 {"".join(wires)}
 """
     return sch_open(UUID_CONTROL_FILE, body)
+
+
+def relay_board_wired() -> str:
+    """RelayBoard with embedded lib_symbols (§11 Q1-B template)."""
+    labels = []
+    for n in range(1, 6):
+        labels.append(hier_label(f"AMP{n}_L", "bidirectional", 200.66, 30.48 + n * 5.08, 0))
+        labels.append(hier_label(f"AMP{n}_R", "bidirectional", 210.82, 30.48 + n * 5.08, 0))
+        labels.append(hier_label(f"AMP{n}_V+", "output", 220.98, 30.48 + n * 5.08, 0))
+        labels.append(hier_label(f"AMP{n}_V-", "output", 231.14, 30.48 + n * 5.08, 0))
+
+    body = f"""{embed_lib_symbols(RELAY_LIBS)}
+{text_note(25.4, 25.4, [
+    "RelayBoard — 5ch template (§11 Q1-B)",
+    "MCP23017 @0x20 (Board A) / @0x21 (Board B — same sch, addr strap note)",
+    "AZ850 latching + ULN2803. NO child Pico.",
+    "COMMON_LR_OUT → ControlPanel PT2314 input",
+])}
+{hier_label("I2C_SDA", "bidirectional", 30.48, 40.64, 180)}
+{hier_label("I2C_SCL", "bidirectional", 30.48, 43.18, 180)}
+{hier_label("3V3", "input", 30.48, 45.72, 180)}
+{hier_label("D_GND", "input", 30.48, 48.26, 180)}
+{hier_label("COMMON_L", "output", 200.66, 88.9, 0)}
+{hier_label("COMMON_R", "output", 200.66, 91.44, 0)}
+{hier_label("A_GND", "bidirectional", 200.66, 93.98, 0)}
+{"".join(labels)}
+{sym("Interface_Expansion:MCP23017-E/SP", "U1", "MCP23017 addr0x20", 63.5, 50.8, 0, PATH_RELAY, [("Addr", "0x20 A / 0x21 B")])}
+{sym("Transistor_Array:ULN2803A", "U2", "ULN2803A", 88.9, 50.8, 0, PATH_RELAY)}
+{sym("Relay:AZ850P2-x", "K1", "AZ850 CH1 audio", 114.3, 40.64, 0, PATH_RELAY)}
+{sym("Relay:AZ850P2-x", "K2", "AZ850 CH1 pwr", 114.3, 50.8, 0, PATH_RELAY)}
+{sym("Relay:AZ850P2-x", "K3", "AZ850 CH2 audio", 127.0, 40.64, 0, PATH_RELAY)}
+{sym("Relay:AZ850P2-x", "K4", "AZ850 CH2 pwr", 127.0, 50.8, 0, PATH_RELAY)}
+{sym("Relay:AZ850P2-x", "K5", "AZ850 CH3 audio", 139.7, 40.64, 0, PATH_RELAY)}
+{sym("Connector:Conn_01x04_Pin", "J_I2C", "I2C to Control", 25.4, 43.18, 0, PATH_RELAY)}
+{sym("Connector:Conn_01x03_Pin", "J_COMMON", "COMMON_LR_OUT", 165.1, 90.17, 0, PATH_RELAY)}
+{sym("Connector:Screw_Terminal_01x02", "J_AMP1", "AMP1 L/R", 165.1, 35.56, 0, PATH_RELAY)}
+"""
+    return sch_open(UUID_RELAY_FILE, body)
+
+
+def output_stage_wired() -> str:
+    """OutputStage with embedded lib_symbols (§11 Q2-A)."""
+    body = f"""{embed_lib_symbols(OUTPUT_LIBS)}
+{text_note(25.4, 25.4, [
+    "OutputStage — DRAFT (§11 Q2-A, same PCB as ControlPanel)",
+    "DEST latching relays: LINE / PHONE / MUTE (AZ850 ×2~3)",
+    "Drive: MCP23017/ULN on RelayBoard OR spare ULN on Control — TODO review",
+    "Startup default: LINE",
+])}
+{hier_label("PGA_HP_L", "input", 30.48, 50.8, 180)}
+{hier_label("PGA_HP_R", "input", 30.48, 53.34, 180)}
+{hier_label("PGA_LINE_L", "input", 30.48, 55.88, 180)}
+{hier_label("PGA_LINE_R", "input", 30.48, 58.42, 180)}
+{hier_label("+12V", "input", 30.48, 60.96, 180)}
+{hier_label("-12V", "input", 30.48, 63.5, 180)}
+{hier_label("A_GND", "bidirectional", 30.48, 66.04, 180)}
+{hier_label("PHONE_L", "output", 200.66, 45.72, 0)}
+{hier_label("PHONE_R", "output", 200.66, 48.26, 0)}
+{hier_label("LINE_L", "output", 200.66, 50.8, 0)}
+{hier_label("LINE_R", "output", 200.66, 53.34, 0)}
+{hier_label("MUTE", "output", 200.66, 55.88, 0)}
+{sym("Relay:AZ850P2-x", "K1", "DEST LINE", 88.9, 50.8, 0, PATH_OUT)}
+{sym("Relay:AZ850P2-x", "K2", "DEST PHONE", 101.6, 50.8, 0, PATH_OUT)}
+{sym("Relay:AZ850P2-x", "K3", "DEST MUTE", 114.3, 50.8, 0, PATH_OUT)}
+{sym("Transistor_Array:ULN2803A", "U1", "ULN spare/TODO", 63.5, 50.8, 0, PATH_OUT)}
+{sym("Connector:Screw_Terminal_01x02", "J_HP", "to Audio HP Buffer", 165.1, 45.72, 0, PATH_OUT)}
+{sym("Connector:Screw_Terminal_01x02", "J_LINE", "LINE OUT", 165.1, 50.8, 0, PATH_OUT)}
+"""
+    return sch_open(UUID_OUTPUT_FILE, body)
 
 
 def parent_wired() -> str:
@@ -685,8 +800,12 @@ def main() -> None:
     target = sys.argv[1] if len(sys.argv) > 1 else "all"
     if target in ("all", "power"):
         (ROOT / "PowerModule.kicad_sch").write_text(power_module_wired(), encoding="utf-8")
+    if target in ("all", "relay"):
+        (ROOT / "RelayBoard.kicad_sch").write_text(relay_board_wired(), encoding="utf-8")
     if target in ("all", "control"):
         (ROOT / "ControlPanel.kicad_sch").write_text(control_panel_wired(), encoding="utf-8")
+    if target in ("all", "output"):
+        (ROOT / "OutputStage.kicad_sch").write_text(output_stage_wired(), encoding="utf-8")
     if target in ("all", "parent"):
         (ROOT / "AudioV2Case.kicad_sch").write_text(parent_wired(), encoding="utf-8")
     print(f"Wired: {target}")

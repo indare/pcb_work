@@ -156,7 +156,11 @@ def pin_uuid_block(numbers: list[str]) -> str:
 
 PIN_COUNTS: dict[str, list[str]] = {
     "Device:C": ["1", "2"],
+    "Device:R": ["1", "2"],
     "Device:Fuse": ["1", "2"],
+    "Device:LED": ["1", "2"],
+    "Device:RotaryEncoder_Switch": ["A", "B", "C", "S1", "S2"],
+    "Switch:SW_SPST": ["1", "2"],
     "Regulator_Linear:LM7809_TO220": ["1", "2", "3"],
     "Connector:USB_C_Receptacle_USB2.0_16P": [
         "A1", "A4", "A5", "A6", "A7", "A8", "A9", "A12",
@@ -164,16 +168,104 @@ PIN_COUNTS: dict[str, list[str]] = {
     ],
     "Connector:Conn_01x02_Pin": ["1", "2"],
     "Connector:Conn_01x03_Pin": ["1", "2", "3"],
+    "Connector:Conn_01x04_Pin": ["1", "2", "3", "4"],
+    "Connector:Screw_Terminal_01x02": ["1", "2"],
     "AudioV2:CH224_50224": ["1", "2", "3", "4"],
     "AudioV2:DKMW20F-12": ["1", "2", "3", "4", "5", "6"],
+    "AudioV2:PT2314": ["1", "2", "3", "4", "10", "11", "12", "15", "16", "20"],
+    "BP5293_ROHM:BP5293-50": ["1", "2", "3"],
+    "Relay:AZ850P2-x": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    "Transistor_Array:ULN2803A": [str(i) for i in range(1, 19)],
+}
+
+# Schematic lib_id -> (source_lib, source_sym, extends chain base-first)
+SYMBOL_SOURCES: dict[str, tuple[str, str, list[tuple[str, str]]]] = {
+    "Interface_Expansion:MCP23017-E/SP": (
+        "Interface_Expansion",
+        "MCP23017x-x-SP",
+        [("Interface_Expansion", "MCP23017x-x-SO")],
+    ),
+    "MCU_Module:Raspberry_Pi_Pico": ("MCU_Module", "RaspberryPi_Pico", []),
+    "MCU_Module:RaspberryPi_Pico": ("MCU_Module", "RaspberryPi_Pico", []),
+    "Display_Graphic:SSD1306-128x64": ("Display_Graphic", "ER_OLEDM0.91_1x-I2C", []),
+    "Audio:PGA2310PA": ("Audio", "PGA2310PA", [("Audio", "PGA2310UA")]),
+    "Regulator_Linear:LM7809_TO220": (
+        "Regulator_Linear",
+        "LM7809_TO220",
+        [("Regulator_Linear", "LM7805_TO220")],
+    ),
+    "BP5293_ROHM:BP5293-50": ("BP5293_ROHM", "BP5293-50", []),
 }
 
 
-def _extract_symbol_body(kicad_sym_text: str, lib_name: str, sym_name: str) -> str:
-    """Turn (symbol \"NAME\" ...) from .kicad_sym into embeddable (symbol \"Lib:NAME\" ...)."""
-    m = re.search(rf'\(symbol "{re.escape(sym_name)}"', kicad_sym_text)
+def _read_symbol_text(lib: str, name: str) -> str:
+    if lib == "AudioV2":
+        return (ROOT / "AudioV2.kicad_sym").read_text(encoding="utf-8")
+    if lib == "BP5293_ROHM":
+        return (ROOT.parent / "Audio" / "BP5293_ROHM.kicad_sym").read_text(encoding="utf-8")
+    return _read_packed_or_dir(lib, name)
+
+
+def _pin_numbers_from_sym_text(text: str, sym_name: str) -> list[str]:
+    m = re.search(rf'\(symbol "{re.escape(sym_name)}"', text)
     if not m:
-        raise ValueError(f"symbol {sym_name} not found")
+        return []
+    start = m.start()
+    depth = 0
+    end = start
+    for i in range(start, len(text)):
+        if text[i] == "(":
+            depth += 1
+        elif text[i] == ")":
+            depth -= 1
+            if depth == 0:
+                end = i + 1
+                break
+    chunk = text[start:end]
+    nums = re.findall(r'\(number "([^"]+)"', chunk)
+    seen: set[str] = set()
+    out: list[str] = []
+    for n in nums:
+        if n not in seen:
+            seen.add(n)
+            out.append(n)
+    return out
+
+
+def pin_numbers_for(lib_id: str) -> list[str]:
+    if lib_id in PIN_COUNTS:
+        return PIN_COUNTS[lib_id]
+    _, embed_name = lib_id.split(":", 1)
+    if lib_id in SYMBOL_SOURCES:
+        file_lib, file_name, extends = SYMBOL_SOURCES[lib_id]
+    else:
+        file_lib, file_name = lib_id.split(":", 1)
+        extends = []
+    merged: list[str] = []
+    seen: set[str] = set()
+    for elib, ename in extends:
+        for p in _pin_numbers_from_sym_text(_read_symbol_text(elib, ename), ename):
+            if p not in seen:
+                seen.add(p)
+                merged.append(p)
+    for p in _pin_numbers_from_sym_text(_read_symbol_text(file_lib, file_name), file_name):
+        if p not in seen:
+            seen.add(p)
+            merged.append(p)
+    return merged or ["1"]
+
+
+def _extract_symbol_body(
+    kicad_sym_text: str,
+    lib_name: str,
+    embed_name: str,
+    file_name: str | None = None,
+) -> str:
+    """Turn (symbol \"FILE\" ...) into embeddable (symbol \"Lib:EMBED\" ...)."""
+    src = file_name or embed_name
+    m = re.search(rf'\(symbol "{re.escape(src)}"', kicad_sym_text)
+    if not m:
+        raise ValueError(f"symbol {src} not found")
     start = m.start()
     depth = 0
     for i in range(start, len(kicad_sym_text)):
@@ -183,8 +275,11 @@ def _extract_symbol_body(kicad_sym_text: str, lib_name: str, sym_name: str) -> s
             depth -= 1
             if depth == 0:
                 body = kicad_sym_text[start : i + 1]
-                return body.replace(f'(symbol "{sym_name}"', f'(symbol "{lib_name}:{sym_name}"', 1)
-    raise ValueError(f"unbalanced symbol {sym_name}")
+                body = body.replace(f'(symbol "{src}"', f'(symbol "{lib_name}:{embed_name}"', 1)
+                if src != embed_name:
+                    body = body.replace(f'"{src}_', f'"{embed_name}_')
+                return body
+    raise ValueError(f"unbalanced symbol {src}")
 
 
 def _read_packed_or_dir(lib: str, sym_name: str) -> str:
@@ -197,36 +292,41 @@ def _read_packed_or_dir(lib: str, sym_name: str) -> str:
     raise FileNotFoundError(symdir)
 
 
+def _sanitize_embed_body(body: str) -> str:
+    """KiCad 10 sch rejects some legacy symbol stroke types."""
+    return body.replace("(type solid)", "(type default)")
+
+
+def _indent_symbol_body(body: str) -> str:
+    return "\n".join(("\t" + ln if ln.strip() else ln) for ln in body.splitlines())
+
+
 def embed_lib_symbols(lib_ids: list[str]) -> str:
     """Build (lib_symbols ...) block with embedded symbol definitions."""
     chunks: list[str] = ["\t(lib_symbols"]
     seen: set[str] = set()
-    extras: list[tuple[str, str]] = []
 
     for lib_id in lib_ids:
         if lib_id in seen:
             continue
         seen.add(lib_id)
-        lib, name = lib_id.split(":", 1)
-        if lib == "AudioV2":
-            text = (ROOT / "AudioV2.kicad_sym").read_text(encoding="utf-8")
+        lib, embed_name = lib_id.split(":", 1)
+        if lib_id in SYMBOL_SOURCES:
+            file_lib, file_name, extends = SYMBOL_SOURCES[lib_id]
         else:
-            text = _read_packed_or_dir(lib, name)
-            if 'extends "' in text and name == "LM7809_TO220":
-                extras.append(("Regulator_Linear", "LM7805_TO220"))
-        body = _extract_symbol_body(text, lib, name)
-        indented = "\n".join(("\t" + ln if ln.strip() else ln) for ln in body.splitlines())
-        chunks.append(indented)
-
-    for lib, name in extras:
-        key = f"{lib}:{name}"
-        if key in seen:
-            continue
-        seen.add(key)
-        text = _read_packed_or_dir(lib, name)
-        body = _extract_symbol_body(text, lib, name)
-        indented = "\n".join(("\t" + ln if ln.strip() else ln) for ln in body.splitlines())
-        chunks.append(indented)
+            file_lib, file_name = lib, embed_name
+            extends = []
+        for elib, ename in extends:
+            ext_key = f"{elib}:{ename}"
+            if ext_key in seen:
+                continue
+            seen.add(ext_key)
+            text = _read_symbol_text(elib, ename)
+            body = _extract_symbol_body(text, elib, ename)
+            chunks.append(_indent_symbol_body(_sanitize_embed_body(body)))
+        text = _read_symbol_text(file_lib, file_name)
+        body = _extract_symbol_body(text, lib, embed_name, file_name)
+        chunks.append(_indent_symbol_body(_sanitize_embed_body(body)))
 
     chunks.append("\t)")
     return "\n".join(chunks)
@@ -255,7 +355,7 @@ def symbol_inst_v10(
     if extra_props:
         for n, v in extra_props:
             props.append(sym_prop(n, v, 0, 0, hide=True))
-    pin_block = pin_uuid_block(PIN_COUNTS.get(lib_id, ["1"]))
+    pin_block = pin_uuid_block(pin_numbers_for(lib_id))
     props_str = "\n".join(props)
     return f"""\t(symbol
 \t\t(lib_id "{lib_id}")
