@@ -39,7 +39,7 @@
 
 ## 2. PGA2310PA — PDIP-16（確定ピン表）
 
-TI SBOS207C §5「Top View」どおり。**AudioV2 は ±12 V アナログ、VD+ = +5 V（BP5293）。**
+TI SBOS187C Rev.C §5「Top View」どおり。**AudioV2 は ±12 V アナログ、VD+ = +5 V（BP5293）。**
 
 | Pin | 名前 | 接続 |
 |:---:|---|---|

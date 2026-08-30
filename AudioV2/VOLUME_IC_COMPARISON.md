@@ -25,37 +25,86 @@
 
 PGA2311 / 2310 / 2320 は**ピン互換・ソフト互換**（さらに Cirrus CS3310 とも互換）。違うのは電源電圧・パッケージ・値段だけ。
 
+### 1.1 データシート再照合（2026-08-30）
+
+各社 DS の **Recommended Operating Conditions** と入出力レンジ式を、AudioV2 確定条件（**VA± = ±12 V**、VD+ = +5 V、Amp 後）で再計算した。
+
+**入出力上限の計算式（DS 本文どおり）**
+
+| 品番 | DS | 式 | @ VA± = ±12 V の I/O 上限 |
+|---|---|---|---|
+| PGA2310 | SBOS187C §6.3, §7.3.1 | (VA−)+1.5 V 〜 (VA+)−1.5 V | **±10.5 V = 7.42 Vrms** |
+| PGA2320 | SBOS273B §Electrical | (VA−)+0.86 V 〜 (VA+)−0.86 V | **±11.14 V = 7.88 Vrms** |
+| PGA2311 | SBOS220D §6.3, §7.3.1 | (VA−)+1.25 V 〜 (VA+)−1.25 V | **±12 V では使えない**（VA± は ±5 V 固定）→ ±5 V 時 **±3.75 V = 2.65 Vrms** |
+| CS3310 | DS82F1 | (VA−)+1.25 V 〜 (VA+)−1.25 V | **±12 V では使えない**（VA± = ±5 V 固定）→ **±3.75 V = 2.65 Vrms** |
+
+**AudioV2 の Amp 出力見積もり:** NE5532 ×10 @ ±12 V → レールから ≈2 V 内側でクリップ ≈ **±10 V = 7.07 Vrms**（`DECISIONS.md` §9 と同じ前提）。
+
+| 品番 | アナログ電源（DS） | I/O 上限 @ ±12 V | Amp ≈7 Vrms | THD+N typ | 出力ノイズ typ | パッケージ | ライフサイクル | AudioV2 |
+|---|---|---|---|---|---|---|---|---|
+| **PGA2310PA** | ±4.5〜±15.5 V | **7.42 Vrms** | **余裕 ≈0.35 Vrms（≈0.7 dB）** | 0.0004 % @10 Vpp | 9.5 µVrms | **PDIP-16** | **Active** | **✅ 第一選択（確定）** |
+| PGA2310UA | 同上 | 同上 | 同上 | 同上 | 同上 | SOIC-16W | **Active** | △ 電気同等。**DIP ソケット方針と不一致** |
+| PGA2311PA | **±4.75〜±5.25 V のみ** | —（±12 V 不可） | ±5 V 別電源でも **2.65 Vrms 上限** → **前段 −8.5 dB パッド必須** | 0.0004 % U / 0.0002 % A | 2.5 µVrms | PDIP-16 | **Active** | ❌ Amp 後・無パッドでは不可 |
+| PGA2311UA | 同上 | — | 同上 | 同上 | 同上 | SOIC-16 | Active | ❌ 同上 + SOIC |
+| PGA2320IDW | ±4.5〜±15.5 V | **7.88 Vrms** | 余裕 ≈0.8 Vrms | **0.0003 %** @10 Vpp | 10.5 µVrms | **SOIC-16 のみ** | **Active** | △ レール余裕最大だが **DIP なし** |
+| CS3310-KS | **±5 V 固定** | — | 2.65 Vrms 上限（PGA2311 同等） | 0.001 % | 8.4 µVrms | **SOIC-16 のみ** | **EOL 扱い**（Cirrus リダイレクト） | ❌ パッド + SOIC + 入手性 |
+
+**@ ±15 V（参考・旧 Audio）:** PGA2310 の I/O は ±13.5 V = **9.54 Vrms**。旧 ±15 V Amp の ≈9.19 Vrms とも整合。
+
+**オーダラブル品番（DS Package Option Addendum、2026-08 確認）**
+
+| 品番 | パッケージ | ステータス | 備考 |
+|---|---|---|---|
+| PGA2310PA / PGA2310PA.A | PDIP-16 | Active | U グレード。`.A` は同梱品 |
+| PGA2310UA / PGA2310UA/1K | SOIC-16 | Active | リール `/1K` あり |
+| PGA2311PA / PGA2311P | PDIP-16 | Active | A / U グレード |
+| PGA2311UA / PGA2311U | SOIC-16 | Active | |
+| PGA2320IDW / PGA2320IDWR | SOIC-16 | Active | リール IDWR |
+| CS3310-KS / CS3310-KSZ | SOIC-16 | EOL | Cirrus 製品ページは `/products/eol` へ |
+
+**価格目安（1 個、2026-08、参考）:** PGA2310PA **US$23〜41**（流通・数量で幅大）。PGA2311PA は **US$8〜15** 程度だが前段パッド 4 本が追加コスト。PGA2320IDW は **US$18〜27** だが SOIC 実装が必要。
+
+**結論（品番）:** AudioV2 の **±12 V + Amp 後 + DIP ソケット** という 3 条件を同時に満たすのは **PGA2310PA のみ**。PGA2310UA は「DIP が切れたときの SOIC 代替」、PGA2311/CS3310 は「±5 V 小信号 or 前段パッド付き」の逃げ道、PGA2320 は「SOIC 許容なら音質・余裕で上」。
+
+---
+
+### 1.2 旧表（±15 V 参考値付き）
+
 | | **PGA2311PA** | **PGA2310PA（推奨）** | PGA2320IDW |
 |---|---|---|---|
 | アナログ電源 | ±5 V（±4.75〜±5.25） | **±4.5〜±15.5 V** | ±4.5〜±15.5 V |
-| 入出力レンジ | レールから 1.25 V 内側 → **±3.75 V / 2.65 Vrms** | レールから 1.5 V 内側 → **±13.5 V / 9.5 Vrms** | レールから 0.86 V 内側 |
+| 入出力レンジ @ ±15 V | ±3.75 V / **2.65 Vrms** | ±13.5 V / **9.54 Vrms** | ±14.14 V / **9.99 Vrms** |
+| 入出力レンジ @ ±12 V | **使用不可**（±5 V 別電源要） | **±10.5 V / 7.42 Vrms** | **±11.14 V / 7.88 Vrms** |
 | THD+N @1 kHz | 0.0004 %（U）/ 0.0002 %（A） | **0.0004 %**（VIN = 10 Vpp） | 0.0003 % |
-| 出力ノイズ | — | **9.5 µVrms**（typ、0 dB） | 10.5 µVrms |
+| 出力ノイズ | 2.5 µVrms typ | **9.5 µVrms** typ | 10.5 µVrms |
 | パッケージ | PDIP-16 / SOIC-16 | **PDIP-16** / SOIC-16 | **SOIC-16 のみ** |
-| 単価（1 個、2026-08 時点） | 数 US$ | **US$15〜22** | US$18〜27（TI 直販は在庫切れ） |
+| 単価（1 個、2026-08 時点） | 数 US$ | **US$23〜41** | US$18〜27 |
 
-Amp（NE5532 ×10・±15 V）の出力は最大 ≈ ±13 V = **9.19 Vrms**。
+AudioV2（±12 V）での判断:
 
-- **PGA2310**: 入出力レンジ ±13.5 V。**Amp のクリップ点とほぼ一致する** → 音量 IC が先に飽和しない。パッド不要。
-- **PGA2311**: 2.65 Vrms 止まり。LINE 無パッドでは **−11 dB 以上の固定パッドを前段に足さないと成立しない**（9.19 → 2.65 Vrms が −10.8 dB）。HP 側もパッドが digipot の**後ろ**にある現行案のままだと同じく足りない。
-- **PGA2320**: 電気的には最良だが SOIC のみ・高い・在庫が薄い。DIP ソケット主体のこのプロジェクトでは選ぶ理由がない。
+- **PGA2310PA**: I/O 7.42 Vrms ≥ Amp ≈7.07 Vrms → **パッド不要**。音量 IC が先に飽和しない。
+- **PGA2311PA**: 2.65 Vrms 止まり。Amp 後では **−8.5 dB 以上の固定パッド**（7.07 → 2.65 Vrms）が LINE / HP 両方に必要。旧 ±15 V 設計なら −11 dB。
+- **PGA2320**: レール余裕は最大だが SOIC のみ。DIP ソケット主体のこのプロジェクトでは選ぶ理由がない。
+- **CS3310**: PGA2311 と同じ ±5 V 制約。**SOIC のみ・EOL** — 新規採用の理由なし。
 
-以降 **「C」= PGA2310PA ×2**（HP 用 1 + LINE 用 1）として比較する。原案の PGA2311 のままなら、下表の「回路設計」で **パッド 4 本（2 抵抗 × 2 系統 × L/R）が追加**になる点だけ読み替える。
+以降 **「C」= PGA2310PA ×2**（HP 用 1 + LINE 用 1）として比較する。PGA2311 に落とす場合は **パッド 4 本（2 抵抗 × 2 系統 × L/R）が追加**される点だけ読み替える。
 
 ---
 
 ## 2. 信号レベルの実際（判断の土台）
 
 ```text
-[Amp NE5532 ×10 / ±15V]  最大 ±13V = 9.19 Vrms
+[Amp NE5532 ×10 / ±12V]  最大 ≈±10V = 7.07 Vrms（AudioV2 確定）
         ├─ 測定タップ（音量非連動）
         ├─ HP  : 音量IC ──(0Ω, §9)── HeadphoneBuffer → PHONE
         └─ LINE: 音量IC ─────────────────────► LINE OUT
 ```
 
+（旧 Audio ±15 V 参考: 最大 ±13 V = 9.19 Vrms — PGA2310 @ ±15 V でも余裕あり）
+
 - 固定パッド 8.2 kΩ 直列 + 910 Ω 並列 = **−20.0 dB**、出力インピーダンス 819 Ω（`Audio/README.md` の実績値）
-- HP で必要な減衰幅: 9.19 Vrms → 1 Vrms（32 Ω で 31 mW＝十分うるさい）が **−19 dB**、→ 5 mVrms（かなり静か）が **−65 dB**。**約 46 dB のレンジ**
-- LINE で必要な減衰幅: 9.19 Vrms → 1〜2 Vrms が **−13〜−19 dB**、上下 ±10 dB 見て **−3〜−29 dB**
+- HP で必要な減衰幅: 7.07 Vrms → 1 Vrms（32 Ω で 31 mW＝十分うるさい）が **−17 dB**、→ 5 mVrms（かなり静か）が **−63 dB**。**約 46 dB のレンジ**
+- LINE で必要な減衰幅: 7.07 Vrms → 1〜2 Vrms が **−11〜−17 dB**、上下 ±10 dB 見て **−1〜−27 dB**
 
 ### MCP45HV51 のリニア 256 タップを dB に直すと
 
@@ -201,7 +250,7 @@ LINE の常用域（−3〜−29 dB）は MCP45HV51 のタップで **0.05〜0.9
 | 条件 | 何が起きるか | どうするか |
 |---|---|---|
 | **±12 V レールに変更** | PGA2310 に余裕。Amp 最大 ≈7 Vrms。**HP 固定 −20 dB パッドは廃止**（§9） | **AudioV2 確定** |
-| **PGA2310PA の入手が切れた / 価格が倍になった** | C 系が成立しない | ピン互換の **PGA2311PA + 前段 −14 dB パッド**（LINE / HP 両方に 2 抵抗ずつ）に落とす。または CS3310（DIP-16、±5 V、同じくパッド前提） |
+| **PGA2310PA の入手が切れた / 価格が倍になった** | C 系が成立しない | ① **PGA2310UA**（SOIC、電気同等・ピン互換）＋ DIP→SOIC アダプタ or PCB 改訂。② **PGA2311PA + 前段 −8.5 dB パッド**（±12 V Amp 後）。③ CS3310-KS は **SOIC・EOL** のため非推奨 |
 | **音量を Amp 前（小信号）に移す判断に変える** | **HV 要件が丸ごと消える**。この比較の前提が全部崩れる | 小信号なら **PGA2311PA が最有力**（安い・DIP・±5 V で足りる）。B 側も MCP4251 級の普通の digipot でよくなり、価格差もほぼ消える。**これが一番大きいレバー**。DECISIONS.md §2 で B（Amp 後）を確定済みなので、覆すなら §2 から |
 | **音量チャンネルを増やしたくなった**（バランス、CH 個別トリム、サブアウト） | B は **4 アドレスで打ち止め**。5 個目は I²C マルチプレクサ（PCA9548A）が要る | C は **SDO→SDI でデイジーチェーンするだけ、GPIO 追加ゼロ**。拡張予定があるなら C 一択 |
 | **ENC ×6 を GPIO 拡張に逃がすことにした** | ピン圧は下がる | **判断は動かない**。B と C のピン差は元々 1 本 |
@@ -214,9 +263,10 @@ LINE の常用域（−3〜−29 dB）は MCP45HV51 のタップで **0.05〜0.9
 | 部品 | 一次ソース |
 |---|---|
 | MCP45HV51 | [MCP45HVX1 データシート DS20005304A](http://ww1.microchip.com/downloads/en/DeviceDoc/20005304A.pdf) / [製品ページ](https://www.microchip.com/en-us/product/mcp45hv51)。アドレス `0111 1 A1 A0`、RW 75 Ω typ・170 Ω max、帯域 5 k=480 k / 10 k=240 k / 50 k=48 k / 100 k=24 kHz、THD 記載なし |
-| PGA2310 | [データシート SBOS187C](https://www.ti.com/lit/ds/symlink/pga2310.pdf)。±4.5〜±15.5 V、入出力レンジ (VA−)+1.5 〜 (VA+)−1.5、THD+N 0.0004 %、出力ノイズ 9.5 µVrms、VIH 2.0 V min、電源投入時 00h = ミュート、PDIP-16 |
-| PGA2311 | [データシート SBOS220D](https://www.ti.com/lit/ds/symlink/pga2311.pdf)。±5 V 固定、最大 7.5 Vpp |
-| PGA2320 | [データシート SBOS273B](https://www.ti.com/lit/ds/symlink/pga2320.pdf)。±15 V、SOIC-16 のみ |
+| PGA2310 | [SBOS187C Rev.C](https://www.ti.com/lit/ds/symlink/pga2310.pdf)。§6.3 VA± ±4.5〜±15.5 V、§7.3.1 I/O (VA±)±1.5 V、THD+N 0.0004 % @10 Vpp、9.5 µVrms、VIH 2.0 V min、00h=ミュート。**PA=PDIP / UA=SOIC** |
+| PGA2311 | [SBOS220D](https://www.ti.com/lit/ds/symlink/pga2311.pdf)。§6.3 VA± ±4.75〜±5.25 V、I/O ±3.75 V（2.65 Vrms）、THD+N 0.0004 % U / 0.0002 % A。**PA/P=PDIP / UA/U=SOIC** |
+| PGA2320 | [SBOS273B](https://www.ti.com/lit/ds/symlink/pga2320.pdf)。VA± ±4.5〜±15.5 V、I/O (VA±)±0.86 V、THD+N 0.0003 %、**SOIC-16 のみ** |
+| CS3310 | [DS82F1](https://d3uzseaevmutz1.cloudfront.net/pubs/proDatasheet/CS3310_F1.pdf)。±5 V、I/O ±3.75 V、THD+N 0.001 %、**SOIC-16 のみ・EOL** |
 | 現行の音量段・パッド | [`Audio/README.md`](../Audio/README.md)「出力切り替えとヘッドホン出力」 |
 | 電源 | AudioV2: **DKMW20F-12 / ±12 V ±830 mA**（PD モジュール差し替え可）。参考: [`Audio/PowerModule_TEC3_REDESIGN.md`](../Audio/PowerModule_TEC3_REDESIGN.md)（旧 ±15 V） |
 | 現行の I²C ピン・速度 | [`Control/protocol.py`](../Control/protocol.py) / [`Control/README.md`](../Control/README.md) |
