@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 import re
 import uuid
 from pathlib import Path
@@ -37,14 +36,20 @@ def pin_connect(
     sym_rot: int,
     px: float,
     py: float,
-    pin_angle: int,
-    length: float,
+    pin_angle: int = 0,
+    length: float = 0.0,
 ) -> tuple[float, float]:
-    """Absolute wire endpoint at the pin tip (symbol Y is flipped on schematic)."""
-    rad = math.radians(pin_angle)
-    tip_x = px + length * math.cos(rad)
-    tip_y = py + length * math.sin(rad)
-    rx, ry = _rotate_point(tip_x, -tip_y, sym_rot)
+    """Absolute electrical tip of a schematic pin.
+
+    In KiCad, lib pin ``(at x y rot)`` is the **connection tip** (wires / labels
+    attach here).  ``length`` draws the pin body *inward* toward the symbol and
+    must not be added to the tip.  Instance placement flips library Y:
+    global = rotate(px, -py, sym_rot) + (sx, sy).
+
+    ``pin_angle`` / ``length`` are kept for call-site compatibility but ignored.
+    """
+    del pin_angle, length
+    rx, ry = _rotate_point(px, -py, sym_rot)
     return sx + rx, sy + ry
 
 

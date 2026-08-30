@@ -1926,7 +1926,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "AudioV2 PowerModule — simplified wired (§9 / CIRCUIT_DESIGN §4)\nUSB-C → 50224 CH224 → PD_12V/J_PD → (panel SW) → PD_12V_SW → F1 → DKMW20F-12\nPrimary PD_GND ≠ secondary A_GND. DKMW R.C. open=ON. LM7809 GND → A_GND.\n±12V + A_GND → J202 / hier.  LM7809 → VCC_TONE (+9V).  Bench +12V_IN: TBD."
+	(text "AudioV2 PowerModule — label-wired (§9 / CIRCUIT_DESIGN §4)\nUSB-C → CH224 → PD_12V/J_PD → (panel SW) → PD_12V_SW → F1 → DKMW_VIN\nPrimary PD_GND ≠ secondary A_GND. DKMW R.C.=RC_OPEN (open=ON). LM7809 GND→A_GND.\nConnectivity = local labels on pin tips (same name = same net)."
 		(at 25.4 20.32 0)
 		(effects
 			(font
@@ -1934,7 +1934,7 @@
 			)
 			(justify left top)
 		)
-		(uuid "50268717-437f-469f-8d2d-81eba8ab7f78")
+		(uuid "156acd7b-a1d5-4af9-a972-ea5c94072606")
 	)
 
 	(hierarchical_label "PD_12V_SW"
@@ -1946,7 +1946,18 @@
 			)
 			(justify right)
 		)
-		(uuid "fc7f2ccc-4d29-498b-aec9-5dc1ffcfa18b")
+		(uuid "4669e60f-5954-4847-97ea-2805f8547283")
+	)
+
+	(label "PD_12V_SW"
+		(at 30.48 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "eab7e52e-dd8e-4fd3-bdec-1e0c3f980a65")
 	)
 
 	(hierarchical_label "PD_12V"
@@ -1958,18 +1969,18 @@
 			)
 			(justify left)
 		)
-		(uuid "b149a3de-8850-45f6-aa01-533d275d29b8")
+		(uuid "973eef09-c6fe-4c05-877c-1c92ea650d23")
 	)
 
-	(wire
-		(pts
-			(xy 176.53 33.02) (xy 210.82 33.02)
+	(label "PD_12V"
+		(at 210.82 33.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "27d8a401-2e57-4728-a5f2-d596a603f1c5")
+		(uuid "50c9b1a8-3913-45bc-a95a-7bd53eebef1b")
 	)
 
 	(hierarchical_label "PD_GND"
@@ -1981,21 +1992,21 @@
 			)
 			(justify left)
 		)
-		(uuid "835ca93b-34be-4b2e-bcf4-25f1cbe3b94d")
+		(uuid "f0b7dd23-dca0-44db-b2cb-7647c13aff4a")
 	)
 
-	(wire
-		(pts
-			(xy 176.53 35.56) (xy 210.82 35.56)
+	(label "PD_GND"
+		(at 210.82 35.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e0624bc4-d28b-4304-b7c8-b694b1151d06")
+		(uuid "885cbbed-43d1-410a-b992-f1423b412b06")
 	)
 
-	(hierarchical_label "+12V_OUT"
+	(hierarchical_label "+12V"
 		(shape output)
 		(at 210.82 53.34 0)
 		(effects
@@ -2004,21 +2015,21 @@
 			)
 			(justify left)
 		)
-		(uuid "4b355586-613e-454d-8daf-1ff3aee63b46")
+		(uuid "edcadf30-2e17-455c-bf69-397a1703744e")
 	)
 
-	(wire
-		(pts
-			(xy 176.53 53.34) (xy 210.82 53.34)
+	(label "+12V"
+		(at 210.82 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0738bb8c-c385-46d4-90fe-842a32c9fc44")
+		(uuid "dfa0e214-4f18-4280-8342-96038f4f2f0e")
 	)
 
-	(hierarchical_label "-12V_OUT"
+	(hierarchical_label "-12V"
 		(shape output)
 		(at 210.82 55.88 0)
 		(effects
@@ -2027,18 +2038,18 @@
 			)
 			(justify left)
 		)
-		(uuid "1cc55f1b-b25b-465f-91db-80e9735f814e")
+		(uuid "7b0373f1-e657-4203-9731-c3fab557ca70")
 	)
 
-	(wire
-		(pts
-			(xy 176.53 55.88) (xy 210.82 55.88)
+	(label "-12V"
+		(at 210.82 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e0662e38-bdbe-4a37-8541-d5991f1b86b3")
+		(uuid "764ff607-ed43-46aa-bccc-cbba29ed4d3c")
 	)
 
 	(hierarchical_label "A_GND"
@@ -2050,18 +2061,18 @@
 			)
 			(justify left)
 		)
-		(uuid "059a3610-a367-4071-b83b-b98c7a46e94e")
+		(uuid "8b37afe2-600b-4a0b-b476-73b99d8a4235")
 	)
 
-	(wire
-		(pts
-			(xy 176.53 58.42) (xy 210.82 58.42)
+	(label "A_GND"
+		(at 210.82 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ee7f6c65-9b9f-4f3f-b303-1ce25cdd61ce")
+		(uuid "6d03932e-a7a4-4e25-8b51-0ff9283d838d")
 	)
 
 	(hierarchical_label "VCC_TONE"
@@ -2073,18 +2084,18 @@
 			)
 			(justify left)
 		)
-		(uuid "487910cb-d3b9-44a8-ab1f-5a53bf232095")
+		(uuid "992738bb-5700-406c-a4bb-9d43589bada8")
 	)
 
-	(wire
-		(pts
-			(xy 195.58 66.04) (xy 210.82 66.04)
+	(label "VCC_TONE"
+		(at 210.82 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d037e829-a252-4fbb-a147-acaf3fe6ac0c")
+		(uuid "95f6e8ab-0732-43ab-b365-60ab5a7f31ba")
 	)
 
 	(symbol
@@ -2098,7 +2109,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "2594343f-c081-4d4b-b904-2044eff3935b")
+		(uuid "0d020d5a-fd3c-4567-a993-80d6de02d302")
 		(property "Reference" "C101"
 			(at 91.44 50.800000000000004 0)
 			(show_name no)
@@ -2158,10 +2169,10 @@
 		)
 
 		(pin "1"
-			(uuid "d3b4f9fd-060c-444c-950f-5c79275d5fa3")
+			(uuid "9dc9cbc5-b7f8-43ff-9634-d575fe00dab6")
 		)
 		(pin "2"
-			(uuid "faa35fe5-6fa8-4759-9849-f121d1750d91")
+			(uuid "0678cd2e-4944-4267-bc67-c6db1128ca58")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2174,7 +2185,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 129.54 60.96 0)
+		(at 137.16 63.5 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2183,9 +2194,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "ef2e23b9-2ba3-4f26-ae1a-8f57806cdf9d")
+		(uuid "3ba17356-9a70-4ef5-a97c-4af445fa60b8")
 		(property "Reference" "C102"
-			(at 129.54 57.150000000000006 0)
+			(at 137.16 60.96 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2196,7 +2207,7 @@
 		)
 
 		(property "Value" "47u"
-			(at 129.54 62.230000000000004 0)
+			(at 137.16 66.04 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2243,10 +2254,10 @@
 		)
 
 		(pin "1"
-			(uuid "400fe8f8-5f78-4f07-b304-2fe972bc98ef")
+			(uuid "968005a0-1888-4a97-949c-1d20ecc1ce48")
 		)
 		(pin "2"
-			(uuid "fe7868ec-359e-4164-9a80-99427046c283")
+			(uuid "87484d23-74e5-4b8a-a6b5-1582b3d1f470")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2259,7 +2270,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 129.54 66.04 0)
+		(at 137.16 68.58 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2268,9 +2279,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "99a8bc9f-d7bf-40af-a185-199237d1d361")
+		(uuid "23c918e3-1c32-4617-80d6-2b6f1390afea")
 		(property "Reference" "C103"
-			(at 129.54 62.23000000000001 0)
+			(at 137.16 66.03999999999999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2281,7 +2292,7 @@
 		)
 
 		(property "Value" "47u"
-			(at 129.54 67.31000000000002 0)
+			(at 137.16 71.12 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2328,10 +2339,10 @@
 		)
 
 		(pin "1"
-			(uuid "8ff3eef1-62c2-4bba-8063-d5730861b835")
+			(uuid "f5b4fd59-e384-4402-891e-64e1354ee632")
 		)
 		(pin "2"
-			(uuid "62791df1-4a65-4673-82b9-fbdb44e08c7c")
+			(uuid "42c860e3-2e63-42ea-84b2-c9454d3da0ac")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2344,7 +2355,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 139.7 60.96 0)
+		(at 149.86 63.5 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2353,9 +2364,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "c9ee2a3f-279a-4098-ba11-bda0cc6b293e")
+		(uuid "ae2e0ee1-8bb6-4534-91eb-16216f76e7ad")
 		(property "Reference" "C104"
-			(at 139.7 57.150000000000006 0)
+			(at 149.86 60.96 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2366,7 +2377,7 @@
 		)
 
 		(property "Value" "0.1u"
-			(at 139.7 62.230000000000004 0)
+			(at 149.86 66.04 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2413,10 +2424,10 @@
 		)
 
 		(pin "1"
-			(uuid "9d87adf2-fddd-4e04-a9eb-ac50261715ce")
+			(uuid "c8d24579-2c69-42a6-9759-3f0a879713ff")
 		)
 		(pin "2"
-			(uuid "6ad56281-46b2-4601-8655-3f6eb57bb203")
+			(uuid "b81a1bf0-9cbc-40a4-ba39-461f2db5678e")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2429,7 +2440,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 144.78 76.2 0)
+		(at 142.24 71.12 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2438,9 +2449,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "2433a654-ea65-433a-9fe8-8254e6f76715")
+		(uuid "4a4ef266-377f-41c5-b3c7-1a10c9374e16")
 		(property "Reference" "C301"
-			(at 144.78 73.66 0)
+			(at 142.24 68.58 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2451,7 +2462,7 @@
 		)
 
 		(property "Value" "10u"
-			(at 144.78 78.74000000000001 0)
+			(at 142.24 73.66000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2498,10 +2509,10 @@
 		)
 
 		(pin "1"
-			(uuid "5d3f2156-daa6-4083-a814-bfeda04c8288")
+			(uuid "bb21e0b4-8435-4a47-8efd-2bfea03f767f")
 		)
 		(pin "2"
-			(uuid "6cb1f46c-81e0-42d1-b21a-82f47f530b73")
+			(uuid "d3cf0c6e-2910-4dfa-a111-2995815066a3")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2514,7 +2525,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 165.1 76.2 0)
+		(at 167.64000000000001 71.12 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2523,9 +2534,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "727bbe66-265b-466e-990a-eb000c523752")
+		(uuid "5087c922-5f39-4537-9009-678dd4d2de06")
 		(property "Reference" "C302"
-			(at 165.1 73.66 0)
+			(at 167.64000000000001 68.58 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2536,7 +2547,7 @@
 		)
 
 		(property "Value" "0.1u"
-			(at 165.1 78.74000000000001 0)
+			(at 167.64000000000001 73.66000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2583,10 +2594,10 @@
 		)
 
 		(pin "1"
-			(uuid "66737aff-ed61-4530-8dc6-bb1e219e1ab2")
+			(uuid "d6551d9d-bac9-485d-9f58-8f664414e0c5")
 		)
 		(pin "2"
-			(uuid "96bc0f31-1f88-401a-b3b6-a3baaa84e689")
+			(uuid "1e049dfd-688b-4e61-83a9-40c0babb6299")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2608,7 +2619,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "f448c684-3d30-4e03-8c9d-d8f5a456e5f3")
+		(uuid "c9e5c722-e26f-4b18-8c22-b36f4356cc57")
 		(property "Reference" "J1"
 			(at 25.4 48.26 0)
 			(show_name no)
@@ -2668,55 +2679,55 @@
 		)
 
 		(pin "A1"
-			(uuid "9d3fc046-3aee-4d55-8b13-93e5c4dbc522")
+			(uuid "1b3d947c-951d-4fa2-82b6-85b15b8f64ef")
 		)
 		(pin "A4"
-			(uuid "0f46ebe1-fa12-4f35-a74b-91efbbcf1548")
+			(uuid "532f5d56-7cf2-4b85-bdc7-ec047e1119aa")
 		)
 		(pin "A5"
-			(uuid "8509ab8c-1602-49f0-aca5-9c8a876204f3")
+			(uuid "36d23f85-9e35-43ca-8fec-85b70c157032")
 		)
 		(pin "A6"
-			(uuid "c7bef636-43ac-4320-9688-b17e9cdd38d3")
+			(uuid "3161faa2-99b7-4869-ae96-8a77b47ce760")
 		)
 		(pin "A7"
-			(uuid "e18ad786-3081-4cf8-8e2b-2dd28da6fcfe")
+			(uuid "6aa1ebca-b3d9-4577-a385-e0ad01327635")
 		)
 		(pin "A8"
-			(uuid "ec4d3682-7292-4abb-ac17-db04a0dc9b22")
+			(uuid "a86ab9b3-c87d-4d8d-9c43-8f7b575aef44")
 		)
 		(pin "A9"
-			(uuid "5029792c-e2e1-4dcd-9d4a-3de68523caf9")
+			(uuid "29b5aa54-9d9b-4241-be13-4db6c5119e38")
 		)
 		(pin "A12"
-			(uuid "7626acd8-46ec-4d2e-9705-8f9f31b49095")
+			(uuid "0e394e27-a3a3-4310-bbcf-4080d49e5282")
 		)
 		(pin "B1"
-			(uuid "49f0e44f-b138-4c36-9e8a-78f0f62e21dd")
+			(uuid "9dcebf2c-7d42-48ca-8d54-a24a70fcdf7b")
 		)
 		(pin "B4"
-			(uuid "2c90f572-d366-478b-b25a-dbfc708fe9fb")
+			(uuid "1146dc69-c4b4-4bd4-bf62-62fc7b46c441")
 		)
 		(pin "B5"
-			(uuid "d825ca75-14b5-4084-b885-a2963dff91b4")
+			(uuid "63ecf92c-f860-45f7-ab20-3d4b3f3d2983")
 		)
 		(pin "B6"
-			(uuid "5925b9a0-2f83-4a7c-967c-d702c13c56f4")
+			(uuid "04babb43-32e3-4b27-8102-10838a223ac2")
 		)
 		(pin "B7"
-			(uuid "1aedd0a6-fdf2-4b3f-ad4c-71077ca14758")
+			(uuid "1942ce70-5fbc-4e44-9deb-b7c0a221187a")
 		)
 		(pin "B8"
-			(uuid "2ef3bef1-42f3-424c-b14a-acfa21978c36")
+			(uuid "9d5442e5-fd9f-4ed3-b1aa-10fca180be6f")
 		)
 		(pin "B9"
-			(uuid "eb7bcf4d-7cd0-43a9-9638-93480dc01186")
+			(uuid "07b6f298-138d-49ff-9978-e298b166ce7c")
 		)
 		(pin "B12"
-			(uuid "e3f77cda-41c1-4a92-ab68-229ee6e117c9")
+			(uuid "45591348-42c0-48f1-8539-057d7fc2acaf")
 		)
 		(pin "SH"
-			(uuid "4ed23b5c-664d-4e8d-811e-55d3c8bfef31")
+			(uuid "0fd3bb9c-b7ef-49b9-8d0e-002d3ceb453c")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2738,7 +2749,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "3660bd8d-3963-49a8-8f0f-c5a50c47e815")
+		(uuid "273404d4-2349-418d-b40b-0a45b5f24b03")
 		(property "Reference" "U2"
 			(at 55.88 45.72 0)
 			(show_name no)
@@ -2798,16 +2809,16 @@
 		)
 
 		(pin "1"
-			(uuid "cf2510e0-f8b4-4c5d-81e5-4c0ed767b32e")
+			(uuid "aba7e08b-6224-4d0a-84ef-c56d17749eec")
 		)
 		(pin "2"
-			(uuid "a5932cd6-5d65-4c59-96ac-af8ba0b4d349")
+			(uuid "f409d82a-8c06-4784-bb6d-499a992f91b1")
 		)
 		(pin "3"
-			(uuid "439b3672-ed5e-40e6-90dc-d9cd2bdf757b")
+			(uuid "b5bdc071-1329-40bf-a5a6-2d99bcd2ecc6")
 		)
 		(pin "4"
-			(uuid "c20dc7ed-27df-46cf-8362-88e7b5134014")
+			(uuid "d4cd4f9e-5305-4fd6-a9fe-9c6bc5b704bc")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2829,7 +2840,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "f691e891-21b3-4310-97fe-3dcb7063cb71")
+		(uuid "ed7333ef-80c9-440e-b9a1-8f1c9990b72c")
 		(property "Reference" "F1"
 			(at 81.28 40.64 0)
 			(show_name no)
@@ -2889,10 +2900,10 @@
 		)
 
 		(pin "1"
-			(uuid "3a745e19-9d4f-47f3-ad0d-ca6b86a96fbe")
+			(uuid "941c33f6-971c-4c85-b9de-fb3ca31468f7")
 		)
 		(pin "2"
-			(uuid "18795e52-c549-4d8c-be1b-e00e71b51640")
+			(uuid "188dd131-3620-4fd6-a120-89f5e5fc3ba7")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2914,7 +2925,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "91c23c4a-f6e7-4c89-bbb7-5234136a383e")
+		(uuid "8bc2d004-423a-4b78-a987-470870ad2c63")
 		(property "Reference" "U1"
 			(at 109.22 50.800000000000004 0)
 			(show_name no)
@@ -2974,22 +2985,22 @@
 		)
 
 		(pin "1"
-			(uuid "0526e043-ee32-4068-852c-474d01385b14")
+			(uuid "326c8500-1695-4dfb-86e3-13166e1f4c47")
 		)
 		(pin "2"
-			(uuid "88c041e4-446d-45e2-b612-c81258f9352d")
+			(uuid "52a2f450-2044-4892-a789-7c6e47a3d5de")
 		)
 		(pin "3"
-			(uuid "79dd2d4b-3e0b-496b-be64-839494300945")
+			(uuid "37a4e2c3-0d49-4298-a79e-75f51ce3e84b")
 		)
 		(pin "4"
-			(uuid "6c2428d6-8988-4411-ad52-1c719c40eeeb")
+			(uuid "0228d02f-59b9-4dc3-9490-75553741c108")
 		)
 		(pin "5"
-			(uuid "e8ca8369-1ab7-4049-8871-2ed23066b15d")
+			(uuid "6b29fd5e-d65a-433f-8a1c-494d9307341e")
 		)
 		(pin "6"
-			(uuid "22b3a001-ceb5-4f89-89b4-775f639936f4")
+			(uuid "ab8e36f2-8cc3-4d22-8165-f2578a1b6b4f")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -3011,7 +3022,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "e77bbe72-48d4-45cf-bfd8-6fef1a2f792d")
+		(uuid "1f37e958-a19a-4584-90bf-6820d3ed9b4c")
 		(property "Reference" "U3"
 			(at 154.94 63.50000000000001 0)
 			(show_name no)
@@ -3071,13 +3082,13 @@
 		)
 
 		(pin "1"
-			(uuid "33488281-9111-4e6d-a16c-3c3c27617a4c")
+			(uuid "02511238-cf59-46c5-8382-e2a123b1f5b3")
 		)
 		(pin "2"
-			(uuid "899a423c-6df5-42cf-8c94-7af89ae89f5e")
+			(uuid "60f90d52-2b71-4841-9ba0-b0f83444a1fa")
 		)
 		(pin "3"
-			(uuid "d12b5612-4323-44b5-a628-006190ae6cac")
+			(uuid "2f96be7c-9169-4b45-b276-af03a5dcd2a4")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -3099,7 +3110,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "92ca9aa4-2e06-4bb7-b2b0-26e579014fd7")
+		(uuid "7c541e08-43c2-452d-abc4-eeb76b333036")
 		(property "Reference" "J_PD"
 			(at 175.26 30.480000000000004 0)
 			(show_name no)
@@ -3159,10 +3170,10 @@
 		)
 
 		(pin "1"
-			(uuid "935381de-6f2e-40c4-baf0-678c9dbb0b7c")
+			(uuid "b3add0be-474a-41a3-948c-e07d9a24d837")
 		)
 		(pin "2"
-			(uuid "1c491bb0-13c8-4811-84ea-1d83166e7ec5")
+			(uuid "0c1dcb5c-587f-4e64-898b-5d942011655a")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -3184,7 +3195,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "4a86a16a-7ddc-4bba-8a51-cf66705e7748")
+		(uuid "954496a7-a261-4ae3-a117-8a55c35b9122")
 		(property "Reference" "J202"
 			(at 175.26 53.34 0)
 			(show_name no)
@@ -3244,13 +3255,13 @@
 		)
 
 		(pin "1"
-			(uuid "30579db6-8596-4e0e-8194-475596b66908")
+			(uuid "24db1e84-d444-4b05-b8c4-5ec0e015f1d5")
 		)
 		(pin "2"
-			(uuid "3046652d-1837-48a4-98cd-040caf5086d9")
+			(uuid "b8fc2f01-e224-4249-9263-2a00794f7947")
 		)
 		(pin "3"
-			(uuid "a54c919d-7e5e-4f64-aa07-f17c72d37253")
+			(uuid "52cc156d-a8e2-40b3-befb-2bb13e23c24d")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -3262,467 +3273,345 @@
 		)
 	)
 
-	(wire
-		(pts
-			(xy 35.56 35.559999999999995) (xy 45.72 43.18)
+	(label "VBUS"
+		(at 40.64 35.559999999999995 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "44d5df48-dd12-4c81-bec8-a071c6a42e7d")
+		(uuid "99fe1d63-9438-4709-a1ec-a5730186d73a")
 	)
-	(wire
-		(pts
-			(xy 25.4 68.58) (xy 45.72 45.72)
+	(label "VBUS"
+		(at 43.18000000000001 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3a870f90-fa2c-4e8e-994a-28d4a85debd2")
+		(uuid "c07d9acd-452b-4d36-bd19-817af2758076")
 	)
-	(wire
-		(pts
-			(xy 66.04 43.18) (xy 71.12 43.18)
+	(label "PD_GND"
+		(at 25.4 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "63742221-9130-4460-8679-7f1155fc38b0")
+		(uuid "b17f854e-cb1f-4a57-ade8-89db146e7bd4")
 	)
-	(junction
-		(at 71.12 43.18)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1229c1e4-2731-4b70-ba97-e2feb81ca4c5")
-	)
-	(wire
-		(pts
-			(xy 71.12 43.18) (xy 176.53 33.02)
+	(label "PD_GND"
+		(at 43.18000000000001 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b34465bb-c37b-4c0d-8ce9-3d0981cae710")
+		(uuid "9d01ddb3-99aa-48ee-8de2-802501dbf86a")
 	)
 	(label "PD_12V"
-		(at 88.9 41.91 0)
+		(at 68.58 43.18 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "68d986e7-b36a-49d8-9b72-0dfbf092e66f")
+		(uuid "39957a80-bef6-49fb-9354-47048f73123d")
 	)
-	(wire
-		(pts
-			(xy 30.48 43.18) (xy 78.74 43.18)
+	(label "PD_12V"
+		(at 180.34 33.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8f40862e-fcff-4934-a72d-d1679898d815")
+		(uuid "d0371843-840a-415a-933e-b0f536ee4118")
 	)
 	(label "PD_12V_SW"
-		(at 33.02 41.91 0)
+		(at 77.47 43.18 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "350cfb5c-a629-4921-b41c-8e2d24cb73c0")
+		(uuid "5b22288d-cfee-4edc-93ce-0c620e9a394b")
 	)
-	(wire
-		(pts
-			(xy 83.82000000000001 43.18) (xy 83.82000000000001 62.230000000000004)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e3ed6b7d-7f0a-412f-92d7-1abb057c5087")
-	)
-	(junction
-		(at 83.82000000000001 62.230000000000004)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b67b8763-24d8-4511-b8f5-d6a31e8a7c69")
-	)
-	(wire
-		(pts
-			(xy 83.82000000000001 62.230000000000004) (xy 99.06 62.230000000000004)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3dea02fe-f7e1-4dd0-b2af-77f31d292cb1")
-	)
-	(wire
-		(pts
-			(xy 83.82000000000001 62.230000000000004) (xy 91.44 52.324000000000005)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ca38f65e-462f-45ab-bdb9-e1e012eba689")
-	)
-	(wire
-		(pts
-			(xy 91.44 54.356) (xy 91.44 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3efcc1cf-0ac3-4546-b2d6-e5bba91ac8db")
-	)
-	(junction
-		(at 91.44 45.72)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "49b8da93-bc7f-444d-9b19-40ec7897c15d")
-	)
-	(wire
-		(pts
-			(xy 45.72 45.72) (xy 91.44 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a72d67a2-06e3-4ae7-9b9c-75480cbd8d07")
-	)
-	(junction
-		(at 91.44 45.72)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "15e4586e-3bb8-4b0b-b4e7-091e656a64b0")
-	)
-	(wire
-		(pts
-			(xy 91.44 45.72) (xy 99.06 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6ea73214-1f73-49c5-8bcf-ad516a524b3f")
-	)
-	(junction
-		(at 99.06 45.72)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ccb85372-1c20-4d44-a904-a3962ebbcf06")
-	)
-	(wire
-		(pts
-			(xy 99.06 45.72) (xy 99.06 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ebdb0309-3fe2-4901-981d-df8bdd7c0d2c")
-	)
-	(wire
-		(pts
-			(xy 91.44 45.72) (xy 176.53 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d6cbee43-24b4-4e94-a4a9-e9283821ce59")
-	)
-	(label "R.C. open=ON"
-		(at 86.36 66.04 0)
+	(label "DKMW_VIN"
+		(at 85.09 43.18 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "cfc780ee-76bb-4c0d-9a00-c46e14529fb6")
+		(uuid "3ac8f570-5159-4c1a-84d7-4f3be6482f13")
 	)
-	(wire
-		(pts
-			(xy 119.38 59.690000000000005) (xy 176.53 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2d3886e5-1d1c-4ba2-a63e-cd1674f8853a")
-	)
-	(wire
-		(pts
-			(xy 119.38 64.77000000000001) (xy 176.53 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "af800fc1-92da-40a7-8161-f3cf9ff87937")
-	)
-	(wire
-		(pts
-			(xy 119.38 62.230000000000004) (xy 176.53 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ff74e992-599f-4ff4-9fbd-cab8299526c0")
-	)
-	(label "+12V_OUT"
-		(at 124.46000000000001 58.42 0)
+	(label "DKMW_VIN"
+		(at 96.52 62.230000000000004 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "461ae7ed-5517-4698-ae63-0d726307c3e6")
+		(uuid "46250ef0-b867-41e8-92c9-88983c8df6e3")
 	)
-	(label "-12V_OUT"
-		(at 124.46000000000001 63.50000000000001 0)
+	(label "DKMW_VIN"
+		(at 91.44 49.53 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "244bbde3-3ad0-45a7-b791-9a20cb6e301b")
+		(uuid "4261ea19-03d7-4300-a94a-874373790037")
+	)
+	(label "PD_GND"
+		(at 91.44 57.150000000000006 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c9d06236-b65c-49ad-9daa-049ef2dcf5ca")
+	)
+	(label "PD_GND"
+		(at 96.52 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cf4efe09-d182-46bd-8191-9f81cccf303d")
+	)
+	(label "PD_GND"
+		(at 180.34 35.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b5c3d7ad-e2a8-4c97-88f1-bd138da5e857")
+	)
+	(label "RC_OPEN"
+		(at 96.52 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "39c4dd40-df48-4ad0-97c1-3844e48e4ed8")
+	)
+	(label "+12V"
+		(at 121.92 59.690000000000005 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8640483b-f120-4444-b1bc-980050d0a262")
+	)
+	(label "+12V"
+		(at 180.34 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2ce7a5f3-4d5c-48ec-843b-11267751af68")
+	)
+	(label "-12V"
+		(at 121.92 64.77000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "86771230-cc2e-454b-b616-4dd3efa265d2")
+	)
+	(label "-12V"
+		(at 180.34 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9a5e6daa-dd23-40ea-8c07-867c6acfcfe6")
 	)
 	(label "A_GND"
-		(at 124.46000000000001 60.96 0)
+		(at 121.92 62.230000000000004 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "584ff6ac-4294-43e5-8f52-f51394214927")
+		(uuid "0875b718-449c-4651-a366-f9a913bdfb9f")
 	)
-	(wire
-		(pts
-			(xy 119.38 62.230000000000004) (xy 124.46000000000001 62.230000000000004)
+	(label "A_GND"
+		(at 180.34 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1cb879f1-6ab1-4e4e-955d-eefcc048b40d")
+		(uuid "3d809aab-149f-470d-8515-34c45dd20576")
 	)
-	(junction
-		(at 124.46000000000001 62.230000000000004)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4b72adf1-e30b-424d-8586-7ff011c2a743")
+	(label "+12V"
+		(at 137.16 59.69 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d305b72d-d12f-498d-8fec-cbf0a82fca0b")
 	)
-	(wire
-		(pts
-			(xy 119.38 59.690000000000005) (xy 129.54 58.67400000000001)
+	(label "A_GND"
+		(at 137.16 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e2c7c65-d87d-4b89-8e30-483f4d87a6d1")
+		(uuid "99adae3b-702e-482f-9ccf-d6371312d0a2")
 	)
-	(wire
-		(pts
-			(xy 129.54 60.706) (xy 129.54 62.230000000000004)
+	(label "-12V"
+		(at 137.16 64.77 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "37078b1f-f4ed-4076-907e-24234321ddb7")
+		(uuid "aef441d8-9e1c-4df0-8552-ce0284dd54e4")
 	)
-	(junction
-		(at 129.54 62.230000000000004)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5cc7cd11-807d-44af-9f66-423d8b6f7090")
+	(label "A_GND"
+		(at 137.16 72.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "43434fff-821f-49dd-87ab-8b973aed36d4")
 	)
-	(wire
-		(pts
-			(xy 119.38 64.77000000000001) (xy 129.54 63.75400000000001)
+	(label "+12V"
+		(at 149.86 59.69 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6a2a7104-0e57-4e74-99f6-20731993e96a")
+		(uuid "c3b6e13b-e394-44ab-947d-09a3cfa2842a")
 	)
-	(wire
-		(pts
-			(xy 129.54 65.78600000000002) (xy 129.54 62.230000000000004)
+	(label "A_GND"
+		(at 149.86 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f48dc131-ad17-4ae4-8e9c-c403deadd263")
+		(uuid "00bacfd0-1141-446d-be0a-533903eca300")
 	)
-	(junction
-		(at 129.54 62.230000000000004)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8424a08c-6a6a-4086-be27-9c0f0feeb75c")
+	(label "+12V"
+		(at 147.32 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "73e6519b-21f2-45b7-9ecf-f44ef013445a")
 	)
-	(wire
-		(pts
-			(xy 119.38 59.690000000000005) (xy 139.7 58.67400000000001)
+	(label "A_GND"
+		(at 154.94 73.66000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f834ac21-f66b-4af5-a740-e7d619e409c9")
-	)
-	(wire
-		(pts
-			(xy 139.7 60.706) (xy 139.7 62.230000000000004)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "809ad7c6-d070-4c6a-9a1e-abb2f776d237")
-	)
-	(junction
-		(at 139.7 62.230000000000004)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "66dcc98a-6070-4b73-8e7c-7a7d5b2d24fd")
-	)
-	(wire
-		(pts
-			(xy 176.53 53.34) (xy 149.85999999999999 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7bfb51a4-5b58-4816-9b54-06ad5f5d3f1a")
-	)
-	(wire
-		(pts
-			(xy 154.94 71.12) (xy 154.94 62.230000000000004)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "263c0a90-11be-471e-b9be-a9be1f3fdc94")
-	)
-	(junction
-		(at 154.94 62.230000000000004)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ea845115-d52c-42d0-95c8-df8ae0d8d4d8")
-	)
-	(wire
-		(pts
-			(xy 154.94 62.230000000000004) (xy 124.46000000000001 62.230000000000004)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f95419fb-257f-44be-8a3d-9b206e5fd03b")
-	)
-	(wire
-		(pts
-			(xy 160.02 66.04) (xy 195.58 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cbd12e12-ca10-47c9-8de6-ac3ec4480764")
+		(uuid "d7d8fd2a-e3c2-4715-877a-981f5ce0774d")
 	)
 	(label "VCC_TONE"
-		(at 180.34 64.77000000000001 0)
+		(at 162.56 66.04 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "85ffc44b-58f3-4120-899b-6de98222952e")
+		(uuid "7cad42f2-3b98-4925-bb0f-27d34fa548c7")
 	)
-	(wire
-		(pts
-			(xy 149.85999999999999 66.04) (xy 144.78 75.184)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "322c1589-61be-4b0e-9ef8-bcc1a5253ece")
-	)
-	(wire
-		(pts
-			(xy 144.78 77.21600000000001) (xy 144.78 62.230000000000004)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1f12db79-405a-4840-9bbf-e6ad98d0ce82")
-	)
-	(junction
-		(at 144.78 62.230000000000004)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "22926fe2-ed33-4b21-b04a-c2e575eccc30")
-	)
-	(wire
-		(pts
-			(xy 160.02 66.04) (xy 165.1 75.184)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "94f867f3-86be-4afc-8a25-748cce3b36f4")
-	)
-	(wire
-		(pts
-			(xy 165.1 77.21600000000001) (xy 165.1 62.230000000000004)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "51939178-bfbf-4b5a-98fa-77d10318fd0a")
-	)
-	(junction
-		(at 165.1 62.230000000000004)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f7294054-b0f5-4d5b-9d46-6005c67337b6")
-	)
-	(label "PG_noconn"
-		(at 68.58000000000001 44.449999999999996 0)
+	(label "+12V"
+		(at 142.24 67.31 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "70834c8c-f693-4a29-aa1d-11880ead42a8")
+		(uuid "8824166f-86d8-4e4e-b4a5-4f1c93ea117a")
+	)
+	(label "A_GND"
+		(at 142.24 74.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7eb0bb7f-25b4-4753-9991-5b874bbb05f6")
+	)
+	(label "VCC_TONE"
+		(at 167.64000000000001 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9ade28e3-9586-4d44-945f-380feaf3a2f8")
+	)
+	(label "A_GND"
+		(at 167.64000000000001 74.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "900b6984-681a-4b84-891e-7b3bccbd9016")
+	)
+	(label "PG_NOCONN"
+		(at 68.58 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b15afd7a-761a-4619-ad20-6954819d2147")
 	)
 
 

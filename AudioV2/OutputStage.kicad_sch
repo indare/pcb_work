@@ -521,7 +521,7 @@
 			)
 			(embedded_fonts no)
 		)
-	(symbol "Switch:SW_DP3T"
+	(symbol "Switch:SW_SP3T"
 			(pin_names
 				(offset 0)
 				(hide yes)
@@ -541,7 +541,7 @@
 					)
 				)
 			)
-			(property "Value" "SW_DP3T"
+			(property "Value" "SW_SP3T"
 				(at 0 -5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -563,7 +563,7 @@
 				)
 			)
 			(property "Datasheet" ""
-				(at -15.875 4.445 0)
+				(at 0 -7.62 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -573,7 +573,7 @@
 					)
 				)
 			)
-			(property "Description" "Switch, three position, dual pole triple throw, 3 position switch, SP3T"
+			(property "Description" "Switch, three position, single pole triple throw, 3 position switch, SP3T"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -584,7 +584,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "switch dp3t ON-ON-ON"
+			(property "ki_keywords" "switch sp3t ON-ON-ON"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -595,7 +595,7 @@
 					)
 				)
 			)
-			(property "ki_fp_filters" "SW* DP3T*"
+			(property "ki_fp_filters" "SW* SP3T*"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -606,18 +606,7 @@
 					)
 				)
 			)
-			(symbol "SW_DP3T_0_1"
-				(rectangle
-					(start -3.175 3.81)
-					(end 3.175 -3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
+			(symbol "SW_SP3T_0_1"
 				(circle
 					(center -2.032 0)
 					(radius 0.4572)
@@ -675,7 +664,18 @@
 					)
 				)
 			)
-			(symbol "SW_DP3T_1_1"
+			(symbol "SW_SP3T_1_1"
+				(rectangle
+					(start -3.175 3.81)
+					(end 3.175 -3.81)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
 				(pin passive line
 					(at 5.08 2.54 180)
 					(length 2.54)
@@ -741,80 +741,6 @@
 						)
 					)
 					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "SW_DP3T_2_1"
-				(pin passive line
-					(at 5.08 2.54 180)
-					(length 2.54)
-					(name "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 2.54)
-					(name "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 2.54)
-					(name "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 -2.54 180)
-					(length 2.54)
-					(name "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1032,7 +958,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "OutputStage — manual DEST + volume (Q2-A same PCB as Control)\nAMP_SEL → SW_DP3T (LINE/MUTE/PHONE) → RV101/102 A50k Dual\nMUTE throws unconnected. Sense pole on ControlPanel SW2.\nHP path: wiper → HeadphoneBuffer (Audio/ physical). No PGA."
+	(text "OutputStage — label-wired DEST + volume (Q2-A)\nAMP_SEL → SW101/102 SP3T → RV101/102 A50k Dual → PHONE/LINE\nMUTE throws = MUTE_NC_*. Sense pole on ControlPanel SW2.\nConnectivity = local labels on pin tips (grid-snapped)."
 		(at 25.4 25.4 0)
 		(effects
 			(font
@@ -1040,11 +966,11 @@
 			)
 			(justify left top)
 		)
-		(uuid "d247c7f8-106f-4109-9948-faa50d55c636")
+		(uuid "ff768cfe-ba4c-4094-a752-60c87873f5d8")
 	)
 
 	(symbol
-		(lib_id "Switch:SW_DP3T")
+		(lib_id "Switch:SW_SP3T")
 		(at 88.9 50.8 0)
 		(unit 1)
 		(body_style 1)
@@ -1054,7 +980,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "d5927920-0627-4422-9ee2-25b1a692b1df")
+		(uuid "2c9115bd-b623-4a41-9752-11f61d243646")
 		(property "Reference" "SW101"
 			(at 88.9 48.26 0)
 			(show_name no)
@@ -1114,16 +1040,16 @@
 		)
 
 		(pin "1"
-			(uuid "af9d6403-206b-4c2b-8f27-8f4745611d51")
+			(uuid "788dc4e4-e03a-480a-9c48-fb2f66673a65")
 		)
 		(pin "2"
-			(uuid "c747309c-9269-49ea-ac87-96beff115d29")
+			(uuid "057c4e7d-5573-4698-838b-45a0cf39daa4")
 		)
 		(pin "3"
-			(uuid "18ccc10e-03d2-4a44-874b-acee69f60470")
+			(uuid "42acddd4-d6cb-4fdc-9fc9-62510c910001")
 		)
 		(pin "4"
-			(uuid "20b5549b-e72b-41b4-8863-5fff1544582f")
+			(uuid "cbcfaeff-5810-4d14-8ed2-8f15c27da8c9")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -1135,9 +1061,9 @@
 		)
 	)
 	(symbol
-		(lib_id "Switch:SW_DP3T")
-		(at 88.9 63.5 0)
-		(unit 2)
+		(lib_id "Switch:SW_SP3T")
+		(at 88.9 66.04 0)
+		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1145,9 +1071,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "fa1aa10a-d010-4cfd-9774-6f65bdc00ae9")
-		(property "Reference" "SW101"
-			(at 88.9 60.96 0)
+		(uuid "ed6aad2b-e137-4264-92bb-823ac6daa9ad")
+		(property "Reference" "SW102"
+			(at 88.9 63.50000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1158,7 +1084,7 @@
 		)
 
 		(property "Value" "DEST R (PHONE/MUTE/LINE)"
-			(at 88.9 66.04 0)
+			(at 88.9 68.58000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1204,23 +1130,23 @@
 			)
 		)
 
-		(pin "5"
-			(uuid "e4b6930b-e491-4a4f-85dd-18c2fb054a83")
+		(pin "1"
+			(uuid "dadaaba1-123e-4976-a930-03219aa39353")
 		)
-		(pin "6"
-			(uuid "24251429-532d-40d6-b8d3-99031309c495")
+		(pin "2"
+			(uuid "fa0a6aec-1215-48cd-97c1-36f37367f5d5")
 		)
-		(pin "7"
-			(uuid "fdbc9cbd-c1a0-4bf5-a54d-7c1693156e43")
+		(pin "3"
+			(uuid "cfda7182-3329-4a17-b431-267b93f0893f")
 		)
-		(pin "8"
-			(uuid "c7b567ca-d193-4ac9-a6a9-12ddf6080a7d")
+		(pin "4"
+			(uuid "2ae56e15-123d-41e5-80bf-fc9e4521435b")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
-					(reference "SW101")
-					(unit 2)
+					(reference "SW102")
+					(unit 1)
 				)
 			)
 		)
@@ -1237,7 +1163,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "d14dc3fb-8d88-4234-964e-f426e1453a96")
+		(uuid "1d537fde-8f62-4637-b4fb-a9ee67d60037")
 		(property "Reference" "RV101"
 			(at 127.0 43.18 0)
 			(show_name no)
@@ -1297,22 +1223,22 @@
 		)
 
 		(pin "1"
-			(uuid "054307fc-1d4c-4acf-9861-37a0c75730e2")
+			(uuid "0db18774-4a19-4ec0-9716-c5baea6de2d4")
 		)
 		(pin "2"
-			(uuid "22707117-ee0e-42ec-a72c-d1f89d85676b")
+			(uuid "8df0f96e-f735-4eba-a9b9-01860579d7ec")
 		)
 		(pin "3"
-			(uuid "0a492843-8833-444e-8c61-204282eae9d1")
+			(uuid "58c9c0d3-4072-4588-ae6a-6fc88c9fc2c3")
 		)
 		(pin "4"
-			(uuid "c9f48a4d-eddd-49f8-9e29-0b7fa952a19b")
+			(uuid "1c0cca01-a095-40f1-863d-ce9bb82b1d57")
 		)
 		(pin "5"
-			(uuid "d13d6fd0-e96c-4de5-82da-73d1df8bca63")
+			(uuid "6fa61d54-980d-4fef-84ac-f9799c1d4b73")
 		)
 		(pin "6"
-			(uuid "3b5ee54d-3798-4dd6-b2f3-27e157d6900d")
+			(uuid "58688066-38ac-40e6-b37b-81dd64eb463e")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -1334,7 +1260,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "6618d779-a7bd-4b21-874d-f59f3a1b9e98")
+		(uuid "af05b456-bd49-4c2d-a5fc-1d0e99471633")
 		(property "Reference" "RV102"
 			(at 127.0 63.50000000000001 0)
 			(show_name no)
@@ -1394,22 +1320,22 @@
 		)
 
 		(pin "1"
-			(uuid "14d61e81-3329-487c-849b-b0ce133777a9")
+			(uuid "8f42f75a-0403-4f2e-a9a5-ccae2e3cc842")
 		)
 		(pin "2"
-			(uuid "43ad85bd-21d6-4c91-98bc-16462f3097b1")
+			(uuid "486c9e88-15d1-4bbd-8f32-4a3e84e5a280")
 		)
 		(pin "3"
-			(uuid "135d9800-b8c6-4fc9-ad8e-6e4c62d2b457")
+			(uuid "cfa2b7d6-3829-425d-9bd6-4bc6afea1a37")
 		)
 		(pin "4"
-			(uuid "9318518a-b608-4b4f-82bb-4cb92dee6d9d")
+			(uuid "f74feb9a-8386-402f-b4cb-51e1be07a7ce")
 		)
 		(pin "5"
-			(uuid "1fcab5b3-af1a-4e92-8496-acdf2b2aaeaa")
+			(uuid "49f4294f-1f5a-4429-b18d-5658c89ab10a")
 		)
 		(pin "6"
-			(uuid "9cc84e59-2b0f-4f31-b3e1-0d3e8f81fa27")
+			(uuid "a4645115-5e2b-4967-8230-7489f91fe40a")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -1432,7 +1358,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "08315b2a-8e10-44b0-8678-40fb9b6c4ea0")
+		(uuid "5696ba06-42d8-48ae-a6d1-fa4256a010a7")
 		(property "Reference" "J_HP"
 			(at 165.1 43.18 0)
 			(show_name no)
@@ -1492,10 +1418,10 @@
 		)
 
 		(pin "1"
-			(uuid "fb70ea30-e672-4cec-a0c8-cc28be493098")
+			(uuid "c1eb3d77-4888-4994-9e78-035b020b451b")
 		)
 		(pin "2"
-			(uuid "7119fe3f-9ff7-447a-a501-d4423584f87e")
+			(uuid "f4a2fb26-1761-4ab6-bed0-9e48c762843a")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -1517,7 +1443,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "33e0dbbc-0143-45e4-8539-4c19a57573e2")
+		(uuid "1b64b0dc-e97c-4ea6-8d4d-e503539de74c")
 		(property "Reference" "J_LINE"
 			(at 165.1 53.34 0)
 			(show_name no)
@@ -1577,10 +1503,10 @@
 		)
 
 		(pin "1"
-			(uuid "e22f59cb-52cb-40d6-bd09-07dac7ea2f83")
+			(uuid "48ff410a-cefe-49a7-bf0e-2a2bac69c31d")
 		)
 		(pin "2"
-			(uuid "d49780a0-0083-4d0e-b090-8e4e0cee4684")
+			(uuid "38647eea-887f-4548-b4eb-8a6959d8da36")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -1601,7 +1527,7 @@
 			)
 			(justify right)
 		)
-		(uuid "28cec809-2b8b-4cca-ba58-06ff24922e59")
+		(uuid "d10b57b3-9129-4f29-88a3-f4907661dc8f")
 	)
 	(hierarchical_label "AMP_SEL_R"
 		(shape input)
@@ -1612,7 +1538,7 @@
 			)
 			(justify right)
 		)
-		(uuid "28c0848a-fe95-4516-b886-d2c766b290df")
+		(uuid "c4e039e1-b865-4311-9d9e-859ec030cc39")
 	)
 	(hierarchical_label "A_GND"
 		(shape bidirectional)
@@ -1623,167 +1549,7 @@
 			)
 			(justify right)
 		)
-		(uuid "88c059d7-ef4e-4fbd-a922-518d37c9080c")
-	)
-	(wire
-		(pts
-			(xy 30.48 50.8) (xy 70.0 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4058da3c-9e69-4921-bab0-b8365e6690f2")
-	)
-	(wire
-		(pts
-			(xy 30.48 53.34) (xy 70.0 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3fba9f86-5bbb-4bcd-b9e3-d53960a24f6d")
-	)
-	(label "AMP_SEL_L"
-		(at 50 50 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7c849602-e83c-4c55-ae28-dd7943cf78eb")
-	)
-	(label "AMP_SEL_R"
-		(at 50 52.5 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0425fb66-1c3b-4b06-ac87-3cb2a7ef5375")
-	)
-	(wire
-		(pts
-			(xy 70.0 50.8) (xy 83.82000000000001 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e8a5cdb9-210b-4da9-9fc4-e2b66d5d5b1b")
-	)
-	(wire
-		(pts
-			(xy 70.0 53.34) (xy 83.82000000000001 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4d3ae4c0-63ac-4181-88cb-efaabc3a2c1f")
-	)
-	(wire
-		(pts
-			(xy 93.98 53.339999999999996) (xy 115.0 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0914db72-196d-4f25-a508-3b9540a62b4a")
-	)
-	(wire
-		(pts
-			(xy 93.98 66.04) (xy 115.0 50.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7cb0b6f7-415a-4e00-a5ac-7eb7f5deb904")
-	)
-	(wire
-		(pts
-			(xy 93.98 48.26) (xy 115.0 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5465e0af-cd6a-4273-8341-29d576f8bab5")
-	)
-	(wire
-		(pts
-			(xy 93.98 60.96) (xy 115.0 71.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "128d58c8-ab10-47cf-9d9b-817ebbf71d13")
-	)
-	(label "MUTE NC (2/6)"
-		(at 98.9 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "22e13f73-316a-4617-85ce-652cd1ea8f37")
-	)
-	(wire
-		(pts
-			(xy 115.0 45.72) (xy 116.84 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eb189c29-73d8-4f15-bdca-57964ab74d4c")
-	)
-	(wire
-		(pts
-			(xy 115.0 50.72) (xy 129.54 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bb1f789f-b07a-4e79-8f4c-a09b86c825a2")
-	)
-	(wire
-		(pts
-			(xy 124.46 43.18) (xy 127.0 80.0)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0aa1ecb1-534d-45b3-b7f3-c63096a929a0")
-	)
-	(wire
-		(pts
-			(xy 137.16 43.18) (xy 132.0 80.0)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "849d37b2-076b-47ee-91a9-ca1d028b70b7")
-	)
-	(wire
-		(pts
-			(xy 127.0 80.0) (xy 30.48 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "34d9fca0-1825-4c14-bf8f-e4b51394eacb")
+		(uuid "93185685-0cb4-4624-bec3-f506dbb04e55")
 	)
 	(hierarchical_label "PHONE_L"
 		(shape output)
@@ -1794,7 +1560,7 @@
 			)
 			(justify left)
 		)
-		(uuid "6fe79c46-978b-4d11-8528-a896827c325d")
+		(uuid "28853e8f-3fb5-4d39-be5a-147bf56be56f")
 	)
 	(hierarchical_label "PHONE_R"
 		(shape output)
@@ -1805,67 +1571,7 @@
 			)
 			(justify left)
 		)
-		(uuid "bd167397-f3d9-4528-9848-def9865a9ae8")
-	)
-	(wire
-		(pts
-			(xy 120.65 48.26) (xy 200.66 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ff3dffbd-afa5-42d4-abc8-5787c07f8ac1")
-	)
-	(wire
-		(pts
-			(xy 133.35 48.26) (xy 200.66 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1173e281-2999-4548-b445-f44a5bed028e")
-	)
-	(wire
-		(pts
-			(xy 115.0 66.04) (xy 116.84 63.50000000000001)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1d399844-1e5e-4886-83e3-3e7d6b2a60fd")
-	)
-	(wire
-		(pts
-			(xy 115.0 71.04) (xy 129.54 63.50000000000001)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e25d194e-5dae-4a41-9b41-f625d747331f")
-	)
-	(wire
-		(pts
-			(xy 124.46 63.50000000000001) (xy 127.0 80.0)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "05ad2f02-3f75-4016-8526-119f80883f97")
-	)
-	(wire
-		(pts
-			(xy 137.16 63.50000000000001) (xy 132.0 80.0)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1c75caa2-480d-4630-8157-5b5e001f3ebd")
+		(uuid "2724da65-bd7e-469c-9a91-0a7e03ceecf1")
 	)
 	(hierarchical_label "LINE_L"
 		(shape output)
@@ -1876,7 +1582,7 @@
 			)
 			(justify left)
 		)
-		(uuid "d3b10433-5084-4797-81ec-0c77a4d8d97e")
+		(uuid "50eb9df1-e0fe-4595-b0c9-616dece765b9")
 	)
 	(hierarchical_label "LINE_R"
 		(shape output)
@@ -1887,27 +1593,318 @@
 			)
 			(justify left)
 		)
-		(uuid "536c42ba-ffcb-4e12-8a89-4d0e8828e6aa")
+		(uuid "927e484c-5ae0-4753-bea0-17c392d474ec")
 	)
-	(wire
-		(pts
-			(xy 120.65 68.58000000000001) (xy 200.66 50.8)
+
+	(label "AMP_SEL_L"
+		(at 30.48 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "33579495-e225-4954-9904-232b010e585d")
+		(uuid "88f81a41-3d5f-4e39-a1af-a9450c1f8349")
 	)
-	(wire
-		(pts
-			(xy 133.35 68.58000000000001) (xy 200.66 53.34)
+	(label "AMP_SEL_R"
+		(at 30.48 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
+		(uuid "170613bf-a8c0-489b-952d-b91c9a26ceaf")
+	)
+	(label "A_GND"
+		(at 30.48 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(uuid "b10d73dc-dc30-49de-aa67-b2769da83130")
+		(uuid "4bd1ca88-e514-4f10-aa2d-ffbefe94833e")
+	)
+	(label "AMP_SEL_L"
+		(at 83.82000000000001 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "63a03eaf-b7d7-4242-a1db-6bcc517bbd5a")
+	)
+	(label "AMP_SEL_R"
+		(at 83.82000000000001 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6a1f7229-2ff3-4521-afee-9571adb8e227")
+	)
+	(label "PHONE_PRE_L"
+		(at 93.98 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "47847baf-453d-4138-a8ce-f989560dfc70")
+	)
+	(label "PHONE_PRE_R"
+		(at 93.98 63.50000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "965978f2-7b38-4f39-b739-85a66956a55e")
+	)
+	(label "LINE_PRE_L"
+		(at 93.98 53.339999999999996 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "af0bfac8-6b73-4259-baaa-3270e94a729b")
+	)
+	(label "LINE_PRE_R"
+		(at 93.98 68.58000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7afe5d20-63cd-4d9f-9a5c-f0490ce1a6e9")
+	)
+	(label "MUTE_NC_L"
+		(at 93.98 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "83525bfb-9653-4379-9975-941213bb97e3")
+	)
+	(label "MUTE_NC_R"
+		(at 93.98 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0b6789e3-1fd2-4e0c-bd4a-b24f65b11817")
+	)
+	(label "PHONE_PRE_L"
+		(at 116.84 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "19eb385d-f810-47b4-813f-cdf9a6e96429")
+	)
+	(label "PHONE_PRE_R"
+		(at 129.54 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5ef80192-80de-473f-ad5b-8fddedfdc188")
+	)
+	(label "PHONE_L"
+		(at 120.65 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "92a29be6-71a5-4e0a-8744-5aee14bf8ae7")
+	)
+	(label "PHONE_R"
+		(at 133.35 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c7d6a8e3-cc0b-425e-82e9-4fef61c783ce")
+	)
+	(label "A_GND"
+		(at 124.46 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b0c7ff14-c3d6-4035-b96a-01c7ab3debb7")
+	)
+	(label "A_GND"
+		(at 137.16 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5b346318-c4fe-4403-8bb3-765e04fb4597")
+	)
+	(label "LINE_PRE_L"
+		(at 116.84 68.58000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "044edf8f-95a1-4aa3-9860-5e03d95727fe")
+	)
+	(label "LINE_PRE_R"
+		(at 129.54 68.58000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2472062b-16e0-464d-bdee-20467658f86d")
+	)
+	(label "LINE_L"
+		(at 120.65 63.50000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c18178ec-fc1d-4120-ba88-7fd167a76e65")
+	)
+	(label "LINE_R"
+		(at 133.35 63.50000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b83dd815-2c96-4d36-b73f-17a4d7f50743")
+	)
+	(label "A_GND"
+		(at 124.46 68.58000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2d3d0268-d392-481f-bb65-ef095016b851")
+	)
+	(label "A_GND"
+		(at 137.16 68.58000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a464f2e2-8c2f-4fd7-a266-c085d5441afa")
+	)
+	(label "PHONE_L"
+		(at 200.66 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b34d4389-8d06-4bac-a496-5f05b3fa2376")
+	)
+	(label "PHONE_R"
+		(at 200.66 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "66b8cb73-935d-4b69-9e61-c9aa567b65b5")
+	)
+	(label "LINE_L"
+		(at 200.66 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ffa8f542-514d-459c-b689-9539dfd87f08")
+	)
+	(label "LINE_R"
+		(at 200.66 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b7e479e7-cda8-4bb8-9390-c6f880967470")
+	)
+	(label "PHONE_L"
+		(at 160.01999999999998 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "70bd91e7-99ed-4e81-86d1-ebd7b0988c69")
+	)
+	(label "PHONE_R"
+		(at 160.01999999999998 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f7b9e20a-b9b2-40a1-916b-2193bee8857c")
+	)
+	(label "LINE_L"
+		(at 160.01999999999998 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3ac5407e-4e62-485a-a0c7-486e870c441c")
+	)
+	(label "LINE_R"
+		(at 160.01999999999998 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "388c4103-e853-4461-a09f-7b2080f1fa43")
 	)
 
 
