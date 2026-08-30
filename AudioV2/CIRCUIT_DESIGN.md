@@ -142,14 +142,28 @@ TI SBOS207C §5「Top View」どおり。**AudioV2 は ±12 V アナログ、VD+
 ## 7. KiCad 更新チェックリスト
 
 - [x] PGA2310PA シンボル — 16pin DS 一致
-- [ ] PT2314 シンボル — 28pin DIP 全ピン
-- [ ] ControlPanel — PT2314 周辺 C/R を具体値に
-- [ ] PowerModule — LM7809 + F1 3A、50224 端子注記
-- [ ] ERC — 親シートグローバル配線完成後
+- [x] PT2314 シンボル — 28pin DIP 全ピン
+- [x] ControlPanel — PT2314 周辺 C/R 配置（`wire_circuit_design.py`）
+- [x] PowerModule — LM7809 + F1 3A、配線
+- [x] 親シート — グローバルバス ↔ 子シート pin 配線
+- [ ] ERC — 未接続・未使用入力の整理
+- [ ] RelayBoard / OutputStage 配線
+
+## 8. 配置・配線（2026-08-30）
+
+`python3 AudioV2/scripts/wire_circuit_design.py` で以下を生成:
+
+| シート | 内容 |
+|---|---|
+| PowerModule | CH224→F1→DKMW20、7809→VCC_TONE、J202 出力 |
+| ControlPanel | PT2314 電源/入力/REF/トーン RC/PGA2310×2/SPI |
+| AudioV2Case | +12V/A_GND/I²C グローバルバス配線 |
+
+KiCad で **ControlPanel ページ 5** を開き、U2 周辺の C/R 配置と net 名を確認。
 
 ---
 
-## 8. 変更履歴
+## 9. 変更履歴
 
 | 日付 | 内容 |
 |---|---|
