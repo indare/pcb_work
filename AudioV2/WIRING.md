@@ -27,9 +27,9 @@
 |---|---|---|---|
 | `COMMON_L/R` | RelayBoard_A/B 合流 → Control PT2314 入力 | §11.8 共通バス | 4P コネクタ想定 |
 | PT2314 OUT → | ControlPanel | **Audio/ Amp×10 入力端子**（図外） | 箱配線 |
-| Amp 出力（選択後）→ | Audio/ 製造済み | ControlPanel PGA2310 入力 | 図外 |
-| `PGA_HP_L/R` | ControlPanel U3 | OutputStage → **Audio/ HeadphoneBuffer** | 0 Ω 固定パッド廃止 |
-| `PGA_LINE_L/R` | ControlPanel U4 | OutputStage → LINE 端子 | |
+| Amp 出力（選択後）→ | Audio/ 製造済み | ControlPanel **AMP_SEL_L/R** → SW_DEST | 図外 |
+| `PHONE_L/R` | OutputStage RV101 | **Audio/ HeadphoneBuffer** | 0 Ω 固定パッド廃止 |
+| `LINE_L/R` | OutputStage RV102 | LINE 端子 | |
 | `PHONE_L/R` | OutputStage J_HP | Audio/ HeadphoneBuffer 入力 | |
 | `LINE_L/R` | OutputStage J_LINE | 前面 LINE OUT | |
 
@@ -45,6 +45,5 @@
 
 - **Q3** I²C 拓扑（daisy / スター）
 - GND NetTie 物理位置
-- DEST リレー本数・駆動元（Control ULN 余裕 vs Relay MCP ビット）
-- PT2314 外部 C/R 値
+- ENC / ノブの正確な秋月コード（在庫次第）
 - ERC / ネットリスト整合

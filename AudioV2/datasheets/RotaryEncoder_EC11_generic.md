@@ -1,6 +1,6 @@
 # ロータリエンコーダー — 機械仕様（汎用品）
 
-AudioV2 操作パネル **ENC×6**（CH / HP / LINE / DEST / BASS / TREBLE）用。特定メーカー品番は固定しない。**秋月等の汎用 EC11 系**を想定。
+AudioV2 操作パネル **ENC×3**（CH / BASS / TREBLE）用。HP / LINE / DEST は手回し。**秋月等の汎用 EC11 系・押し SW 付き**。正確な販売コードは在庫次第（[PARTS.md](../PARTS.md)）。
 
 ## 形状（ユーザー確認）
 

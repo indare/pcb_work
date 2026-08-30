@@ -14,8 +14,10 @@
 
 | 部品 | 用途 | ローカル | 取得元 |
 |---|---|---|---|
-| **PGA2310PA** ×2 | HP / LINE 音量（SPI、Amp 後） | [TI_PGA2310.pdf](TI_PGA2310.pdf) | [TI SBOS187C](https://www.ti.com/lit/ds/symlink/pga2310.pdf) |
-| **PT2314** | Bass / Treble（I²C、Amp 前） | [Princeton_PT2314.pdf](Princeton_PT2314.pdf) | Princeton Technology PT2314 v1.1 |
+| **PT2314 DIP-28** | Bass / Treble（I²C、Amp 前） | [Princeton_PT2314.pdf](Princeton_PT2314.pdf) | Princeton Technology PT2314 v1.1 |
+| **Alps RK27112A00CF** ×2 | HP / LINE 手回し音量（A50k Dual） | （メーカーカタログ） | [PARTS.md](../PARTS.md) |
+| **C&K 7303SYZQE** | DEST 3PDT ON-OFF-ON | [C&K 7000 Series](https://media.digikey.com/pdf/Data%20Sheets/C&K/7000%20Mini%20Toggle%20Series.pdf) | [PARTS.md](../PARTS.md) |
+| ~~PGA2310PA~~ | **不採用**（調査アーカイブ） | [TI_PGA2310.pdf](TI_PGA2310.pdf) | [VOLUME_IC_COMPARISON.md](../VOLUME_IC_COMPARISON.md) |
 
 ## リレー盤（B2-exp）
 
@@ -23,15 +25,16 @@
 |---|---|---|---|
 | **MCP23017** | I²C GPIO 拡張 | [Microchip_MCP23017.pdf](Microchip_MCP23017.pdf) | [Microchip DS20001952C](https://ww1.microchip.com/downloads/en/devicedoc/20001952c.pdf) |
 | **ULN2803A** | コイル駆動 | [ST_ULN2803A.pdf](ST_ULN2803A.pdf) | [ST ULN2803A](https://www.st.com/resource/en/datasheet/uln2803a.pdf) |
-| **AZ850P2-x** | ラッチング DPDT | [Zettler_AZ850.pdf](Zettler_AZ850.pdf) | [Zettler AZ850](https://zettlerelectronics.com/products/AZ850.pdf) |
+| **AZ850P2-5** | ラッチング DPDT（**5 V コイル**） | [Zettler_AZ850.pdf](Zettler_AZ850.pdf) | 秋月 [118017](https://akizukidenshi.com/catalog/g/g118017/) |
 
 ## UI・MCU
 
 | 部品 | 用途 | ローカル | 取得元 |
 |---|---|---|---|
-| **SSD1306** | OLED ×2 | [Solomon_SSD1306.pdf](Solomon_SSD1306.pdf) | [Solomon Systech SSD1306](https://www.solomon-systech.com/product/ssd1306/) |
+| **SSD1306 / SSD1309** | 制御 OLED 128×64 I²C（**2.42″** 第一） | [Solomon_SSD1306.pdf](Solomon_SSD1306.pdf) | v1 `Control/`。[PARTS.md](../PARTS.md) AliExpress 例 |
+| **WAVESHARE-29318** | スペアナ 3.5″ タッチ LCD（ST7796S + FT6336U） | （Wiki） | [スイッチサイエンス 10138](https://www.switch-science.com/products/10138)。`Audio/measurement_fw/` |
 | **RP2350** | Pico 2 | [RaspberryPi_RP2350.pdf](RaspberryPi_RP2350.pdf) | [Raspberry Pi RP2350](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf) |
-| **ロータリ ENC ×6** | 操作パネル | [RotaryEncoder_EC11_generic.md](RotaryEncoder_EC11_generic.md) | **GPIO 直結**（§10）。I²C 集約なし |
+| **ロータリ ENC ×3** | CH / BASS / TREBLE | [RotaryEncoder_EC11_generic.md](RotaryEncoder_EC11_generic.md) | **GPIO 直結**（§10）。押し SW 付き EC11 |
 
 ## 計測（独立・参考）
 
@@ -48,9 +51,11 @@
 
 - PD モジュールの差し替え候補（CH224 以外を試す場合）
 - 購入 ENC のメーカー寸法図（フットプリント作成時）
+- Alps RK27 / C&K 7000 の紙 DS（メーカーページで足りる。必要なら追加）
 
 ## 更新
 
 - 2026-08-30: 初回一括取得
 - 2026-08-30: CH224 [50224]、ENC 機械仕様、Amp/HP 流用方針。OPA1656 削除
-- 2026-08-30: ENC×6 **GPIO 直結**確定（§10）
+- 2026-08-30: ENC×3 **GPIO 直結**確定（§10）
+- 2026-08-30: 表示 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）
