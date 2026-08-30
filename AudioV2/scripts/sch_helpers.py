@@ -160,7 +160,10 @@ PIN_COUNTS: dict[str, list[str]] = {
     "Device:Fuse": ["1", "2"],
     "Device:LED": ["1", "2"],
     "Device:RotaryEncoder_Switch": ["A", "B", "C", "S1", "S2"],
+    "Device:R_Potentiometer_Dual": ["1", "2", "3", "4", "5", "6"],
     "Switch:SW_SPST": ["1", "2"],
+    "Switch:SW_DP3T": ["1", "2", "3", "4", "5", "6", "7", "8"],
+    "Switch:SW_SP3T": ["1", "2", "3", "4"],
     "Regulator_Linear:LM7809_TO220": ["1", "2", "3"],
     "Connector:USB_C_Receptacle_USB2.0_16P": [
         "A1", "A4", "A5", "A6", "A7", "A8", "A9", "A12",
@@ -169,10 +172,11 @@ PIN_COUNTS: dict[str, list[str]] = {
     "Connector:Conn_01x02_Pin": ["1", "2"],
     "Connector:Conn_01x03_Pin": ["1", "2", "3"],
     "Connector:Conn_01x04_Pin": ["1", "2", "3", "4"],
+    "Connector:Conn_01x06_Pin": ["1", "2", "3", "4", "5", "6"],
     "Connector:Screw_Terminal_01x02": ["1", "2"],
     "AudioV2:CH224_50224": ["1", "2", "3", "4"],
     "AudioV2:DKMW20F-12": ["1", "2", "3", "4", "5", "6"],
-    "AudioV2:PT2314": ["1", "2", "3", "4", "10", "11", "12", "15", "16", "20"],
+    "AudioV2:PT2314": [str(i) for i in range(1, 29)],
     "BP5293_ROHM:BP5293-50": ["1", "2", "3"],
     "Relay:AZ850P2-x": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     "Transistor_Array:ULN2803A": [str(i) for i in range(1, 19)],
@@ -342,6 +346,7 @@ def symbol_inst_v10(
     parent_path: str,
     project: str = "AudioV2Case",
     extra_props: list[tuple[str, str]] | None = None,
+    unit: int = 1,
 ) -> str:
     from generate_kicad_scaffold import sym_prop  # noqa: WPS433
 
@@ -355,12 +360,16 @@ def symbol_inst_v10(
     if extra_props:
         for n, v in extra_props:
             props.append(sym_prop(n, v, 0, 0, hide=True))
-    pin_block = pin_uuid_block(pin_numbers_for(lib_id))
+    # Multi-unit: only emit pin UUIDs for pins belonging to this unit when known
+    nums = pin_numbers_for(lib_id)
+    if lib_id == "Switch:SW_DP3T":
+        nums = ["1", "2", "3", "4"] if unit == 1 else ["5", "6", "7", "8"]
+    pin_block = pin_uuid_block(nums)
     props_str = "\n".join(props)
     return f"""\t(symbol
 \t\t(lib_id "{lib_id}")
 \t\t(at {grid(x)} {grid(y)} {rot})
-\t\t(unit 1)
+\t\t(unit {unit})
 \t\t(body_style 1)
 \t\t(exclude_from_sim no)
 \t\t(in_bom yes)
@@ -375,7 +384,7 @@ def symbol_inst_v10(
 \t\t\t(project "{project}"
 \t\t\t\t(path "{parent_path}"
 \t\t\t\t\t(reference "{ref}")
-\t\t\t\t\t(unit 1)
+\t\t\t\t\t(unit {unit})
 \t\t\t\t)
 \t\t\t)
 \t\t)

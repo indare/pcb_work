@@ -1,189 +1,123 @@
-# AudioV2 回路設計メモ（#19 作業中）
+# AudioV2 回路設計メモ
 
-**目的:** 素案 KiCad の **ピン番号・部品値**をデータシートと突き合わせ、机上で確定してから ERC/配線を詰める。
+**目的:** ピン番号・部品値をデータシートと突き合わせ、手回し音量構成で ERC/配線を詰める。
 
-**参照 DS:** `datasheets/` ローカル PDF。KiCad シンボルは **KiCad 標準 lib を優先**（`Audio:PGA2310PA`, `Transistor_Array:ULN2803A`, `Device:RotaryEncoder_Switch` 等）。標準に無いもののみ `AudioV2.kicad_sym`（PT2314 / DKMW20F-12 / 50224 CH224 モジュール枠）と `Audio/` プロジェクト lib（BP5293）。
+**方針（2026-08-30）:** 最終出力ボリュームは **A50k デュアル ×2**、DEST は **トグル + ラダー ADC**。[DECISIONS.md](DECISIONS.md) §2・§3・§10。PGA / digipot は不採用。
+
+**参照 DS:** `datasheets/` ローカル PDF。KiCad シンボルは **標準 lib 優先**。カスタムのみ `AudioV2.kicad_sym`（PT2314 28pin / DKMW20F-12 / CH224_50224）と `Audio/BP5293_ROHM`。
 
 ---
 
-## 0. シンボル lib 方針（2026-08）
+## 0. シンボル lib 方針
 
 | 部品 | lib_id | 備考 |
 |---|---|---|
-| PGA2310PA×2 | `Audio:PGA2310PA` | KiCad 標準（TI PDIP-16） |
-| ULN2803A | `Transistor_Array:ULN2803A` | KiCad 標準 |
-| ENC×6 | `Device:RotaryEncoder_Switch` | KiCad 標準（EC11 相当） |
-| MCP23017 | `Interface_Expansion:MCP23017-E/SP` | 既に標準 |
-| Pico / SSD1306 / LM7809 / AZ850 等 | 各標準 lib | 変更なし |
-| PT2314 | `AudioV2:PT2314` | **標準 lib 無し** — 28pin カスタム維持 |
-| DKMW20F-12 | `AudioV2:DKMW20F-12` | **標準 lib 無し** |
-| 50224 CH224 | `AudioV2:CH224_50224` | **モジュール抽象**（`Interface_USB:CH224K` は IC 直付け用） |
-| BP5293-50 | `BP5293_ROHM:BP5293-50` | Audio/ プロジェクト lib |
+| PT2314 | `AudioV2:PT2314` | **28pin DIP**（Princeton DS）。旧 8pin 仮シンボルは廃止 |
+| RV101/102 | `Device:R_Potentiometer_Dual` | Value **A50k Dual** |
+| SW_DEST 音声 | `Switch:SW_DP3T` | unit1=L / unit2=R。MUTE 投げは NC |
+| SW_DEST センス | `Switch:SW_SP3T` | 3PDT の 3 極目。COM→ADC |
+| ENC×3 | `Device:RotaryEncoder_Switch` | CH / BASS / TREBLE |
+| Pico / OLED / LED / R / C | 各標準 lib | |
+| ULN2803A / AZ850 | 標準（**RelayBoard のみ**） | DEST ラッチングは廃止 |
+| DKMW20F-12 / CH224 / BP5293 | カスタム / プロジェクト | |
 
 ---
 
-## 1. ピン照合サマリー（素案 vs DS）
+## 1. ピン照合サマリー（DS vs 図）
 
-| 部品 | 素案の問題 | DS 正 | 対応 |
+| 部品 | DS | AudioV2 図 | 状態 |
 |---|---|---|---|
-| **PGA2310PA** | ピン名・番号が TI PDIP-16 と **不一致**（例: pin16=V+ は誤り、正しく VINL） | [TI_PGA2310.pdf](datasheets/TI_PGA2310.pdf) §5 | **シンボル修正済み**（本 PR） |
-| **PT2314** | **TSSOP-20 8pin 仮シンボル** — 実体は **28pin DIP/SOP** | [Princeton_PT2314.pdf](datasheets/Princeton_PT2314.pdf) p.3–4 | **28pin シンボルへ差替**（本 PR） |
-| **PT2314 バス** | SDA/SCL 命名 | pin26=**DATA**, pin27=**CLK**（I²C 様シリアル、標準 I²C ではない） | ネット名は `PT2314_DATA/CLK`、ファームは専用ドライバ |
-| **CH224_50224** | 4pin 抽象（VBUS/GND/12V/PG） | [50224 マニュアル](datasheets/StrawberryLinux_CH224K_manual.pdf) | モジュール **端子台/ヘッダは実機配置に合わせる**。PG は OD・プルアップ要 |
-| **DKMW20F-12** | pin1=+Vin, 2=−Vin, 3=+Vout, 4=Common, 5=−Vout, 6=R.C. | MeanWell DS + `PowerModule_TEC3_REDESIGN.md` | **OK**（Audio 流用ピン定義と一致） |
-| **MCP23017** | 標準 KiCad lib 使用想定 | [Microchip_MCP23017.pdf](datasheets/Microchip_MCP23017.pdf) | A0–A2 で **0x20 / 0x21**（Relay A/B） |
-| **Pico 2 GPIO** | §10 表 | [RP2350.pdf](datasheets/RaspberryPi_RP2350.pdf) | **OK** — GP20/21=I²C0, GP18/19=SPI0, GP16/17=MUTE/CS |
-| **ENC 1×3** | 1=A, 2=B, 3=SW, 4=3V3, 5=GND | `Control/README.md` + EC11 | **OK** |
+| **PT2314** | 28pin: VDD=1 … REF=28（下表） | `AudioV2:PT2314` 全ピン | ✅ 再作成 |
+| **SW_DP3T** | KiCad: COM=3/7, throws=1/2/4 & 5/6/8 | Audio SW101 と同型 | ✅ |
+| **R_Potentiometer_Dual** | 1/3=A, 4/6=B, 2/5=wiper | CW←SW, CCW→A_GND, wiper→OUT | ✅ |
+| **DEST ラダー** | [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) | Rh/Rl=10k, Rs=1k | ✅ |
+| Pico GPIO | DECISIONS §10 | ENC×3 + DEST_ADC/LED | ✅ ドキュメント一致（配線はドラフト） |
+| DKMW / CH224 / 7809 | PowerModule | 既存 | ✅ |
 
 ---
 
-## 2. PGA2310PA — PDIP-16（確定ピン表）
-
-TI SBOS187C Rev.C §5「Top View」どおり。**AudioV2 は ±12 V アナログ、VD+ = +5 V（BP5293）。**
-
-| Pin | 名前 | 接続 |
-|:---:|---|---|
-| 1 | ZCEN | **VD+（5 V）** — ゼロクロス常時 ON |
-| 2 | CS | Pico **GP17**（両 IC 共通、Active Low） |
-| 3 | SDI | Pico **GP19** → U_HP；U_HP **SDO(7)** → U_LINE **SDI(3)** |
-| 4 | VD+ | **+5 V（D_GND デカップ 0.1 µF + 10 µF）** |
-| 5 | DGND | **D_GND** |
-| 6 | SCLK | Pico **GP18** |
-| 7 | SDO | → 2 個目 SDI のみ。**Pico へ接続しない**（5 V 出力） |
-| 8 | MUTE | Pico **GP16** + **10 kΩ → DGND**（起動ミュート） |
-| 9 | VINR | アナログ入力 R（Amp 後） |
-| 10 | AGNDR | **A_GND** |
-| 11 | VOUTR | アナログ出力 R |
-| 12 | VA+ | **+12 V** + 0.1 µF + 10 µF |
-| 13 | VA− | **−12 V** + 0.1 µF + 10 µF |
-| 14 | VOUTL | アナログ出力 L |
-| 15 | AGNDL | **A_GND** |
-| 16 | VINL | アナログ入力 L |
-
-**デイジーチェーン:** U_HP（1 個目）SDO pin7 → U_LINE（2 個目）SDI pin3。
-
----
-
-## 3. PT2314 — 28pin（AudioV2 最小接続）
-
-**パッケージ:** 28pin **DIP 300mil**（または SOP — 設計時にどちらか固定）。
-
-**電源:** VDD typ **9 V**（6–10 V）。**±12 V 直結不可。** PowerModule から **+9 V（VCC_TONE）** を生成。
-
-### 3.1 ピン表（使用ピンのみ）
+## 2. PT2314 — 28pin DIP（Princeton DS）
 
 | Pin | 名前 | AudioV2 接続 |
 |:---:|---|---|
-| 1 | VDD | **+9 V** |
+| 1 | VDD | **+9 V（VCC_TONE）** |
 | 2 | AGND | **A_GND** |
-| 3 | TREB_L | **C 2.2 µF + R 2.4 kΩ** → ネットワーク（DS 図 C3/C8 + R） |
-| 4 | TREB_R | 同上 R 系 |
-| 5 | RIN | **COMMON_R** 経 **C 2.2 µF** |
-| 17 | LIN | **COMMON_L** 経 **C 2.2 µF** |
-| 19 | BIN_L | **R 2.4 kΩ + C 100 nF / 2.7 nF**（DS C12–C19 系） |
-| 20 | BOUT_L | 同上 |
-| 21 | BIN_R | 同上 |
-| 22 | BOUT_R | 同上 |
-| 23 | OUT_R | **→ Amp 系統へ**（2.2 µF 結合） |
-| 24 | OUT_L | **→ Amp 系統へ** |
+| 3 | TREB_L | C 2.7 nF + R 2.4 kΩ（DS） |
+| 4 | TREB_R | 同上 |
+| 5 | RIN | **COMMON_R** 経 C 2.2 µF |
+| 6–16 | ROUT / LOUD / RINx / LINx … | **未使用** — AC-GND または NC（レイアウト時） |
+| 17 | LIN | **COMMON_L** 経 C 2.2 µF |
+| 18 | LOUT | 未使用（セレクタ出力） |
+| 19–22 | BIN/BOUT L/R | R 2.4 kΩ + C 100 nF（Bass） |
+| 23 | OUT_R | C 2.2 µF → **TONE_R** → Amp |
+| 24 | OUT_L | C 2.2 µF → **TONE_L** → Amp |
 | 25 | DGND | **D_GND** |
-| 26 | DATA | Pico GP20 経 **4.7 kΩ → 3.3 V**（バスは 3.3 V 世界） |
-| 27 | CLK | Pico GP21 経 **4.7 kΩ → 3.3 V** |
-| 28 | REF | **R 5.6 kΩ → AGND**, **C 22 µF → AGND**（DS 図） |
+| 26 | DATA | Pico I²C SDA 経 4.7 kΩ → 3.3 V |
+| 27 | CLK | Pico I²C SCL 経 4.7 kΩ → 3.3 V |
+| 28 | REF | R 5.6 kΩ + C 22 µF → AGND |
 
-**未使用入力（RIN1–4, LIN1–4 等）:** DS 図に合わせ **2.2 µF + R 2.4 kΩ で AC グランド** または入力セレクタで Main のみ — 詳細は §3.3 シミュ後に確定。
+**電源:** VDD typ 9 V（6–10 V）。±12 V 直結不可 → LM7809（PowerModule）。
 
-### 3.2 外部 C/R（DS Application Circuit より）
+---
 
-| 素子 | 値 | 備考 |
-|---|---|---|
-| 入力結合 C | **2.2 µF** | LIN/RIN 各 1 |
-| トーン R | **2.4 kΩ** | 推奨値（範囲 2.0–3.6 kΩ） |
-| トーン C | **100 nF**, **2.7 nF** | Mylar 推奨（C12–C19） |
-| REF R | **5.6 kΩ** | pin28 |
-| REF C | **22 µF** | pin28–AGND |
-| I²C プルアップ | **4.7 kΩ ×2** | DATA/CLK → **3.3 V**（Pico 側） |
+## 3. OutputStage — DEST + 音量（手回し）
 
-### 3.3 机上検算（電源）
+```text
+AMP_SEL_L/R ── SW101 (DP3T)
+                 ├─ PHONE (1/5) ── RV101 A50k ── PHONE_L/R → HP Buffer
+                 ├─ MUTE  (2/6) ── NC
+                 └─ LINE  (4/8) ── RV102 A50k ── LINE_L/R → LINE OUT
+```
 
-| 項目 | 計算 |
+| 項目 | 値 |
 |---|---|
-| PT2314 Is | typ **30 mA**, max **40 mA** @ 9 V |
-| 9 V 生成 | **LM7809**（+12 V → 9 V, Vin−Vout=3 V > 2 V dropout） |
-| 7809 散逸 | (12−9) V × 40 mA ≈ **0.12 W** — 余裕 |
-| REF 電圧 | VREF ≈ VDD/2 ≈ **4.5 V**（REF ネットワーク経由） |
-
-**未検証（要 LTspice / 実機）:** DATA/CLK の 3.3 V 駆動で VDD=9 V の PT2314 が満足するか — DS は「positive supply」へプルアップと記載。**レベルシフタ不要の報告多いが、波形確認推奨。**
+| ポット | **A カーブ 50 kΩ デュアル** ×2 |
+| 固定パッド | **0 Ω**（§9）。DNP で −10 dB 後付け可 |
+| DEST センス | ControlPanel の SW2 + 10k/10k/1k（別極） |
 
 ---
 
-## 4. PowerModule — 部品値（案）
+## 4. PowerModule — 部品値（変更なし）
 
-| Ref | 部品 | 値 | 根拠 |
-|---|---|---|---|
-| U1 | DKMW20F-12 | — | ±12 V / ±830 mA |
-| U2 | 50224 CH224 | 12 V ジャンパ | §9 |
-| F1 | ヒューズ | **3 A slow** | Audio PowerModule 同型（12 V PD ≈1.5 A） |
-| U3 | LM7809 | +9 V / ≥100 mA | PT2314 VDD |
-| C7809 in/out | 10 µF + 0.1 µF | 7809 定番 |
-| C101 | **47 µF** | DKMW20 +Vin bulk（Audio 同型） |
-| C102/C103 | **47 µF** | ±12 V 出力（DS 800 µF/rail は後追い） |
-| C104 | **0.1 µF** | +12 V HF |
-| DKMW20 Cout | **820 µF/rail** | DS 800 µF each — **次段で LC 追加** |
-
-**PD 配線（§9）:** CH224 12 V → 端子 `PD_12V` → パネル PWR SW → `PD_12V_SW` → F1 → DKMW20 +Vin。
+USB-C → CH224 → PD_12V → PWR SW → F1 → DKMW20F-12 → ±12 V / A_GND。  
++12 V → LM7809 → VCC_TONE（+9 V）。
 
 ---
 
-## 5. MCP23017 + ENC ヘッダ（RelayBoard / ControlPanel）
+## 5. 机上検算
 
-| 項目 | 確定値 |
+| 項目 | 結果 |
 |---|---|
-| Relay A I²C addr | **0x20**（A2:A1:A0 = 000, ハードウェアで確認） |
-| Relay B I²C addr | **0x21**（001） |
-| MCP INT | 任意 — 初版はポーリング可 |
-| ENC J×6 | **1×3 ピン:** 1=A, 2=B, 3=SW；**4=3V3, 5=GND**（Control README 同型） |
+| PT2314 @9 V | Is typ 30 mA — 7809 散逸 ≈0.12 W |
+| DEST ラダー | LINE 3.03 / MUTE 1.65 / PHONE 0.28 V（±5% 間隔 ≈1.3 V） |
+| A50k 負荷 | Amp は 50 kΩ を問題なく駆動 |
 
 ---
 
-## 6. シミュレーション計画
+## 6. KiCad 更新チェックリスト
 
-| 対象 | 方法 | 状態 |
-|---|---|---|
-| PT2314 REF (R5.6k/C22µ) | RC 定常 → VREF≈4.5 V | ✅ 机上 OK |
-| PGA2310 デカップリング | DS 推奨 C 値 | ✅ 0.1+10 µF ×3 レール |
-| 7809 9 V レール | 負荷 40 mA | ✅ 余裕 |
-| PT2314 トーン RC | f_c ≈ 1/(2π×2.4k×C) | ⬜ C=100n → ≈663 Hz 級（要 DS 意図と照合） |
-| DEST リレー + PGA ノイズ | SPICE 簡易 | ⬜ Q2-A vs Q2-B は PCB 時 |
+- [x] PT2314 シンボル — **28pin DS 一致**
+- [x] PGA2310 / DEST ラッチング / ENC_HP·LINE·DEST — **削除**
+- [x] OutputStage — SW_DP3T + A50k Dual ×2
+- [x] ControlPanel — ENC×3 + DEST ラダー + LED
+- [x] `check_sexpr.py -q AudioV2` — OK
+- [x] `kicad-cli sch export netlist` — OK（annotation 警告はドラフト）
+- [ ] ERC 整理（未接続・未使用 PT2314 入力）
+- [ ] RelayBoard 本配線
+- [ ] 未使用 PT2314 入力の AC-GND 実装
 
----
+## 7. 再生成
 
-## 7. KiCad 更新チェックリスト
-
-- [x] PGA2310PA シンボル — 16pin DS 一致
-- [x] PT2314 シンボル — 28pin DIP 全ピン
-- [x] ControlPanel — PT2314 周辺 C/R 配置（`wire_circuit_design.py`）
-- [x] PowerModule — §9 配線（USB→CH224→PD_12V/J_PD→PD_12V_SW→F1→DKMW、7809→VCC_TONE）
-- [x] 親シート — グローバルバス ↔ 子シート pin 配線
-- [ ] ERC — 未接続・未使用入力の整理
-- [ ] RelayBoard / OutputStage 配線
-
-## 8. 配置・配線（2026-08-30）
-
-`python3 AudioV2/scripts/wire_circuit_design.py` で以下を生成:
-
-| シート | 内容 |
-|---|---|
-| PowerModule | CH224→F1→DKMW20、7809→VCC_TONE、J202 出力 |
-| ControlPanel | PT2314 電源/入力/REF/トーン RC/PGA2310×2/SPI |
-| AudioV2Case | +12V/A_GND/I²C グローバルバス配線 |
-
-KiCad で **ControlPanel ページ 5** を開き、U2 周辺の C/R 配置と net 名を確認。
+```bash
+python3 AudioV2/scripts/wire_circuit_design.py all
+python3 Audio/scripts/check_sexpr.py -q AudioV2
+```
 
 ---
 
-## 9. 変更履歴
+## 変更履歴
 
 | 日付 | 内容 |
 |---|---|
-| 2026-08-30 | 初版 — 素案ピン監査、PT2314 28pin 判明、PGA2310 修正方針 |
+| 2026-08-30 | 初版 — 素案ピン監査 |
+| 2026-08-30 | **手回し化** — PGA 削除、PT2314 28pin 再作成、OutputStage ポット+トグル |

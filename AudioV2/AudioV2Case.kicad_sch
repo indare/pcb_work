@@ -5,7 +5,7 @@
 	(uuid "a1000001-0001-4001-8001-000000000001")
 	(paper "A4")
 	(lib_symbols)
-	(text "AudioV2Case — wired per CIRCUIT_DESIGN.md\nGlobal buses connect Power / Relay / Control / Output\nAmp/HP/計測 = Audio/ off-sheet (WIRING.md)"
+	(text "AudioV2Case — manual volume (DECISIONS 2026-08-30)\nSignal: CH→PT2314→Amp→SW_DEST→RV→PHONE/LINE\nAmp/HP/計測 = Audio/ off-sheet (WIRING.md)"
 		(at 25.4 20.32 0)
 		(effects
 			(font
@@ -13,7 +13,7 @@
 			)
 			(justify left top)
 		)
-		(uuid "da9ddacf-0ae2-4ffa-944f-680b4b8eaf68")
+		(uuid "36597002-35f4-490e-a4c6-98f5b34bc85f")
 	)
 
 	(global_label "+12V"
@@ -26,7 +26,7 @@
 			)
 			(justify left)
 		)
-		(uuid "02f8f58f-a6c0-4aae-a78f-701bcd6c8f1c")
+		(uuid "026d87ff-2b81-4c37-9d90-d7f028d2d21e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 127.0 100.0 0)
 			(show_name no)
@@ -51,7 +51,7 @@
 			)
 			(justify left)
 		)
-		(uuid "7e64d23d-cf64-4f15-bf18-66909b7a7acf")
+		(uuid "52b72226-04d0-4e58-b23d-a3dc0784cf05")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 127.0 102.54 0)
 			(show_name no)
@@ -76,7 +76,7 @@
 			)
 			(justify left)
 		)
-		(uuid "6243d871-faf4-48ff-9287-4c62fbc914e7")
+		(uuid "e6f393b2-758f-4abf-b1a9-d19faef09465")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 127.0 105.08 0)
 			(show_name no)
@@ -101,7 +101,7 @@
 			)
 			(justify left)
 		)
-		(uuid "98dffbe0-1464-4f33-b823-afbf066b0f5c")
+		(uuid "a6ecb0ef-492e-4de2-8edd-d2bcf91af362")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 127.0 107.62 0)
 			(show_name no)
@@ -126,7 +126,7 @@
 			)
 			(justify left)
 		)
-		(uuid "a9512df0-2b8d-4428-8fcb-f27b811b36b7")
+		(uuid "81fbc1e4-99ae-428f-9a33-9fff949bfca7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 127.0 110.16 0)
 			(show_name no)
@@ -180,7 +180,7 @@
 		)
 		(pin "+12V_IN" input
 			(at 40.64 50.8 180)
-			(uuid "8fa76445-cc1e-40dd-bbae-64b8503f3f8c")
+			(uuid "95454478-abf6-487a-a02e-98ba3f605d35")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -190,7 +190,7 @@
 		)
 		(pin "-12V_IN" input
 			(at 40.64 53.34 180)
-			(uuid "f5557aeb-7a9e-41c5-a5ad-e572086ffa21")
+			(uuid "0b928e80-31c7-4f85-ae6a-91d585257c49")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -200,7 +200,7 @@
 		)
 		(pin "PD_12V" output
 			(at 60.96 45.72 0)
-			(uuid "04037dfc-4681-447f-a592-60e0d70a77e7")
+			(uuid "435c6767-34ba-49a3-aadb-0dda1fe2b50b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -210,7 +210,7 @@
 		)
 		(pin "PD_GND" bidirectional
 			(at 60.96 48.26 0)
-			(uuid "111a22d6-1919-430d-8f6d-c6ac6e3336da")
+			(uuid "fac49f93-2c3d-4095-a775-9995f0a8212f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -220,7 +220,7 @@
 		)
 		(pin "PD_12V_SW" input
 			(at 40.64 55.88 180)
-			(uuid "15867b9e-bd7b-4d0b-b56c-e331bbf06848")
+			(uuid "e7c47d30-defe-494f-9f23-eeceb87eb119")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -230,7 +230,7 @@
 		)
 		(pin "+12V_OUT" output
 			(at 60.96 35.56 0)
-			(uuid "894ad6fc-e3ef-4b0a-a6d7-b8dd53c57343")
+			(uuid "43ebc066-ede0-4691-941e-4a5433e89b24")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -240,7 +240,7 @@
 		)
 		(pin "-12V_OUT" output
 			(at 60.96 38.1 0)
-			(uuid "24e0eff8-b535-4f7b-b120-0bbea2b879fd")
+			(uuid "8b140a65-b83a-4c16-acc0-a0198e54a34b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -250,7 +250,7 @@
 		)
 		(pin "A_GND" bidirectional
 			(at 60.96 40.64 0)
-			(uuid "b00b9785-50d0-4c83-ab4b-8caf8a680fe4")
+			(uuid "44cb5ee6-a440-40a0-97a8-3fb3e54a67a6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -260,7 +260,7 @@
 		)
 		(pin "VCC_TONE" output
 			(at 60.96 43.18 0)
-			(uuid "c568b4cc-5d61-4f4a-b72c-60fc058603d0")
+			(uuid "391369b3-ebbe-434d-bc12-cfeb6ed94f85")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -315,7 +315,7 @@
 		)
 		(pin "I2C_SDA" bidirectional
 			(at 110.0 40.0 180)
-			(uuid "31aa0ad5-7379-4c48-b58f-9dfdb5e91ae8")
+			(uuid "db219471-3839-465b-9b0d-7829679e7d4e")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -325,7 +325,7 @@
 		)
 		(pin "I2C_SCL" bidirectional
 			(at 110.0 42.54 180)
-			(uuid "19b4317f-9ecb-4389-8fe0-80a8f27daf65")
+			(uuid "63844208-474d-407e-a6fb-7ac1d1119ee0")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -335,7 +335,7 @@
 		)
 		(pin "3V3" input
 			(at 110.0 45.08 180)
-			(uuid "306364de-5337-4654-8dc9-a1eb7e866d14")
+			(uuid "9d3df775-41ce-4128-bf0c-49c8dd667d92")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -345,7 +345,7 @@
 		)
 		(pin "D_GND" input
 			(at 110.0 47.62 180)
-			(uuid "8d02dc90-5395-4f74-b381-09b1b252640a")
+			(uuid "22ae665a-ba0a-45cb-8bf2-840ed26a3d69")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -355,7 +355,7 @@
 		)
 		(pin "COMMON_L" output
 			(at 140.0 40.0 0)
-			(uuid "c1d9a38e-672e-466e-9475-17c7418d823e")
+			(uuid "fa16101d-5340-4c51-b4b0-407c8d0032e1")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -365,7 +365,7 @@
 		)
 		(pin "COMMON_R" output
 			(at 140.0 42.54 0)
-			(uuid "0fadc697-ee2d-42df-a552-57e878a3d2c0")
+			(uuid "67d26e0b-e6a0-4322-803d-95b01fa6b6f2")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -375,7 +375,7 @@
 		)
 		(pin "A_GND" bidirectional
 			(at 140.0 45.08 0)
-			(uuid "bd00c544-28f1-4b13-9d2f-719892e1c142")
+			(uuid "0dab7638-c8cd-444f-9110-344b76d4ea5e")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -430,7 +430,7 @@
 		)
 		(pin "I2C_SDA" bidirectional
 			(at 110.0 40.0 180)
-			(uuid "49d858d0-8e95-4828-956a-040f7a3c8129")
+			(uuid "d6db6a31-0521-4ff1-8b87-052d4cca0c42")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -440,7 +440,7 @@
 		)
 		(pin "I2C_SCL" bidirectional
 			(at 110.0 42.54 180)
-			(uuid "a504dfa2-22d5-4d51-a328-e5d4dd097238")
+			(uuid "84fe127c-d196-442a-ba70-397d945470f0")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -450,7 +450,7 @@
 		)
 		(pin "3V3" input
 			(at 110.0 45.08 180)
-			(uuid "06476d2b-e88d-432d-ad8e-6c8b653e8c6b")
+			(uuid "eb926a9e-319e-48b6-a04a-94374f84557f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -460,7 +460,7 @@
 		)
 		(pin "D_GND" input
 			(at 110.0 47.62 180)
-			(uuid "23736b12-cbfd-43a5-ace7-46025fa224f3")
+			(uuid "fe6128ea-6ff8-4df2-b7a6-ed189c064ec5")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -470,7 +470,7 @@
 		)
 		(pin "COMMON_L" output
 			(at 140.0 40.0 0)
-			(uuid "2309a393-25b6-43e7-a67f-cd80225b12c8")
+			(uuid "1b315484-9b7c-48e4-bf33-11d2e5138f41")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -480,7 +480,7 @@
 		)
 		(pin "COMMON_R" output
 			(at 140.0 42.54 0)
-			(uuid "19fef558-f4fa-4146-b8ce-973af6d5be6d")
+			(uuid "e29ebdc1-5fc4-466f-84e2-fbda2d0bd803")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -490,7 +490,7 @@
 		)
 		(pin "A_GND" bidirectional
 			(at 140.0 45.08 0)
-			(uuid "5e438355-c33a-466a-9711-eb3145844191")
+			(uuid "370523b0-04e0-4e6e-aa17-09efa124cf69")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -545,7 +545,7 @@
 		)
 		(pin "COMMON_L" input
 			(at 170.0 40.0 180)
-			(uuid "ea1271f9-3d30-450c-b705-1cfa10eac0a8")
+			(uuid "a4cec2c5-7487-471b-b6c8-9222f638cc4a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -555,7 +555,7 @@
 		)
 		(pin "COMMON_R" input
 			(at 170.0 42.54 180)
-			(uuid "17b0d69c-29a3-4455-92ac-09078b2f50f3")
+			(uuid "7d5afbbb-13c9-4608-94c2-a6e6b27523cb")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -565,7 +565,7 @@
 		)
 		(pin "I2C_SDA" bidirectional
 			(at 170.0 45.08 180)
-			(uuid "0ffae986-ecaf-49a9-848b-ce37f052d5c6")
+			(uuid "446d59f3-e48f-4464-a1f7-1080ff4f0ce6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -575,7 +575,7 @@
 		)
 		(pin "I2C_SCL" bidirectional
 			(at 170.0 47.62 180)
-			(uuid "4a151498-2455-4fd3-a1a2-2ec349668967")
+			(uuid "c5e113be-5dfd-40e0-a860-0478002aee59")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -585,7 +585,7 @@
 		)
 		(pin "+12V" input
 			(at 170.0 50.16 180)
-			(uuid "41d5259f-ffbc-402a-ab99-b40ef40fabf4")
+			(uuid "fef49501-d062-4f02-9d2d-f3f1c051ca91")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -595,7 +595,7 @@
 		)
 		(pin "-12V" input
 			(at 170.0 52.7 180)
-			(uuid "8f787fc8-ac07-48d0-89fa-67ea4d8b382a")
+			(uuid "0aaff19d-6ac5-485e-94da-630a2249f508")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -605,7 +605,7 @@
 		)
 		(pin "A_GND" bidirectional
 			(at 170.0 55.24 180)
-			(uuid "95d42eb1-8ef4-4a0d-8331-8eac439af177")
+			(uuid "1a1d8b90-3caf-4758-916d-a94013f6f872")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -615,7 +615,7 @@
 		)
 		(pin "D_GND" input
 			(at 170.0 57.78 180)
-			(uuid "656f6345-3a0e-4a3f-bef4-f2a58eb9801d")
+			(uuid "d0d5bca4-0338-4a05-ae23-bd5fd6b85f8d")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -625,7 +625,7 @@
 		)
 		(pin "PD_12V" input
 			(at 170.0 60.32 180)
-			(uuid "88700fdb-22dd-4f85-86a4-c3dc6db5a5f1")
+			(uuid "b1aedb1c-ac61-48e8-a24b-f3216fd5521d")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -635,7 +635,7 @@
 		)
 		(pin "PD_12V_SW" output
 			(at 200.0 60.32 0)
-			(uuid "ccb74e7c-8d81-4b3a-99a3-725e210f1d0d")
+			(uuid "59e38640-40df-4df0-be43-9a1a65e8c309")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -645,47 +645,7 @@
 		)
 		(pin "PD_GND" bidirectional
 			(at 200.0 62.86 0)
-			(uuid "c863fa9a-eed3-48e5-8b45-e6b3ac72a40e")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "PGA_HP_L" output
-			(at 200.0 40.0 0)
-			(uuid "87bb0cb5-fc20-4158-b010-1ed25aeecb38")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "PGA_HP_R" output
-			(at 200.0 42.54 0)
-			(uuid "98ececdf-99c0-4e10-9280-01991aaa55ac")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "PGA_LINE_L" output
-			(at 200.0 45.08 0)
-			(uuid "1815aa23-0769-428a-9dbd-9513f90f5739")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "PGA_LINE_R" output
-			(at 200.0 47.62 0)
-			(uuid "a2ec4771-4cde-4d64-aa1c-482bf2491db5")
+			(uuid "5119f87c-1ea3-4cb7-a097-60750de6cea9")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -695,7 +655,7 @@
 		)
 		(pin "VCC_TONE" input
 			(at 170.0 65.0 180)
-			(uuid "96c11a03-5447-4829-9941-e9d3322fad9c")
+			(uuid "2d64ecd9-7d90-4ed8-8594-cd8af1f4c9b3")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -705,7 +665,7 @@
 		)
 		(pin "TONE_L" output
 			(at 200.0 38.0 0)
-			(uuid "3ed14c20-92dd-4d50-bb21-a05be9ccfbdf")
+			(uuid "f84768b2-d6a5-4967-988f-4319a6bf485a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -715,7 +675,7 @@
 		)
 		(pin "TONE_R" output
 			(at 200.0 38.5 0)
-			(uuid "a5916abd-95a5-4f4b-9225-bd267f7d1a1d")
+			(uuid "25bf7b02-4b36-4479-9cf8-65ad5ac02365")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -768,9 +728,9 @@
 				(justify left top)
 			)
 		)
-		(pin "PGA_HP_L" input
+		(pin "AMP_SEL_L" input
 			(at 230.0 40.0 180)
-			(uuid "1efd28e7-d211-4a0a-b686-f18c38d76053")
+			(uuid "05a4d628-948c-40d4-b39c-f7d7e9590c70")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -778,49 +738,9 @@
 				(justify left)
 			)
 		)
-		(pin "PGA_HP_R" input
+		(pin "AMP_SEL_R" input
 			(at 230.0 42.54 180)
-			(uuid "7ea5fd5f-c05b-42e4-a478-4e1971c90306")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "PGA_LINE_L" input
-			(at 230.0 45.08 180)
-			(uuid "2d63581a-3676-4654-9b47-d5a799b2d0a1")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "PGA_LINE_R" input
-			(at 230.0 47.62 180)
-			(uuid "1dadfe40-c022-4130-a001-8676a6d29768")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "+12V" input
-			(at 230.0 50.16 180)
-			(uuid "bb27a682-1bc8-4a1a-9258-2b4143f35adf")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "-12V" input
-			(at 230.0 52.7 180)
-			(uuid "4473ce95-d706-4d41-a49a-8f9f5579708e")
+			(uuid "ea61b5ce-081e-4275-b4d7-aa679665093e")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -830,7 +750,7 @@
 		)
 		(pin "A_GND" bidirectional
 			(at 230.0 55.24 180)
-			(uuid "351d4bd6-c34b-4964-b736-a4b9ceabf5d9")
+			(uuid "6437fb53-fb1f-4abb-ae5a-15f6a9d8047a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -840,7 +760,7 @@
 		)
 		(pin "PHONE_L" output
 			(at 260.0 40.0 0)
-			(uuid "10384656-3269-4993-83ab-7ffa27875ac5")
+			(uuid "3ae54182-6e1a-4e7d-8e26-8d0fc5eeb4f4")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -850,7 +770,7 @@
 		)
 		(pin "PHONE_R" output
 			(at 260.0 42.54 0)
-			(uuid "8409aa73-b800-437d-b656-596ef6246048")
+			(uuid "a4aae9eb-0f85-41be-88de-5771d1b83b71")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -860,7 +780,7 @@
 		)
 		(pin "LINE_L" output
 			(at 260.0 45.08 0)
-			(uuid "e9398103-2320-4083-849d-6979271d5756")
+			(uuid "b1aef61d-47ef-4ef8-99de-7d8548dbc447")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -870,17 +790,7 @@
 		)
 		(pin "LINE_R" output
 			(at 260.0 47.62 0)
-			(uuid "b3ecdac6-0b8c-45c3-8c71-636c5503e94b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "MUTE" output
-			(at 260.0 50.16 0)
-			(uuid "e557a229-bd6b-4166-9b6c-4acca85a3b48")
+			(uuid "c7a822d4-a33a-4412-b009-8b986b4e34a7")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -905,7 +815,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "40bf4bab-3634-4300-936f-9cefbb8de579")
+		(uuid "c03830ae-81f3-4f04-bbb7-4e5c7ffde4ee")
 	)
 	(label "+12V"
 		(at 57.96 99.5 0)
@@ -915,13 +825,13 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5adec48a-d69c-4443-bf25-7a5f8daa8baa")
+		(uuid "7d62b8bd-4576-4f52-a94e-c9efe443ea7c")
 	)
 	(junction
 		(at 60.96 35.56)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "61280f41-6a3d-41e4-8e07-2039c66b7b11")
+		(uuid "fff37526-0f2e-46da-8ee0-28f18e5eb3d5")
 	)
 	(wire
 		(pts
@@ -931,13 +841,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6de82128-a937-4c5e-b041-24a7bb03f524")
+		(uuid "f4fb6c95-34f9-4690-9c3f-a627872e8124")
 	)
 	(junction
 		(at 170.0 50.16)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "6813b777-a373-46b7-8ecc-8cfc89b87ea6")
+		(uuid "edf27657-8928-42aa-aa8c-162da190f3c7")
 	)
 	(wire
 		(pts
@@ -947,13 +857,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8481191f-f684-42c2-813f-f67f68dfd940")
+		(uuid "7edbb3a8-d58c-4e13-831d-4523c1d1cb18")
 	)
 	(junction
 		(at 230.0 50.16)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "953d78fb-35d9-49ea-b01d-c02b6a937f6c")
+		(uuid "66e34313-1047-4712-acd7-da99050400d5")
 	)
 	(wire
 		(pts
@@ -963,13 +873,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cbfe1f29-d6c5-4402-8849-99a8b51f5334")
+		(uuid "be585500-cff6-453d-90b4-d3dc96aecbd6")
 	)
 	(junction
 		(at 127.0 100.0)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b8ec59cc-2f3f-4806-88fc-fcd5356efc3a")
+		(uuid "ea7efaab-204d-4775-9596-f7be5dac471c")
 	)
 	(wire
 		(pts
@@ -979,7 +889,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "abdb34a8-fbc0-4897-aba4-21f46ae01507")
+		(uuid "1082e5a9-9429-4dac-9793-4504b69695e3")
 	)
 	(label "-12V"
 		(at 57.96 102.04 0)
@@ -989,13 +899,13 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "389095bf-25ef-4db2-9557-7b28a8d00b84")
+		(uuid "33014849-b1f2-48c9-b704-6ab562458577")
 	)
 	(junction
 		(at 60.96 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e9adaef4-8c49-4daa-9000-7bd60c21d057")
+		(uuid "2718d029-3466-4515-b2ca-17b5db2de06c")
 	)
 	(wire
 		(pts
@@ -1005,13 +915,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8069face-98e3-42f7-835f-446fce9039c2")
+		(uuid "e71f6b57-a9d6-4ea0-affa-1a1e470260cf")
 	)
 	(junction
 		(at 170.0 52.7)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "2975b301-ba3d-4cf0-ace9-b27ed8dcf0eb")
+		(uuid "753b9c50-7db8-42e1-8cfb-9c55ef5a0d9b")
 	)
 	(wire
 		(pts
@@ -1021,13 +931,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "98afb3ea-9824-4aff-b186-e07cf038a6c3")
+		(uuid "91dc4764-45ba-4fa3-a3d3-0a80af9ba970")
 	)
 	(junction
 		(at 230.0 52.7)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "987c3911-86e0-4e12-8d33-593fc3c9d3ba")
+		(uuid "0032def9-8f85-4271-9a37-0f023d7fd0d3")
 	)
 	(wire
 		(pts
@@ -1037,13 +947,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "49edb56d-5bfa-4ea2-b6d3-0e7dca87f05d")
+		(uuid "b0d22d18-2923-4e94-acc2-0f96f0c936d0")
 	)
 	(junction
 		(at 127.0 102.54)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "56f21ceb-298d-4e93-8588-8d389c2fbd55")
+		(uuid "be1ab90c-8f90-4b62-98ea-60d730f8338b")
 	)
 	(wire
 		(pts
@@ -1053,7 +963,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "736fde26-4b1e-411b-bfb1-a31cfc21a416")
+		(uuid "48e73812-4d3e-43c6-b629-0eb1d6106fee")
 	)
 	(label "A_GND"
 		(at 57.96 104.58 0)
@@ -1063,13 +973,13 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "cad201b0-ae25-4091-9188-fffac049188e")
+		(uuid "cf424933-7ea6-4f3e-9229-7ea623d14142")
 	)
 	(junction
 		(at 60.96 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "c6dc42b9-5a6e-42d7-8c73-4b6f1f4209f1")
+		(uuid "7a3eb47d-5f78-41a5-b9a1-0d038ba486a6")
 	)
 	(wire
 		(pts
@@ -1079,13 +989,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "41d17250-90ba-4b8f-aa60-e169f53784c0")
+		(uuid "7bd9a841-be36-4103-ada3-b57eeb104345")
 	)
 	(junction
 		(at 140.0 45.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "3541b0ae-66cb-4b8f-b72e-336bd5cc5dd1")
+		(uuid "b659aefb-9748-4c04-adb3-d69423580721")
 	)
 	(wire
 		(pts
@@ -1095,13 +1005,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "39f3553b-ab83-4d4f-a67b-b28385a240ac")
+		(uuid "a95f78a7-9a44-4f3b-8766-622eb36bdce5")
 	)
 	(junction
 		(at 170.0 55.24)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9b6ad1b9-1c18-4e46-b5ae-2a5eb8e38d1e")
+		(uuid "6f28c8f1-a31a-46a6-936e-4d7230d0299d")
 	)
 	(wire
 		(pts
@@ -1111,13 +1021,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "49ea0018-6a30-43c1-918b-ca2d482c4653")
+		(uuid "65f01944-26a3-489c-b7f2-41cffce4a12f")
 	)
 	(junction
 		(at 230.0 55.24)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e94630e4-02e2-4509-8599-69cbf17121e1")
+		(uuid "ed4e6b98-369c-4b1d-82b8-b75dc5ee04b7")
 	)
 	(wire
 		(pts
@@ -1127,13 +1037,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d5f827c4-30be-492c-a355-d8ea721c7743")
+		(uuid "31d0fd6d-58f8-4c71-9657-552145087655")
 	)
 	(junction
 		(at 127.0 105.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "fcd38b20-ae92-44c8-8200-d7a433317894")
+		(uuid "cab8132a-a0fd-44e8-b9de-43ce29e1b357")
 	)
 	(wire
 		(pts
@@ -1143,7 +1053,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "52a47b9b-2ea2-464f-a42e-2046226ad48f")
+		(uuid "2615db61-7c20-495b-a598-8dfe7aff90c7")
 	)
 	(label "I2C_SDA"
 		(at 107.0 107.12 0)
@@ -1153,13 +1063,13 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d69418be-76bb-4ad4-857f-75527f9e698f")
+		(uuid "4a5b93b0-2034-430c-838d-50fa88151ce1")
 	)
 	(junction
 		(at 110.0 40.0)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f81e2cb9-71b6-4696-8bd7-510746ad75c8")
+		(uuid "48256d5a-ca43-4cfd-8050-51531982666c")
 	)
 	(wire
 		(pts
@@ -1169,13 +1079,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a5826273-0a66-4f8b-8aea-a04c77536520")
+		(uuid "adadcefb-cd4d-4aaf-986d-541eab64023d")
 	)
 	(junction
 		(at 170.0 45.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "608a1bb0-2491-4c55-87c4-28969593c395")
+		(uuid "782059f3-82ae-4c48-9e05-4e1138181325")
 	)
 	(wire
 		(pts
@@ -1185,13 +1095,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5991c3bb-9645-4f65-9319-307ba8458128")
+		(uuid "ed8902ba-f6ab-4959-96da-c56505a24ff9")
 	)
 	(junction
 		(at 127.0 107.62)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f1419f45-2a68-4b27-b5a3-cd6ca6d6d5b9")
+		(uuid "f84d5ecc-6522-4077-a53a-da98bb5806b8")
 	)
 	(wire
 		(pts
@@ -1201,7 +1111,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2ddcd842-89a9-43ce-92ab-731fdca1ed7f")
+		(uuid "cc0463e0-5567-4b52-b347-8eb92f9a2f51")
 	)
 	(label "I2C_SCL"
 		(at 107.0 109.66 0)
@@ -1211,13 +1121,13 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "daf94f52-68c9-40a8-9e7f-9c2d6b2a0965")
+		(uuid "8fcda209-8486-4efb-abf3-d5cc23fbb2d5")
 	)
 	(junction
 		(at 110.0 42.54)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e8a826da-8fc3-4b71-9585-f15685b2dd61")
+		(uuid "844e0ca0-331a-4839-a959-64008a245558")
 	)
 	(wire
 		(pts
@@ -1227,13 +1137,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ad6778b5-78ad-4dfd-ae25-ccbfcc02959f")
+		(uuid "7f326f64-bc02-4e50-b752-bdccd820bbda")
 	)
 	(junction
 		(at 170.0 47.62)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "bf668402-7831-4941-8418-8898bf2ffc5b")
+		(uuid "07be89bd-7123-40ce-9c25-54653667147d")
 	)
 	(wire
 		(pts
@@ -1243,13 +1153,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5fe54804-c73f-4584-89e4-ade6e040d92c")
+		(uuid "994b2483-ec3c-4513-b2b9-f8b0fa47666c")
 	)
 	(junction
 		(at 127.0 110.16)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "68e0bd7f-5ee4-4342-8885-1a33f9847f8a")
+		(uuid "2a07886e-8921-4285-93db-2932c72c5595")
 	)
 	(wire
 		(pts
@@ -1259,19 +1169,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d8a4c83b-9355-48b5-a67e-b54980e49859")
+		(uuid "736387f4-2724-465a-9f2a-1b9d8719aa20")
 	)
 	(junction
 		(at 60.96 43.18)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9ccad0d8-ef34-4c06-94a3-418983b06d38")
+		(uuid "06a4222f-1226-4d4c-8789-6046c3399988")
 	)
 	(junction
 		(at 170.0 65.0)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "16e3e4bc-9b1c-4927-bde1-1d4f78f6f0d5")
+		(uuid "f58874b0-5d6d-4bec-b81f-a619ee1d58a6")
 	)
 	(label "VCC_TONE"
 		(at 100 44 0)
@@ -1281,7 +1191,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "79b4dc5b-deb1-4a3b-ae38-8911db01b139")
+		(uuid "cb61a150-fdc5-45a4-a2e1-9174f0f9b79d")
 	)
 	(wire
 		(pts
@@ -1291,7 +1201,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3f2e18db-504e-42f6-8b40-45e3592897c8")
+		(uuid "db4e896f-0967-46b2-9d0d-53dc809f184e")
 	)
 	(wire
 		(pts
@@ -1301,107 +1211,71 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "153407e0-9340-46bf-b9d6-b199429b8593")
+		(uuid "16821de8-2613-45e8-9f11-8a259360a2f3")
 	)
 	(junction
 		(at 140.0 40.0)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "87f01ce3-b76e-4eb0-b2c3-e3b0590d34d6")
+		(uuid "cfb5e0b6-f6da-4a4d-9021-4a42233b40f9")
 	)
 	(junction
 		(at 170.0 40.0)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "6a383e35-a440-471d-8a77-47b6839a8ce6")
+		(uuid "36ce3ceb-5f24-45a3-911a-72c71ae7fb06")
+	)
+	(junction
+		(at 200.0 38.0)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c9828a98-ea00-42bf-a415-3d4c81bfa6a4")
+	)
+	(junction
+		(at 200.0 38.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "80ff3f35-af6a-443d-a16b-5b0641f353d8")
 	)
 	(wire
 		(pts
-			(xy 200.0 40.0) (xy 230.0 40.0)
+			(xy 140.0 48.0) (xy 230.0 40.0)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0a183098-7cce-4b1c-a605-d2cf53b07481")
-	)
-	(junction
-		(at 200.0 40.0)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "47d0d74e-7306-4813-8f12-5b484c8ca1f6")
-	)
-	(junction
-		(at 230.0 40.0)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "843daaea-b59c-4a7c-b823-28733a1f5f83")
+		(uuid "52596e5d-5908-46aa-95d6-c6cf3d7fa6c1")
 	)
 	(wire
 		(pts
-			(xy 200.0 42.54) (xy 230.0 42.54)
+			(xy 140.0 50.54) (xy 230.0 42.54)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "be84ca43-42bd-4081-a0ce-ef5a93c12c80")
+		(uuid "5dfc4a87-e057-4d57-8d17-36b34fe5659a")
 	)
-	(junction
-		(at 200.0 42.54)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "abb995da-8e0b-4392-b256-12883a7a0dc4")
-	)
-	(junction
-		(at 230.0 42.54)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "bf181e2a-2c82-494f-ad46-7e4db97117ff")
-	)
-	(wire
-		(pts
-			(xy 200.0 45.08) (xy 230.0 45.08)
+	(label "AMP_SEL_L"
+		(at 180 41 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
+		(uuid "d0591381-fb7a-4d83-b53b-07515c14d942")
+	)
+	(label "AMP_SEL_R"
+		(at 180 43 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(uuid "46d3cf3b-4a0d-4966-83be-6accf687976d")
-	)
-	(junction
-		(at 200.0 45.08)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c43c5f07-b85b-437d-81e1-9761a17e840f")
-	)
-	(junction
-		(at 230.0 45.08)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "108e6690-0bbb-4641-8afe-7f9c7c921114")
-	)
-	(wire
-		(pts
-			(xy 200.0 47.62) (xy 230.0 47.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ac09cb6c-b58e-4619-805a-485060c59baa")
-	)
-	(junction
-		(at 200.0 47.62)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "244c5f40-9ce2-4e8e-b266-763672034c4b")
-	)
-	(junction
-		(at 230.0 47.62)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b63110e6-ab42-4c82-ba86-bcaf11906b87")
+		(uuid "b92b7546-7179-47ce-bf89-3786841aab2f")
 	)
 	(wire
 		(pts
@@ -1411,7 +1285,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cdbb21fc-d6b1-4df5-b53f-f0c0806d9e42")
+		(uuid "47e41ba3-c321-4bea-b0b8-d0648ccfa397")
 	)
 	(wire
 		(pts
@@ -1421,7 +1295,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e9cd432b-ed91-4cd6-a4ac-19db984aa7d5")
+		(uuid "bd10dbfd-fa58-4039-935d-b4c665c3f21f")
 	)
 	(label "PD_12V"
 		(at 115 47 0)
@@ -1431,7 +1305,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "2a1d3bf9-fee6-4e1a-9b3b-011c2209a4c6")
+		(uuid "3a0fb553-6cfc-4b86-8834-aea1fc857c32")
 	)
 	(label "PD_12V_SW"
 		(at 120 58 0)
@@ -1441,7 +1315,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "483a8686-de9f-4785-be66-cced001373a3")
+		(uuid "d1864d00-5b6c-4578-aa5e-f98fb2c72784")
 	)
 
 

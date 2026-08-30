@@ -53,9 +53,11 @@ CTRL_LIBS = [
     "Device:R",
     "Device:LED",
     "Device:RotaryEncoder_Switch",
+    "Device:R_Potentiometer_Dual",
     "Switch:SW_SPST",
+    "Switch:SW_DP3T",
+    "Switch:SW_SP3T",
     "AudioV2:PT2314",
-    "Audio:PGA2310PA",
     "MCU_Module:RaspberryPi_Pico",
     "Display_Graphic:SSD1306-128x64",
     "BP5293_ROHM:BP5293-50",
@@ -71,8 +73,11 @@ RELAY_LIBS = [
 ]
 
 OUTPUT_LIBS = [
-    "Relay:AZ850P2-x",
-    "Transistor_Array:ULN2803A",
+    "Device:C",
+    "Device:R",
+    "Device:R_Potentiometer_Dual",
+    "Switch:SW_DP3T",
+    "Switch:SW_SP3T",
     "Connector:Screw_Terminal_01x02",
 ]
 
@@ -214,39 +219,66 @@ def sym(
     rot: int,
     path: str,
     extra: list[tuple[str, str]] | None = None,
+    unit: int = 1,
 ) -> str:
-    return symbol_inst_v10(lib_id, ref, val, x, y, rot, path, extra_props=extra)
+    return symbol_inst_v10(lib_id, ref, val, x, y, rot, path, extra_props=extra, unit=unit)
 
 
-def pt2314_pin(sx: float, sy: float, index: int) -> tuple[float, float]:
-    """index 0..27 left pins 0-13, right 14-27 per generate script layout."""
-    if index < 14:
-        return pin(sx, sy, -12.7, 16.51 - index * 2.54)
-    return pin(sx, sy, 12.7, 16.51 - (index - 14) * 2.54)
+def pt2314_pin(sx: float, sy: float, num: int) -> tuple[float, float]:
+    """DIP-28: left 1..14 top→bottom, right 28..15 top→bottom. Tip coords."""
+    if 1 <= num <= 14:
+        return pin(sx, sy, -12.7, 16.51 - (num - 1) * 2.54)
+    if 15 <= num <= 28:
+        # right: 28 at top index0 … 15 at bottom index13
+        idx = 28 - num
+        return pin(sx, sy, 12.7, 16.51 - idx * 2.54)
+    raise ValueError(num)
+
+
+def pot_dual_pin(sx: float, sy: float, num: int) -> tuple[float, float]:
+    """Device:R_Potentiometer_Dual — tip = symbol (at)."""
+    table = {
+        1: (-10.16, -2.54),
+        2: (-6.35, 2.54),
+        3: (-2.54, -2.54),
+        4: (2.54, -2.54),
+        5: (6.35, 2.54),
+        6: (10.16, -2.54),
+    }
+    px, py = table[num]
+    return sx + px, sy + py
+
+
+def sw_dp3t_pin(sx: float, sy: float, num: int) -> tuple[float, float]:
+    """SW_DP3T tip coords for a single unit origin (unit1: 1-4, unit2: 5-8)."""
+    local = {
+        1: (5.08, 2.54),
+        2: (5.08, 0.0),
+        3: (-5.08, 0.0),
+        4: (5.08, -2.54),
+        5: (5.08, 2.54),
+        6: (5.08, 0.0),
+        7: (-5.08, 0.0),
+        8: (5.08, -2.54),
+    }
+    px, py = local[num]
+    return sx + px, sy + py
+
+
+def sw_sp3t_pin(sx: float, sy: float, num: int) -> tuple[float, float]:
+    local = {
+        1: (5.08, 2.54),
+        2: (5.08, 0.0),
+        3: (-5.08, 0.0),
+        4: (5.08, -2.54),
+    }
+    px, py = local[num]
+    return sx + px, sy + py
 
 
 def pga2310_pin(sx: float, sy: float, num: str) -> tuple[float, float]:
-    """Pin offsets for KiCad standard lib Audio:PGA2310PA (extends PGA2310UA)."""
-    table = {
-        "1": (-12.7, 5.08),  # ZCEN
-        "2": (-12.7, -2.54),  # ~CS
-        "3": (-12.7, 0),  # SDI
-        "4": (-5.08, 27.94),  # V_D+
-        "5": (-5.08, -27.94),  # DGND
-        "6": (-12.7, 2.54),  # SCLK
-        "7": (-12.7, -7.62),  # SDO
-        "8": (-12.7, 7.62),  # ~MUTE
-        "9": (-12.7, -12.7),  # V_INR
-        "10": (-12.7, -17.78),  # AGNDR
-        "11": (12.7, -15.24),  # V_OUTR
-        "12": (5.08, 27.94),  # V_A+
-        "13": (5.08, -27.94),  # V_A-
-        "14": (12.7, 15.24),  # V_OUTL
-        "15": (-12.7, 17.78),  # AGNDL
-        "16": (-12.7, 12.7),  # V_INL
-    }
-    px, py = table[num]
-    return pin(sx, sy, px, py)
+    """Deprecated — PGA removed; kept to avoid import errors if referenced."""
+    raise RuntimeError("PGA2310 removed from AudioV2 — use manual volume")
 
 
 def bus_hier(name: str, hy: float, bx: float = 55.0, shape: str = "input") -> str:
@@ -408,13 +440,14 @@ def power_module_wired() -> str:
 
 
 def control_panel_wired() -> str:
+    """ControlPanel: Pico / ENC×3 / OLED / PT2314 / DEST sense+LED / PWR SW.
+
+    Volume pots and DEST audio switch live on OutputStage (same PCB Q2-A).
+    """
     u2x, u2y = 160.0, 120.0
-    u3x, u3y = 127.0, 78.0
-    u4x, u4y = 127.0, 95.0
     picox, picoy = 76.2, 78.0
     wires: list[str] = []
 
-    # --- Buses from hierarchical labels ---
     buses = {
         "COMMON_L": 118.0,
         "COMMON_R": 121.0,
@@ -423,81 +456,69 @@ def control_panel_wired() -> str:
         "D_GND": 128.0,
         "+12V": 131.0,
         "-12V": 133.0,
-        "+5V": 115.0,
         "+3V3": 112.0,
     }
     for name, hy in buses.items():
-        shape = "bidirectional" if name in ("A_GND",) else "input"
-        if name == "+5V":
-            continue
+        shape = "bidirectional" if name == "A_GND" else "input"
         wires.append(bus_hier(name, hy, 50.0, shape))
 
-    # BP5293 +5V from +12V (simplified)
+    # BP5293 +5V (digital / Pico USB alt — keep for 5V rail label)
     parts_bp: list[str] = []
     parts_bp.append(sym("BP5293_ROHM:BP5293-50", "U5", "BP5293-50 +5V", 50.8, 115.0, 0, PATH_CTRL))
-    wires.append(wire(50.0, 131.0, 50.8 - 7.62, 115.0 + 1.27))
-    wires.append(wire(50.8 + 7.62, 115.0, 50.0, 115.0))
     wires.append(label("+5V", 52, 114))
 
-    # --- PT2314 power ---
-    p_vdd = pt2314_pin(u2x, u2y, 0)
-    p_agnd = pt2314_pin(u2x, u2y, 1)
-    p_dgnd = pt2314_pin(u2x, u2y, 24)
+    # --- PT2314 power (DS: VDD=1, AGND=2, DGND=25) ---
+    p_vdd = pt2314_pin(u2x, u2y, 1)
+    p_agnd = pt2314_pin(u2x, u2y, 2)
+    p_dgnd = pt2314_pin(u2x, u2y, 25)
     wires.append(wire(50.0, 110.0, p_vdd[0], p_vdd[1]))
     wires.append(wire(50.0, 125.0, p_agnd[0], p_agnd[1]))
     wires.append(wire(50.0, 128.0, p_dgnd[0], p_dgnd[1]))
-    wires.append(cap("C201", "0.1u", u2x - 20, u2y - 18, PATH_CTRL))
-    wires.append(wire(u2x - 20, u2y - 20.5, p_vdd[0], p_vdd[1]))
+    wires.append(cap("C201", "0.1u", u2x - 22, u2y - 20, PATH_CTRL))
 
-    # Input coupling COMMON → LIN/RIN
+    # Input coupling COMMON → LIN(17) / RIN(5)
     wires.append(cap("C202", "2.2u", 95.0, 118.0, PATH_CTRL))
     wires.append(cap("C203", "2.2u", 95.0, 121.0, PATH_CTRL))
-    plin = pt2314_pin(u2x, u2y, 16)
-    prin = pt2314_pin(u2x, u2y, 4)
+    plin = pt2314_pin(u2x, u2y, 17)
+    prin = pt2314_pin(u2x, u2y, 5)
     wires.append(wire(50.0, 118.0, 92.46, 118.0))
     wires.append(wire(97.54, 118.0, plin[0], plin[1]))
     wires.append(wire(50.0, 121.0, 92.46, 121.0))
     wires.append(wire(97.54, 121.0, prin[0], prin[1]))
 
-    # REF network pin28 (index 27)
-    pref = pt2314_pin(u2x, u2y, 27)
-    wires.append(res("R201", "5.6k", u2x + 18, u2y - 18, PATH_CTRL))
-    wires.append(cap("C204", "22u", u2x + 25, u2y - 18, PATH_CTRL))
-    wires.append(wire(pref[0], pref[1], u2x + 15.24, u2y - 18))
-    wires.append(wire(u2x + 15.24, u2y - 18, u2x + 15.24, 125.0))
-    wires.append(wire(u2x + 15.24, 125.0, 50.0, 125.0))
-    wires.append(wire(u2x + 20.46, u2y - 18, u2x + 22.54, u2y - 18))
-    wires.append(wire(u2x + 27.54, u2y - 18, u2x + 27.54, 125.0))
+    # REF pin28: R 5.6k + C 22u → AGND (DS)
+    pref = pt2314_pin(u2x, u2y, 28)
+    wires.append(res("R201", "5.6k", u2x + 20, u2y - 22, PATH_CTRL))
+    wires.append(cap("C204", "22u", u2x + 28, u2y - 22, PATH_CTRL))
+    wires.append(wire(pref[0], pref[1], u2x + 17.46, u2y - 22))
+    wires.append(wire(u2x + 17.46, u2y - 22, u2x + 17.46, 125.0))
+    wires.append(wire(u2x + 17.46, 125.0, 50.0, 125.0))
 
-    # Bass L network BIN_L/BOUT_L (pin index 18,19)
-    for idx, ref_r, ref_c in ((18, "R202", "C205"), (19, "R203", "C206")):
-        px = pt2314_pin(u2x, u2y, idx)
-        rx, ry = u2x - 25, u2y + 5 - (idx - 18) * 8
+    # Bass L: BIN_L(19) / BOUT_L(20) — R 2.4k + C 100n to AGND (DS app)
+    for pin_n, ref_r, ref_c, dy in ((19, "R202", "C205", 0), (20, "R203", "C206", -8)):
+        px = pt2314_pin(u2x, u2y, pin_n)
+        rx, ry = u2x - 28, u2y + dy
         wires.append(res(ref_r, "2.4k", rx, ry, PATH_CTRL))
-        wires.append(cap(ref_c, "100n", rx + 7, ry, PATH_CTRL))
+        wires.append(cap(ref_c, "100n", rx + 8, ry, PATH_CTRL))
         wires.append(wire(px[0], px[1], rx + 2.54, ry))
-        wires.append(wire(rx + 9.54, ry, rx + 9.54, 125.0))
-        wires.append(wire(rx + 9.54, 125.0, 50.0, 125.0))
 
-    # Bass R (index 20,21)
-    for idx, ref_r, ref_c in ((20, "R204", "C207"), (21, "R205", "C208")):
-        px = pt2314_pin(u2x, u2y, idx)
-        rx, ry = u2x + 25, u2y + 5 - (idx - 20) * 8
+    # Bass R: BIN_R(21) / BOUT_R(22)
+    for pin_n, ref_r, ref_c, dy in ((21, "R204", "C207", 0), (22, "R205", "C208", -8)):
+        px = pt2314_pin(u2x, u2y, pin_n)
+        rx, ry = u2x + 28, u2y + dy
         wires.append(res(ref_r, "2.4k", rx, ry, PATH_CTRL))
-        wires.append(cap(ref_c, "100n", rx - 7, ry, PATH_CTRL))
+        wires.append(cap(ref_c, "100n", rx - 8, ry, PATH_CTRL))
         wires.append(wire(px[0], px[1], rx - 2.54, ry))
-        wires.append(wire(rx - 9.54, ry, rx - 9.54, 125.0))
 
-    # Treble caps on TREB_L/R (index 2,3)
-    for idx, ref_c in ((2, "C209"), (3, "C210")):
-        px = pt2314_pin(u2x, u2y, idx)
-        wires.append(cap(ref_c, "2.7n", px[0] - 8, px[1], PATH_CTRL))
-        wires.append(res(f"R{206+idx}", "2.4k", px[0] - 15, px[1], PATH_CTRL))
-        wires.append(wire(px[0], px[1], px[0] - 5.46, px[1]))
+    # Treble: TREB_L(3) / TREB_R(4) — C 2.7n + R 2.4k (DS)
+    for pin_n, ref_c, ref_r in ((3, "C209", "R206"), (4, "C210", "R207")):
+        px = pt2314_pin(u2x, u2y, pin_n)
+        wires.append(cap(ref_c, "2.7n", px[0] - 10, px[1], PATH_CTRL))
+        wires.append(res(ref_r, "2.4k", px[0] - 18, px[1], PATH_CTRL))
 
-    # Outputs OUT_L/R → hierarchical TONE_OUT (to Amp path)
-    pout_l = pt2314_pin(u2x, u2y, 23)
-    pout_r = pt2314_pin(u2x, u2y, 22)
+    # Outputs OUT_L(24) / OUT_R(23) → TONE_L/R (to Amp path)
+    pout_l = pt2314_pin(u2x, u2y, 24)
+    pout_r = pt2314_pin(u2x, u2y, 23)
     wires.append(cap("C211", "2.2u", 185.0, 118.0, PATH_CTRL))
     wires.append(cap("C212", "2.2u", 185.0, 121.0, PATH_CTRL))
     wires.append(wire(pout_l[0], pout_l[1], 182.46, 118.0))
@@ -507,57 +528,41 @@ def control_panel_wired() -> str:
     wires.append(wire(187.54, 118.0, 200.66, 118.0))
     wires.append(wire(187.54, 121.0, 200.66, 121.0))
 
-    # DATA/CLK + pullups (Pico GP20/21)
-    pdata = pt2314_pin(u2x, u2y, 25)
-    pclk = pt2314_pin(u2x, u2y, 26)
+    # DATA(26) / CLK(27) + 4.7k pullups to 3V3
+    pdata = pt2314_pin(u2x, u2y, 26)
+    pclk = pt2314_pin(u2x, u2y, 27)
     wires.append(res("R210", "4.7k", picox + 15, picoy - 10, PATH_CTRL))
     wires.append(res("R211", "4.7k", picox + 15, picoy - 5, PATH_CTRL))
-    wires.append(wire(50.0, 112.0, picox + 12.46, 112.0))
     wires.append(wire(picox + 17.54, picoy - 10, pdata[0], pdata[1]))
     wires.append(wire(picox + 17.54, picoy - 5, pclk[0], pclk[1]))
-    wires.append(wire(picox + 12.46, picoy - 10, picox + 12.46, 112.0))
     wires.append(label("I2C_SDA", picox + 18, picoy - 11))
     wires.append(label("I2C_SCL", picox + 18, picoy - 6))
 
-    # --- PGA2310 HP (U3) ---
-    wires.append(wire(50.0, 131.0, pga2310_pin(u3x, u3y, "12")[0], pga2310_pin(u3x, u3y, "12")[1]))
-    wires.append(wire(50.0, 133.0, pga2310_pin(u3x, u3y, "13")[0], pga2310_pin(u3x, u3y, "13")[1]))
-    wires.append(wire(50.0, 125.0, pga2310_pin(u3x, u3y, "15")[0], pga2310_pin(u3x, u3y, "15")[1]))
-    wires.append(wire(50.0, 125.0, pga2310_pin(u3x, u3y, "10")[0], pga2310_pin(u3x, u3y, "10")[1]))
-    wires.append(wire(50.0, 115.0, pga2310_pin(u3x, u3y, "4")[0], pga2310_pin(u3x, u3y, "4")[1]))
-    wires.append(wire(50.0, 128.0, pga2310_pin(u3x, u3y, "5")[0], pga2310_pin(u3x, u3y, "5")[1]))
-    zcen = pga2310_pin(u3x, u3y, "1")
-    wires.append(wire(50.0, 115.0, zcen[0], zcen[1]))
-    # SPI to Pico + daisy to U4
-    for pga_pin, gp_y in (("6", picoy + 5), ("3", picoy + 2.5), ("2", picoy)):
-        px, py = pga2310_pin(u3x, u3y, pga_pin)
-        wires.append(wire(picox + 10, gp_y, px, py))
-    sdo = pga2310_pin(u3x, u3y, "7")
-    sdi2 = pga2310_pin(u4x, u4y, "3")
-    wires.append(wire(sdo[0], sdo[1], sdi2[0], sdi2[1]))
-    # MUTE + pulldown
-    wires.append(res("R220", "10k", picox + 5, picoy + 10, PATH_CTRL))
-    mute = pga2310_pin(u3x, u3y, "8")
-    wires.append(wire(picox + 10, picoy + 7.5, mute[0], mute[1]))
-    wires.append(wire(picox + 7.46, picoy + 10, picox + 7.46, 128.0))
-    wires.append(wire(picox + 7.46, 128.0, 50.0, 128.0))
-    # HP outputs → hier
-    for pin_n, hy, hname in (("14", 130.0, "PGA_HP_L"), ("11", 132.54, "PGA_HP_R")):
-        po = pga2310_pin(u3x, u3y, pin_n)
-        wires.append(wire(po[0], po[1], 195.0, hy))
-        wires.append(hier_label(hname, "output", 200.66, hy, 0))
-        wires.append(wire(195.0, hy, 200.66, hy))
-
-    # PGA LINE U4 — shared CS/SCLK/MUTE, inputs TONE would come from amps (hier placeholder)
-    wires.append(hier_label("AMP_SEL_L", "input", 30.48, 105.0, 180))
-    wires.append(hier_label("AMP_SEL_R", "input", 30.48, 107.0, 180))
-    wires.append(wire(50.0, 105.0, pga2310_pin(u4x, u4y, "16")[0], pga2310_pin(u4x, u4y, "16")[1]))
-    wires.append(wire(50.0, 107.0, pga2310_pin(u4x, u4y, "9")[0], pga2310_pin(u4x, u4y, "9")[1]))
-    for pin_n, hy, hname in (("14", 135.08, "PGA_LINE_L"), ("11", 137.62, "PGA_LINE_R")):
-        po = pga2310_pin(u4x, u4y, pin_n)
-        wires.append(wire(po[0], po[1], 195.0, hy))
-        wires.append(hier_label(hname, "output", 200.66, hy, 0))
-        wires.append(wire(195.0, hy, 200.66, hy))
+    # --- DEST sense ladder (Rh/Rl=10k, Rs=1k) + LEDs ---
+    # 3V3 -- Rh -- ADC -- Rl -- GND; ADC -- Rs -- SW_SP3T throws
+    lad_x, lad_y = 55.0, 95.0
+    wires.append(res("R230", "10k", lad_x, lad_y, PATH_CTRL))  # Rh
+    wires.append(res("R231", "10k", lad_x + 12, lad_y, PATH_CTRL))  # Rl
+    wires.append(res("R232", "1k", lad_x + 6, lad_y - 10, PATH_CTRL))  # Rs LINE
+    wires.append(res("R233", "1k", lad_x + 6, lad_y + 10, PATH_CTRL))  # Rs PHONE
+    wires.append(label("DEST_ADC", lad_x + 8, lad_y - 1))
+    wires.append(label("+3V3", lad_x - 2, lad_y - 1))
+    wires.append(label("D_GND", lad_x + 16, lad_y - 1))
+    # Sense switch SP3T: COM=3 → ADC; 1=LINE→3V3 via R232; 2=MUTE NC; 4=PHONE→GND via R233
+    swsx, swsy = 80.0, 95.0
+    sense_sw = sym("Switch:SW_SP3T", "SW2", "DEST sense (3PDT 3rd pole)", swsx, swsy, 0, PATH_CTRL)
+    wires.append(label("to 3V3 via R232", swsx + 8, swsy - 4))
+    wires.append(label("MUTE=NC", swsx + 8, swsy))
+    wires.append(label("to GND via R233", swsx + 8, swsy + 4))
+    # LEDs
+    led_syms = (
+        sym("Device:LED", "D2", "DEST LINE", 100.0, 90.0, 0, PATH_CTRL)
+        + sym("Device:LED", "D3", "DEST PHONE", 100.0, 100.0, 0, PATH_CTRL)
+        + res("R234", "1k", 110.0, 90.0, PATH_CTRL)
+        + res("R235", "1k", 110.0, 100.0, PATH_CTRL)
+    )
+    wires.append(label("GP14 LED_LINE", 112, 89))
+    wires.append(label("GP15 LED_PHONE", 112, 99))
 
     # PWR SW + LED
     wires.append(wire(50.0, 150.32, 165.1, 150.32))
@@ -565,12 +570,9 @@ def control_panel_wired() -> str:
     wires.append(wire(177.8, 150.32, 200.66, 150.32))
 
     encs = [
-        ("ENC_CH", "ENC1", "GP0/1/12", 40.64),
-        ("ENC_HP", "ENC2", "GP2/3/13", 55.88),
-        ("ENC_LINE", "ENC3", "GP4/5/14", 71.12),
-        ("ENC_DEST", "ENC4", "GP6/7/15", 86.36),
-        ("ENC_BASS", "ENC5", "GP8/9/26", 101.6),
-        ("ENC_TREBLE", "ENC6", "GP10/11/27", 116.84),
+        ("ENC_CH", "ENC1", "GP0/1/2", 40.64),
+        ("ENC_BASS", "ENC2", "GP3/4/5", 55.88),
+        ("ENC_TREBLE", "ENC3", "GP6/7/8", 71.12),
     ]
     enc_syms = "\n".join(
         sym("Device:RotaryEncoder_Switch", ref, f"EC11 {name} {gps}", 35.56, y, 0, PATH_CTRL)
@@ -579,9 +581,11 @@ def control_panel_wired() -> str:
 
     body = f"""{embed_lib_symbols(CTRL_LIBS)}
 {text_note(25.4, 25.4, [
-    "ControlPanel — CIRCUIT_DESIGN wired (§10 + §3)",
-    "PT2314 @9V / PGA2310PA×2 / Pico2 / ENC×6",
-    "TONE_L/R → Amp inputs (off-sheet). AMP_SEL ← selected Amp output",
+    "ControlPanel — DECISIONS manual volume (2026-08-30)",
+    "PT2314 28pin DS / Pico2 / ENC×3 (CH BASS TREBLE) / OLED",
+    "DEST sense: Rh Rl=10k Rs=1k → ADC GP26 + LED GP14/15",
+    "Audio DEST SW + A50k pots → OutputStage sheet (same PCB)",
+    "Unused PT2314 inputs (LIN1-4/RIN1-4/LOUD): AC-GND or NC — layout TBD",
 ])}
 {hier_label("PD_12V", "input", 30.48, 150.32, 180)}
 {hier_label("PD_GND", "bidirectional", 200.66, 152.86, 0)}
@@ -590,12 +594,12 @@ def control_panel_wired() -> str:
 {wire(30.48, 135.08, 50.0, 135.08)}
 {wire(30.48, 137.62, 50.0, 137.62)}
 {sym("MCU_Module:RaspberryPi_Pico", "U1", "Pico 2 / RP2350", picox, picoy, 0, PATH_CTRL)}
-{sym("AudioV2:PT2314", "U2", "PT2314", u2x, u2y, 0, PATH_CTRL)}
-{sym("Audio:PGA2310PA", "U3", "PGA2310PA HP", u3x, u3y, 0, PATH_CTRL)}
-{sym("Audio:PGA2310PA", "U4", "PGA2310PA LINE", u4x, u4y, 0, PATH_CTRL)}
+{sym("AudioV2:PT2314", "U2", "PT2314-D", u2x, u2y, 0, PATH_CTRL)}
 {sym("Display_Graphic:SSD1306-128x64", "U6", "OLED ctrl I2C", 101.6, 78.0, 0, PATH_CTRL)}
 {sym("Switch:SW_SPST", "SW1", "PWR SW", 165.1, 150.32, 0, PATH_CTRL)}
 {sym("Device:LED", "D1", "12V panel LED", 177.8, 152.86, 0, PATH_CTRL)}
+{sense_sw}
+{led_syms}
 {"".join(parts_bp)}
 {enc_syms}
 {"".join(wires)}
@@ -642,32 +646,78 @@ def relay_board_wired() -> str:
 
 
 def output_stage_wired() -> str:
-    """OutputStage with embedded lib_symbols (§11 Q2-A)."""
+    """OutputStage: AMP_SEL → SW_DP3T DEST → A50k dual pots → PHONE/LINE.
+
+    SW mapping (Audio SW101 / KiCad SW_DP3T):
+      L: COM=3, PHONE=1, MUTE=2 (NC), LINE=4
+      R: COM=7, PHONE=5, MUTE=6 (NC), LINE=8
+    Pot: CW=1/4 from SW, wiper=2/5 out, CCW=3/6 to A_GND.
+    """
+    wires: list[str] = []
+    rvh_x, rvh_y = 127.0, 45.72
+    rvl_x, rvl_y = 127.0, 66.04
+    sw1x, sw1y = 88.9, 50.8
+    sw2x, sw2y = 88.9, 63.5
+
+    wires.append(hier_label("AMP_SEL_L", "input", 30.48, 50.8, 180))
+    wires.append(hier_label("AMP_SEL_R", "input", 30.48, 53.34, 180))
+    wires.append(hier_label("A_GND", "bidirectional", 30.48, 66.04, 180))
+    wires.append(wire(30.48, 50.8, 70.0, 50.8))
+    wires.append(wire(30.48, 53.34, 70.0, 53.34))
+    wires.append(label("AMP_SEL_L", 50, 50))
+    wires.append(label("AMP_SEL_R", 50, 52.5))
+
+    sw_syms = (
+        sym("Switch:SW_DP3T", "SW101", "DEST L (PHONE/MUTE/LINE)", sw1x, sw1y, 0, PATH_OUT, unit=1)
+        + sym("Switch:SW_DP3T", "SW101", "DEST R (PHONE/MUTE/LINE)", sw2x, sw2y, 0, PATH_OUT, unit=2)
+    )
+    wires.append(wire(70.0, 50.8, *sw_dp3t_pin(sw1x, sw1y, 3)))
+    wires.append(wire(70.0, 53.34, *sw_dp3t_pin(sw2x, sw2y, 7)))
+    wires.append(wire(*sw_dp3t_pin(sw1x, sw1y, 1), rvh_x - 12, rvh_y))
+    wires.append(wire(*sw_dp3t_pin(sw2x, sw2y, 5), rvh_x - 12, rvh_y + 5))
+    wires.append(wire(*sw_dp3t_pin(sw1x, sw1y, 4), rvl_x - 12, rvl_y))
+    wires.append(wire(*sw_dp3t_pin(sw2x, sw2y, 8), rvl_x - 12, rvl_y + 5))
+    wires.append(label("MUTE NC (2/6)", sw1x + 10, sw1y))
+
+    pot_syms = (
+        sym("Device:R_Potentiometer_Dual", "RV101", "A50k Dual HP", rvh_x, rvh_y, 0, PATH_OUT)
+        + sym("Device:R_Potentiometer_Dual", "RV102", "A50k Dual LINE", rvl_x, rvl_y, 0, PATH_OUT)
+    )
+    wires.append(wire(rvh_x - 12, rvh_y, *pot_dual_pin(rvh_x, rvh_y, 1)))
+    wires.append(wire(rvh_x - 12, rvh_y + 5, *pot_dual_pin(rvh_x, rvh_y, 4)))
+    wires.append(wire(*pot_dual_pin(rvh_x, rvh_y, 3), rvh_x, 80.0))
+    wires.append(wire(*pot_dual_pin(rvh_x, rvh_y, 6), rvh_x + 5, 80.0))
+    wires.append(wire(rvh_x, 80.0, 30.48, 66.04))
+    wires.append(hier_label("PHONE_L", "output", 200.66, 45.72, 0))
+    wires.append(hier_label("PHONE_R", "output", 200.66, 48.26, 0))
+    wires.append(wire(*pot_dual_pin(rvh_x, rvh_y, 2), 200.66, 45.72))
+    wires.append(wire(*pot_dual_pin(rvh_x, rvh_y, 5), 200.66, 48.26))
+
+    wires.append(wire(rvl_x - 12, rvl_y, *pot_dual_pin(rvl_x, rvl_y, 1)))
+    wires.append(wire(rvl_x - 12, rvl_y + 5, *pot_dual_pin(rvl_x, rvl_y, 4)))
+    wires.append(wire(*pot_dual_pin(rvl_x, rvl_y, 3), rvl_x, 80.0))
+    wires.append(wire(*pot_dual_pin(rvl_x, rvl_y, 6), rvl_x + 5, 80.0))
+    wires.append(hier_label("LINE_L", "output", 200.66, 50.8, 0))
+    wires.append(hier_label("LINE_R", "output", 200.66, 53.34, 0))
+    wires.append(wire(*pot_dual_pin(rvl_x, rvl_y, 2), 200.66, 50.8))
+    wires.append(wire(*pot_dual_pin(rvl_x, rvl_y, 5), 200.66, 53.34))
+
+    j_syms = (
+        sym("Connector:Screw_Terminal_01x02", "J_HP", "to Audio HP Buffer", 165.1, 45.72, 0, PATH_OUT)
+        + sym("Connector:Screw_Terminal_01x02", "J_LINE", "LINE OUT", 165.1, 55.88, 0, PATH_OUT)
+    )
+
     body = f"""{embed_lib_symbols(OUTPUT_LIBS)}
 {text_note(25.4, 25.4, [
-    "OutputStage — DRAFT (§11 Q2-A, same PCB as ControlPanel)",
-    "DEST latching relays: LINE / PHONE / MUTE (AZ850 ×2~3)",
-    "Drive: MCP23017/ULN on RelayBoard OR spare ULN on Control — TODO review",
-    "Startup default: LINE",
+    "OutputStage — manual DEST + volume (Q2-A same PCB as Control)",
+    "AMP_SEL → SW_DP3T (LINE/MUTE/PHONE) → RV101/102 A50k Dual",
+    "MUTE throws unconnected. Sense pole on ControlPanel SW2.",
+    "HP path: wiper → HeadphoneBuffer (Audio/ physical). No PGA.",
 ])}
-{hier_label("PGA_HP_L", "input", 30.48, 50.8, 180)}
-{hier_label("PGA_HP_R", "input", 30.48, 53.34, 180)}
-{hier_label("PGA_LINE_L", "input", 30.48, 55.88, 180)}
-{hier_label("PGA_LINE_R", "input", 30.48, 58.42, 180)}
-{hier_label("+12V", "input", 30.48, 60.96, 180)}
-{hier_label("-12V", "input", 30.48, 63.5, 180)}
-{hier_label("A_GND", "bidirectional", 30.48, 66.04, 180)}
-{hier_label("PHONE_L", "output", 200.66, 45.72, 0)}
-{hier_label("PHONE_R", "output", 200.66, 48.26, 0)}
-{hier_label("LINE_L", "output", 200.66, 50.8, 0)}
-{hier_label("LINE_R", "output", 200.66, 53.34, 0)}
-{hier_label("MUTE", "output", 200.66, 55.88, 0)}
-{sym("Relay:AZ850P2-x", "K1", "DEST LINE", 88.9, 50.8, 0, PATH_OUT)}
-{sym("Relay:AZ850P2-x", "K2", "DEST PHONE", 101.6, 50.8, 0, PATH_OUT)}
-{sym("Relay:AZ850P2-x", "K3", "DEST MUTE", 114.3, 50.8, 0, PATH_OUT)}
-{sym("Transistor_Array:ULN2803A", "U1", "ULN spare/TODO", 63.5, 50.8, 0, PATH_OUT)}
-{sym("Connector:Screw_Terminal_01x02", "J_HP", "to Audio HP Buffer", 165.1, 45.72, 0, PATH_OUT)}
-{sym("Connector:Screw_Terminal_01x02", "J_LINE", "LINE OUT", 165.1, 50.8, 0, PATH_OUT)}
+{sw_syms}
+{pot_syms}
+{j_syms}
+{"".join(wires)}
 """
     return sch_open(UUID_OUTPUT_FILE, body)
 
@@ -704,11 +754,15 @@ def parent_wired() -> str:
     wires.append(junction(140.0, 40.0))
     wires.append(junction(170.0, 40.0))
 
-    # Control PGA → Output
-    for hy in (40.0, 42.54, 45.08, 47.62):
-        wires.append(wire(200.0, hy, 230.0, hy))
+    # Control TONE / PD only — volume path is Amp → OutputStage
+    for hy in (38.0, 38.5):
         wires.append(junction(200.0, hy))
-        wires.append(junction(230.0, hy))
+
+    # Amp select bus (off-sheet / Relay COMMON after Amp) → Output
+    wires.append(wire(140.0, 48.0, 230.0, 40.0))
+    wires.append(wire(140.0, 50.54, 230.0, 42.54))
+    wires.append(label("AMP_SEL_L", 180, 41))
+    wires.append(label("AMP_SEL_R", 180, 43))
 
     # PD panel loop: Power PD_12V → Control PD_12V; Control PD_12V_SW → Power PD_12V_SW
     wires.append(wire(60.96, 45.72, 170.0, 60.32))
@@ -748,27 +802,18 @@ def parent_wired() -> str:
         ("PD_12V", "input", 170.0, 60.32, 180),
         ("PD_12V_SW", "output", 200.0, 60.32, 0),
         ("PD_GND", "bidirectional", 200.0, 62.86, 0),
-        ("PGA_HP_L", "output", 200.0, 40.0, 0),
-        ("PGA_HP_R", "output", 200.0, 42.54, 0),
-        ("PGA_LINE_L", "output", 200.0, 45.08, 0),
-        ("PGA_LINE_R", "output", 200.0, 47.62, 0),
         ("VCC_TONE", "input", 170.0, 65.0, 180),
         ("TONE_L", "output", 200.0, 38.0, 0),
         ("TONE_R", "output", 200.0, 38.5, 0),
     ]
     output_pins = [
-        ("PGA_HP_L", "input", 230.0, 40.0, 180),
-        ("PGA_HP_R", "input", 230.0, 42.54, 180),
-        ("PGA_LINE_L", "input", 230.0, 45.08, 180),
-        ("PGA_LINE_R", "input", 230.0, 47.62, 180),
-        ("+12V", "input", 230.0, 50.16, 180),
-        ("-12V", "input", 230.0, 52.7, 180),
+        ("AMP_SEL_L", "input", 230.0, 40.0, 180),
+        ("AMP_SEL_R", "input", 230.0, 42.54, 180),
         ("A_GND", "bidirectional", 230.0, 55.24, 180),
         ("PHONE_L", "output", 260.0, 40.0, 0),
         ("PHONE_R", "output", 260.0, 42.54, 0),
         ("LINE_L", "output", 260.0, 45.08, 0),
         ("LINE_R", "output", 260.0, 47.62, 0),
-        ("MUTE", "output", 260.0, 50.16, 0),
     ]
     from generate_kicad_scaffold import UUID_POWER_INST, UUID_RELAY_A, UUID_RELAY_B  # noqa: E402
 
@@ -781,8 +826,8 @@ def parent_wired() -> str:
     )
     body = f"""\t(lib_symbols)
 {text_note(25.4, 20.32, [
-    "AudioV2Case — wired per CIRCUIT_DESIGN.md",
-    "Global buses connect Power / Relay / Control / Output",
+    "AudioV2Case — manual volume (DECISIONS 2026-08-30)",
+    "Signal: CH→PT2314→Amp→SW_DEST→RV→PHONE/LINE",
     "Amp/HP/計測 = Audio/ off-sheet (WIRING.md)",
 ])}
 {global_label("+12V", 127.0, 100.0, 0)}
