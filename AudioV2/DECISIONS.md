@@ -126,7 +126,7 @@
 
 | 懸念 | 扱い |
 |---|---|
-| Amp ×10 の最大出力が **約 2〜3 dB 低下**（≈6〜7 Vrms 級） | 許容。LINE 2 Vrms には足りる。Amp 比較実験は ±12 V 基準で統一 |
+| Amp ×10 の最大出力が **約 2〜3 dB 低下**（≈6〜7 Vrms 級） | 許容。**Amp 基板は再設計しない**（§6）。±12 V を端子で供給するだけ |
 | HP 固定パッド | **廃止（0 Ω）**（§9）。±12 V で Amp ≈7 Vrms、PGA2310 が音量担当 |
 | MeasurementADC の ±15 V ラベル | AudioV2 PowerModule から **±12 V** を配る。計測モジュールは OPA1656 等 ±12 V で動作確認 |
 | PT2314 電源 | データシート推奨に合わせて **9 V 級単一系 or ±12 V からの派生**を PowerModule で決める |
@@ -674,7 +674,7 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 - [x] 音量 IC: **C PGA2310PA ×2**（SPI デイジーチェーン）
 - [x] 電源: **±12 V**（DKMW20F-12）、PD **50224 CH224**（差し替え可）
 - [x] エンコーダー: **EC11 系 ×6**（固定足東西・D カット）
-- [x] Amp / HP: **`Audio/` 流用**（AudioV2 DS 不要）
+- [x] Amp / HP: **`Audio/` 物理流用**（KiCad には載せない）
 - [x] OLED / 表示ループ / PWR+12V LED
 - [x] 12V LED: **CH224 12V → PWR SW 後 → LED + DKMW20**（`PD_GND`）
 - [x] HP 固定パッド: **廃止（0 Ω）**。DNP で −10 dB 後付け可
