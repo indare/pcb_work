@@ -6,12 +6,12 @@
 - **操作 Pico 1 台**＋リレー盤は **I²C GPIO 拡張（MCP23017）**
 - **電源: ±12 V** — **PowerModule 再設計**（DKMW20F-12 + **USB-C / CH224 内蔵**）
 - **Amp / HP** — `Audio/` 製造済み基板を **物理流用**（電源電圧にほぼ非依存。AudioV2 回路図には載せない）
-- 音量: PGA2310PA ×2（SPI）、トーン: PT2314（I²C、Amp 前）
+- 音量: **手回しデュアルポット ×2**（HP / LINE）。DEST: 機械 SW + ADC + LED + OLED。トーン: PT2314（I²C、Amp 前）
 - **物理 PCB:** Relay **5+5×2**、Control+Output **1 枚**（Q2-B なら Output **+1**）、Power **1 枚**（§11）
-- **KiCad 素案あり** — `AudioV2Case.kicad_pro` + 子シート 4 枚（**draft・要レビュー**）
-- **次:** [CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md) — DS ピン照合・部品値・机上検算（#19）
+- **KiCad 素案あり** — `AudioV2Case.kicad_pro` + 子シート 4 枚（**draft・手回し化前の PGA 構成。要改訂**）
+- **次:** [DECISIONS.md](DECISIONS.md) 手回し確定に合わせ KiCad / CIRCUIT_DESIGN を改訂
 
-詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
+詳細は [DECISIONS.md](DECISIONS.md)。DEST ラダーは [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。過去の音量 IC 比較（アーカイブ）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
 
 ## いまの `Audio/` からの参照元
 
