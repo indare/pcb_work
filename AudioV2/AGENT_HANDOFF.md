@@ -72,6 +72,12 @@ U201 → ±12 / A_GND → J201（星型幹線 3P）
 - `VCC_TONE` 戻り = 二次 `A_GND`（7809 GND と同一。衝突ではなく共用）
 - 星型 `A_GND` とトーン用戻りを別ケーブルで両端接続すると **ループ**しやすい → J203 で寄り道（専用 2P）が方針
 
+### 2.4 手持ちオペアンプ（2026-08-31 申告）
+
+正本: **[`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)**
+
+NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364CN8 / MUSES01・MUSES02D、および OPA828・OPA627AU・OPA1612・OPA2140・OPA1652 の DIP 化モジュール等。
+
 ---
 
 ## 3. マージ済み PR（このスレッドで扱った範囲）
@@ -131,6 +137,7 @@ Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 13. 外付け 50224 前提。`J202` PD in、`J203` VCC_TONE out。R.C. 明示 NC
 14. PD 入口 A vs B・往復端子の議論 → **一旦終了**（図は A）
 15. 本メモ更新 → `main` に commit/push（クラウド同期用）
+16. 手持ちオペアンプリストを `Audio/OPAMP_INVENTORY.md` に登録
 
 ---
 
@@ -163,3 +170,4 @@ generate_kicad_scaffold.py は再実行しない。
 |---|---|
 | 2026-08-30 | 初版 — クラウド／ローカル会話の長期記憶化 |
 | 2026-08-31 | Power 端子・SW 配置・PD A/B・VCC_TONE/GND 方針を追記 |
+| 2026-08-31 | 手持ちオペアンプ在庫 → `Audio/OPAMP_INVENTORY.md` |
