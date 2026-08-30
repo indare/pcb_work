@@ -1,12 +1,15 @@
 # AudioV2 音量 IC 比較 — B（MCP45HV51 ×4）vs C（PGA231x ×2）
 
-[DECISIONS.md](DECISIONS.md) §3 の「digipot は B か C」を決めるための調べ物。一次ソースは各社データシート（本文中にリンク）。
+> **アーカイブ（2026-08-30）:** [DECISIONS.md](DECISIONS.md) §2・§3 で **最終出力ボリュームは手回しデュアルポット**に変更。PGA / digipot は **採用しない**。本文は当時の調査記録として残す。
+
+[DECISIONS.md](DECISIONS.md) §3 の「digipot は B か C」を決めるための調べ物（当時）。一次ソースは各社データシート（本文中にリンク）。
 
 ---
 
-## 0. 先に結論
+## 0. 先に結論（当時）
 
-**確定: C 系 — [PGA2310PA](https://www.ti.com/lit/ds/symlink/pga2310.pdf) ×2（DIP-16）。** B（MCP45HV51 ×4）は見送り。
+**当時の確定: C 系 — [PGA2310PA](https://www.ti.com/lit/ds/symlink/pga2310.pdf) ×2（DIP-16）。** B（MCP45HV51 ×4）は見送り。  
+**→ 現行確定は手回しポット（本ファイルの結論は上書き済み）。**
 
 **電源: アナログ ±12 V**（例: DKMW20F-12）。PD 給電モジュールは差し替え可（2026-08 確定）。
 

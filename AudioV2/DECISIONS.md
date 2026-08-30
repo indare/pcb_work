@@ -5,7 +5,7 @@
 - スペアナ用 Pico 2 は独立（負荷・ノイズ・GND 島が違う）
 - ラッチングリレーで多系統 Amp のうち **1 系統だけ有効**は残す
 - **操作側 Pico は 1 台**（リレー用の子 Pico は置かない）
-- 音量はエンコーダー化を検討（機械式デュアルポット置き換え）
+- ~~音量はエンコーダー化を検討~~ → **2026-08-30 確定: 最終出力ボリュームは手回しポット**（§2・§3）
 - `Audio/` は参考のまま残し、ここは新規プロジェクト
 
 ### 決定ログ
@@ -16,18 +16,18 @@
 | 切替信号の渡し方 | **確定** | Pico 1 台 + **I²C GPIO 拡張（B2-exp）** + ULN |
 | CH / 電源 / 音声切替 | **確定** | ラッチングリレー（1 系統のみ有効） |
 | CH 操作 | **確定** | **ENC_CH**（現行どおり）。**回して候補変更、押して確定**（確定で音声＋電源リレー適用） |
-| 音量 | **確定** | Amp 後。**ENC_HP / ENC_LINE は独立**（別 digipot） |
-| 出力先 | **確定** | **ENC_DEST**: 回して候補、押して確定。**LINE → PHONE → MUTE** ループ。**起動時 LINE**。切替は **出力段のラッチングリレー**（CH と同系）。`A_GND` は共有のまま音声出口だけ切替 |
+| 音量 | **確定** | Amp 後。**手回しデュアルポット ×2**（HP=`RV101` / LINE=`RV102` 相当）。**OLED に音量は出さない**（物理ノブがインジケータ） |
+| 出力先 | **確定** | **機械 SW（旧 SW101 相当）** で音声切替。**位置検知 = 抵抗ラダー → Pico ADC（A 案）**。**DEST LED ×2**（LINE / PHONE）+ **OLED 表示**。MUTE = 両 LED 消灯。**DEST 用ラッチングリレーは不要** |
 | トーン | **確定** | **T1: PT2314 系**（Amp 前）。ENC_BASS / ENC_TREBLE → I²C |
-| 音量 IC | **確定** | **C: PGA2310PA ×2**（HP / LINE、SPI デイジーチェーン）。Amp 後。詳細 [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) |
-| 電源レール | **確定** | アナログ **±12 V**（例: **DKMW20F-12**、1″×1″ 同系）。PGA2310 余裕確保 |
+| 音量 IC | **見送り** | PGA2310 / digipot は **採用しない**（手回しに変更）。過去比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) |
+| 電源レール | **確定** | アナログ **±12 V**（例: **DKMW20F-12**、1″×1″ 同系） |
 | PD 給電 | **確定** | **PowerModule 内蔵**（USB-C + CH224K / 50224 相当）。§6・§8 |
-| エンコーダー | **確定** | 汎用 **EC11 系**（固定足東西・信号南北・D カット軸）。×6 |
+| エンコーダー | **確定** | 汎用 **EC11 系**。**×3**（CH / BASS / TREBLE）。HP / LINE / DEST は手回し |
 | ENC 配線 | **確定** | **A/B/SW すべて Pico GPIO 直結**（§10）。I²C 集約は見送り |
 | Amp / HP | **確定** | **`Audio/` 基板を物理流用**。入出力は電源電圧に**ほぼ非依存** → AudioV2 回路図では **載せない** |
-| OLED | **確定** | **2 枚**。計測＝スペアナ用／操作＝制御用 |
+| OLED | **確定** | **2 枚**。計測＝スペアナ用／操作＝制御用（**CH / DEST / Bass / Treble**。音量なし） |
 | 電源 UI | **確定** | **パワースイッチ＋12V LED** |
-| ULN2803 | 役割固定 | コイル電流増幅のみ |
+| ULN2803 | 役割固定 | コイル電流増幅のみ（**CH 系統のみ**。DEST は機械 SW） |
 
 ---
 
@@ -39,70 +39,76 @@
 |---|---|
 | CH 選択（どの Amp を活かすか） | ラッチングリレー（音声） |
 | その系統の電源 | ラッチングリレー（電源） |
-| 出力先 PHONE / LINE / MUTE | **出力段**のラッチングリレー（CH と同系）。`A_GND` 共有のまま音声出口を切替 |
-| HP 音量 | **PGA2310PA**（SPI）。Amp 後 → **0 Ω（固定パッドなし）** → HeadphoneBuffer 前 |
-| LINE 音量 | **PGA2310PA**（SPI）。Amp 後 → LINE |
-| バクサンドール（Bass/Treble 等） | デジタル制御（後続で方式決定）。**制御 OLED に状態表示** |
+| 出力先 PHONE / LINE / MUTE | **機械 SW（2P3T / DP3T）** で音声接点を切替。`A_GND` 共有。**ラッチング不要** |
+| HP 音量 | **デュアルポット**（Amp 後 → HeadphoneBuffer 前）。固定パッドは **0 Ω**（§9） |
+| LINE 音量 | **デュアルポット**（Amp 後 → LINE） |
+| バクサンドール（Bass/Treble） | **PT2314**（I²C）。制御 OLED に状態表示 |
 | スペアナ表示 | 計測 Pico 側（独立） |
 
 ### 操作子・表示（人が触るもの）
 
 | 部品 | 役割 |
 |---|---|
-| **ENC_CH** | CH 選択。**回す＝候補、押す＝確定**（確定時に音声＋電源ラッチング適用）。現行 Controll と同じ |
-| **ENC_HP** | HP 音量専用 |
-| **ENC_LINE** | LINE 音量専用 |
-| **ENC_DEST** | 出力先。**回す＝候補、押す＝確定**。並び **LINE → PHONE → MUTE**（ループ）。**起動時 LINE** |
-| **ENC_BASS** | トーン Bass 専用。制御 OLED に表示 |
-| **ENC_TREBLE** | トーン Treble 専用。制御 OLED に表示 |
-| **OLED 制御用** | CH・音量・出力先・Bass/Treble。操作 Pico 配下 |
+| **ENC_CH** | CH 選択。**回す＝候補、押す＝確定**（確定時に音声＋電源ラッチング適用） |
+| **RV_HP**（目立つ物理ノブ） | HP 音量。**OLED 非表示** |
+| **RV_LINE**（目立つ物理ノブ） | LINE 音量。**OLED 非表示** |
+| **SW_DEST** | 出力先。**LINE / MUTE / PHONE**（旧 SW101 相当。トグル ON-OFF-ON または 2P3T ロータリー） |
+| **DEST LED ×2** | **LINE** / **PHONE**。MUTE = 両方消灯。Pico GPIO 駆動（ADC 読取と連動） |
+| **ENC_BASS** | トーン Bass。制御 OLED に表示 |
+| **ENC_TREBLE** | トーン Treble。制御 OLED に表示 |
+| **OLED 制御用** | **CH / DEST / Bass / Treble**（音量なし）。操作 Pico 配下 |
 | **OLED スペアナ用** | 計測専用。計測 Pico 配下 |
 | **PWR SW + 12V LED** | 本体電源スイッチ。12V LED で ON 視認 |
 
 ```text
 [操作パネル]
-  ENC_CH  ENC_HP  ENC_LINE  ENC_DEST  ENC_BASS  ENC_TREBLE   OLED_制御   PWR+12V LED
-      \      \       |        /         /          /             |            |
-       \      \      |       /         /          /              |            |
-        ======== Pico 操作 1台 ========（表示・制御）============     （電源系）
+  ENC_CH   RV_HP   RV_LINE   SW_DEST(+LED×2)   ENC_BASS  ENC_TREBLE   OLED_制御   PWR+12V LED
+      \      |        |            |                 /         /            |            |
+       \     |        |     ADC+GPIO LED              /         /             |            |
+        ======== Pico 操作 1台 ========（表示・制御）============      （電源系）
                        | I2C
-       +--------+------+------+----------+-----------+
-       |        |      |      |          |           |
-  PGA2310_HP  PGA2310_LINE  トーン系   GPIO拡張    OLED
-                                      |
-                                    ULN→ラッチング
+              +--------+----------+-----------+
+              |        |          |           |
+           トーン系   GPIO拡張    OLED     （音量はアナログのみ・Pico 非接続）
+                          |
+                    ULN→ラッチング（CH のみ）
 ```
 
-エンコーダーは **6 個**（各 A/B/SW）。**§10 確定: すべて Pico GPIO 直結**（18 本）。I²C 集約は見送り。
+エンコーダーは **3 個**（CH / BASS / TREBLE）。**§10 確定: GPIO 直結**。I²C 集約は見送り。
 
-### DEST 確定ルール（確定）
-
-| 項目 | 内容 |
-|---|---|
-| 操作 | 回して候補、押して確定（CH と同型） |
-| 並び | **LINE → PHONE → MUTE**（表示・候補とも **ループ**） |
-| 起動 | **LINE**（押さなくても起動処理で LINE を適用） |
-| その他表示 | CH / 音量 / Bass / Treble の表示もループでよい（本節で「全て表示はループ」） |
-
-### 出力先にリレーは必要か → **必要。出力段にラッチング（確定）**
+### DEST ルール（確定・2026-08-30 更新）
 
 | 項目 | 内容 |
 |---|---|
-| 素子 | CH と同じ **ラッチングリレー** |
-| 置き場所 | **出力段**（CH 選択のリレー盤ではない） |
-| 役割 | `A_GND` は共有のまま、**音声の出口**（LINE / PHONE / MUTE）だけ切替 |
-| MUTE | 両経路オフ |
-| 駆動 | 操作 Pico →（I²C・GPIO 拡張可）→ ULN → コイル |
+| 音声切替 | **機械 SW**（接点が音声を切る）。旧 `Audio/` SW101 と同じ |
+| 並び | **LINE / MUTE / PHONE**（中央 MUTE 推奨） |
+| 位置検知 | **A 案: 抵抗ラダー → Pico ADC 1 ch**（音声接点とは別系統） |
+| OLED | ADC 結果を **DEST: LINE / MUTE / PHONE** として表示 |
+| LED | Pico が ADC に合わせて **LINE LED / PHONE LED** を点灯。MUTE = 消灯 |
+| 起動 | 機械 SW の物理位置がそのまま DEST（ラッチング復帰不要） |
+| その他表示 | CH / Bass / Treble はループ表示可。**音量は OLED に出さない** |
 
-旧 SW101（手回し DP3T）は ENC_DEST + このラッチングに置き換え。
+### 出力先にリレーは必要か → **不要（機械 SW 確定）**
+
+| 項目 | 内容 |
+|---|---|
+| 素子 | **2P3T / DP3T**（パネル実装。基板は 2×4 ヘッダ + リード線可） |
+| 置き場所 | **出力段 / 前面パネル**（旧 SW101） |
+| 役割 | `A_GND` は共有のまま、**音声の出口**だけ切替 |
+| MUTE | 中央位置＝両経路オフ（接点オープン） |
+| 検知 | 抵抗ラダー → ADC。LED / OLED はファーム駆動 |
+
+ENC_DEST + DEST ラッチングリレー案は **見送り**。
 
 ### 操作系統の残り穴
 
 1. ~~12V LED の取り出し元~~ → **§9 確定**
-2. ~~ENC×6 の配線~~ → **§10 確定（GPIO 直結）**
+2. ~~ENC 配線~~ → **§10 確定（GPIO 直結・×3）**
 3. ~~物理基板分割~~ → **§11 Q1=B, Q2=A**。I²C 拓扑（Q3）・端子詳細は **設計時**
 4. PT2314 外部 C/R（トーン）
-5. ~~±12 V 化に伴う HP 固定パッド~~ → **§9 確定（廃止）**
+5. ~~±12 V 化に伴う HP 固定パッド~~ → **§9 確定（0 Ω。ポット回転域を実機で確認）**
+6. **SW_DEST 品種**（トグル ON-OFF-ON DP vs 2P3T ロータリー）と **抵抗ラダー値** — 設計時
+7. **RV_HP / RV_LINE** 品種（ALPS RK27 等 A カーブ 50 kΩ デュアル想定）— 設計時
 
 ---
 
@@ -119,15 +125,15 @@
 
 ### ±12 V にした理由（AudioV2）
 
-- **PGA2310PA** の推奨上限（±15.5 V）に余裕を持たせる
-- 同系列で **電流余裕が増える**（830 mA vs 660 mA @ ±15 V）
+- Amp / HP 基板を再設計せず **同系列で電流余裕が増える**（830 mA vs 660 mA @ ±15 V）
+- 手回しポットは電源電圧制約が無いが、**±12 V の方が Amp 最大がやや低く、ポット回転域が使いやすい**（旧 Audio の −20 dB パッド動機が弱まる）
 
 ### 懸念と AudioV2 での扱い
 
 | 懸念 | 扱い |
 |---|---|
 | Amp ×10 の最大出力が **約 2〜3 dB 低下**（≈6〜7 Vrms 級） | 許容。**Amp 基板は再設計しない**（§6）。±12 V を端子で供給するだけ |
-| HP 固定パッド | **廃止（0 Ω）**（§9）。±12 V で Amp ≈7 Vrms、PGA2310 が音量担当 |
+| HP 固定パッド | **廃止（0 Ω）**（§9）。実機で下端しか使えないなら DNP で −10 dB 後付け |
 | MeasurementADC の ±15 V ラベル | AudioV2 PowerModule から **±12 V** を配る。計測モジュールは OPA1656 等 ±12 V で動作確認 |
 | PT2314 電源 | データシート推奨に合わせて **9 V 級単一系 or ±12 V からの派生**を PowerModule で決める |
 
@@ -142,15 +148,16 @@
 
 Amp×10 / HP Buffer / 計測 ── Audio/ 製造済み基板を ±12V 端子で接続（AudioV2 図には載せない）
 
-CH ──► PT2314 ──► Amp(×10) ──► PGA2310 ──► 出力段
+CH ──► PT2314 ──► Amp(×10) ──► SW_DEST ──┬─ RV_HP ──► HeadphoneBuffer → PHONE
+                                          └─ RV_LINE ──────────────────► LINE OUT
 ```
 
-### ロータリエンコーダー（×6）
+### ロータリエンコーダー（×3）
 
 | 項目 | 内容 |
 |---|---|
 | 品種 | 汎用 EC11 系（秋月等）。**固定足は東西、A/B(/SW) は南北、垂直 D カット軸** |
-| 本数 | ENC_CH / HP / LINE / DEST / BASS / TREBLE |
+| 本数 | **ENC_CH / ENC_BASS / ENC_TREBLE**（HP / LINE / DEST は手回し） |
 | 資料 | 機械図のみ（販売ページ）。[datasheets/RotaryEncoder_EC11_generic.md](datasheets/RotaryEncoder_EC11_generic.md) |
 
 ---
@@ -176,28 +183,27 @@ PD アダプタが 12 V を出せない場合はジャンパ **15 V** に変更�
 
 現行 Audio（`Audio/README.md`）: **8.2 kΩ 直列 + 910 Ω 並列 ≈ −20 dB**。目的は **A50k ポットが回転下端しか使えない**問題（±15 V・Amp ≈9.2 Vrms 時）。
 
-AudioV2 では **PGA2310PA** が 0.5 dB 刻みで音量を担う。**固定パッドは SNR を改善しない**（信号とノイズを同率で減衰するだけ）。
+AudioV2 は **手回しポット + ±12 V**（Amp ≈6.5–7 Vrms）。旧 ±15 V より最大が ≈2–3 dB 低いので、**固定 −20 dB は過剰**。
 
 | 条件 | ±15 V（Audio） | ±12 V（AudioV2） |
 |---|---|---|
-| Amp 最大（目安） | ≈9.2 Vrms | **≈6.5–7 Vrms**（すでに ≈2–3 dB 低い） |
+| Amp 最大（目安） | ≈9.2 Vrms | **≈6.5–7 Vrms** |
 | −20 dB パッド後の最大 | ≈0.92 Vrms | **≈0.65–0.70 Vrms** |
 | 32 Ω 時の最大出力 | ≈26 mW | **≈15 mW** |
-
-−20 dB をそのまま残すと、**PGA2310 を 0 dB まで上げてもヘッドホン最大が Audio より大幅に小さい**。デジタル音量のレンジを無意味に食う。
 
 | 項目 | 決定 |
 |---|---|
 | 固定パッド | **廃止（0 Ω バイパス）** |
-| 信号経路 | `Amp → PGA2310(HP) → HeadphoneBuffer → PHONE`（`Audio/` バッファ流用） |
-| 起動 | PGA2310 **電源投入時 00h = ミュート**（DS どおり）。ファームでユーザー音量へ復帰 |
-| 実機で大きすぎる場合 | Audio 互換の **8.2 kΩ + 910 Ω パッド位置を DNP 実装**し、必要なら **−10 dB（1.8 kΩ + 910 Ω）** を後付け |
+| 信号経路 | `Amp → SW_DEST → RV_HP → HeadphoneBuffer → PHONE`（`Audio/` バッファ流用） |
+| 実機で下端しか使えない場合 | Audio 互換の **8.2 kΩ + 910 Ω パッド位置を DNP 実装**し、必要なら **−10 dB（1.8 kΩ + 910 Ω）** を後付け |
 
-LINE 経路に固定パッドはもともと無し（PGA2310 → LINE OUT のまま）。
+LINE 経路に固定パッドはもともと無し（`SW_DEST → RV_LINE → LINE OUT`）。
+
+**音量は OLED に出さない。** 物理ノブ（RV_HP / RV_LINE）を前面の主操作子として目立たせる。
 
 ---
 
-## 10. ENC×6 配線 — **確定: GPIO 直結**
+## 10. ENC×3 配線 — **確定: GPIO 直結**
 
 ### 採用案
 
@@ -213,55 +219,67 @@ LINE 経路に固定パッドはもともと無し（PGA2310 → LINE OUT のま
 |---|---|
 | A/B の速度 | クアドラチャは **ms 以下の遷移**。MCP23017 経由だと I²C 読出し（数十〜数百 µs）＋ **OLED 描画（≈25 ms 占有）** とぶつかり、**パルス取りこぼし**しやすい |
 | リレー用 MCP23017 との混同 | 盤上の MCP23017 は **コイル駆動出力**。ENC を載せると **操作パネル ↔ リレー盤**に高頻度 I²C が増え、配線も複雑 |
-| ピン数 | B2-exp 確定後は **24 / 26 本使用・2 本余り**（下表）。SW 6 本を I²C に逃がす必然がない |
+| ピン数 | ENC×3 + DEST ADC/LED でも **余裕あり**（下表）。SW を I²C に逃がす必然がない |
 | 実績 | 現行 `Control/main.py` は **GP22/26/27 直結ポーリング**で CH 選択が動いている |
 
-**A/B は GPIO 直結が必須。** SW だけ MCP23017 に載せる折衷も可能だが、**部品・配線が増えるだけでピン節約にならない**ため今回は全部直結。
+**A/B は GPIO 直結が必須。**
 
-### ピン割当（操作 Pico 2）
-
-PGA2310（SPI）+ I²C0 は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) §4 と同じ。
+### ピン割当（操作 Pico 2）— 2026-08-30 更新
 
 | GPIO | 信号 | 備考 |
 |---|---|---|
 | GP20 / GP21 | I²C0 SDA / SCL | OLED（0x3C/0x3D）、**リレー盤 MCP23017**、PT2314 |
-| GP16 | `PGA_MUTE` | 両 PGA2310 共通・負論理 |
-| GP17 | `PGA_CS` | 両 PGA2310 共通 |
-| GP18 / GP19 | SPI0 SCK / TX（SDI） | PGA2310 デイジーチェーン |
 | GP0 / GP1 | **ENC_CH** A / B | |
-| GP2 / GP3 | **ENC_HP** A / B | |
-| GP4 / GP5 | **ENC_LINE** A / B | |
-| GP6 / GP7 | **ENC_DEST** A / B | |
-| GP8 / GP9 | **ENC_BASS** A / B | |
-| GP10 / GP11 | **ENC_TREBLE** A / B | |
-| GP12 | **ENC_CH** SW | |
-| GP13 | **ENC_HP** SW | |
-| GP14 | **ENC_LINE** SW | |
-| GP15 | **ENC_DEST** SW | |
-| GP26 | **ENC_BASS** SW | |
-| GP27 | **ENC_TREBLE** SW | |
-| **GP22, GP28** | **予備** | PWR SW 状態 / PG 入力など |
+| GP2 | **ENC_CH** SW | |
+| GP3 / GP4 | **ENC_BASS** A / B | |
+| GP5 | **ENC_BASS** SW | |
+| GP6 / GP7 | **ENC_TREBLE** A / B | |
+| GP8 | **ENC_TREBLE** SW | |
+| **GP26** | **DEST_ADC**（ADC0） | 抵抗ラダー → LINE / MUTE / PHONE 判定 |
+| **GP14** | **LED_LINE** | DEST = LINE で点灯 |
+| **GP15** | **LED_PHONE** | DEST = PHONE で点灯 |
+| GP9–GP13, GP16–GP19, GP22, GP27, GP28 | **予備** | PWR SW 状態 / PG / 将来拡張 |
 
-**合計 24 / 26 本。** A/B は **隣接 GPIO ペア**（将来 PIO クアドラチャにそのまま使える）。
+**ENC×3 = 9 本 + I²C 2 + DEST ADC 1 + LED 2 ≈ 14 / 26 本。** SPI（旧 PGA）は不要。空きが多い。
+
+### DEST 検知（A 案）— 設計メモ
+
+```text
+3V3 ── R1 ──●── R2 ──●── R3 ── GND
+              │        │
+           (LINE)   (MUTE)   … SW 補助接点 or 別極で短絡
+              │        │
+              └────────┴──► Pico ADC（GP26）
+```
+
+| 位置 | 目安 ADC | LED | OLED |
+|---|---|---|---|
+| LINE | 高 | LINE ON | `DEST: LINE` |
+| MUTE | 中 | 両方 OFF | `DEST: MUTE` |
+| PHONE | 低 | PHONE ON | `DEST: PHONE` |
+
+抵抗値・しきい値は設計時に確定。音声接点とは **電気的に分離**（別極 or 補助 SW）。
 
 ### 基板・ケーブル
 
 | 項目 | 内容 |
 |---|---|
-| 配線 | 操作パネル基板に ENC×6 を実装。Pico へ **2.54 mm ヘッダ**（ENC ごと 1×3、または 2×9 など） |
-| 各 ENC | **1= A, 2= B, 3= SW, 4= 3V3, 5= GND**（現行 J13 と同型。`Control/README.md`） |
-| プルアップ | Pico **内部プルアップ ON**（`Pin.PULL_UP`）。ENC はオープンコレクタ／プルアップ付きどちらも可 |
-| ファーム | 初版は **ポーリング**（現行 `Control/main.py` 拡張）。CPU 負荷が問題になったら **PIO デコード**（配線変更なし） |
+| ENC | 操作パネルに **×3**。Pico へ **2.54 mm ヘッダ** |
+| 各 ENC | **1= A, 2= B, 3= SW, 4= 3V3, 5= GND**（現行 J13 と同型） |
+| SW_DEST | パネル実装。基板は **2×4 ヘッダ**（音声）+ **検知用 1〜2P**（`Audio/README.md` SW101 表を流用） |
+| RV_HP / RV_LINE | パネル実装のデュアルポット。基板は音声ピンのみ（**ADC 接続なし**） |
+| プルアップ | Pico **内部プルアップ ON**（ENC） |
+| ファーム | ENC は **ポーリング**（現行拡張）。DEST は **ADC ポーリング ≈50 ms** |
 
 ### I²C0 バス上のデバイス（参考）
 
 | デバイス | 所在 | 役割 |
 |---|---|---|
 | SSD1306 | 操作パネル | 制御 OLED |
-| MCP23017 | **リレー盤** | ラッチングコイルビット → ULN |
+| MCP23017 | **リレー盤** | ラッチングコイルビット → ULN（**CH のみ**） |
 | PT2314 | 操作／トーン基板 | Bass / Treble |
 
-ENC は **I²C バスに載せない**。
+ENC・DEST・音量は **I²C バスに載せない**。
 
 ---
 
@@ -310,119 +328,78 @@ ENC は **I²C バスに載せない**。
 
 ---
 
-## 2. 音量（digipot）をどこに置くか
+## 2. 音量をどこに置くか — **確定: Amp 後・手回しポット**
 
-Amp は ×10・**±12 V** 系（旧 Audio は ±15 V）。音量 IC は PGA2310（Amp 後）。
+Amp は ×10・**±12 V** 系（旧 Audio は ±15 V）。
 
 ### A. Amp **前**（入力減衰）
 
 | メリット | デメリット |
 |---|---|
-| 普通の digipot（±5 V 級）で足りやすい | 全系統の Amp 入力前なので、リレー切替の **前か後か**で意味が変わる |
-| 部品が安く入手しやすい | 測定タップ（Amp 後）のレベルは音量と連動しない／するを要設計 |
-| クリッピング耐性が高い側に振れる | 「聴感音量」と「Amp 出力フルスケール」がずれる |
-
-※ リレーで Amp を選ぶ構成なら、digipot はだいたい **選択後の共通バス上（選ばれた Amp の入力側 or 出力側）** になる。入力側共通バスに置くなら「選ばれた系統の入力レベル」を一括で絞る形。
+| 小信号で足りる | 全系統の Amp 入力前なので、リレー切替の **前か後か**で意味が変わる |
+| 部品が安い | 測定タップ（Amp 後）のレベルは音量と連動しない／するを要設計 |
+| | 「聴感音量」と「Amp 出力フルスケール」がずれる |
 
 ### B. Amp **後**・現行 `RV101`/`RV102` 位置（出力減衰）
 
 | メリット | デメリット |
 |---|---|
-| いまの聴感・パッド・HP バッファの関係をほぼ維持 | 信号振幅が大きく、**耐圧の高い digipot**か、固定パッド必須 |
-| PHONE / LINE の意味が現行どおり | HV 品は高い・単チャネルが多く L/R で 2 個、など |
+| いまの聴感・HP バッファの関係をほぼ維持 | 信号振幅が大きい（ただし **パッシブなら電源制約なし**） |
+| PHONE / LINE の意味が現行どおり | |
 
 ### C. PHONE と LINE で別減衰
 
 | メリット | デメリット |
 |---|---|
-| 用途ごとに最適レベル | I²C アドレス・部品・UI が倍 |
-| 現行デュアル 2 個の役割分担を維持 | エンコーダー操作が複雑 |
+| 用途ごとに最適レベル | 部品・前面ノブが 2 系統 |
+| 現行デュアル 2 個の役割分担を維持 | |
 
-**確定寄り:** **B + C**（Amp 後で、LINE と HP は別減衰・別エンコーダー）。  
-ヘッドホンの思想は現行どおり **「HeadphoneBuffer に入れる量を絞る」**（バッファ後にポットを置かない）。LINE も Amp 出力バス上で別 digipot。  
-固定 −20 dB パッドは **AudioV2 では廃止**（§9）。±12 V + PGA2310 でレンジ確保。旧 Audio 互換パッドは DNP 可。
+**確定: B + C + 手回し。** Amp 後で、LINE と HP は **別デュアルポット**。ヘッドホンは現行どおり **「HeadphoneBuffer に入れる量を絞る」**（バッファ後にポットを置かない）。固定 −20 dB パッドは **廃止**（§9）。
 
 信号のイメージ:
 
 ```text
 [選ばれた Amp 出力]
         ├─（測定タップ：音量非連動のまま可）
-        ├─ HP用 PGA2310 ← ENC_HP  ─(0Ω, 固定パッドなし)─► HeadphoneBuffer → PHONE
-        └─ LINE用 digipot ← ENC_LINE ───────────► LINE OUT
+        └─ SW_DEST（LINE / MUTE / PHONE）
+                ├─ RV_HP ──► HeadphoneBuffer → PHONE
+                └─ RV_LINE ──────────────────► LINE OUT
 
-同じ Pico がさらに:
-  ・出力先（PHONE / LINE / MUTE … 現行 SW101 相当）
+同じ Pico が:
+  ・DEST 位置（ADC）→ OLED + LED
   ・CH 選択 + その系統の電源リレー（GPIO拡張経由）
+  ・Bass / Treble（PT2314）
+  ・音量は触らない（物理ノブのみ）
 ```
 
 ---
 
-## 3. 音量 IC 品種 — **確定: C（PGA2310PA ×2）**
+## 3. 音量方式 — **確定: 手回しデュアルポット（PGA / digipot 見送り）**
 
-**B（MCP45HV51）は見送り。** 比較根拠は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。
+**2026-08-30:** 最終出力ボリューム段は **手動運用**でよい、と判断。遠隔操作が要らないなら **PGA2310 / digipot は信号経路に入れる理由がない**。
 
 ### 確定内容
 
 | 項目 | 内容 |
 |---|---|
-| 品種 | **PGA2310PA** ×2（PDIP-16 ソケット）。PGA2311（±5 V）は不可 |
-| 配置 | HP 用 1 + LINE 用 1。Amp 出力後 |
-| バス | **SPI0** デイジーチェーン（SCLK / SDI / CS）+ MUTE 1 本。I²C0 は OLED / MCP23017 / PT2314 |
-| HP 経路 | Amp → PGA2310 → **0 Ω（§9）** → HeadphoneBuffer |
-| LINE 経路 | Amp → PGA2310 → LINE OUT（出力バッファ不要） |
-| ±12 V | **DKMW20F-12** 想定。PD 給電モジュールは差し替え可 |
+| 方式 | **デュアルポット ×2**（HP / LINE）。ALPS RK27 等 A カーブ **50 kΩ** 想定（旧 Audio と同じ） |
+| 配置 | Amp 出力後・`SW_DEST` 後。HP は HeadphoneBuffer **前** |
+| OLED | **音量は表示しない**（物理ノブを目立たせる） |
+| DEST | 機械 SW + **抵抗ラダー ADC** + LED×2 + OLED（§0・§10） |
+| 見送り | PGA2310PA、PGA2311、MCP45HV51、ENC_HP / ENC_LINE / ENC_DEST |
 
-### B vs C 比較（参考・決定済み）
+### なぜ IC をやめたか
 
-**満点の比較・数字・決定木は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。以下は要約。**
-
-### 調べて分かった、前提の訂正 2 点
-
-| # | 内容 |
+| 論点 | 内容 |
 |---|---|
-| 1 | **PGA2311 のアナログ電源は ±5 V**（入出力 2.65 Vrms まで）。Amp 後・LINE 無パッドでは成立しない。**±15 V の同ピン互換品は PGA2310PA（DIP-16）**。以降 C = **PGA2310PA** とする |
-| 2 | **MCP45HV51 の I²C アドレスは 0x3C–0x3F の 4 個だけ**。4 個で使い切るため、制御 OLED（SSD1306 は 0x3C / 0x3D のみ）と**必ず衝突する** → B でも 2 本目の I²C バスが要る。**「I²C 集約」という B の採用理由は成立しない** |
+| コスト | PGA2310PA ×2 は IC だけで数万円級。手動ならポット代のみ |
+| 電源 | パッシブ分圧は **±12 V / 7 Vrms でも問題なし**（±5 V 問題が消える） |
+| SNR | 「後段で絞ると有利」は IC でもポットでも同じ |
+| UI | エンコーダ音量は OLED 連動が前提。**ノブを主操作子にする**ならデジタル不要 |
 
-### B. MCP45HV51（HV 単ch・I²C）
+過去の B vs C（digipot vs PGA）比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) に残す（**採用決定ではなく調査アーカイブ**）。
 
-| | |
-|---|---|
-| 構成 | HP L/R + LINE L/R = **4 個**（単ch）＋ 出力バッファ用デュアル OPA **2 個**（ワイパー Zout 最大 2.5 kΩ） |
-| 耐圧 | ±18 V まで。Amp 後にそのまま置ける |
-| 段 | 256、**リニア** → ファームで dB カーブ。**0〜−23 dB は 0.5 dB 以下**だが、**−30 dB 以下で 1〜6 dB 刻みに荒れ、−48 dB が床** |
-| バス | I²C だが **専用の 2 本目が必要**（アドレス衝突） |
-| 音質 | **THD がデータシートに無い**。ゼロクロス更新なし＝ジッパーノイズ |
-| 実装 | **TSSOP-14 / QFN のみ（DIP なし）**。ソケット化・差し替え不可 |
-| 注意 | Rev. A1 シリコンに I²C エラッタ（「専用バスに置け」）。A2 以降で修正済み |
-
-### C. PGA2310PA（ステレオ音量 IC・SPI）
-
-| | |
-|---|---|
-| 構成 | HP 用 1 + LINE 用 1 = **2 個**（ステレオ）。**出力バッファ不要**（600 Ω 直接駆動） |
-| 耐圧 | ±4.5〜±15.5 V。**AudioV2 は ±12 V レール** → PGA2310 に余裕 |
-| 段 | **0.5 dB を 0〜−95.5 dB 全域で均一**。コード 0 でミュート |
-| バス | **SPI 3 本**（SCLK / SDI / CS）。2 個は **SDO→SDI でデイジーチェーン**＝ IC が増えてもピンは増えない |
-| 音質 | THD+N 0.0004 %、DR 116〜120 dB、クロストーク −126 dBFS、ゲイン整合 ±0.05 dB。**ゼロクロス検出内蔵** |
-| 実装 | **PDIP-16**（`AMP401` 等と同じソケット運用）。VIH 2.0 V min。**Pico 3.3 V 直結可** |
-| 注意 | 単価 US$15〜22。Amp 最大 ≈**6〜7 Vrms**（±12 V 系） |
-
-### B vs C（決めどころ）
-
-| | **B MCP45HV51 ×4** | **C PGA2310PA ×2** | 勝ち |
-|---|---|---|---|
-| 音質 | THD 無記載・ジッパーあり | 全項目が実測規定・ゼロクロス | **C** |
-| 配線 | I²C1 追加 2 本 + TSSOP ×4 + バッファ ×2 = **IC 6 個** | SPI 3 本 + MUTE 1 本、**IC 2 個** | **C** |
-| ノイズ | 抵抗ノイズは小さいがバッファが足し戻す。ジッパーが実害 | 9.5 µVrms、SNR ≈120 dB。ジッパー原理的に無し | **C**（僅差） |
-| 回路設計 | 4 アドレス + カーブ自作 + エラッタ確認 | DIP 挿すだけ + 線形な dB 式 | **C** |
-| **Pico ピン** | **22 / 26** | **24 / 26** | **差は 1 本**（B の優位はほぼ無い） |
-| コスト | **US$10〜20** | US$30〜44 | **B** |
-
-**確定: C（PGA2310PA ×2）。** B は部品代優先時のみの次点。
-
-**SPI とアナログの同居は問題ない。** PGA2310 の SPI は音量変更時だけ 32 clk 動くバーストで、聴取中は静止している。一方 I²C は制御 OLED の 1 KB フレーム（400 kHz で ≈25 ms 連続）を常時抱える。**アナログの足元で動くデジタル活動は B の方が多い。**
-
-**トーン（確定）: T1 PT2314 系**
+### トーン（確定）: T1 PT2314 系
 
 | | |
 |---|---|
@@ -432,18 +409,20 @@ Amp は ×10・**±12 V** 系（旧 Audio は ±15 V）。音量 IC は PGA2310�
 | 注意 | TDA7313 系の **1 バイトコマンド** I²C。音量機能は 0 dB 固定で Bass/Treble のみ使う |
 
 ```text
-CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE) ──► 出力段
-                 ▲ ENC_BASS / ENC_TREBLE
+CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► SW_DEST ──► RV_HP / RV_LINE ──► 出力
 ```
 
----
+<details>
+<summary>旧 §3（PGA2310 確定時の要約・参考）</summary>
 
-## 3-old. 参考（見送り候補）
+以前は **C: PGA2310PA ×2** を確定していた。B（MCP45HV51）はアドレス衝突・THD 無記載で見送り。手動化により本節は上記に置き換え。詳細は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。
 
 | 候補 | 理由 |
 |---|---|
 | DS1882 | LINE 側 Amp 後は ±7 V 不足。HP のみなら可だが統一しない |
-| SPI digipot 単体 | GPIO より SPI を PGA に寄せた方が音向き |
+| SPI digipot 単体 | GPIO より SPI を PGA に寄せた方が音向き（当時） |
+
+</details>
 
 ---
 
@@ -451,34 +430,47 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 
 | 案 | 操作 Pico が持つもの | リレー盤 |
 |---|---|---|
-| **P1** | ENC / OLED / digipot /（必要なら）リレー GPIO | 端子台＋ULN＋リレーのみ |
-| **P2** | ENC / OLED / digipot / I²C マスター | 子 MCU or GPIO 拡張でラッチング駆動 |
+| **P1** | ENC / OLED /（必要なら）リレー GPIO | 端子台＋ULN＋リレーのみ |
+| **P2** | ENC / OLED / I²C マスター / DEST ADC+LED | 子 MCU or GPIO 拡張でラッチング駆動 |
 | **P3** | 現行どおりリレー盤上の Pico（UI ヘッダだけ外出し） | 一体 |
 
 計測 Pico 2 はどれでも触らない。
 
-**GPIO メモ（更新）:** 現行 `Controll` ではリレーコイルで GPIO0–19 が埋まり空きは GPIO28 程度だった。だが **基板 B 分割 + B2-exp（MCP23017）が確定**した時点で、コイル線は操作 Pico から消えている。Pico 2 の使える GPIO は **GP0–GP22 + GP26–GP28 = 26 本**（GP23/24/25 は内部用）。
+**GPIO メモ（更新 2026-08-30）:** **基板 B 分割 + B2-exp** 確定後、コイル線は操作 Pico から消えている。手回し化で SPI / ENC×3 分が空き、**≈14 / 26 本**（§10）。
 
 | 用途 | 本数 |
 |---|---|
 | I²C0（OLED制御 / MCP23017 / PT2314）GP20/GP21 | 2 |
-| 音量 IC（C なら SPI0 3 本 + MUTE 1 本 / B なら I²C1 2 本） | 3〜4 |
-| ENC ×6 | **A/B/SW すべて GPIO 直結**（§10） | **18** |
-| **合計** | | **24 / 26** |
+| ENC ×3（CH / BASS / TREBLE）A/B/SW | **9** |
+| DEST ADC + LED×2 | **3** |
+| **合計** | **≈14 / 26** |
+
+**ENC 割当（確定）:** **ENC_CH / ENC_BASS / ENC_TREBLE**。HP / LINE は物理ポット、DEST は機械 SW。パワースイッチに **12V LED**。
+
+<details>
+<summary>旧 ENC 割当案（ENC×6・参考）</summary>
+
+| 案 | 内容 |
+|---|---|
+| E1 | ENC 1 個をモード切替で共有 |
+| E2 | ENC_HP / ENC_LINE を音量専用（当時） |
+| 確定（旧） | ENC×6（CH / HP / LINE / DEST / BASS / TREBLE） |
+
+</details>
 
 **GPIO 直結で収まる。** A/B は I²C 不可。詳細ピン表は §10。
 
 ---
 
-## 5. エンコーダー操作の意味
+## 5. エンコーダー操作の意味 — **確定: ENC×3 + 手回し音量/DEST**
 
-| 案 | 内容 | メリデメ |
+| 案 | 内容 | 結果 |
 |---|---|---|
-| **E1** | 1 つの ENC をモード切替で使い回す | ハード最少。誤操作しやすい |
-| **E2** | **ENC_HP / ENC_LINE は音量専用**。CH・出力先・電源は別 UI（ENC 追加 / SW / OLED+SW） | 誤操作が減る。今回の「LINE と HP の ENC」に一致 |
-| **E3** | ENC=CH、音量はポットのまま | 今回の動機から外れる |
+| E1 | 1 つの ENC をモード切替で使い回す | 見送り |
+| E2（旧） | ENC_HP / ENC_LINE を音量専用 | **見送り**（手回しポットに変更） |
+| E3 | ENC=CH、音量はポットのまま | **採用寄り**（DEST も機械 SW） |
 
-**確定:** **ENC×6**（CH / HP / LINE / DEST / BASS / TREBLE）。CH は回して変更・押して確定。Bass/Treble は独立 ENC＋制御 OLED。パワースイッチに **12V LED**。
+**確定（2026-08-30）:** **ENC×3**（CH / BASS / TREBLE）。**RV_HP / RV_LINE** は目立つ物理ノブ。**SW_DEST** + LED + OLED。CH は回して変更・押して確定。Bass/Treble は独立 ENC＋制御 OLED。パワースイッチに **12V LED**。
 
 ---
 
@@ -501,8 +493,8 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 | # | シート | 物理 PCB | 内容 |
 |---|---|---|---|
 | 1 | `RelayBoard.kicad_sch` | **×2**（5+5） | ラッチ + ULN + MCP23017 + 端子台 + **COMMON_LR_OUT** |
-| 2 | `ControlPanel.kicad_sch` | **×1** | Pico2 / ENC×6 / OLED / PGA2310×2 / PT2314 / PWR SW / 12 V LED |
-| 3 | `OutputStage.kicad_sch` | **Control と同一 PCB** | DEST ラッチング（論理シートは分離） |
+| 2 | `ControlPanel.kicad_sch` | **×1** | Pico2 / ENC×3 / OLED / PT2314 / **RV・SW_DEST ヘッダ** / DEST LED / PWR SW / 12 V LED |
+| 3 | `OutputStage.kicad_sch` | **Control と同一 PCB** | **SW_DEST 音声配線 + 抵抗ラダー**（論理シートは分離可。**DEST ラッチングは廃止**） |
 | 4 | `PowerModule.kicad_sch` | **×1** | 再設計 — USB-C、CH224K、F1、DKMW20F-12 |
 | 5 | `AudioV2Case.kicad_sch` | — | 階層親 + 箱配線（Amp はテキストのみ） |
 
@@ -540,7 +532,7 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 | ブロック | A D1.5 | B D1 | C D2 | D D3 |
 |---|:---:|:---:|:---:|:---:|
 | リレー盤（B、MCP23017 + ULN + ラッチ） | ✅ | ✅ | ✅ | 枠のみ |
-| 操作パネル（Pico2 / ENC×6 / OLED / PGA2310 / PT2314） | ✅ | ✅ | ✅ | 枠のみ |
+| 操作パネル（Pico2 / ENC×3 / OLED / PT2314 / 手回し音量・DEST） | ✅ | ✅ | ✅ | 枠のみ・**手回し化要改訂** |
 | 出力段ラッチング（DEST） | ✅ | ✅ | ✅ | — |
 | **PowerModule（±12 V / CH224）** | ✅ | ❌ 流用 | ✅ コピー改変 | — |
 | AmpModule | 端子 IF | 端子 IF | ✅ コピー | — |
@@ -580,7 +572,7 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 **KiCad 新規シート（目安 4–5 + 親）**
 
 1. `RelayBoard.kicad_sch` — `Controll` から ULN / ラッチ / 端子台 / **MCP23017**（子 Pico **削除**）
-2. `ControlPanel.kicad_sch` — Pico2 / ENC×6 / OLED / PGA2310×2 / PT2314
+2. `ControlPanel.kicad_sch` — Pico2 / ENC×3 / OLED / PT2314 / RV・SW_DEST ヘッダ / DEST LED
 3. `OutputStage.kicad_sch` — DEST 用ラッチング（PHONE / LINE / MUTE）
 4. `PowerModule.kicad_sch` — `Audio/PowerModule.kicad_sch` を **コピー改変**（F-12、CH224、§9 配線）
 5. `AudioV2Case.kicad_sch` — 上記＋**箱配線**（端子台、信号ラベル、注記）
@@ -647,7 +639,7 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 | 項目 | 決定 |
 |---|---|
 | **Q1 Relay 物理枚数** | **B — 5ch × 2 枚**（現 Controll 2 段型。ケーシング向き） |
-| **Q2 OutputStage 物理位置** | **A — ControlPanel と同一 PCB**（PGA2310 直後。ノイズ優先）。**PCB レイアウト時に B（独立板）へ変更可** |
+| **Q2 OutputStage 物理位置** | **A — ControlPanel と同一 PCB**（SW_DEST / ポット同居）。**PCB レイアウト時に B（独立板）へ変更可** |
 | **Q3 I²C 拓扑** | **保留** — 回路・基板レイアウト時に決定 |
 | **物理分割全体** | **PC + PB** — Relay **2 枚** + Control **1 枚**（Output は Control 上）+ Power **1 枚** → **新規 4 PCB** |
 
@@ -657,7 +649,9 @@ KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロッ�
 |---|---:|---|
 | PowerModule | 1 | ±12 V、CH224 内蔵 |
 | RelayBoard | **2** | 5ch ずつ。MCP23017 + ULN + ラッチ + Amp 端子台 |
-| ControlPanel | 1 | Pico / ENC / OLED / PT2314 / PGA2310 / **DEST リレー** |
+| ControlPanel | 1 | Pico / ENC×3 / OLED / PT2314 / **RV・SW_DEST ヘッダ** / DEST LED |
+| PowerModule | 1 | USB-C / CH224 / DKMW20F-12 |
+| **合計** | **4** | Q2-B なら **5** |
 | **合計** | **4** | Amp / HP / 計測は `Audio/` 流用 |
 
 ---
@@ -692,7 +686,7 @@ KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロッ�
 |---|---|---|
 | **多数・並列・再配線** | **端子台**（5.08 mm 等） | ±12 V 分配、Amp×10 音声/電源、外部 L/R 入力 |
 | **固定ハーネス・低電圧デジタル** | **コネクタ**（2.54 mm ヘッダ / JST-XH 等） | I²C バス、短いアナログ幹線（4〜8P） |
-| **パネル UI** | **基板実装** | ENC×6、OLED、PWR SW |
+| **パネル UI** | **基板実装** | ENC×3、OLED、PWR SW。**RV / SW_DEST はパネル＋ヘッダ** |
 | **PowerModule 一次** | 端子 **PD_12V / PD_GND** ↔ 操作パネル SW | §9。長さ可変なら **2P 端子** or **JST** |
 
 現行 `Controll`: Amp 系は **Phoenix 2P 端子台**、OLED/ENC は **ピンヘッダ**。`PowerModule` J202 は **3P 端子**（± / GND 送出）。
@@ -727,7 +721,7 @@ KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロッ�
 | PowerModule ↔ 操作パネル（PD SW） | **端子 2P×2** or **JST 4P** | PD_12V, SW 戻り, GND |
 | ControlPanel ↔ RelayBoard（×2） | **コネクタ 4〜6P** ×2 枚 | SDA, SCL, 3V3, GND — **Q3 保留**（daisy / スターは設計時） |
 | RelayBoard → ControlPanel | **コネクタ 4P** or **端子 2P** | **COMMON_LR_OUT**（§11.8）— 1 対 + GND |
-| ControlPanel 内 OutputStage | **基板内** | Q2-A。PGA2310 → DEST リレー → 外部端子 |
+| ControlPanel 内 OutputStage | **基板内** | Q2-A。SW_DEST → RV → 外部端子 |
 | RelayBoard ↔ Amp×10 | **端子台** | 電源 2P×10 + 音声 2P×10 級 |
 | 外部入力 L/R | **端子台 2〜3P** | STATUS「手前端子台」型 |
 | OutputStage → HP Buffer / LINE | **端子台 2〜3P** | Audio 流用先 |
@@ -736,19 +730,24 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 
 ---
 
-### 11.4 OutputStage の物理位置（Q2）— **確定: A**
+### 11.4 OutputStage の物理位置（Q2）— **確定: A**（手回し化後も維持）
 
-信号順: `… → Amp → PGA2310 → **DEST リレー** → HP / LINE / MUTE`
+信号順: `… → Amp → **SW_DEST** → RV_HP / RV_LINE → HP Buffer / LINE`
 
 | | 配置 | 向く理由 | 状態 |
 |---|---|---|---|
-| **Q2-A** | ControlPanel **同一 PCB** | PGA2310 **直後**。ENC_DEST と同居。**音量 IC〜DEST 間の幹線が最短** | **回路図・初号の既定** |
-| **Q2-B** | **HP/LINE 近傍**の独立 PCB | **最終出力**（→ HP Buffer / LINE 端子）のケーブルが短い。`Audio/` 箱内配線と形が近い | **PCB レイアウト時に再検討可** |
-| **Q2-C** | RelayBoard **同居** | ラッチング集約。アナログ幹線は **最長** | 非推奨 |
+| **Q2-A** | ControlPanel **同一 PCB** | SW_DEST・ポット・ヘッダと同居。幹線が短い | **回路図・初号の既定** |
+| **Q2-B** | **HP/LINE 近傍**の独立 PCB | 最終出力ケーブルが短い。`Audio/` 箱内配線と形が近い | **PCB レイアウト時に再検討可** |
+| **Q2-C** | RelayBoard **同居** | 不要（DEST は機械 SW） | 非推奨 |
 
-**Q2-B を以前推奨していた理由:** `Audio/` 実機は DEST 切替が Amp/HP 側に近く、**リレー後〜ヘッドホン/LINE 端子**の配線を短くするレイアウトに寄っている。OutputStage を独立 PCB にするとその **箱内ワイヤリング**に合わせやすい。
+**手回し化後:** DEST ラッチングリレーは廃止。Q2-A の理由は「パネル部品（SW / ポット / LED）と Pico ADC を同じ板に載せる」に更新。旧「PGA 直後のリレーノイズ」議論は無効。
 
-**Q2-A を採用した理由（ユーザー）:** ラッチングリレーの **コイル駆動・接点バウンス**は PGA2310 直後のアナログ区間に入る。**音量 IC のすぐ後ろで切替を完結**させ、独立 Output 板へ長い幹線を伸ばさない方がノイズ的に有利。前面 Control PCB が大きくなる・HP 側ケーブルが少し伸びるトレードオフは許容。
+<details>
+<summary>旧 Q2-A 理由（PGA + DEST リレー時代）</summary>
+
+ラッチングリレーのコイル駆動を PGA2310 直後で完結させ、独立 Output 板へ長い幹線を伸ばさない、としていた。
+
+</details>
 
 ---
 
@@ -766,7 +765,7 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 | **旧推奨との差** | 旧案は **Q2-B**（Output 独立）＝ Audio 箱配線との見た目整合。**今回は Q2-A で上書き** |
 | **§11.8** | 共通 L/R バスで Relay → Control のアナログは **4P 級** |
 | **Q3** | MCP23017×2 + OLED + PT2314 の I²C — **レイアウト時** |
-| **設計時の注意（Q2-A）** | DEST リレーコイルの GND 戻り・ULN パルスを PGA2310 / アナログ GND から分離（§7 G1/G2）。前面 PCB サイズ上限をケーシングと早めに照合 |
+| **設計時の注意（Q2-A）** | 前面 PCB サイズ（ポット 2 + SW + ENC×3 + OLED）。音声と DEST 検知の分離。`A_GND` / `D_GND`（§7） |
 | **Q2 レイアウト escape** | **OutputStage は論理シートのまま**起こす。PCB で Control に載らないなら **Q2-B = 独立 PCB 1 枚追加**（計 5 枚）。回路図の net 名は変えず物理配置だけ差し替え |
 
 ---
@@ -803,21 +802,23 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 - [x] 受け側: **B2-exp**
 - [x] CH/電源/音声: **ラッチングリレー**
 - [x] CH 操作: **ENC_CH**（回して変更、押して確定）
-- [x] 音量: **ENC_HP / ENC_LINE**
-- [x] 出力先操作: **ENC_DEST**（回して確定、LINE→PHONE→MUTE ループ、起動 LINE）
-- [x] DEST 切替: **出力段のラッチングリレー**
+- [x] 音量: **手回しデュアルポット ×2**（RV_HP / RV_LINE）。**OLED 非表示**
+- [x] 出力先操作: **機械 SW_DEST** + **抵抗ラダー ADC（A 案）** + **LED×2** + OLED
+- [x] DEST 切替: **機械接点**（ラッチングリレー **不要**）
 - [x] トーン: **T1 PT2314 系**（Amp 前）
-- [x] 音量 IC: **C PGA2310PA ×2**（SPI デイジーチェーン）
+- [x] 音量 IC: **見送り**（PGA / digipot 不採用）
 - [x] 電源: **±12 V**（DKMW20F-12）、PD **50224 CH224**（差し替え可）
-- [x] エンコーダー: **EC11 系 ×6**（固定足東西・D カット）
+- [x] エンコーダー: **EC11 系 ×3**（CH / BASS / TREBLE）
 - [x] Amp / HP: **`Audio/` 物理流用**（KiCad には載せない）
-- [x] OLED / 表示ループ / PWR+12V LED
+- [x] OLED / 表示ループ / PWR+12V LED（表示は **CH / DEST / Bass / Treble**）
 - [x] 12V LED: **CH224 12V → PWR SW 後 → LED + DKMW20**（`PD_GND`）
 - [x] HP 固定パッド: **廃止（0 Ω）**。DNP で −10 dB 後付け可
-- [x] ENC 配線: **GPIO 直結 ×6**（§10 ピン表）
+- [x] ENC 配線: **GPIO 直結 ×3**（§10 ピン表）
 - [x] **起こし範囲: D1.5** — 操作系 + **PowerModule 再設計**（CH224 内蔵）。Amp/HP/計測は `Audio/` 流用・**図に載せない**
 - [x] CH224: **PowerModule 基板内蔵**
 - [x] **Relay 物理: 5+5 ×2 枚**（§11 Q1-B）
 - [x] **OutputStage: ControlPanel 同一 PCB**（§11 Q2-A）
 - [x] **CH 音声: リレー後共通 L/R バス**（§11.8）
 - [ ] **I²C 拓扑（§11 Q3）:** 回路・基板設計まで保留
+- [ ] **SW_DEST 品種**（トグル vs 2P3T）・抵抗ラダー値・ポット品種 — 設計時
+- [ ] **KiCad 素案の PGA / ENC×6 / DEST リレーを手回し構成へ改訂** — 次作業
