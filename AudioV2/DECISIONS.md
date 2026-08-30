@@ -647,7 +647,7 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 | 項目 | 決定 |
 |---|---|
 | **Q1 Relay 物理枚数** | **B — 5ch × 2 枚**（現 Controll 2 段型。ケーシング向き） |
-| **Q2 OutputStage 物理位置** | **A — ControlPanel と同一 PCB**（PGA2310 直後。ノイズ優先） |
+| **Q2 OutputStage 物理位置** | **A — ControlPanel と同一 PCB**（PGA2310 直後。ノイズ優先）。**PCB レイアウト時に B（独立板）へ変更可** |
 | **Q3 I²C 拓扑** | **保留** — 回路・基板レイアウト時に決定 |
 | **物理分割全体** | **PC + PB** — Relay **2 枚** + Control **1 枚**（Output は Control 上）+ Power **1 枚** → **新規 4 PCB** |
 
@@ -742,8 +742,8 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 
 | | 配置 | 向く理由 | 状態 |
 |---|---|---|---|
-| **Q2-A** | ControlPanel **同一 PCB** | PGA2310 **直後**。ENC_DEST と同居。**音量 IC〜DEST 間の幹線が最短** | **確定**（ノイズ優先） |
-| **Q2-B** | **HP/LINE 近傍**の独立 PCB | **最終出力**（→ HP Buffer / LINE 端子）のケーブルが短い。`Audio/` 箱内配線と形が近い | 参考（旧エージェント推奨） |
+| **Q2-A** | ControlPanel **同一 PCB** | PGA2310 **直後**。ENC_DEST と同居。**音量 IC〜DEST 間の幹線が最短** | **回路図・初号の既定** |
+| **Q2-B** | **HP/LINE 近傍**の独立 PCB | **最終出力**（→ HP Buffer / LINE 端子）のケーブルが短い。`Audio/` 箱内配線と形が近い | **PCB レイアウト時に再検討可** |
 | **Q2-C** | RelayBoard **同居** | ラッチング集約。アナログ幹線は **最長** | 非推奨 |
 
 **Q2-B を以前推奨していた理由:** `Audio/` 実機は DEST 切替が Amp/HP 側に近く、**リレー後〜ヘッドホン/LINE 端子**の配線を短くするレイアウトに寄っている。OutputStage を独立 PCB にするとその **箱内ワイヤリング**に合わせやすい。
@@ -767,6 +767,7 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 | **§11.8** | 共通 L/R バスで Relay → Control のアナログは **4P 級** |
 | **Q3** | MCP23017×2 + OLED + PT2314 の I²C — **レイアウト時** |
 | **設計時の注意（Q2-A）** | DEST リレーコイルの GND 戻り・ULN パルスを PGA2310 / アナログ GND から分離（§7 G1/G2）。前面 PCB サイズ上限をケーシングと早めに照合 |
+| **Q2 レイアウト escape** | **OutputStage は論理シートのまま**起こす。PCB で Control に載らないなら **Q2-B = 独立 PCB 1 枚追加**（計 5 枚）。回路図の net 名は変えず物理配置だけ差し替え |
 
 ---
 
