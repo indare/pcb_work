@@ -400,9 +400,9 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► digipot(HP/LINE
 - [x] DEST 切替: **出力段のラッチングリレー**
 - [x] トーン: **T1 PT2314 系**（Amp 前）
 - [x] 音量 IC: **C PGA2310PA ×2**（SPI デイジーチェーン）
-- [x] ±15 V: **DC-DC 側で管理**（PowerModule）
-- [x] OLED: **制御用追加**
-- [x] 表示ループ / 電源 UI PWR+12V LED
-- [ ] 12V LED 取り出し:
+- [x] 電源: **±12 V**（DKMW20F-12）、**PD 給電モジュール差し替え可**
+- [x] OLED / 表示ループ / PWR+12V LED
+- [ ] 12V LED 取り出し（+12 V 単極、±12 V レールとは別）:
+- [ ] HP −20 dB パッド（±12 V 向け再計算）:
 - [ ] ENC 6 個の配線:
 - [ ] 起こし範囲: D1 / D2
