@@ -9,7 +9,7 @@
 - 音量: PGA2310PA ×2（SPI）、トーン: PT2314（I²C、Amp 前）
 - 回路図の本起こしは、12V LED・ENC 配線を決めてから
 
-詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較（決定済み）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。
+詳細は [DECISIONS.md](DECISIONS.md)。音量 IC 比較（決定済み）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。予定部品のデータシートは [datasheets/](datasheets/)。
 
 ## いまの `Audio/` からの参照元
 
