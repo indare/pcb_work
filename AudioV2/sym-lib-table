@@ -2,6 +2,5 @@
 	(version 7)
 	(lib (name "DKMW20") (type "KiCad") (uri "${KIPRJMOD}/../Audio/DKMW20.kicad_sym") (options "") (descr "MEAN WELL DKMW20 (Audio ref)"))
 	(lib (name "BP5293_ROHM") (type "KiCad") (uri "${KIPRJMOD}/../Audio/BP5293_ROHM.kicad_sym") (options "") (descr "ROHM BP5293-50"))
-	(lib (name "ULN2803A") (type "KiCad") (uri "${KIPRJMOD}/../Audio/ULN2803A_HTC_DIP_ONLY.kicad_sym") (options "") (descr "ULN2803A DIP"))
-	(lib (name "AudioV2") (type "KiCad") (uri "${KIPRJMOD}/AudioV2.kicad_sym") (options "") (descr "AudioV2 local symbols"))
+	(lib (name "AudioV2") (type "KiCad") (uri "${KIPRJMOD}/AudioV2.kicad_sym") (options "") (descr "AudioV2 local symbols (PT2314, DKMW20F-12, CH224 module)"))
 )
