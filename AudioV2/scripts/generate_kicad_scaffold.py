@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Generate AudioV2 KiCad draft scaffold (Phase 0–6). Run once; output under AudioV2/."""
+"""Generate AudioV2 KiCad draft scaffold (Phase 0–6). Run once; output under AudioV2/.
+
+WARNING (2026-08-30): 手回し音量構成のあとは **このスクリプトを再実行しないこと**。
+PGA2310 / ENC×6 / DEST リレー時代の足場に巻き戻る。
+現行の再生成は `python3 AudioV2/scripts/wire_circuit_design.py all`。
+修正 TODO: AudioV2/SYMBOL_FIX_TODO.md
+"""
 
 from __future__ import annotations
 

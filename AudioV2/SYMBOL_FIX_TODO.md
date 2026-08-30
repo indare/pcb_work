@@ -56,10 +56,10 @@ cd AudioV2 && kicad-cli sch export netlist -o /tmp/audiov2.net AudioV2Case.kicad
 
 | ID | 作業 | Done |
 |---|---|---|
-| C1 | `CIRCUIT_DESIGN.md` チェックリストに WP-A/B 項目を反映（未完/完了） | [ ] |
-| C2 | `generate_kicad_scaffold.py` / `KICAD_SCAFFOLD_TODO.md` 先頭に **「手回し化後は wire_circuit_design.py を使え。scaffold 再実行で PGA に戻る」** 警告 | [ ] |
-| C3 | `PARTS.md` に「図上 Value への MPN 記載はレイアウト時」と現状を明記（任意） | [ ] |
-| C4 | 未追跡 `PowerModule-bom.xml` は **コミットしない**（.gitignore 推奨） | [ ] |
+| C1 | `CIRCUIT_DESIGN.md` チェックリストに WP-A/B 項目を反映（未完/完了） | [x] |
+| C2 | `generate_kicad_scaffold.py` / `KICAD_SCAFFOLD_TODO.md` 先頭に **「手回し化後は wire_circuit_design.py を使え。scaffold 再実行で PGA に戻る」** 警告 | [x] |
+| C3 | `PARTS.md` に「図上 Value への MPN 記載はレイアウト時」と現状を明記（任意） | [x] |
+| C4 | 未追跡 `PowerModule-bom.xml` は **コミットしない**（.gitignore 推奨） | [x] |
 
 ---
 

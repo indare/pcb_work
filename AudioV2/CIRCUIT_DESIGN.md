@@ -107,10 +107,15 @@ USB-C → CH224 → PD_12V → PWR SW → F1 → DKMW20F-12 → ±12 V / A_GND�
 - [x] `kicad-cli sch export netlist` — OK（annotation 警告はドラフト）
 - [x] 3PDT / A50k 具体型番 — [PARTS.md](PARTS.md)
 - [x] 表示品番 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）
-- [ ] OLED KiCad FP — 0.91″ 埋め込みを 2.42″ or 1×4 ヘッダに差し替え
+- [ ] OLED KiCad FP — 0.91″ 埋め込みを 2.42″ or 1×4 ヘッダに差し替え（[SYMBOL_FIX_TODO.md](SYMBOL_FIX_TODO.md) B2）
+- [ ] `AudioV2.kicad_sym` load（二重 embedded_fonts — A1）
+- [ ] extends flatten（LM7809 / MCP23017 — B1）
+- [ ] PowerModule `pin_connect` 一次短絡（B3）
 - [ ] ERC 整理（未接続・未使用 PT2314 入力）
 - [ ] RelayBoard 本配線
 - [ ] 未使用 PT2314 入力の AC-GND 実装
+
+レビュー要約: [SYMBOL_REVIEW_SUMMARY.md](SYMBOL_REVIEW_SUMMARY.md)。
 
 ## 7. 再生成
 

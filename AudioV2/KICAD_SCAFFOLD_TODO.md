@@ -1,5 +1,9 @@
 # AudioV2 KiCad 素案 — TODO（クラウドエージェント用）
 
+> **警告（2026-08-30）:** 手回し音量確定後は **`generate_kicad_scaffold.py` を再実行しない**（PGA / ENC×6 / DEST リレーに戻る）。  
+> 再生成は `python3 AudioV2/scripts/wire_circuit_design.py all`。  
+> シンボル修正: [SYMBOL_FIX_TODO.md](SYMBOL_FIX_TODO.md) / レビュー: [SYMBOL_REVIEW_SUMMARY.md](SYMBOL_REVIEW_SUMMARY.md)。
+
 **目的:** 回路の完全性・ピンアサインの正確性は **後レビュー**。まず **開ける・階層が繋がる・net 名が DECISIONS と一致**する素案を作る。
 
 **参照:** [DECISIONS.md](DECISIONS.md) §6.9 / §8 / §9 / §10 / §11、`Audio/Controll.kicad_sch`、`Audio/PowerModule.kicad_sch`

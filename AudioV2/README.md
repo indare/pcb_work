@@ -12,7 +12,7 @@
 - **品番:** [PARTS.md](PARTS.md) — DEST **C&K 7303SYZQE**、音量 **Alps RK27112A00CF** ×2、制御 OLED **2.42″**、スペアナ **Waveshare 29318**
 - **次:** ERC 整理、OLED FP 差し替え、未使用 PT2314 入力、RelayBoard 本配線
 
-詳細は [DECISIONS.md](DECISIONS.md)。DEST ラダーは [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。過去の音量 IC 比較（アーカイブ）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
+詳細は [DECISIONS.md](DECISIONS.md)。DEST ラダーは [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。品番は [PARTS.md](PARTS.md)。シンボル修正 TODO は [SYMBOL_FIX_TODO.md](SYMBOL_FIX_TODO.md)。レビュー要約は [SYMBOL_REVIEW_SUMMARY.md](SYMBOL_REVIEW_SUMMARY.md)。過去の音量 IC 比較（アーカイブ）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
 
 ## いまの `Audio/` からの参照元
 
