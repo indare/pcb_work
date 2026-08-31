@@ -23,6 +23,7 @@
 | LT1364CN8 | [AD_LT1364.pdf](AD_LT1364.pdf) | Analog Devices / LTC（Wayback 取得） |
 | OPA2140 AIDR DIP | [TI_OPA2140.pdf](TI_OPA2140.pdf) | TI OPAx140 |
 | MUSE01（2→1 DIP） | [NJR_MUSES01.pdf](NJR_MUSES01.pdf) | 製品 DS 名は **MUSES01** |
+| MUSE03（2→DIP・2ch） | [NJR_MUSES03.pdf](NJR_MUSES03.pdf) | 製品 DS 名は **MUSES03**。J-FET シングル |
 
 ## 取得メモ
 
