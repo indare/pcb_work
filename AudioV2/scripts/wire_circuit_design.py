@@ -1235,6 +1235,21 @@ def amp_module_wired() -> str:
     two_pin("Device:C", "C711", "1nF 50V C0G", 99.06, 111.76, "+12V", "A_GND", c_fp, "V+ high-speed bypass")
     two_pin("Device:C", "C712", "1nF 50V C0G", 109.22, 111.76, "A_GND", "-12V", c_fp, "V- high-speed bypass")
 
+    # Bind hierarchical ports into their nets. KiCad 10 reports
+    # label_dangling when a hierarchical_label anchor has no local object;
+    # colocating net_at (same pattern as output_stage_wired) clears it and
+    # joins the sheet pins to the connector/device nets of the same name.
+    for name, x, y, direction in [
+        ("L_IN", 20.32, 60.96, "l"),
+        ("R_IN", 20.32, 71.12, "l"),
+        ("+12V", 20.32, 101.6, "l"),
+        ("-12V", 20.32, 111.76, "l"),
+        ("A_GND", 20.32, 121.92, "l"),
+        ("L_OUT", 180.34, 60.96, "r"),
+        ("R_OUT", 180.34, 71.12, "r"),
+    ]:
+        nets.append(net_at(name, (x, y), direction))
+
     body = f"""{embed_lib_symbols(AMP_LIBS)}
 {text_note(25.4, 20.32, [
     "AudioV2 AmpModule — reference circuit; manufacture x10",

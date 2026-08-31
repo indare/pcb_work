@@ -1,6 +1,6 @@
 # AudioV2 エージェント引き継ぎメモ
 
-**更新:** 2026-08-31（ローカル `DESK01`）  
+**更新:** 2026-08-31（クラウド KiCad 10.0.6）  
 **目的:** クラウド↔ローカル切替で会話 UI が分岐／短く見えることがあるため、別チャットからでも再開できるようにする。  
 **作業の正:** 常に git ブランチ **`main`**（歴史的な `cursor/audiov2-*` 等は base にしない）。
 
@@ -16,13 +16,11 @@
 **AudioV2 AmpModuleを回路図・独立PCBとして再版し、親へ代表1シートで統合した。**
 ゲイン2（20k/20k）、±12 V、100 µF/rail + 100 nF + 1 nF、DIP-8ソケット。物理は×10製造。
 RelayBoardは5ch×2枚の入力＋電源連動配線まで完了し、両インスタンスERC 0件。
-番地ストラップは 0 Ω/1206（§2.6）。`wire_circuit_design.py` はRelayBoard/AmpModule双方とも現図へコード同期済みだが**実機KiCad検証は未実施**。RelayBoardは「手編集所有」（§2.8）に切替済みで、`--force-relay` なしでは書き込まない安全装置あり。ユーザーがローカルKiCadでRelayBoardのAZ850×10を270°回転＋チャンネル間隔拡張し、配線も追従済み（`main`にpush済み、addr strap等は無傷と確認済み）。
+番地ストラップは 0 Ω/1206（§2.6）。**AmpModule はクラウドで `wire_circuit_design.py amp` 再生成・ERC確認済み**（階層ラベル dangling 7→0、§2.5）。RelayBoardは「手編集所有」（§2.8）で `--force-relay` なしでは書き込まない。ユーザーがローカルKiCadでRelayBoardのAZ850×10を270°回転＋チャンネル間隔拡張し、配線も追従済み（`main`反映済み）。
 
 I2C/電源トポロジは**スター確定**（daisy不採用、§WIRING.md）。端子台はv1 `Audio/Controll.kicad_sch`と同じPhoenix MKDS-1,5系。A_GND/D_GNDのNetTieは**ControlPanel側**（Pico直近）に1点、RelayBoardでは結合しない、と確定（WIRING.md）。
 
-**KiCad 10.0.6をクラウド環境にビルド中/ビルド済み**（別セッション `session_01XMzAwTNj2AzF2SjKNLmC32`、ブランチ`claude/kicad-cloud-build-env-2jgp6g`、Docker）。このセッション（会話の続き）からは直接メッセージを送れないので、そちらを開いて`main`を取り込ませ、`wire_circuit_design.py amp`/`relay --force-relay`の実行検証を依頼する必要がある。
-
-次の話題候補: 上記KiCad実機検証、Relayレビュー指摘（§2.7）、Control未接続、親の箱外dangling label整理、ControlPanel側J_I2Cコネクタの物理実装（フェルール/スプリッタ分岐）。
+次の話題候補: Relayレビュー指摘（§2.7）、Control未接続、親の箱外dangling label整理（PHONE/LINE等）、COMMON_L/R isolated、ControlPanel側J_I2Cコネクタの物理実装（フェルール/スプリッタ分岐）。
 
 ---
 
@@ -97,11 +95,12 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 - 親は`AmpModule_Reference` 1シート。回路/BOM代表であり、Relay端子配線で物理×10を選択
 - PCB再生成: `python3 AudioV2/scripts/build_amp_pcb.py`（ソースの`Audio/`基板は変更しない）
 
-**信号順配線化（2026-08-31、コード変更のみ・未実行）:** `amp_module_wired()`はラベルのみで実配線が無かった（旧v1の`Audio/AmpModule.kicad_sch`は逆に配線68本・ラベル0）。以下をコードに反映済み:
-- OpAmp2ユニットの**回路図上の配置**をunit1↔unit2で入れ替え、各chの帰還/出力段（既にL=y45.72-66.04, R=y78.74-99.06で各chごとに纏まっていた）とOpAmpユニットが同じ行に来るようにした（物理ピン割当=unit A/Bは変更していないのでPCBには無関係）
-- 入力バス（J701→R701/C701→C702、J701→R702/C703→C704）と出力段末尾（C707/C708→J702）に実配線を追加。ネットラベルは残したまま（配線＋ラベル両方あるが電気的に問題なし）
-- 帰還ネットワーク周り（L_AC/L_INV/L_OUT_OP等、複数分岐・複数ピンが絡む箇所）は座標を手計算で引くリスクが高いためラベルのままにした（安全側判断）
-- **AmpModule.kicad_sch自体はまだ未再生成。** `python3 AudioV2/scripts/wire_circuit_design.py amp` をKiCadのあるマシンで実行し、`check_sexpr.py`とKiCadでの表示・ERCを確認してからコミットすること。AmpModuleは「生成コード所有」のまま（RelayBoardと違い安全装置は不要）
+**信号順配線化（2026-08-31、クラウド KiCad 10.0.6 で再生成・ERC確認済み）:** 旧図はラベルのみ（wire 0）。`amp_module_wired()`で再生成済み:
+- OpAmp2ユニットの**回路図上の配置**をunit1↔unit2で入れ替え、各chの帰還/出力段とOpAmpユニットが同じ行に来るようにした（物理ピン割当=unit A/Bは変更なし → PCB無関係）
+- 入力バス（J701→R701/C701→C702、J701→R702/C703→C704）と出力段末尾（C707/C708→J702）に実配線
+- 階層ラベル7本は OutputStage と同じく座標に `net_at` を同居させて `label_dangling` を解消（親 ERC: Amp hier dangling 7 → 0）
+- 帰還ネットワーク周りはラベルのまま（安全側）
+- `sch_helpers.KICAD_SYM_ROOT` は `/usr/share/kicad/symbols`（Linux）も探索。AmpModuleは「生成コード所有」のまま
 
 ### 2.6 RelayBoard 番地ストラップ（2026-08-31 更新）
 
@@ -237,13 +236,12 @@ AudioV2/AGENT_HANDOFF.md を読んで続きから。
 AmpModuleは代表1シート＋独立PCB（同一仕様×10）。ゲイン2、±12 V、バルク/1nF対応済み。
 RelayBoardは入力＋電源連動、各盤MCP×1/ULN×2/AZ850×10、ERC 0。AZ850は270°回転済み（ユーザーがKiCadで手編集、main反映済み）。
 番地ストラップは0Ω/1206（§2.6）、addr_strap/C301/C302/J_I2C/階層ラベルはwire_circuit_design.pyへコード同期済みだが実機未検証（§2.6）。
-AmpModuleも信号順配線をコードに追加済みだが同様に実機未検証（§2.5）。
+AmpModuleはクラウド KiCad 10.0.6 で `wire_circuit_design.py amp` 再生成・ERC確認済み（§2.5。階層ラベル dangling 解消）。
 RelayBoardは「手編集所有」（§2.8）。I2C/電源はスター確定、端子台はPhoenix MKDS-1,5系（v1と同一/互換）。
 A_GND/D_GNDのNetTieはControlPanel側（Pico直近）1点、RelayBoardでは結合しない。
-KiCad 10.0.6クラウド環境が別セッション（claude/kicad-cloud-build-env-2jgp6gブランチ）でビルド済み/ビルド中 — そこにmainを取り込ませてwire_circuit_design.py amp / relay --force-relayの実行検証を依頼するのが次の一歩。
 レビュー指摘は §2.7 に未対応で置いてある。
-次候補: 上記KiCad実機検証 / Relayレビュー指摘 / Control未接続 / 親の箱外dangling label整理 / ControlPanel側J_I2Cコネクタ実装。
-generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay/ampは実機検証後にのみ書き込み確認すること（relayは--force-relay必須）。
+次候補: Relayレビュー指摘 / Control未接続 / 親の箱外dangling label整理（PHONE/LINE等） / ControlPanel側J_I2Cコネクタ実装 / COMMON_L/R isolated。
+generate_kicad_scaffold.py は再実行しない。RelayBoardへの機械上書きは `--force-relay` 必須（通常使わない）。
 ```
 
 ---
@@ -275,6 +273,7 @@ generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay/
 | 2026-08-31 | シート所有権モデル（§2.8）を制定。RelayBoardを手編集所有に |
 | 2026-08-31 | ControlPanel↔RelayBoardのI2C/電源をスター確定（daisy不採用）。WIRING.md / DECISIONS.md 更新。実装（ControlPanel側コネクタ、フェルール/スプリッタ分岐）は未着手 |
 | 2026-08-31 | `amp_module_wired()`を信号順配線に修正（OpAmpユニット配置入れ替え＋入出力バス配線）。コード変更のみ、`AmpModule.kicad_sch`の再生成・KiCad検証は未実施（§2.5） |
+| 2026-08-31 | クラウド KiCad 10.0.6 で `wire_circuit_design.py amp` 実行。階層ラベルに `net_at` 同居、Linux シンボルパス対応。Amp hier dangling 7→0（§2.5） |
 | 2026-08-31 | ユーザーがローカルKiCadでRelayBoardのAZ850リレー10個を270°回転＋チャンネル間隔拡張、配線・ラベルを追従修正（main直push）。取り込み確認し、addr strap同期は無傷と確認 |
 | 2026-08-31 | A_GND/D_GND NetTie位置を確定: **ControlPanelのPico直近**（D_GNDの発生源）。RelayBoardは両ネットを受け取るが結合しない、とWIRING.md/DECISIONS.mdを訂正（従来「RelayBoardで結合」と誤読していた） |
 | 2026-08-31 | 手持ちオペアンプに **MUSE03**（2石→DIP化・2ch変換基板）を追記。DS PDF も `Audio/datasheets/opamps/` に追加 |

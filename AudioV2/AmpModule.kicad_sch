@@ -5,7 +5,7 @@
 	(uuid "b2000008-0008-4008-8008-000000000008")
 	(paper "A4")
 	(lib_symbols
-		(symbol "Amplifier_Operational:NE5532"
+	(symbol "Amplifier_Operational:NE5532"
 			(pin_names
 				(offset 0.127)
 			)
@@ -277,7 +277,479 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:Screw_Terminal_01x02"
+	(symbol "Device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	(symbol "Device:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	(symbol "Device:C_Polarized"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C_Polarized"
+				(at 0.635 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Polarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "CP_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_Polarized_0_1"
+				(rectangle
+					(start -2.286 0.508)
+					(end 2.286 1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 2.286) (xy -0.762 2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 2.794) (xy -1.27 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 2.286 -0.508)
+					(end -2.286 -1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+			)
+			(symbol "C_Polarized_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	(symbol "Connector:Screw_Terminal_01x02"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -483,7 +955,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:Screw_Terminal_01x03"
+	(symbol "Connector:Screw_Terminal_01x03"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -742,481 +1214,8 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:C"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.254)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "C"
-				(at 0.635 2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "C"
-				(at 0.635 -2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" ""
-				(at 0.9652 -3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Unpolarized capacitor"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "cap capacitor"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "C_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "C_0_1"
-				(polyline
-					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
-					)
-					(stroke
-						(width 0.508)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
-					)
-					(stroke
-						(width 0.508)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "C_1_1"
-				(pin passive line
-					(at 0 3.81 270)
-					(length 2.794)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 2.794)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Device:C_Polarized"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.254)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "C"
-				(at 0.635 2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "C_Polarized"
-				(at 0.635 -2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" ""
-				(at 0.9652 -3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Polarized capacitor"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "cap capacitor"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "CP_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "C_Polarized_0_1"
-				(rectangle
-					(start -2.286 0.508)
-					(end 2.286 1.016)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.778 2.286) (xy -0.762 2.286)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 2.794) (xy -1.27 1.778)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 2.286 -0.508)
-					(end -2.286 -1.016)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-			)
-			(symbol "C_Polarized_1_1"
-				(pin passive line
-					(at 0 3.81 270)
-					(length 2.794)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 2.794)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Device:R"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "R"
-				(at 2.032 0 90)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "R"
-				(at 0 0 90)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at -1.778 0 90)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Resistor"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "R res resistor"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "R_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "R_0_1"
-				(rectangle
-					(start -1.016 -2.54)
-					(end 1.016 2.54)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "R_1_1"
-				(pin passive line
-					(at 0 3.81 270)
-					(length 1.27)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 1.27)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 	)
 	(text "AudioV2 AmpModule — reference circuit; manufacture x10\nSupply: +/-12 V. Gain: 2 (20k/20k). DIP-8 socket.\n100uF/rail bulk + 100nF + 1nF local bypass for high-speed op amps.\nAMP* selection remains on RelayBoard terminal interfaces."
-		(exclude_from_sim no)
 		(at 25.4 20.32 0)
 		(effects
 			(font
@@ -1224,631 +1223,9 @@
 			)
 			(justify left top)
 		)
-		(uuid "78035647-4601-4244-acda-54b7e052d957")
+		(uuid "7deaf1d4-605c-49ff-a3e7-7bb55d04ff36")
 	)
-	(label "R_AC"
-		(at 55.88 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "02e0fabe-e44f-4f5f-8f7d-9398f5d52c00")
-	)
-	(label "L_INV"
-		(at 88.9 62.23 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "070e022b-16c5-41a4-8c3b-e1251ab0e8c3")
-	)
-	(label "L_AC"
-		(at 55.88 49.53 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "07ab1fe3-c581-4c25-a35d-fc2b078ecde4")
-	)
-	(label "+12V"
-		(at 78.74 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0de88a38-af2a-4569-a9f4-6fe6b98cda4b")
-	)
-	(label "A_GND"
-		(at 55.88 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0e4404d2-146e-41e7-b4eb-ead53640d1e2")
-	)
-	(label "A_GND"
-		(at 88.9 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2398597c-ba08-4101-9c25-0bcb98099483")
-	)
-	(label "R_AC"
-		(at 93.98 48.26 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "26c64d45-3842-4bba-9fae-1234c18ed9f4")
-	)
-	(label "A_GND"
-		(at 45.72 49.53 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "284f1164-947c-4a5f-b511-bef1702f3852")
-	)
-	(label "-12V"
-		(at 124.46 119.38 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2ceab70c-43fd-4e37-bfcb-c6569f6d9924")
-	)
-	(label "+12V"
-		(at 55.88 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "31657b19-fbfc-4e56-bb69-3f704e780bc1")
-	)
-	(label "R_IN"
-		(at 25.4 63.5 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "32bdfcba-dd9a-4510-8148-f8de4d207c1b")
-	)
-	(label "L_OUT_OP"
-		(at 109.22 83.82 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "34717653-9229-403e-8619-df72efdd15a1")
-	)
-	(label "R_IN"
-		(at 66.04 74.93 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "40c02369-0f3a-4fc9-bd49-90f398ebebf2")
-	)
-	(label "R_OUT_PRE"
-		(at 127 87.63 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "45301298-9304-4b86-b978-d2f377127b81")
-	)
-	(label "A_GND"
-		(at 88.9 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "45f47a2d-c1d2-44c7-a80e-23fe1e931883")
-	)
-	(label "R_OUT_OP"
-		(at 109.22 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "465f7ee8-d9ae-4928-a6c8-556ae3260ba4")
-	)
-	(label "L_IN"
-		(at 66.04 41.91 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "48ca4fc6-2130-4490-a984-d3dce9f8b5ef")
-	)
-	(label "A_GND"
-		(at 45.72 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4b51128e-9f94-4a3c-9b77-08e3d69706b0")
-	)
-	(label "L_OUT_PRE"
-		(at 139.7 46.99 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4f53dc56-b909-41ec-8b3a-54b9768aabec")
-	)
-	(label "L_OUT"
-		(at 139.7 54.61 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "50c125bc-7462-4483-b148-ffd0ca0aff1a")
-	)
-	(label "L_OUT_OP"
-		(at 127 46.99 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "54127bed-d02c-411b-8d6d-6dc64805be4e")
-	)
-	(label "R_OUT"
-		(at 154.94 63.5 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "57785c17-fc8d-44d9-976c-83d98fef5bad")
-	)
-	(label "+12V"
-		(at 99.06 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "57895dd3-2e6b-4f1e-bc88-b7b3f032329c")
-	)
-	(label "L_OUT"
-		(at 154.94 60.96 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "580bbeb3-c25e-4ea4-b5b9-f06ee2f183fb")
-	)
-	(label "+12V"
-		(at 25.4 109.22 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "59f7c687-31f3-4d73-8cea-7b101f924e33")
-	)
-	(label "L_IN"
-		(at 55.88 41.91 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5b896ff6-04e7-4753-bd2e-4d77a661dd69")
-	)
-	(label "R_OUT_OP"
-		(at 127 80.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5c7e2c84-d745-4373-9654-fca82f424281")
-	)
-	(label "L_OUT_PRE"
-		(at 127 54.61 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "61eca406-6617-46c4-9c4d-e411e473b67c")
-	)
-	(label "L_AC"
-		(at 76.2 41.91 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "62fa9924-cc29-47c9-8a20-36ebe83d6c57")
-	)
-	(label "R_AC"
-		(at 66.04 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "757dc306-4270-46c8-ae44-955b908616be")
-	)
-	(label "R_OUT_PRE"
-		(at 139.7 80.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7d87e0a8-b354-4ff3-ab7f-dd02bb4b71c7")
-	)
-	(label "L_INV"
-		(at 111.76 69.85 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "92a76f87-e6e7-4ef2-8a6d-c0c707685e03")
-	)
-	(label "+12V"
-		(at 124.46 104.14 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "95d00456-c248-41b8-9f05-1dc4ff18c50e")
-	)
-	(label "A_GND"
-		(at 25.4 111.76 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "96c3d3f0-1887-408b-b1bb-1cb2681f87cb")
-	)
-	(label "-12V"
-		(at 66.04 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "99f40394-8a34-44cf-aaa9-b1d1f29f76ab")
-	)
-	(label "R_OUT_OP"
-		(at 111.76 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9ecb1a64-65b3-4223-ba04-d1944a944a02")
-	)
-	(label "R_INV"
-		(at 111.76 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a0751d72-ccee-43c4-ab5b-fe6ed783a01b")
-	)
-	(label "R_IN"
-		(at 55.88 74.93 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a0a9677d-63d6-4db4-8920-247b0f88c8fe")
-	)
-	(label "L_OUT_OP"
-		(at 111.76 62.23 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ac762d33-bb29-4852-a1a0-40f5151050a0")
-	)
-	(label "L_AC"
-		(at 66.04 49.53 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "aeefd4c3-42f1-4c83-824a-05337b26619f")
-	)
-	(label "R_OUT"
-		(at 139.7 87.63 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b04ae6ce-3564-44af-8744-c719b3572274")
-	)
-	(label "A_GND"
-		(at 76.2 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b1340e9c-0ab5-4180-8bcb-732715921431")
-	)
-	(label "-12V"
-		(at 25.4 114.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b37c7f50-852d-4f7b-a3fc-55ce53c5e807")
-	)
-	(label "L_IN"
-		(at 25.4 60.96 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b5849325-1339-457d-9fc2-a8fb29019036")
-	)
-	(label "A_GND"
-		(at 78.74 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b8d24ee7-1248-4a55-af71-e7697f05f291")
-	)
-	(label "L_IN"
-		(at 45.72 41.91 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ba6c820c-426c-49c2-97ee-5843796326be")
-	)
-	(label "-12V"
-		(at 109.22 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bc966282-fd08-4cd2-be8d-43c65367c169")
-	)
-	(label "A_GND"
-		(at 76.2 49.53 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "beda3746-b700-4dd3-abaf-95e0acc892cd")
-	)
-	(label "R_IN"
-		(at 45.72 74.93 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c1d1822c-72a5-45bb-a9bc-1c4130d3b461")
-	)
-	(label "A_GND"
-		(at 88.9 69.85 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d003d56a-9e92-479d-880c-eda93ede6f46")
-	)
-	(label "R_AC"
-		(at 76.2 74.93 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d8c2024a-8923-4840-aeb0-6d23979079ab")
-	)
-	(label "L_INV"
-		(at 93.98 86.36 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "db1cd0da-a8d5-4f83-b48c-7af459eb6273")
-	)
-	(label "R_INV"
-		(at 93.98 53.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "df79fdb4-bc1b-49cf-b050-d8769dd839b4")
-	)
-	(label "R_INV"
-		(at 88.9 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e2fa3add-7607-4cdc-9d1c-884fecdd12b6")
-	)
-	(label "A_GND"
-		(at 109.22 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e799edc8-9526-480b-a1f2-088e07dad078")
-	)
-	(label "A_GND"
-		(at 66.04 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "eeffc0b3-7de5-4f74-89b4-c1609f323a8d")
-	)
-	(label "A_GND"
-		(at 99.06 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f3700cf3-4595-43e2-a034-2a72e3c85b6c")
-	)
-	(label "L_AC"
-		(at 93.98 81.28 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f42288e5-351a-4e97-904f-879960d9d14c")
-	)
-	(label "-12V"
-		(at 88.9 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f5736e28-99c4-41eb-806c-9f6bf370e851")
-	)
-	(hierarchical_label "A_GND"
-		(shape bidirectional)
-		(at 20.32 121.92 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "063b8163-c8b7-406f-9b8e-7700082646b1")
-	)
-	(hierarchical_label "-12V"
-		(shape input)
-		(at 20.32 111.76 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "23b71788-34c0-4f7d-b86d-9e33a30fa304")
-	)
-	(hierarchical_label "R_OUT"
-		(shape output)
-		(at 180.34 71.12 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "37824a76-7890-4d67-9308-e29b104d1416")
-	)
+
 	(hierarchical_label "L_IN"
 		(shape input)
 		(at 20.32 60.96 180)
@@ -1858,8 +1235,9 @@
 			)
 			(justify right)
 		)
-		(uuid "403b787a-db25-433c-9f2f-13be583adb3f")
+		(uuid "ba4852a9-2791-4bf4-be31-0c345872cb42")
 	)
+
 	(hierarchical_label "R_IN"
 		(shape input)
 		(at 20.32 71.12 180)
@@ -1869,19 +1247,9 @@
 			)
 			(justify right)
 		)
-		(uuid "40ad02e0-74a4-40d0-88ab-58c122b77c70")
+		(uuid "daeaedc2-b7c9-4a16-9945-7d794a5c4d43")
 	)
-	(hierarchical_label "L_OUT"
-		(shape output)
-		(at 180.34 60.96 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a690430c-f268-4a5b-a1bd-f9903a2709a4")
-	)
+
 	(hierarchical_label "+12V"
 		(shape input)
 		(at 20.32 101.6 180)
@@ -1891,11 +1259,60 @@
 			)
 			(justify right)
 		)
-		(uuid "b91af332-3a80-4278-b8a1-408dbd5fbb6e")
+		(uuid "a006ef2a-bcf7-4b1c-9045-07a375223f4f")
 	)
+
+	(hierarchical_label "-12V"
+		(shape input)
+		(at 20.32 111.76 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cdf159bb-b3fd-45e5-bf75-4d5125645c3a")
+	)
+
+	(hierarchical_label "A_GND"
+		(shape bidirectional)
+		(at 20.32 121.92 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c8d98f50-7cf0-4c18-8f62-72848545a2af")
+	)
+
+	(hierarchical_label "L_OUT"
+		(shape output)
+		(at 180.34 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0c773b3c-7d99-4784-b2df-47285ee91609")
+	)
+
+	(hierarchical_label "R_OUT"
+		(shape output)
+		(at 180.34 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7ef1b20b-7e5d-4754-af26-e6a04b682ba0")
+	)
+
 	(symbol
-		(lib_id "Device:R")
-		(at 111.76 66.04 0)
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 30.48 60.96 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -1904,9 +1321,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "1c1830a6-6aef-43d4-a4a0-087b5a11eea1")
-		(property "Reference" "R707"
-			(at 111.76 63.5 0)
+		(uuid "2751bee5-3d3b-4b15-ab3e-5828c6c774a3")
+		(property "Reference" "J701"
+			(at 30.48 58.42 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1915,8 +1332,9 @@
 				)
 			)
 		)
-		(property "Value" "20k"
-			(at 111.76 68.58 0)
+
+		(property "Value" "AMP_IN L/R"
+			(at 30.48 63.5 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1925,49 +1343,138 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "L feedback; gain 2"
+
+		(property "Description" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "37ec82ff-2f4e-459f-a284-5985cdd31be1")
+			(uuid "050a113e-e00b-42c8-962f-25309354bd83")
 		)
 		(pin "2"
-			(uuid "944d03c4-ee40-4bb9-9dfe-c8a4713adf00")
+			(uuid "0e12a70e-7b36-41b0-a22d-13a7a00370c9")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "R707")
+					(reference "J701")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 160.02 60.96 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "613f6203-6b32-45ee-b4af-4609c5957a3d")
+		(property "Reference" "J702"
+			(at 160.02 58.42 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "AMP_OUT L/R"
+			(at 160.02 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "1daa7a76-aee1-48b7-8b23-8e1613d6f818")
+		)
+		(pin "2"
+			(uuid "6468119f-4a6b-4b3d-933d-cfc49181a0cc")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "J702")
 					(unit 1)
 				)
 			)
@@ -1984,7 +1491,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "2076e70c-4e58-418d-914d-e50a7c934dc3")
+		(uuid "82778ef1-d7fb-404d-acf5-6f69bf6b3115")
 		(property "Reference" "J703"
 			(at 30.48 109.22 0)
 			(show_name no)
@@ -1995,8 +1502,9 @@
 				)
 			)
 		)
+
 		(property "Value" "+12V / A_GND / -12V"
-			(at 30.48 114.3 0)
+			(at 30.48 114.30000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2005,47 +1513,51 @@
 				)
 			)
 		)
+
 		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Description" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "5798c70e-2a14-4f90-8293-2ae88d0e9aa4")
+			(uuid "eaea96fa-c419-4748-9d72-5bc2d228fc9b")
 		)
 		(pin "2"
-			(uuid "1564ab96-50aa-41bf-9f1e-a221823bb2bb")
+			(uuid "472133fb-5217-44d8-9be8-b2e94e5da9ed")
 		)
 		(pin "3"
-			(uuid "91302f30-2ed2-4ff5-aade-5c7ca630c130")
+			(uuid "ddb17026-ac47-44c1-8d34-b62349e09444")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2057,8 +1569,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Polarized")
-		(at 55.88 111.76 0)
+		(lib_id "Device:R")
+		(at 45.72 45.72 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2067,9 +1579,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "24761046-672d-4886-8405-166480a1935e")
-		(property "Reference" "C709"
-			(at 55.88 109.22 0)
+		(uuid "084a9c54-7064-4dce-be00-2fba4623b1a2")
+		(property "Reference" "R701"
+			(at 45.72 43.18 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2078,8 +1590,9 @@
 				)
 			)
 		)
-		(property "Value" "100uF 35V polymer"
-			(at 55.88 114.3 0)
+
+		(property "Value" "220k"
+			(at 45.72 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2088,49 +1601,53 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_10x12.6"
+
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "V+ local bulk at power connector"
+
+		(property "Description" "L input pulldown"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "e8a3e0d2-5e1f-49bb-8815-c7b0ea309d53")
+			(uuid "d932818a-d5b1-4c95-9717-6119d07f3110")
 		)
 		(pin "2"
-			(uuid "a4c96397-aa40-4ff3-ac1c-f82cbd7024a5")
+			(uuid "82cfe488-8424-4f3c-b66e-d484ef0ed7b5")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "C709")
+					(reference "R701")
 					(unit 1)
 				)
 			)
@@ -2147,9 +1664,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "2b509fe2-56cd-4c2f-9336-ef8c7361d385")
+		(uuid "2840f309-2078-4038-af1a-a08443c3a300")
 		(property "Reference" "R702"
-			(at 45.72 76.2 0)
+			(at 45.72 76.19999999999999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2158,6 +1675,7 @@
 				)
 			)
 		)
+
 		(property "Value" "220k"
 			(at 45.72 81.28 0)
 			(show_name no)
@@ -2168,44 +1686,48 @@
 				)
 			)
 		)
+
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Description" "R input pulldown"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "28e77cf2-c637-4f54-8065-e168dd799d12")
+			(uuid "fc24276a-548b-4f72-9d37-4ea866194df7")
 		)
 		(pin "2"
-			(uuid "9a826166-88d2-4538-8512-87c3b5aa2536")
+			(uuid "0d8301f7-1ce4-43f5-80cb-8bfb1e555ef3")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2217,8 +1739,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Amplifier_Operational:NE5532")
-		(at 101.6 50.8 0)
+		(lib_id "Device:C")
+		(at 55.88 45.72 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2227,9 +1749,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "34c62cef-6f18-4a5c-8f36-414a0fd5557f")
-		(property "Reference" "AMP701"
-			(at 101.6 48.26 0)
+		(uuid "fd653311-316c-4c7c-b8ca-5814985cac46")
+		(property "Reference" "C701"
+			(at 55.88 43.18 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2238,8 +1760,9 @@
 				)
 			)
 		)
-		(property "Value" "NE5532 / DIP-8 compatible"
-			(at 101.6 53.34 0)
+
+		(property "Value" "100nF film"
+			(at 55.88 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2248,78 +1771,53 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
+
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "AudioV2 replaceable dual op amp; high-speed decoupling fitted"
+
+		(property "Description" "L input film coupling"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "AssemblyQty" "10"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+
 		(pin "1"
-			(uuid "5019603e-a7cc-4cb7-818c-39c448d56613")
+			(uuid "6aa2dcf8-bc72-48ee-9262-3453a214771b")
 		)
 		(pin "2"
-			(uuid "8e37756b-1499-45d3-99e4-0df57ee3df79")
-		)
-		(pin "3"
-			(uuid "70362586-5e1d-477e-8746-02cd594c81a5")
-		)
-		(pin "5"
-			(uuid "1abc7aee-ca2c-4a78-a90d-e4cef7ab6d8a")
-		)
-		(pin "6"
-			(uuid "e3b9d5b6-b5f5-40da-ada9-8810d25695c2")
-		)
-		(pin "7"
-			(uuid "3893a2ff-e65f-42c9-baff-70be6568eb34")
-		)
-		(pin "4"
-			(uuid "6f4d2f6d-f71a-4991-9abc-08dfa7142d24")
-		)
-		(pin "8"
-			(uuid "838a254e-e177-4dc2-8a70-3ce5d0a37c7e")
+			(uuid "5f503dce-82a1-4e83-ad98-118ba1154632")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "AMP701")
+					(reference "C701")
 					(unit 1)
 				)
 			)
@@ -2327,7 +1825,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Polarized")
-		(at 139.7 83.82 0)
+		(at 66.04 45.72 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2336,9 +1834,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "3cc013fc-5fb2-44c1-a3a4-37e149276932")
-		(property "Reference" "C708"
-			(at 139.7 81.28 0)
+		(uuid "dd7b986b-ba45-41b6-8a8c-9ddb865c22ef")
+		(property "Reference" "C702"
+			(at 66.04 43.18 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2347,8 +1845,9 @@
 				)
 			)
 		)
-		(property "Value" "470uF 25V"
-			(at 139.7 86.36 0)
+
+		(property "Value" "10uF"
+			(at 66.04 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2357,49 +1856,138 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
+
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "R output coupling; compact D12.5/P5"
+
+		(property "Description" "L input electrolytic coupling"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "4a6974ef-3026-40bb-8862-412f8460c56b")
+			(uuid "299785ca-ed0b-4276-a36c-6815b5af1479")
 		)
 		(pin "2"
-			(uuid "202a168a-cca3-46d6-8fbc-c254bec93462")
+			(uuid "c96914fa-72a7-4dd5-93b7-63c74671c5c9")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "C708")
+					(reference "C702")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 55.88 78.74 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "02a3fdf4-fbda-44ad-922e-69a9b6c09df8")
+		(property "Reference" "C703"
+			(at 55.88 76.19999999999999 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "100nF film"
+			(at 55.88 81.28 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "R input film coupling"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "6205a1c9-026b-4273-b101-2611c782101c")
+		)
+		(pin "2"
+			(uuid "a5f46340-d192-45e4-99db-70b8c63c4e47")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "C703")
 					(unit 1)
 				)
 			)
@@ -2416,9 +2004,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "490f6de1-977c-4fef-aefa-ae624de9c8bd")
+		(uuid "d73e50c3-5101-457c-876e-c8f65fc3b768")
 		(property "Reference" "C704"
-			(at 66.04 76.2 0)
+			(at 66.04 76.19999999999999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2427,6 +2015,7 @@
 				)
 			)
 		)
+
 		(property "Value" "10uF"
 			(at 66.04 81.28 0)
 			(show_name no)
@@ -2437,44 +2026,48 @@
 				)
 			)
 		)
+
 		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Description" "R input electrolytic coupling"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "5aee506c-0ec9-4527-ac4a-101fa3169a37")
+			(uuid "1378cdd8-c9f3-46fd-a6a8-9a3cc2a5e5f4")
 		)
 		(pin "2"
-			(uuid "d7c7ee7c-12ce-46ad-9cce-c3c8317c3c38")
+			(uuid "e4b9aaf5-6178-4c13-9306-cb515319eb63")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2496,7 +2089,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "4f2e5e23-cbf4-47d8-92fd-b45e5749fa46")
+		(uuid "be0b3a87-64ce-49da-97ca-e7b33b0504e7")
 		(property "Reference" "R703"
 			(at 76.2 43.18 0)
 			(show_name no)
@@ -2507,6 +2100,7 @@
 				)
 			)
 		)
+
 		(property "Value" "1k"
 			(at 76.2 48.26 0)
 			(show_name no)
@@ -2517,44 +2111,48 @@
 				)
 			)
 		)
+
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Description" "L non-inverting bias; 1/10 refine"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "d6c60333-2a9a-4b61-801f-b2361459d289")
+			(uuid "8a1ed514-0ffb-4be5-8a30-073abfa8c40c")
 		)
 		(pin "2"
-			(uuid "4fe2e20c-ad9e-4828-97a7-c411134380d8")
+			(uuid "81878732-dbec-44b1-858a-67dad9ded1dd")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -2567,7 +2165,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 45.72 45.72 0)
+		(at 76.2 78.74 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2576,9 +2174,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "51dfd87d-9d4c-4191-85a8-9a29614c175f")
-		(property "Reference" "R701"
-			(at 45.72 43.18 0)
+		(uuid "3d235b2e-22ad-4266-a194-6ef92e1bd0d3")
+		(property "Reference" "R704"
+			(at 76.2 76.19999999999999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2587,8 +2185,9 @@
 				)
 			)
 		)
-		(property "Value" "220k"
-			(at 45.72 48.26 0)
+
+		(property "Value" "1k"
+			(at 76.2 81.28 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2597,57 +2196,61 @@
 				)
 			)
 		)
+
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "L input pulldown"
+
+		(property "Description" "R non-inverting bias; 1/10 refine"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "98010763-bdcd-481e-a3d3-5ab2ec56dbcb")
+			(uuid "44ee8d50-76dc-4230-85aa-65270610054e")
 		)
 		(pin "2"
-			(uuid "3718b58d-b251-437e-bec5-c5f200694f95")
+			(uuid "0d044113-76d1-42cc-a56d-2f7a10100bf6")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "R701")
+					(reference "R704")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 55.88 78.74 0)
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 101.6 83.82000000000001 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2656,9 +2259,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "5ef02d37-26ec-439c-b967-a9f10342abeb")
-		(property "Reference" "C703"
-			(at 55.88 76.2 0)
+		(uuid "fda0b02f-41c1-4ece-83d1-e273d2f4583b")
+		(property "Reference" "AMP701"
+			(at 101.6 81.27999999999999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2667,8 +2270,9 @@
 				)
 			)
 		)
-		(property "Value" "100nF film"
-			(at 55.88 81.28 0)
+
+		(property "Value" "NE5532 / DIP-8 compatible"
+			(at 101.6 86.36 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2677,57 +2281,321 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "R input film coupling"
+
+		(property "Description" "AudioV2 replaceable dual op amp; high-speed decoupling fitted"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
+		(property "AssemblyQty" "10"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
 		(pin "1"
-			(uuid "7add07ac-3801-4a17-b5ac-4ca483d3a599")
+			(uuid "7c9abbcd-ed55-4dee-8bb0-e45213c2f5da")
 		)
 		(pin "2"
-			(uuid "2b4724d4-f88a-4ce5-a897-2c51883787f1")
+			(uuid "8155b69f-4dc1-426a-bf3c-108fe7fcfc5c")
+		)
+		(pin "3"
+			(uuid "ce7f0f1a-8d82-4cc2-a46e-603a493660c5")
+		)
+		(pin "5"
+			(uuid "a7ee4e9f-faa1-49f2-b0e8-08c1ed52710c")
+		)
+		(pin "6"
+			(uuid "2678ced9-4b4e-4cf6-8cbf-36d016581ee0")
+		)
+		(pin "7"
+			(uuid "f799901d-f7d3-4456-ba91-4222cc445211")
+		)
+		(pin "4"
+			(uuid "1db7a7e3-084d-455f-963d-2217aa2a98fc")
+		)
+		(pin "8"
+			(uuid "b4d90645-ccd3-4282-bc4e-10bf2a283a71")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "C703")
+					(reference "AMP701")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 101.6 50.8 0)
+		(unit 2)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2b2e5b31-1f23-483e-b625-fede26b759cc")
+		(property "Reference" "AMP701"
+			(at 101.6 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "NE5532 / DIP-8 compatible"
+			(at 101.6 53.339999999999996 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "AudioV2 replaceable dual op amp; high-speed decoupling fitted"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "AssemblyQty" "10"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "05c37c50-5575-43a9-9ee1-9bc53375d22f")
+		)
+		(pin "2"
+			(uuid "d57f941a-fa81-4726-9393-5e5dcccba762")
+		)
+		(pin "3"
+			(uuid "d9021ca6-5e58-4794-ab17-461190bfe957")
+		)
+		(pin "5"
+			(uuid "f331a188-1aea-45ed-bafe-ac95131a7217")
+		)
+		(pin "6"
+			(uuid "9c985c55-489d-4604-82ec-8401ae47951c")
+		)
+		(pin "7"
+			(uuid "4154edd3-9228-44c1-8396-9ba91afa35c9")
+		)
+		(pin "4"
+			(uuid "eb4224c3-73c8-4636-8867-2ab54acd01e0")
+		)
+		(pin "8"
+			(uuid "1986cd6b-8873-4f54-90b4-e616b4887c32")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "AMP701")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 127.0 111.76 0)
+		(unit 3)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0203649b-4769-4a57-a01e-23819d01657a")
+		(property "Reference" "AMP701"
+			(at 127.0 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "NE5532 / DIP-8 compatible"
+			(at 127.0 114.30000000000001 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "AudioV2 replaceable dual op amp; high-speed decoupling fitted"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "AssemblyQty" "10"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "7f564fba-31bb-4be3-928c-a3b108ad86ff")
+		)
+		(pin "2"
+			(uuid "1ba456cb-23eb-473b-8fcc-704df78af78a")
+		)
+		(pin "3"
+			(uuid "7746dd20-2990-4de2-b0f4-f1722dc71166")
+		)
+		(pin "5"
+			(uuid "aa380a26-8135-4cf7-b27a-dbcc87c78bd6")
+		)
+		(pin "6"
+			(uuid "92995b02-7371-41a7-926d-ac9aed8f8e86")
+		)
+		(pin "7"
+			(uuid "f0e0fd90-785f-4f16-b269-88ef97b9fcfa")
+		)
+		(pin "4"
+			(uuid "2e8fc77e-cbdf-4b9f-bed0-08c5ac01a81b")
+		)
+		(pin "8"
+			(uuid "b559d190-7f23-4fd8-b044-463e18cc3c20")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "AMP701")
+					(unit 3)
 				)
 			)
 		)
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 111.76 99.06 0)
+		(at 88.9 66.04 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2736,9 +2604,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "72cb3a18-8936-44c1-910a-db53a7f1cddf")
-		(property "Reference" "R708"
-			(at 111.76 96.52 0)
+		(uuid "eef83dcb-0d10-4e09-ba58-8ce2058ae36d")
+		(property "Reference" "R705"
+			(at 88.9 63.50000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2747,8 +2615,9 @@
 				)
 			)
 		)
+
 		(property "Value" "20k"
-			(at 111.76 101.6 0)
+			(at 88.9 68.58000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2757,449 +2626,53 @@
 				)
 			)
 		)
+
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "R feedback; gain 2"
+
+		(property "Description" "L gain resistor; Rf=Rg=20k"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "7cf623fe-68a8-4b15-8887-e3e9bb909acc")
+			(uuid "f4503662-59c4-4f49-99b6-42d717ac29f1")
 		)
 		(pin "2"
-			(uuid "076dc1e7-54b5-43a1-94e0-77beacdc9660")
+			(uuid "bf68789f-ff1a-4180-9f70-8364c2b334b9")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "R708")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 78.74 111.76 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7762fb5b-a7e8-4e80-a608-4f9d19a69199")
-		(property "Reference" "C705"
-			(at 78.74 109.22 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF 50V X7R"
-			(at 78.74 114.3 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "V+ local decoupling"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6b47a671-3579-4f87-8ea5-141400de8ffd")
-		)
-		(pin "2"
-			(uuid "1d89059b-14c0-48a1-9d2f-cbc7b5e61cb8")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "C705")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 99.06 111.76 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "78d89f39-73b7-4051-af9c-ac0ab4b93a4c")
-		(property "Reference" "C711"
-			(at 99.06 109.22 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1nF 50V C0G"
-			(at 99.06 114.3 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "V+ high-speed bypass"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "fe452cc6-cb1a-442a-8290-f7ac8a66dd30")
-		)
-		(pin "2"
-			(uuid "4881411f-abf9-411e-9d5b-029fe2d1e25f")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "C711")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 127 50.8 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7ce19bd0-5ffe-45a0-bb8c-8c3faed51aa0")
-		(property "Reference" "R709"
-			(at 127 48.26 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47R"
-			(at 127 53.34 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "L output isolation"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "da78e603-d0e0-48cc-b535-aed5d9285469")
-		)
-		(pin "2"
-			(uuid "9ac882be-fd0f-4a31-ab0f-e21ef1be8bfb")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "R709")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 30.48 60.96 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "85b883ac-7688-4d72-82b4-c71784556c01")
-		(property "Reference" "J701"
-			(at 30.48 58.42 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AMP_IN L/R"
-			(at 30.48 63.5 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "1ff449ed-f8b8-4197-ba5e-a49723bed74a")
-		)
-		(pin "2"
-			(uuid "89efa02d-ea0a-4d93-aa9b-a321378cf55a")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "J701")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 88.9 111.76 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "93f1ece1-70d2-47b2-ba87-65dd6ea427b8")
-		(property "Reference" "C706"
-			(at 88.9 109.22 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF 50V X7R"
-			(at 88.9 114.3 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "V- local decoupling"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "3747c572-e3d9-40a5-a077-af3e9d8019c5")
-		)
-		(pin "2"
-			(uuid "e33abcec-3f69-4691-90ec-bd3eb7b50d06")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "C706")
+					(reference "R705")
 					(unit 1)
 				)
 			)
@@ -3216,7 +2689,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "99d5f538-9120-4e0d-bbc9-52905eb25df3")
+		(uuid "141f8489-f114-4fd3-82ca-abae59b4bc86")
 		(property "Reference" "R706"
 			(at 88.9 96.52 0)
 			(show_name no)
@@ -3227,8 +2700,9 @@
 				)
 			)
 		)
+
 		(property "Value" "20k"
-			(at 88.9 101.6 0)
+			(at 88.9 101.60000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3237,44 +2711,48 @@
 				)
 			)
 		)
+
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Description" "R gain resistor; Rf=Rg=20k"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "5fdabb93-dfcb-4fa5-b859-b6a7b0cf496a")
+			(uuid "175b79b7-7c1b-4ddf-8113-97c9a35e0b23")
 		)
 		(pin "2"
-			(uuid "2bc72b37-dc0c-44bd-9c26-9ba4aa1c08c6")
+			(uuid "6b492781-56b4-458c-9af4-c4fb9d01f99f")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -3286,8 +2764,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 160.02 60.96 0)
+		(lib_id "Device:R")
+		(at 111.76 66.04 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3296,9 +2774,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "9fcd36b1-58c5-4fd3-8b78-ab68b9a6991e")
-		(property "Reference" "J702"
-			(at 160.02 58.42 0)
+		(uuid "7325b85b-88d0-41ac-9e2d-63aee550d4c9")
+		(property "Reference" "R707"
+			(at 111.76 63.50000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3307,8 +2785,9 @@
 				)
 			)
 		)
-		(property "Value" "AMP_OUT L/R"
-			(at 160.02 63.5 0)
+
+		(property "Value" "20k"
+			(at 111.76 68.58000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3317,57 +2796,61 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" ""
+
+		(property "Description" "L feedback; gain 2"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "e869423c-9f51-49b8-94af-dd4578e0eb5e")
+			(uuid "bcc7b421-722a-4138-a703-c4952b22f52c")
 		)
 		(pin "2"
-			(uuid "a142332e-eef6-4978-a030-169a55163564")
+			(uuid "32a464e4-d644-41b0-9440-e56b2aee60e0")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "J702")
+					(reference "R707")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Polarized")
-		(at 66.04 45.72 0)
+		(lib_id "Device:R")
+		(at 111.76 99.06 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3376,9 +2859,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "ac9d1ec9-0ffb-4f02-bff4-31771285af35")
-		(property "Reference" "C702"
-			(at 66.04 43.18 0)
+		(uuid "2f8ae530-760d-4af4-a07d-e0c0c429b25e")
+		(property "Reference" "R708"
+			(at 111.76 96.52 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3387,8 +2870,9 @@
 				)
 			)
 		)
-		(property "Value" "10uF"
-			(at 66.04 48.26 0)
+
+		(property "Value" "20k"
+			(at 111.76 101.60000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3397,49 +2881,223 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
+
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "L input electrolytic coupling"
+
+		(property "Description" "R feedback; gain 2"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "bf2602de-16a3-46db-b160-c06de1029ade")
+			(uuid "d36add3a-9c5c-4edd-97b9-adaf5d582bdb")
 		)
 		(pin "2"
-			(uuid "bd093363-8c5d-4c43-9c67-91c3f345469f")
+			(uuid "97faba9e-d82b-41f1-873d-d46405d65cfc")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "C702")
+					(reference "R708")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 127.0 50.8 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e9ad4d2e-a0bd-42c9-9077-77817f421512")
+		(property "Reference" "R709"
+			(at 127.0 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "47R"
+			(at 127.0 53.339999999999996 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "L output isolation"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "2bf3ad62-a225-46c3-9fd7-ce4aaf2a41ac")
+		)
+		(pin "2"
+			(uuid "37c76ba9-ec95-4721-a5f8-c8d030e96974")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "R709")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 127.0 83.82000000000001 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1a02c870-45a0-4061-8c1b-e8fd3c792193")
+		(property "Reference" "R710"
+			(at 127.0 81.27999999999999 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "47R"
+			(at 127.0 86.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "R output isolation"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "86da4785-3148-44f2-9bc7-47e547ea5e03")
+		)
+		(pin "2"
+			(uuid "8cc1160c-6e12-4f8e-b7e2-d15704861f61")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "R710")
 					(unit 1)
 				)
 			)
@@ -3456,7 +3114,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "b2157f31-245a-438b-83c9-cd18084ff32e")
+		(uuid "982028f3-6311-496c-9875-f6971e301ff9")
 		(property "Reference" "C707"
 			(at 139.7 48.26 0)
 			(show_name no)
@@ -3467,8 +3125,9 @@
 				)
 			)
 		)
+
 		(property "Value" "470uF 25V"
-			(at 139.7 53.34 0)
+			(at 139.7 53.339999999999996 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3477,44 +3136,48 @@
 				)
 			)
 		)
+
 		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Description" "L output coupling; compact D12.5/P5"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "fab852f7-9fee-4417-998f-7a471b45404b")
+			(uuid "98723830-850a-49d2-bf14-b592b5e1dc86")
 		)
 		(pin "2"
-			(uuid "d2855a04-7017-4fa0-84c2-06b428c8ea9b")
+			(uuid "36856365-c0cd-4930-9ad2-4c3387ab15c4")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -3526,117 +3189,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Amplifier_Operational:NE5532")
-		(at 127 111.76 0)
-		(unit 3)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c3642881-5978-4a31-99a3-52193ffbc001")
-		(property "Reference" "AMP701"
-			(at 127 109.22 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NE5532 / DIP-8 compatible"
-			(at 127 114.3 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "AudioV2 replaceable dual op amp; high-speed decoupling fitted"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "AssemblyQty" "10"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6e4eacaf-7220-453e-8834-381b9255d59b")
-		)
-		(pin "2"
-			(uuid "efd66a13-fea1-4456-ad7f-e2c22b45ad60")
-		)
-		(pin "3"
-			(uuid "253305e6-e8d4-4c60-9cea-8c94d9d8970b")
-		)
-		(pin "5"
-			(uuid "b577a109-b069-44a5-947b-c72a46d1421a")
-		)
-		(pin "6"
-			(uuid "fd2bb050-9703-4979-8108-e0172396cfb7")
-		)
-		(pin "7"
-			(uuid "f0d4d52c-ecba-41cf-833b-c731ac72f7cf")
-		)
-		(pin "4"
-			(uuid "a3e1f4ed-3b14-4ff0-acba-c5846b918a4b")
-		)
-		(pin "8"
-			(uuid "350ea615-627a-4330-be4e-9efa06cf515e")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "AMP701")
-					(unit 3)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 76.2 78.74 0)
+		(lib_id "Device:C_Polarized")
+		(at 139.7 83.82000000000001 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3645,9 +3199,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "c604d40b-5ed5-4c9b-9c1a-d8bdecf07c17")
-		(property "Reference" "R704"
-			(at 76.2 76.2 0)
+		(uuid "e193fcc4-3d48-4341-98b9-23c74186c14f")
+		(property "Reference" "C708"
+			(at 139.7 81.27999999999999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3656,8 +3210,9 @@
 				)
 			)
 		)
-		(property "Value" "1k"
-			(at 76.2 81.28 0)
+
+		(property "Value" "470uF 25V"
+			(at 139.7 86.36 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3666,57 +3221,61 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "R non-inverting bias; 1/10 refine"
+
+		(property "Description" "R output coupling; compact D12.5/P5"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "69d6d4c9-7df5-4089-b1c7-5b258bd08b73")
+			(uuid "b1b07637-d0fe-4dcc-8a94-72ce7aa92783")
 		)
 		(pin "2"
-			(uuid "c7e901d0-c3d8-47fc-93c0-bf8e85458afe")
+			(uuid "79de2eb2-4415-4a8d-8497-705021a0d2f2")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "R704")
+					(reference "C708")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 88.9 66.04 0)
+		(lib_id "Device:C_Polarized")
+		(at 55.88 111.76 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3725,9 +3284,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "ccd4f477-358d-4400-a059-93f8f91f716d")
-		(property "Reference" "R705"
-			(at 88.9 63.5 0)
+		(uuid "79d658b7-d805-421c-9b96-28bc92965f79")
+		(property "Reference" "C709"
+			(at 55.88 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3736,8 +3295,9 @@
 				)
 			)
 		)
-		(property "Value" "20k"
-			(at 88.9 68.58 0)
+
+		(property "Value" "100uF 35V polymer"
+			(at 55.88 114.30000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3746,398 +3306,53 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+
+		(property "Footprint" "Capacitor_SMD:CP_Elec_10x12.6"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "L gain resistor; Rf=Rg=20k"
+
+		(property "Description" "V+ local bulk at power connector"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "2c5d4287-c26c-4dcc-b067-35e451b4ffcd")
+			(uuid "c018dc6f-73e3-4341-b45a-3bb11590c09a")
 		)
 		(pin "2"
-			(uuid "67e6172c-1fbb-4de6-ae5a-5c5158ec5a39")
+			(uuid "a2c20ed0-b2ca-4788-9a79-edd7b889d091")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "R705")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Amplifier_Operational:NE5532")
-		(at 101.6 83.82 0)
-		(unit 2)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d314c1e3-cfa7-409b-bb02-663a43b061e1")
-		(property "Reference" "AMP701"
-			(at 101.6 81.28 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NE5532 / DIP-8 compatible"
-			(at 101.6 86.36 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "AudioV2 replaceable dual op amp; high-speed decoupling fitted"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "AssemblyQty" "10"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "083232c3-361d-4ca1-86f6-e1dbb8f3b022")
-		)
-		(pin "2"
-			(uuid "c9e40710-dc8e-4a64-887d-1939a452a4a0")
-		)
-		(pin "3"
-			(uuid "0335a9a1-b252-4d13-8992-4006c827c9b2")
-		)
-		(pin "5"
-			(uuid "fc4d4f5b-e8ee-4296-a52b-69035eca3a4b")
-		)
-		(pin "6"
-			(uuid "4234be2d-7206-47f7-bbc4-df7b4826d934")
-		)
-		(pin "7"
-			(uuid "a8c6b177-c71c-4068-ab43-523ba42921bc")
-		)
-		(pin "4"
-			(uuid "4cd5ad3c-5069-4de6-8228-f3c85389763d")
-		)
-		(pin "8"
-			(uuid "dedbd761-141a-4e0c-848f-dc2b19a20d20")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "AMP701")
-					(unit 2)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 109.22 111.76 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d3188cbe-dc9c-44f6-86fc-38730a3dc408")
-		(property "Reference" "C712"
-			(at 109.22 109.22 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1nF 50V C0G"
-			(at 109.22 114.3 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "V- high-speed bypass"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "dd9d0931-e988-4abb-8ca5-450c1515cf78")
-		)
-		(pin "2"
-			(uuid "b1d56628-aaea-4954-a47f-031cb64e1a34")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "C712")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 55.88 45.72 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "daf36973-f3e1-46a6-af37-69415e9f1802")
-		(property "Reference" "C701"
-			(at 55.88 43.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF film"
-			(at 55.88 48.26 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "L input film coupling"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6f976574-1894-4426-ba96-50774b0d5c5b")
-		)
-		(pin "2"
-			(uuid "7b4616c7-fb94-4d70-94cb-0761fc18798e")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "C701")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 127 83.82 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f0dfd7d9-065d-40d5-8f53-afbef96d159f")
-		(property "Reference" "R710"
-			(at 127 81.28 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47R"
-			(at 127 86.36 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "R output isolation"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "1ed21c33-965b-47e8-b677-fee550e1d4e2")
-		)
-		(pin "2"
-			(uuid "0f8a4a6a-5a79-49f3-8ad5-06d63a3a7473")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
-					(reference "R710")
+					(reference "C709")
 					(unit 1)
 				)
 			)
@@ -4154,7 +3369,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "f86ae7b1-5086-4960-a787-2aa1f879712a")
+		(uuid "c54562ff-544d-47f5-ad39-a8feded59cd0")
 		(property "Reference" "C710"
 			(at 66.04 109.22 0)
 			(show_name no)
@@ -4165,8 +3380,9 @@
 				)
 			)
 		)
+
 		(property "Value" "100uF 35V polymer"
-			(at 66.04 114.3 0)
+			(at 66.04 114.30000000000001 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4175,44 +3391,48 @@
 				)
 			)
 		)
+
 		(property "Footprint" "Capacitor_SMD:CP_Elec_10x12.6"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(property "Description" "V- local bulk at power connector"
 			(at 0 0 0)
-			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
+
 		(pin "1"
-			(uuid "7d8d89a9-e3fb-4b69-b048-1208ae3959b7")
+			(uuid "c21da850-7cdb-4ad4-ab55-bba127c1634d")
 		)
 		(pin "2"
-			(uuid "26a81f59-761f-494f-805f-b3dc289f0854")
+			(uuid "74e1a742-1434-4934-8ba8-50641bd2e734")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -4223,6 +3443,1114 @@
 			)
 		)
 	)
+	(symbol
+		(lib_id "Device:C")
+		(at 78.74 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4d3ec219-d483-4002-b42b-ffa6fe0e7356")
+		(property "Reference" "C705"
+			(at 78.74 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "100nF 50V X7R"
+			(at 78.74 114.30000000000001 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "V+ local decoupling"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "2e03ed25-d607-489d-9f41-eb4b7149cde5")
+		)
+		(pin "2"
+			(uuid "2bb208d0-92ab-4440-9463-993390724c91")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "C705")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 88.9 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "00e78ac4-0ad9-4d75-b295-a40aaf1f1fbe")
+		(property "Reference" "C706"
+			(at 88.9 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "100nF 50V X7R"
+			(at 88.9 114.30000000000001 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "V- local decoupling"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "ef43e92d-9405-4422-8391-2e6e15bf06e0")
+		)
+		(pin "2"
+			(uuid "08d70425-0fb3-4917-89df-24233ea0f04b")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "C706")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 99.06 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "81d9182b-ff74-423e-b6d0-5f43cc7b6964")
+		(property "Reference" "C711"
+			(at 99.06 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "1nF 50V C0G"
+			(at 99.06 114.30000000000001 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "V+ high-speed bypass"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "84b63d28-380f-437e-a1d7-c0ce9da96201")
+		)
+		(pin "2"
+			(uuid "2e31efbb-d109-4a77-9f1d-1c2e6d2c8f64")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "C711")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 109.22 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9339ae6d-fc6b-4285-a373-dc79d08e8d88")
+		(property "Reference" "C712"
+			(at 109.22 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "1nF 50V C0G"
+			(at 109.22 114.30000000000001 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "V- high-speed bypass"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "163f76e2-1fa8-4cf2-89b9-a5f01a5c2b7b")
+		)
+		(pin "2"
+			(uuid "cdbfdd3e-d077-4823-9046-066446f17136")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000008-0008-4008-8008-000000000008"
+					(reference "C712")
+					(unit 1)
+				)
+			)
+		)
+	)
+
+	(label "L_IN"
+		(at 25.4 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "76bec7fb-e667-45c2-8d1f-7ed5798eb580")
+	)
+	(label "R_IN"
+		(at 25.4 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e6bf4e15-19e9-47bc-8ed3-421f2193effe")
+	)
+	(label "L_OUT"
+		(at 154.94 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "35ee18eb-faaf-4b6e-a0ef-c17877bec4ba")
+	)
+	(label "R_OUT"
+		(at 154.94 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "92348702-854d-43ec-91c0-085a57624c92")
+	)
+	(label "+12V"
+		(at 25.4 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "823b5b1f-385e-4299-948e-556f0f8b4aac")
+	)
+	(label "A_GND"
+		(at 25.4 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "668b6e1a-46a0-40f0-bc48-1c9f223ea266")
+	)
+	(label "-12V"
+		(at 25.4 114.30000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f32d2579-4b35-4b16-939d-0cf68aa584ba")
+	)
+	(label "L_IN"
+		(at 45.72 41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "962f4a07-85ca-4710-ad7b-8dbea19e999d")
+	)
+	(label "A_GND"
+		(at 45.72 49.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ad54fe06-79e0-4c9a-a47d-9a62564df29f")
+	)
+	(label "R_IN"
+		(at 45.72 74.92999999999999 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "619ea132-f5dc-4e1b-b4fa-131d49bfc26d")
+	)
+	(label "A_GND"
+		(at 45.72 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2144ab08-12cf-4a6e-be07-028533fbea7a")
+	)
+	(label "L_IN"
+		(at 55.88 41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e5da6127-2ae0-4f7b-8fc2-8b28a359dfe5")
+	)
+	(label "L_AC"
+		(at 55.88 49.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a3100844-b942-4c42-8341-38d671990755")
+	)
+	(label "L_IN"
+		(at 66.04 41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f5bceca3-07a9-468d-95d7-3a25c8e06dd6")
+	)
+	(label "L_AC"
+		(at 66.04 49.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cfa68098-0f8e-4456-9ba9-bc7670e3e857")
+	)
+	(label "R_IN"
+		(at 55.88 74.92999999999999 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f9b0ec4e-05db-4884-97e1-182955e5c925")
+	)
+	(label "R_AC"
+		(at 55.88 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6651854c-e0bf-41b0-bc76-5da870e3c757")
+	)
+	(label "R_IN"
+		(at 66.04 74.92999999999999 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d0f8f000-1745-47c3-a9e2-2d3c775426ff")
+	)
+	(label "R_AC"
+		(at 66.04 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a44511fa-253f-43fd-85c7-8fe3bbd72b23")
+	)
+	(label "L_AC"
+		(at 76.2 41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2482e4ad-8f45-4ea7-a9db-f3c8dbe7ddc7")
+	)
+	(label "A_GND"
+		(at 76.2 49.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "02f5dd25-0a3e-4d09-8a60-cab102b64b30")
+	)
+	(label "R_AC"
+		(at 76.2 74.92999999999999 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b48402ec-4761-4ba1-b3d9-157699544ffd")
+	)
+	(label "A_GND"
+		(at 76.2 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c489a2fc-d09f-4cc0-b181-cc77a46a7f5b")
+	)
+	(label "R_OUT_OP"
+		(at 109.22 83.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "68d01c9e-bfaf-495b-88fc-998620bfd34c")
+	)
+	(label "R_INV"
+		(at 93.97999999999999 86.36 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "77ed97e2-c70a-499b-9063-caffd924e640")
+	)
+	(label "R_AC"
+		(at 93.97999999999999 81.27999999999999 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "12bff40c-f431-4357-bd4c-029b49a9d008")
+	)
+	(label "L_OUT_OP"
+		(at 109.22 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c0f9f53b-af47-48b9-bb0f-506e146b61b7")
+	)
+	(label "L_INV"
+		(at 93.97999999999999 53.339999999999996 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "72552567-d652-49e7-82f4-8325818eca3c")
+	)
+	(label "L_AC"
+		(at 93.97999999999999 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "92f9de8d-a396-42de-88d8-082569bfe60a")
+	)
+	(label "-12V"
+		(at 124.46 119.38000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4ecd1a64-a770-428d-9f22-543160495b92")
+	)
+	(label "+12V"
+		(at 124.46 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "89523c0f-526d-4208-98cd-addf76d80e72")
+	)
+	(label "L_INV"
+		(at 88.9 62.230000000000004 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c4c2dadb-9351-419f-b03d-eb846314d2b5")
+	)
+	(label "A_GND"
+		(at 88.9 69.85000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d35ddd00-8fec-4537-aafe-ff27077a8bd8")
+	)
+	(label "R_INV"
+		(at 88.9 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4cdc2549-2ff7-491e-abcc-91414f6356c3")
+	)
+	(label "A_GND"
+		(at 88.9 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bd40210f-7e63-4cea-8aea-5d65b498698d")
+	)
+	(label "L_OUT_OP"
+		(at 111.76 62.230000000000004 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d2d34954-448d-45fd-a9ef-a7045a1ed4b0")
+	)
+	(label "L_INV"
+		(at 111.76 69.85000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "666242de-92b9-41ea-a4af-bb00507b50b9")
+	)
+	(label "R_OUT_OP"
+		(at 111.76 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d23d9fb5-a630-4fd3-85aa-63baf7f53908")
+	)
+	(label "R_INV"
+		(at 111.76 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5bbed2a6-5278-44f6-8ec3-be43b591f134")
+	)
+	(label "L_OUT_OP"
+		(at 127.0 46.989999999999995 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2edc6d7f-ed61-4d86-95c9-918825bc7eb9")
+	)
+	(label "L_OUT_PRE"
+		(at 127.0 54.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "35d5ff96-ef80-47ee-9342-2457846ef4a2")
+	)
+	(label "R_OUT_OP"
+		(at 127.0 80.00999999999999 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5e480bc6-76fc-4687-816b-0e3c928c9481")
+	)
+	(label "R_OUT_PRE"
+		(at 127.0 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e30c1699-9cd2-4b06-9a30-74f096875caa")
+	)
+	(label "L_OUT_PRE"
+		(at 139.7 46.989999999999995 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0cd38ec5-5b33-4551-bb88-6c983a55abd6")
+	)
+	(label "L_OUT"
+		(at 139.7 54.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "57a13c58-f158-4e7a-a4eb-61fce9496b43")
+	)
+	(label "R_OUT_PRE"
+		(at 139.7 80.00999999999999 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b4d9ca91-fa7e-4301-b05e-8a3133754d12")
+	)
+	(label "R_OUT"
+		(at 139.7 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a7f40eb7-cfcd-4409-9516-dafb33c1be99")
+	)
+	(label "+12V"
+		(at 55.88 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ece00d44-d1fc-413a-a3f6-cb57b8b77d8f")
+	)
+	(label "A_GND"
+		(at 55.88 115.57000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cb3b77e4-de7d-46fc-a56b-b3c80da610ee")
+	)
+	(label "A_GND"
+		(at 66.04 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8606aec4-894c-4212-8311-37414822bd7a")
+	)
+	(label "-12V"
+		(at 66.04 115.57000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c91e0eaa-3d88-45e4-ad40-969be7b71922")
+	)
+	(label "+12V"
+		(at 78.74 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dadd330d-5f0d-4d94-884a-ec2d07f605ab")
+	)
+	(label "A_GND"
+		(at 78.74 115.57000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4e36a2f5-3980-4ef1-ac3e-41e81d5360c2")
+	)
+	(label "A_GND"
+		(at 88.9 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "adc1903b-7d38-4832-ab3f-09e5b4aaed11")
+	)
+	(label "-12V"
+		(at 88.9 115.57000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1cfee1c3-747f-41ba-875d-1c38920ae885")
+	)
+	(label "+12V"
+		(at 99.06 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "67d18554-5eeb-435f-84b9-ffac0c2b32d2")
+	)
+	(label "A_GND"
+		(at 99.06 115.57000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0d96fc84-06d9-446b-b75a-e50bf4710765")
+	)
+	(label "A_GND"
+		(at 109.22 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "665ab533-45d5-4fe6-a869-4a2d362a2d66")
+	)
+	(label "-12V"
+		(at 109.22 115.57000000000001 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "82371629-2e71-4a9e-ba63-687a4a5a6b2f")
+	)
+	(label "L_IN"
+		(at 20.32 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "87fd1296-785f-4831-896f-083345a9d333")
+	)
+	(label "R_IN"
+		(at 20.32 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f491036d-a033-43b5-bef8-5007d912415c")
+	)
+	(label "+12V"
+		(at 20.32 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b2ceace5-1af9-4c94-b0b7-06f887a1bfd2")
+	)
+	(label "-12V"
+		(at 20.32 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f3f5c42d-40da-4127-95b6-747c22e56d2e")
+	)
+	(label "A_GND"
+		(at 20.32 121.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "db2f7f10-9ad5-4353-b526-f45ed4d91b2f")
+	)
+	(label "L_OUT"
+		(at 180.34 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b570abc7-c770-4df6-b143-a95a50f7d83c")
+	)
+	(label "R_OUT"
+		(at 180.34 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4c8c7588-5cdb-42a3-9b65-2de10dd6a9a9")
+	)
+
+	(wire
+		(pts
+			(xy 25.4 60.96) (xy 25.4 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f6a3209-f48d-4c73-bca3-da80aae487dc")
+	)
+	(wire
+		(pts
+			(xy 25.4 41.91) (xy 66.04 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35627dde-95f6-4e8d-886a-03c38033f4f0")
+	)
+	(junction
+		(at 45.72 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "970801ca-99d7-41f9-b31e-aee328239647")
+	)
+	(junction
+		(at 55.88 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "10c564ca-22e5-4548-b546-27801f125b4b")
+	)
+	(wire
+		(pts
+			(xy 25.4 63.5) (xy 25.4 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8df0ee4f-72fb-4faa-a1e6-ddb1b7cfaecf")
+	)
+	(wire
+		(pts
+			(xy 25.4 74.93) (xy 66.04 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20ba5df0-3ab1-4279-9f2e-46035a4aac67")
+	)
+	(junction
+		(at 45.72 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d89b4098-bbf2-4768-9283-294963cb51b4")
+	)
+	(junction
+		(at 55.88 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "29a39d2b-68d7-4cec-b11d-e8e8a07ae091")
+	)
+	(wire
+		(pts
+			(xy 139.7 54.61) (xy 154.94 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00863de0-e8bd-43e0-b87f-fbe123891704")
+	)
+	(wire
+		(pts
+			(xy 154.94 54.61) (xy 154.94 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1e844e9c-6b13-49ba-8145-8fc08a62a72f")
+	)
+	(wire
+		(pts
+			(xy 139.7 87.63) (xy 154.94 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a7d9ecb-7df9-4a39-a346-8e253ba86225")
+	)
+	(wire
+		(pts
+			(xy 154.94 87.63) (xy 154.94 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8e16917-9cd5-4ed3-8120-c9eb2ce44f86")
+	)
+
+
 	(sheet_instances
 		(path "/"
 			(page "1")
