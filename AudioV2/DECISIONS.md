@@ -801,7 +801,7 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 | **G1** | リレー盤 = 接点側は各 Amp の `A_GND` 世界、コイル/ULN = `D_GND`（または `CTRL_GND`）。結合は NetTie 一点 |
 | **G2** | digipot アナログ端子 = `A_GND`、ロジック = 操作 Pico の `D_GND`。同様に一点 |
 
-基板を B 分割するほど G1/G2 を基板境界に寄せやすい。
+基板を B 分割するほど G1/G2 を基板境界に寄せやすい。G1/G2 は同じ「システム全体で1点」を指しており、**NetTie本体はControlPanel側（D_GNDの発生源=操作Pico直近）に1個だけ**置く（2026-08-31確定、WIRING.md参照）。RelayBoardはA_GND/D_GNDを両方受け取るが結合しない（結合するとNetTieが2箇所目になりグラウンドループになる）。
 
 ---
 

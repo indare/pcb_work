@@ -7,13 +7,21 @@
 | Net | 源 | 先 | 形式 |
 |---|---|---|---|
 | `+12V` | PowerModule **J201**-1 | RelayBoard_A/B `J_RAIL`-1, ControlPanel | 端子台 3P 幹線 ×2本 |
-| `A_GND` | PowerModule **J201**-2 | RelayBoard `J_RAIL`-2 → 各 `J_PWR`-2（非切替）、全アナログ島（NetTie 一点 — **位置未決**） | 端子台 |
+| `A_GND` | PowerModule **J201**-2 | RelayBoard `J_RAIL`-2 → 各 `J_PWR`-2（非切替）、全アナログ島 | 端子台 |
 | `-12V` | PowerModule **J201**-3 | 同上 `J_RAIL`-3 | 同上 |
 | PD 入 | 外付け **50224 等** → Power **J202**（1=GND 2=+12） | 板上 `PD_12V` / `PD_GND` | 2P（トポロジ A） |
 | `PD_12V` | Power（J202 後） | ControlPanel PWR SW 入力 | **往復用端子まだ**（A のまま要追加） |
 | `PD_12V_SW` | ControlPanel SW1 出力 | Power F1 → DKMW +Vin | 2P 戻り |
 | `PD_GND` | J202 / DKMW −Vin | Panel LED 戻り | 上記とセット |
 | `VCC_TONE` | Power LM7809 → **J203**（1=A_GND 2=+9） | ControlPanel PT2314 | 2P（星型 A_GND と二重ループにしない） |
+
+## A_GND / D_GND の分離（2026-08-31 確定）
+
+`D_GND`（デジタル/コイル駆動）と`A_GND`（アナログ/音声・±12V帰路）は**システム全体で1箇所だけ**NetTieで結合する（DECISIONS.md G1/G2）。
+
+- **NetTie位置: ControlPanel**（`D_GND`の発生源＝操作Picoの直近。G2「操作PicoのD_GND」参照）
+- **RelayBoardでは結合しない。** RelayBoardは`A_GND`（PowerModule `J_RAIL`経由、Amp接点/電源用）と`D_GND`（ControlPanel `J_I2C`経由、MCP23017/ULN2803コイル駆動用）の**両方を受け取るが、両者は基板上で最後まで別ネットのまま**。ここで繋ぐとNetTieが2箇所目になり、A_GND側にコイル駆動ノイズが回り込むグラウンドループになる
+- G1「リレー盤=...結合はNetTie一点」は、RelayBoard上に結合点を置けという意味ではなく、システム全体で見た「一点」原則をリレー盤の文脈で言及したもの（G2のControlPanel側の記述と同じ1点を指す）
 
 ## デジタル / I²C（2026-08-31 スター確定）
 
