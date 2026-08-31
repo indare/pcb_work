@@ -19,8 +19,8 @@ def new_uid() -> str:
     return str(uuid.uuid4())
 
 
-def grid(x: float) -> float:
-    return round(x / 2.54) * 2.54
+def grid(x: float, step: float = 2.54) -> float:
+    return round(x / step) * step
 
 
 def _rotate_point(ox: float, oy: float, rot: int) -> tuple[float, float]:
@@ -489,6 +489,7 @@ def symbol_inst_v10(
     description: str = "",
     instance_refs: list[tuple[str, str]] | None = None,
     prop_dx: float = 0.0,
+    grid_step: float = 2.54,
 ) -> str:
     from generate_kicad_scaffold import sym_prop  # noqa: WPS433
 
@@ -518,7 +519,7 @@ def symbol_inst_v10(
     )
     return f"""\t(symbol
 \t\t(lib_id "{lib_id}")
-\t\t(at {grid(x)} {grid(y)} {rot})
+\t\t(at {grid(x, grid_step)} {grid(y, grid_step)} {rot})
 \t\t(unit {unit})
 \t\t(body_style 1)
 \t\t(exclude_from_sim no)

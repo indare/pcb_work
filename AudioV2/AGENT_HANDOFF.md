@@ -16,8 +16,8 @@
 **AudioV2 AmpModuleを回路図・独立PCBとして再版し、親へ代表1シートで統合した。**
 ゲイン2（20k/20k）、±12 V、100 µF/rail + 100 nF + 1 nF、DIP-8ソケット。物理は×10製造。
 RelayBoardは5ch×2枚の入力＋電源連動配線まで完了し、両インスタンスERC 0件。
-番地ストラップは 0 Ω/1206（§2.6）。**`wire_circuit_design.py relay` はスクリプト同期まで回さない。**
-次の話題候補: Relayレビュー指摘（§2.7）、Control未接続、親の箱外dangling label整理。
+番地ストラップは 0 Ω/1206（§2.6）。`wire_circuit_design.py` は現図へコード同期済みだが実行未検証、**`--force-relay` なしではrelayに書き込まない安全装置あり。**
+次の話題候補: ローカルKiCadでの`relay --force-relay`検証、Relayレビュー指摘（§2.7）、Control未接続、親の箱外dangling label整理。
 
 ---
 
@@ -113,13 +113,17 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 - I2C プルアップは **ControlPanel の `R210`/`R211` 4.7 kΩ のみ**。RelayBoard 側には置かない（並列化を避ける）
 - 参照接頭辞は `Device:R` に対し `JP` のまま（ストラップである意図を残す）。**KiCad で「既存アノテーションをリセット」して再アノテートすると `R3xx` に振り直される**ので実行しない
 
-**⚠ スクリプトと図が非同期（未解消）:** `wire_circuit_design.py` の `addr_strap` は今も `SolderJumper_2_Open` を y≈152/168 に生成する。`wire_circuit_design.py relay`（または引数省略の `all`）を再生成すると、手編集ぶん（ストラップの U301 脇配置・0 Ω 化・1206 FP・`J_I2C`/`C301`/`C302` の位置・階層ラベル位置）が**全部戻る**。回すなら先にスクリプトへ写すこと。
+**✅ スクリプト同期（2026-08-31、コード上は完了・実機未検証）:** `wire_circuit_design.py` の `addr_strap`/`C301`/`C302`/`J_I2C`/階層ラベルを現図の座標へ書き直した。根拠は `RelayBoard.kicad_sch` の実座標を `pin_connect()` 相当の計算で裏取りし、`CIRCUIT_DESIGN.md`/`DECISIONS.md` の論理設計（JP301=A0・JP302=A1、`J_I2C`=SDA/SCL/3V3/+5V/D_GND順）と突き合わせて確認したもの。ADDR_A0/ADDR_A1 のネットラベルも復活させた。
 
-**安全装置（2026-08-31 追加）:** `main()` は `relay` への書き込みをデフォルトでスキップし、警告を出すだけになった。上書きするには明示的に `--force-relay` を付ける（`python3 wire_circuit_design.py relay --force-relay`）。誤操作（Cursorエージェントが `.cursor/rules/work-on-main.mdc` を見て「再生成は wire_circuit_design.py」とだけ理解し `all` を回すケースなど）を防ぐための保険であり、根本対応（スクリプトの同期）の代わりにはならない。
+途中で `sch_helpers.grid()`/`symbol_inst_v10()` が **常に2.54mmグリッドへ丸めていた**ことに気づいた（RelayBoardの実配置は半分の1.27mmグリッド）。全シート共通のヘルパーなので既定値2.54は変えず、`grid_step`/`at(x,y,step)`という**オプション引数**を追加し、RelayBoardの新規座標だけ`1.27`を明示的に渡す形にした（他シートの出力は不変）。これに気づかず2.54のまま実装していたら、座標が数mmずれた状態で「同期完了」と誤報告するところだった。
+
+**ただしこのクラウド環境にKiCad本体が無く、`wire_circuit_design.py relay --force-relay` を実際に実行してKiCadで開ける／ERCが通ることまでは検証できていない。** ローカル（Windows）で一度実行し、`kicad-cli sch export netlist` と `kicad-cli sch erc` で確認してから安全装置解除の判断をすること。
+
+**安全装置（2026-08-31 追加）:** `main()` は `relay` への書き込みをデフォルトでスキップし、警告を出すだけになった。上書きするには明示的に `--force-relay` を付ける（`python3 wire_circuit_design.py relay --force-relay`）。誤操作（Cursorエージェントが `.cursor/rules/work-on-main.mdc` を見て「再生成は wire_circuit_design.py」とだけ理解し `all` を回すケースなど）を防ぐための保険。スクリプト同期は済んだが、上記の実機未検証ゆえ**当面は解除しない**。
 
 ### 2.7 RelayBoard レビュー指摘（2026-08-31、いずれも接続ミスではない。未対応）
 
-1. **A0/A1 ネットが無名** — 現在 `Net-(U301-A0)` / `Net-(U301-A1)`。`ADDR_A0`/`ADDR_A1` ラベルを戻すとネットリスト差分と ERC ログが読みやすい
+1. **A0/A1 ネットが無名** — 現在 `Net-(U301-A0)` / `Net-(U301-A1)`。`ADDR_A0`/`ADDR_A1` ラベルを戻すとネットリスト差分と ERC ログが読みやすい。**→ `wire_circuit_design.py` のスクリプト同期（§2.6）でラベルを復活させた。`--force-relay` で実図に反映するまでは無名のまま**
 2. **IC 直近パスコン不足** — `C301`/`C302` は方針どおり `J_I2C` 入口。別途 U301 の 9/10 ピン間、`U302`/`U303` の 10/9 ピン間に 100 nF が欲しい。`+5V` はリレーパルスが乗るので、リレー群近傍にバルク 100–220 µF も検討
 3. **コイル駆動マージンが薄い** — `CHn_SET` は audio/power 2 個のコイルを並列駆動 → 125 Ω∥125 Ω = 62.5 Ω ≈ 80 mA。ULN2803A の VCE(sat) は同電流で 0.9–1.1 V なのでコイル印加は約 3.9–4.1 V。AZ850P2-5 の must-set（定格の 70–75 % = 3.5–3.75 V）に対し余裕が 1 割程度。BP5293 からの 5P 配線の電圧降下も乗る。**`Zettler_AZ850.pdf` の set voltage 実値を確認すること**
 4. **A/B は同一番地に見える** — 親で 2 回インスタンス化しているため、ネットリスト上は A/B が同じ JP 状態＝同じ番地。実装時に基板ごとに JP を変える運用（シルク早見表が前提）
@@ -164,7 +168,7 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 
 ### 未着手・優先候補
 
-1. **`wire_circuit_design.py` の `addr_strap` を現図（0 Ω / 1206 / U301 脇）へ同期** — 未実施のまま `relay` を再生成すると手編集が消える（§2.6 の警告）
+1. **`wire_circuit_design.py relay --force-relay` をKiCadのあるマシンで実行し、netlist/ERCで検証** — コード上の同期（§2.6）は完了。実行検証と `check_sexpr.py` 通過確認が残作業
 2. **RelayBoard レビュー指摘の消化**（§2.7）— 特に 3 の AZ850 set voltage 実測確認
 3. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
 4. **ControlPanel未接続ピンの整理**
@@ -236,3 +240,4 @@ generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay 
 | 2026-08-31 | RelayBoard本配線 — 5ch×2、入力＋電源連動、各インスタンスERC 0 |
 | 2026-08-31 | 番地ストラップ 0 Ω/1206 化（§2.6）＋レビュー指摘の記録（§2.7）。スクリプト非同期の警告あり |
 | 2026-08-31 | `wire_circuit_design.py` に `relay` 書き込みの安全装置（`--force-relay` 必須化）を追加。`work-on-main.mdc` にも注記（§2.6） |
+| 2026-08-31 | `wire_circuit_design.py` の `addr_strap`/`C301`/`C302`/`J_I2C`/階層ラベルを現図の座標へコード同期（§2.6）。ADDR_A0/ADDR_A1ラベルも復活（§2.7-1）。実機（KiCad）未検証のため安全装置は解除せず |

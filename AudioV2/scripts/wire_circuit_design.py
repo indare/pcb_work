@@ -161,9 +161,9 @@ def tip(sx: float, sy: float, px: float, py: float, rot: int = 0) -> tuple[float
     return pin_connect(sx, sy, rot, px, py, 0, 0.0)
 
 
-def at(x: float, y: float) -> tuple[float, float]:
-    """Snap placement to KiCad grid — must match ``symbol_inst_v10``."""
-    return grid(x), grid(y)
+def at(x: float, y: float, step: float = 2.54) -> tuple[float, float]:
+    """Snap placement to KiCad grid — must match ``symbol_inst_v10``'s ``grid_step``."""
+    return grid(x, step), grid(y, step)
 
 
 def r_pins(rx: float, ry: float, rot: int = 0) -> tuple[tuple[float, float], tuple[float, float]]:
@@ -684,6 +684,9 @@ def relay_board_wired() -> str:
         extra: list[tuple[str, str]] | None = None,
         description: str = "",
         prop_dx: float = 0.0,
+        rot: int = 0,
+        footprint: str = "",
+        grid_step: float = 2.54,
     ) -> str:
         """One shared-sheet symbol with unique A/B instance references."""
         return symbol_inst_v10(
@@ -692,12 +695,14 @@ def relay_board_wired() -> str:
             value,
             x,
             y,
-            0,
+            rot,
             PATH_RELAY,
             extra_props=extra,
+            footprint=footprint,
             description=description,
             instance_refs=[(PATH_RELAY, ref_a), (PATH_RELAY_B, ref_b)],
             prop_dx=prop_dx,
+            grid_step=grid_step,
         )
 
     def mcp_pin(px: float, py: float) -> tuple[float, float]:
@@ -773,41 +778,82 @@ def relay_board_wired() -> str:
     ncs.extend([no_connect_at(mcp_pin(-12.7, 5.08)), no_connect_at(mcp_pin(-12.7, 2.54))])
 
     # Default 0x20 (both jumpers open). Close A0 and/or A1 for 0x21-0x23.
-    def addr_strap(ref_r_a: str, ref_r_b: str, ref_j_a: str, ref_j_b: str, net: str, x: float, y: float, value: str) -> None:
-        parts.append(rsym("Device:R", ref_r_a, ref_r_b, "10k", x, y, description=f"MCP {net} pulldown"))
-        jx, jy = at(x + 25.4, y)
+    # Hand-tuned layout (2026-08-31): strap sits beside U301, 0R/1206 hand-solder
+    # jumper (SolderJumper_2_Open has no footprint with a fittable 0R pad). R
+    # pin1 faces U301's ADDR pin, pin2 faces D_GND. JP pin1 faces the pulldown,
+    # pin2 ties to U301's 3V3 pin (shared by both straps).
+    strap_fp = "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+
+    def addr_strap(
+        ref_r_a: str,
+        ref_r_b: str,
+        ref_j_a: str,
+        ref_j_b: str,
+        net: str,
+        r_x: float,
+        r_y: float,
+        r_rot: int,
+        jp_x: float,
+        jp_y: float,
+    ) -> None:
         parts.append(
             rsym(
-                "Jumper:SolderJumper_2_Open",
-                ref_j_a,
-                ref_j_b,
-                value,
-                jx,
-                jy,
-                description=f"Close to pull {net} to 3V3",
+                "Device:R",
+                ref_r_a,
+                ref_r_b,
+                "10k",
+                r_x,
+                r_y,
+                rot=r_rot,
+                footprint=strap_fp,
+                description=f"MCP {net} pulldown",
+                grid_step=1.27,
             )
         )
-        rp1, rp2 = r_pins(x, y)
-        nets.extend([net_at(net, rp1, UP), net_at("D_GND", rp2, DOWN)])
+        parts.append(
+            rsym(
+                "Device:R",
+                ref_j_a,
+                ref_j_b,
+                "0R",
+                jp_x,
+                jp_y,
+                rot=90,
+                footprint=strap_fp,
+                description=f"0R strap: fit to tie {net} to 3V3, leave empty for 0",
+                grid_step=1.27,
+            )
+        )
+        rp1, rp2 = r_pins(r_x, r_y, r_rot)
+        jp1, jp2 = r_pins(jp_x, jp_y, 90)
         nets.extend(
             [
-                net_at(net, tip(jx, jy, -5.08, 0), LEFT),
-                net_at("3V3", tip(jx, jy, 5.08, 0), RIGHT),
+                net_at(net, rp1, UP),
+                net_at("D_GND", rp2, DOWN),
+                net_at(net, jp1, RIGHT),
+                net_at("3V3", jp2, LEFT),
             ]
         )
 
-    addr_strap("R301", "R401", "JP301", "JP401", "ADDR_A0", *at(55.88, 152.4), "A0")
-    addr_strap("R302", "R402", "JP302", "JP402", "ADDR_A1", *at(55.88, 167.64), "A1")
+    # RelayBoard's hand layout sits on a 1.27 mm (half-grid) pitch, finer than
+    # this generator's default 2.54 mm — at(..., 1.27) keeps these exact.
+    addr_strap("R301", "R401", "JP301", "JP401", "ADDR_A0", *at(71.12, 87.63, 1.27), 180, *at(63.5, 91.44, 1.27))
+    addr_strap("R302", "R402", "JP302", "JP402", "ADDR_A1", *at(71.12, 97.79, 1.27), 0, *at(63.5, 96.52, 1.27))
 
     # Local decoupling sits on the J_I2C entry (3V3 / +5V), not the analog rails.
-    for ref_a, ref_b, value, x, y, rail in [
-        ("C301", "C401", "100nF", 58.42, 40.64, "3V3"),
-        ("C302", "C402", "100nF", 71.12, 48.26, "+5V"),
+    # Hand-tuned layout (2026-08-31): C301/C302 stack vertically and share one
+    # D_GND pin between them (C301 top pin=3V3, C302 bottom pin=+5V).
+    for ref_a, ref_b, value, x, y, rail, rail_up in [
+        ("C301", "C401", "100nF", 38.1, 49.53, "3V3", True),
+        ("C302", "C402", "100nF", 38.1, 57.15, "+5V", False),
     ]:
-        cx, cy = at(x, y)
-        parts.append(rsym("Device:C", ref_a, ref_b, value, cx, cy))
+        cx, cy = at(x, y, 1.27)
+        parts.append(rsym("Device:C", ref_a, ref_b, value, cx, cy, grid_step=1.27))
         cp1, cp2 = cap_pins(cx, cy)
-        nets.extend([net_at(rail, cp1, UP), net_at("D_GND", cp2, DOWN)])
+        if rail_up:
+            nets.extend([net_at(rail, cp1, UP), net_at("D_GND", cp2, DOWN)])
+        else:
+            nets.extend([net_at("D_GND", cp1, UP), net_at(rail, cp2, DOWN)])
 
     # GPA0..4 drive SET; GPB0..4 drive RESET. Audio and power relay coils
     # are paired per channel so their state can never diverge.
@@ -933,7 +979,7 @@ def relay_board_wired() -> str:
 
     # Board harnesses: control, toned stereo source, analog rails.
     # Left column = connectors. Caps sit on J_I2C; address straps sit on MCP A0/A1.
-    ji_x, ji_y = at(36.83, 46.99)
+    ji_x, ji_y = at(16.51, 46.99, 1.27)
     jt_x, jt_y = at(50.8, 91.44)
     jr_x, jr_y = at(50.8, 121.92)
     parts.append(
@@ -946,6 +992,7 @@ def relay_board_wired() -> str:
             ji_y,
             description="From ControlPanel: SDA / SCL / 3V3 / +5V / D_GND",
             prop_dx=-12.7,
+            grid_step=1.27,
         )
     )
     for pin_y, name in zip([5.08, 2.54, 0, -2.54, -5.08], ["I2C_SDA", "I2C_SCL", "3V3", "+5V", "D_GND"], strict=True):
@@ -993,16 +1040,16 @@ def relay_board_wired() -> str:
     "+5V/D_GND from ControlPanel; contacts switch +/-12V only.",
     "J_RAIL = PowerModule J201. A_GND is never switched: straight to each J_PWR.",
 ])}
-{hier_label("I2C_SDA", "bidirectional", 25.4, 40.64, 180)}
-{hier_label("I2C_SCL", "bidirectional", 25.4, 45.72, 180)}
-{hier_label("3V3", "input", 25.4, 50.8, 180)}
-{hier_label("+5V", "input", 25.4, 55.88, 180)}
-{hier_label("D_GND", "input", 25.4, 60.96, 180)}
-{hier_label("TONE_L", "input", 25.4, 81.28, 180)}
-{hier_label("TONE_R", "input", 25.4, 86.36, 180)}
-{hier_label("+12V", "input", 25.4, 91.44, 180)}
-{hier_label("-12V", "input", 25.4, 96.52, 180)}
-{hier_label("A_GND", "bidirectional", 25.4, 101.6, 180)}
+{hier_label("I2C_SDA", "bidirectional", 25.4, 39.37, 0)}
+{hier_label("I2C_SCL", "bidirectional", 34.29, 41.91, 0)}
+{hier_label("3V3", "input", 27.94, 46.99, 0)}
+{hier_label("+5V", "input", 26.67, 57.15, 180)}
+{hier_label("D_GND", "input", 31.75, 50.8, 180)}
+{hier_label("TONE_L", "input", 34.29, 90.17, 90)}
+{hier_label("TONE_R", "input", 34.29, 92.71, 270)}
+{hier_label("+12V", "input", 30.48, 114.3, 90)}
+{hier_label("-12V", "input", 30.48, 119.38, 270)}
+{hier_label("A_GND", "bidirectional", 29.21, 115.57, 180)}
 {"".join(parts)}
 {"".join(nets)}
 {"".join(ncs)}
