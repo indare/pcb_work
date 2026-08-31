@@ -132,6 +132,20 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 
 **確認済み・問題なし:** 3.3 V ロジック → ULN2803A 入力は IB ≈ 0.7 mA、必要 hFE ≈ 114 に対しダーリントンは 1000 以上。
 
+### 2.8 シートの所有権モデル（2026-08-31 制定）
+
+`wire_circuit_design.py` が担保するのは**回路の論理設計と意図**（どのネットがどのピンに繋がるか）を回路図sexprに正しく起こすところまで。生成された回路図は人間がKiCad上で読んで座標・フットプリント・配線の見た目を手で整える対象で、そこに手が入った時点でそのシートは**「生成コード所有」から「手編集所有」へ卒業**する。
+
+| 状態 | 意味 | 該当シート |
+|---|---|---|
+| **生成コード所有** | `wire_circuit_design.py <target>` を回せばそのまま正 | Amp, Power, Control, Output, 親 |
+| **手編集所有** | KiCad上の手編集が正。生成コードはロジック（ネット/ピン対応）のドキュメントとして残すが、機械的に上書きしてはいけない | **RelayBoard**（2026-08-31〜） |
+
+**運用ルール:**
+- 手編集所有シートへの**ロジック変更**（ネットの追加/変更、部品の追加）は **KiCad側で直接行う**。`wire_circuit_design.py` 側のコードは追随してドキュメント更新するが、それを起点に書き戻さない
+- `relay` への書き込みはデフォルトで無効（§2.6 安全装置）。`--force-relay` は「シートを丸ごと作り直す」ときだけの脱出ハッチで、通常運用では使わない
+- 新しいシートが今後同様に手編集され始めたら、この表に追記して所有権を切り替えること
+
 ---
 
 ## 3. マージ済み PR（このスレッドで扱った範囲）
@@ -223,7 +237,8 @@ generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay 
 | OK | NG |
 |---|---|
 | `AudioV2/**` の sch / スクリプト / 文書 | `Audio/` 既存製造図の無闇な改変 |
-| `wire_circuit_design.py` での再生成 | `generate_kicad_scaffold.py` 再実行 |
+| `wire_circuit_design.py` での再生成（**手編集所有シートは除く**、§2.8） | `generate_kicad_scaffold.py` 再実行 |
+| RelayBoardのロジック変更を **KiCad側で直接** 行う | RelayBoardを `wire_circuit_design.py relay --force-relay` で機械的に上書き |
 | sexpr 編集後は必ず `check_sexpr.py` | `--no-verify` でコミット |
 | 新規作業は **`main`** | 旧 `cursor/audiov2-*` を base |
 

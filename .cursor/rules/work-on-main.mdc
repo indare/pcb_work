@@ -8,4 +8,4 @@ alwaysApply: true
 - 作業ブランチの正は **`main`**。マージ済みの `cursor/audiov2-*` / `cursor/manual-volume-*` などを fetch・checkout・PR base にしない。
 - 長い文脈は **[AudioV2/AGENT_HANDOFF.md](AudioV2/AGENT_HANDOFF.md)** を読む（クラウド↔ローカルで会話 UI が分岐することがある）。
 - `generate_kicad_scaffold.py` は再実行しない。再生成は `wire_circuit_design.py`。
-- `wire_circuit_design.py all`（引数省略時のデフォルトも `all`）は RelayBoard を含む全シートを対象にする。RelayBoard は生成コードと非同期の手編集が入っているため、`relay` の書き込みはデフォルトでスキップされる（`--force-relay` で上書き可）。詳細と同期手順は **[AudioV2/AGENT_HANDOFF.md](../../AudioV2/AGENT_HANDOFF.md) §2.6**。
+- `wire_circuit_design.py all`（引数省略時のデフォルトも `all`）は RelayBoard を含む全シートを対象にする。**RelayBoard は「手編集所有」シート**（AGENT_HANDOFF §2.8）— ロジック変更も KiCad 側で直接行う。`relay` の書き込みはデフォルトでスキップされる（`--force-relay` はシートを丸ごと作り直すときだけの脱出ハッチ、通常運用では使わない）。詳細は **[AudioV2/AGENT_HANDOFF.md](../../AudioV2/AGENT_HANDOFF.md) §2.6 / §2.8**。
