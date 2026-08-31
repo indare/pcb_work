@@ -16,8 +16,13 @@
 **AudioV2 AmpModuleを回路図・独立PCBとして再版し、親へ代表1シートで統合した。**
 ゲイン2（20k/20k）、±12 V、100 µF/rail + 100 nF + 1 nF、DIP-8ソケット。物理は×10製造。
 RelayBoardは5ch×2枚の入力＋電源連動配線まで完了し、両インスタンスERC 0件。
-番地ストラップは 0 Ω/1206（§2.6）。`wire_circuit_design.py` は現図へコード同期済みだが実行未検証、**`--force-relay` なしではrelayに書き込まない安全装置あり。**
-次の話題候補: ローカルKiCadでの`relay --force-relay`検証、Relayレビュー指摘（§2.7）、Control未接続、親の箱外dangling label整理。
+番地ストラップは 0 Ω/1206（§2.6）。`wire_circuit_design.py` はRelayBoard/AmpModule双方とも現図へコード同期済みだが**実機KiCad検証は未実施**。RelayBoardは「手編集所有」（§2.8）に切替済みで、`--force-relay` なしでは書き込まない安全装置あり。ユーザーがローカルKiCadでRelayBoardのAZ850×10を270°回転＋チャンネル間隔拡張し、配線も追従済み（`main`にpush済み、addr strap等は無傷と確認済み）。
+
+I2C/電源トポロジは**スター確定**（daisy不採用、§WIRING.md）。端子台はv1 `Audio/Controll.kicad_sch`と同じPhoenix MKDS-1,5系。A_GND/D_GNDのNetTieは**ControlPanel側**（Pico直近）に1点、RelayBoardでは結合しない、と確定（WIRING.md）。
+
+**KiCad 10.0.6をクラウド環境にビルド中/ビルド済み**（別セッション `session_01XMzAwTNj2AzF2SjKNLmC32`、ブランチ`claude/kicad-cloud-build-env-2jgp6g`、Docker）。このセッション（会話の続き）からは直接メッセージを送れないので、そちらを開いて`main`を取り込ませ、`wire_circuit_design.py amp`/`relay --force-relay`の実行検証を依頼する必要がある。
+
+次の話題候補: 上記KiCad実機検証、Relayレビュー指摘（§2.7）、Control未接続、親の箱外dangling label整理、ControlPanel側J_I2Cコネクタの物理実装（フェルール/スプリッタ分岐）。
 
 ---
 
@@ -230,10 +235,15 @@ Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 AudioV2/AGENT_HANDOFF.md を読んで続きから。
 ブランチは main（origin と同期済み前提）。
 AmpModuleは代表1シート＋独立PCB（同一仕様×10）。ゲイン2、±12 V、バルク/1nF対応済み。
-RelayBoardは入力＋電源連動、各盤MCP×1/ULN×2/AZ850×10、ERC 0。
-番地ストラップは0Ω/1206（AGENT_HANDOFF §2.6）。レビュー指摘は §2.7 に未対応で置いてある。
-次候補: addr_strapのスクリプト同期 / Relayレビュー指摘 / Control / 親の箱外dangling label整理。
-generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay も同期まで回さない。
+RelayBoardは入力＋電源連動、各盤MCP×1/ULN×2/AZ850×10、ERC 0。AZ850は270°回転済み（ユーザーがKiCadで手編集、main反映済み）。
+番地ストラップは0Ω/1206（§2.6）、addr_strap/C301/C302/J_I2C/階層ラベルはwire_circuit_design.pyへコード同期済みだが実機未検証（§2.6）。
+AmpModuleも信号順配線をコードに追加済みだが同様に実機未検証（§2.5）。
+RelayBoardは「手編集所有」（§2.8）。I2C/電源はスター確定、端子台はPhoenix MKDS-1,5系（v1と同一/互換）。
+A_GND/D_GNDのNetTieはControlPanel側（Pico直近）1点、RelayBoardでは結合しない。
+KiCad 10.0.6クラウド環境が別セッション（claude/kicad-cloud-build-env-2jgp6gブランチ）でビルド済み/ビルド中 — そこにmainを取り込ませてwire_circuit_design.py amp / relay --force-relayの実行検証を依頼するのが次の一歩。
+レビュー指摘は §2.7 に未対応で置いてある。
+次候補: 上記KiCad実機検証 / Relayレビュー指摘 / Control未接続 / 親の箱外dangling label整理 / ControlPanel側J_I2Cコネクタ実装。
+generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay/ampは実機検証後にのみ書き込み確認すること（relayは--force-relay必須）。
 ```
 
 ---
