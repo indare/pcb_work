@@ -24,12 +24,14 @@ UUID_RELAY_A = "a1000004-0004-4004-8004-000000000004"
 UUID_RELAY_B = "a1000005-0005-4005-8005-000000000005"
 UUID_CONTROL_INST = "a1000006-0006-4006-8006-000000000006"
 UUID_OUTPUT_INST = "a1000007-0007-4007-8007-000000000007"
+UUID_AMP_INST = "a1000008-0008-4008-8008-000000000008"
 
 # Child file root UUIDs (distinct from sheet instance UUIDs)
 UUID_POWER_FILE = "b2000002-0002-4002-8002-000000000002"
 UUID_RELAY_FILE = "b2000003-0003-4003-8003-000000000003"
 UUID_CONTROL_FILE = "b2000006-0006-4006-8006-000000000006"
 UUID_OUTPUT_FILE = "b2000007-0007-4007-8007-000000000007"
+UUID_AMP_FILE = "b2000008-0008-4008-8008-000000000008"
 
 PROJECT = "AudioV2Case"
 
@@ -38,13 +40,13 @@ def uid() -> str:
     return str(uuid.uuid4())
 
 
-def sch_open(file_uuid: str, body: str) -> str:
+def sch_open(file_uuid: str, body: str, paper: str = "A4") -> str:
     return f"""(kicad_sch
 \t(version 20260306)
 \t(generator "eeschema")
 \t(generator_version "10.0")
 \t(uuid "{file_uuid}")
-\t(paper "A4")
+\t(paper "{paper}")
 {body}
 \t(sheet_instances
 \t\t(path "/"
@@ -64,6 +66,21 @@ def text_note(x: float, y: float, lines: list[str]) -> str:
 \t\t\t\t(size 1.27 1.27)
 \t\t\t)
 \t\t\t(justify left top)
+\t\t)
+\t\t(uuid "{uid()}")
+\t)
+"""
+
+
+def local_label(name: str, x: float, y: float, angle: int = 0) -> str:
+    """On-sheet net label (not exported as a parent sheet pin)."""
+    return f"""\t(label "{name}"
+\t\t(at {x} {y} {angle})
+\t\t(effects
+\t\t\t(font
+\t\t\t\t(size 1.27 1.27)
+\t\t\t)
+\t\t\t(justify left bottom)
 \t\t)
 \t\t(uuid "{uid()}")
 \t)
@@ -929,16 +946,17 @@ def relay_board_sch() -> str:
     path_b = f"/{PARENT}/{UUID_RELAY_B}"
     labels = []
     for n in range(1, 6):
-        labels.append(hier_label(f"AMP{n}_L", "bidirectional", 200.66, 30.48 + n * 5.08, 0))
-        labels.append(hier_label(f"AMP{n}_R", "bidirectional", 210.82, 30.48 + n * 5.08, 0))
-        labels.append(hier_label(f"AMP{n}_V+", "output", 220.98, 30.48 + n * 5.08, 0))
-        labels.append(hier_label(f"AMP{n}_V-", "output", 231.14, 30.48 + n * 5.08, 0))
+        labels.append(local_label(f"AMP{n}_L", 200.66, 30.48 + n * 5.08, 0))
+        labels.append(local_label(f"AMP{n}_R", 210.82, 30.48 + n * 5.08, 0))
+        labels.append(local_label(f"AMP{n}_V+", 220.98, 30.48 + n * 5.08, 0))
+        labels.append(local_label(f"AMP{n}_V-", 231.14, 30.48 + n * 5.08, 0))
     body = f"""\t(lib_symbols)
 {text_note(25.4, 25.4, [
     "RelayBoard — 5ch template (§11 Q1-B)",
     "MCP23017 @0x20 (Board A) / @0x21 (Board B — same sch, addr strap note)",
     "AZ850 latching + ULN2803. NO child Pico.",
     "COMMON_LR_OUT → ControlPanel PT2314 input",
+    "AMP* = local nets → J_AMP (Audio/ Amp PCB, not instanced here)",
 ])}
 {hier_label("I2C_SDA", "bidirectional", 30.48, 40.64, 180)}
 {hier_label("I2C_SCL", "bidirectional", 30.48, 43.18, 180)}

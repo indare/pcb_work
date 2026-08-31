@@ -24,7 +24,7 @@
 | PD 給電 | **確定** | **PowerModule 内蔵**（USB-C + CH224K / 50224 相当）。§6・§8 |
 | エンコーダー | **確定** | 汎用 **EC11 系**。**×3**（CH / BASS / TREBLE）。HP / LINE / DEST は手回し |
 | ENC 配線 | **確定** | **A/B/SW すべて Pico GPIO 直結**（§10）。I²C 集約は見送り |
-| Amp / HP | **確定** | **`Audio/` 基板を物理流用**。入出力は電源電圧に**ほぼ非依存** → AudioV2 回路図では **載せない** |
+| Amp / HP | **確定（2026-08-31更新）** | **Amp は AudioV2 版を再設計して×10製造**。HP は `Audio/` 基板を物理流用 |
 | 表示 | **確定** | **制御 = 2.42″ OLED 128×64 I²C**（SSD1309 / SSD1306 互換）。**スペアナ = Waveshare 29318 LCD**（計測盤・独立）。[PARTS.md](PARTS.md) |
 | 電源 UI | **確定** | **パワースイッチ＋12V LED** |
 | ULN2803 | 役割固定 | コイル電流増幅のみ（**CH 系統のみ**。DEST は機械 SW） |
@@ -148,7 +148,8 @@ ENC_DEST + DEST ラッチングリレー案は **見送り**。
         └── PD_12V ──(ケーブル)──► [操作パネル] PWR SW ──► 12V LED
                                               └──（SW 後）──► DKMW20 +Vin（板上は SW 前でも可・起こし時に一本化）
 
-Amp×10 / HP Buffer / 計測 ── Audio/ 製造済み基板を ±12V 端子で接続（AudioV2 図には載せない）
+Amp×10 ── AudioV2 再版（±12 V、100 µF/rail、100 nF+1 nF、ゲイン2）
+HP Buffer / 計測 ── Audio/ 製造済み基板を ±12V 端子で接続
 
 CH ──► PT2314 ──► Amp(×10) ──► SW_DEST ──┬─ RV_HP ──► HeadphoneBuffer → PHONE
                                           └─ RV_LINE ──────────────────► LINE OUT
@@ -493,29 +494,30 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► SW_DEST ──�
 
 ## 6. KiCad 起こし範囲 — **確定（D1.5）**
 
-ユーザー確定（2026-08-30）: **操作系 ＋ PowerModule 再設計**。Amp/HP/計測は **`Audio/` 物理流用**（回路図に載せない）。
+ユーザー確定（2026-08-30）: **操作系 ＋ PowerModule 再設計**。
+**2026-08-31更新:** Amp はバルク未対応の旧基板を流用せず、AudioV2版を再版する。HP/計測は `Audio/` 物理流用。
 
 ### 6.8 確定内容
 
 | 項目 | 決定 |
 |---|---|
 | **Q1 スコープ** | **A — D1.5** |
-| **Amp / HP** | NE5532 等は **`V+_IN` / `V-_IN` / `A_GND` で電源に非依存** → AudioV2 KiCad では **無視**（箱配線 MD のみ）。`Audio/` 製造済み基板を ±12 V 端子で接続 |
+| **Amp / HP** | Amp は `AudioV2/AmpModule` を代表1シート＋独立PCBとして管理し**×10製造**。HP は `Audio/` 製造済み基板を ±12 V 端子で接続 |
 | **PowerModule** | **`Audio/PowerModule` からのコピー改変ではなく再設計**。±12 V（DKMW20F-12）、**USB-C + CH224K（50224 相当）を基板内蔵** |
 | **Q2 CH224** | **基板内蔵**（50224 実装枠 or CH224K 直付け） |
-| **Q3 親の Amp** | **載せない**（端子台・階層リンクとも不要） |
+| **Q3 親の Amp** | **代表1シートを載せる**（回路/BOM参照、現物×10）。選択配線は Relay 端子IF |
 
 ### 6.9 AudioV2 で起こす KiCad（確定リスト）
 
 | # | シート | 物理 PCB | 内容 |
 |---|---|---|---|
-| 1 | `RelayBoard.kicad_sch` | **×2**（5+5） | ラッチ + ULN + MCP23017 + 端子台 + **COMMON_LR_OUT** |
+| 1 | `RelayBoard.kicad_sch` | **×2**（5+5） | ラッチ + ULN + MCP23017 + Amp入力/電源端子 + **TONE_L/R IN** |
 | 2 | `ControlPanel.kicad_sch` | **×1** | Pico2 / ENC×3 / OLED / PT2314 / **RV・SW_DEST ヘッダ** / DEST LED / PWR SW / 12 V LED |
 | 3 | `OutputStage.kicad_sch` | **Control と同一 PCB** | **SW_DEST 音声配線 + 抵抗ラダー**（論理シートは分離可。**DEST ラッチングは廃止**） |
 | 4 | `PowerModule.kicad_sch` | **×1** | 再設計 — USB-C、CH224K、F1、DKMW20F-12 |
 | 5 | `AudioV2Case.kicad_sch` | — | 階層親 + 箱配線（Amp はテキストのみ） |
 
-**新規発注 PCB: 4 枚**（Relay×2 + Control×1 + Power×1）。
+**新規発注 PCB: 14 枚**（Relay×2 + Control×1 + Power×1 + **Amp×10**）。設計は5種類。
 
 **ファーム:** 新規 `AudioV2/control_fw/`（`Control/` は現行機用に凍結）。
 
@@ -658,7 +660,7 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► SW_DEST ──�
 | **Q1 Relay 物理枚数** | **B — 5ch × 2 枚**（現 Controll 2 段型。ケーシング向き） |
 | **Q2 OutputStage 物理位置** | **A — ControlPanel と同一 PCB**（SW_DEST / ポット同居）。**PCB レイアウト時に B（独立板）へ変更可** |
 | **Q3 I²C 拓扑** | **保留** — 回路・基板レイアウト時に決定 |
-| **物理分割全体** | **PC + PB** — Relay **2 枚** + Control **1 枚**（Output は Control 上）+ Power **1 枚** → **新規 4 PCB** |
+| **物理分割全体** | **PC + PB + Amp再版** — Relay 2 + Control 1（Output同居）+ Power 1 + Amp 10 → **新規14 PCB** |
 
 KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロック）。物理実装は **ControlPanel PCB 上**。
 
@@ -667,21 +669,25 @@ KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロッ�
 | PowerModule | 1 | ±12 V、CH224 内蔵 |
 | RelayBoard | **2** | 5ch ずつ。MCP23017 + ULN + ラッチ + Amp 端子台 |
 | ControlPanel | 1 | Pico / ENC×3 / OLED / PT2314 / **RV・SW_DEST ヘッダ** / DEST LED |
-| **合計** | **4** | Amp / HP / 計測は `Audio/` 流用。Q2-B なら Output **+1** |
+| AmpModule | **10** | ±12 V、ゲイン2（20k/20k）、100 µF/rail + 100 nF + 1 nF、DIP-8ソケット |
+| **合計** | **14** | HP / 計測は `Audio/` 流用。Q2-B なら Output **+1** |
 
 ---
 
-### 11.8 CH 選択 — 音声 **共通バス**（ユーザー提案・採用方向）
+### 11.8 CH 選択 — Amp **入力＋電源を同時切替**（2026-08-31確定）
 
-ラッチングリレーで **常に 1 系統だけ ON** とする前提なら、各 CH の **リレー接点出力を L/R 共通バスに合流**してよい。
+未給電Ampへ信号を印加しないため、各CHの音声リレーは **PT2314後のTONE_L/Rを選択Amp入力へ接続**する。電源リレーも同じSET/RESET信号で必ず連動させる。
 
 | 項目 | 内容 |
 |---|---|
-| 根拠 | 非選択系は接点が開く（または MUTE 側）。**逆流を考えない**＝他系統 Amp 出力がバスへ戻らない配線（Controll 同型の **選択後共通**） |
-| メリット | RelayBoard → 後段（PT2314 / 操作板）が **L/R 1 対**で済む。端子・ケーブル削減 |
-| 電源リレー | 音声と同様、**選択後共通**で Amp 電源バスへ（現行 `AMP_PWR_IN` → リレー → 各 Amp 型） |
-| ファーム | **排他** — 新 CH 確定時に他 CH コイルを Reset。起動デフォルト CH も規定 |
-| 起こし時 | RelayBoard 各 5ch 盤に **COMMON_LR_OUT**（2P 端子 or コネクタ）→ ControlPanel PT2314 入力 |
+| 信号 | `COMMON_L/R（外部入力）→ PT2314 → TONE_L/R → 音声リレー → 選択Amp J701` |
+| 電源 | `PowerModule J201 → RelayBoard J_RAIL 3P → 電源リレー → 選択Amp J703`。A_GNDは非切替で各`J_PWR`-2へ直結 |
+| 連動 | 1chにつきaudio/power AZ850のSET同士・RESET同士を束ね、MCP23017×1 + ULN2803×2で駆動 |
+| コイル | ControlPanel BP5293の+5 Vを`J_I2C` 5Pで供給。1 ULN出力あたり2コイル並列（約80 mA） |
+| 出力 | Amp J702（47 Ω＋470 µF後）は箱配線で`AMP_SEL_L/R`へ共通化 |
+| ファーム | **排他** — 全CH Reset後、対象CHを100 ms Set。コイルは保持通電しない |
+| アドレス | JP302=A1、JP301=A0（開=0）。00=0x20 A / 01=0x21 B / 10=0x22 C / 11=0x23 D。A2はGND固定 |
+| PCB | **1種を使い回し。** JPそばの **F.Silk に上記早見表**を必ず入れる（実装時の番地衝突防止） |
 
 測定タップ（Amp 後 AdcBuffer）は **リレー前**または分配器で別系統 — 箱配線 MD で位置を固定。
 
@@ -722,7 +728,7 @@ KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロッ�
 |---|:---:|---|---|
 | **PA** | ◎ | Relay 1 枚に **70P 級** | 論理と 1:1 |
 | **PB** | ◎ | 同上 | **Q2-A 確定**。SW_DEST / ポットと同居 |
-| **PC** | ◎ | **2 枚に分散** | 箱内 2 段×5ch と相性良。**MCP23017×2** |
+| **PC** | ◎ | **2 枚に分散** | 箱内 2 段×5ch。各盤MCP23017×1（計2） |
 | **PD** | △ | 1 枚集中 | アナログ幹線が長い |
 | **PE** | ✗ | — | ケーブル増のみ |
 
@@ -734,10 +740,11 @@ KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロッ�
 |---|---|---|
 | PowerModule → 箱内星型 | **端子台 3P** | +12, −12, A_GND |
 | PowerModule ↔ 操作パネル（PD SW） | **端子 2P×2** or **JST 4P** | PD_12V, SW 戻り, GND |
-| ControlPanel ↔ RelayBoard（×2） | **コネクタ 4〜6P** ×2 枚 | SDA, SCL, 3V3, GND — **Q3 保留**（daisy / スターは設計時） |
-| RelayBoard → ControlPanel | **コネクタ 4P** or **端子 2P** | **COMMON_LR_OUT**（§11.8）— 1 対 + GND |
+| ControlPanel ↔ RelayBoard（×2） | **コネクタ 5P** ×2 枚 | SDA, SCL, 3V3, +5V, D_GND — daisy / スターは設計時 |
+| ControlPanel → RelayBoard | **端子 2P** | TONE_L, TONE_R。2芯シールドのドレインはControlの`A_GND`のみ（`J_RAIL`のGNDと二重にしない） |
+| PowerModule → RelayBoard（×2） | **端子 3P** ×2本 | `J_RAIL` = +12, A_GND, -12。旧Controllは±のみだったが、Amp `J703` を3P 1本で完結させるため`A_GND`も持ち込む |
 | ControlPanel 内 OutputStage | **基板内** | Q2-A。SW_DEST → RV → 外部端子 |
-| RelayBoard ↔ Amp×10 | **端子台** | 電源 2P×10 + 音声 2P×10 級 |
+| RelayBoard ↔ Amp×10 | **端子台** | 電源 3P×10（±12/A_GND）+ 入力音声2P×10 |
 | 外部入力 L/R | **端子台 2〜3P** | STATUS「手前端子台」型 |
 | OutputStage → HP Buffer / LINE | **端子台 2〜3P** | Audio 流用先 |
 
@@ -824,19 +831,20 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 - [x] 音量 IC: **見送り**（PGA / digipot 不採用）
 - [x] 電源: **±12 V**（DKMW20F-12）、PD **50224 CH224**（差し替え可）
 - [x] エンコーダー: **EC11 系 ×3**（CH / BASS / TREBLE）
-- [x] Amp / HP: **`Audio/` 物理流用**（KiCad には載せない）
+- [x] Amp: **AudioV2版を再設計し代表1シート＋独立PCB、×10製造**。HPは `Audio/` 物理流用
 - [x] OLED / 表示ループ / PWR+12V LED（表示は **CH / DEST / Bass / Treble**）。制御 = **2.42″ OLED**、スペアナ = **Waveshare 29318**（計測・流用）
 - [x] 12V LED: **CH224 12V → PWR SW 後 → LED + DKMW20**（`PD_GND`）
 - [x] HP 固定パッド: **廃止（0 Ω）**。DNP で −10 dB 後付け可
 - [x] ENC 配線: **GPIO 直結 ×3**（§10 ピン表）
-- [x] **起こし範囲: D1.5** — 操作系 + **PowerModule 再設計**（CH224 内蔵）。Amp/HP/計測は `Audio/` 流用・**図に載せない**
+- [x] **起こし範囲: D1.5 + Amp** — 操作系 + PowerModule + **Amp再版**。HP/計測は `Audio/` 流用
 - [x] CH224: **PowerModule 基板内蔵**
 - [x] **Relay 物理: 5+5 ×2 枚**（§11 Q1-B）
 - [x] **OutputStage: ControlPanel 同一 PCB**（§11 Q2-A）
-- [x] **CH 音声: リレー後共通 L/R バス**（§11.8）
+- [x] **CH 音声: PT2314後をAmp入力側で選択、電源と連動**（§11.8）
 - [x] **ポット: Alps RK27112A00CF**（A50k Dual / RK27）×2 — [PARTS.md](PARTS.md)
 - [x] **DEST ラダー: Rh=Rl=10k, Rs=1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)）
 - [x] **SW_DEST 型番: C&K 7303SYZQE**（3PDT ON-OFF-ON）
 - [x] **AZ850 コイル: AZ850P2-5**（5 V、秋月 118017）
 - [ ] **I²C 拓扑（§11 Q3）:** 回路・基板設計まで保留
-- [ ] **KiCad ERC / 未使用 PT2314 入力 / RelayBoard 本配線**
+- [x] **RelayBoard 本配線 / RelayBoard_A・B ERC 0件**
+- [ ] **KiCad ERC残り / 未使用 PT2314 入力**

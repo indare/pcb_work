@@ -7,7 +7,12 @@ import uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-KICAD_SYM_ROOT = Path("/tmp/kicad-symbols")
+_SYSTEM_SYM_ROOT = Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols")
+KICAD_SYM_ROOT = (
+    Path("/tmp/kicad-symbols")
+    if Path("/tmp/kicad-symbols").is_dir()
+    else _SYSTEM_SYM_ROOT
+)
 
 
 def new_uid() -> str:
@@ -190,6 +195,11 @@ PIN_COUNTS: dict[str, list[str]] = {
 # Schematic lib_id -> (source_lib, source_sym, extends chain base-first)
 # OLED: do NOT map SSD1306/ER_OLEDM0.91 (128×32). Control uses Conn_01x04 header.
 SYMBOL_SOURCES: dict[str, tuple[str, str, list[tuple[str, str]]]] = {
+    "Amplifier_Operational:NE5532": (
+        "Amplifier_Operational",
+        "NE5532",
+        [("Amplifier_Operational", "LM2904")],
+    ),
     "Interface_Expansion:MCP23017-E/SP": (
         "Interface_Expansion",
         "MCP23017x-x-SP",
@@ -474,15 +484,20 @@ def symbol_inst_v10(
     project: str = "AudioV2Case",
     extra_props: list[tuple[str, str]] | None = None,
     unit: int = 1,
+    footprint: str = "",
+    datasheet: str = "",
+    description: str = "",
+    instance_refs: list[tuple[str, str]] | None = None,
+    prop_dx: float = 0.0,
 ) -> str:
     from generate_kicad_scaffold import sym_prop  # noqa: WPS433
 
     props = [
-        sym_prop("Reference", ref, x, y - 2.54),
-        sym_prop("Value", value, x, y + 2.54),
-        sym_prop("Footprint", "", 0, 0, hide=True),
-        sym_prop("Datasheet", "", 0, 0, hide=True),
-        sym_prop("Description", "", 0, 0, hide=True),
+        sym_prop("Reference", ref, x + prop_dx, y - 2.54),
+        sym_prop("Value", value, x + prop_dx, y + 2.54),
+        sym_prop("Footprint", footprint, 0, 0, hide=True),
+        sym_prop("Datasheet", datasheet, 0, 0, hide=True),
+        sym_prop("Description", description, 0, 0, hide=True),
     ]
     if extra_props:
         for n, v in extra_props:
@@ -493,6 +508,14 @@ def symbol_inst_v10(
         nums = ["1", "2", "3", "4"] if unit == 1 else ["5", "6", "7", "8"]
     pin_block = pin_uuid_block(nums)
     props_str = "\n".join(props)
+    paths = instance_refs or [(parent_path, ref)]
+    path_blocks = "\n".join(
+        f"""\t\t\t\t(path "{path}"
+\t\t\t\t\t(reference "{instance_ref}")
+\t\t\t\t\t(unit {unit})
+\t\t\t\t)"""
+        for path, instance_ref in paths
+    )
     return f"""\t(symbol
 \t\t(lib_id "{lib_id}")
 \t\t(at {grid(x)} {grid(y)} {rot})
@@ -509,10 +532,7 @@ def symbol_inst_v10(
 {pin_block}
 \t\t(instances
 \t\t\t(project "{project}"
-\t\t\t\t(path "{parent_path}"
-\t\t\t\t\t(reference "{ref}")
-\t\t\t\t\t(unit {unit})
-\t\t\t\t)
+{path_blocks}
 \t\t\t)
 \t\t)
 \t)

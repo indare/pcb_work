@@ -1,14 +1,14 @@
 # AudioV2 箱配線 IF 素案（draft）
 
-**目的:** KiCad 図外（`Audio/` 流用基板）との端子接続一覧。回路レビュー前のたたき台。
+**目的:** AudioV2基板間と、KiCad図外の流用基板との端子接続一覧。
 
 ## 電源星型（PowerModule → 各所）
 
 | Net | 源 | 先 | 形式 |
 |---|---|---|---|
-| `+12V` | PowerModule **J201**-1 | RelayBoard×2, ControlPanel, Amp×10 `V+` 端子 | 端子台 3P 幹線 |
-| `-12V` | PowerModule **J201**-2 | 同上 `V-` | 同上 |
-| `A_GND` | PowerModule **J201**-3 | 全アナログ島（NetTie 一点 — **位置未決**） | 端子台 |
+| `+12V` | PowerModule **J201**-1 | RelayBoard_A/B `J_RAIL`-1, ControlPanel | 端子台 3P 幹線 ×2本 |
+| `A_GND` | PowerModule **J201**-2 | RelayBoard `J_RAIL`-2 → 各 `J_PWR`-2（非切替）、全アナログ島（NetTie 一点 — **位置未決**） | 端子台 |
+| `-12V` | PowerModule **J201**-3 | 同上 `J_RAIL`-3 | 同上 |
 | PD 入 | 外付け **50224 等** → Power **J202**（1=GND 2=+12） | 板上 `PD_12V` / `PD_GND` | 2P（トポロジ A） |
 | `PD_12V` | Power（J202 後） | ControlPanel PWR SW 入力 | **往復用端子まだ**（A のまま要追加） |
 | `PD_12V_SW` | ControlPanel SW1 出力 | Power F1 → DKMW +Vin | 2P 戻り |
@@ -19,26 +19,28 @@
 
 | Net | 源 | 先 | 備考 |
 |---|---|---|---|
-| `I2C_SDA/SCL` | ControlPanel Pico GP20/21 | RelayBoard_A MCP23017, RelayBoard_B, SSD1306, PT2314 | daisy vs スター — **未決** |
-| `3V3` / `D_GND` | ControlPanel BP5293 | RelayBoard J_I2C | |
+| `I2C_SDA/SCL` | ControlPanel Pico GP20/21 | RelayBoard_A/B MCP23017, SSD1306, PT2314 | daisy vs スター — **未決** |
+| `3V3` / `+5V` / `D_GND` | ControlPanel Pico / BP5293 | RelayBoard `J_I2C` 5P | +5 VはAZ850コイル、3V3はMCPロジック |
 
 ## 音声幹線
 
 | Net | 源 | 先 | 備考 |
 |---|---|---|---|
-| `COMMON_L/R` | RelayBoard_A/B 合流 → Control PT2314 入力 | §11.8 共通バス | 4P コネクタ想定 |
-| PT2314 OUT → | ControlPanel | **Audio/ Amp×10 入力端子**（図外） | 箱配線 |
-| Amp 出力（選択後）→ | Audio/ 製造済み | ControlPanel **AMP_SEL_L/R** → SW_DEST | 図外 |
+| `COMMON_L/R` | 外部ソース入力 | ControlPanel PT2314入力 | 親では箱外スタブ |
+| `TONE_L/R` | ControlPanel PT2314出力 | RelayBoard_A/B `J_TONE` 2P → 選択Amp `J701` | **2芯シールド**。芯=L/R。シールドはControl側の`A_GND`のみ（Relayの`J_RAIL`とループさせない） |
+| Amp入力 `J701` | RelayBoard `J_AUD{n}` | AudioV2 Amp×10 | L/R 2P。長い引き回しは2芯シールドで、シールドは`J_PWR`-2側の`A_GND`へ |
+| Amp電源 `J703` | RelayBoard `J_PWR{n}` | AudioV2 Amp×10 | 3P（+12/A_GND/-12）。±12 Vのみリレー切替、`A_GND`は直結 |
+| Amp出力 `J702` | AudioV2 Amp×10 | `AMP_SEL_L/R`共通ハーネス → OutputStage | 47 Ω＋470 µF後で共通化 |
 | `PHONE_L/R` | OutputStage RV101 | **Audio/ HeadphoneBuffer** | 0 Ω 固定パッド廃止 |
 | `LINE_L/R` | OutputStage RV102 | LINE 端子 | |
 | `PHONE_L/R` | OutputStage J_HP | Audio/ HeadphoneBuffer 入力 | |
 | `LINE_L/R` | OutputStage J_LINE | 前面 LINE OUT | |
 
-## Audio/ 流用（図に載せない）
+## Amp再版とAudio/流用
 
 | 基板 | 接続 |
 |---|---|
-| AmpModule ×10 | RelayBoard `AMP{n}_L/R`, `AMP{n}_V±` |
+| AudioV2 AmpModule ×10 | `J701`=Relay選択済みTONE L/R、`J702`=AMP_SEL共通、`J703`=Relay選択済み+12/A_GND/-12。親は代表1シート |
 | HeadphoneBufferModule | OutputStage `PHONE_L/R`, ±12V |
 | AdcBuffer / MeasurementADC | ±12V + 測定タップ（**位置 MD で固定**） |
 

@@ -3314,683 +3314,7 @@
 			)
 			(justify left top)
 		)
-		(uuid "72344204-0106-44b0-837b-99ec49ab492c")
-	)
-	(junction
-		(at 201.93 149.86)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0c21ddce-4f90-4e24-910c-1cddd7ac4b5f")
-	)
-	(wire
-		(pts
-			(xy 201.93 149.86) (xy 210.82 149.86)
-		)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(uuid "17e4bdaf-9c26-403a-9741-5e4f918fa14f")
-	)
-	(wire
-		(pts
-			(xy 201.93 149.86) (xy 201.93 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3a5d3a47-f6c3-467d-b6e4-4a302f64b884")
-	)
-	(wire
-		(pts
-			(xy 198.12 149.86) (xy 201.93 149.86)
-		)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(uuid "754f9698-eff6-449f-af2d-c7832094f956")
-	)
-	(wire
-		(pts
-			(xy 209.55 157.48) (xy 210.82 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a171e637-e9c2-4427-83fb-799185ec5cf3")
-	)
-	(wire
-		(pts
-			(xy 185.42 149.86) (xy 187.96 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a6e93f27-daab-49a5-9001-791f295011f2")
-	)
-	(label "A_GND"
-		(at 195.58 135.89 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "01da0200-3b82-47f9-b8d8-5bc63c332a3d")
-	)
-	(label "I2C_SDA"
-		(at 172.72 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "08dc1597-5159-45a8-b02b-1c775a9e2397")
-	)
-	(label "PT_BOUT_R"
-		(at 185.42 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "09b3973e-dc01-40bf-b400-dd69638fefc7")
-	)
-	(label "PT_TREB_L_MID"
-		(at 121.92 125.73 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0b112d2b-fd76-4597-b251-5434501e7308")
-	)
-	(label "A_GND"
-		(at 147.32 105.41 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0c070375-d1f5-4beb-832a-5d936b74eb62")
-	)
-	(label "D_GND"
-		(at 27.94 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0c7a7a7c-a45b-4302-a978-68018e70e39d")
-	)
-	(label "PT_LIN"
-		(at 172.72 130.81 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0dd44c1b-7cc7-400b-9b1b-9cc7c0b126fd")
-	)
-	(label "PT_OUT_L"
-		(at 172.72 113.03 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0e4c76e2-18e0-4ad8-970b-d774a65a82b4")
-	)
-	(label "GP1"
-		(at 27.94 43.18 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0e632b31-761c-40aa-ac70-2883b29126d6")
-	)
-	(label "A_GND"
-		(at 124.46 110.49 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "139b3a7b-1e24-4f66-81f0-4bcb3fabb4d7")
-	)
-	(label "GP15"
-		(at 53.34 101.6 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1409fcd8-bcb4-4f81-8933-4accb8517696")
-	)
-	(label "GP3"
-		(at 27.94 53.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "14bcbf6e-d267-4927-9aca-a3e16587d422")
-	)
-	(label "+3V3"
-		(at 109.22 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "14dc78d6-d371-4f6d-b0a0-44bdd9795a4f")
-	)
-	(label "A_GND"
-		(at 111.76 138.43 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "15496992-a496-4b83-81bb-63393bd4f041")
-	)
-	(label "A_GND"
-		(at 180.34 100.33 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "16643fb2-528a-49b8-abfe-037762d7b48b")
-	)
-	(label "DEST_ADC"
-		(at 55.88 97.79 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "17bdd76a-f160-4a9c-bd9f-a5fdd2bc22ba")
-	)
-	(label "DEST_ADC"
-		(at 68.58 90.17 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "17e39da3-4d2d-4c95-912a-1689428b25f4")
-	)
-	(label "PT_TREB_R"
-		(at 147.32 110.49 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1bf805d6-7f0e-4e01-9521-e6e7786e7125")
-	)
-	(label "DEST_SENSE_MUTE_NC"
-		(at 83.82 93.98 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1cb9cd15-bca2-4ba0-99d0-69fe71350c61")
-	)
-	(label "D_GND"
-		(at 60.96 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1d8ae219-501e-4881-9059-a7fd9f05ba5e")
-	)
-	(label "I2C_SCL"
-		(at 30.48 137.62 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1da03f9b-cd06-43a6-825d-18300a0f23b2")
-	)
-	(label "-12V"
-		(at 30.48 133 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "20985e34-10dc-4fd9-8ff7-8cb4afd139a7")
-	)
-	(label "DEST_SENSE_LINE"
-		(at 83.82 91.44 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "20d34cbf-2236-41ce-b31f-43078e69f12c")
-	)
-	(label "GP4"
-		(at 27.94 58.42 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "211c7433-b190-405c-b792-e424009be8ea")
-	)
-	(label "PT_REF"
-		(at 187.96 92.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2798d150-2782-4546-a3ec-098176b983ec")
-	)
-	(label "VCC_TONE"
-		(at 137.16 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "286dd05a-d9fe-44fa-877d-ff8025c229be")
-	)
-	(label "GP6"
-		(at 53.34 78.74 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "29d8e78b-7102-421e-a800-ff46ba9f2c92")
-	)
-	(label "LED_GP14"
-		(at 109.22 92.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "29da520d-1aa5-45f6-bfb4-48ab13346874")
-	)
-	(label "GP0"
-		(at 53.34 63.5 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2afdbff5-792c-42f5-82f1-e650fa0b4d47")
-	)
-	(label "PT_OUT_R"
-		(at 190.5 120.65 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2f1f597f-7205-43c9-b8c3-e0913551be3a")
-	)
-	(label "PT_BOUT_L"
-		(at 124.46 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "36002d7d-27ff-4327-b4c5-28d3e613a8b4")
-	)
-	(label "A_GND"
-		(at 185.42 135.89 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "37578e7b-a1d4-4601-bf18-19f3984d7728")
-	)
-	(label "I2C_SDA"
-		(at 91.44 64.77 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3a687a0a-cf63-4699-84c4-61d9578c43dc")
-	)
-	(label "A_GND"
-		(at 187.96 100.33 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3bac7ac2-32c8-4333-b0ae-ba1b164c3288")
-	)
-	(label "GP4"
-		(at 53.34 73.66 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4253ed15-b443-4198-8dab-4793daee5368")
-	)
-	(label "D_GND"
-		(at 43.18 73.66 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "442eb10a-edc7-4b72-9f64-0090ee617e47")
-	)
-	(label "PT_OUT_L"
-		(at 190.5 105.41 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "44d44d68-5107-4115-9742-a6f960f9859a")
-	)
-	(label "A_GND"
-		(at 185.42 110.49 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "44f020af-abf2-4b2d-8463-c3535967779b")
-	)
-	(label "PT_BIN_L"
-		(at 124.46 128.27 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "490364d3-cac1-48a5-b1a2-7eb222a7fef0")
-	)
-	(label "A_GND"
-		(at 134.62 110.49 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4a245c36-290c-4b17-b377-3d1e03688502")
-	)
-	(label "PT_TREB_R_MID"
-		(at 121.92 138.43 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4ad1822b-0477-45b0-a615-22756d64b17e")
-	)
-	(label "DEST_SENSE_PHONE"
-		(at 83.82 96.52 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5921ab36-6e18-4f0b-ba8e-a96e55a3e319")
-	)
-	(label "PT_BIN_L"
-		(at 172.72 125.73 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "59fcbf16-c51f-426b-93a2-c7ddfadc1cce")
-	)
-	(label "PT_OUT_R"
-		(at 172.72 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5ad9038c-9a6a-4cc4-afaa-7ed546835b13")
-	)
-	(label "D_GND"
-		(at 43.18 58.42 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5e003367-278a-45a5-8d56-fb2fe98cf382")
-	)
-	(label "DEST_ADC"
-		(at 99.06 91.44 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5feb9b56-9600-498e-a49f-f07138b78c85")
-	)
-	(label "D_GND"
-		(at 68.58 97.79 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "60943ee0-c120-4246-8c92-bafc4297b6bd")
-	)
-	(label "VCC_TONE"
-		(at 147.32 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "64c0ac04-1368-492e-a32d-9d8307a6067d")
-	)
-	(label "GP15"
-		(at 95.25 99.06 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "65b98c13-9b52-40e9-98b9-7e3ad1c36524")
-	)
-	(label "PD_12V"
-		(at 185.42 149.86 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "65e3b36f-cf7c-44d1-9832-8e599cdee406")
-	)
-	(label "PT_TREB_L_MID"
-		(at 111.76 118.11 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6804bd2f-78c5-4d74-96b5-e3d0b8a882c3")
-	)
-	(label "PT_TREB_L"
-		(at 147.32 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "695c247a-f0a0-4c71-8a6b-4ca83466ae86")
-	)
-	(label "GP14"
-		(at 53.34 99.06 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6b1839ea-9a25-4f23-bbb1-a26e7c4d3c57")
-	)
-	(label "LED_GP14"
-		(at 102.87 88.9 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6c821e8f-0297-470a-9c6d-9d23624245cc")
-	)
-	(label "GP6"
-		(at 27.94 68.58 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "70c9043d-85dd-4532-9faa-e4725a44f365")
-	)
-	(label "I2C_SDA"
-		(at 30.48 135.08 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "712eb979-42c9-4435-9d61-30a893d5924b")
-	)
-	(label "PT_REF"
-		(at 172.72 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "726bc125-9940-4a7c-916e-24baaf20a16e")
-	)
-	(label "D_GND"
-		(at 50.8 151.13 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "73d5c2cb-715e-49b4-be3f-d6061070162d")
-	)
-	(label "GP7"
-		(at 27.94 73.66 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7955b201-774a-49a7-9d9b-67c0f8edb05b")
-	)
-	(label "I2C_SDA"
-		(at 99.06 76.2 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "79eaa30c-cdea-484a-94dc-169dd336f9c8")
-	)
-	(label "A_GND"
-		(at 137.16 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7df53e8e-9867-402c-9ffb-5bc29ddd3928")
-	)
-	(label "GP5"
-		(at 53.34 76.2 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "808827d1-5f10-4308-b12d-f2eba67088e3")
+		(uuid "af04256e-f45f-4872-a16e-718b24f10634")
 	)
 	(label "PT_BIN_R"
 		(at 195.58 128.27 0)
@@ -4000,17 +3324,17 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "810ffe8c-c3ad-4dd2-a7bd-a1929e0a2e6c")
+		(uuid "0100c023-7825-4bd8-bf0a-fa38ece80357")
 	)
-	(label "PT_RIN"
-		(at 147.32 113.03 0)
+	(label "A_GND"
+		(at 185.42 135.89 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "82fa35de-4f23-418a-86b8-394d39e471d6")
+		(uuid "0296d524-a80f-44e3-92ba-bdae25754ae8")
 	)
 	(label "PT_BOUT_R"
 		(at 172.72 118.11 0)
@@ -4020,17 +3344,17 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "835a807f-acfc-47e6-aef7-b6542bdb856d")
+		(uuid "0446b7eb-cf12-4dd9-af34-821ac5046704")
 	)
-	(label "D_GND"
-		(at 27.94 71.12 0)
+	(label "I2C_SDA"
+		(at 91.44 64.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "83daf039-918e-4753-b63e-6e19887e0590")
+		(uuid "06485383-25d7-46ce-8080-d901e6cf4db3")
 	)
 	(label "TONE_L"
 		(at 200.66 118 0)
@@ -4040,117 +3364,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "83fbb8fe-5411-48ae-9baf-295c4bb8ef36")
-	)
-	(label "I2C_SCL"
-		(at 99.06 78.74 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "852e8790-9e55-4cdc-8c41-72b08b4e1a14")
-	)
-	(label "PT_BOUT_R"
-		(at 195.58 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "88b05521-7843-44b1-ba44-4d3f8e26c36d")
-	)
-	(label "I2C_SCL"
-		(at 106.68 81.28 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "88c886f5-4e63-43ce-8153-faf13f5445ae")
-	)
-	(label "+12V"
-		(at 30.48 131 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8a3640e9-1fe9-47a5-b196-a47c15bcfb45")
-	)
-	(label "GP14"
-		(at 95.25 88.9 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8e9bdc3d-b020-41b2-8a84-0148bfa59048")
-	)
-	(label "PT_BIN_R"
-		(at 185.42 128.27 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8fded856-3da3-4fcd-82ab-dff7070655e8")
-	)
-	(label "GP8"
-		(at 53.34 83.82 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "93c8ef8c-940f-4ab6-888b-d0da1f23b095")
-	)
-	(label "D_GND"
-		(at 30.48 128 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "95024394-40ed-4e95-bd44-da6b06558421")
-	)
-	(label "DEST_SENSE_PHONE"
-		(at 60.96 100.33 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "95896a73-ed45-4cc4-8ed8-de0a1d001cd7")
-	)
-	(label "PT_REF"
-		(at 180.34 92.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "96ef9672-7f81-4188-9654-872518c73869")
-	)
-	(label "DEST_SENSE_LINE"
-		(at 60.96 80.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "972fa062-2f4d-40d2-b9b7-030a4631a8cd")
+		(uuid "07fee10c-8a79-43ca-a353-10fb26c7c671")
 	)
 	(label "COMMON_R"
 		(at 30.48 121 0)
@@ -4160,297 +3374,17 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "976be342-5f47-4735-97cc-628dfdddb9f4")
-	)
-	(label "+3V3"
-		(at 60.96 87.63 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "99b67c6e-653a-4b27-b89a-403c5d5576d8")
-	)
-	(label "+3V3"
-		(at 30.48 112 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9aba215e-c361-47c5-bdf3-b67e1fe87ed0")
-	)
-	(label "GP3"
-		(at 53.34 71.12 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9e509e7d-e665-4cfd-ae2e-d6869d5a01d8")
-	)
-	(label "PT_TREB_L"
-		(at 121.92 118.11 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9e64e0c1-d03d-43c6-b554-e442e463206e")
-	)
-	(label "GP2"
-		(at 43.18 38.1 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9eaeaecf-6b95-47b6-8985-34c80d932317")
-	)
-	(label "I2C_SDA"
-		(at 106.68 83.82 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a310ad45-97ea-4356-b3ac-30f22493e4c1")
-	)
-	(label "COMMON_R"
-		(at 93.98 118.11 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a65bd6bc-4e95-49a2-a9f3-ba9409ae2b89")
-	)
-	(label "GP2"
-		(at 53.34 68.58 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a9ea8a6b-4ae8-4a3c-90c4-3fc1d5ab748a")
-	)
-	(label "I2C_SCL"
-		(at 91.44 69.85 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "aaedb800-da35-4e12-8f1f-534284350157")
-	)
-	(label "PT_BIN_L"
-		(at 134.62 128.27 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ab1d3da1-adfb-48b9-ba59-6625463abb56")
-	)
-	(label "PT_LIN"
-		(at 93.98 120.65 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ae9e7749-51cc-42fd-8bfc-3e857e0fe7a7")
-	)
-	(label "TONE_R"
-		(at 190.5 128.27 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b0c07fc7-a0fb-437c-97df-ab8ad5b9ec78")
-	)
-	(label "PD_12V"
-		(at 30.48 150.32 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b2ebd8a5-8db3-4d19-b242-fc168c039b87")
-	)
-	(label "PT_TREB_R_MID"
-		(at 111.76 130.81 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b73d1346-bd83-4b25-be38-545f1d14e0dd")
-	)
-	(label "DEST_ADC"
-		(at 73.66 93.98 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bcbf8fc1-d58e-4a7d-8919-fce5998496a3")
-	)
-	(label "PT_RIN"
-		(at 93.98 125.73 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bdc854ec-f50a-4cc2-af5a-158c4531be0d")
-	)
-	(label "+3V3"
-		(at 106.68 78.74 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c06f06e9-e883-4119-95dc-c8b8038c291f")
-	)
-	(label "GP8"
-		(at 43.18 68.58 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c11e8a0a-aae0-493c-9907-6ba5d84080f0")
-	)
-	(label "VCC_TONE"
-		(at 30.48 110 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c124bbe6-31f7-4e09-ba2c-5e4e5626e827")
-	)
-	(label "+3V3"
-		(at 91.44 72.39 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c14386f7-cd69-4662-873d-e53e6cebbe42")
+		(uuid "0b32dd28-76bd-463a-9d3d-bdf255bed925")
 	)
 	(label "A_GND"
-		(at 134.62 135.89 0)
+		(at 185.42 110.49 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "c442e92b-9349-40d4-9c9d-ef704fb3a3fe")
-	)
-	(label "GP0"
-		(at 27.94 38.1 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c7cc3b62-a6fb-4d29-9872-7c7c3341ed37")
-	)
-	(label "GP5"
-		(at 43.18 53.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c9ad59f8-a6ab-4dfb-b01d-19afe453c333")
-	)
-	(label "D_GND"
-		(at 27.94 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cad2d14c-fed1-441d-acaf-8374e21300b3")
-	)
-	(label "GP1"
-		(at 53.34 66.04 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ccc2de1b-a8f1-426e-b481-b12bccd514b3")
-	)
-	(label "+5V"
-		(at 58.42 143.51 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d37f384c-7f3e-48c5-ac06-52f1e679fe07")
-	)
-	(label "PT_BOUT_L"
-		(at 172.72 123.19 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d5cfe89f-93d4-4c81-b81e-49a5e515746c")
-	)
-	(label "+3V3"
-		(at 81.28 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d8a70674-f728-4e2a-b924-655bbe32d50d")
-	)
-	(label "PT_TREB_R"
-		(at 121.92 130.81 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d8b8c04c-48f0-4ad6-ae93-6835e4dd9ba3")
+		(uuid "13f4d6d4-cfd0-4973-9243-7e894bbe99a2")
 	)
 	(label "A_GND"
 		(at 124.46 135.89 0)
@@ -4460,7 +3394,167 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d9bae50d-66f5-4afe-a6d1-113ffee0e566")
+		(uuid "15755181-fee1-437a-b304-66901957406e")
+	)
+	(label "TONE_R"
+		(at 190.5 128.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "16811a90-d8e2-4189-8fc7-90946b43cabb")
+	)
+	(label "-12V"
+		(at 30.48 133 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1ab50521-8bd5-4224-b357-8347ac9309fa")
+	)
+	(label "A_GND"
+		(at 134.62 135.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "20ac8bca-c939-4a6f-9a08-2c96cda64937")
+	)
+	(label "DEST_ADC"
+		(at 99.06 91.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "21161b65-2f36-459a-b881-d624ca2061eb")
+	)
+	(label "GP6"
+		(at 53.34 78.74 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "227d614c-768f-4f78-93fc-0c0300fbd3dd")
+	)
+	(label "+5V"
+		(at 30.48 115 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2550ae2c-4961-4b28-b6da-afe96a38f018")
+	)
+	(label "GP4"
+		(at 27.94 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2ac79d4a-ee1d-4670-a74c-b2eb827a50f8")
+	)
+	(label "DEST_ADC"
+		(at 68.58 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2b3a8c46-3e7a-4aaf-a993-416267709697")
+	)
+	(label "D_GND"
+		(at 27.94 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2c4b265e-55b5-4539-9fe0-68eea6ba39c1")
+	)
+	(label "PT_LIN"
+		(at 172.72 130.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2c734925-b0b3-4cd6-b436-de2ca434461b")
+	)
+	(label "I2C_SDA"
+		(at 172.72 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2ea1e2b3-7cc9-4b7f-9df4-873502b0605b")
+	)
+	(label "PT_RIN"
+		(at 147.32 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3063c564-4a0c-4285-9423-b4a850965314")
+	)
+	(label "D_GND"
+		(at 30.48 128 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "35a1a7bf-4b8c-46a7-a6fb-d8a73b90d43d")
+	)
+	(label "DEST_ADC"
+		(at 55.88 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "394fa0c3-2df4-4c09-b627-c5d970c72655")
+	)
+	(label "D_GND"
+		(at 27.94 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "40c6cefe-2671-4d50-9b62-e4dce720b404")
+	)
+	(label "PD_GND"
+		(at 173.99 152.4 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "418ec6eb-9a05-4400-a4ad-eb07c276bc65")
 	)
 	(label "GP7"
 		(at 53.34 81.28 0)
@@ -4470,157 +3564,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "dd008a41-ceef-43aa-a391-1ed043020891")
-	)
-	(label "+3V3"
-		(at 55.88 90.17 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ded9788a-edad-44b6-a6cb-35c52b696f30")
-	)
-	(label "D_GND"
-		(at 76.2 114.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e023b3a4-c611-4035-956a-fac962ff61b8")
-	)
-	(label "PT_BIN_R"
-		(at 172.72 120.65 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e15128b2-30ea-48b4-8f10-e6438bf23d66")
-	)
-	(label "A_GND"
-		(at 195.58 110.49 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e1baf172-4d53-4e8b-9460-9474c0022a9c")
-	)
-	(label "TONE_L"
-		(at 190.5 113.03 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e324db1a-5b23-4a6f-8ab1-0cc7ed69a886")
-	)
-	(label "D_GND"
-		(at 172.72 110.49 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e37245b3-06ca-47bc-b50d-abd96121b8f3")
-	)
-	(label "COMMON_L"
-		(at 30.48 118 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e4ab95a1-7bcc-4723-94c6-067872f35723")
-	)
-	(label "D_GND"
-		(at 43.18 43.18 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e5cf698f-d43d-4793-b181-af7b027a379e")
-	)
-	(label "A_GND"
-		(at 30.48 125 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e74b52b8-11dc-4e94-aa5f-aec4e2595107")
-	)
-	(label "LED_GP15"
-		(at 102.87 99.06 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e9670a37-7b2b-447b-9485-b24f2b252d97")
-	)
-	(label "+3V3"
-		(at 91.44 77.47 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ea56650e-a9f2-40cc-882d-ca31f3a42477")
-	)
-	(label "I2C_SCL"
-		(at 172.72 105.41 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "eb26ebe2-96b1-4db9-a5f1-78b0e0c5d97d")
-	)
-	(label "+3V3"
-		(at 109.22 85.09 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f2a37dec-7d03-4ded-9bf2-4a1dc6e210e4")
-	)
-	(label "LED_GP15"
-		(at 109.22 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f2e49916-eff9-4705-a9a5-925a3a551a21")
-	)
-	(label "D_GND"
-		(at 106.68 76.2 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f50a56e7-4cc6-49e9-bb3a-2692a5c922df")
+		(uuid "43080b1b-173f-4999-ae24-56873b2ddd09")
 	)
 	(label "+12V"
 		(at 43.18 143.51 0)
@@ -4630,37 +3574,87 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "f733d5cc-374c-4d62-a910-62ac8d8a0dd6")
+		(uuid "4535b1e7-e7d6-433a-ab36-da85c68a0215")
 	)
-	(label "PT_BOUT_L"
-		(at 134.62 102.87 0)
+	(label "PT_TREB_R_MID"
+		(at 121.92 138.43 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "f756bc62-214b-47ab-b69a-fe3feb1614e8")
+		(uuid "47378691-e31c-46c5-8c13-5ddf8846da7f")
 	)
-	(label "A_GND"
-		(at 111.76 125.73 0)
+	(label "GP4"
+		(at 53.34 73.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "f9d555ec-d30f-4bec-86ff-7aa363baa63f")
+		(uuid "473cd060-e8f4-4eb9-9cdd-0db3fb84f397")
 	)
-	(label "COMMON_L"
-		(at 93.98 113.03 0)
+	(label "COMMON_R"
+		(at 93.98 118.11 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "fc4de414-5d8a-4d62-a5dd-661429fe697b")
+		(uuid "4761a70e-6c99-48d9-a964-026a06e8a8c2")
+	)
+	(label "PT_BIN_L"
+		(at 172.72 125.73 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4789fefc-4dc3-45bb-8262-c4cbd0770c9c")
+	)
+	(label "I2C_SDA"
+		(at 30.48 135.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4b5bc57b-5e64-4afb-a111-40a911adc38f")
+	)
+	(label "PT_BOUT_R"
+		(at 185.42 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4c2160df-436e-4d3b-96da-951725cb17cb")
+	)
+	(label "PT_OUT_L"
+		(at 190.5 105.41 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4daa2003-a90b-4a4d-8b88-7959064a8811")
+	)
+	(label "PT_REF"
+		(at 187.96 92.71 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4f292782-45ad-45ba-9591-19b75c80de8d")
 	)
 	(label "TONE_R"
 		(at 200.66 121 0)
@@ -4670,95 +3664,1017 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "fed07fe4-b582-4004-a8fc-a191f0e75c05")
+		(uuid "4f2cb027-711c-4295-a201-1b4e5c2e6c6c")
 	)
-	(hierarchical_label "COMMON_R"
-		(shape input)
-		(at 30.48 121 180)
+	(label "PT_TREB_R_MID"
+		(at 111.76 130.81 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left bottom)
 		)
-		(uuid "3f108cc7-3345-47c3-9939-d9307b6a76ea")
+		(uuid "4f9ce803-ee66-42cb-9dc0-93c487fadb3d")
 	)
-	(hierarchical_label "TONE_L"
-		(shape output)
-		(at 200.66 118 0)
+	(label "GP6"
+		(at 27.94 68.58 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify left bottom)
 		)
-		(uuid "4b485b5f-2c7f-4972-ba09-5af014cd6639")
+		(uuid "5057faf2-26df-4803-bb61-5d19f77d0b08")
 	)
-	(hierarchical_label "PD_12V"
-		(shape input)
-		(at 30.48 150.32 180)
+	(label "PD_12V_SW"
+		(at 170.18 149.86 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left bottom)
 		)
-		(uuid "4b757304-a892-4a5d-a3e9-8076d8aa1a8e")
+		(uuid "5513c448-549b-4b37-96d7-934b82bf5dfe")
 	)
-	(hierarchical_label "+12V"
-		(shape input)
-		(at 30.48 131 180)
+	(label "DEST_ADC"
+		(at 73.66 93.98 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left bottom)
 		)
-		(uuid "508f2a6d-3590-4109-bb8f-7af87d9b1012")
+		(uuid "567e71c8-cb46-448f-9b47-103436b7bd0e")
 	)
-	(hierarchical_label "PD_12V_SW"
-		(shape output)
-		(at 210.82 149.86 0)
+	(label "PT_OUT_R"
+		(at 172.72 115.57 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify left bottom)
 		)
-		(uuid "55d2e242-c2e8-43fd-a06c-b430bc29554d")
+		(uuid "5e1b239f-36fa-428a-afec-41a93f8e692b")
 	)
-	(hierarchical_label "-12V"
-		(shape input)
-		(at 30.48 133 180)
+	(label "I2C_SCL"
+		(at 106.68 81.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left bottom)
 		)
-		(uuid "682565cf-0b0a-4186-87cf-e868ce541441")
+		(uuid "5e42ae8e-d50d-4d19-9147-bdf934ebdbbc")
 	)
-	(hierarchical_label "I2C_SCL"
-		(shape bidirectional)
-		(at 30.48 137.62 180)
+	(label "GP14"
+		(at 53.34 99.06 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left bottom)
 		)
-		(uuid "7d8aa689-eb47-4acd-8a86-7deaf62fa919")
+		(uuid "5f9bdf97-1586-4fc2-b8d4-6566a3fe59a6")
 	)
-	(hierarchical_label "TONE_R"
-		(shape output)
-		(at 200.66 121 0)
+	(label "PD_GND"
+		(at 200.66 152.86 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify left bottom)
 		)
-		(uuid "7d8f47c9-5d6b-4cb4-96be-ab6c18282864")
+		(uuid "5fb3541b-0c4a-4f8e-b967-92dcdd05cc0f")
+	)
+	(label "D_GND"
+		(at 43.18 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5ffd5e4c-2d3f-46b5-9ed1-e28b18a1b937")
+	)
+	(label "I2C_SDA"
+		(at 99.06 76.2 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "60d7a140-bb6a-498a-ae23-fd696656e3a9")
+	)
+	(label "A_GND"
+		(at 111.76 138.43 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "60e241df-2e35-446e-b6a1-68da552b1d78")
+	)
+	(label "D_GND"
+		(at 172.72 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "66386d2a-688f-4c50-b50d-d4adb935c647")
+	)
+	(label "+3V3"
+		(at 60.96 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "68857ad7-b413-412b-892e-23c81d523128")
+	)
+	(label "A_GND"
+		(at 147.32 105.41 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6b46c769-b349-4378-be8a-7f78c0a196ec")
+	)
+	(label "+3V3"
+		(at 55.88 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6bc4f29b-f81e-41ad-ba1b-470a28b50722")
+	)
+	(label "VCC_TONE"
+		(at 30.48 110 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6d7b0992-6c34-427b-abd2-59ab0b29b59b")
+	)
+	(label "GP1"
+		(at 27.94 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6dc39630-5014-42b6-affa-e7d754570468")
+	)
+	(label "PT_BIN_R"
+		(at 185.42 128.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "732bb970-36bd-4ee8-b636-7f0a8b6dbbd6")
+	)
+	(label "PT_BOUT_R"
+		(at 195.58 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "76363b7c-4f7a-44cf-996a-a312a7fe9309")
+	)
+	(label "D_GND"
+		(at 76.2 114.3 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7649aa32-07a0-4390-bda7-cc189d011ff6")
+	)
+	(label "LED_GP14"
+		(at 109.22 92.71 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "76f2b82e-c4ab-4174-8f95-9ae0d140ac56")
+	)
+	(label "GP5"
+		(at 53.34 76.2 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7b376de3-e645-42b3-948e-c774b6a627cc")
+	)
+	(label "GP5"
+		(at 43.18 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7b878e4e-cee0-44bf-8197-2c9f649cbecd")
+	)
+	(label "TONE_L"
+		(at 190.5 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "831bedd9-29cd-4286-8b8b-7a5af181a125")
+	)
+	(label "PT_RIN"
+		(at 93.98 125.73 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "83cbbe13-d013-4175-ab3c-a1d87b0ecc26")
+	)
+	(label "D_GND"
+		(at 50.8 151.13 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "85a1d676-35b5-4a41-9f90-07ebd8990284")
+	)
+	(label "PT_REF"
+		(at 180.34 92.71 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8672e218-1758-4729-834e-9a103c8591f8")
+	)
+	(label "GP8"
+		(at 43.18 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "89cd4448-d055-4083-8770-f7ae45948748")
+	)
+	(label "GP8"
+		(at 53.34 83.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8a3b45cc-9c5f-4086-8d45-51663dc454d3")
+	)
+	(label "PT_BIN_L"
+		(at 124.46 128.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8ad19255-a160-4f7a-9d55-3a5289413816")
+	)
+	(label "PT_BOUT_L"
+		(at 124.46 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8d9c3a2a-2da0-4618-a63a-f6bd91a1f046")
+	)
+	(label "GP1"
+		(at 53.34 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8e8703f3-3042-482c-ae16-74042e2a1a09")
+	)
+	(label "+3V3"
+		(at 109.22 85.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8f523aa6-0264-4a37-b0ca-1b96741d8dda")
+	)
+	(label "D_GND"
+		(at 68.58 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8f5cf162-793b-4825-bca0-29d8dd7df97c")
+	)
+	(label "LED_GP15"
+		(at 109.22 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8fe454e4-6c09-4411-916d-2dcd0e4a9674")
+	)
+	(label "PT_OUT_L"
+		(at 172.72 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "91160c24-d9bf-4ee5-a331-af2d2312e7f3")
+	)
+	(label "PT_TREB_L"
+		(at 147.32 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9203770b-3046-45f2-aee3-686b0409b5bf")
+	)
+	(label "A_GND"
+		(at 111.76 125.73 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9281911c-423a-4948-be91-9973aedb631c")
+	)
+	(label "D_GND"
+		(at 43.18 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "92866732-0008-4440-9e64-3e43036695ef")
+	)
+	(label "GP14"
+		(at 95.25 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "92a055d9-5417-4ee1-bd0c-a9c9fb6ceb94")
+	)
+	(label "PT_BIN_R"
+		(at 172.72 120.65 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "931bba85-6b4d-4429-a530-97632e929a7a")
+	)
+	(label "PT_TREB_L"
+		(at 121.92 118.11 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "93de8f4b-fd22-41da-b007-4c6afaab32fc")
+	)
+	(label "+3V3"
+		(at 81.28 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "96818284-6f77-4a44-8a6d-9ad6a2d1ca88")
+	)
+	(label "D_GND"
+		(at 106.68 76.2 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "96a7a98c-da36-4472-b3d6-bf2d96c05e9f")
+	)
+	(label "A_GND"
+		(at 30.48 125 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "96b7611e-9f8f-40d7-b7e3-88f39355f8f6")
+	)
+	(label "GP15"
+		(at 53.34 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "99684547-fecd-457d-aa1e-75768ecb8e37")
+	)
+	(label "A_GND"
+		(at 124.46 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9b0a9080-f777-4f9e-ba60-9ecdc0c0d8a8")
+	)
+	(label "+3V3"
+		(at 30.48 112 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a3d2b4fb-9b57-49b8-830b-ead2abb9719c")
+	)
+	(label "LED_GP14"
+		(at 102.87 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a56d8ed7-0ede-4b4c-8806-c8ea73bc49e4")
+	)
+	(label "VCC_TONE"
+		(at 137.16 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a6456b2a-8ef4-4e05-8e95-38a2baa0ac58")
+	)
+	(label "PD_12V_SW"
+		(at 200.66 150.32 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a7c8f377-1acd-4499-a1b5-99562e7c71d8")
+	)
+	(label "GP2"
+		(at 43.18 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "aa69fc4a-da7e-4a56-9feb-cf4697b0dae4")
+	)
+	(label "DEST_SENSE_LINE"
+		(at 83.82 91.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "aa82692c-0098-40ee-9e95-c0e118da6021")
+	)
+	(label "+3V3"
+		(at 91.44 72.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ab1cb109-4a6e-4164-ad91-51e33b29f3d6")
+	)
+	(label "DEST_SENSE_MUTE_NC"
+		(at 83.82 93.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "accc1411-c61f-4d10-a1ea-901c0bb0c5e1")
+	)
+	(label "I2C_SCL"
+		(at 30.48 137.62 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "afbbc46f-d3e4-404f-8aef-99d55059f360")
+	)
+	(label "A_GND"
+		(at 180.34 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b0169422-f347-43f5-a0f6-6d6bae35e09f")
+	)
+	(label "PT_TREB_L_MID"
+		(at 121.92 125.73 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b18545e1-c542-48dc-a11f-41bc9f94df9c")
+	)
+	(label "PT_OUT_R"
+		(at 190.5 120.65 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b27d3084-5cf8-4083-b8b1-94281ee6ef2d")
+	)
+	(label "DEST_SENSE_PHONE"
+		(at 60.96 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b50ea345-bf7d-493c-8653-6ad863fb4787")
+	)
+	(label "I2C_SCL"
+		(at 91.44 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b83cf6d3-b3ea-4cd6-9d04-cbf7c5b08c23")
+	)
+	(label "GP3"
+		(at 27.94 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b89bd94d-2c66-405f-ab23-7317be59b8a4")
+	)
+	(label "PT_REF"
+		(at 172.72 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bc224519-51d6-43dc-9155-4204b11bbfc5")
+	)
+	(label "I2C_SCL"
+		(at 99.06 78.74 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bc276e70-8f9f-40d0-a93c-0b32900ebb35")
+	)
+	(label "D_GND"
+		(at 43.18 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bdcc0b5f-1579-430a-aa7d-79d751daea94")
+	)
+	(label "A_GND"
+		(at 137.16 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "befc9b28-a43a-4681-a3e5-71012556e212")
+	)
+	(label "GP7"
+		(at 27.94 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bfe7d3fa-86b3-43b3-a96c-ba524d6ebf0d")
+	)
+	(label "A_GND"
+		(at 187.96 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c14769c6-1c42-4d25-b2cb-d98080d947e2")
+	)
+	(label "A_GND"
+		(at 195.58 135.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c212457f-67d8-4551-8b32-89c507a50545")
+	)
+	(label "+12V"
+		(at 30.48 131 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c216093b-0836-4595-83e5-453dfe37003b")
+	)
+	(label "PT_TREB_R"
+		(at 147.32 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c5434d5e-d98d-4e0a-8120-58182ac8bc49")
+	)
+	(label "COMMON_L"
+		(at 30.48 118 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c5b204cf-4e3e-413d-adc0-d1af4d48789e")
+	)
+	(label "I2C_SDA"
+		(at 106.68 83.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ccd421c0-2114-474b-9edb-3409cb539c73")
+	)
+	(label "GP0"
+		(at 27.94 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d06859a5-f70a-4280-9a43-75035ff4597c")
+	)
+	(label "I2C_SCL"
+		(at 172.72 105.41 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d0b82f5a-b3d2-4e4d-9c1c-673d0e9ffc88")
+	)
+	(label "+5V"
+		(at 58.42 143.51 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d28a3e8a-6c52-494c-b48f-a14baafbef81")
+	)
+	(label "VCC_TONE"
+		(at 147.32 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d386af61-e140-4850-9d33-204c9f7b89ce")
+	)
+	(label "+3V3"
+		(at 91.44 77.47 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d74b7091-650f-439a-ad7c-c57147207628")
+	)
+	(label "PT_TREB_L_MID"
+		(at 111.76 118.11 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "da769b57-12bd-48c3-b557-eb67247caae4")
+	)
+	(label "PT_BOUT_L"
+		(at 172.72 123.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "db5f6f53-b85f-4555-99af-42e967d9356c")
+	)
+	(label "PD_12V_SW"
+		(at 181.61 152.4 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dc8d430c-0ca9-4c90-90f6-41c6d78bbe32")
+	)
+	(label "GP3"
+		(at 53.34 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e15a1f4f-da0b-4e5a-a04f-196a46aa4aff")
+	)
+	(label "PT_LIN"
+		(at 93.98 120.65 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e192074f-55ef-48d6-9bbc-e5f4ee621e00")
+	)
+	(label "PT_BOUT_L"
+		(at 134.62 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ec548904-6b13-461a-b357-fab98c76acfd")
+	)
+	(label "PD_12V"
+		(at 160.02 149.86 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ecec6337-1cae-48c7-bcac-f5f411e27a85")
+	)
+	(label "PT_TREB_R"
+		(at 121.92 130.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ecedae39-5488-4463-93ec-159614d0ee85")
+	)
+	(label "A_GND"
+		(at 134.62 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ed36e3ca-e56c-4f4e-9ee0-a7021cb792b0")
+	)
+	(label "LED_GP15"
+		(at 102.87 99.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ee69e747-1d5c-4c48-847b-1ffded03b98e")
+	)
+	(label "PD_12V"
+		(at 30.48 150.32 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ef97a412-131f-4524-badd-c0429998003b")
+	)
+	(label "A_GND"
+		(at 195.58 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f0cde0b8-4c7d-4f8e-b93d-1a5b82855a6e")
+	)
+	(label "D_GND"
+		(at 60.96 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f25149b8-0987-44c0-ba44-74a1e9d2c35f")
+	)
+	(label "COMMON_L"
+		(at 93.98 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f72203be-cae5-4755-bd55-4eae24ea695d")
+	)
+	(label "+3V3"
+		(at 109.22 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f76253f9-e392-40b5-a821-84a217ad0057")
+	)
+	(label "GP15"
+		(at 95.25 99.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f7843c4b-f22a-4238-8f4b-2c9aef5dc62e")
+	)
+	(label "D_GND"
+		(at 27.94 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f934e94b-364f-413c-bfbd-ccf8186b6ece")
+	)
+	(label "DEST_SENSE_PHONE"
+		(at 83.82 96.52 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f9856625-ac1f-4a17-b006-de7fc6eb1eca")
+	)
+	(label "DEST_SENSE_LINE"
+		(at 60.96 80.01 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f9887428-2f62-4e47-bec0-eef743ce7866")
+	)
+	(label "GP0"
+		(at 53.34 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f9b699bf-1468-40fc-b99e-4060d04b3465")
+	)
+	(label "GP2"
+		(at 53.34 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fbd6fbc7-f19c-41bf-8622-d66f236ef2d3")
+	)
+	(label "PT_BIN_L"
+		(at 134.62 128.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fdf910ce-4268-462b-9973-f310abf7dc27")
+	)
+	(label "+3V3"
+		(at 106.68 78.74 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fe66892a-ac8d-4b4f-b809-c78ddc000882")
 	)
 	(hierarchical_label "A_GND"
 		(shape bidirectional)
@@ -4769,62 +4685,18 @@
 			)
 			(justify right)
 		)
-		(uuid "85ade207-1506-44e6-a941-2c00934b109c")
+		(uuid "04753ac1-ef28-48f5-9797-07640f130ec5")
 	)
 	(hierarchical_label "PD_GND"
 		(shape bidirectional)
-		(at 210.82 157.48 0)
+		(at 200.66 152.86 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "a7f2318f-6a7c-4346-9f26-d6314a21efd0")
-	)
-	(hierarchical_label "COMMON_L"
-		(shape input)
-		(at 30.48 118 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "b7ce10fc-db5b-4b8e-9316-d7b079487fd4")
-	)
-	(hierarchical_label "I2C_SDA"
-		(shape bidirectional)
-		(at 30.48 135.08 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "cad49599-3c8c-42d9-86e2-4f95ca3016df")
-	)
-	(hierarchical_label "+3V3"
-		(shape input)
-		(at 30.48 112 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d81c9c8a-c8b1-4051-b5fb-dcf2265ed8d7")
-	)
-	(hierarchical_label "VCC_TONE"
-		(shape input)
-		(at 30.48 110 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "f28247e4-143f-4d67-836b-cc9d8c670e5e")
+		(uuid "0a119088-48d2-43f7-805f-2d36e8037a97")
 	)
 	(hierarchical_label "D_GND"
 		(shape input)
@@ -4835,2544 +4707,150 @@
 			)
 			(justify right)
 		)
-		(uuid "f5f6da66-a918-4b4f-81c4-abd32e4bb5b2")
+		(uuid "1982242b-043d-4233-8a8a-d2daf0eabeb3")
 	)
-	(symbol
-		(lib_id "Device:R")
-		(at 180.34 96.52 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0015a34c-8eaa-4e9e-a8ab-f6508f11504c")
-		(property "Reference" "R507"
-			(at 180.34 93.98 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "I2C_SCL"
+		(shape bidirectional)
+		(at 30.48 137.62 180)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "5.6k"
-			(at 180.34 99.06 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d54ec957-daf7-4871-801c-68b5ba864dbc")
-		)
-		(pin "2"
-			(uuid "5f2d8c53-f57d-4188-ae6d-7d7573d69d91")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R507")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "1f20c6ef-9fa6-4d38-b8b7-3e1ff8e0cbba")
 	)
-	(symbol
-		(lib_id "Device:R")
-		(at 91.44 68.58 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0372a4f1-40e3-4977-a509-5f1804d89bc6")
-		(property "Reference" "R501"
-			(at 91.44 66.04 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "+12V"
+		(shape input)
+		(at 30.48 131 180)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "4.7k"
-			(at 91.44 71.12 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "49ea2d1b-70ef-4bae-8879-fc7b9abb605e")
-		)
-		(pin "2"
-			(uuid "4de18f1c-e7bf-477a-9172-bf9ab397129f")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R501")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "2503e302-325c-406e-910b-63de4361ccdd")
 	)
-	(symbol
-		(lib_id "Device:LED")
-		(at 205.74 157.48 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "0cfeac94-e04f-4377-88fc-7f5e72891474")
-		(property "Reference" "D503"
-			(at 207.01 154.94 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
+	(hierarchical_label "TONE_R"
+		(shape output)
+		(at 200.66 121 0)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify left)
 		)
-		(property "Value" "12V panel LED"
-			(at 132.08 276.86 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at -38.1 119.38 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at -38.1 119.38 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at -38.1 119.38 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e6ba200c-fbd5-4e24-9e1d-138da8e0e8b3")
-		)
-		(pin "2"
-			(uuid "45132a7b-189e-4094-b2e8-9d19549630f8")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "D503")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "3f41494c-f779-4af2-9f73-8eeda12a089b")
 	)
-	(symbol
-		(lib_id "AudioV2:PT2314")
-		(at 160.02 119.38 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "10a8ab59-27ce-46e3-9a86-0093d726c23d")
-		(property "Reference" "U502"
-			(at 160.02 116.84 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "I2C_SDA"
+		(shape bidirectional)
+		(at 30.48 135.08 180)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "PT2314-D"
-			(at 160.02 121.92 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "fe5a8888-8d91-4e97-8394-928b75727c2e")
-		)
-		(pin "2"
-			(uuid "b97ef6e2-143b-40f5-a82b-fea8584833ff")
-		)
-		(pin "3"
-			(uuid "1885108a-223f-4276-a23f-4400d533b30d")
-		)
-		(pin "4"
-			(uuid "ba5231bf-12d5-4447-b56c-ac442c053772")
-		)
-		(pin "5"
-			(uuid "bad0e512-105a-4cf4-b005-04d970e8c3e3")
-		)
-		(pin "6"
-			(uuid "e417b4c1-0e94-478c-9cc0-cda0e1d46012")
-		)
-		(pin "7"
-			(uuid "4d369dc6-b71c-4c12-a1b1-2f788b40cdf6")
-		)
-		(pin "8"
-			(uuid "7d83cb8e-44fc-449c-a1de-7136ae1dbb46")
-		)
-		(pin "9"
-			(uuid "955516b6-d140-4eb2-b811-0390eea38902")
-		)
-		(pin "10"
-			(uuid "4c2b035a-7a3d-4e60-bd00-a3487348bade")
-		)
-		(pin "11"
-			(uuid "43565a25-a20c-4364-9e8a-e0bf19769eff")
-		)
-		(pin "12"
-			(uuid "deecc560-edde-452e-8869-82d27ce9ce21")
-		)
-		(pin "13"
-			(uuid "e3593589-20a0-4077-9781-a35809c63230")
-		)
-		(pin "14"
-			(uuid "e230f903-47b2-4ef4-824d-21f6a5fac35a")
-		)
-		(pin "15"
-			(uuid "23e4bc21-7ffc-42f1-9634-3689efd3d584")
-		)
-		(pin "16"
-			(uuid "dd3ce4c0-6e22-4da7-a4eb-b7e18886f0c0")
-		)
-		(pin "17"
-			(uuid "46d899ec-b9b9-4904-b7b2-88c6a633fede")
-		)
-		(pin "18"
-			(uuid "8fdff647-09f5-4714-a748-466ea07577f5")
-		)
-		(pin "19"
-			(uuid "29748805-e186-4d75-83c8-6c83b5ccec65")
-		)
-		(pin "20"
-			(uuid "88e74a42-9f93-4210-98a8-8e47da4f5f92")
-		)
-		(pin "21"
-			(uuid "64971e82-dc80-40c3-ab2d-184a5d6ebb37")
-		)
-		(pin "22"
-			(uuid "e0898ffe-d2e1-40a0-b6e4-11c6688fcac3")
-		)
-		(pin "23"
-			(uuid "c40904c2-1def-4d93-bcb5-8f8cc32e3bf5")
-		)
-		(pin "24"
-			(uuid "5b5c3359-6fa4-4020-a5ad-60d6eabaaf19")
-		)
-		(pin "25"
-			(uuid "6116034a-9ec2-41fd-abba-22d96c9e2ee1")
-		)
-		(pin "26"
-			(uuid "527a2e20-ee82-4216-9ea8-5bb5fefc99ad")
-		)
-		(pin "27"
-			(uuid "1980b6b2-c46e-47ba-9922-9fd574de90f2")
-		)
-		(pin "28"
-			(uuid "28a2e4f7-c2ab-4bbf-ad34-c232e79935ac")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "U502")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "468a45b6-07de-4f12-bda1-543d74445bc5")
 	)
-	(symbol
-		(lib_id "Device:C")
-		(at 121.92 121.92 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "11144d3c-4d2a-46fc-afa8-730e47122299")
-		(property "Reference" "C508"
-			(at 121.92 119.38 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "+3V3"
+		(shape output)
+		(at 30.48 112 180)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "2.7n"
-			(at 121.92 124.46 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "9630498f-4b36-4610-b8cc-9b95e67062cc")
-		)
-		(pin "2"
-			(uuid "7a759885-9f64-4ab5-a94c-8eb0e5fbe2a3")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C508")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "5e5cab3f-b6f3-402e-99d6-3902a39d9926")
 	)
-	(symbol
-		(lib_id "Device:C")
-		(at 185.42 132.08 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "126a0afe-a511-459d-838d-3d4cafd702b0")
-		(property "Reference" "C511"
-			(at 185.42 129.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "PD_12V_SW"
+		(shape output)
+		(at 200.66 150.32 0)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify left)
 		)
-		(property "Value" "100n"
-			(at 185.42 134.62 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "ae27f93b-b085-449e-a8ba-c436756ee4b4")
-		)
-		(pin "2"
-			(uuid "200bcd18-41f8-41e8-ad45-21d346faa0c3")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C511")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "6ece6f54-f508-4f7a-9af0-d0d4285d6c24")
 	)
-	(symbol
-		(lib_id "Device:R")
-		(at 195.58 106.68 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1d021cbd-ca61-4227-b037-0f9a8f2ad03b")
-		(property "Reference" "R511"
-			(at 195.58 104.14 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "TONE_L"
+		(shape output)
+		(at 200.66 118 0)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify left)
 		)
-		(property "Value" "2.4k"
-			(at 195.58 109.22 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c7d092d7-f37c-4f17-9f65-aacc1830c9da")
-		)
-		(pin "2"
-			(uuid "82124b12-9c71-410a-a544-3741c9d3105b")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R511")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "87521264-3b72-47b8-b659-6482e2007cb1")
 	)
-	(symbol
-		(lib_id "Device:LED")
-		(at 99.06 99.06 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1daaf179-397f-4975-829c-1b107c23c8fe")
-		(property "Reference" "D502"
-			(at 99.06 96.52 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "-12V"
+		(shape input)
+		(at 30.48 133 180)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "DEST GP15"
-			(at 99.06 101.6 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d9d9985c-5c98-4ef5-b61b-7730dc60892b")
-		)
-		(pin "2"
-			(uuid "5ddcdc7e-a04b-456a-9232-201f6b1245a6")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "D502")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "8f843291-c0fd-4562-8353-7704b3a2986e")
 	)
-	(symbol
-		(lib_id "Device:C")
-		(at 134.62 132.08 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2916c30e-6110-44eb-b61f-f860af0eb3b9")
-		(property "Reference" "C510"
-			(at 134.62 129.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "PD_12V"
+		(shape input)
+		(at 30.48 150.32 180)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "100n"
-			(at 134.62 134.62 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "ab224d50-2c8c-414f-b2de-7944fd47fa28")
-		)
-		(pin "2"
-			(uuid "9ab281f9-0d99-4cad-9726-22d01ff922f0")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C510")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "a2498dc9-0c41-4d4c-b1f0-efb4734ae07b")
 	)
-	(symbol
-		(lib_id "Device:R")
-		(at 68.58 93.98 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3837c100-78a5-41fa-ae1c-99bcde112ade")
-		(property "Reference" "R506"
-			(at 68.58 91.44 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "COMMON_L"
+		(shape input)
+		(at 30.48 118 180)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "10k"
-			(at 68.58 96.52 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c33f6ad8-0029-4bea-a815-0ec509d576ee")
-		)
-		(pin "2"
-			(uuid "2689071a-3f65-454f-bc95-daf9a648ac66")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R506")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "ca4f1986-ae2e-4d34-8f70-c17d58f51b4c")
 	)
-	(symbol
-		(lib_id "Device:C")
-		(at 190.5 109.22 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "459c884d-f409-40e1-9b58-3d58853ec83a")
-		(property "Reference" "C505"
-			(at 190.5 106.68 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "+5V"
+		(shape output)
+		(at 30.48 115 180)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "2.2u"
-			(at 190.5 111.76 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c218f2f9-7ed1-4777-9c6d-3e245c9219c8")
-		)
-		(pin "2"
-			(uuid "d67fc22c-03eb-4fb2-b21f-2726d80a6aa3")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C505")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "d8779f48-b007-478a-b00b-c3e190d71bd7")
 	)
-	(symbol
-		(lib_id "Device:R")
-		(at 109.22 99.06 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4ad40493-c663-4c65-81ce-9369d3e3cfda")
-		(property "Reference" "R508"
-			(at 109.22 96.52 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+	(hierarchical_label "COMMON_R"
+		(shape input)
+		(at 30.48 121 180)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "1k"
-			(at 109.22 101.6 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e4a5267c-b6bd-4c55-83fa-d6ca9c323e78")
-		)
-		(pin "2"
-			(uuid "cc66be05-b4a1-4e15-88c5-9d88025e8c61")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R508")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "de2cda02-7e50-45aa-b475-6ccfa8f394bd")
 	)
-	(symbol
-		(lib_id "Device:C")
-		(at 187.96 96.52 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6104b147-47f9-4c95-a935-255ce7782c6e")
-		(property "Reference" "C501"
-			(at 187.96 93.98 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "22u"
-			(at 187.96 99.06 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e0599818-ae65-439e-8b47-b77eef796ca8")
-		)
-		(pin "2"
-			(uuid "62dfce75-f3a6-4179-8311-3de9b1889493")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C501")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:LED")
-		(at 99.06 88.9 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6922db48-8685-4709-bf44-741591272a51")
-		(property "Reference" "D501"
-			(at 99.06 86.36 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "DEST GP14"
-			(at 99.06 91.44 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "bd040952-6329-4eca-9689-31a6b3d6f180")
-		)
-		(pin "2"
-			(uuid "409a505e-4ac9-496c-815e-174d2284d1d5")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "D501")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 93.98 121.92 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6d9f5110-7931-4804-a0f0-a2f29325f81c")
-		(property "Reference" "C507"
-			(at 93.98 119.38 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.2u"
-			(at 93.98 124.46 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "5c7c6edb-bc95-4f69-ab5f-9f0d454916bf")
-		)
-		(pin "2"
-			(uuid "99567892-0583-4e2e-884e-649a3c5339f4")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C507")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 124.46 132.08 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "713b4d65-0767-42fe-8f73-c23e52602428")
-		(property "Reference" "R513"
-			(at 124.46 129.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.4k"
-			(at 124.46 134.62 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "a99dd2d8-ca25-4c0b-8bb6-0a24b22b9586")
-		)
-		(pin "2"
-			(uuid "446717e8-e342-4a33-a987-b9e15d27c4fc")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R513")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "MCU_Module:RaspberryPi_Pico")
-		(at 76.2 78.74 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "731e3243-ebab-4077-8c80-aceeb5cceaf6")
-		(property "Reference" "U501"
-			(at 76.2 76.2 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Pico 2 / RP2350"
-			(at 76.2 81.28 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "2e14bd12-5313-4190-bd33-79e918c5cd5c")
-		)
-		(pin "2"
-			(uuid "cb0c4134-2b25-4d74-bbf5-da84afe6e553")
-		)
-		(pin "3"
-			(uuid "59735442-9ebe-436d-9d00-7a0484141830")
-		)
-		(pin "4"
-			(uuid "477420db-2003-49a7-9bb7-d3b29886beb1")
-		)
-		(pin "5"
-			(uuid "6f9cc57a-e35f-4683-9c8c-8407c21a435c")
-		)
-		(pin "6"
-			(uuid "f4f5be2d-7903-48d7-a1ea-3665d332b56b")
-		)
-		(pin "7"
-			(uuid "01115d3b-d134-47fd-9b2f-4a2c40910431")
-		)
-		(pin "8"
-			(uuid "4c8315fd-a618-4dd4-9a5a-ac7be57ab1af")
-		)
-		(pin "9"
-			(uuid "e6b9ee1a-ed83-4c31-9fe1-9bf95ae0b0de")
-		)
-		(pin "10"
-			(uuid "e5e948ca-fb30-4e3e-a2f6-505e73fb736a")
-		)
-		(pin "11"
-			(uuid "4ca6c7bc-913d-455c-93fd-780b44864ef6")
-		)
-		(pin "12"
-			(uuid "0c07a46e-2135-4831-8751-2fc775e70fc3")
-		)
-		(pin "13"
-			(uuid "435d1fca-ec72-4753-9e70-9abe5658434d")
-		)
-		(pin "14"
-			(uuid "fbf344fd-73c5-435d-9c36-3038448977af")
-		)
-		(pin "15"
-			(uuid "69fa8d48-fdc0-430e-975b-426c23e073c0")
-		)
-		(pin "16"
-			(uuid "d6c9d1ab-c2e8-4b07-b55a-e53ddb714970")
-		)
-		(pin "17"
-			(uuid "a1b68b37-a7cb-4a9a-bf50-9003bf1dcfe3")
-		)
-		(pin "18"
-			(uuid "628b8829-97ce-4505-97ee-3e662feb0c67")
-		)
-		(pin "19"
-			(uuid "af361e99-64e9-457e-9ef0-51c8ade49576")
-		)
-		(pin "20"
-			(uuid "5ee96989-8adb-4f67-a0b5-4c9536a3e37b")
-		)
-		(pin "21"
-			(uuid "1f7ed279-7c26-426d-827b-2662ffb4caa5")
-		)
-		(pin "22"
-			(uuid "e5d1a792-d795-4541-be99-fb0c43195fb6")
-		)
-		(pin "23"
-			(uuid "d4ca1c08-5505-4ab8-b1b8-9ed7bd1b3862")
-		)
-		(pin "24"
-			(uuid "9aae488f-7b1b-4a2d-b655-b0616b31a474")
-		)
-		(pin "25"
-			(uuid "87d2bd48-dbf4-42d2-8407-67a73fec5e0c")
-		)
-		(pin "26"
-			(uuid "c86a6c5b-ce44-46fc-83ee-3d588e1b6661")
-		)
-		(pin "27"
-			(uuid "730f10ee-9748-4589-abd4-350f0b689d57")
-		)
-		(pin "28"
-			(uuid "aec39006-b545-4b20-93da-80a1a404d3bb")
-		)
-		(pin "29"
-			(uuid "5e929e64-7428-40b0-ab82-c0bd3a9fe614")
-		)
-		(pin "30"
-			(uuid "c9a77748-383c-4d81-b260-e4fd8dc949d9")
-		)
-		(pin "31"
-			(uuid "ba6fd24f-c025-4ba6-a73f-26ded6e223b7")
-		)
-		(pin "32"
-			(uuid "e952d667-1e75-4e6a-831c-ce8f76dc22ef")
-		)
-		(pin "33"
-			(uuid "dac3bbc2-a592-4967-b553-b8fe5f5103a7")
-		)
-		(pin "34"
-			(uuid "8d3dfb43-9a87-4a7f-83d6-dd617c2a3d8e")
-		)
-		(pin "35"
-			(uuid "02faa08e-f07e-4a8a-baef-f79df28d1e78")
-		)
-		(pin "36"
-			(uuid "5bea42b7-5a88-483f-aedd-c8338cdbc1aa")
-		)
-		(pin "37"
-			(uuid "9b0b3f67-7eb8-4b33-b824-ae15b2d58036")
-		)
-		(pin "38"
-			(uuid "f54fd920-03e3-4335-8904-2477e86131c9")
-		)
-		(pin "39"
-			(uuid "2213285d-c7d0-4443-88e0-e6e709879962")
-		)
-		(pin "40"
-			(uuid "2f0b949a-778e-4e1f-97b6-572c430ae6e8")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "U501")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 111.76 121.92 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "77ba4fa2-3bf9-4871-8a9d-1e1c8585f73a")
-		(property "Reference" "R512"
-			(at 111.76 119.38 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.4k"
-			(at 111.76 124.46 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "dde25fe8-1316-46d8-aa3b-270fd45257e6")
-		)
-		(pin "2"
-			(uuid "0366ea31-3f9e-48b3-93a1-c4310aa2e9ee")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R512")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 121.92 134.62 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7800ca41-849f-48b4-baae-c6b7c6cb300d")
-		(property "Reference" "C512"
-			(at 121.92 132.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.7n"
-			(at 121.92 137.16 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "def390e5-aaf5-4267-be43-ab61ce78fd2c")
-		)
-		(pin "2"
-			(uuid "5de0524f-7d83-4eba-bbe6-b65610c69eda")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C512")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:RotaryEncoder_Switch")
-		(at 35.56 40.64 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7c3612db-6c26-403e-8277-20f6a744eee9")
-		(property "Reference" "ENC501"
-			(at 35.56 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "EC11 ENC_CH"
-			(at 35.56 43.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "A"
-			(uuid "044d3dce-7603-474b-a268-8703ca0edffa")
-		)
-		(pin "B"
-			(uuid "1404f645-6ac3-468c-b1e1-0e267691dd29")
-		)
-		(pin "C"
-			(uuid "6d7e2580-d827-4c7b-9eb5-81e077ac525a")
-		)
-		(pin "S1"
-			(uuid "42d9a5ce-4efc-4099-8483-681d06705cd9")
-		)
-		(pin "S2"
-			(uuid "23c619b6-4b48-4f8c-a17f-73a649a702dc")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "ENC501")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 55.88 93.98 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7d089d5b-b10a-45fb-b570-596207fef8a2")
-		(property "Reference" "R505"
-			(at 55.88 91.44 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 55.88 96.52 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "1542ca31-3c1d-4b85-8780-6ea3fd72eb49")
-		)
-		(pin "2"
-			(uuid "17d6a7c1-df52-4c36-9c50-12805038570c")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R505")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 109.22 88.9 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8603e091-c484-45f5-ad37-efc0e2402ea6")
-		(property "Reference" "R504"
-			(at 109.22 86.36 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1k"
-			(at 109.22 91.44 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6fba9e72-7abb-4a62-854b-fad85e1ea0a5")
-		)
-		(pin "2"
-			(uuid "78d6e503-f991-4b8e-ba11-248701ae9105")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R504")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_SP3T")
-		(at 78.74 93.98 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "92af5c13-ed95-4c7b-88a9-9351af61640d")
-		(property "Reference" "SW501"
-			(at 78.74 91.44 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "DEST sense (3PDT 3rd pole)"
-			(at 78.74 96.52 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "675d756d-c9ec-4da3-99ea-e05205b8959c")
-		)
-		(pin "2"
-			(uuid "604371db-a3c8-4606-a79d-8a38af2296b5")
-		)
-		(pin "3"
-			(uuid "c4dd5c16-b8b2-4a6b-91dc-2a456d8a5dfd")
-		)
-		(pin "4"
-			(uuid "dacb6f5a-ca59-490c-ade4-00458e9f67b8")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "SW501")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 185.42 106.68 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9b21ae8f-1cc4-48d9-a001-38a1dcdbfaa8")
-		(property "Reference" "C504"
-			(at 185.42 104.14 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100n"
-			(at 185.42 109.22 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "25d91ee7-f7e6-45fd-b48a-b3a7e8e1c47d")
-		)
-		(pin "2"
-			(uuid "c5d511a0-744a-44e9-8a4b-31f98bb3f082")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C504")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 91.44 73.66 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a559e896-e635-4072-ae1d-7bebfc45921e")
-		(property "Reference" "R502"
-			(at 91.44 71.12 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "4.7k"
-			(at 91.44 76.2 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "99fc884a-ea16-42ac-b86b-2c45b7af704e")
-		)
-		(pin "2"
-			(uuid "6bc671ca-869a-4be2-b9dd-7b0bbb8dd57d")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R502")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 124.46 106.68 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a809ed4b-7828-4d3c-bf18-ba6d38fbe277")
-		(property "Reference" "R510"
-			(at 124.46 104.14 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.4k"
-			(at 124.46 109.22 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "8320259f-0882-421f-a4a4-ae7d2037f7d7")
-		)
-		(pin "2"
-			(uuid "3cc93416-90e3-4f61-819e-1a41c3ad7e24")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R510")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:RotaryEncoder_Switch")
-		(at 35.56 55.88 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a9ca2793-8801-4460-b9e6-e1651a02377f")
-		(property "Reference" "ENC502"
-			(at 35.56 53.34 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "EC11 ENC_BASS"
-			(at 35.56 58.42 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "A"
-			(uuid "1d084b9c-a4e9-44ef-a3f9-323a484f6b4a")
-		)
-		(pin "B"
-			(uuid "174bd2f7-a0b6-46f5-b844-d29f19930289")
-		)
-		(pin "C"
-			(uuid "fac7bd65-2754-46f6-bd39-6d3da53673ac")
-		)
-		(pin "S1"
-			(uuid "6581297a-3ee8-4413-9af7-d01e772392c8")
-		)
-		(pin "S2"
-			(uuid "996fa411-39d9-4466-938d-ca94e35e2738")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "ENC502")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 93.98 116.84 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "aefbc7f0-e1c1-4f78-9bd2-f5b60cebaee5")
-		(property "Reference" "C506"
-			(at 93.98 114.3 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.2u"
-			(at 93.98 119.38 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "9148132b-07a3-4f3e-9c5f-b0e632ad74ed")
-		)
-		(pin "2"
-			(uuid "ae4aff40-4bb3-44a6-93c0-c86450a7d00f")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C506")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 195.58 132.08 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b18b1260-3d73-4278-9b71-ee230a227121")
-		(property "Reference" "R514"
-			(at 195.58 129.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.4k"
-			(at 195.58 134.62 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "b20f034e-b4f1-4df0-981b-65cf28eaf9c0")
-		)
-		(pin "2"
-			(uuid "ad614a1f-e6a4-4fbc-bc9d-b49b9451d707")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R514")
-					(unit 1)
-				)
-			)
-		)
+	(hierarchical_label "VCC_TONE"
+		(shape input)
+		(at 30.48 110 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e8bdfe4b-7086-4417-bc64-14f30efb5f43")
 	)
 	(symbol
 		(lib_id "Device:C")
@@ -7385,8 +4863,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "b5c0ce05-275b-47b8-85d5-4a89d7c8e71b")
-		(property "Reference" "C509"
+		(uuid "04a25ab9-9ca5-4d75-9603-6608e9ad800b")
+		(property "Reference" "C212"
 			(at 190.5 121.92 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7440,95 +4918,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "6503b885-527b-4428-93e5-71daba44cd9c")
+			(uuid "5b93f0d2-ad83-4df0-ae84-bdc889b025c0")
 		)
 		(pin "2"
-			(uuid "56641500-825f-4eb4-a5fd-83be08e9db71")
+			(uuid "0d694779-16cb-427d-a3fd-d6b4279ae9cf")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C509")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 60.96 104.14 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ba39074a-f818-4b5a-a053-afd25fc6dbf7")
-		(property "Reference" "R509"
-			(at 60.96 101.6 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1k"
-			(at 60.96 106.68 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "ced67db9-ffde-4bea-a523-ef9638e0ae3e")
-		)
-		(pin "2"
-			(uuid "1677cf6d-480b-4e3b-834f-f80c6d5d5b25")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R509")
+					(reference "C212")
 					(unit 1)
 				)
 			)
@@ -7545,8 +4943,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "beff2bbb-9587-49e6-b552-4d15deaaf404")
-		(property "Reference" "J_OLED501"
+		(uuid "0aab9938-8e0f-4732-8c5d-2a0bb35f0a35")
+		(property "Reference" "J_OLED"
 			(at 101.6 76.2 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7600,21 +4998,21 @@
 			)
 		)
 		(pin "1"
-			(uuid "c7da2c7d-71b1-4701-af74-3b23cbee64d2")
+			(uuid "dd8748a0-64a0-41b9-9054-16f55520ee69")
 		)
 		(pin "2"
-			(uuid "581fcae8-2a94-4767-ac9c-df05750f99c9")
+			(uuid "7d0cdf83-20fd-485d-bf83-7a98af93f94b")
 		)
 		(pin "3"
-			(uuid "27b8182f-4c32-43fa-ab5f-61bc7a84e19e")
+			(uuid "7c5380b3-2934-4ad6-ad7b-ad99cefc8627")
 		)
 		(pin "4"
-			(uuid "d980a6e0-0a60-4a60-b3d8-7b1957b62f5d")
+			(uuid "2fd22b3d-c0d9-4203-beab-ccb51bf78033")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "J_OLED501")
+					(reference "J_OLED")
 					(unit 1)
 				)
 			)
@@ -7622,7 +5020,7 @@
 	)
 	(symbol
 		(lib_id "Device:RotaryEncoder_Switch")
-		(at 35.56 71.12 0)
+		(at 35.56 55.88 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7631,9 +5029,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "c9be2720-282e-43ac-92bd-af38618c4d0b")
-		(property "Reference" "ENC503"
-			(at 35.56 68.58 0)
+		(uuid "17f0659b-8152-4ff6-80bd-fa270a42a10a")
+		(property "Reference" "ENC2"
+			(at 35.56 53.34 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7642,8 +5040,8 @@
 				)
 			)
 		)
-		(property "Value" "EC11 ENC_TREBLE"
-			(at 35.56 73.66 0)
+		(property "Value" "EC11 ENC_BASS"
+			(at 35.56 58.42 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7686,32 +5084,32 @@
 			)
 		)
 		(pin "A"
-			(uuid "0df12eed-de39-41a6-bdc4-1c5beff44be1")
+			(uuid "749c7e4b-4351-48a0-9fd9-9d85171d2d0f")
 		)
 		(pin "B"
-			(uuid "d3b305d5-a139-48b1-8253-4ea40361765d")
+			(uuid "f2ebcc4a-65e7-42ec-88db-beb381662ed2")
 		)
 		(pin "C"
-			(uuid "2b6024f0-d610-4f82-abb7-4f3d73a6b36e")
+			(uuid "84cca7da-e8bd-4fb2-9db2-539081088bac")
 		)
 		(pin "S1"
-			(uuid "dbc0a8c5-6a11-45d8-a72e-d042f41b71c1")
+			(uuid "aa7af71d-44f9-432b-9120-7b214458a62b")
 		)
 		(pin "S2"
-			(uuid "bf5709c7-c44c-4801-88dc-512b335022f4")
+			(uuid "b57b5ea6-4bc7-4eec-8bcd-8ad6a08c4187")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "ENC503")
+					(reference "ENC2")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 137.16 99.06 0)
+		(lib_id "Device:R")
+		(at 111.76 121.92 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7720,9 +5118,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "da7fb4fa-0599-4df7-8872-dc04d5781410")
-		(property "Reference" "C502"
-			(at 137.16 96.52 0)
+		(uuid "19a589fe-6a11-4624-9b49-bf718a3bd07d")
+		(property "Reference" "R206"
+			(at 111.76 119.38 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7731,8 +5129,8 @@
 				)
 			)
 		)
-		(property "Value" "0.1u"
-			(at 137.16 101.6 0)
+		(property "Value" "2.4k"
+			(at 111.76 124.46 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7775,15 +5173,175 @@
 			)
 		)
 		(pin "1"
-			(uuid "a3242be3-29dd-4d49-94f5-f267b94d465b")
+			(uuid "000fa4a1-f5f0-4646-a14b-3c9a3515e51e")
 		)
 		(pin "2"
-			(uuid "c42ccbd8-129a-4f67-a3ac-326015cc7e21")
+			(uuid "a103e05d-d01e-41f8-9a1b-7483d320fdc9")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C502")
+					(reference "R206")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 60.96 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1a73446e-4f6f-4ce3-ba07-ac4dda72fbcd")
+		(property "Reference" "R233"
+			(at 60.96 101.6 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 60.96 106.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "3bf8caf3-bfbd-4984-a837-bfe76479a8f3")
+		)
+		(pin "2"
+			(uuid "5f6c9b15-2a04-4b07-8223-ff47e195f829")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R233")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 187.96 96.52 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "26e8afe8-48f8-4245-bc7a-387f44537431")
+		(property "Reference" "C204"
+			(at 187.96 93.98 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22u"
+			(at 187.96 99.06 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2fdc2b13-386a-48f4-9337-cdb65b7e93a5")
+		)
+		(pin "2"
+			(uuid "71777a0c-9d72-43c7-bb1a-62a75be6a837")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "C204")
 					(unit 1)
 				)
 			)
@@ -7800,8 +5358,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "e2b1547a-7fa4-4cc8-8d5b-5359da0d6515")
-		(property "Reference" "R515"
+		(uuid "26e9216a-5b21-4764-8d79-14c3dd7da690")
+		(property "Reference" "R207"
 			(at 111.76 132.08 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7855,23 +5413,23 @@
 			)
 		)
 		(pin "1"
-			(uuid "c85e5ab5-d891-492d-b9f0-ec6c0537b8b0")
+			(uuid "894b7d1c-0923-4037-9d3f-d2380ea9b922")
 		)
 		(pin "2"
-			(uuid "d547aac3-2ac8-43ec-823f-33aafab3964d")
+			(uuid "6b9afe68-17a0-4477-b637-8eb03242bdbf")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R515")
+					(reference "R207")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "BP5293_ROHM:BP5293-50")
-		(at 50.8 144.78 0)
+		(lib_id "Device:C")
+		(at 93.98 116.84 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7880,9 +5438,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "e34b3d19-25a5-4a26-bc5a-7ff40cded461")
-		(property "Reference" "U503"
-			(at 50.8 142.24 0)
+		(uuid "2aa4eb92-407e-430e-88c2-220a4b101de0")
+		(property "Reference" "C202"
+			(at 93.98 114.3 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7891,8 +5449,8 @@
 				)
 			)
 		)
-		(property "Value" "BP5293-50 +5V"
-			(at 50.8 147.32 0)
+		(property "Value" "2.2u"
+			(at 93.98 119.38 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7935,18 +5493,819 @@
 			)
 		)
 		(pin "1"
-			(uuid "1c0288a3-66ac-4dda-b1d6-1f740a72992c")
+			(uuid "f7251242-d60b-48e0-9236-0b12a7ca1df2")
 		)
 		(pin "2"
-			(uuid "90ac5e8c-c03a-470c-b10a-4a5a63659d04")
-		)
-		(pin "3"
-			(uuid "82ea77c1-3325-4eae-9f5d-bbba706dcbf2")
+			(uuid "748f3075-45b3-4e7b-8348-59b1f7b4d54e")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "U503")
+					(reference "C202")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 121.92 121.92 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "380cf4c8-e903-47a2-b6fd-03ec57ca21c6")
+		(property "Reference" "C209"
+			(at 121.92 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.7n"
+			(at 121.92 124.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "29d4903c-4f2c-4677-a689-862646ae0b3f")
+		)
+		(pin "2"
+			(uuid "070e4f80-66e5-4fd4-b69a-75297378c847")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "C209")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AudioV2:PT2314")
+		(at 160.02 119.38 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "39d7e727-813c-465d-9b93-ea122cbecf66")
+		(property "Reference" "U2"
+			(at 160.02 116.84 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PT2314-D"
+			(at 160.02 121.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0481f247-946f-4e6d-986c-b1e62c72f280")
+		)
+		(pin "2"
+			(uuid "a5824352-a0b7-4fe1-98f1-3f1bbdbdcb23")
+		)
+		(pin "3"
+			(uuid "9af93438-0868-4bc2-bc4b-fb47ec3c124a")
+		)
+		(pin "4"
+			(uuid "4305e23b-cc40-4dc5-83b7-b7110c7e73c0")
+		)
+		(pin "5"
+			(uuid "1cb472f8-5bb0-4620-85ab-c75b9e966664")
+		)
+		(pin "6"
+			(uuid "cefa64c1-9291-404b-b77c-6bb45649d0b2")
+		)
+		(pin "7"
+			(uuid "c38820c9-1ebb-4a79-aa09-ef7e6214d846")
+		)
+		(pin "8"
+			(uuid "76e5f1ea-3495-43be-bc94-c95f8cf132c4")
+		)
+		(pin "9"
+			(uuid "e958000c-3858-4a3b-83cd-3a042948cb61")
+		)
+		(pin "10"
+			(uuid "7772e60e-aafc-4a8b-9d31-0032cbc1df6c")
+		)
+		(pin "11"
+			(uuid "a1cbaa11-08bb-449b-8d1e-b21ac0419618")
+		)
+		(pin "12"
+			(uuid "8bce2380-8326-47a9-9e5f-0dd51da619d8")
+		)
+		(pin "13"
+			(uuid "9622ef79-502c-441c-a23d-6ab26ca435d9")
+		)
+		(pin "14"
+			(uuid "622c10b9-2b56-4f98-8061-ce35671aa1ca")
+		)
+		(pin "15"
+			(uuid "bbf0a03e-788b-433b-96b7-09b43d2f7a56")
+		)
+		(pin "16"
+			(uuid "b87faf10-e26d-4324-a9cd-f39c56f5b4c3")
+		)
+		(pin "17"
+			(uuid "ec473c8e-b0d7-44d0-b74b-119f27df5710")
+		)
+		(pin "18"
+			(uuid "97b23d2b-3824-4b52-a03a-7d6d33e6e1a0")
+		)
+		(pin "19"
+			(uuid "b6d64ba1-3161-448b-ba1d-7c4e550df614")
+		)
+		(pin "20"
+			(uuid "e8a8f946-0a6f-4361-b62d-bbf5754948c7")
+		)
+		(pin "21"
+			(uuid "94968b10-34a7-4a3c-a818-dfeb86a26a45")
+		)
+		(pin "22"
+			(uuid "6d632ef5-2b0e-42f5-9580-d6de23faa988")
+		)
+		(pin "23"
+			(uuid "1c1561f1-6854-474b-88b6-dee8e173a09c")
+		)
+		(pin "24"
+			(uuid "ffdb5c26-1053-435c-953e-94f898618f34")
+		)
+		(pin "25"
+			(uuid "46c6d25f-1ceb-456e-892e-377788f8319c")
+		)
+		(pin "26"
+			(uuid "4dfa9cda-e078-4065-a3c3-d097ed25ddf9")
+		)
+		(pin "27"
+			(uuid "2bf70b91-b008-45af-8b92-b51a301e0177")
+		)
+		(pin "28"
+			(uuid "e3b044e6-e111-4d33-93b6-900f34aa24b1")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "U2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_SP3T")
+		(at 78.74 93.98 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "52ac974b-75f4-48d7-a2da-34b44062e257")
+		(property "Reference" "SW2"
+			(at 78.74 91.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "DEST sense (3PDT 3rd pole)"
+			(at 78.74 96.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "656f5ec0-70e5-42c2-8ac3-70bd947e1745")
+		)
+		(pin "2"
+			(uuid "48ac27c2-82be-4d52-98fa-21809846d14c")
+		)
+		(pin "3"
+			(uuid "13f97156-4c4e-4fa2-bbda-fcbbbde2f44c")
+		)
+		(pin "4"
+			(uuid "f6f30e82-8e40-4a69-a4ca-e9b1817d5209")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "SW2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 195.58 106.68 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "53f56253-9d7b-459f-ac36-0fb1eecfa32d")
+		(property "Reference" "R205"
+			(at 195.58 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.4k"
+			(at 195.58 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8d07efef-f609-4b8f-a416-72924db37404")
+		)
+		(pin "2"
+			(uuid "33761902-5aeb-49c6-87c6-89b6299a4000")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R205")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 55.88 93.98 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "54778876-69de-4ccb-9dbf-d369af79c026")
+		(property "Reference" "R230"
+			(at 55.88 91.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 55.88 96.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6c5386c9-c1d4-4fa1-8b05-81108e6f70da")
+		)
+		(pin "2"
+			(uuid "07dbe618-f9d9-4ade-a13e-b6b05fdfbcc8")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R230")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 185.42 132.08 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "563f364c-0375-403e-9b31-e418262a6898")
+		(property "Reference" "C207"
+			(at 185.42 129.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100n"
+			(at 185.42 134.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c94ae39e-c074-46ba-8d00-6c91833953c2")
+		)
+		(pin "2"
+			(uuid "e6c14384-9063-4e49-80ed-556b28c6c0a2")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "C207")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 195.58 132.08 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "642f737a-3e7f-446a-b881-b3b655989c79")
+		(property "Reference" "R204"
+			(at 195.58 129.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.4k"
+			(at 195.58 134.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "464529d3-7adb-42fb-88eb-551de434a6af")
+		)
+		(pin "2"
+			(uuid "4732375f-792f-4e12-8e46-b5edb09c6c64")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R204")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 99.06 88.9 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "648a8a6e-2ce5-4bbd-bdfb-649164119774")
+		(property "Reference" "D2"
+			(at 99.06 86.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "DEST GP14"
+			(at 99.06 91.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1a7252ab-7343-42ff-b8b3-36a756de9235")
+		)
+		(pin "2"
+			(uuid "884506a0-4b69-4363-b992-50ac19437d58")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_SPST")
+		(at 165.1 149.86 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "65b64d3e-ca1c-4a2d-8100-39724f08df26")
+		(property "Reference" "SW1"
+			(at 165.1 147.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR SW"
+			(at 165.1 152.4 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0d3f8592-b557-475d-831f-bcc232ca66fd")
+		)
+		(pin "2"
+			(uuid "ae840e38-ccec-4eb9-b595-b6c5bdcecabc")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "SW1")
 					(unit 1)
 				)
 			)
@@ -7963,8 +6322,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "e403d5cb-b918-4b4e-8951-426437869752")
-		(property "Reference" "R503"
+		(uuid "6f53ad04-1be0-4e18-9640-4c5e702569af")
+		(property "Reference" "R232"
 			(at 60.96 81.28 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8018,23 +6377,23 @@
 			)
 		)
 		(pin "1"
-			(uuid "ef34e30f-d8ce-466c-9472-d81f6aaf30a6")
+			(uuid "362069de-bc6f-44d3-8b04-7dad47f97691")
 		)
 		(pin "2"
-			(uuid "a7957bd2-4234-4fd0-a625-72188780a93d")
+			(uuid "076a7fbf-eabe-4612-b43a-9819364bdee8")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "R503")
+					(reference "R232")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Switch:SW_SPST")
-		(at 193.04 149.86 0)
+		(lib_id "Device:R")
+		(at 180.34 96.52 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8042,9 +6401,10 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "f1c19033-8da3-4818-abef-792454e16754")
-		(property "Reference" "SW1"
-			(at 193.04 146.05 0)
+		(fields_autoplaced yes)
+		(uuid "76d7640a-4db2-42fc-b553-0dabff7ec444")
+		(property "Reference" "R201"
+			(at 180.34 93.98 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8053,8 +6413,8 @@
 				)
 			)
 		)
-		(property "Value" "PWR SW"
-			(at 83.82 91.44 0)
+		(property "Value" "5.6k"
+			(at 180.34 99.06 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8064,7 +6424,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at -81.28 -60.96 0)
+			(at 0 0 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8075,7 +6435,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at -81.28 -60.96 0)
+			(at 0 0 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8086,7 +6446,7 @@
 			)
 		)
 		(property "Description" ""
-			(at -81.28 -60.96 0)
+			(at 0 0 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8097,15 +6457,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "ca2c5aeb-df50-4188-b5f1-77a6ad8f6b3e")
+			(uuid "a095ed73-348b-4aa1-a48d-ef3b37a21cb6")
 		)
 		(pin "2"
-			(uuid "92df8794-4a39-4c9c-9177-af18456b5266")
+			(uuid "854a17ac-d563-47b4-b311-0f636c997d0d")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "SW1")
+					(reference "R201")
 					(unit 1)
 				)
 			)
@@ -8122,8 +6482,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "f5fc955c-3281-46a7-8e05-b127f021f361")
-		(property "Reference" "C503"
+		(uuid "77d1c79a-c12b-4590-a07f-c79f3178e7dc")
+		(property "Reference" "C206"
 			(at 134.62 104.14 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8177,15 +6537,1670 @@
 			)
 		)
 		(pin "1"
-			(uuid "06dd84f1-65a0-4e96-9759-0b189c6b4e4a")
+			(uuid "5c9da307-c3eb-4cef-ba08-cbd542a1ea67")
 		)
 		(pin "2"
-			(uuid "a37ba985-6dae-4ef7-aea8-3a0ece7336e5")
+			(uuid "03922334-3c0a-447c-89f0-67825144cf34")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
-					(reference "C503")
+					(reference "C206")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 91.44 73.66 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7b4f3be8-f54a-482f-b861-d71ab32991a3")
+		(property "Reference" "R211"
+			(at 91.44 71.12 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 91.44 76.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "11c45d8e-09ed-45a8-bf42-dbc9880bcf8c")
+		)
+		(pin "2"
+			(uuid "5002e633-625c-4b3f-b90e-05d5cf181e83")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R211")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 109.22 99.06 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8d98d3d4-90f2-4582-91c3-d9742632b706")
+		(property "Reference" "R235"
+			(at 109.22 96.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 109.22 101.6 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "570828e7-8d68-4d78-b907-d7ba8a30c137")
+		)
+		(pin "2"
+			(uuid "248bbf5e-6777-4b2c-ad88-06d2e5e19b81")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R235")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 68.58 93.98 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9c6aac25-01e8-4a00-8d16-78af1715f74a")
+		(property "Reference" "R231"
+			(at 68.58 91.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 68.58 96.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4744ccf3-7b83-4c44-8d89-5d84276c0056")
+		)
+		(pin "2"
+			(uuid "d85418fd-2154-41c4-aaa2-2fc4f286aa08")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R231")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 185.42 106.68 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a13d2f88-51fc-4989-b04d-59544f431679")
+		(property "Reference" "C208"
+			(at 185.42 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100n"
+			(at 185.42 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b5b2b862-62f9-44a5-8bd0-dee84ee05078")
+		)
+		(pin "2"
+			(uuid "dd25ace3-4ee0-4600-b10c-3840691a92f6")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "C208")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 137.16 99.06 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a533c91e-7ed8-41b0-8dbd-842c9481963b")
+		(property "Reference" "C201"
+			(at 137.16 96.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.1u"
+			(at 137.16 101.6 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "cd13ef8e-f5b6-4529-ae43-902b4a9936d4")
+		)
+		(pin "2"
+			(uuid "d97f6201-bf90-4919-80a4-ad7b0d28540f")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "C201")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 177.8 152.4 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "abc94056-0b92-408f-9de4-f057e443fe54")
+		(property "Reference" "D1"
+			(at 177.8 149.86 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "12V panel LED"
+			(at 177.8 154.94 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "cdb32228-417b-4ef8-89b6-585f899353a9")
+		)
+		(pin "2"
+			(uuid "16dd0b98-0b33-4c43-b757-59a20fb7f012")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 99.06 99.06 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b177dfc3-6b69-4365-9468-448194234908")
+		(property "Reference" "D3"
+			(at 99.06 96.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "DEST GP15"
+			(at 99.06 101.6 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5e80b2c1-9fcf-4a47-9d32-90e350c034fe")
+		)
+		(pin "2"
+			(uuid "13be0b37-d2b0-45eb-b477-7afebf0d9156")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "D3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 91.44 68.58 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b98ce06c-a06f-4b15-b623-4f590cec8897")
+		(property "Reference" "R210"
+			(at 91.44 66.04 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 91.44 71.12 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "746e5c5d-d9d6-4bd4-b671-c0c03ffeff1c")
+		)
+		(pin "2"
+			(uuid "1c29380e-d1dc-4450-8f20-245a3a69a839")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R210")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 93.98 121.92 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c2ba947c-326d-485e-9118-196578dbc892")
+		(property "Reference" "C203"
+			(at 93.98 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2u"
+			(at 93.98 124.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f8f19e8a-34e9-482e-bd6f-ac8606763fe3")
+		)
+		(pin "2"
+			(uuid "20813971-5f64-4d45-8f6e-52d084a52d8f")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "C203")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 124.46 106.68 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c367c669-6638-49e2-82f8-ba48b063150b")
+		(property "Reference" "R203"
+			(at 124.46 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.4k"
+			(at 124.46 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d830f860-20e1-4ecb-9af3-ded7c39251ee")
+		)
+		(pin "2"
+			(uuid "86c7f450-31e3-430c-858c-423bcca415e5")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R203")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:RotaryEncoder_Switch")
+		(at 35.56 71.12 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ca039293-b899-4ec9-b214-c2bd936382be")
+		(property "Reference" "ENC3"
+			(at 35.56 68.58 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "EC11 ENC_TREBLE"
+			(at 35.56 73.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "A"
+			(uuid "76aeb838-be89-4ccf-a9ac-fae2702f8295")
+		)
+		(pin "B"
+			(uuid "e838f4be-5222-4522-8ecb-c703d6506621")
+		)
+		(pin "C"
+			(uuid "5a7f9831-a9f6-45b9-a680-05b27bcd3e8c")
+		)
+		(pin "S1"
+			(uuid "9bc948e1-afcb-4f49-a73c-ce7b3abf6bbb")
+		)
+		(pin "S2"
+			(uuid "88e3dfdc-62b3-4a53-bcfb-0abdbcce4e24")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "ENC3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 190.5 109.22 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cf1aa9a5-dfa3-4b0e-8427-cf1199ab3ece")
+		(property "Reference" "C211"
+			(at 190.5 106.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2u"
+			(at 190.5 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "76af7184-c728-4f69-96e5-3716ad6f82ee")
+		)
+		(pin "2"
+			(uuid "be55bb1f-945c-40df-9471-3a514780a447")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "C211")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 124.46 132.08 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cf63a163-8956-4016-968d-6d38eab374cb")
+		(property "Reference" "R202"
+			(at 124.46 129.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.4k"
+			(at 124.46 134.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f2bbb7e6-0b7e-4a4a-8103-817b7175fb39")
+		)
+		(pin "2"
+			(uuid "d3d00c6b-c34b-45ef-8362-52261fa1dbda")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R202")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BP5293_ROHM:BP5293-50")
+		(at 50.8 144.78 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "dc87cf8a-978f-4fe4-8717-2731471e1e93")
+		(property "Reference" "U5"
+			(at 50.8 142.24 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BP5293-50 +5V"
+			(at 50.8 147.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "09e5194a-8060-4931-bd8d-a7f304b3b6ec")
+		)
+		(pin "2"
+			(uuid "6f5f9ff2-1d39-4e79-8dc3-0d0e53dbfd91")
+		)
+		(pin "3"
+			(uuid "c166c3e2-21c7-4bba-98d4-0553df741def")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "U5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MCU_Module:RaspberryPi_Pico")
+		(at 76.2 78.74 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "dd629696-46bf-4640-ba95-5e520973c2fd")
+		(property "Reference" "U1"
+			(at 76.2 76.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pico 2 / RP2350"
+			(at 76.2 81.28 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "28ea739d-1e7f-4ed6-8f41-1cdf6ad45721")
+		)
+		(pin "2"
+			(uuid "70e4cac9-3fef-46a7-9185-cd55d144825b")
+		)
+		(pin "3"
+			(uuid "45463105-bb6f-4013-a652-92a8e5c07979")
+		)
+		(pin "4"
+			(uuid "a42eeee9-483d-4f26-bb57-572f77e8723c")
+		)
+		(pin "5"
+			(uuid "a2537fff-dfc8-4255-86d7-df0a238194d0")
+		)
+		(pin "6"
+			(uuid "ec4b5162-bf7f-4ae2-a68b-90b179749a5b")
+		)
+		(pin "7"
+			(uuid "e4313a3d-814d-49d2-b375-679114bfa5ed")
+		)
+		(pin "8"
+			(uuid "aee96ec3-3a5b-4705-b846-0cd5ded3cde2")
+		)
+		(pin "9"
+			(uuid "d71b81b1-cae9-42d4-ba34-38bb7d705a25")
+		)
+		(pin "10"
+			(uuid "80c21517-b410-4f71-a13c-2e6fe8e3bd55")
+		)
+		(pin "11"
+			(uuid "549890b0-a07c-45fb-ab40-9c52eaf53f47")
+		)
+		(pin "12"
+			(uuid "11c6add7-d07d-41c1-868c-af0b679f0611")
+		)
+		(pin "13"
+			(uuid "c5619039-9f36-499a-acaf-11636a83a1df")
+		)
+		(pin "14"
+			(uuid "d1b796ab-d8c0-4b6f-8a6d-521ff2830c83")
+		)
+		(pin "15"
+			(uuid "bf182c74-fc31-4d5b-8305-1b346b1a52f8")
+		)
+		(pin "16"
+			(uuid "051dd268-e76d-4ada-80a5-1bcf101054e0")
+		)
+		(pin "17"
+			(uuid "19c152ec-be52-40fb-b730-5dcc321eaaac")
+		)
+		(pin "18"
+			(uuid "0e911b62-672d-4d15-9ec7-0e336a9ca932")
+		)
+		(pin "19"
+			(uuid "4473194d-7253-4010-9279-3f1fe93e85c4")
+		)
+		(pin "20"
+			(uuid "fd7cd334-e33a-4470-8ed5-c5acdf46f432")
+		)
+		(pin "21"
+			(uuid "6bb89d3e-0ca6-429a-9559-9e81f491191a")
+		)
+		(pin "22"
+			(uuid "7ac83e3c-0afc-4df0-8855-9c5fb3d930c0")
+		)
+		(pin "23"
+			(uuid "d38b1962-02b0-40ec-b5ab-b3125371ba12")
+		)
+		(pin "24"
+			(uuid "7e065639-b706-4940-b7a2-649cf6b65104")
+		)
+		(pin "25"
+			(uuid "62a7ae67-6cb4-467d-853a-663d818609ee")
+		)
+		(pin "26"
+			(uuid "0166e057-dd3b-41b2-9464-201483489b85")
+		)
+		(pin "27"
+			(uuid "ee784561-f9e2-44e0-8a4c-741afeaea771")
+		)
+		(pin "28"
+			(uuid "adcdc284-3653-469a-8517-0957c16113d6")
+		)
+		(pin "29"
+			(uuid "97ee1282-43e0-4a03-91dd-afb977d741d0")
+		)
+		(pin "30"
+			(uuid "11e2ab19-27ed-43fc-aafd-aacb597fad50")
+		)
+		(pin "31"
+			(uuid "ea753b8f-393f-4d23-a9c3-25198e740d54")
+		)
+		(pin "32"
+			(uuid "5c78c793-5568-4c1f-9c95-835974fd42e8")
+		)
+		(pin "33"
+			(uuid "cf3d0dd2-3c3a-4911-849f-d85984f30446")
+		)
+		(pin "34"
+			(uuid "18e5bade-5274-4de6-a158-0aae4f1c9d2b")
+		)
+		(pin "35"
+			(uuid "1f5bc546-5462-4203-adee-609344931136")
+		)
+		(pin "36"
+			(uuid "210db9be-da99-4cb7-8cab-b7fd59b0a8ca")
+		)
+		(pin "37"
+			(uuid "1cbac5ac-9bb3-489f-8311-eaebe884e52d")
+		)
+		(pin "38"
+			(uuid "96513d03-8cb0-41be-9c70-6f03ef0fa3f3")
+		)
+		(pin "39"
+			(uuid "8abc3d00-3f3e-4a58-a825-7f6f84c498b5")
+		)
+		(pin "40"
+			(uuid "bcf57371-cc7a-491b-b190-ac5ab857fcc9")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 134.62 132.08 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e65a1753-52df-41fe-93fb-3faf007e7178")
+		(property "Reference" "C205"
+			(at 134.62 129.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100n"
+			(at 134.62 134.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6b5dfde0-38ed-40d4-a673-13535e62bae8")
+		)
+		(pin "2"
+			(uuid "84851830-3d5d-42bd-8db9-11c4f8bf5761")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "C205")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 121.92 134.62 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f5d6a48c-feb9-40c5-b302-17c1cdde2f97")
+		(property "Reference" "C210"
+			(at 121.92 132.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.7n"
+			(at 121.92 137.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6cc23fef-e2f5-4e1a-a0f1-e2a55d18a3da")
+		)
+		(pin "2"
+			(uuid "2849fdad-ab31-4753-81b4-8bcbc1f04941")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "C210")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 109.22 88.9 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fa3bdb87-7b47-4d8d-8423-592612ef7d90")
+		(property "Reference" "R234"
+			(at 109.22 86.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 109.22 91.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a9de8ef9-2f49-4a5a-9765-c191faf7ce9e")
+		)
+		(pin "2"
+			(uuid "9683ea96-6f40-46ed-881b-b634a50d415f")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "R234")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:RotaryEncoder_Switch")
+		(at 35.56 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ff66e263-9bdf-4bbd-b393-9b84bddd963b")
+		(property "Reference" "ENC1"
+			(at 35.56 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "EC11 ENC_CH"
+			(at 35.56 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "A"
+			(uuid "6ae6bed1-22bc-4d0b-9a50-6de4d9af2926")
+		)
+		(pin "B"
+			(uuid "cbe77e7e-10fa-4475-9d91-322aca5eddee")
+		)
+		(pin "C"
+			(uuid "12fa13e2-4dcf-4204-9513-b249053784b1")
+		)
+		(pin "S1"
+			(uuid "d4ef7ff6-81c3-4eba-8d0a-1254ccd6abf3")
+		)
+		(pin "S2"
+			(uuid "fcc41d54-61d2-4a7f-aac4-38349549ba81")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000006-0006-4006-8006-000000000006"
+					(reference "ENC1")
 					(unit 1)
 				)
 			)

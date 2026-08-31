@@ -39,14 +39,15 @@ python3 Audio/scripts/check_sexpr.py -q AudioV2
 
 ---
 
-## Phase 2 — RelayBoard（5ch テンプレ ×1、§11 Q1-B）
+## Phase 2 — RelayBoard（5chテンプレ×2インスタンス、完了）
 
-- [ ] **2.1** `RelayBoard.kicad_sch` — `Controll` から **AZ850 + ULN2803 + 端子台** を抜粋（5ch 分のみ素案）
-- [ ] **2.2** **MCP23017** + I²C コネクタ J_I2C（SDA/SCL/3V3/GND）+ アドレス 0x20（2 枚目は 0x21 と注記）
-- [ ] **2.3** 各 Amp: `AMP{n}_L/R` 入力端子、`AMP{n}_V+` / `AMP{n}_V-` 電源端子（n=1..5）
-- [ ] **2.4** **COMMON_LR_OUT** — L/R + `A_GND` 階層ラベル（§11.8）
-- [ ] **2.5** 親に **RelayBoard_A** / **RelayBoard_B** の 2 インスタンス（同一 file、sheet name だけ変更）— または 1 インスタンス + 注記「×2 製造」
-- [ ] **2.6** 旧 Controll の **子 Pico 削除**（MCP23017 前提）
+- [x] **2.1** `RelayBoard.kicad_sch` — AZ850×10 + ULN2803×2 + 端子台
+- [x] **2.2** **MCP23017** + J_I2C 5P（SDA/SCL/3V3/+5V/GND）、JP301/JP302で0x20–0x23
+- [x] **2.3** 各Amp: `J_AUD{n}`入力2P、`J_PWR{n}`電源3P（+12/A_GND/-12）
+- [x] **2.4** `TONE_L/R`を選択Amp入力へ接続し、電源リレーと同じSET/RESETで連動
+- [x] **2.5** 親に **RelayBoard_A** / **RelayBoard_B** の2インスタンス。参照番号も300/400番台で分離
+- [x] **2.6** 子Picoなし。MCP23017×1/盤で駆動
+- [ ] **2.7 PCBレイアウト時** JP301/JP302 横の F.Silk に番地早見表（0x20 A … 0x23 D）
 
 ---
 

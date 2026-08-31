@@ -3,9 +3,9 @@
 	(generator "eeschema")
 	(generator_version "10.0")
 	(uuid "b2000003-0003-4003-8003-000000000003")
-	(paper "A4")
+	(paper "A3")
 	(lib_symbols
-		(symbol "Connector:Conn_01x03_Pin"
+		(symbol "Connector:Conn_01x02_Pin"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -16,7 +16,7 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "J"
-				(at 0 5.08 0)
+				(at 0 2.54 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -25,7 +25,7 @@
 					)
 				)
 			)
-			(property "Value" "Conn_01x03_Pin"
+			(property "Value" "Conn_01x02_Pin"
 				(at 0 -5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -57,7 +57,7 @@
 					)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x03, script generated"
+			(property "Description" "Generic connector, single row, 01x02, script generated"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -100,18 +100,7 @@
 					)
 				)
 			)
-			(symbol "Conn_01x03_Pin_1_1"
-				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
+			(symbol "Conn_01x02_Pin_1_1"
 				(rectangle
 					(start 0.8636 0.127)
 					(end 0 -0.127)
@@ -132,18 +121,6 @@
 					)
 					(fill
 						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 2.54) (xy 0.8636 2.54)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
 					)
 				)
 				(polyline
@@ -171,7 +148,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 2.54 180)
+					(at 5.08 0 180)
 					(length 3.81)
 					(name "Pin_1"
 						(effects
@@ -189,7 +166,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 0 180)
+					(at 5.08 -2.54 180)
 					(length 3.81)
 					(name "Pin_2"
 						(effects
@@ -206,28 +183,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 5.08 -2.54 180)
-					(length 3.81)
-					(name "Pin_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:Conn_01x04_Pin"
+		(symbol "Connector:Conn_01x05_Pin"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -238,7 +197,7 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "J"
-				(at 0 5.08 0)
+				(at 0 7.62 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -247,7 +206,7 @@
 					)
 				)
 			)
-			(property "Value" "Conn_01x04_Pin"
+			(property "Value" "Conn_01x05_Pin"
 				(at 0 -7.62 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -279,7 +238,7 @@
 					)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x04, script generated"
+			(property "Description" "Generic connector, single row, 01x05, script generated"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -322,7 +281,18 @@
 					)
 				)
 			)
-			(symbol "Conn_01x04_Pin_1_1"
+			(symbol "Conn_01x05_Pin_1_1"
+				(rectangle
+					(start 0.8636 5.207)
+					(end 0 4.953)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(rectangle
 					(start 0.8636 2.667)
 					(end 0 2.413)
@@ -365,6 +335,18 @@
 					)
 					(fill
 						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 5.08) (xy 0.8636 5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
 					)
 				)
 				(polyline
@@ -416,7 +398,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 2.54 180)
+					(at 5.08 5.08 180)
 					(length 3.81)
 					(name "Pin_1"
 						(effects
@@ -434,7 +416,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 0 180)
+					(at 5.08 2.54 180)
 					(length 3.81)
 					(name "Pin_2"
 						(effects
@@ -452,7 +434,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 -2.54 180)
+					(at 5.08 0 180)
 					(length 3.81)
 					(name "Pin_3"
 						(effects
@@ -470,7 +452,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 -5.08 180)
+					(at 5.08 -2.54 180)
 					(length 3.81)
 					(name "Pin_4"
 						(effects
@@ -480,6 +462,24 @@
 						)
 					)
 					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -5.08 180)
+					(length 3.81)
+					(name "Pin_5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -679,6 +679,560 @@
 					(at -5.08 -2.54 0)
 					(length 3.81)
 					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector:Screw_Terminal_01x03"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Screw_Terminal_01x03"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic screw terminal, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "screw terminal"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "TerminalBlock*:*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Screw_Terminal_01x03_1_1"
+				(rectangle
+					(start -1.27 3.81)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.5334 2.8702) (xy 0.3302 2.032)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.5334 0.3302) (xy 0.3302 -0.508)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.5334 -2.2098) (xy 0.3302 -3.048)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.3556 3.048) (xy 0.508 2.2098)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.3556 0.508) (xy 0.508 -0.3302)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.3556 -2.032) (xy 0.508 -2.8702)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 2.54)
+					(radius 0.635)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 0)
+					(radius 0.635)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 -2.54)
+					(radius 0.635)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1292,6 +1846,184 @@
 						)
 					)
 					(number "28"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Jumper:SolderJumper_2_Open"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "JP"
+				(at 0 2.032 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SolderJumper_2_Open"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Solder Jumper, 2-pole, open"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "solder jumper SPST"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SolderJumper*Open*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "SolderJumper_2_Open_0_1"
+				(polyline
+					(pts
+						(xy -0.254 1.016) (xy -0.254 -1.016)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -0.254 -1.016)
+					(mid -1.2656 0)
+					(end -0.254 1.016)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(arc
+					(start 0.254 1.016)
+					(mid 1.2656 0)
+					(end 0.254 -1.016)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.254 1.016) (xy 0.254 -1.016)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SolderJumper_2_Open_1_1"
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2502,317 +3234,2374 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "RelayBoard — 5ch template (§11 Q1-B)\nMCP23017 @0x20 (Board A) / @0x21 (Board B — same sch, addr strap note)\nAZ850 latching + ULN2803. NO child Pico.\nCOMMON_LR_OUT → ControlPanel PT2314 input"
+	(text "RelayBoard — 5ch input + power selector; instantiate twice\nCHn_SET / CHn_RST = coil pulse nets; CHn_*_CMD = MCP to ULN logic.\nAudio and power AZ850 pairs share SET/RESET: 100ms pulse, never hold.\nJP A1/A0 (open=0): 00=0x20 A, 01=0x21 B, 10=0x22 C, 11=0x23 D. A2=GND.\nSilk table next to JP301/JP302 on the PCB.\nJ_TONE = L/R only. Cable shield drains at ControlPanel, not here (J_RAIL has A_GND).\n+5V/D_GND from ControlPanel; contacts switch +/-12V only.\nJ_RAIL = PowerModule J201. A_GND is never switched: straight to each J_PWR."
 		(exclude_from_sim no)
-		(at 25.4 25.4 0)
+		(at 20.32 15.24 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left top)
 		)
-		(uuid "a140815a-2b29-4ef0-bdee-78ca9974d1c1")
+		(uuid "654099bd-42b7-4dbf-b987-cc80027d4b1b")
 	)
-	(hierarchical_label "3V3"
+	(junction
+		(at 29.21 116.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "03de96aa-f2e0-48dc-8d45-0f7b063a6396")
+	)
+	(junction
+		(at 71.12 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0cfb5577-6b9b-4e51-85c3-40df6f065adf")
+	)
+	(junction
+		(at 88.9 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "19c3b026-6f49-461c-a1f2-b45ae1924275")
+	)
+	(junction
+		(at 21.59 46.99)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "24738b60-e92e-4718-b3eb-45dc84c3995b")
+	)
+	(junction
+		(at 38.1 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2d2816b9-d5b2-47c0-97f7-a56d534229e5")
+	)
+	(junction
+		(at 27.94 55.88)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3dda8622-a421-4575-a7bd-4a0e17fccce3")
+	)
+	(junction
+		(at 31.75 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3ef11960-23d4-47be-a4b1-9178ecf30cdf")
+	)
+	(junction
+		(at 85.09 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4a8fbb9d-b82a-4f53-8ec5-8f653ae09e29")
+	)
+	(junction
+		(at 31.75 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "501e0d80-62eb-437d-9106-9071c888b52c")
+	)
+	(junction
+		(at 58.42 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "67dc2056-5d5e-4ff9-95ca-a364e1e0c5b2")
+	)
+	(junction
+		(at 21.59 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "721851b7-d108-4cc0-8b57-3e048bfc1706")
+	)
+	(junction
+		(at 71.12 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "976ec09d-5270-49dd-88d5-dc68f7158a56")
+	)
+	(junction
+		(at 38.1 60.96)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "abf8e38b-3397-4c59-b064-ad2cfd6fd99c")
+	)
+	(junction
+		(at 38.1 45.72)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ccaa2091-1063-4c37-b24e-63a328e6adc6")
+	)
+	(no_connect
+		(at 144.78 121.92)
+		(uuid "0b7ac5d2-fa95-40bd-af76-acc9c0b2774c")
+	)
+	(no_connect
+		(at 187.96 114.3)
+		(uuid "0c2ee51d-bc20-4aab-bc88-7df103661af8")
+	)
+	(no_connect
+		(at 124.46 63.5)
+		(uuid "0c7b9529-00c5-42bf-b207-7b21976afeea")
+	)
+	(no_connect
+		(at 144.78 119.38)
+		(uuid "1394d740-b8b8-43e9-835d-4e75339e237d")
+	)
+	(no_connect
+		(at 124.46 124.46)
+		(uuid "22414ea8-80cc-427c-9724-16ac47906ba8")
+	)
+	(no_connect
+		(at 248.92 73.66)
+		(uuid "231ce7ae-a4ac-4814-a44f-50cd54e49672")
+	)
+	(no_connect
+		(at 144.78 60.96)
+		(uuid "2a428235-621a-4c28-9962-0cbba9eb2d1f")
+	)
+	(no_connect
+		(at 238.76 154.94)
+		(uuid "2cfe8671-3ea6-42c3-b070-4dca4190c7b8")
+	)
+	(no_connect
+		(at 248.92 33.02)
+		(uuid "3e4fa50b-df4d-408c-b7fe-470fe095ac9a")
+	)
+	(no_connect
+		(at 101.6 73.66)
+		(uuid "40f58be7-3c25-4556-9c06-a99738d62ae5")
+	)
+	(no_connect
+		(at 238.76 33.02)
+		(uuid "48d7b92a-ab72-4537-9438-246738d9211c")
+	)
+	(no_connect
+		(at 124.46 119.38)
+		(uuid "4956f3b5-ae56-4322-afed-b95ebfb05b48")
+	)
+	(no_connect
+		(at 101.6 71.12)
+		(uuid "545f3fa9-3270-44e5-9098-439839d67988")
+	)
+	(no_connect
+		(at 198.12 114.3)
+		(uuid "55f7f0a2-6bce-4e13-8782-d59990c02ca7")
+	)
+	(no_connect
+		(at 248.92 154.94)
+		(uuid "5811ecac-4d65-4b80-9967-42968488f49d")
+	)
+	(no_connect
+		(at 187.96 73.66)
+		(uuid "59b6a7f1-f785-4628-a36f-33e5375e4164")
+	)
+	(no_connect
+		(at 198.12 33.02)
+		(uuid "603f4ebb-1979-4e15-8606-6d9400e3fb70")
+	)
+	(no_connect
+		(at 187.96 195.58)
+		(uuid "65877346-ec0b-41cb-a5f9-c09af4226b5d")
+	)
+	(no_connect
+		(at 144.78 124.46)
+		(uuid "66fd72e2-952a-4743-b2dd-7d012bbf2e90")
+	)
+	(no_connect
+		(at 101.6 68.58)
+		(uuid "6ede75bb-c48b-4750-bdcf-845e31bc450d")
+	)
+	(no_connect
+		(at 238.76 195.58)
+		(uuid "770f9d26-8644-4cb4-ab7a-8b5276580ccb")
+	)
+	(no_connect
+		(at 76.2 71.12)
+		(uuid "77f4ab95-600e-4ad6-9821-c6edf68a43b5")
+	)
+	(no_connect
+		(at 124.46 58.42)
+		(uuid "7a35236a-d4b3-4d6c-9001-8b4edd01c6b7")
+	)
+	(no_connect
+		(at 187.96 33.02)
+		(uuid "7ac48ccd-b4b2-4693-981e-829272217044")
+	)
+	(no_connect
+		(at 198.12 195.58)
+		(uuid "81474362-acde-406e-92bc-62adb88a661a")
+	)
+	(no_connect
+		(at 238.76 114.3)
+		(uuid "84ee30b6-1974-421c-be4d-87368cbf834f")
+	)
+	(no_connect
+		(at 144.78 63.5)
+		(uuid "98b40a2c-b55f-46ce-abb7-2da168977236")
+	)
+	(no_connect
+		(at 101.6 93.98)
+		(uuid "a3ad26ca-0da8-45cc-9eba-59ce89b2a296")
+	)
+	(no_connect
+		(at 198.12 154.94)
+		(uuid "a69c3779-88f1-4e12-ab57-ee9f73c5eea7")
+	)
+	(no_connect
+		(at 198.12 73.66)
+		(uuid "ad525804-68fa-48a8-94db-84f0bed200ef")
+	)
+	(no_connect
+		(at 76.2 73.66)
+		(uuid "b718b227-0d31-4261-a6f1-588d0baa28dd")
+	)
+	(no_connect
+		(at 144.78 58.42)
+		(uuid "cd85e495-b205-4757-9f2f-a5baf93d4744")
+	)
+	(no_connect
+		(at 248.92 195.58)
+		(uuid "ce10a885-93ee-42d8-8a49-1c59d18ebb4b")
+	)
+	(no_connect
+		(at 101.6 91.44)
+		(uuid "d56b31fb-dbcf-4c30-8d1a-1b8035a60afc")
+	)
+	(no_connect
+		(at 248.92 114.3)
+		(uuid "ec6169d2-b8bc-478f-a440-94909529c4b2")
+	)
+	(no_connect
+		(at 124.46 60.96)
+		(uuid "ede00432-901d-4181-a6d8-ad874f6e3342")
+	)
+	(no_connect
+		(at 101.6 96.52)
+		(uuid "f306972f-1084-4d3d-9025-a7ac282330ee")
+	)
+	(no_connect
+		(at 124.46 121.92)
+		(uuid "fb32e7f0-a6ca-457b-bb91-fe2c3a5e8a92")
+	)
+	(no_connect
+		(at 238.76 73.66)
+		(uuid "fea2aa89-4065-431b-a900-f4482d9d7abc")
+	)
+	(no_connect
+		(at 187.96 154.94)
+		(uuid "fee69e59-0b0b-4eb5-8ee2-102e7283d399")
+	)
+	(wire
+		(pts
+			(xy 25.4 39.37) (xy 21.59 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0131c455-651f-4582-b024-e21f1a15759b")
+	)
+	(wire
+		(pts
+			(xy 26.67 57.15) (xy 27.94 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b037e72-1b8c-4e14-b8f6-e9fa9c6f0ac0")
+	)
+	(wire
+		(pts
+			(xy 71.12 91.44) (xy 76.2 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "15f6d7b7-602b-468e-b429-3980a41be84a")
+	)
+	(wire
+		(pts
+			(xy 71.12 82.55) (xy 71.12 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ea0d0f4-e812-4e54-8077-4ff9f1028532")
+	)
+	(wire
+		(pts
+			(xy 46.99 53.34) (xy 38.1 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1edcf662-f75f-47d6-b5c6-6b9590f56042")
+	)
+	(wire
+		(pts
+			(xy 34.29 92.71) (xy 36.83 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20fe5a81-e1a8-43bd-8550-ec28365f1d59")
+	)
+	(wire
+		(pts
+			(xy 31.75 41.91) (xy 31.75 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2186f442-c537-411f-870a-840f6f3a4793")
+	)
+	(wire
+		(pts
+			(xy 38.1 60.96) (xy 46.99 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "290d051e-e256-476c-b5ea-5c9ab9a28c3e")
+	)
+	(wire
+		(pts
+			(xy 67.31 91.44) (xy 71.12 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f2f8b68-b54f-4e21-9082-593c653555ce")
+	)
+	(wire
+		(pts
+			(xy 21.59 39.37) (xy 21.59 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32e420c0-b6f2-49b8-85b5-c37ac2ac26db")
+	)
+	(wire
+		(pts
+			(xy 29.21 114.3) (xy 30.48 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3361d6e2-1ab6-469a-a56a-77708e865eee")
+	)
+	(wire
+		(pts
+			(xy 67.31 96.52) (xy 67.31 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a55093a-397f-4646-befb-5046f00632b6")
+	)
+	(wire
+		(pts
+			(xy 58.42 91.44) (xy 58.42 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d949017-3299-4023-94dc-308c6df97ba7")
+	)
+	(wire
+		(pts
+			(xy 58.42 91.44) (xy 59.69 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1a70c41-2f5d-4e08-9d3a-7c6f0d2a5511")
+	)
+	(wire
+		(pts
+			(xy 58.42 96.52) (xy 59.69 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1a70c41-2f5d-4e08-9d3a-7c6f0d2a5512")
+	)
+	(wire
+		(pts
+			(xy 21.59 53.34) (xy 21.59 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3db9816a-9c72-4408-a48a-a679cc4e0c4c")
+	)
+	(wire
+		(pts
+			(xy 31.75 53.34) (xy 21.59 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3fdc1f41-29f3-48f4-addb-ab6bdfae3a50")
+	)
+	(wire
+		(pts
+			(xy 85.09 101.6) (xy 88.9 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4471dee6-a7f0-4a5f-b2ac-ef44783bbfc1")
+	)
+	(wire
+		(pts
+			(xy 29.21 115.57) (xy 29.21 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "481857c5-32ca-486f-a963-c04ebb0dc8c6")
+	)
+	(wire
+		(pts
+			(xy 33.02 60.96) (xy 27.94 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5222d5f4-be57-4cb9-b47b-440e15266468")
+	)
+	(wire
+		(pts
+			(xy 21.59 46.99) (xy 27.94 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5b95e102-66a1-48c4-86db-6e21c579038c")
+	)
+	(wire
+		(pts
+			(xy 33.02 60.96) (xy 38.1 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5cb24f29-7dbb-4999-9862-13019ac2cc9c")
+	)
+	(wire
+		(pts
+			(xy 29.21 116.84) (xy 30.48 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ee7d3a8-05d9-424b-94a1-d0559f797b0d")
+	)
+	(wire
+		(pts
+			(xy 71.12 93.98) (xy 76.2 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b5d3562-161b-4962-bd9e-ba8692406938")
+	)
+	(wire
+		(pts
+			(xy 71.12 101.6) (xy 71.12 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d5dc4e8-52df-4f43-b1f2-67952417566f")
+	)
+	(wire
+		(pts
+			(xy 31.75 44.45) (xy 21.59 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7799cbda-0b30-486c-bb89-942e237ec9e6")
+	)
+	(wire
+		(pts
+			(xy 38.1 45.72) (xy 46.99 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d486ae7-0f79-444b-951d-25b69e3b26f3")
+	)
+	(wire
+		(pts
+			(xy 76.2 101.6) (xy 85.09 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a2d7b01-f17f-4f06-980a-32ec0388f762")
+	)
+	(wire
+		(pts
+			(xy 88.9 48.26) (xy 88.9 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "970ac85c-5020-4486-bacb-20ebfcebdd49")
+	)
+	(wire
+		(pts
+			(xy 34.29 90.17) (xy 36.83 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a09e64a9-53f2-46e6-8c34-9a8866ad6b47")
+	)
+	(wire
+		(pts
+			(xy 27.94 55.88) (xy 21.59 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a207510c-d88c-4d51-9614-ab182e8202e3")
+	)
+	(wire
+		(pts
+			(xy 21.59 116.84) (xy 29.21 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c707dfcd-5e42-404d-8192-5710baf85624")
+	)
+	(wire
+		(pts
+			(xy 31.75 50.8) (xy 31.75 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca7bb096-2945-4858-a805-8a6cd936a225")
+	)
+	(wire
+		(pts
+			(xy 34.29 41.91) (xy 31.75 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce015a04-dc8a-4aff-b531-0ecb9d7c11b2")
+	)
+	(wire
+		(pts
+			(xy 38.1 45.72) (xy 21.59 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf7f49e3-70d0-4084-a85e-2483400bacc9")
+	)
+	(wire
+		(pts
+			(xy 67.31 93.98) (xy 71.12 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ddbd5709-c5b1-4ec0-9643-e3563e12df8f")
+	)
+	(wire
+		(pts
+			(xy 25.4 41.91) (xy 21.59 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1a5f330-16ba-4a62-8bfe-4d6f748c4ea7")
+	)
+	(wire
+		(pts
+			(xy 85.09 104.14) (xy 85.09 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e54d4d2a-e4a3-4494-8b7c-5cf9b3903ffd")
+	)
+	(wire
+		(pts
+			(xy 29.21 119.38) (xy 30.48 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ec708d4b-9512-459f-8e9e-30647203bd9f")
+	)
+	(wire
+		(pts
+			(xy 35.56 44.45) (xy 31.75 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "edf5a6ca-3b79-4f00-b32d-b0b1b89ae647")
+	)
+	(wire
+		(pts
+			(xy 58.42 50.8) (xy 88.9 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f2182d75-10a0-4fda-901e-5e33bcbf2f23")
+	)
+	(wire
+		(pts
+			(xy 38.1 53.34) (xy 31.75 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5831dd0-0cd6-47c5-b377-c5e90d58a000")
+	)
+	(wire
+		(pts
+			(xy 58.42 50.8) (xy 58.42 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7703cef-d0a3-4c51-9b6b-1faf8115b557")
+	)
+	(wire
+		(pts
+			(xy 76.2 101.6) (xy 76.2 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff2a6862-d76c-4649-adeb-4d934dc0635e")
+	)
+	(label "A_GND"
+		(at 337.82 121.92 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "00054866-a0fa-472f-b2ee-58bff216f1fa")
+	)
+	(label "+5V"
+		(at 46.99 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "035f7beb-924f-40f4-b7d8-1a9c26d80ad0")
+	)
+	(label "CH2_RST"
+		(at 144.78 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "03ee82d4-8cce-4198-86a7-419363523f6f")
+	)
+	(label "AMP2_V+"
+		(at 337.82 78.74 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "05699a97-dc38-4cf0-820d-fb26a0bfbf63")
+	)
+	(label "CH5_SET"
+		(at 144.78 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "05bc1b97-6728-4307-9c60-fee6d55e8ae8")
+	)
+	(label "CH2_RST"
+		(at 233.68 88.9 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "07101c83-d5ad-43d7-8196-b3e2f99ab0c5")
+	)
+	(label "TONE_L"
+		(at 200.66 88.9 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "07cb0063-bdb0-4982-a0e1-016ea109e6ad")
+	)
+	(label "AMP3_V+"
+		(at 337.82 119.38 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0ca2b473-5a93-4372-82ed-04a69f260e61")
+	)
+	(label "A_GND"
+		(at 21.59 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0d19058c-8b91-45a8-8465-c6c5e37915d6")
+	)
+	(label "CH1_SET"
+		(at 182.88 33.02 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0f233a0f-881d-45d0-b9be-5ff9f0bc450a")
+	)
+	(label "AMP5_R"
+		(at 292.1 205.74 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "142cf6d3-fc9b-4fbd-9e41-bf3bfe7693d9")
+	)
+	(label "+5V"
+		(at 177.8 210.82 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "14c266d7-aeba-40c2-9782-6f1c572e1417")
+	)
+	(label "AMP3_V-"
+		(at 337.82 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "15b66367-0575-4794-963c-a9214c82ba05")
+	)
+	(label "I2C_SCL"
+		(at 76.2 55.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "15c9e5f6-af11-4f84-a791-a9f3db1b4516")
+	)
+	(label "TONE_L"
+		(at 200.66 170.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "16134b1e-cc0c-440f-b3be-0175030b0ccb")
+	)
+	(label "D_GND"
+		(at 134.62 129.54 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "169ea71d-78cd-4d10-9123-3a174a47fd6b")
+	)
+	(label "CH4_SET"
+		(at 182.88 154.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1700e58a-c0a5-4efa-8016-05f38259cf46")
+	)
+	(label "AMP2_V-"
+		(at 337.82 83.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "178dea11-7494-49fa-8d23-a9c653a492dc")
+	)
+	(label "CH1_RST"
+		(at 144.78 106.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "17fc009e-90da-4169-8a8b-4c277f8082a0")
+	)
+	(label "AMP1_V+"
+		(at 337.82 38.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "18c06e6c-542c-4e2e-b9f2-ff574b9f6e9a")
+	)
+	(label "CH4_RST"
+		(at 144.78 114.3 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1aab26fb-e857-4223-ab72-6381ac0b1fee")
+	)
+	(label "AMP5_R"
+		(at 193.04 195.58 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1f9b06b7-05ba-4e0d-bba7-b321ef031c57")
+	)
+	(label "CH3_SET"
+		(at 182.88 114.3 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1fa03b9f-5e04-4729-adcd-954e5fd6b1ab")
+	)
+	(label "CH3_SET_CMD"
+		(at 124.46 50.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1ffd4e68-a528-4514-8c27-e03cdd490994")
+	)
+	(label "CH3_SET_CMD"
+		(at 101.6 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "20748e04-12c2-46c0-b735-9d98cff357e6")
+	)
+	(label "-12V"
+		(at 241.3 210.82 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "233f240c-fa08-4e8f-90ff-fec426f5da94")
+	)
+	(label "CH3_RST"
+		(at 233.68 129.54 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "25dc0641-943d-4586-a765-b3ffc40b7699")
+	)
+	(label "AMP2_L"
+		(at 203.2 73.66 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2626796e-f4da-43b7-9692-5085c8b985b0")
+	)
+	(label "+12V"
+		(at 251.46 48.26 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2669c129-0702-4c53-8209-72165af6af7e")
+	)
+	(label "TONE_R"
+		(at 190.5 170.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "28a98ddf-4d19-4d33-8155-f26a90cf44d7")
+	)
+	(label "+5V"
+		(at 228.6 114.3 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "29440a6f-5151-44f5-a3f8-8abf65b316da")
+	)
+	(label "+5V"
+		(at 228.6 170.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2a616fc9-5e62-4b83-a0f0-9e577946c4fc")
+	)
+	(label "I2C_SCL"
+		(at 35.56 44.45 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2a870aaa-cdd5-4d3a-8027-ef34a62298e4")
+	)
+	(label "AMP1_R"
+		(at 292.1 43.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2b0b62a6-bc93-4890-a135-939af8d7c049")
+	)
+	(label "D_GND"
+		(at 134.62 68.58 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2d947da4-e997-409d-8920-73396b842351")
+	)
+	(label "CH3_RST_CMD"
+		(at 101.6 83.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "34369347-33dd-4e48-9631-18cdf1842f28")
+	)
+	(label "CH2_RST_CMD"
+		(at 124.46 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "35131a56-fb93-4487-b1db-a6eac75a87c7")
+	)
+	(label "+5V"
+		(at 177.8 48.26 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3767ddb4-b1c4-409b-b886-9b58bde14bd8")
+	)
+	(label "CH3_RST"
+		(at 182.88 129.54 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "38c4c888-0a42-40cc-9643-5ff9ac9d2c5b")
+	)
+	(label "AMP3_V+"
+		(at 254 114.3 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3b13ba44-487a-4be6-aebe-f1a5376ad904")
+	)
+	(label "AMP4_V+"
+		(at 254 154.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3b66070c-a357-4da1-9e2c-c0391027ff69")
+	)
+	(label "TONE_R"
+		(at 190.5 129.54 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3c25c5fe-a8e3-40eb-93e5-39041a17556b")
+	)
+	(label "A_GND"
+		(at 337.82 81.28 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "40644fe4-9e43-4a29-b3eb-e85486d156e6")
+	)
+	(label "AMP2_R"
+		(at 193.04 73.66 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "40e6994a-74ee-4b4a-95b1-e466935bb535")
+	)
+	(label "AMP4_V-"
+		(at 243.84 154.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "43caa459-e5e3-4862-83c0-b5a4f1eb3675")
+	)
+	(label "CH3_SET"
+		(at 144.78 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "43e412b7-e72d-40e4-8bde-519e3069be75")
+	)
+	(label "I2C_SDA"
+		(at 25.4 41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "44dfcdc2-4384-4a73-bed2-729e68e2aaa1")
+	)
+	(label "CH4_RST"
+		(at 233.68 170.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4566188e-c7fe-4ab6-96a3-47fc5cfa733d")
+	)
+	(label "+5V"
+		(at 177.8 129.54 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "46403fe2-5003-4641-af86-9f091a7197ff")
+	)
+	(label "-12V"
+		(at 241.3 170.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4a1ea0e9-686e-4eeb-a7bc-860a40684c19")
+	)
+	(label "+12V"
+		(at 251.46 129.54 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4a69a332-725a-45ac-abc6-08bd53cd6b54")
+	)
+	(label "+12V"
+		(at 251.46 88.9 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4c55f068-4119-4596-9f75-8b1fa2618320")
+	)
+	(label "A_GND"
+		(at 337.82 162.56 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4dd54be4-b48f-4efc-91df-e89722ad0c57")
+	)
+	(label "AMP1_V+"
+		(at 254 33.02 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4e6c6f87-95a3-4402-a6b1-ae5ca30f081d")
+	)
+	(label "CH5_SET"
+		(at 233.68 195.58 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4e721103-97ab-4dd3-88e8-a206d73832a6")
+	)
+	(label "+5V"
+		(at 228.6 88.9 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4e86ba5d-9dc3-44f7-aef3-3763da8e4610")
+	)
+	(label "A_GND"
+		(at 337.82 40.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4fac3296-f5dd-44b2-8fa2-2663581ce04b")
+	)
+	(label "CH4_SET_CMD"
+		(at 101.6 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50538956-4283-4496-a986-7572f18560b5")
+	)
+	(label "3V3"
+		(at 76.2 78.74 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "543dfaa8-8353-4fa0-9457-2efa6ec7fe01")
+	)
+	(label "D_GND"
+		(at 46.99 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "55dfb65b-306c-433c-a134-8caa915a301d")
+	)
+	(label "A_GND"
+		(at 337.82 203.2 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "570d41a7-a293-4570-9a22-e6628102efa3")
+	)
+	(label "CH1_RST_CMD"
+		(at 101.6 78.74 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "570f5aeb-b91a-4e2d-9ae9-212e36ffacaf")
+	)
+	(label "AMP2_L"
+		(at 292.1 81.28 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5889dcce-6846-4f6b-96aa-b74aa8120a0e")
+	)
+	(label "CH4_RST"
+		(at 182.88 170.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5988c7c6-9eac-444a-af08-795d1f71aef5")
+	)
+	(label "CH3_RST_CMD"
+		(at 124.46 111.76 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5a914d1f-25e2-45fd-a9a4-0789f34492fd")
+	)
+	(label "CH1_SET"
+		(at 144.78 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5bf66191-8d87-406e-b73e-24a00b7a7549")
+	)
+	(label "AMP1_L"
+		(at 292.1 40.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5ebfc1b9-352d-4c4f-bdde-4c5ff5c4afdc")
+	)
+	(label "AMP5_L"
+		(at 292.1 203.2 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "610088b2-0cf8-4721-97e2-b031f4ec02a4")
+	)
+	(label "AMP3_R"
+		(at 193.04 114.3 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "61a97cd0-5b12-43b7-bade-2595dc76a8a0")
+	)
+	(label "CH5_SET"
+		(at 182.88 195.58 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "638d689c-e15b-40ce-9e04-dba740a5469e")
+	)
+	(label "+5V"
+		(at 177.8 33.02 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "646afce1-e6a5-4698-8c1a-76b3ad079462")
+	)
+	(label "AMP5_V+"
+		(at 337.82 200.66 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "68b995a9-6b9f-4c34-ba05-fcd13598f8be")
+	)
+	(label "+5V"
+		(at 144.78 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6dd452de-712f-4826-846e-c327619d6b39")
+	)
+	(label "D_GND"
+		(at 71.12 104.14 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6e1b1834-cf21-4f9d-a92e-ce974b271d9c")
+	)
+	(label "+5V"
+		(at 177.8 154.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6e2c7848-5fb3-4b03-8c8b-3b62cc42a3d5")
+	)
+	(label "CH2_RST_CMD"
+		(at 101.6 81.28 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "72dae5a3-e606-4fc3-af71-1d6f52fec820")
+	)
+	(label "+5V"
+		(at 177.8 88.9 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "74229cb0-147a-4c44-8590-c20d2cb77da1")
+	)
+	(label "TONE_R"
+		(at 190.5 210.82 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "76ea6ba1-d543-4ba4-8b65-340e7d647471")
+	)
+	(label "CH3_SET"
+		(at 233.68 114.3 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "777fadd3-94d6-4239-bfda-eee3df4c343a")
+	)
+	(label "CH5_RST_CMD"
+		(at 124.46 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7a7862e3-ba22-4896-8784-5f63c2d01de7")
+	)
+	(label "CH5_RST"
+		(at 182.88 210.82 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7c696585-ec29-489f-9e5f-d00f2ca2726e")
+	)
+	(label "TONE_R"
+		(at 190.5 88.9 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7f1587e4-d70a-47a7-a147-e5af19651624")
+	)
+	(label "CH5_RST_CMD"
+		(at 101.6 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7fa8180e-af04-44b0-b6ce-656e8bdb10a9")
+	)
+	(label "CH1_RST"
+		(at 233.68 48.26 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8256cd4b-4a02-434b-8abd-9ec575b6c6d8")
+	)
+	(label "CH2_SET"
+		(at 182.88 73.66 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "83d1ded8-7b7f-4f72-a27d-c5a319f336e0")
+	)
+	(label "CH5_RST"
+		(at 233.68 210.82 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "84e1fc0b-3fa6-4722-bbcb-94a11a6876d0")
+	)
+	(label "AMP5_V-"
+		(at 337.82 205.74 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "85c6bbf8-5aac-4585-999a-a022d1211cdb")
+	)
+	(label "CH3_RST"
+		(at 144.78 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "863048c4-0a62-4ceb-9531-1b1ea82bd98b")
+	)
+	(label "+5V"
+		(at 177.8 114.3 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "869c6269-d29c-4107-8f08-e476875c0dfd")
+	)
+	(label "+5V"
+		(at 228.6 33.02 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "871dbfb5-ca6c-4201-9304-6201c023e514")
+	)
+	(label "CH2_SET_CMD"
+		(at 101.6 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "88ad7b7e-6068-42cf-abdc-9c932c2eaaca")
+	)
+	(label "AMP4_L"
+		(at 203.2 154.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8b84be1d-4fd0-4b22-8a91-947ce0c866d1")
+	)
+	(label "CH1_RST"
+		(at 182.88 48.26 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8c8e0a87-1e2b-4e13-adf8-944cc27d269a")
+	)
+	(label "TONE_L"
+		(at 200.66 129.54 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8ca295ae-bda2-4264-ba15-ebde47c7bf2c")
+	)
+	(label "AMP2_V-"
+		(at 243.84 73.66 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8cd18e7b-1bfc-416d-9f8f-e72f5fdfcda8")
+	)
+	(label "+5V"
+		(at 177.8 170.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8cd51972-ca13-4541-87d8-506589def738")
+	)
+	(label "CH2_RST"
+		(at 182.88 88.9 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8e1d4e28-8e43-4871-a0ec-712b864f1542")
+	)
+	(label "CH5_SET_CMD"
+		(at 101.6 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "928b2d6e-96b5-4884-9149-faf6d17445d3")
+	)
+	(label "AMP3_R"
+		(at 292.1 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "939fd7c7-4176-4503-bab3-012a85f386c5")
+	)
+	(label "AMP5_L"
+		(at 203.2 195.58 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "93eefb74-bae8-48f5-a131-ff93a1122f74")
+	)
+	(label "AMP5_V+"
+		(at 254 195.58 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "951b837e-556a-4fb8-a71d-ac6caba48789")
+	)
+	(label "AMP4_V-"
+		(at 337.82 165.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9dec19d8-3d93-4356-82da-701ae05fec24")
+	)
+	(label "+5V"
+		(at 228.6 73.66 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a11ea727-c0c6-43f9-a7bc-3b1aacd26970")
+	)
+	(label "AMP1_L"
+		(at 203.2 33.02 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a2d1f9b8-3e42-4876-8dca-bcf6703af614")
+	)
+	(label "CH4_SET_CMD"
+		(at 124.46 53.34 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a2f674ca-3436-4d83-b655-db7f0d89a1b7")
+	)
+	(label "I2C_SDA"
+		(at 76.2 58.42 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a5d01220-1ad2-49a0-8a99-d9d89434ad2a")
+	)
+	(label "AMP3_V-"
+		(at 243.84 114.3 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a6a21a32-9058-4097-8d04-8678772e7b7d")
+	)
+	(label "+5V"
+		(at 177.8 195.58 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a6cd89da-e4b4-4001-b667-264183e0925b")
+	)
+	(label "CH4_RST_CMD"
+		(at 101.6 86.36 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a729b4d6-c856-4eb2-9c42-afbd8b98cfd5")
+	)
+	(label "+5V"
+		(at 144.78 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a79e3cc4-dd60-4d0f-b07c-bc151e25369a")
+	)
+	(label "AMP2_R"
+		(at 292.1 83.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a815580e-e28b-4c85-81b6-8d14029acc56")
+	)
+	(label "TONE_L"
+		(at 200.66 210.82 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a8930142-2af0-46c3-ba95-925325085199")
+	)
+	(label "CH1_RST_CMD"
+		(at 124.46 106.68 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "aa7ab32b-8069-4ba4-b498-c681d9f3a01b")
+	)
+	(label "D_GND"
+		(at 71.12 82.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b38a17bb-3293-4e30-825b-0bf7a827d9cf")
+	)
+	(label "+5V"
+		(at 228.6 48.26 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b3a7227c-2441-496b-b6d0-3982e87079ce")
+	)
+	(label "-12V"
+		(at 241.3 129.54 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b58ec1a6-5bd9-4bdd-ad41-af12733e6f19")
+	)
+	(label "CH5_RST"
+		(at 144.78 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b71aabbe-53fc-4d77-8670-ff3ad39ec915")
+	)
+	(label "AMP2_V+"
+		(at 254 73.66 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b78982ca-89bc-44da-990c-db4de3b27b38")
+	)
+	(label "+5V"
+		(at 228.6 210.82 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b98350ef-9be1-4900-83f7-dd6e6e15ee7c")
+	)
+	(label "CH5_SET_CMD"
+		(at 124.46 55.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bee8cb4c-48b6-4033-a3a3-b1ff1e26ace6")
+	)
+	(label "+5V"
+		(at 228.6 195.58 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c129c314-18ee-4936-9728-23b5a22c2743")
+	)
+	(label "CH4_SET"
+		(at 233.68 154.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c1b6d603-b793-4554-a97d-562a1a36b3cf")
+	)
+	(label "AMP4_R"
+		(at 292.1 165.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c3af7429-b626-4af9-931a-b55a34608d94")
+	)
+	(label "+5V"
+		(at 177.8 73.66 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c4ee54c1-058a-47a8-bbad-04ba565687bd")
+	)
+	(label "AMP1_R"
+		(at 193.04 33.02 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c58bbbee-b68b-45d8-bca8-4f842f5f14b1")
+	)
+	(label "CH2_SET"
+		(at 233.68 73.66 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cba6798a-4dfa-4b46-925b-d68d94a2fe3e")
+	)
+	(label "AMP1_V-"
+		(at 337.82 43.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cfb32a4d-778f-49f5-8569-e362e09f80b2")
+	)
+	(label "3V3"
+		(at 88.9 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cfd15035-ff05-49eb-a044-67d8d5b9892e")
+	)
+	(label "AMP4_V+"
+		(at 337.82 160.02 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d16ab974-ea8f-406e-9cca-6c70083b0c80")
+	)
+	(label "TONE_R"
+		(at 36.83 92.71 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "da2fe467-d876-4018-a101-ded640fc7789")
+	)
+	(label "TONE_R"
+		(at 190.5 48.26 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e27987b0-7c6a-4cae-b0ae-204018546878")
+	)
+	(label "CH1_SET"
+		(at 233.68 33.02 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e2d88271-ec88-49f4-a3a1-a8818cf18a6d")
+	)
+	(label "CH4_SET"
+		(at 144.78 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e96912e3-ba21-49ab-92b1-7ff33b018e2f")
+	)
+	(label "CH1_SET_CMD"
+		(at 101.6 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e9b64a5f-1e6d-45c7-9fe7-de17340c6fa9")
+	)
+	(label "+5V"
+		(at 228.6 154.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ea4ca754-b478-4fe1-9dca-3a925370e192")
+	)
+	(label "CH1_SET_CMD"
+		(at 124.46 45.72 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "eb63a20b-68e9-426e-b4b1-df3c7c246cc1")
+	)
+	(label "AMP3_L"
+		(at 292.1 121.92 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ec163bce-6b4c-4d24-a2f9-53733d61092c")
+	)
+	(label "CH2_SET"
+		(at 144.78 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ed42138a-2608-4d79-882d-8341b3a080cb")
+	)
+	(label "CH2_SET_CMD"
+		(at 124.46 48.26 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "eff71324-eb57-47c9-a158-8a4061378099")
+	)
+	(label "+12V"
+		(at 29.21 114.3 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f0460942-78be-4a22-9135-8720f39bcedc")
+	)
+	(label "AMP4_L"
+		(at 292.1 162.56 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f1ef542f-d32c-4b28-9797-a548592249dc")
+	)
+	(label "-12V"
+		(at 241.3 88.9 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f2dbd7cb-c4fc-48be-9a6b-a83dd934b5c0")
+	)
+	(label "TONE_L"
+		(at 36.83 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f3b8d0e9-5f1d-41ba-be70-8723a83c03af")
+	)
+	(label "TONE_L"
+		(at 200.66 48.26 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f4da962c-2a85-49f3-83db-5f178726e2a6")
+	)
+	(label "-12V"
+		(at 29.21 119.38 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f509d686-7239-4e76-956c-dcac2b4f5425")
+	)
+	(label "CH4_RST_CMD"
+		(at 124.46 114.3 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f5402c26-adc7-4a0b-be6f-2b0b87d9947b")
+	)
+	(label "+12V"
+		(at 251.46 210.82 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f588260f-99e3-4807-ab75-cbc98ede0292")
+	)
+	(label "+12V"
+		(at 251.46 170.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f7e697d2-2f68-4d31-b7fb-db6fa60e8b04")
+	)
+	(label "AMP3_L"
+		(at 203.2 114.3 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f81c2941-484a-4414-aaec-50443bfd720b")
+	)
+	(label "-12V"
+		(at 241.3 48.26 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f9c69701-0c76-461f-a7f6-93eff29d3d25")
+	)
+	(label "+5V"
+		(at 228.6 129.54 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fb3a9d72-6a40-4c03-abd8-10aedc048a9f")
+	)
+	(label "3V3"
+		(at 46.99 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fd272f50-4bde-475e-9289-4d4781202d88")
+	)
+	(label "AMP5_V-"
+		(at 243.84 195.58 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fd373d62-67f1-42a0-a6b9-3459acc867f8")
+	)
+	(label "D_GND"
+		(at 85.09 104.14 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fde82923-18b9-4453-b258-e0e3d3617a4f")
+	)
+	(label "AMP4_R"
+		(at 193.04 154.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ffb0adb0-cd93-49a6-af45-671e2b2c36b8")
+	)
+	(label "AMP1_V-"
+		(at 243.84 33.02 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ffed8567-aa10-4351-bc2f-0b66caf7007d")
+	)
+	(hierarchical_label "-12V"
 		(shape input)
-		(at 30.48 45.72 180)
+		(at 30.48 119.38 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "03ed27e4-85dd-472d-a752-3e4e8ccddc8b")
-	)
-	(hierarchical_label "AMP2_V-"
-		(shape output)
-		(at 231.14 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "0c57e449-4f85-4a8e-a1c2-0b93ae0fb1a6")
-	)
-	(hierarchical_label "A_GND"
-		(shape bidirectional)
-		(at 200.66 93.98 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "172e9b8f-3ecc-473f-aafa-2b49bf6b3acd")
-	)
-	(hierarchical_label "AMP2_V+"
-		(shape output)
-		(at 220.98 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "1df78816-8cce-403b-a61f-d48dcdf102db")
-	)
-	(hierarchical_label "AMP3_L"
-		(shape bidirectional)
-		(at 200.66 45.72 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "400fd0ec-f474-4d0d-82dc-757277668e73")
-	)
-	(hierarchical_label "AMP1_V-"
-		(shape output)
-		(at 231.14 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "42715318-e734-4c50-b7dc-006ba847cd51")
-	)
-	(hierarchical_label "AMP3_R"
-		(shape bidirectional)
-		(at 210.82 45.72 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "4fe53a35-2f2c-4739-9bd9-8d916bd785c8")
-	)
-	(hierarchical_label "COMMON_L"
-		(shape output)
-		(at 200.66 88.9 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "5fe74eca-725f-4bc5-bd29-13a2b2a4f1c6")
-	)
-	(hierarchical_label "I2C_SDA"
-		(shape bidirectional)
-		(at 30.48 40.64 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "62ba79aa-63dc-4b83-9e40-4da7dad29b6c")
-	)
-	(hierarchical_label "AMP5_L"
-		(shape bidirectional)
-		(at 200.66 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "6e1c1cd9-785d-49f9-a585-7c1f4a494a77")
-	)
-	(hierarchical_label "AMP3_V-"
-		(shape output)
-		(at 231.14 45.72 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "72e8eaa9-365b-4315-8b85-06c78919815f")
-	)
-	(hierarchical_label "AMP2_L"
-		(shape bidirectional)
-		(at 200.66 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "9283aed4-d40c-4f94-b847-7c6dfe691553")
-	)
-	(hierarchical_label "AMP1_R"
-		(shape bidirectional)
-		(at 210.82 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a0019723-0287-4262-9383-915ccd8896c8")
-	)
-	(hierarchical_label "COMMON_R"
-		(shape output)
-		(at 200.66 91.44 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "b1946d5f-1ba5-4cff-847f-c0895cff6a2b")
-	)
-	(hierarchical_label "D_GND"
-		(shape input)
-		(at 30.48 48.26 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "b4aca8c8-94ef-4025-97db-3894e25f6c9d")
-	)
-	(hierarchical_label "AMP3_V+"
-		(shape output)
-		(at 220.98 45.72 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "b7aada62-519d-4823-bd64-559233f2f602")
-	)
-	(hierarchical_label "AMP4_R"
-		(shape bidirectional)
-		(at 210.82 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c2893103-d7dd-40d1-9eef-23a4cb13fa3c")
-	)
-	(hierarchical_label "AMP5_V-"
-		(shape output)
-		(at 231.14 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "d043a26c-db20-4abf-a2d5-242d602a6751")
-	)
-	(hierarchical_label "AMP4_V+"
-		(shape output)
-		(at 220.98 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "d35b05d1-01e5-40b7-affc-00527750692c")
-	)
-	(hierarchical_label "AMP5_R"
-		(shape bidirectional)
-		(at 210.82 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "d3fc7fd7-ffaa-49e7-889d-703478de13a3")
-	)
-	(hierarchical_label "AMP1_L"
-		(shape bidirectional)
-		(at 200.66 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "df2fd576-d7c8-4bda-b465-07a501b90fcd")
+		(uuid "295ccbc7-ed9c-42ad-916a-016bdc6e4bfa")
 	)
 	(hierarchical_label "I2C_SCL"
 		(shape bidirectional)
-		(at 30.48 43.18 180)
+		(at 34.29 41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "436650cc-7cb1-48a6-b819-88009e80f4f8")
+	)
+	(hierarchical_label "TONE_R"
+		(shape input)
+		(at 34.29 92.71 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "e09c3602-ae1d-49b3-8cf1-0894660d9d57")
+		(uuid "5f4ebcfc-6fea-48e5-b205-400a200d990b")
 	)
-	(hierarchical_label "AMP2_R"
+	(hierarchical_label "A_GND"
 		(shape bidirectional)
-		(at 210.82 40.64 0)
+		(at 29.21 115.57 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "609ef639-c276-4065-a647-2a56ac36639d")
+	)
+	(hierarchical_label "TONE_L"
+		(shape input)
+		(at 34.29 90.17 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "e3df4cdb-e7d2-422d-999e-9d4aedb47a4a")
+		(uuid "94c21d12-6ee0-4f6b-955a-289fb0ef7129")
 	)
-	(hierarchical_label "AMP4_L"
+	(hierarchical_label "+12V"
+		(shape input)
+		(at 30.48 114.3 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ab16a999-fdbe-4ab4-9c7f-99efad596551")
+	)
+	(hierarchical_label "+5V"
+		(shape input)
+		(at 26.67 57.15 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "af9bfa7d-6906-4a4e-805f-7afe35f6e74d")
+	)
+	(hierarchical_label "D_GND"
+		(shape input)
+		(at 31.75 50.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b63adfd7-5428-40a5-8fa0-ec5d990b6c69")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 27.94 46.99 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "bbbbc16d-cfc8-4c22-a4fa-e810ce04feb9")
+	)
+	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
-		(at 200.66 50.8 0)
+		(at 25.4 39.37 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "e6d79fc5-fa36-4192-8b81-a20807f57da9")
-	)
-	(hierarchical_label "AMP1_V+"
-		(shape output)
-		(at 220.98 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "f4f4d2a9-2a74-409f-b879-8b5543c486c5")
-	)
-	(hierarchical_label "AMP4_V-"
-		(shape output)
-		(at 231.14 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "f811f5d6-5a5a-4eb4-934d-927d58322ed8")
-	)
-	(hierarchical_label "AMP5_V+"
-		(shape output)
-		(at 220.98 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "fb630acb-20b0-4805-af8a-95e7f13878fe")
+		(uuid "f158c07e-d990-4837-a04c-d71f626a6517")
 	)
 	(symbol
-		(lib_id "Relay:AZ850P2-x")
-		(at 114.3 50.8 0)
+		(lib_id "Connector:Conn_01x05_Pin")
+		(at 16.51 46.99 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2820,399 +5609,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0cd54ff5-da36-4149-9fff-68e6f12bc3d6")
-		(property "Reference" "K304"
-			(at 114.3 48.26 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AZ850 CH1 pwr"
-			(at 114.3 53.34 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "2ca0a6f8-51cc-4d93-ae73-ba9aa5b09476")
-		)
-		(pin "2"
-			(uuid "c210003d-0cef-489b-8e13-180ce5ef880b")
-		)
-		(pin "3"
-			(uuid "967d275f-e933-438b-b6db-e4a1148d41bc")
-		)
-		(pin "4"
-			(uuid "9bb721b5-3bc9-47fc-848e-c0141ca483cd")
-		)
-		(pin "5"
-			(uuid "62eb9841-1db9-4e43-8b71-af781243805e")
-		)
-		(pin "6"
-			(uuid "f25924db-e06f-4008-aa6c-1ea54a2a6f09")
-		)
-		(pin "7"
-			(uuid "f1fcf71f-9a39-4a19-80bf-6b60e232b549")
-		)
-		(pin "8"
-			(uuid "83067fb3-99f7-4c59-984f-3421fae6eb26")
-		)
-		(pin "9"
-			(uuid "66ea823f-e29e-4047-81e8-6c920efff32c")
-		)
-		(pin "10"
-			(uuid "00efe65d-32e4-4d47-853a-b6fa1a2cb800")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "K304")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "K404")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Relay:AZ850P2-x")
-		(at 139.7 40.64 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "13f502ef-598d-4d86-9e05-3f0c2ea014b2")
-		(property "Reference" "K303"
-			(at 139.7 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AZ850 CH3 audio"
-			(at 139.7 43.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "3366d710-8ed3-47a4-a5ac-fa34b26a77f2")
-		)
-		(pin "2"
-			(uuid "01cb6bde-c9f0-4e8c-9d5b-f0dddc7dd819")
-		)
-		(pin "3"
-			(uuid "9384f71c-116d-47b9-b13a-37bcdc1b9024")
-		)
-		(pin "4"
-			(uuid "7cbbcedd-ce2f-4633-9065-de5e4a60414b")
-		)
-		(pin "5"
-			(uuid "d7e583d6-ffb1-4737-9bae-29630a2eeb95")
-		)
-		(pin "6"
-			(uuid "82341469-ba5a-491d-867a-13561e1605b7")
-		)
-		(pin "7"
-			(uuid "e51d1a8c-9888-4fd9-847e-2362525b61c4")
-		)
-		(pin "8"
-			(uuid "7aee62c6-cd18-4fe7-938a-c57bac07dfd5")
-		)
-		(pin "9"
-			(uuid "db453096-289c-4d34-b49d-9961566793b4")
-		)
-		(pin "10"
-			(uuid "10e06922-cf16-40a0-9f2e-0b247b1b1d81")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "K303")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "K403")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Interface_Expansion:MCP23017-E/SP")
-		(at 63.5 50.8 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "171be4ea-b27d-4fea-a935-cd38994e62db")
-		(property "Reference" "U301"
-			(at 63.5 48.26 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MCP23017 addr0x20"
-			(at 63.5 53.34 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Addr" "0x20 A / 0x21 B"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "f21ec086-bf84-427c-9ad9-17f6ca2f7432")
-		)
-		(pin "2"
-			(uuid "b3abd63b-883a-44cc-8139-b22e0f0313b3")
-		)
-		(pin "3"
-			(uuid "416cd7f6-2413-4f18-9082-f217641e9b84")
-		)
-		(pin "4"
-			(uuid "5ab9db4b-8eab-4c62-86f0-cc22d053d554")
-		)
-		(pin "5"
-			(uuid "74279f93-941d-4dff-a9c6-3194a7ea1bc1")
-		)
-		(pin "6"
-			(uuid "e89567db-4aab-47fe-933f-19ee3211636a")
-		)
-		(pin "7"
-			(uuid "aafc509b-fa5f-4a00-b613-3fd0f5b4ebfc")
-		)
-		(pin "8"
-			(uuid "b864324a-6040-48ec-bc78-9c4ddfe9666a")
-		)
-		(pin "9"
-			(uuid "efd0f98e-f791-447d-95cc-c7e17d4ef956")
-		)
-		(pin "10"
-			(uuid "06a80be4-f225-4cf0-b88d-017f7620da9a")
-		)
-		(pin "11"
-			(uuid "34153a7b-64f9-4243-944e-db8bdf3ce0c8")
-		)
-		(pin "12"
-			(uuid "7090b140-3759-4229-8de1-a0990f4aa969")
-		)
-		(pin "13"
-			(uuid "cc26b905-423d-436b-932a-6c6233eeb911")
-		)
-		(pin "14"
-			(uuid "6f69cea9-7425-485b-a6e2-0428a7cf93e8")
-		)
-		(pin "15"
-			(uuid "c5c4b6ad-ea56-4991-99e1-6d8e4bf4b7e7")
-		)
-		(pin "16"
-			(uuid "e14d3087-fc9a-4595-af89-8dd4042d3ba7")
-		)
-		(pin "17"
-			(uuid "8b9ea426-3ad0-4462-b69c-71ea6ac2ab7c")
-		)
-		(pin "18"
-			(uuid "e6ed4e30-318a-4fb7-8304-59b5aa4f587f")
-		)
-		(pin "19"
-			(uuid "96240558-5823-4a90-b440-2d657798155a")
-		)
-		(pin "20"
-			(uuid "113d1afe-5c58-48bc-8fe7-e1ccb41d69fb")
-		)
-		(pin "21"
-			(uuid "9c7bc6bf-8797-4ae2-85e4-2d3b56dea287")
-		)
-		(pin "22"
-			(uuid "4bcda16f-82b0-44bc-9be7-987cf57dd1cd")
-		)
-		(pin "23"
-			(uuid "1888e96a-823f-4a98-a29d-7233f1462829")
-		)
-		(pin "24"
-			(uuid "102d43a7-30e0-4e2f-bd91-5c999722d415")
-		)
-		(pin "25"
-			(uuid "3228f48a-a72a-4f30-86d2-c69f17ccb654")
-		)
-		(pin "26"
-			(uuid "28dbe913-b305-4488-b48a-b76e9c8f3873")
-		)
-		(pin "27"
-			(uuid "22c1a1ee-0c89-40e6-b565-df70ddcc9afb")
-		)
-		(pin "28"
-			(uuid "250fcc7f-f718-47d2-b18d-cf241ce20e64")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "U301")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "U401")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_01x04_Pin")
-		(at 25.4 43.18 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1c2899de-95ab-415f-be4d-5f843a8ec56d")
+		(uuid "22b56066-d489-415a-b330-80e0387dc08d")
 		(property "Reference" "J_I2C301"
-			(at 25.4 40.64 0)
+			(at 18.288 35.306 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3221,8 +5620,8 @@
 				)
 			)
 		)
-		(property "Value" "I2C to Control"
-			(at 25.4 45.72 0)
+		(property "Value" "CTRL"
+			(at 18.796 38.1 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3232,7 +5631,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 0 0 0)
+			(at -19.05 1.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3243,7 +5642,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at -19.05 1.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3253,8 +5652,8 @@
 				)
 			)
 		)
-		(property "Description" ""
-			(at 0 0 0)
+		(property "Description" "From ControlPanel: SDA / SCL / 3V3 / +5V / D_GND"
+			(at -19.05 1.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3265,16 +5664,19 @@
 			)
 		)
 		(pin "1"
-			(uuid "40b2df9c-a65a-4e71-8bc5-8cb4d124253c")
+			(uuid "e088e549-8451-4391-a4b6-4cb0e21e51af")
 		)
 		(pin "2"
-			(uuid "6f6ee579-3e36-4ee4-bbc5-de6abf9b6b78")
+			(uuid "e2b04f30-c3c8-4c2b-9188-b947bfc23774")
 		)
 		(pin "3"
-			(uuid "8c86da84-9d90-477b-b734-eb788077e039")
+			(uuid "0add38ce-41b7-4263-bfbf-737937a8496a")
 		)
 		(pin "4"
-			(uuid "9656fdc0-3932-47b9-9d5f-8ef2fed0353b")
+			(uuid "2fab50d1-9f4f-44d2-8be0-1ffdbd67ad1b")
+		)
+		(pin "5"
+			(uuid "548e73df-32c0-44cb-ad5e-9c61a7b5b1bc")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -3290,8 +5692,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Relay:AZ850P2-x")
-		(at 114.3 40.64 0)
+		(lib_id "Device:C")
+		(at 38.1 49.53 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3300,9 +5702,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "3d7e9583-e844-4a99-b276-7ceb2dc36518")
-		(property "Reference" "K301"
-			(at 114.3 38.1 0)
+		(uuid "245265f3-b5a0-4f34-bf36-69e1b8ad267c")
+		(property "Reference" "C301"
+			(at 38.1 46.99 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3311,8 +5713,175 @@
 				)
 			)
 		)
-		(property "Value" "AZ850 CH1 audio"
-			(at 114.3 43.18 0)
+		(property "Value" "100nF"
+			(at 38.1 52.07 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -20.32 8.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at -20.32 8.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at -20.32 8.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4e439d7c-8176-4f3f-bca3-28d82548d695")
+		)
+		(pin "2"
+			(uuid "9c2452ab-e5aa-4200-a881-eabf29043c88")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "C301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "C401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 63.5 91.44 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "29f03ce0-d6de-4636-a968-8d22e0b43f13")
+		(property "Reference" "JP301"
+			(at 63.5 86.36 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 63.5 88.9 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 144.78 243.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 144.78 243.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "0R strap: fit to tie A0 to 3V3, leave empty for 0"
+			(at 144.78 243.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "eb7664df-3fe9-4c58-941c-5fcae15fe533")
+		)
+		(pin "2"
+			(uuid "5f703273-8f3d-4f3a-b9c5-4d886ade5398")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "JP301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "JP401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 190.5 121.92 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2cb764c8-0465-4822-8a8c-5368dca65197")
+		(property "Reference" "K305"
+			(at 190.5 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH3 AUDIO"
+			(at 190.5 124.46 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3343,7 +5912,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "AZ850P2-5 — routes TONE_L/R to Amp 3 input"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -3355,34 +5924,2698 @@
 			)
 		)
 		(pin "1"
-			(uuid "e8d93524-c19d-4684-b11a-6750096e9383")
+			(uuid "11301ccc-3468-4ea0-a09f-de4c2f243f0e")
 		)
 		(pin "2"
-			(uuid "0eaf04a4-528d-4e5a-9012-3793d1eb0289")
+			(uuid "2d778e97-06ba-4019-bb2a-c05a3c27f468")
 		)
 		(pin "3"
-			(uuid "5408222d-b867-48f4-9e83-c2aab9c41f08")
+			(uuid "90ab9653-4c36-473b-86c3-720f78694ea2")
 		)
 		(pin "4"
-			(uuid "eb086a4f-d93a-4512-b47f-273e3c142fcc")
+			(uuid "444984db-5e81-44da-b5af-c84b576ce357")
 		)
 		(pin "5"
-			(uuid "176fc480-5a39-4215-981d-d354e347e9b6")
+			(uuid "b71e785d-da14-434d-9cf5-4d1a440ff5c0")
 		)
 		(pin "6"
-			(uuid "e0093efa-f783-4e94-baaf-2c26a265dc24")
+			(uuid "fed97157-3231-44b0-bf3d-56611a8f2691")
 		)
 		(pin "7"
-			(uuid "7fd3ee00-5142-45f1-ba1b-6a2f83603bf9")
+			(uuid "2f9f93f4-d2d1-4535-9f8b-9c74b5182955")
 		)
 		(pin "8"
-			(uuid "245952d6-526f-4f5f-929f-c027f2fa171d")
+			(uuid "071847ff-47ee-4b17-b399-6ac0da55d944")
 		)
 		(pin "9"
-			(uuid "bc2bc76c-b42e-485c-97d5-a8bbfd159ff6")
+			(uuid "b7398046-8a83-4773-ad9b-a6a92dfb7085")
 		)
 		(pin "10"
-			(uuid "880d9b87-1c6f-4318-932d-ca33e44b3552")
+			(uuid "df20464d-ddc2-451c-9013-4b2f3dd69316")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K305")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K405")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 38.1 57.15 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2ea2901a-e45a-4a7f-8276-1acbe3452fc9")
+		(property "Reference" "C302"
+			(at 38.1 54.61 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 38.1 59.69 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -33.02 8.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at -33.02 8.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at -33.02 8.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f4fa9f2a-c50c-4a3d-bb5f-bad60d97fa44")
+		)
+		(pin "2"
+			(uuid "62948db9-eae3-4484-8e8a-ddbd99820011")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "C302")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "C402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 63.5 96.52 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "3d0ef7a4-ff13-4bde-96df-ca81a4794b48")
+		(property "Reference" "JP302"
+			(at 63.5 99.06 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 63.5 101.6 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at -17.78 -71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at -17.78 -71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "0R strap: fit to tie A1 to 3V3, leave empty for 0"
+			(at -17.78 -71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a8899f4e-1116-426e-bf89-1c54aefa5d42")
+		)
+		(pin "2"
+			(uuid "d59bfd96-c6e7-4df7-b79a-f4e171136295")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "JP302")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "JP402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 29.21 90.17 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "56e378c7-dc0c-4da4-bcb8-80dddb0add4e")
+		(property "Reference" "J_TONE301"
+			(at 25.146 87.122 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TONE IN"
+			(at 24.892 84.074 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -21.59 -1.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at -21.59 -1.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "From ControlPanel PT2314: TONE_L / TONE_R. Shield at Control only."
+			(at -21.59 -1.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "39e7d549-647d-4019-aa85-90e5097ea2a9")
+		)
+		(pin "2"
+			(uuid "f37b662f-490f-4ae3-8459-0d8afd9991f4")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_TONE301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_TONE401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 342.9 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "57a95da3-9fbe-45a0-ad1d-6f522eafcfab")
+		(property "Reference" "J_PWR301"
+			(at 355.6 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP1 PWR"
+			(at 355.6 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 1 J703 (+12 / A_GND / -12)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "875d2551-7262-455c-82d6-f47853bf27eb")
+		)
+		(pin "2"
+			(uuid "2f75b3a9-8f54-42d6-a8d8-df357d312288")
+		)
+		(pin "3"
+			(uuid "084d4940-2d63-49a5-8d15-dffffeb73210")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_PWR301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_PWR401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 241.3 121.92 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5bac77ca-9b77-4250-aa03-283ea6014b4f")
+		(property "Reference" "K306"
+			(at 241.3 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH3 POWER"
+			(at 241.3 124.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "AZ850P2-5 — routes +/-12V to Amp 3"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "279fcee5-b3d9-4909-9629-0419c56bcd07")
+		)
+		(pin "2"
+			(uuid "62e099d2-10b1-4f8c-8f38-1b16c2a2d2ac")
+		)
+		(pin "3"
+			(uuid "1c0fa5c5-c1e0-4425-ba87-fbd6d7b7f7a3")
+		)
+		(pin "4"
+			(uuid "806b59b0-7c42-4c73-a4b2-ff60b0e66d8c")
+		)
+		(pin "5"
+			(uuid "82a2cda1-0384-4e9b-9a3e-ca8799709626")
+		)
+		(pin "6"
+			(uuid "9729bf05-d968-4539-8c90-7f00c7adb896")
+		)
+		(pin "7"
+			(uuid "ea29972c-17a0-40da-aea3-03942ccd55b4")
+		)
+		(pin "8"
+			(uuid "45fbff82-5e3d-4219-9da4-f5b3da5df7dc")
+		)
+		(pin "9"
+			(uuid "643df973-7347-40b0-91c1-f06cdcb83a68")
+		)
+		(pin "10"
+			(uuid "f976f9a6-7539-462d-a7da-c085f7fff910")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K306")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K406")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 35.56 116.84 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5c4e4ca5-caa4-4868-a3d4-b2c88d981107")
+		(property "Reference" "J_RAIL301"
+			(at 48.26 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "RAIL IN"
+			(at 48.26 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -15.24 -5.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at -15.24 -5.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "From PowerModule J201: +12V / A_GND / -12V (relays switch rails only)"
+			(at -15.24 -5.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f9c4794f-760d-4fed-97ca-4cf75e63778f")
+		)
+		(pin "2"
+			(uuid "4720624d-50c8-468c-922b-74a1437a0777")
+		)
+		(pin "3"
+			(uuid "e0cf282d-94d2-4167-8814-cf0c4b584bde")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_RAIL301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_RAIL401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 297.18 81.28 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5d9b8b8a-df24-4ce9-ac27-9983561badaf")
+		(property "Reference" "J_AUD302"
+			(at 309.88 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP2 IN"
+			(at 309.88 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 2 J701 (L/R)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "58e1733a-525a-45e9-9fa3-5b6683049413")
+		)
+		(pin "2"
+			(uuid "dcd62f36-c7ac-4ac5-96ff-d12362865110")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_AUD302")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_AUD402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 297.18 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "688cce24-bb58-4a8c-897d-a06b579a210e")
+		(property "Reference" "J_AUD301"
+			(at 309.88 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP1 IN"
+			(at 309.88 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 1 J701 (L/R)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ba1cb3b1-d469-437f-83b9-fd65fe498648")
+		)
+		(pin "2"
+			(uuid "f8e0b7d2-05ea-40be-a930-d8a732b1c613")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_AUD301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_AUD401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 190.5 81.28 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "74bb9a5f-4d80-4276-b84d-4fd27514a796")
+		(property "Reference" "K303"
+			(at 190.5 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH2 AUDIO"
+			(at 190.5 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "AZ850P2-5 — routes TONE_L/R to Amp 2 input"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8df28842-6661-4680-bd1f-6be3fe5f0a53")
+		)
+		(pin "2"
+			(uuid "513795ed-cad9-48c9-9abe-a9d4f43866de")
+		)
+		(pin "3"
+			(uuid "2578ad91-c356-4457-a2e1-4a1ba0d9552f")
+		)
+		(pin "4"
+			(uuid "0bcec8da-8873-47cc-b0ba-242d3e278668")
+		)
+		(pin "5"
+			(uuid "4ae09546-6ebb-4098-9091-daca1f68b370")
+		)
+		(pin "6"
+			(uuid "abb09f67-8183-4485-8918-7bb2f9b3b76f")
+		)
+		(pin "7"
+			(uuid "f2895e75-92b9-4044-97aa-bdac9aa637b1")
+		)
+		(pin "8"
+			(uuid "88f29c76-cb7a-40f1-864f-97b5ef45627a")
+		)
+		(pin "9"
+			(uuid "9b6b077f-5aa1-4f9b-81ea-f4fdd80d915c")
+		)
+		(pin "10"
+			(uuid "faf7caac-869b-4d14-837c-8f515baeb593")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K303")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K403")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 342.9 203.2 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "80ec38fb-a942-4c39-ae1e-805d69c07df5")
+		(property "Reference" "J_PWR305"
+			(at 355.6 200.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP5 PWR"
+			(at 355.6 205.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 5 J703 (+12 / A_GND / -12)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8dd673c1-2b5b-4f40-88a8-7a9092edcce8")
+		)
+		(pin "2"
+			(uuid "321a275c-51d1-407d-92c7-4fec1044874c")
+		)
+		(pin "3"
+			(uuid "75c396da-1324-4b3e-95b1-d0289f567ea2")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_PWR305")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_PWR405")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 71.12 97.79 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "849133ac-917c-4114-a382-8da1da1f0985")
+		(property "Reference" "R302"
+			(at 73.66 96.5199 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10k"
+			(at 73.66 99.0599 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 15.24 -69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 15.24 -69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "MCP ADDR_A1 pulldown"
+			(at 15.24 -69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "13eb0636-429c-4e71-b196-78c082be0b6e")
+		)
+		(pin "2"
+			(uuid "5e802bf4-efd5-45f6-b5c6-0c160c6ed4de")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "R302")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "R402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 297.18 203.2 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "84a46239-f858-40e6-82ed-c5be5a154d56")
+		(property "Reference" "J_AUD305"
+			(at 309.88 200.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP5 IN"
+			(at 309.88 205.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 5 J701 (L/R)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a48e826a-a137-420d-8c5c-dfc648c2a890")
+		)
+		(pin "2"
+			(uuid "ad740f8e-653e-41d2-be5b-0d324e9a45da")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_AUD305")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_AUD405")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 241.3 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "92776f8e-7023-47cf-a0ad-6f70d13f16e5")
+		(property "Reference" "K302"
+			(at 241.3 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH1 POWER"
+			(at 241.3 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "AZ850P2-5 — routes +/-12V to Amp 1"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0208ce9f-0fa4-49d7-a50a-02ba1dccc78b")
+		)
+		(pin "2"
+			(uuid "30d8f2d3-0e25-4c8c-94f4-1bb4a9dc9046")
+		)
+		(pin "3"
+			(uuid "4f0c488b-84ef-40ed-b2a8-33ec40535c84")
+		)
+		(pin "4"
+			(uuid "de5efcb6-cc6f-4fe0-bb4b-bfe8ea4848a6")
+		)
+		(pin "5"
+			(uuid "9547f560-56a6-4868-a7d4-5418c591d2b0")
+		)
+		(pin "6"
+			(uuid "1f4c93b5-4022-4675-9d27-9361a197dfc1")
+		)
+		(pin "7"
+			(uuid "5d77ea8a-7a5b-4785-b2f8-1d3bf4bc3681")
+		)
+		(pin "8"
+			(uuid "b0ada1cd-4d42-4466-95f6-ae65aec18def")
+		)
+		(pin "9"
+			(uuid "6567217f-2fd1-4420-bfd3-996515070b4d")
+		)
+		(pin "10"
+			(uuid "fd670dda-b871-4c5c-8635-e0003f1ad441")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K302")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 342.9 81.28 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "92b994de-18cd-404a-8640-8b148c92ec5e")
+		(property "Reference" "J_PWR302"
+			(at 355.6 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP2 PWR"
+			(at 355.6 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 2 J703 (+12 / A_GND / -12)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a24cbb09-f7a8-45cf-b2e0-d9f66bddf65a")
+		)
+		(pin "2"
+			(uuid "c7252276-e25d-4e4d-b86d-8bdb93081d67")
+		)
+		(pin "3"
+			(uuid "3ff7dc7a-d29c-4829-8075-b82a1dbaf274")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_PWR302")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_PWR402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 71.12 87.63 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "97f2be78-0b53-482f-964c-d90bfff98661")
+		(property "Reference" "R301"
+			(at 73.66 86.3599 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10k"
+			(at 73.66 88.8999 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 127 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 127 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "MCP ADDR_A0 pulldown"
+			(at 127 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "39ccee8e-5f97-4e23-89bd-0f436fd588db")
+		)
+		(pin "2"
+			(uuid "1503b1ec-f97f-4272-a9be-bd4b6a923421")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "R301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "R401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 190.5 203.2 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "99693405-0fd4-4bd1-b4fc-d1f2a9f7c3f2")
+		(property "Reference" "K309"
+			(at 190.5 200.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH5 AUDIO"
+			(at 190.5 205.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "AZ850P2-5 — routes TONE_L/R to Amp 5 input"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ea341fdc-260e-4988-a56d-f1d149bd91ff")
+		)
+		(pin "2"
+			(uuid "f6317c59-409d-4752-8887-2f761cb1e557")
+		)
+		(pin "3"
+			(uuid "33a0e186-b993-4264-9736-a758c085f509")
+		)
+		(pin "4"
+			(uuid "95915739-9f1e-461a-a932-f9505bf7fed5")
+		)
+		(pin "5"
+			(uuid "5489afbc-e1a9-4924-afce-84dcdc61e5a7")
+		)
+		(pin "6"
+			(uuid "6f918c15-7c2c-49e5-bde9-7ba81710cb9d")
+		)
+		(pin "7"
+			(uuid "3b800e79-84b9-4731-b7c2-4c66b359842f")
+		)
+		(pin "8"
+			(uuid "b8e334c4-2c09-4e19-906d-7baaba59c066")
+		)
+		(pin "9"
+			(uuid "ecbe20ba-f4af-4076-8317-30ed20ca618b")
+		)
+		(pin "10"
+			(uuid "2fc4f1e6-e9ef-45be-842c-1aa9a773b95c")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K309")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K409")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 297.18 162.56 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a472a896-4426-476d-b7ce-a1f3dc245bd0")
+		(property "Reference" "J_AUD304"
+			(at 309.88 160.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP4 IN"
+			(at 309.88 165.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 4 J701 (L/R)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "068b19fc-35c8-45ac-a9ff-33abd86c0da7")
+		)
+		(pin "2"
+			(uuid "b6bf0b9e-19bf-48d8-b1b3-6e0bebad470a")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_AUD304")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_AUD404")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 297.18 121.92 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a55fc3fb-6a67-4458-8102-26be2987cbca")
+		(property "Reference" "J_AUD303"
+			(at 309.88 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP3 IN"
+			(at 309.88 124.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 3 J701 (L/R)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c25e131d-f9ab-45e9-8357-bc46f1bb52e3")
+		)
+		(pin "2"
+			(uuid "da7510cc-dee2-4d36-8201-59b35a2cd313")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_AUD303")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_AUD403")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 342.9 121.92 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ad1e5877-2b83-4162-b249-b9f5fabd8f08")
+		(property "Reference" "J_PWR303"
+			(at 355.6 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP3 PWR"
+			(at 355.6 124.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 3 J703 (+12 / A_GND / -12)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5d2f5efd-0322-4ca9-9e08-f4eb5a193181")
+		)
+		(pin "2"
+			(uuid "6f1dc646-b0d4-4700-b5e5-cd73028bd32e")
+		)
+		(pin "3"
+			(uuid "0b7fb156-63eb-4ed5-9bc3-abc87fccb6a5")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_PWR303")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_PWR403")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_Array:ULN2803A")
+		(at 134.62 50.8 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b7d6a8d0-bb0c-482a-a686-20e07832a013")
+		(property "Reference" "U302"
+			(at 134.62 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "ULN2803A"
+			(at 134.62 53.34 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "SET pulse driver, one output per channel pair"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "180836ca-b462-4d50-be3d-2f5d76dbf2db")
+		)
+		(pin "2"
+			(uuid "9bba2450-603f-4be5-8b00-c2fbc1803808")
+		)
+		(pin "3"
+			(uuid "5aa2ba05-ecfc-4a27-a25d-8b98477167eb")
+		)
+		(pin "4"
+			(uuid "9873d550-7472-4f8a-87bc-f3c83a23c30b")
+		)
+		(pin "5"
+			(uuid "7207c705-1391-4f99-a1d8-562683342357")
+		)
+		(pin "6"
+			(uuid "7ba425b4-15e6-4dfc-9fb3-bff9456af371")
+		)
+		(pin "7"
+			(uuid "332f6524-8b52-46c7-b6bc-f1c0f72801b0")
+		)
+		(pin "8"
+			(uuid "938fd48c-3f74-4276-bd79-1de85add56ed")
+		)
+		(pin "9"
+			(uuid "cae62067-0d93-4cd5-bbcd-c0578ff79ccd")
+		)
+		(pin "10"
+			(uuid "108d06a1-02a2-4af5-9cd6-90fe75067913")
+		)
+		(pin "11"
+			(uuid "6ba39a97-6d90-4bcf-a415-a7da79063d21")
+		)
+		(pin "12"
+			(uuid "19ecfb65-6fdf-40d8-928e-9fa4e72d46ac")
+		)
+		(pin "13"
+			(uuid "9c96bc5b-c207-4362-b843-1f7b9bff7346")
+		)
+		(pin "14"
+			(uuid "0a9ad211-4678-4228-b9e3-c24beb7ef1f2")
+		)
+		(pin "15"
+			(uuid "b008d5ad-5551-490c-8189-54543ad20a97")
+		)
+		(pin "16"
+			(uuid "85be6db1-4dcd-48b7-8a62-ca02c77576b3")
+		)
+		(pin "17"
+			(uuid "5d7c3c8e-a8bb-4d1b-a59f-a1767bbb23ae")
+		)
+		(pin "18"
+			(uuid "947532ff-32b8-4b55-9251-4c166b431ec6")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "U302")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "U402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 190.5 162.56 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b87492e1-4298-400d-9b59-ca3f423dadc3")
+		(property "Reference" "K307"
+			(at 190.5 160.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH4 AUDIO"
+			(at 190.5 165.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "AZ850P2-5 — routes TONE_L/R to Amp 4 input"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "cd9f07f9-0b36-48de-a47a-6143d405d607")
+		)
+		(pin "2"
+			(uuid "dd212b4b-9c42-4500-965f-928b3f01b6f8")
+		)
+		(pin "3"
+			(uuid "e7f14adc-51d9-4839-be4d-281464226873")
+		)
+		(pin "4"
+			(uuid "0483fe4b-eeb0-4a8a-9b97-e0f86ff51902")
+		)
+		(pin "5"
+			(uuid "0e5a3744-03a2-49bc-b0ad-06c5fbf7e2cd")
+		)
+		(pin "6"
+			(uuid "6e7a9012-7033-4a00-8758-3f59f7aa1d8b")
+		)
+		(pin "7"
+			(uuid "ebb22ad2-a033-4a13-8760-f6ee97955878")
+		)
+		(pin "8"
+			(uuid "972e324c-7237-4010-b3bb-3c83b8c22a66")
+		)
+		(pin "9"
+			(uuid "5e58e2f9-4da9-43bf-8c64-c493209a98d9")
+		)
+		(pin "10"
+			(uuid "6813ff78-a549-48a4-978b-ed2861faaa25")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K307")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K407")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Interface_Expansion:MCP23017-E/SP")
+		(at 88.9 76.2 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c3cf27db-1d93-4a45-bc47-74a25fa42b8f")
+		(property "Reference" "U301"
+			(at 88.9 73.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MCP23017"
+			(at 88.9 76.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Coil command expander, address strapped by JP301/JP302"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Addr" "JP A1/A0 → 0x20-0x23; A2=0"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "78eea7e6-97e3-44c5-9a14-d5d58d5e5862")
+		)
+		(pin "2"
+			(uuid "6f13f987-fbfc-4c57-8c1f-a0b81febc5b4")
+		)
+		(pin "3"
+			(uuid "355545fb-30ff-4554-9b4b-3a3d75c22ed3")
+		)
+		(pin "4"
+			(uuid "2ddb1c19-9195-437f-b328-7d458c9e22f8")
+		)
+		(pin "5"
+			(uuid "59d24900-01df-4f5b-9eb7-6354ff2165e5")
+		)
+		(pin "6"
+			(uuid "0a4ae66d-5bb1-4a7e-b1ac-1202ef716a0a")
+		)
+		(pin "7"
+			(uuid "569a4a6b-fe4f-4e8f-bedb-1a9cb7761afd")
+		)
+		(pin "8"
+			(uuid "105fa677-1b10-4e7c-a3f1-92f73b195184")
+		)
+		(pin "9"
+			(uuid "bbeca5a4-82a5-44fd-9d59-fe1436e4826f")
+		)
+		(pin "10"
+			(uuid "0d76195d-652f-43f1-80db-e3f103aa76c6")
+		)
+		(pin "11"
+			(uuid "2fde3ed2-10e9-42f6-bbed-685c6192e05a")
+		)
+		(pin "12"
+			(uuid "7b274a70-cab1-4f31-b931-91928da281c3")
+		)
+		(pin "13"
+			(uuid "344ebdb0-ac44-4fa8-853e-da952397ddc1")
+		)
+		(pin "14"
+			(uuid "67bf9654-4f21-4ce1-bed8-4b1bd27eb471")
+		)
+		(pin "15"
+			(uuid "32a183f4-a38f-4234-adcb-ff56f845c61c")
+		)
+		(pin "16"
+			(uuid "e7c48623-c608-4c28-823e-2237d621e994")
+		)
+		(pin "17"
+			(uuid "ac89333b-561d-481a-b207-2e38ad571b07")
+		)
+		(pin "18"
+			(uuid "51f61a24-81bd-417d-a26c-6aa63854d7de")
+		)
+		(pin "19"
+			(uuid "b82e5cf5-80d6-4521-84c7-4de9ec5e5dba")
+		)
+		(pin "20"
+			(uuid "96a0de0f-392d-43c4-962b-dece880bd420")
+		)
+		(pin "21"
+			(uuid "8aeecad2-78bd-4726-ba24-3d6c7eea3550")
+		)
+		(pin "22"
+			(uuid "0c274a08-0a1a-4195-956a-775877aae13e")
+		)
+		(pin "23"
+			(uuid "bb3b0233-34af-4a49-b211-345c6bcfb22c")
+		)
+		(pin "24"
+			(uuid "4ea273fb-d144-49ad-b00e-54fbad1ea2d9")
+		)
+		(pin "25"
+			(uuid "02b3b74e-5e7f-4480-bb8a-742e48257348")
+		)
+		(pin "26"
+			(uuid "ebee7d3c-51e0-4f6f-bb12-e9c7b326d0ed")
+		)
+		(pin "27"
+			(uuid "c768f1b3-089b-4ab7-96e2-d17098077669")
+		)
+		(pin "28"
+			(uuid "52066ef8-73ec-4ad0-86c1-163bed396d26")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "U301")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "U401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 342.9 162.56 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ca955477-c285-4d15-8b35-85e108c1fe5b")
+		(property "Reference" "J_PWR304"
+			(at 355.6 160.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP4 PWR"
+			(at 355.6 165.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "To Amp 4 J703 (+12 / A_GND / -12)"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "bcabec9e-f08b-45cc-a797-4da70cc3c9ac")
+		)
+		(pin "2"
+			(uuid "e05a8a73-8795-45c1-8ac2-9a0a32f6660c")
+		)
+		(pin "3"
+			(uuid "3a2e1cde-cd1a-45b0-979c-af2060e1b97f")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "J_PWR304")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "J_PWR404")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 241.3 203.2 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cb4ddf17-714c-475f-80d8-a1fadb828ff7")
+		(property "Reference" "K310"
+			(at 241.3 200.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH5 POWER"
+			(at 241.3 205.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "AZ850P2-5 — routes +/-12V to Amp 5"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c880e300-021b-41f8-a5d8-caa09a04bf25")
+		)
+		(pin "2"
+			(uuid "01d9bc67-2bc9-4faf-9ac6-035ac41340e3")
+		)
+		(pin "3"
+			(uuid "627b2803-c0e1-44b1-bf0c-230e3026f3fe")
+		)
+		(pin "4"
+			(uuid "82351e55-10d6-47b3-b923-4581982d6d6b")
+		)
+		(pin "5"
+			(uuid "668363be-f1f1-4cb6-90d8-d190c69131da")
+		)
+		(pin "6"
+			(uuid "6e87c4c1-584b-4357-9645-f85b922b77ac")
+		)
+		(pin "7"
+			(uuid "113ffde1-fbc0-41df-b2b8-fe413e005362")
+		)
+		(pin "8"
+			(uuid "5f9c9ea5-5214-4cbe-90fd-7aea837a6ee7")
+		)
+		(pin "9"
+			(uuid "5b342832-340a-487f-8d81-a443ed712343")
+		)
+		(pin "10"
+			(uuid "db1778b8-2dde-42dd-adff-5d72606b04fb")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K310")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K410")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_Array:ULN2803A")
+		(at 134.62 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cda83a05-1756-41bf-89ef-2a0f8727a33d")
+		(property "Reference" "U303"
+			(at 134.62 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "ULN2803A"
+			(at 134.62 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "RESET pulse driver, one output per channel pair"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "696cf81d-5c47-4250-808b-660d400c60de")
+		)
+		(pin "2"
+			(uuid "d093e244-f942-40b1-812d-d7ea6dcf4aa2")
+		)
+		(pin "3"
+			(uuid "7a9c0fe1-e1ff-4c1f-bc18-e617be3771c2")
+		)
+		(pin "4"
+			(uuid "540a40ec-49dd-4cc0-a3a3-82f80ca32874")
+		)
+		(pin "5"
+			(uuid "f7d26445-9591-4332-a2f7-2d82262d3300")
+		)
+		(pin "6"
+			(uuid "569bdf4f-ad38-40c0-b8fc-5b44ffa1ed26")
+		)
+		(pin "7"
+			(uuid "aec97cdd-259a-4192-aeaa-8e9d17d0cab8")
+		)
+		(pin "8"
+			(uuid "e839468b-96ca-483e-ba1f-c5c9b1762ca6")
+		)
+		(pin "9"
+			(uuid "e7211658-d8c0-428d-9fe4-e3950320269d")
+		)
+		(pin "10"
+			(uuid "2162d14d-3fe2-4aab-b497-d85f6c3007d4")
+		)
+		(pin "11"
+			(uuid "faafa99b-62f4-42f3-a1a8-ce0d9aca486c")
+		)
+		(pin "12"
+			(uuid "2a2f52fc-cd76-4a73-8732-819443304a36")
+		)
+		(pin "13"
+			(uuid "4b52a5c4-08b8-4cfc-9452-725f1d9797a9")
+		)
+		(pin "14"
+			(uuid "69314418-19f2-49a1-ad37-ea18e41313a7")
+		)
+		(pin "15"
+			(uuid "a6d5b78e-8110-4ccc-a1fd-d8793c23dac5")
+		)
+		(pin "16"
+			(uuid "3d80e9dd-a3d7-4b65-bb84-6c8239d79312")
+		)
+		(pin "17"
+			(uuid "fd7b8e52-d588-43c8-b065-faed62bdbf4f")
+		)
+		(pin "18"
+			(uuid "e1d729a9-aedf-4246-bf8e-2566324819bd")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "U303")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "U403")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 241.3 162.56 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ce4a3a13-36b7-4781-8171-deaa340fe988")
+		(property "Reference" "K308"
+			(at 241.3 160.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH4 POWER"
+			(at 241.3 165.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "AZ850P2-5 — routes +/-12V to Amp 4"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b8fba95f-1736-460d-9a5f-35eb76692497")
+		)
+		(pin "2"
+			(uuid "896bdbb7-05d6-42fb-ab61-dfd059145c22")
+		)
+		(pin "3"
+			(uuid "a0068967-e722-4c16-a934-3346485fa29c")
+		)
+		(pin "4"
+			(uuid "e4e2d243-ded7-42a3-b79b-eeb1e4db2bdb")
+		)
+		(pin "5"
+			(uuid "28ef23a8-f908-4aca-aff7-c9244aa4bf43")
+		)
+		(pin "6"
+			(uuid "0ac7664a-d267-4766-98a1-47b119475266")
+		)
+		(pin "7"
+			(uuid "24ca4947-186a-493b-95cb-341a13a2fce7")
+		)
+		(pin "8"
+			(uuid "5d02b4c0-dc67-4eaa-8829-6804b9a72c2d")
+		)
+		(pin "9"
+			(uuid "9e512999-1494-4fcf-b2f7-9668f3bb7464")
+		)
+		(pin "10"
+			(uuid "bed74673-1070-485e-b1bc-c995d8f2e7c9")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
+					(reference "K308")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
+					(reference "K408")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:AZ850P2-x")
+		(at 190.5 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e73d04ec-216b-48ab-a072-93f58e603904")
+		(property "Reference" "K301"
+			(at 190.5 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH1 AUDIO"
+			(at 190.5 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "AZ850P2-5 — routes TONE_L/R to Amp 1 input"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "bf4a5009-1416-4caf-8c45-da5a1eed0457")
+		)
+		(pin "2"
+			(uuid "a9edc0aa-3609-4eee-87fb-f77a05f3c860")
+		)
+		(pin "3"
+			(uuid "c5718f79-400b-482e-b8b5-050c3f56b1f8")
+		)
+		(pin "4"
+			(uuid "579076df-c881-406b-9a6a-07b1847d0e27")
+		)
+		(pin "5"
+			(uuid "5749ad68-3207-4d02-8bba-cd457aab7473")
+		)
+		(pin "6"
+			(uuid "a2970996-e166-44f9-ba3f-7154ea5fa455")
+		)
+		(pin "7"
+			(uuid "f621fde4-b2ec-42b8-b3a5-8de9f35facf2")
+		)
+		(pin "8"
+			(uuid "c16f0b3c-afa0-4f84-8848-3fa6fb1f01b6")
+		)
+		(pin "9"
+			(uuid "e8fb1ca7-5c7b-433e-ace8-569760dbbd93")
+		)
+		(pin "10"
+			(uuid "c5c48e66-5be4-4a4e-bac9-d172315bbf7d")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -3399,7 +8632,7 @@
 	)
 	(symbol
 		(lib_id "Relay:AZ850P2-x")
-		(at 127 50.8 0)
+		(at 241.3 81.28 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3408,9 +8641,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "47f86028-2c5d-48ec-ab85-56ca4f6ca222")
-		(property "Reference" "K305"
-			(at 127 48.26 0)
+		(uuid "fe3cc9d2-93de-4e10-95c6-32dc3f1f645c")
+		(property "Reference" "K304"
+			(at 241.3 78.74 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3419,8 +8652,8 @@
 				)
 			)
 		)
-		(property "Value" "AZ850 CH2 pwr"
-			(at 127 53.34 0)
+		(property "Value" "CH2 POWER"
+			(at 241.3 83.82 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3451,7 +8684,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "AZ850P2-5 — routes +/-12V to Amp 2"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -3463,457 +8696,51 @@
 			)
 		)
 		(pin "1"
-			(uuid "6f0b24a6-dcd0-4639-84a7-4b525cfda6a5")
+			(uuid "82a20756-7c58-4ab2-9935-2f4ce2d9fa99")
 		)
 		(pin "2"
-			(uuid "bd9becad-3bab-4845-bb04-263339449eb5")
+			(uuid "c0230ba7-7988-4f11-9a76-9369fd57c81d")
 		)
 		(pin "3"
-			(uuid "2175dd45-69ea-419b-aa27-3f912ac1edc7")
+			(uuid "c1c94b92-f2f3-4e1d-9802-38569a652233")
 		)
 		(pin "4"
-			(uuid "33404e2c-c9a7-48aa-a66d-159a08aad1d7")
+			(uuid "62251ad9-bd4c-4602-8947-d0e5e4e6ec8a")
 		)
 		(pin "5"
-			(uuid "6ee3852f-22f1-47be-92da-7317ac8765ba")
+			(uuid "841dbf8f-c54f-4d86-aed0-6392dd165ffa")
 		)
 		(pin "6"
-			(uuid "838bcb3f-aae3-4b2c-8d1b-1d8db8e00e26")
+			(uuid "ba26a23a-2589-4054-bf87-55c533b90259")
 		)
 		(pin "7"
-			(uuid "1172d5f7-2666-4af7-8458-c92a2f6b78d2")
+			(uuid "54b100b7-8ec7-48d8-943c-8d952578b241")
 		)
 		(pin "8"
-			(uuid "00e464e8-481e-4691-bce6-2d62962037cc")
+			(uuid "9e55bd16-b7a7-43cc-8bb7-dc5cd1680a66")
 		)
 		(pin "9"
-			(uuid "c4382236-c30c-4077-bc07-f265db4ffeb4")
+			(uuid "a6b5c250-ca12-424b-8f5a-8f05a057479a")
 		)
 		(pin "10"
-			(uuid "9d0f0abe-5895-4167-b9d0-46940a327eb7")
+			(uuid "5c5bc7a9-ffd8-4098-af0d-a64876d944a4")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "K305")
+					(reference "K304")
 					(unit 1)
 				)
 				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "K405")
+					(reference "K404")
 					(unit 1)
 				)
 			)
 		)
 	)
-	(symbol
-		(lib_id "Relay:AZ850P2-x")
-		(at 127 40.64 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8a554a9f-1f90-4b78-a8e4-ed2fb6663139")
-		(property "Reference" "K302"
-			(at 127 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AZ850 CH2 audio"
-			(at 127 43.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e010d3f2-f027-4c5e-949c-85606c2df12c")
-		)
-		(pin "2"
-			(uuid "1cdd4203-5288-43d9-86da-aa0f042e517d")
-		)
-		(pin "3"
-			(uuid "da950005-7920-4bb8-bcbf-29ad63fb8eb5")
-		)
-		(pin "4"
-			(uuid "a6a4595b-af20-480f-b86c-06de6038f005")
-		)
-		(pin "5"
-			(uuid "bb186edf-605c-4b34-babe-7e9a97766984")
-		)
-		(pin "6"
-			(uuid "0238cd98-9f1b-4fab-abf4-7cc07898e186")
-		)
-		(pin "7"
-			(uuid "762a58ef-8d05-4653-a92c-d549e44f0178")
-		)
-		(pin "8"
-			(uuid "240d511c-396f-4085-a009-005fd32c1f56")
-		)
-		(pin "9"
-			(uuid "3bad5066-a3dc-426c-92fc-53147f66ed0e")
-		)
-		(pin "10"
-			(uuid "38c4796b-a280-42e3-9e91-6c229ec4383e")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "K302")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "K402")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_Array:ULN2803A")
-		(at 88.9 50.8 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "96e3cefd-9710-4f6e-a7e0-0c3daf68f6f6")
-		(property "Reference" "U302"
-			(at 88.9 48.26 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ULN2803A"
-			(at 88.9 53.34 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "fb44f593-bfb9-455b-91b1-9feaff8b3d6e")
-		)
-		(pin "2"
-			(uuid "afd99f65-36c8-42a4-ad5d-25805cdb0977")
-		)
-		(pin "3"
-			(uuid "4c972992-db21-473f-a6a1-d87705553127")
-		)
-		(pin "4"
-			(uuid "58511617-56ae-4491-a477-434e627037ea")
-		)
-		(pin "5"
-			(uuid "ca146401-4ffa-4b13-b11d-8b033c636582")
-		)
-		(pin "6"
-			(uuid "51dfadcd-88d3-43db-8152-2573cd435e32")
-		)
-		(pin "7"
-			(uuid "8eb11441-0c7c-4705-8401-28dfbb3157e8")
-		)
-		(pin "8"
-			(uuid "05af7a02-9ef9-4fb4-a49e-601f68c7714c")
-		)
-		(pin "9"
-			(uuid "a0238ba6-1b88-41ff-869c-e8ea1c18d2d3")
-		)
-		(pin "10"
-			(uuid "0727c6f6-97a3-4402-95af-a5b7c33d7161")
-		)
-		(pin "11"
-			(uuid "d35826c6-da92-40d7-aae0-072d11fbdd08")
-		)
-		(pin "12"
-			(uuid "ac97cae5-7268-48e7-b947-b845d855241f")
-		)
-		(pin "13"
-			(uuid "dde4d9eb-12f4-4cbb-81f4-046a943617b4")
-		)
-		(pin "14"
-			(uuid "3e5ead01-9550-4011-a904-8691ea7ea9b1")
-		)
-		(pin "15"
-			(uuid "d56d3377-4832-4fc9-b2a8-9a1f8a94a9dd")
-		)
-		(pin "16"
-			(uuid "9e6eeabf-7700-4867-a3a5-54ca03cfd6e7")
-		)
-		(pin "17"
-			(uuid "50ab12b2-4b8d-43fe-8127-84c47ad04a3f")
-		)
-		(pin "18"
-			(uuid "67996aa1-63d7-4833-86ae-fb4071b0e621")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "U302")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "U402")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_01x03_Pin")
-		(at 165.1 91.44 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ab0191db-bb58-45c5-9822-f6d3001fa480")
-		(property "Reference" "J_COMMON301"
-			(at 165.1 87.63 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "COMMON_LR_OUT"
-			(at 165.1 92.71 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d24edf92-2e69-4b4f-8c32-d410e5fd8465")
-		)
-		(pin "2"
-			(uuid "21d9a1d3-97b9-430c-b819-d228892c0333")
-		)
-		(pin "3"
-			(uuid "a7a3efe5-9256-4f56-b937-62adaca964ac")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "J_COMMON301")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "J_COMMON401")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 165.1 35.56 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f44c51a9-e3dc-4764-adb6-9f6604e4dc13")
-		(property "Reference" "J_AMP301"
-			(at 165.1 33.02 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AMP1 L/R"
-			(at 165.1 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d35eb7a5-149c-4ef9-945c-58f8d2317bf4")
-		)
-		(pin "2"
-			(uuid "878ce561-394c-4c42-9701-62e17299f5fb")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "J_AMP301")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "J_AMP401")
-					(unit 1)
-				)
-			)
+	(sheet_instances
+		(path "/"
+			(page "1")
 		)
 	)
 )

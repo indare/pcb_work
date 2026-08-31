@@ -16,6 +16,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from generate_kicad_scaffold import (  # noqa: E402
     PARENT,
     PROJECT,
+    UUID_AMP_FILE,
+    UUID_AMP_INST,
     UUID_CONTROL_FILE,
     UUID_CONTROL_INST,
     UUID_OUTPUT_FILE,
@@ -23,6 +25,7 @@ from generate_kicad_scaffold import (  # noqa: E402
     UUID_POWER_FILE,
     UUID_POWER_INST,
     UUID_RELAY_A,
+    UUID_RELAY_B,
     UUID_RELAY_FILE,
     hier_label,
     sch_open,
@@ -49,6 +52,8 @@ PATH_CTRL = f"/{PARENT}/{UUID_CONTROL_INST}"
 PATH_PWR = f"/{PARENT}/{UUID_POWER_INST}"
 PATH_OUT = f"/{PARENT}/{UUID_OUTPUT_INST}"
 PATH_RELAY = f"/{PARENT}/{UUID_RELAY_A}"
+PATH_RELAY_B = f"/{PARENT}/{UUID_RELAY_B}"
+PATH_AMP = f"/{PARENT}/{UUID_AMP_INST}"
 
 CTRL_LIBS = [
     "Device:C",
@@ -64,18 +69,31 @@ CTRL_LIBS = [
 ]
 
 RELAY_LIBS = [
+    "Device:C",
+    "Device:R",
     "Interface_Expansion:MCP23017-E/SP",
+    "Jumper:SolderJumper_2_Open",
     "Transistor_Array:ULN2803A",
     "Relay:AZ850P2-x",
-    "Connector:Conn_01x04_Pin",
-    "Connector:Conn_01x03_Pin",
+    "Connector:Conn_01x05_Pin",
+    "Connector:Conn_01x02_Pin",
     "Connector:Screw_Terminal_01x02",
+    "Connector:Screw_Terminal_01x03",
 ]
 
 OUTPUT_LIBS = [
     "Device:R_Potentiometer_Dual",
     "Switch:SW_SP3T",  # L/R as separate refs (avoid SW_DP3T multi-unit tip bug)
     "Connector:Screw_Terminal_01x02",
+]
+
+AMP_LIBS = [
+    "Amplifier_Operational:NE5532",
+    "Device:R",
+    "Device:C",
+    "Device:C_Polarized",
+    "Connector:Screw_Terminal_01x02",
+    "Connector:Screw_Terminal_01x03",
 ]
 
 
@@ -103,7 +121,7 @@ def junction(x: float, y: float) -> str:
 """
 
 
-def label(name: str, x: float, y: float, angle: int = 0) -> str:
+def label(name: str, x: float, y: float, angle: int = 0, justify: str = "left") -> str:
     """Local label. ``(at x y)`` must sit on a pin tip / wire end / junction."""
     return f"""\t(label "{name}"
 \t\t(at {x} {y} {angle})
@@ -111,16 +129,31 @@ def label(name: str, x: float, y: float, angle: int = 0) -> str:
 \t\t\t(font
 \t\t\t\t(size 1.27 1.27)
 \t\t\t)
-\t\t\t(justify left bottom)
+\t\t\t(justify {justify} bottom)
 \t\t)
 \t\t(uuid "{uid()}")
 \t)
 """
 
 
-def net_at(name: str, tip: tuple[float, float], angle: int = 0) -> str:
-    """Place a local label exactly on an electrical tip."""
-    return label(name, tip[0], tip[1], angle)
+# KiCad draws label text from the anchor toward the justified side, so the
+# direction the text runs is set by justification, not by rotation alone.
+LABEL_DIRS = {"r": (0, "left"), "l": (0, "right"), "u": (90, "left"), "d": (90, "right")}
+
+
+def net_at(name: str, tip: tuple[float, float], direction: str | int = "r") -> str:
+    """Place a local label on an electrical tip, text running away from the pin."""
+    angle, justify = LABEL_DIRS[direction] if isinstance(direction, str) else (direction, "left")
+    return label(name, tip[0], tip[1], angle, justify)
+
+
+def no_connect_at(tip_xy: tuple[float, float]) -> str:
+    """Mark one electrical tip intentionally unconnected."""
+    return f"""\t(no_connect
+\t\t(at {grid(tip_xy[0])} {grid(tip_xy[1])})
+\t\t(uuid "{uid()}")
+\t)
+"""
 
 
 def tip(sx: float, sy: float, px: float, py: float, rot: int = 0) -> tuple[float, float]:
@@ -446,9 +479,15 @@ def control_panel_wired() -> str:
         "+12V": 131.0,
         "-12V": 133.0,
         "+3V3": 112.0,
+        "+5V": 115.0,
     }
     for name, hy in buses.items():
-        shape = "bidirectional" if name == "A_GND" else "input"
+        if name == "A_GND":
+            shape = "bidirectional"
+        elif name in {"+3V3", "+5V"}:
+            shape = "output"
+        else:
+            shape = "input"
         parts.append(hier_label(name, shape, 30.48, hy, 180))
         nets.append(net_at(name, (30.48, hy)))
 
@@ -623,41 +662,516 @@ def control_panel_wired() -> str:
 
 
 def relay_board_wired() -> str:
-    """RelayBoard with embedded lib_symbols (§11 Q1-B template)."""
-    labels = []
-    for n in range(1, 6):
-        labels.append(hier_label(f"AMP{n}_L", "bidirectional", 200.66, 30.48 + n * 5.08, 0))
-        labels.append(hier_label(f"AMP{n}_R", "bidirectional", 210.82, 30.48 + n * 5.08, 0))
-        labels.append(hier_label(f"AMP{n}_V+", "output", 220.98, 30.48 + n * 5.08, 0))
-        labels.append(hier_label(f"AMP{n}_V-", "output", 231.14, 30.48 + n * 5.08, 0))
+    """Five-channel Amp input/power selector; instantiate twice for ten Amps."""
+    parts: list[str] = []
+    nets: list[str] = []
+    ncs: list[str] = []
+
+    # A3 with generous column pitch: pin labels are the only wiring here, so
+    # every label needs room to point away from its symbol.
+    mcp_x, mcp_y = at(88.9, 76.2)
+    set_x, set_y = at(134.62, 50.8)
+    reset_x, reset_y = at(134.62, 111.76)
+    LEFT, RIGHT, UP, DOWN = "l", "r", "u", "d"
+
+    def rsym(
+        lib_id: str,
+        ref_a: str,
+        ref_b: str,
+        value: str,
+        x: float,
+        y: float,
+        extra: list[tuple[str, str]] | None = None,
+        description: str = "",
+        prop_dx: float = 0.0,
+    ) -> str:
+        """One shared-sheet symbol with unique A/B instance references."""
+        return symbol_inst_v10(
+            lib_id,
+            ref_a,
+            value,
+            x,
+            y,
+            0,
+            PATH_RELAY,
+            extra_props=extra,
+            description=description,
+            instance_refs=[(PATH_RELAY, ref_a), (PATH_RELAY_B, ref_b)],
+            prop_dx=prop_dx,
+        )
+
+    def mcp_pin(px: float, py: float) -> tuple[float, float]:
+        return tip(mcp_x, mcp_y, px, py)
+
+    def uln_pin(x: float, y: float, channel: int, output: bool) -> tuple[float, float]:
+        px = 10.16 if output else -10.16
+        py = 5.08 - (channel - 1) * 2.54
+        return tip(x, y, px, py)
+
+    def relay_pins(x: float, y: float) -> dict[int, tuple[float, float]]:
+        local = {
+            1: (-12.7, 7.62),
+            2: (-2.54, 7.62),
+            3: (0, -7.62),
+            4: (2.54, 7.62),
+            5: (-7.62, 7.62),
+            6: (-7.62, -7.62),
+            7: (12.7, 7.62),
+            8: (10.16, -7.62),
+            9: (7.62, 7.62),
+            10: (-12.7, -7.62),
+        }
+        return {num: tip(x, y, px, py) for num, (px, py) in local.items()}
+
+    parts.append(
+        rsym(
+            "Interface_Expansion:MCP23017-E/SP",
+            "U301",
+            "U401",
+            "MCP23017",
+            mcp_x,
+            mcp_y,
+            [("Addr", "JP A1/A0 → 0x20-0x23; A2=0")],
+            description="Coil command expander, address strapped by JP301/JP302",
+        )
+    )
+    parts.append(
+        rsym(
+            "Transistor_Array:ULN2803A",
+            "U302",
+            "U402",
+            "ULN2803A",
+            set_x,
+            set_y,
+            description="SET pulse driver, one output per channel pair",
+        )
+    )
+    parts.append(
+        rsym(
+            "Transistor_Array:ULN2803A",
+            "U303",
+            "U403",
+            "ULN2803A",
+            reset_x,
+            reset_y,
+            description="RESET pulse driver, one output per channel pair",
+        )
+    )
+
+    # MCP core: shared I2C, 3.3 V logic. A2=0; A1/A0 are strap-selectable.
+    for name, point, angle in [
+        ("I2C_SCL", mcp_pin(-12.7, 20.32), LEFT),
+        ("I2C_SDA", mcp_pin(-12.7, 17.78), LEFT),
+        ("3V3", mcp_pin(0, 25.4), UP),
+        ("D_GND", mcp_pin(0, -25.4), DOWN),
+        ("3V3", mcp_pin(-12.7, -2.54), LEFT),
+        ("ADDR_A0", mcp_pin(-12.7, -15.24), LEFT),
+        ("ADDR_A1", mcp_pin(-12.7, -17.78), LEFT),
+        ("D_GND", mcp_pin(-12.7, -20.32), LEFT),
+    ]:
+        nets.append(net_at(name, point, angle))
+    ncs.extend([no_connect_at(mcp_pin(-12.7, 5.08)), no_connect_at(mcp_pin(-12.7, 2.54))])
+
+    # Default 0x20 (both jumpers open). Close A0 and/or A1 for 0x21-0x23.
+    def addr_strap(ref_r_a: str, ref_r_b: str, ref_j_a: str, ref_j_b: str, net: str, x: float, y: float, value: str) -> None:
+        parts.append(rsym("Device:R", ref_r_a, ref_r_b, "10k", x, y, description=f"MCP {net} pulldown"))
+        jx, jy = at(x + 25.4, y)
+        parts.append(
+            rsym(
+                "Jumper:SolderJumper_2_Open",
+                ref_j_a,
+                ref_j_b,
+                value,
+                jx,
+                jy,
+                description=f"Close to pull {net} to 3V3",
+            )
+        )
+        rp1, rp2 = r_pins(x, y)
+        nets.extend([net_at(net, rp1, UP), net_at("D_GND", rp2, DOWN)])
+        nets.extend(
+            [
+                net_at(net, tip(jx, jy, -5.08, 0), LEFT),
+                net_at("3V3", tip(jx, jy, 5.08, 0), RIGHT),
+            ]
+        )
+
+    addr_strap("R301", "R401", "JP301", "JP401", "ADDR_A0", *at(55.88, 152.4), "A0")
+    addr_strap("R302", "R402", "JP302", "JP402", "ADDR_A1", *at(55.88, 167.64), "A1")
+
+    # Local decoupling sits on the J_I2C entry (3V3 / +5V), not the analog rails.
+    for ref_a, ref_b, value, x, y, rail in [
+        ("C301", "C401", "100nF", 58.42, 40.64, "3V3"),
+        ("C302", "C402", "100nF", 71.12, 48.26, "+5V"),
+    ]:
+        cx, cy = at(x, y)
+        parts.append(rsym("Device:C", ref_a, ref_b, value, cx, cy))
+        cp1, cp2 = cap_pins(cx, cy)
+        nets.extend([net_at(rail, cp1, UP), net_at("D_GND", cp2, DOWN)])
+
+    # GPA0..4 drive SET; GPB0..4 drive RESET. Audio and power relay coils
+    # are paired per channel so their state can never diverge.
+    for channel in range(1, 6):
+        set_cmd = f"CH{channel}_SET_CMD"
+        reset_cmd = f"CH{channel}_RST_CMD"
+        nets.append(net_at(set_cmd, mcp_pin(12.7, 20.32 - (channel - 1) * 2.54), RIGHT))
+        nets.append(net_at(reset_cmd, mcp_pin(12.7, -2.54 - (channel - 1) * 2.54), RIGHT))
+        nets.append(net_at(set_cmd, uln_pin(set_x, set_y, channel, False), LEFT))
+        nets.append(net_at(reset_cmd, uln_pin(reset_x, reset_y, channel, False), LEFT))
+        nets.append(net_at(f"CH{channel}_SET", uln_pin(set_x, set_y, channel, True), RIGHT))
+        nets.append(net_at(f"CH{channel}_RST", uln_pin(reset_x, reset_y, channel, True), RIGHT))
+
+    # Unused MCP GPIO and ULN channels are explicit NCs.
+    for index in range(5, 8):
+        ncs.append(no_connect_at(mcp_pin(12.7, 20.32 - index * 2.54)))
+        ncs.append(no_connect_at(mcp_pin(12.7, -2.54 - index * 2.54)))
+    for x, y in [(set_x, set_y), (reset_x, reset_y)]:
+        for channel in range(6, 9):
+            ncs.append(no_connect_at(uln_pin(x, y, channel, False)))
+            ncs.append(no_connect_at(uln_pin(x, y, channel, True)))
+        nets.append(net_at("D_GND", tip(x, y, 0, -17.78), DOWN))
+        nets.append(net_at("+5V", tip(x, y, 10.16, 7.62), RIGHT))
+
+    # Per channel: one DPDT selects stereo Amp input, another selects ±12 V.
+    # Their SET and RESET coils share one ULN output pair.
+    for channel in range(1, 6):
+        row_y = grid(40.64 + (channel - 1) * 40.64)
+        audio_x, power_x = 190.5, 241.3
+        audio_num, power_num = 300 + 2 * channel - 1, 300 + 2 * channel
+        parts.append(
+            rsym(
+                "Relay:AZ850P2-x",
+                f"K{audio_num}",
+                f"K{audio_num + 100}",
+                f"CH{channel} AUDIO",
+                audio_x,
+                row_y,
+                description=f"AZ850P2-5 — routes TONE_L/R to Amp {channel} input",
+            )
+        )
+        parts.append(
+            rsym(
+                "Relay:AZ850P2-x",
+                f"K{power_num}",
+                f"K{power_num + 100}",
+                f"CH{channel} POWER",
+                power_x,
+                row_y,
+                description=f"AZ850P2-5 — routes +/-12V to Amp {channel}",
+            )
+        )
+        audio = relay_pins(audio_x, row_y)
+        power = relay_pins(power_x, row_y)
+
+        # Coil-side labels run vertically so the four per edge stay legible.
+        for relay in (audio, power):
+            nets.extend(
+                [
+                    net_at("+5V", relay[1], UP),
+                    net_at("+5V", relay[10], DOWN),
+                    net_at(f"CH{channel}_SET", relay[5], UP),
+                    net_at(f"CH{channel}_RST", relay[6], DOWN),
+                ]
+            )
+            ncs.extend([no_connect_at(relay[2]), no_connect_at(relay[9])])
+
+        # Contact commons receive the toned source and ±12 V rails.
+        nets.extend(
+            [
+                net_at("TONE_L", audio[8], DOWN),
+                net_at("TONE_R", audio[3], DOWN),
+                net_at(f"AMP{channel}_L", audio[7], UP),
+                net_at(f"AMP{channel}_R", audio[4], UP),
+                net_at("+12V", power[8], DOWN),
+                net_at("-12V", power[3], DOWN),
+                net_at(f"AMP{channel}_V+", power[7], UP),
+                net_at(f"AMP{channel}_V-", power[4], UP),
+            ]
+        )
+
+        audio_jx, power_jx = 297.18, 342.9
+        parts.append(
+            rsym(
+                "Connector:Screw_Terminal_01x02",
+                f"J_AUD{300 + channel}",
+                f"J_AUD{400 + channel}",
+                f"AMP{channel} IN",
+                audio_jx,
+                row_y,
+                description=f"To Amp {channel} J701 (L/R)",
+                prop_dx=12.7,
+            )
+        )
+        parts.append(
+            rsym(
+                "Connector:Screw_Terminal_01x03",
+                f"J_PWR{300 + channel}",
+                f"J_PWR{400 + channel}",
+                f"AMP{channel} PWR",
+                power_jx,
+                row_y,
+                description=f"To Amp {channel} J703 (+12 / A_GND / -12)",
+                prop_dx=12.7,
+            )
+        )
+        # Screw-terminal symbols face left (generic Conn helpers face right).
+        ja1, ja2 = (audio_jx - 5.08, row_y), (audio_jx - 5.08, row_y + 2.54)
+        jp1, jpg, jp3 = (
+            (power_jx - 5.08, row_y - 2.54),
+            (power_jx - 5.08, row_y),
+            (power_jx - 5.08, row_y + 2.54),
+        )
+        nets.extend(
+            [
+                net_at(f"AMP{channel}_L", ja1, LEFT),
+                net_at(f"AMP{channel}_R", ja2, LEFT),
+                net_at(f"AMP{channel}_V+", jp1, LEFT),
+                net_at("A_GND", jpg, LEFT),
+                net_at(f"AMP{channel}_V-", jp3, LEFT),
+            ]
+        )
+
+    # Board harnesses: control, toned stereo source, analog rails.
+    # Left column = connectors. Caps sit on J_I2C; address straps sit on MCP A0/A1.
+    ji_x, ji_y = at(36.83, 46.99)
+    jt_x, jt_y = at(50.8, 91.44)
+    jr_x, jr_y = at(50.8, 121.92)
+    parts.append(
+        rsym(
+            "Connector:Conn_01x05_Pin",
+            "J_I2C301",
+            "J_I2C401",
+            "CTRL",
+            ji_x,
+            ji_y,
+            description="From ControlPanel: SDA / SCL / 3V3 / +5V / D_GND",
+            prop_dx=-12.7,
+        )
+    )
+    for pin_y, name in zip([5.08, 2.54, 0, -2.54, -5.08], ["I2C_SDA", "I2C_SCL", "3V3", "+5V", "D_GND"], strict=True):
+        nets.append(net_at(name, tip(ji_x, ji_y, 5.08, pin_y), RIGHT))
+    parts.append(
+        rsym(
+            "Connector:Conn_01x02_Pin",
+            "J_TONE301",
+            "J_TONE401",
+            "TONE IN",
+            jt_x,
+            jt_y,
+            description="From ControlPanel PT2314: TONE_L / TONE_R. Shield at Control only.",
+            prop_dx=-12.7,
+        )
+    )
+    jt1, jt2 = conn02_pins(jt_x, jt_y)
+    nets.extend([net_at("TONE_L", jt1, RIGHT), net_at("TONE_R", jt2, RIGHT)])
+
+    # Analog rail entry from PowerModule J201. A_GND passes straight through to
+    # every J_PWR so one 3P cable per Amp carries both rails and the return.
+    parts.append(
+        rsym(
+            "Connector:Screw_Terminal_01x03",
+            "J_RAIL301",
+            "J_RAIL401",
+            "RAIL IN",
+            jr_x,
+            jr_y,
+            description="From PowerModule J201: +12V / A_GND / -12V (relays switch rails only)",
+            prop_dx=12.7,
+        )
+    )
+    for name, pin_y in [("+12V", -2.54), ("A_GND", 0.0), ("-12V", 2.54)]:
+        nets.append(net_at(name, (jr_x - 5.08, jr_y + pin_y), LEFT))
 
     body = f"""{embed_lib_symbols(RELAY_LIBS)}
-{text_note(25.4, 25.4, [
-    "RelayBoard — 5ch template (§11 Q1-B)",
-    "MCP23017 @0x20 (Board A) / @0x21 (Board B — same sch, addr strap note)",
-    "AZ850 latching + ULN2803. NO child Pico.",
-    "COMMON_LR_OUT → ControlPanel PT2314 input",
+{text_note(20.32, 15.24, [
+    "RelayBoard — 5ch input + power selector; instantiate twice",
+    "CHn_SET / CHn_RST = coil pulse nets; CHn_*_CMD = MCP to ULN logic.",
+    "Audio and power AZ850 pairs share SET/RESET: 100ms pulse, never hold.",
+    "JP A1/A0 (open=0): 00=0x20 A, 01=0x21 B, 10=0x22 C, 11=0x23 D. A2=GND.",
+    "Silk table next to JP301/JP302 on the PCB.",
+    "J_TONE = L/R only. Cable shield drains at ControlPanel, not here (J_RAIL has A_GND).",
+    "+5V/D_GND from ControlPanel; contacts switch +/-12V only.",
+    "J_RAIL = PowerModule J201. A_GND is never switched: straight to each J_PWR.",
 ])}
-{hier_label("I2C_SDA", "bidirectional", 30.48, 40.64, 180)}
-{hier_label("I2C_SCL", "bidirectional", 30.48, 43.18, 180)}
-{hier_label("3V3", "input", 30.48, 45.72, 180)}
-{hier_label("D_GND", "input", 30.48, 48.26, 180)}
-{hier_label("COMMON_L", "output", 200.66, 88.9, 0)}
-{hier_label("COMMON_R", "output", 200.66, 91.44, 0)}
-{hier_label("A_GND", "bidirectional", 200.66, 93.98, 0)}
-{"".join(labels)}
-{sym("Interface_Expansion:MCP23017-E/SP", "U1", "MCP23017 addr0x20", 63.5, 50.8, 0, PATH_RELAY, [("Addr", "0x20 A / 0x21 B")])}
-{sym("Transistor_Array:ULN2803A", "U2", "ULN2803A", 88.9, 50.8, 0, PATH_RELAY)}
-{sym("Relay:AZ850P2-x", "K1", "AZ850 CH1 audio", 114.3, 40.64, 0, PATH_RELAY)}
-{sym("Relay:AZ850P2-x", "K2", "AZ850 CH1 pwr", 114.3, 50.8, 0, PATH_RELAY)}
-{sym("Relay:AZ850P2-x", "K3", "AZ850 CH2 audio", 127.0, 40.64, 0, PATH_RELAY)}
-{sym("Relay:AZ850P2-x", "K4", "AZ850 CH2 pwr", 127.0, 50.8, 0, PATH_RELAY)}
-{sym("Relay:AZ850P2-x", "K5", "AZ850 CH3 audio", 139.7, 40.64, 0, PATH_RELAY)}
-{sym("Connector:Conn_01x04_Pin", "J_I2C", "I2C to Control", 25.4, 43.18, 0, PATH_RELAY)}
-{sym("Connector:Conn_01x03_Pin", "J_COMMON", "COMMON_LR_OUT", 165.1, 90.17, 0, PATH_RELAY)}
-{sym("Connector:Screw_Terminal_01x02", "J_AMP1", "AMP1 L/R", 165.1, 35.56, 0, PATH_RELAY)}
+{hier_label("I2C_SDA", "bidirectional", 25.4, 40.64, 180)}
+{hier_label("I2C_SCL", "bidirectional", 25.4, 45.72, 180)}
+{hier_label("3V3", "input", 25.4, 50.8, 180)}
+{hier_label("+5V", "input", 25.4, 55.88, 180)}
+{hier_label("D_GND", "input", 25.4, 60.96, 180)}
+{hier_label("TONE_L", "input", 25.4, 81.28, 180)}
+{hier_label("TONE_R", "input", 25.4, 86.36, 180)}
+{hier_label("+12V", "input", 25.4, 91.44, 180)}
+{hier_label("-12V", "input", 25.4, 96.52, 180)}
+{hier_label("A_GND", "bidirectional", 25.4, 101.6, 180)}
+{"".join(parts)}
+{"".join(nets)}
+{"".join(ncs)}
 """
-    return sch_open(UUID_RELAY_FILE, body)
+    return sch_open(UUID_RELAY_FILE, body, paper="A3")
+
+
+def amp_module_wired() -> str:
+    """AudioV2 Amp reference design; manufacture ten identical PCBs."""
+    parts: list[str] = []
+    nets: list[str] = []
+    r_fp = "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+    c_fp = "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+    bulk_fp = "Capacitor_SMD:CP_Elec_10x12.6"
+    out_fp = "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
+    conn2_fp = (
+        "TerminalBlock_Phoenix:"
+        "TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+    )
+    conn3_fp = (
+        "TerminalBlock_Phoenix:"
+        "TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
+    )
+
+    def two_pin(
+        lib_id: str,
+        ref: str,
+        value: str,
+        x: float,
+        y: float,
+        net1: str,
+        net2: str,
+        footprint: str,
+        description: str,
+        polarized: bool = False,
+    ) -> None:
+        parts.append(
+            symbol_inst_v10(
+                lib_id,
+                ref,
+                value,
+                x,
+                y,
+                0,
+                PATH_AMP,
+                footprint=footprint,
+                description=description,
+            )
+        )
+        p1, p2 = cap_pins(x, y)
+        if lib_id == "Device:R":
+            p1, p2 = r_pins(x, y)
+        nets.append(net_at(net1, p1))
+        nets.append(net_at(net2, p2))
+
+    # Physical connectors.
+    for ref, value, x, y, footprint in [
+        ("J701", "AMP_IN L/R", 30.48, 60.96, conn2_fp),
+        ("J702", "AMP_OUT L/R", 160.02, 60.96, conn2_fp),
+        ("J703", "+12V / A_GND / -12V", 30.48, 111.76, conn3_fp),
+    ]:
+        lib_id = (
+            "Connector:Screw_Terminal_01x03"
+            if ref == "J703"
+            else "Connector:Screw_Terminal_01x02"
+        )
+        parts.append(
+            symbol_inst_v10(
+                lib_id,
+                ref,
+                value,
+                x,
+                y,
+                0,
+                PATH_AMP,
+                footprint=footprint,
+            )
+        )
+    def screw02_pins(x: float, y: float) -> tuple[tuple[float, float], tuple[float, float]]:
+        return (x - 5.08, y), (x - 5.08, y + 2.54)
+
+    def screw03_pins(
+        x: float, y: float
+    ) -> tuple[tuple[float, float], tuple[float, float], tuple[float, float]]:
+        return (x - 5.08, y - 2.54), (x - 5.08, y), (x - 5.08, y + 2.54)
+
+    for name, p in zip(("L_IN", "R_IN"), screw02_pins(30.48, 60.96), strict=True):
+        nets.append(net_at(name, p))
+    for name, p in zip(("L_OUT", "R_OUT"), screw02_pins(160.02, 60.96), strict=True):
+        nets.append(net_at(name, p))
+    for name, p in zip(
+        ("+12V", "A_GND", "-12V"), screw03_pins(30.48, 111.76), strict=True
+    ):
+        nets.append(net_at(name, p))
+
+    # Input coupling and bias. 100 nF film and 10 uF electrolytic are parallel.
+    two_pin("Device:R", "R701", "220k", 45.72, 45.72, "L_IN", "A_GND", r_fp, "L input pulldown")
+    two_pin("Device:R", "R702", "220k", 45.72, 78.74, "R_IN", "A_GND", r_fp, "R input pulldown")
+    two_pin("Device:C", "C701", "100nF film", 55.88, 45.72, "L_IN", "L_AC", "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2", "L input film coupling")
+    two_pin("Device:C_Polarized", "C702", "10uF", 66.04, 45.72, "L_IN", "L_AC", "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm", "L input electrolytic coupling", True)
+    two_pin("Device:C", "C703", "100nF film", 55.88, 78.74, "R_IN", "R_AC", "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2", "R input film coupling")
+    two_pin("Device:C_Polarized", "C704", "10uF", 66.04, 78.74, "R_IN", "R_AC", "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm", "R input electrolytic coupling", True)
+    two_pin("Device:R", "R703", "1k", 76.2, 45.72, "L_AC", "A_GND", r_fp, "L non-inverting bias; 1/10 refine")
+    two_pin("Device:R", "R704", "1k", 76.2, 78.74, "R_AC", "A_GND", r_fp, "R non-inverting bias; 1/10 refine")
+
+    # Dual op amp, gain = 1 + 20k/20k = 2 (headroom; source volume handles loudness).
+    for unit, x, y in [(1, 101.6, 50.8), (2, 101.6, 83.82), (3, 127.0, 111.76)]:
+        parts.append(
+            symbol_inst_v10(
+                "Amplifier_Operational:NE5532",
+                "AMP701",
+                "NE5532 / DIP-8 compatible",
+                x,
+                y,
+                0,
+                PATH_AMP,
+                unit=unit,
+                footprint="Package_DIP:DIP-8_W7.62mm_Socket",
+                extra_props=[("AssemblyQty", "10")],
+                description="AudioV2 replaceable dual op amp; high-speed decoupling fitted",
+            )
+        )
+    for net, p in [
+        # Preserve the proven PCB routing: unit A = R, unit B = L.
+        ("R_OUT_OP", tip(101.6, 50.8, 7.62, 0)),
+        ("R_INV", tip(101.6, 50.8, -7.62, -2.54)),
+        ("R_AC", tip(101.6, 50.8, -7.62, 2.54)),
+        ("L_OUT_OP", tip(101.6, 83.82, 7.62, 0)),
+        ("L_INV", tip(101.6, 83.82, -7.62, -2.54)),
+        ("L_AC", tip(101.6, 83.82, -7.62, 2.54)),
+        ("-12V", tip(127.0, 111.76, -2.54, -7.62)),
+        ("+12V", tip(127.0, 111.76, -2.54, 7.62)),
+    ]:
+        nets.append(net_at(net, p))
+    two_pin("Device:R", "R705", "20k", 88.9, 66.04, "L_INV", "A_GND", r_fp, "L gain resistor; Rf=Rg=20k")
+    two_pin("Device:R", "R706", "20k", 88.9, 99.06, "R_INV", "A_GND", r_fp, "R gain resistor; Rf=Rg=20k")
+    two_pin("Device:R", "R707", "20k", 111.76, 66.04, "L_OUT_OP", "L_INV", r_fp, "L feedback; gain 2")
+    two_pin("Device:R", "R708", "20k", 111.76, 99.06, "R_OUT_OP", "R_INV", r_fp, "R feedback; gain 2")
+    two_pin("Device:R", "R709", "47R", 127.0, 50.8, "L_OUT_OP", "L_OUT_PRE", r_fp, "L output isolation")
+    two_pin("Device:R", "R710", "47R", 127.0, 83.82, "R_OUT_OP", "R_OUT_PRE", r_fp, "R output isolation")
+    two_pin("Device:C_Polarized", "C707", "470uF 25V", 139.7, 50.8, "L_OUT_PRE", "L_OUT", out_fp, "L output coupling; compact D12.5/P5", True)
+    two_pin("Device:C_Polarized", "C708", "470uF 25V", 139.7, 83.82, "R_OUT_PRE", "R_OUT", out_fp, "R output coupling; compact D12.5/P5", True)
+
+    # Power reservoir and high-frequency bypass. Negative bulk has + at A_GND.
+    two_pin("Device:C_Polarized", "C709", "100uF 35V polymer", 55.88, 111.76, "+12V", "A_GND", bulk_fp, "V+ local bulk at power connector", True)
+    two_pin("Device:C_Polarized", "C710", "100uF 35V polymer", 66.04, 111.76, "A_GND", "-12V", bulk_fp, "V- local bulk at power connector", True)
+    two_pin("Device:C", "C705", "100nF 50V X7R", 78.74, 111.76, "+12V", "A_GND", c_fp, "V+ local decoupling")
+    two_pin("Device:C", "C706", "100nF 50V X7R", 88.9, 111.76, "A_GND", "-12V", c_fp, "V- local decoupling")
+    two_pin("Device:C", "C711", "1nF 50V C0G", 99.06, 111.76, "+12V", "A_GND", c_fp, "V+ high-speed bypass")
+    two_pin("Device:C", "C712", "1nF 50V C0G", 109.22, 111.76, "A_GND", "-12V", c_fp, "V- high-speed bypass")
+
+    body = f"""{embed_lib_symbols(AMP_LIBS)}
+{text_note(25.4, 20.32, [
+    "AudioV2 AmpModule — reference circuit; manufacture x10",
+    "Supply: +/-12 V. Gain: 2 (20k/20k). DIP-8 socket.",
+    "100uF/rail bulk + 100nF + 1nF local bypass for high-speed op amps.",
+    "AMP* selection remains on RelayBoard terminal interfaces.",
+])}
+{hier_label("L_IN", "input", 20.32, 60.96, 180)}
+{hier_label("R_IN", "input", 20.32, 71.12, 180)}
+{hier_label("+12V", "input", 20.32, 101.6, 180)}
+{hier_label("-12V", "input", 20.32, 111.76, 180)}
+{hier_label("A_GND", "bidirectional", 20.32, 121.92, 180)}
+{hier_label("L_OUT", "output", 180.34, 60.96, 0)}
+{hier_label("R_OUT", "output", 180.34, 71.12, 0)}
+{"".join(parts)}
+{"".join(nets)}
+"""
+    return sch_open(UUID_AMP_FILE, body)
 
 
 def output_stage_wired() -> str:
@@ -764,8 +1278,6 @@ def parent_wired() -> str:
     # Power / Control / Output pin coords — on sheet edges, ≥10.16 mm apart
     # Power @ (35.56, 30.48) w=30.48 → L=35.56 R=66.04
     power_pins = [
-        ("+12V_IN", "input", 35.56, 66.04, 180),
-        ("-12V_IN", "input", 35.56, 76.2, 180),
         ("PD_12V_SW", "input", 35.56, 86.36, 180),
         ("+12V", "output", 66.04, 35.56, 0),
         ("-12V", "output", 66.04, 45.72, 0),
@@ -779,18 +1291,24 @@ def parent_wired() -> str:
         ("I2C_SCL", "bidirectional", 88.9, 50.8, 180),
         ("3V3", "input", 88.9, 60.96, 180),
         ("D_GND", "input", 88.9, 71.12, 180),
-        ("COMMON_L", "output", 144.78, 40.64, 0),
-        ("COMMON_R", "output", 144.78, 50.8, 0),
-        ("A_GND", "bidirectional", 144.78, 60.96, 0),
+        ("TONE_L", "input", 144.78, 35.56, 0),
+        ("TONE_R", "input", 144.78, 40.64, 0),
+        ("+12V", "input", 144.78, 45.72, 0),
+        ("-12V", "input", 144.78, 50.8, 0),
+        ("A_GND", "bidirectional", 144.78, 55.88, 0),
+        ("+5V", "input", 144.78, 60.96, 0),
     ]
     relay_pins_b = [
         ("I2C_SDA", "bidirectional", 88.9, 83.82, 180),
         ("I2C_SCL", "bidirectional", 88.9, 93.98, 180),
         ("3V3", "input", 88.9, 104.14, 180),
         ("D_GND", "input", 88.9, 114.3, 180),
-        ("COMMON_L", "output", 144.78, 83.82, 0),
-        ("COMMON_R", "output", 144.78, 93.98, 0),
+        ("TONE_L", "input", 144.78, 83.82, 0),
+        ("TONE_R", "input", 144.78, 88.9, 0),
+        ("+12V", "input", 144.78, 93.98, 0),
+        ("-12V", "input", 144.78, 99.06, 0),
         ("A_GND", "bidirectional", 144.78, 104.14, 0),
+        ("+5V", "input", 144.78, 109.22, 0),
     ]
     control_pins = [
         ("COMMON_L", "input", 152.4, 30.48, 180),
@@ -807,6 +1325,8 @@ def parent_wired() -> str:
         ("PD_GND", "bidirectional", 208.28, 132.08, 0),
         ("TONE_L", "output", 208.28, 30.48, 0),
         ("TONE_R", "output", 208.28, 40.64, 0),
+        ("+3V3", "output", 152.4, 132.08, 180),
+        ("+5V", "output", 208.28, 111.76, 0),
     ]
     output_pins = [
         ("AMP_SEL_L", "input", 215.9, 40.64, 180),
@@ -817,14 +1337,23 @@ def parent_wired() -> str:
         ("LINE_L", "output", 266.7, 60.96, 0),
         ("LINE_R", "output", 266.7, 71.12, 0),
     ]
+    amp_pins = [
+        ("L_IN", "input", 88.9, 142.24, 180),
+        ("R_IN", "input", 88.9, 152.4, 180),
+        ("+12V", "input", 88.9, 162.56, 180),
+        ("-12V", "input", 88.9, 172.72, 180),
+        ("A_GND", "bidirectional", 88.9, 182.88, 180),
+        ("L_OUT", "output", 144.78, 142.24, 0),
+        ("R_OUT", "output", 144.78, 152.4, 0),
+    ]
 
     # Explicit label bridges on every sheet pin tip (KiCad 10 does not
     # reliably auto-join same-named pins without a parent-side net object).
     join("+12V", [(66.04, 35.56), (152.4, 71.12)])
     join("-12V", [(66.04, 45.72), (152.4, 81.28)])
     join("A_GND", [
-        (66.04, 55.88), (144.78, 60.96), (144.78, 104.14),
-        (152.4, 91.44), (215.9, 71.12),
+        (66.04, 55.88), (144.78, 55.88), (144.78, 104.14),
+        (152.4, 91.44), (215.9, 71.12), (88.9, 182.88),
     ])
     join("VCC_TONE", [(66.04, 66.04), (152.4, 111.76)])
     join("PD_12V", [(66.04, 76.2), (152.4, 121.92)])
@@ -832,14 +1361,18 @@ def parent_wired() -> str:
     join("PD_12V_SW", [(35.56, 86.36), (208.28, 121.92)])
     join("I2C_SDA", [(88.9, 40.64), (88.9, 83.82), (152.4, 50.8)])
     join("I2C_SCL", [(88.9, 50.8), (88.9, 93.98), (152.4, 60.96)])
-    join("COMMON_L", [(144.78, 40.64), (144.78, 83.82), (152.4, 30.48)])
-    join("COMMON_R", [(144.78, 50.8), (144.78, 93.98), (152.4, 40.64)])
+    # External line/source input into the tone stage.
+    join("COMMON_L", [(152.4, 30.48)])
+    join("COMMON_R", [(152.4, 40.64)])
     join("D_GND", [(88.9, 71.12), (88.9, 114.3), (152.4, 101.6)])
-    join("3V3", [(88.9, 60.96), (88.9, 104.14)])
-    join("AMP_SEL_L", [(215.9, 40.64)])
-    join("AMP_SEL_R", [(215.9, 50.8)])
-    join("TONE_L", [(208.28, 30.48)])
-    join("TONE_R", [(208.28, 40.64)])
+    join("3V3", [(88.9, 60.96), (88.9, 104.14), (152.4, 132.08)])
+    join("+5V", [(144.78, 60.96), (144.78, 109.22), (208.28, 111.76)])
+    join("AMP_SEL_L", [(215.9, 40.64), (144.78, 142.24)])
+    join("AMP_SEL_R", [(215.9, 50.8), (144.78, 152.4)])
+    join("TONE_L", [(208.28, 30.48), (144.78, 35.56), (144.78, 83.82), (88.9, 142.24)])
+    join("TONE_R", [(208.28, 40.64), (144.78, 40.64), (144.78, 88.9), (88.9, 152.4)])
+    join("+12V", [(144.78, 45.72), (144.78, 93.98), (88.9, 162.56)])
+    join("-12V", [(144.78, 50.8), (144.78, 99.06), (88.9, 172.72)])
     join("PHONE_L", [(266.7, 40.64)])
     join("PHONE_R", [(266.7, 50.8)])
     join("LINE_L", [(266.7, 60.96)])
@@ -853,12 +1386,14 @@ def parent_wired() -> str:
         + sheet_block(UUID_RELAY_B, "RelayBoard_B", "RelayBoard.kicad_sch", 88.9, 78.74, 55.88, 45.72, relay_pins_b, "4")
         + sheet_block(UUID_CONTROL_INST, "ControlPanel", "ControlPanel.kicad_sch", 152.4, 25.4, 55.88, 111.76, control_pins, "5")
         + sheet_block(UUID_OUTPUT_INST, "OutputStage", "OutputStage.kicad_sch", 215.9, 30.48, 50.8, 50.8, output_pins, "6")
+        + sheet_block(UUID_AMP_INST, "AmpModule_Reference", "AmpModule.kicad_sch", 88.9, 132.08, 55.88, 60.96, amp_pins, "7")
     )
     body = f"""\t(lib_symbols)
 {text_note(25.4, 15.24, [
     "AudioV2Case — label-wired parent",
     "Sheet pins ≥10.16 mm apart; bridges via local labels on pin tips only.",
-    "AMP_SEL_* = stubs until Amp sheet exists.",
+    "AmpModule_Reference = one circuit/BOM instance; manufacture x10.",
+    "RelayBoard J_AMP terminal wiring selects the physical Amp; see WIRING.md.",
 ])}
 {sheets}
 {"".join(nets)}
@@ -868,6 +1403,8 @@ def parent_wired() -> str:
 
 def main() -> None:
     target = sys.argv[1] if len(sys.argv) > 1 else "all"
+    if target in ("all", "amp"):
+        (ROOT / "AmpModule.kicad_sch").write_text(amp_module_wired(), encoding="utf-8")
     if target in ("all", "power"):
         (ROOT / "PowerModule.kicad_sch").write_text(power_module_wired(), encoding="utf-8")
     if target in ("all", "relay"):

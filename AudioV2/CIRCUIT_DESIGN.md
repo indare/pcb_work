@@ -85,9 +85,46 @@ AMP_SEL_L/R ── SW101 (DP3T)
 USB-C → CH224 → PD_12V → PWR SW → F1 → DKMW20F-12 → ±12 V / A_GND。  
 +12 V → LM7809 → VCC_TONE（+9 V）。
 
+### RelayBoard — 5ch×2枚
+
+- 1枚あたり MCP23017×1、ULN2803×2、AZ850×10（audio/power各5）
+- `TONE_L/R → audio relay → 選択Amp J701`
+- `±12 V → power relay → 選択Amp J703`、A_GNDは常時接続
+- 各chのaudio/powerリレーはSET同士・RESET同士を並列駆動し、状態不一致を防止
+- ネット名: `CH{n}_SET` / `CH{n}_RST` = コイルパルス、`CH{n}_SET_CMD` / `CH{n}_RST_CMD` = MCP→ULN のロジック
+- 図面サイズは **A3**（5ch×リレー20個ぶんのラベルを重ねずに置くため）
+- `J_RAIL`: PowerModule `J201` から +12 / A_GND / -12 の3P。`A_GND`は切替せず各 `J_PWR`-2 へ直結
+- `J_TONE`: PT2314出力の2P（L/R）。シールドはControl側`A_GND`のみ。Relayのアナログ基準は`J_RAIL`-2
+- `J_I2C`: SDA / SCL / 3V3 / +5V / D_GND。+5 VはControlPanel BP5293から供給
+- JP301=A0、JP302=A1（開=0）。00=0x20 A / 01=0x21 B / 10=0x22 C / 11=0x23 D。A2はGND固定。同じ回路で最大4枚
+- `C301`/`C302` は `J_I2C` 直近（3V3 / +5V 入口のパスコン。アナログ端子台ではない）
+
+```text
+JP302  JP301   ADDR   BOARD
+  開     開    0x20     A
+  開     閉    0x21     B
+  閉     開    0x22     C
+  閉     閉    0x23     D
+```
+- Amp J702出力は47 Ω＋470 µF後を箱配線で`AMP_SEL_L/R`へ共通化
+
 ---
 
-## 5. 机上検算
+## 5. AmpModule — AudioV2再版
+
+- 信号経路: `J701 → 100 nF film + 10 µF → 非反転Amp → 47 Ω → 470 µF → J702`
+- ゲイン: `1 + 20 kΩ / 20 kΩ = 2`（L/R同一。ソース音量で Loudness、Amp は電気的余裕）
+- 入力プルダウン: 220 kΩ、非反転バイアス: 1 kΩ
+- 電源: `J703 = +12 V / A_GND / -12 V`
+- デカップリング（各レール）: 100 µF polymer + 100 nF X7R + 1 nF C0G
+- AMP701: DIP-8ソケット。NE5532Pを基準とし、高速品差し替え時も47 Ω出力アイソレーションを維持
+- `AudioV2Case.kicad_sch` は代表1シートのみ。物理PCB/BOMは同一仕様を×10製造し、RelayBoardで入力＋電源を選択
+
+PCBは `Audio/split/AudioCase_4_amp.kicad_pcb` の実績配線を再利用。端子・取付穴を維持し、100 µF×2のため上辺のみ15 mm拡張した。
+
+---
+
+## 6. 机上検算
 
 | 項目 | 結果 |
 |---|---|
@@ -97,7 +134,7 @@ USB-C → CH224 → PD_12V → PWR SW → F1 → DKMW20F-12 → ±12 V / A_GND�
 
 ---
 
-## 6. KiCad 更新チェックリスト
+## 7. KiCad 更新チェックリスト
 
 - [x] PT2314 シンボル — **28pin DS 一致**
 - [x] PGA2310 / DEST ラッチング / ENC_HP·LINE·DEST — **削除**
@@ -107,15 +144,18 @@ USB-C → CH224 → PD_12V → PWR SW → F1 → DKMW20F-12 → ±12 V / A_GND�
 - [x] `kicad-cli sch export netlist` — OK（annotation 警告はドラフト）
 - [x] 3PDT / A50k 具体型番 — [PARTS.md](PARTS.md)
 - [x] 表示品番 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）
+- [x] AmpModule — 代表回路図 + 独立PCB、バルク/1 nF対応、×10注記
 - [ ] OLED KiCad FP — 0.91″ 埋め込みを 2.42″ or 1×4 ヘッダに差し替え
 - [ ] ERC 整理（未接続・未使用 PT2314 入力）
-- [ ] RelayBoard 本配線
+- [x] RelayBoard 本配線 — 5ch×2、入力＋電源連動、ERC 0件/instance
+- [ ] RelayBoard PCB — JP横 F.Silk に番地早見表（0x20 A … 0x23 D）
 - [ ] 未使用 PT2314 入力の AC-GND 実装
 
-## 7. 再生成
+## 8. 再生成
 
 ```bash
 python3 AudioV2/scripts/wire_circuit_design.py all
+python3 AudioV2/scripts/build_amp_pcb.py
 python3 Audio/scripts/check_sexpr.py -q AudioV2
 ```
 
@@ -128,3 +168,4 @@ python3 Audio/scripts/check_sexpr.py -q AudioV2
 | 2026-08-30 | 初版 — 素案ピン監査 |
 | 2026-08-30 | **手回し化** — PGA 削除、PT2314 28pin 再作成、OutputStage ポット+トグル |
 | 2026-08-30 | **品番** — SW_DEST=7303SYZQE、RV=RK27112A00CF（[PARTS.md](PARTS.md)） |
+| 2026-08-31 | **Amp再版** — ゲイン2（20k/20k）、±12 V、100 µF/100 nF/1 nF、独立PCB |
