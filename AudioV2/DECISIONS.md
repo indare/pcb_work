@@ -845,6 +845,6 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 - [x] **DEST ラダー: Rh=Rl=10k, Rs=1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)）
 - [x] **SW_DEST 型番: C&K 7303SYZQE**（3PDT ON-OFF-ON）
 - [x] **AZ850 コイル: AZ850P2-5**（5 V、秋月 118017）
-- [ ] **I²C 拓扑（§11 Q3）:** 回路・基板設計まで保留
+- [x] **I²C 拓扑（§11 Q3）: スター確定**（2026-08-31、WIRING.md）。端子台はPhoenix MKDS-1,5系（v1 `Audio/Controll.kicad_sch`と同一/互換、PARTS.md）
 - [x] **RelayBoard 本配線 / RelayBoard_A・B ERC 0件**
 - [ ] **KiCad ERC残り / 未使用 PT2314 入力**

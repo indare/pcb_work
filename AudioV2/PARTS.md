@@ -145,6 +145,7 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 | **DKMW / CH224** | **DKMW20F-12** / **50224（CH224K 12 V）** | 既確定 |
 | **USB-C** | USB2.0 16P レセプタクル（KiCad `USB_C_Receptacle_USB2.0_16P`） | CC はモジュール側。基板は VBUS/GND が主 |
 | **ラダー R** | 10 k / 10 k / 1 k **1%**（1206 可） | ±5% でも間隔は足りるが、初号は 1% |
+| **J_I2C（ControlPanel↔RelayBoard 5P）** | **Phoenix Contact MKDS-1,5シリーズ**（5.08 mmピッチ、ネジ式）互換品または同一品。KiCad FP: `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-N-5.08_1xNN_P5.08mm_Horizontal`（Nはピン数、5Pなら`5`/`05`） | `Audio/Controll.kicad_sch`（v1の「リレー＋端子台＋ULN」原型）で13箇所使用実績あり。フェルール対応で、スター配線をControlPanel側1コネクタ＋箱内フェルール束ね/スプリッタで実現する方針（WIRING.md）と合う |
 
 ---
 
@@ -187,7 +188,6 @@ Amp 選択後 L/R
 
 | 項目 | 状態 |
 |---|---|
-| I²C コネクタ（JST-XH vs 2.54） | §11 Q3 保留 |
 | ENC 正確な秋月コード | 在庫を見て同一外形を 3 個 |
 | PT2314 入手先 | DigiKey に無いことが多い。LCSC / モジュール屋。DIP ソケット推奨 |
 | ノブ（φ6 D カット） | RK27 用に大きめ。ENC 用は小さめ |
@@ -202,3 +202,4 @@ Amp 選択後 L/R
 | 2026-08-30 | 初版 — 回路制約から SW_DEST / RV / 周辺の第一候補を固定 |
 | 2026-08-30 | 表示 — 制御 OLED=2.42″ SSD1309（AliExpress）、スペアナ=Waveshare 29318（v1 実装） |
 | 2026-08-31 | AmpModule再版 — ゲイン2（20k/20k）、バルク/高速バイパス、出力C小型化 |
+| 2026-08-31 | J_I2C端子台をPhoenix MKDS-1,5シリーズ（v1 `Audio/Controll.kicad_sch`と同一/互換）に確定。§11 Q3（JST-XH vs 2.54）は解消 |
