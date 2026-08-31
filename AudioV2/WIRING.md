@@ -15,12 +15,18 @@
 | `PD_GND` | J202 / DKMW −Vin | Panel LED 戻り | 上記とセット |
 | `VCC_TONE` | Power LM7809 → **J203**（1=A_GND 2=+9） | ControlPanel PT2314 | 2P（星型 A_GND と二重ループにしない） |
 
-## デジタル / I²C（Q3 拓扑 **保留**）
+## デジタル / I²C（2026-08-31 スター確定）
 
 | Net | 源 | 先 | 備考 |
 |---|---|---|---|
-| `I2C_SDA/SCL` | ControlPanel Pico GP20/21 | RelayBoard_A/B MCP23017, SSD1306, PT2314 | daisy vs スター — **未決** |
+| `I2C_SDA/SCL` | ControlPanel Pico GP20/21 | RelayBoard_A/B MCP23017, SSD1306, PT2314 | **スター確定**（daisy不採用）。ControlPanel `J_I2C`出力から板の枚数分ホームラン |
 | `3V3` / `+5V` / `D_GND` | ControlPanel Pico / BP5293 | RelayBoard `J_I2C` 5P | +5 VはAZ850コイル、3V3はMCPロジック |
+
+**スターを選んだ理由:** (1) 板の抜き差しで他板を巻き込まない（daisyは中継コネクタ不良で下流が全滅）、(2) `+5V`にリレーパルス電流(§AGENT_HANDOFF 2.7-2)が乗るため、daisyだと板Aのノイズが板Bの給電経路を直列で通過してしまう。starなら各板の帰路が独立し、ノイズ源(ControlPanel)止まりで完結する。(3) I2Cプルアップが`ControlPanel`の`R210`/`R211`一箇所に集約されており、starの方が電気的中心と一致する。
+
+**実装:** ControlPanel基板上のコネクタは1個のまま（`Conn_01x05_Pin`、footprint未定）。板の本数分の分岐は**箱内配線**で行う — フェルール端子で複数本を1端子にまとめる、またはスプリッタケーブルで分岐。PCB側の物理コネクタ選定（端子台 vs ピンヘッダ）は、この分岐方式が確定してから決める（footprint未定のまま、AGENT_HANDOFF §5参照）。
+
+**製造ロット:** RelayBoard PCBは5枚発注。番地ストラップ(JP301/JP302)は2bitで最大4枚(0x20–0x23)までしか同時稼働できないため、5枚目は予備。
 
 ## 音声幹線
 

@@ -740,7 +740,7 @@ KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロッ�
 |---|---|---|
 | PowerModule → 箱内星型 | **端子台 3P** | +12, −12, A_GND |
 | PowerModule ↔ 操作パネル（PD SW） | **端子 2P×2** or **JST 4P** | PD_12V, SW 戻り, GND |
-| ControlPanel ↔ RelayBoard（×2） | **コネクタ 5P** ×2 枚 | SDA, SCL, 3V3, +5V, D_GND — daisy / スターは設計時 |
+| ControlPanel ↔ RelayBoard（×2、予備含め最大4枚+1） | **コネクタ 5P** ×N（**スター確定**、2026-08-31） | SDA, SCL, 3V3, +5V, D_GND。ControlPanel側はコネクタ1個のまま、箱内配線でフェルール端子まとめ or スプリッタ分岐（WIRING.md参照） |
 | ControlPanel → RelayBoard | **端子 2P** | TONE_L, TONE_R。2芯シールドのドレインはControlの`A_GND`のみ（`J_RAIL`のGNDと二重にしない） |
 | PowerModule → RelayBoard（×2） | **端子 3P** ×2本 | `J_RAIL` = +12, A_GND, -12。旧Controllは±のみだったが、Amp `J703` を3P 1本で完結させるため`A_GND`も持ち込む |
 | ControlPanel 内 OutputStage | **基板内** | Q2-A。SW_DEST → RV → 外部端子 |

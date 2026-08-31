@@ -256,3 +256,5 @@ generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay 
 | 2026-08-31 | 番地ストラップ 0 Ω/1206 化（§2.6）＋レビュー指摘の記録（§2.7）。スクリプト非同期の警告あり |
 | 2026-08-31 | `wire_circuit_design.py` に `relay` 書き込みの安全装置（`--force-relay` 必須化）を追加。`work-on-main.mdc` にも注記（§2.6） |
 | 2026-08-31 | `wire_circuit_design.py` の `addr_strap`/`C301`/`C302`/`J_I2C`/階層ラベルを現図の座標へコード同期（§2.6）。ADDR_A0/ADDR_A1ラベルも復活（§2.7-1）。実機（KiCad）未検証のため安全装置は解除せず |
+| 2026-08-31 | シート所有権モデル（§2.8）を制定。RelayBoardを手編集所有に |
+| 2026-08-31 | ControlPanel↔RelayBoardのI2C/電源をスター確定（daisy不採用）。WIRING.md / DECISIONS.md 更新。実装（ControlPanel側コネクタ、フェルール/スプリッタ分岐）は未着手 |
