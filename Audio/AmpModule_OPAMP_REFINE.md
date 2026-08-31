@@ -166,6 +166,7 @@ AMP1 は `Package_DIP:DIP-8_W7.62mm_Socket`。挿し替え前提の設計にな�
 | OPA2140（JFET） | 5.1 | 0.0008 | 0.0 | 0.0 | 17.2 | 17.9 | −0.99 dB |
 | NJM4580DD ※in | 3.0 | 0.40 | 4.0 | 3.3 | 17.2 | 18.2 | −0.86 dB |
 | MUSES01 ※ | 5.0 | 0.50 | 5.0 | 4.1 | 17.2 | 19.0 | −0.47 dB |
+| **MUSES03**（JFET・×2 DIP 化） | 7.5 | ≈0 | 0.0 | 0.0 | 17.2 | **18.8** | **−0.58 dB** |
 | MUSES8920A（JFET） | 8.0 | 0.006 | 0.1 | 0.0 | 17.2 | 19.0 | −0.50 dB |
 | OPA2604（JFET） | 11 | 0.006 | 0.1 | 0.0 | 17.2 | 20.4 | +0.14 dB |
 | MUSES02 ※ | 8.0 | 0.60 | 6.0 | 4.9 | 17.2 | 20.5 | +0.18 dB |
@@ -176,6 +177,7 @@ AMP1 は `Package_DIP:DIP-8_W7.62mm_Socket`。挿し替え前提の設計にな�
 | AK05 / LC5 | — | — | — | — | 17.2 | — | 公称なし |
 
 ※ MUSES01 / MUSES02 の en・in はメーカー PDF をこちらで未取得のため仮値。NJM4580 の in は DS に密度が無く、Ib typ 100 nA から概算。
+MUSES03 の en は DS typ（1 kHz）。in 密度は未記載のため JFET 並みに ≈0 と置く（Ib 5 pA typ）。
 AK05/LC5 はディスクリート基板で en/in のメーカー値なし。
 
 **重要な帰結が 2 つある。**
@@ -194,7 +196,7 @@ AK05/LC5 はディスクリート基板で en/in のメーカー値なし。
 
 | | 交差周波数 | 帰還ゼロ（Cs=5 pF） | 判定 |
 | --- | --- | --- | --- |
-| NE5532 / MUSES01・02 / OPA2140 / MUSES8920（〜11 MHz） | 〜1.9 MHz | 3.9 MHz | OK |
+| NE5532 / MUSES01・02・**03** / OPA2140 / MUSES8920（〜11〜12 MHz） | 〜1.9〜2.1 MHz | 3.9 MHz | OK |
 | NJM4580（15 MHz） | 2.6 MHz | 3.9 MHz | OK |
 | OPA1652（18 MHz） | 3.2 MHz | 3.9 MHz | ぎりぎり OK |
 | OPA2604（20 MHz） | 3.5 MHz | 3.9 MHz | ぎりぎり OK |
@@ -229,6 +231,7 @@ GBW 40〜70 MHz 級を挿すなら、ピン直近に 1〜10 nF を 0.1 µF と�
 | NE5532（現行） | 10 MHz | 9 V/µs | 200 nA typ | DIP-8 | 600 Ω ライン駆動用。低インピーダンス駆動に強い |
 | MUSES02 ※ | 11 MHz | 5 V/µs | 100 nA | DIP-8 | **高速ではない**。音を狙った石。そのまま挿さる |
 | MUSES01 ※ | 〜10 MHz | 〜5 V/µs | 100 nA 級 | DIP-8×2（シングル扱いなら 2 個） | バイポーラ。02 の前世代。en は仮値 |
+| **MUSES03** | **12 MHz** | **35 V/µs** | **5 pA typ** | シングル×2 → DIP 化・2ch 変換基板 | J-FET。手持ちは変換基板あり（[OPAMP_INVENTORY](OPAMP_INVENTORY.md)）。Vs ±3.5〜±18。DS: [`NJR_MUSES03.pdf`](datasheets/opamps/NJR_MUSES03.pdf) |
 | NJM4580DD | 15 MHz | 5 V/µs | 100 nA typ | DIP-8 | D ランクは雑音選別。低 GBW で安定側 |
 | MUSES8920A | 11 MHz | 25 V/µs | 5 pA typ | SOP8（DIP 変換） | JFET。±3.5〜17 V。公式外形は SOP/DFN。ノイズはこの回路で 5532 よりわずかに良い |
 | OPA2140 | 11 MHz | 20 V/µs | 10 pA max | SOIC（DIP 変換） | JFET。Vcm は (V+)−3.5 V まで。入力が 0 V 付近なら ±15 で可 |
@@ -319,7 +322,7 @@ DRC は基板全体 142 違反 / 87 未接続で移動前と同一。AMP 島内�
 
 7. **まず MUSES02 / MUSES01 / NJM4580 と NE5532 の聴き比べ**。DIP-8 でそのまま挿さり、GBW も近く、
    安定性の心配がない。ノイズは抵抗支配でほぼ同等。
-8. **この抵抗値のまま素性を上げるなら JFET**（OPA1652 DIP、OPA2140、MUSES8920A、OPA828×2、OPA1656）。
+8. **この抵抗値のまま素性を上げるなら JFET**（OPA1652 DIP、OPA2140、**MUSES03**、MUSES8920A、OPA828×2、OPA1656）。
    バイポーラ低雑音（OPA1612、LME49860、AD797）は 4.1 のとおり悪化する。
 9. **LT1364 / LME49860 / OPA828 / OPA1656 は 4〜6 を済ませてから**。いまのまま挿すとリンギングか発振が出て、
    石のせいか配線のせいか切り分けられない。AD797 はこのゲインでは使わない。
@@ -328,8 +331,8 @@ DRC は基板全体 142 違反 / 87 未接続で移動前と同一。AMP 島内�
 
 ## 7. 未確認事項
 
-- **MUSES01 / MUSES02**: データシート PDF を配布元から取得できず。等価入力雑音電圧が未確認。
-  電源電圧範囲 ±3.5〜16 V が動作保証か絶対最大かも要確認
+- **MUSES01 / MUSES02**: 等価入力雑音電圧は旧メモ時点で仮値のまま（PDF は `datasheets/opamps/` に保管済み。数値突合せは未実施）
+- **MUSES03**: DS 要点は確認済み（en 7.5 nV/√Hz、Vs ±3.5〜±18、GBW 12 MHz）。変換基板のピン割当は実物確認
 - **NJM4580**: en 3 nV はメーカー表。in 密度は未記載
 - **AK05 / LC5**: メーカー相当の en/in/GBW なし。外形と消費電流は実物で確認
 - **LT1364**: 主要諸元は Analog Devices の製品情報から。PDF 本体は未取得
@@ -360,8 +363,9 @@ DRC は基板全体 142 違反 / 87 未接続で移動前と同一。AMP 島内�
 未取得（リンクのみ）
 
 - LT1364/LT1365 データシート — https://www.analog.com/media/en/technical-documentation/data-sheets/13645fa.pdf
-- MUSES01 — https://www.nisshinbo-microdevices.co.jp/en/products/operational-amplifier/spec/?product=muses01
-- MUSES02 — https://www.nisshinbo-microdevices.co.jp/en/products/operational-amplifier/spec/?product=muses02
+- MUSES01 — https://www.nisshinbo-microdevices.co.jp/en/products/operational-amplifier/spec/?product=muses01（ローカル: `datasheets/opamps/NJR_MUSES01.pdf`）
+- MUSES02 — https://www.nisshinbo-microdevices.co.jp/en/products/operational-amplifier/spec/?product=muses02（ローカル: `datasheets/opamps/NJR_MUSES02.pdf`）
+- MUSES03 — https://www.nisshinbo-microdevices.co.jp/ja/products/operational-amplifier/spec/?product=muses03（ローカル: `datasheets/opamps/NJR_MUSES03.pdf`）
 - MUSES8920A — https://www.nisshinbo-microdevices.co.jp/en/products/operational-amplifier/spec/?product=muses8920a
 - NJM4580 — https://www.nisshinbo-microdevices.co.jp/en/products/operational-amplifier/spec/?product=njm4580
 - OPA2140 — https://www.ti.com/lit/ds/symlink/opa2140.pdf

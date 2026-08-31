@@ -24,7 +24,7 @@
 | **LT1364CN8** | DIP | 可（GBW 高くデカップ／帰還注意） | [PDF](datasheets/opamps/AD_LT1364.pdf) |
 | **OPA2140AIDR** 2 回路 JFET DIP | DIP 化／変換実装 | 可 | [PDF](datasheets/opamps/TI_OPA2140.pdf) |
 | **MUSE01**（×2 → 1×DIP 変換） | シングル相当 **2 個**を 1 個の DIP-8 に挿す変換基板。表記は MUSE01（MUSES01 ではない） | 可（変換ごと Amp ソケットへ） | [PDF](datasheets/opamps/NJR_MUSES01.pdf) |
-| **MUSE03**（×2 → DIP 化・2ch 変換基板） | シングル相当 **2 個**を DIP 化し 2ch にした変換基板あり。表記は MUSE03（製品 DS 名は MUSES03） | 可（変換ごと Amp ソケットへ） | [PDF](datasheets/opamps/NJR_MUSES03.pdf) |
+| **MUSE03**（×2 → DIP 化・2ch 変換基板） | シングル相当 **2 個**を DIP 化し 2ch にした変換基板あり。表記は MUSE03（製品 DS 名は **MUSES03**）。J-FET、en 7.5 nV/√Hz、GBW 12 MHz、SR 35 V/µs、Vs ±3.5〜±18（[DS 要点](datasheets/opamps/README.md#muses03-ds-要点)） | 可（変換ごと Amp ソケットへ） | [PDF](datasheets/opamps/NJR_MUSES03.pdf) |
 
 ## AudioV2 ±12 V 電源での可否（DKMW20F-12）
 
@@ -81,3 +81,4 @@
 | 2026-08-31 | AudioV2 ±12 V 電源可否表を追加（全石 OK） |
 | 2026-08-31 | 手持ち全石の DS を `datasheets/opamps/` に保管・索引リンク | |
 | 2026-08-31 | MUSE03 = 2 石→DIP 化・2ch 変換基板あり、と追記 | |
+| 2026-08-31 | MUSE03 DS 要点・製品ページ参照を `datasheets/opamps/README.md` に追加 | |

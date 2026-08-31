@@ -22,8 +22,24 @@
 | OPA1612 DIP 化 | [TI_OPA1612.pdf](TI_OPA1612.pdf) | TI |
 | LT1364CN8 | [AD_LT1364.pdf](AD_LT1364.pdf) | Analog Devices / LTC（Wayback 取得） |
 | OPA2140 AIDR DIP | [TI_OPA2140.pdf](TI_OPA2140.pdf) | TI OPAx140 |
-| MUSE01（2→1 DIP） | [NJR_MUSES01.pdf](NJR_MUSES01.pdf) | 製品 DS 名は **MUSES01** |
-| MUSE03（2→DIP・2ch） | [NJR_MUSES03.pdf](NJR_MUSES03.pdf) | 製品 DS 名は **MUSES03**。J-FET シングル |
+| MUSE01（2→1 DIP） | [NJR_MUSES01.pdf](NJR_MUSES01.pdf) | 製品 DS 名は **MUSES01**。[製品ページ](https://www.nisshinbo-microdevices.co.jp/ja/products/operational-amplifier/spec/?product=muses01) |
+| MUSE03（2→DIP・2ch） | [NJR_MUSES03.pdf](NJR_MUSES03.pdf) | 製品 DS 名は **MUSES03**。J-FET シングル。[製品ページ](https://www.nisshinbo-microdevices.co.jp/ja/products/operational-amplifier/spec/?product=muses03) |
+
+### MUSES03 DS 要点
+
+ローカル PDF: [`NJR_MUSES03.pdf`](NJR_MUSES03.pdf)（Ver.4.x）
+
+| 項目 | 値 |
+|---|---|
+| 入力 | J-FET・シングル（DIP-8 OFC） |
+| 推奨電源 | **±3.5〜±18 V**（絶対最大 ±19 V） |
+| en | 7.5 nV/√Hz typ（1 kHz） |
+| Ib | 5 pA typ |
+| GBW | 12 MHz typ |
+| SR | 35 V/µs typ |
+| Iq | 5.8 mA typ |
+
+手元はシングル×2 の DIP 化・2ch 変換基板。Amp DIP-8 ソケットへは変換ごと挿す。
 
 ## 取得メモ
 
@@ -31,6 +47,7 @@
 - Nisshinbo (NJR): 製品ページの DS PDF
 - LT1364: AD 現行 URL が不安定だったため Internet Archive 経由で取得
 - OPA2604: TI 現行リダイレクト回避のため DigiKey 公開 PDF
+- MUSES03: 秋月公開 PDF（`MUSES03_J-1.pdf`）を `NJR_MUSES03.pdf` として保管（2026-08-31）
 
 ## AudioV2 側
 
