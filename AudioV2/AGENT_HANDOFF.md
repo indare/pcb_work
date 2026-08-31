@@ -113,7 +113,9 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 - I2C プルアップは **ControlPanel の `R210`/`R211` 4.7 kΩ のみ**。RelayBoard 側には置かない（並列化を避ける）
 - 参照接頭辞は `Device:R` に対し `JP` のまま（ストラップである意図を残す）。**KiCad で「既存アノテーションをリセット」して再アノテートすると `R3xx` に振り直される**ので実行しない
 
-**⚠ スクリプトと図が非同期（未解消）:** `wire_circuit_design.py` の `addr_strap` は今も `SolderJumper_2_Open` を y≈152/168 に生成する。`wire_circuit_design.py relay` を再生成すると、手編集ぶん（ストラップの U301 脇配置・0 Ω 化・1206 FP・`J_I2C`/`C301`/`C302` の位置・階層ラベル位置）が**全部戻る**。回すなら先にスクリプトへ写すこと。
+**⚠ スクリプトと図が非同期（未解消）:** `wire_circuit_design.py` の `addr_strap` は今も `SolderJumper_2_Open` を y≈152/168 に生成する。`wire_circuit_design.py relay`（または引数省略の `all`）を再生成すると、手編集ぶん（ストラップの U301 脇配置・0 Ω 化・1206 FP・`J_I2C`/`C301`/`C302` の位置・階層ラベル位置）が**全部戻る**。回すなら先にスクリプトへ写すこと。
+
+**安全装置（2026-08-31 追加）:** `main()` は `relay` への書き込みをデフォルトでスキップし、警告を出すだけになった。上書きするには明示的に `--force-relay` を付ける（`python3 wire_circuit_design.py relay --force-relay`）。誤操作（Cursorエージェントが `.cursor/rules/work-on-main.mdc` を見て「再生成は wire_circuit_design.py」とだけ理解し `all` を回すケースなど）を防ぐための保険であり、根本対応（スクリプトの同期）の代わりにはならない。
 
 ### 2.7 RelayBoard レビュー指摘（2026-08-31、いずれも接続ミスではない。未対応）
 
@@ -233,3 +235,4 @@ generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay 
 | 2026-08-31 | AmpModule再版 — 高速石対応、独立PCB、親代表1シート、×10 |
 | 2026-08-31 | RelayBoard本配線 — 5ch×2、入力＋電源連動、各インスタンスERC 0 |
 | 2026-08-31 | 番地ストラップ 0 Ω/1206 化（§2.6）＋レビュー指摘の記録（§2.7）。スクリプト非同期の警告あり |
+| 2026-08-31 | `wire_circuit_design.py` に `relay` 書き込みの安全装置（`--force-relay` 必須化）を追加。`work-on-main.mdc` にも注記（§2.6） |

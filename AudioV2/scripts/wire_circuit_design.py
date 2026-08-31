@@ -1403,19 +1403,31 @@ def parent_wired() -> str:
 
 def main() -> None:
     target = sys.argv[1] if len(sys.argv) > 1 else "all"
+    force_relay = "--force-relay" in sys.argv[2:]
     if target in ("all", "amp"):
         (ROOT / "AmpModule.kicad_sch").write_text(amp_module_wired(), encoding="utf-8")
     if target in ("all", "power"):
         (ROOT / "PowerModule.kicad_sch").write_text(power_module_wired(), encoding="utf-8")
+    relay_skipped = False
     if target in ("all", "relay"):
-        (ROOT / "RelayBoard.kicad_sch").write_text(relay_board_wired(), encoding="utf-8")
+        if force_relay:
+            (ROOT / "RelayBoard.kicad_sch").write_text(relay_board_wired(), encoding="utf-8")
+        else:
+            relay_skipped = True
+            print(
+                "SKIPPED RelayBoard.kicad_sch: relay_board_wired() is out of sync with "
+                "hand edits (addr strap footprint/position, C301/C302, J_I2C — see "
+                "AudioV2/AGENT_HANDOFF.md §2.6). Sync the generator first, or pass "
+                "--force-relay to overwrite anyway.",
+                file=sys.stderr,
+            )
     if target in ("all", "control"):
         (ROOT / "ControlPanel.kicad_sch").write_text(control_panel_wired(), encoding="utf-8")
     if target in ("all", "output"):
         (ROOT / "OutputStage.kicad_sch").write_text(output_stage_wired(), encoding="utf-8")
     if target in ("all", "parent"):
         (ROOT / "AudioV2Case.kicad_sch").write_text(parent_wired(), encoding="utf-8")
-    print(f"Wired: {target}")
+    print(f"Wired: {target}" + (" (relay skipped)" if relay_skipped else ""))
 
 
 if __name__ == "__main__":
