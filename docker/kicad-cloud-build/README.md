@@ -47,3 +47,19 @@ docker run --rm kicad-cloud:10.0.6 kicad-cli version
 
 - `mirror.gcr.io` 経由のベースイメージ + `gitlab.com` からのソース取得で、Docker Hub のイメージ配信やKiCad公式サイトへの直接アクセスが制限された環境でもビルド可能なことを確認済み。
 - 本リポジトリの `Audio/split/AudioCase_4_amp.kicad_pcb` に対して実際に DRC・Gerber・ドリル出力を実行し、成功を確認済み（DRC違反7件検出）。
+
+## Cloud Agent 環境での使い方
+
+このディレクトリの `Dockerfile.10.0.6` は **Docker イメージをソースビルドする**ためのものです（初回 ~45 分）。Cursor Cloud Agent の VM には Docker が入っておらず、その Dockerfile をそのまま `docker build` しては使えません。
+
+代わりに、ランタイム成果物（`kicad-cli` 10.0.6 + symbols / footprints / templates）を **apt パッケージ**で揃えます。
+
+| Dockerfile.10.0.6 | Cloud Agent での対応 |
+|---|---|
+| ソースから KiCad 10.0.6 をビルド | 既存ベースに入っている `kicad` 10.0.6（PPA） |
+| `kicad-symbols` / `footprints` / `templates` を clone+install | `apt install kicad-symbols kicad-footprints kicad-templates kicad-libraries` |
+| ユーザー設定へ `*-lib-table` をコピー | `~/.config/kicad/10.0/` へ同ファイルをコピー |
+| `kicad-packages3d` | Dockerfile にも無いので入れない |
+
+Personal（ダッシュボード管理）環境では `install` スクリプトに上記 apt を書き、スナップショットを Save する。リポジトリ管理の Dockerfile ビルドに切り替える場合の参考として `Dockerfile.cloud-agent` も置いてある。
+

@@ -1,0 +1,44 @@
+# Cloud Agent base image equivalent of Dockerfile.10.0.6 runtime stage.
+#
+# The source-build Dockerfile.10.0.6 is for `docker build` / CI (~45 min).
+# Cloud Agent VMs do not run that Docker build; they boot from a Cursor
+# environment snapshot. This file documents the apt-package set that matches
+# the runtime outcome of Dockerfile.10.0.6 (kicad-cli 10.0.6 + symbols +
+# footprints + templates), for use as `.cursor/Dockerfile` if/when the
+# environment is switched to repository-managed Dockerfile builds.
+#
+# Not used by the current Personal (DB-managed) environment; that path
+# installs the same packages via the environment `install` script.
+
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=C.UTF-8 \
+    LANGUAGE=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
+# KiCad 10.0 PPA (same version line as Dockerfile.10.0.6 / kicad-cli 10.0.6)
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends software-properties-common ca-certificates \
+ && add-apt-repository -y ppa:kicad/kicad-10.0-releases \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends \
+      kicad \
+      kicad-symbols \
+      kicad-footprints \
+      kicad-templates \
+      kicad-libraries \
+      python3 \
+      python3-wxgtk4.0 \
+      git \
+      sudo \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+# Seed global lib tables for new users, matching Dockerfile.10.0.6 copying
+# *-lib-table into the runtime user's KiCad config.
+RUN mkdir -p /etc/skel/.config/kicad/10.0 \
+ && cp /usr/share/kicad/template/*-lib-table /etc/skel/.config/kicad/10.0/
+
+USER ubuntu
+WORKDIR /workspace
