@@ -1183,7 +1183,7 @@ def write_wiring_md() -> None:
 | `PD_GND` | CH224/DKMW −Vin | Panel LED 戻り | 2P |
 | `VCC_TONE` | PowerModule LDO | ControlPanel PT2314 | 2P or 同一 PCB |
 
-## デジタル / I²C（Q3 拓扑 **保留**）
+## デジタル / I²C（Q3 トポロジー **保留**）
 
 | Net | 源 | 先 | 備考 |
 |---|---|---|---|
@@ -1212,7 +1212,7 @@ def write_wiring_md() -> None:
 
 ## 意図的未決
 
-- **Q3** I²C 拓扑（daisy / スター）
+- **Q3** I²C トポロジー（daisy / スター）
 - GND NetTie 物理位置
 - DEST リレー本数・駆動元（Control ULN 余裕 vs Relay MCP ビット）
 - PT2314 外部 C/R 値

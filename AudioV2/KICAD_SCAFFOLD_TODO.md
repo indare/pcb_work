@@ -99,10 +99,10 @@ python3 Audio/scripts/check_sexpr.py -q AudioV2
 
 ## Phase 7 — レビュー待ち（素案では埋めなくてよい）
 
-- [ ] Q3 I²C 拓扑（daisy / スター）
+- [x] Q3 I²C トポロジー（daisy / スター）→ **スター確定**（2026-08-31、WIRING.md）
 - [ ] Q2-B 独立 Output PCB への物理分割
 - [ ] GND NetTie 一点の物理位置
-- [ ] DEST リレー拓扑の最終本数
+- [ ] DEST リレートポロジーの最終本数
 - [ ] ERC / ネットリスト整合（`kicad-cli sch export netlist` — 環境に CLI があれば）
 
 ---

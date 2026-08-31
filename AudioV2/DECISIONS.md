@@ -105,7 +105,7 @@ ENC_DEST + DEST ラッチングリレー案は **見送り**。
 
 1. ~~12V LED の取り出し元~~ → **§9 確定**
 2. ~~ENC 配線~~ → **§10 確定（GPIO 直結・×3）**
-3. ~~物理基板分割~~ → **§11 Q1=B, Q2=A**。I²C 拓扑（Q3）・端子詳細は **設計時**
+3. ~~物理基板分割~~ → **§11 Q1=B, Q2=A**。I²C トポロジー（Q3）・端子詳細は **設計時**
 4. ~~PT2314 外部 C/R（トーン）~~ → DS 値（2.4 k / 2.7 nF / 100 n / 2.2 µF / REF 5.6 k+22 µ）を [CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md) に反映済み
 5. ~~±12 V 化に伴う HP 固定パッド~~ → **§9 確定（0 Ω。ポット回転域を実機で確認）**
 6. ~~**SW_DEST 品種**~~ → **C&K 7303SYZQE**（3PDT ON-OFF-ON）。ラダー **10k/10k/1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) / [PARTS.md](PARTS.md)）
@@ -651,7 +651,7 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► SW_DEST ──�
 
 ## 11. 物理基板分割・基板間接続 — **一部確定**
 
-**論理分割 B** は確定。**Q1・Q2 は確定、Q3（I²C 拓扑）は回路・基板設計まで保留。**
+**論理分割 B** は確定。**Q1・Q2 は確定、Q3（I²C トポロジー）は回路・基板設計まで保留。**
 
 ### 11.7 確定内容（ユーザー 2026-08-30）
 
@@ -659,7 +659,7 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► SW_DEST ──�
 |---|---|
 | **Q1 Relay 物理枚数** | **B — 5ch × 2 枚**（現 Controll 2 段型。ケーシング向き） |
 | **Q2 OutputStage 物理位置** | **A — ControlPanel と同一 PCB**（SW_DEST / ポット同居）。**PCB レイアウト時に B（独立板）へ変更可** |
-| **Q3 I²C 拓扑** | **保留** — 回路・基板レイアウト時に決定 |
+| **Q3 I²C トポロジー** | **保留** — 回路・基板レイアウト時に決定 |
 | **物理分割全体** | **PC + PB + Amp再版** — Relay 2 + Control 1（Output同居）+ Power 1 + Amp 10 → **新規14 PCB** |
 
 KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロック）。物理実装は **ControlPanel PCB 上**。
@@ -813,7 +813,7 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 4. ~~起こし範囲（§6）~~ → **D1.5 確定**
 5. ~~起こし範囲（§6）~~ → **D1.5 確定**
 6. ~~物理基板（§11 Q1/Q2）~~ → **確定**
-7. **I²C 拓扑（§11 Q3）** — 回路・基板設計時
+7. **I²C トポロジー（§11 Q3）** — 回路・基板設計時
 8. KiCad 起こし
 
 ---
@@ -845,6 +845,6 @@ I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で d
 - [x] **DEST ラダー: Rh=Rl=10k, Rs=1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)）
 - [x] **SW_DEST 型番: C&K 7303SYZQE**（3PDT ON-OFF-ON）
 - [x] **AZ850 コイル: AZ850P2-5**（5 V、秋月 118017）
-- [x] **I²C 拓扑（§11 Q3）: スター確定**（2026-08-31、WIRING.md）。端子台はPhoenix MKDS-1,5系（v1 `Audio/Controll.kicad_sch`と同一/互換、PARTS.md）
+- [x] **I²C トポロジー（§11 Q3）: スター確定**（2026-08-31、WIRING.md）。端子台はPhoenix MKDS-1,5系（v1 `Audio/Controll.kicad_sch`と同一/互換、PARTS.md）
 - [x] **RelayBoard 本配線 / RelayBoard_A・B ERC 0件**
 - [ ] **KiCad ERC残り / 未使用 PT2314 入力**
