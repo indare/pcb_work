@@ -1061,6 +1061,7 @@ def amp_module_wired() -> str:
     """AudioV2 Amp reference design; manufacture ten identical PCBs."""
     parts: list[str] = []
     nets: list[str] = []
+    wires: list[str] = []
     r_fp = "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
     c_fp = "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
     bulk_fp = "Capacitor_SMD:CP_Elec_10x12.6"
@@ -1155,8 +1156,28 @@ def amp_module_wired() -> str:
     two_pin("Device:R", "R703", "1k", 76.2, 45.72, "L_AC", "A_GND", r_fp, "L non-inverting bias; 1/10 refine")
     two_pin("Device:R", "R704", "1k", 76.2, 78.74, "R_AC", "A_GND", r_fp, "R non-inverting bias; 1/10 refine")
 
+    # Draw the input bus so the signal path reads left-to-right like the v1
+    # schematic (net_at labels above still carry the actual connectivity).
+    j701_l, j701_r = screw02_pins(30.48, 60.96)
+    wires.extend(
+        [
+            wire(j701_l[0], j701_l[1], j701_l[0], 41.91),
+            wire(j701_l[0], 41.91, 66.04, 41.91),
+            junction(45.72, 41.91),
+            junction(55.88, 41.91),
+            wire(j701_r[0], j701_r[1], j701_r[0], 74.93),
+            wire(j701_r[0], 74.93, 66.04, 74.93),
+            junction(45.72, 74.93),
+            junction(55.88, 74.93),
+        ]
+    )
+
     # Dual op amp, gain = 1 + 20k/20k = 2 (headroom; source volume handles loudness).
-    for unit, x, y in [(1, 101.6, 50.8), (2, 101.6, 83.82), (3, 127.0, 111.76)]:
+    # Unit A/B = R/L is fixed by the proven PCB routing; only the *schematic*
+    # position is chosen here, so each unit sits in its own channel's row
+    # (R701-704/R706/R708/R710/C708 are already at y=78.74-99.06; L's
+    # counterparts at y=45.72-66.04) instead of crossing to the other row.
+    for unit, x, y in [(1, 101.6, 83.82), (2, 101.6, 50.8), (3, 127.0, 111.76)]:
         parts.append(
             symbol_inst_v10(
                 "Amplifier_Operational:NE5532",
@@ -1173,13 +1194,14 @@ def amp_module_wired() -> str:
             )
         )
     for net, p in [
-        # Preserve the proven PCB routing: unit A = R, unit B = L.
-        ("R_OUT_OP", tip(101.6, 50.8, 7.62, 0)),
-        ("R_INV", tip(101.6, 50.8, -7.62, -2.54)),
-        ("R_AC", tip(101.6, 50.8, -7.62, 2.54)),
-        ("L_OUT_OP", tip(101.6, 83.82, 7.62, 0)),
-        ("L_INV", tip(101.6, 83.82, -7.62, -2.54)),
-        ("L_AC", tip(101.6, 83.82, -7.62, 2.54)),
+        # Unit A = R, unit B = L (proven PCB routing); positions match the
+        # row swap above.
+        ("R_OUT_OP", tip(101.6, 83.82, 7.62, 0)),
+        ("R_INV", tip(101.6, 83.82, -7.62, -2.54)),
+        ("R_AC", tip(101.6, 83.82, -7.62, 2.54)),
+        ("L_OUT_OP", tip(101.6, 50.8, 7.62, 0)),
+        ("L_INV", tip(101.6, 50.8, -7.62, -2.54)),
+        ("L_AC", tip(101.6, 50.8, -7.62, 2.54)),
         ("-12V", tip(127.0, 111.76, -2.54, -7.62)),
         ("+12V", tip(127.0, 111.76, -2.54, 7.62)),
     ]:
@@ -1192,6 +1214,18 @@ def amp_module_wired() -> str:
     two_pin("Device:R", "R710", "47R", 127.0, 83.82, "R_OUT_OP", "R_OUT_PRE", r_fp, "R output isolation")
     two_pin("Device:C_Polarized", "C707", "470uF 25V", 139.7, 50.8, "L_OUT_PRE", "L_OUT", out_fp, "L output coupling; compact D12.5/P5", True)
     two_pin("Device:C_Polarized", "C708", "470uF 25V", 139.7, 83.82, "R_OUT_PRE", "R_OUT", out_fp, "R output coupling; compact D12.5/P5", True)
+
+    # Draw the output tail so it visibly lands on J702 (net_at labels above
+    # still carry the actual connectivity).
+    j702_l, j702_r = screw02_pins(160.02, 60.96)
+    wires.extend(
+        [
+            wire(139.7, 54.61, j702_l[0], 54.61),
+            wire(j702_l[0], 54.61, j702_l[0], j702_l[1]),
+            wire(139.7, 87.63, j702_r[0], 87.63),
+            wire(j702_r[0], 87.63, j702_r[0], j702_r[1]),
+        ]
+    )
 
     # Power reservoir and high-frequency bypass. Negative bulk has + at A_GND.
     two_pin("Device:C_Polarized", "C709", "100uF 35V polymer", 55.88, 111.76, "+12V", "A_GND", bulk_fp, "V+ local bulk at power connector", True)
@@ -1217,6 +1251,7 @@ def amp_module_wired() -> str:
 {hier_label("R_OUT", "output", 180.34, 71.12, 0)}
 {"".join(parts)}
 {"".join(nets)}
+{"".join(wires)}
 """
     return sch_open(UUID_AMP_FILE, body)
 
