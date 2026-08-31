@@ -7,12 +7,22 @@ import uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-_SYSTEM_SYM_ROOT = Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols")
-KICAD_SYM_ROOT = (
-    Path("/tmp/kicad-symbols")
-    if Path("/tmp/kicad-symbols").is_dir()
-    else _SYSTEM_SYM_ROOT
-)
+
+
+def _resolve_kicad_sym_root() -> Path:
+    """Prefer an explicit cache, then OS-specific KiCad installs."""
+    candidates = [
+        Path("/tmp/kicad-symbols"),
+        Path("/usr/share/kicad/symbols"),  # Linux packages / cloud image
+        Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols"),
+    ]
+    for path in candidates:
+        if path.is_dir():
+            return path
+    return candidates[-1]
+
+
+KICAD_SYM_ROOT = _resolve_kicad_sym_root()
 
 
 def new_uid() -> str:
