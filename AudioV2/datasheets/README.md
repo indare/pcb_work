@@ -7,7 +7,7 @@
 | 部品 | 用途 | ローカル | 取得元 |
 |---|---|---|---|
 | **[50224] CH224** | USB-PD（PowerModule 内蔵） | [StrawberryLinux_CH224K_manual.pdf](StrawberryLinux_CH224K_manual.pdf) 他 | AudioV2 PowerModule **再設計**に統合 |
-| **DKMW20F-12** | ±12 V DC-DC（AudioV2 PowerModule） | [MeanWell_SKMW20_DKMW20.pdf](MeanWell_SKMW20_DKMW20.pdf) | [Mean Well SKMW20/DKMW20](https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20)。F-12 は ±12 V / ±830 mA |
+| **DKMW20F-15** | ±15 V DC-DC（AudioV2 PowerModule） | [MeanWell_SKMW20_DKMW20.pdf](MeanWell_SKMW20_DKMW20.pdf) | [Mean Well SKMW20/DKMW20](https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20)。F-15 は ±15 V / ±660 mA。2026-09-01 に F-12(±12 V) から変更 |
 | **BP5293-50** | 操作板 +5 V（Controll 系） | [ROHM_BP5293-xx.pdf](ROHM_BP5293-xx.pdf) | [ROHM BP5293-xx](https://www.rohm.com/products/power-management/switching-regulators-integrated-fet/bp5293-xx-series) |
 
 ## 音量・トーン
@@ -19,13 +19,25 @@
 | **C&K 7303SYZQE** | DEST 3PDT ON-OFF-ON | [C&K 7000 Series](https://media.digikey.com/pdf/Data%20Sheets/C&K/7000%20Mini%20Toggle%20Series.pdf) | [PARTS.md](../PARTS.md) |
 | ~~PGA2310PA~~ | **不採用**（調査アーカイブ） | [TI_PGA2310.pdf](TI_PGA2310.pdf) | [VOLUME_IC_COMPARISON.md](../VOLUME_IC_COMPARISON.md) |
 
-## リレー盤（B2-exp）
+## アンプ切替（統合1枚基板）
+
+2026-09-01 にアーキテクチャを刷新し、リレー盤とアンプ基板を1枚へ統合した（[DECISIONS.md](../DECISIONS.md) §11.1）。
+切替はラッチングリレーからアナログスイッチICへ変更。
 
 | 部品 | 用途 | ローカル | 取得元 |
 |---|---|---|---|
-| **MCP23017** | I²C GPIO 拡張 | [Microchip_MCP23017.pdf](Microchip_MCP23017.pdf) | [Microchip DS20001952C](https://ww1.microchip.com/downloads/en/devicedoc/20001952c.pdf) |
-| **ULN2803A** | コイル駆動 | [ST_ULN2803A.pdf](ST_ULN2803A.pdf) | [ST ULN2803A](https://www.st.com/resource/en/datasheet/uln2803a.pdf) |
-| **AZ850P2-5** | ラッチング DPDT（**5 V コイル**） | [Zettler_AZ850.pdf](Zettler_AZ850.pdf) | 秋月 [118017](https://akizukidenshi.com/catalog/g/g118017/) |
+| **TMUX7612** | **アンプ入出力の切替**（4回路SPST、1パッケージ=1ch） | [TI_TMUX7612.pdf](TI_TMUX7612.pdf) | [TI TMUX7612](https://www.ti.com/lit/ds/symlink/tmux7612.pdf) |
+| **MCP23017** | I²C GPIO 拡張（切替IC の制御、10本） | [Microchip_MCP23017.pdf](Microchip_MCP23017.pdf) | [Microchip DS20001952C](https://ww1.microchip.com/downloads/en/devicedoc/20001952c.pdf) |
+
+### 不採用（調査アーカイブ）
+
+ラッチングリレー方式で検討した部品。経緯は [AGENT_HANDOFF.md](../AGENT_HANDOFF.md) §2.7-3 / §2.9。
+
+| 部品 | 検討内容 | ローカル | 不採用の理由 |
+|---|---|---|---|
+| ~~AZ850P2-5~~ | ラッチング DPDT（5 V コイル） | [Zettler_AZ850.pdf](Zettler_AZ850.pdf) | 1枚統合でリレーは面積を食いすぎる。コイル 125 Ω / Must Operate 3.75 V の実値は §2.7-3 の検算根拠 |
+| ~~ULN2803A~~ | コイル駆動 | [ST_ULN2803A.pdf](ST_ULN2803A.pdf) | ダーリントンの約1 V 降下が 5 V レールの20%を食い、40 ℃ で仕様割れ（§2.7-3） |
+| ~~TBD62083A~~ | ULN2803A のドロップイン代替（DMOS） | [Toshiba_TBD62083A.pdf](Toshiba_TBD62083A.pdf) | コイル駆動マージンは解決したが、リレー方式ごと不採用になった。RON 2.0 typ / 3.25 max Ω、ピン配置は ULN2803A と完全一致 |
 
 ## UI・MCU
 
