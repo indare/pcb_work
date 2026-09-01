@@ -85,7 +85,13 @@ AMP_SEL_L ── SW601 (SP3T) / AMP_SEL_R ── SW602 (SP3T)
 USB-C → CH224 → PD_12V → PWR SW → F201 → DKMW20F-12 → ±12 V / A_GND。  
 +12 V → LM7809 → VCC_TONE（+9 V）。
 
-### RelayBoard — 5ch×2枚
+### RelayBoard — **廃止予定**（2026-09-01、AGENT_HANDOFF §2.9）
+
+> **この節は旧アーキテクチャの記録です。** RelayBoard と AmpModule は 10ch 分を載せた
+> 1枚の基板へ統合することが決まりました。入力と出力の両方をアナログスイッチで切り替え、
+> 電源は常時給電します。以下は統合前の仕様で、`RelayBoard.kicad_sch` の現状に対応します。
+
+#### 旧仕様（5ch×2枚）
 
 - 1枚あたり MCP23017×1、ULN2803×2、AZ850×10（audio/power各5）
 - `TONE_L/R → audio relay → 選択Amp J701`
