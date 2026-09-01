@@ -43,7 +43,7 @@ I2C/電源トポロジは**スター確定**（daisy不採用、§WIRING.md）�
 
 ```text
 J202 ← PD module (1=GND 2=+12)
-        → PD_12V ──(Case)──► ControlPanel SW1 + D503 LED
+        → PD_12V ──(Case)──► ControlPanel SW502 + D503 LED
                               → PD_12V_SW ──(Case)──► F201 → U201 DKMW +Vin
         PD_GND ←→ 一次（LED 戻りもここ）
 
@@ -91,15 +91,15 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 
 - `AudioV2/AmpModule.kicad_sch`: L/R非反転、ゲイン `1+20k/20k=2`
 - `AudioV2/AmpModule.kicad_pcb`: `Audio/split/AudioCase_4_amp.kicad_pcb`を元に端子・4穴を維持
-- バルク: C709/C710 = 100 µF 35 V polymer（各レール）
-- 高周波: C705/C706 = 100 nF X7R、C711/C712 = 1 nF C0G
-- 出力: C707/C708 = 470 µF 25 V D12.5/P5、R709/R710 = 47 Ω
+- バルク: C707/C708 = 100 µF 35 V polymer（各レール）
+- 高周波: C709/C710 = 100 nF X7R、C711/C712 = 1 nF C0G
+- 出力: C703/C706 = 470 µF 25 V D12.5/P5、R703/R708 = 47 Ω
 - 親は`AmpModule_Reference` 1シート。回路/BOM代表であり、Relay端子配線で物理×10を選択
 - PCB再生成: `python3 AudioV2/scripts/build_amp_pcb.py`（ソースの`Audio/`基板は変更しない）
 
 **信号順配線化（2026-08-31、コード変更のみ・未実行）:** `amp_module_wired()`はラベルのみで実配線が無かった（旧v1の`Audio/AmpModule.kicad_sch`は逆に配線68本・ラベル0）。以下をコードに反映済み:
 - OpAmp2ユニットの**回路図上の配置**をunit1↔unit2で入れ替え、各chの帰還/出力段（既にL=y45.72-66.04, R=y78.74-99.06で各chごとに纏まっていた）とOpAmpユニットが同じ行に来るようにした（物理ピン割当=unit A/Bは変更していないのでPCBには無関係）
-- 入力バス（J701→R701/C701→C702、J701→R702/C703→C704）と出力段末尾（C707/C708→J702）に実配線を追加。ネットラベルは残したまま（配線＋ラベル両方あるが電気的に問題なし）
+- 入力バス（J701→R701/C701→C702、J701→R706/C704→C705）と出力段末尾（C703/C706→J702）に実配線を追加。ネットラベルは残したまま（配線＋ラベル両方あるが電気的に問題なし）
 - 帰還ネットワーク周り（L_AC/L_INV/L_OUT_OP等、複数分岐・複数ピンが絡む箇所）は座標を手計算で引くリスクが高いためラベルのままにした（安全側判断）
 - **AmpModule.kicad_sch自体はまだ未再生成。** `python3 AudioV2/scripts/wire_circuit_design.py amp` をKiCadのあるマシンで実行し、`check_sexpr.py`とKiCadでの表示・ERCを確認してからコミットすること。AmpModuleは「生成コード所有」のまま（RelayBoardと違い安全装置は不要）
 
@@ -121,7 +121,7 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 - **`SolderJumper_2_Open` は不採用**。FP が `SolderJumper-2_P1.3mm_*`（1.3 mm ピッチ / 1.0×1.5 mm パッド）しか無く 0 Ω チップが載らない。1206 なら 0 Ω 実装でもハンダブリッジでも可
 - JP 位置に 10 kΩ を載せるのは誤り（10k∥10k で約 1.65 V、3.3 V の VIH を下回る）
 - `~RESET`(18) は `3V3` 直結（Low アクティブ、浮かせ禁止）。`A2`(17) は `V_SS`(10) と同節点で `D_GND`
-- I2C プルアップは **ControlPanel の `R210`/`R211` 4.7 kΩ のみ**。RelayBoard 側には置かない（並列化を避ける）
+- I2C プルアップは **ControlPanel の `R501`/`R502` 4.7 kΩ のみ**。RelayBoard 側には置かない（並列化を避ける）
 - 参照接頭辞は `Device:R` に対し `JP` のまま（ストラップである意図を残す）。**KiCad で「既存アノテーションをリセット」して再アノテートすると `R3xx` に振り直される**ので実行しない
 
 **✅ スクリプト同期（2026-08-31、コード上は完了・実機未検証）:** `wire_circuit_design.py` の `addr_strap`/`C301`/`C302`/`J_I2C`/階層ラベルを現図の座標へ書き直した。根拠は `RelayBoard.kicad_sch` の実座標を `pin_connect()` 相当の計算で裏取りし、`CIRCUIT_DESIGN.md`/`DECISIONS.md` の論理設計（JP301=A0・JP302=A1、`J_I2C`=SDA/SCL/3V3/+5V/D_GND順）と突き合わせて確認したもの。ADDR_A0/ADDR_A1 のネットラベルも復活させた。
@@ -134,8 +134,8 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 
 ### 2.7 RelayBoard レビュー指摘（2026-08-31、いずれも接続ミスではない。未対応）
 
-1. **A0/A1 ネットが無名** — 現在 `Net-(U301-A0)` / `Net-(U301-A1)`。`ADDR_A0`/`ADDR_A1` ラベルを戻すとネットリスト差分と ERC ログが読みやすい。**→ `wire_circuit_design.py` のスクリプト同期（§2.6）でラベルを復活させた。`--force-relay` で実図に反映するまでは無名のまま**
-2. **IC 直近パスコン不足** — `C301`/`C302` は方針どおり `J_I2C` 入口。別途 U301 の 9/10 ピン間、`U302`/`U303` の 10/9 ピン間に 100 nF が欲しい。`+5V` はリレーパルスが乗るので、リレー群近傍にバルク 100–220 µF も検討
+1. **A0/A1 ネットが無名** — 現在 `Net-(U302-A0)` / `Net-(U302-A1)`。`ADDR_A0`/`ADDR_A1` ラベルを戻すとネットリスト差分と ERC ログが読みやすい。**→ `wire_circuit_design.py` のスクリプト同期（§2.6）でラベルを復活させた。`--force-relay` で実図に反映するまでは無名のまま**
+2. **IC 直近パスコン不足** — `C301`/`C302` は方針どおり `J_I2C` 入口。別途 U302（MCP23017）の 9/10 ピン間、`U301`/`U303`（ULN2803A）の 10/9 ピン間に 100 nF が欲しい。`+5V` はリレーパルスが乗るので、リレー群近傍にバルク 100–220 µF も検討
 3. **コイル駆動マージンが薄い** — `CHn_SET` は audio/power 2 個のコイルを並列駆動 → 125 Ω∥125 Ω = 62.5 Ω ≈ 80 mA。ULN2803A の VCE(sat) は同電流で 0.9–1.1 V なのでコイル印加は約 3.9–4.1 V。AZ850P2-5 の must-set（定格の 70–75 % = 3.5–3.75 V）に対し余裕が 1 割程度。BP5293 からの 5P 配線の電圧降下も乗る。**`Zettler_AZ850.pdf` の set voltage 実値を確認すること**
 4. **A/B は同一番地に見える** — 親で 2 回インスタンス化しているため、ネットリスト上は A/B が同じ JP 状態＝同じ番地。実装時に基板ごとに JP を変える運用（シルク早見表が前提）
 5. **起動時 I2C スキャン** — 0x20–0x23 を叩いて応答番地をログ出力。JP 未実装のまま 2 枚組むと両方 0x20 で応答し、配線不良に見える化け方をするため
@@ -186,7 +186,7 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 ### できている
 
 - Power: PD モジュール入・DKMW・7809・J201/J202/J203・パネル SW ループ（論理）
-- Control: SW1 PWR SW + D503 12V LED、PT2314 / Pico / ENC 等
+- Control: SW502 PWR SW + D503 12V LED、PT2314 / Pico / ENC 等
 - Output / ラベル結線素案（#27）
 - AmpModule回路図、独立PCB、代表親シート（×10）
 - RelayBoard本配線: 各盤MCP23017×1、ULN2803×2、AZ850×10。Amp入力＋±12 Vを同時切替。番地はJP A1/A0で0x20–0x23（最大4枚）
@@ -199,7 +199,7 @@ NJM5532DD / NJM4580DD / OPA2134PA / OPA1656ID / OPA2604AQ / LME49860NA / LT1364C
 4. **ControlPanel未接続ピンの整理**
 5. ERC 残り（Relay/Amp/Power/Outputは0件。Control 32件＋親の箱外ラベルが主）
 6. OLED FP、PT2314 未使用入力
-7. RelayBoard PCB時: JP横 F.Silk に番地早見表（0x20–0x23）。FP は RelayBoard 全体で未割当（U301 含む）
+7. RelayBoard PCB時: JP横 F.Silk に番地早見表（0x20–0x23）。FP は RelayBoard 全体で未割当（U302 含む）
 
 ### 検証
 
@@ -225,7 +225,7 @@ Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 16. 手持ちオペアンプリストを `Audio/OPAMP_INVENTORY.md` に登録
 17. AmpModuleを高速石対応で再版。代表1シートを親へ統合し、独立PCBを×10仕様で生成
 18. RelayBoard本配線。未給電Ampへの信号印加を避け、audio入力＋±12 Vを同時切替。全体ERC 207→66
-19. 番地ストラップを `SolderJumper` → **0 Ω / 1206** に変更（§2.6）。`C301`/`C302` は `J_I2C` 入口、ストラップは U301 脇へ。レビュー指摘を §2.7 に記録。全体ERC 56（Relay 0）
+19. 番地ストラップを `SolderJumper` → **0 Ω / 1206** に変更（§2.6）。`C301`/`C302` は `J_I2C` 入口、ストラップは U302 脇へ。レビュー指摘を §2.7 に記録。全体ERC 56（Relay 0）
 
 ---
 

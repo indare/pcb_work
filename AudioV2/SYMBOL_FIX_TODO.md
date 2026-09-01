@@ -39,9 +39,9 @@ cd AudioV2 && kicad-cli sch export netlist -o /tmp/audiov2.net AudioV2Case.kicad
 
 | ID | 作業 | Done |
 |---|---|---|
-| B1 | `embed_lib_symbols`: `(extends …)` シンボルを **親のピン付き定義へ flatten** して埋め込む。対象: `LM7809_TO220`←`LM7805`, `MCP23017-E/SP`←`MCP23017x-x-SO`。ネットリストで U3/MCP の **pins が空でない**こと | [x] |
+| B1 | `embed_lib_symbols`: `(extends …)` シンボルを **親のピン付き定義へ flatten** して埋め込む。対象: `LM7809_TO220`←`LM7805`, `MCP23017-E/SP`←`MCP23017x-x-SO`。ネットリストで U202(LM7809)/U302(MCP23017) の **pins が空でない**こと | [x] |
 | B2 | `SYMBOL_SOURCES` の OLED: `ER_OLEDM0.91`（128×32）をやめる。**128×64 用途** — 当面は `Connector:Conn_01x04_Pin` 等のヘッダ＋注記「2.42″ OLED I2C」でも可。Value/FP に 0.91 / 128×32 を残さない | [x] |
-| B3 | `pin_connect` / PowerModule 配線を修正。ジャンクション `(83.82, 45.72)` 付近で **PD_GND・F1・DKMW ±Vin・R.C.・7809 GND が同一ネットに合流しない**こと。一次／二次（A_GND）を混ぜない。R.C. は DS どおり（通常オープン or 仕様どおり） | [x] |
+| B3 | `pin_connect` / PowerModule 配線を修正。ジャンクション `(83.82, 45.72)` 付近で **PD_GND・F201・DKMW ±Vin・R.C.・7809 GND が同一ネットに合流しない**こと。一次／二次（A_GND）を混ぜない。R.C. は DS どおり（通常オープン or 仕様どおり） | [x] |
 | B4 | `CTRL_LIBS` / `OUTPUT_LIBS` を実配置に合わせ、未使用埋め込みを削減 | [x] |
 | B5 | `python3 AudioV2/scripts/wire_circuit_design.py all` で再生成 → sexpr / netlist | [x] |
 

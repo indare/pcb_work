@@ -122,7 +122,7 @@ ENC_DEST + DEST ラッチングリレー案は **見送り**。
 |---|---|
 | アナログレール | **±12 V**（現行 Audio の ±15 V から変更） |
 | DC-DC | **DKMW20F-12** 想定（±12 V / **±830 mA**、Cout ≈800 µF/rail、外形は F-15 と同じ 1″×1″） |
-| PD 入力 | **PowerModule 基板に内蔵** — USB Type-C + **CH224K**（50224 相当）。ジャンパ **12 V** → 板上 **F1** → DKMW20。**開発用の外部 PD 端子**は任意 |
+| PD 入力 | **PowerModule 基板に内蔵** — USB Type-C + **CH224K**（50224 相当）。ジャンパ **12 V** → 板上 **F201** → DKMW20。**開発用の外部 PD 端子**は任意 |
 | パネル 12 V LED | CH224 **12 V** → **PWR SW**（操作パネル）→ LED + DKMW20 一次（§9）。`PD_GND` |
 
 ### ±12 V にした理由（AudioV2）
@@ -143,7 +143,7 @@ ENC_DEST + DEST ラッチングリレー案は **見送り**。
 
 ```text
 [PowerModule 基板]
-  USB-C ── CH224K(12V) ── F1 ── DKMW20F-12 ── ±12V / A_GND ──► 端子台（箱配線）
+  USB-C ── CH224K(12V) ── F201 ── DKMW20F-12 ── ±12V / A_GND ──► 端子台（箱配線）
         │                              │
         └── PD_12V ──(ケーブル)──► [操作パネル] PWR SW ──► 12V LED
                                               └──（SW 後）──► DKMW20 +Vin（板上は SW 前でも可・起こし時に一本化）
@@ -172,7 +172,7 @@ CH ──► PT2314 ──► Amp(×10) ──► SW_DEST ──┬─ RV_HP ─
 | 項目 | 決定 |
 |---|---|
 | CH224 | **PowerModule 基板に内蔵**（§6・§8）。ジャンパ **12 V** |
-| 配線 | 板上 CH224 出力 → 端子 **`PD_12V`** → **操作パネル PWR SW** → 戻り **`PD_12V_SW`** → 板上 **F1** → DKMW20 |
+| 配線 | 板上 CH224 出力 → 端子 **`PD_12V`** → **操作パネル PWR SW** → 戻り **`PD_12V_SW`** → 板上 **F201** → DKMW20 |
 | LED | SW 後段で **12 V パネル LED** → `PD_GND`（SW と LED を並列分岐しても可） |
 | GND | **`PD_GND`**（CH224 = DKMW20 `−Vin`）。`A_GND` とは NetTie 一点 |
 | LED 部品 | **12 V 内蔵抵抗付き 5 mm**（≈10–15 mA）。素 LED なら **680 Ω–1 kΩ** |
@@ -348,7 +348,7 @@ Amp は ×10・**±12 V** 系（旧 Audio は ±15 V）。
 | 部品が安い | 測定タップ（Amp 後）のレベルは音量と連動しない／するを要設計 |
 | | 「聴感音量」と「Amp 出力フルスケール」がずれる |
 
-### B. Amp **後**・現行 `RV101`/`RV102` 位置（出力減衰）
+### B. Amp **後**・現行 `RV601`/`RV602` 位置（出力減衰）
 
 | メリット | デメリット |
 |---|---|
@@ -514,7 +514,7 @@ CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► SW_DEST ──�
 | 1 | `RelayBoard.kicad_sch` | **×2**（5+5） | ラッチ + ULN + MCP23017 + Amp入力/電源端子 + **TONE_L/R IN** |
 | 2 | `ControlPanel.kicad_sch` | **×1** | Pico2 / ENC×3 / OLED / PT2314 / **RV・SW_DEST ヘッダ** / DEST LED / PWR SW / 12 V LED |
 | 3 | `OutputStage.kicad_sch` | **Control と同一 PCB** | **SW_DEST 音声配線 + 抵抗ラダー**（論理シートは分離可。**DEST ラッチングは廃止**） |
-| 4 | `PowerModule.kicad_sch` | **×1** | 再設計 — USB-C、CH224K、F1、DKMW20F-12 |
+| 4 | `PowerModule.kicad_sch` | **×1** | 再設計 — USB-C、CH224K、F201、DKMW20F-12 |
 | 5 | `AudioV2Case.kicad_sch` | — | 階層親 + 箱配線（Amp はテキストのみ） |
 
 **新規発注 PCB: 14 枚**（Relay×2 + Control×1 + Power×1 + **Amp×10**）。設計は5種類。

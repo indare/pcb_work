@@ -31,8 +31,8 @@ python3 Audio/scripts/check_sexpr.py -q AudioV2
 
 ## Phase 1 — PowerModule（§6.3 着手順 1）
 
-- [ ] **1.1** `PowerModule.kicad_sch` — `Audio/PowerModule.kicad_sch` を **参考に新規**（コピペ改変可）。U1 = **DKMW20F-12**（F-15 から差替）
-- [ ] **1.2** USB-C + **CH224K / 50224 枠** を板上に配置（素案: 50224 モジュール + 周辺 F1/PD_12V 端子）
+- [ ] **1.1** `PowerModule.kicad_sch` — `Audio/PowerModule.kicad_sch` を **参考に新規**（コピペ改変可）。U201 = **DKMW20F-12**（F-15 から差替）
+- [ ] **1.2** USB-C + **CH224K / 50224 枠** を板上に配置（素案: 50224 モジュール + 周辺 F201/PD_12V 端子）
 - [ ] **1.3** 階層ラベル: `+12V_IN` / `-12V_IN` / `A_GND` / `PD_12V` / `PD_GND` / `PD_12V_SW`（§9）
 - [ ] **1.4** PT2314 用 **+9V または +5V 派生** — 暫定 LDO 1 個 + ラベル `VCC_TONE`（値は TODO コメント）
 - [ ] **1.5** 親シートとの sheet pin 接続
@@ -77,7 +77,7 @@ python3 Audio/scripts/check_sexpr.py -q AudioV2
 
 - [ ] **5.1** PowerModule → 星型 ±12V / A_GND バス（グローバルラベル）
 - [ ] **5.2** Relay COMMON_LR → Control PT2314 入力（シート間 pin）
-- [ ] **5.3** Control PGA 出力 → OutputStage → **J_HP** / **J_LINE** 端子（Audio HP Buffer / LINE 流用先）
+- [ ] **5.3** Control PGA 出力 → OutputStage → **J_HP601** / **J_LINE601** 端子（Audio HP Buffer / LINE 流用先）
 - [ ] **5.4** テキストボックス: 「Amp×10 / HP / 計測 = Audio/ 製造済み・図外」
 - [ ] **5.5** `MeasurementADC_STATUS.md` 型の **箱配線一覧** を `AudioV2/WIRING.md` に 1 ページ素案
 

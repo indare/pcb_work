@@ -390,7 +390,7 @@ def power_module_wired() -> str:
     nets.append(net_at("PD_12V", pch["12V"]))
     nets.append(net_at("PD_12V", jpd1))
 
-    # Panel return PD_12V_SW → F1 → DKMW +Vin
+    # Panel return PD_12V_SW → F201 → DKMW +Vin
     nets.append(net_at("PD_12V_SW", f1_in))
     nets.append(net_at("DKMW_VIN", f1_out))
     nets.append(net_at("DKMW_VIN", pdk["1"]))
@@ -428,18 +428,18 @@ def power_module_wired() -> str:
         [
             symbol_inst_v10("Connector:USB_C_Receptacle_USB2.0_16P", "J1", "USB-C PD in", j1x, j1y, 0, PATH_PWR),
             symbol_inst_v10("AudioV2:CH224_50224", "U2", "50224_CH224 12V", u2x, u2y, 0, PATH_PWR),
-            symbol_inst_v10("Device:Fuse", "F1", "3A slow", f1x, f1y, 90, PATH_PWR),
-            symbol_inst_v10("AudioV2:DKMW20F-12", "U1", "DKMW20F-12", u1x, u1y, 0, PATH_PWR),
-            symbol_inst_v10("Regulator_Linear:LM7809_TO220", "U3", "LM7809 +9V", u3x, u3y, 0, PATH_PWR),
+            symbol_inst_v10("Device:Fuse", "F201", "3A slow", f1x, f1y, 90, PATH_PWR),
+            symbol_inst_v10("AudioV2:DKMW20F-12", "U201", "DKMW20F-12", u1x, u1y, 0, PATH_PWR),
+            symbol_inst_v10("Regulator_Linear:LM7809_TO220", "U202", "LM7809 +9V", u3x, u3y, 0, PATH_PWR),
             symbol_inst_v10("Connector:Conn_01x02_Pin", "J_PD", "PD_12V/GND to panel", j_pdx, j_pdy, 0, PATH_PWR),
-            symbol_inst_v10("Connector:Conn_01x03_Pin", "J202", "+12/-12/A_GND out", j202x, j202y, 0, PATH_PWR),
+            symbol_inst_v10("Connector:Conn_01x03_Pin", "J201", "+12/-12/A_GND out", j202x, j202y, 0, PATH_PWR),
         ]
     )
 
     body = f"""{embed_lib_symbols(lib_ids)}
 {text_note(25.4, 20.32, [
     "AudioV2 PowerModule — label-wired (§9 / CIRCUIT_DESIGN §4)",
-    "USB-C → CH224 → PD_12V/J_PD → (panel SW) → PD_12V_SW → F1 → DKMW_VIN",
+    "USB-C → CH224 → PD_12V/J_PD → (panel SW) → PD_12V_SW → F201 → DKMW_VIN",
     "Primary PD_GND ≠ secondary A_GND. DKMW R.C.=RC_OPEN (open=ON). LM7809 GND→A_GND.",
     "Connectivity = local labels on pin tips (same name = same net).",
 ])}
@@ -494,7 +494,7 @@ def control_panel_wired() -> str:
     # BP5293 +5V (VIN from +12V, GND D_GND)
     bpx, bpy = at(50.8, 145.0)
     bp = bp5293_pins(bpx, bpy)
-    parts.append(sym("BP5293_ROHM:BP5293-50", "U5", "BP5293-50 +5V", bpx, bpy, 0, PATH_CTRL))
+    parts.append(sym("BP5293_ROHM:BP5293-50", "U503", "BP5293-50 +5V", bpx, bpy, 0, PATH_CTRL))
     nets.append(net_at("+12V", bp["VIN"]))
     nets.append(net_at("D_GND", bp["GND"]))
     nets.append(net_at("+5V", bp["VOUT"]))
@@ -503,25 +503,25 @@ def control_panel_wired() -> str:
     nets.append(net_at("VCC_TONE", pt2314_pin(u2x, u2y, 1)))
     nets.append(net_at("A_GND", pt2314_pin(u2x, u2y, 2)))
     nets.append(net_at("D_GND", pt2314_pin(u2x, u2y, 25)))
-    _cap_net(parts, nets, "C201", "0.1u", u2x - 22, u2y - 20, "VCC_TONE", "A_GND", PATH_CTRL)
+    _cap_net(parts, nets, "C502", "0.1u", u2x - 22, u2y - 20, "VCC_TONE", "A_GND", PATH_CTRL)
 
     # COMMON → coupling → LIN(17) / RIN(5)
-    _cap_net(parts, nets, "C202", "2.2u", 95.0, 118.0, "COMMON_L", "PT_LIN", PATH_CTRL)
-    _cap_net(parts, nets, "C203", "2.2u", 95.0, 121.0, "COMMON_R", "PT_RIN", PATH_CTRL)
+    _cap_net(parts, nets, "C506", "2.2u", 95.0, 118.0, "COMMON_L", "PT_LIN", PATH_CTRL)
+    _cap_net(parts, nets, "C507", "2.2u", 95.0, 121.0, "COMMON_R", "PT_RIN", PATH_CTRL)
     nets.append(net_at("PT_LIN", pt2314_pin(u2x, u2y, 17)))
     nets.append(net_at("PT_RIN", pt2314_pin(u2x, u2y, 5)))
 
     # REF pin28: R 5.6k + C 22u → A_GND
     nets.append(net_at("PT_REF", pt2314_pin(u2x, u2y, 28)))
-    _res_net(parts, nets, "R201", "5.6k", u2x + 20, u2y - 22, "PT_REF", "A_GND", PATH_CTRL)
-    _cap_net(parts, nets, "C204", "22u", u2x + 28, u2y - 22, "PT_REF", "A_GND", PATH_CTRL)
+    _res_net(parts, nets, "R507", "5.6k", u2x + 20, u2y - 22, "PT_REF", "A_GND", PATH_CTRL)
+    _cap_net(parts, nets, "C501", "22u", u2x + 28, u2y - 22, "PT_REF", "A_GND", PATH_CTRL)
 
     # Bass L/R networks — rows ≥7.62 apart so R/C pin tips never coincide
     for pin_n, ref_r, ref_c, net_name, dx, dy in (
-        (19, "R202", "C205", "PT_BIN_L", -35.56, 12.7),
-        (20, "R203", "C206", "PT_BOUT_L", -35.56, -12.7),
-        (21, "R204", "C207", "PT_BIN_R", 35.56, 12.7),
-        (22, "R205", "C208", "PT_BOUT_R", 35.56, -12.7),
+        (19, "R513", "C510", "PT_BIN_L", -35.56, 12.7),
+        (20, "R510", "C503", "PT_BOUT_L", -35.56, -12.7),
+        (21, "R514", "C511", "PT_BIN_R", 35.56, 12.7),
+        (22, "R511", "C504", "PT_BOUT_R", 35.56, -12.7),
     ):
         nets.append(net_at(net_name, pt2314_pin(u2x, u2y, pin_n)))
         _res_net(parts, nets, ref_r, "2.4k", u2x + dx, u2y + dy, net_name, "A_GND", PATH_CTRL)
@@ -531,10 +531,10 @@ def control_panel_wired() -> str:
             net_name, "A_GND", PATH_CTRL,
         )
 
-    # Treble — clear of C201 (left of U2); place below pin tips
+    # Treble — clear of C502 (left of U502); place below pin tips
     for pin_n, ref_c, ref_r, net_name, mid, yoff in (
-        (3, "C209", "R206", "PT_TREB_L", "PT_TREB_L_MID", 15.24),
-        (4, "C210", "R207", "PT_TREB_R", "PT_TREB_R_MID", 25.4),
+        (3, "C508", "R512", "PT_TREB_L", "PT_TREB_L_MID", 15.24),
+        (4, "C512", "R515", "PT_TREB_R", "PT_TREB_R_MID", 25.4),
     ):
         px = pt2314_pin(u2x, u2y, pin_n)
         nets.append(net_at(net_name, px))
@@ -545,8 +545,8 @@ def control_panel_wired() -> str:
     # OUT → TONE hier (caps spaced > 7.62 so tips don't meet)
     nets.append(net_at("PT_OUT_L", pt2314_pin(u2x, u2y, 24)))
     nets.append(net_at("PT_OUT_R", pt2314_pin(u2x, u2y, 23)))
-    _cap_net(parts, nets, "C211", "2.2u", 190.5, 110.0, "PT_OUT_L", "TONE_L", PATH_CTRL)
-    _cap_net(parts, nets, "C212", "2.2u", 190.5, 125.0, "PT_OUT_R", "TONE_R", PATH_CTRL)
+    _cap_net(parts, nets, "C505", "2.2u", 190.5, 110.0, "PT_OUT_L", "TONE_L", PATH_CTRL)
+    _cap_net(parts, nets, "C509", "2.2u", 190.5, 125.0, "PT_OUT_R", "TONE_R", PATH_CTRL)
     parts.append(hier_label("TONE_L", "output", 200.66, 118.0, 0))
     parts.append(hier_label("TONE_R", "output", 200.66, 121.0, 0))
     nets.append(net_at("TONE_L", (200.66, 118.0)))
@@ -557,8 +557,8 @@ def control_panel_wired() -> str:
     nets.append(net_at("I2C_SCL", pt2314_pin(u2x, u2y, 27)))
     nets.append(net_at("I2C_SDA", pico_pin(picox, picoy, 26)))
     nets.append(net_at("I2C_SCL", pico_pin(picox, picoy, 27)))
-    _res_net(parts, nets, "R210", "4.7k", picox + 15, picoy - 10, "I2C_SDA", "+3V3", PATH_CTRL)
-    _res_net(parts, nets, "R211", "4.7k", picox + 15, picoy - 5, "I2C_SCL", "+3V3", PATH_CTRL)
+    _res_net(parts, nets, "R501", "4.7k", picox + 15, picoy - 10, "I2C_SDA", "+3V3", PATH_CTRL)
+    _res_net(parts, nets, "R502", "4.7k", picox + 15, picoy - 5, "I2C_SCL", "+3V3", PATH_CTRL)
     parts.append(hier_label("I2C_SDA", "bidirectional", 30.48, 135.08, 180))
     parts.append(hier_label("I2C_SCL", "bidirectional", 30.48, 137.62, 180))
     nets.append(net_at("I2C_SDA", (30.48, 135.08)))
@@ -578,10 +578,10 @@ def control_panel_wired() -> str:
 
     # DEST sense: 3V3--Rh--ADC--Rl--GND; COM=ADC; LINE→3V3 via Rs; PHONE→GND via Rs
     lad_x, lad_y = at(55.0, 95.0)
-    _res_net(parts, nets, "R230", "10k", lad_x, lad_y, "+3V3", "DEST_ADC", PATH_CTRL)
-    _res_net(parts, nets, "R231", "10k", lad_x + 12, lad_y, "DEST_ADC", "D_GND", PATH_CTRL)
-    _res_net(parts, nets, "R232", "1k", lad_x + 6, lad_y - 10, "DEST_SENSE_LINE", "+3V3", PATH_CTRL)
-    _res_net(parts, nets, "R233", "1k", lad_x + 6, lad_y + 10, "DEST_SENSE_PHONE", "D_GND", PATH_CTRL)
+    _res_net(parts, nets, "R505", "10k", lad_x, lad_y, "+3V3", "DEST_ADC", PATH_CTRL)
+    _res_net(parts, nets, "R506", "10k", lad_x + 12, lad_y, "DEST_ADC", "D_GND", PATH_CTRL)
+    _res_net(parts, nets, "R503", "1k", lad_x + 6, lad_y - 10, "DEST_SENSE_LINE", "+3V3", PATH_CTRL)
+    _res_net(parts, nets, "R509", "1k", lad_x + 6, lad_y + 10, "DEST_SENSE_PHONE", "D_GND", PATH_CTRL)
     nets.append(net_at("DEST_ADC", pico_pin(picox, picoy, 31)))  # GP26
 
     swsx, swsy = at(80.0, 95.0)
@@ -592,8 +592,8 @@ def control_panel_wired() -> str:
 
     # DEST LEDs: +3V3 -- R -- A/K -- GP (MCU sink)
     for ref_d, ref_r, gy, gp_pin, net_led in (
-        ("D2", "R234", 90.0, 19, "GP14"),
-        ("D3", "R235", 100.0, 20, "GP15"),
+        ("D501", "R504", 90.0, 19, "GP14"),
+        ("D502", "R508", 100.0, 20, "GP15"),
     ):
         lx, ly = at(100.0, gy)
         rx, ry = at(110.0, gy)
@@ -625,9 +625,9 @@ def control_panel_wired() -> str:
 
     # ENC×3 → GP0–8; C/S2 → D_GND
     encs = [
-        ("ENC1", "ENC_CH", 40.64, ("GP0", "GP1", "GP2"), (1, 2, 4)),
-        ("ENC2", "ENC_BASS", 55.88, ("GP3", "GP4", "GP5"), (5, 6, 7)),
-        ("ENC3", "ENC_TREBLE", 71.12, ("GP6", "GP7", "GP8"), (9, 10, 11)),
+        ("ENC501", "ENC_CH", 40.64, ("GP0", "GP1", "GP2"), (1, 2, 4)),
+        ("ENC502", "ENC_BASS", 55.88, ("GP3", "GP4", "GP5"), (5, 6, 7)),
+        ("ENC503", "ENC_TREBLE", 71.12, ("GP6", "GP7", "GP8"), (9, 10, 11)),
     ]
     for ref, name, ey, gp_names, gp_pins in encs:
         ex, ey = at(35.56, ey)
@@ -646,15 +646,15 @@ def control_panel_wired() -> str:
 {text_note(25.4, 25.4, [
     "ControlPanel — label-wired (DECISIONS manual volume)",
     "PT2314 / Pico2 / ENC×3 / 2.42″ OLED I2C / DEST ladder+LED / PWR SW",
-    "J_OLED: 1=GND 2=3V3 3=SCL 4=SDA. ENC→GP0-8, DEST_ADC→GP26, LED→GP14/15.",
+    "J_OLED501: 1=GND 2=3V3 3=SCL 4=SDA. ENC→GP0-8, DEST_ADC→GP26, LED→GP14/15.",
     "Connectivity = local labels on pin tips (grid-snapped).",
 ])}
-{sym("MCU_Module:RaspberryPi_Pico", "U1", "Pico 2 / RP2350", picox, picoy, 0, PATH_CTRL)}
-{sym("AudioV2:PT2314", "U2", "PT2314-D", u2x, u2y, 0, PATH_CTRL)}
-{sym("Connector:Conn_01x04_Pin", "J_OLED", "2.42 OLED I2C GND/3V3/SCL/SDA", oled_x, oled_y, 0, PATH_CTRL)}
-{sym("Switch:SW_SPST", "SW1", "PWR SW", sw1x, sw1y, 0, PATH_CTRL)}
-{sym("Device:LED", "D1", "12V panel LED", d1x, d1y, 0, PATH_CTRL)}
-{sym("Switch:SW_SP3T", "SW2", "DEST sense (3PDT 3rd pole)", swsx, swsy, 0, PATH_CTRL)}
+{sym("MCU_Module:RaspberryPi_Pico", "U501", "Pico 2 / RP2350", picox, picoy, 0, PATH_CTRL)}
+{sym("AudioV2:PT2314", "U502", "PT2314-D", u2x, u2y, 0, PATH_CTRL)}
+{sym("Connector:Conn_01x04_Pin", "J_OLED501", "2.42 OLED I2C GND/3V3/SCL/SDA", oled_x, oled_y, 0, PATH_CTRL)}
+{sym("Switch:SW_SPST", "SW502", "PWR SW", sw1x, sw1y, 0, PATH_CTRL)}
+{sym("Device:LED", "D503", "12V panel LED", d1x, d1y, 0, PATH_CTRL)}
+{sym("Switch:SW_SP3T", "SW501", "DEST sense (3PDT 3rd pole)", swsx, swsy, 0, PATH_CTRL)}
 {"".join(parts)}
 {"".join(nets)}
 """
@@ -731,8 +731,8 @@ def relay_board_wired() -> str:
     parts.append(
         rsym(
             "Interface_Expansion:MCP23017-E/SP",
-            "U301",
-            "U401",
+            "U302",
+            "U402",
             "MCP23017",
             mcp_x,
             mcp_y,
@@ -743,8 +743,8 @@ def relay_board_wired() -> str:
     parts.append(
         rsym(
             "Transistor_Array:ULN2803A",
-            "U302",
-            "U402",
+            "U301",
+            "U401",
             "ULN2803A",
             set_x,
             set_y,
@@ -778,10 +778,10 @@ def relay_board_wired() -> str:
     ncs.extend([no_connect_at(mcp_pin(-12.7, 5.08)), no_connect_at(mcp_pin(-12.7, 2.54))])
 
     # Default 0x20 (both jumpers open). Close A0 and/or A1 for 0x21-0x23.
-    # Hand-tuned layout (2026-08-31): strap sits beside U301, 0R/1206 hand-solder
+    # Hand-tuned layout (2026-08-31): strap sits beside U302, 0R/1206 hand-solder
     # jumper (SolderJumper_2_Open has no footprint with a fittable 0R pad). R
-    # pin1 faces U301's ADDR pin, pin2 faces D_GND. JP pin1 faces the pulldown,
-    # pin2 ties to U301's 3V3 pin (shared by both straps).
+    # pin1 faces U302's ADDR pin, pin2 faces D_GND. JP pin1 faces the pulldown,
+    # pin2 ties to U302's 3V3 pin (shared by both straps).
     strap_fp = "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 
     def addr_strap(
@@ -1148,13 +1148,13 @@ def amp_module_wired() -> str:
 
     # Input coupling and bias. 100 nF film and 10 uF electrolytic are parallel.
     two_pin("Device:R", "R701", "220k", 45.72, 45.72, "L_IN", "A_GND", r_fp, "L input pulldown")
-    two_pin("Device:R", "R702", "220k", 45.72, 78.74, "R_IN", "A_GND", r_fp, "R input pulldown")
+    two_pin("Device:R", "R706", "220k", 45.72, 78.74, "R_IN", "A_GND", r_fp, "R input pulldown")
     two_pin("Device:C", "C701", "100nF film", 55.88, 45.72, "L_IN", "L_AC", "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2", "L input film coupling")
     two_pin("Device:C_Polarized", "C702", "10uF", 66.04, 45.72, "L_IN", "L_AC", "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm", "L input electrolytic coupling", True)
-    two_pin("Device:C", "C703", "100nF film", 55.88, 78.74, "R_IN", "R_AC", "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2", "R input film coupling")
-    two_pin("Device:C_Polarized", "C704", "10uF", 66.04, 78.74, "R_IN", "R_AC", "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm", "R input electrolytic coupling", True)
-    two_pin("Device:R", "R703", "1k", 76.2, 45.72, "L_AC", "A_GND", r_fp, "L non-inverting bias; 1/10 refine")
-    two_pin("Device:R", "R704", "1k", 76.2, 78.74, "R_AC", "A_GND", r_fp, "R non-inverting bias; 1/10 refine")
+    two_pin("Device:C", "C704", "100nF film", 55.88, 78.74, "R_IN", "R_AC", "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2", "R input film coupling")
+    two_pin("Device:C_Polarized", "C705", "10uF", 66.04, 78.74, "R_IN", "R_AC", "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm", "R input electrolytic coupling", True)
+    two_pin("Device:R", "R702", "1k", 76.2, 45.72, "L_AC", "A_GND", r_fp, "L non-inverting bias; 1/10 refine")
+    two_pin("Device:R", "R707", "1k", 76.2, 78.74, "R_AC", "A_GND", r_fp, "R non-inverting bias; 1/10 refine")
 
     # Draw the input bus so the signal path reads left-to-right like the v1
     # schematic (net_at labels above still carry the actual connectivity).
@@ -1175,7 +1175,7 @@ def amp_module_wired() -> str:
     # Dual op amp, gain = 1 + 20k/20k = 2 (headroom; source volume handles loudness).
     # Unit A/B = R/L is fixed by the proven PCB routing; only the *schematic*
     # position is chosen here, so each unit sits in its own channel's row
-    # (R701-704/R706/R708/R710/C708 are already at y=78.74-99.06; L's
+    # (R701-704/R709/R710/R708/C706 are already at y=78.74-99.06; L's
     # counterparts at y=45.72-66.04) instead of crossing to the other row.
     for unit, x, y in [(1, 101.6, 83.82), (2, 101.6, 50.8), (3, 127.0, 111.76)]:
         parts.append(
@@ -1206,14 +1206,14 @@ def amp_module_wired() -> str:
         ("+12V", tip(127.0, 111.76, -2.54, 7.62)),
     ]:
         nets.append(net_at(net, p))
-    two_pin("Device:R", "R705", "20k", 88.9, 66.04, "L_INV", "A_GND", r_fp, "L gain resistor; Rf=Rg=20k")
-    two_pin("Device:R", "R706", "20k", 88.9, 99.06, "R_INV", "A_GND", r_fp, "R gain resistor; Rf=Rg=20k")
-    two_pin("Device:R", "R707", "20k", 111.76, 66.04, "L_OUT_OP", "L_INV", r_fp, "L feedback; gain 2")
-    two_pin("Device:R", "R708", "20k", 111.76, 99.06, "R_OUT_OP", "R_INV", r_fp, "R feedback; gain 2")
-    two_pin("Device:R", "R709", "47R", 127.0, 50.8, "L_OUT_OP", "L_OUT_PRE", r_fp, "L output isolation")
-    two_pin("Device:R", "R710", "47R", 127.0, 83.82, "R_OUT_OP", "R_OUT_PRE", r_fp, "R output isolation")
-    two_pin("Device:C_Polarized", "C707", "470uF 25V", 139.7, 50.8, "L_OUT_PRE", "L_OUT", out_fp, "L output coupling; compact D12.5/P5", True)
-    two_pin("Device:C_Polarized", "C708", "470uF 25V", 139.7, 83.82, "R_OUT_PRE", "R_OUT", out_fp, "R output coupling; compact D12.5/P5", True)
+    two_pin("Device:R", "R704", "20k", 88.9, 66.04, "L_INV", "A_GND", r_fp, "L gain resistor; Rf=Rg=20k")
+    two_pin("Device:R", "R709", "20k", 88.9, 99.06, "R_INV", "A_GND", r_fp, "R gain resistor; Rf=Rg=20k")
+    two_pin("Device:R", "R705", "20k", 111.76, 66.04, "L_OUT_OP", "L_INV", r_fp, "L feedback; gain 2")
+    two_pin("Device:R", "R710", "20k", 111.76, 99.06, "R_OUT_OP", "R_INV", r_fp, "R feedback; gain 2")
+    two_pin("Device:R", "R703", "47R", 127.0, 50.8, "L_OUT_OP", "L_OUT_PRE", r_fp, "L output isolation")
+    two_pin("Device:R", "R708", "47R", 127.0, 83.82, "R_OUT_OP", "R_OUT_PRE", r_fp, "R output isolation")
+    two_pin("Device:C_Polarized", "C703", "470uF 25V", 139.7, 50.8, "L_OUT_PRE", "L_OUT", out_fp, "L output coupling; compact D12.5/P5", True)
+    two_pin("Device:C_Polarized", "C706", "470uF 25V", 139.7, 83.82, "R_OUT_PRE", "R_OUT", out_fp, "R output coupling; compact D12.5/P5", True)
 
     # Draw the output tail so it visibly lands on J702 (net_at labels above
     # still carry the actual connectivity).
@@ -1228,10 +1228,10 @@ def amp_module_wired() -> str:
     )
 
     # Power reservoir and high-frequency bypass. Negative bulk has + at A_GND.
-    two_pin("Device:C_Polarized", "C709", "100uF 35V polymer", 55.88, 111.76, "+12V", "A_GND", bulk_fp, "V+ local bulk at power connector", True)
-    two_pin("Device:C_Polarized", "C710", "100uF 35V polymer", 66.04, 111.76, "A_GND", "-12V", bulk_fp, "V- local bulk at power connector", True)
-    two_pin("Device:C", "C705", "100nF 50V X7R", 78.74, 111.76, "+12V", "A_GND", c_fp, "V+ local decoupling")
-    two_pin("Device:C", "C706", "100nF 50V X7R", 88.9, 111.76, "A_GND", "-12V", c_fp, "V- local decoupling")
+    two_pin("Device:C_Polarized", "C707", "100uF 35V polymer", 55.88, 111.76, "+12V", "A_GND", bulk_fp, "V+ local bulk at power connector", True)
+    two_pin("Device:C_Polarized", "C708", "100uF 35V polymer", 66.04, 111.76, "A_GND", "-12V", bulk_fp, "V- local bulk at power connector", True)
+    two_pin("Device:C", "C709", "100nF 50V X7R", 78.74, 111.76, "+12V", "A_GND", c_fp, "V+ local decoupling")
+    two_pin("Device:C", "C710", "100nF 50V X7R", 88.9, 111.76, "A_GND", "-12V", c_fp, "V- local decoupling")
     two_pin("Device:C", "C711", "1nF 50V C0G", 99.06, 111.76, "+12V", "A_GND", c_fp, "V+ high-speed bypass")
     two_pin("Device:C", "C712", "1nF 50V C0G", 109.22, 111.76, "A_GND", "-12V", c_fp, "V- high-speed bypass")
 
@@ -1284,7 +1284,7 @@ def output_stage_wired() -> str:
     nets.append(net_at("MUTE_NC_L", sw_sp3t_pin(sw1x, sw1y, 2)))
     nets.append(net_at("MUTE_NC_R", sw_sp3t_pin(sw2x, sw2y, 2)))
 
-    # HP pot RV101
+    # HP pot RV601
     nets.append(net_at("PHONE_PRE_L", pot_dual_pin(rvh_x, rvh_y, 1)))
     nets.append(net_at("PHONE_PRE_R", pot_dual_pin(rvh_x, rvh_y, 4)))
     nets.append(net_at("PHONE_L", pot_dual_pin(rvh_x, rvh_y, 2)))
@@ -1292,7 +1292,7 @@ def output_stage_wired() -> str:
     nets.append(net_at("A_GND", pot_dual_pin(rvh_x, rvh_y, 3)))
     nets.append(net_at("A_GND", pot_dual_pin(rvh_x, rvh_y, 6)))
 
-    # LINE pot RV102
+    # LINE pot RV602
     nets.append(net_at("LINE_PRE_L", pot_dual_pin(rvl_x, rvl_y, 1)))
     nets.append(net_at("LINE_PRE_R", pot_dual_pin(rvl_x, rvl_y, 4)))
     nets.append(net_at("LINE_L", pot_dual_pin(rvl_x, rvl_y, 2)))
@@ -1317,22 +1317,22 @@ def output_stage_wired() -> str:
     nets.append(net_at("LINE_R", jln2))
 
     sw_syms = (
-        sym("Switch:SW_SP3T", "SW101", "DEST L (PHONE/MUTE/LINE)", sw1x, sw1y, 0, PATH_OUT)
-        + sym("Switch:SW_SP3T", "SW102", "DEST R (PHONE/MUTE/LINE)", sw2x, sw2y, 0, PATH_OUT)
+        sym("Switch:SW_SP3T", "SW601", "DEST L (PHONE/MUTE/LINE)", sw1x, sw1y, 0, PATH_OUT)
+        + sym("Switch:SW_SP3T", "SW602", "DEST R (PHONE/MUTE/LINE)", sw2x, sw2y, 0, PATH_OUT)
     )
     pot_syms = (
-        sym("Device:R_Potentiometer_Dual", "RV101", "A50k Dual HP", rvh_x, rvh_y, 0, PATH_OUT)
-        + sym("Device:R_Potentiometer_Dual", "RV102", "A50k Dual LINE", rvl_x, rvl_y, 0, PATH_OUT)
+        sym("Device:R_Potentiometer_Dual", "RV601", "A50k Dual HP", rvh_x, rvh_y, 0, PATH_OUT)
+        + sym("Device:R_Potentiometer_Dual", "RV602", "A50k Dual LINE", rvl_x, rvl_y, 0, PATH_OUT)
     )
     j_syms = (
-        sym("Connector:Screw_Terminal_01x02", "J_HP", "to Audio HP Buffer", jhp_x, jhp_y, 0, PATH_OUT)
-        + sym("Connector:Screw_Terminal_01x02", "J_LINE", "LINE OUT", jln_x, jln_y, 0, PATH_OUT)
+        sym("Connector:Screw_Terminal_01x02", "J_HP601", "to Audio HP Buffer", jhp_x, jhp_y, 0, PATH_OUT)
+        + sym("Connector:Screw_Terminal_01x02", "J_LINE601", "LINE OUT", jln_x, jln_y, 0, PATH_OUT)
     )
 
     body = f"""{embed_lib_symbols(OUTPUT_LIBS)}
 {text_note(25.4, 25.4, [
     "OutputStage — label-wired DEST + volume (Q2-A)",
-    "AMP_SEL → SW101/102 SP3T → RV101/102 A50k Dual → PHONE/LINE",
+    "AMP_SEL → SW601/102 SP3T → RV601/102 A50k Dual → PHONE/LINE",
     "MUTE throws = MUTE_NC_*. Sense pole on ControlPanel SW2.",
     "Connectivity = local labels on pin tips (grid-snapped).",
 ])}

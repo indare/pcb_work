@@ -7687,7 +7687,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b7d6a8d0-bb0c-482a-a686-20e07832a013")
-		(property "Reference" "U302"
+		(property "Reference" "U301"
 			(at 140.97 43.18 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7797,11 +7797,11 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "U302")
+					(reference "U301")
 					(unit 1)
 				)
 				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "U402")
+					(reference "U401")
 					(unit 1)
 				)
 			)
@@ -7926,7 +7926,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c3cf27db-1d93-4a45-bc47-74a25fa42b8f")
-		(property "Reference" "U301"
+		(property "Reference" "U302"
 			(at 88.9 73.66 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8077,11 +8077,11 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000004-0004-4004-8004-000000000004"
-					(reference "U301")
+					(reference "U302")
 					(unit 1)
 				)
 				(path "/a1000001-0001-4001-8001-000000000001/a1000005-0005-4005-8005-000000000005"
-					(reference "U401")
+					(reference "U402")
 					(unit 1)
 				)
 			)

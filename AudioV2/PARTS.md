@@ -81,13 +81,13 @@ AudioV2 では **計測 Pico 配下のまま**。操作 Pico の I²C0 / SPI に
 
 | 現物端子 | 役割 | 基板ヘッダ（音声 2×4 + センス 1×3） |
 |---|---|---|
-| 2 | L COM | SW101-3 `AMP_SEL_L` |
-| 3 | L PHONE（Pos1） | SW101-1 → RV101 |
-| 1 | L LINE（Pos3） | SW101-4 → RV102 |
-| （L MUTE） | 開放 | SW101-2 NC |
-| 5 | R COM | SW101-7 `AMP_SEL_R` |
-| 6 | R PHONE | SW101-5 → RV101 |
-| 4 | R LINE | SW101-8 → RV102 |
+| 2 | L COM | SW601-3 `AMP_SEL_L` |
+| 3 | L PHONE（Pos1） | SW601-1 → RV601 |
+| 1 | L LINE（Pos3） | SW601-4 → RV602 |
+| （L MUTE） | 開放 | SW601-2 NC |
+| 5 | R COM | SW602-3 `AMP_SEL_R` |
+| 6 | R PHONE | SW602-1 → RV601 |
+| 4 | R LINE | SW602-4 → RV602 |
 | 8 | センス COM | → DEST_ADC（GP26） |
 | 9 | センス PHONE | → Rs=1 kΩ → GND |
 | 7 | センス LINE | → Rs=1 kΩ → 3V3 |
@@ -140,7 +140,7 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 | **ULN2803** | **ULN2803AN**（DIP-18）×4（各RelayBoardに2） | SET用/RESET用。1出力でaudio+pwr 2コイル（約80 mA）、COMは+5 V |
 | **PT2314** | **PT2314 DIP-28**（回路値 `PT2314-D`） | Princeton DS 28 pin。SOP は初号では使わない |
 | **+9 V LDO** | **ST L7809CV**（TO-220） | PT2314 typ 30 mA → 散逸 (12-9)×30 mA ≈ 0.09 W |
-| **F1** | **5×20 mm T3.15 A**（または図の 3 A スロー） | 一次 ~2 A。ガラス管スローブロー |
+| **F201** | **5×20 mm T3.15 A**（または図の 3 A スロー） | 一次 ~2 A。ガラス管スローブロー |
 | **BP5293** | **BP5293-50**（秋月 111188） | 現行 Audio と同じ +5 V |
 | **DKMW / CH224** | **DKMW20F-12** / **50224（CH224K 12 V）** | 既確定 |
 | **USB-C** | USB2.0 16P レセプタクル（KiCad `USB_C_Receptacle_USB2.0_16P`） | CC はモジュール側。基板は VBUS/GND が主 |
@@ -154,9 +154,9 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 ```text
 Amp 選択後 L/R
     → 7303 極1/極2 COM
-         下 PHONE → RK27 (RV101) CW ← wiper → HP Buffer
+         下 PHONE → RK27 (RV601) CW ← wiper → HP Buffer
          中 MUTE  → NC
-         上 LINE  → RK27 (RV102) CW ← wiper → LINE OUT
+         上 LINE  → RK27 (RV602) CW ← wiper → LINE OUT
     → 7303 極3 COM → ADC
          下 → Rs → GND     = PHONE
          上 → Rs → 3V3     = LINE
@@ -171,16 +171,16 @@ Amp 選択後 L/R
 | 用途 | 値 / 第一候補 | 実装 |
 |---|---|---|
 | AMP701 | NE5532P（基準）/ DIP-8互換デュアルOpAmp | DIP-8ソケット。高速品は±12 V、ユニティ安定、容量負荷条件を確認 |
-| R701/702 | 220 kΩ | 入力プルダウン |
-| R703/704 | 1 kΩ | 非反転バイアス |
-| R705–708 | 20 kΩ | ゲイン下側 / 帰還。`1+20k/20k=2` |
-| R709/710 | 47 Ω | 出力アイソレーション |
-| C701/703 | 100 nF film | 入力AC結合 |
-| C702/704 | 10 µF | 入力AC結合 |
-| C705/706 | 100 nF 50 V X7R | 各電源レール、OpAmp直近 |
-| C711/712 | 1 nF 50 V C0G | 高速バイパス、B面0603 |
-| C709/710 | 100 µF 35 V polymer | +12 V / -12 V 各1、SMD 10×12.6 |
-| C707/708 | 470 µF 25 V | 出力AC結合、THT D12.5/P5 |
+| R701/R706 | 220 kΩ | 入力プルダウン（L/R） |
+| R702/R707 | 1 kΩ | 非反転バイアス（L/R） |
+| R704/R705/R709/R710 | 20 kΩ | ゲイン下側 / 帰還。`1+20k/20k=2` |
+| R703/R708 | 47 Ω | 出力アイソレーション（L/R） |
+| C701/C704 | 100 nF film | 入力AC結合（L/R） |
+| C702/C705 | 10 µF | 入力AC結合（L/R） |
+| C709/C710 | 100 nF 50 V X7R | 各電源レール、OpAmp直近 |
+| C711/C712 | 1 nF 50 V C0G | 高速バイパス、B面0603 |
+| C707/C708 | 100 µF 35 V polymer | +12 V / -12 V 各1、SMD 10×12.6 |
+| C703/C706 | 470 µF 25 V | 出力AC結合、THT D12.5/P5 |
 
 端子は `J701=入力L/R`、`J702=出力L/R`、`J703=+12V/A_GND/-12V`。PCB外形上辺のみ15 mm拡張し、既存の端子位置と4穴位置は維持。
 

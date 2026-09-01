@@ -34,7 +34,7 @@ PT2314 のピン名は DS と一致するが、シンボル lib の load 失敗�
    - PARTS/v1 ファームは **2.42″ / 128×64**（`Control/ssd1306.py`）
 
 4. **PowerModule 一次短絡（否定レビュー・座標再確認）**  
-   - ジャンクション `(83.82, 45.72)` に PD_GND・F1 系・DKMW ±Vin・R.C.・7809 GND が合流  
+   - ジャンクション `(83.82, 45.72)` に PD_GND・F201 系・DKMW ±Vin・R.C.・7809 GND が合流  
    - `sch_helpers.pin_connect` の座標取り違えが疑義  
    - 7809 が一次 GND と二次 +12 を跨ぐリスクも指摘
 

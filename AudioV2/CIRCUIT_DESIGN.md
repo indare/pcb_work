@@ -13,8 +13,8 @@
 | 部品 | lib_id | 備考 |
 |---|---|---|
 | PT2314 | `AudioV2:PT2314` | **28pin DIP**（Princeton DS）。旧 8pin 仮シンボルは廃止 |
-| RV101/102 | `Device:R_Potentiometer_Dual` | Value **A50k Dual** |
-| SW_DEST 音声 | `Switch:SW_DP3T` | unit1=L / unit2=R。MUTE 投げは NC |
+| RV601/602 | `Device:R_Potentiometer_Dual` | Value **A50k Dual** |
+| SW_DEST 音声 | `Switch:SW_SP3T`×2 | SW601=L / SW602=R。MUTE 投げは NC |
 | SW_DEST センス | `Switch:SW_SP3T` | 3PDT の 3 極目。COM→ADC |
 | ENC×3 | `Device:RotaryEncoder_Switch` | CH / BASS / TREBLE |
 | Pico / OLED / LED / R / C | 各標準 lib | OLED は論理 `SSD1306-128x64`。**実物は 2.42″（[PARTS.md](PARTS.md)）。埋め込み元 0.91″ FP は差し替え予定** |
@@ -28,7 +28,7 @@
 | 部品 | DS | AudioV2 図 | 状態 |
 |---|---|---|---|
 | **PT2314** | 28pin: VDD=1 … REF=28（下表） | `AudioV2:PT2314` 全ピン | ✅ 再作成 |
-| **SW_DP3T** | KiCad: COM=3/7, throws=1/2/4 & 5/6/8 | Audio SW101 と同型 | ✅ |
+| **SW_SP3T**×2 | KiCad: COM=3, throws=1(PHONE)/2(MUTE)/4(LINE) | 旧 Audio SW101(DP3T) を L/R 2個に分割 | ✅ |
 | **R_Potentiometer_Dual** | 1/3=A, 4/6=B, 2/5=wiper | CW←SW, CCW→A_GND, wiper→OUT | ✅ |
 | **DEST ラダー** | [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) | Rh/Rl=10k, Rs=1k | ✅ |
 | Pico GPIO | DECISIONS §10 | ENC×3 + DEST_ADC/LED | ✅ ドキュメント一致（配線はドラフト） |
@@ -63,10 +63,10 @@
 ## 3. OutputStage — DEST + 音量（手回し）
 
 ```text
-AMP_SEL_L/R ── SW101 (DP3T)
-                 ├─ PHONE (1/5) ── RV101 A50k ── PHONE_L/R → HP Buffer
-                 ├─ MUTE  (2/6) ── NC
-                 └─ LINE  (4/8) ── RV102 A50k ── LINE_L/R → LINE OUT
+AMP_SEL_L ── SW601 (SP3T) / AMP_SEL_R ── SW602 (SP3T)
+                 ├─ PHONE (pin1) ── RV601 A50k ── PHONE_L/R → HP Buffer
+                 ├─ MUTE  (pin2) ── NC
+                 └─ LINE  (pin4) ── RV602 A50k ── LINE_L/R → LINE OUT
 ```
 
 | 項目 | 値 |
@@ -82,7 +82,7 @@ AMP_SEL_L/R ── SW101 (DP3T)
 
 ## 4. PowerModule — 部品値（変更なし）
 
-USB-C → CH224 → PD_12V → PWR SW → F1 → DKMW20F-12 → ±12 V / A_GND。  
+USB-C → CH224 → PD_12V → PWR SW → F201 → DKMW20F-12 → ±12 V / A_GND。  
 +12 V → LM7809 → VCC_TONE（+9 V）。
 
 ### RelayBoard — 5ch×2枚
