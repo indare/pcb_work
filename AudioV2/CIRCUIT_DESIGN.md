@@ -120,7 +120,7 @@ JP302  JP301   ADDR   BOARD
 - AMP701: DIP-8ソケット。NE5532Pを基準とし、高速品差し替え時も47 Ω出力アイソレーションを維持
 - `AudioV2Case.kicad_sch` は代表1シートのみ。物理PCB/BOMは同一仕様を×10製造し、RelayBoardで入力＋電源を選択
 
-PCBは `Audio/split/AudioCase_4_amp.kicad_pcb` の実績配線を再利用。端子・取付穴を維持し、100 µF×2のため上辺のみ15 mm拡張した。
+PCB は未設計（2026-09-01 に削除）。着手時は `Audio/split/AudioCase_4_amp.kicad_pcb` の実績配線を参考に、端子・取付穴を維持し、100 µF×2のため上辺のみ15 mm拡張する。要件は [PARTS.md](PARTS.md) §4.2。
 
 ---
 
@@ -144,7 +144,8 @@ PCBは `Audio/split/AudioCase_4_amp.kicad_pcb` の実績配線を再利用。端
 - [x] `kicad-cli sch export netlist` — OK（annotation 警告はドラフト）
 - [x] 3PDT / A50k 具体型番 — [PARTS.md](PARTS.md)
 - [x] 表示品番 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）
-- [x] AmpModule — 代表回路図 + 独立PCB、バルク/1 nF対応、×10注記
+- [x] AmpModule — 代表回路図、バルク/1 nF対応、×10注記
+- [ ] AmpModule PCB — **未着手**（要件は [PARTS.md](PARTS.md) §4.2）
 - [ ] OLED KiCad FP — 0.91″ 埋め込みを 2.42″ or 1×4 ヘッダに差し替え
 - [ ] ERC 整理（未接続・未使用 PT2314 入力）
 - [x] RelayBoard 本配線 — 5ch×2、入力＋電源連動、ERC 0件/instance
@@ -155,7 +156,6 @@ PCBは `Audio/split/AudioCase_4_amp.kicad_pcb` の実績配線を再利用。端
 
 ```bash
 python3 AudioV2/scripts/wire_circuit_design.py all
-python3 AudioV2/scripts/build_amp_pcb.py
 python3 Audio/scripts/check_sexpr.py -q AudioV2
 ```
 

@@ -21,7 +21,7 @@
 
 | 流用・参照 | 内容 |
 |---|---|
-| Amp | `Audio/AmpModule`を基にAudioV2版へ再設計。`AmpModule.kicad_sch/.kicad_pcb` |
+| Amp | `Audio/AmpModule`を基にAudioV2版へ再設計。`AmpModule.kicad_sch`（PCB は未設計） |
 | HP バッファ | **実基板のみ**流用。KiCad には載せない |
 | PowerModule | **再設計**の参考（`Audio/PowerModule.kicad_sch` は F-15） |
 | リレー＋端子台＋ULN | `Audio/Controll.kicad_sch` |
