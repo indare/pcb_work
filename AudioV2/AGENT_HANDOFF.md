@@ -325,11 +325,40 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 180k    10.0   20.0
 ```
 
+#### 部品構成（2026-09-01 確定）
+
+**合計 236 点**（旧構成は 324 点 + PCB 12 枚 + 基板間ケーブル 30 本）。
+
+1ch = **22 点**：`NE5532`（DIP-8 ソケット）1、`TMUX7612` 1、抵抗 10（220k×2 / 1k×2 / 20k×4 / 47R×2）、
+コンデンサ 10（入力 100nF film×2・10µF×2、出力 2.2µF film×2、AMP 直近 100nF×2、SW 直近 100nF×2）。
+
+共通部 = **16 点**：`MCP23017`、端子台 3 種（±15V 3P / TONE 2P / AMP_SEL 2P）、I2C ヘッダ 4P、
+入口バルク 100µF×2、SW 用 1µF×8（数 IC で共有）、デカップリング 100nF。
+
+**デカップリングは「入口にバルク + 各 IC 直近に 100nF」に変更する。**
+旧 `AmpModule` が ch 毎に 100 µF polymer を持っていたのは「1 枚 1 台・ケーブル 1 m の先」
+という前提だったため。1 枚に統合すると電源入口から数 cm になるのでその前提が消える。
+そのまま 10ch 展開すると 100 µF が 20 個で 25.2 cm² を食うが、入口 2 個なら 2.5 cm²。
+信号電流は選択中の 1 台で 0.14 mA、静止電流も 10 台で 80 mA なので入口バルクで足りる。
+1 nF C0G は 100nF をピア直近に置けば同等なので省く（必要なら DNP パターンを残す）。
+
+#### シンボル・フットプリントの調査結果（2026-09-01）
+
+**新規作成が必要だったのは `TMUX7612` シンボルの 1 個だけ。** フットプリントは全て標準 lib にあった。
+
+| | 状況 |
+|---|---|
+| `Amplifier_Operational:NE5532` / `Device:R` / `C` / `C_Polarized` | 標準 lib にあり |
+| `Connector:Screw_Terminal_01x02` / `_01x03` / `Conn_01x04_Pin` | あり |
+| **`Interface_Expansion:MCP23017x-x-SP`** | あり。**旧回路図の `MCP23017-E/SP` は KiCad 10 で使えない名前**。新シートでは `MCP23017x-x-SP`(DIP-28) か `-SO` を使う |
+| `TMUX7612` | **なし → `AudioV2.kicad_sym` に作成済み** |
+| フットプリント（TSSOP-16 / DIP-8ソケット / 1206 / フィルムP5 / 端子台 等） | **全て標準 lib にあり** |
+
 #### 実装時の作業（未着手）
 
-1. `AudioV2.kicad_sym` に **`TMUX7612` のシンボルを追加**。標準 lib の `Analog_Switch:DG411xY` が
-   4回路SPST・SOIC-16 でピン配置がほぼ一致するが、**12番ピンだけ違う**（DG411 は `VL`、TMUX7612 は N.C.）。
-   流用は可能だが混乱の元なので、`PT2314` / `CH224_50224` と同じくカスタムで正しく起こす
+1. ~~`TMUX7612` シンボルの作成~~ → **2026-09-01 完了**。`AudioV2.kicad_sym` に追加済み。
+   全16ピンが DS（TSSOP-16）と一致することを検証済み。`kicad-cli sym export svg` も通る。
+   フットプリントは **`Package_SO:TSSOP-16_4.4x5mm_P0.65mm` が標準 lib にあり、新規作成は不要**だった
 2. `AmpBank.kicad_sch` を新規作成（10ch 分のアンプ + 切替 + MCP23017）
 3. `RelayBoard.kicad_sch` / `AmpModule.kicad_sch` を削除
 4. 親 `AudioV2Case.kicad_sch` から `RelayBoard_A` / `RelayBoard_B` / `AmpModule_Reference` の
