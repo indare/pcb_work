@@ -1502,6 +1502,191 @@ def parent_wired() -> str:
     return sch_open(PARENT, body)
 
 
+
+# ---------------------------------------------------------------- AmpBank
+# AmpBank = 10ch 分のアンプと切替を載せた1枚の基板（AGENT_HANDOFF §2.9）。
+# AmpChannel サブシートを 10 回インスタンス化する構成なので、生成するのは
+# 1ch 分（22点）と Bank 側の共通部（16点）だけで済む。
+
+AMP_CHANNELS = 10
+
+CHANNEL_LIBS = [
+    "Device:C",
+    "Device:C_Polarized",
+    "Device:R",
+    "Amplifier_Operational:NE5532",
+    "AudioV2:TMUX7612",
+]
+
+UUID_BANK_FILE = "a1000010-0010-4010-8010-000000000010"
+UUID_BANK_INST = "a1000011-0011-4011-8011-000000000011"
+UUID_CHAN_FILE = "a1000012-0012-4012-8012-000000000012"
+PATH_BANK = f"/{PARENT}/{UUID_BANK_INST}"
+
+
+def tmux_pin(sx: float, sy: float, num: int) -> tuple[float, float]:
+    """AudioV2:TMUX7612 のピン先端。lib の (at) を Y 反転して返す。"""
+    left = {  # 左辺: SEL と S
+        1: (-12.7, 10.16), 3: (-12.7, 7.62),
+        16: (-12.7, 2.54), 14: (-12.7, 0.0),
+        9: (-12.7, -5.08), 11: (-12.7, -7.62),
+        8: (-12.7, -12.7), 6: (-12.7, -15.24),
+    }
+    right = {2: (12.7, 8.89), 15: (12.7, 1.27), 10: (12.7, -6.35), 7: (12.7, -13.97)}
+    power = {13: (-2.54, 17.78), 4: (-2.54, -17.78), 5: (2.54, -17.78), 12: (2.54, 17.78)}
+    for tbl in (left, right, power):
+        if num in tbl:
+            return tip(sx, sy, tbl[num][0], tbl[num][1])
+    raise ValueError(num)
+
+
+def ne5532_pin(sx: float, sy: float, role: str, unit: int) -> tuple[float, float]:
+    """Amplifier_Operational:NE5532（LM2904 継承）のピン先端。
+
+    実ピン番号は unit1 = 1/2/3、unit2 = 7/6/5、unit3 = 8(V+)/4(V-)。
+    番号ではなく役割（out/inv/nin/vp/vn）で引く。
+    """
+    if unit in (1, 2):
+        return {
+            "out": tip(sx, sy, 7.62, 0.0),
+            "inv": tip(sx, sy, -7.62, -2.54),
+            "nin": tip(sx, sy, -7.62, 2.54),
+        }[role]
+    return {"vp": tip(sx, sy, -2.54, 7.62), "vn": tip(sx, sy, -2.54, -7.62)}[role]
+
+
+def amp_channel_wired() -> str:
+    """AmpChannel: 1ch 分。10 回インスタンス化されるので参照は KiCad が採番する。
+
+    構成（AGENT_HANDOFF §2.9、ngspice 検証済み）:
+      TONE_x ─[SW]─┬─ 220k ─ A_GND
+                    └─ 100nF ∥ 10uF ─┬─ 1k ─ A_GND
+                                       └─ AMP + 入力（帰還 20k/20k = GAIN 2）
+                    AMP 出力 ─ 47R ─ 2.2uF ─[SW]─ AMP_SEL_x
+    """
+    parts: list[str] = []
+    nets: list[str] = []
+    r_fp = "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+    c_fp = "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+    film_fp = "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+    elec_fp = "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
+
+    def two_pin(lib_id, ref, val, x, y, net1, net2, fp, desc, rot=0, polar=False):
+        parts.append(
+            symbol_inst_v10(lib_id, ref, val, x, y, rot, PATH_BANK,
+                            footprint=fp, description=desc)
+        )
+        p1, p2 = (cap_pins(x, y, rot) if lib_id.startswith("Device:C") else r_pins(x, y, rot))
+        nets.append(net_at(net1, p1, "u" if rot == 0 else "r"))
+        nets.append(net_at(net2, p2, "d" if rot == 0 else "l"))
+
+    # --- L/R それぞれ同じ形。y をずらして 2 段に置く ---
+    for ch, y0 in (("L", 0.0), ("R", 63.5)):
+        sw_in = f"IN_{ch}"        # SW 通過後・結合C 手前
+        ac = f"AC_{ch}"           # 結合C 後（+ 入力）
+        inv = f"INV_{ch}"         # 反転入力
+        op = f"OPOUT_{ch}"        # OpAmp 出力
+        pre = f"PRE_{ch}"         # 47R 後・結合C 手前
+        # 入力プルダウン（SW の後ろ。非選択中に結合C 左極板を 0V に保つ）
+        two_pin("Device:R", f"R_PD_{ch}", "220k", 50.8, y0 + 45.72,
+                sw_in, "A_GND", r_fp, f"{ch} input pulldown (after switch)")
+        # 入力 AC 結合（フィルム ∥ 電解）
+        two_pin("Device:C", f"C_F_{ch}", "100nF film", 63.5, y0 + 38.1,
+                sw_in, ac, film_fp, f"{ch} input film coupling", rot=90)
+        two_pin("Device:C_Polarized", f"C_E_{ch}", "10uF", 63.5, y0 + 45.72,
+                sw_in, ac, elec_fp, f"{ch} input electrolytic coupling", rot=90)
+        # 非反転バイアス
+        two_pin("Device:R", f"R_B_{ch}", "1k", 76.2, y0 + 45.72,
+                ac, "A_GND", r_fp, f"{ch} non-inverting bias")
+        # 帰還（Rf）とゲイン下側（Rg）。既定 20k/20k = GAIN 2
+        two_pin("Device:R", f"R_G_{ch}", "20k", 99.06, y0 + 45.72,
+                inv, "A_GND", r_fp, f"{ch} gain resistor Rg; GAIN=1+Rf/Rg")
+        two_pin("Device:R", f"R_F_{ch}", "20k", 111.76, y0 + 33.02,
+                op, inv, r_fp, f"{ch} feedback Rf; default 20k = GAIN 2", rot=90)
+        # 出力アイソレーション + AC 結合（結合C は SW の前）
+        two_pin("Device:R", f"R_O_{ch}", "47R", 127.0, y0 + 38.1,
+                op, pre, r_fp, f"{ch} output isolation", rot=90)
+        two_pin("Device:C", f"C_O_{ch}", "2.2uF film", 139.7, y0 + 38.1,
+                pre, f"OUT_{ch}", film_fp, f"{ch} output coupling (before switch)", rot=90)
+
+    # --- OpAmp（DIP-8 ソケット。unit1=L, unit2=R, unit3=電源）---
+    ox, oy = 88.9, 38.1
+    for unit, ch, dy in ((1, "L", 0.0), (2, "R", 63.5)):
+        parts.append(
+            symbol_inst_v10("Amplifier_Operational:NE5532", "AMP", "NE5532 / DIP-8 compatible",
+                            ox, oy + dy, 0, PATH_BANK, unit=unit,
+                            footprint="Package_DIP:DIP-8_W7.62mm_Socket",
+                            description="Socketed dual op amp under test")
+        )
+        nets.append(net_at(f"AC_{ch}", ne5532_pin(ox, oy + dy, "nin", unit), "l"))
+        nets.append(net_at(f"INV_{ch}", ne5532_pin(ox, oy + dy, "inv", unit), "l"))
+        nets.append(net_at(f"OPOUT_{ch}", ne5532_pin(ox, oy + dy, "out", unit), "r"))
+    parts.append(
+        symbol_inst_v10("Amplifier_Operational:NE5532", "AMP", "NE5532 / DIP-8 compatible",
+                        ox, 127.0, 0, PATH_BANK, unit=3,
+                        footprint="Package_DIP:DIP-8_W7.62mm_Socket",
+                        description="Socketed dual op amp under test")
+    )
+
+
+    # --- 切替 SW（TMUX7612 1個で 1ch 分 = L入/R入/L出/R出）---
+    sx, sy = 33.02, 63.5
+    parts.append(
+        symbol_inst_v10("AudioV2:TMUX7612", "SW", "TMUX7612", sx, sy, 0, PATH_BANK,
+                        footprint="Package_SO:TSSOP-16_4.4x5mm_P0.65mm",
+                        datasheet="datasheets/TI_TMUX7612.pdf",
+                        description="4ch SPST; ch1/2=input L/R, ch3/4=output L/R")
+    )
+    # 回路1=L入力, 2=R入力, 3=L出力, 4=R出力
+    # TONE_L/R・AMP_SEL_L/R・A_GND・SEL は階層ラベルを直接ピンに置くので、
+    # ここではローカルラベルを付けない（二重定義を避ける）
+    for num, net, d in (
+        (2, "IN_L", "r"), (15, "IN_R", "r"),
+        (11, "OUT_L", "l"), (6, "OUT_R", "l"),
+        (13, "+15V", "u"), (4, "-15V", "d"),
+    ):
+        nets.append(net_at(net, tmux_pin(sx, sy, num), d))
+    # SEL1-4 を束ねて 1 本の制御線に。内蔵プルダウンがあるので外付け不要
+    for num in (16, 9, 8):
+        nets.append(net_at("SEL", tmux_pin(sx, sy, num), "l"))
+    parts.append(no_connect_at(tmux_pin(sx, sy, 12)))
+
+    # --- デカップリング（各 IC 直近に 100nF。バルクは Bank 入口）---
+    for ref, x, y, n1, n2 in (
+        ("C_AV", 165.1, 20.32, "+15V", "A_GND"),
+        ("C_AV2", 177.8, 20.32, "A_GND", "-15V"),
+        ("C_SV", 165.1, 33.02, "+15V", "A_GND"),
+        ("C_SV2", 177.8, 33.02, "A_GND", "-15V"),
+    ):
+        two_pin("Device:C", ref, "100nF", x, y, n1, n2, c_fp, "local decoupling")
+
+    # --- 階層ラベルは実ピン先端に置く。宙に浮かせると label_dangling になり、
+    #     同名ローカルラベルと「名前だけで繋がっている」状態になって脆い（§2.9）。
+    hiers: list[str] = []
+    for name, shape, xy, ang in (
+        ("TONE_L", "input", tmux_pin(sx, sy, 3), 180),
+        ("TONE_R", "input", tmux_pin(sx, sy, 14), 180),
+        ("SEL", "input", tmux_pin(sx, sy, 1), 180),
+        ("AMP_SEL_L", "output", tmux_pin(sx, sy, 10), 0),
+        ("AMP_SEL_R", "output", tmux_pin(sx, sy, 7), 0),
+        ("+15V", "input", ne5532_pin(ox, 127.0, "vp", 3), 90),
+        ("-15V", "input", ne5532_pin(ox, 127.0, "vn", 3), 270),
+        ("A_GND", "bidirectional", tmux_pin(sx, sy, 5), 270),
+    ):
+        hiers.append(hier_label(name, shape, xy[0], xy[1], ang))
+
+    body = f"""{embed_lib_symbols(CHANNEL_LIBS)}
+{text_note(25.4, 12.7, [
+    "AmpBank / AmpChannel — 1 ch. Instantiated x10 by AmpBank.",
+    "SW selects this channel's input AND output. Supply is always on.",
+    "GAIN = 1 + Rf/Rg  (default 20k/20k = 2)",
+])}
+{"".join(hiers)}
+{"".join(parts)}
+{"".join(nets)}
+"""
+    return sch_open(UUID_CHAN_FILE, body, paper="A3")
+
 def main() -> None:
     target = sys.argv[1] if len(sys.argv) > 1 else "all"
     flags = sys.argv[2:]
