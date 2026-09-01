@@ -46,9 +46,10 @@ from pathlib import Path
 BLOCKS = [
     {
         # PARTS.md のマーカー id
-        "id": "ampmodule-bom",
-        # 生成元シート（リポジトリルートからの相対パス）
-        "sheet": "AudioV2/AmpModule.kicad_sch",
+        "id": "ampbank-bom",
+        # 生成元シート（リポジトリルートからの相対パス）。AmpBank は AmpChannel を
+        # 10 回インスタンス化する階層なので、kicad-cli は子シートも含めて集計する。
+        "sheet": "AudioV2/AmpBank.kicad_sch",
         # kicad-cli sch export bom に渡す列。Description は回路図の部品プロパティ
         # （= 役割の記述）で、これも回路図から導出できる情報なので生成側に含める。
         "fields": "Reference,Value,Footprint,QUANTITY,Description",
@@ -60,7 +61,7 @@ BLOCKS = [
         # Role 列は同一値グループ内で重複しがちなので、重複を畳んで " / " で繋ぐ
         "dedupe_column": "Role",
         # 表の直前に出す見出し行（生成物の一部。人が書き換えても再生成で戻る）
-        "caption": "AmpModule 1 枚あたりの部品表",
+        "caption": "AmpBank 部品表（ch1 代表 + 共通部）",
     },
 ]
 
@@ -99,6 +100,8 @@ def export_bom(root: Path, block: dict) -> Path:
         sys.exit(f"error: 生成元シートがありません: {block['sheet']}")
 
     cmd = [
+        # kicad-run.sh has a bash shebang; Windows can't exec it directly.
+        *(["bash"] if os.name == "nt" else []),
         str(runner), "cli", "sch", "export", "bom",
         "--group-by", block["group_by"],
         "--fields", block["fields"],
@@ -110,7 +113,7 @@ def export_bom(root: Path, block: dict) -> Path:
         "-o", f"@OUT@/{csv_name}",
         f"@WORK@/{block['sheet']}",
     ]
-    proc = subprocess.run(cmd, cwd=root, capture_output=True, text=True)
+    proc = subprocess.run(cmd, cwd=root, capture_output=True, text=True, encoding="utf-8")
     if proc.returncode != 0:
         sys.stderr.write(proc.stdout + proc.stderr)
         sys.exit(f"error: kicad-cli の BOM 出力に失敗しました ({block['sheet']})")

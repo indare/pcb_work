@@ -9,7 +9,7 @@
 > **この文書の読み方 — どこが生成で、どこが手書きか**
 >
 > `<!-- BEGIN GENERATED: ... -->` 〜 `<!-- END GENERATED: ... -->` で囲まれたブロックは
-> **回路図から自動生成**したもの（現在は §4.1 の AmpModule 部品表）。
+> **回路図から自動生成**したもの（現在は §4.1 の AmpBank 部品表）。
 > **手で編集しても次の再生成で消える。** 直すときは KiCad の回路図側を直して再生成する。
 >
 > それ以外はすべて**手書きで、こちらが正**。調達先・代替品・選定理由・C&K の現物端子対応・
@@ -181,12 +181,21 @@ Amp 選択後 L/R
 
 ---
 
-## 4. AmpModule 再版（1枚あたり、×10）
+## 4. AmpBank（10ch 統合基板、§2.9）
 
 ### 4.1 部品表（回路図から自動生成）
 
-<!-- BEGIN GENERATED: ampmodule-bom -->
-**AmpModule 1 枚あたりの部品表** — 下の表は `AudioV2/AmpModule.kicad_sch` から自動生成しています。
+> **注意 — ch あたりの行は代表 1ch 分のみ。** `AmpChannel` は 10 回インスタンス化されているが、
+> `kicad-cli sch export bom` を `AmpBank.kicad_sch` 単体（真のルートである `AudioV2Case.kicad_sch`
+> 経由ではない）に対して実行すると、参照のインスタンス別上書き（ch2=8xx, ch3=9xx…）を解決できず、
+> ch1（7xx 系）の値だけが出る。**下表の ch 系の行（`AMP701`/`R70x`/`C70x`/`U701` 等）は実際には
+> ×10 存在する**（220k×2 の行なら実際は 20 個、等）。共通部（`U_IO`/`J_*`/`C_BULK_*`）は
+> 1 回路のみで正しい。正確な全数 BOM が要るときは `AudioV2Case.kicad_sch` からの全体エクスポートを
+> 使うこと（`docker/kicad-cloud-build/kicad-run.sh cli sch export bom -o @OUT@/full.csv
+> @WORK@/AudioV2/AudioV2Case.kicad_sch`）。
+
+<!-- BEGIN GENERATED: ampbank-bom -->
+**AmpBank 部品表（ch1 代表 + 共通部）** — 下の表は `AudioV2/AmpBank.kicad_sch` から自動生成しています。
 **手で編集しないでください**（次の再生成で消えます）。値・フットプリント・役割を直すときは KiCad の回路図側を直し、
 `python3 AudioV2/scripts/gen_parts_bom.py` で再生成します。
 
@@ -194,29 +203,35 @@ Amp 選択後 L/R
 
 | Refs | Value | Footprint | Qty | Role |
 |---|---|---|---|---|
-| AMP701 | NE5532 / DIP-8 compatible | `Package_DIP:DIP-8_W7.62mm_Socket` | 1 | AudioV2 replaceable dual op amp; high-speed decoupling fitted |
+| AMP701 | NE5532 / DIP-8 compatible | `Package_DIP:DIP-8_W7.62mm_Socket` | 1 | Socketed dual op amp under test |
 | C701,C704 | 100nF film | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 2 | L input film coupling / R input film coupling |
 | C702,C705 | 10uF | `Capacitor_THT:CP_Radial_D5.0mm_P2.00mm` | 2 | L input electrolytic coupling / R input electrolytic coupling |
-| C703,C706 | 470uF 25V | `Capacitor_THT:CP_Radial_D12.5mm_P5.00mm` | 2 | L output coupling; compact D12.5/P5 / R output coupling; compact D12.5/P5 |
-| C707,C708 | 100uF 35V polymer | `Capacitor_SMD:CP_Elec_10x12.6` | 2 | V+ local bulk at power connector / V- local bulk at power connector |
-| C709,C710 | 100nF 50V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 | V+ local decoupling / V- local decoupling |
-| C711,C712 | 1nF 50V C0G | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 | V+ high-speed bypass / V- high-speed bypass |
-| J701 | AMP_IN L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 |  |
-| J702 | AMP_OUT L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 |  |
-| J703 | +12V / A_GND / -12V | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 |  |
-| R701,R706 | 220k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L input pulldown / R input pulldown |
-| R702,R707 | 1k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L non-inverting bias; 1/10 refine / R non-inverting bias; 1/10 refine |
+| C703,C706 | 2.2uF film | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 2 | L output coupling (before switch) / R output coupling (before switch) |
+| C707,C708,C709,C710,C_IO? | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 5 | MCP23017 decoupling / op amp V+ local decoupling / op amp V- local decoupling / switch VDD local decoupling / switch VSS local decoupling |
+| C_BULK_N?,C_BULK_P? | 100uF 35V | `Capacitor_SMD:CP_Elec_10x12.6` | 2 | rail bulk at board entry |
+| J_CTRL? | I2C SDA/SCL/3V3/D_GND | `Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical` | 1 | I2C from ControlPanel |
+| J_OUT? | AMP_SEL OUT L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Selected amp out to OutputStage |
+| J_PWR? | +15V / A_GND / -15V | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | Supply in from PowerModule |
+| J_TONE? | TONE IN L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Tone stage output in |
+| R701,R706 | 220k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L input pulldown (after switch) / R input pulldown (after switch) |
+| R702,R707 | 1k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L non-inverting bias / R non-inverting bias |
 | R703,R708 | 47R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L output isolation / R output isolation |
-| R704,R705,R709,R710 | 20k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 | L feedback; gain 2 / L gain resistor; Rf=Rg=20k / R feedback; gain 2 / R gain resistor; Rf=Rg=20k |
-<!-- END GENERATED: ampmodule-bom -->
+| R704,R705,R709,R710 | 20k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 | L feedback Rf; default 20k = GAIN 2 / L gain resistor Rg; GAIN=1+Rf/Rg / R feedback Rf; default 20k = GAIN 2 / R gain resistor Rg; GAIN=1+Rf/Rg |
+| U701 | TMUX7612 | `Package_SO:TSSOP-16_4.4x5mm_P0.65mm` | 1 | 4ch SPST; ch1/2=input L/R, ch3/4=output L/R |
+| U_IO? | MCP23017 | `Package_DIP:DIP-28_W7.62mm` | 1 | I2C GPIO expander; 10 SEL lines |
+<!-- END GENERATED: ampbank-bom -->
 
 ### 4.2 選定・実装メモ（回路図から導出できない＝ここが正）
 
+> **TODO（§2.9 移行に伴う要更新）:** 以下は旧 AmpModule（×10 独立基板）時代の記述が残っている。
+> AmpBank（1 枚統合、TMUX7612 切替、出力カップリング 2.2 µF フィルム、入口バルクのみ）の実態と
+> 一部合っていない。書き換えは未着手。デカップリング寸法・OpAmp 差し替え条件はおおむね有効。
+
 | 項目 | 内容 |
 |---|---|
-| **OpAmp の差し替え条件** | 基準は **NE5532P**。DIP-8 **ソケット**実装なので現物差し替えで聴き比べできる。他の DIP-8 互換デュアルに替えるときは **±12 V 動作・ユニティゲイン安定・容量負荷耐性** を DS で確認する（手持ち在庫は [`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)） |
-| **SMD バイパスコンデンサの寸法** | `100nF X7R` / `1nF C0G` とも **1206 が既定**（回路図の Footprint も 1206）。ハンドはんだ前提のため大きめを選んでいる。**レイアウト都合で 0603 まで下げるのは可**（削除した旧 PCB では `1nF C0G` を裏面 0603 にしていた）。下げる場合は回路図の Footprint も合わせて変更すること |
-| **PCB 外形（未設計・着手時の要件）** | AmpModule の PCB はまだ設計していない。着手するときは `Audio/split/AudioCase_4_amp.kicad_pcb` を参考に、**端子位置と 4 穴位置を維持**し、100 µF ポリマー×2 を載せるため**上辺のみ 15 mm 拡張**する。ソースの `Audio/` 基板は変更しない |
+| **OpAmp の差し替え条件** | 基準は **NE5532P**。DIP-8 **ソケット**実装なので現物差し替えで聴き比べできる。他の DIP-8 互換デュアルに替えるときは **±15 V 動作・ユニティゲイン安定・容量負荷耐性** を DS で確認する（手持ち在庫は [`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)） |
+| **SMD バイパスコンデンサの寸法** | `100nF` は **1206 が既定**（回路図の Footprint も 1206）。ハンドはんだ前提のため大きめを選んでいる。**レイアウト都合で 0603 まで下げるのは可**。下げる場合は回路図の Footprint も合わせて変更すること |
+| **PCB 外形（未設計）** | AmpBank の PCB はまだ設計していない。基板サイズは 150×100 mm 見込み（DIP-8 ソケット10個が面積の支配要因、[AGENT_HANDOFF.md §2.9](AGENT_HANDOFF.md)）。旧 AmpModule 用の `Audio/split/AudioCase_4_amp.kicad_pcb` 流用方針は§2.9の刷新で無効 |
 
 ## 5. まだ買わなくてよい / レイアウト時
 
@@ -225,7 +240,7 @@ Amp 選択後 L/R
 | ENC 正確な秋月コード | 在庫を見て同一外形を 3 個 |
 | PT2314 入手先 | DigiKey に無いことが多い。LCSC / モジュール屋。DIP ソケット推奨 |
 | ノブ（φ6 D カット） | RK27 用に大きめ。ENC 用は小さめ |
-| RelayBoard シルク | JP横に A1/A0→0x20–0x23 早見表（同一PCB使い回し） |
+| AmpBank シルク | 帰還抵抗の倍率表（GAIN = 1 + Rf/Rg）を基板隅に印刷（§2.9） |
 
 ---
 

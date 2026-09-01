@@ -26,6 +26,10 @@
 
 set -euo pipefail
 
+# Windows の既定コンソールコードページ (cp932) では sch_drift.py 等が出力する
+# UTF-8 の記号（·, § 等）でクラッシュする。python3 呼び出しは常に UTF-8 に固定する。
+export PYTHONUTF8=1
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || (cd "$SCRIPT_DIR/../.." && pwd))"
 

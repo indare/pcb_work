@@ -415,23 +415,23 @@ def power_module_wired() -> str:
     # R.C. (pin 6) open = ON — unique label only on that tip
     nets.append(net_at("RC_OPEN", pdk["6"]))
 
-    # ±12 V / A_GND secondary
-    nets.append(net_at("+12V", pdk["3"]))
-    nets.append(net_at("+12V", j12))
-    nets.append(net_at("-12V", pdk["5"]))
-    nets.append(net_at("-12V", jm12))
+    # ±15 V / A_GND secondary
+    nets.append(net_at("+15V", pdk["3"]))
+    nets.append(net_at("+15V", j12))
+    nets.append(net_at("-15V", pdk["5"]))
+    nets.append(net_at("-15V", jm12))
     nets.append(net_at("A_GND", pdk["4"]))
     nets.append(net_at("A_GND", jagnd))
 
-    _cap_net(parts, nets, "C102", "47u", pdk["3"][0] + 15.24, pdk["3"][1] + 3.81, "+12V", "A_GND", PATH_PWR)
-    _cap_net(parts, nets, "C103", "47u", pdk["5"][0] + 15.24, pdk["5"][1] + 3.81, "-12V", "A_GND", PATH_PWR)
-    _cap_net(parts, nets, "C104", "0.1u", pdk["3"][0] + 27.94, pdk["3"][1] + 3.81, "+12V", "A_GND", PATH_PWR)
+    _cap_net(parts, nets, "C102", "47u", pdk["3"][0] + 15.24, pdk["3"][1] + 3.81, "+15V", "A_GND", PATH_PWR)
+    _cap_net(parts, nets, "C103", "47u", pdk["5"][0] + 15.24, pdk["5"][1] + 3.81, "-15V", "A_GND", PATH_PWR)
+    _cap_net(parts, nets, "C104", "0.1u", pdk["3"][0] + 27.94, pdk["3"][1] + 3.81, "+15V", "A_GND", PATH_PWR)
 
     # LM7809 → VCC_TONE; GND on A_GND only
-    nets.append(net_at("+12V", u3["VI"]))
+    nets.append(net_at("+15V", u3["VI"]))
     nets.append(net_at("A_GND", u3["GND"]))
     nets.append(net_at("VCC_TONE", u3["VO"]))
-    _cap_net(parts, nets, "C301", "10u", u3x - 12.7, u3["VI"][1] + 3.81, "+12V", "A_GND", PATH_PWR)
+    _cap_net(parts, nets, "C301", "10u", u3x - 12.7, u3["VI"][1] + 3.81, "+15V", "A_GND", PATH_PWR)
     _cap_net(parts, nets, "C302", "0.1u", u3x + 12.7, u3["VO"][1] + 3.81, "VCC_TONE", "A_GND", PATH_PWR)
 
     nets.append(net_at("PG_NOCONN", pch["PG"]))
@@ -441,10 +441,10 @@ def power_module_wired() -> str:
             symbol_inst_v10("Connector:USB_C_Receptacle_USB2.0_16P", "J1", "USB-C PD in", j1x, j1y, 0, PATH_PWR),
             symbol_inst_v10("AudioV2:CH224_50224", "U2", "50224_CH224 12V", u2x, u2y, 0, PATH_PWR),
             symbol_inst_v10("Device:Fuse", "F201", "3A slow", f1x, f1y, 90, PATH_PWR),
-            symbol_inst_v10("AudioV2:DKMW20F-12", "U201", "DKMW20F-12", u1x, u1y, 0, PATH_PWR),
+            symbol_inst_v10("AudioV2:DKMW20F-15", "U201", "DKMW20F-15", u1x, u1y, 0, PATH_PWR),
             symbol_inst_v10("Regulator_Linear:LM7809_TO220", "U202", "LM7809 +9V", u3x, u3y, 0, PATH_PWR),
             symbol_inst_v10("Connector:Conn_01x02_Pin", "J_PD", "PD_12V/GND to panel", j_pdx, j_pdy, 0, PATH_PWR),
-            symbol_inst_v10("Connector:Conn_01x03_Pin", "J201", "+12/-12/A_GND out", j202x, j202y, 0, PATH_PWR),
+            symbol_inst_v10("Connector:Conn_01x03_Pin", "J201", "+15/-15/A_GND out", j202x, j202y, 0, PATH_PWR),
         ]
     )
 
@@ -461,10 +461,10 @@ def power_module_wired() -> str:
 {net_at("PD_12V", (hier_x, jpd1[1]))}
 {hier_label("PD_GND", "bidirectional", hier_x, jpd2[1], 0)}
 {net_at("PD_GND", (hier_x, jpd2[1]))}
-{hier_label("+12V", "output", hier_x, j12[1], 0)}
-{net_at("+12V", (hier_x, j12[1]))}
-{hier_label("-12V", "output", hier_x, jm12[1], 0)}
-{net_at("-12V", (hier_x, jm12[1]))}
+{hier_label("+15V", "output", hier_x, j12[1], 0)}
+{net_at("+15V", (hier_x, j12[1]))}
+{hier_label("-15V", "output", hier_x, jm12[1], 0)}
+{net_at("-15V", (hier_x, jm12[1]))}
 {hier_label("A_GND", "bidirectional", hier_x, jagnd[1], 0)}
 {net_at("A_GND", (hier_x, jagnd[1]))}
 {hier_label("VCC_TONE", "output", hier_x, u3["VO"][1], 0)}
@@ -488,8 +488,8 @@ def control_panel_wired() -> str:
         "VCC_TONE": 110.0,
         "A_GND": 125.0,
         "D_GND": 128.0,
-        "+12V": 131.0,
-        "-12V": 133.0,
+        "+15V": 131.0,
+        "-15V": 133.0,
         "+3V3": 112.0,
         "+5V": 115.0,
     }
@@ -503,11 +503,11 @@ def control_panel_wired() -> str:
         parts.append(hier_label(name, shape, 30.48, hy, 180))
         nets.append(net_at(name, (30.48, hy)))
 
-    # BP5293 +5V (VIN from +12V, GND D_GND)
+    # BP5293 +5V (VIN from +15V, GND D_GND)
     bpx, bpy = at(50.8, 145.0)
     bp = bp5293_pins(bpx, bpy)
     parts.append(sym("BP5293_ROHM:BP5293-50", "U503", "BP5293-50 +5V", bpx, bpy, 0, PATH_CTRL))
-    nets.append(net_at("+12V", bp["VIN"]))
+    nets.append(net_at("+15V", bp["VIN"]))
     nets.append(net_at("D_GND", bp["GND"]))
     nets.append(net_at("+5V", bp["VOUT"]))
 
@@ -1380,7 +1380,7 @@ def parent_wired() -> str:
     """Parent — same-named sheet pins auto-connect in KiCad; no extra labels on pins.
 
     Only place labels for nets that need an off-sheet stub (AMP_SEL) or explicit
-    Relay-B ↔ Relay-A / Control bridges when pin coords differ.
+    AmpBank ↔ Control bridges when pin coords differ.
     """
     nets: list[str] = []
 
@@ -1388,48 +1388,38 @@ def parent_wired() -> str:
         for p in pts:
             nets.append(net_at(name, p))
 
-    # Power / Control / Output pin coords — on sheet edges, ≥10.16 mm apart
+    # Power / AmpBank / Control / Output pin coords — on sheet edges, ≥10.16 mm apart
     # Power @ (35.56, 30.48) w=30.48 → L=35.56 R=66.04
     power_pins = [
         ("PD_12V_SW", "input", 35.56, 86.36, 180),
-        ("+12V", "output", 66.04, 35.56, 0),
-        ("-12V", "output", 66.04, 45.72, 0),
+        ("+15V", "output", 66.04, 35.56, 0),
+        ("-15V", "output", 66.04, 45.72, 0),
         ("A_GND", "bidirectional", 66.04, 55.88, 0),
         ("VCC_TONE", "output", 66.04, 66.04, 0),
         ("PD_12V", "output", 66.04, 76.2, 0),
         ("PD_GND", "bidirectional", 66.04, 86.36, 0),
     ]
-    relay_pins_a = [
+    # AmpBank pin names must match the hier_label() names in amp_bank_wired() (§2.9).
+    amp_bank_pins = [
         ("I2C_SDA", "bidirectional", 88.9, 40.64, 180),
         ("I2C_SCL", "bidirectional", 88.9, 50.8, 180),
         ("3V3", "input", 88.9, 60.96, 180),
         ("D_GND", "input", 88.9, 71.12, 180),
-        ("TONE_L", "input", 144.78, 35.56, 0),
-        ("TONE_R", "input", 144.78, 40.64, 0),
-        ("+12V", "input", 144.78, 45.72, 0),
-        ("-12V", "input", 144.78, 50.8, 0),
-        ("A_GND", "bidirectional", 144.78, 55.88, 0),
-        ("+5V", "input", 144.78, 60.96, 0),
-    ]
-    relay_pins_b = [
-        ("I2C_SDA", "bidirectional", 88.9, 83.82, 180),
-        ("I2C_SCL", "bidirectional", 88.9, 93.98, 180),
-        ("3V3", "input", 88.9, 104.14, 180),
-        ("D_GND", "input", 88.9, 114.3, 180),
-        ("TONE_L", "input", 144.78, 83.82, 0),
-        ("TONE_R", "input", 144.78, 88.9, 0),
-        ("+12V", "input", 144.78, 93.98, 0),
-        ("-12V", "input", 144.78, 99.06, 0),
-        ("A_GND", "bidirectional", 144.78, 104.14, 0),
-        ("+5V", "input", 144.78, 109.22, 0),
+        ("TONE_L", "input", 88.9, 81.28, 180),
+        ("TONE_R", "input", 88.9, 91.44, 180),
+        ("+15V", "input", 88.9, 101.6, 180),
+        ("-15V", "input", 88.9, 111.76, 180),
+        ("A_GND", "bidirectional", 88.9, 121.92, 180),
+        ("AMP_SEL_L", "output", 144.78, 40.64, 0),
+        ("AMP_SEL_R", "output", 144.78, 50.8, 0),
     ]
     control_pins = [
         ("COMMON_L", "input", 152.4, 30.48, 180),
         ("COMMON_R", "input", 152.4, 40.64, 180),
         ("I2C_SDA", "bidirectional", 152.4, 50.8, 180),
         ("I2C_SCL", "bidirectional", 152.4, 60.96, 180),
-        ("+12V", "input", 152.4, 71.12, 180),
-        ("-12V", "input", 152.4, 81.28, 180),
+        ("+15V", "input", 152.4, 71.12, 180),
+        ("-15V", "input", 152.4, 81.28, 180),
         ("A_GND", "bidirectional", 152.4, 91.44, 180),
         ("D_GND", "input", 152.4, 101.6, 180),
         ("VCC_TONE", "input", 152.4, 111.76, 180),
@@ -1450,63 +1440,51 @@ def parent_wired() -> str:
         ("LINE_L", "output", 266.7, 60.96, 0),
         ("LINE_R", "output", 266.7, 71.12, 0),
     ]
-    amp_pins = [
-        ("L_IN", "input", 88.9, 142.24, 180),
-        ("R_IN", "input", 88.9, 152.4, 180),
-        ("+12V", "input", 88.9, 162.56, 180),
-        ("-12V", "input", 88.9, 172.72, 180),
-        ("A_GND", "bidirectional", 88.9, 182.88, 180),
-        ("L_OUT", "output", 144.78, 142.24, 0),
-        ("R_OUT", "output", 144.78, 152.4, 0),
-    ]
 
     # Explicit label bridges on every sheet pin tip (KiCad 10 does not
     # reliably auto-join same-named pins without a parent-side net object).
-    join("+12V", [(66.04, 35.56), (152.4, 71.12)])
-    join("-12V", [(66.04, 45.72), (152.4, 81.28)])
+    join("+15V", [(66.04, 35.56), (152.4, 71.12), (88.9, 101.6)])
+    join("-15V", [(66.04, 45.72), (152.4, 81.28), (88.9, 111.76)])
     join("A_GND", [
-        (66.04, 55.88), (144.78, 55.88), (144.78, 104.14),
-        (152.4, 91.44), (215.9, 71.12), (88.9, 182.88),
+        (66.04, 55.88), (152.4, 91.44), (215.9, 71.12), (88.9, 121.92),
     ])
     join("VCC_TONE", [(66.04, 66.04), (152.4, 111.76)])
     join("PD_12V", [(66.04, 76.2), (152.4, 121.92)])
     join("PD_GND", [(66.04, 86.36), (208.28, 132.08)])
     join("PD_12V_SW", [(35.56, 86.36), (208.28, 121.92)])
-    join("I2C_SDA", [(88.9, 40.64), (88.9, 83.82), (152.4, 50.8)])
-    join("I2C_SCL", [(88.9, 50.8), (88.9, 93.98), (152.4, 60.96)])
+    join("I2C_SDA", [(88.9, 40.64), (152.4, 50.8)])
+    join("I2C_SCL", [(88.9, 50.8), (152.4, 60.96)])
     # External line/source input into the tone stage.
     join("COMMON_L", [(152.4, 30.48)])
     join("COMMON_R", [(152.4, 40.64)])
-    join("D_GND", [(88.9, 71.12), (88.9, 114.3), (152.4, 101.6)])
-    join("3V3", [(88.9, 60.96), (88.9, 104.14), (152.4, 132.08)])
-    join("+5V", [(144.78, 60.96), (144.78, 109.22), (208.28, 111.76)])
-    join("AMP_SEL_L", [(215.9, 40.64), (144.78, 142.24)])
-    join("AMP_SEL_R", [(215.9, 50.8), (144.78, 152.4)])
-    join("TONE_L", [(208.28, 30.48), (144.78, 35.56), (144.78, 83.82), (88.9, 142.24)])
-    join("TONE_R", [(208.28, 40.64), (144.78, 40.64), (144.78, 88.9), (88.9, 152.4)])
-    join("+12V", [(144.78, 45.72), (144.78, 93.98), (88.9, 162.56)])
-    join("-12V", [(144.78, 50.8), (144.78, 99.06), (88.9, 172.72)])
+    join("D_GND", [(88.9, 71.12), (152.4, 101.6)])
+    join("3V3", [(88.9, 60.96), (152.4, 132.08)])
+    # BP5293 +5V is now a spare output on Control — its only consumer (RelayBoard
+    # coil driver) was removed in §2.9. Single-point join keeps the stub from
+    # reading as an unconnected pin in ERC.
+    join("+5V", [(208.28, 111.76)])
+    join("AMP_SEL_L", [(215.9, 40.64), (144.78, 40.64)])
+    join("AMP_SEL_R", [(215.9, 50.8), (144.78, 50.8)])
+    join("TONE_L", [(208.28, 30.48), (88.9, 81.28)])
+    join("TONE_R", [(208.28, 40.64), (88.9, 91.44)])
     join("PHONE_L", [(266.7, 40.64)])
     join("PHONE_R", [(266.7, 50.8)])
     join("LINE_L", [(266.7, 60.96)])
     join("LINE_R", [(266.7, 71.12)])
 
-    from generate_kicad_scaffold import UUID_POWER_INST, UUID_RELAY_A, UUID_RELAY_B  # noqa: E402
+    from generate_kicad_scaffold import UUID_POWER_INST  # noqa: E402
 
     sheets = (
         sheet_block(UUID_POWER_INST, "PowerModule", "PowerModule.kicad_sch", 35.56, 30.48, 30.48, 60.96, power_pins, "2")
-        + sheet_block(UUID_RELAY_A, "RelayBoard_A", "RelayBoard.kicad_sch", 88.9, 30.48, 55.88, 45.72, relay_pins_a, "3")
-        + sheet_block(UUID_RELAY_B, "RelayBoard_B", "RelayBoard.kicad_sch", 88.9, 78.74, 55.88, 45.72, relay_pins_b, "4")
-        + sheet_block(UUID_CONTROL_INST, "ControlPanel", "ControlPanel.kicad_sch", 152.4, 25.4, 55.88, 111.76, control_pins, "5")
-        + sheet_block(UUID_OUTPUT_INST, "OutputStage", "OutputStage.kicad_sch", 215.9, 30.48, 50.8, 50.8, output_pins, "6")
-        + sheet_block(UUID_AMP_INST, "AmpModule_Reference", "AmpModule.kicad_sch", 88.9, 132.08, 55.88, 60.96, amp_pins, "7")
+        + sheet_block(UUID_BANK_INST, "AmpBank", "AmpBank.kicad_sch", 88.9, 25.4, 55.88, 111.76, amp_bank_pins, "3")
+        + sheet_block(UUID_CONTROL_INST, "ControlPanel", "ControlPanel.kicad_sch", 152.4, 25.4, 55.88, 111.76, control_pins, "4")
+        + sheet_block(UUID_OUTPUT_INST, "OutputStage", "OutputStage.kicad_sch", 215.9, 30.48, 50.8, 50.8, output_pins, "5")
     )
     body = f"""\t(lib_symbols)
 {text_note(25.4, 15.24, [
     "AudioV2Case — label-wired parent",
     "Sheet pins ≥10.16 mm apart; bridges via local labels on pin tips only.",
-    "AmpModule_Reference = one circuit/BOM instance; manufacture x10.",
-    "RelayBoard J_AMP terminal wiring selects the physical Amp; see WIRING.md.",
+    "AmpBank = 10ch socketed op amp bank, one channel selected at a time (§2.9).",
 ])}
 {sheets}
 {"".join(nets)}
@@ -1875,11 +1853,6 @@ def main() -> None:
     # 機械的に上書きしない。--force-<name> は「シートを丸ごと作り直す」ときだけの
     # 脱出ハッチで、通常運用では使わない。
     HAND_EDITED = {
-        "relay": (
-            "RelayBoard.kicad_sch",
-            relay_board_wired,
-            "addr strap footprint/position, C301/C302, J_I2C — see §2.6",
-        ),
         "power": (
             "PowerModule.kicad_sch",
             power_module_wired,
@@ -1894,7 +1867,8 @@ def main() -> None:
     }
     # 生成コード所有シート（回せばそのまま正）
     GENERATED = {
-        "amp": ("AmpModule.kicad_sch", amp_module_wired),
+        "channel": ("AmpChannel.kicad_sch", amp_channel_wired),
+        "bank": ("AmpBank.kicad_sch", amp_bank_wired),
         "control": ("ControlPanel.kicad_sch", control_panel_wired),
         "parent": ("AudioV2Case.kicad_sch", parent_wired),
     }
@@ -1912,7 +1886,7 @@ def main() -> None:
         else:
             skipped.append(name)
             print(
-                f"SKIPPED {fn}: hand-edited sheet (AGENT_HANDOFF.md §2.8). {why}. "
+                f"SKIPPED {fn}: hand-edited sheet (AGENT_HANDOFF.md sec 2.8). {why}. "
                 f"Make logic changes in KiCad, or pass --force-{name} to overwrite anyway.",
                 file=sys.stderr,
             )

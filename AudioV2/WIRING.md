@@ -1,5 +1,13 @@
 # AudioV2 箱配線 IF 素案（draft）
 
+> **未更新（2026-09-01 のアーキテクチャ刷新未反映）:** RelayBoard と AmpModule ×10 は
+> `AmpBank` 1枚へ統合され、`RelayBoard.kicad_sch` / `AmpModule.kicad_sch` は削除済み
+> （[AGENT_HANDOFF.md §2.9](AGENT_HANDOFF.md)）。以下の「RelayBoard」「AMPn」を含む記述
+> （音声幹線・Amp再版の節、番地ストラップの製造ロット言及など）は旧アーキテクチャの記録で、
+> 現行の物理配線（AmpBank への `+15V/-15V/A_GND` 星型・`TONE_L/R`・`AMP_SEL_L/R`・I2C 各1本）
+> を反映していない。書き換えは未着手。電源星型節のネット名（`+12V`/`-12V`）は
+> `+15V`/`-15V` に読み替えること。
+
 **目的:** AudioV2基板間と、KiCad図外の流用基板との端子接続一覧。
 
 > **記法:** 端子台は参照(designator)ではなく **ネット名と回路図の Value 欄の名前**で指す。

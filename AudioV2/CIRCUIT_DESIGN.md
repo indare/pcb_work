@@ -83,14 +83,14 @@ AMP_SEL_L ── SW601 (SP3T) / AMP_SEL_R ── SW602 (SP3T)
 ## 4. PowerModule — 部品値（変更なし）
 
 USB-C → CH224 → PD_12V → PWR SW → F201 → **DKMW20F-15** → **±15 V** / A_GND。
-（2026-09-01 に ±12 V から変更。理由は [DECISIONS.md](DECISIONS.md) §8。**回路図のネット名はまだ `+12V`/`-12V`**）  
-+12 V → LM7809 → VCC_TONE（+9 V）。
+（2026-09-01 に ±12 V から変更。理由は [DECISIONS.md](DECISIONS.md) §8。回路図のネット名も `+15V`/`-15V` に改名済み）  
++15 V → LM7809 → VCC_TONE（+9 V）。
 
 ### RelayBoard — **廃止**（2026-09-01、`AmpBank` へ統合。AGENT_HANDOFF §2.9）
 
 > **この節は旧アーキテクチャの記録です。** RelayBoard と AmpModule は 10ch 分を載せた
 > 1枚の基板 **`AmpBank`** へ統合することが決まりました。入力と出力の両方をアナログスイッチで切り替え、
-> 電源は常時給電します。以下は統合前の仕様で、`RelayBoard.kicad_sch` の現状に対応します。
+> 電源は常時給電します。以下は統合前の仕様で、削除済みの `RelayBoard.kicad_sch` の実装内容の記録です。
 
 #### 旧仕様（5ch×2枚）
 
@@ -117,7 +117,10 @@ JP302  JP301   ADDR   BOARD
 
 ---
 
-## 5. AmpModule — AudioV2再版
+## 5. AmpModule — AudioV2再版（**廃止・記録** — 2026-09-01、`AmpBank` へ統合。AGENT_HANDOFF §2.9）
+
+> **この節は旧アーキテクチャの記録です。** `AmpModule.kicad_sch` は削除済み。現行は §2.9 の
+> `AmpBank`（出力カップリング 2.2 µF film、常時給電、TMUX7612 切替）。以下は統合前の仕様。
 
 - 信号経路: `J701 → 100 nF film + 10 µF → 非反転Amp → 47 Ω → 470 µF → J702`
 - ゲイン: `1 + 20 kΩ / 20 kΩ = 2`（L/R同一。ソース音量で Loudness、Amp は電気的余裕）

@@ -13,24 +13,29 @@
 
 ## 1. いま何をしているか（一言）
 
-**アーキテクチャ刷新の途中（§2.9）。`AmpBank`（10ch を1枚）の生成コードは完成・検証済みだが、
-回路図ファイルはまだリポジトリに無い。旧 RelayBoard / AmpModule が現役のまま残っている。**
+**アーキテクチャ刷新（§2.9）の手順3〜5が完了。`AmpBank`（10ch を1枚）が回路図としてリポジトリに存在し、
+親に配線され、電源レールも `+15V`/`-15V` へ改名済み（PowerModule の DKMW20F-12 → -15 差替え含む）。
+旧 RelayBoard / AmpModule は削除済み。残るのは §2.8 所有権表の追記と WIRING.md 等の全面書き換え。**
 
 2026-09-01 に「RelayBoard 5ch×2 + AmpModule ×10」を **`AmpBank` 1枚へ統合**すると決めた（§2.9）。
 切替はラッチングリレー AZ850 → **アナログスイッチ TMUX7612**、電源は切替せず **常時給電**、
-レールは **±15 V**（TMUX7612 と LT1364 の要求）。経緯と根拠は §2.9。
+レールは **±15 V**（TMUX7612 と LT1364 の要求、v1 資産との互換。DECISIONS.md §8）。経緯と根拠は §2.9。
 
-いまリポジトリに **ある / 無い**もの:
+いまリポジトリに **ある / 無い**もの（2026-09-01 更新）:
 
 | もの | 状態 |
 |---|---|
-| `TMUX7612` シンボル（`AudioV2.kicad_sym`） | **ある**。全16ピンをデータシートと照合済み。FP は標準 lib の TSSOP-16 で足りる |
-| `wire_circuit_design.py` の `amp_channel_wired()` / `amp_bank_wired()` | **ある**。サンドボックスで生成 → ネットリスト / ERC で検証済み |
-| `AmpBank.kicad_sch` / `AmpChannel.kicad_sch` | **無い**。サンドボックスで作って捨てた。リポジトリへの書き込みは未実施 |
-| 旧 `RelayBoard.kicad_sch` / `AmpModule.kicad_sch`、親の3シート | **残っている**。まだ現役 |
+| `TMUX7612` シンボル、`DKMW20F-15` シンボル（`AudioV2.kicad_sym`） | **ある**。DKMW20F-15 は v1 `Audio/DKMW20.kicad_sym` から移植（フットプリント `Library:DKMW20F-15_1in_THT` も v1 資産で既存） |
+| `AmpBank.kicad_sch` / `AmpChannel.kicad_sch` | **ある**。`wire_circuit_design.py bank` / `channel` で生成・コミット済み。所有権は生成コード |
+| `AudioV2Case.kicad_sch`（親） | **`AmpBank` 1枚に差し替え済み**。旧3シート（RelayBoard_A/B, AmpModule_Reference）を撤去 |
+| `PowerModule.kicad_sch`（手編集所有） | **`+15V`/`-15V` へ改名、DKMW20F-12 → -15 に差替え済み**（直接 sexpr 編集。KiCad GUI 未検証） |
+| `ControlPanel.kicad_sch` | **`+15V`/`-15V` へ改名して再生成済み**（生成コード所有なのでスクリプト実行のみ） |
+| 旧 `RelayBoard.kicad_sch` / `AmpModule.kicad_sch` | **削除済み**（`git rm`）。生成関数 `relay_board_wired()`/`amp_module_wired()` はコード上に残置（デッドコード、§2.8 未整理） |
 
-つまり次の一歩は §2.9 の手順 **3〜7**。いずれも **既存の回路図を消す破壊的な操作**なので、
-着手前にユーザーの合意を取ること。手順1・2（シンボルと生成コード）は完了している。
+残る作業（§2.9 手順6・7 相当）:
+1. **§2.8 所有権モデル表の更新** — 本メモ内でこの手順の一部として反映済み（下記参照）。旧 `relay_board_wired()`/`amp_module_wired()` 関数本体の削除はまだ
+2. `CIRCUIT_DESIGN.md` §5・`WIRING.md` 全体・`DECISIONS.md` のRelayBoard/AmpModule前提の記述は**未着手**（重要箇所にのみ「旧アーキテクチャの記録」フラグを追記済み。全面書き換えは別タスク）
+3. `PARTS.md` §4.2「選定・実装メモ」の内容更新（BOM生成ブロックの対象は `AmpBank.kicad_sch` へ切替済み。ただし kicad-cli の制約で**代表 ch1 分＋共通部のみ**表示、×10 は手動換算が要る旨を注記済み。詳細は §5）
 
 刷新後も生きている確定事項:
 I2C/電源トポロジは **スター確定**（daisy 不採用、WIRING.md）。端子台は v1 `Audio/Controll.kicad_sch` と同じ Phoenix MKDS-1,5 系。
@@ -41,10 +46,17 @@ A_GND / D_GND の NetTie は **ControlPanel 側**（Pico 直近）に1点。ゲ�
 および §2.7 の RelayBoard レビュー指摘全般（基板そのものが無くなるため）。
 
 KiCad の実行環境は `docker/kicad-cloud-build/kicad-run.sh` で解決済み（Docker イメージが無ければ
-ホストの `kicad-cli` へ自動フォールバック）。別セッションへ検証を依頼する必要はもう無い。
+ホストの `kicad-cli` へ自動フォールバック）。**この Windows ローカル環境では別途:**
+`C:\tmp\kicad-symbols` を KiCad インストールの `share/kicad/symbols` へのジャンクションとして
+作成しないと `wire_circuit_design.py` のピン数ルックアップが失敗する（`sch_helpers.py` の
+`KICAD_SYM_ROOT` フォールバックが `/tmp/kicad-symbols` 前提のため）。`kicad-run.sh` には
+`PYTHONUTF8=1` を追加済み（Windows のコンソールコードページで `drift`/`gen_parts_bom.py` の
+UTF-8 出力がクラッシュする問題への対処）。
 
-次の話題候補: §2.9 手順3〜7 / ERC 47件の仕分け（うち階層ラベル7件は意図的） /
-ControlPanel 未接続ピン / `CIRCUIT_DESIGN.md`・`DECISIONS.md` の語彙をネット名ベースへ書き換え。
+次の話題候補: ERC 60件の仕分け（旧47件から純増10件は AmpBank 各chの `ground_pin_not_ground`
+警告＝TMUX7612 VSS=-15V の既知誤検知。残りは元々あったControlPanel未接続ピン等） /
+`WIRING.md`・`CIRCUIT_DESIGN.md`・`DECISIONS.md` の RelayBoard/AmpModule 前提記述の全面書き換え /
+`relay_board_wired()`/`amp_module_wired()` デッドコードの削除。
 
 > **記法について:** このメモは部品を原則 **ネット名・機能名**（回路図 Value 欄の名前）で指す。
 > 参照(designator)は KiCad の採番の産物で再アノテーションのたびに動くため（2026-09-01 に58件が変わった）、
@@ -62,7 +74,7 @@ ControlPanel 未接続ピン / `CIRCUIT_DESIGN.md`・`DECISIONS.md` の語彙を
 | Tone | PT2314。電源は **`VCC_TONE`(+9)** ← Power LM7809 |
 | 基板分割 | **Power ≠ Control**。Control+Output 同居可。Power 同居は非推奨（GND/熱/EMI） |
 | 隔離 | 一次 `PD_GND` ≠ 二次 `A_GND`。DKMW **R.C. = NC（オープン=ON）** |
-| Output / Amp | Outputは`SW_SP3T`×2。Ampは代表1シート、同一仕様×10を製造（PCB は未設計） |
+| Output / Amp | Outputは`SW_SP3T`×2。Ampは `AmpBank` 1枚に10ch統合、`AmpChannel`サブシート×10（§2.9、PCB は未設計） |
 
 詳細: `DECISIONS.md` / `CIRCUIT_DESIGN.md` / `PARTS.md` / `WIRING.md`
 
@@ -218,17 +230,20 @@ B 板のストラップ／プルダウンには別の参照が振られる（§2
 
 | 状態 | 意味 | 該当シート |
 |---|---|---|
-| **生成コード所有** | `wire_circuit_design.py <target>` を回せばそのまま正 | Amp, Control, 親 |
-| **手編集所有** | KiCad上の手編集が正。生成コードはロジック（ネット/ピン対応）のドキュメントとして残すが、機械的に上書きしてはいけない | **RelayBoard**（2026-08-31〜）, **Power**（2026-09-01〜）, **Output**（2026-09-01〜） |
+| **生成コード所有** | `wire_circuit_design.py <target>` を回せばそのまま正 | AmpBank, AmpChannel, Control, 親 |
+| **手編集所有** | KiCad上の手編集が正。生成コードはロジック（ネット/ピン対応）のドキュメントとして残すが、機械的に上書きしてはいけない | **Power**（2026-09-01〜）, **Output**（2026-09-01〜） |
 
-**2026-09-01 の実測による更新:** サンドボックスで `all --force-relay` を再生成して実図と突き合わせたところ、Power と Output は「回せばそのまま正」ではなかったため所有権を移した。
+**2026-09-01 更新（§2.9 統合）:** `RelayBoard` は基板ごと廃止（削除済み）。`Amp`（旧 `AmpModule`）は
+`AmpBank`/`AmpChannel` に置き換わり、生成コード所有のまま。旧 `relay` の書き込み安全装置
+（`--force-relay` 必須化）は対象シートが無くなったため `main()` の `HAND_EDITED` から削除した。
+
+**drift 実測（2026-09-01、`kicad-run.sh drift` をこの Windows ローカル環境で実行）:**
 
 | シート | 再生成 vs 実図 |
 |---|---|
-| Amp / Control / 親 | ✅ 参照・値とも完全一致。Amp は座標が2件相違していた（`AMP701` のユニット入れ替えが未再生成、§2.5）が 2026-09-01 に再生成して解消済み |
-| RelayBoard | 参照・値は一致するが座標24個が相違（手調整レイアウト。所有権は従来どおり手編集） |
-| **Output** | Amp 共通ハーネス受けの `RAIL IN` 端子台（3P: `AMP_SEL_L` / `A_GND` / `AMP_SEL_R`）が生成されない。部品5個の座標も相違 |
-| **Power** | **一世代古い。** 生成側は USB-C + CH224 の PD 前段（スクリプト内の `J1`/`U2`/`J_PD`）を出すが、実図は PD モジュール外付け（`PD module in` / `VCC_TONE OUT` 端子台、§2.1）。コンデンサも生成6個 対 実図8個 |
+| AmpBank / AmpChannel / Control / 親 | ✅ 完全一致（部品・ネット名・サブシートとも） |
+| **Output** | 変わらず — Amp 共通ハーネス受けの `RAIL IN` 端子台が生成されない。部品5個の座標も相違（従来からの既知ギャップ） |
+| **Power** | 変わらず一世代古い（PD 前段が USB-C+CH224 内蔵 vs 実図は外付けモジュール）。**ただし `+15V`/`-15V` ネット名と `DKMW20F-15` は生成側・実図側とも一致**（今回の改名作業で両方を揃えたため、drift の「ネット名相違」に `+15V`/`-15V` は出ない） |
 
 **参照の対応表（生成スクリプト側 → 実図）:** ここは参照そのものが主題なので designator で書く。
 Power は `F1→F201` / `U1→U201` / `U3→U202` / `J202→J201` のみ確実に対応が取れたため修正済み。
@@ -236,7 +251,9 @@ Power は `F1→F201` / `U1→U201` / `U3→U202` / `J202→J201` のみ確実�
 
 **運用ルール:**
 - 手編集所有シートへの**ロジック変更**（ネットの追加/変更、部品の追加）は **KiCad側で直接行う**。`wire_circuit_design.py` 側のコードは追随してドキュメント更新するが、それを起点に書き戻さない
-- `relay` への書き込みはデフォルトで無効（§2.6 安全装置）。`--force-relay` は「シートを丸ごと作り直す」ときだけの脱出ハッチで、通常運用では使わない
+- PowerModule の `+12V`/`-12V` → `+15V`/`-15V` 改名と `DKMW20F-12`→`-15` 差替えは、KiCad GUI が無い
+  環境だったため**実ファイルの sexpr を直接テキスト編集**して行った（§2.9）。手編集所有シートの本来の
+  運用（人が KiCad で触る）からは外れる例外対応。次に KiCad で開いたときに壊れていないか確認すること
 - 新しいシートが今後同様に手編集され始めたら、この表に追記して所有権を切り替えること
 
 ### 2.9 アーキテクチャ刷新 — `AmpBank` へ統合（2026-09-01 決定）
@@ -381,11 +398,11 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 | 1 | `TMUX7612` シンボル作成 | **完了**（2026-09-01） |
 | 2a | `amp_channel_wired()` — 1ch の生成コード | **完了**。ネットリストで設計どおりを確認 |
 | 2b | `amp_bank_wired()` — Bank 側（共通部 + 10 インスタンス） | **完了**。全コネクタの接続をネットリストで確認 |
-| 3 | `RelayBoard` / `AmpModule` の削除 | 未着手 |
-| 4 | 親から3シートを外して `AmpBank` へ | 未着手 |
-| 5 | ネット名 `+15V` / `-15V` へ改名 | 未着手 |
-| 6 | §2.8 所有権表の更新 | 未着手 |
-| 7 | `gen_parts_bom.py` の対象シート差し替え | 未着手 |
+| 3 | `RelayBoard` / `AmpModule` の削除 | **完了**（2026-09-01、`git rm`） |
+| 4 | 親から3シートを外して `AmpBank` へ | **完了**。`drift` で親シート一致を確認済み |
+| 5 | ネット名 `+15V` / `-15V` へ改名 | **完了**（PowerModule の `DKMW20F-12`→`-15` 差替え含む、全シート） |
+| 6 | §2.8 所有権表の更新 | **一部完了**。表は更新済み。旧 `relay_board_wired()`/`amp_module_wired()` 関数本体の削除は未着手（デッドコードのまま残置） |
+| 7 | `gen_parts_bom.py` の対象シート差し替え | **完了**。ただし kicad-cli の制約で ch1 代表 + 共通部のみ（×10 の全数展開は不可、PARTS.md に注記） |
 
 **構造:** `AmpChannel` サブシートを 10 回インスタンス化する（`AudioV2Case → AmpBank → AmpChannel ×10`）。
 生成コードが書くのは 1ch 分（22点）と Bank 側（16点）だけで、236点を並べるより約6倍簡単。
@@ -461,7 +478,12 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 
 ## 4. 現状の git / 作業ツリー
 
-作業ブランチは **`main`**。2026-09-01 時点で **`1d42401` を origin/main へ push 済み**（作業ツリー clean、ローカル/リモートとも先行 0）。
+作業ブランチは **`main`**。HEAD は `1c9a359`（origin/main と同期済み）。
+**作業ツリーは dirty — §2.9 手順3〜5（AmpBank 統合・±15V 改名）がまだ未コミット。**
+変更ファイル: `AmpModule.kicad_sch`/`RelayBoard.kicad_sch` 削除、`AmpBank.kicad_sch`/`AmpChannel.kicad_sch` 新規、
+`AudioV2Case.kicad_sch`/`ControlPanel.kicad_sch`/`PowerModule.kicad_sch`/`AudioV2.kicad_sym` 変更、
+`wire_circuit_design.py`/`gen_parts_bom.py`/`kicad-run.sh` 変更、`PARTS.md`/`CIRCUIT_DESIGN.md`/`WIRING.md` 更新。
+コミットはユーザー指示待ち。
 
 履歴ブランチ（`cursor/audiov2-*` 等）は base にしない。クラウドが古い `branchName` を fetch して落ちることがある → tip が必要なら一時復帰のみ。
 
@@ -471,26 +493,23 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 
 ### できている
 
-- Power: PD モジュール入・DKMW・7809・端子台3種（§2.1）・パネル SW ループ（論理）
-- Control: パネル PWR SW（`PD_12V` → `PD_12V_SW`）＋ 12 V パネル LED（`PD_12V_SW` → `PD_GND`。SW 後に入れてあるので通電表示になる）、PT2314 / Pico / ENC 等
+- Power: PD モジュール入・DKMW20F-15・7809・端子台3種（§2.1、Value は `+15/-15/A_GND out` に改名済み）・パネル SW ループ（論理）
+- Control: パネル PWR SW（`PD_12V` → `PD_12V_SW`）＋ 12 V パネル LED（`PD_12V_SW` → `PD_GND`。SW 後に入れてあるので通電表示になる）、PT2314 / Pico / ENC 等。`+15V`/`-15V` へ改名済み
 - Output / ラベル結線素案（#27）
-- AmpModule回路図、代表親シート（×10）。**PCB は未設計**（§2.5）
-- RelayBoard本配線: 各盤MCP23017×1、ULN2803×2、AZ850×10。Amp入力＋±12 Vを同時切替。番地はJP A1/A0で0x20–0x23（最大4枚）
-  — ただし §2.9 の刷新でこの2つ（AmpModule / RelayBoard）は**置き換え対象**
-- `AmpBank` の論理設計・部品選定・`TMUX7612` シンボル・生成コード（§2.9）。
-  カップリング位置とプルダウン位置は ngspice で検証済み（`AudioV2/spice/`）
+- `AmpBank`（10ch 統合、TMUX7612 切替、常時給電、±15V）。**リポジトリに存在し、親に配線済み。PCB は未設計**（§2.9）
+- 旧 AmpModule / RelayBoard は **削除済み**（§2.9 手順3〜5完了）
 
 ### 未着手・優先候補
 
-1. **§2.9 手順3〜7 — 旧 RelayBoard / AmpModule を消して `AmpBank` へ置き換える。**
-   破壊的なのでユーザー合意の上で。ネット名 `+12V`/`-12V` → `+15V`/`-15V` の改名も含む
-2. ERC 残り 47 件の仕分け（少なくとも階層ラベル7件は意図的。刷新で大半が消える見込み）
-3. **ControlPanel 未接続ピンの整理**
-4. `CIRCUIT_DESIGN.md` / `DECISIONS.md` の語彙をネット名ベースへ書き換え（SOURCE_OF_TRUTH.md §3）
-5. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
-6. OLED FP、PT2314 未使用入力
-7. ControlPanel 側 I2C/電源コネクタ（5P: `I2C_SDA`/`I2C_SCL`/`3V3`/`+5V`/`D_GND`）の物理実装（フェルール/スプリッタ分岐）
-8. `PowerModule` の生成コードが現図より1世代古い（`drift` で検出済み。手編集所有なので実害は無いが要追従）
+1. ERC 60 件の仕分け（純増10件は AmpBank 各chの `ground_pin_not_ground` — TMUX7612 VSS=-15V の既知誤検知。残りは元々あった ControlPanel 未接続ピン等、下記2と重複）
+2. **ControlPanel 未接続ピンの整理**（Pico 未使用GPIO、PT2314 未使用入力。§2.9以前からの既知事項）
+3. `WIRING.md` 全面書き換え（RelayBoard 前提の箱配線記述が残っている。冒頭に注意書きを追記済みだが本文は未更新）／`CIRCUIT_DESIGN.md` §5・`DECISIONS.md` の語彙をネット名ベースへ書き換え（SOURCE_OF_TRUTH.md §3）
+4. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
+5. OLED FP、PT2314 未使用入力
+6. ControlPanel 側 I2C/電源コネクタ（5P: `I2C_SDA`/`I2C_SCL`/`3V3`/`+5V`/`D_GND`）の物理実装（フェルール/スプリッタ分岐）
+7. `PowerModule` の生成コードが現図より1世代古い（PD 前段のみ。`+15V`/`-15V` 改名は反映済み。`drift` で検出済み。手編集所有なので実害は無いが要追従）
+8. `relay_board_wired()` / `amp_module_wired()` デッドコードの削除（§2.8）
+9. `PARTS.md` §4.2「選定・実装メモ」の AmpBank 実態への書き換え（TODO 注記のみ済み）
 
 ### 検証
 
@@ -505,8 +524,17 @@ python3 AudioV2/scripts/gen_parts_bom.py --check   # PARTS.md の BOM ブロッ�
 `kicad-run.sh` は Docker イメージ `kicad-cloud:10.0.6` があればそれを、無ければホストの
 `kicad-cli` を使う。出力は `out/`（gitignore 済み）。
 
-**2026-09-01 push 時点の値**（次回はここから増減を見る）:
-`check_sexpr` 8ファイル / 問題0、ERC **47件**、`drift` 生成コード所有 3/3 一致、`gen_parts_bom --check` rc=0。
+**2026-09-01 §2.9 手順3〜5 完了時点の値**（このローカル Windows 環境で実測。次回はここから増減を見る）:
+`check_sexpr` 10ファイル / 問題0、ERC **60件**（うち新規10件は AmpBank VSS 警告の既知誤検知）、
+`drift` 生成コード所有 4/4（AmpBank/AmpChannel/Control/親）一致・手編集所有2件は既知差分のみ、
+`gen_parts_bom --check` rc=0。
+
+**この環境固有の前提**（他マシンでは不要な場合あり）:
+- `C:\tmp\kicad-symbols` → KiCad の `share/kicad/symbols` へのディレクトリジャンクション
+  （`sch_helpers.py` のピン数ルックアップに必要。無いと `wire_circuit_design.py` が
+  `FileNotFoundError` で落ちる）
+- `kicad-run.sh` に `PYTHONUTF8=1` を追加済み（Windows コンソールの cp932 が `drift` の
+  UTF-8 出力でクラッシュするため）
 
 Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 
@@ -530,37 +558,42 @@ Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 22. v1 の Pico 制御プログラムとガーバーを確認。「v1 にバルクコンデンサは無かった」というユーザーの指摘が正しいことを git ログで確認（schematic には `e1f965e` で入ったが基板には届いていない）
 23. 「電源も切替える」構造が諸問題（突入電流・スタック枚数・寄生）の根であると特定 → **アーキテクチャ刷新を決定**（§2.9）。10ch を1枚に統合、切替は TMUX7612、電源は常時給電、レールは ±15 V
 24. `TMUX7612` シンボル作成、`AmpChannel` / `AmpBank` の生成コードを実装しサンドボックスで検証。カップリング位置とプルダウン位置は ngspice で決めた（`AudioV2/spice/`）。`1d42401` を push
+25. §2.9 手順3〜5実施（ローカル Windows 環境、このセッション）: `RelayBoard.kicad_sch`/`AmpModule.kicad_sch` を削除、`wire_circuit_design.py` に `channel`/`bank` ターゲットを追加して `AmpBank.kicad_sch`/`AmpChannel.kicad_sch` を生成、親を差し替え、`+12V`/`-12V` → `+15V`/`-15V` へ全シート改名。PowerModule は手編集所有だが KiCad GUI が無い環境のため sexpr 直接編集で `DKMW20F-12`→`-15` を差替え（v1 `Audio/DKMW20.kicad_sym` から移植）。副産物として Windows 固有の環境不備を2件発見・修正（`KICAD_SYM_ROOT` 用ジャンクション、`kicad-run.sh` の `PYTHONUTF8=1`）。ERC 47→60件（新規はAmpBankのVSS警告10件、既知）。`gen_parts_bom.py` を `AmpBank.kicad_sch` 対象へ切替（ch1代表+共通部の制約を注記）。未コミット
 
 ---
 
 ## 7. 別チャット再開プロンプト（コピペ用）
 
 ```
-AudioV2/AGENT_HANDOFF.md を読んで続きから。ブランチは main（origin と同期済み、1d42401）。
+AudioV2/AGENT_HANDOFF.md を読んで続きから。ブランチは main（origin と同期済み、HEAD 1c9a359）。
+**作業ツリーは dirty — §2.9 手順3〜5の変更が未コミット。まずコミットするか確認すること。**
 
-いまはアーキテクチャ刷新の途中（§2.9）。RelayBoard 5ch×2 + AmpModule ×10 を
-**AmpBank 1枚（10ch）へ統合**すると決めた。切替は AZ850 → アナログスイッチ TMUX7612、
-電源は切替えず常時給電、レールは ±15 V（TMUX7612 と LT1364 の要求）。
+§2.9（RelayBoard+AmpModule → AmpBank 1枚統合）の手順3〜5が完了:
+- RelayBoard.kicad_sch / AmpModule.kicad_sch を削除
+- AmpBank.kicad_sch / AmpChannel.kicad_sch を生成しリポジトリに追加
+  （wire_circuit_design.py に "channel"/"bank" ターゲットを追加）
+- 親 AudioV2Case.kicad_sch を AmpBank 1枚に差し替え
+- +12V/-12V → +15V/-15V に全シート改名。PowerModule の DKMW20F-12 → -15 差替え含む
+  （PowerModule は手編集所有だが KiCad GUI 環境が無かったため sexpr 直接編集。
+  次に KiCad で開いたとき壊れていないか確認すること）
 
-済んでいること: TMUX7612 シンボル（AudioV2.kicad_sym、DS 照合済み、FP は標準 lib の TSSOP-16）、
-wire_circuit_design.py の amp_channel_wired() / amp_bank_wired()（サンドボックスでネットリスト/ERC 検証済み）、
-カップリング位置とプルダウン位置の ngspice 検証（AudioV2/spice/）。
-
-済んでいないこと: **AmpBank.kicad_sch / AmpChannel.kicad_sch はリポジトリに無い**。
-旧 RelayBoard.kicad_sch / AmpModule.kicad_sch と親の3シートがまだ現役。
-次の一歩は §2.9 の手順3〜7（旧シート削除・親の差し替え・+12V/-12V → +15V/-15V 改名・
-旧生成関数の廃止・§2.8 所有権表更新・gen_parts_bom.py の対象シート差し替え）。
-**既存回路図を消す破壊的操作なので、着手前にユーザーの合意を取ること。**
-
-刷新で「不採用経路の記録」になったもの: §2.6 番地ストラップ、§2.7-3 コイル駆動マージン、§2.7 の Relay レビュー指摘。
+残っている作業:
+- §2.8 所有権表は更新済みだが、relay_board_wired()/amp_module_wired() のデッドコードは未削除
+- WIRING.md（全面）/ CIRCUIT_DESIGN.md §5 / DECISIONS.md の RelayBoard・AmpModule 前提の
+  記述はまだ書き換えていない（重要箇所に注意書きのみ追記済み）
+- PARTS.md §4.2「選定・実装メモ」も AmpBank の実態に未更新（TODO注記のみ）
+- ERC 60件の仕分け（新規10件はAmpBank各chのground_pin_not_ground、TMUX7612 VSS=-15Vの既知誤検知）
 
 検証は docker/kicad-cloud-build/kicad-run.sh の erc / netlist / drift と
 python3 Audio/scripts/check_sexpr.py -q AudioV2、python3 AudioV2/scripts/gen_parts_bom.py --check。
-push 時点の値は check_sexpr 8ファイル/0、ERC 47件、drift 3/3 一致、BOM check rc=0。
+このローカル Windows 環境固有の前提: C:\tmp\kicad-symbols が KiCad の
+share/kicad/symbols へのジャンクションとして必要（無いと wire_circuit_design.py が落ちる）。
+kicad-run.sh には PYTHONUTF8=1 を追加済み（Windows コンソールの cp932 対策）。
+今回時点の値: check_sexpr 10ファイル/0、ERC 60件、drift 生成コード所有4/4一致、BOM check rc=0。
 
 I2C/電源はスター確定。端子台は Phoenix MKDS-1,5 系（v1 と同一/互換）。
 A_GND/D_GND の NetTie は ControlPanel 側（Pico 直近）1点。
-generate_kicad_scaffold.py は再実行しない。手編集所有シート（§2.8）は機械的に上書きしない。
+generate_kicad_scaffold.py は再実行しない。手編集所有シート（§2.8、Power/Output）は機械的に上書きしない。
 文書は designator でなくネット名・機能名で書く（SOURCE_OF_TRUTH.md §3）。
 §2.9 末尾の「実装で踏んだ落とし穴」は必ず読むこと（NE5532 のピン番号、Screw_Terminal の x 座標、
 PIN_NUMBERS 登録漏れ、座標衝突など、同じ轍を踏みやすい）。
@@ -606,3 +639,4 @@ PIN_NUMBERS 登録漏れ、座標衝突など、同じ轍を踏みやすい）�
 | 2026-08-31 | 手持ちオペアンプに **MUSE03**（2石→DIP化・2ch変換基板）を追記。DS PDF も `Audio/datasheets/opamps/` に追加 |
 | 2026-08-31 | MUSE03 の DS 要点・製品ページ・REFINE 表への参照を追加 |
 | 2026-09-01 | 再アノテーション（58件）を受け、本メモと `WIRING.md` の記述を designator ベースから**ネット名・機能名（回路図 Value）ベース**へ改訂（[`SOURCE_OF_TRUTH.md`](../SOURCE_OF_TRUTH.md) §3）。番地ストラップ表（§2.6）・シート所有権と参照対応（§2.8）・生成スクリプト内の識別子は「参照が主題そのもの」なので意図的に残した |
+| 2026-09-01 | **§2.9 手順3〜5 実施**（ローカル Windows、このセッション）。`RelayBoard.kicad_sch`/`AmpModule.kicad_sch` 削除、`AmpBank.kicad_sch`/`AmpChannel.kicad_sch` を生成しコミット対象に追加、親を差し替え、`+12V`/`-12V`→`+15V`/`-15V` を全シート改名（`DKMW20F-15` シンボルを v1 `Audio/DKMW20.kicad_sym` から移植し `PowerModule.kicad_sch` の部品を差替え）。`gen_parts_bom.py` の対象を `AmpBank.kicad_sch` へ切替（kicad-cli の制約で ch1代表+共通部のみ出力される旨を注記）。副産物としてこの Windows 環境の不備を2件修正: `sch_helpers.py` の `KICAD_SYM_ROOT` 用に `C:\tmp\kicad-symbols` ジャンクションを作成、`kicad-run.sh`/`gen_parts_bom.py` に UTF-8 まわりの修正（`§2.8`表記の§記号がsedのマルチバイト処理を壊していた点をASCII化、`PYTHONUTF8=1`追加）。§2.8所有権表・§1/§4/§5/§7を現状に更新。CIRCUIT_DESIGN.md/PARTS.md/WIRING.mdの一部記述にも「旧アーキテクチャの記録」フラグを追記（全面書き換えは未着手）。**作業ツリーは未コミット** |

@@ -5,7 +5,7 @@
 	(uuid "b2000002-0002-4002-8002-000000000002")
 	(paper "A4")
 	(lib_symbols
-		(symbol "AudioV2:DKMW20F-12"
+		(symbol "AudioV2:DKMW20F-15"
 			(pin_names
 				(offset 1)
 			)
@@ -24,7 +24,7 @@
 					)
 				)
 			)
-			(property "Value" "DKMW20F-12"
+			(property "Value" "DKMW20F-15"
 				(at 0 -18.415 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -34,7 +34,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Library:DKMW20F-12_1in_THT"
+			(property "Footprint" "Library:DKMW20F-15_1in_THT"
 				(at 1.27 3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -56,7 +56,7 @@
 					)
 				)
 			)
-			(property "Description" "Mean Well DKMW20F-12 isolated DC/DC, 9-36Vin, ±12V/±830mA, DIP 1in x 1in, Cout 800uF/rail; DS datasheets/SKMW20_DKMW20_Datasheet.pdf"
+			(property "Description" "Mean Well DKMW20F-15 isolated DC/DC, 9-36Vin, ±15V/±660mA, DIP 1in x 1in, Cout 650uF/rail; DS datasheets/MeanWell_SKMW20_DKMW20.pdf"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -78,7 +78,7 @@
 					)
 				)
 			)
-			(property "MPN" "DKMW20F-12"
+			(property "MPN" "DKMW20F-15"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -89,7 +89,7 @@
 					)
 				)
 			)
-			(symbol "DKMW20F-12_0_1"
+			(symbol "DKMW20F-15_0_1"
 				(rectangle
 					(start -10.16 -2.54)
 					(end 10.16 -16.51)
@@ -101,7 +101,7 @@
 						(type background)
 					)
 				)
-				(text "DKMW20F-12"
+				(text "DKMW20F-15"
 					(at 0 -9.525 0)
 					(effects
 						(font
@@ -110,7 +110,25 @@
 					)
 				)
 			)
-			(symbol "DKMW20F-12_1_1"
+			(symbol "DKMW20F-15_1_1"
+				(pin power_in line
+					(at -12.7 -5.08 0)
+					(length 2.54)
+					(name "-Vin"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin power_in line
 					(at -12.7 -8.89 0)
 					(length 2.54)
@@ -129,17 +147,17 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at -12.7 -5.08 0)
+				(pin passive line
+					(at -12.7 -13.97 0)
 					(length 2.54)
-					(name "-Vin"
+					(name "R.C."
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "2"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -194,24 +212,6 @@
 						)
 					)
 					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -12.7 -13.97 0)
-					(length 2.54)
-					(name "R.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2257,7 +2257,7 @@
 		)
 		(uuid "fbaa325b-0b0d-41f0-a3b9-81b5a68da3e9")
 	)
-	(label "+12V"
+	(label "+15V"
 		(at 120.65 55.88 0)
 		(effects
 			(font
@@ -2267,7 +2267,7 @@
 		)
 		(uuid "2ce7a5f3-4d5c-48ec-843b-11267751af68")
 	)
-	(label "+12V"
+	(label "+15V"
 		(at 144.78 74.93 90)
 		(effects
 			(font
@@ -2287,7 +2287,7 @@
 		)
 		(uuid "525155e0-aa62-409c-816d-64829da8ccd2")
 	)
-	(label "-12V"
+	(label "-15V"
 		(at 120.65 69.85 0)
 		(effects
 			(font
@@ -2307,7 +2307,7 @@
 		)
 		(uuid "6d03932e-a7a4-4e25-8b51-0ff9283d838d")
 	)
-	(label "-12V"
+	(label "-15V"
 		(at 147.32 92.71 0)
 		(effects
 			(font
@@ -2337,7 +2337,7 @@
 		)
 		(uuid "f71e6c5b-2f6e-4cf1-af22-cf8f3fc62023")
 	)
-	(hierarchical_label "+12V"
+	(hierarchical_label "+15V"
 		(shape output)
 		(at 124.46 59.69 0)
 		(effects
@@ -2348,7 +2348,7 @@
 		)
 		(uuid "165a91cb-5e8d-4d34-8f75-1c160ebfce44")
 	)
-	(hierarchical_label "-12V"
+	(hierarchical_label "-15V"
 		(shape output)
 		(at 124.46 64.77 0)
 		(effects
@@ -3291,7 +3291,7 @@
 		)
 	)
 	(symbol
-		(lib_id "AudioV2:DKMW20F-12")
+		(lib_id "AudioV2:DKMW20F-15")
 		(at 111.76 76.2 0)
 		(unit 1)
 		(body_style 1)
@@ -3311,7 +3311,7 @@
 				)
 			)
 		)
-		(property "Value" "DKMW20F-12"
+		(property "Value" "DKMW20F-15"
 			(at 111.76 77.47 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3402,7 +3402,7 @@
 				)
 			)
 		)
-		(property "Value" "+12/-12/A_GND out"
+		(property "Value" "+15/-15/A_GND out"
 			(at 115.57 50.8 0)
 			(show_name no)
 			(do_not_autoplace no)
