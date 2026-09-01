@@ -188,6 +188,7 @@ PIN_COUNTS: dict[str, list[str]] = {
     "AudioV2:DKMW20F-12": ["1", "2", "3", "4", "5", "6"],
     "AudioV2:PT2314": [str(i) for i in range(1, 29)],
     "AudioV2:TMUX7612": [str(i) for i in range(1, 17)],
+    "Interface_Expansion:MCP23017x-x-SP": [str(i) for i in range(1, 29)],
     "BP5293_ROHM:BP5293-50": ["1", "2", "3"],
     "Relay:AZ850P2-x": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     "Transistor_Array:ULN2803A": [str(i) for i in range(1, 19)],
@@ -202,6 +203,13 @@ SYMBOL_SOURCES: dict[str, tuple[str, str, list[tuple[str, str]]]] = {
         [("Amplifier_Operational", "LM2904")],
     ),
     "Interface_Expansion:MCP23017-E/SP": (
+        "Interface_Expansion",
+        "MCP23017x-x-SP",
+        [("Interface_Expansion", "MCP23017x-x-SO")],
+    ),
+    # KiCad 10 の正しい名前。旧 "MCP23017-E/SP" は現行 lib に存在しないので
+    # 新規シートではこちらを使う（AGENT_HANDOFF §2.9）。
+    "Interface_Expansion:MCP23017x-x-SP": (
         "Interface_Expansion",
         "MCP23017x-x-SP",
         [("Interface_Expansion", "MCP23017x-x-SO")],
