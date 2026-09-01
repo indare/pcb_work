@@ -1485,31 +1485,55 @@ def parent_wired() -> str:
 
 def main() -> None:
     target = sys.argv[1] if len(sys.argv) > 1 else "all"
-    force_relay = "--force-relay" in sys.argv[2:]
-    if target in ("all", "amp"):
-        (ROOT / "AmpModule.kicad_sch").write_text(amp_module_wired(), encoding="utf-8")
-    if target in ("all", "power"):
-        (ROOT / "PowerModule.kicad_sch").write_text(power_module_wired(), encoding="utf-8")
-    relay_skipped = False
-    if target in ("all", "relay"):
-        if force_relay:
-            (ROOT / "RelayBoard.kicad_sch").write_text(relay_board_wired(), encoding="utf-8")
+    flags = sys.argv[2:]
+
+    # 手編集所有シート（AudioV2/AGENT_HANDOFF.md §2.8）。KiCad 側が正なので
+    # 機械的に上書きしない。--force-<name> は「シートを丸ごと作り直す」ときだけの
+    # 脱出ハッチで、通常運用では使わない。
+    HAND_EDITED = {
+        "relay": (
+            "RelayBoard.kicad_sch",
+            relay_board_wired,
+            "addr strap footprint/position, C301/C302, J_I2C — see §2.6",
+        ),
+        "power": (
+            "PowerModule.kicad_sch",
+            power_module_wired,
+            "generator is a generation behind: it still emits the on-board USB-C + CH224 "
+            "PD front-end, while the sheet takes PD from an external module (J202/J203)",
+        ),
+        "output": (
+            "OutputStage.kicad_sch",
+            output_stage_wired,
+            "generator does not emit J_RAIL601 (RAIL IN); 5 parts differ in position",
+        ),
+    }
+    # 生成コード所有シート（回せばそのまま正）
+    GENERATED = {
+        "amp": ("AmpModule.kicad_sch", amp_module_wired),
+        "control": ("ControlPanel.kicad_sch", control_panel_wired),
+        "parent": ("AudioV2Case.kicad_sch", parent_wired),
+    }
+
+    for name, (fn, build) in GENERATED.items():
+        if target in ("all", name):
+            (ROOT / fn).write_text(build(), encoding="utf-8")
+
+    skipped = []
+    for name, (fn, build, why) in HAND_EDITED.items():
+        if target not in ("all", name):
+            continue
+        if f"--force-{name}" in flags:
+            (ROOT / fn).write_text(build(), encoding="utf-8")
         else:
-            relay_skipped = True
+            skipped.append(name)
             print(
-                "SKIPPED RelayBoard.kicad_sch: relay_board_wired() is out of sync with "
-                "hand edits (addr strap footprint/position, C301/C302, J_I2C — see "
-                "AudioV2/AGENT_HANDOFF.md §2.6). Sync the generator first, or pass "
-                "--force-relay to overwrite anyway.",
+                f"SKIPPED {fn}: hand-edited sheet (AGENT_HANDOFF.md §2.8). {why}. "
+                f"Make logic changes in KiCad, or pass --force-{name} to overwrite anyway.",
                 file=sys.stderr,
             )
-    if target in ("all", "control"):
-        (ROOT / "ControlPanel.kicad_sch").write_text(control_panel_wired(), encoding="utf-8")
-    if target in ("all", "output"):
-        (ROOT / "OutputStage.kicad_sch").write_text(output_stage_wired(), encoding="utf-8")
-    if target in ("all", "parent"):
-        (ROOT / "AudioV2Case.kicad_sch").write_text(parent_wired(), encoding="utf-8")
-    print(f"Wired: {target}" + (" (relay skipped)" if relay_skipped else ""))
+
+    print(f"Wired: {target}" + (f" (skipped: {', '.join(skipped)})" if skipped else ""))
 
 
 if __name__ == "__main__":
