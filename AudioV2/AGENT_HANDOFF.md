@@ -502,27 +502,28 @@ v1時代の見積り（Amp×10+計測+Buffer同居、Icc控えめ8mA/ch）は今
 | **DKMW20F-15**（現行） | ±15V/660mA | $30.75(Digikey) | 650µF/rail | R.C.=Open=ON | 余裕最大・実績あり |
 | RS6-1215D/1212D（RECOM） | ±15V/200mA・±12V/250mA | $19.04(Digikey) | **660〜900µF**（データシートTable値、確認済み・問題なし） | Open=ON寄り（DKMW20と近い論理、詳細未確認） | Cout・ノイズとも良好 |
 | MGW61215/61212（Cosel） | ±15V/200mA・±12V/250mA | ¥1,870（RS Japan品番171-4773/171-5235、正規代理店価格で確認済み。以前提示した$5.92は不正確な集約サイト値だったので訂正済み） | **0-100µF/rail**（Cosel公式Instruction Manual `CME_MG1R5-10.pdf` Table 2.3で実測確認。AmpBank入口100µF+PowerModule直近47µFの合算がこの上限を超える可能性があり要注意） | **Negative logic: L=ON, H=OFF**（現行DKMW20と逆論理、配線変更必須） | 実測リップル&ノイズは5〜15mVと良好（スペック上限120-600mVは保証値で実力はもっと良い）。EMI/EMS全項目Pass（EN55022 ClassA等、マージン25dB以上）。入力側に指定EMIフィルタ部品あり（L1=2.2µH/2600mA等、`mgw61212-en55022.pdf`参照） |
-| **Aimtec AM10GH-2415DLPZ** | 9-36Vin→±15V/**333mA** | ¥8.80 | **未確認**（次にやること） | 未確認 | 10W、86%効率、OVP+SCP |
-| Aimtec AM10TW-2415DLPZ/2412DLPZ | 9-36Vin→±15V/330mA・±12V/**416mA** | ¥9.98 | 未確認 | 未確認 | 10W、87%効率、Remote ON/OFF+OCP+OTP+SCP+UVLO（保護機能が一番充実） |
-| Aimtec AM3G-1215DLPZ | 9-18Vin→±15V/100mA | ¥5.85 | 未確認 | 未確認 | 3W、DKMW20より電流余裕が少ない |
+| **Aimtec AM10TW-2415DLPZ**（±15V） | 9-36Vin→±15V/**333mA** | ¥9.98 | **330µF**（データシート`F059e`本文で確認済み・問題なし） | **Open/pulled-high=ON, pulled-low=OFF**（DKMW20F-15と同じ論理。配線変更不要と確認済み） | 10W、87%効率、リップル&ノイズ40typ/85max mVp-p（DKMW20の100mVp-pより良好）、300kHz固定（Coselのような軽負荷間欠動作なし）、絶縁1500VDC/≥1000MΩ/2000pF、24-DIPパッケージ |
+| Aimtec AM10TW-2412DLPZ（±12V） | 9-36Vin→±12V/**416mA** | ¥9.98 | **470µF** | 同上 | 同上シリーズ。電流・Cout ともさらに余裕 |
+| Aimtec AM10GH-2415DLPZ | 9-36Vin→±15V/333mA | ¥8.80 | 未確認（8-SIP、保護機能はAM10TWよりやや少ない：OVP+SCPのみ） | 未確認 | AM10TWで代替十分ならこちらは調査不要 |
+| Aimtec AM3G-1215DLPZ | 9-18Vin→±15V/100mA | ¥5.85 | 未確認 | 未確認 | 3W、DKMW20より電流余裕が少ない。優先度低 |
 
-**AM10GH/AM10TWシリーズが現時点の最有力候補。** Cosel並みの価格でDKMW20に近い電流余裕（330〜416mA）が
-取れるため、価格とマージンのトレードオフを両方解決できる可能性がある。
+**AM10TW-2415DLPZ/2412DLPZ が最有力候補として確定的。** DKMW20F-15の懸念（コスト）とCoselの懸念
+（Cout制限0-100µF・Remote配線変更必須）を**両方解消**。価格・電流余裕（330-416mA）・Cout（330-470µF）・
+配線互換性（Open=ON同一）のすべてで現行より優れるか同等。**±12V/±15Vのどちらもラインナップにあるため、
+電圧の最終判断（v1互換という当初理由は失効済み、純粋にコスト/性能で選べる）は依然オープン。**
 
 **入手経路:** [`AudioV2/dc_dc.csv`](dc_dc.csv) — DigiKeyの実フィルタ済みエクスポート
-（絶縁型・出力±12V/±15V、79件）。ユーザー添付。データシートURLも列に含む
-（Aimtec分は `https://aimtec.com/site/Aimtec/files/Datasheet/HighResolution/AM10TW-LPZ.pdf` 等）。
+（絶縁型・出力±12V/±15V、79件）。データシート: `https://aimtec.com/site/Aimtec/files/Datasheet/HighResolution/AM10TW-LPZ.pdf`
+（`F059e – 01apr2024 R0`、pdfplumberで全文抽出済み・信頼できる一次資料）。
 
 #### 次にやること（優先順）
 
-1. **AM10GH-LPZ / AM10TW-LPZ データシートでCout上限とRemote ON/OFF論理を確認**
-   （`dc_dc.csv` にPDF URLあり。前例（Cosel）に倣い、製品ページの「Instruction Manual」相当文書も探すこと。
-   crude zlib展開が効かない場合は `pdfplumber`（このセッションでpip install済み）を使うと確実）
-2. Cout・Remote論理が問題なければ、**±12Vか±15Vかを確定**（v1互換の理由は失効済みなので純粋にコスト/性能で決めてよい）
-3. 決定後: シンボル・フットプリントの要否確認（Aimtec品はKiCad標準libに無い可能性が高く新規作成が要る）
-4. `PowerModule.kicad_sch`（手編集所有）の部品差し替え・ネット名調整
-5. `power_module_wired()`（生成コード、ドキュメント用途）も追随
-6. 検証: `check_sexpr` / ERC / netlist / drift
+1. **±12V か ±15V かを確定**（AM10TWは両方あるので、あとは純粋な電圧選定の意思決定のみ）
+2. シンボル・フットプリントの要否確認（Aimtec AM10TW-LPZ、24-DIPパッケージ。KiCad標準libに無い可能性が高く新規作成が要る）
+3. `PowerModule.kicad_sch`（手編集所有）の部品差し替え・ネット名調整
+4. `power_module_wired()`（生成コード、ドキュメント用途）も追随
+5. 検証: `check_sexpr` / ERC / netlist / drift
+6. （任意）AM10TW-LPZ に明示的なEMI/EMC試験報告書があるか確認（Coselでは別PDFで確認できたが、AM10TWは未確認）
 
 #### この調査で得た副産物
 
@@ -719,3 +720,4 @@ PIN_NUMBERS 登録漏れ、座標衝突など、同じ轍を踏みやすい）�
 | 2026-09-01 | 再アノテーション（58件）を受け、本メモと `WIRING.md` の記述を designator ベースから**ネット名・機能名（回路図 Value）ベース**へ改訂（[`SOURCE_OF_TRUTH.md`](../SOURCE_OF_TRUTH.md) §3）。番地ストラップ表（§2.6）・シート所有権と参照対応（§2.8）・生成スクリプト内の識別子は「参照が主題そのもの」なので意図的に残した |
 | 2026-09-01 | **§2.9 手順3〜5 実施**（ローカル Windows、このセッション）。`RelayBoard.kicad_sch`/`AmpModule.kicad_sch` 削除、`AmpBank.kicad_sch`/`AmpChannel.kicad_sch` を生成しコミット対象に追加、親を差し替え、`+12V`/`-12V`→`+15V`/`-15V` を全シート改名（`DKMW20F-15` シンボルを v1 `Audio/DKMW20.kicad_sym` から移植し `PowerModule.kicad_sch` の部品を差替え）。`gen_parts_bom.py` の対象を `AmpBank.kicad_sch` へ切替（kicad-cli の制約で ch1代表+共通部のみ出力される旨を注記）。副産物としてこの Windows 環境の不備を2件修正: `sch_helpers.py` の `KICAD_SYM_ROOT` 用に `C:\tmp\kicad-symbols` ジャンクションを作成、`kicad-run.sh`/`gen_parts_bom.py` に UTF-8 まわりの修正（`§2.8`表記の§記号がsedのマルチバイト処理を壊していた点をASCII化、`PYTHONUTF8=1`追加）。§2.8所有権表・§1/§4/§5/§7を現状に更新。CIRCUIT_DESIGN.md/PARTS.md/WIRING.mdの一部記述にも「旧アーキテクチャの記録」フラグを追記（全面書き換えは未着手）。**作業ツリーは未コミット** |
 | 2026-09-02 | ユーザーが `AmpCh2` を KiCad で手直し → `AmpBank`/`AmpChannel` を手編集所有へ卒業（`wire_circuit_design.py` の `HAND_EDITED`/`GENERATED` 更新、`drift` で確認）。バルクコンデンサ周りの未接続配線1件を発見・ユーザーが修正、ERC 60件に復帰。C_BULK_P/N・MCP23017 A0-A2=D_GND を実配線で検証。PROCUREMENT.xlsx（AudioV2全体の発注リスト）を新規作成。PowerModule の絶縁型DC-DCコンバータ（DKMW20F-15、$30.75）のコスト代替調査を開始（§2.10、途中・未反映。DigiKeyフィルタ済みCSVを `dc_dc.csv` として追加） |
+| 2026-09-02 | §2.10継続: `AudioV2Case.kicad_pcb`（空スキャフォールド）をコミット。Aimtec `AM10TW-LPZ` データシートを一次資料で確認し、**Cout上限（±15V品330µF・±12V品470µF）とRemote ON/OFF論理（Open/pulled-high=ON、DKMW20F-15と同一）の両方が問題ないと確定**。§2.10の候補比較表・次のアクションを更新（残るは電圧確定のみ） |
