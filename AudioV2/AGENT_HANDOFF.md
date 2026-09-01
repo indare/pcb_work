@@ -219,9 +219,9 @@ Power は `F1→F201` / `U1→U201` / `U3→U202` / `J202→J201` のみ確実�
 - `relay` への書き込みはデフォルトで無効（§2.6 安全装置）。`--force-relay` は「シートを丸ごと作り直す」ときだけの脱出ハッチで、通常運用では使わない
 - 新しいシートが今後同様に手編集され始めたら、この表に追記して所有権を切り替えること
 
-### 2.9 アーキテクチャ刷新 — RelayBoard と AmpModule を1枚へ統合（2026-09-01 決定）
+### 2.9 アーキテクチャ刷新 — `AmpBank` へ統合（2026-09-01 決定）
 
-**RelayBoard（5ch×2枚）と AmpModule（×10枚）を廃止し、10ch 分のアンプと切替を載せた1枚の基板へ統合する。** 回路図はまだ着手していない。
+**RelayBoard（5ch×2枚）と AmpModule（×10枚）を廃止し、10ch 分のアンプと切替を載せた1枚の基板 `AmpBank` へ統合する。** 回路図はまだ着手していない。
 
 #### なぜ
 
@@ -261,9 +261,9 @@ v1 でラッチングを選んだ理由は「**通常リレーはコイル電流
 #### 廃止・位置づけ変更
 
 - `RelayBoard.kicad_sch` — **廃止**
-- `AmpModule.kicad_sch` — 10ch 展開した新シートへ吸収
+- `AmpModule.kicad_sch` — **廃止**。10ch 展開して `AmpBank.kicad_sch` へ吸収
 - §2.6 番地ストラップ、§2.7-3 コイル駆動マージン検算 — **不採用となった経路の記録**として残す（検算内容自体は正しい）
-- ControlPanel → 切替基板は I2C ではなく **SPI 3本 + ±12 V**
+- ControlPanel → `AmpBank` は I2C（MCP23017、GPIO 10本）+ **±15 V**
 
 #### 確定（2026-09-01）
 
@@ -279,10 +279,19 @@ v1 でラッチングを選んだ理由は「**通常リレーはコイル電流
 `TMUX7612` は `ADG1412` とピン互換なので、同じフットプリントで差し替え比較できる（¥1,795）。
 制御ピンに内蔵プルダウンがあり、MCP23017 がリセットで Hi-Z のとき自動的に全 OFF になる。
 
-#### 未決
+#### 実装時の作業（未着手）
 
-- 新シート名（仮 `AmpSelector`）
-- **回路図のネット名はまだ `+12V` / `-12V`**。新シート設計時に `+15V` / `-15V` へ改名が要る
+1. `AudioV2.kicad_sym` に **`TMUX7612` のシンボルを追加**。標準 lib の `Analog_Switch:DG411xY` が
+   4回路SPST・SOIC-16 でピン配置がほぼ一致するが、**12番ピンだけ違う**（DG411 は `VL`、TMUX7612 は N.C.）。
+   流用は可能だが混乱の元なので、`PT2314` / `CH224_50224` と同じくカスタムで正しく起こす
+2. `AmpBank.kicad_sch` を新規作成（10ch 分のアンプ + 切替 + MCP23017）
+3. `RelayBoard.kicad_sch` / `AmpModule.kicad_sch` を削除
+4. 親 `AudioV2Case.kicad_sch` から `RelayBoard_A` / `RelayBoard_B` / `AmpModule_Reference` の
+   3シートを外し、`AmpBank` 1枚に置き換える
+5. **ネット名 `+12V` / `-12V` → `+15V` / `-15V` へ改名**（親・各シート）
+6. `wire_circuit_design.py` の `relay_board_wired()` / `amp_module_wired()` を廃し、
+   `amp_bank_wired()` を起こす。§2.8 の所有権表も更新が要る
+7. `PARTS.md` の生成ブロック（`gen_parts_bom.py`）の対象シートを差し替え
 
 ---
 
