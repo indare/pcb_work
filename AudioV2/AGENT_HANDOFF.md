@@ -534,6 +534,15 @@ v1時代の見積り（Amp×10+計測+Buffer同居、Icc控えめ8mA/ch）は今
   という実例あり。PDF生成ツールの違いで内部構造が変わるため両方試す価値がある）
 - DigiKeyの「フィルタ済みURL」はGoogle広告経由などで来ると**フィルタが反映されないことがある**
   （今回92,861件の未フィルタ状態だった）。信頼できるのはCSVエクスポートかUI操作での再現のみ
+- **DigiKey公式の部品検索API（Product Information API v4）がある:**
+  https://developer.digikey.com/products/product-information-v4/productsearch
+  キーワード/型番検索は `KeywordSearch` エンドポイント（`POST /products/v4/search/keyword`）、
+  型番指定の詳細取得は `ProductDetails` エンドポイント。認証は OAuth2 client_credentials
+  （developer portal でアプリ登録して `client_id`/`client_secret` を取得、リクエストには
+  `X-DIGIKEY-Client-Id` ヘッダも必要）。上記の「フィルタ済みURLが不安定」問題を回避して
+  プログラムから直接・再現可能に検索できる見込みだが、**このセッションでは存在を確認しただけで
+  未調査・未使用**（登録要否の詳細・レート制限・sandbox動作は未確認）。次に部品調査で
+  同じ問題に当たったら候補に入れる
 
 ---
 
@@ -721,3 +730,4 @@ PIN_NUMBERS 登録漏れ、座標衝突など、同じ轍を踏みやすい）�
 | 2026-09-01 | **§2.9 手順3〜5 実施**（ローカル Windows、このセッション）。`RelayBoard.kicad_sch`/`AmpModule.kicad_sch` 削除、`AmpBank.kicad_sch`/`AmpChannel.kicad_sch` を生成しコミット対象に追加、親を差し替え、`+12V`/`-12V`→`+15V`/`-15V` を全シート改名（`DKMW20F-15` シンボルを v1 `Audio/DKMW20.kicad_sym` から移植し `PowerModule.kicad_sch` の部品を差替え）。`gen_parts_bom.py` の対象を `AmpBank.kicad_sch` へ切替（kicad-cli の制約で ch1代表+共通部のみ出力される旨を注記）。副産物としてこの Windows 環境の不備を2件修正: `sch_helpers.py` の `KICAD_SYM_ROOT` 用に `C:\tmp\kicad-symbols` ジャンクションを作成、`kicad-run.sh`/`gen_parts_bom.py` に UTF-8 まわりの修正（`§2.8`表記の§記号がsedのマルチバイト処理を壊していた点をASCII化、`PYTHONUTF8=1`追加）。§2.8所有権表・§1/§4/§5/§7を現状に更新。CIRCUIT_DESIGN.md/PARTS.md/WIRING.mdの一部記述にも「旧アーキテクチャの記録」フラグを追記（全面書き換えは未着手）。**作業ツリーは未コミット** |
 | 2026-09-02 | ユーザーが `AmpCh2` を KiCad で手直し → `AmpBank`/`AmpChannel` を手編集所有へ卒業（`wire_circuit_design.py` の `HAND_EDITED`/`GENERATED` 更新、`drift` で確認）。バルクコンデンサ周りの未接続配線1件を発見・ユーザーが修正、ERC 60件に復帰。C_BULK_P/N・MCP23017 A0-A2=D_GND を実配線で検証。PROCUREMENT.xlsx（AudioV2全体の発注リスト）を新規作成。PowerModule の絶縁型DC-DCコンバータ（DKMW20F-15、$30.75）のコスト代替調査を開始（§2.10、途中・未反映。DigiKeyフィルタ済みCSVを `dc_dc.csv` として追加） |
 | 2026-09-02 | §2.10継続: `AudioV2Case.kicad_pcb`（空スキャフォールド）をコミット。Aimtec `AM10TW-LPZ` データシートを一次資料で確認し、**Cout上限（±15V品330µF・±12V品470µF）とRemote ON/OFF論理（Open/pulled-high=ON、DKMW20F-15と同一）の両方が問題ないと確定**。§2.10の候補比較表・次のアクションを更新（残るは電圧確定のみ） |
+| 2026-09-01 | DigiKey公式の部品検索API「Product Information API v4」（`https://developer.digikey.com/products/product-information-v4/productsearch`）の存在を§2.10の副産物節に記録。フィルタ済みURLが不安定な問題への対策候補だが未調査・未使用 |
