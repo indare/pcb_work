@@ -1169,6 +1169,9 @@ def amp_module_wired() -> str:
             wire(j701_r[0], 74.93, 66.04, 74.93),
             junction(45.72, 74.93),
             junction(55.88, 74.93),
+            # 入力・電源の階層ラベル → 端子台ピンの実配線（左余白側、5.08 mm）
+            wire(20.32, j701_l[1], j701_l[0], j701_l[1]),
+            wire(20.32, j701_r[1], j701_r[0], j701_r[1]),
         ]
     )
 
@@ -1224,6 +1227,13 @@ def amp_module_wired() -> str:
             wire(j702_l[0], 54.61, j702_l[0], j702_l[1]),
             wire(139.7, 87.63, j702_r[0], 87.63),
             wire(j702_r[0], 87.63, j702_r[0], j702_r[1]),
+            # 出力の階層ラベルまで実配線で伸ばす。端子台の本体を避けるため
+            # y=54.61(本体の上) / y=87.63(本体の下) の給電ワイヤをそのまま延長し、
+            # 分岐点になる角にジャンクションを置く。
+            wire(j702_l[0], 54.61, 180.34, 54.61),
+            junction(j702_l[0], 54.61),
+            wire(j702_r[0], 87.63, 180.34, 87.63),
+            junction(j702_r[0], 87.63),
         ]
     )
 
@@ -1235,6 +1245,15 @@ def amp_module_wired() -> str:
     two_pin("Device:C", "C711", "1nF 50V C0G", 99.06, 111.76, "+12V", "A_GND", c_fp, "V+ high-speed bypass")
     two_pin("Device:C", "C712", "1nF 50V C0G", 109.22, 111.76, "A_GND", "-12V", c_fp, "V- high-speed bypass")
 
+    j703_p, j703_g, j703_n = screw03_pins(30.48, 111.76)
+    wires.extend(
+        [
+            wire(20.32, j703_p[1], j703_p[0], j703_p[1]),
+            wire(20.32, j703_g[1], j703_g[0], j703_g[1]),
+            wire(20.32, j703_n[1], j703_n[0], j703_n[1]),
+        ]
+    )
+
     body = f"""{embed_lib_symbols(AMP_LIBS)}
 {text_note(25.4, 20.32, [
     "AudioV2 AmpModule — reference circuit; manufacture x10",
@@ -1243,12 +1262,12 @@ def amp_module_wired() -> str:
     "AMP* selection remains on RelayBoard terminal interfaces.",
 ])}
 {hier_label("L_IN", "input", 20.32, 60.96, 180)}
-{hier_label("R_IN", "input", 20.32, 71.12, 180)}
-{hier_label("+12V", "input", 20.32, 101.6, 180)}
-{hier_label("-12V", "input", 20.32, 111.76, 180)}
-{hier_label("A_GND", "bidirectional", 20.32, 121.92, 180)}
-{hier_label("L_OUT", "output", 180.34, 60.96, 0)}
-{hier_label("R_OUT", "output", 180.34, 71.12, 0)}
+{hier_label("R_IN", "input", 20.32, 63.5, 180)}
+{hier_label("+12V", "input", 20.32, 109.22, 180)}
+{hier_label("A_GND", "bidirectional", 20.32, 111.76, 180)}
+{hier_label("-12V", "input", 20.32, 114.3, 180)}
+{hier_label("L_OUT", "output", 180.34, 54.61, 0)}
+{hier_label("R_OUT", "output", 180.34, 87.63, 0)}
 {"".join(parts)}
 {"".join(nets)}
 {"".join(wires)}
