@@ -112,24 +112,6 @@
 			)
 			(symbol "DKMW20F-15_1_1"
 				(pin power_in line
-					(at -12.7 -5.08 0)
-					(length 2.54)
-					(name "-Vin"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
 					(at -12.7 -8.89 0)
 					(length 2.54)
 					(name "+Vin"
@@ -147,17 +129,17 @@
 						)
 					)
 				)
-				(pin passive line
-					(at -12.7 -13.97 0)
+				(pin power_in line
+					(at -12.7 -5.08 0)
 					(length 2.54)
-					(name "R.C."
+					(name "-Vin"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "6"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -212,6 +194,24 @@
 						)
 					)
 					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -12.7 -13.97 0)
+					(length 2.54)
+					(name "R.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
