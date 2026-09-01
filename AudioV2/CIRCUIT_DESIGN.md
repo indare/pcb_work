@@ -19,7 +19,7 @@
 | ENC×3 | `Device:RotaryEncoder_Switch` | CH / BASS / TREBLE |
 | Pico / OLED / LED / R / C | 各標準 lib | OLED は論理 `SSD1306-128x64`。**実物は 2.42″（[PARTS.md](PARTS.md)）。埋め込み元 0.91″ FP は差し替え予定** |
 | ULN2803A / AZ850 | 標準（**RelayBoard のみ**） | DEST ラッチングは廃止 |
-| DKMW20F-12 / CH224 / BP5293 | カスタム / プロジェクト | |
+| DKMW20F-15 / CH224 / BP5293 | カスタム / プロジェクト | シンボルは F-12 と同一外形 |
 
 ---
 
@@ -56,7 +56,7 @@
 | 27 | CLK | Pico I²C SCL 経 4.7 kΩ → 3.3 V |
 | 28 | REF | R 5.6 kΩ + C 22 µF → AGND |
 
-**電源:** VDD typ 9 V（6–10 V）。±12 V 直結不可 → LM7809（PowerModule）。
+**電源:** VDD typ 9 V（6–10 V）。±15 V 直結不可 → LM7809（PowerModule）。
 
 ---
 
@@ -82,7 +82,8 @@ AMP_SEL_L ── SW601 (SP3T) / AMP_SEL_R ── SW602 (SP3T)
 
 ## 4. PowerModule — 部品値（変更なし）
 
-USB-C → CH224 → PD_12V → PWR SW → F201 → DKMW20F-12 → ±12 V / A_GND。  
+USB-C → CH224 → PD_12V → PWR SW → F201 → **DKMW20F-15** → **±15 V** / A_GND。
+（2026-09-01 に ±12 V から変更。理由は [DECISIONS.md](DECISIONS.md) §8。**回路図のネット名はまだ `+12V`/`-12V`**）  
 +12 V → LM7809 → VCC_TONE（+9 V）。
 
 ### RelayBoard — **廃止予定**（2026-09-01、AGENT_HANDOFF §2.9）

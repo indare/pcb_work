@@ -157,7 +157,7 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 | **+9 V LDO** | **ST L7809CV**（TO-220） | PT2314 typ 30 mA → 散逸 (12-9)×30 mA ≈ 0.09 W |
 | **F201** | **5×20 mm T3.15 A**（または図の 3 A スロー） | 一次 ~2 A。ガラス管スローブロー |
 | **BP5293** | **BP5293-50**（秋月 111188） | 現行 Audio と同じ +5 V |
-| **DKMW / CH224** | **DKMW20F-12** / **50224（CH224K 12 V）** | 既確定 |
+| **DKMW / CH224** | **DKMW20F-15**（±15 V / ±660 mA） / **50224（CH224K 12 V）** | 2026-09-01 に F-12 から変更。外形は同じ 1″×1″ |
 | **USB-C** | USB2.0 16P レセプタクル（KiCad `USB_C_Receptacle_USB2.0_16P`） | CC はモジュール側。基板は VBUS/GND が主 |
 | **ラダー R** | 10 k / 10 k / 1 k **1%**（1206 可） | ±5% でも間隔は足りるが、初号は 1% |
 | **J_I2C（ControlPanel↔RelayBoard 5P）** | **Phoenix Contact MKDS-1,5シリーズ**（5.08 mmピッチ、ネジ式）互換品または同一品。KiCad FP: `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-N-5.08_1xNN_P5.08mm_Horizontal`（Nはピン数、5Pなら`5`/`05`） | `Audio/Controll.kicad_sch`（v1の「リレー＋端子台＋ULN」原型）で13箇所使用実績あり。フェルール対応で、スター配線をControlPanel側1コネクタ＋箱内フェルール束ね/スプリッタで実現する方針（WIRING.md）と合う |
