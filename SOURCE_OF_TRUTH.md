@@ -53,6 +53,12 @@ designator は **KiCad が採番する割り当ての産物**で、再アノテ�
 後者は designator を含まないのに情報量が落ちておらず、しかも**なぜそうするか**という
 導出不能な情報（＝ドキュメントが本来担うべきもの）まで書けている。
 
+### 適用状況（2026-09-01 時点）
+
+この語彙ルールを**適用済み**なのは `AudioV2/AGENT_HANDOFF.md` と `AudioV2/WIRING.md` の2本だけ。
+`AudioV2/CIRCUIT_DESIGN.md` と `AudioV2/DECISIONS.md` は**まだ旧記法（designator 直書き）**が残っている。
+どちらが現行か迷ったら、この節が正。未適用の文書を読むときは designator が古い可能性を疑うこと。
+
 ---
 
 ## 4. それでも designator が要る場所
@@ -64,7 +70,7 @@ BOM・発注・パネルの現物対応表は designator が本質的に必要�
 docker/kicad-cloud-build/kicad-run.sh cli sch export bom -o @OUT@/bom.csv @WORK@/AudioV2/AudioV2Case.kicad_sch
 ```
 
-手書きが残っている箇所（`PARTS.md` の Amp 値表など）は、生成に寄せるまでの暫定と考える。
+`PARTS.md` の AmpModule 部品表は 2026-09-01 にこの方式へ移行済み（`AudioV2/scripts/gen_parts_bom.py`、マーカー囲みブロック）。他に手書きで残っている導出可能な表があれば、同じように生成へ寄せる。
 
 ---
 

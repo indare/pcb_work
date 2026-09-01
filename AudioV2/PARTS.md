@@ -6,6 +6,21 @@
 
 参照: [DECISIONS.md](DECISIONS.md) §0・§3・§9・§10、[CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md)、[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。
 
+> **この文書の読み方 — どこが生成で、どこが手書きか**
+>
+> `<!-- BEGIN GENERATED: ... -->` 〜 `<!-- END GENERATED: ... -->` で囲まれたブロックは
+> **回路図から自動生成**したもの（現在は §4.1 の AmpModule 部品表）。
+> **手で編集しても次の再生成で消える。** 直すときは KiCad の回路図側を直して再生成する。
+>
+> それ以外はすべて**手書きで、こちらが正**。調達先・代替品・選定理由・C&K の現物端子対応・
+> パネル/箱配線など、**回路図から導出できない情報**を置く場所。方針は
+> [SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)。
+>
+> ```bash
+> python3 AudioV2/scripts/gen_parts_bom.py          # 再生成して埋め込み直す
+> python3 AudioV2/scripts/gen_parts_bom.py --check  # 実図とズレていれば非ゼロ終了（検査のみ）
+> ```
+
 ---
 
 ## 0. 回路が課す制約（品番を決める前に）
@@ -168,21 +183,40 @@ Amp 選択後 L/R
 
 ## 4. AmpModule 再版（1枚あたり、×10）
 
-| 用途 | 値 / 第一候補 | 実装 |
-|---|---|---|
-| AMP701 | NE5532P（基準）/ DIP-8互換デュアルOpAmp | DIP-8ソケット。高速品は±12 V、ユニティ安定、容量負荷条件を確認 |
-| R701/R706 | 220 kΩ | 入力プルダウン（L/R） |
-| R702/R707 | 1 kΩ | 非反転バイアス（L/R） |
-| R704/R705/R709/R710 | 20 kΩ | ゲイン下側 / 帰還。`1+20k/20k=2` |
-| R703/R708 | 47 Ω | 出力アイソレーション（L/R） |
-| C701/C704 | 100 nF film | 入力AC結合（L/R） |
-| C702/C705 | 10 µF | 入力AC結合（L/R） |
-| C709/C710 | 100 nF 50 V X7R | 各電源レール、OpAmp直近 |
-| C711/C712 | 1 nF 50 V C0G | 高速バイパス、B面0603 |
-| C707/C708 | 100 µF 35 V polymer | +12 V / -12 V 各1、SMD 10×12.6 |
-| C703/C706 | 470 µF 25 V | 出力AC結合、THT D12.5/P5 |
+### 4.1 部品表（回路図から自動生成）
 
-端子は `J701=入力L/R`、`J702=出力L/R`、`J703=+12V/A_GND/-12V`。PCB外形上辺のみ15 mm拡張し、既存の端子位置と4穴位置は維持。
+<!-- BEGIN GENERATED: ampmodule-bom -->
+**AmpModule 1 枚あたりの部品表** — 下の表は `AudioV2/AmpModule.kicad_sch` から自動生成しています。
+**手で編集しないでください**（次の再生成で消えます）。値・フットプリント・役割を直すときは KiCad の回路図側を直し、
+`python3 AudioV2/scripts/gen_parts_bom.py` で再生成します。
+
+> `Refs` 列と `Value` / `Role` 列に**位置の対応はありません**。kicad-cli はグループ内の値を重複除去してアルファベット順に並べるため、「n 番目の参照 = n 番目の役割」とは読めません。
+
+| Refs | Value | Footprint | Qty | Role |
+|---|---|---|---|---|
+| AMP701 | NE5532 / DIP-8 compatible | `Package_DIP:DIP-8_W7.62mm_Socket` | 1 | AudioV2 replaceable dual op amp; high-speed decoupling fitted |
+| C701,C704 | 100nF film | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 2 | L input film coupling / R input film coupling |
+| C702,C705 | 10uF | `Capacitor_THT:CP_Radial_D5.0mm_P2.00mm` | 2 | L input electrolytic coupling / R input electrolytic coupling |
+| C703,C706 | 470uF 25V | `Capacitor_THT:CP_Radial_D12.5mm_P5.00mm` | 2 | L output coupling; compact D12.5/P5 / R output coupling; compact D12.5/P5 |
+| C707,C708 | 100uF 35V polymer | `Capacitor_SMD:CP_Elec_10x12.6` | 2 | V+ local bulk at power connector / V- local bulk at power connector |
+| C709,C710 | 100nF 50V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 | V+ local decoupling / V- local decoupling |
+| C711,C712 | 1nF 50V C0G | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 | V+ high-speed bypass / V- high-speed bypass |
+| J701 | AMP_IN L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 |  |
+| J702 | AMP_OUT L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 |  |
+| J703 | +12V / A_GND / -12V | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 |  |
+| R701,R706 | 220k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L input pulldown / R input pulldown |
+| R702,R707 | 1k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L non-inverting bias; 1/10 refine / R non-inverting bias; 1/10 refine |
+| R703,R708 | 47R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L output isolation / R output isolation |
+| R704,R705,R709,R710 | 20k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 | L feedback; gain 2 / L gain resistor; Rf=Rg=20k / R feedback; gain 2 / R gain resistor; Rf=Rg=20k |
+<!-- END GENERATED: ampmodule-bom -->
+
+### 4.2 選定・実装メモ（回路図から導出できない＝ここが正）
+
+| 項目 | 内容 |
+|---|---|
+| **OpAmp の差し替え条件** | 基準は **NE5532P**。DIP-8 **ソケット**実装なので現物差し替えで聴き比べできる。他の DIP-8 互換デュアルに替えるときは **±12 V 動作・ユニティゲイン安定・容量負荷耐性** を DS で確認する（手持ち在庫は [`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)） |
+| **SMD バイパスコンデンサの寸法** | `100nF X7R` / `1nF C0G` とも **1206 が既定**（回路図の Footprint も 1206）。ハンドはんだ前提のため大きめを選んでいる。**レイアウト都合で 0603 まで下げるのは可**（削除した旧 PCB では `1nF C0G` を裏面 0603 にしていた）。下げる場合は回路図の Footprint も合わせて変更すること |
+| **PCB 外形（未設計・着手時の要件）** | AmpModule の PCB はまだ設計していない。着手するときは `Audio/split/AudioCase_4_amp.kicad_pcb` を参考に、**端子位置と 4 穴位置を維持**し、100 µF ポリマー×2 を載せるため**上辺のみ 15 mm 拡張**する。ソースの `Audio/` 基板は変更しない |
 
 ## 5. まだ買わなくてよい / レイアウト時
 
@@ -203,3 +237,4 @@ Amp 選択後 L/R
 | 2026-08-30 | 表示 — 制御 OLED=2.42″ SSD1309（AliExpress）、スペアナ=Waveshare 29318（v1 実装） |
 | 2026-08-31 | AmpModule再版 — ゲイン2（20k/20k）、バルク/高速バイパス、出力C小型化 |
 | 2026-08-31 | J_I2C端子台をPhoenix MKDS-1,5シリーズ（v1 `Audio/Controll.kicad_sch`と同一/互換）に確定。§11 Q3（JST-XH vs 2.54）は解消 |
+| 2026-09-01 | AmpModule 部品表を回路図からの**自動生成**に切替（§4.1）。手書きの designator 表を廃止し、非導出情報だけを §4.2 に残した。生成: `AudioV2/scripts/gen_parts_bom.py` |

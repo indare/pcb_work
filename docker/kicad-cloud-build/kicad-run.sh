@@ -12,8 +12,10 @@
 #   docker/kicad-cloud-build/kicad-run.sh erc --strict     # 違反があれば非ゼロ終了
 #   docker/kicad-cloud-build/kicad-run.sh netlist          # ネットリスト出力
 #   docker/kicad-cloud-build/kicad-run.sh erc AudioV2/AmpModule.kicad_sch
-#   docker/kicad-cloud-build/kicad-run.sh cli pcb drc --format json \
-#       -o @OUT@/drc.json @WORK@/AudioV2/AmpModule.kicad_pcb
+#   docker/kicad-cloud-build/kicad-run.sh drift            # 生成スクリプトと実図の乖離
+#   docker/kicad-cloud-build/kicad-run.sh drift --strict   # 乖離があれば非ゼロ終了
+#   docker/kicad-cloud-build/kicad-run.sh cli sch export bom \
+#       -o @OUT@/bom.csv @WORK@/AudioV2/AmpModule.kicad_sch
 #   docker/kicad-cloud-build/kicad-run.sh version
 #   docker/kicad-cloud-build/kicad-run.sh build            # イメージをビルド(約45分)
 #
@@ -155,6 +157,89 @@ cmd_cli() {
   kc "${args[@]}"
 }
 
+# --- drift: 生成スクリプトと実図の乖離を見る -------------------------------
+#
+# kicad-cli は使わない（バックエンド非依存。必要なのはホストの python3 だけ）。
+# 回路図の生成は必ず一時ディレクトリで行い、リポジトリの *.kicad_sch には
+# 一切触らない。
+
+DRIFT_TMP=""
+drift_cleanup() {
+  if [ -n "$DRIFT_TMP" ]; then rm -rf "$DRIFT_TMP"; fi
+}
+
+cmd_drift() {
+  local strict=0 a
+  for a in "$@"; do
+    case "$a" in
+      --strict) strict=1 ;;
+      *) die "drift: 不明なオプション $a" ;;
+    esac
+  done
+
+  command -v python3 >/dev/null 2>&1 || die "python3 が見つかりません"
+  local gen_rel="AudioV2/scripts/wire_circuit_design.py"
+  [ -f "$REPO_ROOT/$gen_rel" ] || die "生成スクリプトが見つかりません: $gen_rel"
+  mkdir -p "$OUT_DIR"
+
+  DRIFT_TMP="$(mktemp -d "${TMPDIR:-/tmp}/kicad-drift.XXXXXX")"
+  trap drift_cleanup EXIT INT TERM
+
+  # AudioV2 を丸ごとコピーし、兄弟の Audio/ のシンボルも置く。生成スクリプトは
+  # ../Audio/BP5293_ROHM.kicad_sym などを読むので、これが無いと落ちる。
+  cp -R "$REPO_ROOT/AudioV2" "$DRIFT_TMP/AudioV2"
+  mkdir -p "$DRIFT_TMP/Audio"
+  cp "$REPO_ROOT"/Audio/*.kicad_sym "$DRIFT_TMP/Audio/" \
+    || die "drift: Audio/*.kicad_sym をコピーできません（生成スクリプトが参照します）"
+  # コピーしてきた実図は消す。残しておくと「生成されなかったシート」が
+  # 実図のコピーのまま残り、乖離ゼロに見えてしまう。
+  rm -f "$DRIFT_TMP/AudioV2"/*.kicad_sch
+
+  local gen="$DRIFT_TMP/AudioV2/scripts/wire_circuit_design.py"
+
+  # 手編集所有シート（AGENT_HANDOFF.md §2.8）の一覧と、その強制生成フラグは
+  # 生成スクリプト自身が知っている。まず素で回して SKIPPED の行から拾う。
+  python3 "$gen" all >/dev/null 2>"$DRIFT_TMP/skipped.txt" \
+    || { cat "$DRIFT_TMP/skipped.txt" >&2; die "drift: 回路図の生成に失敗しました"; }
+
+  local hand=() force=() line
+  while IFS= read -r line; do
+    if [ -n "$line" ]; then hand+=(--hand-edited "$line"); fi
+  done < <(sed -n 's/^SKIPPED \([^:]*\):.*/\1/p' "$DRIFT_TMP/skipped.txt")
+  while IFS= read -r line; do
+    if [ -n "$line" ]; then force+=("$line"); fi
+  done < <(sed -n 's/.*pass \(--force-[a-z-]*\) to.*/\1/p' "$DRIFT_TMP/skipped.txt")
+
+  # どちらも生成スクリプトの英文メッセージを削って作っている。書式が変わって
+  # hand 側だけ空になると、手編集所有シートが [生成コード所有] と表示され、
+  # 想定内の差分が「スクリプトか実図が古い」という警告に化ける。両者の件数が
+  # 一致することを確認して、静かな誤表示を防ぐ。
+  if [ $(( ${#hand[@]} / 2 )) -ne ${#force[@]} ]; then
+    cat "$DRIFT_TMP/skipped.txt" >&2
+    die "drift: 手編集所有シートの検出に失敗しました（SKIPPED メッセージの書式変更の可能性）"
+  fi
+
+  # 手編集所有シートも「いま生成したらどうなるか」を見たいので強制生成する。
+  # 一時ディレクトリなのでリポジトリには影響しない。
+  echo "drift: wire_circuit_design.py all ${force[*]-} を一時ディレクトリで再生成 → AudioV2/ と比較"
+  python3 "$gen" all "${force[@]+"${force[@]}"}" >/dev/null 2>"$DRIFT_TMP/skipped2.txt" \
+    || { cat "$DRIFT_TMP/skipped2.txt" >&2; die "drift: 回路図の強制生成に失敗しました"; }
+  if grep -q '^SKIPPED' "$DRIFT_TMP/skipped2.txt"; then
+    cat "$DRIFT_TMP/skipped2.txt" >&2
+    die "drift: 強制生成されなかったシートがあります（--force-* の名前が変わった可能性）"
+  fi
+
+  local rc=0
+  python3 "$SCRIPT_DIR/sch_drift.py" "$DRIFT_TMP/AudioV2" "$REPO_ROOT/AudioV2" \
+    --json "$OUT_DIR/drift.json" "${hand[@]+"${hand[@]}"}" || rc=$?
+  [ "$rc" -le 1 ] || die "drift: 比較に失敗しました"
+  echo "出力: $OUT_DIR/drift.json"
+
+  # 乖離（rc=1）は既定では成功扱い。CI で落としたいときだけ --strict。
+  if [ "$strict" = 1 ]; then return "$rc"; fi
+  return 0
+}
+
 cmd_build() {
   command -v docker >/dev/null 2>&1 || die "docker が見つかりません"
   echo "$IMAGE をビルドします（ソースビルドのため約45分）..."
@@ -170,6 +255,7 @@ main() {
   [ $# -gt 0 ] && shift || true
   case "$cmd" in
     build)              cmd_build "$@" ;;                      # ビルドはバックエンド解決不要
+    drift)              cmd_drift "$@" ;;                      # kicad-cli 不要
     erc)                resolve_backend; cmd_erc "$@" ;;
     netlist)            resolve_backend; cmd_netlist "$@" ;;
     cli)                resolve_backend; cmd_cli "$@" ;;
