@@ -1864,11 +1864,21 @@ def main() -> None:
             output_stage_wired,
             "generator does not emit J_RAIL601 (RAIL IN); 5 parts differ in position",
         ),
+        "channel": (
+            "AmpChannel.kicad_sch",
+            amp_channel_wired,
+            "graduated to hand-edited on 2026-09-02 (user reworked AmpCh2 in KiCad); "
+            "generator kept as logic documentation only",
+        ),
+        "bank": (
+            "AmpBank.kicad_sch",
+            amp_bank_wired,
+            "graduated to hand-edited on 2026-09-02 alongside AmpChannel (bulk-cap wiring "
+            "fixed in KiCad); generator kept as logic documentation only",
+        ),
     }
     # 生成コード所有シート（回せばそのまま正）
     GENERATED = {
-        "channel": ("AmpChannel.kicad_sch", amp_channel_wired),
-        "bank": ("AmpBank.kicad_sch", amp_bank_wired),
         "control": ("ControlPanel.kicad_sch", control_panel_wired),
         "parent": ("AudioV2Case.kicad_sch", parent_wired),
     }

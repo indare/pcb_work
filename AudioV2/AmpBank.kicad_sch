@@ -1683,6 +1683,84 @@
 		)
 		(uuid "72d485e3-4973-4305-b442-4d44a43ccb62")
 	)
+	(junction
+		(at 287.02 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "005a80bc-6738-466b-b3af-baae1a3a0e4c")
+	)
+	(junction
+		(at 288.29 129.54)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2630262d-727c-41c5-aff1-5bd27d40748f")
+	)
+	(junction
+		(at 288.29 124.46)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4f7f3484-d1f4-48e7-90c1-c9b1ae18a9b1")
+	)
+	(junction
+		(at 287.02 76.2)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "60f8038b-e475-457c-9c57-f6ce93e5658e")
+	)
+	(junction
+		(at 289.56 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7ff56777-0aad-4582-ad58-69eaea9f5a69")
+	)
+	(junction
+		(at 289.56 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "94e9cc24-e658-4a75-92ef-15d4447b6ce9")
+	)
+	(junction
+		(at 306.07 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "984f60bb-02e8-41f2-9c15-8498f03e1885")
+	)
+	(junction
+		(at 294.64 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9c683205-f6e7-405f-9848-2e22b5721782")
+	)
+	(junction
+		(at 288.29 137.16)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9edc5d70-b6da-4d2d-b5c0-6f8162269cc4")
+	)
+	(junction
+		(at 285.75 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ac16b25d-1130-458b-a372-feeb2fbb511c")
+	)
+	(junction
+		(at 285.75 99.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c1c9d520-688e-4ad6-9cb2-8f7ed879bf62")
+	)
+	(junction
+		(at 295.91 46.99)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dbf509e5-6a9a-41f4-b99f-f8b730d28ee9")
+	)
+	(junction
+		(at 289.56 46.99)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fb9f3c55-5b77-41b6-a509-7d6990bd96cb")
+	)
 	(no_connect
 		(at 317.5 172.72)
 		(uuid "3ffcdee2-2f6c-49a9-9a20-3c461dba7ed5")
@@ -1723,6 +1801,366 @@
 		(at 317.5 175.26)
 		(uuid "df9a4b3f-2358-4d1d-b097-553bbc463c72")
 	)
+	(wire
+		(pts
+			(xy 284.48 35.56) (xy 284.48 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "05ae8a1b-c0ec-4e98-9bf7-8a14432c372f")
+	)
+	(wire
+		(pts
+			(xy 284.48 99.06) (xy 285.75 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "135d5b94-cc24-4e0d-8a0a-a1243c966ff8")
+	)
+	(wire
+		(pts
+			(xy 288.29 137.16) (xy 293.37 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ab1921b-b249-4592-84cd-5687628ca8f8")
+	)
+	(wire
+		(pts
+			(xy 284.48 30.48) (xy 289.56 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ae73b9e-9fcf-49eb-aaff-6157591fdf79")
+	)
+	(wire
+		(pts
+			(xy 288.29 124.46) (xy 289.56 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b5e2962-4c6c-4bb4-9653-87df9908b814")
+	)
+	(wire
+		(pts
+			(xy 288.29 123.19) (xy 288.29 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1cb367b5-37d5-4aae-9ed3-31c4fca7e98e")
+	)
+	(wire
+		(pts
+			(xy 288.29 137.16) (xy 284.48 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2682eaf3-8d10-47a2-8438-d239d746fb96")
+	)
+	(wire
+		(pts
+			(xy 284.48 129.54) (xy 288.29 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29d0f659-99f5-4237-8934-4386064f1a61")
+	)
+	(wire
+		(pts
+			(xy 285.75 96.52) (xy 285.75 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "329cc42c-d870-4711-9b34-268f1801069f")
+	)
+	(wire
+		(pts
+			(xy 294.64 27.94) (xy 294.64 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32ba6616-8373-4667-8c3f-42b5412e8d2a")
+	)
+	(wire
+		(pts
+			(xy 284.48 124.46) (xy 288.29 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4712afe8-ad0e-43f2-a3f3-9e0336907e6a")
+	)
+	(wire
+		(pts
+			(xy 306.07 36.83) (xy 306.07 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "536db327-1ebe-4388-9e3e-9b28faa89ec6")
+	)
+	(wire
+		(pts
+			(xy 285.75 99.06) (xy 288.29 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "53894f94-8afa-459b-9b9f-51814693d83c")
+	)
+	(wire
+		(pts
+			(xy 287.02 71.12) (xy 287.02 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "56d6d8cd-915d-434f-82cd-c974e1a6dc65")
+	)
+	(wire
+		(pts
+			(xy 306.07 38.1) (xy 289.56 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59c5947d-0748-46c9-b082-a00edc1c049b")
+	)
+	(wire
+		(pts
+			(xy 285.75 101.6) (xy 284.48 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e3602b2-9366-4301-b359-d41cca10339b")
+	)
+	(wire
+		(pts
+			(xy 284.48 73.66) (xy 287.02 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69cb67c6-d2df-4d0f-ba87-9b0239cf47d0")
+	)
+	(wire
+		(pts
+			(xy 294.64 30.48) (xy 297.18 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72814bbd-3949-42c1-b67b-9a7bb5a34a7e")
+	)
+	(wire
+		(pts
+			(xy 293.37 137.16) (xy 293.37 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7503e6ea-8500-40f2-a563-a80bb819c606")
+	)
+	(wire
+		(pts
+			(xy 285.75 101.6) (xy 288.29 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "759708cb-2ef3-41c8-ba0d-ee1b5f592a8b")
+	)
+	(wire
+		(pts
+			(xy 289.56 46.99) (xy 304.8 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "790ecc1a-2116-40e9-9f45-b970fb88d48c")
+	)
+	(wire
+		(pts
+			(xy 289.56 30.48) (xy 294.64 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7925d2bb-b6ea-4729-a349-73ea41f101fb")
+	)
+	(wire
+		(pts
+			(xy 285.75 101.6) (xy 285.75 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80254593-82f3-42e3-a9aa-383f4335eb24")
+	)
+	(wire
+		(pts
+			(xy 289.56 45.72) (xy 289.56 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9aa863ac-62cf-40fc-b361-1f0062060c4b")
+	)
+	(wire
+		(pts
+			(xy 284.48 76.2) (xy 287.02 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9d1bcf78-a2e0-4cbb-9719-47f4cdb4f49d")
+	)
+	(wire
+		(pts
+			(xy 284.48 132.08) (xy 284.48 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a57baedb-8f9f-4f6a-81e1-cff9aa331683")
+	)
+	(wire
+		(pts
+			(xy 289.56 38.1) (xy 284.48 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf04422b-fee0-4fd4-885e-0b1f09d064b3")
+	)
+	(wire
+		(pts
+			(xy 289.56 46.99) (xy 284.48 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1c06e25-ab8b-460f-847d-82dc0e6fab98")
+	)
+	(wire
+		(pts
+			(xy 284.48 46.99) (xy 284.48 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2b86498-5936-4997-b956-0628de5042b9")
+	)
+	(wire
+		(pts
+			(xy 306.07 38.1) (xy 308.61 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c49ad3bf-2a2b-4ab8-81d3-5b6d2015878a")
+	)
+	(wire
+		(pts
+			(xy 287.02 76.2) (xy 288.29 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d2e689e1-1b74-407e-b0c5-4164fc1ede1d")
+	)
+	(wire
+		(pts
+			(xy 287.02 80.01) (xy 287.02 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db6378e6-da33-42a7-af6f-ed27619fcfed")
+	)
+	(wire
+		(pts
+			(xy 287.02 73.66) (xy 288.29 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5ced829-ac26-4632-844f-054855d14ae6")
+	)
+	(wire
+		(pts
+			(xy 295.91 46.99) (xy 295.91 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e893c200-0adf-4272-8ac9-ac919fdc9e1b")
+	)
+	(wire
+		(pts
+			(xy 288.29 129.54) (xy 290.83 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f2bd6124-e2bd-4fb8-9366-b8efd883eed0")
+	)
+	(wire
+		(pts
+			(xy 284.48 127) (xy 289.56 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6ba02da-f8f3-41e9-967b-5734ed92cca2")
+	)
 	(label "SEL_CH4"
 		(at 152.4 76.2 180)
 		(effects
@@ -1752,16 +2190,6 @@
 			(justify left bottom)
 		)
 		(uuid "03f63d2e-992c-420d-acb9-f07cc203886c")
-	)
-	(label "+15V"
-		(at 274.32 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "05314ee1-ea28-4362-836c-f417821a928b")
 	)
 	(label "AMP_SEL_R"
 		(at 228.6 106.68 0)
@@ -1804,7 +2232,7 @@
 		(uuid "0e84a09a-b523-4df1-898f-1714141fc0d1")
 	)
 	(label "AMP_SEL_R"
-		(at 274.32 104.14 0)
+		(at 285.75 96.52 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1812,16 +2240,6 @@
 			(justify left bottom)
 		)
 		(uuid "0f34d1c7-399d-4200-a1e3-91a7b2e90975")
-	)
-	(label "-15V"
-		(at 274.32 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10679074-9810-4bd6-bf91-fa62d778aba6")
 	)
 	(label "D_GND"
 		(at 317.5 195.58 180)
@@ -1833,13 +2251,23 @@
 		)
 		(uuid "1276731e-9ca0-47c6-ba97-0a6b9889a5df")
 	)
-	(label "I2C_SDA"
-		(at 284.48 124.46 180)
+	(label "-15V"
+		(at 294.64 27.94 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
+		)
+		(uuid "138467b6-ab35-45fc-97a3-9e1de8f903ad")
+	)
+	(label "I2C_SDA"
+		(at 288.29 123.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
 		(uuid "15bc01fe-86ab-4b04-b503-27641bd122b7")
 	)
@@ -1924,7 +2352,7 @@
 		(uuid "2efc2bdd-58a3-48b6-a387-e59fecb63ee4")
 	)
 	(label "AMP_SEL_L"
-		(at 274.32 101.6 0)
+		(at 285.75 105.41 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1963,16 +2391,6 @@
 		)
 		(uuid "3a91122a-7aa0-48d6-90f9-d5624d753d44")
 	)
-	(label "A_GND"
-		(at 274.32 38.1 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3e2a816c-438a-4b30-9be1-d2be18b10c9f")
-	)
 	(label "SEL_CH4"
 		(at 342.9 165.1 0)
 		(effects
@@ -1984,12 +2402,12 @@
 		(uuid "3eb73903-96e9-4e0c-aee1-1e90b4d6e59a")
 	)
 	(label "3V3"
-		(at 284.48 129.54 180)
+		(at 289.56 129.54 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "3f665778-40cf-4a3f-bf37-eb8ca6f373d3")
 	)
@@ -2233,16 +2651,6 @@
 		)
 		(uuid "6612f7ba-b91d-4ef2-9d62-46ceed4ed5ef")
 	)
-	(label "3V3"
-		(at 304.8 123.19 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "66430f52-94e1-44b5-993f-cd4fa5ee0973")
-	)
 	(label "TONE_L"
 		(at 38.1 172.72 180)
 		(effects
@@ -2264,7 +2672,7 @@
 		(uuid "6b57c5a8-ba00-4364-8af4-2b7779fbb41c")
 	)
 	(label "TONE_R"
-		(at 274.32 78.74 0)
+		(at 287.02 71.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2444,16 +2852,6 @@
 		(uuid "a0da5ed0-77e4-4744-9049-7b40e5ac34df")
 	)
 	(label "A_GND"
-		(at 304.8 41.91 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a1c11da6-7645-4354-861c-390a57204c5b")
-	)
-	(label "A_GND"
 		(at 152.4 88.9 180)
 		(effects
 			(font
@@ -2462,6 +2860,26 @@
 			(justify right bottom)
 		)
 		(uuid "a8845aea-a55d-404b-887e-252e08ccf23b")
+	)
+	(label "+15V"
+		(at 295.91 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "abdd90a9-87d8-4625-9934-b9154844764b")
+	)
+	(label "A_GND"
+		(at 306.07 36.83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b2093ca2-d5d6-4068-9f6b-3fc3841074c0")
 	)
 	(label "TONE_L"
 		(at 152.4 66.04 180)
@@ -2544,12 +2962,12 @@
 		(uuid "bf8768f9-2c5f-465b-b5b1-76079f476c54")
 	)
 	(label "I2C_SCL"
-		(at 284.48 127 180)
+		(at 288.29 127 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "c0530f7b-53aa-4cb3-b613-0feae0a4801b")
 	)
@@ -2563,15 +2981,15 @@
 		)
 		(uuid "c23f2a7c-66db-4cbd-a1f7-077aa13bbecf")
 	)
-	(label "-15V"
-		(at 317.5 41.91 270)
+	(label "D_GND"
+		(at 293.37 137.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
-		(uuid "c57a8e86-fc1d-47cf-9b48-5caf74c58f74")
+		(uuid "c6c831ff-fbd9-44df-8fe9-b1c9e9760d28")
 	)
 	(label "TONE_L"
 		(at 38.1 30.48 180)
@@ -2633,16 +3051,6 @@
 		)
 		(uuid "ce3913d0-02f7-4ef3-b16a-86431e84957e")
 	)
-	(label "+15V"
-		(at 304.8 34.29 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d316ae97-6d1b-4067-a5de-8038bd120c3b")
-	)
 	(label "AMP_SEL_L"
 		(at 228.6 30.48 0)
 		(effects
@@ -2693,16 +3101,6 @@
 		)
 		(uuid "dda46b48-2199-4904-b7e2-048564331517")
 	)
-	(label "D_GND"
-		(at 304.8 130.81 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "de81685b-fb0b-4417-9f4f-91f62b4ed67f")
-	)
 	(label "+15V"
 		(at 152.4 187.96 180)
 		(effects
@@ -2744,7 +3142,7 @@
 		(uuid "e2528d76-0fe9-4e91-ba07-b3c2b5b8f445")
 	)
 	(label "TONE_L"
-		(at 274.32 76.2 0)
+		(at 287.02 80.01 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2752,16 +3150,6 @@
 			(justify left bottom)
 		)
 		(uuid "e86ede36-240c-412d-b1fb-451283a9d976")
-	)
-	(label "A_GND"
-		(at 317.5 34.29 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e9895881-0199-4feb-ba33-ca40458b33a9")
 	)
 	(label "+15V"
 		(at 38.1 45.72 180)
@@ -2802,16 +3190,6 @@
 			(justify right bottom)
 		)
 		(uuid "f4e09960-6f22-485b-85d0-5028dfe6a4d6")
-	)
-	(label "D_GND"
-		(at 284.48 132.08 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f50797fa-2b0f-4125-8ef1-44cb95dad5a1")
 	)
 	(label "TONE_R"
 		(at 38.1 142.24 180)
@@ -2873,31 +3251,20 @@
 		)
 		(uuid "ffadfb75-8909-486e-829b-89145e03e0f0")
 	)
-	(hierarchical_label "+15V"
-		(shape input)
-		(at 274.32 35.56 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "1a695a15-a273-4013-8683-e1bf8f79d333")
-	)
 	(hierarchical_label "3V3"
 		(shape input)
-		(at 284.48 129.54 180)
+		(at 290.83 129.54 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "3474cb6c-042f-4a0c-b49b-9fa149af1271")
 	)
 	(hierarchical_label "AMP_SEL_L"
 		(shape output)
-		(at 274.32 101.6 0)
+		(at 288.29 101.6 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2908,84 +3275,73 @@
 	)
 	(hierarchical_label "D_GND"
 		(shape bidirectional)
-		(at 284.48 132.08 180)
+		(at 293.37 139.7 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "42e88a84-454f-4dd6-a9e5-00edecb3ed2a")
 	)
 	(hierarchical_label "TONE_L"
 		(shape input)
-		(at 274.32 76.2 180)
+		(at 288.29 76.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "6711fc22-8c25-4630-b331-6a43fcf302f3")
 	)
-	(hierarchical_label "I2C_SDA"
+	(hierarchical_label "A_GND"
 		(shape bidirectional)
-		(at 284.48 124.46 180)
+		(at 308.61 38.1 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
+		)
+		(uuid "825221e7-4fd5-41d3-bfe4-24727006474e")
+	)
+	(hierarchical_label "I2C_SDA"
+		(shape bidirectional)
+		(at 289.56 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
 		)
 		(uuid "969d3781-6ae9-4f8d-9b52-a903fb5adc85")
 	)
 	(hierarchical_label "I2C_SCL"
 		(shape input)
-		(at 284.48 127 180)
+		(at 289.56 127 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "99b44b9f-8004-49c1-8d76-2eadf2161dea")
 	)
-	(hierarchical_label "A_GND"
-		(shape bidirectional)
-		(at 274.32 38.1 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "a60f44eb-f8be-4a85-9949-73dd2b594fef")
-	)
 	(hierarchical_label "TONE_R"
 		(shape input)
-		(at 274.32 78.74 180)
+		(at 288.29 73.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "c7d3a4cd-4b3b-40bb-ad5a-5a8aaf15ddcc")
 	)
-	(hierarchical_label "-15V"
-		(shape input)
-		(at 274.32 40.64 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "c8377ec8-afa7-4dab-90c8-ab0753a03bf3")
-	)
 	(hierarchical_label "AMP_SEL_R"
 		(shape output)
-		(at 274.32 104.14 0)
+		(at 288.29 99.06 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2994,9 +3350,31 @@
 		)
 		(uuid "d075cc11-a984-42ad-b161-43023c243fad")
 	)
+	(hierarchical_label "-15V"
+		(shape input)
+		(at 297.18 30.48 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d1ddd21b-9873-468c-af05-2b6eb6c68cc6")
+	)
+	(hierarchical_label "+15V"
+		(shape input)
+		(at 304.8 46.99 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f338f392-3d19-4ae2-bf83-8d9131ff1838")
+	)
 	(symbol
 		(lib_id "Device:C_Polarized")
-		(at 317.5 38.1 0)
+		(at 289.56 41.91 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3005,29 +3383,31 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "027878ef-257b-479e-8500-df68a36c466a")
-		(property "Reference" "C_BULK_N"
-			(at 317.5 35.56 0)
+		(uuid "3dd300e5-6cba-47f6-ba30-0ca6d3021774")
+		(property "Reference" "C_BULK_P301"
+			(at 293.37 41.5289 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Value" "100uF 35V"
-			(at 317.5 40.64 0)
+			(at 293.37 44.0689 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:CP_Elec_10x12.6"
-			(at 0 0 0)
+			(at 594.36 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3038,7 +3418,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 594.36 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3049,7 +3429,7 @@
 			)
 		)
 		(property "Description" "rail bulk at board entry"
-			(at 0 0 0)
+			(at 594.36 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3060,15 +3440,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "8ba65dc3-135b-4354-8097-901d2de8d1b3")
+			(uuid "da27f9e4-2128-4067-9545-9a022132bb4a")
 		)
 		(pin "2"
-			(uuid "349422d9-fe13-4ee9-8e96-c52c87c63008")
+			(uuid "26404153-7035-4e8e-a3a9-271abf7c18f5")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
-					(reference "C_BULK_N")
+					(reference "C_BULK_P301")
 					(unit 1)
 				)
 			)
@@ -3084,10 +3464,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "3f75788c-5802-4481-93f8-cdf220daba56")
-		(property "Reference" "J_CTRL"
-			(at 279.4 124.46 0)
+		(property "Reference" "J_CTRL301"
+			(at 280.67 120.65 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3097,7 +3476,7 @@
 			)
 		)
 		(property "Value" "I2C SDA/SCL/3V3/D_GND"
-			(at 279.4 129.54 0)
+			(at 280.67 118.11 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3154,7 +3533,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
-					(reference "J_CTRL")
+					(reference "J_CTRL301")
 					(unit 1)
 				)
 			)
@@ -3162,7 +3541,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 279.4 76.2 0)
+		(at 279.4 76.2 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3170,10 +3549,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "4fc28b44-b45d-4cf1-8e56-ed4400836a04")
-		(property "Reference" "J_TONE"
-			(at 279.4 73.66 0)
+		(property "Reference" "J_TONE301"
+			(at 279.4 69.85 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3183,7 +3561,7 @@
 			)
 		)
 		(property "Value" "TONE IN L/R"
-			(at 279.4 78.74 0)
+			(at 279.4 67.31 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3193,7 +3571,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
-			(at 0 0 0)
+			(at 558.8 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3204,7 +3582,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 558.8 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3215,7 +3593,7 @@
 			)
 		)
 		(property "Description" "Tone stage output in"
-			(at 0 0 0)
+			(at 558.8 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3234,15 +3612,15 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
-					(reference "J_TONE")
+					(reference "J_TONE301")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 279.4 101.6 0)
+		(lib_id "Device:C")
+		(at 288.29 133.35 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3251,9 +3629,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "65d6d39d-79b8-4556-b479-edbde78d1b49")
-		(property "Reference" "J_OUT"
-			(at 279.4 99.06 0)
+		(uuid "5f530048-7236-4f17-9a20-ce5921d6c881")
+		(property "Reference" "C_IO301"
+			(at 288.29 130.81 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3262,8 +3640,8 @@
 				)
 			)
 		)
-		(property "Value" "AMP_SEL OUT L/R"
-			(at 279.4 104.14 0)
+		(property "Value" "100nF"
+			(at 288.29 135.89 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3272,8 +3650,8 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
-			(at 0 0 0)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at -16.51 6.35 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3284,7 +3662,86 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at -16.51 6.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "MCP23017 decoupling"
+			(at -16.51 6.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "91b190a3-8877-4ec0-a743-7c2767d90572")
+		)
+		(pin "2"
+			(uuid "c686fe50-8f49-453e-9eb6-89312249de4c")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
+					(reference "C_IO301")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 279.4 101.6 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "65d6d39d-79b8-4556-b479-edbde78d1b49")
+		(property "Reference" "J_OUT301"
+			(at 279.4 95.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMP_SEL OUT L/R"
+			(at 279.4 92.71 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+			(at 558.8 203.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 558.8 203.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3295,7 +3752,7 @@
 			)
 		)
 		(property "Description" "Selected amp out to OutputStage"
-			(at 0 0 0)
+			(at 558.8 203.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3314,7 +3771,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
-					(reference "J_OUT")
+					(reference "J_OUT301")
 					(unit 1)
 				)
 			)
@@ -3322,7 +3779,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x03")
-		(at 279.4 38.1 0)
+		(at 279.4 38.1 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3330,10 +3787,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "6c6612e6-a647-4d95-a551-e3c8bd088ca9")
-		(property "Reference" "J_PWR"
-			(at 279.4 35.56 0)
+		(property "Reference" "J_PWR301"
+			(at 279.4 27.94 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3343,7 +3799,7 @@
 			)
 		)
 		(property "Value" "+15V / A_GND / -15V"
-			(at 279.4 40.64 0)
+			(at 279.4 25.4 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3353,7 +3809,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
-			(at 0 0 0)
+			(at 558.8 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3364,7 +3820,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 558.8 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3375,7 +3831,7 @@
 			)
 		)
 		(property "Description" "Supply in from PowerModule"
-			(at 0 0 0)
+			(at 558.8 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3397,7 +3853,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
-					(reference "J_PWR")
+					(reference "J_PWR301")
 					(unit 1)
 				)
 			)
@@ -3413,9 +3869,8 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "7be82dd1-af0b-4cbf-a595-1cc96ad8c9e4")
-		(property "Reference" "U_IO"
+		(property "Reference" "U_IO301"
 			(at 330.2 175.26 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3426,7 +3881,7 @@
 			)
 		)
 		(property "Value" "MCP23017"
-			(at 330.2 180.34 0)
+			(at 330.2 146.05 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3555,7 +4010,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
-					(reference "U_IO")
+					(reference "U_IO301")
 					(unit 1)
 				)
 			)
@@ -3563,7 +4018,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Polarized")
-		(at 304.8 38.1 0)
+		(at 289.56 34.29 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3572,29 +4027,31 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "91bc2551-a6b3-4cd7-b309-ec2dc0981a0a")
-		(property "Reference" "C_BULK_P"
-			(at 304.8 35.56 0)
+		(uuid "85c539bc-5159-49a9-9d4e-17df70322b7d")
+		(property "Reference" "C_BULK_N301"
+			(at 293.37 33.9089 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Value" "100uF 35V"
-			(at 304.8 40.64 0)
+			(at 293.37 36.4489 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:CP_Elec_10x12.6"
-			(at 0 0 0)
+			(at 607.06 72.39 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3605,7 +4062,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 607.06 72.39 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3616,7 +4073,7 @@
 			)
 		)
 		(property "Description" "rail bulk at board entry"
-			(at 0 0 0)
+			(at 607.06 72.39 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3627,95 +4084,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "eaa0d02c-9826-4fe7-894b-fbb9c885f716")
+			(uuid "09275eb0-fa88-4ae9-906f-5bfd84b4f939")
 		)
 		(pin "2"
-			(uuid "2c84894b-fe44-4812-8f23-709e6be7ced2")
+			(uuid "8a84e557-f339-447f-bf5e-044686c5f415")
 		)
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
-					(reference "C_BULK_P")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 304.8 127 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "bcc3cf48-6dca-48d1-a662-d3dd25eb3491")
-		(property "Reference" "C_IO"
-			(at 304.8 124.46 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 304.8 129.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "MCP23017 decoupling"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "bd201f78-0616-4c21-ba79-39ff202b2324")
-		)
-		(pin "2"
-			(uuid "821e1eff-0fb5-4202-adbd-71a868932c00")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
-					(reference "C_IO")
+					(reference "C_BULK_N301")
 					(unit 1)
 				)
 			)

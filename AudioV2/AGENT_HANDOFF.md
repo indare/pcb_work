@@ -13,9 +13,12 @@
 
 ## 1. いま何をしているか（一言）
 
-**アーキテクチャ刷新（§2.9）の手順3〜5が完了。`AmpBank`（10ch を1枚）が回路図としてリポジトリに存在し、
-親に配線され、電源レールも `+15V`/`-15V` へ改名済み（PowerModule の DKMW20F-12 → -15 差替え含む）。
-旧 RelayBoard / AmpModule は削除済み。残るのは §2.8 所有権表の追記と WIRING.md 等の全面書き換え。**
+**アーキテクチャ刷新（§2.9）の手順3〜5が完了・コミット済み（`main` へ push 済み）。
+`AmpBank`/`AmpChannel` はユーザーが KiCad で `AmpCh2` を手直ししたのを機に
+**生成コード所有→手編集所有へ卒業**（2026-09-02、§2.8）。
+いま進行中なのは別スレッド: **PowerModule の絶縁型DC-DCコンバータ（現行 `DKMW20F-15`、$30.75）が
+高いという指摘を受けての代替候補調査**（§2.10 に詳細・次のセッションはここから再開）。
+回路図・BOMへの反映は**まだ何もしていない**（調査・比較のみ）。**
 
 2026-09-01 に「RelayBoard 5ch×2 + AmpModule ×10」を **`AmpBank` 1枚へ統合**すると決めた（§2.9）。
 切替はラッチングリレー AZ850 → **アナログスイッチ TMUX7612**、電源は切替せず **常時給電**、
@@ -230,20 +233,28 @@ B 板のストラップ／プルダウンには別の参照が振られる（§2
 
 | 状態 | 意味 | 該当シート |
 |---|---|---|
-| **生成コード所有** | `wire_circuit_design.py <target>` を回せばそのまま正 | AmpBank, AmpChannel, Control, 親 |
-| **手編集所有** | KiCad上の手編集が正。生成コードはロジック（ネット/ピン対応）のドキュメントとして残すが、機械的に上書きしてはいけない | **Power**（2026-09-01〜）, **Output**（2026-09-01〜） |
+| **生成コード所有** | `wire_circuit_design.py <target>` を回せばそのまま正 | Control, 親 |
+| **手編集所有** | KiCad上の手編集が正。生成コードはロジック（ネット/ピン対応）のドキュメントとして残すが、機械的に上書きしてはいけない | **Power**（2026-09-01〜）, **Output**（2026-09-01〜）, **AmpBank**（2026-09-02〜）, **AmpChannel**（2026-09-02〜） |
 
 **2026-09-01 更新（§2.9 統合）:** `RelayBoard` は基板ごと廃止（削除済み）。`Amp`（旧 `AmpModule`）は
 `AmpBank`/`AmpChannel` に置き換わり、生成コード所有のまま。旧 `relay` の書き込み安全装置
 （`--force-relay` 必須化）は対象シートが無くなったため `main()` の `HAND_EDITED` から削除した。
 
-**drift 実測（2026-09-01、`kicad-run.sh drift` をこの Windows ローカル環境で実行）:**
+**2026-09-02 更新:** ユーザーが `AmpCh2` を KiCad で直接修正（バルクコンデンサ周りの未接続配線を含む）。
+これにより `AmpBank`/`AmpChannel` は**生成コード所有から手編集所有へ卒業**。`main()` の `HAND_EDITED` に
+`bank`/`channel` を追加し（`--force-bank`/`--force-channel` が脱出ハッチ）、`GENERATED` からは削除した。
+再アノテーションで `AMP701→AMP601` 等・`C_BULK_P`/`C_BULK_N` の参照が入れ替わったが、ネットリストで
+電気的な接続と極性を個別に検証済み（後述、問題なし）。
+
+**drift 実測（2026-09-02、`kicad-run.sh drift` をこの Windows ローカル環境で実行）:**
 
 | シート | 再生成 vs 実図 |
 |---|---|
-| AmpBank / AmpChannel / Control / 親 | ✅ 完全一致（部品・ネット名・サブシートとも） |
+| Control / 親 | ✅ 完全一致（部品・ネット名・サブシートとも） |
+| **AmpBank** | 手編集所有に移行。参照相違8件（`J_CTRL→J_CTRL301`等、末尾301付与＋`C_BULK_P`/`C_BULK_N`入れ替え）・座標相違6件。想定内 |
+| **AmpChannel** | 手編集所有に移行。参照相違24件（再アノテーションでAMP701→AMP601等に変動）・ネット名相違8件・座標相違24件。想定内 |
 | **Output** | 変わらず — Amp 共通ハーネス受けの `RAIL IN` 端子台が生成されない。部品5個の座標も相違（従来からの既知ギャップ） |
-| **Power** | 変わらず一世代古い（PD 前段が USB-C+CH224 内蔵 vs 実図は外付けモジュール）。**ただし `+15V`/`-15V` ネット名と `DKMW20F-15` は生成側・実図側とも一致**（今回の改名作業で両方を揃えたため、drift の「ネット名相違」に `+15V`/`-15V` は出ない） |
+| **Power** | 変わらず一世代古い（PD 前段が USB-C+CH224 内蔵 vs 実図は外付けモジュール）。`+15V`/`-15V` ネット名と `DKMW20F-15` は生成側・実図側とも一致 |
 
 **参照の対応表（生成スクリプト側 → 実図）:** ここは参照そのものが主題なので designator で書く。
 Power は `F1→F201` / `U1→U201` / `U3→U202` / `J202→J201` のみ確実に対応が取れたため修正済み。
@@ -462,6 +473,69 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 
 ---
 
+### 2.10 PowerModule 絶縁型DC-DCコンバータ — 代替候補調査（2026-09-02、途中・未反映）
+
+**発端:** 現行 `DKMW20F-15`（±15V/±660mA、$30.75/Digikey）が「結構良いお値段」という指摘。
+**電圧そのもの（±15V）も固定ではない**とユーザーから明言あり（v1互換という当初理由は
+§2.9でRelayBoard/AmpModuleが無くなったことで大部分が失効している）。
+
+**回路図・PARTS.md・DECISIONS.mdへの反映は一切まだ行っていない。** 唯一の実ファイル変更は
+`DECISIONS.md` §11.1 に追記した電流マージンの数値根拠（下記）。**次のセッションはここから続行できる。**
+
+#### 判明した実負荷（DECISIONS.md §11.1 に反映済み）
+
+v1時代の見積り（Amp×10+計測+Buffer同居、Icc控えめ8mA/ch）は今のAudioV2には当てはまらない
+（計測ADCは別電源系統）。実際にPowerModuleが賄うのは **AmpBank + ControlPanelのLM7809/PT2314系統のみ**。
+
+| レール | 現実的レンジ |
+|---|---|
+| +15V | ~115〜208mA（AmpBank 80〜150mA + LM7809/PT2314系 ~35mA + スペアナ基盤を乗せるなら+23mA） |
+| -15V | ~80〜173mA（AmpBank のみ、+スペアナなら+23mA） |
+
+オペアンプ差し替え最悪ケース（`Audio/AmpModule_OPAMP_REFINE.md` §4.4 実測ベース、10ch異なる型番前提）
+では既存想定（20mA/ch）が十分安全側と確認済み。AK05/LC5（最大150mA、実測必須）は1ch挿しなら余裕あり。
+
+#### 検討した候補と実勢価格・仕様（一次資料で検証済み）
+
+| 候補 | 電圧/電流 | 価格（実勢） | Cout上限 | Remote ON/OFF | 備考 |
+|---|---|---|---|---|---|
+| **DKMW20F-15**（現行） | ±15V/660mA | $30.75(Digikey) | 650µF/rail | R.C.=Open=ON | 余裕最大・実績あり |
+| RS6-1215D/1212D（RECOM） | ±15V/200mA・±12V/250mA | $19.04(Digikey) | **660〜900µF**（データシートTable値、確認済み・問題なし） | Open=ON寄り（DKMW20と近い論理、詳細未確認） | Cout・ノイズとも良好 |
+| MGW61215/61212（Cosel） | ±15V/200mA・±12V/250mA | ¥1,870（RS Japan品番171-4773/171-5235、正規代理店価格で確認済み。以前提示した$5.92は不正確な集約サイト値だったので訂正済み） | **0-100µF/rail**（Cosel公式Instruction Manual `CME_MG1R5-10.pdf` Table 2.3で実測確認。AmpBank入口100µF+PowerModule直近47µFの合算がこの上限を超える可能性があり要注意） | **Negative logic: L=ON, H=OFF**（現行DKMW20と逆論理、配線変更必須） | 実測リップル&ノイズは5〜15mVと良好（スペック上限120-600mVは保証値で実力はもっと良い）。EMI/EMS全項目Pass（EN55022 ClassA等、マージン25dB以上）。入力側に指定EMIフィルタ部品あり（L1=2.2µH/2600mA等、`mgw61212-en55022.pdf`参照） |
+| **Aimtec AM10GH-2415DLPZ** | 9-36Vin→±15V/**333mA** | ¥8.80 | **未確認**（次にやること） | 未確認 | 10W、86%効率、OVP+SCP |
+| Aimtec AM10TW-2415DLPZ/2412DLPZ | 9-36Vin→±15V/330mA・±12V/**416mA** | ¥9.98 | 未確認 | 未確認 | 10W、87%効率、Remote ON/OFF+OCP+OTP+SCP+UVLO（保護機能が一番充実） |
+| Aimtec AM3G-1215DLPZ | 9-18Vin→±15V/100mA | ¥5.85 | 未確認 | 未確認 | 3W、DKMW20より電流余裕が少ない |
+
+**AM10GH/AM10TWシリーズが現時点の最有力候補。** Cosel並みの価格でDKMW20に近い電流余裕（330〜416mA）が
+取れるため、価格とマージンのトレードオフを両方解決できる可能性がある。
+
+**入手経路:** [`AudioV2/dc_dc.csv`](dc_dc.csv) — DigiKeyの実フィルタ済みエクスポート
+（絶縁型・出力±12V/±15V、79件）。ユーザー添付。データシートURLも列に含む
+（Aimtec分は `https://aimtec.com/site/Aimtec/files/Datasheet/HighResolution/AM10TW-LPZ.pdf` 等）。
+
+#### 次にやること（優先順）
+
+1. **AM10GH-LPZ / AM10TW-LPZ データシートでCout上限とRemote ON/OFF論理を確認**
+   （`dc_dc.csv` にPDF URLあり。前例（Cosel）に倣い、製品ページの「Instruction Manual」相当文書も探すこと。
+   crude zlib展開が効かない場合は `pdfplumber`（このセッションでpip install済み）を使うと確実）
+2. Cout・Remote論理が問題なければ、**±12Vか±15Vかを確定**（v1互換の理由は失効済みなので純粋にコスト/性能で決めてよい）
+3. 決定後: シンボル・フットプリントの要否確認（Aimtec品はKiCad標準libに無い可能性が高く新規作成が要る）
+4. `PowerModule.kicad_sch`（手編集所有）の部品差し替え・ネット名調整
+5. `power_module_wired()`（生成コード、ドキュメント用途）も追随
+6. 検証: `check_sexpr` / ERC / netlist / drift
+
+#### この調査で得た副産物
+
+- PDFデータシートの自動テキスト抽出: `WebFetch`が失敗する場合、生バイナリを保存の上
+  ①crude zlib-stream展開（`re.finditer(rb'stream...endstream')`+`zlib.decompress`）を試し、
+  ②それでも0件なら`pdfplumber`（`pip install pdfplumber`、本セッションで導入済み）を使うと高確率で成功する
+  （Cosel `SFE_MG1R5-10.pdf`はcrude法で成功、`CME_MG1R5-10.pdf`はcrude法が0件でpdfplumberが成功、
+  という実例あり。PDF生成ツールの違いで内部構造が変わるため両方試す価値がある）
+- DigiKeyの「フィルタ済みURL」はGoogle広告経由などで来ると**フィルタが反映されないことがある**
+  （今回92,861件の未フィルタ状態だった）。信頼できるのはCSVエクスポートかUI操作での再現のみ
+
+---
+
 ## 3. マージ済み PR（このスレッドで扱った範囲）
 
 | PR | 内容 | 状態 |
@@ -478,12 +552,16 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 
 ## 4. 現状の git / 作業ツリー
 
-作業ブランチは **`main`**。HEAD は `1c9a359`（origin/main と同期済み）。
-**作業ツリーは dirty — §2.9 手順3〜5（AmpBank 統合・±15V 改名）がまだ未コミット。**
-変更ファイル: `AmpModule.kicad_sch`/`RelayBoard.kicad_sch` 削除、`AmpBank.kicad_sch`/`AmpChannel.kicad_sch` 新規、
-`AudioV2Case.kicad_sch`/`ControlPanel.kicad_sch`/`PowerModule.kicad_sch`/`AudioV2.kicad_sym` 変更、
-`wire_circuit_design.py`/`gen_parts_bom.py`/`kicad-run.sh` 変更、`PARTS.md`/`CIRCUIT_DESIGN.md`/`WIRING.md` 更新。
-コミットはユーザー指示待ち。
+作業ブランチは **`main`**。§2.9 手順3〜5とKiCad正規化はそれぞれ commit 済み・push 済み
+（`ca0af51` AmpBank統合・+15V改名、`f04f0ad` KiCad正規化）。このメモの更新時点でさらに
+未コミット分あり（AmpCh2手直しに伴う所有権変更・DECISIONS.md §11.1・PROCUREMENT.xlsx・
+dc_dc.csv・本メモ自体）→ このセッションの最後にまとめてコミット・push する。
+
+**未確認の副産物:** `AudioV2Case.kicad_pcb` が untracked で出現している（91行・部品0〜1個程度の
+ごく小さいファイル）。KiCadでPCBエディタを開いた際の空スキャフォールドと思われるが、
+実際にPCBレイアウト着手の意図があるものか未確認。**次のセッションでユーザーに確認してから
+git add するか判断すること**（AGENT_HANDOFF は「PCB未設計」と各所に書いているため、
+着手済みなら§2.9等の記述更新が必要になる）。
 
 履歴ブランチ（`cursor/audiov2-*` 等）は base にしない。クラウドが古い `branchName` を fetch して落ちることがある → tip が必要なら一時復帰のみ。
 
@@ -640,3 +718,4 @@ PIN_NUMBERS 登録漏れ、座標衝突など、同じ轍を踏みやすい）�
 | 2026-08-31 | MUSE03 の DS 要点・製品ページ・REFINE 表への参照を追加 |
 | 2026-09-01 | 再アノテーション（58件）を受け、本メモと `WIRING.md` の記述を designator ベースから**ネット名・機能名（回路図 Value）ベース**へ改訂（[`SOURCE_OF_TRUTH.md`](../SOURCE_OF_TRUTH.md) §3）。番地ストラップ表（§2.6）・シート所有権と参照対応（§2.8）・生成スクリプト内の識別子は「参照が主題そのもの」なので意図的に残した |
 | 2026-09-01 | **§2.9 手順3〜5 実施**（ローカル Windows、このセッション）。`RelayBoard.kicad_sch`/`AmpModule.kicad_sch` 削除、`AmpBank.kicad_sch`/`AmpChannel.kicad_sch` を生成しコミット対象に追加、親を差し替え、`+12V`/`-12V`→`+15V`/`-15V` を全シート改名（`DKMW20F-15` シンボルを v1 `Audio/DKMW20.kicad_sym` から移植し `PowerModule.kicad_sch` の部品を差替え）。`gen_parts_bom.py` の対象を `AmpBank.kicad_sch` へ切替（kicad-cli の制約で ch1代表+共通部のみ出力される旨を注記）。副産物としてこの Windows 環境の不備を2件修正: `sch_helpers.py` の `KICAD_SYM_ROOT` 用に `C:\tmp\kicad-symbols` ジャンクションを作成、`kicad-run.sh`/`gen_parts_bom.py` に UTF-8 まわりの修正（`§2.8`表記の§記号がsedのマルチバイト処理を壊していた点をASCII化、`PYTHONUTF8=1`追加）。§2.8所有権表・§1/§4/§5/§7を現状に更新。CIRCUIT_DESIGN.md/PARTS.md/WIRING.mdの一部記述にも「旧アーキテクチャの記録」フラグを追記（全面書き換えは未着手）。**作業ツリーは未コミット** |
+| 2026-09-02 | ユーザーが `AmpCh2` を KiCad で手直し → `AmpBank`/`AmpChannel` を手編集所有へ卒業（`wire_circuit_design.py` の `HAND_EDITED`/`GENERATED` 更新、`drift` で確認）。バルクコンデンサ周りの未接続配線1件を発見・ユーザーが修正、ERC 60件に復帰。C_BULK_P/N・MCP23017 A0-A2=D_GND を実配線で検証。PROCUREMENT.xlsx（AudioV2全体の発注リスト）を新規作成。PowerModule の絶縁型DC-DCコンバータ（DKMW20F-15、$30.75）のコスト代替調査を開始（§2.10、途中・未反映。DigiKeyフィルタ済みCSVを `dc_dc.csv` として追加） |

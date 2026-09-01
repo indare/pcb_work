@@ -1966,7 +1966,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1b64b0dc-e97c-4ea6-8d4d-e503539de74c")
-		(property "Reference" "J_LINE601"
+		(property "Reference" "J_LINE501"
 			(at 173.99 53.34 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2028,7 +2028,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
-					(reference "J_LINE601")
+					(reference "J_LINE501")
 					(unit 1)
 				)
 			)
@@ -2045,7 +2045,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1d537fde-8f62-4637-b4fb-a9ee67d60037")
-		(property "Reference" "RV601"
+		(property "Reference" "RV501"
 			(at 127 31.75 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2119,7 +2119,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
-					(reference "RV601")
+					(reference "RV501")
 					(unit 1)
 				)
 			)
@@ -2136,7 +2136,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "2c9115bd-b623-4a41-9752-11f61d243646")
-		(property "Reference" "SW601"
+		(property "Reference" "SW501"
 			(at 62.23 43.18 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2204,7 +2204,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
-					(reference "SW601")
+					(reference "SW501")
 					(unit 1)
 				)
 			)
@@ -2221,7 +2221,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5696ba06-42d8-48ae-a6d1-fa4256a010a7")
-		(property "Reference" "J_HP601"
+		(property "Reference" "J_HP501"
 			(at 173.99 38.1 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2283,7 +2283,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
-					(reference "J_HP601")
+					(reference "J_HP501")
 					(unit 1)
 				)
 			)
@@ -2300,7 +2300,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "af05b456-bd49-4c2d-a5fc-1d0e99471633")
-		(property "Reference" "RV602"
+		(property "Reference" "RV502"
 			(at 127 63.5 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2374,7 +2374,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
-					(reference "RV602")
+					(reference "RV502")
 					(unit 1)
 				)
 			)
@@ -2391,7 +2391,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e5f7b29b-0909-4beb-8b9e-617fbf2e49e4")
-		(property "Reference" "J_RAIL601"
+		(property "Reference" "J_RAIL501"
 			(at 36.83 45.72 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2456,7 +2456,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
-					(reference "J_RAIL601")
+					(reference "J_RAIL501")
 					(unit 1)
 				)
 			)
@@ -2473,7 +2473,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ed6aad2b-e137-4264-92bb-823ac6daa9ad")
-		(property "Reference" "SW602"
+		(property "Reference" "SW502"
 			(at 62.23 59.69 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2541,7 +2541,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000007-0007-4007-8007-000000000007"
-					(reference "SW602")
+					(reference "SW502")
 					(unit 1)
 				)
 			)
