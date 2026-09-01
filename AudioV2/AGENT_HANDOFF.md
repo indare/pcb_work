@@ -13,18 +13,38 @@
 
 ## 1. いま何をしているか（一言）
 
-**AudioV2 AmpModuleを回路図として再版し、親へ代表1シートで統合した。PCB は未設計（§2.5）。**
-ゲイン2（20k/20k）、±12 V、100 µF/rail + 100 nF + 1 nF、DIP-8ソケット。物理は×10製造。
-RelayBoardは5ch×2枚の入力＋電源連動配線まで完了し、両インスタンスERC 0件。
-番地ストラップは 0 Ω/1206（§2.6）。`wire_circuit_design.py` はRelayBoard/AmpModule双方とも現図へコード同期済みだが**実機KiCad検証は未実施**。RelayBoardは「手編集所有」（§2.8）に切替済みで、`--force-relay` なしでは書き込まない安全装置あり。ユーザーがローカルKiCadでRelayBoardのAZ850×10を270°回転＋チャンネル間隔拡張し、配線も追従済み（`main`にpush済み、addr strap等は無傷と確認済み）。
+**アーキテクチャ刷新の途中（§2.9）。`AmpBank`（10ch を1枚）の生成コードは完成・検証済みだが、
+回路図ファイルはまだリポジトリに無い。旧 RelayBoard / AmpModule が現役のまま残っている。**
 
-I2C/電源トポロジは**スター確定**（daisy不採用、§WIRING.md）。端子台はv1 `Audio/Controll.kicad_sch`と同じPhoenix MKDS-1,5系。A_GND/D_GNDのNetTieは**ControlPanel側**（Pico直近）に1点、RelayBoardでは結合しない、と確定（WIRING.md）。
+2026-09-01 に「RelayBoard 5ch×2 + AmpModule ×10」を **`AmpBank` 1枚へ統合**すると決めた（§2.9）。
+切替はラッチングリレー AZ850 → **アナログスイッチ TMUX7612**、電源は切替せず **常時給電**、
+レールは **±15 V**（TMUX7612 と LT1364 の要求）。経緯と根拠は §2.9。
 
-**KiCad 10.0.6をクラウド環境にビルド中/ビルド済み**（別セッション `session_01XMzAwTNj2AzF2SjKNLmC32`、ブランチ`claude/kicad-cloud-build-env-2jgp6g`、Docker）。このセッション（会話の続き）からは直接メッセージを送れないので、そちらを開いて`main`を取り込ませ、`wire_circuit_design.py amp`/`relay --force-relay`の実行検証を依頼する必要がある。
+いまリポジトリに **ある / 無い**もの:
 
-**アーキテクチャ刷新を決定（2026-09-01、§2.9）: RelayBoard と AmpModule を10ch分の1枚へ統合。入力と出力の両方をアナログスイッチで切替、電源は常時給電。** 回路図は未着手。これに伴い §2.6 番地ストラップと §2.7-3 コイル駆動マージンは**不採用経路の記録**になった。
+| もの | 状態 |
+|---|---|
+| `TMUX7612` シンボル（`AudioV2.kicad_sym`） | **ある**。全16ピンをデータシートと照合済み。FP は標準 lib の TSSOP-16 で足りる |
+| `wire_circuit_design.py` の `amp_channel_wired()` / `amp_bank_wired()` | **ある**。サンドボックスで生成 → ネットリスト / ERC で検証済み |
+| `AmpBank.kicad_sch` / `AmpChannel.kicad_sch` | **無い**。サンドボックスで作って捨てた。リポジトリへの書き込みは未実施 |
+| 旧 `RelayBoard.kicad_sch` / `AmpModule.kicad_sch`、親の3シート | **残っている**。まだ現役 |
 
-次の話題候補: 上記KiCad実機検証、Relayレビュー指摘（§2.7）、Control未接続、親の箱外dangling label整理、ControlPanel側 I2C/電源コネクタ（5P: `I2C_SDA`/`I2C_SCL`/`3V3`/`+5V`/`D_GND`）の物理実装（フェルール/スプリッタ分岐）。
+つまり次の一歩は §2.9 の手順 **3〜7**。いずれも **既存の回路図を消す破壊的な操作**なので、
+着手前にユーザーの合意を取ること。手順1・2（シンボルと生成コード）は完了している。
+
+刷新後も生きている確定事項:
+I2C/電源トポロジは **スター確定**（daisy 不採用、WIRING.md）。端子台は v1 `Audio/Controll.kicad_sch` と同じ Phoenix MKDS-1,5 系。
+A_GND / D_GND の NetTie は **ControlPanel 側**（Pico 直近）に1点。ゲイン2（20k/20k）、DIP-8 ソケット。
+帰還抵抗の倍率表をシルクに入れる（§2.9）。
+
+刷新により **不採用経路の記録** に降格したもの: §2.6 番地ストラップ、§2.7-3 コイル駆動マージン、
+および §2.7 の RelayBoard レビュー指摘全般（基板そのものが無くなるため）。
+
+KiCad の実行環境は `docker/kicad-cloud-build/kicad-run.sh` で解決済み（Docker イメージが無ければ
+ホストの `kicad-cli` へ自動フォールバック）。別セッションへ検証を依頼する必要はもう無い。
+
+次の話題候補: §2.9 手順3〜7 / ERC 47件の仕分け（うち階層ラベル7件は意図的） /
+ControlPanel 未接続ピン / `CIRCUIT_DESIGN.md`・`DECISIONS.md` の語彙をネット名ベースへ書き換え。
 
 > **記法について:** このメモは部品を原則 **ネット名・機能名**（回路図 Value 欄の名前）で指す。
 > 参照(designator)は KiCad の採番の産物で再アノテーションのたびに動くため（2026-09-01 に58件が変わった）、
@@ -148,7 +168,7 @@ B 板のストラップ／プルダウンには別の参照が振られる（§2
 
 **安全装置（2026-08-31 追加）:** `main()` は `relay` への書き込みをデフォルトでスキップし、警告を出すだけになった。上書きするには明示的に `--force-relay` を付ける（`python3 wire_circuit_design.py relay --force-relay`）。誤操作（Cursorエージェントが `.cursor/rules/work-on-main.mdc` を見て「再生成は wire_circuit_design.py」とだけ理解し `all` を回すケースなど）を防ぐための保険。スクリプト同期は済んだが、上記の実機未検証ゆえ**当面は解除しない**。
 
-### 2.7 RelayBoard レビュー指摘（2026-08-31、いずれも接続ミスではない。未対応）
+### 2.7 RelayBoard レビュー指摘（2026-08-31、いずれも接続ミスではない / **不採用経路の記録** — §2.9 で基板ごと置換）
 
 1. **A0/A1 ネットが無名** — MCP23017 の A0/A1 に付くネットに名前が無く、KiCad が参照から自動生成した名前（`Net-(U302-A0)` 形式）になっている。`ADDR_A0`/`ADDR_A1` ラベルを戻すとネットリスト差分と ERC ログが読みやすい。**自動生成名は参照を含むので、再アノテーションのたびにネット名まで動く**（＝ `SOURCE_OF_TRUTH.md` §3 の語彙ルールが効かない状態）のも名前を付けたい理由。**→ `wire_circuit_design.py` のスクリプト同期（§2.6）でラベルを復活させた。`--force-relay` で実図に反映するまでは無名のまま**
 2. **IC 直近パスコン不足** — 既存の 100 nF ×2 は方針どおり I2C/電源コネクタ入口（`3V3` 側・`+5V` 側）に置いてある。別途 MCP23017 の 9/10 ピン間、ULN2803A 2個の 10/9 ピン間に 100 nF が欲しい。`+5V` はリレーパルスが乗るので、リレー群近傍にバルク 100–220 µF も検討
@@ -411,13 +431,16 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 1. ~~`TMUX7612` シンボルの作成~~ → **2026-09-01 完了**。`AudioV2.kicad_sym` に追加済み。
    全16ピンが DS（TSSOP-16）と一致することを検証済み。`kicad-cli sym export svg` も通る。
    フットプリントは **`Package_SO:TSSOP-16_4.4x5mm_P0.65mm` が標準 lib にあり、新規作成は不要**だった
-2. `AmpBank.kicad_sch` を新規作成（10ch 分のアンプ + 切替 + MCP23017）
+2. ~~`AmpBank.kicad_sch` を新規作成（10ch 分のアンプ + 切替 + MCP23017）~~ →
+   **2026-09-01 生成コード完了・検証済み。ただしファイルはリポジトリに未書き込み。**
+   `amp_channel_wired()`（1ch）と `amp_bank_wired()`（10ch を階層で構成 + MCP23017 + 各コネクタ）を
+   `wire_circuit_design.py` に追加済み。サンドボックスで生成してネットリスト / ERC まで通した
 3. `RelayBoard.kicad_sch` / `AmpModule.kicad_sch` を削除
 4. 親 `AudioV2Case.kicad_sch` から `RelayBoard_A` / `RelayBoard_B` / `AmpModule_Reference` の
    3シートを外し、`AmpBank` 1枚に置き換える
 5. **ネット名 `+12V` / `-12V` → `+15V` / `-15V` へ改名**（親・各シート）
-6. `wire_circuit_design.py` の `relay_board_wired()` / `amp_module_wired()` を廃し、
-   `amp_bank_wired()` を起こす。§2.8 の所有権表も更新が要る
+6. `amp_bank_wired()` は**作成済み**。残りは旧 `relay_board_wired()` / `amp_module_wired()` の
+   廃止と、§2.8 所有権表の更新
 7. `PARTS.md` の生成ブロック（`gen_parts_bom.py`）の対象シートを差し替え
 
 ---
@@ -438,7 +461,7 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 
 ## 4. 現状の git / 作業ツリー
 
-作業ブランチは **`main`**。クラウド切替前に **push して origin/main と揃える**こと。
+作業ブランチは **`main`**。2026-09-01 時点で **`1d42401` を origin/main へ push 済み**（作業ツリー clean、ローカル/リモートとも先行 0）。
 
 履歴ブランチ（`cursor/audiov2-*` 等）は base にしない。クラウドが古い `branchName` を fetch して落ちることがある → tip が必要なら一時復帰のみ。
 
@@ -453,23 +476,37 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 - Output / ラベル結線素案（#27）
 - AmpModule回路図、代表親シート（×10）。**PCB は未設計**（§2.5）
 - RelayBoard本配線: 各盤MCP23017×1、ULN2803×2、AZ850×10。Amp入力＋±12 Vを同時切替。番地はJP A1/A0で0x20–0x23（最大4枚）
+  — ただし §2.9 の刷新でこの2つ（AmpModule / RelayBoard）は**置き換え対象**
+- `AmpBank` の論理設計・部品選定・`TMUX7612` シンボル・生成コード（§2.9）。
+  カップリング位置とプルダウン位置は ngspice で検証済み（`AudioV2/spice/`）
 
 ### 未着手・優先候補
 
-1. **`wire_circuit_design.py relay --force-relay` をKiCadのあるマシンで実行し、netlist/ERCで検証** — コード上の同期（§2.6）は完了。実行検証と `check_sexpr.py` 通過確認が残作業
-2. **RelayBoard レビュー指摘の消化**（§2.7）— 特に 3 の AZ850 set voltage 実測確認
-3. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
-4. **ControlPanel未接続ピンの整理**
-5. ERC 残り（Relay/Amp/Power/Outputは0件。Control 32件＋親の箱外ラベルが主）
+1. **§2.9 手順3〜7 — 旧 RelayBoard / AmpModule を消して `AmpBank` へ置き換える。**
+   破壊的なのでユーザー合意の上で。ネット名 `+12V`/`-12V` → `+15V`/`-15V` の改名も含む
+2. ERC 残り 47 件の仕分け（少なくとも階層ラベル7件は意図的。刷新で大半が消える見込み）
+3. **ControlPanel 未接続ピンの整理**
+4. `CIRCUIT_DESIGN.md` / `DECISIONS.md` の語彙をネット名ベースへ書き換え（SOURCE_OF_TRUTH.md §3）
+5. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
 6. OLED FP、PT2314 未使用入力
-7. RelayBoard PCB時: 番地ストラップ横の F.Silk に番地早見表（0x20–0x23）。FP は RelayBoard 全体で未割当（MCP23017 含む）
+7. ControlPanel 側 I2C/電源コネクタ（5P: `I2C_SDA`/`I2C_SCL`/`3V3`/`+5V`/`D_GND`）の物理実装（フェルール/スプリッタ分岐）
+8. `PowerModule` の生成コードが現図より1世代古い（`drift` で検出済み。手編集所有なので実害は無いが要追従）
 
 ### 検証
 
 ```bash
 python3 Audio/scripts/check_sexpr.py -q AudioV2
-cd AudioV2 && kicad-cli sch export netlist -o /tmp/audiov2.net AudioV2Case.kicad_sch
+docker/kicad-cloud-build/kicad-run.sh erc      # AudioV2 全体の ERC
+docker/kicad-cloud-build/kicad-run.sh netlist  # ネットリスト
+docker/kicad-cloud-build/kicad-run.sh drift    # 生成コード所有シートと現図の差分
+python3 AudioV2/scripts/gen_parts_bom.py --check   # PARTS.md の BOM ブロック
 ```
+
+`kicad-run.sh` は Docker イメージ `kicad-cloud:10.0.6` があればそれを、無ければホストの
+`kicad-cli` を使う。出力は `out/`（gitignore 済み）。
+
+**2026-09-01 push 時点の値**（次回はここから増減を見る）:
+`check_sexpr` 8ファイル / 問題0、ERC **47件**、`drift` 生成コード所有 3/3 一致、`gen_parts_bom --check` rc=0。
 
 Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 
@@ -488,25 +525,45 @@ Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 17. AmpModuleを高速石対応で再版。代表1シートを親へ統合し、独立PCBを×10仕様で生成
 18. RelayBoard本配線。未給電Ampへの信号印加を避け、audio入力＋±12 Vを同時切替。全体ERC 207→66
 19. 番地ストラップを `SolderJumper` → **0 Ω / 1206** に変更（§2.6）。入口パスコン 100 nF ×2 は I2C/電源コネクタ側、ストラップは MCP23017 脇へ。レビュー指摘を §2.7 に記録。全体ERC 56（Relay 0）
+20. `kicad-run.sh` / `sch_drift.py` / `gen_parts_bom.py` を整備。再アノテーションで58参照が変化したのを受け、**「回路図から導出できる情報は文書に書かない」方針**を `SOURCE_OF_TRUTH.md` に制定（Cursor / Claude 双方から読める形に）
+21. AZ850 のコイル駆動マージンをデータシートで検算 → **仕様割れ**（§2.7-3）。原因は Darlington の約1 V ドロップが 5 V レールの2割を食うこと
+22. v1 の Pico 制御プログラムとガーバーを確認。「v1 にバルクコンデンサは無かった」というユーザーの指摘が正しいことを git ログで確認（schematic には `e1f965e` で入ったが基板には届いていない）
+23. 「電源も切替える」構造が諸問題（突入電流・スタック枚数・寄生）の根であると特定 → **アーキテクチャ刷新を決定**（§2.9）。10ch を1枚に統合、切替は TMUX7612、電源は常時給電、レールは ±15 V
+24. `TMUX7612` シンボル作成、`AmpChannel` / `AmpBank` の生成コードを実装しサンドボックスで検証。カップリング位置とプルダウン位置は ngspice で決めた（`AudioV2/spice/`）。`1d42401` を push
 
 ---
 
 ## 7. 別チャット再開プロンプト（コピペ用）
 
 ```
-AudioV2/AGENT_HANDOFF.md を読んで続きから。
-ブランチは main（origin と同期済み前提）。
-AmpModuleは代表1シート（同一仕様×10を製造）。ゲイン2、±12 V、バルク/1nF対応済み。**PCB は未設計**（2026-09-01 に削除、§2.5）。
-RelayBoardは入力＋電源連動、各盤MCP×1/ULN×2/AZ850×10、ERC 0。AZ850は270°回転済み（ユーザーがKiCadで手編集、main反映済み）。
-番地ストラップは0Ω/1206（§2.6）、ストラップ・I2C/電源コネクタ入口パスコン・階層ラベルはwire_circuit_design.pyへコード同期済みだが実機未検証（§2.6）。
-AmpModuleも信号順配線をコードに追加済みだが同様に実機未検証（§2.5）。
-RelayBoardは「手編集所有」（§2.8）。I2C/電源はスター確定、端子台はPhoenix MKDS-1,5系（v1と同一/互換）。
-A_GND/D_GNDのNetTieはControlPanel側（Pico直近）1点、RelayBoardでは結合しない。
-KiCad 10.0.6クラウド環境が別セッション（claude/kicad-cloud-build-env-2jgp6gブランチ）でビルド済み/ビルド中 — そこにmainを取り込ませてwire_circuit_design.py amp / relay --force-relayの実行検証を依頼するのが次の一歩。
-レビュー指摘は §2.7 に未対応で置いてある。
-次候補: 上記KiCad実機検証 / Relayレビュー指摘 / Control未接続 / 親の箱外dangling label整理 / ControlPanel側 I2C/電源コネクタ（5P）実装。
-generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay/ampは実機検証後にのみ書き込み確認すること（relayは--force-relay必須）。
-文書は designator でなくネット名・機能名で書く（SOURCE_OF_TRUTH.md §3）。参照が主題の箇所（番地ストラップ表・所有権/参照対応・スクリプト内識別子）だけ例外。
+AudioV2/AGENT_HANDOFF.md を読んで続きから。ブランチは main（origin と同期済み、1d42401）。
+
+いまはアーキテクチャ刷新の途中（§2.9）。RelayBoard 5ch×2 + AmpModule ×10 を
+**AmpBank 1枚（10ch）へ統合**すると決めた。切替は AZ850 → アナログスイッチ TMUX7612、
+電源は切替えず常時給電、レールは ±15 V（TMUX7612 と LT1364 の要求）。
+
+済んでいること: TMUX7612 シンボル（AudioV2.kicad_sym、DS 照合済み、FP は標準 lib の TSSOP-16）、
+wire_circuit_design.py の amp_channel_wired() / amp_bank_wired()（サンドボックスでネットリスト/ERC 検証済み）、
+カップリング位置とプルダウン位置の ngspice 検証（AudioV2/spice/）。
+
+済んでいないこと: **AmpBank.kicad_sch / AmpChannel.kicad_sch はリポジトリに無い**。
+旧 RelayBoard.kicad_sch / AmpModule.kicad_sch と親の3シートがまだ現役。
+次の一歩は §2.9 の手順3〜7（旧シート削除・親の差し替え・+12V/-12V → +15V/-15V 改名・
+旧生成関数の廃止・§2.8 所有権表更新・gen_parts_bom.py の対象シート差し替え）。
+**既存回路図を消す破壊的操作なので、着手前にユーザーの合意を取ること。**
+
+刷新で「不採用経路の記録」になったもの: §2.6 番地ストラップ、§2.7-3 コイル駆動マージン、§2.7 の Relay レビュー指摘。
+
+検証は docker/kicad-cloud-build/kicad-run.sh の erc / netlist / drift と
+python3 Audio/scripts/check_sexpr.py -q AudioV2、python3 AudioV2/scripts/gen_parts_bom.py --check。
+push 時点の値は check_sexpr 8ファイル/0、ERC 47件、drift 3/3 一致、BOM check rc=0。
+
+I2C/電源はスター確定。端子台は Phoenix MKDS-1,5 系（v1 と同一/互換）。
+A_GND/D_GND の NetTie は ControlPanel 側（Pico 直近）1点。
+generate_kicad_scaffold.py は再実行しない。手編集所有シート（§2.8）は機械的に上書きしない。
+文書は designator でなくネット名・機能名で書く（SOURCE_OF_TRUTH.md §3）。
+§2.9 末尾の「実装で踏んだ落とし穴」は必ず読むこと（NE5532 のピン番号、Screw_Terminal の x 座標、
+PIN_NUMBERS 登録漏れ、座標衝突など、同じ轍を踏みやすい）。
 ```
 
 ---
@@ -520,6 +577,7 @@ generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay/
 | RelayBoardのロジック変更を **KiCad側で直接** 行う | RelayBoardを `wire_circuit_design.py relay --force-relay` で機械的に上書き |
 | sexpr 編集後は必ず `check_sexpr.py` | `--no-verify` でコミット |
 | 新規作業は **`main`** | 旧 `cursor/audiov2-*` を base |
+| `AmpBank` の生成コードを直す（§2.9） | 旧シート削除・親の差し替え（§2.9 手順3〜7）を**合意なしで**実行 |
 
 ---
 
@@ -538,6 +596,10 @@ generate_kicad_scaffold.py は再実行しない。wire_circuit_design.py relay/
 | 2026-09-01 | 再アノテーションで58参照が変更。`AmpModule.kicad_pcb` と `build_amp_pcb.py` を削除し **PCB を未設計扱いに戻した**（§2.5）。Power / Output を手編集所有へ移動（§2.8）。`kicad-run.sh` に `drift` 追加、`PARTS.md` の部品表を BOM 生成化 |
 | 2026-08-31 | シート所有権モデル（§2.8）を制定。RelayBoardを手編集所有に |
 | 2026-08-31 | ControlPanel↔RelayBoardのI2C/電源をスター確定（daisy不採用）。WIRING.md / DECISIONS.md 更新。実装（ControlPanel側コネクタ、フェルール/スプリッタ分岐）は未着手 |
+| 2026-09-01 | `SOURCE_OF_TRUTH.md` を制定（回路図から導出できる情報は文書に書かない）。`kicad-run.sh` / `sch_drift.py` / `gen_parts_bom.py` を整備 |
+| 2026-09-01 | AZ850 コイル駆動マージンの検算 → 仕様割れを記録（§2.7-3、不採用経路） |
+| 2026-09-01 | **アーキテクチャ刷新を決定（§2.9）** — RelayBoard + AmpModule を `AmpBank` 1枚へ統合。TMUX7612 / 常時給電 / ±15 V |
+| 2026-09-01 | `TMUX7612` シンボルと `AmpChannel` / `AmpBank` 生成コードを追加（サンドボックス検証済み、回路図ファイルは未書き込み）。`1d42401` を push。§1 / §5 / §7 を現状に合わせて更新 |
 | 2026-08-31 | `amp_module_wired()`を信号順配線に修正（OpAmpユニット配置入れ替え＋入出力バス配線）。コード変更のみ、`AmpModule.kicad_sch`の再生成・KiCad検証は未実施（§2.5） |
 | 2026-08-31 | ユーザーがローカルKiCadでRelayBoardのAZ850リレー10個を270°回転＋チャンネル間隔拡張、配線・ラベルを追従修正（main直push）。取り込み確認し、addr strap同期は無傷と確認 |
 | 2026-08-31 | A_GND/D_GND NetTie位置を確定: **ControlPanelのPico直近**（D_GNDの発生源）。RelayBoardは両ネットを受け取るが結合しない、とWIRING.md/DECISIONS.mdを訂正（従来「RelayBoardで結合」と誤読していた） |
