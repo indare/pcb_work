@@ -40,3 +40,6 @@ Audio/measurement_fw/c_fft/*.uf2
 Audio/output/
 AudioV2/output/
 AudioV2/.kicad-mcp/
+
+# kicad-run.sh の出力 (ERC / DRC / ネットリスト)
+/out/
