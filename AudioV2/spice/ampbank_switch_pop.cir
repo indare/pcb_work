@@ -1,0 +1,50 @@
+* AmpBank: 出力カップリングをスイッチの前に置くか後に置くかの過渡比較
+* 論点: 非選択オペアンプの DC オフセットが、切替時にバスへ飛んでポップになるか
+*
+* 案A（前置き）: OpAmp -> 47R -> C(2.2u) -> SW -> バス   ch毎にCが要る（10ch=20個）
+* 案B（後置き）: OpAmp -> 47R -> SW -> C(2.2u)共通 -> バス   Cは1組で済む
+*
+* オペアンプ出力は DC オフセットのみ（NE5532 代表 ±3 mV）。信号を載せると
+* 段差が振幅に埋もれて見えないため、あえて DC だけで段差を切り出す。
+* ch1(+3mV) -> 全OFF -> ch2(-3mV) と切り替えて、バスに出る段差を見る。
+
+.param Rout=47 Cc=2.2u RL=50k Ron=1.1
+
+* --- オペアンプ出力（オフセット + 信号）---
+V1 a1o 0 DC 3m
+V2 a2o 0 DC -3m
+
+* ===== 案A: カップリングがスイッチの前 =====
+Ra1 a1o a1r {Rout}
+Ca1 a1r a1s {Cc}
+Sa1 a1s busA ctl1 0 sw
+Ra2 a2o a2r {Rout}
+Ca2 a2r a2s {Cc}
+Sa2 a2s busA ctl2 0 sw
+RLa busA 0 {RL}
+
+* ===== 案B: カップリングがスイッチの後（共通1組） =====
+Rb1 a1o b1r {Rout}
+Sb1 b1r nb ctl1 0 sw
+Rb2 a2o b2r {Rout}
+Sb2 b2r nb ctl2 0 sw
+Cb nb busB {Cc}
+RLb busB 0 {RL}
+
+.model sw SW vt=1.5 vh=0.1 ron={Ron} roff=1e12
+
+* ch1 ON → 0.1秒 全OFF → ch2 ON
+Vctl1 ctl1 0 PWL(0 3.3  0.1999 3.3  0.2 0)
+Vctl2 ctl2 0 PWL(0 0    0.2999 0    0.3 3.3)
+
+.tran 20u 0.6 0 20u
+.control
+run
+print "=== 切替直後(0.30-0.45s)にバスに出る電圧の振れ ==="
+meas tran aMax MAX v(busA) from=0.30 to=0.45
+meas tran aMin MIN v(busA) from=0.30 to=0.45
+meas tran bMax MAX v(busB) from=0.30 to=0.45
+meas tran bMin MIN v(busB) from=0.30 to=0.45
+print "=== 期待: 案A は約0、案B は -6mV の段差が 150ms 尾を引く ==="
+.endc
+.end
