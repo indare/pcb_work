@@ -105,7 +105,8 @@ def solve(part: str, f: float, rbias: float, rload: float, nch: int, rsrc: float
 
 
 def solve_broadcast(part: str, f: float, rload: float, nch: int,
-                     mismatch: list[tuple[float, float, float | None]] | None = None):
+                     mismatch: list[tuple[float, float, float | None]] | None = None,
+                     coherent: bool = False):
     """入力ブロードキャスト構成（全DUT入力ON、出力だけ1 ON/9 OFF）の BUS 誤差を解く。
 
     `solve()` の2段OFFモデルとは前提が違う: 非選択chも選択chと**同じ強さの信号**を
@@ -114,6 +115,11 @@ def solve_broadcast(part: str, f: float, rload: float, nch: int,
 
     mismatch: 非選択9ch 分の (gain_ratio, phase_deg, thd_db) のリスト。
       省略時は「9chとも選択chと完全に同一」（=素子のOFF特性のみが誤差要因）。
+    coherent: 非選択ch の歪み成分の足し方。
+      False（既定）= 二乗和（RSS、各chの高調波位相がランダムという前提）。
+      True = 振幅の単純和（coherent worst case）。全DUTは同一正弦波を受けているので
+      同じ次数の高調波が同相で揃う可能性があり、そのとき n ch では RSS の √n 倍
+      （9ch なら +9.5dB）になる。**どちらが実態かは石の揃い方次第なので両方見る。**
     戻り値: v_bus_all（全ch込みのBUS電圧）, gain_err（複素数。絶対値=振幅誤差比、
       角度=位相誤差 deg）, dist_leak（非選択9ch自身の歪みが漏れてくる分、dB用の比）
     """
@@ -131,19 +137,23 @@ def solve_broadcast(part: str, f: float, rload: float, nch: int,
 
     num = b_on / z_on
     den = 1 / z_on + 1 / rload
-    dist_leak_sq = 0.0
+    dist_sq = 0.0      # RSS 用
+    dist_lin = 0.0     # coherent 用
     for gain_ratio, phase_deg, thd_db in mismatch:
         b_k = GAIN * gain_ratio * np.exp(1j * np.radians(phase_deg))
         num += b_k / z_off
         den += 1 / z_off
         if thd_db is not None:
             dut = 10 ** (thd_db / 20)
-            dist_leak_sq += (abs(b_k) * dut * abs(1 / z_off)) ** 2  # 非選択ch間は非可干渉なので二乗和
+            contrib = abs(b_k) * dut * abs(1 / z_off)
+            dist_sq += contrib ** 2
+            dist_lin += contrib
 
     v_bus_all = num / den
     v_bus_sel = (b_on / z_on) / (1 / z_on + 1 / rload)  # 理想: 選択chのみが駆動した場合
     gain_err = v_bus_all / v_bus_sel
-    dist_leak = np.sqrt(dist_leak_sq) / abs(1 / z_on + nch_off / z_off + 1 / rload) / abs(v_bus_sel)
+    dist_num = dist_lin if coherent else np.sqrt(dist_sq)
+    dist_leak = dist_num / abs(1 / z_on + nch_off / z_off + 1 / rload) / abs(v_bus_sel)
     return v_bus_all, gain_err, dist_leak, coff
 
 
@@ -163,15 +173,21 @@ def broadcast_report(rload: float = 50e3, nch: int = 10,
         tag = f"  [感度分析: 非選択9ch に gain{gain_pct:+.1f}% / phase{phase_deg:+.2f}deg を最悪ケースで付与]"
     print(f"=== ブロードキャスト構成（全ch入力ON、出力のみ1 ON/{nch_off} OFF）"
           f" 負荷{rload/1e3:.0f}k{tag} ===\n")
+    if dut_thd_db:
+        print(f"   漏れ歪みは非選択chの THD を {dut_thd_db:.0f}dB として、"
+              f"RSS（位相ランダム）と coherent（{nch_off}ch同相・最悪）の両方を出す\n")
     for part, (oiso, f0, rl0, ron, name) in PARTS.items():
         c = coff_from_oiso(oiso, f0, rl0)
         print(f"■ {name}   OISO {oiso:.0f}dB@{f0/1e3:.0f}kHz → C_off {c*1e12:.2f} pF   Ron {ron}Ω")
-        print(f"   {'周波数':>9s}{'振幅誤差':>11s}{'位相誤差':>11s}{'漏れ歪み':>11s}")
+        print(f"   {'周波数':>9s}{'振幅誤差':>11s}{'位相誤差':>11s}"
+              f"{'漏れ歪みRSS':>13s}{'同 coherent':>13s}")
         for f in (20.0, 1e3, 10e3, 20e3):
             _, gerr, dleak, _ = solve_broadcast(part, f, rload, nch, mismatch)
-            print(f"   {f:8.0f}Hz{db(abs(gerr)):10.4f}dB{np.degrees(np.angle(gerr)):10.3f}deg"
-                  f"{db(dleak) if dut_thd_db else float('nan'):10.1f}"
-                  f"{'dB' if dut_thd_db else '  '}")
+            _, _, dcoh, _ = solve_broadcast(part, f, rload, nch, mismatch, coherent=True)
+            cells = (f"{db(dleak):11.1f}dB{db(dcoh):11.1f}dB"
+                     if dut_thd_db else f"{'—':>13s}{'—':>13s}")
+            print(f"   {f:8.0f}Hz{db(abs(gerr)):10.4f}dB"
+                  f"{np.degrees(np.angle(gerr)):10.3f}deg{cells}")
         print()
 
 

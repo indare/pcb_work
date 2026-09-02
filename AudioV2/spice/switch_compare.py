@@ -89,6 +89,8 @@ def main() -> None:
             thd, _, _, _ = switch_thd.run(key, "pchip", v, a.rbias, a.rload, a.stage)
             cells.append(f"{db(thd):9.1f}dB")
         print(f"{name:22s}{nic:>3d}{conf:>7s}" + "".join(cells))
+    print("\n  ⚠ 「モデル」行の数値は実 Ron(V) から得たものではない（後述）。")
+    print("     部品間の差を語るときは必ず『仮定モデル上では』と付けること。")
 
     print("\n--- Ron(V) の実効的な広がり（抽出/モデルカーブから） ---")
     print(f"{'部品':22s}{'Ron@0V':>10s}{'|V|<=13V の flatness':>22s}")
@@ -98,6 +100,26 @@ def main() -> None:
         ys = [p[1] for p in sub]
         c = min(sub, key=lambda p: abs(p[0]))[1]
         print(f"{name:22s}{c:9.2f}Ω{max(ys)-min(ys):20.3f}Ω")
+
+    print("\n--- 判定の基準線（この装置で意味のある下限はどこか） ---")
+    #   PCM1804 の DR は広帯域値。スペアナは FFT なので離散高調波のビン雑音床は
+    #   処理利得 10log10(N/2) だけ下がる（Audio/measurement_fw/spectrum.py の MAX_N=2048）。
+    adc_dr, nfft = 112.0, 2048
+    pg = 10 * np.log10(nfft / 2)
+    refs = [
+        (f"PCM1804 広帯域 DR", -adc_dr),
+        (f"同・FFT N={nfft} のビン雑音床（離散高調波の実質下限）", -(adc_dr + pg)),
+        ("OPA1612 THD+N（在庫最良、3Vrms/1kHz）", -136.0),
+        ("LME49860 THD+N（0.00003%）", -130.5),
+        ("MUSES02 THD（0.001%）", -100.0),
+        ("NE5532 THD（0.002%）", -94.0),
+        ("PT2314 歪み（0.1%、通常経路では常にこれが支配）", -60.0),
+    ]
+    for name, v in refs:
+        print(f"  {v:8.1f} dB  {name}")
+    print("  → 切替素子は「在庫最良のDUT（−136dB）より十分下」であれば測定を汚さない。")
+    print("     PT2314 経由の通常運用では PT2314 の −60dB が常に支配的なので、")
+    print("     素子の差が見えるのは DIRECT 経路（PT2314 迂回）だけ。")
 
     print("\n--- OFF側: ブロードキャスト構成でのBUS合成誤差（20kHz、非選択9ch） ---")
     print(f"{'部品':22s}{'OISO条件':>18s}{'C_off':>9s}{'振幅誤差':>11s}{'漏れ歪み':>11s}")
