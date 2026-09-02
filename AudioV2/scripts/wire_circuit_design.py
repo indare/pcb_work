@@ -506,7 +506,7 @@ def control_panel_wired() -> str:
     # BP5293 +5V (VIN from +15V, GND D_GND)
     bpx, bpy = at(50.8, 145.0)
     bp = bp5293_pins(bpx, bpy)
-    parts.append(sym("BP5293_ROHM:BP5293-50", "U503", "BP5293-50 +5V", bpx, bpy, 0, PATH_CTRL))
+    parts.append(sym("BP5293_ROHM:BP5293-50", "U403", "BP5293-50 +5V", bpx, bpy, 0, PATH_CTRL))
     nets.append(net_at("+15V", bp["VIN"]))
     nets.append(net_at("D_GND", bp["GND"]))
     nets.append(net_at("+5V", bp["VOUT"]))
@@ -515,25 +515,25 @@ def control_panel_wired() -> str:
     nets.append(net_at("VCC_TONE", pt2314_pin(u2x, u2y, 1)))
     nets.append(net_at("A_GND", pt2314_pin(u2x, u2y, 2)))
     nets.append(net_at("D_GND", pt2314_pin(u2x, u2y, 25)))
-    _cap_net(parts, nets, "C502", "0.1u", u2x - 22, u2y - 20, "VCC_TONE", "A_GND", PATH_CTRL)
+    _cap_net(parts, nets, "C402", "0.1u", u2x - 22, u2y - 20, "VCC_TONE", "A_GND", PATH_CTRL)
 
     # COMMON → coupling → LIN(17) / RIN(5)
-    _cap_net(parts, nets, "C506", "2.2u", 95.0, 118.0, "COMMON_L", "PT_LIN", PATH_CTRL)
-    _cap_net(parts, nets, "C507", "2.2u", 95.0, 121.0, "COMMON_R", "PT_RIN", PATH_CTRL)
+    _cap_net(parts, nets, "C406", "2.2u", 95.0, 118.0, "COMMON_L", "PT_LIN", PATH_CTRL)
+    _cap_net(parts, nets, "C407", "2.2u", 95.0, 121.0, "COMMON_R", "PT_RIN", PATH_CTRL)
     nets.append(net_at("PT_LIN", pt2314_pin(u2x, u2y, 17)))
     nets.append(net_at("PT_RIN", pt2314_pin(u2x, u2y, 5)))
 
     # REF pin28: R 5.6k + C 22u → A_GND
     nets.append(net_at("PT_REF", pt2314_pin(u2x, u2y, 28)))
-    _res_net(parts, nets, "R507", "5.6k", u2x + 20, u2y - 22, "PT_REF", "A_GND", PATH_CTRL)
-    _cap_net(parts, nets, "C501", "22u", u2x + 28, u2y - 22, "PT_REF", "A_GND", PATH_CTRL)
+    _res_net(parts, nets, "R407", "5.6k", u2x + 20, u2y - 22, "PT_REF", "A_GND", PATH_CTRL)
+    _cap_net(parts, nets, "C401", "22u", u2x + 28, u2y - 22, "PT_REF", "A_GND", PATH_CTRL)
 
     # Bass L/R networks — rows ≥7.62 apart so R/C pin tips never coincide
     for pin_n, ref_r, ref_c, net_name, dx, dy in (
-        (19, "R513", "C510", "PT_BIN_L", -35.56, 12.7),
-        (20, "R510", "C503", "PT_BOUT_L", -35.56, -12.7),
-        (21, "R514", "C511", "PT_BIN_R", 35.56, 12.7),
-        (22, "R511", "C504", "PT_BOUT_R", 35.56, -12.7),
+        (19, "R413", "C410", "PT_BIN_L", -35.56, 12.7),
+        (20, "R410", "C403", "PT_BOUT_L", -35.56, -12.7),
+        (21, "R414", "C411", "PT_BIN_R", 35.56, 12.7),
+        (22, "R411", "C404", "PT_BOUT_R", 35.56, -12.7),
     ):
         nets.append(net_at(net_name, pt2314_pin(u2x, u2y, pin_n)))
         _res_net(parts, nets, ref_r, "2.4k", u2x + dx, u2y + dy, net_name, "A_GND", PATH_CTRL)
@@ -543,10 +543,10 @@ def control_panel_wired() -> str:
             net_name, "A_GND", PATH_CTRL,
         )
 
-    # Treble — clear of C502 (left of U502); place below pin tips
+    # Treble — clear of C402 (left of U402); place below pin tips
     for pin_n, ref_c, ref_r, net_name, mid, yoff in (
-        (3, "C508", "R512", "PT_TREB_L", "PT_TREB_L_MID", 15.24),
-        (4, "C512", "R515", "PT_TREB_R", "PT_TREB_R_MID", 25.4),
+        (3, "C408", "R412", "PT_TREB_L", "PT_TREB_L_MID", 15.24),
+        (4, "C412", "R415", "PT_TREB_R", "PT_TREB_R_MID", 25.4),
     ):
         px = pt2314_pin(u2x, u2y, pin_n)
         nets.append(net_at(net_name, px))
@@ -557,8 +557,8 @@ def control_panel_wired() -> str:
     # OUT → TONE hier (caps spaced > 7.62 so tips don't meet)
     nets.append(net_at("PT_OUT_L", pt2314_pin(u2x, u2y, 24)))
     nets.append(net_at("PT_OUT_R", pt2314_pin(u2x, u2y, 23)))
-    _cap_net(parts, nets, "C505", "2.2u", 190.5, 110.0, "PT_OUT_L", "TONE_L", PATH_CTRL)
-    _cap_net(parts, nets, "C509", "2.2u", 190.5, 125.0, "PT_OUT_R", "TONE_R", PATH_CTRL)
+    _cap_net(parts, nets, "C405", "2.2u", 190.5, 110.0, "PT_OUT_L", "TONE_L", PATH_CTRL)
+    _cap_net(parts, nets, "C409", "2.2u", 190.5, 125.0, "PT_OUT_R", "TONE_R", PATH_CTRL)
     parts.append(hier_label("TONE_L", "output", 200.66, 118.0, 0))
     parts.append(hier_label("TONE_R", "output", 200.66, 121.0, 0))
     nets.append(net_at("TONE_L", (200.66, 118.0)))
@@ -569,8 +569,8 @@ def control_panel_wired() -> str:
     nets.append(net_at("I2C_SCL", pt2314_pin(u2x, u2y, 27)))
     nets.append(net_at("I2C_SDA", pico_pin(picox, picoy, 26)))
     nets.append(net_at("I2C_SCL", pico_pin(picox, picoy, 27)))
-    _res_net(parts, nets, "R501", "4.7k", picox + 15, picoy - 10, "I2C_SDA", "+3V3", PATH_CTRL)
-    _res_net(parts, nets, "R502", "4.7k", picox + 15, picoy - 5, "I2C_SCL", "+3V3", PATH_CTRL)
+    _res_net(parts, nets, "R401", "4.7k", picox + 15, picoy - 10, "I2C_SDA", "+3V3", PATH_CTRL)
+    _res_net(parts, nets, "R402", "4.7k", picox + 15, picoy - 5, "I2C_SCL", "+3V3", PATH_CTRL)
     parts.append(hier_label("I2C_SDA", "bidirectional", 30.48, 135.08, 180))
     parts.append(hier_label("I2C_SCL", "bidirectional", 30.48, 137.62, 180))
     nets.append(net_at("I2C_SDA", (30.48, 135.08)))
@@ -590,10 +590,10 @@ def control_panel_wired() -> str:
 
     # DEST sense: 3V3--Rh--ADC--Rl--GND; COM=ADC; LINE→3V3 via Rs; PHONE→GND via Rs
     lad_x, lad_y = at(55.0, 95.0)
-    _res_net(parts, nets, "R505", "10k", lad_x, lad_y, "+3V3", "DEST_ADC", PATH_CTRL)
-    _res_net(parts, nets, "R506", "10k", lad_x + 12, lad_y, "DEST_ADC", "D_GND", PATH_CTRL)
-    _res_net(parts, nets, "R503", "1k", lad_x + 6, lad_y - 10, "DEST_SENSE_LINE", "+3V3", PATH_CTRL)
-    _res_net(parts, nets, "R509", "1k", lad_x + 6, lad_y + 10, "DEST_SENSE_PHONE", "D_GND", PATH_CTRL)
+    _res_net(parts, nets, "R405", "10k", lad_x, lad_y, "+3V3", "DEST_ADC", PATH_CTRL)
+    _res_net(parts, nets, "R406", "10k", lad_x + 12, lad_y, "DEST_ADC", "D_GND", PATH_CTRL)
+    _res_net(parts, nets, "R403", "1k", lad_x + 6, lad_y - 10, "DEST_SENSE_LINE", "+3V3", PATH_CTRL)
+    _res_net(parts, nets, "R409", "1k", lad_x + 6, lad_y + 10, "DEST_SENSE_PHONE", "D_GND", PATH_CTRL)
     nets.append(net_at("DEST_ADC", pico_pin(picox, picoy, 31)))  # GP26
 
     swsx, swsy = at(80.0, 95.0)
@@ -604,8 +604,8 @@ def control_panel_wired() -> str:
 
     # DEST LEDs: +3V3 -- R -- A/K -- GP (MCU sink)
     for ref_d, ref_r, gy, gp_pin, net_led in (
-        ("D501", "R504", 90.0, 19, "GP14"),
-        ("D502", "R508", 100.0, 20, "GP15"),
+        ("D401", "R404", 90.0, 19, "GP14"),
+        ("D402", "R408", 100.0, 20, "GP15"),
     ):
         lx, ly = at(100.0, gy)
         rx, ry = at(110.0, gy)
@@ -637,9 +637,9 @@ def control_panel_wired() -> str:
 
     # ENC×3 → GP0–8; C/S2 → D_GND
     encs = [
-        ("ENC501", "ENC_CH", 40.64, ("GP0", "GP1", "GP2"), (1, 2, 4)),
-        ("ENC502", "ENC_BASS", 55.88, ("GP3", "GP4", "GP5"), (5, 6, 7)),
-        ("ENC503", "ENC_TREBLE", 71.12, ("GP6", "GP7", "GP8"), (9, 10, 11)),
+        ("ENC401", "ENC_CH", 40.64, ("GP0", "GP1", "GP2"), (1, 2, 4)),
+        ("ENC402", "ENC_BASS", 55.88, ("GP3", "GP4", "GP5"), (5, 6, 7)),
+        ("ENC403", "ENC_TREBLE", 71.12, ("GP6", "GP7", "GP8"), (9, 10, 11)),
     ]
     for ref, name, ey, gp_names, gp_pins in encs:
         ex, ey = at(35.56, ey)
@@ -658,15 +658,15 @@ def control_panel_wired() -> str:
 {text_note(25.4, 25.4, [
     "ControlPanel — label-wired (DECISIONS manual volume)",
     "PT2314 / Pico2 / ENC×3 / 2.42″ OLED I2C / DEST ladder+LED / PWR SW",
-    "J_OLED501: 1=GND 2=3V3 3=SCL 4=SDA. ENC→GP0-8, DEST_ADC→GP26, LED→GP14/15.",
+    "J_OLED401: 1=GND 2=3V3 3=SCL 4=SDA. ENC→GP0-8, DEST_ADC→GP26, LED→GP14/15.",
     "Connectivity = local labels on pin tips (grid-snapped).",
 ])}
-{sym("MCU_Module:RaspberryPi_Pico", "U501", "Pico 2 / RP2350", picox, picoy, 0, PATH_CTRL)}
-{sym("AudioV2:PT2314", "U502", "PT2314-D", u2x, u2y, 0, PATH_CTRL)}
-{sym("Connector:Conn_01x04_Pin", "J_OLED501", "2.42 OLED I2C GND/3V3/SCL/SDA", oled_x, oled_y, 0, PATH_CTRL)}
-{sym("Switch:SW_SPST", "SW502", "PWR SW", sw1x, sw1y, 0, PATH_CTRL)}
-{sym("Device:LED", "D503", "12V panel LED", d1x, d1y, 0, PATH_CTRL)}
-{sym("Switch:SW_SP3T", "SW501", "DEST sense (3PDT 3rd pole)", swsx, swsy, 0, PATH_CTRL)}
+{sym("MCU_Module:RaspberryPi_Pico", "U401", "Pico 2 / RP2350", picox, picoy, 0, PATH_CTRL)}
+{sym("AudioV2:PT2314", "U402", "PT2314-D", u2x, u2y, 0, PATH_CTRL)}
+{sym("Connector:Conn_01x04_Pin", "J_OLED401", "2.42 OLED I2C GND/3V3/SCL/SDA", oled_x, oled_y, 0, PATH_CTRL)}
+{sym("Switch:SW_SPST", "SW402", "PWR SW", sw1x, sw1y, 0, PATH_CTRL)}
+{sym("Device:LED", "D403", "12V panel LED", d1x, d1y, 0, PATH_CTRL)}
+{sym("Switch:SW_SP3T", "SW401", "DEST sense (3PDT 3rd pole)", swsx, swsy, 0, PATH_CTRL)}
 {"".join(parts)}
 {"".join(nets)}
 """
