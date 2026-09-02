@@ -27,6 +27,14 @@ API の癖（調べて分かったこと。次に触る人向け）:
   - FilterValues を一度に多く（15個程度）渡すと HTTP 400 になる。
     ワット数はビンごとに分けて引いて結合している
   - KeywordRequest に並べ替えは無く Limit は最大 50
+  - **在庫・リードタイム・MarketPlace の各フィールドは信用しないこと。**
+    AM10TW-2415DLPZ は API が「ProductStatus=アクティブ / QuantityAvailable=240 /
+    ManufacturerLeadWeeks='0' / MarketPlace=None / EndOfLife=False」を返したが、
+    その ProductUrl を開くと "This product is no longer available at DigiKey" だった。
+    実際に買えるのは別の Marketplace 出品（DComponents Corporation、約55日、
+    別途 $8.49 送料）だけ。同じ型番に複数の出品があり、API は死んだ方を返していた。
+    **採用を決める前に digikey.com の実ページを人手または WebFetch で確認すること。**
+    このスクリプトの「在庫あり」フィルタも同じ理由で絶対視できない
   - **UnitPrice だけで比較しないこと。** ProductVariations[].MinimumOrderQuantity に
     最小注文数量がある。チューブ品は MOQ が 19 などになることがあり、実際に払う額は
     単価 x MOQ。ここでは min_spend_jpy を出して、その順で並べている
