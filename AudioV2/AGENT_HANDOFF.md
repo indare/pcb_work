@@ -13,63 +13,59 @@
 
 ## 1. いま何をしているか（一言）
 
-**アーキテクチャ刷新（§2.9）の手順3〜5が完了・コミット済み（`main` へ push 済み）。
-`AmpBank`/`AmpChannel` はユーザーが KiCad で `AmpCh2` を手直ししたのを機に
-**生成コード所有→手編集所有へ卒業**（2026-09-02、§2.8）。
-いま進行中なのは別スレッド: **PowerModule の絶縁型DC-DCコンバータ（現行 `DKMW20F-15`、$30.75）が
-高いという指摘を受けての代替候補調査**（§2.10 に詳細・次のセッションはここから再開）。
-回路図・BOMへの反映は**まだ何もしていない**（調査・比較のみ）。**
+**AudioV2 は「オペアンプ10個を差し替えて聴き比べる箱」。** 10ch 分のアンプと切替を
+1枚に載せた `AmpBank` が中心（§2.9）。**回路図は組み上がっていて ERC も通る段階**だが、
+**PCB は未設計**。
 
-2026-09-01 に「RelayBoard 5ch×2 + AmpModule ×10」を **`AmpBank` 1枚へ統合**すると決めた（§2.9）。
-切替はラッチングリレー AZ850 → **アナログスイッチ TMUX7612**、電源は切替せず **常時給電**、
-レールは **±15 V**。ただし **±15 V に技術的な必須要件は無い**（2026-09-02 確認）。
-TMUX7612 は ±4.5〜±25 V 動作、v1 `Audio/AmpModule` も `NE5532` + 受動部品だけで
-電源は `AMP_V+_IN`/`AMP_V-_IN` という電圧非依存の名前で入るため、**v1 との実機比較が
-要求するのは「± 両電源であること」だけ**。±15 V を選んでいる理由は
-①出力ヘッドルームが 2〜3 dB 広い ②全シートの改名をやり直さずに済む、の2つ。経緯は §2.9。
-DC-DC は **`REC10K-2415DAW/H2`（Recom、¥2,404）に確定・回路図反映済み**（2026-09-02、§2.10）。
+### 次にやること（2026-09-02 時点）
 
-**⚠ 2026-09-02: 切替素子を `TMUX7612` から ラッチング DPDT リレー ×20 へ変更した**
-（`DECISIONS.md` §11.1a）。**1枚基板への統合はそのまま維持**で、撤回したのは素子選択だけ。
-理由は Ron(V) の平坦度が歪みを生むことが数値で分かったため。**回路図はまだ `TMUX7612` のまま。**
-基板は 150×100 → **200×100 mm** に広げる。
+**切替素子を `TMUX7612`（アナログスイッチ）→ ラッチング DPDT リレー ×20 へ置き換える。**
+決定は済んでいる（[`DECISIONS.md` §11.1a](DECISIONS.md)）が、**回路図はまだ `TMUX7612` のまま**。
+手順は §5 の優先候補 1。最初に決めるのは「コイル用の `+5V` を AmpBank にどう供給するか」。
 
-いまリポジトリに **ある / 無い**もの（2026-09-01 更新）:
+### 直近3つの確定（すべて 2026-09-02）
+
+| 決定 | 内容 | 回路図 |
+|---|---|---|
+| **DC-DC** | `DKMW20F-15` → **`REC10K-2415DAW/H2`**（¥5,116 → ¥2,404、53%減） | ✅ 反映済み |
+| **Pico 給電** | `VSYS` が未接続で基板単体では起動しなかった → `+5V`→ショットキー`D404`→`VSYS` | ✅ 反映済み |
+| **切替素子** | `TMUX7612` ×10 → **ラッチング DPDT リレー ×20**（`AZ850P2-5` / `TQ2-L2-5V`） | ⬜ **未反映** |
+
+リレーへ戻したのは安さではなく、`Ron(V)` の平坦度が歪みを生むと数値で分かったため。
+**1枚基板への統合（§2.9）は維持**で、撤回したのは素子選択だけ。基板は 150×100 →
+**200×100 mm** に広げる。経緯と代替案は `DECISIONS.md` §11.1a。
+
+### アーキテクチャの骨格（動かない部分）
+
+- `PowerModule` / `ControlPanel` / `AmpBank` / `OutputStage` の **4シート**。`AmpBank` は
+  `AmpChannel` を10回インスタンス化
+- **入力と出力の両方を切る。電源は常時給電**（§2.9）。非選択アンプを信号経路から
+  完全に孤立させるため。電源を切る方式は ESD ダイオード経由で分離できないので採らない
+- アナログレールは **±15 V**。ただし**技術的な必須要件ではない**（v1 の `AmpModule` は
+  `NE5532` ＋受動部品だけで `AMP_V+_IN`/`AMP_V-_IN` という電圧非依存の名前で受ける）。
+  理由は①出力ヘッドルームが 2〜3 dB 広い ②全シートの改名をやり直さずに済む、の2つ
+- ゲイン2（20k/20k）、DIP-8 ソケット、帰還抵抗の倍率表をシルクに入れる
+- `A_GND` / `D_GND` の NetTie は **ControlPanel 側1点**
+
+### いまリポジトリにある / 無いもの
 
 | もの | 状態 |
 |---|---|
-| `TMUX7612` シンボル、`DKMW20F-15` シンボル（`AudioV2.kicad_sym`） | **ある**。DKMW20F-15 は v1 `Audio/DKMW20.kicad_sym` から移植（フットプリント `Library:DKMW20F-15_1in_THT` も v1 資産で既存） |
-| `AmpBank.kicad_sch` / `AmpChannel.kicad_sch` | **ある**。`wire_circuit_design.py bank` / `channel` で生成・コミット済み。所有権は生成コード |
-| `AudioV2Case.kicad_sch`（親） | **`AmpBank` 1枚に差し替え済み**。旧3シート（RelayBoard_A/B, AmpModule_Reference）を撤去 |
-| `PowerModule.kicad_sch`（手編集所有） | **`+15V`/`-15V` へ改名、DKMW20F-12 → -15 に差替え済み**（直接 sexpr 編集。KiCad GUI 未検証） |
-| `ControlPanel.kicad_sch` | **`+15V`/`-15V` へ改名して再生成済み**（生成コード所有なのでスクリプト実行のみ） |
-| 旧 `RelayBoard.kicad_sch` / `AmpModule.kicad_sch` | **削除済み**（`git rm`）。生成関数 `relay_board_wired()`/`amp_module_wired()` も 2026-09-02 に削除（計 638 行。道連れで未使用になった `wire()`/`junction()` も。生成シートはラベル方式でワイヤを使わない） |
+| `AmpBank` / `AmpChannel` / `AudioV2Case` / `ControlPanel` / `PowerModule` / `OutputStage` | **ある**。ERC 53件（内訳は §5-2） |
+| **PCB** | **無い**。`AudioV2Case.kicad_pcb` は空のスキャフォールドのみ |
+| `TMUX7612` シンボル | **ある**（`AudioV2.kicad_sym`）。リレー化で不要になる見込み |
+| `REC10K-2415DAW` シンボル / `Library:REC10K-AW_1in_THT` | **ある**。穴位置は旧 `DKMW20F-15_1in_THT` と同一 |
+| リレーのシンボル / フットプリント | **`Relay_THT:Relay_DPDT_FRT5` は KiCad 標準にある**（v1 で使用実績）。新規作成は不要 |
+| 旧 `RelayBoard` / `AmpModule` シート | 削除済み。生成関数も削除済み（638行） |
 
-残る作業（§2.9 手順6・7 相当）:
-1. **§2.8 所有権モデル表の更新** — 反映済み。旧 `relay_board_wired()`/`amp_module_wired()` 関数本体も 2026-09-02 に削除済み
-2. `CIRCUIT_DESIGN.md` §5・`WIRING.md` 全体・`DECISIONS.md` のRelayBoard/AmpModule前提の記述は**未着手**（重要箇所にのみ「旧アーキテクチャの記録」フラグを追記済み。全面書き換えは別タスク）
-3. `PARTS.md` §4.2「選定・実装メモ」の内容更新（BOM生成ブロックの対象は `AmpBank.kicad_sch` へ切替済み。ただし kicad-cli の制約で**代表 ch1 分＋共通部のみ**表示、×10 は手動換算が要る旨を注記済み。詳細は §5）
+### 検証の基準値（`eb966ef` 時点）
 
-刷新後も生きている確定事項:
-I2C/電源トポロジは **スター確定**（daisy 不採用、WIRING.md）。端子台は v1 `Audio/Controll.kicad_sch` と同じ Phoenix MKDS-1,5 系。
-A_GND / D_GND の NetTie は **ControlPanel 側**（Pico 直近）に1点。ゲイン2（20k/20k）、DIP-8 ソケット。
-帰還抵抗の倍率表をシルクに入れる（§2.9）。
+    python3 Audio/scripts/check_sexpr.py -q AudioV2      → 9ファイル / 問題0
+    docker/kicad-cloud-build/kicad-run.sh erc            → 53件（内訳は §5-2）
+    docker/kicad-cloud-build/kicad-run.sh drift          → 生成コード所有 2/2 一致
+    python3 AudioV2/scripts/gen_parts_bom.py --check     → rc=0
 
-刷新により **不採用経路の記録** に降格したもの: §2.6 番地ストラップ、§2.7-3 コイル駆動マージン、
-および §2.7 の RelayBoard レビュー指摘全般（基板そのものが無くなるため）。
-
-KiCad の実行環境は `docker/kicad-cloud-build/kicad-run.sh` で解決済み（Docker イメージが無ければ
-ホストの `kicad-cli` へ自動フォールバック）。**この Windows ローカル環境では別途:**
-`C:\tmp\kicad-symbols` を KiCad インストールの `share/kicad/symbols` へのジャンクションとして
-作成しないと `wire_circuit_design.py` のピン数ルックアップが失敗する（`sch_helpers.py` の
-`KICAD_SYM_ROOT` フォールバックが `/tmp/kicad-symbols` 前提のため）。`kicad-run.sh` には
-`PYTHONUTF8=1` を追加済み（Windows のコンソールコードページで `drift`/`gen_parts_bom.py` の
-UTF-8 出力がクラッシュする問題への対処）。
-
-次の話題候補: ERC 60件の仕分け（旧47件から純増10件は AmpBank 各chの `ground_pin_not_ground`
-警告＝TMUX7612 VSS=-15V の既知誤検知。残りは元々あったControlPanel未接続ピン等） /
-`WIRING.md`・`CIRCUIT_DESIGN.md`・`DECISIONS.md` の RelayBoard/AmpModule 前提記述の全面書き換え /
-`relay_board_wired()`/`amp_module_wired()` デッドコードの削除。
+`drift` の手編集所有シート（AmpBank / AmpChannel / OutputStage / PowerModule）の差分は**想定内**（§2.8）。
 
 > **記法について:** このメモは部品を原則 **ネット名・機能名**（回路図 Value 欄の名前）で指す。
 > 参照(designator)は KiCad の採番の産物で再アノテーションのたびに動くため（2026-09-01 に58件が変わった）、
@@ -473,7 +469,8 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 生成コードが書くのは 1ch 分（22点）と Bank 側（16点）だけで、236点を並べるより約6倍簡単。
 1ch を直せば 10ch すべてに反映される。全 ch が同一であるべき比較装置の性質とも一致する。
 
-**所有権:** まず `AmpBank` / `AmpChannel` とも**生成コード所有**で起こす。KiCad で手を入れた
+**所有権:** ~~まず `AmpBank` / `AmpChannel` とも**生成コード所有**で起こす~~
+→ **2026-09-02 に両方とも手編集所有へ卒業済み**（§2.8）。以下は当初の方針の記録。KiCad で手を入れた
 時点で手編集所有へ卒業させ §2.8 を更新する。今日 `drift` を作ったので、卒業を記録し忘れても乖離は見える。
 
 #### 生成の検証状況（2026-09-01）
@@ -532,7 +529,7 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 **電圧そのもの（±15V）も固定ではない**とユーザーから明言あり（v1互換という当初理由は
 §2.9でRelayBoard/AmpModuleが無くなったことで大部分が失効している）。
 
-## 結論（2026-09-02）
+#### 結論（2026-09-02）
 
 **`REC10K-2415DAW/H2`（Recom、DigiKey ¥2,404、`945-REC10K-2415DAW/H2-ND`、MOQ 1、在庫177）に確定。**
 現行 `DKMW20F-15`（¥5,116）比 **53 % 減**。決定の記録は [`DECISIONS.md` §8](DECISIONS.md)。
@@ -571,7 +568,8 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
    `drift` の差は広がったが、手編集所有なので想定内
 5. ⬜ `power_module_wired()` の追随（ドキュメント用途。ここから書き戻さない）
 6. ✅ `CIRCUIT_DESIGN.md` / `DECISIONS.md` の記述を更新。`PARTS.md` の BOM は `--check` rc=0
-7. ✅ 検証: `check_sexpr` 9/0、**ERC 60 件で変化なし**、`drift` 生成コード所有 2/2 一致、BOM rc=0。
+7. ✅ 検証: `check_sexpr` 9/0、**ERC 60 件で変化なし**（当時。その後 ERC の実害2件を潰して現在53件）、
+   `drift` 生成コード所有 2/2 一致、BOM rc=0。
    ネットリストで全6ピンの接続が機能どおりであることを確認:
    `1=+Vin→F201 経由`, `2=-Vin→/PD_GND`, `3=CTRL→未接続`, `4=-Vout→/-15V`, `5=COM→/A_GND`, `6=+Vout→/+15V`
 
@@ -898,15 +896,13 @@ git add するか判断すること**（AGENT_HANDOFF は「PCB未設計」と�
 ### 未着手・優先候補
 
 1. **【最優先】切替素子をラッチングリレーへ置き換える（`DECISIONS.md` §11.1a、2026-09-02 確定）**
-   - `AmpChannel` / `AmpBank` から `TMUX7612` を外し、ラッチ DPDT ×2/ch（`AZ850P2-5` or `TQ2-L2-5V`、
+   - `AmpChannel` / `AmpBank` から `TMUX7612` ×10 を外し、**ラッチング DPDT リレー ×20**
+     （1ch につき入力L/R 用と出力L/R 用の各1個。`AZ850P2-5` or `TQ2-L2-5V`、
      FP `Relay_THT:Relay_DPDT_FRT5`）へ。**手編集所有なので KiCad 側で**
    - ドライバ ULN2803 ×5 と GPIO 拡張（40本の駆動線）を追加
    - **`+5V` を AmpBank に戻す**（コイル用。ControlPanel の I²C を 5P に戻すか、AmpBank にレギュレータ）
    - 基板を **200×100 mm** 想定に更新（150×100 では 59% 占有で入らない）
    - 面積が入らない場合の代替は §11.1a 末尾（出力だけリレー10個＋入力 `DG412`+220k）
-2. **絶縁型 DC-DC の実装（§2.10）** — 品番は **`REC10K-2415DAW/H2` に確定済み**（2026-09-02）。
-   残りは実装のみ: **CTRL ピンの論理確認** → シンボル/FP 作成 → `PowerModule.kicad_sch`
-   （手編集所有）で差し替え → `power_module_wired()` 追随 → `PARTS.md` → 検証。手順は §2.10
 2. **ERC の仕分け（2026-09-02 に着手、60 → 53 件）** — 実害2件を発見し修正済み:
    ①**Pico の `VSYS` が未接続で基板単体では起動しなかった**（`+5V`→ショットキー`D404`→`VSYS` で修正、`PWR_FLAG` 付き）
    ②ControlPanel の `-15V`／`+5V` インタフェースが死んでいた（生成コードから削除）。
@@ -915,14 +911,21 @@ git add するか判断すること**（AGENT_HANDOFF は「PCB未設計」と�
    - `pin_not_connected` 29件 … Pico 未使用GPIO 12 / AGND・VBUS・RUN・3V3_EN 4 / ADC_VREF 1 / PT2314 未使用入力・ラウドネス 12。**`no_connect` を付ける**
    - `isolated_pin_label` 9件・`label_dangling` 4件 … `COMMON_L/R`・`PHONE_L/R`・`LINE_L/R` 等の箱外スタブ。仕様なので ERC 除外
    - `power_pin_not_driven` 1件 … Pico `ADC_VREF`。Pico 内部で 3V3 に接続済みなので開放が正しい。ERC 除外 or `+3V3` 接続
-3. **ControlPanel 未接続ピンの整理**（Pico 未使用GPIO、PT2314 未使用入力。§2.9以前からの既知事項）
-4. ~~`WIRING.md` 全面書き換え~~ → **2026-09-02 完了**（AmpBank 構成へ。I²C を 4P に訂正）。`CIRCUIT_DESIGN.md` §5・`DECISIONS.md` の語彙をネット名ベースへ書き換えるのは残作業（SOURCE_OF_TRUTH.md §3）
-5. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
-6. OLED FP、PT2314 未使用入力
-7. ControlPanel 側 I²C コネクタ（**4P**: `I2C_SDA`/`I2C_SCL`/`3V3`/`D_GND`）の物理実装。**旧記述の 5P は誤り** — `+5V` は AZ850 のコイル駆動用で、アナログスイッチ化により不要（AmpBank 側 `J_CTRL301` は 4P）。相手が1枚だけなのでフェルール/スプリッタ分岐も不要
-8. `PowerModule` の生成コードが現図より1世代古い（PD 前段のみ。`+15V`/`-15V` 改名は反映済み。`drift` で検出済み。手編集所有なので実害は無いが要追従）
-9. ~~`relay_board_wired()` / `amp_module_wired()` デッドコードの削除~~ → **2026-09-02 完了**（638 行）
-10. `PARTS.md` §4.2「選定・実装メモ」の AmpBank 実態への書き換え（TODO 注記のみ済み）
+3. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
+4. OLED FP、PT2314 未使用入力
+5. ControlPanel 側 I²C コネクタの物理実装。**現状 4P**（`I2C_SDA`/`I2C_SCL`/`3V3`/`D_GND`）だが、
+   **項目1（リレー化）で `+5V` が要れば 5P に戻る。先に項目1を決めること。****旧記述の 5P は誤り** — `+5V` は AZ850 のコイル駆動用で、アナログスイッチ化により不要（AmpBank 側 `J_CTRL301` は 4P）。相手が1枚だけなのでフェルール/スプリッタ分岐も不要
+6. `PowerModule` の生成コードが現図より1世代古い（PD 前段のみ。`+15V`/`-15V` 改名は反映済み。`drift` で検出済み。手編集所有なので実害は無いが要追従）
+7. `PARTS.md` §4.2「選定・実装メモ」の AmpBank 実態への書き換え（TODO 注記のみ済み）
+
+#### 完了済み（再実行しないこと）
+
+- ~~絶縁型 DC-DC の選定と実装~~ → **`REC10K-2415DAW/H2` で完了**（§2.10）。CTRL ピンの論理確認・
+  シンボル/FP 作成・`PowerModule.kicad_sch` 差し替え・文書更新まで済み。`power_module_wired()` の
+  追随（ドキュメント用途）だけ残っているが急がない
+- ~~`WIRING.md` の全面書き換え~~ → 完了（2026-09-02）
+- ~~`relay_board_wired()` / `amp_module_wired()` デッドコード削除~~ → 完了（638行）
+- ~~ControlPanel の再アノテーション追従~~ → 完了（生成コードを 4xx へ）
 
 ### 検証
 
@@ -937,10 +940,14 @@ python3 AudioV2/scripts/gen_parts_bom.py --check   # PARTS.md の BOM ブロッ�
 `kicad-run.sh` は Docker イメージ `kicad-cloud:10.0.6` があればそれを、無ければホストの
 `kicad-cli` を使う。出力は `out/`（gitignore 済み）。
 
-**2026-09-01 §2.9 手順3〜5 完了時点の値**（このローカル Windows 環境で実測。次回はここから増減を見る）:
-`check_sexpr` 10ファイル / 問題0、ERC **60件**（うち新規10件は AmpBank VSS 警告の既知誤検知）、
-`drift` 生成コード所有 4/4（AmpBank/AmpChannel/Control/親）一致・手編集所有2件は既知差分のみ、
-`gen_parts_bom --check` rc=0。
+**基準値（`eb966ef`、2026-09-02）** — 次回はここから増減を見る:
+`check_sexpr` **9ファイル / 問題0**、ERC **53件**（内訳と対応方針は上の「未着手・優先候補」2）、
+`drift` **生成コード所有 2/2 一致**（ControlPanel / 親）・手編集所有4件（AmpBank / AmpChannel /
+OutputStage / PowerModule）の差分は想定内（§2.8）、`gen_parts_bom --check` rc=0。
+
+> 参考（2026-09-01 §2.9 手順3〜5 完了時点）: check_sexpr 10ファイル、ERC 60件、drift 4/4。
+> ファイル数が減ったのは削除したシートの分、ERC が減ったのは実害2件を潰したため、
+> drift の分母が減ったのは AmpBank/AmpChannel が手編集所有へ卒業したため。
 
 **この環境固有の前提**（他マシンでは不要な場合あり）:
 - `C:\tmp\kicad-symbols` → KiCad の `share/kicad/symbols` へのディレクトリジャンクション
@@ -978,47 +985,60 @@ Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 ## 7. 別チャット再開プロンプト（コピペ用）
 
 ```
-AudioV2/AGENT_HANDOFF.md を読んで続きから。ブランチは main（origin と同期済み、HEAD 1c9a359）。
-**作業ツリーは dirty — §2.9 手順3〜5の変更が未コミット。まずコミットするか確認すること。**
+AudioV2/AGENT_HANDOFF.md を読んで続きから。ブランチ main、origin と同期済み、作業ツリー clean。
 
-§2.9（RelayBoard+AmpModule → AmpBank 1枚統合）の手順3〜5が完了:
-- RelayBoard.kicad_sch / AmpModule.kicad_sch を削除
-- AmpBank.kicad_sch / AmpChannel.kicad_sch を生成しリポジトリに追加
-  （wire_circuit_design.py に "channel"/"bank" ターゲットを追加）
-- 親 AudioV2Case.kicad_sch を AmpBank 1枚に差し替え
-- +12V/-12V → +15V/-15V に全シート改名。PowerModule の DKMW20F-12 → -15 差替え含む
-  （PowerModule は手編集所有だが KiCad GUI 環境が無かったため sexpr 直接編集。
-  次に KiCad で開いたとき壊れていないか確認すること）
+■ この基板は何か
+オペアンプ10個を差し替えて聴き比べる箱。10ch のアンプと切替を1枚に載せた AmpBank が中心。
+回路図は組み上がって ERC も通る段階。**PCB は未設計**（空スキャフォールドのみ）。
 
-残っている作業:
-- relay_board_wired()/amp_module_wired() のデッドコードは 2026-09-02 に削除済み（638 行）
-- WIRING.md（全面）/ CIRCUIT_DESIGN.md §5 / DECISIONS.md の RelayBoard・AmpModule 前提の
-  記述はまだ書き換えていない（重要箇所に注意書きのみ追記済み）
-- PARTS.md §4.2「選定・実装メモ」も AmpBank の実態に未更新（TODO注記のみ）
-- ERC 60件の仕分け（新規10件はAmpBank各chのground_pin_not_ground、TMUX7612 VSS=-15Vの既知誤検知）
+■ 次にやること（最優先）
+**切替素子を TMUX7612（アナログスイッチ）→ ラッチング DPDT リレー x20 へ置き換える。**
+決定済み（DECISIONS.md §11.1a）だが**回路図はまだ TMUX7612 のまま**。手順は §5 の優先候補1。
+- 部品: AZ850P2-5（秋月で国内可）or TQ2-L2-5V（DigiKey 在庫1,247）。
+  FP は KiCad 標準の Relay_THT:Relay_DPDT_FRT5（v1 実績、両社が同じ 10ピン DIP 配置＝2社互換）
+- 1ch につき 2個（入力L/R 用・出力L/R 用）。合計 20個
+- **最初に決めること: コイル用の +5V を AmpBank にどう供給するか。**
+  2026-09-02 に「アナログスイッチ化で不要」として ControlPanel のインタフェースから外したので、
+  I2C を 4P→5P に戻すか、AmpBank にレギュレータを置くか
+- ドライバ ULN2803 x5 と 40本の駆動線、GPIO 拡張、パルス用リザーバも要る
+- 基板は 150x100 → 200x100 mm へ（150x100 では 59% 占有で入らない）
+- AmpChannel / AmpBank は**手編集所有**なので KiCad 側で直接編集する
 
-検証は docker/kicad-cloud-build/kicad-run.sh の erc / netlist / drift と
-python3 Audio/scripts/check_sexpr.py -q AudioV2、python3 AudioV2/scripts/gen_parts_bom.py --check。
-このローカル Windows 環境固有の前提: C:\tmp\kicad-symbols が KiCad の
-share/kicad/symbols へのジャンクションとして必要（無いと wire_circuit_design.py が落ちる）。
-kicad-run.sh には PYTHONUTF8=1 を追加済み（Windows コンソールの cp932 対策）。
-今回時点の値: check_sexpr 10ファイル/0、ERC 60件、drift 生成コード所有4/4一致、BOM check rc=0。
+■ 直近の確定（2026-09-02）
+- DC-DC: REC10K-2415DAW/H2（¥2,404、現行比53%減）**回路図反映済み**
+- Pico 給電: VSYS 未接続だったのを +5V→ショットキー D404→VSYS で修正 **反映済み**
+- 切替素子: ラッチングリレー x20 **未反映**（上記）
 
-【いま進行中】PowerModule の絶縁型 DC-DC の代替調査（§2.10）。現行 DKMW20F-15 が $30.75 と高い、
-というのが発端。Aimtec AM10TW-2415DLPZ（±15V/333mA、Cout 330µF）/ AM10TW-2412DLPZ（±12V/416mA、
-Cout 470µF）が最有力で、価格・電流余裕・Cout・Remote 論理（Open=ON、現行と同一で配線変更不要）の
-すべて一次資料で確認済み。**残るは ±12V か ±15V かの意思決定だけ**（±15V にした当初理由の
-「v1 資産との互換」は §2.9 で RelayBoard/AmpModule が無くなったため失効している）。
-決まったら シンボル/FP 新規作成 → PowerModule.kicad_sch（手編集所有）差し替え →
-power_module_wired() 追随 → check_sexpr/ERC/netlist/drift、の順。手順と候補比較は §2.10 末尾。
-回路図・PARTS.md への反映はまだ一切していない。
+■ なぜリレーに戻したか（同じ提案が繰り返し来るので必読）
+Ron(V) の平坦度が歪みを生む。2026-09-01 の判断は Ron をレベルの問題として扱っていた。
+データシートのグラフをベクタ抽出して解いた結果（spice/switch_thd.py, spice/switch_offiso.py）:
+  TMUX7612 は平坦領域が ±11V で終わり、9.2Vrms では性能を 47dB 捨てる（-115dB）
+  DG412 は Rbias をいくら上げても出力側律速で -90dB（DUT より悪い）
+  TMUX4821 は全±15Vで平坦だが 2mm QFN x20 でリフロー前提
+  リレーは接触抵抗が電圧に依存しないので歪みを生まない
+**「もっと安いスイッチがあるのでは」と問われたら、まず spice/README.md を読むこと。**
+TC4066B（±15V が絶対最大超過）/ ADG419（SPDT x1 で40個要る）も検討済み・不採用。
 
-I2C/電源はスター確定。端子台は Phoenix MKDS-1,5 系（v1 と同一/互換）。
-A_GND/D_GND の NetTie は ControlPanel 側（Pico 直近）1点。
-generate_kicad_scaffold.py は再実行しない。手編集所有シート（§2.8、Power/Output）は機械的に上書きしない。
-文書は designator でなくネット名・機能名で書く（SOURCE_OF_TRUTH.md §3）。
-§2.9 末尾の「実装で踏んだ落とし穴」は必ず読むこと（NE5532 のピン番号、Screw_Terminal の x 座標、
-PIN_NUMBERS 登録漏れ、座標衝突など、同じ轍を踏みやすい）。
+■ 検証（eb966ef 時点の値。ここから増減を見る）
+  python3 Audio/scripts/check_sexpr.py -q AudioV2   → 9ファイル/0
+  docker/kicad-cloud-build/kicad-run.sh erc         → 53件
+  docker/kicad-cloud-build/kicad-run.sh drift       → 生成コード所有 2/2 一致
+  python3 AudioV2/scripts/gen_parts_bom.py --check  → rc=0
+ERC 53件の内訳と対応方針は §5 の項目2（実害のあるものは全部潰してある）。
+
+■ 守ること
+- generate_kicad_scaffold.py は再実行しない
+- **手編集所有シート（§2.8: AmpBank / AmpChannel / OutputStage / PowerModule）を
+  wire_circuit_design.py で上書きしない。** ロジック変更は KiCad 側で
+- **生成コードの再実行は UUID を作り直す**（348行が毎回変わる）。回すのは論理を作り直すときだけ
+- drift の「生成コード所有」行に参照相違が出たら、実図ではなく生成コード側を直す
+  （アノテーションは KiCad が正）
+- 文書は designator でなくネット名・機能名で書く（SOURCE_OF_TRUTH.md §3）
+- 部品調査で DigiKey API を使うときは AudioV2/scripts/dcdc_survey.py 冒頭の
+  「API の癖」を必ず読む（在庫情報が信用できない・MOQ・Offset+Limit<=300・
+  パラメータ空欄で黙って落とされる）。**採用前に必ず実ページを確認する**
+- §2.9 末尾の「実装で踏んだ落とし穴」（NE5532 のピン番号、Screw_Terminal の x 座標、
+  PIN_NUMBERS 登録漏れ、座標衝突、sym() の 2.54mm スナップ）
 ```
 
 ---
@@ -1058,6 +1078,8 @@ PIN_NUMBERS 登録漏れ、座標衝突など、同じ轍を踏みやすい）�
 | 2026-09-02 | ControlPanel の生成コードを再アノテーション後の参照（4xx）へ追従（§2.8）。生成コード再実行が UUID を作り直すことも記録 |
 | 2026-09-02 | AmpChannel の出力側に 220 kΩ プルダウンを追加（10ch×2）。入力側だけ対策済みで出力側が抜けていた（§2.9 / spice/README） |
 | 2026-09-02 | DigiKey Product Information API v4 を実際に疎通（`digikey_search.py`、2-legged）。§2.10 の価格表が **¥ と $ の取り違え**だったことが判明し訂正（AM10TW は ¥9.98 ではなく **¥1,581**）。結論の向き（現行比 69% 安）は不変だが、`AM10GH-2415DLPZ` が AM10TW より安いことが分かり選定を一部再オープン。実測値は `dc_dc_prices.csv` |
+| 2026-09-02 | **切替素子をラッチング DPDT リレー ×20 に確定**（`DECISIONS.md` §11.1a）。§2.9 の統合は維持し素子選択だけ撤回。理由は `Ron(V)` 平坦度が歪みを生むと数値で判明したため。解析ツール `spice/switch_thd.py` / `switch_offiso.py` とデータシートから抽出した Ron 曲線を追加 |
+| 2026-09-02 | **§1 と §7（再開プロンプト）を全面書き換え。** 「DC-DC 調査が進行中」「作業ツリー dirty」「切替は TMUX7612」等、別エージェントを誤らせる古い記述が残っていたため。§5 の優先候補も番号重複を直し、完了済みを別枠へ分離した |
 | 2026-09-02 | `.gitattributes` を追加し改行コードを LF に統一。製造出力（Gerber/ドリル）・バイナリ・`dc_dc.csv`・`.wxsch` は対象外 |
 | 2026-08-31 | `amp_module_wired()`を信号順配線に修正（OpAmpユニット配置入れ替え＋入出力バス配線）。コード変更のみ、`AmpModule.kicad_sch`の再生成・KiCad検証は未実施（§2.5） |
 | 2026-08-31 | ユーザーがローカルKiCadでRelayBoardのAZ850リレー10個を270°回転＋チャンネル間隔拡張、配線・ラベルを追従修正（main直push）。取り込み確認し、addr strap同期は無傷と確認 |
