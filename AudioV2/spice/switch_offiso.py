@@ -1,0 +1,128 @@
+#!/usr/bin/env python3
+"""10ch セレクタで「OFF の9ch から何が漏れてくるか」を周波数ごとに解く。
+
+## なぜ要るか
+
+これまでは ON になったスイッチの THD だけを追っていた。しかし 10ch セレクタでは
+**非選択9ch の OFF 経路からの漏れ**が別の律速になりうる。特に TMUX4821 は
+OISO が −50dB（@100kHz, RL=50Ω）で、TMUX7612 の −105dB より 55dB 悪い。
+
+`CS(off)` の比（70pF 対 24pF）で見ると3倍程度に見えるが、それはソース対グランド容量。
+**ソース→ドレインの貫通は OISO 規格が捉えている**ので、そちらから実効直列容量を逆算する:
+
+    OISO = RL / |RL + 1/(jωC)|  →  C = 1 / (2π f · (RL/OISO))
+
+    TMUX7612  OISO −105dB @100kHz, RL=50Ω  →  C_off ≈ 0.18 pF
+    TMUX4821  OISO  −50dB @100kHz, RL=50Ω  →  C_off ≈ 100.6 pF   （562倍）
+
+## モデル
+
+    TONE ─┬─[SW1_on  Ron ]─ A1 ─ Rbias ─ GND      選択ch
+          │                    └ Amp1 ─ Riso ─[SW2_on  Ron ]─┐
+          │                                                   ├─ BUS ─ RL
+          ├─[SW1_off Coff]─ Ak ─ Rbias ─ GND      非選択ch ×9 │
+          │                    └ Ampk ─ Riso ─[SW2_off Coff]─┘
+          ⋮
+
+OFF は2段（入力側と出力側）通るので、単純に「OISO が −50dB だから駄目」とは言えない。
+各周波数でフェーザとして節点方程式を解き、**選択chのみの場合との差**を漏れ量とする。
+
+漏れは信号の同相コピーなので、効果は THD ではなく**周波数特性の誤差**になる。
+非選択アンプ自身の歪みも一緒に漏れてくるが、二重減衰を受けるので普通は無視できる。
+それも一緒に出す。
+
+使い方:
+  python3 AudioV2/spice/switch_offiso.py
+  python3 AudioV2/spice/switch_offiso.py --rbias 100e3 --nch 10
+"""
+
+from __future__ import annotations
+
+import argparse
+
+import numpy as np
+
+# (OISO dB, 測定周波数 Hz, 測定 RL Ω, Ron Ω, 部品名)
+PARTS = {
+    "tmux7612": (-105.0, 100e3, 50.0, 1.35, "TMUX7612 (16-TSSOP)"),
+    "tmux4821": (-50.0, 100e3, 50.0, 0.25, "TMUX4821 (2ch/pkg)"),
+}
+GAIN = 2.0
+R_ISO = 47.0          # 出力直列抵抗
+DUT_THD_DB = -94.0    # 被試験オペアンプ自身の THD（NE5532 0.002%）
+
+
+def coff_from_oiso(oiso_db: float, f: float, rl: float) -> float:
+    """OISO 規格から OFF 経路の実効直列容量を逆算する。"""
+    a = 10 ** (oiso_db / 20)          # 電圧比
+    # a = RL / sqrt(RL^2 + X^2) → X = RL * sqrt(1/a^2 - 1)
+    x = rl * np.sqrt(1 / a**2 - 1)
+    return 1 / (2 * np.pi * f * x)
+
+
+def solve(part: str, f: float, rbias: float, rload: float, nch: int, rsrc: float):
+    oiso_db, f0, rl0, ron, _ = PARTS[part]
+    coff = coff_from_oiso(oiso_db, f0, rl0)
+    zc = 1 / (1j * 2 * np.pi * f * coff)
+
+    # --- 入力側: TONE から各ch のアンプ入力へ ---
+    v_on = rbias / (rbias + rsrc + ron)              # 選択ch
+    v_off = rbias / (rbias + rsrc + zc)              # 非選択ch（容量結合）
+
+    # --- 出力側: 各アンプ出力 → BUS ---
+    z_on = R_ISO + ron
+    z_off = R_ISO + zc
+    b_on = GAIN * v_on
+    b_off = GAIN * v_off
+
+    def bus(include_off: bool):
+        num = b_on / z_on
+        den = 1 / z_on + 1 / rload
+        if include_off:
+            num += nch_off * b_off / z_off
+            den += nch_off / z_off
+        return num / den
+
+    nch_off = nch - 1
+    v_all = bus(True)
+    v_sel = bus(False)
+    leak = abs(v_all - v_sel) / abs(v_sel)
+
+    # 非選択アンプ自身の歪みが漏れてくる分（各アンプ出力の DUT_THD 分が OFF 経路を通る）
+    dut = 10 ** (DUT_THD_DB / 20)
+    d_leak = nch_off * abs(b_off) * dut * abs((1 / z_off) / (1 / z_on + nch_off / z_off + 1 / rload))
+    d_leak /= abs(v_sel)
+
+    return abs(v_off), leak, d_leak, coff
+
+
+def db(x: float) -> float:
+    return 20 * np.log10(max(abs(x), 1e-30))
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--rbias", type=float, default=47e3)
+    ap.add_argument("--rload", type=float, default=50e3)
+    ap.add_argument("--rsrc", type=float, default=1e3, help="TONE 側の出力インピーダンス")
+    ap.add_argument("--nch", type=int, default=10)
+    a = ap.parse_args()
+
+    print(f"Rbias {a.rbias/1e3:.0f}k / 負荷 {a.rload/1e3:.0f}k / 源 {a.rsrc:.0f}Ω / "
+          f"{a.nch}ch（1 ON, {a.nch-1} OFF）/ ゲイン {GAIN:g}\n")
+    for part, (oiso, f0, rl0, ron, name) in PARTS.items():
+        c = coff_from_oiso(oiso, f0, rl0)
+        print(f"■ {name}   OISO {oiso:.0f}dB@{f0/1e3:.0f}kHz → C_off {c*1e12:.2f} pF   Ron {ron}Ω")
+        print(f"   {'周波数':>9s}{'非選択入力':>12s}{'BUS漏れ計':>12s}{'漏れ歪み':>11s}")
+        for f in (20.0, 100.0, 1e3, 10e3, 20e3):
+            voff, leak, dleak, _ = solve(part, f, a.rbias, a.rload, a.nch, a.rsrc)
+            print(f"   {f:8.0f}Hz{db(voff):10.1f}dB{db(leak):11.1f}dB{db(dleak):10.1f}dB")
+        print()
+    print(f"判定の目安: BUS漏れ計は信号の同相コピー = 周波数特性の誤差。")
+    print(f"  −60dB で 0.009dB、−40dB で 0.09dB、−20dB で 0.9dB の誤差。")
+    print(f"  漏れ歪みは被試験石（{DUT_THD_DB:.0f}dB 相当）より十分下にあるべき。")
+
+
+if __name__ == "__main__":
+    main()
