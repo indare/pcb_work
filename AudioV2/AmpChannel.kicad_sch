@@ -1153,10 +1153,22 @@
 		(uuid "42b0c210-0a6e-42c5-9a82-7e2506052c67")
 	)
 	(junction
+		(at 127 76.2)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7e4ec3ef-978e-43fc-8c26-e4ab78876739")
+	)
+	(junction
 		(at 45.72 146.05)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8d486035-877f-46eb-908f-3627da66ae8b")
+	)
+	(junction
+		(at 125.73 39.37)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "94893fe4-a48a-42e9-a7e1-ec027ca0fb5f")
 	)
 	(junction
 		(at 72.39 36.83)
@@ -1244,7 +1256,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 76.2) (xy 121.92 76.2)
+			(xy 118.11 76.2) (xy 127 76.2)
 		)
 		(stroke
 			(width 0)
@@ -1284,6 +1296,16 @@
 	)
 	(wire
 		(pts
+			(xy 127 76.2) (xy 127 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "237ab8d3-2b39-4133-8117-b6ca140aaaed")
+	)
+	(wire
+		(pts
 			(xy 38.1 146.05) (xy 50.8 146.05)
 		)
 		(stroke
@@ -1314,6 +1336,16 @@
 	)
 	(wire
 		(pts
+			(xy 125.73 39.37) (xy 134.62 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "448c0dc7-69bb-427e-a3fa-a9726c3d1b4a")
+	)
+	(wire
+		(pts
 			(xy 43.18 44.45) (xy 49.53 44.45)
 		)
 		(stroke
@@ -1321,6 +1353,16 @@
 			(type default)
 		)
 		(uuid "500fa964-155e-4a40-baba-d48e3b108bdb")
+	)
+	(wire
+		(pts
+			(xy 127 85.09) (xy 127 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "539988fd-2046-4b15-9b99-94590f4ce2b8")
 	)
 	(wire
 		(pts
@@ -1421,6 +1463,16 @@
 			(type default)
 		)
 		(uuid "80d253f4-3690-4ab8-8728-6ed4d65d6a23")
+	)
+	(wire
+		(pts
+			(xy 125.73 39.37) (xy 125.73 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "840d546f-0dbd-4fde-b2fd-8070f30d5b0d")
 	)
 	(wire
 		(pts
@@ -1554,7 +1606,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 39.37) (xy 121.92 39.37)
+			(xy 118.11 39.37) (xy 125.73 39.37)
 		)
 		(stroke
 			(width 0)
@@ -1631,6 +1683,16 @@
 			(type default)
 		)
 		(uuid "d9662f85-1eda-4665-aac5-5e0aff60ee5c")
+	)
+	(wire
+		(pts
+			(xy 125.73 48.26) (xy 125.73 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de094088-2d43-44ba-85f9-66fa3b7e9402")
 	)
 	(wire
 		(pts
@@ -1724,6 +1786,16 @@
 	)
 	(wire
 		(pts
+			(xy 127 76.2) (xy 135.89 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb1ffc6e-ad15-495e-8777-3efe73499bf8")
+	)
+	(wire
+		(pts
 			(xy 142.24 156.21) (xy 139.7 156.21)
 		)
 		(stroke
@@ -1753,7 +1825,7 @@
 		(uuid "07fd185c-98ec-4c24-abec-03ed939c56ff")
 	)
 	(label "OUT_R"
-		(at 121.92 76.2 0)
+		(at 135.89 76.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1791,6 +1863,16 @@
 			(justify right bottom)
 		)
 		(uuid "18da9978-f2e6-474f-b89c-a6a5749969a5")
+	)
+	(label "A_GND"
+		(at 125.73 49.53 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1ad16562-b51b-4965-9f5f-2663f327de64")
 	)
 	(label "A_GND"
 		(at 74.93 63.5 180)
@@ -1893,7 +1975,7 @@
 		(uuid "805c40eb-aeab-441a-8b80-ffca62f8eeae")
 	)
 	(label "OUT_L"
-		(at 121.92 39.37 0)
+		(at 134.62 39.37 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1911,6 +1993,16 @@
 			(justify right bottom)
 		)
 		(uuid "89f3d509-ed63-440c-8458-d50a67694591")
+	)
+	(label "A_GND"
+		(at 127 87.63 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8a13af0f-a2dd-4917-9990-9db680b67704")
 	)
 	(label "A_GND"
 		(at 49.53 91.44 0)
@@ -3614,6 +3706,121 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 127 81.28 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "921a288c-0524-4b6d-b278-6946bda840d0")
+		(property "Reference" "R612"
+			(at 131.318 80.264 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220k"
+			(at 130.81 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 76.2 -27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 -27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "R input pulldown (after switch)"
+			(at 76.2 -27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d1a3e7bc-6aff-445d-aa51-93614c0c2bab")
+		)
+		(pin "2"
+			(uuid "d8c0b5ee-470f-4e94-a015-25c5f0d34763")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000020-0020-4020-8020-000000000020"
+					(reference "R612")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000021-0021-4021-8021-000000000021"
+					(reference "R1112")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000022-0022-4022-8022-000000000022"
+					(reference "R712")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000023-0023-4023-8023-000000000023"
+					(reference "R1212")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000024-0024-4024-8024-000000000024"
+					(reference "R812")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000025-0025-4025-8025-000000000025"
+					(reference "R1312")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000026-0026-4026-8026-000000000026"
+					(reference "R912")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000027-0027-4027-8027-000000000027"
+					(reference "R1412")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000028-0028-4028-8028-000000000028"
+					(reference "R1012")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000029-0029-4029-8029-000000000029"
+					(reference "R1512")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Amplifier_Operational:NE5532")
 		(at 90.17 76.2 0)
 		(unit 2)
@@ -4434,6 +4641,121 @@
 				)
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000029-0029-4029-8029-000000000029"
 					(reference "C1510")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 125.73 44.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d27c2aa8-c2d9-4a5a-81ee-84e07c786328")
+		(property "Reference" "R611"
+			(at 130.048 43.434 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220k"
+			(at 129.54 46.99 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 74.93 -64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 74.93 -64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "R input pulldown (after switch)"
+			(at 74.93 -64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1a86043e-18de-4834-ab58-27ab2b4f895c")
+		)
+		(pin "2"
+			(uuid "8944ece0-bf4c-40b2-8602-6b4534331818")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000020-0020-4020-8020-000000000020"
+					(reference "R611")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000021-0021-4021-8021-000000000021"
+					(reference "R1111")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000022-0022-4022-8022-000000000022"
+					(reference "R711")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000023-0023-4023-8023-000000000023"
+					(reference "R1211")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000024-0024-4024-8024-000000000024"
+					(reference "R811")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000025-0025-4025-8025-000000000025"
+					(reference "R1311")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000026-0026-4026-8026-000000000026"
+					(reference "R911")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000027-0027-4027-8027-000000000027"
+					(reference "R1411")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000028-0028-4028-8028-000000000028"
+					(reference "R1011")
+					(unit 1)
+				)
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000029-0029-4029-8029-000000000029"
+					(reference "R1511")
 					(unit 1)
 				)
 			)
