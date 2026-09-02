@@ -59,6 +59,8 @@ CTRL_LIBS = [
     "Device:C",
     "Device:R",
     "Device:LED",
+    "Device:D_Schottky",
+    "power:PWR_FLAG",
     "Device:RotaryEncoder_Switch",
     "Switch:SW_SPST",
     "Switch:SW_SP3T",
@@ -200,7 +202,7 @@ def bp5293_pins(ux: float, uy: float, rot: int = 0) -> dict[str, tuple[float, fl
 
 
 def pico_pin(sx: float, sy: float, num: int, rot: int = 0) -> tuple[float, float]:
-    """RaspberryPi_Pico pin number → tip. GPIO0=1 … GPIO15=20, GPIO26=31, 3V3=36."""
+    """RaspberryPi_Pico pin number → tip. GPIO0=1 … GPIO15=20, GPIO26=31, 3V3=36, VSYS=39."""
     table: dict[int, tuple[float, float]] = {
         1: (-22.86, 15.24),  # GP0
         2: (-22.86, 12.70),  # GP1
@@ -216,7 +218,8 @@ def pico_pin(sx: float, sy: float, num: int, rot: int = 0) -> tuple[float, float
         26: (22.86, 2.54),  # GP20 I2C SDA
         27: (22.86, 0.0),  # GP21 I2C SCL
         31: (22.86, -12.70),  # GP26 ADC0
-        36: (5.08, 38.10),  # 3V3
+        36: (5.08, 38.10),  # 3V3 (Pico 内蔵レギュレータの「出力」)
+        39: (-5.08, 38.10),  # VSYS (Pico への給電「入力」)
         38: (0.0, -35.56),  # GND
     }
     px, py = table[num]
@@ -555,6 +558,26 @@ def control_panel_wired() -> str:
     # Pico 3V3 / GND
     nets.append(net_at("+3V3", pico_pin(picox, picoy, 36)))
     nets.append(net_at("D_GND", pico_pin(picox, picoy, 38)))
+
+    # Pico VSYS 給電: BP5293 の +5V をショットキー経由で入れる。
+    # pin36 の 3V3 は Pico 内蔵レギュレータの「出力」で、OLED / I2C プルアップ /
+    # PT2314 ロジックはそこから貰っている。VSYS を繋がないと Pico 自身が起動せず、
+    # 基板単体で動かない（2026-09-02 に ERC の pin_not_connected で発見）。
+    # ダイオードを挟むのは Raspberry Pi の推奨。Pico 内部は VBUS→ショットキー→VSYS
+    # なので、開発中に USB を挿しても外部 5V と衝突しない。
+    dsx, dsy = at(76.2, 145.0)
+    dk, da = led_pins(dsx, dsy)          # D_Schottky は LED と同じピン配置（K=1 / A=2）
+    parts.append(sym("Device:D_Schottky", "D404", "1N5817", dsx, dsy, 0, PATH_CTRL))
+    nets.append(net_at("+5V", da, "r"))
+    nets.append(net_at("VSYS", dk, "l"))
+    nets.append(net_at("VSYS", pico_pin(picox, picoy, 39)))
+    # VSYS はダイオード（パッシブ）の先なので、ERC から見ると電源供給元が居ない。
+    # PWR_FLAG で「ここから先は給電されている」と宣言する。
+    # sym() は座標を 2.54 グリッドにスナップするので、at() で揃えた値を
+    # シンボルとラベルの両方に使う（生の座標を渡すとラベルだけずれる）。
+    fx, fy = at(71.12, 149.86)
+    parts.append(sym("power:PWR_FLAG", "#FLG0401", "PWR_FLAG", fx, fy, 0, PATH_CTRL))
+    nets.append(net_at("VSYS", (fx, fy), "u"))
 
     # OLED 1×4: GND / 3V3 / SCL / SDA
     oled_x, oled_y = at(101.6, 78.0)

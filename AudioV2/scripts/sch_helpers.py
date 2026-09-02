@@ -185,6 +185,7 @@ PIN_COUNTS: dict[str, list[str]] = {
     "Connector:Conn_01x06_Pin": ["1", "2", "3", "4", "5", "6"],
     "Connector:Screw_Terminal_01x02": ["1", "2"],
     "AudioV2:CH224_50224": ["1", "2", "3", "4"],
+    "power:PWR_FLAG": ["1"],
     "AudioV2:DKMW20F-12": ["1", "2", "3", "4", "5", "6"],
     "AudioV2:DKMW20F-15": ["1", "2", "3", "4", "5", "6"],
     "AudioV2:REC10K-2415DAW": ["1", "2", "3", "4", "5", "6"],
