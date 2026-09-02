@@ -8,7 +8,7 @@
 
 条件（AudioV2 の実要件。根拠は §2.10 の実負荷見積り）:
   カテゴリ 922 (DC/DCコンバータ) / タイプ=絶縁モジュール / 取り付け=スルーホール
-  出力1・出力2 が ±12V または ±15V / 8〜20W / 在庫あり
+  出力1・出力2 が ±12V または ±15V / --watt-min〜--watt-max W / 在庫あり
   取得後にクライアント側で: 入力範囲が 12V を含む、両レール >= --min-ma
 
 使い方:
@@ -51,8 +51,7 @@ TYPE_ISOLATED = "361527"          # タイプ = 絶縁モジュール
 MOUNT_THROUGH_HOLE = "411897"     # 取り付けタイプ = スルーホール
 # 電圧 - 出力1 / 出力2 の値 ID。部品によって正負どちらが「出力1」かが逆なので両方入れる
 V_12_15 = ["87718", "103542", "87719", "103543"]   # 12V, 15V, -12V, -15V
-WATT_BINS = ["8 W", "9 W", "9.6 W", "9.8 W", "9.9 W", "9.98 W", "9.984 W",
-             "9.99 W", "10 W", "11 W", "12 W", "15 W", "16 W", "17 W", "20 W"]
+# ワット数のビンは API の FilterOptions から動的に取る（固定リストだと取りこぼす）
 
 P_TYPE, P_VOUT1, P_VOUT2 = 183, 1525, 1526
 P_VIN_MIN, P_VIN_MAX, P_IOUT = 1471, 573, 1120
@@ -98,9 +97,33 @@ def query(watt: str, limit: int, offset: int) -> dict:
         "MinimumQuantityAvailable": 1}}
 
 
-def collect(token: str, cid: str, verbose: bool) -> list[dict]:
+def watt_bins(token: str, cid: str, lo: float, hi: float) -> list[str]:
+    """在庫ありの母集団から、lo〜hi W に入るワット数ビンの ValueId を列挙する。"""
+    filters = [
+        {"ParameterId": P_TYPE, "FilterValues": [{"Id": TYPE_ISOLATED}]},
+        {"ParameterId": P_VOUT1, "FilterValues": [{"Id": i} for i in V_12_15]},
+        {"ParameterId": P_VOUT2, "FilterValues": [{"Id": i} for i in V_12_15]},
+        {"ParameterId": P_MOUNT, "FilterValues": [{"Id": MOUNT_THROUGH_HOLE}]},
+    ]
+    res = request(token, cid, {"Keywords": "", "Limit": 1, "Offset": 0,
+        "FilterOptionsRequest": {
+            "ParameterFilterRequest": {"CategoryFilter": {"Id": CATEGORY_DCDC},
+                                       "ParameterFilters": filters},
+            "MinimumQuantityAvailable": 1}})
+    out = []
+    for f in (res.get("FilterOptions") or {}).get("ParametricFilters") or []:
+        if f.get("ParameterId") != P_WATT:
+            continue
+        for v in f.get("FilterValues") or []:
+            m = re.match(r"^([\d.]+)\s*W", v.get("ValueName") or "")
+            if m and lo <= float(m.group(1)) <= hi:
+                out.append(v["ValueId"])
+    return out
+
+
+def collect(token: str, cid: str, verbose: bool, bins: list[str]) -> list[dict]:
     seen: dict[str, dict] = {}
-    for watt in WATT_BINS:
+    for watt in bins:
         offset, total = 0, None
         while True:
             res = request(token, cid, query(watt, 50, offset))
@@ -158,8 +181,12 @@ def flatten(p: dict) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--min-ma", type=float, default=300,
-                    help="両レールに必要な最小出力電流 mA（既定 300。実負荷は +15V 側 208mA）")
+    ap.add_argument("--min-ma", type=float, default=250,
+                    help="両レールに必要な最小出力電流 mA（既定 250。実負荷は +15V 側 208mA）")
+    ap.add_argument("--watt-min", type=float, default=6,
+                    help="下限W（既定6。実負荷は両レール合計 5.7W）")
+    ap.add_argument("--watt-max", type=float, default=25)
+    ap.add_argument("--max-price", type=float, help="この価格以下だけ表示")
     ap.add_argument("--vin", type=float, default=12.0, help="入力電圧 V（既定 12）")
     ap.add_argument("--top", type=int, default=20)
     ap.add_argument("--all", action="store_true", help="全件表示")
@@ -173,8 +200,10 @@ def main() -> None:
         sys.exit("DIGIKEY_CLIENT_ID が未設定です（.secrets.env を見てください）")
     token = get_token(PROD, cid, env["DIGIKEY_CLIENT_SECRET"])
 
-    print("DigiKey を検索中…", file=sys.stderr)
-    raw = collect(token, cid, verbose=True)
+    bins = watt_bins(token, cid, a.watt_min, a.watt_max)
+    print(f"DigiKey を検索中…（{a.watt_min:g}〜{a.watt_max:g}W = {len(bins)} ビン）",
+          file=sys.stderr)
+    raw = collect(token, cid, True, bins)
     if a.raw:
         Path(a.raw).parent.mkdir(parents=True, exist_ok=True)
         Path(a.raw).write_text(json.dumps(raw, ensure_ascii=False), encoding="utf-8")
@@ -184,7 +213,8 @@ def main() -> None:
             if r["vin_min"] is not None and r["vin_max"] is not None
             and r["vin_min"] <= a.vin <= r["vin_max"]
             and r["iout_min_a"] and r["iout_min_a"] * 1000 >= a.min_ma
-            and r["price_jpy"]]
+            and r["price_jpy"]
+            and (a.max_price is None or r["price_jpy"] <= a.max_price)]
     keep.sort(key=lambda r: r["price_jpy"])
 
     print(f"\n取得 {len(rows)} 件 → 入力{a.vin:g}V対応かつ両レール{a.min_ma:g}mA以上: "
