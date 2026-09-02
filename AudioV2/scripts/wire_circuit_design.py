@@ -468,14 +468,18 @@ def control_panel_wired() -> str:
         "A_GND": 125.0,
         "D_GND": 128.0,
         "+15V": 131.0,
-        "-15V": 133.0,
         "+3V3": 112.0,
-        "+5V": 115.0,
     }
+    # -15V と +5V は 2026-09-02 にインタフェースから外した。
+    #   -15V: ControlPanel は +15V しか使わない（BP5293 の入力）。受け取るだけで
+    #         中で誰も使っておらず label_dangling になっていた
+    #   +5V : BP5293 の出力。旧 RelayBoard の AZ850 コイル用に外へ出していたが、
+    #         アナログスイッチ化で消費先が消えた。いまは D404 経由で Pico VSYS が
+    #         内部で使うだけなので、外へ出す意味がない
     for name, hy in buses.items():
         if name == "A_GND":
             shape = "bidirectional"
-        elif name in {"+3V3", "+5V"}:
+        elif name == "+3V3":
             shape = "output"
         else:
             shape = "input"
@@ -804,7 +808,6 @@ def parent_wired() -> str:
         ("I2C_SDA", "bidirectional", 152.4, 50.8, 180),
         ("I2C_SCL", "bidirectional", 152.4, 60.96, 180),
         ("+15V", "input", 152.4, 71.12, 180),
-        ("-15V", "input", 152.4, 81.28, 180),
         ("A_GND", "bidirectional", 152.4, 91.44, 180),
         ("D_GND", "input", 152.4, 101.6, 180),
         ("VCC_TONE", "input", 152.4, 111.76, 180),
@@ -814,7 +817,6 @@ def parent_wired() -> str:
         ("TONE_L", "output", 208.28, 30.48, 0),
         ("TONE_R", "output", 208.28, 40.64, 0),
         ("+3V3", "output", 152.4, 132.08, 180),
-        ("+5V", "output", 208.28, 111.76, 0),
     ]
     output_pins = [
         ("AMP_SEL_L", "input", 215.9, 40.64, 180),
@@ -829,7 +831,7 @@ def parent_wired() -> str:
     # Explicit label bridges on every sheet pin tip (KiCad 10 does not
     # reliably auto-join same-named pins without a parent-side net object).
     join("+15V", [(66.04, 35.56), (152.4, 71.12), (88.9, 101.6)])
-    join("-15V", [(66.04, 45.72), (152.4, 81.28), (88.9, 111.76)])
+    join("-15V", [(66.04, 45.72), (88.9, 111.76)])  # Control は -15V を使わない
     join("A_GND", [
         (66.04, 55.88), (152.4, 91.44), (215.9, 71.12), (88.9, 121.92),
     ])
@@ -847,7 +849,6 @@ def parent_wired() -> str:
     # BP5293 +5V is now a spare output on Control — its only consumer (RelayBoard
     # coil driver) was removed in §2.9. Single-point join keeps the stub from
     # reading as an unconnected pin in ERC.
-    join("+5V", [(208.28, 111.76)])
     join("AMP_SEL_L", [(215.9, 40.64), (144.78, 40.64)])
     join("AMP_SEL_R", [(215.9, 50.8), (144.78, 50.8)])
     join("TONE_L", [(208.28, 30.48), (88.9, 81.28)])

@@ -880,7 +880,14 @@ git add するか判断すること**（AGENT_HANDOFF は「PCB未設計」と�
 1. **絶縁型 DC-DC の実装（§2.10）** — 品番は **`REC10K-2415DAW/H2` に確定済み**（2026-09-02）。
    残りは実装のみ: **CTRL ピンの論理確認** → シンボル/FP 作成 → `PowerModule.kicad_sch`
    （手編集所有）で差し替え → `power_module_wired()` 追随 → `PARTS.md` → 検証。手順は §2.10
-2. ERC 60 件の仕分け（純増10件は AmpBank 各chの `ground_pin_not_ground` — TMUX7612 VSS=-15V の既知誤検知。残りは元々あった ControlPanel 未接続ピン等、下記2と重複）
+2. **ERC の仕分け（2026-09-02 に着手、60 → 53 件）** — 実害2件を発見し修正済み:
+   ①**Pico の `VSYS` が未接続で基板単体では起動しなかった**（`+5V`→ショットキー`D404`→`VSYS` で修正、`PWR_FLAG` 付き）
+   ②ControlPanel の `-15V`／`+5V` インタフェースが死んでいた（生成コードから削除）。
+   残り53件の内訳と対応方針:
+   - TMUX7612 `VSS` 10件 … **誤検知確定**（DS 原文「VSS = Negative power supply」、GND は pin5 に別途）。ERC 除外にする
+   - `pin_not_connected` 29件 … Pico 未使用GPIO 12 / AGND・VBUS・RUN・3V3_EN 4 / ADC_VREF 1 / PT2314 未使用入力・ラウドネス 12。**`no_connect` を付ける**
+   - `isolated_pin_label` 9件・`label_dangling` 4件 … `COMMON_L/R`・`PHONE_L/R`・`LINE_L/R` 等の箱外スタブ。仕様なので ERC 除外
+   - `power_pin_not_driven` 1件 … Pico `ADC_VREF`。Pico 内部で 3V3 に接続済みなので開放が正しい。ERC 除外 or `+3V3` 接続
 3. **ControlPanel 未接続ピンの整理**（Pico 未使用GPIO、PT2314 未使用入力。§2.9以前からの既知事項）
 4. ~~`WIRING.md` 全面書き換え~~ → **2026-09-02 完了**（AmpBank 構成へ。I²C を 4P に訂正）。`CIRCUIT_DESIGN.md` §5・`DECISIONS.md` の語彙をネット名ベースへ書き換えるのは残作業（SOURCE_OF_TRUTH.md §3）
 5. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
