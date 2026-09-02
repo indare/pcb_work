@@ -5,7 +5,7 @@
 	(uuid "b2000002-0002-4002-8002-000000000002")
 	(paper "A4")
 	(lib_symbols
-		(symbol "AudioV2:DKMW20F-15"
+		(symbol "AudioV2:REC10K-2415DAW"
 			(pin_names
 				(offset 1)
 			)
@@ -24,7 +24,7 @@
 					)
 				)
 			)
-			(property "Value" "DKMW20F-15"
+			(property "Value" "REC10K-2415DAW/H2"
 				(at 0 -18.415 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -34,7 +34,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Library:DKMW20F-15_1in_THT"
+			(property "Footprint" "Library:REC10K-AW_1in_THT"
 				(at 1.27 3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -45,7 +45,7 @@
 					)
 				)
 			)
-			(property "Datasheet" "https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20"
+			(property "Datasheet" "https://recom-power.com/pdf/Econoline/REC10K-AW.pdf"
 				(at 0.508 1.778 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -89,7 +89,7 @@
 					)
 				)
 			)
-			(symbol "DKMW20F-15_0_1"
+			(symbol "REC10K-2415DAW_0_1"
 				(rectangle
 					(start -10.16 -2.54)
 					(end 10.16 -16.51)
@@ -110,7 +110,7 @@
 					)
 				)
 			)
-			(symbol "DKMW20F-15_1_1"
+			(symbol "REC10K-2415DAW_1_1"
 				(pin power_in line
 					(at -12.7 -8.89 0)
 					(length 2.54)
@@ -147,10 +147,10 @@
 						)
 					)
 				)
-				(pin power_out line
-					(at 12.7 -6.35 180)
+				(pin passive line
+					(at -12.7 -13.97 0)
 					(length 2.54)
-					(name "+Vout"
+					(name "CTRL"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -158,24 +158,6 @@
 						)
 					)
 					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 12.7 -8.89 180)
-					(length 2.54)
-					(name "Common"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -193,6 +175,24 @@
 							)
 						)
 					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 12.7 -8.89 180)
+					(length 2.54)
+					(name "COM"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
 					(number "5"
 						(effects
 							(font
@@ -201,10 +201,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at -12.7 -13.97 0)
+				(pin power_out line
+					(at 12.7 -6.35 180)
 					(length 2.54)
-					(name "R.C."
+					(name "+Vout"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3291,97 +3291,6 @@
 		)
 	)
 	(symbol
-		(lib_id "AudioV2:DKMW20F-15")
-		(at 111.76 76.2 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "8bc2d004-423a-4b78-a987-470870ad2c63")
-		(property "Reference" "U201"
-			(at 111.76 74.93 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "DKMW20F-15"
-			(at 111.76 77.47 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 2.54 22.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 2.54 22.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 2.54 22.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "326c8500-1695-4dfb-86e3-13166e1f4c47")
-		)
-		(pin "2"
-			(uuid "52a2f450-2044-4892-a789-7c6e47a3d5de")
-		)
-		(pin "3"
-			(uuid "37a4e2c3-0d49-4298-a79e-75f51ce3e84b")
-		)
-		(pin "4"
-			(uuid "0228d02f-59b9-4dc3-9490-75553741c108")
-		)
-		(pin "5"
-			(uuid "6b29fd5e-d65a-433f-8a1c-494d9307341e")
-		)
-		(pin "6"
-			(uuid "ab8e36f2-8cc3-4d22-8165-f2578a1b6b4f")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000002-0002-4002-8002-000000000002"
-					(reference "U201")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector:Conn_01x03_Pin")
 		(at 115.57 62.23 0)
 		(unit 1)
@@ -3695,6 +3604,120 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000002-0002-4002-8002-000000000002"
 					(reference "C205")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AudioV2:REC10K-2415DAW")
+		(at 111.76 76.2 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fc61d7e6-c75e-4d63-963f-a52da54b8045")
+		(property "Reference" "U203"
+			(at 111.76 73.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "REC10K-2415DAW/H2"
+			(at 111.76 76.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:REC10K-AW_1in_THT"
+			(at 113.03 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://recom-power.com/pdf/Econoline/REC10K-AW.pdf"
+			(at 112.268 74.422 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Mean Well DKMW20F-15 isolated DC/DC, 9-36Vin, ±15V/±660mA, DIP 1in x 1in, Cout 650uF/rail; DS datasheets/MeanWell_SKMW20_DKMW20.pdf"
+			(at 111.76 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "MEAN WELL"
+			(at 111.76 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "DKMW20F-15"
+			(at 111.76 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "5"
+			(uuid "2dc834b2-e028-48cb-8739-65d1a25b3c5e")
+		)
+		(pin "6"
+			(uuid "0a01d24d-8867-48a7-a864-602af99f8106")
+		)
+		(pin "4"
+			(uuid "70e0436f-67ac-4b03-aedf-a33a8c6e6b03")
+		)
+		(pin "3"
+			(uuid "b2ed739a-94d7-4c80-bae1-c398d8640e92")
+		)
+		(pin "2"
+			(uuid "3df9d8a0-07bc-43b3-9584-684a8ff408c4")
+		)
+		(pin "1"
+			(uuid "00b16e7c-e2c7-4358-85f3-9cc39001efd0")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000002-0002-4002-8002-000000000002"
+					(reference "U203")
 					(unit 1)
 				)
 			)

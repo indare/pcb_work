@@ -4,7 +4,7 @@
 
 **方針（2026-08-30）:** 最終出力ボリュームは **A50k デュアル ×2**、DEST は **トグル + ラダー ADC**。[DECISIONS.md](DECISIONS.md) §2・§3・§10。PGA / digipot は不採用。
 
-**参照 DS:** `datasheets/` ローカル PDF。KiCad シンボルは **標準 lib 優先**。カスタムのみ `AudioV2.kicad_sym`（PT2314 28pin / DKMW20F-12 / CH224_50224）と `Audio/BP5293_ROHM`。
+**参照 DS:** `datasheets/` ローカル PDF。KiCad シンボルは **標準 lib 優先**。カスタムのみ `AudioV2.kicad_sym`（PT2314 28pin / REC10K-2415DAW / TMUX7612 / CH224_50224）と `Audio/BP5293_ROHM`。
 
 ---
 
@@ -19,7 +19,7 @@
 | ENC×3 | `Device:RotaryEncoder_Switch` | CH / BASS / TREBLE |
 | Pico / OLED / LED / R / C | 各標準 lib | OLED は論理 `SSD1306-128x64`。**実物は 2.42″（[PARTS.md](PARTS.md)）。埋め込み元 0.91″ FP は差し替え予定** |
 | ULN2803A / AZ850 | 標準（**RelayBoard のみ**） | DEST ラッチングは廃止 |
-| DKMW20F-15 / CH224 / BP5293 | カスタム / プロジェクト | シンボルは F-12 と同一外形 |
+| REC10K-2415DAW / CH224 / BP5293 | カスタム / プロジェクト | FP `Library:REC10K-AW_1in_THT`。穴位置は旧 `DKMW20F-15_1in_THT` と同一で、各穴の機能も一致（業界標準 1″ 6ピン）。番号の振り方だけが違う |
 
 ---
 
@@ -82,7 +82,7 @@ AMP_SEL_L ── SW601 (SP3T) / AMP_SEL_R ── SW602 (SP3T)
 
 ## 4. PowerModule — 部品値（変更なし）
 
-USB-C → CH224 → PD_12V → PWR SW → F201 → **DKMW20F-15** → **±15 V** / A_GND。
+USB-C → CH224 → PD_12V → PWR SW → F201 → **REC10K-2415DAW/H2** → **±15 V** / A_GND。
 （2026-09-01 に ±12 V から変更。理由は [DECISIONS.md](DECISIONS.md) §8。回路図のネット名も `+15V`/`-15V` に改名済み）  
 +15 V → LM7809 → VCC_TONE（+9 V）。
 
