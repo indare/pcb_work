@@ -46,6 +46,10 @@ import numpy as np
 PARTS = {
     "tmux7612": (-105.0, 100e3, 50.0, 1.35, "TMUX7612 (16-TSSOP)"),
     "tmux4821": (-50.0, 100e3, 50.0, 0.25, "TMUX4821 (2ch/pkg)"),
+    # 以下2026-09-02追加。OISOはデータシート記載値をそのまま外挿（測定周波数が違う点に注意）。
+    # Ronはswitch_thd.py用に抽出したRon(V)カーブのVS≈0点（代表値、フルカーブではない）
+    "adg1407": (-73.0, 1e6, 50.0, 7.79, "ADG1407 (dual 8:1, 25C typ)"),
+    "dg507b": (-84.0, 1e6, 50.0, 170.0, "DG507B (dual 8:1)"),
 }
 GAIN = 2.0
 R_ISO = 47.0          # 出力直列抵抗
@@ -96,8 +100,75 @@ def solve(part: str, f: float, rbias: float, rload: float, nch: int, rsrc: float
     return abs(v_off), leak, d_leak, coff
 
 
+def solve_broadcast(part: str, f: float, rload: float, nch: int,
+                     mismatch: list[tuple[float, float, float | None]] | None = None):
+    """入力ブロードキャスト構成（全DUT入力ON、出力だけ1 ON/9 OFF）の BUS 誤差を解く。
+
+    `solve()` の2段OFFモデルとは前提が違う: 非選択chも選択chと**同じ強さの信号**を
+    増幅している（入力側に減衰が無い）。漏れは「弱い幽霊信号」ではなく、
+    「ほぼ同じ信号を出す9台が Coff 経由で BUS に相乗りして起きる合成誤差」になる。
+
+    mismatch: 非選択9ch 分の (gain_ratio, phase_deg, thd_db) のリスト。
+      省略時は「9chとも選択chと完全に同一」（=素子のOFF特性のみが誤差要因）。
+    戻り値: v_bus_all（全ch込みのBUS電圧）, gain_err（複素数。絶対値=振幅誤差比、
+      角度=位相誤差 deg）, dist_leak（非選択9ch自身の歪みが漏れてくる分、dB用の比）
+    """
+    oiso_db, f0, rl0, ron, _ = PARTS[part]
+    coff = coff_from_oiso(oiso_db, f0, rl0)
+    zc = 1 / (1j * 2 * np.pi * f * coff)
+
+    z_on = R_ISO + ron
+    z_off = R_ISO + zc
+    b_on = GAIN + 0j
+
+    nch_off = nch - 1
+    if mismatch is None:
+        mismatch = [(1.0, 0.0, None)] * nch_off
+
+    num = b_on / z_on
+    den = 1 / z_on + 1 / rload
+    dist_leak_sq = 0.0
+    for gain_ratio, phase_deg, thd_db in mismatch:
+        b_k = GAIN * gain_ratio * np.exp(1j * np.radians(phase_deg))
+        num += b_k / z_off
+        den += 1 / z_off
+        if thd_db is not None:
+            dut = 10 ** (thd_db / 20)
+            dist_leak_sq += (abs(b_k) * dut * abs(1 / z_off)) ** 2  # 非選択ch間は非可干渉なので二乗和
+
+    v_bus_all = num / den
+    v_bus_sel = (b_on / z_on) / (1 / z_on + 1 / rload)  # 理想: 選択chのみが駆動した場合
+    gain_err = v_bus_all / v_bus_sel
+    dist_leak = np.sqrt(dist_leak_sq) / abs(1 / z_on + nch_off / z_off + 1 / rload) / abs(v_bus_sel)
+    return v_bus_all, gain_err, dist_leak, coff
+
+
 def db(x: float) -> float:
     return 20 * np.log10(max(abs(x), 1e-30))
+
+
+def broadcast_report(rload: float = 50e3, nch: int = 10,
+                      gain_pct: float = 0.0, phase_deg: float = 0.0,
+                      dut_thd_db: float | None = None) -> None:
+    """入力ブロードキャスト構成のBUS誤差レポート。gain_pct/phase_degを与えると
+    非選択9chすべてに同方向（最悪ケース）でその誤差を持たせた感度分析になる。"""
+    nch_off = nch - 1
+    mismatch = [(1.0 + gain_pct / 100, phase_deg, dut_thd_db)] * nch_off
+    tag = ""
+    if gain_pct or phase_deg:
+        tag = f"  [感度分析: 非選択9ch に gain{gain_pct:+.1f}% / phase{phase_deg:+.2f}deg を最悪ケースで付与]"
+    print(f"=== ブロードキャスト構成（全ch入力ON、出力のみ1 ON/{nch_off} OFF）"
+          f" 負荷{rload/1e3:.0f}k{tag} ===\n")
+    for part, (oiso, f0, rl0, ron, name) in PARTS.items():
+        c = coff_from_oiso(oiso, f0, rl0)
+        print(f"■ {name}   OISO {oiso:.0f}dB@{f0/1e3:.0f}kHz → C_off {c*1e12:.2f} pF   Ron {ron}Ω")
+        print(f"   {'周波数':>9s}{'振幅誤差':>11s}{'位相誤差':>11s}{'漏れ歪み':>11s}")
+        for f in (20.0, 1e3, 10e3, 20e3):
+            _, gerr, dleak, _ = solve_broadcast(part, f, rload, nch, mismatch)
+            print(f"   {f:8.0f}Hz{db(abs(gerr)):10.4f}dB{np.degrees(np.angle(gerr)):10.3f}deg"
+                  f"{db(dleak) if dut_thd_db else float('nan'):10.1f}"
+                  f"{'dB' if dut_thd_db else '  '}")
+        print()
 
 
 def main() -> None:
@@ -107,7 +178,19 @@ def main() -> None:
     ap.add_argument("--rload", type=float, default=50e3)
     ap.add_argument("--rsrc", type=float, default=1e3, help="TONE 側の出力インピーダンス")
     ap.add_argument("--nch", type=int, default=10)
+    ap.add_argument("--broadcast", action="store_true",
+                     help="入力ブロードキャスト構成（全ch入力ON、出力のみ切替）で解く")
+    ap.add_argument("--gain-pct", type=float, default=0.0,
+                     help="[--broadcast] 非選択9chに与える最悪ケースのゲイン誤差(%%)")
+    ap.add_argument("--phase-deg", type=float, default=0.0,
+                     help="[--broadcast] 非選択9chに与える最悪ケースの位相誤差(deg)")
+    ap.add_argument("--dut-thd", type=float, default=None,
+                     help="[--broadcast] 非選択chのDUT自身のTHD(dB)。指定時のみ漏れ歪み列を出す")
     a = ap.parse_args()
+
+    if a.broadcast:
+        broadcast_report(a.rload, a.nch, a.gain_pct, a.phase_deg, a.dut_thd)
+        return
 
     print(f"Rbias {a.rbias/1e3:.0f}k / 負荷 {a.rload/1e3:.0f}k / 源 {a.rsrc:.0f}Ω / "
           f"{a.nch}ch（1 ON, {a.nch-1} OFF）/ ゲイン {GAIN:g}\n")
