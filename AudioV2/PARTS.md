@@ -229,6 +229,7 @@ Amp 選択後 L/R
 
 | 項目 | 内容 |
 |---|---|
+| **`TMUX7612` の発注型番** | 回路図の Value は基本型番の `TMUX7612`。**発注は `TMUX7612PWR`**（16-TSSOP。DS の orderable は他に WQFN の `TMUX7612RUMR`）。DigiKey は包装で品番が分かれ、**`296-TMUX7612PWRCT-ND`（カットテープ・MOQ 1）を使う** — `...TR-ND`（テープ&リール）は **MOQ 3000 / 在庫0**、`...DKR-ND`（Digi-Reel）は別途リール手数料 $7。2026-09-02 実ページ確認: 正規在庫 1,772 個、qty1 $7.59 / **qty10 $5.86**（10ch で約 $59）。WQFN 版は ¥806 と安いがテープ&リール MOQ 3000 のみで実用にならない |
 | **OpAmp の差し替え条件** | 基準は **NE5532P**。DIP-8 **ソケット**実装なので現物差し替えで聴き比べできる。他の DIP-8 互換デュアルに替えるときは **±15 V 動作・ユニティゲイン安定・容量負荷耐性** を DS で確認する（手持ち在庫は [`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)） |
 | **SMD バイパスコンデンサの寸法** | `100nF` は **1206 が既定**（回路図の Footprint も 1206）。ハンドはんだ前提のため大きめを選んでいる。**レイアウト都合で 0603 まで下げるのは可**。下げる場合は回路図の Footprint も合わせて変更すること |
 | **PCB 外形（未設計）** | AmpBank の PCB はまだ設計していない。基板サイズは 150×100 mm 見込み（DIP-8 ソケット10個が面積の支配要因、[AGENT_HANDOFF.md §2.9](AGENT_HANDOFF.md)）。旧 AmpModule 用の `Audio/split/AudioCase_4_amp.kicad_pcb` 流用方針は§2.9の刷新で無効 |
