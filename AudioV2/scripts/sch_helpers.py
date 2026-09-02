@@ -186,6 +186,8 @@ PIN_COUNTS: dict[str, list[str]] = {
     "Connector:Screw_Terminal_01x02": ["1", "2"],
     "AudioV2:CH224_50224": ["1", "2", "3", "4"],
     "AudioV2:DKMW20F-12": ["1", "2", "3", "4", "5", "6"],
+    "AudioV2:DKMW20F-15": ["1", "2", "3", "4", "5", "6"],
+    "AudioV2:REC10K-2415DAW": ["1", "2", "3", "4", "5", "6"],
     "AudioV2:PT2314": [str(i) for i in range(1, 29)],
     "AudioV2:TMUX7612": [str(i) for i in range(1, 17)],
     "Interface_Expansion:MCP23017x-x-SP": [str(i) for i in range(1, 29)],
