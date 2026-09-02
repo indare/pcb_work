@@ -26,7 +26,12 @@ API の癖（調べて分かったこと。次に触る人向け）:
     出力1・出力2 を指定すれば2出力であることは自明なので実害はない
   - FilterValues を一度に多く（15個程度）渡すと HTTP 400 になる。
     ワット数はビンごとに分けて引いて結合している
-  - KeywordRequest に並べ替えは無く Limit は最大 50
+  - KeywordRequest に並べ替えは無く Limit は最大 50。さらに **Offset + Limit <= 300**
+    なので、300 件を超える母集団は必ず何かの軸で分割して引く必要がある
+  - **パラメトリック値が空欄の製品がある。フィルタは黙ってそれを落とす。**
+    アナログスイッチ(カテゴリ747)を「デュアル電源 ±15V」で絞ったとき、採用品の
+    TMUX7612 は DS に ±4.5〜±25V と書いてあるのに DigiKey の当該欄が "-" で、
+    検索結果から消えた（2026-09-02）。**採用候補が結果に出ているかを必ず確認すること**
   - **在庫・リードタイム・MarketPlace の各フィールドは信用しないこと。**
     AM10TW-2415DLPZ は API が「ProductStatus=アクティブ / QuantityAvailable=240 /
     ManufacturerLeadWeeks='0' / MarketPlace=None / EndOfLife=False」を返したが、
