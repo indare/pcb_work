@@ -1557,7 +1557,12 @@ def amp_channel_wired() -> str:
       TONE_x ─[SW]─┬─ 220k ─ A_GND
                     └─ 100nF ∥ 10uF ─┬─ 1k ─ A_GND
                                        └─ AMP + 入力（帰還 20k/20k = GAIN 2）
-                    AMP 出力 ─ 47R ─ 2.2uF ─[SW]─ AMP_SEL_x
+                    AMP 出力 ─ 47R ─ 2.2uF ─┬─ 220k ─ A_GND
+                                              └─[SW]─ AMP_SEL_x
+
+    220k は入力側・出力側とも「SW の側」に置く。カップリング C と SW ピンの
+    間は非選択中に浮くので、オフ漏れ電流（TMUX7612 max 0.15 nA）で充電され、
+    再接続時に段差になる。出力側は 2026-09-02 に追加（それまで抜けていた）。
 
     参照は ch1=7xx, ch2=8xx ... と 100 番刻みで instance_refs に与える。
     与えないと KiCad が「同名 AMP の unit1/2/3 が別ネット」と誤検出する。
@@ -1583,9 +1588,11 @@ def amp_channel_wired() -> str:
         nets.append(net_at(net1, p1, "u" if rot == 0 else "r"))
         nets.append(net_at(net2, p2, "d" if rot == 0 else "l"))
 
-    #  ch   R: 220k  1k  47R  Rg   Rf   /  C: film  elec  out
-    plan = {"L": dict(pd=1, bias=2, iso=3, rg=4, rf=5, cf=1, ce=2, co=3, y=0.0),
-            "R": dict(pd=6, bias=7, iso=8, rg=9, rf=10, cf=4, ce=5, co=6, y=63.5)}
+    #  ch   R: 220k  1k  47R  Rg   Rf  出力220k  /  C: film  elec  out
+    plan = {"L": dict(pd=1, bias=2, iso=3, rg=4, rf=5, opd=11,
+                      cf=1, ce=2, co=3, y=0.0),
+            "R": dict(pd=6, bias=7, iso=8, rg=9, rf=10, opd=12,
+                      cf=4, ce=5, co=6, y=63.5)}
     for ch, q in plan.items():
         y0 = q["y"]
         sw_in, ac, inv = f"IN_{ch}", f"AC_{ch}", f"INV_{ch}"
@@ -1606,6 +1613,8 @@ def amp_channel_wired() -> str:
                 op, pre, r_fp, f"{ch} output isolation", rot=90)
         two_pin("Device:C", "C", q["co"], "2.2uF film", 139.7, y0 + 38.1,
                 pre, f"OUT_{ch}", film_fp, f"{ch} output coupling (before switch)", rot=90)
+        two_pin("Device:R", "R", q["opd"], "220k", 152.4, y0 + 45.72,
+                f"OUT_{ch}", "A_GND", r_fp, f"{ch} output pulldown (before switch)")
 
     # --- OpAmp（DIP-8 ソケット。unit1=L, unit2=R, unit3=電源）---
     ox, oy = 88.9, 38.1

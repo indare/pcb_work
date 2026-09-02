@@ -3758,7 +3758,7 @@
 				)
 			)
 		)
-		(property "Description" "R input pulldown (after switch)"
+		(property "Description" "R output pulldown (before switch)"
 			(at 76.2 -27.94 0)
 			(hide yes)
 			(show_name no)
@@ -4699,7 +4699,7 @@
 				)
 			)
 		)
-		(property "Description" "R input pulldown (after switch)"
+		(property "Description" "L output pulldown (before switch)"
 			(at 74.93 -64.77 0)
 			(hide yes)
 			(show_name no)

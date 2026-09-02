@@ -203,22 +203,22 @@ Amp 選択後 L/R
 
 | Refs | Value | Footprint | Qty | Role |
 |---|---|---|---|---|
-| AMP701 | NE5532 / DIP-8 compatible | `Package_DIP:DIP-8_W7.62mm_Socket` | 1 | Socketed dual op amp under test |
-| C701,C704 | 100nF film | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 2 | L input film coupling / R input film coupling |
-| C702,C705 | 10uF | `Capacitor_THT:CP_Radial_D5.0mm_P2.00mm` | 2 | L input electrolytic coupling / R input electrolytic coupling |
-| C703,C706 | 2.2uF film | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 2 | L output coupling (before switch) / R output coupling (before switch) |
-| C707,C708,C709,C710,C_IO? | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 5 | MCP23017 decoupling / op amp V+ local decoupling / op amp V- local decoupling / switch VDD local decoupling / switch VSS local decoupling |
-| C_BULK_N?,C_BULK_P? | 100uF 35V | `Capacitor_SMD:CP_Elec_10x12.6` | 2 | rail bulk at board entry |
-| J_CTRL? | I2C SDA/SCL/3V3/D_GND | `Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical` | 1 | I2C from ControlPanel |
-| J_OUT? | AMP_SEL OUT L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Selected amp out to OutputStage |
-| J_PWR? | +15V / A_GND / -15V | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | Supply in from PowerModule |
-| J_TONE? | TONE IN L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Tone stage output in |
-| R701,R706 | 220k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L input pulldown (after switch) / R input pulldown (after switch) |
-| R702,R707 | 1k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L non-inverting bias / R non-inverting bias |
-| R703,R708 | 47R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L output isolation / R output isolation |
-| R704,R705,R709,R710 | 20k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 | L feedback Rf; default 20k = GAIN 2 / L gain resistor Rg; GAIN=1+Rf/Rg / R feedback Rf; default 20k = GAIN 2 / R gain resistor Rg; GAIN=1+Rf/Rg |
-| U701 | TMUX7612 | `Package_SO:TSSOP-16_4.4x5mm_P0.65mm` | 1 | 4ch SPST; ch1/2=input L/R, ch3/4=output L/R |
-| U_IO? | MCP23017 | `Package_DIP:DIP-28_W7.62mm` | 1 | I2C GPIO expander; 10 SEL lines |
+| AMP601 | NE5532 / DIP-8 compatible | `Package_DIP:DIP-8_W7.62mm_Socket` | 1 | Socketed dual op amp under test |
+| C601,C604 | 100nF film | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 2 | L input film coupling / R input film coupling |
+| C602,C605 | 2.2uF film | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 2 | L output coupling (before switch) / R output coupling (before switch) |
+| C603,C606 | 10uF | `Capacitor_THT:CP_Radial_D5.0mm_P2.00mm` | 2 | L input electrolytic coupling / R input electrolytic coupling |
+| C607,C608,C609,C610,C_IO301 | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 5 | MCP23017 decoupling / op amp V+ local decoupling / op amp V- local decoupling / switch VDD local decoupling / switch VSS local decoupling |
+| C_BULK_N301,C_BULK_P301 | 100uF 35V | `Capacitor_SMD:CP_Elec_10x12.6` | 2 | rail bulk at board entry |
+| J_CTRL301 | I2C SDA/SCL/3V3/D_GND | `Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical` | 1 | I2C from ControlPanel |
+| J_OUT301 | AMP_SEL OUT L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Selected amp out to OutputStage |
+| J_PWR301 | +15V / A_GND / -15V | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | Supply in from PowerModule |
+| J_TONE301 | TONE IN L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Tone stage output in |
+| R601,R605,R606,R610 | 20k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 | L feedback Rf; default 20k = GAIN 2 / L gain resistor Rg; GAIN=1+Rf/Rg / R feedback Rf; default 20k = GAIN 2 / R gain resistor Rg; GAIN=1+Rf/Rg |
+| R602,R607 | 47R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L output isolation / R output isolation |
+| R603,R608,R611,R612 | 220k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 | L input pulldown (after switch) / L output pulldown (before switch) / R input pulldown (after switch) / R output pulldown (before switch) |
+| R604,R609 | 1k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | L non-inverting bias / R non-inverting bias |
+| U601 | TMUX7612 | `Package_SO:TSSOP-16_4.4x5mm_P0.65mm` | 1 | 4ch SPST; ch1/2=input L/R, ch3/4=output L/R |
+| U_IO301 | MCP23017 | `Package_DIP:DIP-28_W7.62mm` | 1 | I2C GPIO expander; 10 SEL lines |
 <!-- END GENERATED: ampbank-bom -->
 
 ### 4.2 選定・実装メモ（回路図から導出できない＝ここが正）
