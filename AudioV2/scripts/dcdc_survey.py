@@ -27,6 +27,9 @@ API の癖（調べて分かったこと。次に触る人向け）:
   - FilterValues を一度に多く（15個程度）渡すと HTTP 400 になる。
     ワット数はビンごとに分けて引いて結合している
   - KeywordRequest に並べ替えは無く Limit は最大 50
+  - **UnitPrice だけで比較しないこと。** ProductVariations[].MinimumOrderQuantity に
+    最小注文数量がある。チューブ品は MOQ が 19 などになることがあり、実際に払う額は
+    単価 x MOQ。ここでは min_spend_jpy を出して、その順で並べている
 """
 
 from __future__ import annotations
@@ -161,10 +164,21 @@ def parse_amps(text: str) -> list[float]:
 def flatten(p: dict) -> dict:
     d = {x.get("ParameterId"): x.get("ValueText") for x in p.get("Parameters", [])}
     cur = parse_amps(d.get(P_IOUT, ""))
+    # UnitPrice だけで並べると誤る。チューブ/リール品は最小注文数量が 1 でないことがあり、
+    # 実際に払う額は 単価 x MOQ。URA2415YMD-10WR3 は単価が最安でも MOQ 19 で
+    # 最低 23,317 円かかる（2026-09-02 に踏んだ）。
+    moq = None
+    for v in p.get("ProductVariations") or []:
+        m = v.get("MinimumOrderQuantity")
+        if isinstance(m, int) and m > 0:
+            moq = m if moq is None else min(moq, m)
+    price = p.get("UnitPrice")
     return {
         "mpn": p["ManufacturerProductNumber"],
         "manufacturer": (p.get("Manufacturer") or {}).get("Name", ""),
-        "price_jpy": p.get("UnitPrice"),
+        "price_jpy": price,
+        "moq": moq,
+        "min_spend_jpy": (price * moq) if (price and moq) else price,
         "stock": p.get("QuantityAvailable"),
         "vout1": d.get(P_VOUT1, ""), "vout2": d.get(P_VOUT2, ""),
         "vin_min": parse_volts(d.get(P_VIN_MIN, "")),
@@ -215,13 +229,15 @@ def main() -> None:
             and r["iout_min_a"] and r["iout_min_a"] * 1000 >= a.min_ma
             and r["price_jpy"]
             and (a.max_price is None or r["price_jpy"] <= a.max_price)]
-    keep.sort(key=lambda r: r["price_jpy"])
+    keep.sort(key=lambda r: (r["min_spend_jpy"] or 0))
 
     print(f"\n取得 {len(rows)} 件 → 入力{a.vin:g}V対応かつ両レール{a.min_ma:g}mA以上: "
           f"{len(keep)} 件（安い順）\n")
     for r in (keep if a.all else keep[:a.top]):
-        print(f"  {r['mpn'][:26]:26s} {r['manufacturer'][:13]:13s} "
-              f"¥{r['price_jpy']:>7,.0f} 在庫{str(r['stock']):>6s} "
+        moq = r["moq"] or 1
+        note = f" x{moq}=¥{r['min_spend_jpy']:,.0f}" if moq > 1 else ""
+        print(f"  {r['mpn'][:24]:24s} {r['manufacturer'][:12]:12s} "
+              f"¥{r['price_jpy']:>7,.0f}{note:>16s} 在庫{str(r['stock']):>6s} "
               f"{r['vout1']}/{r['vout2']:<6s} {r['iout_min_a']*1000:4.0f}mA "
               f"{r['watt']:>5s} {r['vin_min']:g}-{r['vin_max']:g}V")
 
