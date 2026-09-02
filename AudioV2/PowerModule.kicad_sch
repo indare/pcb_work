@@ -3621,7 +3621,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fc61d7e6-c75e-4d63-963f-a52da54b8045")
-		(property "Reference" "U203"
+		(property "Reference" "U201"
 			(at 111.76 73.66 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3717,7 +3717,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000002-0002-4002-8002-000000000002"
-					(reference "U203")
+					(reference "U201")
 					(unit 1)
 				)
 			)
