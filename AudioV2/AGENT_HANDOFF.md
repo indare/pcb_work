@@ -573,6 +573,26 @@ v1時代の見積り（Amp×10+計測+Buffer同居、Icc控えめ8mA/ch）は今
   未調査・未使用**（登録要否の詳細・レート制限・sandbox動作は未確認）。次に部品調査で
   同じ問題に当たったら候補に入れる
 
+  **2026-09-02 追記 — 実行スクリプトを用意した（キー待ち）:**
+  [`AudioV2/scripts/digikey_search.py`](scripts/digikey_search.py)。
+  ダミー値で本番エンドポイントを叩き、`401 Invalid clientId` が返ることまで確認済み
+  （= トークン取得の URL と形式は正しい。あとは実キーだけ）。
+
+  - 認証は **2-legged（client_credentials）で足りる**。ユーザーログインが要る 3-legged は
+    MyDigiKey 系（注文・在庫連携）向けで、部品検索には不要。
+    トークン endpoint は `POST https://api.digikey.com/v1/oauth2/token`、
+    **アクセストークンの寿命は 30 分**（FAQ 記載）。スクリプトは実行ごとに取り直す
+  - 検索は `POST /products/v4/search/keyword`。ヘッダに `Authorization: Bearer` と
+    `X-DIGIKEY-Client-Id` の両方が要る。ロケールは `X-DIGIKEY-Locale-Site: JP` /
+    `Language: ja` / `Currency: JPY` を既定にした（env で上書き可）
+  - **キーの取得手順**: developer.digikey.com/teams で組織を作る → Production Apps →
+    新規作成 → API プロダクトに **Product Information** を選ぶ → 作成後の詳細画面に
+    Client ID と Secret が出る。組織名・アプリ名は何でもよい。
+    Sandbox App は sandbox しか叩けず本番在庫が返らないので、実調査には Production App を使う
+  - 認証情報の置き場所は **`.secrets.env`（リポジトリ直下、.gitignore 済み）**。
+    `DIGIKEY_CLIENT_ID` / `DIGIKEY_CLIENT_SECRET` の2行。環境変数があればそちらが優先。
+    **`.cursor/mcp.json` は git 追跡下なので絶対に置かないこと**
+
 ---
 
 ## 3. マージ済み PR（このスレッドで扱った範囲）

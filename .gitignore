@@ -19,6 +19,9 @@ Audio/split/AudioCase_for_separate.kicad_pcb
 #vscode
 .vscode/
 
+# API 認証情報（DigiKey 等）。中身は絶対にコミットしない
+.secrets.env
+
 # Cursor MCP local overrides / setup backups (no personal paths in git)
 .cursor/mcp.local.env
 .cursor/mcp.json.*.kicad-mcp.bak
