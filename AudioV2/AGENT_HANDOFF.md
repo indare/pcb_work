@@ -750,6 +750,9 @@ PIN_NUMBERS 登録漏れ、座標衝突など、同じ轍を踏みやすい）�
 | 2026-09-01 | AZ850 コイル駆動マージンの検算 → 仕様割れを記録（§2.7-3、不採用経路） |
 | 2026-09-01 | **アーキテクチャ刷新を決定（§2.9）** — RelayBoard + AmpModule を `AmpBank` 1枚へ統合。TMUX7612 / 常時給電 / ±15 V |
 | 2026-09-01 | `TMUX7612` シンボルと `AmpChannel` / `AmpBank` 生成コードを追加（サンドボックス検証済み、回路図ファイルは未書き込み）。`1d42401` を push。§1 / §5 / §7 を現状に合わせて更新 |
+| 2026-09-02 | ControlPanel の生成コードを再アノテーション後の参照（4xx）へ追従（§2.8）。生成コード再実行が UUID を作り直すことも記録 |
+| 2026-09-02 | AmpChannel の出力側に 220 kΩ プルダウンを追加（10ch×2）。入力側だけ対策済みで出力側が抜けていた（§2.9 / spice/README） |
+| 2026-09-02 | `.gitattributes` を追加し改行コードを LF に統一。製造出力（Gerber/ドリル）・バイナリ・`dc_dc.csv`・`.wxsch` は対象外 |
 | 2026-08-31 | `amp_module_wired()`を信号順配線に修正（OpAmpユニット配置入れ替え＋入出力バス配線）。コード変更のみ、`AmpModule.kicad_sch`の再生成・KiCad検証は未実施（§2.5） |
 | 2026-08-31 | ユーザーがローカルKiCadでRelayBoardのAZ850リレー10個を270°回転＋チャンネル間隔拡張、配線・ラベルを追従修正（main直push）。取り込み確認し、addr strap同期は無傷と確認 |
 | 2026-08-31 | A_GND/D_GND NetTie位置を確定: **ControlPanelのPico直近**（D_GNDの発生源）。RelayBoardは両ネットを受け取るが結合しない、とWIRING.md/DECISIONS.mdを訂正（従来「RelayBoardで結合」と誤読していた） |
