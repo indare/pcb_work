@@ -102,7 +102,7 @@ USB-C → CH224 → PD_12V → PWR SW → F201 → **REC10K-2415DAW/H2** → **�
 - 図面サイズは **A3**（5ch×リレー20個ぶんのラベルを重ねずに置くため）
 - `J_RAIL`: PowerModule `J201` から +12 / A_GND / -12 の3P。`A_GND`は切替せず各 `J_PWR`-2 へ直結
 - `J_TONE`: PT2314出力の2P（L/R）。シールドはControl側`A_GND`のみ。Relayのアナログ基準は`J_RAIL`-2
-- `J_I2C`: SDA / SCL / 3V3 / +5V / D_GND。+5 VはControlPanel BP5293から供給
+- I²C コネクタ: SDA / SCL / 3V3 / D_GND の **4P**（AmpBank 側 `J_CTRL301`）。**旧 5P の `+5V` は不要になった** — AZ850 のコイル駆動用だったが、アナログスイッチ化で消えた
 - JP301=A0、JP302=A1（開=0）。00=0x20 A / 01=0x21 B / 10=0x22 C / 11=0x23 D。A2はGND固定。同じ回路で最大4枚
 - `C301`/`C302` は `J_I2C` 直近（3V3 / +5V 入口のパスコン。アナログ端子台ではない）
 

@@ -1,79 +1,100 @@
-# AudioV2 箱配線 IF 素案（draft）
+# AudioV2 箱配線 IF
 
-> **未更新（2026-09-01 のアーキテクチャ刷新未反映）:** RelayBoard と AmpModule ×10 は
-> `AmpBank` 1枚へ統合され、`RelayBoard.kicad_sch` / `AmpModule.kicad_sch` は削除済み
-> （[AGENT_HANDOFF.md §2.9](AGENT_HANDOFF.md)）。以下の「RelayBoard」「AMPn」を含む記述
-> （音声幹線・Amp再版の節、番地ストラップの製造ロット言及など）は旧アーキテクチャの記録で、
-> 現行の物理配線（AmpBank への `+15V/-15V/A_GND` 星型・`TONE_L/R`・`AMP_SEL_L/R`・I2C 各1本）
-> を反映していない。書き換えは未着手。電源星型節のネット名（`+12V`/`-12V`）は
-> `+15V`/`-15V` に読み替えること。
+**目的:** 基板間の物理配線と、KiCad 図の外にある流用基板（`Audio/`）との接続を決める。
 
-**目的:** AudioV2基板間と、KiCad図外の流用基板との端子接続一覧。
-
+> **この文書に書くこと / 書かないこと**
+>
+> どの端子台がどのネットに繋がるかは**回路図から導出できる**ので書かない
+> （`kicad-run.sh netlist` で出る）。ここに書くのは導出できないもの
+> — **ケーブルの種類・シールドの落とし方・分岐の方法・図の外にある基板との接続・未決事項**。
+> 方針は [`SOURCE_OF_TRUTH.md`](../SOURCE_OF_TRUTH.md)。
+>
 > **記法:** 端子台は参照(designator)ではなく **ネット名と回路図の Value 欄の名前**で指す。
-> 参照は再アノテーションで動くが（2026-09-01 に58件が動いた）、ネット名と Value は設計者が付けた名前なので動かない。
-> 方針は [`SOURCE_OF_TRUTH.md`](../SOURCE_OF_TRUTH.md) §3。ピン番号は現物の締め付け順なので併記する。
+> 参照は再アノテーションで動く（2026-09-01 に58件、2026-09-02 に AmpChannel で320件が動いた）が、
+> ネット名と Value は設計者が付けた名前なので動かない。
 
-## 電源星型（PowerModule → 各所）
+## 基板構成（2026-09-01 の刷新後）
 
-| Net | 源 | 先 | 形式 |
+`PowerModule` / `ControlPanel` / `AmpBank` / `OutputStage` の **4枚**。
+`AmpBank` は 10ch 分のアンプと切替を1枚に載せたもので、旧 `RelayBoard` ×2 と
+`AmpModule` ×10 を置き換えた（[AGENT_HANDOFF.md §2.9](AGENT_HANDOFF.md)）。
+
+**箱配線が劇的に減ったのが刷新の実利。** 旧構成では Amp 1台につき電源3線＋入力2線の
+端子台が要り、10台で 30本以上のケーブルがあった。いまは `AmpBank` へ行くのが
+**電源3線・音声入力2線・音声出力2線・I²C 4線の計4本**だけで、ch 間の配線は基板上のパターンになった。
+
+## 電源
+
+| 系統 | 源（Value） | 先（Value） | 形式・注意 |
 |---|---|---|---|
-| `+12V` | PowerModule `+12/-12/A_GND out` 端子台-1 | RelayBoard_A/B `RAIL IN` 端子台-1, ControlPanel | 端子台 3P 幹線 ×2本 |
-| `A_GND` | PowerModule `+12/-12/A_GND out` 端子台-2 | RelayBoard `RAIL IN`-2 → 各 `AMPn PWR` 端子台-2（非切替）、全アナログ島 | 端子台 |
-| `-12V` | PowerModule `+12/-12/A_GND out` 端子台-3 | 同上 `RAIL IN`-3 | 同上 |
-| PD 入 | 外付け **50224 等** → Power `PD module in` 端子台（1=GND 2=+12） | 板上 `PD_12V` / `PD_GND` | 2P（トポロジ A） |
-| `PD_12V` | Power（PD 入力端子台の直後、ヒューズ前） | ControlPanel パネル PWR SW 入力 | **往復用端子まだ**（A のまま要追加） |
-| `PD_12V_SW` | ControlPanel パネル PWR SW 出力 | Power ヒューズ(3A slow) → DKMW +Vin | 2P 戻り。12 V パネル LED もこの戻り側に付く（SW 後なので通電表示になる） |
-| `PD_GND` | PD 入力端子台 / DKMW −Vin | Panel LED 戻り | 上記とセット |
-| `VCC_TONE` | Power LM7809 → `VCC_TONE OUT` 端子台（1=A_GND 2=+9） | ControlPanel PT2314 | 2P（星型 A_GND と二重ループにしない） |
+| アナログ ±15 V | PowerModule `+15/-15/A_GND out` | AmpBank `+15V / A_GND / -15V` | 端子台 3P。**1本だけ**（旧構成は RelayBoard ×2 へ2本） |
+| トーン用 +9 V | PowerModule `VCC_TONE OUT` | ControlPanel PT2314 | 2P。星型の `A_GND` と二重ループにしない |
+| PD 入力 | 外付け **50224 等** → PowerModule `PD module in` | 板上の PD 一次側 | 2P（トポロジ A） |
+| PD 往復 | PowerModule（ヒューズ前） ⇄ ControlPanel パネル PWR SW | | **往復用端子が未実装**（下記「意図的未決」） |
+
+12 V パネル LED は PWR SW の**後**に入れてあるので通電表示になる。
+一次（`PD_GND`）と二次（`A_GND`）は DC-DC で絶縁されており、**繋がない**。
 
 ## A_GND / D_GND の分離（2026-08-31 確定）
 
-`D_GND`（デジタル/コイル駆動）と`A_GND`（アナログ/音声・±12V帰路）は**システム全体で1箇所だけ**NetTieで結合する（DECISIONS.md G1/G2）。
+`D_GND`（デジタル）と `A_GND`（アナログ・音声・±15 V 帰路）は
+**システム全体で1箇所だけ** NetTie で結合する（[DECISIONS.md](DECISIONS.md) G1/G2）。
 
-- **NetTie位置: ControlPanel**（`D_GND`の発生源＝操作Picoの直近。G2「操作PicoのD_GND」参照）
-- **RelayBoardでは結合しない。** RelayBoardは`A_GND`（PowerModuleから `RAIL IN` 端子台経由、Amp接点/電源用）と`D_GND`（ControlPanelから I2C/電源コネクタ経由、MCP23017/ULN2803コイル駆動用）の**両方を受け取るが、両者は基板上で最後まで別ネットのまま**。ここで繋ぐとNetTieが2箇所目になり、A_GND側にコイル駆動ノイズが回り込むグラウンドループになる
-- G1「リレー盤=...結合はNetTie一点」は、RelayBoard上に結合点を置けという意味ではなく、システム全体で見た「一点」原則をリレー盤の文脈で言及したもの（G2のControlPanel側の記述と同じ1点を指す）
+- **NetTie 位置: ControlPanel**（`D_GND` の発生源＝操作 Pico の直近）
+- **AmpBank では結合しない。** AmpBank は `A_GND`（電源端子台経由、オペアンプとアナログスイッチ用）と
+  `D_GND`（I²C コネクタ経由、MCP23017 用）の**両方を受け取るが、基板上で最後まで別ネットのまま**。
+  ここで繋ぐと NetTie が2箇所目になり、グラウンドループになる
 
-## デジタル / I²C（2026-08-31 スター確定）
+> 刷新でこの論点は**軽くなった**。旧 RelayBoard は AZ850 のコイル駆動電流が `D_GND` に流れており、
+> それが `A_GND` へ回り込むことを警戒していた。アナログスイッチにはコイルが無く、
+> `D_GND` 側に流れるのは MCP23017 のロジック電流だけになった。
 
-| Net | 源 | 先 | 備考 |
+## I²C
+
+**ControlPanel → AmpBank の1本だけ。** コネクタは **4P**（`I2C_SDA` / `I2C_SCL` / `3V3` / `D_GND`）。
+
+> **⚠ `+5V` は不要になった。** 旧 RelayBoard は AZ850 のコイル駆動に `+5V` が要ったので 5P だったが、
+> AmpBank の I²C 機器は MCP23017（3.3 V ロジック）だけ。**旧文書の「5P」記述は古い。**
+
+I²C 機器は PT2314 と OLED が ControlPanel 上、MCP23017 が AmpBank 上。
+**基板をまたぐ I²C 配線は1本しかない**ので、旧「スター vs デイジー」の議論は実質消えた
+（枝が1本ならどちらも同じ）。プルアップ（`I2C_SDA`/`I2C_SCL` → `3V3`、4.7 kΩ ×2）は
+**ControlPanel の1箇所**に置いてある。
+
+**番地ストラップは不要になった。** MCP23017 が1個だけなので A0–A2 は `D_GND` 固定（0x20）。
+旧 RelayBoard の 2bit ストラップ（0x20–0x23、最大4枚）は
+[AGENT_HANDOFF.md §2.6](AGENT_HANDOFF.md) に**不採用経路の記録**として残っている。
+
+**ControlPanel 側のコネクタは回路図にまだ存在しない**（現状は OLED 用 4P のみ）。
+実装時に AmpBank 側と同じピン順へ合わせる。
+
+## 音声
+
+| 系統 | 源（Value） | 先（Value） | ケーブル・シールド |
 |---|---|---|---|
-| `I2C_SDA/SCL` | ControlPanel Pico GP20/21 | RelayBoard_A/B MCP23017, SSD1306, PT2314 | **スター確定**（daisy不採用）。ControlPanel 側 I2C/電源コネクタ出力から板の枚数分ホームラン |
-| `3V3` / `+5V` / `D_GND` | ControlPanel Pico / BP5293 | RelayBoard の I2C/電源コネクタ（`CTRL`）5P | +5 VはAZ850コイル、3V3はMCPロジック |
+| トーン出力 | ControlPanel PT2314 出力 | AmpBank `TONE IN L/R` | **2芯シールド**。芯 = L/R。**シールドは ControlPanel 側の `A_GND` のみに落とす**（電源幹線とループさせない） |
+| 選択アンプ出力 | AmpBank `AMP_SEL OUT L/R` | OutputStage `RAIL IN` | **2芯シールド**。シールドは OutputStage 側の `A_GND` のみ。`RAIL IN` は 3P で中央が `A_GND` |
+| ヘッドホン | OutputStage `to Audio HP Buffer` | **`Audio/` HeadphoneBufferModule** 入力 | 図の外。0 Ω 固定パッドは廃止済み |
+| ライン出力 | OutputStage `LINE OUT` | 前面 LINE OUT ジャック | |
+| 外部入力 | 外部ソース | ControlPanel PT2314 入力 | 親では箱外スタブ（`COMMON_L/R`） |
 
-I2C/電源コネクタのピン順は、RelayBoard 側（回路図 Value `CTRL`）が **1=`I2C_SDA` / 2=`I2C_SCL` / 3=`3V3` / 4=`+5V` / 5=`D_GND`**。**ControlPanel 側のコネクタは回路図にまだ存在しない**（現状 4P の OLED 用のみ）ので、実装するときにこの順へ合わせる。
+音量ポット（HP / LINE とも A カーブ 50 kΩ 2連）と行き先スイッチ（`DEST L/R`）は
+**パネル実装**で、基板へはリードで戻す（[PARTS.md](PARTS.md)）。
 
-**スターを選んだ理由:** (1) 板の抜き差しで他板を巻き込まない（daisyは中継コネクタ不良で下流が全滅）、(2) `+5V`にリレーパルス電流(§AGENT_HANDOFF 2.7-2)が乗るため、daisyだと板Aのノイズが板Bの給電経路を直列で通過してしまう。starなら各板の帰路が独立し、ノイズ源(ControlPanel)止まりで完結する。(3) I2Cプルアップ（`I2C_SDA`/`I2C_SCL` → `3V3`、4.7 kΩ ×2）を **ControlPanel 一箇所に集約**しており、starの方が電気的中心と一致する（板側にも置くと枚数ぶん並列になる。AGENT_HANDOFF §2.6）。
+**ch 間の配線は箱内に無い。** 10ch 分の入力分配（`TONE_L/R`）と出力集約（`AMP_SEL_L/R`）は
+AmpBank の基板パターンで、切替素子はオペアンプの直近にある。
 
-**実装:** ControlPanel 基板上のコネクタは1個で設計する**方針**（`Conn_01x05_Pin` 想定、シンボル未配置・footprint未定）。板の本数分の分岐は**箱内配線**で行う — フェルール端子で複数本を1端子にまとめる、またはスプリッタケーブルで分岐。PCB側の物理コネクタ選定（端子台 vs ピンヘッダ）は、この分岐方式が確定してから決める（footprint未定のまま、AGENT_HANDOFF §5参照）。
+## `Audio/`（v1）流用基板との接続
 
-**製造ロット:** RelayBoard PCBは5枚発注。番地ストラップは2bit（A1/A0）で最大4枚(0x20–0x23)までしか同時稼働できないため、5枚目は予備。ストラップの実装対応表は AGENT_HANDOFF §2.6。
-
-## 音声幹線
-
-| Net | 源 | 先 | 備考 |
-|---|---|---|---|
-| `COMMON_L/R` | 外部ソース入力 | ControlPanel PT2314入力 | 親では箱外スタブ |
-| `TONE_L/R` | ControlPanel PT2314出力 | RelayBoard_A/B `TONE IN` 端子台 2P → 選択されたAmpの `AMP_IN L/R` 端子台 | **2芯シールド**。芯=L/R。シールドはControl側の`A_GND`のみ（Relay側の ±12/A_GND 幹線とループさせない） |
-| Amp入力 `AMPn_L/R` | RelayBoard `AMPn IN` 端子台（1=L / 2=R） | Amp の `AMP_IN L/R` 端子台 | L/R 2P。長い引き回しは2芯シールドで、シールドは `AMPn PWR` 端子台-2 側の `A_GND` へ |
-| Amp電源 `AMPn_V+ / AMPn_V-` | RelayBoard `AMPn PWR` 端子台（1=V+ / 2=`A_GND` / 3=V−） | Amp の `+12V / A_GND / -12V` 端子台 | 3P。**±12 Vのみリレー切替、`A_GND`は直結**（切替中も帰路が浮かない） |
-| `AMP_SEL_L/R` | Amp×10 の `AMP_OUT L/R` 端子台 | 共通ハーネス → OutputStage の `RAIL IN` 端子台（1=`AMP_SEL_L` / 2=`A_GND` / 3=`AMP_SEL_R`） | 各Ampの 47 Ω＋470 µF の後で共通化。**同名の `RAIL IN` が RelayBoard 側にもあるが別物**（あちらは Power からの ±12/A_GND） |
-| `PHONE_L/R` | OutputStage HP 音量ポット（A50k 2連）のワイパ | `to Audio HP Buffer` 端子台 → **Audio/ HeadphoneBuffer** 入力 | 0 Ω 固定パッド廃止 |
-| `LINE_L/R` | OutputStage LINE 音量ポット（A50k 2連）のワイパ | `LINE OUT` 端子台 → 前面 LINE OUT | |
-
-## Amp再版とAudio/流用
-
-| 基板 | 接続 |
-|---|---|
-| AudioV2 AmpModule ×10 | `AMP_IN L/R` 端子台=Relay選択済みの `TONE_L/R`、`AMP_OUT L/R` 端子台=`AMP_SEL_L/R` 共通ハーネス、`+12V / A_GND / -12V` 端子台=Relay選択済み ±12 V（`A_GND` は直結）。親は代表1シート |
-| HeadphoneBufferModule | OutputStage `PHONE_L/R`, ±12V |
-| AdcBuffer / MeasurementADC | ±12V + 測定タップ（**位置 MD で固定**） |
+| 基板 | 接続 | 備考 |
+|---|---|---|
+| HeadphoneBufferModule | OutputStage `to Audio HP Buffer` ＋ ±15 V | |
+| AdcBuffer / MeasurementADC | ±15 V ＋ 測定タップ（**位置 MD で固定**） | 別電源系統 |
+| v1 RelayBoard / AmpModule | **±15 V と音声で直結できる** | v1 の AmpModule は `NE5532` ＋受動部品だけで、電源は `AMP_V+_IN`/`AMP_V-_IN` という電圧非依存のネット名で受ける。**新旧アーキテクチャの実機比較用**（[DECISIONS.md §8](DECISIONS.md)） |
 
 ## 意図的未決
 
-- **Q3** I²C トポロジー（daisy / スター）
-- GND NetTie 物理位置
-- PD 入口トポロジ **A（いまの図）vs B（パネル入口）** — 議論打ち切り。A なら Power↔Panel 往復端子が追加で必要
+- **PD 入口トポロジ A（いまの図）vs B（パネル入口）** — 議論打ち切り。A なら Power↔Panel 往復端子が追加で必要
+- ControlPanel 側 I²C コネクタ（4P）の物理選定（端子台 vs ピンヘッダ）と footprint
+- GND NetTie の物理位置（ControlPanel 上のどこか）
 - ENC / ノブの正確な秋月コード（在庫次第）
-- ERC / ネットリスト整合

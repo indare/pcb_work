@@ -38,10 +38,10 @@ DC-DC は **`REC10K-2415DAW/H2`（Recom、¥2,404）に確定**（2026-09-02、�
 | `AudioV2Case.kicad_sch`（親） | **`AmpBank` 1枚に差し替え済み**。旧3シート（RelayBoard_A/B, AmpModule_Reference）を撤去 |
 | `PowerModule.kicad_sch`（手編集所有） | **`+15V`/`-15V` へ改名、DKMW20F-12 → -15 に差替え済み**（直接 sexpr 編集。KiCad GUI 未検証） |
 | `ControlPanel.kicad_sch` | **`+15V`/`-15V` へ改名して再生成済み**（生成コード所有なのでスクリプト実行のみ） |
-| 旧 `RelayBoard.kicad_sch` / `AmpModule.kicad_sch` | **削除済み**（`git rm`）。生成関数 `relay_board_wired()`/`amp_module_wired()` はコード上に残置（デッドコード、§2.8 未整理） |
+| 旧 `RelayBoard.kicad_sch` / `AmpModule.kicad_sch` | **削除済み**（`git rm`）。生成関数 `relay_board_wired()`/`amp_module_wired()` も 2026-09-02 に削除（計 638 行。道連れで未使用になった `wire()`/`junction()` も。生成シートはラベル方式でワイヤを使わない） |
 
 残る作業（§2.9 手順6・7 相当）:
-1. **§2.8 所有権モデル表の更新** — 本メモ内でこの手順の一部として反映済み（下記参照）。旧 `relay_board_wired()`/`amp_module_wired()` 関数本体の削除はまだ
+1. **§2.8 所有権モデル表の更新** — 反映済み。旧 `relay_board_wired()`/`amp_module_wired()` 関数本体も 2026-09-02 に削除済み
 2. `CIRCUIT_DESIGN.md` §5・`WIRING.md` 全体・`DECISIONS.md` のRelayBoard/AmpModule前提の記述は**未着手**（重要箇所にのみ「旧アーキテクチャの記録」フラグを追記済み。全面書き換えは別タスク）
 3. `PARTS.md` §4.2「選定・実装メモ」の内容更新（BOM生成ブロックの対象は `AmpBank.kicad_sch` へ切替済み。ただし kicad-cli の制約で**代表 ch1 分＋共通部のみ**表示、×10 は手動換算が要る旨を注記済み。詳細は §5）
 
@@ -446,7 +446,7 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 | 3 | `RelayBoard` / `AmpModule` の削除 | **完了**（2026-09-01、`git rm`） |
 | 4 | 親から3シートを外して `AmpBank` へ | **完了**。`drift` で親シート一致を確認済み |
 | 5 | ネット名 `+15V` / `-15V` へ改名 | **完了**（PowerModule の `DKMW20F-12`→`-15` 差替え含む、全シート） |
-| 6 | §2.8 所有権表の更新 | **一部完了**。表は更新済み。旧 `relay_board_wired()`/`amp_module_wired()` 関数本体の削除は未着手（デッドコードのまま残置） |
+| 6 | §2.8 所有権表の更新 | **完了**。表を更新し、旧 `relay_board_wired()`/`amp_module_wired()` 本体も 2026-09-02 に削除（638 行） |
 | 7 | `gen_parts_bom.py` の対象シート差し替え | **完了**。ただし kicad-cli の制約で ch1 代表 + 共通部のみ（×10 の全数展開は不可、PARTS.md に注記） |
 
 **構造:** `AmpChannel` サブシートを 10 回インスタンス化する（`AudioV2Case → AmpBank → AmpChannel ×10`）。
@@ -501,8 +501,7 @@ GAIN = 1 + Rf/Rg     Rf=R705  Rg=R704
 4. 親 `AudioV2Case.kicad_sch` から `RelayBoard_A` / `RelayBoard_B` / `AmpModule_Reference` の
    3シートを外し、`AmpBank` 1枚に置き換える
 5. **ネット名 `+12V` / `-12V` → `+15V` / `-15V` へ改名**（親・各シート）
-6. `amp_bank_wired()` は**作成済み**。残りは旧 `relay_board_wired()` / `amp_module_wired()` の
-   廃止と、§2.8 所有権表の更新
+6. ✅ `amp_bank_wired()` 作成済み。旧 `relay_board_wired()` / `amp_module_wired()` は削除済み（2026-09-02）。§2.8 所有権表も更新済み
 7. `PARTS.md` の生成ブロック（`gen_parts_bom.py`）の対象シートを差し替え
 
 ---
@@ -883,12 +882,12 @@ git add するか判断すること**（AGENT_HANDOFF は「PCB未設計」と�
    （手編集所有）で差し替え → `power_module_wired()` 追随 → `PARTS.md` → 検証。手順は §2.10
 2. ERC 60 件の仕分け（純増10件は AmpBank 各chの `ground_pin_not_ground` — TMUX7612 VSS=-15V の既知誤検知。残りは元々あった ControlPanel 未接続ピン等、下記2と重複）
 3. **ControlPanel 未接続ピンの整理**（Pico 未使用GPIO、PT2314 未使用入力。§2.9以前からの既知事項）
-4. `WIRING.md` 全面書き換え（RelayBoard 前提の箱配線記述が残っている。冒頭に注意書きを追記済みだが本文は未更新）／`CIRCUIT_DESIGN.md` §5・`DECISIONS.md` の語彙をネット名ベースへ書き換え（SOURCE_OF_TRUTH.md §3）
+4. ~~`WIRING.md` 全面書き換え~~ → **2026-09-02 完了**（AmpBank 構成へ。I²C を 4P に訂正）。`CIRCUIT_DESIGN.md` §5・`DECISIONS.md` の語彙をネット名ベースへ書き換えるのは残作業（SOURCE_OF_TRUTH.md §3）
 5. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
 6. OLED FP、PT2314 未使用入力
-7. ControlPanel 側 I2C/電源コネクタ（5P: `I2C_SDA`/`I2C_SCL`/`3V3`/`+5V`/`D_GND`）の物理実装（フェルール/スプリッタ分岐）
+7. ControlPanel 側 I²C コネクタ（**4P**: `I2C_SDA`/`I2C_SCL`/`3V3`/`D_GND`）の物理実装。**旧記述の 5P は誤り** — `+5V` は AZ850 のコイル駆動用で、アナログスイッチ化により不要（AmpBank 側 `J_CTRL301` は 4P）。相手が1枚だけなのでフェルール/スプリッタ分岐も不要
 8. `PowerModule` の生成コードが現図より1世代古い（PD 前段のみ。`+15V`/`-15V` 改名は反映済み。`drift` で検出済み。手編集所有なので実害は無いが要追従）
-9. `relay_board_wired()` / `amp_module_wired()` デッドコードの削除（§2.8）
+9. ~~`relay_board_wired()` / `amp_module_wired()` デッドコードの削除~~ → **2026-09-02 完了**（638 行）
 10. `PARTS.md` §4.2「選定・実装メモ」の AmpBank 実態への書き換え（TODO 注記のみ済み）
 
 ### 検証
@@ -958,7 +957,7 @@ AudioV2/AGENT_HANDOFF.md を読んで続きから。ブランチは main（origi
   次に KiCad で開いたとき壊れていないか確認すること）
 
 残っている作業:
-- §2.8 所有権表は更新済みだが、relay_board_wired()/amp_module_wired() のデッドコードは未削除
+- relay_board_wired()/amp_module_wired() のデッドコードは 2026-09-02 に削除済み（638 行）
 - WIRING.md（全面）/ CIRCUIT_DESIGN.md §5 / DECISIONS.md の RelayBoard・AmpModule 前提の
   記述はまだ書き換えていない（重要箇所に注意書きのみ追記済み）
 - PARTS.md §4.2「選定・実装メモ」も AmpBank の実態に未更新（TODO注記のみ）
