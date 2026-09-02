@@ -618,15 +618,19 @@ git add するか判断すること**（AGENT_HANDOFF は「PCB未設計」と�
 
 ### 未着手・優先候補
 
-1. ERC 60 件の仕分け（純増10件は AmpBank 各chの `ground_pin_not_ground` — TMUX7612 VSS=-15V の既知誤検知。残りは元々あった ControlPanel 未接続ピン等、下記2と重複）
-2. **ControlPanel 未接続ピンの整理**（Pico 未使用GPIO、PT2314 未使用入力。§2.9以前からの既知事項）
-3. `WIRING.md` 全面書き換え（RelayBoard 前提の箱配線記述が残っている。冒頭に注意書きを追記済みだが本文は未更新）／`CIRCUIT_DESIGN.md` §5・`DECISIONS.md` の語彙をネット名ベースへ書き換え（SOURCE_OF_TRUTH.md §3）
-4. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
-5. OLED FP、PT2314 未使用入力
-6. ControlPanel 側 I2C/電源コネクタ（5P: `I2C_SDA`/`I2C_SCL`/`3V3`/`+5V`/`D_GND`）の物理実装（フェルール/スプリッタ分岐）
-7. `PowerModule` の生成コードが現図より1世代古い（PD 前段のみ。`+15V`/`-15V` 改名は反映済み。`drift` で検出済み。手編集所有なので実害は無いが要追従）
-8. `relay_board_wired()` / `amp_module_wired()` デッドコードの削除（§2.8）
-9. `PARTS.md` §4.2「選定・実装メモ」の AmpBank 実態への書き換え（TODO 注記のみ済み）
+1. **【進行中】絶縁型 DC-DC の代替確定（§2.10）** — `AM10TW-2415DLPZ`/`2412DLPZ` が最有力と確定済み。
+   残るは **±12V か ±15V かの意思決定のみ**（v1 互換という当初理由は §2.9 で失効済みなので、
+   純粋にコスト/性能で選べる）。決まったらシンボル・FP 新規作成 → `PowerModule.kicad_sch`
+   （手編集所有）の差し替え → `power_module_wired()` 追随 → 検証、の順。手順は §2.10 末尾
+2. ERC 60 件の仕分け（純増10件は AmpBank 各chの `ground_pin_not_ground` — TMUX7612 VSS=-15V の既知誤検知。残りは元々あった ControlPanel 未接続ピン等、下記2と重複）
+3. **ControlPanel 未接続ピンの整理**（Pico 未使用GPIO、PT2314 未使用入力。§2.9以前からの既知事項）
+4. `WIRING.md` 全面書き換え（RelayBoard 前提の箱配線記述が残っている。冒頭に注意書きを追記済みだが本文は未更新）／`CIRCUIT_DESIGN.md` §5・`DECISIONS.md` の語彙をネット名ベースへ書き換え（SOURCE_OF_TRUTH.md §3）
+5. PD 往復端子（A のままなら Power↔Panel 用コネクタ追加）or トポロジ B への図変更
+6. OLED FP、PT2314 未使用入力
+7. ControlPanel 側 I2C/電源コネクタ（5P: `I2C_SDA`/`I2C_SCL`/`3V3`/`+5V`/`D_GND`）の物理実装（フェルール/スプリッタ分岐）
+8. `PowerModule` の生成コードが現図より1世代古い（PD 前段のみ。`+15V`/`-15V` 改名は反映済み。`drift` で検出済み。手編集所有なので実害は無いが要追従）
+9. `relay_board_wired()` / `amp_module_wired()` デッドコードの削除（§2.8）
+10. `PARTS.md` §4.2「選定・実装メモ」の AmpBank 実態への書き換え（TODO 注記のみ済み）
 
 ### 検証
 
@@ -707,6 +711,15 @@ python3 Audio/scripts/check_sexpr.py -q AudioV2、python3 AudioV2/scripts/gen_pa
 share/kicad/symbols へのジャンクションとして必要（無いと wire_circuit_design.py が落ちる）。
 kicad-run.sh には PYTHONUTF8=1 を追加済み（Windows コンソールの cp932 対策）。
 今回時点の値: check_sexpr 10ファイル/0、ERC 60件、drift 生成コード所有4/4一致、BOM check rc=0。
+
+【いま進行中】PowerModule の絶縁型 DC-DC の代替調査（§2.10）。現行 DKMW20F-15 が $30.75 と高い、
+というのが発端。Aimtec AM10TW-2415DLPZ（±15V/333mA、Cout 330µF）/ AM10TW-2412DLPZ（±12V/416mA、
+Cout 470µF）が最有力で、価格・電流余裕・Cout・Remote 論理（Open=ON、現行と同一で配線変更不要）の
+すべて一次資料で確認済み。**残るは ±12V か ±15V かの意思決定だけ**（±15V にした当初理由の
+「v1 資産との互換」は §2.9 で RelayBoard/AmpModule が無くなったため失効している）。
+決まったら シンボル/FP 新規作成 → PowerModule.kicad_sch（手編集所有）差し替え →
+power_module_wired() 追随 → check_sexpr/ERC/netlist/drift、の順。手順と候補比較は §2.10 末尾。
+回路図・PARTS.md への反映はまだ一切していない。
 
 I2C/電源はスター確定。端子台は Phoenix MKDS-1,5 系（v1 と同一/互換）。
 A_GND/D_GND の NetTie は ControlPanel 側（Pico 直近）1点。
