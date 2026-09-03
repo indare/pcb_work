@@ -27,6 +27,7 @@ v1 の実機（AudioCase / MeasurementADC）は `Audio/` にあり、こちら�
 雛形: [`.cursor/mcp.json.example`](.cursor/mcp.json.example)
 
 個人の絶対パスはコミットしません。Cursor の変数展開を使います。
+**2026-09-04 に Cursor で実際に動作確認済み**（`${workspaceFolder}` は展開され、`uvx` は PATH から解決される）。
 
 ```json
 {
