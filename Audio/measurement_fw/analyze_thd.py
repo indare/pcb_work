@@ -46,7 +46,12 @@ import sys
 import numpy as np
 
 FULL_SCALE = float(1 << 23)
-INTERFERER_HZ = 1174.8          # 既知の妨害（BRINGUP 実測）
+# 既知の妨害。BRINGUP では 1174.8Hz だったが 2026-09-03 の実測では 1205.7Hz。
+# 自走の非同期源なのでドリフトする。
+INTERFERER_HZ = 1205.7
+# fs/64 の倍音列（BCK 起因、クロック同期なのでドリフトしない）。2026-09-03 に発見。
+# 750*4 = 3000Hz が 1kHz 音の H3 と衝突するので **試験周波数に 1kHz は使えない**。
+CLOCK_SPUR_HZ = 750.0
 HARMONICS = (2, 3, 5)
 
 
@@ -196,8 +201,9 @@ def main() -> None:
     ap.add_argument("files", nargs="*", help="capture_raw.py の出力")
     ap.add_argument("--ch", choices=["L", "R"], default="L",
                     help="既定 L（R は実測で全倍音 14dB 悪い）")
-    ap.add_argument("--f-lo", type=float, default=500.0, help="基本波の探索下限")
-    ap.add_argument("--f-hi", type=float, default=2000.0, help="基本波の探索上限")
+    # 既定は試験周波数 1320Hz を挟む範囲（STATUS の実測でここが最も妨害が少ない）
+    ap.add_argument("--f-lo", type=float, default=1100.0, help="基本波の探索下限")
+    ap.add_argument("--f-hi", type=float, default=1600.0, help="基本波の探索上限")
     ap.add_argument("--show-interferer", action="store_true",
                     help="既知の 1174.8Hz 妨害の位置も出す")
     ap.add_argument("--self-test", action="store_true")
@@ -248,13 +254,18 @@ def main() -> None:
         print("  → 振幅のばらつき(1σ)より小さい石の差は見分けられない。")
 
     if a.show_interferer:
-        print(f"\n既知の妨害 {INTERFERER_HZ}Hz とその倍音の位置:")
         r = runs[0]
-        for k in (1, 2, 3):
-            f = INTERFERER_HZ * k
-            near = [h for h in HARMONICS if abs(r[f"h{h}"]["f"] - f) < 20] if r["h2"] else []
-            warn = f"  ⚠ H{near[0]} と {abs(r[f'h{near[0]}']['f']-f):.1f}Hz しか離れていない" if near else ""
-            print(f"  {f:8.1f} Hz{warn}")
+        print(f"\n既知の妨害と H2/H3/H5 の離隔:")
+        for label, base, ks in (("自走源(ドリフトあり)", INTERFERER_HZ, range(1, 7)),
+                                ("fs/64 系(クロック同期)", CLOCK_SPUR_HZ, range(1, 13))):
+            print(f"  ■ {label} {base}Hz")
+            for k in ks:
+                f = base * k
+                if f >= r["fs"] / 2:
+                    break
+                sep = min((abs(r[f"h{h}"]["f"] - f), h) for h in HARMONICS if r[f"h{h}"])
+                if sep[0] < 150:
+                    print(f"    {f:8.1f} Hz  ⚠ H{sep[1]} と {sep[0]:.0f}Hz しか離れていない")
 
 
 if __name__ == "__main__":
