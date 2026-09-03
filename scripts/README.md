@@ -23,10 +23,35 @@ KiCad は公式 PPA `ppa:kicad/kicad-10.0-releases`（Ubuntu 24.04 で `10.0.6`�
 （本体 + シンボル / フットプリント / テンプレート + `ngspice` + グローバル lib-table のシード）。
 3D モデル (`kicad-packages3d`, 展開 ~5.6GB) は Dockerfile 側も含めないため対象外。
 
-Cloud Agent 環境の `install` コマンドとして実行される。手元でも実行可能:
+### モード
+
+| | 動き |
+|---|---|
+| 既定 | `apt-get` があれば導入する。無ければ**検証のみに落ちる**（下記） |
+| `--verify` | 何も導入せず、揃っているかだけ見て報告する。足りなければ非ゼロ終了 |
 
 ```sh
-bash scripts/cloud-agent-setup.sh
+bash scripts/cloud-agent-setup.sh            # Cloud Agent の install コマンド
+bash scripts/cloud-agent-setup.sh --verify   # 環境が揃っているかだけ見る
 ```
 
 冪等なので再実行しても安全。
+
+### Windows / macOS では検証のみ
+
+`apt-get` が無い環境では導入せず検証だけする。**黙って「セットアップ完了」と
+言わせないため** — 以前は `kicad-cli` と `uv` が既にあるとどちらもスキップし、
+`/usr/share/kicad/template/` が無いので lib-table のコピーも飛ばして、
+何も検証せずに成功を名乗っていた。
+
+検証は置き場の違いを吸収する。KiCad の設定は Linux が `~/.config/kicad/<ver>`、
+Windows が `%APPDATA%/kicad/<ver>`。lib-table の雛形は `kicad-cli` の実体から
+`../share/kicad/template` を辿るので、`/usr/share` でも
+`C:/Program Files/KiCad/<ver>/share` でも同じ式で当たる。
+
+Windows で KiCad は公式インストーラで入れる（このリポジトリは WSL2 / Docker を
+前提にしない）。詳細は `.cursor/rules/kicad-cli-git-bash.mdc`。
+
+> **`ngspice` は Windows の KiCad には CLI が入らない。** 同梱されるのは内蔵
+> シミュレータ用の `ngspice.dll` と `lib/ngspice` だけで、`ngspice -b` は打てない。
+> `AudioV2/spice/*.cir` を回すなら別途入れる。`--verify` はこれを検出する。
