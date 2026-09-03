@@ -175,7 +175,8 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 | **リレードライバ** | **`TBD62083APG`**（DIP-18。`ULN2803` とピン互換） | **`ULN2803` は不採用**（D24）。ダーリントンの約 1 V 降下では 40 ℃ 超で `AZ850` の Must Operate を満たさない。DMOS なら 40 mA で 0.13 V。**1枚に2個要る**（5ch×2コイル=10本 > 8ch。D25 — 4ch/枚なら1個で済んだ分のコスト） |
 | **PT2314** | **PT2314 DIP-28**（回路値 `PT2314-D`） | Princeton DS 28 pin。SOP は初号では使わない |
 | **+9 V LDO** | **ST `L7809CV`**（TO-220） | 入力は **+15 V**（`U202.1 → /+15V`）。PT2314 typ 30 mA → 散逸 **(15−9)×30 mA ≈ 0.18 W**。TO-220 なら放熱器なしで余裕。⚠ TI の `LM78xx` は廃番系なので**回路図の Value も `L7809CV` に揃えてある**（KiCad のシンボル名 `Regulator_Linear:LM7809_TO220` は 78xx 共通の型で、そのまま使える） |
-| **一次ヒューズ**（PD 入力〜DC-DC 間） | **5×20 mm T3.15 A**（または図の 3 A スロー） | ⚠ **この定格は旧 `DKMW20`（20 W、一次 ~2 A）で選んだもの**。`REC10K`（10 W）では一次 **~1 A** なので **3 倍で緩い**。T2 A 級への見直しは未判断（保護と突入電流のどちらを取るか）。ガラス管スローブロー |
+| **一次ヒューズ**（PD 入力〜DC-DC 間） | **5×20 mm `T1.6 A` スローブロー**（ガラス管＋ホルダ）**確定 2026-09-04** | 定常 0.96 A に対し 60 %。3 A で数秒・5 A で瞬時に切れる。旧 `T3.15 A` は PD ポートの供給能力（12 V/3〜5 A 級）の全域で切れず実質「保護なし」だった。突入は 47 µF ぶんで I²t ≈ 0.03 A²s、溶断 I²t の2桁下なので効かない。導出は [DECISIONS.md](DECISIONS.md) §8 |
+| **各コンバータ手前のリセッタブル** | **PPTC** — `+5V_D` に **0.5 A** / `+5V_COIL` に **0.35 A** / `+9V` に **0.1 A**（I_hold）**確定 2026-09-04** | 立ち上げ中はプローブを当てるので自己復帰品にする（一発品だと外して交換になる）。⚠ **回路図には未追加**。詳細と根拠は [DECISIONS.md](DECISIONS.md) §8 |
 | **BP5293** | **BP5293-50**（秋月 111188） | 現行 Audio と同じ +5 V |
 | **DC-DC** | **`REC10K-2415DAW/H2`**（Recom、±15 V / ±333 mA、1″×1″ 6-DIP） | **2026-09-02 に `DKMW20F-15` から変更**（[DECISIONS.md](DECISIONS.md) §8）。穴位置は旧品と同一で差し替え可。DigiKey `945-REC10K-2415DAW/H2-ND` |
 | **PD 給電モジュール** | **ストロベリーリナックス `50224`**（CH224K。DS: [`datasheets/StrawberryLinux_CH224K_manual.pdf`](datasheets/StrawberryLinux_CH224K_manual.pdf)） | **外付けモジュールとして使う。** 板上に USB-C / CH224K チップは載せず、受けの端子（`PD module in`）で 12 V を受ける。**部品は当初と同じで、変わったのは実装形態だけ**（基板内蔵 → 外付け、2026-09-04 訂正）。12 V/15 V のジャンパはモジュール側 |
@@ -262,7 +263,7 @@ Amp 選択後 L/R
 | ENC1601 | ENC_CH | `Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm` | 1 |  |
 | ENC1602 | ENC_VOL | `Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm` | 1 |  |
 | ENC1603 | ENC_TREBLE | `Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm` | 1 |  |
-| F201 | 3A slow |  | 1 |  |
+| F201 | T1.6A slow 5x20 |  | 1 |  |
 | F1601 | Fuse | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 | Fuse |
 | J201 | +15/-15/A_GND out |  | 1 |  |
 | J202 | PD module in (1=GND 2=+12V) |  | 1 |  |
