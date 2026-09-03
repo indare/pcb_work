@@ -176,6 +176,41 @@ def analyze(x: np.ndarray, fs: float, f_lo: float, f_hi: float):
     return out
 
 
+def compare(runs_a: list, runs_b: list, label_a: str, label_b: str) -> None:
+    """2群を高調波の**複素ベクトル**として比較する。
+
+    振幅だけを見ると差を見落とす。DUT の寄与がベースラインに対して直交していると、
+    振幅はほとんど変わらず**位相だけ動く**（実測: OPA2134 → NJM5532 で H3 の振幅差は
+    0.11dB＝1.3σ で有意でないのに、複素では 6.6σ で有意だった）。
+
+    有意度は実部・虚部それぞれの標準誤差で正規化した距離。
+    """
+    print(f"\n=== 複素ベクトル比較: {label_a}  vs  {label_b} ===")
+    print("  （振幅だけでは見落とす。DUT の寄与が直交すると位相だけ動く）")
+    for h in HARMONICS:
+        def vec(runs):
+            v = [10 ** (r[f"h{h}"]["dbc"] / 20)
+                 * np.exp(1j * np.radians(r[f"h{h}"]["rel_deg"]))
+                 for r in runs if r[f"h{h}"]]
+            return np.array(v)
+        a, b = vec(runs_a), vec(runs_b)
+        if len(a) < 2 or len(b) < 2:
+            continue
+        ma, mb = a.mean(), b.mean()
+        sr = np.sqrt(a.real.var(ddof=1) / len(a) + b.real.var(ddof=1) / len(b))
+        si = np.sqrt(a.imag.var(ddof=1) / len(a) + b.imag.var(ddof=1) / len(b))
+        d = mb - ma
+        sig = np.hypot(d.real / sr, d.imag / si) if sr > 0 and si > 0 else 0.0
+        db = lambda z: 20 * np.log10(max(abs(z), 1e-30))
+        # 3σ で検出できる差ベクトルの大きさ
+        lim = db(d) - 20 * np.log10(sig / 3.0) if sig > 0 else float("nan")
+        print(f"  H{h}: {label_a} {db(ma):7.2f}dBc∠{np.degrees(np.angle(ma)):7.2f}°   "
+              f"{label_b} {db(mb):7.2f}dBc∠{np.degrees(np.angle(mb)):7.2f}°")
+        print(f"      差ベクトル {db(d):7.2f} dBc   **{sig:.1f}σ**  "
+              f"{'有意' if sig > 3 else '有意差なし'}   "
+              f"（3σ 検出限界 {lim:.1f} dBc）")
+
+
 def circ_stats(deg: list[float]):
     """位相の平均と広がり（±180 をまたいでも壊れない）。"""
     r = np.exp(1j * np.radians(deg))
@@ -222,6 +257,10 @@ def main() -> None:
     ap.add_argument("--f-hi", type=float, default=1600.0, help="基本波の探索上限")
     ap.add_argument("--show-interferer", action="store_true",
                     help="既知の 1174.8Hz 妨害の位置も出す")
+    ap.add_argument("--vs", nargs="+", metavar="FILE",
+                    help="別条件のキャプチャ群。複素ベクトルで有意差を検定する")
+    ap.add_argument("--label", default="A", help="--vs 使用時の主群のラベル")
+    ap.add_argument("--label-vs", default="B", help="--vs 側のラベル")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
 
@@ -277,6 +316,15 @@ def main() -> None:
         print(f"\n  f0 のドリフト: {f0s.min():.3f} 〜 {f0s.max():.3f} Hz "
               f"({np.ptp(f0s)*1e6/f0s.mean():.0f} ppm)")
         print("  → 振幅のばらつき(1σ)より小さい石の差は見分けられない。")
+
+    if a.vs:
+        other = []
+        for path in a.vs:
+            left, right, fs = load(path)
+            r = analyze(left if a.ch == "L" else right, fs, a.f_lo, a.f_hi)
+            r["path"] = path
+            other.append(r)
+        compare(runs, other, a.label, a.label_vs)
 
     if a.show_interferer:
         r = runs[0]
