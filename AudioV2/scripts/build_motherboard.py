@@ -76,6 +76,9 @@ MOTHER_PINS_R = [
     ("+15V", "output"), ("-15V", "output"), ("A_GND", "bidirectional"),
     ("VCC_TONE", "output"), ("PD_12V", "output"), ("PD_GND", "bidirectional"),
     ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
+    # GND_COIL は NT101 でシート内に閉じていたが、リレー版娘基板のコイル帰路が
+    # ここに繋がるので外へ出す（出さないと母板内とルートで別ネットになる）。
+    ("GND_COIL", "bidirectional"),
     ("PHONE_L", "output"), ("PHONE_R", "output"),
     ("LINE_L", "output"), ("LINE_R", "output"),
 ]
@@ -111,13 +114,17 @@ SLOT_ADDR = {1: ("D_GND", "D_GND"), 2: ("3V3", "D_GND")}
 SLOTS = [(1, (215.9, 50.8), (215.9, 96.52)),
          (2, (279.4, 50.8), (279.4, 96.52))]
 NETTIE_AT = (215.9, 154.94)   # GND_COIL <-> D_GND
-SLOT_LIBS = ["Connector_Generic:Conn_02x05_Odd_Even",
+SLOT_LIBS = ["power:PWR_FLAG",
+             "Connector_Generic:Conn_02x05_Odd_Even",
              "Connector_Generic:Conn_02x06_Odd_Even",
              "Device:NetTie_2"]
 # 娘基板スロットで新たに母板の外へ出る／入るネット
 SLOT_HIER = [("TONE_L", "input"), ("TONE_R", "input"),
              ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
-             ("D_GND", "input"), ("3V3", "input"), ("+5V", "input")]
+             ("D_GND", "input"), ("3V3", "input"), ("+5V", "input"),
+             # ⚠ 親のシートピンを足すだけでは繋がらない。シート側に階層ラベルが
+             #    無いとピンに対応するものが無く、母板内とルートで別ネットになる。
+             ("GND_COIL", "bidirectional")]
 
 # 親から外すシート。母板へ統合される2枚に加え、"MotherBoard" 自身も入れて
 # 再実行を冪等にする（回すたびにシートが増えないように）。
@@ -224,6 +231,17 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
             x, y = tips[num]
             els.append(sch_import.Element("label", _plain_label(net, x, y, ang, just),
                                           None, net, (x, y)))
+        # NetTie 越しだと ERC は駆動側と見なさない。リレー版ドライバの GND が
+        # power_pin_not_driven になるので GND_COIL に PWR_FLAG を立てる。
+        fx, fy = nx - 12.7, ny
+        els.append(sch_import.Element(
+            "symbol",
+            symbol_inst_v10("power:PWR_FLAG", "#FLG0101", "PWR_FLAG", fx, fy, 0, path),
+            "#FLG0101", None, (fx, fy)))
+        ftips = _lib_pin_tips("power:PWR_FLAG", fx, fy)
+        for x, y in ftips.values():
+            els.append(sch_import.Element(
+                "label", _plain_label("GND_COIL", x, y, 0, "left"), None, "GND_COIL", (x, y)))
 
         # 母板の外と繋がるネットを階層ピンにする（scaffold.uid を使うので try の中）
         hx, hy = 340.36, 40.64

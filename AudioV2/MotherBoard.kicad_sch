@@ -10505,6 +10505,98 @@
 		)
 		(uuid "5ee9b81c-09ac-5983-8a98-c5d7a9db5071")
 	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 203.2 154.94 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8bc6e1c0-ee36-5c9d-8c2e-6b518007211b")
+		(property "Reference" "#FLG0101"
+			(at 203.20000000000002 152.4 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "PWR_FLAG"
+			(at 203.20000000000002 157.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "f557caa6-f9a6-5bb5-a638-52380c249340")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "#FLG0101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "GND_COIL"
+		(at 203.20000000000002 154.94 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f8074c71-ce30-54de-ab1b-2acb4be0a62a")
+	)
 	(hierarchical_label "TONE_L"
 		(shape input)
 		(at 340.36 40.64 0)
@@ -10514,7 +10606,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f557caa6-f9a6-5bb5-a638-52380c249340")
+		(uuid "36bbc364-1c69-5a40-ab79-5ba249b1fbfa")
 	)
 	(label "TONE_L"
 		(at 340.36 40.64 0)
@@ -10524,7 +10616,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "8bc6e1c0-ee36-5c9d-8c2e-6b518007211b")
+		(uuid "51406b6c-e58a-5775-ab58-74c6a4e112a9")
 	)
 	(hierarchical_label "TONE_R"
 		(shape input)
@@ -10535,7 +10627,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f8074c71-ce30-54de-ab1b-2acb4be0a62a")
+		(uuid "f44a4364-ec2c-5ab8-8e67-cfd8cdcdd6f6")
 	)
 	(label "TONE_R"
 		(at 340.36 48.26 0)
@@ -10545,7 +10637,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "36bbc364-1c69-5a40-ab79-5ba249b1fbfa")
+		(uuid "c5208f99-b909-53b7-9cc2-5ad5725789b0")
 	)
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
@@ -10556,7 +10648,7 @@
 			)
 			(justify left)
 		)
-		(uuid "51406b6c-e58a-5775-ab58-74c6a4e112a9")
+		(uuid "5ce751a3-8910-538a-a963-6d54b047b43d")
 	)
 	(label "I2C_SDA"
 		(at 340.36 55.88 0)
@@ -10566,7 +10658,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "f44a4364-ec2c-5ab8-8e67-cfd8cdcdd6f6")
+		(uuid "8f5521c0-2e08-5ead-afa4-790cff9ef1bd")
 	)
 	(hierarchical_label "I2C_SCL"
 		(shape bidirectional)
@@ -10577,7 +10669,7 @@
 			)
 			(justify left)
 		)
-		(uuid "c5208f99-b909-53b7-9cc2-5ad5725789b0")
+		(uuid "28b28e17-df2d-59d8-9fb7-85a512c3e589")
 	)
 	(label "I2C_SCL"
 		(at 340.36 63.5 0)
@@ -10587,7 +10679,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5ce751a3-8910-538a-a963-6d54b047b43d")
+		(uuid "2b71da32-d7b6-5f7f-84fe-9e39839d098e")
 	)
 	(hierarchical_label "D_GND"
 		(shape input)
@@ -10598,7 +10690,7 @@
 			)
 			(justify left)
 		)
-		(uuid "8f5521c0-2e08-5ead-afa4-790cff9ef1bd")
+		(uuid "2afde1c6-0e44-5580-bc95-c79e987a84a8")
 	)
 	(label "D_GND"
 		(at 340.36 71.12 0)
@@ -10608,7 +10700,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "28b28e17-df2d-59d8-9fb7-85a512c3e589")
+		(uuid "cd4f75ce-4269-50b8-917a-20dd0adce7b2")
 	)
 	(hierarchical_label "3V3"
 		(shape input)
@@ -10619,7 +10711,7 @@
 			)
 			(justify left)
 		)
-		(uuid "2b71da32-d7b6-5f7f-84fe-9e39839d098e")
+		(uuid "f42432e9-8d65-5053-8c2b-5de4a215c178")
 	)
 	(label "3V3"
 		(at 340.36 78.74000000000001 0)
@@ -10629,7 +10721,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "2afde1c6-0e44-5580-bc95-c79e987a84a8")
+		(uuid "60819a38-1c46-5fef-badd-4b6eba4c135e")
 	)
 	(hierarchical_label "+5V"
 		(shape input)
@@ -10640,7 +10732,7 @@
 			)
 			(justify left)
 		)
-		(uuid "cd4f75ce-4269-50b8-917a-20dd0adce7b2")
+		(uuid "35349fca-4bec-5912-89a5-e52be02141c9")
 	)
 	(label "+5V"
 		(at 340.36 86.36 0)
@@ -10650,7 +10742,28 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "f42432e9-8d65-5053-8c2b-5de4a215c178")
+		(uuid "921da070-8cc3-558e-8e87-feb1907bb167")
+	)
+	(hierarchical_label "GND_COIL"
+		(shape bidirectional)
+		(at 340.36 93.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7bebcf16-9d09-58a3-b8db-dc1e7167939a")
+	)
+	(label "GND_COIL"
+		(at 340.36 93.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "144f132d-8eb7-50df-a44b-f0eb6e9546fc")
 	)
 	(sheet_instances
 		(path "/"

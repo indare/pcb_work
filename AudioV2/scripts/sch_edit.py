@@ -31,12 +31,61 @@ def _key(pt: tuple[float, float]) -> tuple[float, float]:
 _lib_cache: dict[str, dict[str, tuple[float, float]]] = {}
 
 
+def _symbol_body(text: str, name: str) -> str:
+    m = re.search(rf'\n\t\(symbol "{re.escape(name)}"', text)
+    if not m:
+        raise KeyError(name)
+    start, depth, i, in_str = m.start() + 1, 0, m.start() + 1, False
+    while i < len(text):
+        c = text[i]
+        if in_str:
+            if c == "\\":
+                i += 2
+                continue
+            if c == '"':
+                in_str = False
+        elif c == '"':
+            in_str = True
+        elif c == "(":
+            depth += 1
+        elif c == ")":
+            depth -= 1
+            if depth == 0:
+                break
+        i += 1
+    return text[start:i + 1]
+
+
+def lib_pin_names(lib_id: str) -> dict[str, str]:
+    """`(ピン番号 -> ピン名)`。`extends` を辿る。"""
+    lib, name = lib_id.split(":", 1)
+    text = sch_helpers._read_symbol_text(lib, name)
+    body = _symbol_body(text, name)
+    ext = re.search(r'\(extends "([^"]+)"\)', body)
+    if ext and not re.search(r'\(pin \w+ \w+', body):
+        body = _symbol_body(text, ext.group(1))
+    return {
+        num: nm
+        for nm, num in re.findall(
+            r'\(name "([^"]*)"[\s\S]{0,200}?\(number "([^"]+)"', body)
+    }
+
+
 def lib_pins(lib_id: str) -> dict[str, tuple[float, float]]:
-    """ライブラリのピン定義 `(番号 -> (x, y))`。KiCad のシンボルから直接読む。"""
+    """ライブラリのピン定義 `(番号 -> (x, y))`。KiCad のシンボルから直接読む。
+
+    ⚠ `extends` で派生したシンボル（例 `MCP23017x-x-SP` は `...-SO` を継承）は
+    自分ではピンを持たない。辿らないとピンが 0 個になり、シンボルが
+    ネットリストから丸ごと消える。
+    """
     if lib_id in _lib_cache:
         return _lib_cache[lib_id]
     lib, name = lib_id.split(":", 1)
     text = sch_helpers._read_symbol_text(lib, name)
+    body0 = _symbol_body(text, name)
+    ext = re.search(r'\(extends "([^"]+)"\)', body0)
+    if ext and not re.search(r"\(pin \w+ \w+", body0):
+        name = ext.group(1)
     m = re.search(rf'\n\t\(symbol "{re.escape(name)}"', text)
     if not m:
         raise KeyError(lib_id)
