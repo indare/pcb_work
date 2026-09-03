@@ -1244,18 +1244,11 @@ def main() -> None:
     # 手編集所有シート（AudioV2/AGENT_HANDOFF.md §2.8）。KiCad 側が正なので
     # 機械的に上書きしない。--force-<name> は「シートを丸ごと作り直す」ときだけの
     # 脱出ハッチで、通常運用では使わない。
+    # power / output は 2026-09-03 に MotherBoard へ統合され、シートごと legacy/ へ移した。
+    # 親からも参照されていないので書き込み対象から外す。母板を作るのは
+    # build_motherboard.py。power_module_wired() / output_stage_wired() は
+    # 旧構成のロジックの記録として残してあるが、どこにも書き出されない。
     HAND_EDITED = {
-        "power": (
-            "PowerModule.kicad_sch",
-            power_module_wired,
-            "generator is a generation behind: it still emits the on-board USB-C + CH224 "
-            "PD front-end, while the sheet takes PD from an external module (J202/J203)",
-        ),
-        "output": (
-            "OutputStage.kicad_sch",
-            output_stage_wired,
-            "generator does not emit J_RAIL601 (RAIL IN); 5 parts differ in position",
-        ),
         "channel": (
             "AmpChannel.kicad_sch",
             amp_channel_wired,
