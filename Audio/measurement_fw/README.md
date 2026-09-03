@@ -19,6 +19,15 @@
 | `spectrum_monitor.py` | 10 バンドをシリアル表示 |
 | `lcd_test.py` | LCD 単体確認 |
 | `main.py` | 電源投入で `spectrum_lcd.main()` を起動 |
+| `capture_raw.py` | **生サンプルを USB へ base64 で吐くだけ**（THD 測定用。Pico 側で解析しない） |
+| `analyze_thd.py` | **PC 側 float64 解析**。基本波・H2/H3/H5 の dBc と相対位相、複数回の再現性 |
+
+### THD 測定に `spectrum.py` を使わない理由
+
+ブリングアップ実測で **固定小数点 FFT の演算ノイズはピークから約 65dB 下**。
+`NORM_BITS = 15` で 24bit の 9bit を捨て各段で `>>1` するので、
+−100dB 級の高調波は丸め誤差に埋もれる。`power()` は位相も捨てる。
+→ **`capture_raw.py` で生のまま出し、PC 側 numpy(float64) で解析する。**
 
 ## 使い方
 
