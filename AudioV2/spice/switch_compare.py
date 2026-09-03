@@ -83,10 +83,12 @@ def main() -> None:
     print(f"\n段={a.stage} / 負荷{a.rload/1e3:.0f}kΩ / Riso={switch_thd.R_ISO:.0f}Ω / "
           f"ゲイン{switch_thd.GAIN:g} / 1kHz\n")
     print(f"{'部品':22s}{'IC':>3s}{'確度':>7s}" + "".join(f"{v:>9.2f}Vrms" for v in levels))
+    TOTALS = {}   # 下の次数別テーブルと条件が一致しているか突き合わせるために控える
     for key, (name, nic, conf) in CANDIDATES.items():
         cells = []
         for v in levels:
             thd, _, _, _ = switch_thd.run(key, "pchip", v, a.rbias, a.rload, a.stage)
+            TOTALS.setdefault(key, {})[v] = db(thd)
             cells.append(f"{db(thd):9.1f}dB")
         print(f"{name:22s}{nic:>3d}{conf:>7s}" + "".join(cells))
     print("\n  ⚠ 「モデル」行の数値は実 Ron(V) から得たものではない（後述）。")
@@ -101,41 +103,56 @@ def main() -> None:
         c = min(sub, key=lambda p: abs(p[0]))[1]
         print(f"{name:22s}{c:9.2f}Ω{max(ys)-min(ys):20.3f}Ω")
 
-    print("\n--- ON経路の歪みを次数別に（総THDで比較しないこと） ---")
+    print(f"\n--- ON経路の歪みを次数別に（段={a.stage}。上の表と同一条件） ---")
     #   #33: 総THD同士をベクトル合成してはいけない。合成できるのは同じ次数の成分だけ。
     #   総THD は H2..H9 の RSS なので、次数別に見ると像が変わる部品がある。
     print(f"{'部品':22s}{'Vrms':>6s}{'THD(RSS)':>11s}{'H2':>10s}{'H3':>10s}")
+    #   上の総THD表と同じ (rbias, rload, stage) で回し、一致するか自分で検証する。
+    #   ここを固定値でハードコードして構成がズレる事故を起こしたので（#33）。
+    mismatched = []
     for key, (name, _, _) in CANDIDATES.items():
         if not (DATA / f"{key}_ron_curve.json").exists():
             continue
         for v in (4.0, 9.2):
             try:
-                thd, h2, h3, _ = switch_thd.run(key, "pchip", v, 100e3, a.rload, "both")
+                thd, h2, h3, _ = switch_thd.run(key, "pchip", v, a.rbias, a.rload,
+                                                a.stage)
             except Exception:
                 continue
+            if v in TOTALS.get(key, {}) and abs(db(thd) - TOTALS[key][v]) > 0.05:
+                mismatched.append(f"{name}@{v}Vrms")
             print(f"{name:22s}{v:6.1f}{db(thd):10.1f}dB{db(h2):9.1f}dB{db(h3):9.1f}dB")
-    print("  → ADG1407 は H3 支配（9.2Vrms で H2 -129 / H3 -96 と 33dB 差）。")
+    print("  → ADG1407 は H3 支配（9.2Vrms で H2 -133.4 / H3 -96.3 と 37dB 差）。")
     print("     総THD だけ見ていると次数の偏りが見えない。")
     print("  ⚠ MAX14753/14778 の H2 が両振幅で同値(-169dB)なのは数値床。")
     print("     モデルが左右対称パラボラなので偶数次が原理的に出ない（実チップの値ではない）。")
+    if mismatched:
+        print("  ✗ 上の総THD表と条件がズレている: " + ", ".join(mismatched))
+    else:
+        print("  ✓ THD(RSS) 列は上の総THD表と一致（同一条件で計算されている）")
 
-    print("\n--- 判定の基準線（#33 で3回訂正。README「判定の基準線」が正） ---")
-    print("  ① ランダム雑音の bin 床   -137.3 dBFS  DR112dB(A特性) + 処理利得")
-    print("       実使用 N=1024（MAX_N=2048 は確保量）/ Hann 窓 ENBW 1.5bin")
-    print("       10log10(512) - 10log10(1.5) = 25.33dB")
-    print("  ② PCM1804 の歪み          THD+N typ -102 dB  ← 絶対THDを制約するのはこれ")
+    print("\n--- 判定の目安（#33 で3回訂正。確定値ではない。README が正） ---")
+    print("  ① 理想化した概算 bin floor  約 -137 dBFS")
+    print("       DR112dB(A特性) + 処理利得。実使用 N=1024 / Hann 窓 ENBW 1.5bin")
+    print("       ⚠ 112dB は A特性の積分値。雑音が白色・平坦でない限り、ここから")
+    print("         正確な 1bin floor は決まらない（ΔΣ は雑音整形で高域が持ち上がる）。")
+    print("         実際の bin floor は ADC 無入力の実測で確定。")
+    print("  ② PCM1804 の THD+N データシート基準値  typ -102 dB")
     print("       DS p.7: fIN=1kHz, AP System Two, 20k LPF + 400Hz HPF（無加重）")
     print("       ⚠ DR/SNR は A特性。加重が違うので THD+N から SNR は引けない。")
-    print("       ⚠ よって ADC 自身の H2/H3 の実値は不明。実測が要る。")
+    print("       ⚠ これは THD+N の基準値であって『絶対THDの床』そのものではない。")
+    print("         実際の高調波測定限界は H2/H3 baseline 実測で決まる。")
     print("  ③ PT2314                  -60 dB  通常経路では常にこれが支配")
     print()
     print("  やってはいけないこと:")
     print("   ・①を『歪みの床』として使う（①は雑音。処理利得は離散トーンに効かない）")
+    print("   ・①②を確定した測定床として部品を落とす（どちらも実測前の目安）")
     print("   ・②より下だから『見えない』と結論する（同次数は複素和で残る）")
     print("   ・②(総THD+N) と素子の総THD をそのままベクトル合成する（次数別に扱う）")
     print()
-    print("  → 現時点で言えるのは『②近辺で制約される可能性が高い』まで。")
-    print("     ADC 直結 baseline で H2/H3 の振幅・位相を実測するのが次の一手。")
+    print("  → 総量の段階で確定できるのは『②より上の DG507B と ADG1407@9.2Vrms は")
+    print("     確実に測定を汚す』まで。残りは ADC 直結 baseline で H2/H3 の")
+    print("     振幅・位相を実測してから。")
 
     print("\n--- OFF側: ブロードキャスト構成でのBUS合成誤差（20kHz、非選択9ch） ---")
     print(f"{'部品':22s}{'OISO条件':>18s}{'C_off':>9s}{'振幅誤差':>11s}{'漏れ歪み':>11s}")
