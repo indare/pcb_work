@@ -89,7 +89,7 @@ AmpBank の基板パターンで、切替素子はオペアンプの直近にあ
 | 基板 | 接続 | 備考 |
 |---|---|---|
 | HeadphoneBufferModule | OutputStage `to Audio HP Buffer` ＋ ±15 V | |
-| AdcBuffer / MeasurementADC | ±15 V ＋ 測定タップ（**位置 MD で固定**） | 別電源系統 |
+| AdcBuffer / MeasurementADC | ±15 V ＋ 測定タップ（**位置 MD で固定**） | 別電源系統。**⚠ 2026-09-03 にスタック化へ方針変更**（[DECISIONS.md](DECISIONS.md)）。回路は v1 `rev 0.4` のまま、**外形とヘッダだけ AudioV2 のスタック規格へ合わせる**。この行のワイヤ接続は暫定 |
 | v1 RelayBoard / AmpModule | **±15 V と音声で直結できる** | v1 の AmpModule は `NE5532` ＋受動部品だけで、電源は `AMP_V+_IN`/`AMP_V-_IN` という電圧非依存のネット名で受ける。**新旧アーキテクチャの実機比較用**（[DECISIONS.md §8](DECISIONS.md)） |
 
 ## 意図的未決
