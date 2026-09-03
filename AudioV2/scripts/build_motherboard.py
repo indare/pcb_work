@@ -122,6 +122,14 @@ SLOT_LIBS = ["power:PWR_FLAG",
              "Connector_Generic:Conn_02x05_Odd_Even",
              "Connector_Generic:Conn_02x06_Odd_Even",
              "Device:NetTie_2"]
+# 娘基板スロットのフットプリント（A5）。
+#   母板は**メス（ソケット）**、娘基板は**オス**。娘基板側は build_daughter.py が
+#   PinHeader_2x0N_P2.54mm_Vertical を入れている。
+#   ⚠ ピン長（標準 vs ロングピン 11mm）はフットプリントでは区別されない。
+#     パッド配置は同じで、違うのは部品高さだけなので**発注時の属性**として扱う。
+#     基板間 15mm を成立させるのは娘基板側のロングピン品（A5 の案a）。
+SLOT_FP_ANA = "Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical"
+SLOT_FP_PWR = "Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical"
 # 娘基板スロットで新たに母板の外へ出る／入るネット
 # ⚠ 娘基板スロットが要求するネットのうち、母板の中で作られるようになったもの
 #    （TONE_L/R は PT2314、+5V は BP5293）は方向が input -> output に変わる。
@@ -210,16 +218,18 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
     saved_sc, scaffold.uid = scaffold.uid, uid
     try:
         for slot, ana_at, pwr_at in SLOTS:
-            for lib, ref, value, at, nets in (
+            for lib, ref, value, at, nets, fp in (
                 ("Connector_Generic:Conn_02x05_Odd_Even", f"J_ANA10{slot}",
-                 f"SLOT{slot} ANA (D18)", ana_at, SLOT_ANA_NETS),
+                 f"SLOT{slot} ANA (D18)", ana_at, SLOT_ANA_NETS, SLOT_FP_ANA),
                 ("Connector_Generic:Conn_02x06_Odd_Even", f"J_PWR10{slot}",
                  f"SLOT{slot} PWR/CTRL (D18)", pwr_at,
-                 {**SLOT_PWR_NETS, 11: SLOT_ADDR[slot][0], 12: SLOT_ADDR[slot][1]}),
+                 {**SLOT_PWR_NETS, 11: SLOT_ADDR[slot][0], 12: SLOT_ADDR[slot][1]},
+                 SLOT_FP_PWR),
             ):
                 els.append(sch_import.Element(
                     "symbol",
-                    symbol_inst_v10(lib, ref, value, at[0], at[1], 0, path),
+                    symbol_inst_v10(lib, ref, value, at[0], at[1], 0, path,
+                                    footprint=fp),
                     ref, None, at))
                 tips = _lib_pin_tips(lib, at[0], at[1])
                 for num, net in nets.items():
