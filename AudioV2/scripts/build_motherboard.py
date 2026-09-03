@@ -30,8 +30,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import generate_kicad_scaffold as scaffold  # noqa: E402
+import sch_helpers  # noqa: E402
 import sch_import  # noqa: E402
 from generate_kicad_scaffold import PARENT, PROJECT, sheet_block  # noqa: E402
+from sch_helpers import embed_lib_symbols, pin_connect, symbol_inst_v10  # noqa: E402
 
 # 生成コード所有のシートは「回すたびに UUID が変わる」と差分がレビューできない
 # （§2.8 の既知の問題。control を2回流すと 348 行の uuid が毎回変わった）。
@@ -62,23 +64,61 @@ PAPER = "A3"
 
 # 親での母板シート。PowerModule が居た場所を使う（OutputStage の枠は空く）。
 MOTHER_AT = (25.4, 25.4)
-MOTHER_SIZE = (35.56, 86.36)
-# (階層ピン名, 種別, 左右, y)
-MOTHER_PINS = [
-    ("PD_12V_SW", "input", "L", 33.02),
-    ("AMP_SEL_L", "input", "L", 40.64),
-    ("AMP_SEL_R", "input", "L", 48.26),
-    ("+15V", "output", "R", 33.02),
-    ("-15V", "output", "R", 40.64),
-    ("A_GND", "bidirectional", "R", 48.26),
-    ("VCC_TONE", "output", "R", 55.88),
-    ("PD_12V", "output", "R", 63.5),
-    ("PD_GND", "bidirectional", "R", 71.12),
-    ("PHONE_L", "output", "R", 78.74),
-    ("PHONE_R", "output", "R", 86.36),
-    ("LINE_L", "output", "R", 93.98),
-    ("LINE_R", "output", "R", 101.6),
+MOTHER_SIZE = (35.56, 101.6)
+_PIN_Y0, _PIN_PITCH = 33.02, 7.62
+# 左＝入力、右＝出力と双方向。順序がそのまま上からの並びになる。
+MOTHER_PINS_L = [
+    ("PD_12V_SW", "input"), ("AMP_SEL_L", "input"), ("AMP_SEL_R", "input"),
+    ("TONE_L", "input"), ("TONE_R", "input"),
+    ("D_GND", "input"), ("3V3", "input"), ("+5V", "input"),
 ]
+MOTHER_PINS_R = [
+    ("+15V", "output"), ("-15V", "output"), ("A_GND", "bidirectional"),
+    ("VCC_TONE", "output"), ("PD_12V", "output"), ("PD_GND", "bidirectional"),
+    ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
+    ("PHONE_L", "output"), ("PHONE_R", "output"),
+    ("LINE_L", "output"), ("LINE_R", "output"),
+]
+# (階層ピン名, 種別, 左右, y)
+MOTHER_PINS = (
+    [(n, k, "L", _PIN_Y0 + i * _PIN_PITCH) for i, (n, k) in enumerate(MOTHER_PINS_L)]
+    + [(n, k, "R", _PIN_Y0 + i * _PIN_PITCH) for i, (n, k) in enumerate(MOTHER_PINS_R)]
+)
+
+# --- 娘基板スロット（D18 のピン割当）------------------------------------
+#
+# 両版で完全に同一のヘッダ。スイッチ版は +5V_COIL / GND_COIL を使わないだけ。
+# アナログ4本は、直交する隣接ピンが3方向とも A_GND になるよう千鳥に置いてある
+# （標準の 2xNN フットプリントは 奇数=1列目 / 偶数=2列目 で行が y に進む）。
+SLOT_ANA_NETS = {
+    1: "A_GND",  2: "A_GND",
+    3: "TONE_L", 4: "A_GND",
+    5: "A_GND",  6: "TONE_R",
+    7: "AMP_SEL_L", 8: "A_GND",
+    9: "A_GND", 10: "AMP_SEL_R",
+}
+# 11/12 は番地。母板側でスロットごとに D_GND / 3V3 へ落とす（D21）。
+SLOT_PWR_NETS = {
+    1: "+15V",     2: "A_GND",
+    3: "-15V",     4: "A_GND",
+    5: "+5V",      6: "GND_COIL",
+    7: "I2C_SDA",  8: "D_GND",
+    9: "I2C_SCL", 10: "3V3",
+}
+# スロット番号 -> (ADDR0, ADDR1)。0x20 と 0x21。
+SLOT_ADDR = {1: ("D_GND", "D_GND"), 2: ("3V3", "D_GND")}
+# (スロット番号, J_ANA の位置, J_PWR の位置)
+SLOTS = [(1, (215.9, 50.8), (215.9, 96.52)),
+         (2, (279.4, 50.8), (279.4, 96.52))]
+NETTIE_AT = (215.9, 154.94)   # GND_COIL <-> D_GND
+SLOT_LIBS = ["Connector_Generic:Conn_02x05_Odd_Even",
+             "Connector_Generic:Conn_02x06_Odd_Even",
+             "Device:NetTie_2"]
+# 娘基板スロットで新たに母板の外へ出る／入るネット
+SLOT_HIER = [("TONE_L", "input"), ("TONE_R", "input"),
+             ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
+             ("D_GND", "input"), ("3V3", "input"), ("+5V", "input")]
+
 # 親から外すシート。母板へ統合される2枚に加え、"MotherBoard" 自身も入れて
 # 再実行を冪等にする（回すたびにシートが増えないように）。
 REPLACED_SHEETS = ("PowerModule", "OutputStage", "MotherBoard")
@@ -101,12 +141,117 @@ def _label_from_hier(el: sch_import.Element) -> sch_import.Element:
     return sch_import.Element("label", text, None, name, (x, y))
 
 
+def _lib_pin_tips(lib_id: str, sx: float, sy: float, rot: int = 0) -> dict[str, tuple[float, float]]:
+    """ライブラリのピン定義から、配置後の電気的な先端を番号ごとに返す。
+
+    ピン座標を手で写すと間違えるので、KiCad のシンボルから直接読む。
+    """
+    lib, name = lib_id.split(":", 1)
+    text = sch_helpers._read_symbol_text(lib, name)
+    m = re.search(rf'\n\t\(symbol "{re.escape(name)}"', text)
+    if not m:
+        raise KeyError(f"シンボルが見つからない: {lib_id}")
+    start, depth, i, in_str = m.start() + 1, 0, m.start() + 1, False
+    while i < len(text):
+        c = text[i]
+        if in_str:
+            if c == "\\":
+                i += 2
+                continue
+            if c == '"':
+                in_str = False
+        elif c == '"':
+            in_str = True
+        elif c == "(":
+            depth += 1
+        elif c == ")":
+            depth -= 1
+            if depth == 0:
+                break
+        i += 1
+    body = text[start:i + 1]
+    out: dict[str, tuple[float, float]] = {}
+    for px, py, num in re.findall(
+            r"\(pin \w+ \w+\s*\n\s*\(at (-?[\d.]+) (-?[\d.]+) -?[\d.]+\)"
+            r'[\s\S]{0,300}?\(number "([^"]+)"', body):
+        out[num] = pin_connect(sx, sy, rot, float(px), float(py))
+    return out
+
+
+def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
+    """娘基板スロット2組と、コイル帰路の NetTie を組み立てる（D18 / D19 / D21）。"""
+    els: list[sch_import.Element] = []
+    hier_names: list[str] = []
+    path = f"/{PARENT}/{UUID_MOTHER_INST}"
+
+    # symbol_inst_v10 は sch_helpers.new_uid()、hier_label は scaffold.uid() を使う。
+    # 両方とも決定的な uid() に差し替える（片方だけだと再実行でその分だけ差分が出る。
+    # 実際に階層ラベル7本ぶん、uuid 14 行が毎回変わった）。
+    saved_new, sch_helpers.new_uid = sch_helpers.new_uid, uid
+    saved_sc, scaffold.uid = scaffold.uid, uid
+    try:
+        for slot, ana_at, pwr_at in SLOTS:
+            for lib, ref, value, at, nets in (
+                ("Connector_Generic:Conn_02x05_Odd_Even", f"J_ANA10{slot}",
+                 f"SLOT{slot} ANA (D18)", ana_at, SLOT_ANA_NETS),
+                ("Connector_Generic:Conn_02x06_Odd_Even", f"J_PWR10{slot}",
+                 f"SLOT{slot} PWR/CTRL (D18)", pwr_at,
+                 {**SLOT_PWR_NETS, 11: SLOT_ADDR[slot][0], 12: SLOT_ADDR[slot][1]}),
+            ):
+                els.append(sch_import.Element(
+                    "symbol",
+                    symbol_inst_v10(lib, ref, value, at[0], at[1], 0, path),
+                    ref, None, at))
+                tips = _lib_pin_tips(lib, at[0], at[1])
+                for num, net in nets.items():
+                    x, y = tips[str(num)]
+                    # 奇数ピンは左向き、偶数ピンは右向きに出ている
+                    left = num % 2 == 1
+                    els.append(sch_import.Element(
+                        "label",
+                        _plain_label(net, x, y, 180 if left else 0,
+                                     "right" if left else "left"),
+                        None, net, (x, y)))
+
+        nx, ny = NETTIE_AT
+        els.append(sch_import.Element(
+            "symbol",
+            symbol_inst_v10("Device:NetTie_2", "NT101", "GND_COIL-D_GND", nx, ny, 0, path,
+                            footprint="NetTie:NetTie-2_SMD_Pad2.0mm"),
+            "NT101", None, (nx, ny)))
+        tips = _lib_pin_tips("Device:NetTie_2", nx, ny)
+        for num, net, ang, just in (("1", "GND_COIL", 180, "right"), ("2", "D_GND", 0, "left")):
+            x, y = tips[num]
+            els.append(sch_import.Element("label", _plain_label(net, x, y, ang, just),
+                                          None, net, (x, y)))
+
+        # 母板の外と繋がるネットを階層ピンにする（scaffold.uid を使うので try の中）
+        hx, hy = 340.36, 40.64
+        for i, (name, shape) in enumerate(SLOT_HIER):
+            y = hy + i * 7.62
+            els.append(sch_import.Element(
+                "hierarchical_label",
+                scaffold.hier_label(name, shape, hx, y, 0), None, name, (hx, y)))
+            els.append(sch_import.Element("label", _plain_label(name, hx, y, 0, "left"),
+                                          None, name, (hx, y)))
+            hier_names.append(name)
+    finally:
+        sch_helpers.new_uid = saved_new
+        scaffold.uid = saved_sc
+    return els, hier_names
+
+
 def _merge_lib_symbols(blocks: list[str]) -> str:
     """複数シートの (lib_symbols ...) を名前で重複排除して1つにする。"""
     seen: dict[str, str] = {}
     for blk in blocks:
-        for m in re.finditer(r'\n\t\t\(symbol "([^"]+)"', blk):
-            name = m.group(1)
+        # 実図の lib_symbols は 2 タブ、`embed_lib_symbols()` は 1 タブで
+        # `(symbol` を出す。両方受けて 2 タブへ揃える（1タブのままだと
+        # ここの抽出に引っかからず、シンボルが lib_symbols から落ちる。
+        # 落ちると KiCad がピンを解決できず、そのコネクタの全ピンが
+        # 1本のネットに潰れる ＝ 2026-09-03 に実際に踏んだ）。
+        for m in re.finditer(r'\n(\t+)\(symbol "([^"]+)"', blk):
+            indent, name = m.group(1), m.group(2)
             start = m.start() + 1
             depth, i, in_str = 0, start, False
             while i < len(blk):
@@ -126,7 +271,11 @@ def _merge_lib_symbols(blocks: list[str]) -> str:
                     if depth == 0:
                         break
                 i += 1
-            seen.setdefault(name, blk[start:i + 1])
+            body = blk[start:i + 1]
+            if len(indent) < 2:
+                pad = "\t" * (2 - len(indent))
+                body = "\n".join(pad + ln if ln else ln for ln in body.split("\n"))
+            seen.setdefault(name, body)
     body = "\n".join(seen[k] for k in sorted(seen))
     return f"\n\t(lib_symbols\n{body}\n\t)\n"
 
@@ -159,7 +308,13 @@ def build(dry_run: bool = False) -> str:
                     el.ref, el.name, el.at)
             elements.append(el)
 
-    lib = _merge_lib_symbols([h for _, s, *_ in sheets for h in s.header if h.lstrip().startswith("(lib_symbols")])
+    slot_els, slot_hier = daughter_slots()
+    elements.extend(slot_els)
+    hier_seen.update(slot_hier)
+
+    lib = _merge_lib_symbols(
+        [h for _, s, *_ in sheets for h in s.header if h.lstrip().startswith("(lib_symbols")]
+        + [embed_lib_symbols(SLOT_LIBS)])
 
     # 外接は要素のアンカーとワイヤ端だけで測る。symbol の hide 済みプロパティは
     # KiCad が置き去りにした負座標を持つことがあり（例: PowerModule の C206 が

@@ -9,6 +9,11 @@
 統合・移設の検証はこちらを使うこと。
 
     python3 AudioV2/scripts/netlist_partition.py before.net after.net
+    python3 AudioV2/scripts/netlist_partition.py before.net after.net --added J_ANA101,NT101
+
+`--added` を付けると、後のネットリストから**その参照のピンを取り除いてから**比べる。
+部品を足す変更（娘基板スロットの追加など）で「既存の分割は一切変わっていない」ことを
+確かめるのに使う。足した部品だけで閉じた新ネットは別に一覧で出す。
 """
 
 from __future__ import annotations
@@ -32,7 +37,27 @@ def partition(path: str) -> dict[frozenset[str], str]:
 
 
 def main() -> int:
-    a, b = partition(sys.argv[1]), partition(sys.argv[2])
+    argv = sys.argv[1:]
+    added: set[str] = set()
+    if "--added" in argv:
+        i = argv.index("--added")
+        added = {s.strip() for s in argv[i + 1].split(",") if s.strip()}
+        argv = argv[:i] + argv[i + 2:]
+    a, b0 = partition(argv[0]), partition(argv[1])
+    b: dict[frozenset[str], str] = {}
+    brand_new: list[tuple[str, frozenset[str]]] = []
+    for key, name in b0.items():
+        stripped = frozenset(n for n in key if n.split(".")[0] not in added)
+        if not stripped:
+            brand_new.append((name, key))
+            continue
+        b[stripped] = name
+    if added:
+        print(f"後から除いた参照: {', '.join(sorted(added))}")
+        if brand_new:
+            print(f"足した部品だけで閉じた新ネット {len(brand_new)} 本:")
+            for name, key in sorted(brand_new):
+                print(f"    {name}: {' '.join(sorted(key))}")
     only_a, only_b = set(a) - set(b), set(b) - set(a)
     print(f"前: {len(a)} ネット / 後: {len(b)} ネット")
     renamed = [(a[k], b[k]) for k in set(a) & set(b) if a[k] != b[k]]
