@@ -18,18 +18,27 @@ KiCad の基板プロジェクト。現在の作業対象は `AudioV2/`。
 
 ### シートの所有権
 
-[AudioV2/AGENT_HANDOFF.md §2.8](AudioV2/AGENT_HANDOFF.md) の表が正。
-**2026-09-03 に「所有権をスクリプト側へ戻す」方針へ転換した。**
-既存シート（PowerModule / OutputStage / ControlPanel / AmpBank / AmpChannel / 親）は
-**再構成で解体・統合されて消える**ので、保守対象ではなく**新シートを組み立てる素材**。
-いまはまだ KiCad 側が正なので、`--force-<name>` で機械的に上書きしてはいけない。
-`MeasureControl` は再構成の対象外（D11）。
+**2026-09-03 に構成刷新が完了した。シートは4枚。**
 
-素材を読むには **`AudioV2/scripts/sch_import.py`**（分解→再構成がバイト一致することを検証済み、
-`--roundtrip`）。生成コードは 2026-09-03 まで**ワイヤを1本も出せなかった**ので、
-配線を持つシートを作るときは `sch_helpers.py` の `wire()` / `wire_path()` / `junction()` を使う。
+| シート | 誰が作るか |
+|---|---|
+| `MotherBoard` | **`scripts/build_motherboard.py`**（冪等・再実行でバイト一致） |
+| `AmpBankSwitch` / `AmpBankRelay` | **`scripts/build_daughter.py`**（同上） |
+| `MeasureControl` | 生成対象外。**KiCad で直接いじってよい** |
+| `AudioV2Case`（親） | 上の2本がパッチする |
 
-**⚠ ワイヤを使うシートの検証に `drift` は使えない**（比較対象外）。ネットリスト同値で見ること。
+**生成対象のシートを手で直さないこと。** 回すと上書きされる。回路を変えるならスクリプトを直す。
+
+`ControlPanel` / `PowerModule` / `OutputStage` / `AmpBank` は**解体済みで `AudioV2/legacy/` に凍結**。
+**編集しても設計に反映されない**（`build_motherboard.py` が素材として読むだけ）。
+
+道具（すべて `AudioV2/scripts/`）:
+
+- **`sch_import.py`** — `.kicad_sch` を要素へ分解／再構成／平行移動。`--roundtrip` がバイト一致
+- **`sch_edit.py`** — 部品単位の編集。ピン座標は KiCad のシンボルから直読み（`extends` も辿る）
+- **`netlist_partition.py`** — ネットリストを「ピン集合の集合」で比較。**統合・移設の検証はこれ**
+
+**⚠ 配線の検証に `sch_drift.py` を使ってはいけない。** ワイヤもジャンクションも比較対象外。
 
 `generate_kicad_scaffold.py` は再実行しない。
 
@@ -49,6 +58,15 @@ python3 Audio/scripts/check_sexpr.py -q Audio
 docker/kicad-cloud-build/kicad-run.sh erc        # AudioV2 全体の ERC
 docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 ```
+
+**2026-09-03 時点の期待値**（これと違ったら何かが変わっている）:
+
+| | |
+|---|---|
+| `check_sexpr.py -q AudioV2` | **13 ファイル / 問題 0** |
+| `kicad-run.sh erc` | **29 件** |
+| `kicad-run.sh netlist` | **部品 370 個・重複 0・注釈警告なし** |
+| `sch_import.py --roundtrip AudioV2/*.kicad_sch` | **全部 OK** |
 
 イメージがあれば Docker(KiCad 10.0.6)、無ければホストの `kicad-cli` で動く。
 出力は `out/`（gitignore 済み）。詳細は [docker/kicad-cloud-build/README.md](docker/kicad-cloud-build/README.md)。

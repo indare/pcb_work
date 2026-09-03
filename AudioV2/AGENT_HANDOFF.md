@@ -13,13 +13,25 @@
 
 ## 1. いま何をしているか（一言）
 
-**AudioV2 は「オペアンプ10個を差し替えて聴き比べる箱」。** 10ch 分のアンプと切替を
-1枚に載せた `AmpBank` が中心（§2.9）。**回路図は組み上がっていて ERC も通る段階**だが、
-**PCB は未設計**。
+**AudioV2 は「オペアンプ10個を電子的に切り替えて、なんとなく音が違うのを楽しむ箱」。**
+**計測器ではない。** 測定系が載っているのは「切替素子が音を悪くしないか」を確かめるためで、
+**その問いには既に答えが出ている**（切替素子の歪みは −166 dBc で、聴こえるものからも
+測れるものからも 60dB 以上下）。**リレー版とスイッチ版の優劣は測定ではなく耳で決める。**
 
-**2026-09-03: 測定系 `MeasureControl` を v1 からコピーして親へ結線した**（ERC 違反 0）。
-これで**測る側と測られる側が1つのプロジェクトに載った**。境界は7本（§5 A2 の表）で、
-うちアナログ信号は `AMP_SEL_L/R` の2本だけ。**未決は Pico が2個あること**（§5 B4'）。
+**2026-09-03 に構成刷新が完了した。回路図のシートは4枚。PCB は未設計。**
+
+| シート | 中身 | 部品 |
+|---|---|---:|
+| `MotherBoard` | 電源・`PT2314`・出力段・娘基板スロット×2 | 49 |
+| `MeasureControl` | ADC・Pico・LCD・UI（`MCP23017` 0x22） | 101 |
+| `AmpBankSwitch` | `AmpChannel`×5 ＋ `TMUX7612`×3、番地 **0x20** | 15＋5×19 |
+| `AmpBankRelay` | `AmpChannel`×5 ＋ `AZ850P2-5`×5、番地 **0x21** | 15＋5×19 |
+
+**両版が同じ `AMP_SEL` バスに同居している**（D9）ので、同一セッションで切替素子だけを
+比べられる。`ControlPanel` / `PowerModule` / `OutputStage` / `AmpBank` は**解体済み**で
+`AudioV2/legacy/` に凍結してある（編集しても設計に反映されない）。
+
+**残っているのは PCB とケーシングの段階の話だけ**（§5 の B5 / C1 / D-a）。
 
 ### ⚠⚠ 大前提: いまの実測の絶対値で設計判断をしない（2026-09-03、ユーザー判断）
 
@@ -1453,47 +1465,57 @@ AudioV2/AGENT_HANDOFF.md を読んで続きから。ブランチ main、origin �
 ■ まず §5 の「確定事項」と「やること」を読む
 そこが正。§5b は根拠の詳細で、2026-09-03 の構成変更より前の記述を含むので鵜呑みにしない。
 
-■ この基板は何か
-オペアンプ10個を差し替えて聴き比べる箱。**PCB は未設計。**
-2026-09-03 に基板構成を作り直す方針が固まったが、**KiCad の回路図はまだ旧構成のシート割り**
-（PowerModule / ControlPanel / AmpBank / OutputStage ＋ 同日追加した MeasureControl）。
-WIRING.md も旧構成のまま。新構成は DECISIONS.md「2026-09-03 時点の基板構成案」を読むこと。
+■ この装置は何か（ここを外すと優先順位を間違える）
+オペアンプ10個を電子的に切り替えて「なんとなく音が違う」を楽しむ箱。**計測器ではない。**
+測定系が載っているのは「切替素子が音を悪くしないか」を確かめるためで、**その問いには
+既に答えが出ている**（切替素子の歪みは聴こえるものからも測れるものからも 60dB 以上下）。
+**リレー版とスイッチ版の優劣は測定ではなく耳で決める。** 数値で追い込む対象ではない。
 
-  新構成: 母板（アナログ）＋ AmpBank 娘基板 xN（番地付き）＋ 計測/制御基板
-          基板間はヘッダのスタック。ポット・ジャックはパネルからリード戻し
-          PC への USB は 2本→1本
+■ 回路図の現状（2026-09-03 に構成刷新が完了した）
+シートは **4枚**。ControlPanel / PowerModule / OutputStage / AmpBank は**もう無い**。
 
-■ 全シートが「手編集所有」＝ KiCad 側が正（§2.8）
-**wire_circuit_design.py はもうどのシートも書き換えない。** 回路の変更は KiCad で直接行う。
---force-<name> は丸ごと作り直すとき専用。とくに parent を回すと MeasureControl シートが消える。
+  MotherBoard      電源・PT2314・出力段・娘基板スロット×2       49 部品
+  MeasureControl   ADC・Pico・LCD・UI（MCP23017 0x22）        101 部品
+  AmpBankSwitch    AmpChannel×5 ＋ TMUX7612×3    番地 0x20
+  AmpBankRelay     AmpChannel×5 ＋ AZ850P2-5×5   番地 0x21
 
-■ 測る側と測られる側が同じプロジェクトに載った（2026-09-03）
-MeasureControl（v1 MeasurementADC からコピー、参照は 16xx 帯）が親に結線済み、ERC 違反 0。
-基板境界は7本で、アナログ信号は AMP_SEL_L/R の2本だけ（§5 A2 の表 ＝ ヘッダ設計の入力データ）。
-**未決: Pico が2個ある**（U401=ControlPanel / A1602=MeasureControl）。U401 の VSYS が浮いており、
-ERC の宙ぶらりん3件はこの移行の途中状態。消える側は U401（§5 B4'）。
+**両版が同じ AMP_SEL バスに同居している**（D9）。**PCB は未設計。**
+解体済みの旧シートは AudioV2/legacy/ に凍結（編集しても設計に反映されない）。
 
-■ スタック規格（A2）は 2026-09-03 に確定した → D18〜D21
-段構成は「1段目 母板＋計測基板を横並び、2段目 娘基板2枚」。娘基板は 100x80mm、
-M3 四隅5mm、基板間15mm。ヘッダは J_ANA 2x5 と J_PWR_CTRL 2x6 の2個で、
-**両版で完全に同一**（リレー版のコイル +5V を含む上位集合）。番地はスロット側から渡す。
-粒度は 4ch×3枚 から **5ch×2枚** へ変更（母板の横幅で決まった）。詳細は DECISIONS.md。
+■ シートは生成コードで作る。KiCad で直接いじる前に該当スクリプトを見ること
+  build_motherboard.py   母板（legacy/ の3枚を取り込んで組む）＋親のパッチ
+  build_daughter.py      娘基板2版（スイッチ/リレー）＋親のパッチ
+  build_ui_move.py       B4'（UI と I2C マスタを計測基板へ）※一度きり・冪等でない
+  build_ampchannel.py    B0/B1 の実装        ※一度きり・冪等でない
+  build_ampbank.py       旧 AmpBank 用       ※役目を終えた
+  wire_circuit_design.py 旧構成のロジックの記録。**どのシートも書き換えない**
 
-■ 最初にやること（§5 の A1）
-**USB アイソレーションの切り分け。** 1205〜1212Hz の混入が USB グラウンドループ
-由来かを判定する。**当たりならレイアウトでは消えない種類。** Pico を1個に寄せると
-USB も1本になるので、B4'（Pico 統合）の設計に直接効く。
+  build_motherboard.py と build_daughter.py は**冪等でバイト一致**する（再実行で差分ゼロ）。
+  「一度きり」の2本は変換済みシートを食わせると**書き込む前に落ちる**（そう作ってある）。
 
-■ 娘基板の回路を起こす前に B0 を片付けること
-AmpChannel は**まだ「入力も出力も MUX」**（TMUX7612 が 1ch に1個）。決定は
-「入力ブロードキャスト＋出力のみ MUX、×5」。IC 数が半分になり B1 とも直結する。
-ヘッダを渡る信号は変わらないので D18 には影響しない。
+■ シートを機械的に編集する道具（新規、2026-09-03）
+  sch_import.py        .kicad_sch をトップレベル要素へ分解／再構成／平行移動
+                       --roundtrip がバイト一致することを検証済み
+  sch_edit.py          部品単位の編集（remove_symbols / set_value / symbol_tips / lib_pins）
+                       ピン座標は KiCad のシンボルから直読み（extends も辿る）
+  netlist_partition.py ネットリストを「ピン集合の集合」で比較。--added で足した部品を除ける
 
-■ 2026-09-03 に実機測定をやった。手法と罠は Audio/MeasurementADC_BRINGUP.md
-道具: Audio/measurement_fw/ の capture_raw.py（Pico）/ analyze_thd.py（PC）/ make_tone.py
+  ⚠ **統合・移設の検証に sch_drift.py を使ってはいけない。**ワイヤもジャンクションも
+     比較対象に入っていない。**ネットリストの分割**で見ること。
+
+■ 実機（v1 のスペアナ基板）の状態
+  ・回路図は rev 0.4 で全部直っている。MeasureControl はそのコピー
+  ・**物理基板はまだ応急配線のまま**（ASFL 空中配線 / LCD の SPI をヘッダから飛ばし /
+    U710 の1番ピンをリフト）。次号 PCB（B5）で消える
+  ・Pico の main.py は **LCD スペアナ版**（既定）。測定に使うときだけ capture_hold.py 側へ
+    差し替える。差し替え方は Audio/measurement_fw/README.md
+
+■ 2026-09-03 の実機測定。手法と罠は Audio/MeasurementADC_BRINGUP.md
+道具: Audio/measurement_fw/ の capture_raw.py / capture_hold.py / analyze_thd.py / make_tone.py
 
   分解能        抜き差し込みで約 -106 dBc（測定雑音のみなら -111 dBc）
-  ベースライン   H3 -76.17 dBc ← 仮配線由来。**この絶対値で設計判断しないこと**
+  ベースライン   H3 -76.17 dBc ← **仮配線由来。この絶対値で設計判断しないこと**
+                （OPA2134 の DS 値は -122 dB。差 46dB は仮配線とケーシング未了で説明が付く）
 
 **必ず守る3つ:**
 - **複素ベクトルで扱う。** H3 の振幅差 0.11dB(1.3σ)が複素では 6.6σ。振幅だけでは見落とす
@@ -1505,17 +1527,29 @@ AmpChannel は**まだ「入力も出力も MUX」**（TMUX7612 が 1ch に1個�
 - fs/64=750Hz のスプリアス。750x4=3000Hz が 1kHz の H3 と衝突 → **試験周波数は 1320Hz**
 - 信号源と ADC で L/R が入れ替わっている。ADC-R は約6dB高く先にクリップする
 - mpremote で繋ぐとスペアナが止まる（接続時に Ctrl-C が飛ぶ）
+- **mpremote exec は既定でソフトリセットする。** RAM に残したデータを読むときは
+  必ず `resume` を挟む（`mpremote connect <dev> resume exec "..."`）
 - **AmpModule の実装は回路図と違う。Rf=Rg=10.0k でゲイン 2.0**（発注記録で確定）
+- **USB は挿したまま使う。** 抜くと床が 23dB 悪化する（A1 で実測。仮説は否定された）
 
 ■ 議論の作法（この案件で繰り返し失敗した）
 - **数値を並べる前に「同じ条件で測られたか」を確認する。** 加重・回路・振幅の不一致で3回間違えた
 - **雑音の床と歪みの床を混同しない。** 処理利得はランダム雑音にしか効かない
 - **実装値を回路図から推定しない。** 発注記録か実測が正。これで3回間違えた
+- **同居は結合ではない。** 同じシートに A_GND と D_GND が出てもネットリスト上は別ネット
+
+■ 残っているのは PCB とケーシングの段階の話
+  B5   次号 PCB。**「計測基板を母板に統合するか」をここで判断**（方向は1枚寄り）。
+       **DECISIONS.md「PCB を起こすときの申し送り — アースをきちんと処理する」を必ず読む**
+  C1   筐体設計。**シャーシアースを1点で落とす**（2点でループになる）
+  D-a  ERC 29件の仕分け（12件は PT2314 の未使用入力。no_connect を打てば消える）
+  --   パネル部品が母板と計測基板に分散している。Panel シートを立てるかは B4'-2 の続き
 
 ■ 検証
-  python3 Audio/scripts/check_sexpr.py -q AudioV2   → 10ファイル/0
-  docker/kicad-cloud-build/kicad-run.sh erc         → 60件（新構成で作り直すので一部は消える）
-  docker/kicad-cloud-build/kicad-run.sh netlist     → 部品 392 個・重複0・注釈警告なし
+  python3 Audio/scripts/check_sexpr.py -q AudioV2   → 13ファイル/0
+  docker/kicad-cloud-build/kicad-run.sh erc         → 29件
+  docker/kicad-cloud-build/kicad-run.sh netlist     → 部品 370 個・重複0・注釈警告なし
+  python3 AudioV2/scripts/sch_import.py --roundtrip AudioV2/*.kicad_sch  → 全部 OK
 ```
 
 ---
@@ -1525,12 +1559,13 @@ AmpChannel は**まだ「入力も出力も MUX」**（TMUX7612 が 1ch に1個�
 | OK | NG |
 |---|---|
 | `AudioV2/**` の sch / スクリプト / 文書 | `Audio/` 既存製造図の無闇な改変 |
-| 回路の変更を **KiCad 側で直接** 行う（**全シートが手編集所有**、§2.8） | `generate_kicad_scaffold.py` 再実行 |
-| `wire_circuit_design.py` をロジックの記録として読む・直す | `wire_circuit_design.py <target> --force-<name>` で機械的に上書き（とくに `parent` は `MeasureControl` シートが消える） |
+| **母板・娘基板は `build_motherboard.py` / `build_daughter.py` を直して回す**（冪等・バイト一致） | 生成物の `.kicad_sch` を手で直してスクリプトと食い違わせる |
+| `MeasureControl` は KiCad で直接いじってよい（生成対象外） | `AudioV2/legacy/**` を編集する（**凍結。設計に反映されない**） |
 | `MeasureControl` のシンボルは `Audio/` を `sym-lib-table` 経由で参照 | `Audio/*.kicad_sym` を AudioV2 へ複製する |
-| sexpr 編集後は必ず `check_sexpr.py` | `--no-verify` でコミット |
+| sexpr 編集後は必ず `check_sexpr.py` | `generate_kicad_scaffold.py` 再実行 |
+| **統合・移設の検証は `netlist_partition.py`** | **`sch_drift.py` で配線の検証をする**（ワイヤもジャンクションも比較対象外） |
 | 新規作業は **`main`** | 旧 `cursor/audiov2-*` を base |
-| `AmpBank` の生成コードを直す（§2.9） | 旧シート削除・親の差し替え（§2.9 手順3〜7）を**合意なしで**実行 |
+| 実機の Pico は `main.py` = **LCD スペアナ版が既定** | 測定用に差し替えたまま放置する（戻し方は `measurement_fw/README.md`） |
 
 ---
 
@@ -1558,6 +1593,7 @@ AmpChannel は**まだ「入力も出力も MUX」**（TMUX7612 が 1ch に1個�
 | 2026-09-02 | DigiKey Product Information API v4 を実際に疎通（`digikey_search.py`、2-legged）。§2.10 の価格表が **¥ と $ の取り違え**だったことが判明し訂正（AM10TW は ¥9.98 ではなく **¥1,581**）。結論の向き（現行比 69% 安）は不変だが、`AM10GH-2415DLPZ` が AM10TW より安いことが分かり選定を一部再オープン。実測値は `dc_dc_prices.csv` |
 | 2026-09-02 | **切替素子をラッチング DPDT リレー ×20 に確定**（`DECISIONS.md` §11.1a）。§2.9 の統合は維持し素子選択だけ撤回。理由は `Ron(V)` 平坦度が歪みを生むと数値で判明したため。解析ツール `spice/switch_thd.py` / `switch_offiso.py` とデータシートから抽出した Ron 曲線を追加 |
 | 2026-09-02 夕 | 別セッションが切替素子5候補を比較（[issue #33](https://github.com/indare/pcb_work/issues/33)）。**PT2314 のクリップにより DUT 出力の実上限が 4〜5 Vrms** と判明し「9.2Vrms で TMUX7612 が 47dB 損する」というリレー選定の根拠が失効。測定床も PCM1804 の 112dB。**§11.1a を「リレーに確定」から「両案を並行検討。基板として両方設計してもよい」へ差し戻し**。§1/§5/§7 も #33 の状態へ更新（最大の未決事項は入力トポロジ A/B/C 案、#33 コメント2 の5点は未回答） |
+| 2026-09-03 夜 | **構成刷新が完了。シートは 母板 / 計測制御 / 娘基板2版 の4枚になり、`ControlPanel`・`PowerModule`・`OutputStage`・`AmpBank` は `legacy/` へ凍結。** A2(スタック規格)・A3(5ch×2枚)・A6(NetTie は足さない)・B0(出力のみMUX)・B1(入力A案)・B3a/b(娘基板2版)・B4'(Pico を計測側へ統合) を確定して実装。**A1(USB 切り分け)は実測して決着 —— 仮説は否定され、抜くと床が 23dB 悪化した。**道具として `sch_import.py`(往復バイト一致)・`sch_edit.py`・`netlist_partition.py`・`build_motherboard.py`/`build_daughter.py`(冪等・バイト一致)、実機側に `capture_hold.py` を追加。§1/§7/§8 と CLAUDE.md を現状へ書き直し、検証の期待値を 13ファイル/ERC 29件/部品 370個 に更新した。**残りは PCB とケーシングの段階の話だけ**（B5 / C1 / D-a） |
 | 2026-09-03 朝 | **`MeasureControl` を AudioV2 に取り込み、親へ結線完了。ERC 違反 0。あわせて全シートが手編集所有へ卒業した。** v1 `Audio/MeasurementADC1804_Module.kicad_sch` を**コピー**（`Audio/` 側は実機の記録として残す）。シンボルは複製せず `sym-lib-table` から `${KIPRJMOD}/../Audio/` を参照。取り込み時に3つ直した: ①`instances` の project 名が `AudioCase` のまま ②`instances` の path が1段（既存は `/ルート/シート` の2段） ③**参照が 7xx 帯で `AmpBank/AmpCh3` と衝突** → 16xx 帯へ改番（180箇所）。③は最初の衝突チェックで**各シートファイルの静的な参照しか見ておらず、`AmpChannel` が10回インスタンス化されて 600〜1500番台を占めることを見落とした**のが原因。**階層プロジェクトの参照衝突は netlist で見ること。** ユーザーが KiCad で親にシートを配置し、7本のシートピンをラベル＋ワイヤで結線。ネットリストで合流を確認（`+15V_A`→`/+15V`、`-15V_A`→`/-15V`、`A_GND`→`/A_GND`、`ADC_V_IN`→`/PD_12V_SW`、`ADC_GND_IN`→`/PD_GND`、**`AUDIO_L/R_IN`→`/AMP_SEL_L/R`（＝選択されたオペアンプの出力）**）。`ADC_V_IN` は駆動側が `SW402`/`D403` の passive しかなく `U1604 IN+` が `power_pin_not_driven` になったので PWR_FLAG を追加。**GND は v1 の NetTie 構造がそのまま生きており、`ADC_GND`(27) と `D_GND`(17) がそれぞれ1点だけで `A_GND`/`PD_GND` に落ちる** —— D10 の「GND を分離すれば成立する」は回路図上すでに満たされている。**副産物: スタック境界が7本に確定**（`15_V_IN` 3本・`V_IN` 2本・`AUDIO` 2本。アナログ信号は2本だけ）で A2 の入力データになった。**所有権**: ユーザーの手編集で `Control` と `親` が生成コード所有から卒業。この状態で `wire_circuit_design.py parent` を回すと**生成側が `MeasureControl` を出力しないため置いたシートが丸ごと消える**ので、`control`/`parent` を `HAND_EDITED` へ移した（`GENERATED` は空になり、このスクリプトはもうどのシートも書き換えない）。**未決: Pico が2個**（`U401`/`A1602`）。`ControlPanel` の `+5V`→ショットキー→`VSYS` 給電が削除されて `U401` の VSYS が浮いており、ERC の宙ぶらりん3件はこの移行の途中状態（§5 B4'）。ERC 64→60 |
 | 2026-09-03 深夜7 | **#33 クローズ。設計上限 7Vrms の根拠を DUT 比較から外し、スイッチ単独の絶対値に置き直した。** 「`OPA1612` より 23.8dB 下」を根拠にすると、DUT 側が `G=−1/RL2k` の THD+N・実回路が `G=+2/RL50k`・switch 側が個別次数、と揃っていないうえ、**軽い負荷なら実 `OPA1612` はもっと良く差は縮む方向**なので設計保証値にならない。**直接の根拠は「7Vrms = 9.90Vpk が膝（±11V）の明確に内側で、その領域では switch 自身が約 −167dB 級（絶対値）」とスイッチ単独で完結させた。**こうすれば将来 `OPA1612` の 50kΩ 実測がどれだけ良くても設計判断が崩れない。**交差点 7.9Vrms は物理モデルの検証用**（膝 7.78Vrms と独立に一致したことが「膝を外れると急に悪化する」の裏付けになる）で、設計上限の根拠ではない、と明記。**issue #33 は机上検討として完了。次は ADC 直結 H2/H3 baseline 実測（§5 優先候補2）** |
 | 2026-09-03 深夜6 | **振幅を掃引して交差点を特定。経路ごとの振幅上限を3段階に確定（`DECISIONS.md` §11.1a）。** `TMUX7612` の最大次数と `OPA1612` の THD+N を振幅を揃えて掃引すると、**交差は 7.9 Vrms（11.17 Vpk）。`Ron` 平坦領域の膝（±11V = 7.78 Vrms）とほぼ一致**した。独立に出した2つの数字が一致したので「膝より下で使う」が数値で裏付いた。**通常 4〜5 Vrms / 精密 DIRECT 約 7 Vrms（10 Vpk、23dB マージン）/ フルレンジ 9.2 Vrms はリレー等**の3段階。**`TMUX7612` を 4〜5 Vrms に縛る必要はない**（7.07 Vrms でも −167.2dB で 23.8dB マージン）ことが分かったのが実利。代理カーブに `G=−1, RL=2k` を選んだ根拠も補強した——**`G=−1` のノイズゲインは 2 で 非反転 `G=+2` と一致する**（`G=+1` が早くクリップするのは同相入力制限で、`G=+2` なら +入力は `Vout/2`≈6.5Vpk しか振れず余裕がある）。`OPA1612` の抽出値は **typical グラフ由来なので小数点1桁で扱わない**（9.2Vrms は「概ね −144〜−146dB 級」）と明記 |
