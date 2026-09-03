@@ -144,18 +144,31 @@ def main() -> None:
     print("     出力振幅の限界を見るなら G=-1 系（同相制限なし）が適切な代理。")
     print("     9.2Vrms = ±13.0Vpk で、±15V 電源の出力振幅限界にかなり近い。")
 
-    print("\n=== 振幅を揃えた比較（switch の H2/H3 vs DUT の THD+N）===")
-    v, db = curves["G=-1, RL=2k"]     # 出力振幅限界の代理（同相制限なし）
-    for amp, sw_worst, sw_name in ((4.0, -166.6, "TMUX7612 H2"),
-                                   (9.2, -119.7, "TMUX7612 H3")):
+    print("\n=== 振幅を揃えた比較: TMUX7612 の H2/H3 vs OPA1612 の THD+N ===")
+    #   代理カーブに G=-1, RL=2k を使う理由（#33 で補強された）:
+    #   ・G=-1 のノイズゲインは 2 で、非反転 G=+2 のノイズゲインと一致する
+    #   ・非反転 G=+1 は入力が出力と同電位まで振れるので入力同相制限で先にクリップする。
+    #     OPA1612 の同相入力範囲は電源レールから 2V 内側＝±15V なら約±13V。
+    #     G=+2 で 9.2Vrms 出力なら +入力は約 6.5Vpk しか振れないので余裕がある。
+    import switch_thd
+    v, db = curves["G=-1, RL=2k"]
+    print(f"  {'Vrms':>7s}{'Vpk':>7s}{'switch最大次数':>15s}{'OPA1612':>11s}{'差':>9s}")
+    cross = None
+    for amp in (4.0, 5.0, 6.0, 7.0, 7.5, 7.78, 7.9, 8.0, 9.2):
+        _, h2, h3, _ = switch_thd.run("tmux7612", "pchip", amp, 47e3, 50e3, "output")
+        worst = max(switch_thd.db(h2), switch_thd.db(h3))
         dut = float(np.interp(amp, v, db))
-        margin = sw_worst - dut
-        verdict = ("switch が DUT を上回る（支配的）" if margin > 0
-                   else f"switch は DUT より {abs(margin):.1f}dB 下")
-        print(f"  {amp}Vrms: {sw_name} {sw_worst:.1f}dB  vs  OPA1612 THD+N {dut:.1f}dB"
-              f"  → {verdict}")
+        if cross is None and worst > dut:
+            cross = amp
+        print(f"  {amp:7.2f}{amp * 1.414:7.2f}{worst:13.1f}dB{dut:10.1f}dB"
+              f"{worst - dut:8.1f}dB")
+    print(f"  → 交差は {cross} Vrms 付近。Ron 平坦領域の膝（±11V = 7.78Vrms）とほぼ一致する。")
+    print("     膝を越えた瞬間に switch が DUT を上回る。")
+    print()
+    print("  ⚠ OPA1612 の値は typical グラフのベクタ抽出なので、小数点1桁の絶対値として")
+    print("     扱わないこと。9.2Vrms なら『概ね -144〜-146dB 級』が適切な言い方。")
     print("  ⚠ 残る不一致: switch は H2/H3 の個別次数、DUT は THD+N 総量。")
-    print("     負荷も DS 2k / 実回路 50k。ゲインも DS -1 / 実回路 +2。")
+    print("     負荷 DS 2k / 実回路 50k（軽いぶん実 DUT はもっと良い＝ switch に不利）。")
 
 
 if __name__ == "__main__":
