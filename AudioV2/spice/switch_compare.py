@@ -37,6 +37,10 @@ from switch_offiso import coff_from_oiso, solve_broadcast  # noqa: E402
 
 DATA = Path(__file__).resolve().parent / "data"
 
+#   在庫の DUT とその公称 THD。落選判定の基準に使う（ADC 非依存）。
+DUTS = [("NE5532", -94.0), ("MUSES02", -100.0),
+        ("LME49860", -130.5), ("OPA1612", -136.0)]
+
 # name: (表示名, 出力のみに必要なIC数, データ確度)
 CANDIDATES = {
     "tmux7612": ("TMUX7612 (4xSPST)", 5, "実カーブ"),
@@ -110,6 +114,7 @@ def main() -> None:
     #   上の総THD表と同じ (rbias, rload, stage) で回し、一致するか自分で検証する。
     #   ここを固定値でハードコードして構成がズレる事故を起こしたので（#33）。
     mismatched = []
+    orders = {}
     for key, (name, _, _) in CANDIDATES.items():
         if not (DATA / f"{key}_ron_curve.json").exists():
             continue
@@ -121,8 +126,19 @@ def main() -> None:
                 continue
             if v in TOTALS.get(key, {}) and abs(db(thd) - TOTALS[key][v]) > 0.05:
                 mismatched.append(f"{name}@{v}Vrms")
+            orders[(key, v)] = (db(h2), db(h3))
             print(f"{name:22s}{v:6.1f}{db(thd):10.1f}dB{db(h2):9.1f}dB{db(h3):9.1f}dB")
-    print("  → ADG1407 は H3 支配（9.2Vrms で H2 -133.4 / H3 -96.3 と 37dB 差）。")
+
+    #   説明文も実測値から生成する（--stage を変えると表だけ動いて説明が置き去りに
+    #   なる事故を防ぐ。#33）。次数の偏りが大きい部品を自動で拾う。
+    skewed = sorted(((abs(h2 - h3), k, v, h2, h3)
+                     for (k, v), (h2, h3) in orders.items()
+                     if CANDIDATES[k][2] != "モデル"), reverse=True)
+    if skewed:
+        d, k, v, h2, h3 = skewed[0]
+        dom = "H3" if h3 > h2 else "H2"
+        print(f"  → {CANDIDATES[k][0].split()[0]} は {dom} 支配"
+              f"（{v}Vrms で H2 {h2:.1f} / H3 {h3:.1f} と {d:.0f}dB 差）。")
     print("     総THD だけ見ていると次数の偏りが見えない。")
     print("  ⚠ MAX14753/14778 の H2 が両振幅で同値(-169dB)なのは数値床。")
     print("     モデルが左右対称パラボラなので偶数次が原理的に出ない（実チップの値ではない）。")
@@ -149,10 +165,37 @@ def main() -> None:
     print("   ・①②を確定した測定床として部品を落とす（どちらも実測前の目安）")
     print("   ・②より下だから『見えない』と結論する（同次数は複素和で残る）")
     print("   ・②(総THD+N) と素子の総THD をそのままベクトル合成する（次数別に扱う）")
+
+    #   #33: 部品を落とす根拠は ADC 側に置かない。①②が未確定である以上、
+    #   「②より上だから汚す」は同じ②を確定床として使うことになり自己矛盾する。
+    #   スイッチ自身の H2/H3 を DUT の THD と直接比べる方が ADC 非依存で強い。
+    print("\n--- 落選判定（ADC 非依存。スイッチ自身の高調波 vs DUT の THD） ---")
+    print("  低歪の DUT を比較する経路に、DUT より大きい高調波を出す素子は置けない。")
+    print(f"  {'部品':22s}{'Vrms':>6s}{'最大次数':>10s}" +
+          "".join(f"{n:>11s}" for n, _ in DUTS))
+    for key, (name, _, _) in CANDIDATES.items():
+        if CANDIDATES[key][2] == "モデル":
+            continue
+        for v in (4.0, 9.2):
+            if (key, v) not in orders:
+                continue
+            h2, h3 = orders[(key, v)]
+            worst = max(h2, h3)
+            cells = []
+            for _, t in DUTS:
+                cells.append("  覆い隠す" if worst > t else f"{worst - t:8.1f}dB")
+            print(f"  {name:22s}{v:6.1f}{worst:9.1f}dB" + "".join(f"{c:>11s}"
+                                                                 for c in cells))
+    print("  『覆い隠す』= スイッチの高調波が DUT の THD より大きい ＝ その石は測れない。")
     print()
-    print("  → 総量の段階で確定できるのは『②より上の DG507B と ADG1407@9.2Vrms は")
-    print("     確実に測定を汚す』まで。残りは ADC 直結 baseline で H2/H3 の")
-    print("     振幅・位相を実測してから。")
+    print("  → DG507B は 4Vrms でも全 DUT を覆い隠す。明確に不適。")
+    print("     ADG1407 @9.2Vrms は H3≈-96dB で MUSES02 以上の3石を覆い隠すため、")
+    print("     精密 DIRECT 用途には高リスク（4Vrms なら LME49860/OPA1612 の2石）。")
+    print("  ⚠ TMUX7612 @9.2Vrms も LME49860/OPA1612 を覆い隠す（H3 -119.7dB）。")
+    print("     在庫最良の2石まで測れるのは TMUX7612 @4Vrms だけ。")
+    print("     ＝『膝(±11V)より下で使う』は歪みの都合だけでなく、")
+    print("       どの DUT まで測れるかを直接決める設計条件。")
+    print("     最終的な測定影響は ADC baseline 実測後に確定。")
 
     print("\n--- OFF側: ブロードキャスト構成でのBUS合成誤差（20kHz、非選択9ch） ---")
     print(f"{'部品':22s}{'OISO条件':>18s}{'C_off':>9s}{'振幅誤差':>11s}{'漏れ歪み':>11s}")
