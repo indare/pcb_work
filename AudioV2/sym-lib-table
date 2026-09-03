@@ -3,4 +3,6 @@
 	(lib (name "DKMW20") (type "KiCad") (uri "${KIPRJMOD}/../Audio/DKMW20.kicad_sym") (options "") (descr "MEAN WELL DKMW20 (Audio ref)"))
 	(lib (name "BP5293_ROHM") (type "KiCad") (uri "${KIPRJMOD}/../Audio/BP5293_ROHM.kicad_sym") (options "") (descr "ROHM BP5293-50"))
 	(lib (name "AudioV2") (type "KiCad") (uri "${KIPRJMOD}/AudioV2.kicad_sym") (options "") (descr "AudioV2 local symbols (PT2314, DKMW20F-12, CH224 module)"))
+	(lib (name "MeasurementADC1804") (type "KiCad") (uri "${KIPRJMOD}/../Audio/MeasurementADC1804.kicad_sym") (options "") (descr "PCM1804 / ADC1804_F (Audio ref)"))
+	(lib (name "MeasurementADC_Extras") (type "KiCad") (uri "${KIPRJMOD}/../Audio/MeasurementADC_Extras.kicad_sym") (options "") (descr "MeasurementADC 周辺 (Audio ref)"))
 )

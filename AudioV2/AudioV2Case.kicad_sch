@@ -586,6 +586,114 @@
 			)
 		)
 	)
+	(sheet
+		(at 215.9 96.52)
+		(size 50.8 40.64)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "2d4af32f-e475-4ca0-9aa6-e738d6678f72")
+		(property "Sheetname" "MeasureControl"
+			(at 215.9 95.6484 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MeasureControl.kicad_sch"
+			(at 215.9 137.96 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "+15V_A" input
+			(at 215.9 101.60 180)
+			(uuid "1fa29175-0357-40ec-ab5c-1e8942c61d0e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "-15V_A" input
+			(at 215.9 106.68 180)
+			(uuid "221d0384-3da2-45cf-b5b4-8e651dd98ed1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "A_GND" bidirectional
+			(at 215.9 111.76 180)
+			(uuid "e316f56b-be98-465a-bf27-3d54e4956d16")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ADC_V_IN" input
+			(at 215.9 116.84 180)
+			(uuid "8d83cc4a-9dfa-4f7a-a09f-db052802f48c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ADC_GND_IN" input
+			(at 215.9 121.92 180)
+			(uuid "8dd0defb-bba7-4095-a55a-dde9d2839a83")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "AUDIO_L_IN" input
+			(at 215.9 127.00 180)
+			(uuid "1383c167-0c2d-45e4-a2a0-72e7d7693d08")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "AUDIO_R_IN" input
+			(at 215.9 132.08 180)
+			(uuid "c3f4f013-af96-41a1-9b18-31ec1c01e4a9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 
 	(label "+15V"
 		(at 66.04 35.56 0)
