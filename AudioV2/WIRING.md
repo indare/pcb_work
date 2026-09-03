@@ -40,7 +40,7 @@
 | 系統 | 源（Value） | 先（Value） | 形式・注意 |
 |---|---|---|---|
 | アナログ ±15 V | PowerModule `+15/-15/A_GND out` | AmpBank `+15V / A_GND / -15V` | 端子台 3P。**1本だけ**（旧構成は RelayBoard ×2 へ2本） |
-| トーン用 +9 V | PowerModule `VCC_TONE OUT` | ControlPanel PT2314 | 2P。星型の `A_GND` と二重ループにしない |
+| ~~トーン用 +9 V~~ | — | — | **2026-09-04 に消滅。** PT2314 が母板に載り `VCC_TONE` は板上で完結。端子台も削除した |
 | PD 入力 | 外付け **50224 等** → PowerModule `PD module in` | 板上の PD 一次側 | 2P（トポロジ A） |
 | PD 往復 | PowerModule（ヒューズ前） ⇄ ControlPanel パネル PWR SW | | **往復用端子が未実装**（下記「意図的未決」） |
 

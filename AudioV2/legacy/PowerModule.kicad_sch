@@ -1739,16 +1739,6 @@
 	)
 	(wire
 		(pts
-			(xy 175.26 85.09) (xy 171.45 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "041970a1-637e-4e1a-9038-4602c13dfadd")
-	)
-	(wire
-		(pts
 			(xy 73.66 81.28) (xy 78.74 81.28)
 		)
 		(stroke
@@ -2069,16 +2059,6 @@
 	)
 	(wire
 		(pts
-			(xy 175.26 81.28) (xy 177.8 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a4979a09-4f32-4842-806f-3c5385d4f465")
-	)
-	(wire
-		(pts
 			(xy 53.34 85.09) (xy 57.15 85.09)
 		)
 		(stroke
@@ -2236,16 +2216,6 @@
 			(type default)
 		)
 		(uuid "ed555a91-082c-4c63-996a-930d0a23aa52")
-	)
-	(wire
-		(pts
-			(xy 175.26 85.09) (xy 175.26 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f43023ee-649c-411b-83ac-b1ace10be6da")
 	)
 	(wire
 		(pts
@@ -2648,85 +2618,6 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000002-0002-4002-8002-000000000002"
 					(reference "J202")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_01x02_Pin")
-		(at 182.88 81.28 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "1389d314-cbd9-4c31-8ba3-f4965d552958")
-		(property "Reference" "J203"
-			(at 177.8 67.31 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "VCC_TONE OUT (1=A_GND 2=9V)"
-			(at 179.07 69.85 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 208.28 167.64 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 208.28 167.64 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 208.28 167.64 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "b1a56ae5-49aa-4dc4-bdd7-c44d0115a8db")
-		)
-		(pin "2"
-			(uuid "a98e6cff-fa79-4f44-8cbf-ff6a972ff060")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000002-0002-4002-8002-000000000002"
-					(reference "J203")
 					(unit 1)
 				)
 			)
