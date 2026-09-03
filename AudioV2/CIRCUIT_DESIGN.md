@@ -146,28 +146,49 @@ PCB は未設計（2026-09-01 に削除）。着手時は `Audio/split/AudioCase
 
 ## 7. KiCad 更新チェックリスト
 
+**2026-09-03 の構成刷新で `ControlPanel` / `PowerModule` / `OutputStage` / `AmpBank`（および
+それ以前に廃止された `RelayBoard` / `AmpModule`）は解体され、`legacy/` に凍結された。**
+それらの基板に対する未完了項目は**もう作業対象ではない**ので、下は現行構成の残りだけ。
+現行のシート構成は [CLAUDE.md](../CLAUDE.md)「シートの所有権」が正。
+
+- [ ] OLED KiCad FP — 0.91″ 埋め込みを 2.42″ or 1×4 ヘッダに差し替え
+- [ ] ERC 整理（未接続・未使用 PT2314 入力）
+- [ ] 未使用 PT2314 入力の AC-GND 実装
+- [ ] PCB — 母板・娘基板とも未設計（旧 AmpModule PCB 用にまとめた要件は [PARTS.md](PARTS.md) §4.2 に残る）
+
+### 刷新前に完了していた項目（2026-09-03 までの記録）
+
 - [x] PT2314 シンボル — **28pin DS 一致**
 - [x] PGA2310 / DEST ラッチング / ENC_HP·LINE·DEST — **削除**
-- [x] OutputStage — SW_DP3T + A50k Dual ×2
-- [x] ControlPanel — ENC×3 + DEST ラダー + LED
+- [x] OutputStage — SW_DP3T + A50k Dual ×2（→ シートは母板へ統合）
+- [x] ControlPanel — ENC×3 + DEST ラダー + LED（→ シート解体。UI は `MeasureControl` へ、PT2314 は母板へ）
 - [x] `check_sexpr.py -q AudioV2` — OK
 - [x] `kicad-cli sch export netlist` — OK（annotation 警告はドラフト）
 - [x] 3PDT / A50k 具体型番 — [PARTS.md](PARTS.md)
 - [x] 表示品番 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）
-- [x] AmpModule — 代表回路図、バルク/1 nF対応、×10注記
-- [ ] AmpModule PCB — **未着手**（要件は [PARTS.md](PARTS.md) §4.2）
-- [ ] OLED KiCad FP — 0.91″ 埋め込みを 2.42″ or 1×4 ヘッダに差し替え
-- [ ] ERC 整理（未接続・未使用 PT2314 入力）
-- [x] RelayBoard 本配線 — 5ch×2、入力＋電源連動、ERC 0件/instance
-- [ ] RelayBoard PCB — JP横 F.Silk に番地早見表（0x20 A … 0x23 D）
-- [ ] 未使用 PT2314 入力の AC-GND 実装
+- [x] AmpModule — 代表回路図、バルク/1 nF対応、×10注記（→ 廃止。10ch は娘基板側へ）
+- [x] RelayBoard 本配線 — 5ch×2、入力＋電源連動（→ 基板ごと廃止。PCB 用の番地早見表シルクも不要になった）
 
 ## 8. 再生成
 
+どのシートを誰が生成するかは [CLAUDE.md](../CLAUDE.md)「シートの所有権」が正。
+現行の再生成手段はこの2本で、どちらも冪等（再実行でバイト一致）。`--dry-run` で内訳だけ出る。
+
 ```bash
-python3 AudioV2/scripts/wire_circuit_design.py all
+python3 AudioV2/scripts/build_motherboard.py   # 母板 ＋ 親のパッチ
+python3 AudioV2/scripts/build_daughter.py      # 娘基板2版（スイッチ / リレー）＋ 親のパッチ
 python3 Audio/scripts/check_sexpr.py -q AudioV2
 ```
+
+`MeasureControl` は生成対象外（KiCad 側が正）。ERC・ネットリストの検証コマンドと
+期待値は CLAUDE.md にある。
+
+> **⚠ `wire_circuit_design.py` は再生成の道具ではない。** 旧構成（`PowerModule` /
+> `ControlPanel` / `OutputStage` / `AmpBank`）のロジックの記録として残してあるだけで、
+> **現行のシートを出力する経路を持たない**（[AGENT_HANDOFF.md](AGENT_HANDOFF.md) §2.8、
+> および同「別チャット再開プロンプト」の道具一覧）。
+> かつてこの節が案内していた `wire_circuit_design.py all` は再生成にならないので使わない。
+> `generate_kicad_scaffold.py` も再実行しない（手回し音量前の素案に戻る）。
 
 ---
 
@@ -179,3 +200,4 @@ python3 Audio/scripts/check_sexpr.py -q AudioV2
 | 2026-08-30 | **手回し化** — PGA 削除、PT2314 28pin 再作成、OutputStage ポット+トグル |
 | 2026-08-30 | **品番** — SW_DEST=7303SYZQE、RV=RK27112A00CF（[PARTS.md](PARTS.md)） |
 | 2026-08-31 | **Amp再版** — ゲイン2（20k/20k）、±12 V、100 µF/100 nF/1 nF、独立PCB |
+| 2026-09-03 | §8 の再生成手段を `build_motherboard.py` / `build_daughter.py` に差し替え（`wire_circuit_design.py all` は再生成にならない）。§7 チェックリストから解体済みシートの未完了項目を外し、記録として分離 |
