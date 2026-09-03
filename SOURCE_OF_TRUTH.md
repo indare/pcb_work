@@ -3,8 +3,9 @@
 このリポジトリには「同じことが2箇所に書いてある」ことによる事故が繰り返し起きている。
 その予防のための方針。**エージェント（Claude / Cursor）も人間もこれに従う。**
 
-関連: シートごとの「生成スクリプト vs KiCad」の所有権は
-[AudioV2/AGENT_HANDOFF.md §2.8](AudioV2/AGENT_HANDOFF.md) が正。ここでは重複させない。
+関連: シートごとの「生成スクリプト vs KiCad」の所有権と再生成の順は
+[CLAUDE.md](CLAUDE.md) が正。ここでは重複させない。
+そう決めた理由と移行期の記録は [AudioV2/AGENT_HANDOFF.md §2.8](AudioV2/AGENT_HANDOFF.md)。
 
 ---
 

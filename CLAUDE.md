@@ -5,7 +5,27 @@ KiCad の基板プロジェクト。現在の作業対象は `AudioV2/`。
 ## 最初に読むもの
 
 - **[SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md)** — 何をどこに書くか。ドキュメント編集の前に必読
-- **[AudioV2/AGENT_HANDOFF.md](AudioV2/AGENT_HANDOFF.md)** — 長い文脈・確定事項・シート所有権(§2.8)
+- **[AudioV2/AGENT_HANDOFF.md](AudioV2/AGENT_HANDOFF.md)** — 長い文脈・確定事項・決定の理由と履歴
+
+## Cursor と Claude で同じに動かすために
+
+このリポジトリは Cursor と Claude Code の両方から触られる。**同じ事実を2箇所に書くと
+必ず片方が腐る** — 実際 `.cursor/rules/work-on-main.mdc` は2世代遅れて、解体済みの
+シート名と、回すと `MeasureControl` が消えるコマンドを指示していた（2026-09-03 に修正）。
+
+なので、正は1つに決めてある:
+
+| 事実 | 正 | どう届くか |
+|---|---|---|
+| シートの所有権・再生成の順・検証の期待値 | **このファイル** | Claude は自動で読む。Cursor は `work-on-main.mdc` から誘導 |
+| 何をどこに書くか | [SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md) | 両方。Cursor 側は `source-of-truth.mdc` が要約＋誘導 |
+| S式を壊さない手順 | `.cursor/rules/kicad-sexpr-integrity.mdc` | 両方。Cursor 用の置き場だが**リポジトリ共通のルール** |
+| Windows での kicad-cli の回し方 | `.cursor/rules/kicad-cli-git-bash.mdc` | 両方。同上 |
+| 長い文脈・決定の理由・履歴 | [AudioV2/AGENT_HANDOFF.md](AudioV2/AGENT_HANDOFF.md) | 両方 |
+
+`.cursor/rules/*.mdc` のうち `alwaysApply: true` のものは Cursor が必ず読む。
+**禁止事項（踏むと壊れるもの）だけは重複して書いてよい** — リンク先にあると踏む。
+それ以外は正へのリンクにして、表や数値を複製しない。
 
 ## 守ること
 

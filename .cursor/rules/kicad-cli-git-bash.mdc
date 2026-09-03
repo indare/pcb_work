@@ -8,7 +8,7 @@ alwaysApply: true
 When the workspace OS is Windows/win32:
 
 - Use Git Bash for KiCad CLI commands.
-- KiCad CLI is available as KiCad 10.0.1 on PATH inside Git Bash.
+- KiCad CLI is available as KiCad 10.0.6 on PATH inside Git Bash (verified 2026-09-03).
 - Prefer running KiCad CLI commands via:
   `& "C:\Program Files\Git\bin\bash.exe" -lc 'kicad-cli version'`
 - In Git Bash, `kicad-cli` is on PATH from `/c/Program Files/KiCad/10.0/bin`.

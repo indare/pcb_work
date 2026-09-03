@@ -87,7 +87,12 @@ cd AudioV2 && kicad-cli sch export netlist -o /tmp/audiov2.net AudioV2Case.kicad
 | Cloud-B | **WP-B** | 完了（`main`） |
 | 親 | メンテ / ERC / Relay | `main` |
 
-WP-A と WP-B が両方 `*.kicad_sch` の埋め込みを触る場合は **B が A の後に再生成**するか、B が A の sym 修正を取り込んでから `wire_circuit_design.py all`。
+WP-A と WP-B が両方 `*.kicad_sch` の埋め込みを触る場合は **B が A の後に再生成**するか、
+B が A の sym 修正を取り込んでから再生成する。
+
+> **再生成の手段は 2026-09-03 に変わった。** 上の表で `[x]` になっている `wire_circuit_design.py all`
+> は当時の手段で、**いまは使わない**（`GENERATED` が空でどのシートも書き出さない）。
+> 現行は `build_daughter.py` → `build_motherboard.py` の順。正は [CLAUDE.md](../CLAUDE.md)。
 
 ---
 
