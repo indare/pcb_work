@@ -225,7 +225,7 @@ Amp 選択後 L/R
 **手で編集しないでください**（次の再生成で消えます）。値・フットプリント・役割を直すときは KiCad の回路図側を直し、
 `python3 AudioV2/scripts/gen_parts_bom.py` で再生成します。
 
-行数 88 / 部品総数 366。うち **Footprint 未設定 43 個**（§5）。
+行数 90 / 部品総数 368。うち **Footprint 未設定 44 個**（§5）。
 
 > `Refs` 列と `Value` / `Role` 列に**位置の対応はありません**。kicad-cli はグループ内の値を重複除去してアルファベット順に並べるため、「n 番目の参照 = n 番目の役割」とは読めません。
 
@@ -264,7 +264,9 @@ Amp 選択後 L/R
 | ENC1602 | ENC_VOL | `Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm` | 1 |  |
 | ENC1603 | ENC_TREBLE | `Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm` | 1 |  |
 | F201 | T1.6A slow 5x20 |  | 1 |  |
+| F202 | PPTC 0.35A hold |  | 1 |  |
 | F1601 | Fuse | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 | Fuse |
+| F1602 | PPTC 0.5A hold | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 | Fuse |
 | J201 | +15/-15/A_GND out |  | 1 |  |
 | J202 | PD module in (1=GND 2=+12V) |  | 1 |  |
 | J1601 | AUDIO | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
