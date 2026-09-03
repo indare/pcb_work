@@ -19,10 +19,17 @@ KiCad の基板プロジェクト。現在の作業対象は `AudioV2/`。
 ### シートの所有権
 
 [AudioV2/AGENT_HANDOFF.md §2.8](AudioV2/AGENT_HANDOFF.md) の表が正。
-**2026-09-03 時点で AudioV2 の全シートが「手編集所有」**（KiCad 側が正）。
-`wire_circuit_design.py` はどのシートも書き換えず、ロジックのドキュメントと
-`drift` の比較基準としてだけ残っている。回路の変更は KiCad 側で直接行う。
-`--force-<name>` はシートを丸ごと作り直すとき専用の脱出ハッチで、通常運用では使わない。
+**2026-09-03 に「所有権をスクリプト側へ戻す」方針へ転換した。**
+既存シート（PowerModule / OutputStage / ControlPanel / AmpBank / AmpChannel / 親）は
+**再構成で解体・統合されて消える**ので、保守対象ではなく**新シートを組み立てる素材**。
+いまはまだ KiCad 側が正なので、`--force-<name>` で機械的に上書きしてはいけない。
+`MeasureControl` は再構成の対象外（D11）。
+
+素材を読むには **`AudioV2/scripts/sch_import.py`**（分解→再構成がバイト一致することを検証済み、
+`--roundtrip`）。生成コードは 2026-09-03 まで**ワイヤを1本も出せなかった**ので、
+配線を持つシートを作るときは `sch_helpers.py` の `wire()` / `wire_path()` / `junction()` を使う。
+
+**⚠ ワイヤを使うシートの検証に `drift` は使えない**（比較対象外）。ネットリスト同値で見ること。
 
 `generate_kicad_scaffold.py` は再実行しない。
 
