@@ -116,3 +116,35 @@ Pico は横向き。**南の列が西→東 1〜20、北の列が東→西 21〜
 ## 応急構成（初号機）
 
 U710 1番リフト、Y701 空中配線、LCD SPI 飛ばし。詳細は `../MeasurementADC_BRINGUP.md`。
+
+## `capture_hold.py` — USB を抜いたまま測る（A1 の切り分け）
+
+`capture_raw.py` は `sys.stdout`（USB シリアル）に吐くので USB が要る。
+だが **A1 で確かめたいのは「USB を抜くとスプリアスが消えるか」**なので、
+挿したまま採ったのでは意味が無い。`capture_hold.py` は **RAM に保持して止まる**。
+
+```
+1. USB を抜く
+2. Pico 上で main.py を main_capture.py の内容に差し替えておく（LCD スペアナは起動しない）
+3. 基板の電源を入れ直す
+4. 1320Hz を流す            → 音が来たら自動でラッチして停止する
+5. USB を挿して mpremote で繋ぐ（接続時の Ctrl-C でアイドルが割れる）
+6. import capture_hold; capture_hold.status()   → 何本採れたか
+   import capture_hold; capture_hold.dump()     → capture_raw.py と同じ書式で吐く
+7. analyze_thd.py にそのまま渡せる
+```
+
+**なぜ成立するか:**
+
+- **電源が USB に依存しない。** Pico の VSYS は `D701`（ショットキ）経由で基板の
+  `+5V_D` から来ている。USB を抜いても動き続ける
+- **`mpremote` は Pico をリセットしない。** 接続時に Ctrl-C を送るだけなので、
+  モジュールのグローバル（`capture_hold.HOLD`）は生き残る
+- **採ったら止まる。** 連続で採り続けると **USB を挿した瞬間の汚れたデータで
+  上書きしてしまい、切り分けにならない**
+
+**副次的な利点:** LCD スペアナを起動しないので **SPI 40MHz が止まった状態**で測れる。
+前回の測定も `mpremote` 接続でスペアナが止まっていたので、**条件が揃って直接比較できる**。
+
+RAM は1本 128KB（16384 frames × 2ch × 4B）。`N_HOLD` は既定 2 で、
+`MemoryError` になったら 1 に落ちる。`status()` が `mem_free` を出す。
