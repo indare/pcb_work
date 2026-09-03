@@ -6,7 +6,7 @@
 |---|---|
 | `Dockerfile.10.0.6` | `kicad-cli` 10.0.6 をソースビルドするイメージ定義 |
 | `kicad-run.sh` | リポジトリのファイルに対して kicad-cli を回すラッパー |
-| `sch_drift.py` | `kicad-run.sh drift` が使う回路図の突き合わせ（S式パーサ + 差分） |
+| `sch_drift.py` | 旧構成向けの回路図突き合わせ（S式パーサ + 差分）。**`kicad-run.sh` からは呼ばれない**（下の「生成スクリプトと実図の突き合わせ」） |
 
 公式の Docker Hub イメージ (`kicad/kicad`) が 10.0.6 に追随する前でも、KiCad公式リポジトリの `10.0.6` タグから直接ビルドすることで最新版を使える。ビルドレシピは KiCad 公式の [`kicad/packaging/kicad-docker`](https://gitlab.com/kicad/packaging/kicad-docker)（`Dockerfile.10.0-stable`）をベースに、Debian trixie 向けの内容を Ubuntu 24.04 用のパッケージ名に置き換えたもの。
 
@@ -22,7 +22,7 @@ docker/kicad-cloud-build/kicad-run.sh build
 docker/kicad-cloud-build/kicad-run.sh erc
 ```
 
-出力は `out/erc.json` と `out/erc.rpt`。標準出力には違反の種別ごとの集計が出る（下は `KICAD_BACKEND=local` で実行したときの例）。
+出力は `out/erc.json` と `out/erc.rpt`。標準出力には違反の種別ごとの集計が出る（下は `KICAD_BACKEND=local` で実行したときの例）。**件数は 2026-09-01 の実測で、現在の期待値は [`CLAUDE.md`](../../CLAUDE.md) が正**（ここでは追随しない）。
 
 ```
 ERC: AudioV2/AudioV2Case.kicad_sch  (backend=local, image=kicad-cloud:10.0.6)
@@ -48,7 +48,6 @@ ERC 違反 合計 54 件
 |---|---|
 | `erc [SCH]` | ERC実行。既定の対象は `AudioV2/AudioV2Case.kicad_sch`（階層ルート）。`out/erc.json` + `out/erc.rpt` |
 | `netlist [SCH]` | ネットリスト出力（kicadsexpr）。`out/netlist.net` |
-| `drift` | 生成スクリプトの出力と実図の乖離をシート単位で報告。`out/drift.json` |
 | `cli ARGS...` | 任意の `kicad-cli` コマンドをそのまま実行 |
 | `version` | 使用中の kicad-cli のバージョン |
 | `shell` | コンテナ内で対話シェル（dockerバックエンド専用） |
@@ -60,8 +59,8 @@ ERC 違反 合計 54 件
 # AudioV2 全体
 docker/kicad-cloud-build/kicad-run.sh erc
 
-# シート単位（例: RelayBoard だけ）
-docker/kicad-cloud-build/kicad-run.sh erc AudioV2/RelayBoard.kicad_sch
+# シート単位（例: 母板だけ）
+docker/kicad-cloud-build/kicad-run.sh erc AudioV2/MotherBoard.kicad_sch
 
 # 違反があれば失敗させる
 docker/kicad-cloud-build/kicad-run.sh erc --strict
@@ -70,100 +69,45 @@ docker/kicad-cloud-build/kicad-run.sh erc --strict
 docker/kicad-cloud-build/kicad-run.sh netlist
 ```
 
-### `drift` — 生成スクリプトと実図の乖離を見る
+### 生成スクリプトと実図の突き合わせ（`drift` は廃止）
 
-`AudioV2/scripts/wire_circuit_design.py` が生成する回路図と、リポジトリの実図（KiCad上で手編集されたもの）がどれだけ離れたかをシート単位で報告する。**同期はしない。ズレを見せるだけ。**
+`kicad-run.sh drift` と、それが使っていた「`wire_circuit_design.py` を一時ディレクトリで回して
+実図と突き合わせる」仕組みは **2026-09-03 に削除した**。理由は2つ。
 
-```sh
-docker/kicad-cloud-build/kicad-run.sh drift
+- **前提が消えた。** 構成刷新で現行シートを作るのは `AudioV2/scripts/build_motherboard.py` /
+  `build_daughter.py` になり、`wire_circuit_design.py` は**どのシートも書き出さない**
+  （旧構成のロジックの記録として残っているだけ）。drift はそれを回していたので比較対象が空になる。
+  `--force-*` で無理に書かせても出てくるのは `AudioV2/legacy/` に凍結された旧シートで、
+  **現行シートは全部「対象外・比較していない」に落ちる**。実際の出力は
+  「リポジトリ側に旧シートが無い＝乖離あり」という**逆向きの警告**になっていた
+- **もともと配線の検証には使えない。** ワイヤ・ジャンクション・`no_connect` の実配線と、
+  ラベルがどのワイヤに付いているかを比較対象に入れていない
+  （[`CLAUDE.md`](../../CLAUDE.md)・[`AGENT_HANDOFF.md`](../../AudioV2/AGENT_HANDOFF.md) §2.8）
 
-# 乖離があれば非ゼロ終了（CI用）
-docker/kicad-cloud-build/kicad-run.sh drift --strict
-```
+代わりに使うもの:
 
-やっていること:
-
-1. 一時ディレクトリに `AudioV2/` をコピーし、`Audio/*.kicad_sym` も兄弟として置く（生成スクリプトが `../Audio/BP5293_ROHM.kicad_sym` などを読むため。無いと落ちる）
-2. コピー側の `*.kicad_sch` を消してから `wire_circuit_design.py all` を回す（実図のコピーが残っていると、生成されないシートが「乖離ゼロ」に見えてしまう）
-3. 手編集所有シート（[AGENT_HANDOFF.md](../../AudioV2/AGENT_HANDOFF.md) §2.8）は既定でスキップされるので `--force-relay` などを付けて強制生成する。drift が見たいのは「いま生成したらどうなるか」なので強制でよい
-4. 生成物とリポジトリの実図を突き合わせて報告する
-
-**リポジトリの `*.kicad_sch` には一切書き込まない。** 生成は一時ディレクトリの中だけで行い、終了時（中断時も）に trap で消す。`kicad-cli` を使わないので、バックエンドの設定とは無関係に動く（必要なのはホストの `python3` だけ）。
-
-シートごとに出るもの:
-
-| 項目 | 内容 |
+| 見たいもの | 道具 |
 |---|---|
-| 生成のみに存在 / 実図のみに存在 | 片側にしかない部品。参照(designator)は再アノテーションで動くので、同一性は **Value と lib_id** で見る |
-| 参照が相違 | 同じ部品だが designator が違う |
-| ネット名が相違 | 片側にしか無いネット名（`label` / `hierarchical_label` / `global_label`） |
-| 座標が相違 | 同じ部品で座標だけ違うものの件数。明細は `out/drift.json` |
-| サブシートが相違 | `(sheet ...)` の Sheetname / Sheetfile / シートピン名。親シートは部品を持たないので、ここが実質的な比較対象になる |
+| 生成スクリプトと実図のズレ | **生成スクリプトを回して `git diff` が空か見る。** 母板・娘基板の生成は冪等でバイト一致する（[`CLAUDE.md`](../../CLAUDE.md)）ので、これが drift より強い検査になる |
+| 統合・移設で接続が保たれたか | **`AudioV2/scripts/netlist_partition.py`** — ネットリストを「ピン集合の集合」で比較する |
+| 接続そのもの | `kicad-run.sh erc` / `kicad-run.sh netlist` |
 
-> **「一致」は接続の一致を意味しない。** 比較しているのは *部品（lib_id / Value / ユニット / 座標）*、*ネット名の集合*、*サブシート定義* だけで、**ワイヤ・ジャンクション・no_connect の実配線、およびラベルがどのワイヤに付いているかは見ていない**。同じ名前のラベルが別のワイヤに移動しても検出できない。接続そのものの検証は `erc` と `netlist` の役目。
-
-`[生成コード所有]` / `[手編集所有]` の別は生成スクリプトの `SKIPPED` 出力から取っている。**追随するのは `wire_circuit_design.py` の `HAND_EDITED` 定義であって、§2.8 の表ではない** — 所有権を移すときは両方を直すこと（片方だけだと表示と方針がずれる）。取りこぼしたときは die して黙って通さない。**手編集所有シートの差分は想定内**（KiCad側が正）。生成コード所有シートに差分が出ていたら、スクリプトか実図のどちらかが古い。
-
-実行例（2026-09-01 時点の実出力。`KICAD_BACKEND` 非依存）:
-
-```
-drift: wire_circuit_design.py all --force-relay --force-power --force-output を一時ディレクトリで再生成 → AudioV2/ と比較
-シート差分（スクリプト再生成 → リポジトリの実図）
-
-  AmpModule.kicad_sch      [生成コード所有] 一致  (部品 生成 28 / 実図 28)
-  AudioV2Case.kicad_sch    [生成コード所有] 一致  (部品 生成 0 / 実図 0 · サブシート 6 — 部品を持たないシート。比較はサブシート定義とネット名のみ)
-  ControlPanel.kicad_sch   [生成コード所有] 一致  (部品 生成 39 / 実図 39)
-  OutputStage.kicad_sch    [手編集所有] 実図のみ 1／ネット名相違 2／座標相違 5  (部品 生成 6 / 実図 7)
-    実図のみに存在 1 件:
-      J_RAIL601  Connector:Screw_Terminal_01x03 "RAIL IN"
-    生成のみのネット名: MUTE_NC_L, MUTE_NC_R
-    座標が相違: 5 件（明細は JSON 側）
-  PowerModule.kicad_sch    [手編集所有] 生成のみ 3／実図のみ 6／参照相違 6／ネット名相違 4／座標相違 10  (部品 生成 13 / 実図 16)
-    生成のみに存在 3 件:
-      U2         AudioV2:CH224_50224 "50224_CH224 12V"
-      J_PD       Connector:Conn_01x02_Pin "PD_12V/GND to panel"
-      J1         Connector:USB_C_Receptacle_USB2.0_16P "USB-C PD in"
-    実図のみに存在 6 件:
-      J202       Connector:Conn_01x02_Pin "PD module in (1=GND 2=+12V)"
-      J203       Connector:Conn_01x02_Pin "VCC_TONE OUT (1=A_GND 2=9V)"
-      C208       Device:C "0.1u"
-      C204       Device:C "0.1u"
-      #FLG0201   power:PWR_FLAG "PWR_FLAG"
-      #FLG0202   power:PWR_FLAG "PWR_FLAG"
-    参照が相違 6 件:
-      生成 C104       → 実図 C206       Device:C "0.1u"
-      生成 C302       → 実図 C202       Device:C "0.1u"
-      生成 C301       → 実図 C203       Device:C "10u"
-      生成 C101       → 実図 C205       Device:C "47u"
-      生成 C102       → 実図 C201       Device:C "47u"
-      生成 C103       → 実図 C207       Device:C "47u"
-    生成のみのネット名: DKMW_VIN, PG_NOCONN, RC_OPEN, VBUS
-    座標が相違: 10 件（明細は JSON 側）
-  RelayBoard.kicad_sch     [手編集所有] ネット名相違 2／座標相違 24  (部品 生成 32 / 実図 32)
-    生成のみのネット名: ADDR_A0, ADDR_A1
-    座標が相違: 24 件（明細は JSON 側）
-
-乖離あり。手編集所有シートの差分は想定内（KiCad 側が正: AGENT_HANDOFF.md §2.8）。
-生成コード所有シートに差分が出ていたら、スクリプトか実図のどちらかが古い。
-
-比較しているのは 部品(lib_id/Value/ユニット/座標)・ネット名の集合・サブシート(名前/ファイル/ピン名) だけ。
-ワイヤやジャンクションの実配線、ラベルがどのワイヤに付いているかは見ていないので、『一致』は接続の一致を意味しない。
-出力: /Users/masashiarino/workspace/pcb_work/out/drift.json
-```
-
-`kicad_sch` はS式なので、`sch_drift.py` は括弧の対応を数えるパーサで読んでいる。正規表現で属性を拾うと `(property ...)` の内側の `(at ...)` を部品座標と取り違えるなど、隣の要素に食い込んだ誤った組み合わせを拾う。座標は文字列ではなく数値で比べる（生成側は `83.82000000000001` / `127.0`、KiCad が書き戻すと `83.82` / `127` になり、文字列比較では別物に見える）。
+`sch_drift.py` はファイルとしては残してある（旧構成向けの突き合わせとして手で回せる。
+`sch_drift.py GEN_DIR REPO_DIR`）。**ただし上記のとおり配線は見ないので、接続の検証にはならない。**
+どのシートを誰が作るかは [`CLAUDE.md`](../../CLAUDE.md) と
+[`AGENT_HANDOFF.md`](../../AudioV2/AGENT_HANDOFF.md) §2.8 が正。ここでは重複させない。
 
 ### `cli` によるパススルー
 
 `erc` / `netlist` 以外は `cli` で任意のコマンドを渡せる。引数中の `@WORK@` はリポジトリルート、`@OUT@` は出力ディレクトリに置換される（Docker実行時はコンテナ内パス、ローカル実行時はホストパス）。
 
-AudioV2 にはまだ PCB が無い（2026-09-01 に未設計として削除）。以下は旧 `Audio/` の基板を例にした
-PCB 系の実行例で、AudioV2 の PCB を起こしたら同じ形でパスを差し替える。
+AudioV2 の PCB はまだ未設計（`AudioV2Case.kicad_pcb` は空のスキャフォールドだけ）。以下は旧 `Audio/`
+の基板を例にした PCB 系の実行例で、AudioV2 の PCB を起こしたら同じ形でパスを差し替える。
 
 ```sh
-# BOM 出力（AudioV2 の回路図から）
+# BOM 出力（AudioV2 の階層ルートから。子シートも含めて集計される）
 docker/kicad-cloud-build/kicad-run.sh cli sch export bom --group-by Value \
-  -o @OUT@/bom.csv @WORK@/AudioV2/AmpModule.kicad_sch
+  -o @OUT@/bom.csv @WORK@/AudioV2/AudioV2Case.kicad_sch
 
 # DRC / Gerber / ドリル（旧 Audio プロジェクトの基板を例に）
 docker/kicad-cloud-build/kicad-run.sh cli pcb drc --format json \
@@ -243,7 +187,7 @@ docker/kicad-cloud-build/kicad-run.sh version
 
 - `mirror.gcr.io` 経由のベースイメージ + `gitlab.com` からのソース取得で、Docker Hub のイメージ配信やKiCad公式サイトへの直接アクセスが制限された環境でもビルド可能なことを確認済み。
 - `Audio/split/AudioCase_4_amp.kicad_pcb` に対して実際に DRC・Gerber・ドリル出力を実行し、成功を確認済み（DRC違反7件検出）。
-- `drift` は **2026-09-01 に実行確認済み**（ERC 54件・netlist が従来どおり通ること、`git status` で `*.kicad_sch` が無変更であることも同時に確認）。`--strict` が乖離時に 1 を返すこと、一時ディレクトリが残らないこと、`KICAD_BACKEND=docker` を指定してもイメージ無しで動く（＝バックエンド非依存）ことも確認済み。
+- `drift` は **2026-09-03 に削除**（理由は上の「生成スクリプトと実図の突き合わせ」）。2026-09-01 の確認記録もここから外した。削除したのは `drift` 専用のコードと `--help` の記述だけで、`erc` / `netlist` / `cli` / `version` / `build` の引数解釈には触っていない（`AudioV2/scripts/gen_parts_bom.py` が `cli` 経由で BOM を出すため、ここの互換性は壊せない）。
 - `kicad-run.sh` の `erc` / `netlist` / `cli` / `version`、`erc --strict` の非ゼロ終了、存在しないファイルのエラー処理は **`KICAD_BACKEND=local`（kicad-cli 10.0.6）で実行確認済み**。プロジェクトツリーを読み取り専用にした状態でも ERC が完走することを確認しており、`:ro` マウント前提の設計はこれに基づく。
 - **未確認**: Docker バックエンド経由の実行（イメージが未ビルドのため）。初回は `kicad-run.sh build` の後に `kicad-run.sh version` で 10.0.6 が返ることを確認すること。
 
