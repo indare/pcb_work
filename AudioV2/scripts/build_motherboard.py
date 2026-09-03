@@ -58,9 +58,13 @@ SOURCES = [
     # ⚠ 平行移動量は 2.54 の倍数にすること。半端な値だと配線の端点がグリッドから
     #    外れ、KiCad の ERC が endpoint_off_grid を吐く（110.0 で 46 件出した）。
     ("legacy/OutputStage.kicad_sch", "a1000007-0007-4007-8007-000000000007", (0.0, 111.76)),
+    # ControlPanel は B4'-2 で解体。UI と Pico は計測基板へ移した（D27）ので、
+    # ここへ来るのは PT2314 とその周辺・BP5293(+5V)・パネル PWR SW・12V LED。
+    ("legacy/ControlPanelAnalog.kicad_sch", "a1000006-0006-4006-8006-000000000006",
+     (355.6, 0.0)),
 ]
 
-PAPER = "A3"
+PAPER = "A2"   # ControlPanel を取り込んで A3 では収まらなくなった
 
 # 親での母板シート。PowerModule が居た場所を使う（OutputStage の枠は空く）。
 MOTHER_AT = (25.4, 25.4)
@@ -68,16 +72,16 @@ MOTHER_SIZE = (35.56, 101.6)
 _PIN_Y0, _PIN_PITCH = 33.02, 7.62
 # 左＝入力、右＝出力と双方向。順序がそのまま上からの並びになる。
 MOTHER_PINS_L = [
-    ("PD_12V_SW", "input"), ("AMP_SEL_L", "input"), ("AMP_SEL_R", "input"),
-    ("TONE_L", "input"), ("TONE_R", "input"),
-    ("D_GND", "input"), ("3V3", "input"), ("+5V", "input"),
+    ("COMMON_L", "input"), ("COMMON_R", "input"),      # 箱外スタブ（外部入力）
+    ("AMP_SEL_L", "input"), ("AMP_SEL_R", "input"),    # 娘基板から
+    ("D_GND", "input"), ("3V3", "input"),              # 計測基板から（D27 で発生源が移った）
 ]
 MOTHER_PINS_R = [
     ("+15V", "output"), ("-15V", "output"), ("A_GND", "bidirectional"),
-    ("VCC_TONE", "output"), ("PD_12V", "output"), ("PD_GND", "bidirectional"),
+    ("+5V", "output"),                                  # BP5293。娘基板のコイル電源
+    ("TONE_L", "output"), ("TONE_R", "output"),         # PT2314 の出力（母板に載った）
     ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
-    # GND_COIL は NT101 でシート内に閉じていたが、リレー版娘基板のコイル帰路が
-    # ここに繋がるので外へ出す（出さないと母板内とルートで別ネットになる）。
+    ("PD_12V_SW", "output"), ("PD_GND", "bidirectional"),
     ("GND_COIL", "bidirectional"),
     ("PHONE_L", "output"), ("PHONE_R", "output"),
     ("LINE_L", "output"), ("LINE_R", "output"),
@@ -119,16 +123,24 @@ SLOT_LIBS = ["power:PWR_FLAG",
              "Connector_Generic:Conn_02x06_Odd_Even",
              "Device:NetTie_2"]
 # 娘基板スロットで新たに母板の外へ出る／入るネット
-SLOT_HIER = [("TONE_L", "input"), ("TONE_R", "input"),
-             ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
-             ("D_GND", "input"), ("3V3", "input"), ("+5V", "input"),
+# ⚠ 娘基板スロットが要求するネットのうち、母板の中で作られるようになったもの
+#    （TONE_L/R は PT2314、+5V は BP5293）は方向が input -> output に変わる。
+#    VCC_TONE と PD_12V は ControlPanel が母板に入って**完全に内部**になったので階層ピンから外した。
+SLOT_HIER = [("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
+             ("D_GND", "input"), ("3V3", "input"),
              # ⚠ 親のシートピンを足すだけでは繋がらない。シート側に階層ラベルが
              #    無いとピンに対応するものが無く、母板内とルートで別ネットになる。
              ("GND_COIL", "bidirectional")]
 
 # 親から外すシート。母板へ統合される2枚に加え、"MotherBoard" 自身も入れて
 # 再実行を冪等にする（回すたびにシートが増えないように）。
-REPLACED_SHEETS = ("PowerModule", "OutputStage", "MotherBoard")
+REPLACED_SHEETS = ("PowerModule", "OutputStage", "ControlPanel", "MotherBoard")
+
+# ControlPanel が母板に入ったことで、作る側と使う側の両方が母板の中に収まった
+# ネット。階層ピンに残すと親で行き先の無いピンになるのでローカルへ落とす。
+#   VCC_TONE: PowerModule の 7809 -> PT2314
+#   PD_12V  : PowerModule -> パネル PWR SW(SW402)
+INTERNAL_NOW = {"VCC_TONE", "PD_12V"}
 
 
 def _label_from_hier(el: sch_import.Element) -> sch_import.Element:
@@ -313,7 +325,10 @@ def build(dry_run: bool = False) -> str:
             if dx or dy:
                 el = el.translated(dx, dy)
             if el.kind == "hierarchical_label":
-                if el.name in hier_seen:
+                if el.name in INTERNAL_NOW:
+                    demoted.append(f"{fname}:{el.name}(内部化)")
+                    el = _label_from_hier(el)
+                elif el.name in hier_seen:
                     demoted.append(f"{fname}:{el.name}")
                     el = _label_from_hier(el)
                 else:

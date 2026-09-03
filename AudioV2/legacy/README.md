@@ -29,3 +29,11 @@ python3 AudioV2/scripts/netlist_partition.py <統合前の.net> out/netlist.net
 
 2026-09-03 の統合時は **310 ネットの分割が完全一致**（名前だけ 4 件が
 `/OutputStage/*` → `/MotherBoard/*` に変化）、**ERC も 60 件で前後同一**だった。
+
+## ControlPanelAnalog.kicad_sch（2026-09-03 追加）
+
+`ControlPanel` から UI と Pico を外した残り（`PT2314` と周辺・`BP5293-50`・パネル `PWR SW`・12V LED）。
+**B4'-2 で母板へ統合済み**。`build_motherboard.py` がここを読んで母板を組み立てる。
+
+UI（エンコーダ3個・DEST LED・OLED・DEST センスラダー・I2C プルアップ）と `U401`(Pico) は
+**B4'-1 で `MeasureControl` へ移した**（D27）。この legacy ファイルには残っていない。
