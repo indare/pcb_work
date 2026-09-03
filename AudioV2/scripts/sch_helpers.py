@@ -550,3 +550,47 @@ def symbol_inst_v10(
 \t\t)
 \t)
 """
+
+
+# --- 配線要素（2026-09-03 追加） ------------------------------------------
+#
+# 生成コードは長らく「ピン先にラベルを置く」方式だけで、ワイヤを1本も出せなかった。
+# 一方 KiCad 側の実図は 572 本のワイヤと 181 個のジャンクションを持つ。
+# 手編集所有からスクリプト所有へ戻すにも、新構成の母板・娘基板を起こすにも、
+# ここが無いと実図を再現できない。
+#
+# ⚠ `sch_drift.py` はワイヤもジャンクションも比較しない。これらを使ったシートの
+#    検証は drift ではなく **ネットリストの同値** で行うこと。
+
+def wire(x1: float, y1: float, x2: float, y2: float, width: float = 0, style: str = "default") -> str:
+    """1本のワイヤ。端点はピン先／他のワイヤ端／ジャンクションに乗せる。"""
+    return f"""\t(wire
+\t\t(pts
+\t\t\t(xy {x1} {y1}) (xy {x2} {y2})
+\t\t)
+\t\t(stroke
+\t\t\t(width {width})
+\t\t\t(type {style})
+\t\t)
+\t\t(uuid "{new_uid()}")
+\t)
+"""
+
+
+def wire_path(points: list[tuple[float, float]], **kw: object) -> str:
+    """折れ線を線分に展開する。`[(x0,y0), (x1,y1), ...]`。"""
+    return "".join(
+        wire(points[i][0], points[i][1], points[i + 1][0], points[i + 1][1], **kw)  # type: ignore[arg-type]
+        for i in range(len(points) - 1)
+    )
+
+
+def junction(x: float, y: float, diameter: float = 0) -> str:
+    """3本以上が集まる点に打つ。2本の突き合わせには要らない。"""
+    return f"""\t(junction
+\t\t(at {x} {y})
+\t\t(diameter {diameter})
+\t\t(color 0 0 0 0)
+\t\t(uuid "{new_uid()}")
+\t)
+"""
