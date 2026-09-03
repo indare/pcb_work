@@ -640,7 +640,7 @@
 					)
 				)
 			)
-			(property "Description" "Mean Well DKMW20F-15 isolated DC/DC, 9-36Vin, ±15V/±660mA, DIP 1in x 1in, Cout 650uF/rail; DS datasheets/MeanWell_SKMW20_DKMW20.pdf"
+			(property "Description" "Recom REC10K-2415DAW/H2 isolated DC/DC, 18-36Vin, ±15V/±333mA, DIP 1in x 1in; Cout max per DS; replaces DKMW20F-15"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -12758,7 +12758,7 @@
 				)
 			)
 		)
-		(property "Description" "Mean Well DKMW20F-15 isolated DC/DC, 9-36Vin, ±15V/±660mA, DIP 1in x 1in, Cout 650uF/rail; DS datasheets/MeanWell_SKMW20_DKMW20.pdf"
+		(property "Description" "Recom REC10K-2415DAW/H2 isolated DC/DC, 18-36Vin, ±15V/±333mA, DIP 1in x 1in; Cout max per DS; replaces DKMW20F-15"
 			(at 111.76 76.2 0)
 			(hide yes)
 			(show_name no)

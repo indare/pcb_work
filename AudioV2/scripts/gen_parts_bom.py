@@ -27,6 +27,10 @@
 
 回路図は読むだけで、*.kicad_sch / *.kicad_pcb は書き換えない
 （kicad-run.sh はリポジトリを read-only でマウントする）。
+
+⚠ AmpBankSwitch / AmpBankRelay を単体で export すると、階層の AmpChannel が
+1 インスタンス分しか展開されない（旧 AmpBank と同じ kicad-cli 制約）。
+全数 BOM は必ず AudioV2Case.kicad_sch から取る。
 """
 
 from __future__ import annotations
@@ -45,23 +49,24 @@ from pathlib import Path
 # --------------------------------------------------------------------------
 BLOCKS = [
     {
-        # PARTS.md のマーカー id
-        "id": "ampbank-bom",
-        # 生成元シート（リポジトリルートからの相対パス）。AmpBank は AmpChannel を
-        # 10 回インスタンス化する階層なので、kicad-cli は子シートも含めて集計する。
-        "sheet": "AudioV2/AmpBank.kicad_sch",
-        # kicad-cli sch export bom に渡す列。Description は回路図の部品プロパティ
-        # （= 役割の記述）で、これも回路図から導出できる情報なので生成側に含める。
+        # プロジェクト全体。AmpChannel×10 の参照上書きもここで解決される。
+        "id": "case-bom",
+        "sheet": "AudioV2/AudioV2Case.kicad_sch",
         "fields": "Reference,Value,Footprint,QUANTITY,Description",
         "labels": "Refs,Value,Footprint,Qty,Role",
-        # Value だけでグループ化すると、同一 Value・異 Footprint が 1 行に合流し
-        # Footprint 列が "fpA,fpB" になる。Phoenix の FP 名自体がカンマを含むので
-        # 後から気づけない。Footprint もグループキーに入れて分離する。
         "group_by": "Value,Footprint",
-        # Role 列は同一値グループ内で重複しがちなので、重複を畳んで " / " で繋ぐ
         "dedupe_column": "Role",
-        # 表の直前に出す見出し行（生成物の一部。人が書き換えても再生成で戻る）
-        "caption": "AmpBank 部品表（ch1 代表 + 共通部）",
+        "caption": "AudioV2 全体部品表",
+    },
+    {
+        # 1ch テンプレ。娘基板共通部（TMUX / リレー / MCP23017）は含まない。
+        "id": "ampchannel-bom",
+        "sheet": "AudioV2/AmpChannel.kicad_sch",
+        "fields": "Reference,Value,Footprint,QUANTITY,Description",
+        "labels": "Refs,Value,Footprint,Qty,Role",
+        "group_by": "Value,Footprint",
+        "dedupe_column": "Role",
+        "caption": "AmpChannel 1ch テンプレ",
     },
 ]
 
@@ -185,6 +190,7 @@ def render_block(root: Path, block: dict) -> str:
 
     # 並びはここで固定する（kicad-cli の既定順に依存しない = 決定論的）
     body.sort(key=lambda r: natural_key(r[0]))
+    total_qty = sum(int(r[qty_i]) for r in body) if qty_i is not None else None
 
     lines = [
         "",
@@ -192,6 +198,10 @@ def render_block(root: Path, block: dict) -> str:
         "**手で編集しないでください**（次の再生成で消えます）。値・フットプリント・"
         "役割を直すときは KiCad の回路図側を直し、",
         f"`python3 {SELF}` で再生成します。",
+    ]
+    if total_qty is not None:
+        lines.append(f"行数 {len(body)} / 部品総数 {total_qty}。")
+    lines.extend([
         "",
         "> `Refs` 列と `Value` / `Role` 列に**位置の対応はありません**。kicad-cli は"
         "グループ内の値を重複除去してアルファベット順に並べるため、"
@@ -199,7 +209,7 @@ def render_block(root: Path, block: dict) -> str:
         "",
         "| " + " | ".join(header) + " |",
         "|" + "---|" * len(header),
-    ]
+    ])
     for row in body:
         cells = []
         for i, cell in enumerate(row):
