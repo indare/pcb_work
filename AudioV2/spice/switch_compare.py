@@ -101,25 +101,41 @@ def main() -> None:
         c = min(sub, key=lambda p: abs(p[0]))[1]
         print(f"{name:22s}{c:9.2f}Ω{max(ys)-min(ys):20.3f}Ω")
 
-    print("\n--- 判定の基準線（この装置で意味のある下限はどこか） ---")
-    #   PCM1804 の DR は広帯域値。スペアナは FFT なので離散高調波のビン雑音床は
-    #   処理利得 10log10(N/2) だけ下がる（Audio/measurement_fw/spectrum.py の MAX_N=2048）。
-    adc_dr, nfft = 112.0, 2048
-    pg = 10 * np.log10(nfft / 2)
-    refs = [
-        (f"PCM1804 広帯域 DR", -adc_dr),
-        (f"同・FFT N={nfft} のビン雑音床（離散高調波の実質下限）", -(adc_dr + pg)),
-        ("OPA1612 THD+N（在庫最良、3Vrms/1kHz）", -136.0),
-        ("LME49860 THD+N（0.00003%）", -130.5),
-        ("MUSES02 THD（0.001%）", -100.0),
-        ("NE5532 THD（0.002%）", -94.0),
-        ("PT2314 歪み（0.1%、通常経路では常にこれが支配）", -60.0),
-    ]
-    for name, v in refs:
-        print(f"  {v:8.1f} dB  {name}")
-    print("  → 切替素子は「在庫最良のDUT（−136dB）より十分下」であれば測定を汚さない。")
-    print("     PT2314 経由の通常運用では PT2314 の −60dB が常に支配的なので、")
-    print("     素子の差が見えるのは DIRECT 経路（PT2314 迂回）だけ。")
+    print("\n--- ON経路の歪みを次数別に（総THDで比較しないこと） ---")
+    #   #33: 総THD同士をベクトル合成してはいけない。合成できるのは同じ次数の成分だけ。
+    #   総THD は H2..H9 の RSS なので、次数別に見ると像が変わる部品がある。
+    print(f"{'部品':22s}{'Vrms':>6s}{'THD(RSS)':>11s}{'H2':>10s}{'H3':>10s}")
+    for key, (name, _, _) in CANDIDATES.items():
+        if not (DATA / f"{key}_ron_curve.json").exists():
+            continue
+        for v in (4.0, 9.2):
+            try:
+                thd, h2, h3, _ = switch_thd.run(key, "pchip", v, 100e3, a.rload, "both")
+            except Exception:
+                continue
+            print(f"{name:22s}{v:6.1f}{db(thd):10.1f}dB{db(h2):9.1f}dB{db(h3):9.1f}dB")
+    print("  → ADG1407 は H3 支配（9.2Vrms で H2 -129 / H3 -96 と 33dB 差）。")
+    print("     総THD だけ見ていると次数の偏りが見えない。")
+    print("  ⚠ MAX14753/14778 の H2 が両振幅で同値(-169dB)なのは数値床。")
+    print("     モデルが左右対称パラボラなので偶数次が原理的に出ない（実チップの値ではない）。")
+
+    print("\n--- 判定の基準線（#33 で3回訂正。README「判定の基準線」が正） ---")
+    print("  ① ランダム雑音の bin 床   -137.3 dBFS  DR112dB(A特性) + 処理利得")
+    print("       実使用 N=1024（MAX_N=2048 は確保量）/ Hann 窓 ENBW 1.5bin")
+    print("       10log10(512) - 10log10(1.5) = 25.33dB")
+    print("  ② PCM1804 の歪み          THD+N typ -102 dB  ← 絶対THDを制約するのはこれ")
+    print("       DS p.7: fIN=1kHz, AP System Two, 20k LPF + 400Hz HPF（無加重）")
+    print("       ⚠ DR/SNR は A特性。加重が違うので THD+N から SNR は引けない。")
+    print("       ⚠ よって ADC 自身の H2/H3 の実値は不明。実測が要る。")
+    print("  ③ PT2314                  -60 dB  通常経路では常にこれが支配")
+    print()
+    print("  やってはいけないこと:")
+    print("   ・①を『歪みの床』として使う（①は雑音。処理利得は離散トーンに効かない）")
+    print("   ・②より下だから『見えない』と結論する（同次数は複素和で残る）")
+    print("   ・②(総THD+N) と素子の総THD をそのままベクトル合成する（次数別に扱う）")
+    print()
+    print("  → 現時点で言えるのは『②近辺で制約される可能性が高い』まで。")
+    print("     ADC 直結 baseline で H2/H3 の振幅・位相を実測するのが次の一手。")
 
     print("\n--- OFF側: ブロードキャスト構成でのBUS合成誤差（20kHz、非選択9ch） ---")
     print(f"{'部品':22s}{'OISO条件':>18s}{'C_off':>9s}{'振幅誤差':>11s}{'漏れ歪み':>11s}")
