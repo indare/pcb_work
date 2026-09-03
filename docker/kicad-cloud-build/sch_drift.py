@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 """再生成した回路図と実図を突き合わせ、シートごとの乖離を報告する。
 
-`kicad-run.sh drift` から呼ばれる。GEN_DIR には一時ディレクトリで
-`wire_circuit_design.py all --force-*` を回した結果、REPO_DIR には
-リポジトリの実図（AudioV2/）を渡す。
+⚠ **これは配線の検証にならない。** ワイヤ・ジャンクション・no_connect の実配線と、
+ラベルがどのワイヤに付いているかを比較していない（CLAUDE.md / AGENT_HANDOFF.md §2.8）。
+接続の同値は `AudioV2/scripts/netlist_partition.py` と `kicad-run.sh erc` / `netlist` で見る。
+
+⚠ **`kicad-run.sh` からは呼ばれない。** 2026-09-03 の構成刷新で `drift` サブコマンドは
+削除した（経緯は README.md「生成スクリプトと実図の突き合わせ」）。旧構成向けの道具として
+手で回せるように残しているだけで、現行シートの生成（`build_motherboard.py` /
+`build_daughter.py`）は冪等でバイト一致するので、そちらは `git diff` で見るほうが強い。
+
+GEN_DIR には再生成した回路図のディレクトリ、REPO_DIR にはリポジトリの実図（AudioV2/）を渡す。
 
 kicad_sch は S式なので、括弧の対応を数える素朴なパーサで読む。属性を正規表現で
 拾うと `(property ...)` の内側の `(at ...)` を部品座標と取り違えるなど、隣の要素に
