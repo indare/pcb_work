@@ -235,10 +235,23 @@ def render_block(root: Path, block: dict) -> str:
         "| " + " | ".join(header) + " |",
         "|" + "---|" * len(header),
     ]
+    # Footprint が空の個数。AudioV2 の PCB はまだ設計していないので、legacy
+    # シートからそのまま持ってきた部品は Footprint が空のまま残っている。
+    # 数を出しておかないと表がびっしり埋まって見えて、レイアウト時に気づく。
+    no_fp = None
+    if fp_i is not None and qty_i is not None:
+        try:
+            no_fp = sum(int(r[qty_i]) for r in body if not r[fp_i].strip())
+        except (TypeError, ValueError):
+            no_fp = None
+
     if total_qty is not None:
         # 見出し群の直後・注記の前に置く。後ろに空行を足さないと注記の
         # blockquote と密着して Markdown が崩れる。
-        lines[5:5] = [f"行数 {len(body)} / 部品総数 {total_qty}。", ""]
+        summary = f"行数 {len(body)} / 部品総数 {total_qty}。"
+        if no_fp:
+            summary += f"うち **Footprint 未設定 {no_fp} 個**（§5）。"
+        lines[5:5] = [summary, ""]
     for row in body:
         cells = []
         for i, cell in enumerate(row):

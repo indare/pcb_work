@@ -193,15 +193,16 @@ Amp 選択後 L/R
 > （解体前の `AmpBank.kicad_sch` でも同じだった）。2つ目の表は「1ch に何が要るか」を
 > 見るためのテンプレートで、**発注数の根拠にはならない**。
 >
-> 1つ目の表の部品総数がネットリストの部品数より 2 個少ないのは、NetTie が BOM 対象外
-> だから。NetTie は基板上の銅箔で、買う部品ではない。
+> 1つ目の表の部品総数がネットリストの部品数より少ないのは、NetTie が BOM 対象外
+> だから（差は NetTie の個数ぶん）。NetTie は基板上の銅箔で、買う部品ではない。
+> KiCad 標準 `Device:NetTie_2` の既定も `in_bom=no`。
 
 <!-- BEGIN GENERATED: case-bom -->
 **AudioV2 全体部品表（母板 + 娘基板 + 計測 + 親）** — 下の表は `AudioV2/AudioV2Case.kicad_sch` から自動生成しています。
 **手で編集しないでください**（次の再生成で消えます）。値・フットプリント・役割を直すときは KiCad の回路図側を直し、
 `python3 AudioV2/scripts/gen_parts_bom.py` で再生成します。
 
-行数 90 / 部品総数 368。
+行数 89 / 部品総数 367。うち **Footprint 未設定 44 個**（§5）。
 
 > `Refs` 列と `Value` / `Role` 列に**位置の対応はありません**。kicad-cli はグループ内の値を重複除去してアルファベット順に並べるため、「n 番目の参照 = n 番目の役割」とは読めません。
 
@@ -259,7 +260,6 @@ Amp 選択後 L/R
 | J_RAIL501 | RAIL IN |  | 1 | From PowerModule J201: +12V / A_GND / -12V (relays switch rails only) |
 | K301,K302,K303,K304,K305 | AZ850P2-5 | `Relay_THT:Relay_DPDT_FRT5` | 5 |  |
 | LCDDisplay1601 | WAVESHARE-29318 | `Connector_PinHeader_2.54mm:PinHeader_1x15_P2.54mm_Vertical` | 1 | Waveshare 29318 Interface2 host side: 2.54mm 1x15 pin header for included GH-to-Dupont cable (ST7796S SPI + FT6336U I2C) |
-| NT101 | GND_COIL-D_GND | `NetTie:NetTie-2_SMD_Pad2.0mm` | 1 |  |
 | R407 | 5.6k |  | 1 |  |
 | R410,R411,R412,R413,R414,R415 | 2.4k |  | 6 |  |
 | R601,R607,R701,R707,R801,R807,R901,R907,R1001,R1007,R1101,R1107,R1201,R1207,R1301,R1307,R1401,R1407,R1501,R1507,R1620 | 100k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 21 | L non-inverting bias / R non-inverting bias / U708(XC8107) CE プルダウン。Active High なので Pico GPIO が Hi-Z の間は LCD OFF がデフォルト。CE に内部プルダウンは無いため必須。 |
@@ -375,6 +375,7 @@ Amp 選択後 L/R
 | PT2314 入手先 | DigiKey に無いことが多い。LCSC / モジュール屋。DIP ソケット推奨 |
 | ノブ（φ6 D カット） | RK27 用に大きめ。ENC 用は小さめ |
 | AmpBank シルク | 帰還抵抗の倍率表（GAIN = 1 + Rf/Rg）を基板隅に印刷（§2.9） |
+| **Footprint 未設定の部品** | 現在の個数は §4.1 の生成値が出す（数値をここに書き写すと腐るので置かない）。`legacy/` から持ってきた電源・トーン・出力段・パネル部品が空のまま。**物理部品の外形が基板面積を決める**ので、品番が確定しているもの（DEST スイッチ・ボリューム）も含めてレイアウト着手時にまとめて割り当てる。生成コードで作った部品（娘基板・スロット・DC-DC・ADC モジュール）は既に入っている |
 
 ---
 

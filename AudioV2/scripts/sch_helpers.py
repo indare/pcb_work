@@ -502,6 +502,9 @@ def symbol_inst_v10(
     instance_refs: list[tuple[str, str]] | None = None,
     prop_dx: float = 0.0,
     grid_step: float = 2.54,
+    # NetTie のように「基板上の銅箔で、買う部品ではない」ものは False。
+    # KiCad 標準ライブラリの Device:NetTie_2 の既定も in_bom=no。
+    in_bom: bool = True,
 ) -> str:
     from generate_kicad_scaffold import sym_prop  # noqa: WPS433
 
@@ -535,7 +538,7 @@ def symbol_inst_v10(
 \t\t(unit {unit})
 \t\t(body_style 1)
 \t\t(exclude_from_sim no)
-\t\t(in_bom yes)
+\t\t(in_bom {'yes' if in_bom else 'no'})
 \t\t(on_board yes)
 \t\t(in_pos_files yes)
 \t\t(dnp no)

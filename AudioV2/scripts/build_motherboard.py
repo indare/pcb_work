@@ -246,7 +246,11 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
         els.append(sch_import.Element(
             "symbol",
             symbol_inst_v10("Device:NetTie_2", "NT101", "GND_COIL-D_GND", nx, ny, 0, path,
-                            footprint="NetTie:NetTie-2_SMD_Pad2.0mm"),
+                            footprint="NetTie:NetTie-2_SMD_Pad2.0mm",
+                            # 基板上の銅箔で買う部品ではない。KiCad 標準の
+                            # Device:NetTie_2 の既定も in_bom=no で、手編集所有の
+                            # MeasureControl の NT1601/NT1602 もそうなっている
+                            in_bom=False),
             "NT101", None, (nx, ny)))
         tips = _lib_pin_tips("Device:NetTie_2", nx, ny)
         for num, net, ang, just in (("1", "GND_COIL", 180, "right"), ("2", "D_GND", 0, "left")):

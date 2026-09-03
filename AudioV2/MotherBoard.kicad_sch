@@ -10653,7 +10653,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "AudioV2 PowerModule — label-wired (§9 / CIRCUIT_DESIGN §4)\nJ_PD201←PD module; PD_12V → panel SW → PD_12V_SW → F1 → DKMW +Vin\nPrimary PD_GND ≠ secondary A_GND. DKMW R.C.=RC_OPEN (open=ON). LM7809 GND→A_GND.\nConnectivity = local labels on pin tips (same name = same net)."
+	(text "AudioV2 PowerModule — label-wired (§9 / CIRCUIT_DESIGN §4)\nPD module in → PD_12V → panel SW → PD_12V_SW → fuse → DC-DC +Vin\nPrimary PD_GND ≠ secondary A_GND. DC-DC CTRL left unconnected (open = ON). LM7809 GND→A_GND.\nConnectivity = local labels on pin tips (same name = same net)."
 		(exclude_from_sim no)
 		(at 25.4 20.32 0)
 		(effects
@@ -17891,7 +17891,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
