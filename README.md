@@ -1,12 +1,14 @@
 # PCB Work
 
-KiCad 10 の基板・回路図リポジトリです。主な作業対象は `Audio/`（AudioCase / MeasurementADC）。
+KiCad 10 の基板・回路図リポジトリです。**いま設計作業をしているのは `AudioV2/`**。
+v1 の実機（AudioCase / MeasurementADC）は `Audio/` にあり、こちらは組んで動いているものです。
 
 ## ディレクトリ
 
 | パス | 内容 |
 | --- | --- |
-| `Audio/` | AudioCase 本体・MeasurementADC・分割 Gerber・計測 FW。[案内](Audio/README.md) |
+| `AudioV2/` | 現行の設計作業。回路図・生成スクリプト・検討メモ。[案内](AudioV2/AGENT_HANDOFF.md) |
+| `Audio/` | v1 実機。AudioCase 本体・MeasurementADC・分割 Gerber・計測 FW。[案内](Audio/README.md) |
 | `Control/` | Controll 用 Pico2 ファーム（親／子） |
 | `docker/` | KiCad 10.0.6 のヘッドレス検証環境（ERC / ネットリスト / DRC / Gerber）。[案内](docker/kicad-cloud-build/README.md) |
 | `scripts/` | 環境セットアップ。ローカルで回せない検証をクラウドエージェントへ投げるための導入手順。[案内](scripts/README.md) |
@@ -33,7 +35,7 @@ KiCad 10 の基板・回路図リポジトリです。主な作業対象は `Aud
       "command": "uvx",
       "args": ["kicad-mcp-pro"],
       "env": {
-        "KICAD_MCP_PROJECT_DIR": "${workspaceFolder}/Audio",
+        "KICAD_MCP_PROJECT_DIR": "${workspaceFolder}/AudioV2",
         "KICAD_MCP_PROFILE": "build",
         "KICAD_MCP_OPERATING_MODE": "write"
       }
@@ -53,7 +55,7 @@ KiCad 10 の基板・回路図リポジトリです。主な作業対象は `Aud
 | 値 | 意味 |
 | --- | --- |
 | `${workspaceFolder}` | このリポジトリのルート（`.cursor/mcp.json` がある側） |
-| `KICAD_MCP_PROJECT_DIR` | KiCad プロジェクトディレクトリ（`Audio/`） |
+| `KICAD_MCP_PROJECT_DIR` | KiCad プロジェクトディレクトリ（現行は `AudioV2/`） |
 | `KICAD_MCP_PROFILE` | `build`（配置・配線向け） |
 | `KICAD_MCP_OPERATING_MODE` | `write`（読み取り専用にしたい場合は `readonly`） |
 
