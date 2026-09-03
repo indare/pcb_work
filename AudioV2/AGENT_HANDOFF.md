@@ -233,10 +233,10 @@
 
     python3 Audio/scripts/check_sexpr.py -q AudioV2      → 9ファイル / 問題0
     docker/kicad-cloud-build/kicad-run.sh erc            → 53件（内訳は §5-2）
-    docker/kicad-cloud-build/kicad-run.sh drift          → 生成コード所有 2/2 一致
     python3 AudioV2/scripts/gen_parts_bom.py --check     → rc=0
 
-`drift` の手編集所有シート（AmpBank / AmpChannel / OutputStage / PowerModule）の差分は**想定内**（§2.8）。
+**上は `eb966ef` 時点の値で、現在の期待値は [CLAUDE.md](../CLAUDE.md) が正。**
+`drift` の行はここにあったが、サブコマンドごと 2026-09-03 に廃止した（§7 参照）。
 
 > **記法について:** このメモは部品を原則 **ネット名・機能名**（回路図 Value 欄の名前）で指す。
 > 参照(designator)は KiCad の採番の産物で再アノテーションのたびに動くため（2026-09-01 に58件が変わった）、
@@ -1408,17 +1408,20 @@ GND は v1 の NetTie 構造がそのまま生きていて、`ADC_GND`(27ノー�
 python3 Audio/scripts/check_sexpr.py -q AudioV2
 docker/kicad-cloud-build/kicad-run.sh erc      # AudioV2 全体の ERC
 docker/kicad-cloud-build/kicad-run.sh netlist  # ネットリスト
-docker/kicad-cloud-build/kicad-run.sh drift    # 生成コード所有シートと現図の差分
+python3 AudioV2/scripts/sch_import.py --roundtrip AudioV2/*.kicad_sch
 python3 AudioV2/scripts/gen_parts_bom.py --check   # PARTS.md の BOM ブロック
 ```
+
+**`drift` は 2026-09-03 に廃止した。** `wire_circuit_design.py` がどのシートも
+書き出さなくなり、現行4シートを1枚も見ずに「リポジトリ側が古い」と逆向きの警告を
+出す状態だったため。統合・移設の検証は
+[`scripts/netlist_partition.py`](scripts/netlist_partition.py) を使う。
 
 `kicad-run.sh` は Docker イメージ `kicad-cloud:10.0.6` があればそれを、無ければホストの
 `kicad-cli` を使う。出力は `out/`（gitignore 済み）。
 
-**基準値（`eb966ef`、2026-09-02）** — 次回はここから増減を見る:
-`check_sexpr` **9ファイル / 問題0**、ERC **53件**（内訳と対応方針は上の「未着手・優先候補」2）、
-`drift` **生成コード所有 2/2 一致**（ControlPanel / 親）・手編集所有4件（AmpBank / AmpChannel /
-OutputStage / PowerModule）の差分は想定内（§2.8）、`gen_parts_bom --check` rc=0。
+**現在の期待値は [CLAUDE.md](../CLAUDE.md) が正**（そこに一覧がある）。ここに数値を
+書き写すと二重管理になって腐るので置かない（[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。
 
 > 参考（2026-09-01 §2.9 手順3〜5 完了時点）: check_sexpr 10ファイル、ERC 60件、drift 4/4。
 > ファイル数が減ったのは削除したシートの分、ERC が減ったのは実害2件を潰したため、
@@ -1428,8 +1431,8 @@ OutputStage / PowerModule）の差分は想定内（§2.8）、`gen_parts_bom --
 - `C:\tmp\kicad-symbols` → KiCad の `share/kicad/symbols` へのディレクトリジャンクション
   （`sch_helpers.py` のピン数ルックアップに必要。無いと `wire_circuit_design.py` が
   `FileNotFoundError` で落ちる）
-- `kicad-run.sh` に `PYTHONUTF8=1` を追加済み（Windows コンソールの cp932 が `drift` の
-  UTF-8 出力でクラッシュするため）
+- `kicad-run.sh` に `PYTHONUTF8=1` を追加済み（Windows コンソールの cp932 が ERC 集計の
+  UTF-8 出力でクラッシュするため。当初は `drift` 向けだったが、廃止後も ERC 集計に必要）
 
 Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 
