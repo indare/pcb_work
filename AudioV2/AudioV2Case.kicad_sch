@@ -806,6 +806,201 @@
 			)
 		)
 	)
+	(label "I2C_SDA"
+		(at 238.76 111.76 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4b5e80ad-639f-5a81-ad8e-18e58fa8e403")
+	)
+	(label "I2C_SCL"
+		(at 238.76 114.30000000000001 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2ca6334f-5a78-5be5-ac0b-84cda7565a12")
+	)
+	(label "3V3"
+		(at 238.76 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "26016af5-95be-5fe5-9895-4f29463958c3")
+	)
+	(label "D_GND"
+		(at 238.76 119.38 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "164ccf09-01f5-52cc-a9a0-791093beb370")
+	)
+	(sheet
+		(at 238.76 91.44)
+		(size 26.67 30.48)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "43e41fda-fe26-43e3-950a-c017f3070bbf")
+		(property "Sheetname" "MeasureControl"
+			(at 238.76 90.5684 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MeasureControl.kicad_sch"
+			(at 252.095 124.46000000000001 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "+15V_A" input
+			(at 238.76 93.98 180)
+			(uuid "d018be54-4e27-5b17-b705-76cab855b188")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "-15V_A" input
+			(at 238.76 96.52000000000001 180)
+			(uuid "5a254eac-b898-5491-b465-7880e3f42012")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ADC_GND_IN" input
+			(at 238.76 99.06 180)
+			(uuid "a0b93df2-6f3c-5ca3-95ad-5cba4de228e2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ADC_V_IN" input
+			(at 238.76 101.60000000000001 180)
+			(uuid "a9525c53-458a-5bb9-9016-c78ca688b09e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "AUDIO_L_IN" input
+			(at 238.76 104.14 180)
+			(uuid "00e016af-1c29-57f9-b499-266856653b80")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "AUDIO_R_IN" input
+			(at 238.76 106.68 180)
+			(uuid "15f882f5-d4dd-5def-bf07-9e18fc6960d6")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "A_GND" bidirectional
+			(at 238.76 109.22 180)
+			(uuid "7dc8987d-e62b-5623-9eb9-9c10c58653b9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 238.76 111.76 180)
+			(uuid "437ada85-f70e-5456-a29e-83a335e287ce")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 238.76 114.30000000000001 180)
+			(uuid "3be94f60-2a46-51dc-ae4f-85c0e2852df3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "3V3" output
+			(at 238.76 116.84 180)
+			(uuid "510ef289-8c08-51e1-8c26-8efac06450a3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "D_GND" bidirectional
+			(at 238.76 119.38 180)
+			(uuid "d0af5793-d097-59b7-b662-876d9d15430b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001"
+					(page "1")
+				)
+			)
+		)
+	)
 	(sheet
 		(at 25.4 25.4)
 		(size 35.56 101.6)
@@ -1270,201 +1465,6 @@
 			(justify left bottom)
 		)
 		(uuid "54d48a6a-3ea4-5292-ade5-1af365cb6c31")
-	)
-	(label "I2C_SDA"
-		(at 238.76 111.76 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4b5e80ad-639f-5a81-ad8e-18e58fa8e403")
-	)
-	(label "I2C_SCL"
-		(at 238.76 114.30000000000001 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2ca6334f-5a78-5be5-ac0b-84cda7565a12")
-	)
-	(label "3V3"
-		(at 238.76 116.84 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "26016af5-95be-5fe5-9895-4f29463958c3")
-	)
-	(label "D_GND"
-		(at 238.76 119.38 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "164ccf09-01f5-52cc-a9a0-791093beb370")
-	)
-	(sheet
-		(at 238.76 91.44)
-		(size 26.67 30.48)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "43e41fda-fe26-43e3-950a-c017f3070bbf")
-		(property "Sheetname" "MeasureControl"
-			(at 238.76 90.5684 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "MeasureControl.kicad_sch"
-			(at 252.095 124.46000000000001 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "+15V_A" input
-			(at 238.76 93.98 180)
-			(uuid "d018be54-4e27-5b17-b705-76cab855b188")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "-15V_A" input
-			(at 238.76 96.52000000000001 180)
-			(uuid "5a254eac-b898-5491-b465-7880e3f42012")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "ADC_GND_IN" input
-			(at 238.76 99.06 180)
-			(uuid "a0b93df2-6f3c-5ca3-95ad-5cba4de228e2")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "ADC_V_IN" input
-			(at 238.76 101.60000000000001 180)
-			(uuid "a9525c53-458a-5bb9-9016-c78ca688b09e")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "AUDIO_L_IN" input
-			(at 238.76 104.14 180)
-			(uuid "00e016af-1c29-57f9-b499-266856653b80")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "AUDIO_R_IN" input
-			(at 238.76 106.68 180)
-			(uuid "15f882f5-d4dd-5def-bf07-9e18fc6960d6")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "A_GND" bidirectional
-			(at 238.76 109.22 180)
-			(uuid "7dc8987d-e62b-5623-9eb9-9c10c58653b9")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "I2C_SDA" bidirectional
-			(at 238.76 111.76 180)
-			(uuid "437ada85-f70e-5456-a29e-83a335e287ce")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "I2C_SCL" bidirectional
-			(at 238.76 114.30000000000001 180)
-			(uuid "3be94f60-2a46-51dc-ae4f-85c0e2852df3")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "3V3" output
-			(at 238.76 116.84 180)
-			(uuid "510ef289-8c08-51e1-8c26-8efac06450a3")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "D_GND" bidirectional
-			(at 238.76 119.38 180)
-			(uuid "d0af5793-d097-59b7-b662-876d9d15430b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001"
-					(page "1")
-				)
-			)
-		)
 	)
 	(sheet_instances
 		(path "/"
