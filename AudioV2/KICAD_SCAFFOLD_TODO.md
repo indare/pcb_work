@@ -1,7 +1,18 @@
 # AudioV2 KiCad 素案 — TODO（クラウドエージェント用）
 
-> **警告（2026-08-30）:** 手回し音量確定後は **`generate_kicad_scaffold.py` を再実行しない**（PGA / ENC×6 / DEST リレーに戻る）。  
-> 再生成は `python3 AudioV2/scripts/wire_circuit_design.py all`。  
+> **⚠ この文書は 2026-08-30 の素案づくり用 TODO で、いまは歴史記録。**
+> 以下の Phase は旧構成（`PowerModule` / `RelayBoard` / `ControlPanel` / `OutputStage`）に対するもので、
+> **2026-09-03 の構成刷新で対象シートごと解体・廃止された**（`legacy/` に凍結）。
+> 未完了のまま残っているチェックも**現行の作業指示ではない**。
+> 現行のシート構成とシート所有権は [CLAUDE.md](../CLAUDE.md) が正。
+>
+> **警告（2026-08-30、いまも有効）:** **`generate_kicad_scaffold.py` を再実行しない**（PGA / ENC×6 / DEST リレーに戻る）。
+>
+> **現行の再生成手段は `scripts/build_motherboard.py`（母板）と `scripts/build_daughter.py`（娘基板2版）。**
+> かつてここに書いていた `wire_circuit_design.py all` は**再生成にならない** — 同スクリプトは
+> 旧構成のロジックの記録で、現行のシートを出力する経路を持たない
+> （[AGENT_HANDOFF.md](AGENT_HANDOFF.md) §2.8、[CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md) §8）。
+>
 > シンボル修正: [SYMBOL_FIX_TODO.md](SYMBOL_FIX_TODO.md) / レビュー: [SYMBOL_REVIEW_SUMMARY.md](SYMBOL_REVIEW_SUMMARY.md)。
 
 **目的:** 回路の完全性・ピンアサインの正確性は **後レビュー**。まず **開ける・階層が繋がる・net 名が DECISIONS と一致**する素案を作る。
