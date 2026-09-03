@@ -35,8 +35,8 @@
 | [scripts/](scripts/) | 回路図の生成・編集・検証の道具。どれを何に使うかは `CLAUDE.md` |
 | [datasheets/](datasheets/) | 参照したデータシート PDF |
 | [legacy/](legacy/README.md) | **母板へ統合済みの旧シート。凍結してある。編集しても設計には反映されない** |
-| `PROCUREMENT.xlsx` / `dc_dc*.csv` | 発注リストと DC-DC 探索の出力（`scripts/dcdc_survey.py`） |
-| [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) / [KICAD_SCAFFOLD_TODO.md](KICAD_SCAFFOLD_TODO.md) / [SYMBOL_FIX_TODO.md](SYMBOL_FIX_TODO.md) / [SYMBOL_REVIEW_SUMMARY.md](SYMBOL_REVIEW_SUMMARY.md) | **2026-08-30 前後の記録。** 不採用になった案・当時の作業指示で、現構成より前の内容 |
+| 発注リスト | **持たない。** 発注のときに [PARTS.md](PARTS.md) §4.1 の生成部品表から起こす。ベンダのデータを読むときの罠は §0b |
+| [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) / [SYMBOL_FIX_TODO.md](SYMBOL_FIX_TODO.md) / [SYMBOL_REVIEW_SUMMARY.md](SYMBOL_REVIEW_SUMMARY.md) | **2026-08-30 前後の記録。** 不採用になった案・当時の作業指示で、現構成より前の内容 |
 
 ## 古い記述の読み方
 

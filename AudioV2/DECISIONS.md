@@ -172,7 +172,9 @@ MinMax MIWI06 系、Aimtec AM10GH、Mornsun の 6 W 系）。100 µF は小容�
 技術的な必須要件ではない**（v1 実機比較は ± 両電源であればよい。上の訂正を参照）。
 
 不採用にした主な候補と理由は [AGENT_HANDOFF.md §2.10](AGENT_HANDOFF.md)。
-探索は再現可能（[`scripts/dcdc_survey.py`](scripts/dcdc_survey.py) / [`dc_dc_survey.csv`](dc_dc_survey.csv)）。
+探索は [`scripts/dcdc_survey.py`](scripts/dcdc_survey.py) で引き直せる。
+**ライブ API なので結果は当時と変わる** — 固定してあるのは上の表と、
+ベンダのデータを読むときの罠（[PARTS.md](PARTS.md) §0b）。
 
 **⚠ 実装前に必ず確認すること:** `REC10K` の **pin 3 = CTRL** の論理。現行 `DKMW20` は
 `R.C.` オープン = ON でネットリスト上も未接続。`REC10K` が同じ極性とは限らないので、

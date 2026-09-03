@@ -50,7 +50,8 @@ sym-lib-table text eol=lf
 *.gm1    -text
 
 # ---- 他ツールの原本: 触らない ----
-# dc_dc.csv は DigiKey のエクスポート。CSV は RFC 4180 で CRLF が正なので原本のまま置く。
+# ベンダからのエクスポート CSV は RFC 4180 で CRLF が正なので原本のまま置く
+# （2026-09-04 時点で該当ファイルは無いが、また置くときのために残す）。
 *.csv -text
 # SIMetrix の回路図。テキストだが Windows 製ツールの原本なので変換しない。
 *.wxsch -text
