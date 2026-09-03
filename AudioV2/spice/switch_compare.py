@@ -37,7 +37,12 @@ from switch_offiso import coff_from_oiso, solve_broadcast  # noqa: E402
 
 DATA = Path(__file__).resolve().parent / "data"
 
-#   在庫の DUT とその公称 THD。落選判定の基準に使う（ADC 非依存）。
+#   在庫 DUT の THD+N 公称値。**データシートの参考値であって、この回路の条件ではない。**
+#   一般にオーディオ用オペアンプの THD+N は G=1 / Vout=3Vrms / 1kHz / RL=2k or 600Ω 前後で
+#   規定される。一方こちらの計算は G=2 / Vout=4.0 or 9.2Vrms / RL=50k / ±15V。
+#   **条件が違うので直接比較は「一次スクリーニング」までしかできない**（#33）。
+#   厳密な判定には同一条件（同 gain / Vout / load）の DUT 特性か実測が要る。
+#   ※ DUT のデータシートはこのリポジトリに未取得。上記条件は未検証。
 DUTS = [("NE5532", -94.0), ("MUSES02", -100.0),
         ("LME49860", -130.5), ("OPA1612", -136.0)]
 
@@ -169,8 +174,13 @@ def main() -> None:
     #   #33: 部品を落とす根拠は ADC 側に置かない。①②が未確定である以上、
     #   「②より上だから汚す」は同じ②を確定床として使うことになり自己矛盾する。
     #   スイッチ自身の H2/H3 を DUT の THD と直接比べる方が ADC 非依存で強い。
-    print("\n--- 落選判定（ADC 非依存。スイッチ自身の高調波 vs DUT の THD） ---")
-    print("  低歪の DUT を比較する経路に、DUT より大きい高調波を出す素子は置けない。")
+    print("\n--- 経路歪みリスクの一次スクリーニング（ADC 非依存） ---")
+    print("  スイッチ自身の H2/H3（この回路の実条件）を DUT の THD+N 公称値と比べる。")
+    print("  ⚠ 条件が揃っていない。これは判定ではなくスクリーニング:")
+    print("     switch側 = G2 / Vout 4.0・9.2Vrms / RL 50k / ±15V（この計算の条件）")
+    print("     DUT側    = データシート参考値（一般に G1 / 3Vrms / RL 2k・600Ω）")
+    print("     さらに switch は H2/H3 の最大次数、DUT は THD+N 総量で内訳不明。")
+    print("     → 保守的なふるい分けには使えるが「測れない」の証明にはならない。")
     print(f"  {'部品':22s}{'Vrms':>6s}{'最大次数':>10s}" +
           "".join(f"{n:>11s}" for n, _ in DUTS))
     for key, (name, _, _) in CANDIDATES.items():
@@ -183,19 +193,19 @@ def main() -> None:
             worst = max(h2, h3)
             cells = []
             for _, t in DUTS:
-                cells.append("  覆い隠す" if worst > t else f"{worst - t:8.1f}dB")
+                cells.append("     要注意" if worst > t else f"{worst - t:8.1f}dB")
             print(f"  {name:22s}{v:6.1f}{worst:9.1f}dB" + "".join(f"{c:>11s}"
                                                                  for c in cells))
-    print("  『覆い隠す』= スイッチの高調波が DUT の THD より大きい ＝ その石は測れない。")
+    print("  『要注意』= switch の高調波成分が DUT の公称総量を上回る。")
+    print("     最終判定は同一条件（同 gain / Vout / load）の DUT 特性か実測で。")
     print()
-    print("  → DG507B は 4Vrms でも全 DUT を覆い隠す。明確に不適。")
-    print("     ADG1407 @9.2Vrms は H3≈-96dB で MUSES02 以上の3石を覆い隠すため、")
-    print("     精密 DIRECT 用途には高リスク（4Vrms なら LME49860/OPA1612 の2石）。")
-    print("  ⚠ TMUX7612 @9.2Vrms も LME49860/OPA1612 を覆い隠す（H3 -119.7dB）。")
-    print("     在庫最良の2石まで測れるのは TMUX7612 @4Vrms だけ。")
-    print("     ＝『膝(±11V)より下で使う』は歪みの都合だけでなく、")
-    print("       どの DUT まで測れるかを直接決める設計条件。")
-    print("     最終的な測定影響は ADC baseline 実測後に確定。")
+    print("  → DG507B は 4Vrms でも全 DUT で要注意。差が大きく条件差では覆らない。不適。")
+    print("     ADG1407 @9.2Vrms は H3≈-96dB。低歪比較系には高リスク。")
+    print("  ⚠ TMUX7612 も 9.2Vrms では H3 が -119.7dB まで悪化する（4Vrms は -166.6dB）。")
+    print("     『9.2V では OPA1612 を絶対測れない』とまでは言えない（条件不一致）が、")
+    print("     46dB の悪化は低歪比較系にとって余計な変数。")
+    print("     ＝『膝(±11V)より下で使う』設計理由としては、これで十分強い。")
+    print("     厳密な可否は同一条件の DUT 特性 or ADC baseline 実測後に確定。")
 
     print("\n--- OFF側: ブロードキャスト構成でのBUS合成誤差（20kHz、非選択9ch） ---")
     print(f"{'部品':22s}{'OISO条件':>18s}{'C_off':>9s}{'振幅誤差':>11s}{'漏れ歪み':>11s}")
