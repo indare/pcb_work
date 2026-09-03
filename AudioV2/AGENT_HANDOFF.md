@@ -208,23 +208,27 @@
 
 ### アーキテクチャの骨格（動かない部分）
 
-- `PowerModule` / `ControlPanel` / `AmpBank` / `OutputStage` の **4シート**。`AmpBank` は
-  `AmpChannel` を10回インスタンス化
+- **母板 / 娘基板2版 / 計測制御 の 4シート**（2026-09-03 の刷新後）。娘基板は
+  `AmpChannel` を **5回ずつ**インスタンス化し、2枚で 10ch。シート名と生成器の
+  対応は [CLAUDE.md](../CLAUDE.md) の所有権表が正
 - **入力と出力の両方を切る。電源は常時給電**（§2.9）。非選択アンプを信号経路から
   完全に孤立させるため。電源を切る方式は ESD ダイオード経由で分離できないので採らない
 - アナログレールは **±15 V**。ただし**技術的な必須要件ではない**（v1 の `AmpModule` は
   `NE5532` ＋受動部品だけで `AMP_V+_IN`/`AMP_V-_IN` という電圧非依存の名前で受ける）。
   理由は①出力ヘッドルームが 2〜3 dB 広い ②全シートの改名をやり直さずに済む、の2つ
 - ゲイン2（20k/20k）、DIP-8 ソケット、帰還抵抗の倍率表をシルクに入れる
-- `A_GND` / `D_GND` の NetTie は **ControlPanel 側1点**
+- **NetTie は足さない**（A6 / D28）。結合は `MeasureControl` に既にある
+  （`A_GND`–`ADC_GND` と `ADC_GND_IN`–`D_GND`）。母板側にあるのはコイル帰路の
+  `GND_COIL`–`D_GND` の1本だけ。`ControlPanel` は解体済みなので、そこにあった
+  という記述はもう当てにならない
 
 ### いまリポジトリにある / 無いもの
 
 | もの | 状態 |
 |---|---|
-| `AmpBank` / `AmpChannel` / `AudioV2Case` / `ControlPanel` / `PowerModule` / `OutputStage` | **ある**。ERC 53件（内訳は §5-2） |
+| `MotherBoard` / `AmpBankSwitch` / `AmpBankRelay` / `MeasureControl` / `AmpChannel` / `AudioV2Case` | **ある**（現行の4シート＋子シート＋親）。ERC 件数などの期待値は [CLAUDE.md](../CLAUDE.md) が正 |
 | **PCB** | **無い**。`AudioV2Case.kicad_pcb` は空のスキャフォールドのみ |
-| `TMUX7612` シンボル | **ある**（`AudioV2.kicad_sym`）。リレー化で不要になる見込み |
+| `TMUX7612` シンボル | **ある**（`AudioV2.kicad_sym`）。**スイッチ版で現に使っている** — B3a/B3b でスイッチ版とリレー版の両方を起こす方針になったので、「リレー化で不要」は失効 |
 | `REC10K-2415DAW` シンボル / `Library:REC10K-AW_1in_THT` | **ある**。穴位置は旧 `DKMW20F-15_1in_THT` と同一 |
 | リレーのシンボル / フットプリント | **`Relay_THT:Relay_DPDT_FRT5` は KiCad 標準にある**（v1 で使用実績）。新規作成は不要 |
 | 旧 `RelayBoard` / `AmpModule` シート | 削除済み。生成関数も削除済み（638行） |
