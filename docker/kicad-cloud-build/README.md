@@ -246,3 +246,24 @@ docker/kicad-cloud-build/kicad-run.sh version
 - `drift` は **2026-09-01 に実行確認済み**（ERC 54件・netlist が従来どおり通ること、`git status` で `*.kicad_sch` が無変更であることも同時に確認）。`--strict` が乖離時に 1 を返すこと、一時ディレクトリが残らないこと、`KICAD_BACKEND=docker` を指定してもイメージ無しで動く（＝バックエンド非依存）ことも確認済み。
 - `kicad-run.sh` の `erc` / `netlist` / `cli` / `version`、`erc --strict` の非ゼロ終了、存在しないファイルのエラー処理は **`KICAD_BACKEND=local`（kicad-cli 10.0.6）で実行確認済み**。プロジェクトツリーを読み取り専用にした状態でも ERC が完走することを確認しており、`:ro` マウント前提の設計はこれに基づく。
 - **未確認**: Docker バックエンド経由の実行（イメージが未ビルドのため）。初回は `kicad-run.sh build` の後に `kicad-run.sh version` で 10.0.6 が返ることを確認すること。
+
+---
+
+## Cloud Agent 環境での使い方
+
+このディレクトリの `Dockerfile.10.0.6` は **Docker イメージをソースビルドする**ためのもので、初回に約45分かかる。Cursor Cloud Agent の VM には Docker が入っていないので、この Dockerfile をそのまま `docker build` する経路は使えない。
+
+代わりに、ランタイム成果物（`kicad-cli` 10.0.6 + シンボル / フットプリント / テンプレート）を **apt パッケージで揃える**。その手順が [`scripts/cloud-agent-setup.sh`](../../scripts/cloud-agent-setup.sh)（冪等・[案内](../../scripts/README.md)）で、ダッシュボード管理環境の `install` コマンドとして実行する想定。
+
+| `Dockerfile.10.0.6` | `scripts/cloud-agent-setup.sh` |
+|---|---|
+| KiCad 10.0.6 をソースからフルビルド | PPA `ppa:kicad/kicad-10.0-releases` から `apt install kicad`（Ubuntu 24.04 で 10.0.6） |
+| `kicad-symbols` / `kicad-footprints` / `kicad-templates` を gitlab から clone して install | 同名の apt パッケージ |
+| `ngspice` を apt で導入 | 同じ |
+| ユーザー設定へ `*-lib-table` をコピー | `~/.config/kicad/<ver>/` へ同じファイルをコピー |
+| 3Dモデル (`kicad-packages3d`) は入れない | `--no-install-recommends` で `kicad-libraries` 経由の巻き込みを避ける（展開 ~5.6GB） |
+| （対象外） | `uv` / `uvx` — `uvx kicad-mcp-pro` 用。root [README](../../README.md) の「前提」参照 |
+
+**ローカルで回せない検証をクラウドエージェントへ投げるための導線がこれ。** ERC / ネットリスト / DRC / Gerber が向こう側でも同じ結果になることを、パッケージ構成をこの表で Dockerfile に揃えることで担保している。
+
+> スナップショットを取り直したら `kicad-cli version` が `10.0.6` を返すことを確認する。PPA は 10.0 系の最新を出すので、将来 10.0.7 以降に上がるとホスト側の `KICAD_BACKEND=local` と版がずれる。**版差が結果に効く検証では Docker バックエンドを明示する**（上の「バックエンド」節）。

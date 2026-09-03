@@ -8,6 +8,8 @@ KiCad 10 の基板・回路図リポジトリです。主な作業対象は `Aud
 | --- | --- |
 | `Audio/` | AudioCase 本体・MeasurementADC・分割 Gerber・計測 FW。[案内](Audio/README.md) |
 | `Control/` | Controll 用 Pico2 ファーム（親／子） |
+| `docker/` | KiCad 10.0.6 のヘッドレス検証環境（ERC / ネットリスト / DRC / Gerber）。[案内](docker/kicad-cloud-build/README.md) |
+| `scripts/` | 環境セットアップ。ローカルで回せない検証をクラウドエージェントへ投げるための導入手順。[案内](scripts/README.md) |
 | `.cursor/` | Cursor 用ルール・MCP 設定 |
 
 ## いまの実機（要約）
