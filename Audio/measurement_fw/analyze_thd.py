@@ -104,6 +104,22 @@ def refine_peak(mag: np.ndarray, k: int) -> float:
     return k + 0.5 * (a - c) / denom
 
 
+def stationarity(x: np.ndarray, blocks: int = 8):
+    """キャプチャ中ずっと信号が出ていたかを見る。
+
+    再生が途中で終わる／始まると、その区間だけ振幅が違う。スペクトルは
+    広がり、基本波は実際より低く、床は高く見える（実際にやらかした:
+    10秒ファイルが 0.34 秒のキャプチャ途中で終わり、基本波が -3.4dBFS
+    ではなく -18.5dBFS に見えた）。
+    戻り値: (各ブロックの RMS[dBFS], 最大-最小[dB])
+    """
+    x = x - x.mean()
+    m = len(x) // blocks
+    rms = np.array([np.sqrt(np.mean(x[i * m:(i + 1) * m] ** 2)) for i in range(blocks)])
+    db = 20 * np.log10(np.maximum(rms, 1e-30) / FULL_SCALE)
+    return db, float(db.max() - db.min())
+
+
 def analyze(x: np.ndarray, fs: float, f_lo: float, f_hi: float):
     """基本波を見つけ、各高調波の振幅(dBc)と相対位相(deg)を返す。"""
     x = x - x.mean()
@@ -220,6 +236,7 @@ def main() -> None:
         x = left if a.ch == "L" else right
         r = analyze(x, fs, a.f_lo, a.f_hi)
         r["path"] = path
+        r["blocks"], r["nonstat"] = stationarity(x)
         runs.append(r)
 
     print(f"ch={a.ch}  N={runs[0]['n']}  fs={runs[0]['fs']:.0f}Hz  "
@@ -233,6 +250,14 @@ def main() -> None:
             cells += f"{g['dbc']:10.1f}{g['rel_deg']:10.1f}" if g else f"{'—':>10s}{'—':>10s}"
         print(f"{r['path'][-22:]:22s}{r['f0']:9.2f}H{r['fund_dbfs']:10.2f}"
               f"{r['floor_dbfs']:10.1f}{cells}")
+
+    bad = [r for r in runs if r["nonstat"] > 1.0]
+    if bad:
+        print("\n**⚠ 信号が定常でないキャプチャがある。再生が途中で切れたか始まった可能性**")
+        for r in bad:
+            print(f"  {r['path'][-22:]}: ブロック間 RMS 差 {r['nonstat']:.1f} dB")
+            print("    " + " ".join(f"{v:.1f}" for v in r["blocks"]) + "  dBFS")
+        print("  → ループ再生にして取り直すこと。この結果は使えない。")
 
     if len(runs) > 1:
         print("\n=== 再現性（これが分解能の床）===")
