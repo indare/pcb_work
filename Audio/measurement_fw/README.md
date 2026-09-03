@@ -129,8 +129,9 @@ U710 1番リフト、Y701 空中配線、LCD SPI 飛ばし。詳細は `../Measu
 3. 基板の電源を入れ直す
 4. 1320Hz を流す            → 音が来たら自動でラッチして停止する
 5. USB を挿して mpremote で繋ぐ（接続時の Ctrl-C でアイドルが割れる）
-6. import capture_hold; capture_hold.status()   → 何本採れたか
-   import capture_hold; capture_hold.dump()     → capture_raw.py と同じ書式で吐く
+6. **必ず `resume` を挟む**（挟まないと RAM を消してから読みに行く）:
+     mpremote connect <dev> resume exec "import capture_hold; capture_hold.status()"
+     mpremote connect <dev> resume exec "import capture_hold; capture_hold.dump()"
 7. analyze_thd.py にそのまま渡せる
 ```
 
@@ -139,7 +140,10 @@ U710 1番リフト、Y701 空中配線、LCD SPI 飛ばし。詳細は `../Measu
 - **電源が USB に依存しない。** Pico の VSYS は `D701`（ショットキ）経由で基板の
   `+5V_D` から来ている。USB を抜いても動き続ける
 - **`mpremote` は Pico をリセットしない。** 接続時に Ctrl-C を送るだけなので、
-  モジュールのグローバル（`capture_hold.HOLD`）は生き残る
+  モジュールのグローバル（`capture_hold.HOLD`）は生き残る。
+  **⚠ ただし `mpremote exec` は既定でソフトリセットする。**`resume` を挟まないと
+  RAM を消してから読みに行く（`mpremote --help` の `resume` = "will not auto soft-reset"）。
+  2026-09-03 に実際にこれで読もうとした
 - **採ったら止まる。** 連続で採り続けると **USB を挿した瞬間の汚れたデータで
   上書きしてしまい、切り分けにならない**
 

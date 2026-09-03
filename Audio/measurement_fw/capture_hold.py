@@ -5,8 +5,16 @@
 （`../MeasurementADC_BRINGUP.md`）。USB を挿し直すとその環が閉じ直るので、
 **挿してから採ったのでは意味が無い**。抜いている間に採って、挿してから読む。
 
-`mpremote` は接続時に Ctrl-C を送るだけで **Pico をリセットしない**ので、
+`mpremote` は接続時に Ctrl-C を送るだけで Pico をリセットしないので、
 モジュールのグローバルに置いておけば再接続後も生きている。
+
+⚠⚠ **ただし `mpremote exec` は既定でソフトリセットを送る。** 読み出しに使うと
+   **RAM を消してから読みに行く**ので、この用途では必ず `resume` を挟むこと。
+
+       mpremote connect <dev> resume exec "import capture_hold; capture_hold.dump()"
+
+   `mpremote --help` の `resume` に「will not auto soft-reset」とある＝既定はリセットする。
+   既知の「`mpremote` で繋ぐとスペアナが止まる」と同じ系統の罠。
 
 **電源は USB に依存しない。** Pico の VSYS は `D701`（ショットキ）経由で
 基板の `+5V_D` から来ている（`../MeasurementADC_STATUS.md`）。USB を抜いても動く。
@@ -16,9 +24,9 @@
     # 1. USB を抜く
     # 2. 基板の電源を入れ直す（main.py がこれを呼ぶ）
     # 3. 1320Hz を流す  → 音が来たら自動でラッチして停止する
-    # 4. USB を挿して mpremote で繋ぐ（Ctrl-C が飛んでアイドルが割れる）
-    # 5. 読み出す:
-    #      import capture_hold; capture_hold.dump()
+    # 4. USB を挿して mpremote で繋ぐ
+    # 5. 読み出す。**必ず `resume` を挟むこと**:
+    #      mpremote connect <dev> resume exec "import capture_hold; capture_hold.dump()"
     #    出力は capture_raw.py と同じ書式なので analyze_thd.py にそのまま渡せる
 
 ⚠ **LCD スペアナは起動しないこと。** SPI 40MHz は系で最も騒がしいデジタル源で、
