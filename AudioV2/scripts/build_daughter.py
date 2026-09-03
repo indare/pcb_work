@@ -401,6 +401,21 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
+    # symbol_inst_v10 / pin_uuid_block は sch_helpers.new_uid()（uuid4 = 乱数）を
+    # 使う。ここを差し替えないと再実行でシンボルの uuid が毎回変わり、
+    # 「冪等・再実行でバイト一致」（CLAUDE.md）が成立しない。
+    # 下の3箇所で scaffold.uid は個別に差し替えているが、片方だけでは足りない
+    # （同じ罠の実測は build_motherboard.daughter_slots() の注記にある）。
+    # ここは生成全体を覆うので、build() / rewrite_ampchannel_instances() /
+    # patch_parent() のすべてが決定的な uid() を通る。
+    saved_new_uid, sch_helpers.new_uid = sch_helpers.new_uid, uid
+    try:
+        return _build_all(a)
+    finally:
+        sch_helpers.new_uid = saved_new_uid
+
+
+def _build_all(a) -> int:
     outs = {}
     for v in (SWITCH, RELAY):
         b = Builder(v)

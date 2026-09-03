@@ -29,6 +29,11 @@ KiCad の基板プロジェクト。現在の作業対象は `AudioV2/`。
 
 **生成対象のシートを手で直さないこと。** 回すと上書きされる。回路を変えるならスクリプトを直す。
 
+**両方を回すときは `build_daughter.py` → `build_motherboard.py` の順で。**
+どちらも親シートをパッチするが、`AudioV2Case.kicad_sch` の中でのサブシート block の
+並びが生成器ごとに違う。逆順や片方だけを回すと、**内容は同じまま 900 行規模の
+並べ替え差分**が出る。この順なら不動点で、何巡しても同じものが出る。
+
 `ControlPanel` / `PowerModule` / `OutputStage` / `AmpBank` は**解体済みで `AudioV2/legacy/` に凍結**。
 **編集しても設計に反映されない**（`build_motherboard.py` が素材として読むだけ）。
 
