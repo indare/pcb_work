@@ -6,7 +6,7 @@
       "args": ["kicad-mcp-pro"],
       "env": {
         "KICAD_MCP_PROJECT_DIR": "${workspaceFolder}/AudioV2",
-        "KICAD_MCP_PROFILE": "build",
+        "KICAD_MCP_PROFILE": "full",
         "KICAD_MCP_OPERATING_MODE": "write"
       }
     }

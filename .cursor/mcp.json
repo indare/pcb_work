@@ -2,10 +2,10 @@
   "mcpServers": {
     "kicad": {
       "type": "stdio",
-      "command": "C:/Users/masas/AppData/Local/Microsoft/WinGet/Packages/astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe/uvx.exe",
+      "command": "uvx",
       "args": ["kicad-mcp-pro"],
       "env": {
-        "KICAD_MCP_PROJECT_DIR": "C:/Users/masas/Desktop/PCB/AudioV2",
+        "KICAD_MCP_PROJECT_DIR": "${workspaceFolder}/AudioV2",
         "KICAD_MCP_PROFILE": "full",
         "KICAD_MCP_OPERATING_MODE": "write"
       }

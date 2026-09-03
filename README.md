@@ -32,11 +32,12 @@ v1 の実機（AudioCase / MeasurementADC）は `Audio/` にあり、こちら�
 {
   "mcpServers": {
     "kicad": {
+      "type": "stdio",
       "command": "uvx",
       "args": ["kicad-mcp-pro"],
       "env": {
         "KICAD_MCP_PROJECT_DIR": "${workspaceFolder}/AudioV2",
-        "KICAD_MCP_PROFILE": "build",
+        "KICAD_MCP_PROFILE": "full",
         "KICAD_MCP_OPERATING_MODE": "write"
       }
     }
@@ -56,7 +57,7 @@ v1 の実機（AudioCase / MeasurementADC）は `Audio/` にあり、こちら�
 | --- | --- |
 | `${workspaceFolder}` | このリポジトリのルート（`.cursor/mcp.json` がある側） |
 | `KICAD_MCP_PROJECT_DIR` | KiCad プロジェクトディレクトリ（現行は `AudioV2/`） |
-| `KICAD_MCP_PROFILE` | `build`（配置・配線向け） |
+| `KICAD_MCP_PROFILE` | `full`（2026-09-02 に `build` から変更。AudioV2 移行と同時） |
 | `KICAD_MCP_OPERATING_MODE` | `write`（読み取り専用にしたい場合は `readonly`） |
 
 ### PATH に `uvx` が無い場合
