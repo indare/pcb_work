@@ -19,9 +19,10 @@ KiCad の基板プロジェクト。現在の作業対象は `AudioV2/`。
 ### シートの所有権
 
 [AudioV2/AGENT_HANDOFF.md §2.8](AudioV2/AGENT_HANDOFF.md) の表が正。
-**手編集所有**のシート（RelayBoard / PowerModule / OutputStage）は KiCad 側が正で、
-`wire_circuit_design.py` から機械的に上書きしてはいけない。
-ロジック変更もそれらは KiCad 側で直接行う。
+**2026-09-03 時点で AudioV2 の全シートが「手編集所有」**（KiCad 側が正）。
+`wire_circuit_design.py` はどのシートも書き換えず、ロジックのドキュメントと
+`drift` の比較基準としてだけ残っている。回路の変更は KiCad 側で直接行う。
+`--force-<name>` はシートを丸ごと作り直すとき専用の脱出ハッチで、通常運用では使わない。
 
 `generate_kicad_scaffold.py` は再実行しない。
 

@@ -1268,12 +1268,22 @@ def main() -> None:
             "graduated to hand-edited on 2026-09-02 alongside AmpChannel (bulk-cap wiring "
             "fixed in KiCad); generator kept as logic documentation only",
         ),
+        "control": (
+            "ControlPanel.kicad_sch",
+            control_panel_wired,
+            "graduated to hand-edited on 2026-09-03: the sheet now exports -15V and +5V "
+            "to the parent, and the local +5V->Schottky->VSYS feed was removed in KiCad; "
+            "generator kept as logic documentation only",
+        ),
+        "parent": (
+            "AudioV2Case.kicad_sch",
+            parent_wired,
+            "graduated to hand-edited on 2026-09-03: the MeasureControl sheet was placed "
+            "in KiCad and the generator does not emit it; regenerating would delete it",
+        ),
     }
     # 生成コード所有シート（回せばそのまま正）
-    GENERATED = {
-        "control": ("ControlPanel.kicad_sch", control_panel_wired),
-        "parent": ("AudioV2Case.kicad_sch", parent_wired),
-    }
+    GENERATED: dict[str, tuple[str, object]] = {}
 
     for name, (fn, build) in GENERATED.items():
         if target in ("all", name):
