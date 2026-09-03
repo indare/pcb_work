@@ -191,6 +191,34 @@ def broadcast_report(rload: float = 50e3, nch: int = 10,
         print()
 
 
+def harmonics_report(rload: float, nch: int) -> None:
+    """THD 試験で実際に見る周波数での coherent 最悪ケース。
+
+    20kHz 単発で「OFF漏れは非問題」と言うと条件が混ざる。OFF 結合は容量性主体なので
+    漏れは周波数に比例し、基本波 1kHz の THD 試験なら見るのは H2=2k / H3=3k / H5=5k で、
+    そこは 20kHz より 12〜20dB 小さい。逆に基本波を 10kHz まで掃引すると H2 が 20kHz に来る。
+
+    **非選択chに何が刺さっているかで漏れの絶対値が変わる**のが要点。10石を比較する装置なので、
+    最良の石を測っている最中に残り9ソケットに最悪の石が刺さっている状況が現実に起きる。
+    """
+    cases = ((-94.0, "NE5532 (-94dB) が9ソケットに刺さっている"),
+             (-136.0, "OPA1612 (-136dB) が9ソケットに刺さっている"))
+    freqs = (1e3, 2e3, 3e3, 5e3, 10e3, 20e3)
+    print(f"=== THD 試験周波数での coherent 最悪ケース（負荷 {rload/1e3:.0f}k / "
+          f"{nch}ch 中 9ch が OFF）===\n")
+    for dut_thd, label in cases:
+        print(f"■ 非選択9ch: {label}")
+        print(f"   {'部品':12s}" + "".join(f"{f/1e3:9.0f}kHz" for f in freqs))
+        for part in PARTS:
+            mism = [(1.0, 0.0, dut_thd)] * (nch - 1)
+            vals = [db(solve_broadcast(part, f, rload, nch, mism, coherent=True)[2])
+                    for f in freqs]
+            print(f"   {part:12s}" + "".join(f"{v:10.1f}dB" for v in vals))
+        print()
+    print("読み方: 基本波 1kHz の THD 試験なら H2=2k / H3=3k / H5=5k の列を見る。")
+    print("  20kHz 列が効くのは基本波を 10kHz まで掃引したときだけ。")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -206,7 +234,14 @@ def main() -> None:
                      help="[--broadcast] 非選択9chに与える最悪ケースの位相誤差(deg)")
     ap.add_argument("--dut-thd", type=float, default=None,
                      help="[--broadcast] 非選択chのDUT自身のTHD(dB)。指定時のみ漏れ歪み列を出す")
+    ap.add_argument("--harmonics", action="store_true",
+                     help="THD 試験の実周波数（基本波1kHz → H2=2k/H3=3k/H5=5k）で "
+                          "coherent 最悪ケースを出す。20kHz 単発で判断しないため")
     a = ap.parse_args()
+
+    if a.harmonics:
+        harmonics_report(a.rload, a.nch)
+        return
 
     if a.broadcast:
         broadcast_report(a.rload, a.nch, a.gain_pct, a.phase_deg, a.dut_thd)
