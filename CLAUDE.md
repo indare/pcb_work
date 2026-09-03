@@ -84,7 +84,7 @@ docker/kicad-cloud-build/kicad-run.sh erc        # AudioV2 全体の ERC
 docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 ```
 
-**2026-09-03 時点の期待値**（これと違ったら何かが変わっている）:
+**2026-09-03 時点の期待値**（これと違ったら何かが変わっている）。**`kicad-cli` 10.0.6・`KICAD_BACKEND=local`（このマシンのホスト KiCad）で実測した値**。版が変われば ERC 件数は動くので、ずれたら先に `kicad-run.sh version` を見ること:
 
 | | |
 |---|---|
