@@ -38,11 +38,21 @@ from switch_offiso import coff_from_oiso, solve_broadcast  # noqa: E402
 DATA = Path(__file__).resolve().parent / "data"
 
 #   在庫 DUT の THD+N 公称値。**データシートの参考値であって、この回路の条件ではない。**
-#   一般にオーディオ用オペアンプの THD+N は G=1 / Vout=3Vrms / 1kHz / RL=2k or 600Ω 前後で
-#   規定される。一方こちらの計算は G=2 / Vout=4.0 or 9.2Vrms / RL=50k / ±15V。
+#   条件はデータシートで確認済み（Audio/datasheets/opamps/）。**DUT どうしですら揃っていない**:
+#
+#     OPA1612  -136.0dB  G=+1,  f=1kHz, VO=3Vrms          TI_OPA1612.pdf p.5
+#     LME49860 -130.5dB  AV=1,  f=1kHz, VOUT=3Vrms, RL=2k TI_LME49860.pdf p.3
+#     MUSES02  -100.0dB  AV=+10,f=1kHz, Vo=5Vrms, RL=2k   NJR_MUSES02.pdf p.3
+#     NE5532    -94.0dB  ★TI DS に THD 規定なし。通説値で出典不明
+#
+#   一方こちらの計算は G=2 / Vout=4.0 or 9.2Vrms / RL=50k / ±15V。
 #   **条件が違うので直接比較は「一次スクリーニング」までしかできない**（#33）。
-#   厳密な判定には同一条件（同 gain / Vout / load）の DUT 特性か実測が要る。
-#   ※ DUT のデータシートはこのリポジトリに未取得。上記条件は未検証。
+#   なお DS の RL=2k はこちらの 50k より重い＝ DS 値は悲観側。実回路の DUT はこれより
+#   良い可能性があり、その場合スイッチが支配的になる方向に効く。
+#
+#   TODO: 振幅依存カーブは各 DS にある（OPA1612 p.1/p.8「THD+N vs Output Amplitude」、
+#   LME49860 p.5「THD+N vs OUTPUT VOLTAGE」、MUSES02 p.5「vs Output Amplitude」）。
+#   Ron 曲線と同じベクタ抽出で 4.0/9.2Vrms の値を取れば、振幅軸だけは条件を揃えられる。
 DUTS = [("NE5532", -94.0), ("MUSES02", -100.0),
         ("LME49860", -130.5), ("OPA1612", -136.0)]
 
@@ -178,7 +188,9 @@ def main() -> None:
     print("  スイッチ自身の H2/H3（この回路の実条件）を DUT の THD+N 公称値と比べる。")
     print("  ⚠ 条件が揃っていない。これは判定ではなくスクリーニング:")
     print("     switch側 = G2 / Vout 4.0・9.2Vrms / RL 50k / ±15V（この計算の条件）")
-    print("     DUT側    = データシート参考値（一般に G1 / 3Vrms / RL 2k・600Ω）")
+    print("     DUT側    = データシート値。DUT どうしですら条件が揃っていない:")
+    print("        OPA1612 G=1/3Vrms  LME49860 G=1/3Vrms/RL2k")
+    print("        MUSES02 G=10/5Vrms/RL2k  NE5532 は TI DS に THD 規定なし(通説値)")
     print("     さらに switch は H2/H3 の最大次数、DUT は THD+N 総量で内訳不明。")
     print("     → 保守的なふるい分けには使えるが「測れない」の証明にはならない。")
     print(f"  {'部品':22s}{'Vrms':>6s}{'最大次数':>10s}" +
