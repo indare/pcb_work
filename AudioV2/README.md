@@ -1,33 +1,51 @@
-# AudioV2（作業中）
+# AudioV2
 
-`Audio/`（AudioCase）を参考に、操作系を Pico 2 前提で再構成する作業用ディレクトリ。
+**「オペアンプを何個も電子的に切り替えて、なんとなく音が違うのを楽しむ箱」の KiCad プロジェクト。**
+計測系が載っているのは「切替素子が音を悪くしないか」を確かめるためで、装置そのものは計測器ではない。
+優劣は測定ではなく耳で決める。
 
-- **計測 / スペアナ**（`MeasurementADC` + 計測 Pico 2）は現行どおり独立
-- **操作 Pico 1 台**＋リレー盤は **I²C GPIO 拡張（MCP23017）**
-- **電源: ±12 V** — **PowerModule 再設計**（DKMW20F-12 + **USB-C / CH224 内蔵**）
-- **Amp** — AudioV2版を再設計（±12 V、ゲイン2、100 µF/rail + 100 nF + 1 nF、DIP-8）。代表1シート、**×10製造**
-- **HP** — `Audio/` 製造済み基板を物理流用
-- 音量: **手回しデュアルポット ×2**（HP / LINE）。DEST: 機械 SW + ADC + LED + OLED。トーン: PT2314（I²C、Amp 前）
-- **物理 PCB:** Relay **5+5×2**、Control+Output **1 枚**、Power **1 枚**、Amp **×10**（計14枚、設計5種）
-- **KiCad 素案** — 手回し音量構成（PT2314 28pin / SW_DP3T / A50k Dual）。[CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md)
-- **品番:** [PARTS.md](PARTS.md) — DEST **C&K 7303SYZQE**、音量 **Alps RK27112A00CF** ×2、制御 OLED **2.42″**、スペアナ **Waveshare 29318**
-- **Relay:** 各盤5ch、Amp入力＋電源を連動切替（MCP23017×1 / ULN2803×2 / AZ850×10）
-- **次:** ControlPanel ERC整理、OLED FP差し替え、未使用PT2314入力
-- **エージェント再開:** [AGENT_HANDOFF.md](AGENT_HANDOFF.md)（クラウド会話の長期記憶）
+母板に電源・トーン・出力段をまとめ、オペアンプと切替素子を載せた**娘基板をヘッダでスタック**する。
+娘基板は切替素子だけを替えた版を作り、**同じ箱に混ぜて挿して同一セッションで比べる**
+（時間ドリフトと抜き差しを比較に交絡させないため）。**PCB は未着手。**
 
-詳細は [DECISIONS.md](DECISIONS.md)。DEST ラダーは [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。過去の音量 IC 比較（アーカイブ）は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。データシートは [datasheets/](datasheets/)。
+この段落より詳しいことは以下の文書が正。**README には書かない。**
 
-## いまの `Audio/` からの参照元
+## 着手する前に読むもの
 
-| 流用・参照 | 内容 |
+| | 何が書いてあるか |
 |---|---|
-| Amp | `Audio/AmpModule`を基にAudioV2版へ再設計。`AmpModule.kicad_sch`（PCB は未設計） |
-| HP バッファ | **実基板のみ**流用。KiCad には載せない |
-| PowerModule | **再設計**の参考（`Audio/PowerModule.kicad_sch` は F-15） |
-| リレー＋端子台＋ULN | `Audio/Controll.kicad_sch` |
-| 親 UI ファーム（原型） | `Control/` → 新規 `AudioV2/control_fw/` |
-| GND 分離の型 | `MeasurementADC` の NetTie |
+| [`../CLAUDE.md`](../CLAUDE.md) | **守ること。シートの所有権**（どれをスクリプトが生成し、どれを KiCad で直すか）**と検証コマンド・その期待値** |
+| [`../SOURCE_OF_TRUTH.md`](../SOURCE_OF_TRUTH.md) | ドキュメントに何を書き、何を書かないか。**ドキュメント編集の前に必読** |
+| [AGENT_HANDOFF.md](AGENT_HANDOFF.md) | 長い文脈の入口。確定事項の一覧・次にやること・踏んだ落とし穴 |
 
-## このディレクトリの置き方
+回路図のシート構成と、手で触ってよいシートは **`CLAUDE.md` の所有権表が正**。
+構成は何度も変わっているので、ここには写さない。
 
-判断確定済み（main マージ済み）— KiCad は **#19** で回路設計・ピン修正中。`Audio/` 直編集はしない。
+## この下にあるもの
+
+| | |
+|---|---|
+| `*.kicad_sch` / `AudioV2.kicad_sym` / `AudioV2Case.kicad_pro` | 回路図本体。`AudioV2Case.kicad_pcb` は空のスキャフォールド（PCB 未着手） |
+| [DECISIONS.md](DECISIONS.md) | **確定事項の正。** 電源レール・切替方式・基板構成・スタック規格。迷ったらここ |
+| [CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md) | 回路の構成、データシートとのピン照合、机上検算 |
+| [PARTS.md](PARTS.md) | 品番と機能等価の代替。BOM のブロックは回路図から生成する |
+| [WIRING.md](WIRING.md) | 箱配線・シールドの落とし方・図の外にある流用基板との接続 |
+| [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) | 出力先センスの抵抗ラダー設計 |
+| [spice/](spice/README.md) | 設計判断の根拠に回した ngspice ネットリスト |
+| [scripts/](scripts/) | 回路図の生成・編集・検証の道具。どれを何に使うかは `CLAUDE.md` |
+| [datasheets/](datasheets/) | 参照したデータシート PDF |
+| [legacy/](legacy/README.md) | **母板へ統合済みの旧シート。凍結してある。編集しても設計には反映されない** |
+| `PROCUREMENT.xlsx` / `dc_dc*.csv` | 発注リストと DC-DC 探索の出力（`scripts/dcdc_survey.py`） |
+| [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) / [KICAD_SCAFFOLD_TODO.md](KICAD_SCAFFOLD_TODO.md) / [SYMBOL_FIX_TODO.md](SYMBOL_FIX_TODO.md) / [SYMBOL_REVIEW_SUMMARY.md](SYMBOL_REVIEW_SUMMARY.md) | **2026-08-30 前後の記録。** 不採用になった案・当時の作業指示で、現構成より前の内容 |
+
+## 古い記述の読み方
+
+構成を何度も作り直しているので、**どの文書にも日付の違う記述が混在している。**
+不採用になった経路も「同じ検討を繰り返さない」ために消さずに残してある。
+
+- **新しい日付の節が正。** 最新は [DECISIONS.md](DECISIONS.md) と
+  [AGENT_HANDOFF.md](AGENT_HANDOFF.md) の確定事項に集約されている
+- 解体されたシートの名前（`ControlPanel` / `PowerModule` / `OutputStage` / `RelayBoard` /
+  `AmpModule` / 10ch 一体の `AmpBank`）が出てくる節は、**旧構成の記録**
+- 部品数・ERC 件数・ネット名・ピン接続は**回路図が正**。文書の値は当時のもの
+  （[`../SOURCE_OF_TRUTH.md`](../SOURCE_OF_TRUTH.md)）
