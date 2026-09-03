@@ -78,7 +78,7 @@ MOTHER_PINS_L = [
 ]
 MOTHER_PINS_R = [
     ("+15V", "output"), ("-15V", "output"), ("A_GND", "bidirectional"),
-    ("+5V", "output"),                                  # BP5293。娘基板のコイル電源
+    ("+5V_COIL", "output"),                             # BP5293。娘基板のコイル電源（D18 pin5）
     ("TONE_L", "output"), ("TONE_R", "output"),         # PT2314 の出力（母板に載った）
     ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
     ("PD_12V_SW", "output"), ("PD_GND", "bidirectional"),
@@ -108,7 +108,7 @@ SLOT_ANA_NETS = {
 SLOT_PWR_NETS = {
     1: "+15V",     2: "A_GND",
     3: "-15V",     4: "A_GND",
-    5: "+5V",      6: "GND_COIL",
+    5: "+5V_COIL", 6: "GND_COIL",
     7: "I2C_SDA",  8: "D_GND",
     9: "I2C_SCL", 10: "3V3",
 }

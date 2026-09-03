@@ -14139,7 +14139,7 @@
 		)
 		(uuid "139b8c62-7ad6-4be2-abbb-4fc9bae1049f")
 	)
-	(label "+5V"
+	(label "+5V_COIL"
 		(at 414.02 143.51 0)
 		(effects
 			(font
@@ -14259,7 +14259,7 @@
 		)
 		(uuid "4799dc52-1e11-427a-876c-fc9ceb5740ec")
 	)
-	(label "D_GND"
+	(label "GND_COIL"
 		(at 406.4 151.13 0)
 		(effects
 			(font
@@ -14489,7 +14489,7 @@
 		)
 		(uuid "9179228d-6b31-4b1e-b960-670b9b780e5d")
 	)
-	(label "+15V"
+	(label "PD_12V_SW"
 		(at 398.78 143.51 0)
 		(effects
 			(font
@@ -14789,7 +14789,7 @@
 		)
 		(uuid "fb33f459-94cf-44cd-b779-33ff94819694")
 	)
-	(label "+5V"
+	(label "+5V_COIL"
 		(at 386.08 115 0)
 		(effects
 			(font
@@ -14819,7 +14819,7 @@
 		)
 		(uuid "96c707c4-3b01-5f47-9578-107f72660e00")
 	)
-	(hierarchical_label "+5V"
+	(hierarchical_label "+5V_COIL"
 		(shape output)
 		(at 386.08 115 180)
 		(effects
@@ -17252,7 +17252,7 @@
 		)
 		(uuid "d4e6dcd3-e548-5bd8-a49a-473f40837132")
 	)
-	(label "+5V"
+	(label "+5V_COIL"
 		(at 210.82 96.52 180)
 		(effects
 			(font
@@ -17696,7 +17696,7 @@
 		)
 		(uuid "a3da0639-d58f-59e0-a174-3a69845010e7")
 	)
-	(label "+5V"
+	(label "+5V_COIL"
 		(at 274.32 96.52 180)
 		(effects
 			(font

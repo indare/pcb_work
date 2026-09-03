@@ -341,11 +341,12 @@ PARENT_SHEETS = [
 # 同じネットに合流してしまう**ものを、ここで差し替える。
 #   - ADDR0/ADDR1 は D21 のとおり**スロットごとに違う値**でなければ番地にならない
 #     （スロット1 = 0x20、スロット2 = 0x21）
-#   - +5V_COIL / GND_COIL は母板側のネット名が別
+#   - +5V_COIL / GND_COIL は母板側と同名（2026-09-04 に母板を +5V -> +5V_COIL へ
+#     揃えたので恒等。以前は母板が +5V で名前が食い違っていた）
 PARENT_NET = {
     SWITCH: {"ADDR0": "D_GND", "ADDR1": "D_GND"},
     RELAY: {"ADDR0": "3V3", "ADDR1": "D_GND",
-            "+5V_COIL": "+5V", "GND_COIL": "GND_COIL"},
+            "+5V_COIL": "+5V_COIL", "GND_COIL": "GND_COIL"},
 }
 
 
