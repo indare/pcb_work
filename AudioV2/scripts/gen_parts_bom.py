@@ -27,6 +27,11 @@
 
 回路図は読むだけで、*.kicad_sch / *.kicad_pcb は書き換えない
 （kicad-run.sh はリポジトリを read-only でマウントする）。
+
+⚠ 全数 BOM は必ず階層ルートの AudioV2Case.kicad_sch から取ること。
+  AmpBankSwitch / AmpBankRelay を単体で export すると、子シート AmpChannel の
+  参照のインスタンス別上書き（ch2=8xx, ch3=9xx…）を kicad-cli が解決できず、
+  1 インスタンス分の値しか出ない。旧 AmpBank.kicad_sch でも同じだった。
 """
 
 from __future__ import annotations
@@ -43,25 +48,45 @@ from pathlib import Path
 # 生成するブロックの定義。増やすときはここに1つ足して、PARTS.md 側に
 # 同じ id の BEGIN/END マーカーを置くだけでよい。
 # --------------------------------------------------------------------------
+# kicad-cli sch export bom に渡す列。Description は回路図の部品プロパティ
+# （= 役割の記述）で、これも回路図から導出できる情報なので生成側に含める。
+_FIELDS = "Reference,Value,Footprint,QUANTITY,Description"
+_LABELS = "Refs,Value,Footprint,Qty,Role"
+# Value だけでグループ化すると、同一 Value・異 Footprint が 1 行に合流し
+# Footprint 列が "fpA,fpB" になる。Phoenix の FP 名自体がカンマを含むので
+# 後から気づけない。Footprint もグループキーに入れて分離する。
+_GROUP_BY = "Value,Footprint"
+# Role 列は同一値グループ内で重複しがちなので、重複を畳んで " / " で繋ぐ
+_DEDUPE = "Role"
+
 BLOCKS = [
     {
         # PARTS.md のマーカー id
-        "id": "ampbank-bom",
-        # 生成元シート（リポジトリルートからの相対パス）。AmpBank は AmpChannel を
-        # 10 回インスタンス化する階層なので、kicad-cli は子シートも含めて集計する。
-        "sheet": "AudioV2/AmpBank.kicad_sch",
-        # kicad-cli sch export bom に渡す列。Description は回路図の部品プロパティ
-        # （= 役割の記述）で、これも回路図から導出できる情報なので生成側に含める。
-        "fields": "Reference,Value,Footprint,QUANTITY,Description",
-        "labels": "Refs,Value,Footprint,Qty,Role",
-        # Value だけでグループ化すると、同一 Value・異 Footprint が 1 行に合流し
-        # Footprint 列が "fpA,fpB" になる。Phoenix の FP 名自体がカンマを含むので
-        # 後から気づけない。Footprint もグループキーに入れて分離する。
-        "group_by": "Value,Footprint",
-        # Role 列は同一値グループ内で重複しがちなので、重複を畳んで " / " で繋ぐ
-        "dedupe_column": "Role",
+        "id": "case-bom",
+        # 生成元シート（リポジトリルートからの相対パス）。
+        # **階層ルート**を渡すのが肝。ここから取ると AmpChannel×10 の
+        # インスタンス別参照上書き（ch2=8xx, ch3=9xx…）まで解決されるので、
+        # これが唯一の「全数」BOM になる。娘基板シート単体では 1ch 分しか出ない
+        # （docstring の ⚠ 参照）。
+        "sheet": "AudioV2/AudioV2Case.kicad_sch",
+        "fields": _FIELDS,
+        "labels": _LABELS,
+        "group_by": _GROUP_BY,
+        "dedupe_column": _DEDUPE,
         # 表の直前に出す見出し行（生成物の一部。人が書き換えても再生成で戻る）
-        "caption": "AmpBank 部品表（ch1 代表 + 共通部）",
+        "caption": "AudioV2 全体部品表（母板 + 娘基板 + 計測 + 親）",
+    },
+    {
+        # 1ch あたり何が要るかを見るためのテンプレート。娘基板の共通部
+        # （切替素子・I2C エキスパンダ・入口バルク・スロット）は含まれない。
+        # 発注数の根拠には使えない。使うのは上の case-bom。
+        "id": "ampchannel-bom",
+        "sheet": "AudioV2/AmpChannel.kicad_sch",
+        "fields": _FIELDS,
+        "labels": _LABELS,
+        "group_by": _GROUP_BY,
+        "dedupe_column": _DEDUPE,
+        "caption": "AmpChannel 1ch テンプレート（×10 される中身）",
     },
 ]
 
@@ -186,6 +211,16 @@ def render_block(root: Path, block: dict) -> str:
     # 並びはここで固定する（kicad-cli の既定順に依存しない = 決定論的）
     body.sort(key=lambda r: natural_key(r[0]))
 
+    # 部品総数。ネットリストの comp 数と突き合わせられるので、
+    # 「シートを取り違えて 1ch 分しか出ていない」のを人が気づける唯一の手がかり。
+    # Qty が数値でない行が混じったら黙って諦める（表そのものは正しいので）。
+    total_qty = None
+    if qty_i is not None:
+        try:
+            total_qty = sum(int(r[qty_i]) for r in body)
+        except (TypeError, ValueError):
+            total_qty = None
+
     lines = [
         "",
         f"**{block['caption']}** — 下の表は `{block['sheet']}` から自動生成しています。",
@@ -200,6 +235,10 @@ def render_block(root: Path, block: dict) -> str:
         "| " + " | ".join(header) + " |",
         "|" + "---|" * len(header),
     ]
+    if total_qty is not None:
+        # 見出し群の直後・注記の前に置く。後ろに空行を足さないと注記の
+        # blockquote と密着して Markdown が崩れる。
+        lines[5:5] = [f"行数 {len(body)} / 部品総数 {total_qty}。", ""]
     for row in body:
         cells = []
         for i, cell in enumerate(row):
