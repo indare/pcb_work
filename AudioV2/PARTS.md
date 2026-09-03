@@ -174,7 +174,7 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 | **MCP23017** | **`MCP23017-E/SP`**（DIP-28） | JP A1/A0 で 0x20–0x23（最大4枚）。A2=0。UI 側は 0x22。**個数は回路図から導出できるので §4.1 の部品表を見る** |
 | **リレードライバ** | **`TBD62083APG`**（DIP-18。`ULN2803` とピン互換） | **`ULN2803` は不採用**（D24）。ダーリントンの約 1 V 降下では 40 ℃ 超で `AZ850` の Must Operate を満たさない。DMOS なら 40 mA で 0.13 V。**1枚に2個要る**（5ch×2コイル=10本 > 8ch。D25 — 4ch/枚なら1個で済んだ分のコスト） |
 | **PT2314** | **PT2314 DIP-28**（回路値 `PT2314-D`） | Princeton DS 28 pin。SOP は初号では使わない |
-| **+9 V LDO** | **ST L7809CV**（TO-220） | PT2314 typ 30 mA → 散逸 (12-9)×30 mA ≈ 0.09 W |
+| **+9 V LDO** | **ST `L7809CV`**（TO-220） | 入力は **+15 V**（`U202.1 → /+15V`）。PT2314 typ 30 mA → 散逸 **(15−9)×30 mA ≈ 0.18 W**。TO-220 なら放熱器なしで余裕。⚠ TI の `LM78xx` は廃番系なので**回路図の Value も `L7809CV` に揃えてある**（KiCad のシンボル名 `Regulator_Linear:LM7809_TO220` は 78xx 共通の型で、そのまま使える） |
 | **一次ヒューズ**（PD 入力〜DC-DC 間） | **5×20 mm T3.15 A**（または図の 3 A スロー） | ⚠ **この定格は旧 `DKMW20`（20 W、一次 ~2 A）で選んだもの**。`REC10K`（10 W）では一次 **~1 A** なので **3 倍で緩い**。T2 A 級への見直しは未判断（保護と突入電流のどちらを取るか）。ガラス管スローブロー |
 | **BP5293** | **BP5293-50**（秋月 111188） | 現行 Audio と同じ +5 V |
 | **DC-DC** | **`REC10K-2415DAW/H2`**（Recom、±15 V / ±333 mA、1″×1″ 6-DIP） | **2026-09-02 に `DKMW20F-15` から変更**（[DECISIONS.md](DECISIONS.md) §8）。穴位置は旧品と同一で差し替え可。DigiKey `945-REC10K-2415DAW/H2-ND` |
@@ -304,7 +304,7 @@ Amp 選択後 L/R
 | SW1601 | DEST sense (3PDT 3rd pole, same body as SW501/SW502) |  | 1 |  |
 | TP1601 | ADC_MCLK | `TestPoint:TestPoint_Pad_D1.5mm` | 1 | ADC_MCLK probe pad after R718. |
 | U201 | REC10K-2415DAW/H2 | `Library:REC10K-AW_1in_THT` | 1 | Recom REC10K-2415DAW/H2 isolated DC/DC, 9-36Vin, ±15V/±333mA (10W), 1.6kVDC iso, DIP 1in x 1in, Cout ±270uF/rail, pin3=CTRL open=ON |
-| U202 | LM7809 +9V |  | 1 |  |
+| U202 | L7809CV +9V |  | 1 |  |
 | U311,U312,U313 | TMUX7612 | `Package_SO:TSSOP-16_4.4x5mm_P0.65mm` | 3 |  |
 | U321,U322 | TBD62083APG | `Package_DIP:DIP-18_W7.62mm` | 2 |  |
 | U402 | PT2314-D |  | 1 |  |
