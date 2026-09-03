@@ -5,7 +5,7 @@
 # このリポジトリの検証ワークフローが前提とするツールを冪等に導入する:
 #   - KiCad 10 本体 (kicad-cli + pcbnew Python モジュール)
 #   - KiCad 標準ライブラリ (シンボル / フットプリント / テンプレート)
-#   - ngspice (SPICE。KiCad のシミュレーション連携で使う)
+#   - ngspice (AudioV2/spice/*.cir を -b で回す。KiCad 連携ではなく単体実行)
 #   - uv / uvx (README 記載の kicad-mcp-pro を起動するために使う)
 #
 # パッケージ構成は docker/kicad-cloud-build/Dockerfile.10.0.6 の runtime 段に
