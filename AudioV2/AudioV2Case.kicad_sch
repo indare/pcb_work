@@ -86,6 +86,96 @@
 		)
 		(uuid "d995d30a-1380-49bf-9bf6-77ad5fc6af6e")
 	)
+	(label "3V3"
+		(at 25.4 71.12 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "08c7fb08-fc2f-57a8-bbfe-678556b19c8e")
+	)
+	(label "COMMON_R"
+		(at 25.4 40.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "097fee8f-3a26-5012-abde-61df92283d12")
+	)
+	(label "TONE_R"
+		(at 160 165.24 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "098f9107-6cec-5957-b0cf-7bd3b946a5b0")
+	)
+	(label "AMP_SEL_R"
+		(at 115.56 165.24 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0c9fe487-4729-5a98-bfef-cfd453404533")
+	)
+	(label "D_GND"
+		(at 80 210.96 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0d5bf5b8-8698-5807-8285-88368b92cec9")
+	)
+	(label "3V3"
+		(at 160 226.2 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0f0501de-5c9c-59c8-9f3e-3ea688c24b8b")
+	)
+	(label "D_GND"
+		(at 238.76 119.38 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "164ccf09-01f5-52cc-a9a0-791093beb370")
+	)
+	(label "AMP_SEL_L"
+		(at 25.4 48.26 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "19e2bb54-8269-54ba-a5ed-09f205f19bde")
+	)
+	(label "I2C_SDA"
+		(at 160 195.72 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1ba71317-6efb-56cd-ac1a-788d5637d43f")
+	)
 	(label "A_GND"
 		(at 234.95 109.22 180)
 		(effects
@@ -95,6 +185,46 @@
 			(justify right bottom)
 		)
 		(uuid "20f4b0ff-081e-4838-9dcc-3b78384586c8")
+	)
+	(label "3V3"
+		(at 238.76 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "26016af5-95be-5fe5-9895-4f29463958c3")
+	)
+	(label "PHONE_L"
+		(at 60.96 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "288ec84a-4851-513f-b1a8-a18b80b1c00c")
+	)
+	(label "I2C_SCL"
+		(at 238.76 114.3 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2ca6334f-5a78-5be5-ac0b-84cda7565a12")
+	)
+	(label "I2C_SDA"
+		(at 60.96 78.74 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2eee4ab1-fc24-5750-9d81-b976fa347841")
 	)
 	(label "AMP_SEL_L"
 		(at 234.95 104.14 180)
@@ -106,6 +236,176 @@
 		)
 		(uuid "311f2369-6a54-4e1f-9aa9-e619568642d4")
 	)
+	(label "AMP_SEL_R"
+		(at 195.56 165.24 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3510a910-4ea2-5faa-800e-86af8b206127")
+	)
+	(label "I2C_SDA"
+		(at 80 195.72 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "38fb1388-c883-50dd-983b-6885a7c607eb")
+	)
+	(label "TONE_L"
+		(at 80 157.62 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "463ad27b-941d-54e3-b4a8-830dd026c1c0")
+	)
+	(label "I2C_SCL"
+		(at 80 203.34 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "48fdf0b9-0fb2-5791-ba64-c8275f7e78a2")
+	)
+	(label "I2C_SCL"
+		(at 60.96 86.36 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4b0a79ca-7dc6-5acf-ae93-40d98c98d6d8")
+	)
+	(label "I2C_SDA"
+		(at 238.76 111.76 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4b5e80ad-639f-5a81-ad8e-18e58fa8e403")
+	)
+	(label "LINE_R"
+		(at 60.96 139.7 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "54d48a6a-3ea4-5292-ade5-1af365cb6c31")
+	)
+	(label "+15V"
+		(at 60.96 33.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "58186ba4-3a0c-56b6-a8e5-99c4c89324ab")
+	)
+	(label "A_GND"
+		(at 160 188.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6cb10875-e6d5-57a0-9c6e-bbe9ad10d4f9")
+	)
+	(label "AMP_SEL_L"
+		(at 195.56 157.62 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6fd0c8d8-ed3a-5778-be84-36dac84a4c8e")
+	)
+	(label "D_GND"
+		(at 160 233.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7414545f-b89b-5142-8ecd-b041c1cbee97")
+	)
+	(label "-15V"
+		(at 80 180.48 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8a592320-3012-51b3-945d-ed2a57244f54")
+	)
+	(label "3V3"
+		(at 80 218.58 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8d13d956-8d60-5971-baf9-bd023881e485")
+	)
+	(label "TONE_R"
+		(at 60.96 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90145c9a-8845-5678-9c78-9750a7306c39")
+	)
+	(label "TONE_L"
+		(at 160 157.62 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "91dafdbe-07c8-59b1-86a8-92cb2a8c41ff")
+	)
+	(label "-15V"
+		(at 60.96 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "93864484-b48d-55a5-96aa-1698b986c0ea")
+	)
+	(label "LINE_L"
+		(at 60.96 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "943a64c0-9554-5b2a-81a7-f4b4c8ee3d64")
+	)
 	(label "+15V"
 		(at 234.95 93.98 180)
 		(effects
@@ -116,6 +416,66 @@
 		)
 		(uuid "95e212a4-4ddc-4c67-953e-3e7446d85194")
 	)
+	(label "AMP_SEL_L"
+		(at 115.56 157.62 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9808638a-4d47-5a17-8fad-3d1bdfb7b6fd")
+	)
+	(label "D_GND"
+		(at 80 226.2 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9f811dcf-0216-5002-b64e-64924f556d4e")
+	)
+	(label "D_GND"
+		(at 80 233.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9fc16e42-a82c-52f0-b893-1d46531ed56f")
+	)
+	(label "A_GND"
+		(at 60.96 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a799324d-ad83-5cd6-8a31-18dfd5936ff7")
+	)
+	(label "A_GND"
+		(at 80 188.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a8f61e54-9db5-5d51-aa2a-89e67462744b")
+	)
+	(label "D_GND"
+		(at 160 210.96 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "aaaac478-4bc4-5298-b3d0-c3975846ab2b")
+	)
 	(label "AMP_SEL_R"
 		(at 234.95 106.68 180)
 		(effects
@@ -125,6 +485,46 @@
 			(justify right bottom)
 		)
 		(uuid "ab72dd94-6c4e-4f14-bdfe-896da7d6c768")
+	)
+	(label "+15V"
+		(at 160 172.86 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "adaeced8-9534-5a12-81d4-a4af7af2775e")
+	)
+	(label "AMP_SEL_R"
+		(at 25.4 55.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "af8c659d-6999-5326-8745-b3e4a54cbd53")
+	)
+	(label "+15V"
+		(at 80 172.86 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bb09b427-41b4-5989-8534-97167dda8c9e")
+	)
+	(label "3V3"
+		(at 160 218.58 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c7421af2-b066-507b-a201-f1c445ec8d56")
 	)
 	(label "-15V"
 		(at 234.95 96.52 180)
@@ -137,6 +537,26 @@
 		(uuid "c7680bee-f14d-420d-8a21-4c7684b8f30c")
 	)
 	(label "PD_GND"
+		(at 60.96 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c7c712bb-5286-52ad-92ec-7c91b308e440")
+	)
+	(label "TONE_R"
+		(at 80 165.24 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c991baf1-2d8d-5cbf-8011-aef2778bf3a8")
+	)
+	(label "PD_GND"
 		(at 234.95 99.06 180)
 		(effects
 			(font
@@ -145,6 +565,26 @@
 			(justify right bottom)
 		)
 		(uuid "d5e33e22-7db4-4121-a6bb-4ae152cfaf21")
+	)
+	(label "D_GND"
+		(at 25.4 63.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d7245ddd-36a6-5ae2-998a-e783590bdd42")
+	)
+	(label "PD_12V_SW"
+		(at 60.96 93.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d8874a6a-fc68-5eb2-bdaf-8d91e1f551bc")
 	)
 	(label "PD_12V_SW"
 		(at 234.95 101.6 180)
@@ -156,45 +596,95 @@
 		)
 		(uuid "dea9cadb-93d8-48e7-b059-15e08f1da806")
 	)
-	(label "I2C_SDA"
-		(at 238.76 111.76 180)
+	(label "TONE_L"
+		(at 60.96 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e970ebf5-90a5-5f07-bb57-a507b9acc83e")
+	)
+	(label "GND_COIL"
+		(at 60.96 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ec3910b2-e6cf-5d1a-8135-f2a48f2d02d7")
+	)
+	(label "+5V"
+		(at 160 241.44 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "4b5e80ad-639f-5a81-ad8e-18e58fa8e403")
+		(uuid "f190c177-0af5-59d3-9f96-d5aa50525fa4")
+	)
+	(label "-15V"
+		(at 160 180.48 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f583f521-37f8-5368-b139-d997758fd80c")
+	)
+	(label "PHONE_R"
+		(at 60.96 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f8627b45-b6ef-5177-8873-43e1142aef6c")
 	)
 	(label "I2C_SCL"
-		(at 238.76 114.30000000000001 180)
+		(at 160 203.34 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "2ca6334f-5a78-5be5-ac0b-84cda7565a12")
+		(uuid "f90769a2-906f-5e12-ae2a-1a5b35b134fd")
 	)
-	(label "3V3"
-		(at 238.76 116.84 180)
+	(label "GND_COIL"
+		(at 160 249.06 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "26016af5-95be-5fe5-9895-4f29463958c3")
+		(uuid "fb2d3da9-c64e-5d38-8330-a1757c8c22dc")
 	)
-	(label "D_GND"
-		(at 238.76 119.38 180)
+	(label "COMMON_L"
+		(at 25.4 33.02 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "164ccf09-01f5-52cc-a9a0-791093beb370")
+		(uuid "fc5c901d-fae5-5c0d-9968-a04e015ca5bd")
+	)
+	(label "+5V"
+		(at 60.96 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fe068c48-1bc4-5f71-9d5a-790ad82fd964")
 	)
 	(sheet
 		(at 238.76 91.44)
@@ -223,7 +713,7 @@
 			)
 		)
 		(property "Sheetfile" "MeasureControl.kicad_sch"
-			(at 252.095 124.46000000000001 0)
+			(at 252.095 124.46 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -244,7 +734,7 @@
 			)
 		)
 		(pin "-15V_A" input
-			(at 238.76 96.52000000000001 180)
+			(at 238.76 96.52 180)
 			(uuid "5a254eac-b898-5491-b465-7880e3f42012")
 			(effects
 				(font
@@ -264,7 +754,7 @@
 			)
 		)
 		(pin "ADC_V_IN" input
-			(at 238.76 101.60000000000001 180)
+			(at 238.76 101.6 180)
 			(uuid "a9525c53-458a-5bb9-9016-c78ca688b09e")
 			(effects
 				(font
@@ -314,7 +804,7 @@
 			)
 		)
 		(pin "I2C_SCL" bidirectional
-			(at 238.76 114.30000000000001 180)
+			(at 238.76 114.3 180)
 			(uuid "3be94f60-2a46-51dc-ae4f-85c0e2852df3")
 			(effects
 				(font
@@ -346,143 +836,13 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001"
-					(page "1")
+					(page "5")
 				)
 			)
 		)
 	)
-	(label "TONE_L"
-		(at 80.0 157.62 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "463ad27b-941d-54e3-b4a8-830dd026c1c0")
-	)
-	(label "TONE_R"
-		(at 80.0 165.24 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c991baf1-2d8d-5cbf-8011-aef2778bf3a8")
-	)
-	(label "AMP_SEL_L"
-		(at 115.56 157.62 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9808638a-4d47-5a17-8fad-3d1bdfb7b6fd")
-	)
-	(label "AMP_SEL_R"
-		(at 115.56 165.24 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0c9fe487-4729-5a98-bfef-cfd453404533")
-	)
-	(label "+15V"
-		(at 80.0 172.86 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "bb09b427-41b4-5989-8534-97167dda8c9e")
-	)
-	(label "-15V"
-		(at 80.0 180.48000000000002 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8a592320-3012-51b3-945d-ed2a57244f54")
-	)
-	(label "A_GND"
-		(at 80.0 188.1 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a8f61e54-9db5-5d51-aa2a-89e67462744b")
-	)
-	(label "I2C_SDA"
-		(at 80.0 195.72 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "38fb1388-c883-50dd-983b-6885a7c607eb")
-	)
-	(label "I2C_SCL"
-		(at 80.0 203.34 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "48fdf0b9-0fb2-5791-ba64-c8275f7e78a2")
-	)
-	(label "D_GND"
-		(at 80.0 210.96 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0d5bf5b8-8698-5807-8285-88368b92cec9")
-	)
-	(label "3V3"
-		(at 80.0 218.58 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8d13d956-8d60-5971-baf9-bd023881e485")
-	)
-	(label "D_GND"
-		(at 80.0 226.2 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9f811dcf-0216-5002-b64e-64924f556d4e")
-	)
-	(label "D_GND"
-		(at 80.0 233.82 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9fc16e42-a82c-52f0-b893-1d46531ed56f")
-	)
 	(sheet
-		(at 80.0 150.0)
+		(at 80 150)
 		(size 35.56 114.3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -497,7 +857,7 @@
 		)
 		(uuid "a1000011-0011-4011-8011-000000000011")
 		(property "Sheetname" "AmpBankSwitch"
-			(at 80.0 149.1284 0)
+			(at 80 149.1284 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -508,7 +868,7 @@
 			)
 		)
 		(property "Sheetfile" "AmpBankSwitch.kicad_sch"
-			(at 97.78 266.84000000000003 0)
+			(at 97.78 266.84 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -519,7 +879,7 @@
 			)
 		)
 		(pin "TONE_L" input
-			(at 80.0 157.62 180)
+			(at 80 157.62 180)
 			(uuid "73442561-c1ef-5602-925c-359678f32386")
 			(effects
 				(font
@@ -529,7 +889,7 @@
 			)
 		)
 		(pin "TONE_R" input
-			(at 80.0 165.24 180)
+			(at 80 165.24 180)
 			(uuid "020774c9-22bf-5041-9d55-7ef41418aa0a")
 			(effects
 				(font
@@ -559,7 +919,7 @@
 			)
 		)
 		(pin "+15V" input
-			(at 80.0 172.86 180)
+			(at 80 172.86 180)
 			(uuid "7b6120f0-e04d-5e6a-ae48-e74e2d294154")
 			(effects
 				(font
@@ -569,7 +929,7 @@
 			)
 		)
 		(pin "-15V" input
-			(at 80.0 180.48000000000002 180)
+			(at 80 180.48 180)
 			(uuid "ff79d716-03ab-5527-9fe1-e4ef94758f64")
 			(effects
 				(font
@@ -579,7 +939,7 @@
 			)
 		)
 		(pin "A_GND" bidirectional
-			(at 80.0 188.1 180)
+			(at 80 188.1 180)
 			(uuid "3b6b0fd0-45bf-588c-b889-0e3a62179474")
 			(effects
 				(font
@@ -589,7 +949,7 @@
 			)
 		)
 		(pin "I2C_SDA" bidirectional
-			(at 80.0 195.72 180)
+			(at 80 195.72 180)
 			(uuid "e5b6c5ee-6d82-597a-a6db-040d507475b7")
 			(effects
 				(font
@@ -599,7 +959,7 @@
 			)
 		)
 		(pin "I2C_SCL" bidirectional
-			(at 80.0 203.34 180)
+			(at 80 203.34 180)
 			(uuid "c9b1898f-1610-5308-b01d-69ca17c9b07b")
 			(effects
 				(font
@@ -609,7 +969,7 @@
 			)
 		)
 		(pin "D_GND" input
-			(at 80.0 210.96 180)
+			(at 80 210.96 180)
 			(uuid "c2b6832a-739e-5b2e-8e9b-b876023c5318")
 			(effects
 				(font
@@ -619,7 +979,7 @@
 			)
 		)
 		(pin "3V3" input
-			(at 80.0 218.58 180)
+			(at 80 218.58 180)
 			(uuid "9482523b-300c-5c0e-8aa7-38e284fb6315")
 			(effects
 				(font
@@ -629,7 +989,7 @@
 			)
 		)
 		(pin "ADDR0" input
-			(at 80.0 226.2 180)
+			(at 80 226.2 180)
 			(uuid "496fd1e8-522d-537a-a3c7-3292ac7b4589")
 			(effects
 				(font
@@ -639,7 +999,7 @@
 			)
 		)
 		(pin "ADDR1" input
-			(at 80.0 233.82 180)
+			(at 80 233.82 180)
 			(uuid "caf5c218-2562-5eb6-b3e1-3dedc292aa19")
 			(effects
 				(font
@@ -651,352 +1011,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001"
-					(page "1")
-				)
-			)
-		)
-	)
-	(label "TONE_L"
-		(at 160.0 157.62 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "91dafdbe-07c8-59b1-86a8-92cb2a8c41ff")
-	)
-	(label "TONE_R"
-		(at 160.0 165.24 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "098f9107-6cec-5957-b0cf-7bd3b946a5b0")
-	)
-	(label "AMP_SEL_L"
-		(at 195.56 157.62 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6fd0c8d8-ed3a-5778-be84-36dac84a4c8e")
-	)
-	(label "AMP_SEL_R"
-		(at 195.56 165.24 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3510a910-4ea2-5faa-800e-86af8b206127")
-	)
-	(label "+15V"
-		(at 160.0 172.86 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "adaeced8-9534-5a12-81d4-a4af7af2775e")
-	)
-	(label "-15V"
-		(at 160.0 180.48000000000002 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f583f521-37f8-5368-b139-d997758fd80c")
-	)
-	(label "A_GND"
-		(at 160.0 188.1 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6cb10875-e6d5-57a0-9c6e-bbe9ad10d4f9")
-	)
-	(label "I2C_SDA"
-		(at 160.0 195.72 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "1ba71317-6efb-56cd-ac1a-788d5637d43f")
-	)
-	(label "I2C_SCL"
-		(at 160.0 203.34 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f90769a2-906f-5e12-ae2a-1a5b35b134fd")
-	)
-	(label "D_GND"
-		(at 160.0 210.96 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "aaaac478-4bc4-5298-b3d0-c3975846ab2b")
-	)
-	(label "3V3"
-		(at 160.0 218.58 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c7421af2-b066-507b-a201-f1c445ec8d56")
-	)
-	(label "3V3"
-		(at 160.0 226.2 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0f0501de-5c9c-59c8-9f3e-3ea688c24b8b")
-	)
-	(label "D_GND"
-		(at 160.0 233.82 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7414545f-b89b-5142-8ecd-b041c1cbee97")
-	)
-	(label "+5V"
-		(at 160.0 241.44 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f190c177-0af5-59d3-9f96-d5aa50525fa4")
-	)
-	(label "GND_COIL"
-		(at 160.0 249.06 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "fb2d3da9-c64e-5d38-8330-a1757c8c22dc")
-	)
-	(sheet
-		(at 160.0 150.0)
-		(size 35.56 114.3)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "a1000013-0013-4013-8013-000000000013")
-		(property "Sheetname" "AmpBankRelay"
-			(at 160.0 149.1284 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "AmpBankRelay.kicad_sch"
-			(at 177.78 266.84000000000003 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "TONE_L" input
-			(at 160.0 157.62 180)
-			(uuid "3201b7c7-5735-510f-9a35-3473df0d72c0")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "TONE_R" input
-			(at 160.0 165.24 180)
-			(uuid "79309c69-de9e-5f4b-965d-4a15482579e7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "AMP_SEL_L" output
-			(at 195.56 157.62 0)
-			(uuid "573ce8c9-c2dd-5c86-8a58-9d3276630d33")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "AMP_SEL_R" output
-			(at 195.56 165.24 0)
-			(uuid "928e02b4-e34d-53d2-b976-6a9641ad6da7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "+15V" input
-			(at 160.0 172.86 180)
-			(uuid "7b860090-17c2-5f96-9af5-75f938153a39")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "-15V" input
-			(at 160.0 180.48000000000002 180)
-			(uuid "bf7bcbc9-2aba-59f4-b4f1-4a8acfde6506")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "A_GND" bidirectional
-			(at 160.0 188.1 180)
-			(uuid "df9c046d-a561-5c8e-86ea-d56960a5a923")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "I2C_SDA" bidirectional
-			(at 160.0 195.72 180)
-			(uuid "596b0073-ec22-5844-b6aa-4996078ce7bc")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "I2C_SCL" bidirectional
-			(at 160.0 203.34 180)
-			(uuid "557c3680-9e6e-52a6-b3fe-bddadf1813c1")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "D_GND" input
-			(at 160.0 210.96 180)
-			(uuid "18ba17b6-424c-5fe6-a732-b8c780984759")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "3V3" input
-			(at 160.0 218.58 180)
-			(uuid "7450e18a-43c9-5399-8888-87ac8a833823")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "ADDR0" input
-			(at 160.0 226.2 180)
-			(uuid "7eedeea9-e54a-5506-8c68-ab958247677e")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "ADDR1" input
-			(at 160.0 233.82 180)
-			(uuid "0696f890-794d-52c8-9c1f-bd1496b74190")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "+5V_COIL" input
-			(at 160.0 241.44 180)
-			(uuid "1b155fba-2d78-5770-aa02-596fc8a1e4c4")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "GND_COIL" bidirectional
-			(at 160.0 249.06 180)
-			(uuid "1a343d9e-b66d-5213-bc96-920b42a467ae")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001"
-					(page "1")
+					(page "3")
 				)
 			)
 		)
@@ -1017,7 +1032,7 @@
 		)
 		(uuid "a1000012-0012-4012-8012-000000000012")
 		(property "Sheetname" "MotherBoard"
-			(at 25.4 24.528399999999998 0)
+			(at 25.4 24.5284 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1059,7 +1074,7 @@
 			)
 		)
 		(pin "AMP_SEL_L" input
-			(at 25.4 48.260000000000005 180)
+			(at 25.4 48.26 180)
 			(uuid "d298639a-a4f1-588e-aeda-c05d65eae64e")
 			(effects
 				(font
@@ -1119,7 +1134,7 @@
 			)
 		)
 		(pin "A_GND" bidirectional
-			(at 60.96 48.260000000000005 0)
+			(at 60.96 48.26 0)
 			(uuid "c2950d45-b527-5980-9a61-c152f7daff36")
 			(effects
 				(font
@@ -1159,7 +1174,7 @@
 			)
 		)
 		(pin "I2C_SDA" bidirectional
-			(at 60.96 78.74000000000001 0)
+			(at 60.96 78.74 0)
 			(uuid "9c889684-3305-5210-9c97-3e6e4e6a117f")
 			(effects
 				(font
@@ -1169,7 +1184,7 @@
 			)
 		)
 		(pin "I2C_SCL" bidirectional
-			(at 60.96 86.36000000000001 0)
+			(at 60.96 86.36 0)
 			(uuid "15c29d56-adde-5ccb-becc-59550e91bb76")
 			(effects
 				(font
@@ -1219,7 +1234,7 @@
 			)
 		)
 		(pin "PHONE_R" output
-			(at 60.96 124.46000000000001 0)
+			(at 60.96 124.46 0)
 			(uuid "dcb81c08-ff84-562b-ad85-a74d766ac470")
 			(effects
 				(font
@@ -1229,7 +1244,7 @@
 			)
 		)
 		(pin "LINE_L" output
-			(at 60.96 132.08 0)
+			(at 60.96 127 0)
 			(uuid "e72ff0fe-75c6-5443-a7a0-773867db90bf")
 			(effects
 				(font
@@ -1239,7 +1254,7 @@
 			)
 		)
 		(pin "LINE_R" output
-			(at 60.96 139.70000000000002 0)
+			(at 60.96 127 0)
 			(uuid "308aaa3f-f39c-5aa0-b306-6418b0f3e770")
 			(effects
 				(font
@@ -1251,220 +1266,205 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001"
-					(page "1")
+					(page "2")
 				)
 			)
 		)
 	)
-	(label "COMMON_L"
-		(at 25.4 33.02 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
+	(sheet
+		(at 160 150)
+		(size 35.56 114.3)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
 		)
-		(uuid "fc5c901d-fae5-5c0d-9968-a04e015ca5bd")
-	)
-	(label "COMMON_R"
-		(at 25.4 40.64 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
+		(fill
+			(color 0 0 0 0)
 		)
-		(uuid "097fee8f-3a26-5012-abde-61df92283d12")
-	)
-	(label "AMP_SEL_L"
-		(at 25.4 48.260000000000005 180)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(uuid "a1000013-0013-4013-8013-000000000013")
+		(property "Sheetname" "AmpBankRelay"
+			(at 160 149.1284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
 			)
-			(justify right bottom)
 		)
-		(uuid "19e2bb54-8269-54ba-a5ed-09f205f19bde")
-	)
-	(label "AMP_SEL_R"
-		(at 25.4 55.88 180)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(property "Sheetfile" "AmpBankRelay.kicad_sch"
+			(at 177.78 266.84 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
 			)
-			(justify right bottom)
 		)
-		(uuid "af8c659d-6999-5326-8745-b3e4a54cbd53")
-	)
-	(label "D_GND"
-		(at 25.4 63.5 180)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "TONE_L" input
+			(at 160 157.62 180)
+			(uuid "3201b7c7-5735-510f-9a35-3473df0d72c0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify right bottom)
 		)
-		(uuid "d7245ddd-36a6-5ae2-998a-e783590bdd42")
-	)
-	(label "3V3"
-		(at 25.4 71.12 180)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "TONE_R" input
+			(at 160 165.24 180)
+			(uuid "79309c69-de9e-5f4b-965d-4a15482579e7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify right bottom)
 		)
-		(uuid "08c7fb08-fc2f-57a8-bbfe-678556b19c8e")
-	)
-	(label "+15V"
-		(at 60.96 33.02 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "AMP_SEL_L" output
+			(at 195.56 157.62 0)
+			(uuid "573ce8c9-c2dd-5c86-8a58-9d3276630d33")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
-			(justify left bottom)
 		)
-		(uuid "58186ba4-3a0c-56b6-a8e5-99c4c89324ab")
-	)
-	(label "-15V"
-		(at 60.96 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "AMP_SEL_R" output
+			(at 195.56 165.24 0)
+			(uuid "928e02b4-e34d-53d2-b976-6a9641ad6da7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
-			(justify left bottom)
 		)
-		(uuid "93864484-b48d-55a5-96aa-1698b986c0ea")
-	)
-	(label "A_GND"
-		(at 60.96 48.260000000000005 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "+15V" input
+			(at 160 172.86 180)
+			(uuid "7b860090-17c2-5f96-9af5-75f938153a39")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "a799324d-ad83-5cd6-8a31-18dfd5936ff7")
-	)
-	(label "+5V"
-		(at 60.96 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "-15V" input
+			(at 160 180.48 180)
+			(uuid "bf7bcbc9-2aba-59f4-b4f1-4a8acfde6506")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "fe068c48-1bc4-5f71-9d5a-790ad82fd964")
-	)
-	(label "TONE_L"
-		(at 60.96 63.5 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "A_GND" bidirectional
+			(at 160 188.1 180)
+			(uuid "df9c046d-a561-5c8e-86ea-d56960a5a923")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "e970ebf5-90a5-5f07-bb57-a507b9acc83e")
-	)
-	(label "TONE_R"
-		(at 60.96 71.12 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "I2C_SDA" bidirectional
+			(at 160 195.72 180)
+			(uuid "596b0073-ec22-5844-b6aa-4996078ce7bc")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "90145c9a-8845-5678-9c78-9750a7306c39")
-	)
-	(label "I2C_SDA"
-		(at 60.96 78.74000000000001 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "I2C_SCL" bidirectional
+			(at 160 203.34 180)
+			(uuid "557c3680-9e6e-52a6-b3fe-bddadf1813c1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "2eee4ab1-fc24-5750-9d81-b976fa347841")
-	)
-	(label "I2C_SCL"
-		(at 60.96 86.36000000000001 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "D_GND" input
+			(at 160 210.96 180)
+			(uuid "18ba17b6-424c-5fe6-a732-b8c780984759")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "4b0a79ca-7dc6-5acf-ae93-40d98c98d6d8")
-	)
-	(label "PD_12V_SW"
-		(at 60.96 93.98 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "3V3" input
+			(at 160 218.58 180)
+			(uuid "7450e18a-43c9-5399-8888-87ac8a833823")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "d8874a6a-fc68-5eb2-bdaf-8d91e1f551bc")
-	)
-	(label "PD_GND"
-		(at 60.96 101.6 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "ADDR0" input
+			(at 160 226.2 180)
+			(uuid "7eedeea9-e54a-5506-8c68-ab958247677e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "c7c712bb-5286-52ad-92ec-7c91b308e440")
-	)
-	(label "GND_COIL"
-		(at 60.96 109.22 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "ADDR1" input
+			(at 160 233.82 180)
+			(uuid "0696f890-794d-52c8-9c1f-bd1496b74190")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "ec3910b2-e6cf-5d1a-8135-f2a48f2d02d7")
-	)
-	(label "PHONE_L"
-		(at 60.96 116.84 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "+5V_COIL" input
+			(at 160 241.44 180)
+			(uuid "1b155fba-2d78-5770-aa02-596fc8a1e4c4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "288ec84a-4851-513f-b1a8-a18b80b1c00c")
-	)
-	(label "PHONE_R"
-		(at 60.96 124.46000000000001 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(pin "GND_COIL" bidirectional
+			(at 160 249.06 180)
+			(uuid "1a343d9e-b66d-5213-bc96-920b42a467ae")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
-			(justify left bottom)
 		)
-		(uuid "f8627b45-b6ef-5177-8873-43e1142aef6c")
-	)
-	(label "LINE_L"
-		(at 60.96 132.08 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001"
+					(page "4")
+				)
 			)
-			(justify left bottom)
 		)
-		(uuid "943a64c0-9554-5b2a-81a7-f4b4c8ee3d64")
-	)
-	(label "LINE_R"
-		(at 60.96 139.70000000000002 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "54d48a6a-3ea4-5292-ade5-1af365cb6c31")
 	)
 	(sheet_instances
 		(path "/"
