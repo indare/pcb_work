@@ -193,6 +193,11 @@ def main() -> None:
     print("        MUSES02 G=10/5Vrms/RL2k  NE5532 は TI DS に THD 規定なし(通説値)")
     print("     さらに switch は H2/H3 の最大次数、DUT は THD+N 総量で内訳不明。")
     print("     → 保守的なふるい分けには使えるが「測れない」の証明にはならない。")
+    print("  ★ 振幅だけは揃えられる: extract_dut_thd.py が OPA1612 の")
+    print("     THD+N vs 出力振幅カーブを DS から抽出済み。振幅を揃えると:")
+    print("       4.0Vrms: TMUX7612 H2 -166.6 vs OPA1612 -139.4  → switch 27.2dB 下")
+    print("       9.2Vrms: TMUX7612 H3 -119.7 vs OPA1612 -145.3  → switch が 25.6dB 上")
+    print("     DS 規定点(-136dB)で比べると 9.2V の問題を過小評価する。")
     print(f"  {'部品':22s}{'Vrms':>6s}{'最大次数':>10s}" +
           "".join(f"{n:>11s}" for n, _ in DUTS))
     for key, (name, _, _) in CANDIDATES.items():
