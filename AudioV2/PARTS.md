@@ -150,17 +150,18 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 | **PWR SW** | **C&K 7101SYZQE**（SPDT ON-ON、5 A、ラグ）を SPST として使用 | 12 V / ~2 A。ミニ信号 SW 禁止 |
 | **12 V LED** | **12 V 内蔵抵抗付き 5 mm**（緑または青、~10 mA） | DECISIONS §9。素 LED なら 680 Ω–1 kΩ |
 | **DEST LED×2** | 3 mm 通常 LED（Vf≈2 V）+ 既存 **1 kΩ** | 3.3 V で ~1.3 mA。暗ければ 330 Ω に落とす |
-| **AZ850** | **AZ850P2-5**（秋月 118017） | コイル **5 V** / 125 Ω / ~40 mA。ULN2803 + BP5293-50 と一致。**12 V コイルは使わない** |
-| **MCP23017** | **MCP23017-E/SP**（DIP-28）×盤ごとに1 | JP A1/A0 で 0x20–0x23（最大4枚）。A2=0 |
-| **ULN2803** | **ULN2803AN**（DIP-18）×4（各RelayBoardに2） | SET用/RESET用。1出力でaudio+pwr 2コイル（約80 mA）、COMは+5 V |
+| **AZ850** | **AZ850P2-5**（秋月 118017） | コイル **5 V** / 125 Ω / ~40 mA。`TBD62083APG` + BP5293-50 と一致。**12 V コイルは使わない** |
+| **MCP23017** | **`MCP23017-E/SP`**（DIP-28） | JP A1/A0 で 0x20–0x23（最大4枚）。A2=0。UI 側は 0x22。**個数は回路図から導出できるので §4.1 の部品表を見る** |
+| **リレードライバ** | **`TBD62083APG`**（DIP-18。`ULN2803` とピン互換） | **`ULN2803` は不採用**（D24）。ダーリントンの約 1 V 降下では 40 ℃ 超で `AZ850` の Must Operate を満たさない。DMOS なら 40 mA で 0.13 V。**1枚に2個要る**（5ch×2コイル=10本 > 8ch。D25 — 4ch/枚なら1個で済んだ分のコスト） |
 | **PT2314** | **PT2314 DIP-28**（回路値 `PT2314-D`） | Princeton DS 28 pin。SOP は初号では使わない |
 | **+9 V LDO** | **ST L7809CV**（TO-220） | PT2314 typ 30 mA → 散逸 (12-9)×30 mA ≈ 0.09 W |
-| **F201** | **5×20 mm T3.15 A**（または図の 3 A スロー） | 一次 ~2 A。ガラス管スローブロー |
+| **一次ヒューズ**（PD 入力〜DC-DC 間） | **5×20 mm T3.15 A**（または図の 3 A スロー） | 一次 ~2 A。ガラス管スローブロー |
 | **BP5293** | **BP5293-50**（秋月 111188） | 現行 Audio と同じ +5 V |
-| **DKMW / CH224** | **DKMW20F-15**（±15 V / ±660 mA） / **50224（CH224K 12 V）** | 2026-09-01 に F-12 から変更。外形は同じ 1″×1″ |
+| **DC-DC** | **`REC10K-2415DAW/H2`**（Recom、±15 V / ±333 mA、1″×1″ 6-DIP） | **2026-09-02 に `DKMW20F-15` から変更**（[DECISIONS.md](DECISIONS.md) §8）。穴位置は旧品と同一で差し替え可。DigiKey `945-REC10K-2415DAW/H2-ND` |
+| **CH224K / USB-C** | — | **⚠ 現行の回路図に入っていない。** PD はモジュール外付けで、板上は受けの端子（`PD module in`）だけ。一方 [DECISIONS.md](DECISIONS.md) §6・§8 は「PowerModule 基板に内蔵」のままで**食い違っている**。どちらを正とするか未決 |
 | **USB-C** | USB2.0 16P レセプタクル（KiCad `USB_C_Receptacle_USB2.0_16P`） | CC はモジュール側。基板は VBUS/GND が主 |
 | **ラダー R** | 10 k / 10 k / 1 k **1%**（1206 可） | ±5% でも間隔は足りるが、初号は 1% |
-| **J_I2C（ControlPanel↔RelayBoard 5P）** | **Phoenix Contact MKDS-1,5シリーズ**（5.08 mmピッチ、ネジ式）互換品または同一品。KiCad FP: `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-N-5.08_1xNN_P5.08mm_Horizontal`（Nはピン数、5Pなら`5`/`05`） | `Audio/Controll.kicad_sch`（v1の「リレー＋端子台＋ULN」原型）で13箇所使用実績あり。フェルール対応で、スター配線をControlPanel側1コネクタ＋箱内フェルール束ね/スプリッタで実現する方針（WIRING.md）と合う |
+| **J_I2C（旧 ControlPanel↔RelayBoard 5P。⚠ 両シートは解体済みで、基板間はヘッダのスタックへ変更。この行は v1 の実績の記録）** | **Phoenix Contact MKDS-1,5シリーズ**（5.08 mmピッチ、ネジ式）互換品または同一品。KiCad FP: `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-N-5.08_1xNN_P5.08mm_Horizontal`（Nはピン数、5Pなら`5`/`05`） | `Audio/Controll.kicad_sch`（v1の「リレー＋端子台＋ULN」原型）で13箇所使用実績あり。フェルール対応で、スター配線をControlPanel側1コネクタ＋箱内フェルール束ね/スプリッタで実現する方針（WIRING.md）と合う |
 
 ---
 
