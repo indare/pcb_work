@@ -7,7 +7,8 @@
 関連:
 
 - ルール: `.cursor/rules/work-on-main.mdc`
-- ローカル会話: [Power/PD 整理系](37c7411c-c7bb-4644-9194-686ff5fe1fd5)
+- ローカル会話: Power/PD 整理系 — `37c7411c-c7bb-4644-9194-686ff5fe1fd5`
+  （会話 ID。ファイルでも URL でもないのでリンクにしない）
 
 ---
 

@@ -29,12 +29,12 @@
 |---|---|---|
 | **RV_HP / RV_LINE** | A カーブ 50 kΩ デュアル。Amp 後 ~7 Vrms → 素子 0.05 W で十分（7²/50k ≈ 1 mW） | **目立つノブ**。6 ピン（1/3=A, 4/6=B, 2/5=wiper）。基板はヘッダ |
 | **SW_DEST** | 3 極 × ON-OFF-ON。音声 L/R + センス 1 極。電流 ≈ 7 V / 50 kΩ = **0.14 mA**（信号級で足りる） | パネル φ6.35 mm 級。はんだラグ → ヘッダ |
-| **PWR SW** | DKMW 一次 ≈ **2 A @ 12 V**（20 W / η）+ LED | 3 A 以上。信号用ミニスイッチは不可 |
+| **PWR SW** | DC-DC 一次 ≈ **1 A @ 12 V**（`REC10K` は 10 W / η 87 % → 11.5 W ÷ 12 V）+ パネル LED ~10–15 mA | 3 A 以上。信号用ミニスイッチは不可。**旧 `DKMW20`（20 W）時代は約 2 A だったので余裕が増えた** |
 | **ENC×3** | A/B/SW、Pico 内部プルアップ | EC11、押し SW、D カット、固定足東西 |
 | **DEST LED** | GP14/15、3.3 V、直列 1 kΩ | パネル 3–5 mm |
 | **12 V LED** | SW 後 12 V、内蔵抵抗 ~10–15 mA | パネル 5 mm |
 | **PT2314** | VDD 9 V、I²C、28 pin | **DIP-28**（ソケット可） |
-| **AZ850** | コイルはControlPanel BP5293の **+5 V**（RelayBoardへ5P配線） | 2コイル・ラッチDPDT。audio/powerを同時駆動 |
+| **AZ850** | コイルは**母板の `BP5293-50` が作る +5 V**。娘基板へは**スタッキングヘッダ経由**で渡る（旧: ControlPanel から RelayBoard へ 5P 配線） | 2コイル・ラッチDPDT。audio/power を同時駆動 |
 | **OLED 制御** | I²C 0x3C、128×64、3.3 V、**SSD1306 互換**（実機は SSD1309 可） | 4 線（VCC/GND/SCL/SDA）。パネル or ヘッダ |
 | **LCD スペアナ** | SPI（ST7796S）+ I²C タッチ（FT6336U）、5 V 可 | Waveshare **29318**。計測盤のみ |
 
@@ -167,7 +167,7 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 | **操作 Pico** | **Raspberry Pi Pico 2**（RP2350、**W なし**、SC0915 相当） | Wi-Fi 不要。ヘッダ後付け可 |
 | **OLED（制御）** | **2.42″ 128×64 I²C**（SSD1309、SSD1306 互換）— [AliExpress 例](https://a.aliexpress.com/_c3yp3JiX) / item `4000002579405` | v1 `Control/` と同じ。`WIDTH=128 HEIGHT=64`、addr **0x3C**、GP20/21。**0.96″ でも動くが、現行機は 2.42″** |
 | **LCD（スペアナ）** | **Waveshare 29318**（スイッチサイエンス [10138](https://www.switch-science.com/products/10138)） | v1 `Audio/measurement_fw/`。ST7796S SPI + FT6336U I²C。**MeasurementADC 流用**（AudioV2 Control には載せない） |
-| **PWR SW** | **C&K 7101SYZQE**（SPDT ON-ON、5 A、ラグ）を SPST として使用 | 12 V / ~2 A。ミニ信号 SW 禁止 |
+| **PWR SW** | **C&K 7101SYZQE**（SPDT ON-ON、5 A、ラグ）を SPST として使用 | 12 V / **~1 A**（`REC10K` 10 W。旧 `DKMW20` 20 W では ~2 A）。5 A 品なので余裕は十分。ミニ信号 SW 禁止 |
 | **12 V LED** | **12 V 内蔵抵抗付き 5 mm**（緑または青、~10 mA） | DECISIONS §9。素 LED なら 680 Ω–1 kΩ |
 | **DEST LED×2** | 3 mm 通常 LED（Vf≈2 V）+ 既存 **1 kΩ** | 3.3 V で ~1.3 mA。暗ければ 330 Ω に落とす |
 | **AZ850** | **AZ850P2-5**（秋月 118017） | コイル **5 V** / 125 Ω / ~40 mA。`TBD62083APG` + BP5293-50 と一致。**12 V コイルは使わない** |
@@ -175,7 +175,7 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 | **リレードライバ** | **`TBD62083APG`**（DIP-18。`ULN2803` とピン互換） | **`ULN2803` は不採用**（D24）。ダーリントンの約 1 V 降下では 40 ℃ 超で `AZ850` の Must Operate を満たさない。DMOS なら 40 mA で 0.13 V。**1枚に2個要る**（5ch×2コイル=10本 > 8ch。D25 — 4ch/枚なら1個で済んだ分のコスト） |
 | **PT2314** | **PT2314 DIP-28**（回路値 `PT2314-D`） | Princeton DS 28 pin。SOP は初号では使わない |
 | **+9 V LDO** | **ST L7809CV**（TO-220） | PT2314 typ 30 mA → 散逸 (12-9)×30 mA ≈ 0.09 W |
-| **一次ヒューズ**（PD 入力〜DC-DC 間） | **5×20 mm T3.15 A**（または図の 3 A スロー） | 一次 ~2 A。ガラス管スローブロー |
+| **一次ヒューズ**（PD 入力〜DC-DC 間） | **5×20 mm T3.15 A**（または図の 3 A スロー） | ⚠ **この定格は旧 `DKMW20`（20 W、一次 ~2 A）で選んだもの**。`REC10K`（10 W）では一次 **~1 A** なので **3 倍で緩い**。T2 A 級への見直しは未判断（保護と突入電流のどちらを取るか）。ガラス管スローブロー |
 | **BP5293** | **BP5293-50**（秋月 111188） | 現行 Audio と同じ +5 V |
 | **DC-DC** | **`REC10K-2415DAW/H2`**（Recom、±15 V / ±333 mA、1″×1″ 6-DIP） | **2026-09-02 に `DKMW20F-15` から変更**（[DECISIONS.md](DECISIONS.md) §8）。穴位置は旧品と同一で差し替え可。DigiKey `945-REC10K-2415DAW/H2-ND` |
 | **CH224K / USB-C** | — | **⚠ 現行の回路図に入っていない。** PD はモジュール外付けで、板上は受けの端子（`PD module in`）だけ。一方 [DECISIONS.md](DECISIONS.md) §6・§8 は「PowerModule 基板に内蔵」のままで**食い違っている**。どちらを正とするか未決 |
