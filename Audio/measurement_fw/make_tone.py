@@ -39,7 +39,11 @@ def main() -> None:
     ap.add_argument("--freq", type=float, default=1320.0)
     ap.add_argument("--fs", type=int, default=48000)
     ap.add_argument("--sec", type=float, default=10.0)
-    ap.add_argument("--db", type=float, default=-1.0, help="ピーク dBFS")
+    ap.add_argument("--db", type=float, default=-1.0, help="L のピーク dBFS")
+    ap.add_argument("--db-r", type=float, default=None,
+                    help="R のピーク dBFS（既定は L と同じ）。"
+                         "この装置は R がハード側で L より約6dB高く先にクリップするので、"
+                         "R だけ下げておくと L をフルスケール近くまで使える")
     ap.add_argument("--no-dither", action="store_true")
     ap.add_argument("-o", "--out", default="tone_1320.wav")
     a = ap.parse_args()
@@ -49,23 +53,21 @@ def main() -> None:
     n = int(round(a.sec * a.fs / period)) * period
     cycles = a.freq * n / a.fs
     t = np.arange(n, dtype=np.float64) / a.fs
-    amp = 10 ** (a.db / 20) * (2 ** 23 - 1)
-    x = amp * np.sin(2 * np.pi * a.freq * t)
+    db_r = a.db if a.db_r is None else a.db_r
+    rng = np.random.default_rng(0)
+    chans = []
+    for db in (a.db, db_r):
+        x = 10 ** (db / 20) * (2 ** 23 - 1) * np.sin(2 * np.pi * a.freq * t)
+        if not a.no_dither:
+            # TPDF 1LSB。量子化で出る高調波を雑音に均す
+            x = x + rng.random(n) - rng.random(n)
+        chans.append(np.clip(np.round(x), -(2 ** 23), 2 ** 23 - 1).astype("<i4"))
 
-    if not a.no_dither:
-        # TPDF 1LSB。量子化で出る高調波を雑音に均す
-        rng = np.random.default_rng(0)
-        x = x + rng.random(n) - rng.random(n)
-
-    q = np.clip(np.round(x), -(2 ** 23), 2 ** 23 - 1).astype(np.int32)
-    # 24bit little-endian、L/R 同一
-    b = q.astype("<i4").tobytes()
-    mono24 = bytearray()
-    for i in range(0, len(b), 4):
-        mono24 += b[i:i + 3]
     frames = bytearray()
-    for i in range(0, len(mono24), 3):
-        frames += mono24[i:i + 3] * 2      # L と R に同じものを入れる
+    bl, br = chans[0].tobytes(), chans[1].tobytes()
+    for i in range(0, len(bl), 4):
+        frames += bl[i:i + 3]              # L
+        frames += br[i:i + 3]              # R
 
     with wave.open(a.out, "wb") as w:
         w.setnchannels(2)
@@ -74,7 +76,7 @@ def main() -> None:
         w.writeframes(bytes(frames))
 
     print(f"{a.out}: {a.freq}Hz  {a.fs}Hz  24bit stereo  "
-          f"{n} サンプル ({n/a.fs:.3f}秒)  ピーク {a.db} dBFS")
+          f"{n} サンプル ({n/a.fs:.3f}秒)  L {a.db} dBFS / R {db_r} dBFS")
     print(f"  整数周期 {cycles:.0f} 周期でちょうど閉じる → ループしてもクリックが出ない")
     print(f"  ディザ: {'なし' if a.no_dither else 'TPDF 1LSB'}")
     print("\n⚠ 再生時の注意:")
