@@ -68,7 +68,11 @@ PAPER = "A2"   # ControlPanel を取り込んで A3 では収まらなくなっ�
 
 # 親での母板シート。PowerModule が居た場所を使う（OutputStage の枠は空く）。
 MOTHER_AT = (25.4, 25.4)
-MOTHER_SIZE = (35.56, 101.6)
+# ⚠ 高さはピン数に足りていること。2026-09-04 に右側 15 本に対して 101.6 のままで
+#    LINE_L / LINE_R が枠の外へはみ出し、**ネットリスト上で LINE_L と LINE_R が
+#    短絡した**（シート側の配線は正しかったので気付きにくい）。
+#    右列の最終ピンは _PIN_Y0 + (本数-1)*_PIN_PITCH。枠はそれより下まで伸ばす。
+MOTHER_SIZE = (35.56, 121.92)
 _PIN_Y0, _PIN_PITCH = 33.02, 7.62
 # 左＝入力、右＝出力と双方向。順序がそのまま上からの並びになる。
 MOTHER_PINS_L = [
@@ -420,6 +424,9 @@ def patch_parent(dry_run: bool = False) -> str:
 
     mx, my = MOTHER_AT
     mw, mh = MOTHER_SIZE
+    over = [(n, y) for n, _, _, y in MOTHER_PINS if not (my <= y <= my + mh)]
+    if over:
+        raise ValueError(f"シートピンが枠の外に出ている（枠 y {my}..{my+mh}）: {over}")
     pins, labels = [], []
     for name, ptype, side, y in MOTHER_PINS:
         x = mx if side == "L" else mx + mw
