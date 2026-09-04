@@ -27,6 +27,7 @@ import sch_edit  # noqa: E402
 import sch_helpers  # noqa: E402
 import sch_import  # noqa: E402
 from build_motherboard import _merge_lib_symbols  # noqa: E402
+from build_motherboard import UUID_MOTHER_INST  # noqa: E402
 from generate_kicad_scaffold import PARENT, sheet_block  # noqa: E402
 from sch_helpers import embed_lib_symbols, symbol_inst_v10  # noqa: E402
 
@@ -141,7 +142,9 @@ class Builder:
     def __init__(self, variant: str) -> None:
         self.v = variant
         self.cfg = VARIANT[variant]
-        self.path = f"/{PARENT}/{self.cfg['inst_uuid']}"
+        # 2026-09-04: 娘基板は親ではなく**母板の子**になった（物理の入れ子に合わせた）。
+        # パスは /親/母板/娘基板。AmpChannel はさらにその下で /親/母板/娘基板/ch。
+        self.path = f"/{PARENT}/{UUID_MOTHER_INST}/{self.cfg['inst_uuid']}"
         self.els: list[sch_import.Element] = []
         self.libs: list[str] = []
 
@@ -306,6 +309,7 @@ def rewrite_ampchannel_instances() -> tuple[str, list[str]]:
     sw, rl = VARIANT[SWITCH], VARIANT[RELAY]
     order = [(sw["inst_uuid"], u) for u in sw["chan_uuids"]] + \
             [(rl["inst_uuid"], u) for u in rl["chan_uuids"]]
+    path_base = f"/{PARENT}/{UUID_MOTHER_INST}"   # 母板の下に入った（2026-09-04）
     notes: list[str] = []
     for i, e in enumerate(s.elements):
         if e.kind != "symbol":
@@ -319,7 +323,7 @@ def rewrite_ampchannel_instances() -> tuple[str, list[str]]:
         blocks = []
         for k, (bank, chan) in enumerate(order):
             blocks.append(
-                f'\t\t\t\t(path "/{PARENT}/{bank}/{chan}"\n'
+                f'\t\t\t\t(path "{path_base}/{bank}/{chan}"\n'
                 f'\t\t\t\t\t(reference "{prefix}{base + 100 * k}")\n'
                 f"\t\t\t\t\t(unit {unit})\n\t\t\t\t)")
         new_inst = ('(instances\n\t\t\t(project "AudioV2Case"\n'
@@ -351,7 +355,8 @@ PARENT_NET = {
 
 
 def patch_parent() -> str:
-    """親から `AmpBank` を外し、娘基板2枚（スイッチ版・リレー版）に置き換える。"""
+    """⚠ 2026-09-04 以降は使わない。娘基板は母板の子になり、シートを置くのは
+    build_motherboard.py の CHILD_SHEETS。残してあるのは経緯の記録のため。"""
     p = sch_import.load(ROOT / "AudioV2Case.kicad_sch")
     drop_names = {"AmpBank"} | {VARIANT[v]["name"] for v, _, _ in PARENT_SHEETS}
     drop_pins: set[tuple[float, float]] = set()
@@ -428,15 +433,18 @@ def _build_all(a) -> int:
               f"階層ピン {len([e for e in b.els if e.kind=='hierarchical_label'])}")
     chan, notes = rewrite_ampchannel_instances()
     print("AmpChannel の参照:", ", ".join(notes[:3]), f"… 計 {len(notes)} 部品")
-    parent = patch_parent()
+    # 2026-09-04: 娘基板は母板の子になったので、親は触らない。
+    # シートを置くのは build_motherboard.py（CHILD_SHEETS）。
+    parent = ""
     if a.dry_run:
         return 0
     for name, text in outs.items():
+        if len(text) < 1000:          # 空や欠けたものを書き込まない安全弁
+            raise SystemExit(f"{name}: 生成結果が短すぎる（{len(text)} bytes）")
         (ROOT / f"{name}.kicad_sch").write_text(text, encoding="utf-8")
         print(f"書き出し: AudioV2/{name}.kicad_sch ({len(text)} bytes)")
     (ROOT / "AmpChannel.kicad_sch").write_text(chan, encoding="utf-8")
-    (ROOT / "AudioV2Case.kicad_sch").write_text(parent, encoding="utf-8")
-    print("書き換え: AmpChannel.kicad_sch / AudioV2Case.kicad_sch")
+    print("書き換え: AmpChannel.kicad_sch（親は build_motherboard.py が扱う）")
     return 0
 
 

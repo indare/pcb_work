@@ -75,19 +75,14 @@ MOTHER_AT = (25.4, 25.4)
 MOTHER_SIZE = (35.56, 121.92)
 _PIN_Y0, _PIN_PITCH = 33.02, 7.62
 # 左＝入力、右＝出力と双方向。順序がそのまま上からの並びになる。
+# 2026-09-04: 計測基板と娘基板2枚を**母板の子**にした（物理の入れ子に合わせた）。
+# その結果、**親が持つのは「箱の外に出るもの」だけ**になる。
+# 電源・I2C・音声バス・番地は全部この中で閉じる。
 MOTHER_PINS_L = [
-    ("COMMON_L", "input"), ("COMMON_R", "input"),      # 箱外スタブ（外部入力）
-    ("AMP_SEL_L", "input"), ("AMP_SEL_R", "input"),    # 娘基板から
-    ("D_GND", "input"), ("3V3", "input"),              # 計測基板から（D27 で発生源が移った）
+    ("COMMON_L", "input"), ("COMMON_R", "input"),      # 入力ジャック（パネル）
 ]
 MOTHER_PINS_R = [
-    ("+15V", "output"), ("-15V", "output"), ("A_GND", "bidirectional"),
-    ("+5V_COIL", "output"),                             # BP5293。娘基板のコイル電源（D18 pin5）
-    ("TONE_L", "output"), ("TONE_R", "output"),         # PT2314 の出力（母板に載った）
-    ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
-    ("PD_12V_SW", "output"), ("PD_GND", "bidirectional"),
-    ("GND_COIL", "bidirectional"),
-    ("PHONE_L", "output"), ("PHONE_R", "output"),
+    ("PHONE_L", "output"), ("PHONE_R", "output"),      # 出力ジャック（パネル）
     ("LINE_L", "output"), ("LINE_R", "output"),
 ]
 # (階層ピン名, 種別, 左右, y)
@@ -122,6 +117,46 @@ SLOT_ADDR = {1: ("D_GND", "D_GND"), 2: ("3V3", "D_GND")}
 SLOTS = [(1, (215.9, 50.8), (215.9, 96.52)),
          (2, (279.4, 50.8), (279.4, 96.52))]
 NETTIE_AT = (215.9, 154.94)   # GND_COIL <-> D_GND
+# --- 子シート（2026-09-04 に母板の下へ入れた）---------------------------
+# 物理の入れ子に合わせた。KiCad の階層シートは配置を縛らないので、
+# **どこに実装するか（B5）とは独立**に構造だけ先に整えている。
+#
+# (名前, ファイル, インスタンス UUID, 位置, 大きさ, [(シートピン名, 種別, 左右, 母板側のネット)])
+CHILD_SHEETS = [
+    ("MeasureControl", "MeasureControl.kicad_sch",
+     "43e41fda-fe26-43e3-950a-c017f3070bbf", (400.0, 220.0), (45.72, 33.02), [
+         ("+15V_A", "input", "L", "+15V"), ("-15V_A", "input", "L", "-15V"),
+         ("ADC_GND_IN", "input", "L", "PD_GND"), ("ADC_V_IN", "input", "L", "PD_12V_SW"),
+         ("AUDIO_L_IN", "input", "L", "AMP_SEL_L"), ("AUDIO_R_IN", "input", "L", "AMP_SEL_R"),
+         ("A_GND", "bidirectional", "L", "A_GND"),
+         ("I2C_SDA", "bidirectional", "R", "I2C_SDA"), ("I2C_SCL", "bidirectional", "R", "I2C_SCL"),
+         ("3V3", "output", "R", "3V3"), ("D_GND", "bidirectional", "R", "D_GND"),
+     ]),
+    ("AmpBankSwitch", "AmpBankSwitch.kicad_sch",
+     "a1000011-0011-4011-8011-000000000011", (400.0, 270.0), (45.72, 40.64), [
+         ("TONE_L", "input", "L", "TONE_L"), ("TONE_R", "input", "L", "TONE_R"),
+         ("+15V", "input", "L", "+15V"), ("-15V", "input", "L", "-15V"),
+         ("A_GND", "bidirectional", "L", "A_GND"),
+         ("I2C_SDA", "bidirectional", "L", "I2C_SDA"), ("I2C_SCL", "bidirectional", "L", "I2C_SCL"),
+         ("D_GND", "input", "L", "D_GND"), ("3V3", "input", "L", "3V3"),
+         # 番地はスロットごとに違う値（D21）。スイッチ版 = 0x20
+         ("ADDR0", "input", "L", "D_GND"), ("ADDR1", "input", "L", "D_GND"),
+         ("AMP_SEL_L", "output", "R", "AMP_SEL_L"), ("AMP_SEL_R", "output", "R", "AMP_SEL_R"),
+     ]),
+    ("AmpBankRelay", "AmpBankRelay.kicad_sch",
+     "a1000013-0013-4013-8013-000000000013", (400.0, 330.0), (45.72, 45.72), [
+         ("TONE_L", "input", "L", "TONE_L"), ("TONE_R", "input", "L", "TONE_R"),
+         ("+15V", "input", "L", "+15V"), ("-15V", "input", "L", "-15V"),
+         ("A_GND", "bidirectional", "L", "A_GND"),
+         ("I2C_SDA", "bidirectional", "L", "I2C_SDA"), ("I2C_SCL", "bidirectional", "L", "I2C_SCL"),
+         ("D_GND", "input", "L", "D_GND"), ("3V3", "input", "L", "3V3"),
+         # リレー版 = 0x21（ADDR0 が 3V3）
+         ("ADDR0", "input", "L", "3V3"), ("ADDR1", "input", "L", "D_GND"),
+         ("+5V_COIL", "input", "L", "+5V_COIL"), ("GND_COIL", "bidirectional", "L", "GND_COIL"),
+         ("AMP_SEL_L", "output", "R", "AMP_SEL_L"), ("AMP_SEL_R", "output", "R", "AMP_SEL_R"),
+     ]),
+]
+
 SLOT_LIBS = ["power:PWR_FLAG",
              "Connector_Generic:Conn_02x05_Odd_Even",
              "Connector_Generic:Conn_02x06_Odd_Even",
@@ -138,6 +173,7 @@ SLOT_FP_PWR = "Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical"
 # ⚠ 娘基板スロットが要求するネットのうち、母板の中で作られるようになったもの
 #    （TONE_L/R は PT2314、+5V は BP5293）は方向が input -> output に変わる。
 #    VCC_TONE と PD_12V は ControlPanel が母板に入って**完全に内部**になったので階層ピンから外した。
+# 子シートを母板の中に置いたので、これらは**母板内のネット**。階層ピンにはしない。
 SLOT_HIER = [("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
              ("D_GND", "input"), ("3V3", "input"),
              # ⚠ 親のシートピンを足すだけでは繋がらない。シート側に階層ラベルが
@@ -146,13 +182,22 @@ SLOT_HIER = [("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
 
 # 親から外すシート。母板へ統合される2枚に加え、"MotherBoard" 自身も入れて
 # 再実行を冪等にする（回すたびにシートが増えないように）。
-REPLACED_SHEETS = ("PowerModule", "OutputStage", "ControlPanel", "MotherBoard")
+# 親から外すシート。母板へ統合された3枚と、母板自身（再実行を冪等にするため）、
+# そして 2026-09-04 に**母板の子へ移した3枚**。
+REPLACED_SHEETS = ("PowerModule", "OutputStage", "ControlPanel", "MotherBoard",
+                   "MeasureControl", "AmpBankSwitch", "AmpBankRelay")
 
 # ControlPanel が母板に入ったことで、作る側と使う側の両方が母板の中に収まった
 # ネット。階層ピンに残すと親で行き先の無いピンになるのでローカルへ落とす。
 #   VCC_TONE: PowerModule の 7809 -> PT2314
 #   PD_12V  : PowerModule -> パネル PWR SW(SW402)
-INTERNAL_NOW = {"VCC_TONE", "PD_12V"}
+INTERNAL_NOW = {
+    "VCC_TONE", "PD_12V",
+    # 2026-09-04: 子シートが母板の中に入ったので、これらは母板内で閉じる
+    "+15V", "-15V", "A_GND", "+5V_COIL", "TONE_L", "TONE_R",
+    "AMP_SEL_L", "AMP_SEL_R", "I2C_SDA", "I2C_SCL",
+    "PD_12V_SW", "PD_GND", "GND_COIL", "D_GND", "3V3",
+}
 
 
 def _label_from_hier(el: sch_import.Element) -> sch_import.Element:
@@ -273,16 +318,12 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
             els.append(sch_import.Element(
                 "label", _plain_label("GND_COIL", x, y, 0, "left"), None, "GND_COIL", (x, y)))
 
-        # 母板の外と繋がるネットを階層ピンにする（scaffold.uid を使うので try の中）
-        hx, hy = 340.36, 40.64
-        for i, (name, shape) in enumerate(SLOT_HIER):
-            y = hy + i * 7.62
-            els.append(sch_import.Element(
-                "hierarchical_label",
-                scaffold.hier_label(name, shape, hx, y, 0), None, name, (hx, y)))
-            els.append(sch_import.Element("label", _plain_label(name, hx, y, 0, "left"),
-                                          None, name, (hx, y)))
-            hier_names.append(name)
+        # 2026-09-04: SLOT_HIER は役目を終えた。
+        # 子シートが母板の中に入ったので、これらは母板内のネットになり、
+        # 階層ラベルは不要（親にピンが無く hier_label_mismatch になる）。
+        # 単独のローカルラベルも浮くだけ（label_dangling）。
+        # これらのネットは J_PWR101/102（スロットコネクタ）・NT101・U402 側に
+        # 実体があるので、ここで置く必要はない。定義は経緯の記録として残す。
     finally:
         sch_helpers.new_uid = saved_new
         scaffold.uid = saved_sc
@@ -363,6 +404,30 @@ def build(dry_run: bool = False) -> str:
     elements.extend(slot_els)
     hier_seen.update(slot_hier)
 
+    # --- 子シート3枚を母板の中に置く（2026-09-04）---
+    saved_sc2, scaffold.uid = scaffold.uid, uid
+    try:
+        for name, fname, inst, (sx, sy), (sw, sh), pins in CHILD_SHEETS:
+            lefts = [x for x in pins if x[2] == "L"]
+            rights = [x for x in pins if x[2] == "R"]
+            blk_pins = []
+            for group, px in ((lefts, sx), (rights, sx + sw)):
+                for i, (pn, kind, side, net) in enumerate(group):
+                    py = sy + 2.54 + i * 2.54
+                    blk_pins.append((pn, kind, px, py, 180 if side == "L" else 0))
+                    elements.append(sch_import.Element(
+                        "label", _plain_label(net, px, py, 180 if side == "L" else 0,
+                                              "right" if side == "L" else "left"),
+                        None, net, (px, py)))
+            need = sy + 2.54 + (max(len(lefts), len(rights)) - 1) * 2.54
+            if need > sy + sh:
+                raise ValueError(f"{name}: シートピンが枠の外（枠 {sy}..{sy+sh} / 最終ピン {need}）")
+            elements.append(sch_import.Element(
+                "sheet", sheet_block(inst, name, fname, sx, sy, sw, sh, blk_pins, "1"),
+                None, name, (sx, sy)))
+    finally:
+        scaffold.uid = saved_sc2
+
     lib = _merge_lib_symbols(
         [h for _, s, *_ in sheets for h in s.header if h.lstrip().startswith("(lib_symbols")]
         + [embed_lib_symbols(SLOT_LIBS)])
@@ -414,10 +479,34 @@ def patch_parent(dry_run: bool = False) -> str:
             continue
         kept.append(el)
 
+    # ⚠ シートを外すと、そのピンへ引いてあったワイヤとラベルも浮く。
+    #    2026-09-04 に子シートを母板へ移したとき、親に 7 組が残って
+    #    unconnected_wire_endpoint と label_dangling を出した。
+    dangling = set(drop_pins)
+    for _ in range(4):                       # 数珠つなぎのワイヤを辿る
+        more = set()
+        for el in kept:
+            if el.kind != "wire":
+                continue
+            pts = [(round(x, 2), round(y, 2)) for x, y in el.coords()[:2]]
+            if len(pts) != 2:
+                continue
+            a, b = pts
+            if a in dangling and b not in dangling:
+                more.add(b)
+            elif b in dangling and a not in dangling:
+                more.add(a)
+        if not more - dangling:
+            break
+        dangling |= more
+
     dropped_labels: list[str] = []
     out: list[sch_import.Element] = []
     for el in kept:
-        if el.kind == "label" and el.at and (round(el.at[0], 2), round(el.at[1], 2)) in drop_pins:
+        pts = [(round(x, 2), round(y, 2)) for x, y in el.coords()[:2]]
+        if el.kind == "wire" and any(q in dangling for q in pts):
+            continue
+        if el.kind == "label" and el.at and (round(el.at[0], 2), round(el.at[1], 2)) in dangling:
             dropped_labels.append(f"{el.name}@{el.at[0]},{el.at[1]}")
             continue
         out.append(el)
