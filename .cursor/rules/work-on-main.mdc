@@ -7,12 +7,14 @@ alwaysApply: true
 
 - 作業ブランチの正は **`main`**。マージ済みの `cursor/audiov2-*` / `cursor/manual-volume-*` などを fetch・checkout・PR base にしない。
 - 長い文脈は **[AudioV2/AGENT_HANDOFF.md](../../AudioV2/AGENT_HANDOFF.md)** を読む（クラウド↔ローカルで会話 UI が分岐することがある）。
-- シート所有権の正は **[CLAUDE.md](../../CLAUDE.md)** の表。2026-09-03 に構成刷新が完了し、シートは4枚。
+- シート所有権の正は **[CLAUDE.md](../../CLAUDE.md)** の表。シートは4枚で、2026-09-04 に
+  `AudioV2Case`（親）→ `MotherBoard` → {`MeasureControl`, `AmpBankSwitch`, `AmpBankRelay`} の**入れ子**になった。
 - `generate_kicad_scaffold.py` は再実行しない。
 - 再生成は **`build_daughter.py` → `build_motherboard.py`** の順（どちらも `AudioV2/scripts/`）。
-  - **この順が不動点。** 逆順や片方だけを回すと、内容は同じまま親シートに 900 行規模の並べ替え差分が出る
   - **どのシートを誰が作るかは [CLAUDE.md](../../CLAUDE.md) の表が正**（ここに表を複製しない。2箇所あると片方が腐る）
   - 生成対象のシートを手で直さない。回すと上書きされる。回路を変えるならスクリプトを直す
+  - ⚠ **`MeasureControl` にシートピンを足したら `build_motherboard.py` の `CHILD_SHEETS` にも足す。**
+    手編集所有だが、母板に置かれる側のピンはコードが持っている
 - ⚠ **`wire_circuit_design.py` を再生成に使わない。** 旧構成のロジックの記録として残っているだけで、`GENERATED` が空なのでどのシートも書き出さない。
   さらに `--force-parent` を渡すと親から **`MeasureControl` シートが消える**（スクリプト内のコメント自身がそう書いている）。`control` の出力先 `ControlPanel.kicad_sch` はもう存在しないパス。
 - ⚠ **配線の検証に `sch_drift.py` を使わない。** ワイヤもジャンクションも比較対象外。統合・移設の検証は `AudioV2/scripts/netlist_partition.py`。

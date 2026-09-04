@@ -38,30 +38,46 @@ KiCad の基板プロジェクト。現在の作業対象は `AudioV2/`。
 
 ### シートの所有権
 
-**2026-09-03 に構成刷新が完了した。シートは4枚。**
+**2026-09-04 に階層を物理の入れ子に合わせた。親は「箱の皮」だけになった。**
+
+```
+AudioV2Case（親）  COMMON_L/R・PHONE_L/R・LINE_L/R の6本だけ
+└─ MotherBoard
+   ├─ MeasureControl
+   ├─ AmpBankSwitch  └─ AmpCh1-5
+   └─ AmpBankRelay   └─ AmpCh1-5
+```
+
+**KiCad の階層シートは配置を縛らない。** どれを別基板に切り出すかは PCB を起こす
+とき（B5）に決める。入れ子は「電気的にどこに属するか」だけを言っている。
 
 | シート | 誰が作るか |
 |---|---|
 | `MotherBoard` | **`scripts/build_motherboard.py`**（冪等・再実行でバイト一致） |
 | `AmpBankSwitch` / `AmpBankRelay` | **`scripts/build_daughter.py`**（同上） |
 | `MeasureControl` | 生成対象外。**KiCad で直接いじってよい** |
-| `AudioV2Case`（親） | 上の2本がパッチする |
+| `AudioV2Case`（親） | `build_motherboard.py` がパッチする |
 
 **生成対象のシートを手で直さないこと。** 回すと上書きされる。回路を変えるならスクリプトを直す。
 
-**両方を回すときは `build_daughter.py` → `build_motherboard.py` の順で。**
-どちらも親シートをパッチするが、`AudioV2Case.kicad_sch` の中でのサブシート block の
-並びが生成器ごとに違う。逆順や片方だけを回すと、**内容は同じまま 900 行規模の
-並べ替え差分**が出る。
+**⚠ `MeasureControl` にシートピンを足したら `build_motherboard.py` の `CHILD_SHEETS` にも足すこと。**
+手編集所有だが、**母板に置かれる側のピンはコードが持っている**。片方だけだと親子で
+ピンの対応が取れず `hier_label_mismatch` が出る。
 
-**⚠ KiCad で開いて保存した後に再生成するときは、この順で2巡回す。**
-1巡目は過渡状態で、親シートに**ラベルが二重に入る**（2026-09-04 実測: `LINE_L` /
-`LINE_R` が ×2 になり ERC の `label_dangling` が 4 → 6 に増えた）。2巡目で収束し、
-そこから先は何巡してもバイト一致する。**1巡で止めてコミットしないこと。**
-収束したかは `kicad-run.sh erc` の件数が期待値（下の表）に戻ることで確認できる。
+**順序は `build_daughter.py` → `build_motherboard.py`。**
+娘基板のファイルを母板がシートとして参照するので、回路を変えたときはこの順が自然。
+ただし**逆順でも母板単独でも結果はバイト一致する**（2026-09-04 実測）。親を書くのは
+`build_motherboard.py` だけになったため。入れ子化より前にあった
+「逆順で 900 行規模の並べ替え差分」「1巡目が過渡状態でラベルが二重に入る」は
+**どちらも解消した**。
+
+**⚠ KiCad で開いて保存した後の再生成だけは未検証。** 回したら
+`kicad-run.sh erc` の件数が期待値（下の表）に戻ることを確認すること。
 
 `ControlPanel` / `PowerModule` / `OutputStage` / `AmpBank` は**解体済みで `AudioV2/legacy/` に凍結**。
-**編集しても設計に反映されない**（`build_motherboard.py` が素材として読むだけ）。
+親からは参照されていないが、**`build_motherboard.py` が素材として読むので直すと設計に届く**
+（2026-09-03 に PPTC 追加でここを編集し、実際に母板へ反映された）。直したら必ず回すこと。
+編集時の注意は [AudioV2/legacy/README.md](AudioV2/legacy/README.md)。
 
 道具（すべて `AudioV2/scripts/`）:
 
