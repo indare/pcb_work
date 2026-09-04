@@ -124,7 +124,7 @@ docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 
 | | |
 |---|---|
-| `check_sexpr.py -q AudioV2` | **13 ファイル / 問題 0** |
+| `check_sexpr.py -q AudioV2` | **13 ファイル / 問題 0**（KiCad を開いていると `_autosave-*` が増えて **15** になる。gitignore 済みだが `check_sexpr` はディレクトリを見るので数に出る） |
 | `kicad-run.sh erc` | **29 件** |
 | `kicad-run.sh netlist` | **部品 371 個・重複 0・注釈警告なし** |
 | `sch_import.py --roundtrip AudioV2/*.kicad_sch` | **全部 OK** |

@@ -46,3 +46,6 @@ AudioV2/.kicad-mcp/
 
 # kicad-run.sh の出力 (ERC / DRC / ネットリスト)
 /out/
+
+# KiCad の autosave（開いている間だけ存在する一時ファイル）
+_autosave-*
