@@ -1571,7 +1571,7 @@ AudioV2/AGENT_HANDOFF.md を読んで続きから。ブランチ main、origin �
 ■ 検証
   python3 Audio/scripts/check_sexpr.py -q AudioV2   → 13ファイル/0
   docker/kicad-cloud-build/kicad-run.sh erc         → 29件
-  docker/kicad-cloud-build/kicad-run.sh netlist     → 部品 370 個・重複0・注釈警告なし
+  docker/kicad-cloud-build/kicad-run.sh netlist     → 部品 371 個・重複0・注釈警告なし
   python3 AudioV2/scripts/sch_import.py --roundtrip AudioV2/*.kicad_sch  → 全部 OK
 ```
 

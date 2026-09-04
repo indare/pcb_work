@@ -110,7 +110,7 @@ docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 |---|---|
 | `check_sexpr.py -q AudioV2` | **13 ファイル / 問題 0** |
 | `kicad-run.sh erc` | **29 件** |
-| `kicad-run.sh netlist` | **部品 370 個・重複 0・注釈警告なし** |
+| `kicad-run.sh netlist` | **部品 371 個・重複 0・注釈警告なし** |
 | `sch_import.py --roundtrip AudioV2/*.kicad_sch` | **全部 OK** |
 
 イメージがあれば Docker(KiCad 10.0.6)、無ければホストの `kicad-cli` で動く。
