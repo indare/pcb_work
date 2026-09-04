@@ -1290,7 +1290,7 @@ GND は v1 の NetTie 構造がそのまま生きていて、`ADC_GND`(27ノー�
 | D-d | `PowerModule` 生成コードの追従 | 母板統合で作り直し |
 | D-e | `PARTS.md` §4.2 の書き換え | |
 | D-f | **`U202`（+9V LDO）手前の PPTC 0.1 A が未実装** | 定格は確定（`DECISIONS.md` §8）。`+15V` の T 点から `U202.1` への配線が **2.54 mm のスタブ**で 7.62 mm の素子が入らない。T 点の上流に入れると別の枝も保護してしまうので不可。**`U202` を数 mm ずらすか引き回しを変える必要があり、KiCad で見ながらやる**。30 mA の枝なので優先度は低い。**⚠ `U1604` を `+9V` 共有へ替えるなら定格は 0.2〜0.25 A へ上げ直し**（`DECISIONS.md`「`+9V` 共有の可否」） |
-| ~~D-g~~ | ~~`U1604` にヒューズを入れるか~~ | **2026-09-04 確定 → 入れる。`F1603` = PPTC 0.15 A**（場所は走行線の上へ迂回、`(265.43, 34.29)` r90）。**実測ではなく定格から出した数字**（実測は試みたが取れなかった）。`DECISIONS.md`「D-g の定格」。**⚠ KiCad での実装は未着手。** `MeasureControl` は手編集所有なので直接置く。**`U1604` 直近のローカルバルクとセットで**入れること |
+| ~~D-g~~ | ~~`U1604` にヒューズを入れるか~~ | **2026-09-04 完了。`F1603` = PPTC 0.15 A ＋ ローカルバルク `C1644` 47µF ＋ `#FLG1603`。** 走行線の上へ迂回（`(265.43, 34.29)` r90）。新ネットは `PD_12V_ADC`。**定格から出した数字**なので `U1604` の負荷電流が測れたら検算。`DECISIONS.md`「D-g の定格」 |
 
 ---
 
@@ -1601,7 +1601,7 @@ AudioV2/AGENT_HANDOFF.md を読んで続きから。ブランチ main、origin �
 ■ 検証
   python3 Audio/scripts/check_sexpr.py -q AudioV2   → 13ファイル/0
   docker/kicad-cloud-build/kicad-run.sh erc         → 29件
-  docker/kicad-cloud-build/kicad-run.sh netlist     → 部品 371 個・重複0・注釈警告なし
+  docker/kicad-cloud-build/kicad-run.sh netlist     → 部品 373 個・重複0・注釈警告なし
   python3 AudioV2/scripts/sch_import.py --roundtrip AudioV2/*.kicad_sch  → 全部 OK
 ```
 

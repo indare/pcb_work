@@ -17896,16 +17896,6 @@
 	)
 	(wire
 		(pts
-			(xy 262.89 44.45) (xy 269.24 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "55db0d39-965c-4124-a88b-fa7730ed8c92")
-	)
-	(wire
-		(pts
 			(xy 50.8 100.33) (xy 50.8 107.95)
 		)
 		(stroke
@@ -23148,7 +23138,7 @@
 				)
 			)
 		)
-		(property "Value" "Fuse"
+		(property "Value" "T1A slow"
 			(at 63.754 223.52 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31844,5 +31834,320 @@
 			(justify left bottom)
 		)
 		(uuid "32103070-f906-5089-bc82-baa12c33581d")
+	)
+	(wire
+		(pts
+			(xy 261.62 44.45) (xy 261.62 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74335d1a-e656-50a2-9c08-8a6508d027e3")
+	)
+	(wire
+		(pts
+			(xy 269.24 34.29) (xy 269.24 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5a6aac4-309e-5302-bd43-4221e8d60ea5")
+	)
+	(wire
+		(pts
+			(xy 269.24 40.64) (xy 266.7 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5af2813a-d486-52b5-bca5-e684fc9db6e4")
+	)
+	(wire
+		(pts
+			(xy 266.7 48.26) (xy 266.7 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49f4a66c-af80-579f-9896-29ccd1ed2e8d")
+	)
+	(junction
+		(at 261.62 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e027376b-411f-5e76-bf08-836d74a8a899")
+	)
+	(junction
+		(at 269.24 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dc838753-a1a9-53aa-803a-64337fb852b1")
+	)
+	(junction
+		(at 266.7 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5e24b75f-d71f-5b60-b260-a45505f2c3be")
+	)
+	(symbol
+		(lib_id "Device:Fuse")
+		(at 265.43 34.29 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "dbb8999d-563d-57ee-97ac-7e125c34674c")
+		(property "Reference" "F1603"
+			(at 265.43 30.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PPTC 0.15A hold"
+			(at 265.43 27.94 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal"
+			(at 265.43 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 265.43 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U1604 (MBC2596) input fuse. D-g. Rated from datasheets, not measured: 6.8V x 90mA / eta 85% / 12V = 60mA steady, x1.5-2 -> 0.15A hold. Detours above the ADC_V_IN run because the direct stub is only 6.35mm."
+			(at 265.43 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "73ba9c6f-6780-5685-a37d-36cd15f095f0")
+		)
+		(pin "2"
+			(uuid "64703674-107b-5d9f-8b1c-c5c0ecb74f4a")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "F1603")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Polarized")
+		(at 266.7 44.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "2f1de057-3e4a-5731-9db3-2283237b7db3")
+		(property "Reference" "C1644"
+			(at 262.382 41.91 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "47uF 35V"
+			(at 264.668 46.736 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
+			(at 266.7 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 266.7 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Local bulk for U1604, downstream of F1603. The PPTC is 2-5 ohm, so the converter input pulses must be supplied locally, not through the fuse. 15V rail -> 35V rating. Return on ADC_GND_IN."
+			(at 266.7 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "af82bcc7-6610-5202-98a7-d63c87196d06")
+		)
+		(pin "2"
+			(uuid "2667c045-d133-570c-b5d2-0d668bd32b9e")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "C1644")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "PD_12V_ADC"
+		(at 269.24 39.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1079dafd-3f54-51be-b946-e511596e8f8f")
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 276.86 34.29 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7adae6d5-cd51-59f0-8067-ef8d21f7d900")
+		(property "Reference" "#FLG1603"
+			(at 276.86 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 276.86 29.21 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 276.86 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 276.86 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 276.86 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "951bea95-b56b-5246-bb35-d1f7bec8078a")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "#FLG1603")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "PD_12V_ADC"
+		(at 276.86 34.29 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2505e538-95b1-5cfc-8cf1-a55cb8683e7f")
 	)
 )
