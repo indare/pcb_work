@@ -10,7 +10,7 @@
 | **DKMW20F-15** | ±15 V DC-DC（AudioV2 PowerModule） | [MeanWell_SKMW20_DKMW20.pdf](MeanWell_SKMW20_DKMW20.pdf) | [Mean Well SKMW20/DKMW20](https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20)。F-15 は ±15 V / ±660 mA。2026-09-01 に F-12(±12 V) から変更 |
 | **BP5293-50** | 操作板 +5 V（Controll 系） | [ROHM_BP5293-xx.pdf](ROHM_BP5293-xx.pdf) | [ROHM BP5293-xx](https://www.rohm.com/products/power-management/switching-regulators-integrated-fet/bp5293-xx-series) |
 
-### ±12 V DC-DC の候補（2026-09-05 の再探索。**採否は未決**）
+### DC-DC の候補（2026-09-05 の再探索。**採否は未決**）
 
 `dcdc_survey.py` で 431 件を引き、±12 V 両レール・MOQ 1・在庫あり・12 V 入力対応の
 220 件から実読した分。**選定の決め手になる `Cout`（最大容量負荷）・軽負荷での `Fsw` の
@@ -21,12 +21,22 @@
 まるで違う（TEL 10WI は単出力 12 V が 560 µF、±12 V dual は 390 µF。EC7AW は単出力 24S12 が
 833 µF、±12 V dual は 417 µF）。**モデル行を取り違えると倍以上ずれる。**
 
-**⚠ `Fsw` は「値」より「どの列に載っているか」を見ること。** Recom の 350 kHz は
-**Max. 列**（Min./Typ. 欄も条件欄も空）で、**軽負荷で下がることと矛盾しない**。
-「条件が書いていない＝固定」ではない。
+**⚠⚠ `Fsw` の欄で候補を比べてはいけない。** 「Aimtec は @100% load と条件付き、Recom は
+条件が書いていない」という差は**見せかけ**だった —— Recom は同じ条件を**表の見出し**に
+書いている（`REC10K-AW.pdf` p2 *"BASIC CHARACTERISTICS (measured @ TAMB= 25°C, nom. VIN,
+**full load** and after warm-up unless otherwise stated)"*）。Cincon も Traco も同様の全負荷注記が
+あり、**下の候補は9品すべて全負荷規定**。しかも Recom の 350 kHz は **Max. 列**（Min./Typ. 欄は空）で、
+軽負荷で下がることと矛盾しない。
+
+**この欄で意味があるのは次の2つだけ:**
+- **Mornsun `URA_ZP-10WR3` / `URA_LD-20WR3` は「軽負荷（50%以下）で周波数を下げる」と明記**（不採用の根拠。この箱が追っている 1.2 kHz スパーの第一容疑者と同系統の挙動）
+- **Traco `TEL`/`TMR` は "(PWM)" と明記**（PFM／バーストではない、という積極的な主張）
+
+それ以外の「書いていない」は**全部同じ**で、優劣を付ける材料にならない。
 
 | 部品 | ローカル | `Cout`（±12V dual） | `Fsw` の書かれ方 | 絶縁容量 | 最小負荷 | 効率 |
 |---|---|---|---|---|---|---|
+| **REC20K-Z**（Recom） | [Recom_REC20K-Z_Rev3-2025.pdf](Recom_REC20K-Z_Rev3-2025.pdf) | `2415DZ`=**±3000 µF** / `2412DZ`=**±4000 µF**（p1） | "Internal Operating Frequency" 265 kHz、Max. 列（p2） | **2000 pF** typ（p6） | **0 %**（p2） | 88 % |
 | **REC10K-AW**（Recom） | [Recom_REC10K-AW_Rev2-2025.pdf](Recom_REC10K-AW_Rev2-2025.pdf) | `2412DAW`=**±470 µF** / `2415DAW`=±270 µF（p1） | "Internal Operating Frequency" 350 kHz、**Max. 列**・条件欄空（p2） | 1000 pF typ（p6） | **0 %**（p2、Min. 列） | 85 % |
 | **AM10TW-LPZ**（Aimtec） | [Aimtec_AM10TW-LPZ.pdf](Aimtec_AM10TW-LPZ.pdf) | `2412DLPZ`=**470 µF**（± 表記なし、p2） | 300 kHz、条件 **"100% load"**、Min./Max. 欄空（p3） | **2000 pF**（p2） | 項目なし | 87 % |
 | **AM15CW-LPZ**（Aimtec） | [Aimtec_AM15CW-LPZ.pdf](Aimtec_AM15CW-LPZ.pdf) | `2412DLPZ`=**±470 µF**、±625 mA（p2） | 300 kHz、条件 **"100% load"**（p3） | **2000 pF**（p3） | 項目なし | 90 % |
@@ -40,6 +50,16 @@
 分ける構造そのもので、効くのは耐電圧（functional）ではなく**絶縁容量**の方
 （[DECISIONS.md](../DECISIONS.md) の否定側査読）。**Aimtec 2品は 2000 pF で Recom / Cincon の2倍。**
 安いのはこの2品だが、**この設計がいちばん気にしている欄で最下位**にいる。
+
+**⚠⚠ `REC20K-Z` は ±15 V のままで `Cout` の宿題を閉じられる。** 現行 `REC10K-2415DAW/H2` の
+`Cout ±270 µF` はレール総容量に対して余裕が無いが、**同じ Recom・同じ 1"×1"・同じピン配置**
+（Dual: 1 +Vin / 2 −Vin / 3 CTRL / 4 −Vout / 5 COM / 6 +Vout。`REC20K-Z` p9）の
+`REC20K-2415DZ` は **±3000 µF**・±667 mA・88 %・絶縁 2 kVDC（**grade basic**、`REC10K` は
+functional）で、差額は **+¥1,216**（¥3,620 / 在庫 162 / MOQ1）。
+**`TMUX7612` の膝も `L7809` の入力下限もネット名の改名も、一切触らずに済む。**
+代償は絶縁容量が 1000 → **2000 pF** に悪化することと、ピン径が Ø1.0→**Ø1.4 mm**（穴径が別。PCB 未設計なので実害なし）。
+**この選択肢は 2026-09-05 の否定側査読で出た。それまでの記録は ±15 V 側を「逃げ道が乏しい」と
+誤って結論していた（REC10K 系列しか見ていなかった）。**
 
 **⚠ Recom の EMC フィルタ推奨は `2412DAW` にあって `2415DAW` に無い。**
 `Recom_REC10K-AW_Rev2-2025.pdf` **p8** の EN55032 Class B / Dual Output の Component List に
@@ -113,3 +133,4 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 - 2026-08-31: Amp/HP OPA DS は `Audio/datasheets/opamps/` を正と明記
 - 2026-09-05: ±12 V DC-DC 候補の一次資料7点（Aimtec ×2 / MEAN WELL / Cincon ×2 / Traco ×2）。`Cout`・軽負荷 `Fsw`・絶縁容量は API に無いため
 - 2026-09-05: **上の表を訂正。** ブラインド再抽出で 2 件の誤りが出た —— ①Aimtec 2品の絶縁容量を「記載なし」としていたが **2000 pF が明記されている**（AM10TW p2 / AM15CW p3）。②Recom の 350 kHz を「条件の但し書きなし」と書いたが、実際は **Max. 列**で、軽負荷での低下と矛盾しない
+- 2026-09-05: **否定側査読で `REC20K-Z` の見落としが出た**（`2415DZ`=±3000 µF / `2412DZ`=±4000 µF）。あわせて `Fsw` 欄の比較が無意味だったこと（全社が全負荷規定。Recom は表の見出しに書いている）を反映
