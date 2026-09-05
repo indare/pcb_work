@@ -49,3 +49,7 @@ AudioV2/.kicad-mcp/
 
 # KiCad の autosave（開いている間だけ存在する一時ファイル）
 _autosave-*
+
+# エージェントが作る一時の作業ディレクトリ（PDF 抽出ヘルパ等）。
+# リポジトリの道具は AudioV2/scripts/ に置く
+/.dsx/
