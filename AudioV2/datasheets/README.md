@@ -18,19 +18,36 @@
 だからここに置いてある。経緯と比較は [DECISIONS.md](../DECISIONS.md)。
 
 **⚠ この表の数値は ±12 V 両出力版のもの。** 同じ系列でも単出力版・±15 V 版では `Cout` が
-まるで違う（TEL 10WI は単出力 3.3 V が 2'600 µF、±12 V dual は 390 µF）。
-**モデル行を取り違えると桁で間違える。**
+まるで違う（TEL 10WI は単出力 12 V が 560 µF、±12 V dual は 390 µF。EC7AW は単出力 24S12 が
+833 µF、±12 V dual は 417 µF）。**モデル行を取り違えると倍以上ずれる。**
 
-| 部品 | ローカル | この設計に効く数字 |
-|---|---|---|
-| **REC10K-AW**（Recom） | [Recom_REC10K-AW_Rev2-2025.pdf](Recom_REC10K-AW_Rev2-2025.pdf) | 既収録。`2412DAW` は `Cout ±470 µF`、`2415DAW` は `±270 µF`（p1 表）。**p8 の EN55032 Class B EMC フィルタ推奨は `2412DAW` を明記、`2415DAW` は無い**（Note7: 記載型番にのみ有効） |
-| **AM10TW-LPZ**（Aimtec） | [Aimtec_AM10TW-LPZ.pdf](Aimtec_AM10TW-LPZ.pdf) | `2412DLPZ` は `Cout 470 µF` / ±416 mA / 87 %。**`Fsw 300 kHz` は「100 % load」条件付き表記** |
-| **AM15CW-LPZ**（Aimtec） | [Aimtec_AM15CW-LPZ.pdf](Aimtec_AM15CW-LPZ.pdf) | `2412DLPZ` は `Cout ±470 µF` / ±625 mA / 90 %。`Fsw` は同じく「100 % load」条件付き |
-| **NSD10-D**（MEAN WELL） | [MeanWell_NSD10-D.pdf](MeanWell_NSD10-D.pdf) | `Cout ±1000 µF` と最大。ただし効率 77 % / 絶縁 1 kVDC / 最小負荷 20 mA/レール。**DigiKey では NCNR（返品・キャンセル不可）** |
-| **EC7AW**（Cincon） | [Cincon_EC7AW.pdf](Cincon_EC7AW.pdf) | **候補中で唯一「Fixed Switching Frequency」を明記**（p1、電気的特性は 477/530/583 kHz）。`Cout 417 µF`・絶縁容量 1000 pF・最小負荷 0 mA |
-| **EC2SBW**（Cincon） | [Cincon_EC2SBW.pdf](Cincon_EC2SBW.pdf) | `Cout 470 µF`・最小負荷 0 mA。**`Fsw` が「100 kHz min.」という下限表記**（可変を示唆） |
-| **TEL 10WI**（Traco） | [Traco_TEL10WI.pdf](Traco_TEL10WI.pdf) | ±12 V dual は `Cout 390 µF`。絶縁容量 1'500 pF max は候補中で最大 |
-| **TMR 10WI**（Traco） | [Traco_TMR10WI.pdf](Traco_TMR10WI.pdf) | ±12 V dual は `Cout 390 / 390 µF`。`Fsw 390-450 kHz`・最小負荷不要 |
+**⚠ `Fsw` は「値」より「どの列に載っているか」を見ること。** Recom の 350 kHz は
+**Max. 列**（Min./Typ. 欄も条件欄も空）で、**軽負荷で下がることと矛盾しない**。
+「条件が書いていない＝固定」ではない。
+
+| 部品 | ローカル | `Cout`（±12V dual） | `Fsw` の書かれ方 | 絶縁容量 | 最小負荷 | 効率 |
+|---|---|---|---|---|---|---|
+| **REC10K-AW**（Recom） | [Recom_REC10K-AW_Rev2-2025.pdf](Recom_REC10K-AW_Rev2-2025.pdf) | `2412DAW`=**±470 µF** / `2415DAW`=±270 µF（p1） | "Internal Operating Frequency" 350 kHz、**Max. 列**・条件欄空（p2） | 1000 pF typ（p6） | **0 %**（p2、Min. 列） | 85 % |
+| **AM10TW-LPZ**（Aimtec） | [Aimtec_AM10TW-LPZ.pdf](Aimtec_AM10TW-LPZ.pdf) | `2412DLPZ`=**470 µF**（± 表記なし、p2） | 300 kHz、条件 **"100% load"**、Min./Max. 欄空（p3） | **2000 pF**（p2） | 項目なし | 87 % |
+| **AM15CW-LPZ**（Aimtec） | [Aimtec_AM15CW-LPZ.pdf](Aimtec_AM15CW-LPZ.pdf) | `2412DLPZ`=**±470 µF**、±625 mA（p2） | 300 kHz、条件 **"100% load"**（p3） | **2000 pF**（p3） | 項目なし | 90 % |
+| **NSD10-D**（MEAN WELL） | [MeanWell_NSD10-D.pdf](MeanWell_NSD10-D.pdf) | **±1000 µF** と最大。ただし**6モデル横断の1セル**でモデル別値ではない（p1） | 仕様表に**記載なし**。p2 ブロック図に "fosc : 350KHz" とあるだけ | **記載なし** | 項目なし（`CURRENT RANGE` 下限が 0.02 A） | **77 %** |
+| **EC7AW**（Cincon） | [Cincon_EC7AW.pdf](Cincon_EC7AW.pdf) | **417 µF**（± 表記なし、p1） | **"Fixed Switching Frequency"**（p1 Features、**文書内ここ1箇所のみ**）。特性表は 477/530/**583** kHz ≒ ±10 % の幅で、**両者を結ぶ注記は無い**（p3） | 1000 pF typ（p3） | 項目なし（`OUTPUT CURRENT MIN.` が 0 mA） | 88.5 % |
+| **EC2SBW**（Cincon） | [Cincon_EC2SBW.pdf](Cincon_EC2SBW.pdf) | **470 µF**（± 表記なし、p1） | **"100 kHz min."**（p2、条件記載なし。**下限表記＝可変を示唆**） | 1000 pF typ（p2） | 項目なし（`OUTPUT CURRENT MIN.` が 0 mA） | 86 % |
+| **TEL 10WI**（Traco） | [Traco_TEL10WI.pdf](Traco_TEL10WI.pdf) | **390 / 390 µF**（p2） | 355-485 kHz (PWM) / 420 kHz typ（p3） | **1'500 pF max**（p3、候補中で最大） | **"Not required"**（p2） | 87 % |
+| **TMR 10WI**（Traco） | [Traco_TMR10WI.pdf](Traco_TMR10WI.pdf) | **390 / 390 µF**（p2） | 390-450 kHz (PWM) / 420 kHz typ（p3） | 1'000 pF typ / **1'500 pF max**（p4） | **"Not required"**（p2） | 88 % |
+
+**⚠ 絶縁容量は候補ごとに桁ではなく倍で違う。** この設計の絶縁は `PD_GND` と `A_GND` を
+分ける構造そのもので、効くのは耐電圧（functional）ではなく**絶縁容量**の方
+（[DECISIONS.md](../DECISIONS.md) の否定側査読）。**Aimtec 2品は 2000 pF で Recom / Cincon の2倍。**
+安いのはこの2品だが、**この設計がいちばん気にしている欄で最下位**にいる。
+
+**⚠ Recom の EMC フィルタ推奨は `2412DAW` にあって `2415DAW` に無い。**
+`Recom_REC10K-AW_Rev2-2025.pdf` **p8** の EN55032 Class B / Dual Output の Component List に
+挙がっているのは `REC10K-2412DAW/H2` / `REC10K-2405DAW/H2` / `REC10K-4824DAW/H2` の3つで、
+**現行採用の `2415DAW/H2` は入っていない**。Note7: *"Filter suggestions are valid for indicated
+part numbers only. For other part numbers, please contact RECOM for advice."*
+なお部品表に載っているのは**定数だけ**（C 10 µF / L1 10 µH / CMC1 5 µH / C4,C5 4.7 nF）で、
+フィルタ部品のメーカ型番は書かれていない。単出力版は L1 が 33 µH で Dual と違う。
 
 ## 音量・トーン
 
@@ -95,3 +112,4 @@
 - 2026-08-30: 表示 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）
 - 2026-08-31: Amp/HP OPA DS は `Audio/datasheets/opamps/` を正と明記
 - 2026-09-05: ±12 V DC-DC 候補の一次資料7点（Aimtec ×2 / MEAN WELL / Cincon ×2 / Traco ×2）。`Cout`・軽負荷 `Fsw`・絶縁容量は API に無いため
+- 2026-09-05: **上の表を訂正。** ブラインド再抽出で 2 件の誤りが出た —— ①Aimtec 2品の絶縁容量を「記載なし」としていたが **2000 pF が明記されている**（AM10TW p2 / AM15CW p3）。②Recom の 350 kHz を「条件の但し書きなし」と書いたが、実際は **Max. 列**で、軽負荷での低下と矛盾しない
