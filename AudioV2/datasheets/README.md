@@ -62,7 +62,7 @@
 `VIN=11.5 to 25V`、`IQ` 4.3/6.0 mA、絶対最大 35 V、**7809 のドロップアウト曲線が無いことまで同じ**。
 違ったのは絶対最大定格のモデル群の括り方（`7805 to 7809` → `7805 to 7810`）と
 パッケージ表記（`DL1` → `DL1A`）だけ。**旧版はリポジトリに置かない**（同じ事実を2箇所に
-置くと片方が腐る。[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。
+置くと片方が腐る。[SOURCE_OF_TRUTH.md](../../SOURCE_OF_TRUTH.md)）。
 
 **⚠ `L7809CV` は ST 純正が DigiKey に存在しない**（UMW / Lumimax / EVVO のセカンドソースのみ。
 2026-09-05 に API で確認）。**なので入力範囲の議論は ST 版ではなく、実際に買える石で
@@ -77,9 +77,11 @@
 | **URA_LD-20WR3**（Mornsun） | [Mornsun_URA_LD-20WR3.pdf](Mornsun_URA_LD-20WR3.pdf) | **p3 Note \*** に同一文。加えて 2"×1" で面積が倍 |
 | **PYBE10**（CUI / Bel） | [CUI_PYBE10.pdf](CUI_PYBE10.pdf) | **p3 note 9** *"Value is based on full load. **At loads <50%, the switching frequency decreases with decreasing load**"* —— Mornsun と同じ。`Cout` 470 µF・絶縁容量 2000 pF・350 kHz PWM・±416 mA と**数値が全部一致**する。DigiKey では **NFND**。⚠ `belfuse.com` のリンクは製品ナビの HTML を返す。**実体は CUI 側**（`cui.com/product/resource/pybe10.pdf`） |
 
-**TDK-Lambda `CCG15-30W`**（2026-09-05 にユーザーから提供。**この環境からは取得できない** ——
-`product.tdk.com` は TDK 自身の Akamai が 403 を返し、`curl`・`WebFetch`・実 Chromium すべて不可。
-代理店ミラーは単出力のみで `Cout` 欄が無い短縮版だった）:
+**TDK-Lambda `CCG15-30W`**（2026-09-05）。`product.tdk.com` は TDK 自身の Akamai が 403 を返し、
+`curl`・`WebFetch`・実 Chromium すべて不可。**⚠ ただし「取得不能」と結論したのは誤りだった** ——
+**公開ミラーで取れる**（`docs.rs-online.com/b44f/A700000006915758.pdf` が取説、
+`4donline.ihs.com` にカタログ。どちらも認証なしで 200）。**4つ試して諦めたのが早すぎた。**
+Farnell と Octopart のミラーが単出力のみだったのは事実だが、**それは短縮版を引いていただけ**:
 
 | ローカル | 中身 |
 |---|---|
@@ -93,7 +95,7 @@
 | 最小負荷 | **"No minimum load required"** | カタログ p3 |
 | `Fsw` | `CCG-D`: **430 kHz**（**負荷条件の記載なし。表に全負荷の見出しも無い**） | カタログ p3 |
 | **絶縁容量** | **⚠ 非公表。** あるのは Withstand Voltage（入出力間 1,500 Vdc）と Isolation Resistance だけ | カタログ p3 |
-| **`RC` ピン** | **⚠ サフィックス無しは負論理 —— *"ON when pin is shorted, OFF when open"*。`REC10K` の「開放 = ON」と逆で、ON にするのに配線が要る。** `/P` サフィックスが正論理（開放 = ON）だが、**`/P` 品は DigiKey に無い**（`CCG15-24-12D/P` / `-15D/P` / `CCG30-24-15D/P` すべて 0 件） | カタログ p2・p3 |
+| **`RC` ピン** | **⚠ サフィックス無しは負論理 —— *"ON when pin is shorted, OFF when open"*。`REC10K` の「開放 = ON」と逆で、ON にするのに `−Vin` へのショートが要る**（取説 §6-7 Note 1）。`/P` サフィックスが正論理（開放 = ON）だが、**`/P` 品は DigiKey に無い**（`CCG15-24-12D/P` / `-15D/P` / `CCG30-24-15D/P` すべて 0 件）。**⚠ この事実は Farnell / Octopart の短縮版 p1 にも書かれていた**（*"Standard: Low = ON, Open = OFF"*）。**欄の名前だけ見て行を読まなかったせいで「DigiKey 属性は信用できないので裏取り待ち」と誤って記録した** | カタログ p2・p3、取説 §6-7 |
 | OCP | **hiccup mode, >105 %**（`REC10K` の 150 % に比べてかなり狭い） | カタログ p3 |
 | 寸法 | 25.4×25.4×9.9（1"×1"） | カタログ p3 |
 | 該当品 | `CCG15-24-12D` ±12V ±650 mA 89 % ¥5,082 在庫 80 ／ `CCG15-24-15D` ±15V ±500 mA 90 % ¥5,082 在庫 108 | カタログ p1・API |
@@ -117,6 +119,8 @@
 `Cout` は `ccg_e.pdf`（カタログ）と `ccg_apl.pdf`（取説 Table 5-1）にしかなく、
 どちらも `product.tdk.com` のみ。**`CCG15-24-12D`（¥5,082・在庫 80・±650 mA・1"×1"）は
 `Cout` 不明のまま未評価。** 判断するには通常回線からの人手が要る。
+
+| **EC4SBW**（Cincon） | [Cincon_EC4SBW.pdf](Cincon_EC4SBW.pdf) | `24D15`=**650 µF/レール**（p1） | **p1 features に "Fixed Switching Frequency" を明記**。3.3/5V は 270 kHz typ（p2） | **1500 pF typ**（p2） | **0 mA**（p1） | 89 % |
 
 **⚠⚠ `REC20K-Z` は ±15 V のままで `Cout` の宿題を閉じられる。** 現行 `REC10K-2415DAW/H2` の
 `Cout ±270 µF` はレール総容量に対して余裕が無いが、**同じ Recom・同じ 1"×1"・同じピン配置**
@@ -203,3 +207,4 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 - 2026-09-05: **否定側査読で `REC20K-Z` の見落としが出た**（`2415DZ`=±3000 µF / `2412DZ`=±4000 µF）。あわせて `Fsw` 欄の比較が無意味だったこと（全社が全負荷規定。Recom は表の見出しに書いている）を反映
 - 2026-09-05: 不採用確定の一次資料3点（Mornsun ×2 / CUI PYBE10）。落選根拠がデータシートの一文なので置く。TDK-Lambda `CCG` は取得不能と確定（実ブラウザでも 403）
 - 2026-09-05: `NJM7809FA`（日清紡）。ST 純正 `L7809` は入手不能・`st.com` も不通なので、`+9V` の入力範囲は実際に買える石で評価する
+- 2026-09-05: 第2ラウンドの査読で `Cincon EC4SBW` を追加、TDK「取得不能」の記述と `RC` の裏取り経緯を訂正
