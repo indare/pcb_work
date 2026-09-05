@@ -54,12 +54,16 @@ python3 AudioV2/scripts/dcdc_survey.py --csv out/dcdc_12v.csv --all
 python3 AudioV2/scripts/digikey_search.py "REC10K-2412DAW/H2"
 ```
 
-| 前提 | 状態 |
+| 前提 | 状態（2026-09-05、クラウドセッションで再実測） |
 |---|---|
-| `api.digikey.com` への到達 | **✅ 2026-09-05 に開通済み**（403 → DigiKey 自身が応答）。**ネットワークポリシーは走っているセッションにも即効く**（実測） |
-| `DIGIKEY_CLIENT_ID` / `_SECRET` | **⚠ 環境変数はセッション開始時に一度だけ読まれる。** 新セッションなら拾えるはず。`env \| grep DIGIKEY` で最初に確認すること |
-| `sandbox-api.digikey.com` | **❌ まだ塞がっている**（`--sandbox` を使うなら要追加） |
-| `www.digikey.com` / `www.digikey.jp` | **❌ まだ塞がっている。** これは**入れた方がよい** —— 記録が繰り返し警告している「API の在庫・リードタイム・MarketPlace は信用できない、発注前に実ページを確認」（`AM10TW` の実例）が実行できない |
+| `api.digikey.com` への到達 | **✅ 通る。** OAuth (`/v1/oauth2/token`) も検索 (`/products/v4/search/keyword`) も DigiKey 自身が 401 を返す。`curl` でも Python の `urllib` でも同じ（プロキシは `HTTPS_PROXY` 経由で自動的に使われる） |
+| `DIGIKEY_CLIENT_ID` / `_SECRET` | **❌ クラウドセッションには入っていない。** `env` にも `.secrets.env`（gitignore 済みなのでクローンに来ない）にも無く、**検索は認証情報が無いという一点だけで止まる。** クラウドで回すなら環境設定の環境変数に入れる（`digikey_search.py` は環境変数を優先するのでコード変更は不要） |
+| `sandbox-api.digikey.com` | **✅ 開通していた**（DigiKey 自身が 401 を返す）。前回の「塞がっている」は解消 |
+| `www.digikey.com` / `www.digikey.jp` | **⚠ ネットワークは通っている。塞いでいるのはポリシーではなく Cloudflare のボット判定** —— CONNECT は成立し、`server: cloudflare` / `cf-mitigated: challenge` で 403。**つまりポリシーに追加しても解決しない。** 「発注前に実ページを確認」（`AM10TW` の実例）は人間の目で見るしかない |
+
+**プロキシのブロックと上流のブロックの見分け方**（実測）: ポリシーで塞がれているホストは
+CONNECT 自体が失敗する（`curl: (56) CONNECT tunnel failed, response 502` ＋ プロキシからの
+`connect_rejected` の注記）。**HTTP ステータスが返ってきている時点で、到達はしている。**
 
 **⚠ 否定側の査読が未了のまま中断した。** ±12 V 選定について、否定エージェントに投げた
 論点は次のとおり。**新セッションで投げ直すこと:**
