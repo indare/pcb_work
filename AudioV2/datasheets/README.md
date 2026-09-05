@@ -10,6 +10,28 @@
 | **DKMW20F-15** | ±15 V DC-DC（AudioV2 PowerModule） | [MeanWell_SKMW20_DKMW20.pdf](MeanWell_SKMW20_DKMW20.pdf) | [Mean Well SKMW20/DKMW20](https://www.meanwell.com/webapp/product/search.aspx?prod=DKMW20)。F-15 は ±15 V / ±660 mA。2026-09-01 に F-12(±12 V) から変更 |
 | **BP5293-50** | 操作板 +5 V（Controll 系） | [ROHM_BP5293-xx.pdf](ROHM_BP5293-xx.pdf) | [ROHM BP5293-xx](https://www.rohm.com/products/power-management/switching-regulators-integrated-fet/bp5293-xx-series) |
 
+### ±12 V DC-DC の候補（2026-09-05 の再探索。**採否は未決**）
+
+`dcdc_survey.py` で 431 件を引き、±12 V 両レール・MOQ 1・在庫あり・12 V 入力対応の
+220 件から実読した分。**選定の決め手になる `Cout`（最大容量負荷）・軽負荷での `Fsw` の
+扱い・絶縁容量・最小負荷は、どれも DigiKey API には無くデータシートにしかない。**
+だからここに置いてある。経緯と比較は [DECISIONS.md](../DECISIONS.md)。
+
+**⚠ この表の数値は ±12 V 両出力版のもの。** 同じ系列でも単出力版・±15 V 版では `Cout` が
+まるで違う（TEL 10WI は単出力 3.3 V が 2'600 µF、±12 V dual は 390 µF）。
+**モデル行を取り違えると桁で間違える。**
+
+| 部品 | ローカル | この設計に効く数字 |
+|---|---|---|
+| **REC10K-AW**（Recom） | [Recom_REC10K-AW_Rev2-2025.pdf](Recom_REC10K-AW_Rev2-2025.pdf) | 既収録。`2412DAW` は `Cout ±470 µF`、`2415DAW` は `±270 µF`（p1 表）。**p8 の EN55032 Class B EMC フィルタ推奨は `2412DAW` を明記、`2415DAW` は無い**（Note7: 記載型番にのみ有効） |
+| **AM10TW-LPZ**（Aimtec） | [Aimtec_AM10TW-LPZ.pdf](Aimtec_AM10TW-LPZ.pdf) | `2412DLPZ` は `Cout 470 µF` / ±416 mA / 87 %。**`Fsw 300 kHz` は「100 % load」条件付き表記** |
+| **AM15CW-LPZ**（Aimtec） | [Aimtec_AM15CW-LPZ.pdf](Aimtec_AM15CW-LPZ.pdf) | `2412DLPZ` は `Cout ±470 µF` / ±625 mA / 90 %。`Fsw` は同じく「100 % load」条件付き |
+| **NSD10-D**（MEAN WELL） | [MeanWell_NSD10-D.pdf](MeanWell_NSD10-D.pdf) | `Cout ±1000 µF` と最大。ただし効率 77 % / 絶縁 1 kVDC / 最小負荷 20 mA/レール。**DigiKey では NCNR（返品・キャンセル不可）** |
+| **EC7AW**（Cincon） | [Cincon_EC7AW.pdf](Cincon_EC7AW.pdf) | **候補中で唯一「Fixed Switching Frequency」を明記**（p1、電気的特性は 477/530/583 kHz）。`Cout 417 µF`・絶縁容量 1000 pF・最小負荷 0 mA |
+| **EC2SBW**（Cincon） | [Cincon_EC2SBW.pdf](Cincon_EC2SBW.pdf) | `Cout 470 µF`・最小負荷 0 mA。**`Fsw` が「100 kHz min.」という下限表記**（可変を示唆） |
+| **TEL 10WI**（Traco） | [Traco_TEL10WI.pdf](Traco_TEL10WI.pdf) | ±12 V dual は `Cout 390 µF`。絶縁容量 1'500 pF max は候補中で最大 |
+| **TMR 10WI**（Traco） | [Traco_TMR10WI.pdf](Traco_TMR10WI.pdf) | ±12 V dual は `Cout 390 / 390 µF`。`Fsw 390-450 kHz`・最小負荷不要 |
+
 ## 音量・トーン
 
 | 部品 | 用途 | ローカル | 取得元 |
@@ -72,3 +94,4 @@
 - 2026-08-30: ENC×3 **GPIO 直結**確定（§10）
 - 2026-08-30: 表示 — 制御 OLED 2.42″ / スペアナ Waveshare 29318（v1）
 - 2026-08-31: Amp/HP OPA DS は `Audio/datasheets/opamps/` を正と明記
+- 2026-09-05: ±12 V DC-DC 候補の一次資料7点（Aimtec ×2 / MEAN WELL / Cincon ×2 / Traco ×2）。`Cout`・軽負荷 `Fsw`・絶縁容量は API に無いため
