@@ -93,8 +93,8 @@ Farnell と Octopart のミラーが単出力のみだったのは事実だが�
 | **最大外部出力容量** | **±12V: ±1,200 µF / ±15V: ±1,000 µF** | 取説 p8 Table 5-1・カタログ p3 |
 | **その容量はどこに繋ぐ値か** | **`CCG-D` は「+Vout と COM の間」「−Vout と COM の間」＝ 片レール**（取説 p8 に明記） | 取説 p8 |
 | 最小負荷 | **"No minimum load required"** | カタログ p3 |
-| `Fsw` | `CCG-D`: **430 kHz**（**負荷条件の記載なし。表に全負荷の見出しも無い**） | カタログ p3 |
-| **絶縁容量** | **⚠ 非公表。** あるのは Withstand Voltage（入出力間 1,500 Vdc）と Isolation Resistance だけ | カタログ p3 |
+| `Fsw` | `CCG-D`: **430 kHz**。**取説 p4 のブロック図が `Switching Frequency(fixed) : 430kHz` と "fixed" を明記**（⚠ 当初「記載なし」としたのは誤り。同上） | カタログ p3 / 取説 p4 |
+| **絶縁容量** | **1000 pF**（取説 p17 §6-19 *"This product has internal capacitor connected between input and output. Capacitance of input - output : 1000pF"*）。**⚠ 当初「非公表」と記録したのは誤り —— カタログ p3 にしか無いと思い込み、同時に持っていた取説を見ていなかった。** この欄では `EC4SBW`(1500 pF) より良く、`REC20K`(2000 pF) の半分 | 取説 p17 |
 | **`RC` ピン** | **⚠ サフィックス無しは負論理 —— *"ON when pin is shorted, OFF when open"*。`REC10K` の「開放 = ON」と逆で、ON にするのに `−Vin` へのショートが要る**（取説 §6-7 Note 1）。`/P` サフィックスが正論理（開放 = ON）だが、**`/P` 品は DigiKey に無い**（`CCG15-24-12D/P` / `-15D/P` / `CCG30-24-15D/P` すべて 0 件）。**⚠ この事実は Farnell / Octopart の短縮版 p1 にも書かれていた**（*"Standard: Low = ON, Open = OFF"*）。**欄の名前だけ見て行を読まなかったせいで「DigiKey 属性は信用できないので裏取り待ち」と誤って記録した** | カタログ p2・p3、取説 §6-7 |
 | OCP | **hiccup mode, >105 %**（`REC10K` の 150 % に比べてかなり狭い） | カタログ p3 |
 | 寸法 | 25.4×25.4×9.9（1"×1"） | カタログ p3 |
@@ -120,7 +120,11 @@ Farnell と Octopart のミラーが単出力のみだったのは事実だが�
 どちらも `product.tdk.com` のみ。**`CCG15-24-12D`（¥5,082・在庫 80・±650 mA・1"×1"）は
 `Cout` 不明のまま未評価。** 判断するには通常回線からの人手が要る。
 
-| **EC4SBW**（Cincon） | [Cincon_EC4SBW.pdf](Cincon_EC4SBW.pdf) | `24D15`=**650 µF/レール**（p1） | **p1 features に "Fixed Switching Frequency" を明記**。3.3/5V は 270 kHz typ（p2） | **1500 pF typ**（p2） | **0 mA**（p1） | 89 % |
+| **EC4SBW**（Cincon） | [Cincon_EC4SBW.pdf](Cincon_EC4SBW.pdf) | `24D15`=**650 µF/レール**（p1） | **p1 features に "Fixed Switching Frequency" を明記**。`Others` は **330 kHz typ**、3.3/5V のみ 270 kHz（p2） | **1500 pF typ**（p2） | **0 mA**（p1） | 89 % |
+
+**⚠ `REC20K-2415DZ` にはメーカーの EMC フィルタ推奨が無い。** `Recom_REC20K-Z_Rev3-2025.pdf` p8
+**Note8: *"Filter suggestions are valid for `REC20K-2405SZ` only."*** —— `REC10K` 側の
+「Dual 用推奨に `2415DAW` が入っていない」より穴が広い（`REC20K` は単出力1品にしか無い）。
 
 **⚠⚠ `REC20K-Z` は ±15 V のままで `Cout` の宿題を閉じられる。** 現行 `REC10K-2415DAW/H2` の
 `Cout ±270 µF` はレール総容量に対して余裕が無いが、**同じ Recom・同じ 1"×1"・同じピン配置**
@@ -208,3 +212,4 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 - 2026-09-05: 不採用確定の一次資料3点（Mornsun ×2 / CUI PYBE10）。落選根拠がデータシートの一文なので置く。TDK-Lambda `CCG` は取得不能と確定（実ブラウザでも 403）
 - 2026-09-05: `NJM7809FA`（日清紡）。ST 純正 `L7809` は入手不能・`st.com` も不通なので、`+9V` の入力範囲は実際に買える石で評価する
 - 2026-09-05: 第2ラウンドの査読で `Cincon EC4SBW` を追加、TDK「取得不能」の記述と `RC` の裏取り経緯を訂正
+- 2026-09-05: **3観点の並行査読で自分の誤りが2件出た** —— `CCG` の絶縁容量は非公表ではなく **1000 pF**、`Fsw` も **"fixed" と明記**（どちらも取説にあり、カタログしか見ていなかった）。`REC20K` の EMC フィルタ推奨が `2405SZ` のみ有効という穴も記録
