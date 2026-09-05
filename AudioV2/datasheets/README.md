@@ -70,6 +70,38 @@
 | **URA_LD-20WR3**（Mornsun） | [Mornsun_URA_LD-20WR3.pdf](Mornsun_URA_LD-20WR3.pdf) | **p3 Note \*** に同一文。加えて 2"×1" で面積が倍 |
 | **PYBE10**（CUI / Bel） | [CUI_PYBE10.pdf](CUI_PYBE10.pdf) | **p3 note 9** *"Value is based on full load. **At loads <50%, the switching frequency decreases with decreasing load**"* —— Mornsun と同じ。`Cout` 470 µF・絶縁容量 2000 pF・350 kHz PWM・±416 mA と**数値が全部一致**する。DigiKey では **NFND**。⚠ `belfuse.com` のリンクは製品ナビの HTML を返す。**実体は CUI 側**（`cui.com/product/resource/pybe10.pdf`） |
 
+**TDK-Lambda `CCG15-30W`**（2026-09-05 にユーザーから提供。**この環境からは取得できない** ——
+`product.tdk.com` は TDK 自身の Akamai が 403 を返し、`curl`・`WebFetch`・実 Chromium すべて不可。
+代理店ミラーは単出力のみで `Cout` 欄が無い短縮版だった）:
+
+| ローカル | 中身 |
+|---|---|
+| [TDK-Lambda_CCG15-30.pdf](TDK-Lambda_CCG15-30.pdf) | カタログ。p1 モデル表、p3 仕様表 |
+| [TDK-Lambda_CCG15-30_manual.pdf](TDK-Lambda_CCG15-30_manual.pdf) | 取説。**p8 Table 5-1 が最大外部出力容量** |
+
+| 項目 | 値 | 出典 |
+|---|---|---|
+| **最大外部出力容量** | **±12V: ±1,200 µF / ±15V: ±1,000 µF** | 取説 p8 Table 5-1・カタログ p3 |
+| **その容量はどこに繋ぐ値か** | **`CCG-D` は「+Vout と COM の間」「−Vout と COM の間」＝ 片レール**（取説 p8 に明記） | 取説 p8 |
+| 最小負荷 | **"No minimum load required"** | カタログ p3 |
+| `Fsw` | `CCG-D`: **430 kHz**（**負荷条件の記載なし。表に全負荷の見出しも無い**） | カタログ p3 |
+| **絶縁容量** | **⚠ 非公表。** あるのは Withstand Voltage（入出力間 1,500 Vdc）と Isolation Resistance だけ | カタログ p3 |
+| **`RC` ピン** | **⚠ サフィックス無しは負論理 —— *"ON when pin is shorted, OFF when open"*。`REC10K` の「開放 = ON」と逆で、ON にするのに配線が要る。** `/P` サフィックスが正論理（開放 = ON）だが、**`/P` 品は DigiKey に無い**（`CCG15-24-12D/P` / `-15D/P` / `CCG30-24-15D/P` すべて 0 件） | カタログ p2・p3 |
+| OCP | **hiccup mode, >105 %**（`REC10K` の 150 % に比べてかなり狭い） | カタログ p3 |
+| 寸法 | 25.4×25.4×9.9（1"×1"） | カタログ p3 |
+| 該当品 | `CCG15-24-12D` ±12V ±650 mA 89 % ¥5,082 在庫 80 ／ `CCG15-24-15D` ±15V ±500 mA 90 % ¥5,082 在庫 108 | カタログ p1・API |
+
+**⚠⚠ 記録が「`Cout` ≥ 102 µF の足切りで TDK-Lambda `CC`/`CCG` 系が落ちた」としていたのは誤り。**
+`CCG` の `Cout` は **1,000〜1,200 µF** で、その足切りの10倍以上ある。**落ちる理由が無かった。**
+
+**不採用が確定した候補の一次資料**（落選根拠がデータシートの一文にあるので置く）:
+
+| 部品 | ローカル | 落選根拠（原文） |
+|---|---|---|
+| **URA_ZP-10WR3**（Mornsun） | [Mornsun_URA_ZP-10WR3.pdf](Mornsun_URA_ZP-10WR3.pdf) | **p3 注①** *"Switching frequency is measured at full load. **The module reduces the switching frequency for light load (below 50%) efficiency improvement.**"* —— この箱が追っている 1.2 kHz スパーと同系統の挙動を自分で作りに行くことになる。`Cout` 470 µF（**注③「Vo1 と Vo2 の値は同一」＝片レール**）・絶縁容量 **2000 pF** |
+| **URA_LD-20WR3**（Mornsun） | [Mornsun_URA_LD-20WR3.pdf](Mornsun_URA_LD-20WR3.pdf) | **p3 Note \*** に同一文。加えて 2"×1" で面積が倍 |
+| **PYBE10**（CUI / Bel） | [CUI_PYBE10.pdf](CUI_PYBE10.pdf) | **p3 note 9** *"Value is based on full load. **At loads <50%, the switching frequency decreases with decreasing load**"* —— Mornsun と同じ。`Cout` 470 µF・絶縁容量 2000 pF・350 kHz PWM・±416 mA と**数値が全部一致**する。DigiKey では **NFND**。⚠ `belfuse.com` のリンクは製品ナビの HTML を返す。**実体は CUI 側**（`cui.com/product/resource/pybe10.pdf`） |
+
 **⚠ TDK-Lambda `CC`/`CCG` 系はこの環境から取得できない。** `product.tdk.com` は
 **TDK 自身の Akamai** が 403 を返す（本文に `errors.edgesuite.net` の参照番号）。
 `curl`・`WebFetch`・**プリインストールの実 Chromium** すべて 403 で、
