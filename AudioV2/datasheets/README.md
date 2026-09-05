@@ -51,6 +51,23 @@
 （[DECISIONS.md](../DECISIONS.md) の否定側査読）。**Aimtec 2品は 2000 pF で Recom / Cincon の2倍。**
 安いのはこの2品だが、**この設計がいちばん気にしている欄で最下位**にいる。
 
+**不採用が確定した候補の一次資料**（落選根拠がデータシートの一文にあるので置く）:
+
+| 部品 | ローカル | 落選根拠（原文） |
+|---|---|---|
+| **URA_ZP-10WR3**（Mornsun） | [Mornsun_URA_ZP-10WR3.pdf](Mornsun_URA_ZP-10WR3.pdf) | **p3 注①** *"Switching frequency is measured at full load. **The module reduces the switching frequency for light load (below 50%) efficiency improvement.**"* —— この箱が追っている 1.2 kHz スパーと同系統の挙動を自分で作りに行くことになる。`Cout` 470 µF（**注③「Vo1 と Vo2 の値は同一」＝片レール**）・絶縁容量 **2000 pF** |
+| **URA_LD-20WR3**（Mornsun） | [Mornsun_URA_LD-20WR3.pdf](Mornsun_URA_LD-20WR3.pdf) | **p3 Note \*** に同一文。加えて 2"×1" で面積が倍 |
+| **PYBE10**（CUI / Bel） | [CUI_PYBE10.pdf](CUI_PYBE10.pdf) | **p3 note 9** *"Value is based on full load. **At loads <50%, the switching frequency decreases with decreasing load**"* —— Mornsun と同じ。`Cout` 470 µF・絶縁容量 2000 pF・350 kHz PWM・±416 mA と**数値が全部一致**する。DigiKey では **NFND**。⚠ `belfuse.com` のリンクは製品ナビの HTML を返す。**実体は CUI 側**（`cui.com/product/resource/pybe10.pdf`） |
+
+**⚠ TDK-Lambda `CC`/`CCG` 系はこの環境から取得できない。** `product.tdk.com` は
+**TDK 自身の Akamai** が 403 を返す（本文に `errors.edgesuite.net` の参照番号）。
+`curl`・`WebFetch`・**プリインストールの実 Chromium** すべて 403 で、
+**クライアント指紋ではなく IP レピュテーションでの遮断**。代理店ミラー
+（Farnell / Octopart）は本物の TDK 文書だが**単出力のみ・`Cout` 欄そのものが無い**短縮版。
+`Cout` は `ccg_e.pdf`（カタログ）と `ccg_apl.pdf`（取説 Table 5-1）にしかなく、
+どちらも `product.tdk.com` のみ。**`CCG15-24-12D`（¥5,082・在庫 80・±650 mA・1"×1"）は
+`Cout` 不明のまま未評価。** 判断するには通常回線からの人手が要る。
+
 **⚠⚠ `REC20K-Z` は ±15 V のままで `Cout` の宿題を閉じられる。** 現行 `REC10K-2415DAW/H2` の
 `Cout ±270 µF` はレール総容量に対して余裕が無いが、**同じ Recom・同じ 1"×1"・同じピン配置**
 （Dual: 1 +Vin / 2 −Vin / 3 CTRL / 4 −Vout / 5 COM / 6 +Vout。`REC20K-Z` p9）の
@@ -134,3 +151,4 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 - 2026-09-05: ±12 V DC-DC 候補の一次資料7点（Aimtec ×2 / MEAN WELL / Cincon ×2 / Traco ×2）。`Cout`・軽負荷 `Fsw`・絶縁容量は API に無いため
 - 2026-09-05: **上の表を訂正。** ブラインド再抽出で 2 件の誤りが出た —— ①Aimtec 2品の絶縁容量を「記載なし」としていたが **2000 pF が明記されている**（AM10TW p2 / AM15CW p3）。②Recom の 350 kHz を「条件の但し書きなし」と書いたが、実際は **Max. 列**で、軽負荷での低下と矛盾しない
 - 2026-09-05: **否定側査読で `REC20K-Z` の見落としが出た**（`2415DZ`=±3000 µF / `2412DZ`=±4000 µF）。あわせて `Fsw` 欄の比較が無意味だったこと（全社が全負荷規定。Recom は表の見出しに書いている）を反映
+- 2026-09-05: 不採用確定の一次資料3点（Mornsun ×2 / CUI PYBE10）。落選根拠がデータシートの一文なので置く。TDK-Lambda `CCG` は取得不能と確定（実ブラウザでも 403）
