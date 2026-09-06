@@ -36,7 +36,12 @@ Audio/measurement_fw/c_fft/*.dSYM/
 Audio/measurement_fw/c_fft/*.uf2
 
 # Claude and MCP specific files
-.claude/
+# ローカル設定（settings.local.json 等）は無視する。ただし **共有するエージェント定義だけは
+# 追跡する** —— `.cursor/rules/*.mdc` を追跡しているのと同じ理由で、査読の手順が
+# 手元にしか無いと Cursor / Claude / 人間で食い違う（CLAUDE.md「Cursor と Claude で同じに動かすために」）
+.claude/*
+!.claude/agents/
+!.claude/commands/
 .mcp.json.*.kicad-mcp.bak
 .mcp.json
 # KiCad MCP / quality-gate generated outputs

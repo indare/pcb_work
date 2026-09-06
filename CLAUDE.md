@@ -84,6 +84,9 @@ AudioV2Case（親）  COMMON_L/R・PHONE_L/R・LINE_L/R の6本だけ
 - **`sch_import.py`** — `.kicad_sch` を要素へ分解／再構成／平行移動。`--roundtrip` がバイト一致
 - **`sch_edit.py`** — 部品単位の編集。ピン座標は KiCad のシンボルから直読み（`extends` も辿る）
 - **`netlist_partition.py`** — ネットリストを「ピン集合の集合」で比較。**統合・移設の検証はこれ**
+- **`sch_facts.py`** — 回路図から機械的に導出できる事実を出す（階層の枚数・部品数・レールごとの
+  容量・親子のシート界面・未接続ピン・1本のネットに載った別名）。**読み取り専用。査読の入口**。
+  裏の取れ方と限界はスクリプト先頭の docstring にある。**ERC の正はこれではなく `kicad-run.sh erc`**
 
 **⚠ 配線の検証に `sch_drift.py` を使ってはいけない。** ワイヤもジャンクションも比較対象外。
 
@@ -131,6 +134,19 @@ docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 
 イメージがあれば Docker(KiCad 10.0.6)、無ければホストの `kicad-cli` で動く。
 出力は `out/`（gitignore 済み）。詳細は [docker/kicad-cloud-build/README.md](docker/kicad-cloud-build/README.md)。
+
+### 回路図の査読
+
+査読はエージェントに投げる。定義は **[`.claude/agents/sch-review.md`](.claude/agents/sch-review.md)**
+（Claude Code のサブエージェント。`/sch-review [論点]` でも起動する）。
+
+読み取り専用で、回路図もドキュメントも書き換えない。**まず `sch_facts.py all` を回して
+回路図から事実を降ろし、そこから指摘を立てる**という順序を定義側で縛ってある。
+ドキュメントの数値をそのまま根拠にしないのは [SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md) と同じ理由。
+
+戻ってきた指摘は**そのまま採用しない**。回路図まで降りているか・確度は何か・外れる条件は
+書かれているかを見てから扱う（2026-09-05 の否定側査読では、親エージェント自身の推論が
+1件撤回になっている）。
 
 ### ブランチ
 

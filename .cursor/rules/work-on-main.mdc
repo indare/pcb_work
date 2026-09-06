@@ -17,6 +17,7 @@ alwaysApply: true
     手編集所有だが、母板に置かれる側のピンはコードが持っている
 - ⚠ **`wire_circuit_design.py` を再生成に使わない。** 旧構成のロジックの記録として残っているだけで、`GENERATED` が空なのでどのシートも書き出さない。
   さらに `--force-parent` を渡すと親から **`MeasureControl` シートが消える**（スクリプト内のコメント自身がそう書いている）。`control` の出力先 `ControlPanel.kicad_sch` はもう存在しないパス。
+- 回路図の事実（階層の枚数・部品数・レール容量・未接続ピン）は **`python3 AudioV2/scripts/sch_facts.py all`** で出す。読み取り専用。査読エージェントの定義は `.claude/agents/sch-review.md`（Cursor からも読める）
 - ⚠ **配線の検証に `sch_drift.py` を使わない。** ワイヤもジャンクションも比較対象外。統合・移設の検証は `AudioV2/scripts/netlist_partition.py`。
   `kicad-run.sh drift` サブコマンドは 2026-09-03 に廃止済み。
 - ドキュメントを書くときは **[SOURCE_OF_TRUTH.md](../../SOURCE_OF_TRUTH.md)** に従う（回路図から導出できる情報は書かない／designator でなくネット名で書く）。
