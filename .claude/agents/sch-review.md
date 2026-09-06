@@ -58,9 +58,10 @@ ERC の正は `sch_facts.py` ではなく `docker/kicad-cloud-build/kicad-run.sh
 | | 何のために |
 |---|---|
 | `sch_facts.py all` の出力 | 事実の土台。**ここが起点** |
+| [`AudioV2/NOW.md`](../../AudioV2/NOW.md) | **いま何待ちか**（現況の正。短い） |
 | [`CLAUDE.md`](../../CLAUDE.md) | シートの所有権・検証コマンドと期待値・踏むと壊れるもの |
 | [`AudioV2/DECISIONS.md`](../../AudioV2/DECISIONS.md) | 確定事項と却下案。**日付の新しい節が正** |
-| [`AudioV2/AGENT_HANDOFF.md`](../../AudioV2/AGENT_HANDOFF.md) | 長い文脈・未決事項・申し送り |
+| [`AudioV2/AGENT_HANDOFF.md`](../../AudioV2/AGENT_HANDOFF.md) | 長い文脈・履歴。**現況は NOW.md** |
 | `AudioV2/datasheets/*.pdf` | 一次資料。**規格値はここまで降りる** |
 | `AudioV2/spice/` | 過去の解析。**前提条件（電源電圧など）を必ず確認する** |
 | `AudioV2/legacy/` | 解体済みの旧シート。**現行の設計ではない**が母板の素材ではある |

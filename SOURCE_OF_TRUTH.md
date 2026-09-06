@@ -6,6 +6,7 @@
 関連: シートごとの「生成スクリプト vs KiCad」の所有権と再生成の順は
 [CLAUDE.md](CLAUDE.md) が正。ここでは重複させない。
 そう決めた理由と移行期の記録は [AudioV2/AGENT_HANDOFF.md §2.8](AudioV2/AGENT_HANDOFF.md)。
+**いま何待ちか・次の一手**は [AudioV2/NOW.md](AudioV2/NOW.md) が正（HANDOFF の現況節より優先）。
 
 ---
 

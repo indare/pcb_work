@@ -26,6 +26,12 @@ designator は KiCad が採番する割り当ての産物で、再アノテー�
 BOM・発注・現物対応表など designator が本質的に要る場所は、手書きせず
 `kicad-cli sch export bom` で生成に寄せる。
 
+## 現況と履歴を混ぜない
+
+- **いま何待ちか** → [AudioV2/NOW.md](../../AudioV2/NOW.md)（短く保つ）
+- **決定の理由・履歴** → `DECISIONS.md` / `AGENT_HANDOFF.md`（ユーザーが頼んだときだけ追記）
+- 進捗は `.kicad_sch` / `.kicad_pcb` / 生成スクリプトの差分。「文書を更新した」だけを進捗にしない
+
 ## 全文
 
 **[SOURCE_OF_TRUTH.md](../../SOURCE_OF_TRUTH.md)** が正。

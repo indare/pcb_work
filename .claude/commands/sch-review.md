@@ -17,3 +17,4 @@ description: AudioV2 の回路図を査読する（sch-review エージェント
 戻ってきた指摘は**そのまま採用しない**。回路図まで降りている指摘か、確度は何か、
 外れる条件は書かれているかを見てから扱う。ドキュメントへ反映するときは
 [SOURCE_OF_TRUTH.md](../../SOURCE_OF_TRUTH.md) に従う（回路図から導出できる数値を書き写さない）。
+現況の更新は [AudioV2/NOW.md](../../AudioV2/NOW.md) だけ。HANDOFF への物語追記はユーザーが頼んだとき。
