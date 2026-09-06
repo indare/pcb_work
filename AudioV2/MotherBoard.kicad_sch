@@ -11056,16 +11056,6 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 77.47) (xy 147.32 77.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7e83e2ef-8788-4562-93a2-e4c3493cf3df")
-	)
-	(wire
-		(pts
 			(xy 120.65 64.77) (xy 124.46 64.77)
 		)
 		(stroke
@@ -11096,7 +11086,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 74.93) (xy 144.78 77.47)
+			(xy 144.78 66.04) (xy 144.78 77.47)
 		)
 		(stroke
 			(width 0)
@@ -12783,6 +12773,131 @@
 			)
 		)
 	)
+	(wire
+		(pts
+			(xy 144.78 66.04) (xy 147.32 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08a67d03-846d-5d31-82fe-c21f3214ef00")
+	)
+	(wire
+		(pts
+			(xy 147.32 73.66) (xy 147.32 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "550b89fb-1b11-53c1-bff2-e1b422c02712")
+	)
+	(wire
+		(pts
+			(xy 147.32 74.93) (xy 147.32 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36b6c5f6-6505-518b-bdad-0769ab085a9d")
+	)
+	(wire
+		(pts
+			(xy 147.32 74.93) (xy 151.13 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1de99902-e64d-5491-b3f9-750c7c945ff8")
+	)
+	(junction
+		(at 147.32 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8afb678c-84d2-52af-9a7e-418064d6d438")
+	)
+	(symbol
+		(lib_id "Device:Fuse")
+		(at 147.32 69.85 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4e0facb7-09e1-59d1-ab05-37eb51512441")
+		(property "Reference" "F203"
+			(at 142.24 69.85 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PPTC 0.1A hold"
+			(at 152.4 69.85 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -12.7 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at -12.7 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at -12.7 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "770705c8-3309-58f9-8e09-81312feecf3a")
+		)
+		(pin "2"
+			(uuid "0b1544e2-d164-5abd-9c7e-31abedba0a6f")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "F203")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(label "PD_12V_SW"
 		(at 137.16 58.42 0)
 		(effects
@@ -12876,6 +12991,84 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
 					(reference "#FLG0203")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 151.13 74.93 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4bf76448-5bd2-5e1b-a8cc-23bfa8e15bc8")
+		(property "Reference" "#FLG0204"
+			(at 151.13 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 151.13 69.85 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 74.93 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 74.93 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 74.93 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ed433671-f10d-5330-a5da-c7f6fddefa51")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "#FLG0204")
 					(unit 1)
 				)
 			)
