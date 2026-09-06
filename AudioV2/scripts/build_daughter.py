@@ -28,6 +28,7 @@ import sch_helpers  # noqa: E402
 import sch_import  # noqa: E402
 from build_motherboard import _merge_lib_symbols  # noqa: E402
 from build_motherboard import UUID_MOTHER_INST  # noqa: E402
+from build_motherboard import SLOT_ANA_NETS, SLOT_PWR_NETS  # noqa: E402
 from generate_kicad_scaffold import PARENT, sheet_block  # noqa: E402
 from sch_helpers import embed_lib_symbols, symbol_inst_v10  # noqa: E402
 
@@ -66,12 +67,12 @@ VARIANT = {
 }
 
 # --- D18 のヘッダ（娘基板側の受け）--------------------------------------
-ANA_NETS = {1: "A_GND", 2: "A_GND", 3: "TONE_L", 4: "A_GND",
-            5: "A_GND", 6: "TONE_R", 7: "AMP_SEL_L", 8: "A_GND",
-            9: "A_GND", 10: "AMP_SEL_R"}
-PWR_NETS = {1: "+15V", 2: "A_GND", 3: "-15V", 4: "A_GND",
-            5: "+5V_COIL", 6: "GND_COIL", 7: "I2C_SDA", 8: "D_GND",
-            9: "I2C_SCL", 10: "3V3", 11: "ADDR0", 12: "ADDR1"}
+# ⚠ 割当の正は build_motherboard 側（D-k）。ここで literal を持たない。
+# 母板とはコネクタ対でも繋がっているので、ピン番号がズレても ERC にも
+# ネットリストにも出ず、基板が出来上がってから分かる。
+ANA_NETS = dict(SLOT_ANA_NETS)
+# 11/12（番地）は娘基板だけが持つ。母板はスロットごとに D_GND / 3V3 へ落とす（D21）。
+PWR_NETS = {**SLOT_PWR_NETS, 11: "ADDR0", 12: "ADDR1"}
 
 # --- MCP23017 -----------------------------------------------------------
 # スイッチ版は 1ch=1ビット（5本）、リレー版は 1ch=2ビット（SET/RESET で 10本）。
