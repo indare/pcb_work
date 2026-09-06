@@ -2,17 +2,76 @@
 
 from __future__ import annotations
 
+import os
 import re
+import sys
 import uuid
+from functools import lru_cache
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-_SYSTEM_SYM_ROOT = Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols")
-KICAD_SYM_ROOT = (
-    Path("/tmp/kicad-symbols")
-    if Path("/tmp/kicad-symbols").is_dir()
-    else _SYSTEM_SYM_ROOT
-)
+
+# --- KiCad 標準シンボルライブラリの探索 --------------------------------------
+# macOS / Windows / Linux のどれでも動くようにする。以前は macOS のパスが直書きで、
+# Windows は `C:\tmp\kicad-symbols` にジャンクションを張って凌いでいた（§2.9 の記録）。
+# 順に見て、最初に見つかったものを使う。**見つからないときは試した場所を全部出す。**
+
+_EXPLICIT_ENV = "KICAD_SYMBOL_DIR"          # このリポジトリ独自。最優先
+_KICAD_ENV = ("KICAD9_SYMBOL_DIR", "KICAD8_SYMBOL_DIR", "KICAD7_SYMBOL_DIR")
+
+
+def _symbol_root_candidates():
+    """(パス, どこ由来か) を優先順に返す。存在確認はしない。"""
+    for var in (_EXPLICIT_ENV, *_KICAD_ENV):
+        val = os.environ.get(var)
+        if val:
+            yield Path(val), f"環境変数 {var}"
+
+    # 旧来の逃げ道。Windows では カレントドライブの \tmp\kicad-symbols に解決される
+    yield Path("/tmp/kicad-symbols"), "旧来の逃げ道 /tmp/kicad-symbols"
+
+    # macOS
+    yield (Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols"),
+           "macOS 既定")
+
+    # Windows: Program Files\KiCad\<version>\share\kicad\symbols
+    seen = set()
+    for base in (os.environ.get("ProgramW6432"), os.environ.get("ProgramFiles"),
+                 r"C:\Program Files"):
+        if not base or base in seen:
+            continue
+        seen.add(base)
+        kicad = Path(base) / "KiCad"
+        try:
+            vers = sorted((d for d in kicad.iterdir() if d.is_dir()),
+                          key=lambda d: d.name, reverse=True)
+        except OSError:
+            continue
+        for ver in vers:
+            yield ver / "share" / "kicad" / "symbols", f"Windows KiCad {ver.name}"
+
+    # Linux（ディストリ配布・Flatpak）
+    yield Path("/usr/share/kicad/symbols"), "Linux 既定"
+    yield (Path("/var/lib/flatpak/app/org.kicad.KiCad/current/active/files/"
+                "share/kicad/symbols"), "Flatpak")
+
+
+@lru_cache(maxsize=1)
+def symbol_root() -> Path:
+    """KiCad 標準シンボルライブラリの場所。見つからなければ試した場所を添えて落とす。"""
+    tried = []
+    for path, why in _symbol_root_candidates():
+        if path.is_dir():
+            return path
+        tried.append(f"    {why}: {path}")
+    raise FileNotFoundError(
+        "KiCad の標準シンボルライブラリが見つかりません。\n"
+        "  探した場所（この順）:\n" + "\n".join(tried) + "\n\n"
+        f"  KiCad を入れるか、{_EXPLICIT_ENV} で明示してください:\n"
+        f"    macOS/Linux:  export {_EXPLICIT_ENV}=/path/to/kicad/symbols\n"
+        f"    Windows:      set {_EXPLICIT_ENV}=C:\\Program Files\\KiCad\\9.0\\share\\kicad\\symbols\n"
+        "  自己診断:  python3 AudioV2/scripts/sch_helpers.py"
+    )
 
 
 def new_uid() -> str:
@@ -314,13 +373,19 @@ def _extract_symbol_body(
 
 
 def _read_packed_or_dir(lib: str, sym_name: str) -> str:
-    symdir = KICAD_SYM_ROOT / f"{lib}.kicad_symdir" / f"{sym_name}.kicad_sym"
+    root = symbol_root()
+    symdir = root / f"{lib}.kicad_symdir" / f"{sym_name}.kicad_sym"
     if symdir.is_file():
         return symdir.read_text(encoding="utf-8")
-    packed = KICAD_SYM_ROOT / f"{lib}.kicad_sym"
+    packed = root / f"{lib}.kicad_sym"
     if packed.is_file():
         return packed.read_text(encoding="utf-8")
-    raise FileNotFoundError(symdir)
+    raise FileNotFoundError(
+        f"シンボル {lib}:{sym_name} が見つかりません。\n"
+        f"  探した場所: {symdir}\n"
+        f"              {packed}\n"
+        f"  シンボルライブラリの場所: {root}"
+    )
 
 
 def _sanitize_embed_body(body: str) -> str:
@@ -597,3 +662,22 @@ def junction(x: float, y: float, diameter: float = 0) -> str:
 \t\t(uuid "{new_uid()}")
 \t)
 """
+
+
+if __name__ == "__main__":
+    # 自己診断: このマシンでシンボルライブラリが見つかるか
+    print("KiCad シンボルライブラリの探索\n")
+    found = None
+    for path, why in _symbol_root_candidates():
+        ok = path.is_dir()
+        mark = "✅" if ok else "  "
+        print(f"  {mark} {why}\n       {path}")
+        if ok and found is None:
+            found = path
+    print()
+    if found:
+        n = len(list(found.glob("*.kicad_sym"))) + len(list(found.glob("*.kicad_symdir")))
+        print(f"→ 使うのは {found}（ライブラリ {n} 件）")
+    else:
+        print(f"→ 見つかりません。{_EXPLICIT_ENV} で明示してください。")
+        sys.exit(1)

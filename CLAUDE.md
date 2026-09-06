@@ -79,6 +79,16 @@ AudioV2Case（親）  COMMON_L/R・PHONE_L/R・LINE_L/R の6本だけ
 （2026-09-03 に PPTC 追加でここを編集し、実際に母板へ反映された）。直したら必ず回すこと。
 編集時の注意は [AudioV2/legacy/README.md](AudioV2/legacy/README.md)。
 
+**⚠ 生成スクリプトは KiCad の標準シンボルライブラリを読む。** macOS / Windows / Linux の
+どれでも自動で探すが、**新しいマシンで最初に回すのはこれ**:
+
+```bash
+python3 AudioV2/scripts/sch_helpers.py     # 見つかった場所と、探した順を全部出す
+```
+
+見つからなければ `KICAD_SYMBOL_DIR` で明示する。**Windows で `C:\tmp\kicad-symbols` の
+ジャンクションを作る必要はもう無い**（2026-09-06 に自動探索へ変えた）。
+
 道具（すべて `AudioV2/scripts/`）:
 
 - **`sch_import.py`** — `.kicad_sch` を要素へ分解／再構成／平行移動。`--roundtrip` がバイト一致

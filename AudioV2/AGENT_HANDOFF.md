@@ -1590,9 +1590,18 @@ python3 AudioV2/scripts/gen_parts_bom.py --check   # PARTS.md の BOM ブロッ�
 > drift の分母が減ったのは AmpBank/AmpChannel が手編集所有へ卒業したため。
 
 **この環境固有の前提**（他マシンでは不要な場合あり）:
-- `C:\tmp\kicad-symbols` → KiCad の `share/kicad/symbols` へのディレクトリジャンクション
-  （`sch_helpers.py` のピン数ルックアップに必要。無いと `wire_circuit_design.py` が
-  `FileNotFoundError` で落ちる）
+- ~~`C:\tmp\kicad-symbols` → KiCad の `share/kicad/symbols` へのディレクトリジャンクション~~
+  → **2026-09-06 に不要になった。** `sch_helpers.py` がシンボルライブラリを
+  **macOS / Windows / Linux で自動的に探すようになった**（環境変数 → 既定の場所の順）。
+  **ジャンクションはもう作らなくてよい**（残っていても最優先ではないので害はない）。
+  **どのマシンでも最初にこれを回すこと:**
+
+  ```bash
+  python3 AudioV2/scripts/sch_helpers.py     # 見つかった場所と、探した順を全部出す
+  ```
+
+  見つからないときは `KICAD_SYMBOL_DIR` で明示できる
+  （Windows: `set KICAD_SYMBOL_DIR=C:\Program Files\KiCad\9.0\share\kicad\symbols`）
 - `kicad-run.sh` に `PYTHONUTF8=1` を追加済み（Windows コンソールの cp932 が ERC 集計の
   UTF-8 出力でクラッシュするため。当初は `drift` 向けだったが、廃止後も ERC 集計に必要）
 
