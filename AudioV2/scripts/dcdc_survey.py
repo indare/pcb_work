@@ -60,7 +60,7 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from digikey_search import PROD, get_token, load_secrets  # noqa: E402
+from digikey_search import PROD, get_token, load_secrets, use_utf8_stdout  # noqa: E402
 
 CATEGORY_DCDC = "922"
 TYPE_ISOLATED = "361527"          # タイプ = 絶縁モジュール
@@ -206,6 +206,7 @@ def flatten(p: dict) -> dict:
 
 
 def main() -> None:
+    use_utf8_stdout()
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--min-ma", type=float, default=250,

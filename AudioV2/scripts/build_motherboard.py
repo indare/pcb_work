@@ -552,10 +552,10 @@ def main() -> int:
     out = build(dry_run=a.dry_run)
     parent = patch_parent(dry_run=a.dry_run)
     if out:
-        (ROOT / "MotherBoard.kicad_sch").write_text(out, encoding="utf-8")
+        sch_helpers.write_sch(ROOT / "MotherBoard.kicad_sch", out)
         print(f"書き出し: AudioV2/MotherBoard.kicad_sch ({len(out)} bytes)")
     if parent:
-        (ROOT / "AudioV2Case.kicad_sch").write_text(parent, encoding="utf-8")
+        sch_helpers.write_sch(ROOT / "AudioV2Case.kicad_sch", parent)
         print(f"書き換え: AudioV2/AudioV2Case.kicad_sch ({len(parent)} bytes)")
     return 0
 

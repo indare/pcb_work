@@ -441,9 +441,9 @@ def _build_all(a) -> int:
     for name, text in outs.items():
         if len(text) < 1000:          # 空や欠けたものを書き込まない安全弁
             raise SystemExit(f"{name}: 生成結果が短すぎる（{len(text)} bytes）")
-        (ROOT / f"{name}.kicad_sch").write_text(text, encoding="utf-8")
+        sch_helpers.write_sch(ROOT / f"{name}.kicad_sch", text)
         print(f"書き出し: AudioV2/{name}.kicad_sch ({len(text)} bytes)")
-    (ROOT / "AmpChannel.kicad_sch").write_text(chan, encoding="utf-8")
+    sch_helpers.write_sch(ROOT / "AmpChannel.kicad_sch", chan)
     print("書き換え: AmpChannel.kicad_sch（親は build_motherboard.py が扱う）")
     return 0
 

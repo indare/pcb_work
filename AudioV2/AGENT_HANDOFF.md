@@ -1593,7 +1593,9 @@ python3 AudioV2/scripts/gen_parts_bom.py --check   # PARTS.md の BOM ブロッ�
 - ~~`C:\tmp\kicad-symbols` → KiCad の `share/kicad/symbols` へのディレクトリジャンクション~~
   → **2026-09-06 に不要になった。** `sch_helpers.py` がシンボルライブラリを
   **macOS / Windows / Linux で自動的に探すようになった**（環境変数 → 既定の場所の順）。
-  **ジャンクションはもう作らなくてよい**（残っていても最優先ではないので害はない）。
+  **ジャンクションはもう作らなくてよい。** ただし**残っていると今もそれが使われる** —
+  探索順で `/tmp/kicad-symbols` は環境変数の次、OS 既定より前にある。同じ場所を指して
+  いるので実害は無く、自己診断の「使うのは」がジャンクションを指していても異常ではない。
   **どのマシンでも最初にこれを回すこと:**
 
   ```bash
@@ -1604,6 +1606,15 @@ python3 AudioV2/scripts/gen_parts_bom.py --check   # PARTS.md の BOM ブロッ�
   （Windows: `set KICAD_SYMBOL_DIR=C:\Program Files\KiCad\9.0\share\kicad\symbols`）
 - `kicad-run.sh` に `PYTHONUTF8=1` を追加済み（Windows コンソールの cp932 が ERC 集計の
   UTF-8 出力でクラッシュするため。当初は `drift` 向けだったが、廃止後も ERC 集計に必要）
+- **生成物の改行は `sch_helpers.write_sch()` が LF に固定する**（2026-09-06）。Windows の
+  Python は素の `write_text` で `\n` を `\r\n` にする。放っておくと内容が同一でも再生成の
+  たびに全シートが変更扱いになり、本物の差分が埋もれる（`.gitattributes` がコミット時に
+  戻すのでリポジトリは汚れない）。**生成物の書き出しは必ず `write_sch()` を通すこと**
+- **DigiKey の2本は `use_utf8_stdout()` で標準出力を UTF-8 に固定する**（2026-09-06）。
+  `digikey_search.py` / `dcdc_survey.py`。cp932 のままパイプに流すと日本語の部品説明が
+  化けるため。`PYTHONIOENCODING=utf-8` を毎回付ける必要はもう無い
+- KiCad が複数版入っている Windows では**新しい版を選ぶ**（2026-09-06）。バージョン名を
+  数値で比較する。辞書順だと `9.0` > `10.0` になって古い方を掴んでいた
 
 Windows: Git Bash + KiCad CLI（`.cursor/rules/kicad-cli-git-bash.mdc`）。
 

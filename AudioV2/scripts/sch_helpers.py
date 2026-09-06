@@ -17,7 +17,19 @@ ROOT = Path(__file__).resolve().parents[1]
 # 順に見て、最初に見つかったものを使う。**見つからないときは試した場所を全部出す。**
 
 _EXPLICIT_ENV = "KICAD_SYMBOL_DIR"          # このリポジトリ独自。最優先
-_KICAD_ENV = ("KICAD9_SYMBOL_DIR", "KICAD8_SYMBOL_DIR", "KICAD7_SYMBOL_DIR")
+_KICAD_ENV = ("KICAD10_SYMBOL_DIR", "KICAD9_SYMBOL_DIR",
+              "KICAD8_SYMBOL_DIR", "KICAD7_SYMBOL_DIR")
+
+
+def _ver_key(d: Path) -> tuple[bool, tuple[int, ...]]:
+    """バージョン名を数値で比較する。
+
+    辞書順だと "9.0" > "10.0" になり、KiCad 9 と 10 が同居している Windows で
+    古い方を掴む。数字を取り出して数値のタプルで比べる。数字を含まない
+    ディレクトリは (False, ()) になり、reverse=True では最後に回る。
+    """
+    nums = tuple(int(n) for n in re.findall(r"\d+", d.name))
+    return bool(nums), nums
 
 
 def _symbol_root_candidates():
@@ -44,7 +56,7 @@ def _symbol_root_candidates():
         kicad = Path(base) / "KiCad"
         try:
             vers = sorted((d for d in kicad.iterdir() if d.is_dir()),
-                          key=lambda d: d.name, reverse=True)
+                          key=_ver_key, reverse=True)
         except OSError:
             continue
         for ver in vers:
@@ -72,6 +84,18 @@ def symbol_root() -> Path:
         f"    Windows:      set {_EXPLICIT_ENV}=C:\\Program Files\\KiCad\\9.0\\share\\kicad\\symbols\n"
         "  自己診断:  python3 AudioV2/scripts/sch_helpers.py"
     )
+
+
+def write_sch(path: Path, text: str) -> None:
+    r"""KiCad ファイルを書き出す。改行は必ず LF。
+
+    Windows の Python はテキストモードで ``\n`` を ``\r\n`` に変換する。
+    素の ``write_text`` で書くと生成物が CRLF になり、内容が同一でも再生成の
+    たびに全ファイルが変更扱いになって本物の差分が埋もれる（``.gitattributes``
+    の ``*.kicad_sch text eol=lf`` がコミット時に戻すのでリポジトリは汚れないが、
+    作業ツリーは汚れる）。**生成物の書き出しは必ずここを通すこと。**
+    """
+    path.write_text(text, encoding="utf-8", newline="\n")
 
 
 def new_uid() -> str:

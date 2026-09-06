@@ -94,6 +94,9 @@ python3 AudioV2/scripts/sch_helpers.py     # 見つかった場所と、探し�
 - **`sch_import.py`** — `.kicad_sch` を要素へ分解／再構成／平行移動。`--roundtrip` がバイト一致
 - **`sch_edit.py`** — 部品単位の編集。ピン座標は KiCad のシンボルから直読み（`extends` も辿る）
 - **`netlist_partition.py`** — ネットリストを「ピン集合の集合」で比較。**統合・移設の検証はこれ**
+- **`sch_helpers.py`** — 生成の土台。単体で回すと**シンボルライブラリの探索を自己診断**する
+  （新しいマシンで最初にこれ）。**生成物の書き出しは `write_sch()` を通すこと** —
+  素の `write_text` は Windows で CRLF になり、内容が同じでも全ファイルが変更扱いになる
 - **`sch_facts.py`** — 回路図から機械的に導出できる事実を出す（階層の枚数・部品数・レールごとの
   容量・親子のシート界面・未接続ピン・1本のネットに載った別名）。**読み取り専用。査読の入口**。
   裏の取れ方と限界はスクリプト先頭の docstring にある。**ERC の正はこれではなく `kicad-run.sh erc`**
@@ -133,11 +136,12 @@ docker/kicad-cloud-build/kicad-run.sh erc        # AudioV2 全体の ERC
 docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 ```
 
-**2026-09-03 時点の期待値**（これと違ったら何かが変わっている）。**`kicad-cli` 10.0.6・`KICAD_BACKEND=local`（このマシンのホスト KiCad）で実測した値**。版が変われば ERC 件数は動くので、ずれたら先に `kicad-run.sh version` を見ること:
+**2026-09-03 時点の期待値**（これと違ったら何かが変わっている）。**`kicad-cli` 10.0.6・`KICAD_BACKEND=local`（このマシンのホスト KiCad）で実測した値**。版が変われば ERC 件数は動くので、ずれたら先に `kicad-run.sh version` を見ること。
+**2026-09-06 に Windows（Git Bash・Docker 無し・同 10.0.6）でも同じ値になることを確認した**:
 
 | | |
 |---|---|
-| `check_sexpr.py -q AudioV2` | **13 ファイル / 問題 0**（KiCad を開いていると `_autosave-*` が増えて **15** になる。gitignore 済みだが `check_sexpr` はディレクトリを見るので数に出る） |
+| `check_sexpr.py -q AudioV2` | **問題 0**。ファイル数は環境で増える — `AudioV2/.kicad-mcp/` の作業ファイルや、KiCad を開いているときの `_autosave-*` を拾うため。**素の状態で 13、2026-09-06 の実測は 15**（増分は `.kicad-mcp/visual-diff-*-before.kicad_sch` の2件）。どちらも gitignore 済みだが `check_sexpr` はディレクトリを見るので数に出る |
 | `kicad-run.sh erc` | **29 件** |
 | `kicad-run.sh netlist` | **部品 373 個・重複 0・注釈警告なし**（2026-09-04 に D-g のヒューズ＋バルクで 371→373） |
 | `sch_import.py --roundtrip AudioV2/*.kicad_sch` | **全部 OK** |

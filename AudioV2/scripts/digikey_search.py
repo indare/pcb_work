@@ -42,6 +42,21 @@ PROD = "https://api.digikey.com"
 SANDBOX = "https://sandbox-api.digikey.com"
 
 
+def use_utf8_stdout() -> None:
+    """標準出力・標準エラーを UTF-8 に固定する。
+
+    Windows の既定コードページは cp932 で、パイプやリダイレクトに流すと出力も
+    cp932 になる。DigiKey は日本語の部品説明を返すので、そのままだと読めない
+    （毎回 PYTHONIOENCODING=utf-8 を付ける代わり）。コンソール直結のときは
+    Python が元から UTF-8 で書くので実質何もしない。
+    """
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError):
+            pass          # 差し替えられている等。出力できることを優先する
+
+
 def load_secrets() -> dict[str, str]:
     """環境変数を優先し、無ければ .secrets.env から読む。"""
     env = dict(os.environ)
@@ -131,6 +146,7 @@ def flatten(p: dict) -> dict:
 
 
 def main() -> None:
+    use_utf8_stdout()
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("keyword", nargs="?", help="検索語（型番でも自由語でも可）")
