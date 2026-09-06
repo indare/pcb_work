@@ -60,3 +60,10 @@ _autosave-*
 # 残す価値のあるデータシートは AudioV2/datasheets/ へ手で移す
 /.dsx/
 /.work_indep/
+
+# 計測の作業ファイル（2026-09-07）
+# キャプチャの正は Audio/measurement_fw/captures/<日付>/ に置く。
+# 直下の cap_*.txt は撮り直しの途中経過なので追跡しない。
+Audio/measurement_fw/cap_*.txt
+# 試験音は make_tone.py で再生成できる（rng シード固定で決定的）
+Audio/measurement_fw/*.wav
