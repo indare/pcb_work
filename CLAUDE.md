@@ -163,7 +163,7 @@ docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 |---|---|
 | `check_sexpr.py -q AudioV2` | **問題 0**。ファイル数は環境で増える — `AudioV2/.kicad-mcp/` の作業ファイルや、KiCad を開いているときの `_autosave-*` を拾うため。**素の状態で 13、2026-09-06 の実測は 15**（増分は `.kicad-mcp/visual-diff-*-before.kicad_sch` の2件）。どちらも gitignore 済みだが `check_sexpr` はディレクトリを見るので数に出る |
 | `kicad-run.sh erc` | **17 件**（2026-09-07 に 29→17。PT2314 の未使用12ピンに `no_connect` を立て `pin_not_connected` が消えた） |
-| `kicad-run.sh netlist` | **部品 374 個・重複 0・注釈警告なし**（2026-09-04 に D-g のヒューズ＋バルクで 371→373、2026-09-06 に D-f の PPTC で 373→374。同時に入れた `PWR_FLAG` は仮想なので計上外） |
+| `kicad-run.sh netlist` | **部品 369 個・重複 0・注釈警告なし**（2026-09-04 に D-g のヒューズ＋バルクで 371→373、2026-09-06 に D-f の PPTC で 373→374、2026-09-07 に PT2314E のトーン網をDS通りに組み直して抵抗5本減り 374→369。`PWR_FLAG` は仮想なので計上外） |
 | `sch_import.py --roundtrip AudioV2/*.kicad_sch` | **全部 OK** |
 
 イメージがあれば Docker(KiCad 10.0.6)、無ければホストの `kicad-cli` で動く。
