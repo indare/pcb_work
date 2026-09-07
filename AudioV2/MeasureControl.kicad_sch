@@ -16459,12 +16459,6 @@
 		(uuid "eda59ddf-20d3-4b5c-8213-f3b6accf8969")
 	)
 	(junction
-		(at 270.51 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f27e3077-7244-4d4f-bf7a-c6e85ee101fa")
-	)
-	(junction
 		(at 318.77 76.2)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -18163,16 +18157,6 @@
 			(type default)
 		)
 		(uuid "6afbb05e-8cc3-4f00-9738-6f0e9ee7cef4")
-	)
-	(wire
-		(pts
-			(xy 270.51 72.39) (xy 270.51 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6c544492-00f9-4824-b9c9-32e79fb08e03")
 	)
 	(wire
 		(pts
@@ -26064,6 +26048,115 @@
 				)
 			)
 		)
+	)
+	(label "D_GND"
+		(at 270.51 72.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ccb3de00-e9d5-5094-a77f-b5b02f6e7a9d")
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 254 66.04 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "35f89689-034b-5b75-bbe8-00b3acd1aa45")
+		(property "Reference" "C1645"
+			(at 251.714 64.008 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10uF 50V"
+			(at 257.302 68.072 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 254 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 254 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U1607(BP5293-50) の入力コンデンサ CIN。DS p.2 推奨 10uF。帰り先は D_GND（U1607 の GND と同じ）。PD_GND に落とすと入力の脈流ループが NT1602 を通ってしまう。"
+			(at 254 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "771b0c80-fe41-508a-98c0-11c0378c7be4")
+		)
+		(pin "2"
+			(uuid "4130f003-6762-51fb-95e7-c6bb2d823e5e")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "C1645")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "PD_12V_MEAS"
+		(at 254 62.23 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "080c7c3b-6389-56df-aa81-451bddce5279")
+	)
+	(label "D_GND"
+		(at 254 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c6dde913-c2b4-5709-ad46-565ca7a520ad")
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
