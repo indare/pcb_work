@@ -42,6 +42,11 @@ Audio/measurement_fw/c_fft/*.uf2
 .claude/*
 !.claude/agents/
 !.claude/commands/
+# SessionStart フックも共有する。クラウドのコンテナは毎回空なので、これが
+# 追跡されていないと kicad-cli もシンボルも lib-table も無い状態で始まる
+!.claude/hooks/
+!.claude/settings.json
+# settings.local.json は各自のもの。上の `.claude/*` で無視されたまま
 .mcp.json.*.kicad-mcp.bak
 .mcp.json
 # KiCad MCP / quality-gate generated outputs

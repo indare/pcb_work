@@ -1,0 +1,88 @@
+# KiCad 10.0.6 CLI 環境（PPA 版・数分でビルドできる）
+#
+# Dockerfile.10.0.6 と同じ 10.0.6 の kicad-cli を用意する。違いはビルド時間だけ:
+#
+#   Dockerfile.10.0.6      ソースビルド  約45分
+#   Dockerfile.10.0.6-ppa  PPA から      約2分   ← これ
+#
+# ソースビルドを書いた時点では 10.0.6 を入れる方法が他に無かった（公式の
+# kicad/kicad:10.0.6 は Docker Hub に今も無く 10.0.5 止まり、Ubuntu 標準
+# アーカイブは 7.0.11）。その後 ppa:kicad/kicad-10.0-releases に noble 向けの
+# 10.0.6 が来たので、こちらの方が速い。
+#
+# **ソースビルドを消していないのは意図的。** PPA から 10.0.6 が消えたら
+# Dockerfile.10.0.6 が唯一の再現手段に戻る。
+#
+# パッケージ構成は Dockerfile.10.0.6 の runtime 段および
+# scripts/cloud-agent-setup.sh と揃えてある（README の対応表が正）。
+# 3D モデル (kicad-packages3d, 展開 ~5.6GB) はどれも入れない。
+#
+# ビルド:
+#   docker build -f docker/kicad-cloud-build/Dockerfile.10.0.6-ppa \
+#     -t kicad-cloud:10.0.6 docker/kicad-cloud-build
+#
+# 使い方は Dockerfile.10.0.6 と同じ。kicad-run.sh がそのまま拾う:
+#   docker/kicad-cloud-build/kicad-run.sh erc
+
+FROM ubuntu:24.04
+ARG KICAD_VERSION=10.0.6
+ARG HTTPS_PROXY
+# https_proxy だけ。http_proxy まで振ると apt（http でアーカイブを引く）が
+# プロキシ経由になり、直通なら通る環境で逆に落ちる。2026-09-07 に踏んだ。
+ENV https_proxy=$HTTPS_PROXY
+ENV DEBIAN_FRONTEND=noninteractive
+
+LABEL org.opencontainers.image.description='KiCad 10.0.6 CLI (kicad-cli) for pcb_work, installed from ppa:kicad/kicad-10.0-releases'
+
+# PPA の署名鍵はリポジトリに同梱してある。add-apt-repository も keyserver への
+# HTTPS も使わないので、HTTP しか通らない制限された網でもビルドできる
+# （このリポジトリのクラウド環境が実際そう）。指紋は下で必ず突き合わせる。
+COPY kicad-ppa-10.0.asc /tmp/kicad-ppa.asc
+
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends ca-certificates gnupg; \
+    # 入れる前に指紋を確認する。違えば落とす（trusted=yes で誤魔化さない）。
+    fpr="$(gpg --show-keys --with-colons /tmp/kicad-ppa.asc | awk -F: '/^fpr:/{print $10; exit}')"; \
+    test "$fpr" = "FDA854F61C4D0D9572BB95E5245D5502FAD7A805"; \
+    gpg --dearmor -o /usr/share/keyrings/kicad-ppa.gpg /tmp/kicad-ppa.asc; \
+    rm -f /tmp/kicad-ppa.asc; \
+    echo "deb [signed-by=/usr/share/keyrings/kicad-ppa.gpg] http://ppa.launchpad.net/kicad/kicad-10.0-releases/ubuntu noble main" \
+      > /etc/apt/sources.list.d/kicad-10.list; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+      "kicad=${KICAD_VERSION}~ubuntu24.04.1" \
+      "kicad-symbols=${KICAD_VERSION}~ubuntu24.04.1" \
+      "kicad-footprints=${KICAD_VERSION}~ubuntu24.04.1" \
+      "kicad-templates=${KICAD_VERSION}~ubuntu24.04.1" \
+      ngspice \
+      python3-yaml; \
+    # 版とシンボルの実在を確かめてから先へ進む
+    got="$(kicad-cli version)"; \
+    test "$got" = "$KICAD_VERSION" \
+      || { echo "kicad-cli が $KICAD_VERSION ではなく $got" >&2; exit 1; }; \
+    test -n "$(ls /usr/share/kicad/symbols/*.kicad_sym)"; \
+    apt-get clean autoclean; \
+    apt-get autoremove -y; \
+    rm -rf /var/lib/apt/lists/*
+
+ENV LANG=C.UTF-8
+ENV LANGUAGE=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
+# ソースビルド版に合わせて uid 1001 の kicad ユーザを置く（1000 は ubuntu が使用済み）。
+# lib-table を置かないと ERC が 29 件ではなく 387 件になる（lib_symbol_issues 197 +
+# footprint_link_issues 161 の偽陽性が乗る）。kicad-run.sh は呼び出し元の uid で
+# 走らせて HOME を振り直し、実行時にも同じコピーをするので二重の備えになっている。
+ARG USER_NAME=kicad
+ARG USER_UID=1001
+ARG USER_GID=$USER_UID
+RUN set -eux; \
+    groupadd --gid $USER_GID $USER_NAME; \
+    useradd --uid $USER_UID --gid $USER_GID -m $USER_NAME; \
+    v="$(kicad-cli version | cut -d . -f 1,2)"; \
+    mkdir -p "/home/$USER_NAME/.config/kicad/$v"; \
+    cp /usr/share/kicad/template/*-lib-table "/home/$USER_NAME/.config/kicad/$v/"; \
+    chown -R $USER_NAME:$USER_NAME "/home/$USER_NAME/.config"
+
+USER $USER_NAME

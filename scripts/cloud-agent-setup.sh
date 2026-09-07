@@ -27,6 +27,48 @@ set -euo pipefail
 
 KICAD_PPA="ppa:kicad/kicad-10.0-releases"
 
+# PPA は add-apt-repository を使わず、鍵と sources.list を自分で置いて足す。
+#
+# **add-apt-repository は使えない。** Claude Code on the web のコンテナでは
+# 実体はあるのに `ModuleNotFoundError: No module named 'apt_pkg'` で落ちる
+# （python3 と apt_pkg の版がずれている。2026-09-07 実測）。set -e で走る
+# このスクリプトはそこで丸ごと止まり、**何も入らないまま終わる**。
+# 「クラウドに KiCad のシンボルが無い」の原因がこれだった。
+#
+# 鍵は keyserver から取らずリポジトリに同梱したものを使う。制限された網では
+# HTTPS が直通しないことがあり（この環境は HTTP 直通・HTTPS はプロキシ経由）、
+# 取りに行かない方が確実に再現する。どちらにせよ入れる前に指紋を突き合わせる。
+KICAD_PPA_URI="http://ppa.launchpad.net/kicad/kicad-10.0-releases/ubuntu"
+KICAD_PPA_KEY_FPR="FDA854F61C4D0D9572BB95E5245D5502FAD7A805"
+KICAD_PPA_KEYRING="/usr/share/keyrings/kicad-ppa.gpg"
+KICAD_PPA_LIST="/etc/apt/sources.list.d/kicad-10.list"
+KICAD_PPA_KEY_ASC="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/docker/kicad-cloud-build/kicad-ppa-10.0.asc"
+
+add_kicad_ppa() {
+	if [ ! -f "$KICAD_PPA_KEYRING" ]; then
+		command -v gpg >/dev/null 2>&1 \
+			|| sudo apt-get install -y --no-install-recommends gnupg \
+			|| { sudo apt-get update && sudo apt-get install -y --no-install-recommends gnupg; }
+		[ -f "$KICAD_PPA_KEY_ASC" ] || { echo "PPA の署名鍵が無い: $KICAD_PPA_KEY_ASC" >&2; return 1; }
+		local fpr
+		fpr="$(gpg --show-keys --with-colons "$KICAD_PPA_KEY_ASC" 2>/dev/null | awk -F: '/^fpr:/{print $10; exit}')"
+		if [ "$fpr" != "$KICAD_PPA_KEY_FPR" ]; then
+			echo "PPA の署名鍵の指紋が合わない (期待 $KICAD_PPA_KEY_FPR / 実際 ${fpr:-読めず})" >&2
+			return 1
+		fi
+		sudo gpg --dearmor --yes -o "$KICAD_PPA_KEYRING" "$KICAD_PPA_KEY_ASC"
+		echo "PPA の署名鍵を入れた（指紋 OK）"
+	fi
+	if [ ! -f "$KICAD_PPA_LIST" ]; then
+		local codename
+		codename="$(. /etc/os-release && echo "$VERSION_CODENAME")"
+		printf 'deb [signed-by=%s] %s %s main\n' \
+			"$KICAD_PPA_KEYRING" "$KICAD_PPA_URI" "$codename" \
+			| sudo tee "$KICAD_PPA_LIST" >/dev/null
+		echo "$KICAD_PPA を追加した ($codename)"
+	fi
+}
+
 MODE=install
 case "${1:-}" in
 	--verify) MODE=verify ;;
@@ -68,7 +110,7 @@ install_all() {
 	#    --no-install-recommends で GUI 3D モデル一式 (kicad-libraries 経由の
 	#    kicad-packages3d) を避け、ヘッドレス CLI 検証に必要な構成だけ入れる。
 	if ! command -v kicad-cli >/dev/null 2>&1; then
-		sudo add-apt-repository -y "$KICAD_PPA"
+		add_kicad_ppa
 		sudo apt-get update
 		sudo apt-get install -y --no-install-recommends \
 			kicad \
@@ -79,6 +121,16 @@ install_all() {
 			python3-yaml
 	else
 		echo "kicad-cli は導入済み: $(kicad-cli version)"
+	fi
+
+	# ngspice は kicad-cli とは別に見る。上の塊に混ぜたままだと、
+	# kicad-cli だけ先に入っている環境（手で入れた・別経路で入った）で
+	# 塊ごと飛ばされ、ngspice が永久に入らない。PPA ではなく標準アーカイブにある。
+	if ! command -v ngspice >/dev/null 2>&1; then
+		sudo apt-get install -y --no-install-recommends ngspice \
+			|| { sudo apt-get update && sudo apt-get install -y --no-install-recommends ngspice; }
+	else
+		echo "ngspice は導入済み: $(command -v ngspice)"
 	fi
 
 	# 2. グローバル lib-table をシード（Dockerfile と同じ手順）。
@@ -96,9 +148,17 @@ install_all() {
 
 	# 3. uv / uvx（kicad-mcp-pro 用。README「前提」参照）。
 	#    全ユーザーが使えるよう /usr/local/bin へ配置する。
+	# ここで失敗しても中断しない。uv は kicad-mcp-pro のためのもので、
+	# ERC / ネットリスト / DRC には要らない。astral.sh への HTTPS が通らない網で
+	# 全体を巻き添えに止めると、肝心の kicad-cli まで入らないまま終わる。
+	# 入らなかったことは末尾の verify_all が NG 行で報せる。
 	if ! command -v uv >/dev/null 2>&1; then
-		curl -LsSf https://astral.sh/uv/install.sh \
-			| sudo env UV_INSTALL_DIR=/usr/local/bin UV_UNMANAGED_INSTALL=/usr/local/bin sh
+		if ! command -v curl >/dev/null 2>&1; then
+			echo "curl が無いので uv は入れない（kicad-mcp-pro のみ影響）"
+		elif ! curl -LsSf https://astral.sh/uv/install.sh \
+			| sudo env UV_INSTALL_DIR=/usr/local/bin UV_UNMANAGED_INSTALL=/usr/local/bin sh; then
+			echo "uv を入れられなかった（kicad-mcp-pro のみ影響）。検証は続ける"
+		fi
 	else
 		echo "uv は導入済み: $(uv --version)"
 	fi

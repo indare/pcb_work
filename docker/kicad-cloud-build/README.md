@@ -4,23 +4,35 @@
 
 | ファイル | 役割 |
 |---|---|
-| `Dockerfile.10.0.6` | `kicad-cli` 10.0.6 をソースビルドするイメージ定義 |
+| `Dockerfile.10.0.6-ppa` | `kicad-cli` 10.0.6 を **PPA から**入れるイメージ定義。**約2分** |
+| `Dockerfile.10.0.6` | 同じ 10.0.6 を**ソースビルド**するイメージ定義。約45分 |
+| `kicad-ppa-10.0.asc` | `ppa:kicad/kicad-10.0-releases` の署名鍵（同梱。指紋は使う側が必ず検証する） |
 | `kicad-run.sh` | リポジトリのファイルに対して kicad-cli を回すラッパー |
 | `sch_drift.py` | 旧構成向けの回路図突き合わせ（S式パーサ + 差分）。**`kicad-run.sh` からは呼ばれない**（下の「生成スクリプトと実図の突き合わせ」） |
 
-公式の Docker Hub イメージ (`kicad/kicad`) が 10.0.6 に追随する前でも、KiCad公式リポジトリの `10.0.6` タグから直接ビルドすることで最新版を使える。ビルドレシピは KiCad 公式の [`kicad/packaging/kicad-docker`](https://gitlab.com/kicad/packaging/kicad-docker)（`Dockerfile.10.0-stable`）をベースに、Debian trixie 向けの内容を Ubuntu 24.04 用のパッケージ名に置き換えたもの。
+イメージの作り方は2つあり、**できあがる `kicad-cli` は同じ 10.0.6**。違うのはビルド時間と、PPA に依存するかどうかだけ。
+
+- **`Dockerfile.10.0.6-ppa`**（既定）— `ppa:kicad/kicad-10.0-releases` に noble 向けの 10.0.6 がある。約2分。署名鍵を同梱しているので `add-apt-repository` も keyserver への HTTPS も要らず、**HTTP しか通らない制限された網でもビルドできる**。
+- **`Dockerfile.10.0.6`** — KiCad公式リポジトリの `10.0.6` タグから直接ビルドする。レシピは KiCad 公式の [`kicad/packaging/kicad-docker`](https://gitlab.com/kicad/packaging/kicad-docker)（`Dockerfile.10.0-stable`）をベースに、Debian trixie 向けの内容を Ubuntu 24.04 用のパッケージ名に置き換えたもの。**PPA から 10.0.6 が消えたらこれが唯一の再現手段に戻るので、消していない。**
+
+公式の Docker Hub イメージ (`kicad/kicad`) は 2026-09-07 時点でまだ 10.0.5 止まりで、10.0.6 が無い。Ubuntu 標準アーカイブは 7.0.11。
+
+**Docker を使わずホストに直接入れる**なら [`scripts/cloud-agent-setup.sh`](../../scripts/cloud-agent-setup.sh)（冪等）。下の「Cloud Agent 環境での使い方」の対応表を参照。
 
 ---
 
 ## クイックスタート
 
 ```sh
-# 1. イメージをビルド（初回のみ・約45分）
-docker/kicad-cloud-build/kicad-run.sh build
+# 1. イメージをビルド（初回のみ・約2分）
+docker build -f docker/kicad-cloud-build/Dockerfile.10.0.6-ppa \
+  -t kicad-cloud:10.0.6 docker/kicad-cloud-build
 
 # 2. AudioV2 全体の ERC を実行
 docker/kicad-cloud-build/kicad-run.sh erc
 ```
+
+`kicad-run.sh build` はソースビルド版（`Dockerfile.10.0.6`・約45分）を回す。
 
 出力は `out/erc.json` と `out/erc.rpt`。標準出力には違反の種別ごとの集計が出る（下は `KICAD_BACKEND=local` で実行したときの例）。**件数は 2026-09-01 の実測で、現在の期待値は [`CLAUDE.md`](../../CLAUDE.md) が正**（ここでは追随しない）。
 
@@ -195,11 +207,15 @@ docker/kicad-cloud-build/kicad-run.sh version
 
 ## Cloud Agent 環境での使い方
 
-このディレクトリの `Dockerfile.10.0.6` は **Docker イメージをソースビルドする**ためのもので、初回に約45分かかる。Cursor Cloud Agent の VM には Docker が入っていないので、この Dockerfile をそのまま `docker build` する経路は使えない。
+Cursor Cloud Agent の VM には Docker が入っていないので、Dockerfile を `docker build` する経路は使えない。
 
 代わりに、ランタイム成果物（`kicad-cli` 10.0.6 + シンボル / フットプリント / テンプレート）を **apt パッケージで揃える**。その手順が [`scripts/cloud-agent-setup.sh`](../../scripts/cloud-agent-setup.sh)（冪等・[案内](../../scripts/README.md)）で、ダッシュボード管理環境の `install` コマンドとして実行する想定。
 
-| `Dockerfile.10.0.6` | `scripts/cloud-agent-setup.sh` |
+**Claude Code on the web も同じスクリプトを通る。** コンテナは回収されると消えるので、毎セッション何も入っていない状態から始まる。それを埋めるのが `.claude/hooks/session-start.sh` で、中身は書かずに `scripts/cloud-agent-setup.sh` を呼ぶだけにしてある（`CLAUDE_CODE_REMOTE=true` のときだけ動くので、手元の macOS / Windows では何もしない）。
+
+> **`~/.config/kicad/<ver>/*-lib-table` を置き忘れると ERC が壊れる。** `kicad-cli` とシンボルが入っていても、これが無いと標準ライブラリを解決できず `lib_symbol_issues` 197 件 + `footprint_link_issues` 161 件の偽陽性が乗り、**ERC が 29 件ではなく 387 件になる**（2026-09-07 実測）。`cloud-agent-setup.sh` も Dockerfile も `kicad-run.sh` の docker バックエンドも、それぞれこのコピーをしている。手で入れたときだけ抜ける。
+
+| `Dockerfile.10.0.6` | `Dockerfile.10.0.6-ppa` / `scripts/cloud-agent-setup.sh` |
 |---|---|
 | KiCad 10.0.6 をソースからフルビルド | PPA `ppa:kicad/kicad-10.0-releases` から `apt install kicad`（Ubuntu 24.04 で 10.0.6） |
 | `kicad-symbols` / `kicad-footprints` / `kicad-templates` を gitlab から clone して install | 同名の apt パッケージ |
