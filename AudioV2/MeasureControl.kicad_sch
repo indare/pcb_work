@@ -17260,16 +17260,6 @@
 	)
 	(wire
 		(pts
-			(xy 294.64 54.61) (xy 302.26 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2d8a27c8-42f3-4c76-b028-6c091d56f546")
-	)
-	(wire
-		(pts
 			(xy 77.47 31.75) (xy 77.47 41.91)
 		)
 		(stroke
@@ -19080,16 +19070,6 @@
 	)
 	(wire
 		(pts
-			(xy 294.64 44.45) (xy 302.26 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b84daf82-ee64-41a3-846b-b01e3a6c8af1")
-	)
-	(wire
-		(pts
 			(xy 74.93 105.41) (xy 74.93 115.57)
 		)
 		(stroke
@@ -19887,16 +19867,6 @@
 			(type default)
 		)
 		(uuid "e1420ae6-b3a6-4719-bad0-d252854c89e2")
-	)
-	(wire
-		(pts
-			(xy 257.81 54.61) (xy 269.24 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e1621d53-dec8-407f-ae88-1e6364e7bbfc")
 	)
 	(wire
 		(pts
@@ -24062,7 +24032,7 @@
 				)
 			)
 		)
-		(property "Value" "10uF 16V X7R"
+		(property "Value" "10uF 50V X7R"
 			(at 327.66 67.056 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24072,7 +24042,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder"
 			(at 325.12 64.77 0)
 			(hide yes)
 			(show_name no)
@@ -25792,7 +25762,7 @@
 				)
 			)
 		)
-		(property "Value" "10uF 16V X7R"
+		(property "Value" "10uF 50V X7R"
 			(at 326.39 39.116 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25802,7 +25772,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder"
 			(at 323.85 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -31610,91 +31580,6 @@
 		)
 	)
 	(symbol
-		(lib_id "MeasurementADC_Extras:MBC2596-01")
-		(at 281.94 49.53 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "fcaef7a5-8a2a-4291-9562-35f1e89cb92a")
-		(property "Reference" "U1604"
-			(at 281.94 46.99 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MBC2596-01"
-			(at 281.94 43.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Library:MBC2596-01_TAEJIN_43x21mm"
-			(at 281.94 49.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 281.94 49.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "MBC2596-01 measured FP: 43x21mm, corner pads 3.5mm from edges, module hole ~1.3mm"
-			(at 281.94 49.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "2a1ae36f-49a9-42d2-9650-ec5cd6bdfd0f")
-		)
-		(pin "2"
-			(uuid "4cf528d3-d166-4e44-8804-520e048d5326")
-		)
-		(pin "3"
-			(uuid "fddfec01-ce72-4070-a200-fbab0932003d")
-		)
-		(pin "4"
-			(uuid "1c545650-e3d9-4fa4-8e2c-bdf8bc33c03a")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "U1604")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:Fuse")
 		(at 262.89 54.61 0)
 		(unit 1)
@@ -31892,321 +31777,6 @@
 		)
 		(uuid "32103070-f906-5089-bc82-baa12c33581d")
 	)
-	(wire
-		(pts
-			(xy 261.62 44.45) (xy 261.62 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "74335d1a-e656-50a2-9c08-8a6508d027e3")
-	)
-	(wire
-		(pts
-			(xy 269.24 34.29) (xy 269.24 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e5a6aac4-309e-5302-bd43-4221e8d60ea5")
-	)
-	(wire
-		(pts
-			(xy 269.24 40.64) (xy 266.7 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5af2813a-d486-52b5-bca5-e684fc9db6e4")
-	)
-	(wire
-		(pts
-			(xy 266.7 48.26) (xy 266.7 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "49f4a66c-af80-579f-9896-29ccd1ed2e8d")
-	)
-	(junction
-		(at 261.62 44.45)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e027376b-411f-5e76-bf08-836d74a8a899")
-	)
-	(junction
-		(at 269.24 40.64)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "dc838753-a1a9-53aa-803a-64337fb852b1")
-	)
-	(junction
-		(at 266.7 54.61)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5e24b75f-d71f-5b60-b260-a45505f2c3be")
-	)
-	(symbol
-		(lib_id "Device:Fuse")
-		(at 265.43 34.29 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "dbb8999d-563d-57ee-97ac-7e125c34674c")
-		(property "Reference" "F1603"
-			(at 265.43 30.48 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PPTC 0.15A hold"
-			(at 265.43 27.94 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal"
-			(at 265.43 34.29 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 265.43 34.29 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "U1604 (MBC2596) input fuse. D-g. Rated from datasheets, not measured: 6.8V x 90mA / eta 85% / 12V = 60mA steady, x1.5-2 -> 0.15A hold. Detours above the ADC_V_IN run because the direct stub is only 6.35mm."
-			(at 265.43 34.29 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "73ba9c6f-6780-5685-a37d-36cd15f095f0")
-		)
-		(pin "2"
-			(uuid "64703674-107b-5d9f-8b1c-c5c0ecb74f4a")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "F1603")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Polarized")
-		(at 266.7 44.45 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "2f1de057-3e4a-5731-9db3-2283237b7db3")
-		(property "Reference" "C1644"
-			(at 262.382 41.91 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47uF 35V"
-			(at 264.668 46.736 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
-			(at 266.7 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 266.7 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Local bulk for U1604, downstream of F1603. The PPTC is 2-5 ohm, so the converter input pulses must be supplied locally, not through the fuse. 15V rail -> 35V rating. Return on ADC_GND_IN."
-			(at 266.7 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "af82bcc7-6610-5202-98a7-d63c87196d06")
-		)
-		(pin "2"
-			(uuid "2667c045-d133-570c-b5d2-0d668bd32b9e")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "C1644")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "PD_12V_ADC"
-		(at 269.24 39.37 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1079dafd-3f54-51be-b946-e511596e8f8f")
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 276.86 34.29 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7adae6d5-cd51-59f0-8067-ef8d21f7d900")
-		(property "Reference" "#FLG1603"
-			(at 276.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 276.86 29.21 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 276.86 34.29 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 276.86 34.29 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 276.86 34.29 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "951bea95-b56b-5246-bb35-d1f7bec8078a")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "#FLG1603")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "PD_12V_ADC"
-		(at 276.86 34.29 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2505e538-95b1-5cfc-8cf1-a55cb8683e7f")
-	)
 	(label "ENC_INTA"
 		(at 106.68 335.28 180)
 		(effects
@@ -32250,5 +31820,203 @@
 	(no_connect
 		(at 294.64 190.5)
 		(uuid "7696a0a1-c2f8-5ecd-acd9-e24e8c0d1567")
+	)
+	(label "+15V_A"
+		(at 302.26 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dc360270-25a5-5674-bc37-d9da7ea282d0")
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 198.12 82.55 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "20e79880-0cf5-5a93-9452-2c2d58f80dfe")
+		(property "Reference" "NT1603"
+			(at 196.85 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "A_GND-D_GND"
+			(at 196.85 86.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
+			(at 198.12 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 198.12 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "A_GND と D_GND の唯一の結合点。2026-09-07 に U1604(MBC2596 非絶縁バック)を削除した時点で新設した — それまでこの結合は U1604 の内部で起きていて、置き場所を選べなかった。結合点の数は1のままで、場所が選べるようになっただけ（A6/D28 の趣旨は保たれている）。⚠ PCB では NT1601(A_GND-ADC_GND)の隣に置くこと。I2S の帰り(D_GND -> A_GND -> ADC_GND)が2ホップになるので、2つの NetTie が離れるとその間の A_GND 銅箔がループ面積になる。"
+			(at 198.12 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f440f330-77b3-54c2-9703-3d9505acf83a")
+		)
+		(pin "2"
+			(uuid "052d80b0-46ef-552c-ad1e-6fc36b88107f")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "NT1603")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "A_GND"
+		(at 195.58 82.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ce40298d-e6e7-51a8-b43d-d59dc0a295b0")
+	)
+	(label "D_GND"
+		(at 200.66 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "60943be4-21c1-5f3e-bfac-428af9938037")
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 281.94 49.53 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a346afe8-887f-5b0d-87b5-6878a87e2add")
+		(property "Reference" "#FLG1604"
+			(at 281.94 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 281.94 44.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 281.94 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 281.94 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "ADC_GND は NT1601 で A_GND に結合しているが、KiCad の NetTie は passive なので ERC に駆動が伝わらない。2026-09-07 に U1604(非絶縁バック)を消したことで ADC_GND 上の power_output ピンが無くなったため置いた。"
+			(at 281.94 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "213c8370-9918-53f4-93f0-11b15a0328de")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "#FLG1604")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "ADC_GND"
+		(at 281.94 49.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "36926157-51d6-5dd8-b3b3-c4bc647e5c4e")
 	)
 )

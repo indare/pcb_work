@@ -250,7 +250,7 @@ Amp 選択後 L/R
 **手で編集しないでください**（次の再生成で消えます）。値・フットプリント・役割を直すときは KiCad の回路図側を直し、
 `python3 AudioV2/scripts/gen_parts_bom.py` で再生成します。
 
-行数 94 / 部品総数 369。
+行数 94 / 部品総数 367。
 
 > `Refs` 列と `Value` / `Role` 列に**位置の対応はありません**。kicad-cli はグループ内の値を重複除去してアルファベット順に並べるため、「n 番目の参照 = n 番目の役割」とは読めません。
 
@@ -273,10 +273,11 @@ Amp 選択後 L/R
 | C1601,C1608,C1623 | 10nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 3 | Y701 VDD bypass 10nF (ASFL1 データシート指定: pin2-pin4 間) |
 | C1602,C1613,C1626,C1628 | 10uF 25V NP | `Capacitor_THT:C_Radial_D5.0mm_H7.0mm_P2.00mm` | 4 | AC couple unpolarized 10uF 25V (not polar electrolytic) |
 | C1603 | 10uF 10V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 1 | LT1763-3.3 OUT bulk, >=10V X7R 1206 |
-| C1606,C1616,C1619 | 10uF 16V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 3 | LT1763 IN bulk, 16V X7R 1206 (6.7V rail),LT1763-5 OUT bulk, 10V or 16V X7R 1206 |
+| C1606,C1619 | 10uF 50V X7R | `Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder` | 2 | LT1763 IN bulk / 16V X7R 1206 (6.7V rail) |
 | C1609,C1620,C1627,C1632 | 1.8nF C0G | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 4 | LPF C0G/NP0 ceramic |
-| C1610,C1644 | 47uF 35V | `Capacitor_THT:CP_Radial_D8.0mm_P3.50mm` | 2 | BP5293/MBC2596 input bulk. 15V rail -> 35V rating. Return on ADC_GND_IN.,Local bulk for U1604, downstream of F1603. The PPTC is 2-5 ohm, so the converter input pulses must be supplied locally, not through the fuse. 15V rail -> 35V rating. Return on ADC_GND_IN. |
+| C1610 | 47uF 35V | `Capacitor_THT:CP_Radial_D8.0mm_P3.50mm` | 1 | BP5293/MBC2596 input bulk. 15V rail -> 35V rating. Return on ADC_GND_IN. |
 | C1611,C1631,C1633 | 10uF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 3 | U704/U705 VIN mid-freq ceramic 10uF (unpolarized), return ADC_GND_IN. Parallel with C723 bulk and C725 100nF.,積セラ 10uF50V 3216（秋月 117338・購入済）。U708(XC8107) 入力コンデンサ CIN。データシート推奨 1.0uF 以上、VIN-VSS 間を最短で。,積セラ 10uF50V 3216（秋月 117338・購入済）。U708(XC8107) 出力コンデンサ CL。データシート推奨 1.0uF 以上、IC 直近に配置。 |
+| C1616 | 10uF 16V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 1 | LT1763-5 OUT bulk, 10V or 16V X7R 1206 |
 | C1621 | 47uF | `Capacitor_THT:CP_Radial_D8.0mm_P3.50mm` | 1 | 導電性高分子アルミ固体電解コンデンサー OS-CON相当 47uF16V以上 +5V_D |
 | C1630 | 22uF | `Capacitor_THT:CP_Radial_D6.3mm_P2.50mm` | 1 | 導電性高分子アルミ固体電解コンデンサー OS-CON相当 22uF16V以上 LCD_VCC |
 | C1635,C1640 | 10uF 50V | `Capacitor_THT:CP_Radial_D5.0mm_P2.00mm` | 2 | 導電性高分子アルミ固体電解コンデンサー ハイブリッド相当 10μF50V +15V_A / 導電性高分子アルミ固体電解コンデンサー ハイブリッド相当 10μF50V -15V_A |
@@ -294,7 +295,6 @@ Amp 選択後 L/R
 | F203 | PPTC 0.1A hold | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 |  |
 | F1601 | T1A slow | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 | Fuse |
 | F1602 | PPTC 0.5A hold | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 | Fuse |
-| F1603 | PPTC 0.15A hold | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 | U1604 (MBC2596) input fuse. D-g. Rated from datasheets, not measured: 6.8V x 90mA / eta 85% / 12V = 60mA steady, x1.5-2 -> 0.15A hold. Detours above the ADC_V_IN run because the direct stub is only 6.35mm. |
 | J201 | +15/-15/A_GND out | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 |  |
 | J202 | PD module in (1=GND 2=+12V) | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 |  |
 | J1601 | AUDIO | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
@@ -313,6 +313,7 @@ Amp 選択後 L/R
 | J_RAIL501 | RAIL IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 選択された Amp 出力の取り出し端子。1=AMP_SEL_L / 2=A_GND / 3=AMP_SEL_R で、DEST スイッチ(SW501/SW502)の手前。Value の RAIL IN と旧記述の +12V/A_GND/-12V は、娘基板がスロット直結(J_PWR/J_ANA)になる前の名残で電源ではない。A_GND 極を持つ唯一の音声取り出し口。 |
 | K301,K302,K303,K304,K305 | AZ850P2-5 | `Relay_THT:Relay_DPDT_FRT5` | 5 |  |
 | LCDDisplay1601 | WAVESHARE-29318 | `Connector_PinHeader_2.54mm:PinHeader_1x15_P2.54mm_Vertical` | 1 | Waveshare 29318 Interface2 host side: 2.54mm 1x15 pin header for included GH-to-Dupont cable (ST7796S SPI + FT6336U I2C) |
+| NT1603 | A_GND-D_GND | `NetTie:NetTie-2_SMD_Pad0.5mm` | 1 | A_GND と D_GND の唯一の結合点。2026-09-07 に U1604(MBC2596 非絶縁バック)を削除した時点で新設した — それまでこの結合は U1604 の内部で起きていて、置き場所を選べなかった。結合点の数は1のままで、場所が選べるようになっただけ（A6/D28 の趣旨は保たれている）。⚠ PCB では NT1601(A_GND-ADC_GND)の隣に置くこと。I2S の帰り(D_GND -> A_GND -> ADC_GND)が2ホップになるので、2つの NetTie が離れるとその間の A_GND 銅箔がループ面積になる。 |
 | R401 | 2.2k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 1 | D403(12V パネル LED)の直列抵抗。素の LED でも 12V 直結で壊れないようにする。(12-Vf2)/2.2k = 約 4.5mA。抵抗内蔵の 12V LED を挿しても点く（やや暗い）。 |
 | R410,R411 | 5.6k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 |  |
 | R601,R607,R701,R707,R801,R807,R901,R907,R1001,R1007,R1101,R1107,R1201,R1207,R1301,R1307,R1401,R1407,R1501,R1507,R1620 | 100k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 21 | L non-inverting bias / R non-inverting bias / U708(XC8107) CE プルダウン。Active High なので Pico GPIO が Hi-Z の間は LCD OFF がデフォルト。CE に内部プルダウンは無いため必須。 |
@@ -342,7 +343,6 @@ Amp 選択後 L/R
 | U403 | BP5293-50 +5V | `Library:BP5293-50_ROHM_SIP-3` | 1 |  |
 | U1601,U1602,U1608 | OPA1656 | `Package_SO:SOIC-8_3.9x4.9mm_P1.27mm` | 3 |  |
 | U1603 | LT1763-3.3 | `Package_SO:SOIC-8_3.9x4.9mm_P1.27mm` | 1 | ADI LT1763 3.3V fixed LDO, SO-8, low noise |
-| U1604 | MBC2596-01 | `Library:MBC2596-01_TAEJIN_43x21mm` | 1 | MBC2596-01 measured FP: 43x21mm, corner pads 3.5mm from edges, module hole ~1.3mm |
 | U1605 | TPS3307-33 | `Package_SO:SOIC-8_3.9x4.9mm_P1.27mm` | 1 | Triple supervisor SO-8: SENSE1=5V (4.55V), SENSE2=3.3V (2.93V), SENSE3=adj 1.25V. Push-pull RESET / ~RESET, 200ms delay, ~MR. VDD from +3V3_A so ~RESET is 3.3V. |
 | U1606 | LT1763-5 | `Package_SO:SOIC-8_3.9x4.9mm_P1.27mm` | 1 | ADI LT1763 5V fixed LDO, SO-8, low noise |
 | U1607 | BP5293-50 | `Library:BP5293-50_ROHM_SIP-3` | 1 |  |
