@@ -3786,7 +3786,7 @@
 		)
 		(uuid "c2a6a5cd-6769-42be-962b-45c70e15eca3")
 	)
-	(label "PD_12V_SW"
+	(label "LED_12V_A"
 		(at 181.61 152.4 0)
 		(effects
 			(font
@@ -4413,7 +4413,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D5.0mm"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -4460,6 +4460,105 @@
 				)
 			)
 		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 189.23 152.4 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ab38ff12-b1cb-5527-b432-3899ad0917fb")
+		(property "Reference" "R401"
+			(at 186.944 150.368 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2k"
+			(at 192.532 154.432 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 189.23 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 189.23 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "D403(12V パネル LED)の直列抵抗。素の LED でも 12V 直結で壊れないようにする。(12-Vf2)/2.2k = 約 4.5mA。抵抗内蔵の 12V LED を挿しても点く（やや暗い）。"
+			(at 189.23 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5504a344-04b2-58ef-81dc-01bae2d584d2")
+		)
+		(pin "2"
+			(uuid "3823a23d-4019-5844-ac13-c9efe7327120")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "R401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "PD_12V_SW"
+		(at 189.23 148.59 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6f71049a-fcaa-5fe5-bf73-0502b1816368")
+	)
+	(label "LED_12V_A"
+		(at 189.23 156.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fb627c33-2480-5bce-94b5-ed79e95a793c")
 	)
 	(symbol
 		(lib_id "Device:C")
