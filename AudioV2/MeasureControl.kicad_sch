@@ -20744,7 +20744,7 @@
 		)
 		(uuid "3453739b-705e-55d6-97a0-0a15c2a47eaf")
 	)
-	(label "DEST_SENSE_MUTE_NC"
+	(label "DEST_SENSE_LINE"
 		(at 365.76 342.9 0)
 		(effects
 			(font
@@ -21134,7 +21134,7 @@
 		)
 		(uuid "6782969b-a5c9-55bf-a610-54a5b41bce0b")
 	)
-	(label "DEST_ADC"
+	(label "DEST_SENSE_MUTE_NC"
 		(at 365.76 340.36 0)
 		(effects
 			(font
@@ -21334,7 +21334,7 @@
 		)
 		(uuid "8442a6c0-2a31-50cf-b14b-222dadb994ee")
 	)
-	(label "DEST_SENSE_LINE"
+	(label "DEST_ADC"
 		(at 355.6 340.36 180)
 		(effects
 			(font
