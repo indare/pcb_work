@@ -5,7 +5,7 @@
 	(uuid "b2000002-0002-4002-8002-000000000002")
 	(paper "A4")
 	(lib_symbols
-		(symbol "AudioV2:REC10K-2415DAW"
+		(symbol "AudioV2:REC20K-2415DZ"
 			(pin_names
 				(offset 1)
 			)
@@ -24,7 +24,7 @@
 					)
 				)
 			)
-			(property "Value" "REC10K-2415DAW/H2"
+			(property "Value" "REC20K-2415DZ"
 				(at 0 -18.415 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -34,7 +34,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Library:REC10K-AW_1in_THT"
+			(property "Footprint" "Library:REC20K-Z_1in_THT"
 				(at 1.27 3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -45,7 +45,7 @@
 					)
 				)
 			)
-			(property "Datasheet" "https://recom-power.com/pdf/Econoline/REC10K-AW.pdf"
+			(property "Datasheet" "AudioV2/datasheets/Recom_REC20K-Z_Rev3-2025.pdf"
 				(at 0.508 1.778 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -56,7 +56,7 @@
 					)
 				)
 			)
-			(property "Description" "Recom REC10K-2415DAW/H2 isolated DC/DC, 9-36Vin, ±15V/±333mA (10W), 1.6kVDC iso, DIP 1in x 1in, Cout ±270uF/rail, pin3=CTRL open=ON"
+			(property "Description" "Recom REC20K-2415DZ isolated DC/DC, 9-36Vin, +/-15V/+/-667mA (20W), eff 88% typ, DIP 1in x 1in, Cout +/-3000uF/rail, pin3=CTRL open=ON. Pinout identical to REC10K-2415DAW; only the recommended hole differs (1.0 -> 1.4), and a 1.4 hole still takes a REC10K."
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -78,7 +78,7 @@
 					)
 				)
 			)
-			(property "MPN" "REC10K-2415DAW/H2"
+			(property "MPN" "REC20K-2415DZ"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -89,7 +89,7 @@
 					)
 				)
 			)
-			(symbol "REC10K-2415DAW_0_1"
+			(symbol "REC20K-2415DZ_0_1"
 				(rectangle
 					(start -10.16 -2.54)
 					(end 10.16 -16.51)
@@ -101,7 +101,7 @@
 						(type background)
 					)
 				)
-				(text "REC10K-2415DAW"
+				(text "REC20K-2415DZ"
 					(at 0 -9.525 0)
 					(effects
 						(font
@@ -110,7 +110,7 @@
 					)
 				)
 			)
-			(symbol "REC10K-2415DAW_1_1"
+			(symbol "REC20K-2415DZ_1_1"
 				(pin power_in line
 					(at -12.7 -8.89 0)
 					(length 2.54)
@@ -3491,7 +3491,7 @@
 		)
 	)
 	(symbol
-		(lib_id "AudioV2:REC10K-2415DAW")
+		(lib_id "AudioV2:REC20K-2415DZ")
 		(at 111.76 76.2 0)
 		(unit 1)
 		(body_style 1)
@@ -3512,7 +3512,7 @@
 				)
 			)
 		)
-		(property "Value" "REC10K-2415DAW/H2"
+		(property "Value" "REC20K-2415DZ"
 			(at 111.76 76.2 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3522,7 +3522,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Library:REC10K-AW_1in_THT"
+		(property "Footprint" "Library:REC20K-Z_1in_THT"
 			(at 113.03 72.39 0)
 			(hide yes)
 			(show_name no)
@@ -3533,7 +3533,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://recom-power.com/pdf/Econoline/REC10K-AW.pdf"
+		(property "Datasheet" "AudioV2/datasheets/Recom_REC20K-Z_Rev3-2025.pdf"
 			(at 112.268 74.422 0)
 			(hide yes)
 			(show_name no)
@@ -3544,7 +3544,7 @@
 				)
 			)
 		)
-		(property "Description" "Recom REC10K-2415DAW/H2 isolated DC/DC, 9-36Vin, ±15V/±333mA (10W), 1.6kVDC iso, DIP 1in x 1in, Cout ±270uF/rail, pin3=CTRL open=ON"
+		(property "Description" "Recom REC20K-2415DZ isolated DC/DC, 9-36Vin, ±15V/±667mA (20W), eff 88% typ, DIP 1in x 1in, Cout ±3000uF/rail, pin3=CTRL open=ON。REC10K-2415DAW/H2（±333mA・Cout ±270uF）から 2026-09-07 に差し替えた。理由は独立に3つ: ①ソケット10個が常時通電なので ±333mA だと 1ソケットあたり 27mA しか使えず、在庫の MUSES03（20mA）で既に窮屈 ②実レール容量 259.8uF が Cout ±270uF の 96% ③計測系の電源を +15V へ寄せる余地。ピン配置は REC10K と同一で、推奨穴が Ø1.0 -> Ø1.4 になるのでフットプリントも替えた（Ø1.4 なら REC10K も挿さる）"
 			(at 111.76 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -3566,7 +3566,7 @@
 				)
 			)
 		)
-		(property "MPN" "REC10K-2415DAW/H2"
+		(property "MPN" "REC20K-2415DZ"
 			(at 111.76 76.2 0)
 			(hide yes)
 			(show_name no)

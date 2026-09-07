@@ -334,7 +334,7 @@ Amp 選択後 L/R
 | SW502 | DEST R (PHONE/MUTE/LINE) | `Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical` | 1 |  |
 | SW1601 | DEST sense (3PDT 3rd pole, same body as SW501/SW502) | `Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical` | 1 |  |
 | TP1601 | ADC_MCLK | `TestPoint:TestPoint_Pad_D1.5mm` | 1 | ADC_MCLK probe pad after R718. |
-| U201 | REC10K-2415DAW/H2 | `Library:REC10K-AW_1in_THT` | 1 | Recom REC10K-2415DAW/H2 isolated DC/DC, 9-36Vin, ±15V/±333mA (10W), 1.6kVDC iso, DIP 1in x 1in, Cout ±270uF/rail, pin3=CTRL open=ON |
+| U201 | REC20K-2415DZ | `Library:REC20K-Z_1in_THT` | 1 | Recom REC20K-2415DZ isolated DC/DC, 9-36Vin, ±15V/±667mA (20W), eff 88% typ, DIP 1in x 1in, Cout ±3000uF/rail, pin3=CTRL open=ON。REC10K-2415DAW/H2（±333mA・Cout ±270uF）から 2026-09-07 に差し替えた。理由は独立に3つ: ①ソケット10個が常時通電なので ±333mA だと 1ソケットあたり 27mA しか使えず、在庫の MUSES03（20mA）で既に窮屈 ②実レール容量 259.8uF が Cout ±270uF の 96% ③計測系の電源を +15V へ寄せる余地。ピン配置は REC10K と同一で、推奨穴が Ø1.0 -> Ø1.4 になるのでフットプリントも替えた（Ø1.4 なら REC10K も挿さる） |
 | U202 | L7809CV +9V | `Package_TO_SOT_THT:TO-220-3_Vertical` | 1 |  |
 | U311,U312,U313 | TMUX7612 | `Package_SO:TSSOP-16_4.4x5mm_P0.65mm` | 3 |  |
 | U321,U322 | TBD62083APG | `Package_DIP:DIP-18_W7.62mm` | 2 |  |
