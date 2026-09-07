@@ -310,7 +310,7 @@ Amp 選択後 L/R
 | J_PWR101 | SLOT1 PWR/CTRL (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical` | 1 |  |
 | J_PWR102 | SLOT2 PWR/CTRL (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical` | 1 |  |
 | J_PWR301,J_PWR302 | SLOT PWR/CTRL (D18) | `Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical` | 2 |  |
-| J_RAIL501 | RAIL IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | From PowerModule J201: +12V / A_GND / -12V (relays switch rails only) |
+| J_RAIL501 | RAIL IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 選択された Amp 出力の取り出し端子。1=AMP_SEL_L / 2=A_GND / 3=AMP_SEL_R で、DEST スイッチ(SW501/SW502)の手前。Value の RAIL IN と旧記述の +12V/A_GND/-12V は、娘基板がスロット直結(J_PWR/J_ANA)になる前の名残で電源ではない。A_GND 極を持つ唯一の音声取り出し口。 |
 | K301,K302,K303,K304,K305 | AZ850P2-5 | `Relay_THT:Relay_DPDT_FRT5` | 5 |  |
 | LCDDisplay1601 | WAVESHARE-29318 | `Connector_PinHeader_2.54mm:PinHeader_1x15_P2.54mm_Vertical` | 1 | Waveshare 29318 Interface2 host side: 2.54mm 1x15 pin header for included GH-to-Dupont cable (ST7796S SPI + FT6336U I2C) |
 | R401 | 2.2k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 1 | D403(12V パネル LED)の直列抵抗。素の LED でも 12V 直結で壊れないようにする。(12-Vf2)/2.2k = 約 4.5mA。抵抗内蔵の 12V LED を挿しても点く（やや暗い）。 |
@@ -428,7 +428,7 @@ Amp 選択後 L/R
 | PT2314E 入手先 | **LCSC `C90034` / JLCPCB（Extended part）**。無印 PT2314 は DigiKey に無く、モデレータ自身が調達困難と回答している。SOP なのでソケットは無い |
 | ノブ（φ6 D カット） | RK27 用に大きめ。ENC 用は小さめ |
 | AmpBank シルク | 帰還抵抗の倍率表（GAIN = 1 + Rf/Rg）を基板隅に印刷（§2.9） |
-| ~~Footprint 未設定の部品~~ | **2026-09-07 に 0 個**（現在の個数は §4.1 の生成値が正。数値をここに書き写すと腐るので置かない）。`legacy/` 由来の電源・トーン・出力段・パネル部品も埋めた。パネル部品（RV / SW_DEST / ENC / PWR SW）は**基板側をヘッダにして現物は箱配線**なので、品番が変わっても基板は動かない。`U202` の立て方と F201-203 のヒューズ外形はレイアウトで見直す前提 |
+| ~~Footprint 未設定の部品~~ | **2026-09-07 に 0 個**（現在の個数は §4.1 の生成値が正。数値をここに書き写すと腐るので置かない）。`legacy/` 由来の電源・トーン・出力段・パネル部品も埋めた。⚠ パネル部品は2種類ある — **ヘッダ**（`RV501/502`・`SW402`・`SW501/502`・`SW1601`。現物は箱配線なので品番が変わっても基板は動かない）と、**基板実装**（`ENC1601-1603` は EC11 垂直・軸20mm の本体、`D1610/D1611/D403` は 5mm LED 本体、`A1602` は Pico 本体）。後者は基板の物理位置をパネルに縛るので、品番変更が基板に効く。`U202` の立て方と F201-203 のヒューズ外形はレイアウトで見直す前提 |
 
 ---
 

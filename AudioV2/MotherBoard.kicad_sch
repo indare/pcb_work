@@ -14297,7 +14297,7 @@
 				)
 			)
 		)
-		(property "Description" "From PowerModule J201: +12V / A_GND / -12V (relays switch rails only)"
+		(property "Description" "選択された Amp 出力の取り出し端子。1=AMP_SEL_L / 2=A_GND / 3=AMP_SEL_R で、DEST スイッチ(SW501/SW502)の手前。Value の RAIL IN と旧記述の +12V/A_GND/-12V は、娘基板がスロット直結(J_PWR/J_ANA)になる前の名残で電源ではない。A_GND 極を持つ唯一の音声取り出し口。"
 			(at -13.97 49.53 0)
 			(hide yes)
 			(show_name no)
