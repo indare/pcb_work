@@ -12,7 +12,7 @@
 
 | 部品 | lib_id | 備考 |
 |---|---|---|
-| PT2314 | `AudioV2:PT2314` | **28pin DIP**（Princeton DS）。旧 8pin 仮シンボルは廃止 |
+| PT2314E | `AudioV2:PT2314` | **28pin**（Princeton DS）。2026-09-07 に `PT2314E`／**SOP-28 300 mil** へ。ピン番号は無印と同一 |
 | RV601/602 | `Device:R_Potentiometer_Dual` | Value **A50k Dual** |
 | SW_DEST 音声 | `Switch:SW_SP3T`×2 | SW601=L / SW602=R。MUTE 投げは NC |
 | SW_DEST センス | `Switch:SW_SP3T` | 3PDT の 3 極目。COM→ADC |
@@ -36,7 +36,9 @@
 
 ---
 
-## 2. PT2314 — 28pin DIP（Princeton DS）
+## 2. PT2314E — 28pin SOP-28 300 mil（Princeton DS）
+
+ピン番号・名前は無印 PT2314 と同一（I²C の 26/27 が `DATA`/`CLK` → `SDA`/`SCL`）。
 
 | Pin | 名前 | AudioV2 接続 |
 |:---:|---|---|
@@ -152,8 +154,8 @@ PCB は未設計（2026-09-01 に削除）。着手時は `Audio/split/AudioCase
 現行のシート構成は [CLAUDE.md](../CLAUDE.md)「シートの所有権」が正。
 
 - [ ] OLED KiCad FP — 0.91″ 埋め込みを 2.42″ or 1×4 ヘッダに差し替え
-- [ ] ERC 整理（未接続・未使用 PT2314 入力）
-- [ ] 未使用 PT2314 入力の AC-GND 実装
+- [x] 未使用 PT2314 入力 — 2026-09-07 に `no_connect` で解消（AC-GND は不要。`LOUT`/`ROUT` ごと孤立しており信号経路に道が無い）
+- [ ] ERC 整理（残り。件数の正は [CLAUDE.md](../CLAUDE.md)）
 - [ ] PCB — 母板・娘基板とも未設計（旧 AmpModule PCB 用にまとめた要件は [PARTS.md](PARTS.md) §4.2 に残る）
 
 ### 刷新前に完了していた項目（2026-09-03 までの記録）
