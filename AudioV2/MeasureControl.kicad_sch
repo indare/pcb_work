@@ -19686,16 +19686,6 @@
 	)
 	(wire
 		(pts
-			(xy 247.65 147.32) (xy 248.92 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d57c675f-2d92-4fd4-aa0b-f18ae876f064")
-	)
-	(wire
-		(pts
 			(xy 429.26 39.37) (xy 434.34 39.37)
 		)
 		(stroke
@@ -21494,16 +21484,6 @@
 		)
 		(uuid "922cc637-6a77-4561-8e70-d07a5855d376")
 	)
-	(label "PICO_3V3"
-		(at 247.65 147.32 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "92a8e865-b0e4-4526-9397-e7876d3635cf")
-	)
 	(label "LCD_CS"
 		(at 247.65 165.1 180)
 		(effects
@@ -22871,6 +22851,10 @@
 				)
 			)
 		)
+	)
+	(no_connect
+		(at 248.92 147.32)
+		(uuid "f855c8b1-03bb-55ae-bd0a-a943dfec4c3c")
 	)
 	(symbol
 		(lib_id "MeasurementADC_Extras:ASFL1-12.288MHZ")
