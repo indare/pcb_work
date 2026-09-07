@@ -16377,6 +16377,118 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 431.8 118.11 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "918e733b-110e-56e6-a035-0f80bfdac711")
+		(property "Reference" "J_IN401"
+			(at 431.8 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AUDIO IN L/R"
+			(at 431.8 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
+			(at 431.8 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 431.8 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "箱の外部音声入力。1=L / 2=A_GND / 3=R。ここから結合C経由で PT2314E の LIN/RIN へ入る（セレクタとボリューム段は LOUT/ROUT->LIN/RIN のインサートで飛ばしている）。L と R の間に GND を挟むため 3P にした。"
+			(at 431.8 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "58079061-2e72-54a0-8921-7ba2bc87fde3")
+		)
+		(pin "2"
+			(uuid "9b0a2000-7250-5074-8170-195a5080a3b5")
+		)
+		(pin "3"
+			(uuid "0bbe45cb-a067-5736-99a2-ded3f127f478")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "J_IN401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "COMMON_L"
+		(at 426.72 115.57 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "58079061-2e72-54a0-8921-7ba2bc87fde3")
+	)
+	(label "A_GND"
+		(at 426.72 118.11 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9b0a2000-7250-5074-8170-195a5080a3b5")
+	)
+	(label "COMMON_R"
+		(at 426.72 120.65 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0bbe45cb-a067-5736-99a2-ded3f127f478")
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 449.58 116.84 0)
 		(unit 1)
@@ -16590,7 +16702,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SOP-28 300 mil（表面実装。無印 PT2314 の DIP 版は入手不可）。LCSC C90034。トーン段だけ使う — 入力セレクタとボリューム段は LOUT/ROUT -> LIN/RIN の インサート点で飛ばしていて、未使用12ピンには no_connect を立ててある。"
 			(at 355.6 0 0)
 			(hide yes)
 			(show_name no)

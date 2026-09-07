@@ -16511,20 +16511,12 @@
 		(uuid "337fc2b7-2569-46b1-ad37-13ad62a10181")
 	)
 	(no_connect
-		(at 106.68 337.82)
-		(uuid "3db1e41c-3561-5a03-af62-825361d61ba1")
-	)
-	(no_connect
 		(at 294.64 170.18)
 		(uuid "5e21211f-553d-408c-ad47-7e6344e44fcf")
 	)
 	(no_connect
 		(at 132.08 355.6)
 		(uuid "7445f34f-f9d7-5180-a81c-069f278026ae")
-	)
-	(no_connect
-		(at 294.64 190.5)
-		(uuid "7d8ce763-a7aa-4fda-92ea-434364544b77")
 	)
 	(no_connect
 		(at 132.08 360.68)
@@ -16555,20 +16547,8 @@
 		(uuid "c8107020-0000-4a01-b001-000000000020")
 	)
 	(no_connect
-		(at 106.68 335.28)
-		(uuid "c919ec58-63cf-5b1b-a066-aecb62e6b6ee")
-	)
-	(no_connect
 		(at 132.08 353.06)
 		(uuid "d5b2a88a-663e-583b-adce-d230fe3b7fd7")
-	)
-	(no_connect
-		(at 294.64 154.94)
-		(uuid "ec782843-9709-4ae8-a342-fe48540ae836")
-	)
-	(no_connect
-		(at 294.64 157.48)
-		(uuid "ed9bbee6-1844-4bd6-95b4-e1d74acb84a4")
 	)
 	(no_connect
 		(at 194.31 168.91)
@@ -26337,7 +26317,7 @@
 				)
 			)
 		)
-		(property "Value" "ENC_VOL"
+		(property "Value" "ENC_BASS"
 			(at 265.72 342.54 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32226,5 +32206,49 @@
 			(justify left bottom)
 		)
 		(uuid "2505e538-95b1-5cfc-8cf1-a55cb8683e7f")
+	)
+	(label "ENC_INTA"
+		(at 106.68 335.28 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3950941e-b0b8-5de6-9b02-8550ab019b44")
+	)
+	(label "ENC_INTB"
+		(at 106.68 337.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9ed21488-8936-55bd-a2a4-4b1a57752c69")
+	)
+	(label "ENC_INTA"
+		(at 294.64 154.94 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d14ec962-b97a-5049-98c6-feee71b44546")
+	)
+	(label "ENC_INTB"
+		(at 294.64 157.48 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "23a4848d-765a-58d3-916a-f15bce46c9c3")
+	)
+	(no_connect
+		(at 294.64 190.5)
+		(uuid "7696a0a1-c2f8-5ecd-acd9-e24e8c0d1567")
 	)
 )
