@@ -15526,7 +15526,7 @@
 		)
 		(uuid "15a00571-55d4-4988-a9f1-dafeb45f21bb")
 	)
-	(text "ADC_V_IN\n  ├─ BP5293-50 → +5V_D（Pico/LCD）\n  └─ MBC2596 → ~6.6V\n         ├─ LT1763-5   → +5V_A  （ADC）\n         └─ LT1763-3.3 → +3V3_A （ADC）"
+	(text "電源系（2026-09-07 U1604 削除後）\nPD_12V_SW ─F1602─ PD_12V_MEAS ─ U1607 BP5293-50 → +5V_D（Pico/LCD。GND=D_GND、CIN=C1645）\n+15V ─────────────────────── U1603 LT1763-3.3 → +3V3_A（ADC。GND=ADC_GND）\n+15V ─────────────────────── U1606 LT1763-5   → +5V_A （ADC。SHDN=+3V3_A で 3V3 先行）\n旧 U1604（MBC2596 12V→6.6V 非絶縁バック）と F1603/C1644 は削除。ADC の LDO は +15V 直結。"
 		(exclude_from_sim no)
 		(at 257.81 27.94 0)
 		(effects
@@ -15538,7 +15538,7 @@
 		)
 		(uuid "1c2b84b1-b2ef-4a07-a061-97e4efaa2c8e")
 	)
-	(text "POWER/DIGITAL: ADC_VIN->U705(MBC2596 6.6-6.8V)->U706(+3V3_A) then U707(+5V_A EN=+3V3_A). U704=+5V_D; D701 Schottky +5V_D->VSYS so USB cannot backfeed +5V_D. Y701 ASFL1->R718->ADC_MCLK (TP701; R720 1k to GP9 sense). U709 TPS3307-33D SO-8 watches +5V_A/+3V3_A, ~RESET->ADC_nRST (PP, 200ms), GP15 OD -> ~MR. U708 XC8107 LCD load-SW (LCD_EN High=ON)."
+	(text "POWER/DIGITAL（2026-09-07）: +15V → U1603(+3V3_A) と U1606(+5V_A, SHDN=+3V3_A)。旧 U1604(MBC2596) は削除。U1607=+5V_D（PD_12V_MEAS から）。D1601 ショットキ: +5V_D → Pico VSYS（USB 逆流止め）。Y1601 12.288MHz → R1604 33Ω → SCKI。R1605 1k → MCLK_SENSE(GP9、監視のみ。⚠ ファームは未使用)。U1609 XC8107 → LCD_VCC。U1605 TPS3307 監視。"
 		(exclude_from_sim no)
 		(at 325.12 17.78 0)
 		(effects
@@ -15549,7 +15549,7 @@
 		)
 		(uuid "1ef2b45d-efcb-4418-92fc-b0a48a8883d2")
 	)
-	(text "GP9=MCLK_SENSE は R720 1k 経由の入力専用。出力にすると Y701 と衝突して SCKI が化ける。"
+	(text "GP9=MCLK_SENSE は R1605 1k 経由の入力専用。出力にすると Y1601 と衝突して SCKI が化ける。"
 		(exclude_from_sim no)
 		(at 171.45 223.52 0)
 		(effects
@@ -15560,7 +15560,7 @@
 		)
 		(uuid "20c6921b-fcd4-43f6-9cfc-0a14db139453")
 	)
-	(text "A3 Pico2 横置き: 南列 1-20 西→東 / 北列 21-40 東→西。VSYS=+5V_D via D701 ショットキ, GND=D_GND | GP0=ADC_DATA GP1=ADC_BCK GP2=ADC_LRCK | GP3/GP4=NC(旧 LCD SPI) | GP5=LCD_CS GP6=LCD_DC GP7=LCD_RST GP8=LCD_EN | GP9=MCLK_SENSE (R720 1k, 入力専用) | GP10=TP_SDA GP11=TP_SCL GP12=TP_INT GP13=TP_RST | GP15=ADC_nMR (TPS3307 ~MR, OD, H は駆動しない) | GP18=LCD_SCK GP19=LCD_MOSI (SPI0)"
+	(text "A3 Pico2 横置き: 南列 1-20 西→東 / 北列 21-40 東→西。VSYS=+5V_D via D1601 ショットキ, GND=D_GND | GP0=ADC_DATA GP1=ADC_BCK GP2=ADC_LRCK | GP3/GP4=NC(旧 LCD SPI) | GP5=LCD_CS GP6=LCD_DC GP7=LCD_RST GP8=LCD_EN | GP9=MCLK_SENSE (R1605 1k, 入力専用) | GP10=TP_SDA GP11=TP_SCL GP12=TP_INT GP13=TP_RST | GP15=ADC_nMR (TPS3307 ~MR, OD, H は駆動しない) | GP18=LCD_SCK GP19=LCD_MOSI (SPI0)"
 		(exclude_from_sim no)
 		(at 171.45 213.36 0)
 		(effects
@@ -15593,7 +15593,7 @@
 		)
 		(uuid "51385100-3953-4fa8-b1c9-741cc6e56e73")
 	)
-	(text "U707 EN=+3V3_A (3V3-first). AbsMax VCC-VDD protection."
+	(text "U1606 EN=+3V3_A (3V3-first). AbsMax VCC-VDD protection."
 		(exclude_from_sim no)
 		(at 325.628 20.828 0)
 		(effects
@@ -15615,7 +15615,7 @@
 		)
 		(uuid "668cae3d-a3f8-4670-8eef-c2f984a761b2")
 	)
-	(text "GND: NT702=A_GND─ADC_GND（A701近傍・アナログ星点）。NT701=ADC_GND_IN─D_GND（PD入口）。Pico/LCD は D_GND のみ。D_GND は太く短く、アナログ入力から離す。計測経路は PD 基準（非絶縁完成）。"
+	(text "GND: NT1601=A_GND─ADC_GND（A1601 近傍・アナログ星点）。NT1602=PD_GND─D_GND（PD 入口）。NT1603=A_GND─D_GND（2026-09-07 新設。U1604 削除で失われた A_GND↔D_GND の橋を明示化）。⚠ NT1601 / NT1602 / NT1603 は PCB で近接させる（1点アース。I2S の帰り・U403 の帰路・U201 の Ciso 経由 CM が全部ここを通る）。Pico/LCD は D_GND のみ。D_GND は太く短く、アナログ入力から離す。"
 		(exclude_from_sim no)
 		(at 63.246 14.478 0)
 		(effects
@@ -15626,7 +15626,7 @@
 		)
 		(uuid "72910310-bb51-4e57-b94e-36eed2e97fe3")
 	)
-	(text "U709=TPS3307-33D SO-8: SENSE1=+5V_A (4.55V) SENSE2=+3V3_A (2.93V) SENSE3=VDD; VDD=+3V3_A C745 100nF; ~RESET PP -> ADC_nRST + R719; GP15 OD -> ~MR (do not drive H); RESET pin NC; 200ms delay. Replaces TPS3808G33/G50 SOT-23-6."
+	(text "U1605=TPS3307-33D SO-8: SENSE1=+5V_A (4.55V) SENSE2=+3V3_A (2.93V) SENSE3=VDD; VDD=+3V3_A C1614 100nF; ~RESET PP -> ADC_nRST + R1611; GP15 OD -> ~MR (do not drive H); RESET pin NC; 200ms delay. Replaces TPS3808G33/G50 SOT-23-6."
 		(exclude_from_sim no)
 		(at 406.654 16.002 0)
 		(effects
@@ -15648,17 +15648,6 @@
 		)
 		(uuid "a77c55ae-5aa4-4472-bbe4-cdf59468ca9e")
 	)
-	(text "チャンネルあたりの公式リファレンス構成: 入力インバータ + ADC VCOM 基準の反転 LPF ドライバ×2。"
-		(exclude_from_sim no)
-		(at 20.32 78.74 0)
-		(effects
-			(font
-				(size 1.397 1.397)
-			)
-			(justify left bottom)
-		)
-		(uuid "a77c55ae-5aa4-4472-bbe4-cdf59468ca9f")
-	)
 	(text "OPA2134 からの OPA1656 置き換え。3.3k/4.7k 網では FET 入力が有利。試作で安定性とフルスケール・レベルを確認すること。"
 		(exclude_from_sim no)
 		(at 20.32 81.28 0)
@@ -15669,17 +15658,6 @@
 			(justify left bottom)
 		)
 		(uuid "a948393a-e8c2-4fdf-9207-c38578b7c253")
-	)
-	(text "OPA2134 からの OPA1656 置き換え。3.3k/4.7k 網では FET 入力が有利。試作で安定性とフルスケール・レベルを確認すること。"
-		(exclude_from_sim no)
-		(at 20.32 81.28 0)
-		(effects
-			(font
-				(size 1.397 1.397)
-			)
-			(justify left bottom)
-		)
-		(uuid "a948393a-e8c2-4fdf-9207-c38578b7c254")
 	)
 	(text "左チャンネル"
 		(exclude_from_sim no)
@@ -15714,7 +15692,7 @@
 		)
 		(uuid "cf7b8622-6606-4cee-b2e8-df99a8415dbd")
 	)
-	(text "U706 LT1763-3.3 (+3V3_A). Fixed LDO; SHDN tied for always-on or as designed. Local CIN/COUT."
+	(text "U1603 LT1763-3.3 (+3V3_A). Fixed LDO; SHDN tied for always-on or as designed. Local CIN/COUT."
 		(exclude_from_sim no)
 		(at 407.416 13.97 0)
 		(effects
@@ -15736,7 +15714,7 @@
 		)
 		(uuid "e4bf9b7d-51ef-49fc-889c-a903e71bb899")
 	)
-	(text "電源: USB VBUS → Pico 内部ショットキ → VSYS。D701 が +5V_D への逆流を止めるので、USB だけ挿すと Pico は動き LCD は消える。VBUS(pin40) は NC。"
+	(text "電源: USB VBUS → Pico 内部ショットキ → VSYS。D1601 が +5V_D への逆流を止めるので、USB だけ挿すと Pico は動き LCD は消える。VBUS(pin40) は NC。"
 		(exclude_from_sim no)
 		(at 171.45 219.71 0)
 		(effects
@@ -15747,7 +15725,7 @@
 		)
 		(uuid "eec355b7-296c-478d-99ad-4217a3f5e4e4")
 	)
-	(text "U708 XC8107AC20MR-G ロードスイッチ: LCD_EN High=ON / Low・Hi-Z=OFF（Active High, VCEH 1.5V min → Pico 3.3V で直接駆動可）。R717 100k=CE プルダウンで起動時 OFF。初号は常時 ON 可。OFF 運用時は SPI/タッチを Low/Hi-Z に。ソフトスタート 0.6ms typ・短絡/逆流/過熱/UVLO 保護内蔵。C740=CIN, C739=CL は各 10uF/3216 を IC 直近へ。FLG は未使用（NC）。"
+	(text "U1609 XC8107AC20MR-G ロードスイッチ: LCD_EN High=ON / Low・Hi-Z=OFF（Active High, VCEH 1.5V min → Pico 3.3V で直接駆動可）。R1620 100k=CE プルダウンで起動時 OFF。初号は常時 ON 可。OFF 運用時は SPI/タッチを Low/Hi-Z に。ソフトスタート 0.6ms typ・短絡/逆流/過熱/UVLO 保護内蔵。C1633=CIN, C1631=CL は各 10uF/3216 を IC 直近へ。FLG は未使用（NC）。"
 		(exclude_from_sim no)
 		(at 312.42 163.83 0)
 		(effects

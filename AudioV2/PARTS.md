@@ -310,7 +310,7 @@ Amp 選択後 L/R
 | J_PWR101 | SLOT1 PWR/CTRL (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical` | 1 |  |
 | J_PWR102 | SLOT2 PWR/CTRL (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical` | 1 |  |
 | J_PWR301,J_PWR302 | SLOT PWR/CTRL (D18) | `Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical` | 2 |  |
-| J_RAIL501 | RAIL IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 選択された Amp 出力の取り出し端子。1=AMP_SEL_L / 2=A_GND / 3=AMP_SEL_R で、DEST スイッチ(SW501/SW502)の手前。Value の RAIL IN と旧記述の +12V/A_GND/-12V は、娘基板がスロット直結(J_PWR/J_ANA)になる前の名残で電源ではない。A_GND 極を持つ唯一の音声取り出し口。 |
+| J_RAIL501 | AMP_SEL OUT | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 選択された Amp 出力の取り出し端子。1=AMP_SEL_L / 2=A_GND / 3=AMP_SEL_R で、DEST スイッチ(SW501/SW502)の手前。旧 Value の RAIL IN と旧記述の +12V/A_GND/-12V は、娘基板がスロット直結(J_PWR/J_ANA)になる前の名残で電源ではない。A_GND 極を持つ唯一の音声取り出し口。 |
 | K301,K302,K303,K304,K305 | AZ850P2-5 | `Relay_THT:Relay_DPDT_FRT5` | 5 |  |
 | LCDDisplay1601 | WAVESHARE-29318 | `Connector_PinHeader_2.54mm:PinHeader_1x15_P2.54mm_Vertical` | 1 | Waveshare 29318 Interface2 host side: 2.54mm 1x15 pin header for included GH-to-Dupont cable (ST7796S SPI + FT6336U I2C) |
 | NT1603 | A_GND-D_GND | `NetTie:NetTie-2_SMD_Pad0.5mm` | 1 | A_GND と D_GND の唯一の結合点。2026-09-07 に U1604(MBC2596 非絶縁バック)を削除した時点で新設した — それまでこの結合は U1604 の内部で起きていて、置き場所を選べなかった。結合点の数は1のままで、場所が選べるようになっただけ（A6/D28 の趣旨は保たれている）。⚠ PCB では NT1601(A_GND-ADC_GND)の隣に置くこと。I2S の帰り(D_GND -> A_GND -> ADC_GND)が2ホップになるので、2つの NetTie が離れるとその間の A_GND 銅箔がループ面積になる。 |
