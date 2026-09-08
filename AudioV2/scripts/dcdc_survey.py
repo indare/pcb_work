@@ -153,6 +153,14 @@ def collect(token: str, cid: str, verbose: bool, bins: list[str]) -> list[dict]:
             offset += 50
             if offset >= total:
                 break
+            # DigiKey は Offset + Limit <= 300 を超えると HTTP 400 を返す。
+            # 10〜20 W ではビンあたり 300 件未満だったので露出しなかったが、
+            # 1〜3 W では 1 ビンが 300 を超える（2026-09-07 に踏んだ）。
+            # 300 で打ち切り、母集団が溢れたビンは警告する — 出力電圧などの軸で分割して引き直すこと。
+            if offset + 50 > 300:
+                print(f"  ⚠ {watt:9s} {total:4d} 件のうち先頭 {offset} 件で打ち切り"
+                      f"（DigiKey の Offset+Limit<=300）。軸を分けて引き直すこと", file=sys.stderr)
+                break
             time.sleep(0.15)
         if verbose:
             print(f"  {watt:9s} {total:4d} 件", file=sys.stderr)

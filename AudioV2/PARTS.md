@@ -250,7 +250,7 @@ Amp 選択後 L/R
 **手で編集しないでください**（次の再生成で消えます）。値・フットプリント・役割を直すときは KiCad の回路図側を直し、
 `python3 AudioV2/scripts/gen_parts_bom.py` で再生成します。
 
-行数 94 / 部品総数 367。
+行数 94 / 部品総数 371。
 
 > `Refs` 列と `Value` / `Role` 列に**位置の対応はありません**。kicad-cli はグループ内の値を重複除去してアルファベット順に並べるため、「n 番目の参照 = n 番目の役割」とは読めません。
 
@@ -262,7 +262,7 @@ Amp 選択後 L/R
 | C201,C205,C207 | 47u | `Capacitor_THT:CP_Radial_D8.0mm_P3.50mm` | 3 |  |
 | C202,C204,C206,C208,C402 | 0.1u | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 5 |  |
 | C203 | 10u | `Capacitor_THT:CP_Radial_D5.0mm_P2.00mm` | 1 |  |
-| C311,C312,C313,C314,C315,C316,C322,C607,C608,C609,C610,C707,C708,C709,C710,C807,C808,C809,C810,C907,C908,C909,C910,C1007,C1008,C1009,C1010,C1107,C1108,C1109,C1110,C1207,C1208,C1209,C1210,C1307,C1308,C1309,C1310,C1407,C1408,C1409,C1410,C1507,C1508,C1509,C1510,C1604,C1605,C1607,C1612,C1614,C1615,C1617,C1618,C1622,C1624,C1625,C1629,C1634,C1636,C1637,C1638,C1639,C1641,C1642,C1643,C1650,C_IO301,C_IO302 | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 70 | A701 +3V3_A local bypass 100nF / 1206 / A701 +5V_A local bypass 100nF / 1206 / U704/U705 VIN HF bypass 100nF / return ADC_GND_IN. / U709 VDD bypass 100nF / VCOML bypass to ADC_GND / VCOMR bypass to ADC_GND / op amp V+ local decoupling / op amp V- local decoupling / switch VDD local decoupling / switch VSS local decoupling |
+| C311,C312,C313,C314,C315,C316,C322,C607,C608,C609,C610,C707,C708,C709,C710,C807,C808,C809,C810,C907,C908,C909,C910,C1007,C1008,C1009,C1010,C1107,C1108,C1109,C1110,C1207,C1208,C1209,C1210,C1307,C1308,C1309,C1310,C1407,C1408,C1409,C1410,C1507,C1508,C1509,C1510,C1604,C1605,C1607,C1612,C1614,C1615,C1617,C1618,C1622,C1624,C1625,C1629,C1634,C1636,C1637,C1638,C1639,C1641,C1642,C1643,C1646,C1647,C1650,C_IO301,C_IO302 | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 72 | A701 +3V3_A local bypass 100nF / 1206 / A701 +5V_A local bypass 100nF / 1206 / U1611 の +15V_A デカップリング / U1611 の -15V_A デカップリング / U704/U705 VIN HF bypass 100nF / return ADC_GND_IN. / U709 VDD bypass 100nF / VCOML bypass to ADC_GND / VCOMR bypass to ADC_GND / op amp V+ local decoupling / op amp V- local decoupling / switch VDD local decoupling / switch VSS local decoupling |
 | C321 | 100uF 25V | `Capacitor_SMD:CP_Elec_10x12.6` | 1 |  |
 | C401 | 22u | `Capacitor_THT:CP_Radial_D6.3mm_P2.50mm` | 1 |  |
 | C403,C404,C410,C411 | 100n | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 4 |  |
@@ -316,17 +316,17 @@ Amp 選択後 L/R
 | NT1603 | A_GND-D_GND | `NetTie:NetTie-2_SMD_Pad0.5mm` | 1 | A_GND と D_GND の唯一の結合点。2026-09-07 に U1604(MBC2596 非絶縁バック)を削除した時点で新設した — それまでこの結合は U1604 の内部で起きていて、置き場所を選べなかった。結合点の数は1のままで、場所が選べるようになっただけ（A6/D28 の趣旨は保たれている）。⚠ PCB では NT1601(A_GND-ADC_GND)の隣に置くこと。I2S の帰り(D_GND -> A_GND -> ADC_GND)が2ホップになるので、2つの NetTie が離れるとその間の A_GND 銅箔がループ面積になる。 |
 | R401 | 2.2k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 1 | D403(12V パネル LED)の直列抵抗。素の LED でも 12V 直結で壊れないようにする。(12-Vf2)/2.2k = 約 4.5mA。抵抗内蔵の 12V LED を挿しても点く（やや暗い）。 |
 | R410,R411 | 5.6k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 |  |
-| R601,R607,R701,R707,R801,R807,R901,R907,R1001,R1007,R1101,R1107,R1201,R1207,R1301,R1307,R1401,R1407,R1501,R1507,R1620 | 100k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 21 | L non-inverting bias / R non-inverting bias / U708(XC8107) CE プルダウン。Active High なので Pico GPIO が Hi-Z の間は LCD OFF がデフォルト。CE に内部プルダウンは無いため必須。 |
+| R601,R607,R701,R707,R801,R807,R901,R907,R1001,R1007,R1101,R1107,R1201,R1207,R1301,R1307,R1401,R1407,R1501,R1507,R1620,R1659,R1660 | 100k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 23 | L non-inverting bias / R non-inverting bias / U1611 L バッファの入力バイアス（v1 R805 相当）。J1601 を抜いても入力が浮かない / U1611 R バッファの入力バイアス（v1 R810 相当） / U708(XC8107) CE プルダウン。Active High なので Pico GPIO が Hi-Z の間は LCD OFF がデフォルト。CE に内部プルダウンは無いため必須。 |
 | R602,R608,R702,R708,R802,R808,R902,R908,R1002,R1008,R1102,R1108,R1202,R1208,R1302,R1308,R1402,R1408,R1502,R1508 | 47R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 20 | L output isolation / R output isolation |
 | R603,R609,R703,R709,R803,R809,R903,R909,R1003,R1009,R1103,R1109,R1203,R1209,R1303,R1309,R1403,R1409,R1503,R1509 | 220k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 20 | L output pulldown (before switch) / R output pulldown (before switch) |
 | R604,R606,R610,R612,R704,R706,R710,R712,R804,R806,R810,R812,R904,R906,R910,R912,R1004,R1006,R1010,R1012,R1104,R1106,R1110,R1112,R1204,R1206,R1210,R1212,R1304,R1306,R1310,R1312,R1404,R1406,R1410,R1412,R1504,R1506,R1510,R1512 | 20k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 40 | L feedback Rf; default 20k = GAIN 2 / L gain resistor Rg; GAIN=1+Rf/Rg / R feedback Rf; default 20k = GAIN 2 / R gain resistor Rg; GAIN=1+Rf/Rg |
 | R1601,R1606,R1612,R1615 | 4.7k 0.1% | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 |  |
 | R1602,R1608,R1613,R1617 | 47 | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 | OPA to ADC VIN series 47 / 1206 |
-| R1603,R1609,R1614,R1618 | 3.3k 0.1% | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 |  |
+| R1603,R1609,R1614,R1618 | 6.19k 0.1% | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 |  |
 | R1604 | 33 | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 1 | Y701 MCLK series 33, 1206 |
-| R1605,R1651,R1652,R1655,R1658 | 1k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 5 | ADC_MCLK -> GP9 sense series resistor. GP9 is input only. |
 | R1607,R1610,R1616,R1619 | 1k 0.1% | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 |  |
 | R1611,R1656,R1657 | 10k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 3 | ADC_nRST pull-up 10k / 1206 |
+| R1651,R1652,R1655,R1658 | 1k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 |  |
 | R1653,R1654 | 4.7k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 |  |
 | RV501 | A50k Dual HP | `Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical` | 1 |  |
 | RV502 | A50k Dual LINE | `Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical` | 1 |  |
@@ -341,7 +341,7 @@ Amp 選択後 L/R
 | U321,U322 | TBD62083APG | `Package_DIP:DIP-18_W7.62mm` | 2 |  |
 | U402 | PT2314E | `Package_SO:SOIC-28W_7.5x17.9mm_P1.27mm` | 1 | SOP-28 300 mil（表面実装。無印 PT2314 の DIP 版は入手不可）。LCSC C90034。トーン段だけ使う — 入力セレクタとボリューム段は LOUT/ROUT -> LIN/RIN の インサート点で飛ばしていて、未使用12ピンには no_connect を立ててある。 |
 | U403 | BP5293-50 +5V | `Library:BP5293-50_ROHM_SIP-3` | 1 |  |
-| U1601,U1602,U1608 | OPA1656 | `Package_SO:SOIC-8_3.9x4.9mm_P1.27mm` | 3 |  |
+| U1601,U1602,U1608,U1611 | OPA1656 | `Package_SO:SOIC-8_3.9x4.9mm_P1.27mm` | 4 | 計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→100k に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−119.7dB、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない。2026-09-07 |
 | U1603 | LT1763-3.3 | `Package_SO:SOIC-8_3.9x4.9mm_P1.27mm` | 1 | ADI LT1763 3.3V fixed LDO, SO-8, low noise |
 | U1605 | TPS3307-33 | `Package_SO:SOIC-8_3.9x4.9mm_P1.27mm` | 1 | Triple supervisor SO-8: SENSE1=5V (4.55V), SENSE2=3.3V (2.93V), SENSE3=adj 1.25V. Push-pull RESET / ~RESET, 200ms delay, ~MR. VDD from +3V3_A so ~RESET is 3.3V. |
 | U1606 | LT1763-5 | `Package_SO:SOIC-8_3.9x4.9mm_P1.27mm` | 1 | ADI LT1763 5V fixed LDO, SO-8, low noise |
