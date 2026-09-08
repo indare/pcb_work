@@ -15538,7 +15538,7 @@
 		)
 		(uuid "1c2b84b1-b2ef-4a07-a061-97e4efaa2c8e")
 	)
-	(text "POWER/DIGITAL（2026-09-07）: +15V → U1603(+3V3_A) と U1606(+5V_A, SHDN=+3V3_A)。旧 U1604(MBC2596) は削除。U1607=+5V_D（PD_12V_MEAS から）。D1601 ショットキ: +5V_D → Pico VSYS（USB 逆流止め）。Y1601 12.288MHz → R1604 33Ω → SCKI。R1605 1k → MCLK_SENSE(GP9、監視のみ。⚠ ファームは未使用)。U1609 XC8107 → LCD_VCC。U1605 TPS3307 監視。"
+	(text "POWER/DIGITAL（2026-09-07）: +15V → U1603(+3V3_A) と U1606(+5V_A, SHDN=+3V3_A)。旧 U1604(MBC2596) は削除。U1607=+5V_D（PD_12V_MEAS から）。D1601 ショットキ: +5V_D → Pico VSYS（USB 逆流止め）。Y1601 12.288MHz → R1604 33Ω → SCKI。U1609 XC8107 → LCD_VCC。U1605 TPS3307 監視。"
 		(exclude_from_sim no)
 		(at 325.12 17.78 0)
 		(effects
@@ -15560,7 +15560,7 @@
 		)
 		(uuid "20c6921b-fcd4-43f6-9cfc-0a14db139453")
 	)
-	(text "GP9: 旧 MCLK_SENSE（R1605 1k 経由）は 2026-09-07 に削除。ファームは GP9 を読んでいなかった。SCKI の生死は BCK（=SCKI/4）で分かる。GP9 は no_connect。"
+	(text "A3 Pico2 横置き: 南列 1-20 西→東 / 北列 21-40 東→西。VSYS=+5V_D via D1601 ショットキ, GND=D_GND | GP0=ADC_DATA GP1=ADC_BCK GP2=ADC_LRCK | GP3/GP4=NC(旧 LCD SPI) | GP5=LCD_CS GP6=LCD_DC GP7=LCD_RST GP8=LCD_EN | GP9=NC（旧 MCLK_SENSE、2026-09-07 削除） | GP10=TP_SDA GP11=TP_SCL GP12=TP_INT GP13=TP_RST | GP15=ADC_nMR (TPS3307 ~MR, OD, H は駆動しない) | GP16=ENC_INTA GP17=ENC_INTB (U1610 MCP23017 割り込み) | GP18=LCD_SCK GP19=LCD_MOSI (SPI0)"
 		(exclude_from_sim no)
 		(at 171.45 213.36 0)
 		(effects
@@ -15648,7 +15648,7 @@
 		)
 		(uuid "a77c55ae-5aa4-4472-bbe4-cdf59468ca9e")
 	)
-	(text "OPA2134 からの OPA1656 置き換え。3.3k/4.7k 網では FET 入力が有利。試作で安定性とフルスケール・レベルを確認すること。"
+	(text "OPA2134 からの OPA1656 置き換え。6.19k/4.7k 網（前段入力抵抗は 2026-09-07 に 3.3k→6.19k）では FET 入力が有利。試作で安定性とフルスケール・レベルを確認すること。"
 		(exclude_from_sim no)
 		(at 20.32 81.28 0)
 		(effects
@@ -31684,7 +31684,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -31953,7 +31953,7 @@
 				)
 			)
 		)
-		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→100k に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−119.7dB、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない。2026-09-07"
+		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→約30k（RV501 50k ∥ R603 220k ∥ R1659 100k）に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−115.5dB（spice/switch_thd.py --rload 30.4e3 実測）、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない（負荷は R1612/R1614 系の抵抗で容量性ではなく、OPA1656 は CL 100 pF まで規定内。DS Electrical Characteristics）。2026-09-07"
 			(at 20.32 115.57 0)
 			(hide yes)
 			(show_name no)
@@ -32080,7 +32080,7 @@
 				)
 			)
 		)
-		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→100k に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−119.7dB、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない。2026-09-07"
+		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→約30k（RV501 50k ∥ R603 220k ∥ R1659 100k）に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−115.5dB（spice/switch_thd.py --rload 30.4e3 実測）、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない（負荷は R1612/R1614 系の抵抗で容量性ではなく、OPA1656 は CL 100 pF まで規定内。DS Electrical Characteristics）。2026-09-07"
 			(at 20.32 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -32197,7 +32197,7 @@
 				)
 			)
 		)
-		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→100k に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−119.7dB、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない。2026-09-07"
+		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→約30k（RV501 50k ∥ R603 220k ∥ R1659 100k）に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−115.5dB（spice/switch_thd.py --rload 30.4e3 実測）、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない（負荷は R1612/R1614 系の抵抗で容量性ではなく、OPA1656 は CL 100 pF まで規定内。DS Electrical Characteristics）。2026-09-07"
 			(at 20.32 135.89 0)
 			(hide yes)
 			(show_name no)

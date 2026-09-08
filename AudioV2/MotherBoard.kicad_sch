@@ -6,6 +6,278 @@
 	(paper "A2")
 
 	(lib_symbols
+		(symbol "Amplifier_Operational:NE5532"
+			(pin_names
+				(offset 0.127)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "NE5532"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ne5532.pdf"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Dual Low-Noise Operational Amplifiers, DIP-8/SOIC-8"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "dual opamp"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "NE5532_1_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "NE5532_2_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "NE5532_3_1"
+				(pin power_in line
+					(at -2.54 -7.62 90)
+					(length 3.81)
+					(name "V-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 7.62 270)
+					(length 3.81)
+					(name "V+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "AudioV2:PT2314"
 			(pin_names
 				(offset 1.016)
@@ -1020,6 +1292,229 @@
 			)
 			(embedded_fonts no)
 		)
+			(symbol "BSS138_0_1"
+				(polyline
+					(pts
+						(xy 0.254 1.905) (xy 0.254 -1.905)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.254 0) (xy -2.54 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 2.286) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 0.508) (xy 0.762 -0.508)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.27) (xy 0.762 -2.286)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.778) (xy 3.302 -1.778) (xy 3.302 1.778) (xy 0.762 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0) (xy 2.032 0.381) (xy 2.032 -0.381) (xy 1.016 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 1.651 0)
+					(radius 2.794)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54) (xy 2.54 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 2.54 -1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.921 0.381) (xy 3.683 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.302 0.381) (xy 2.921 -0.254) (xy 3.683 -0.254) (xy 3.302 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "BSS138_1_1"
+				(pin input line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "G"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 -5.08 90)
+					(length 2.54)
+					(name "S"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 2.54)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
 			(symbol "C_0_1"
 				(polyline
 					(pts
@@ -7068,6 +7563,180 @@
 			)
 			(embedded_fonts no)
 		)
+			(symbol "NE5532_1_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "NE5532_2_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "NE5532_3_1"
+				(pin power_in line
+					(at -2.54 -7.62 90)
+					(length 3.81)
+					(name "V-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 7.62 270)
+					(length 3.81)
+					(name "V+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
 			(symbol "NetTie_2_0_1"
 				(polyline
 					(pts
@@ -10537,6 +11206,321 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Transistor_FET:BSS138"
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "Q"
+				(at 5.08 1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "BSS138"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 5.08 -1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(justify left)
+				)
+			)
+			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/BSS138-D.PDF"
+				(at 5.08 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Description" "50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "N-Channel MOSFET"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+	(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "BSS138_0_1"
+				(polyline
+					(pts
+						(xy 0.254 1.905) (xy 0.254 -1.905)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.254 0) (xy -2.54 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 2.286) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 0.508) (xy 0.762 -0.508)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.27) (xy 0.762 -2.286)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.778) (xy 3.302 -1.778) (xy 3.302 1.778) (xy 0.762 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0) (xy 2.032 0.381) (xy 2.032 -0.381) (xy 1.016 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 1.651 0)
+					(radius 2.794)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54) (xy 2.54 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 2.54 -1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.921 0.381) (xy 3.683 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.302 0.381) (xy 2.921 -0.254) (xy 3.683 -0.254) (xy 3.302 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "BSS138_1_1"
+				(pin input line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "G"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 -5.08 90)
+					(length 2.54)
+					(name "S"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 2.54)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:PWR_FLAG"
 			(power global)
 			(pin_numbers
@@ -13120,12 +14104,6 @@
 		(uuid "9ecc6ac9-9d0e-4d20-a326-d81dc12f4fc2")
 	)
 	(junction
-		(at 168.91 160.02)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a72ade43-c3d5-49da-a377-375d5e0472cf")
-	)
-	(junction
 		(at 167.64 171.45)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -13217,16 +14195,6 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 161.29) (xy 168.91 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "388b16e8-bb4c-43d0-8c9e-e55b984e393a")
-	)
-	(wire
-		(pts
 			(xy 124.46 194.31) (xy 124.46 189.23)
 		)
 		(stroke
@@ -13277,16 +14245,6 @@
 	)
 	(wire
 		(pts
-			(xy 156.21 160.02) (xy 168.91 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6e991d5d-8d16-4094-b758-ebbc4825071d")
-	)
-	(wire
-		(pts
 			(xy 167.64 173.99) (xy 156.21 173.99)
 		)
 		(stroke
@@ -13307,16 +14265,6 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 175.26) (xy 167.64 173.99)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "78c8ffc7-e5dc-463b-bb90-6bebeffb9255")
-	)
-	(wire
-		(pts
 			(xy 26.67 171.45) (xy 31.75 171.45)
 		)
 		(stroke
@@ -13324,16 +14272,6 @@
 			(type default)
 		)
 		(uuid "858f46bd-18d7-4352-b910-3991ba45bdb3")
-	)
-	(wire
-		(pts
-			(xy 168.91 173.99) (xy 167.64 173.99)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "867590dd-88d7-45fa-840e-964b46bd0fee")
 	)
 	(wire
 		(pts
@@ -13535,6 +14473,78 @@
 		)
 		(uuid "f8e0994c-22d6-4eb2-a854-41251e33619c")
 	)
+	(wire
+		(pts
+			(xy 156.21 160.02) (xy 163.83 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca5f692c-b1c9-5dba-a376-0b987ca2bf7a")
+	)
+	(wire
+		(pts
+			(xy 163.83 160.02) (xy 163.83 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e7ab536-b7c3-51bd-aabb-27276f89c383")
+	)
+	(wire
+		(pts
+			(xy 163.83 162.56) (xy 168.91 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e98eeb5e-3c80-5e3f-9d27-b8ac1e4450f4")
+	)
+	(wire
+		(pts
+			(xy 168.91 161.29) (xy 168.91 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e798cb0-25fd-5e69-a2ad-1b6204b0553a")
+	)
+	(junction
+		(at 168.91 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "14fa97e4-f57b-53b0-96d5-4682044103d5")
+	)
+	(wire
+		(pts
+			(xy 167.64 173.99) (xy 167.64 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "efe1b952-8a88-5514-9025-2849e05416e3")
+	)
+	(wire
+		(pts
+			(xy 167.64 176.53) (xy 168.91 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a441b50-e77f-513c-a5b1-d42a8e3375f5")
+	)
+	(junction
+		(at 167.64 175.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c6004920-2026-56d3-b368-a7e0e231f6cf")
+	)
 	(label "LINE_PRE_L"
 		(at 116.84 196.85 0)
 		(effects
@@ -13655,7 +14665,7 @@
 		)
 		(uuid "7afe5d20-63cd-4d9f-9a5c-f0490ce1a6e9")
 	)
-	(label "PHONE_L"
+	(label "PHONE_BUF_L"
 		(at 120.65 151.13 0)
 		(effects
 			(font
@@ -13725,7 +14735,7 @@
 		)
 		(uuid "c18178ec-fc1d-4120-ba88-7fd167a76e65")
 	)
-	(label "PHONE_R"
+	(label "PHONE_BUF_R"
 		(at 133.35 151.13 0)
 		(effects
 			(font
@@ -13744,6 +14754,317 @@
 			(justify right bottom)
 		)
 		(uuid "f7b9e20a-b9b2-40a1-916b-2193bee8857c")
+	)
+	(label "HP_OUT_L"
+		(at 68.58 212.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "00e7b4cf-a0dc-5e1c-936f-04cea248aa11")
+	)
+	(label "HP_OUT_L"
+		(at 53.34 214.63 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bb7ed3de-f2a7-5992-851f-3a6a8ae21cba")
+	)
+	(label "PHONE_BUF_L"
+		(at 53.34 209.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9b5a789a-c194-5aa1-8926-154fc83a1644")
+	)
+	(label "HP_OUT_L"
+		(at 83.82 208.28 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b044d350-25dd-5ce6-808e-0b22733ee5f8")
+	)
+	(label "HP_RC_L"
+		(at 83.82 215.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "acd4f2d1-933c-52a2-a71f-0df86f3f25d2")
+	)
+	(label "HP_RC_L"
+		(at 96.52 208.28 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0f09a15c-9505-5ff9-87e0-d68c9d54b49d")
+	)
+	(label "PHONE_L"
+		(at 96.52 215.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4df55047-af49-5774-8233-b125de28baa4")
+	)
+	(label "PHONE_L"
+		(at 109.22 208.28 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ec981b96-6b30-518b-9575-cb5fdbc4296f")
+	)
+	(label "A_GND"
+		(at 109.22 215.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f8e035ac-6f8e-592d-867d-f4d9d25f8c22")
+	)
+	(label "PHONE_BUF_R"
+		(at 53.34 229.87 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "044a7891-63b3-5b9c-b41b-4fcb2d860480")
+	)
+	(label "HP_OUT_R"
+		(at 53.34 234.95 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "dd4d4957-6406-534d-abd7-032404ffd4e3")
+	)
+	(label "HP_OUT_R"
+		(at 68.58 232.41 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1f8a95e9-b773-535f-92b0-f375f2a0396c")
+	)
+	(label "HP_OUT_R"
+		(at 83.82 228.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cfee0f1b-b48b-5de9-ab4d-dc8c3cc3a9d9")
+	)
+	(label "HP_RC_R"
+		(at 83.82 236.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a50e026f-93a7-55d7-ae9e-4cef5ca986be")
+	)
+	(label "HP_RC_R"
+		(at 96.52 228.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3f7ddea2-62d1-57dd-9385-e7dcb47e392e")
+	)
+	(label "PHONE_R"
+		(at 96.52 236.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1d778251-ff29-5b1d-9067-b6446ecea4a7")
+	)
+	(label "PHONE_R"
+		(at 109.22 228.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3acfe042-0e93-5842-9d3c-cd41506e1fcf")
+	)
+	(label "A_GND"
+		(at 109.22 236.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "898a4bff-a19b-5cae-af13-793a30b782b0")
+	)
+	(label "-15V"
+		(at 132.08 229.87 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ea45e8c5-d0b2-5232-ae80-6b081280c81c")
+	)
+	(label "+15V"
+		(at 132.08 214.63 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f514a3ac-3141-5329-b371-671b9168bd0b")
+	)
+	(label "+15V"
+		(at 147.32 210.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c880e074-9e01-599f-afa9-462064ffd33f")
+	)
+	(label "A_GND"
+		(at 147.32 218.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b1f04aba-8524-51ee-895a-8adb2161c5c8")
+	)
+	(label "+15V"
+		(at 157.48 210.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3718c711-960a-5e2d-9c76-32bcfe24b8ab")
+	)
+	(label "A_GND"
+		(at 157.48 218.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "126db53d-db75-5707-b7b1-64eaf0d909c1")
+	)
+	(label "A_GND"
+		(at 147.32 226.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b05ebbd4-6b98-5862-8447-2f34822b085c")
+	)
+	(label "-15V"
+		(at 147.32 233.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8bce620c-9817-57ca-ad8d-5928cca2336f")
+	)
+	(label "A_GND"
+		(at 157.48 226.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7c83a87e-82ed-514d-92c9-0fa9686ac007")
+	)
+	(label "-15V"
+		(at 157.48 233.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ee9b06a0-2e59-5893-8768-efd7bc302096")
+	)
+	(label "A_GND"
+		(at 168.91 160.02 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c0cce3fe-aa70-567f-97c0-dbfff7c9415d")
+	)
+	(label "A_GND"
+		(at 168.91 173.99 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b89c1dd9-7262-5419-b77c-771c86a292f9")
+	)
+	(text "HP バッファ（2026-09-08、v1 HeadphoneBufferModule を 5xx で移設）: RV501 ワイパー → PHONE_BUF_L/R → U501 ユニティ → 10Ω → 470µF NP → PHONE_L/R → J_HP501 / 親。100k はジャック側のブリード。U501 は DIP-8 ソケット、標準実装 OPA1652。LINE はバッファ無し（RV502 直出し）のまま。配線はピン先ラベル（このシートの流儀）。"
+		(exclude_from_sim no)
+		(at 40.64 247.65 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "14bb122e-ec63-59b9-be02-cda780e4f625")
 	)
 	(hierarchical_label "PHONE_L"
 		(shape output)
@@ -13820,8 +15141,8 @@
 		(uuid "03e8d622-7c2e-58fa-9d1a-f3bff5c7f93f")
 	)
 	(symbol
-		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 173.99 171.45 0)
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 173.99 173.99 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -13850,7 +15171,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
 			(at 8.89 115.57 0)
 			(hide yes)
 			(show_name no)
@@ -13872,7 +15193,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "ライン出力端子（箱のパネルへ）。1=LINE_L / 2=A_GND / 3=LINE_R。RV502 直出し（バッファ無し）。2026-09-08 に 2P→3P（帰路を入れた）"
 			(at 8.89 115.57 0)
 			(hide yes)
 			(show_name no)
@@ -13888,6 +15209,9 @@
 		)
 		(pin "2"
 			(uuid "38647eea-887f-4548-b4eb-8a6959d8da36")
+		)
+		(pin "3"
+			(uuid "31333560-9dc9-5f38-ae19-86a1925ad1b9")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -14075,8 +15399,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 173.99 157.48 0)
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 173.99 160.02 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -14095,7 +15419,7 @@
 				)
 			)
 		)
-		(property "Value" "to Audio HP Buffer"
+		(property "Value" "HP OUT"
 			(at 173.99 152.4 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14105,7 +15429,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal"
 			(at 8.89 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -14127,7 +15451,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "ヘッドホン出力端子（箱のパネルのジャックへ）。1=PHONE_L / 2=A_GND / 3=PHONE_R。U501 バッファの出力（10Ω・470µF NP 経由）。2026-09-08 に 2P→3P（帰路を入れた。J_IN401/J_RAIL501 と同じ流儀）。旧 Value「to Audio HP Buffer」= 図の外の v1 バッファは同日 U501 として取り込んだ"
 			(at 8.89 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -14143,6 +15467,9 @@
 		)
 		(pin "2"
 			(uuid "f4a2fb26-1761-4ab6-bed0-9e48c762843a")
+		)
+		(pin "3"
+			(uuid "2a830762-a61a-5501-925b-7f64a4b25da5")
 		)
 		(instances
 			(project "AudioV2Case"
@@ -14411,6 +15738,1087 @@
 			)
 		)
 	)
+	(symbol
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 60.96 212.09 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c8828ac9-6617-51a7-aff9-e595de7257c8")
+		(property "Reference" "U501"
+			(at 60.96 204.47 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA1652"
+			(at 60.96 219.71 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
+			(at 60.96 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 60.96 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "HP バッファ（v1 HeadphoneBufferModule AMP901 の移設・2026-09-08）。ユニティフォロワ ×2（A=L, B=R）。DIP-8 ソケットで AmpChannel と同じ。標準実装は OPA1652（DIP 化モジュール、出力 ±30 mA）。入力は RV501 ワイパー（PHONE_BUF_L/R）、出力は 10Ω→470µF NP→PHONE_L/R。⚠ 比較セッション中は差し替えない（10 石すべてに共通に掛かる）。"
+			(at 60.96 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "558ab41f-424b-5581-bf4a-df4a0ee5ad4e")
+		)
+		(pin "2"
+			(uuid "1b035d53-d1ac-5d50-8e58-cef32e93904b")
+		)
+		(pin "3"
+			(uuid "fba1f295-bbc0-5f89-a5c0-77191b2f63b3")
+		)
+		(pin "4"
+			(uuid "5c06d1b2-652f-5d4b-bc01-b101412515c8")
+		)
+		(pin "5"
+			(uuid "44d88e24-7243-5cf0-b69c-6e9b371e718f")
+		)
+		(pin "6"
+			(uuid "e93095aa-8163-5f28-a176-0f42e407080f")
+		)
+		(pin "7"
+			(uuid "3eab2c72-0f79-526c-95dd-953b116de3de")
+		)
+		(pin "8"
+			(uuid "3e967d4f-fe18-518b-96d1-9437c4250079")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "U501")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 83.82 212.09 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b682f160-818e-50f2-a232-833baf38eb44")
+		(property "Reference" "R501"
+			(at 86.36 210.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10R"
+			(at 86.36 213.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 83.82 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "HP 出力の直列抵抗（v1 R901）。ケーブル容量からの分離"
+			(at 83.82 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a02f5ba7-7652-51ae-b042-1f5c8a754217")
+		)
+		(pin "2"
+			(uuid "ae70dbd1-35bb-59d3-b342-df133b3143ad")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "R501")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 96.52 212.09 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4a7651b1-b8d9-56dd-9bf0-db37927035c6")
+		(property "Reference" "C501"
+			(at 99.06 210.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "470uF 25V NP"
+			(at 99.06 213.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+			(at 96.52 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（DECISIONS）"
+			(at 96.52 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e5c97c8f-70f1-56ce-a78f-976fff4fd17d")
+		)
+		(pin "2"
+			(uuid "2314f2c9-0b10-5d99-b9fd-d8e83a33ecfa")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "C501")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 109.22 212.09 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "5f2df3d7-da5b-5147-ba6c-fcd706aacc9e")
+		(property "Reference" "R503"
+			(at 111.76 210.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100k"
+			(at 111.76 213.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 109.22 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 109.22 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "HP ジャック側ノードのブリード（v1 R902）。未接続時に C501 の DC を落とす"
+			(at 109.22 212.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "fbee58e1-37a2-5887-a1d9-647f1bf02e26")
+		)
+		(pin "2"
+			(uuid "2f619af9-0c39-52e7-9d00-2ff5a707d981")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "R503")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 60.96 232.41 0)
+		(unit 2)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4e2d6ddb-83b9-5220-b272-e5fb93ad5d54")
+		(property "Reference" "U501"
+			(at 60.96 224.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA1652"
+			(at 60.96 240.03 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
+			(at 60.96 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 60.96 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "HP バッファ（v1 HeadphoneBufferModule AMP901 の移設・2026-09-08）。ユニティフォロワ ×2（A=L, B=R）。DIP-8 ソケットで AmpChannel と同じ。標準実装は OPA1652（DIP 化モジュール、出力 ±30 mA）。入力は RV501 ワイパー（PHONE_BUF_L/R）、出力は 10Ω→470µF NP→PHONE_L/R。⚠ 比較セッション中は差し替えない（10 石すべてに共通に掛かる）。"
+			(at 60.96 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f6aaec9e-8e2e-5f9f-b5c6-3a203a33eb13")
+		)
+		(pin "2"
+			(uuid "efce4203-0b4c-5899-91a3-ff7cd2f2466f")
+		)
+		(pin "3"
+			(uuid "94ff1e66-c528-5c42-98c5-9f211441503c")
+		)
+		(pin "4"
+			(uuid "5a7ee249-b243-5832-a5b8-542025502c3f")
+		)
+		(pin "5"
+			(uuid "ee2d62a7-f81d-5efd-bb0c-a58da17cb0a4")
+		)
+		(pin "6"
+			(uuid "4822015d-ace1-5530-a731-a06374c91c47")
+		)
+		(pin "7"
+			(uuid "68671d1a-3fa0-59ca-9404-00f1bcb85185")
+		)
+		(pin "8"
+			(uuid "96f445a8-0cc3-57fe-8eee-db974f91f2a2")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "U501")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 83.82 232.41 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "94a6ce11-ade8-57a3-a50b-52591bd725bd")
+		(property "Reference" "R502"
+			(at 86.36 231.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10R"
+			(at 86.36 233.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 83.82 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "HP 出力の直列抵抗（v1 R903）"
+			(at 83.82 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f39a9105-a77e-5162-9488-411ff4a9a9ad")
+		)
+		(pin "2"
+			(uuid "74258e86-7b1f-5f94-9ed1-a79b81b64bb5")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "R502")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 96.52 232.41 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "cf096593-fcb6-59c7-a8a3-246bb32e224d")
+		(property "Reference" "C502"
+			(at 99.06 231.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "470uF 25V NP"
+			(at 99.06 233.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+			(at 96.52 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "HP 出力の DC ブロック（v1 C902）。無極性電解"
+			(at 96.52 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4cb7b77c-99b9-5620-a46e-141985b1e56d")
+		)
+		(pin "2"
+			(uuid "063b9341-1b14-5106-afde-a5004619668b")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "C502")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 109.22 232.41 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "522a28fd-93e3-5367-8699-55fa0b23586c")
+		(property "Reference" "R504"
+			(at 111.76 231.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100k"
+			(at 111.76 233.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 109.22 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 109.22 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "HP ジャック側ノードのブリード（v1 R904）"
+			(at 109.22 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1d8918bc-af47-537f-a5b4-1c33fe219bd0")
+		)
+		(pin "2"
+			(uuid "671d3a7b-d828-5497-8be1-f04f2e8e4a34")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "R504")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:NE5532")
+		(at 134.62 222.25 0)
+		(unit 3)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e5397c30-49bb-5ad2-9314-13fcd6e0740a")
+		(property "Reference" "U501"
+			(at 134.62 214.63 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA1652"
+			(at 134.62 229.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DIP:DIP-8_W7.62mm_Socket"
+			(at 134.62 222.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 134.62 222.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "HP バッファ（v1 HeadphoneBufferModule AMP901 の移設・2026-09-08）。ユニティフォロワ ×2（A=L, B=R）。DIP-8 ソケットで AmpChannel と同じ。標準実装は OPA1652（DIP 化モジュール、出力 ±30 mA）。入力は RV501 ワイパー（PHONE_BUF_L/R）、出力は 10Ω→470µF NP→PHONE_L/R。⚠ 比較セッション中は差し替えない（10 石すべてに共通に掛かる）。"
+			(at 134.62 222.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "723ea608-6bfa-5e00-a446-21c426489df9")
+		)
+		(pin "2"
+			(uuid "f97047c0-4757-53ac-b681-d7df871ba731")
+		)
+		(pin "3"
+			(uuid "e189a7aa-116a-57b6-b7a7-1eeb86ab22d8")
+		)
+		(pin "4"
+			(uuid "bc580ec2-ce04-5012-bdc5-d98f2c5035e3")
+		)
+		(pin "5"
+			(uuid "6a0646af-e343-594a-a3df-7d5e037f5001")
+		)
+		(pin "6"
+			(uuid "4fbc9eb2-5412-5b76-8d73-fd816ac2e1c5")
+		)
+		(pin "7"
+			(uuid "375444ec-eee0-5ad2-b0eb-5c8f0b5d6460")
+		)
+		(pin "8"
+			(uuid "29c16df6-6737-5d72-8208-36d0987a1d2b")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "U501")
+					(unit 3)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 147.32 214.63 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7f133d8d-bef1-55ea-a66b-e89a684976ee")
+		(property "Reference" "C503"
+			(at 149.86 213.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10uF 25V X7R"
+			(at 149.86 215.9 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 147.32 214.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 147.32 214.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U501 の +15V ローカルバルク（v1 C903）"
+			(at 147.32 214.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2b3af691-5aa3-5ca7-88bc-d748e73e07ef")
+		)
+		(pin "2"
+			(uuid "c727c561-3c39-54d9-b8ad-7bd3689cbc74")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "C503")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 157.48 214.63 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "72a2cc75-fe62-5f38-b4d6-edf9dc653262")
+		(property "Reference" "C505"
+			(at 160.02 213.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 160.02 215.9 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 157.48 214.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 157.48 214.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U501 の +15V デカップリング"
+			(at 157.48 214.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "32458263-3719-5520-8a1a-8925a135a7cc")
+		)
+		(pin "2"
+			(uuid "779c4c8a-75ee-53b4-913d-098da77a72fb")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "C505")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 147.32 229.87 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6046f1ec-4cdf-5775-8461-7503f5e674ef")
+		(property "Reference" "C504"
+			(at 149.86 228.6 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10uF 25V X7R"
+			(at 149.86 231.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 147.32 229.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 147.32 229.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U501 の -15V ローカルバルク（v1 C905 相当）"
+			(at 147.32 229.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9b75370c-4193-5f78-ada9-e8dd3802d078")
+		)
+		(pin "2"
+			(uuid "973ca321-8dd4-5d3a-81e1-e80f7bb057c8")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "C504")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 157.48 229.87 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "891277f0-dff0-5728-81ff-cf3b6545ff1a")
+		(property "Reference" "C506"
+			(at 160.02 228.6 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 160.02 231.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 157.48 229.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 157.48 229.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U501 の -15V デカップリング（v1 C906）"
+			(at 157.48 229.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1b4d6c51-c4a2-5e3c-8ece-975e83feafbd")
+		)
+		(pin "2"
+			(uuid "cbd23e05-af6f-5f8e-942e-5045fa64beef")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "C506")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(text "ControlPanel — label-wired (DECISIONS manual volume)\nPT2314 / Pico2 / ENC×3 / 2.42″ OLED I2C / DEST ladder+LED / PWR SW\nJ_OLED501: 1=GND 2=3V3 3=SCL 4=SDA. ENC→GP0-8, DEST_ADC→GP26, LED→GP14/15.\nConnectivity = local labels on pin tips (grid-snapped)."
 		(exclude_from_sim no)
 		(at 381 25.4 0)
@@ -14482,7 +16890,7 @@
 		)
 		(uuid "114240fe-c660-4334-b20b-b1dd20c9b62a")
 	)
-	(label "D_GND"
+	(label "A_GND"
 		(at 528.32 110.49 0)
 		(effects
 			(font
@@ -14522,7 +16930,7 @@
 		)
 		(uuid "16bb4c94-e8d5-4d64-9742-02badfa1c1f8")
 	)
-	(label "I2C_SDA"
+	(label "I2C_SDA_9V"
 		(at 528.32 107.95 0)
 		(effects
 			(font
@@ -14882,7 +17290,7 @@
 		)
 		(uuid "c29dbbc3-89e7-4e1a-b95d-fd85cb351da9")
 	)
-	(label "I2C_SCL"
+	(label "I2C_SCL_9V"
 		(at 528.32 105.41 0)
 		(effects
 			(font
@@ -16488,6 +18896,117 @@
 		)
 		(uuid "0bbe45cb-a067-5736-99a2-ded3f127f478")
 	)
+	(label "3V3"
+		(at 441.96 146.05 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a47ea1bc-9f60-504d-8edc-54384c02ea28")
+	)
+	(label "I2C_SDA"
+		(at 449.58 151.13 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9d2a6380-2c1e-555b-8815-c88fd02ef096")
+	)
+	(label "I2C_SDA_9V"
+		(at 449.58 140.97 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bdc6d6ba-312d-5789-b5c4-60ed212a3516")
+	)
+	(label "VCC_TONE"
+		(at 457.2 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b7331f7b-b550-5e1f-9021-854b477ef1cb")
+	)
+	(label "I2C_SDA_9V"
+		(at 457.2 139.7 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2d157e1b-8dec-547f-9c21-5f3fec57d5d6")
+	)
+	(label "3V3"
+		(at 459.74 146.05 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f6926a48-7cdc-5150-b31b-e6f562271a5c")
+	)
+	(label "I2C_SCL"
+		(at 467.36 151.13 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7c7070f2-36d9-5384-90a2-0616781ee931")
+	)
+	(label "I2C_SCL_9V"
+		(at 467.36 140.97 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d5886403-70b9-58f8-b079-d866e579c8b5")
+	)
+	(label "VCC_TONE"
+		(at 472.44 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fe7d959a-8909-5165-aaf3-d2bbd0fb66e6")
+	)
+	(label "I2C_SCL_9V"
+		(at 472.44 139.7 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fa05f3d3-6484-5327-bcfc-2c679bba8015")
+	)
+	(text "I²C レベルシフタ（2026-09-08）: Pico 側 3V3 バス I2C_SDA/SCL（プルアップは MeasureControl の R1653/R1654 4.7k）↔ PT2314E 側 9V バス I2C_SDA_9V/SCL_9V（R412/R413 10k → VCC_TONE）。BSS138 ゲート=3V3。同時に U402 pin25 DGND をチップの足元で A_GND へ（旧 D_GND）。片方だけでは成立しない（DECISIONS「DGND はチップの足元で A_GND へ」）。"
+		(exclude_from_sim no)
+		(at 441.96 158.75 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "923492f0-237c-5543-8f09-30b978de96ff")
+	)
 	(symbol
 		(lib_id "Device:C")
 		(at 449.58 116.84 0)
@@ -16702,7 +19221,7 @@
 				)
 			)
 		)
-		(property "Description" "SOP-28 300 mil（表面実装。無印 PT2314 の DIP 版は入手不可）。LCSC C90034。トーン段だけ使う — 入力セレクタとボリューム段は LOUT/ROUT -> LIN/RIN の インサート点で飛ばしていて、未使用12ピンには no_connect を立ててある。"
+		(property "Description" "SOP-28 300 mil（表面実装。無印 PT2314 の DIP 版は入手不可）。LCSC C90034。トーン段だけ使う — 入力セレクタとボリューム段は LOUT/ROUT -> LIN/RIN の インサート点で飛ばしていて、未使用12ピンには no_connect を立ててある。 DGND(25) は 2026-09-08 にチップの足元で A_GND へ（旧 D_GND）。I²C は Q401/Q402 レベルシフタ越しに 9V（VCC_TONE）プルアップの I2C_SDA_9V/I2C_SCL_9V で受ける。"
 			(at 355.6 0 0)
 			(hide yes)
 			(show_name no)
@@ -17009,6 +19528,328 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
 					(reference "R410")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:BSS138")
+		(at 447.04 146.05 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "51b89034-ac72-5a5d-ad8a-433e7b3b013e")
+		(property "Reference" "Q401"
+			(at 452.12 143.51 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BSS138"
+			(at 452.12 148.59 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 447.04 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 447.04 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "I²C 双方向レベルシフタ（2026-09-08）。S=Pico 側 3V3 バス、D=PT2314E 側 9V バス、G=3V3。PT2314E の VIH min 3.0 V に対し 3.3 V プルアップでは余裕 0.3 V しか無いので、PT 側を VCC_TONE(9V) で釣る。P82B96 を使わないのは Sx 側 VOL 0.8–1.0 V が PT2314E VIL max 1.0 V / RP2350 VIL 0.8 V を食い切るため（DECISIONS）。 SDA。"
+			(at 447.04 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "85e94911-1946-5702-b98a-af604875caa9")
+		)
+		(pin "2"
+			(uuid "a40d1fb9-1057-5b6f-83d5-d889be1cabd2")
+		)
+		(pin "3"
+			(uuid "f3ef0ea2-3135-5e6a-b4c7-add26ef712ca")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "Q401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 457.2 135.89 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4c5d368a-d582-5ed4-af1c-cdff6e660830")
+		(property "Reference" "R412"
+			(at 459.74 134.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 459.74 137.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 457.2 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 457.2 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "PT2314E 側 I²C SDA のプルアップ（9V=VCC_TONE）。10k: 0.9 mA / 立ち上がり ~0.3 µs（100 kbit/s）"
+			(at 457.2 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9bdd95f9-6844-5b32-9a08-c7c9bdefcf35")
+		)
+		(pin "2"
+			(uuid "35db508b-b001-59e0-8578-5c028995fc35")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "R412")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:BSS138")
+		(at 464.82 146.05 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6363ee5f-4adc-5378-a965-9956d577beb6")
+		(property "Reference" "Q402"
+			(at 469.9 143.51 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BSS138"
+			(at 469.9 148.59 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 464.82 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 464.82 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "I²C SCL 側の双方向レベルシフタ。役目・理由は Q401（SDA 側）と同じ"
+			(at 464.82 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1477a77f-b8c9-5fc7-8a15-ed820038d1aa")
+		)
+		(pin "2"
+			(uuid "17ade1b5-c278-598a-9f9d-865fd4f4afe6")
+		)
+		(pin "3"
+			(uuid "312adf21-407d-5375-9710-5a18007d51d6")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "Q402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 472.44 135.89 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6f201cdd-d1d4-50da-a92b-0c730fb3cb7c")
+		(property "Reference" "R413"
+			(at 474.98 134.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 474.98 137.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 472.44 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 472.44 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "PT2314E 側 I²C SCL のプルアップ（9V=VCC_TONE）"
+			(at 472.44 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4d77b7c1-4253-50a5-be41-6eacebde2e9e")
+		)
+		(pin "2"
+			(uuid "850232b1-330a-5e51-aad7-346f12dd8695")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000012-0012-4012-8012-000000000012"
+					(reference "R413")
 					(unit 1)
 				)
 			)
