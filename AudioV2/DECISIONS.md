@@ -2519,10 +2519,10 @@ MOSFET シフタは低レベルが**駆動側の VOL ＋ FET の飲み込み**�
 
 | 方向 | 受け側が見る低 | 余裕 |
 |---|---|---|
-| Pico → PT（コマンド） | Pico VOL ≈ 0.2 V ＋ Rds·I（数十 mV）＋ `D_GND`−`A_GND` の差 | PT2314E VIL 1.0 V まで **≥ 0.7 V** |
+| Pico → PT（コマンド） | Pico VOL **typ 0.2 V / max 0.5 V**（[`RaspberryPi_RP2350.pdf`](datasheets/RaspberryPi_RP2350.pdf) GPIO 表、IOVDD 3.3 V、IOL は駆動設定値。実際の吸い込みは約 1.6 mA で最小設定 2 mA 未満）＋ Rds·I（数十 mV）＋ `D_GND`−`A_GND` の差 | PT2314E VIL 1.0 V まで **typ 0.75 V / max 0.45 V** |
 | PT → Pico（ACK） | `Vack` 0.4 V（DS、Rpu 3 kΩ 条件。10k ならもっと低い）＋ 数十 mV | RP2350 VIL 0.8 V まで **≈ 0.3 V** |
 
-PT 側の高は 9 V プルアップなので **VIH 3.0 V に対し 6 V** の余裕（ここが元々の目的）。`BSS138` は Vgs(th) max 1.5 V・VDS 50 V で、
+PT 側の高は 9 V プルアップなので **VIH 3.0 V に対し 6 V** の余裕（ここが元々の目的）。**⚠ これで I²C が Fast（400 kbit/s）になるとは言えない。** DS p.7 の DATA RATE 表は「MCU レベル × VDD」で、9 V の行は無く、注記が「design guarantee only, not fully tested」。3.3 V × 9 V ＝ Standard のまま、が保守的な読み。表の内側で Fast が付くのは 5 V × 9 V（PT 側を 5 V にする案）か 3.3 V × VDD 7 V（VDD を下げる案）だけ。`BSS138` は Vgs(th) max 1.5 V・VDS 50 V で、
 ゲート 3.3 V・ソース 0.4 V でも Vgs 2.9 V で導通する。10k × 約 30 pF で立ち上がり 0.3 µs（Standard mode の 1 µs 内。
 この設計は 100 kbit/s 止まり）。
 
