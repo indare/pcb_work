@@ -297,11 +297,11 @@ Amp 選択後 L/R
 | F203 | PPTC 0.1A hold | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 |  |
 | F1601 | T1A slow | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 | Fuse |
 | F1602 | PPTC 0.5A hold | `Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal` | 1 | Fuse |
-| J201 | +15/-15/A_GND out | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 |  |
+| J201 | +15/A_GND/-15 out | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 |  |
 | J202 | PD module in (1=GND 2=+12V) | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 |  |
 | J1601 | AUDIO | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| J1602 | V_IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
-| J1603 | 15_V_IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | Generic screw terminal, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/) |
+| J1602 | V_IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | 計測側の 12V 入口（F1601 経由で U1607 へ）。1=PD_GND / 2=+12V —— 母板 J202（1=GND 2=+12V）と同じ並び。2026-09-09 に揃えた。残すか外すかは B5 のハーネス判断 |
+| J1603 | 15_V_IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 計測側の ±15V 入口。1=+15V_A / 2=A_GND / 3=-15V_A —— 母板 J201（+15/A_GND/-15）と同じ並び。2026-09-09 にミラーで揃えた（それまで逆だった）。残すか外すかは B5 のハーネス判断 |
 | J_ANA101 | SLOT1 ANA (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical` | 1 |  |
 | J_ANA102 | SLOT2 ANA (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical` | 1 |  |
 | J_ANA301,J_ANA302 | SLOT ANA (D18) | `Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical` | 2 |  |
@@ -313,7 +313,7 @@ Amp 選択後 L/R
 | J_PWR102 | SLOT2 PWR/CTRL (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical` | 1 |  |
 | J_PWR301,J_PWR302 | SLOT PWR/CTRL (D18) | `Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical` | 2 |  |
 | J_RAIL501 | AMP_SEL OUT | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 選択された Amp 出力の取り出し端子。1=AMP_SEL_L / 2=A_GND / 3=AMP_SEL_R で、DEST スイッチ(SW501/SW502)の手前。旧 Value の RAIL IN と旧記述の +12V/A_GND/-12V は、娘基板がスロット直結(J_PWR/J_ANA)になる前の名残で電源ではない。A_GND 極を持つ唯一の音声取り出し口。 |
-| K301,K302,K303,K304,K305 | AZ850P2-5 | `Relay_THT:Relay_DPDT_FRT5` | 5 |  |
+| K301,K302,K303,K304,K305 | AZ850P2-5 | `Relay_THT:Relay_DPDT_FRT5` | 5 | 双コイル・ラッチングリレー。v1 と同じ AZ850P2-5 に固定（2026-09-09）。接点 3/8・4/7 を使い 2/9 は開放、コイル 1-5 / 10-6 —— v1 のネットリストと同一の使い方で、v1 実機で動作実績あり。⚠ 外形（FRT5）が同じセカンドソース（TQ2-L2 など）は接点の COM/NC/NO のピン番号が同じとは限らず、挿すと SET/RESET の意味が反転しうる。AZ850P2-5 以外を挿さない。 |
 | LCDDisplay1601 | WAVESHARE-29318 | `Connector_PinHeader_2.54mm:PinHeader_1x15_P2.54mm_Vertical` | 1 | Waveshare 29318 Interface2 host side: 2.54mm 1x15 pin header for included GH-to-Dupont cable (ST7796S SPI + FT6336U I2C) |
 | Q401,Q402 | BSS138 | `Package_TO_SOT_SMD:SOT-23` | 2 | I²C SCL 側の双方向レベルシフタ。役目・理由は Q401（SDA 側）と同じ / I²C 双方向レベルシフタ（2026-09-08）。S=Pico 側 3V3 バス、D=PT2314E 側 9V バス、G=3V3。PT2314E の VIH min 3.0 V に対し 3.3 V プルアップでは余裕 0.3 V しか無いので、PT 側を VCC_TONE(9V) で釣る。P82B96 を使わないのは Sx 側 VOL 0.8–1.0 V が PT2314E VIL max 1.0 V / RP2350 VIL 0.8 V を食い切るため（DECISIONS）。 SDA。 |
 | R401 | 2.2k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 1 | D403(12V パネル LED)の直列抵抗。素の LED でも 12V 直結で壊れないようにする。(12-Vf2)/2.2k = 約 4.5mA。抵抗内蔵の 12V LED を挿しても点く（やや暗い）。 |

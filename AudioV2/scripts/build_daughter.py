@@ -103,6 +103,12 @@ RELAY_MAP = {"1": "+5V_COIL", "5": "CH{n}_RSTC", "10": "+5V_COIL", "6": "CH{n}_S
              "3": "CH{n}_OUT_L", "4": "AMP_SEL_L",
              "8": "CH{n}_OUT_R", "7": "AMP_SEL_R"}
 RELAY_NC = ["2", "9"]
+# 石は v1 と同じ AZ850P2-5 に固定（2026-09-09 ユーザー確定）。接点ピンの使い方（3/8・4/7 を使い
+# 2/9 を開放）とコイル（1-5 / 10-6）は v1 のネットリストと同一で、v1 実機で動いている組み合わせ。
+RELAY_DESC = ("双コイル・ラッチングリレー。v1 と同じ AZ850P2-5 に固定（2026-09-09）。接点 3/8・4/7 を使い 2/9 は開放、"
+              "コイル 1-5 / 10-6 —— v1 のネットリストと同一の使い方で、v1 実機で動作実績あり。"
+              "⚠ 外形（FRT5）が同じセカンドソース（TQ2-L2 など）は接点の COM/NC/NO のピン番号が同じとは限らず、"
+              "挿すと SET/RESET の意味が反転しうる。AZ850P2-5 以外を挿さない。")
 
 # ⚠ ULN2803A ではなく TBD62083APG（ピン互換のドロップイン）を使う。
 #    §2.7-3 で「ULN2803 のダーリントンが約 1V 落とすので 40℃ 超で AZ850 の
@@ -152,10 +158,11 @@ class Builder:
     # --- 部品を置いて、ピン先にラベルを撒く ---
     def place(self, lib: str, ref: str, value: str, x: float, y: float,
               nets: dict[str, str], nc: list[str] | None = None,
-              footprint: str = "", rot: int = 0) -> None:
+              footprint: str = "", rot: int = 0, description: str = "") -> None:
         el = sch_import.Element(
             "symbol", symbol_inst_v10(lib, ref, value, x, y, rot, self.path,
-                                      footprint=footprint), ref, None, (x, y))
+                                      footprint=footprint, description=description),
+            ref, None, (x, y))
         self.els.append(el)
         if lib not in self.libs:
             self.libs.append(lib)
@@ -247,8 +254,10 @@ class Builder:
                 self.place(RELAY_SYM, f"K{300+n}", "AZ850P2-5",
                            150.0 + (n - 1) * 45.72, 290.0,
                            {k: v.format(n=n) for k, v in RELAY_MAP.items()}, RELAY_NC,
-                           # FP は v1 実績の FRT5（AZ850P2-5 / TQ2-L2-5V 互換）
-                           footprint="Relay_THT:Relay_DPDT_FRT5")
+                           # FP は v1 実績の FRT5。⚠ 外形が同じ TQ2-L2 は接点ピンの割り当てが
+                           #    違う（2026-09-09 査読）ので「互換」ではない。石は AZ850P2-5 に固定
+                           footprint="Relay_THT:Relay_DPDT_FRT5",
+                           description=RELAY_DESC)
             for i, (ref, span) in enumerate((("U321", range(1, 5)), ("U322", range(5, 6)))):
                 nets = {"9": "GND_COIL", "10": "+5V_COIL"}
                 used_in, used_out = [], []
