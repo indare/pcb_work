@@ -24358,7 +24358,8 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 66.04 233.68 270)
+		(at 63.5 233.68 270)
+		(mirror y)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -24412,7 +24413,7 @@
 				)
 			)
 		)
-		(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "計測側の 12V 入口（F1601 経由で U1607 へ）。1=PD_GND / 2=+12V —— 母板 J202（1=GND 2=+12V）と同じ並び。2026-09-09 に揃えた。残すか外すかは B5 のハーネス判断"
 			(at 66.04 233.68 0)
 			(hide yes)
 			(show_name no)
@@ -24520,6 +24521,7 @@
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x03")
 		(at 106.68 233.68 270)
+		(mirror y)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -24573,7 +24575,7 @@
 				)
 			)
 		)
-		(property "Description" "Generic screw terminal, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "計測側の ±15V 入口。1=+15V_A / 2=A_GND / 3=-15V_A —— 母板 J201（+15/A_GND/-15）と同じ並び。2026-09-09 にミラーで揃えた（それまで逆だった）。残すか外すかは B5 のハーネス判断"
 			(at 106.68 233.68 0)
 			(hide yes)
 			(show_name no)
