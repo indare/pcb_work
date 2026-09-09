@@ -14,7 +14,8 @@
 
 ## 回路図・検証（期待）
 
-- 階層: `AudioV2Case` → `MotherBoard` → {`MeasureControl`, `AmpBankSwitch`, `AmpBankRelay`}
+- 階層: `AudioV2Case` → {`MeasureControl`, `AmpBankSwitch`, `AmpBankRelay`}
+  （2026-09-09 に中間 `MotherBoard` を廃止。箱外 I/O はルート上のコネクタで閉じる）
 - 所有権・再生成: [CLAUDE.md](../CLAUDE.md)
 - 期待値の正も CLAUDE.md（ERC・部品数など）。ずれたら先に `kicad-run.sh version`
 
@@ -77,7 +78,6 @@
   （EC11 垂直・軸20mm）・`D1610/D1611/D403`（5mm LED）・`A1602`（Pico の USB）**。
   後者があるので **`MeasureControl` はフロントパネルの直後に固定される** — 基板の
   置き場を動かす検討をするときは、まずここを見ること
-- 親シートの6ラベルは箱外スタブ。ERC に `label_dangling` として出るが**仕様**
 
 ## 次に手を動かすなら
 
@@ -104,6 +104,8 @@
 - ~~NetTie 数の腐り~~ → `NT1603` を `in_bom no` に揃え、PARTS.md 385 ＝ ネットリスト 389 − NetTie 4
 
 **2026-09-09（軽微）:** `ENC_INTA`/`ENC_INTB` に 10k→`3V3`。BP5293 Description（等ピッチ・DS 穴 Ø0.9）。母板の旧 ENC→GP0-8 注釈を現状へ
+
+**2026-09-09:** 中間 `MotherBoard` を廃止し内容を `AudioV2Case` へ繰り上げ。箱外スタブ6本と階層ラベルを削除（ERC 11→5）
 
 ## やらないこと（エージェント）
 

@@ -8,8 +8,8 @@ alwaysApply: true
 - 作業ブランチの正は **`main`**。マージ済みの `cursor/audiov2-*` / `cursor/manual-volume-*` などを fetch・checkout・PR base にしない。
 - **いま何待ちか・次の一手は [AudioV2/NOW.md](../../AudioV2/NOW.md)。** 再開はここから。
 - 長い文脈・決定の理由・履歴は [AudioV2/AGENT_HANDOFF.md](../../AudioV2/AGENT_HANDOFF.md)（**現況の正ではない**）。
-- シート所有権の正は **[CLAUDE.md](../../CLAUDE.md)** の表。シートは4枚で、2026-09-04 に
-  `AudioV2Case`（親）→ `MotherBoard` → {`MeasureControl`, `AmpBankSwitch`, `AmpBankRelay`} の**入れ子**になった。
+- シート所有権の正は **[CLAUDE.md](../../CLAUDE.md)** の表。シートはルート＋子3枚で、2026-09-09 に
+  中間の `MotherBoard` を廃止し `AudioV2Case` → {`MeasureControl`, `AmpBankSwitch`, `AmpBankRelay`} になった。
 - `generate_kicad_scaffold.py` は再実行しない。
 - 再生成は **`build_daughter.py` → `build_motherboard.py`** の順（どちらも `AudioV2/scripts/`）。
   - **どのシートを誰が作るかは [CLAUDE.md](../../CLAUDE.md) の表が正**（ここに表を複製しない。2箇所あると片方が腐る）

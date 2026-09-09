@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
-"""母板（MotherBoard）を旧シートから組み立てる。
+"""ルート基板（AudioV2Case）を旧シートから組み立てる。
 
-新構成では PowerModule / OutputStage / ControlPanel(PT2314部) が1枚の母板へ統合される
-（`DECISIONS.md`「2026-09-03 時点の基板構成案」）。ここは **v0 = 確定している部分だけ**:
+2026-09-09: かつての `MotherBoard` 中間階層を廃止し、内容を親 `AudioV2Case` へ
+繰り上げた。箱外 I/O（音声端子・PD 受け）はルート上のコネクタで閉じるので、
+親スタブ用の階層ラベル（COMMON/PHONE/LINE）は不要。
 
-    母板 v0 = PowerModule の全要素 ＋ OutputStage の全要素（平行移動）
+    AudioV2Case = PowerModule + OutputStage + ControlPanelAnalog
+                + 娘基板スロット + 子シート3枚
 
-`PT2314` の移設と `ControlPanel` の解体は未決なので触らない（未決のまま足すと
-検証できない）。娘基板スロットは別ステップ。
-
-素材の旧シートは `legacy/` に凍結してある（親からは参照されていない）。
-`sch_import` で **元のままの S式** として読むので、**手描きの配線と
-ジャンクションがそのまま母板へ移る**。分解→再構成がバイト一致することは
-`sch_import.py --roundtrip` で検証済み。
+素材の旧シートは `legacy/` に凍結してある。`sch_import` で **元のままの S式**
+として読むので、手描きの配線とジャンクションがそのままルートへ移る。
 
     python3 AudioV2/scripts/build_motherboard.py           # 書き出す
     python3 AudioV2/scripts/build_motherboard.py --dry-run # 内訳だけ
+
+⚠ ファイル名は歴史的に `build_motherboard.py` のまま（呼び出し側が多い）。
 """
 
 from __future__ import annotations
@@ -48,9 +47,14 @@ def uid() -> str:
     _uid_seq += 1
     return str(uuid.uuid5(_UID_NS, f"motherboard/{_uid_seq}"))
 
-# 母板の UUID。既存の a10000NN / b20000NN 系に合わせて 12 番を確保する。
+# 旧 MotherBoard シートのインスタンス UUID。2026-09-09 に中間階層を廃止したあとも
+# 素材の instances パス書き換え・娘基板スクリプトの互換 import 用に残す。
+# ルートのシートインスタンスとしては使わない。
 UUID_MOTHER_INST = "a1000012-0012-4012-8012-000000000012"
-UUID_MOTHER_FILE = "b2000012-0012-4012-8012-000000000012"
+UUID_MOTHER_FILE = "b2000012-0012-4012-8012-000000000012"  # 旧 MotherBoard ファイル UUID（未使用）
+
+# ルートシートのインスタンスパス（中間階層なし）
+ROOT_PATH = f"/{PARENT}"
 
 SOURCES = [
     # (ファイル, 元のシートインスタンス UUID, 平行移動)
@@ -65,31 +69,6 @@ SOURCES = [
 ]
 
 PAPER = "A2"   # ControlPanel を取り込んで A3 では収まらなくなった
-
-# 親での母板シート。PowerModule が居た場所を使う（OutputStage の枠は空く）。
-MOTHER_AT = (25.4, 25.4)
-# ⚠ 高さはピン数に足りていること。2026-09-04 に右側 15 本に対して 101.6 のままで
-#    LINE_L / LINE_R が枠の外へはみ出し、**ネットリスト上で LINE_L と LINE_R が
-#    短絡した**（シート側の配線は正しかったので気付きにくい）。
-#    右列の最終ピンは _PIN_Y0 + (本数-1)*_PIN_PITCH。枠はそれより下まで伸ばす。
-MOTHER_SIZE = (35.56, 121.92)
-_PIN_Y0, _PIN_PITCH = 33.02, 7.62
-# 左＝入力、右＝出力と双方向。順序がそのまま上からの並びになる。
-# 2026-09-04: 計測基板と娘基板2枚を**母板の子**にした（物理の入れ子に合わせた）。
-# その結果、**親が持つのは「箱の外に出るもの」だけ**になる。
-# 電源・I2C・音声バス・番地は全部この中で閉じる。
-MOTHER_PINS_L = [
-    ("COMMON_L", "input"), ("COMMON_R", "input"),      # 入力ジャック（パネル）
-]
-MOTHER_PINS_R = [
-    ("PHONE_L", "output"), ("PHONE_R", "output"),      # 出力ジャック（パネル）
-    ("LINE_L", "output"), ("LINE_R", "output"),
-]
-# (階層ピン名, 種別, 左右, y)
-MOTHER_PINS = (
-    [(n, k, "L", _PIN_Y0 + i * _PIN_PITCH) for i, (n, k) in enumerate(MOTHER_PINS_L)]
-    + [(n, k, "R", _PIN_Y0 + i * _PIN_PITCH) for i, (n, k) in enumerate(MOTHER_PINS_R)]
-)
 
 # --- 娘基板スロット（D18 のピン割当）------------------------------------
 #
@@ -117,11 +96,11 @@ SLOT_ADDR = {1: ("D_GND", "D_GND"), 2: ("3V3", "D_GND")}
 SLOTS = [(1, (215.9, 50.8), (215.9, 96.52)),
          (2, (279.4, 50.8), (279.4, 96.52))]
 NETTIE_AT = (215.9, 154.94)   # GND_COIL <-> D_GND
-# --- 子シート（2026-09-04 に母板の下へ入れた）---------------------------
-# 物理の入れ子に合わせた。KiCad の階層シートは配置を縛らないので、
-# **どこに実装するか（B5）とは独立**に構造だけ先に整えている。
+# --- 子シート（ルート直下）-----------------------------------------------
+# 2026-09-04 に母板の子へ入れ、2026-09-09 に母板ごとルートへ繰り上げた。
+# KiCad の階層シートは配置を縛らないので、**どこに実装するか（B5）とは独立**。
 #
-# (名前, ファイル, インスタンス UUID, 位置, 大きさ, [(シートピン名, 種別, 左右, 母板側のネット)])
+# (名前, ファイル, インスタンス UUID, 位置, 大きさ, [(シートピン名, 種別, 左右, ルート側のネット)])
 CHILD_SHEETS = [
     ("MeasureControl", "MeasureControl.kicad_sch",
      "43e41fda-fe26-43e3-950a-c017f3070bbf", (400.0, 220.0), (45.72, 33.02), [
@@ -197,6 +176,9 @@ INTERNAL_NOW = {
     "+15V", "-15V", "A_GND", "+5V_COIL", "TONE_L", "TONE_R",
     "AMP_SEL_L", "AMP_SEL_R", "I2C_SDA", "I2C_SCL",
     "PD_12V_SW", "PD_GND", "GND_COIL", "D_GND", "3V3",
+    # 2026-09-09: ルートへ繰り上げ。箱外 I/O はルート上のコネクタで閉じるので
+    # 親スタブ用の階層ラベルはローカルへ落とす。
+    "COMMON_L", "COMMON_R", "PHONE_L", "PHONE_R", "LINE_L", "LINE_R",
 }
 
 
@@ -258,7 +240,7 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
     """娘基板スロット2組と、コイル帰路の NetTie を組み立てる（D18 / D19 / D21）。"""
     els: list[sch_import.Element] = []
     hier_names: list[str] = []
-    path = f"/{PARENT}/{UUID_MOTHER_INST}"
+    path = ROOT_PATH
 
     # symbol_inst_v10 は sch_helpers.new_uid()、hier_label は scaffold.uid() を使う。
     # 両方とも決定的な uid() に差し替える（片方だけだと再実行でその分だけ差分が出る。
@@ -393,11 +375,11 @@ def build(dry_run: bool = False) -> str:
                 else:
                     hier_seen.add(el.name)
             elif el.kind == "symbol":
-                # インスタンスパスを母板のシートへ付け替える
-                el = sch_import.Element(
-                    el.kind,
-                    el.text.replace(f"/{PARENT}/{old_inst}", f"/{PARENT}/{UUID_MOTHER_INST}"),
-                    el.ref, el.name, el.at)
+                # インスタンスパスをルートへ付け替える（旧素材 / 旧母板パスの両方）
+                text = el.text.replace(
+                    f"/{PARENT}/{UUID_MOTHER_INST}", ROOT_PATH)
+                text = text.replace(f"/{PARENT}/{old_inst}", ROOT_PATH)
+                el = sch_import.Element(el.kind, text, el.ref, el.name, el.at)
             elements.append(el)
 
     slot_els, slot_hier = daughter_slots()
@@ -449,7 +431,7 @@ def build(dry_run: bool = False) -> str:
         return ""
 
     header = (f'\n\t(version 20260306)\n\t(generator "eeschema")\n\t(generator_version "10.0")\n'
-              f'\t(uuid "{UUID_MOTHER_FILE}")\n\t(paper "{PAPER}")\n{lib}')
+              f'\t(uuid "{PARENT}")\n\t(paper "{PAPER}")\n{lib}')
     footer = '\t(sheet_instances\n\t\t(path "/"\n\t\t\t(page "1")\n\t\t)\n\t)\n'
     return "(kicad_sch" + header + "".join(e.text for e in elements) + footer + ")\n"
 
@@ -460,89 +442,22 @@ def _plain_label(name: str, x: float, y: float, rot: int, justify: str) -> str:
             f'\t\t(uuid "{uid()}")\n\t)\n')
 
 
-def patch_parent(dry_run: bool = False) -> str:
-    """親から PowerModule / OutputStage を外し、母板シート1枚に置き換える。
-
-    この親は「シートピンの座標にラベルを置く」方式で結線しているので、外すシートの
-    ピン上にあったラベルも一緒に外し、母板のピン上に置き直す。
-    """
-    parent = sch_import.load(ROOT / "AudioV2Case.kicad_sch")
-
-    drop_pins: set[tuple[float, float]] = set()
-    kept: list[sch_import.Element] = []
-    removed_sheets: list[str] = []
-    for el in parent.elements:
-        if el.kind == "sheet" and el.name in REPLACED_SHEETS:
-            removed_sheets.append(el.name)
-            for m in re.finditer(r"\(pin \"[^\"]+\" \w+\n\t\t\t\(at (-?[\d.]+) (-?[\d.]+)", el.text):
-                drop_pins.add((round(float(m.group(1)), 2), round(float(m.group(2)), 2)))
+def rewrite_child_instance_paths() -> list[str]:
+    """手編集所有の MeasureControl など、生成が触らない子の instances パスから
+    旧 MotherBoard 段を落とす。"""
+    notes: list[str] = []
+    old = f"/{PARENT}/{UUID_MOTHER_INST}/"
+    new = f"/{PARENT}/"
+    for fname in ("MeasureControl.kicad_sch",):
+        path = ROOT / fname
+        text = path.read_text(encoding="utf-8")
+        if old not in text:
+            notes.append(f"{fname}: 旧パス無し")
             continue
-        kept.append(el)
-
-    # ⚠ シートを外すと、そのピンへ引いてあったワイヤとラベルも浮く。
-    #    2026-09-04 に子シートを母板へ移したとき、親に 7 組が残って
-    #    unconnected_wire_endpoint と label_dangling を出した。
-    dangling = set(drop_pins)
-    for _ in range(4):                       # 数珠つなぎのワイヤを辿る
-        more = set()
-        for el in kept:
-            if el.kind != "wire":
-                continue
-            pts = [(round(x, 2), round(y, 2)) for x, y in el.coords()[:2]]
-            if len(pts) != 2:
-                continue
-            a, b = pts
-            if a in dangling and b not in dangling:
-                more.add(b)
-            elif b in dangling and a not in dangling:
-                more.add(a)
-        if not more - dangling:
-            break
-        dangling |= more
-
-    dropped_labels: list[str] = []
-    out: list[sch_import.Element] = []
-    for el in kept:
-        pts = [(round(x, 2), round(y, 2)) for x, y in el.coords()[:2]]
-        if el.kind == "wire" and any(q in dangling for q in pts):
-            continue
-        if el.kind == "label" and el.at and (round(el.at[0], 2), round(el.at[1], 2)) in dangling:
-            dropped_labels.append(f"{el.name}@{el.at[0]},{el.at[1]}")
-            continue
-        out.append(el)
-
-    mx, my = MOTHER_AT
-    mw, mh = MOTHER_SIZE
-    over = [(n, y) for n, _, _, y in MOTHER_PINS if not (my <= y <= my + mh)]
-    if over:
-        raise ValueError(f"シートピンが枠の外に出ている（枠 y {my}..{my+mh}）: {over}")
-    pins, labels = [], []
-    for name, ptype, side, y in MOTHER_PINS:
-        x = mx if side == "L" else mx + mw
-        angle = 180 if side == "L" else 0
-        pins.append((name, ptype, x, y, angle))
-        labels.append(sch_import.Element(
-            "label",
-            _plain_label(name, x, y, angle, "right" if side == "L" else "left"),
-            None, name, (x, y)))
-
-    saved, scaffold.uid = scaffold.uid, uid   # sheet_block 内のピン UUID も決定的に
-    try:
-        block = sheet_block(UUID_MOTHER_INST, "MotherBoard", "MotherBoard.kicad_sch",
-                            mx, my, mw, mh, pins, "1")
-    finally:
-        scaffold.uid = saved
-    out.append(sch_import.Element("sheet", block, None, "MotherBoard", (mx, my)))
-    out.extend(labels)
-
-    if dry_run:
-        print(f"親: 外すシート {removed_sheets} / そのピン {len(drop_pins)} 本")
-        print(f"    外すラベル {len(dropped_labels)}: {', '.join(dropped_labels)}")
-        print(f"    足す母板シート: ピン {len(pins)} 本 ＋ 同数のラベル")
-        return ""
-
-    parent.elements = out
-    return parent.render()
+        n = text.count(old)
+        sch_helpers.write_sch(path, text.replace(old, new))
+        notes.append(f"{fname}: MotherBoard 段を {n} 箇所削除")
+    return notes
 
 
 def main() -> int:
@@ -550,13 +465,17 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     out = build(dry_run=a.dry_run)
-    parent = patch_parent(dry_run=a.dry_run)
+    if a.dry_run:
+        return 0
     if out:
-        sch_helpers.write_sch(ROOT / "MotherBoard.kicad_sch", out)
-        print(f"書き出し: AudioV2/MotherBoard.kicad_sch ({len(out)} bytes)")
-    if parent:
-        sch_helpers.write_sch(ROOT / "AudioV2Case.kicad_sch", parent)
-        print(f"書き換え: AudioV2/AudioV2Case.kicad_sch ({len(parent)} bytes)")
+        sch_helpers.write_sch(ROOT / "AudioV2Case.kicad_sch", out)
+        print(f"書き出し: AudioV2/AudioV2Case.kicad_sch ({len(out)} bytes)")
+    for note in rewrite_child_instance_paths():
+        print(f"  {note}")
+    mother = ROOT / "MotherBoard.kicad_sch"
+    if mother.exists():
+        mother.unlink()
+        print("削除: AudioV2/MotherBoard.kicad_sch（中間階層を廃止）")
     return 0
 
 

@@ -27,7 +27,7 @@ import sch_edit  # noqa: E402
 import sch_helpers  # noqa: E402
 import sch_import  # noqa: E402
 from build_motherboard import _merge_lib_symbols  # noqa: E402
-from build_motherboard import UUID_MOTHER_INST  # noqa: E402
+from build_motherboard import ROOT_PATH  # noqa: E402
 from build_motherboard import SLOT_ANA_NETS, SLOT_PWR_NETS  # noqa: E402
 from generate_kicad_scaffold import PARENT, sheet_block  # noqa: E402
 from sch_helpers import embed_lib_symbols, symbol_inst_v10  # noqa: E402
@@ -149,9 +149,8 @@ class Builder:
     def __init__(self, variant: str) -> None:
         self.v = variant
         self.cfg = VARIANT[variant]
-        # 2026-09-04: 娘基板は親ではなく**母板の子**になった（物理の入れ子に合わせた）。
-        # パスは /親/母板/娘基板。AmpChannel はさらにその下で /親/母板/娘基板/ch。
-        self.path = f"/{PARENT}/{UUID_MOTHER_INST}/{self.cfg['inst_uuid']}"
+        # 2026-09-09: 母板中間階層を廃止。パスは /親/娘基板。
+        self.path = f"{ROOT_PATH}/{self.cfg['inst_uuid']}"
         self.els: list[sch_import.Element] = []
         self.libs: list[str] = []
 
@@ -319,7 +318,7 @@ def rewrite_ampchannel_instances() -> tuple[str, list[str]]:
     sw, rl = VARIANT[SWITCH], VARIANT[RELAY]
     order = [(sw["inst_uuid"], u) for u in sw["chan_uuids"]] + \
             [(rl["inst_uuid"], u) for u in rl["chan_uuids"]]
-    path_base = f"/{PARENT}/{UUID_MOTHER_INST}"   # 母板の下に入った（2026-09-04）
+    path_base = ROOT_PATH   # 2026-09-09: 母板中間階層を廃止
     notes: list[str] = []
     for i, e in enumerate(s.elements):
         if e.kind != "symbol":

@@ -58,14 +58,14 @@ HANDOFF や DECISIONS を追記しただけでは進捗に数えない。
 
 ### シートの所有権
 
-**2026-09-04 に階層を物理の入れ子に合わせた。親は「箱の皮」だけになった。**
+**2026-09-09 に中間の `MotherBoard` を廃止し、内容を親へ繰り上げた。**
+箱外 I/O はルート上のコネクタで閉じる（親スタブ用の階層ラベルは不要）。
 
 ```
-AudioV2Case（親）  COMMON_L/R・PHONE_L/R・LINE_L/R の6本だけ
-└─ MotherBoard
-   ├─ MeasureControl
-   ├─ AmpBankSwitch  └─ AmpCh1-5
-   └─ AmpBankRelay   └─ AmpCh1-5
+AudioV2Case（旧 MotherBoard の中身）
+├─ MeasureControl
+├─ AmpBankSwitch  └─ AmpCh1-5
+└─ AmpBankRelay   └─ AmpCh1-5
 ```
 
 **KiCad の階層シートは配置を縛らない。** どれを別基板に切り出すかは PCB を起こす
@@ -73,30 +73,26 @@ AudioV2Case（親）  COMMON_L/R・PHONE_L/R・LINE_L/R の6本だけ
 
 | シート | 誰が作るか |
 |---|---|
-| `MotherBoard` | **`scripts/build_motherboard.py`**（冪等・再実行でバイト一致） |
+| `AudioV2Case`（ルート） | **`scripts/build_motherboard.py`**（冪等・再実行でバイト一致） |
 | `AmpBankSwitch` / `AmpBankRelay` | **`scripts/build_daughter.py`**（同上） |
 | `MeasureControl` | 生成対象外。**KiCad で直接いじってよい** |
-| `AudioV2Case`（親） | `build_motherboard.py` がパッチする |
 
 **生成対象のシートを手で直さないこと。** 回すと上書きされる。回路を変えるならスクリプトを直す。
 
 **⚠ `MeasureControl` にシートピンを足したら `build_motherboard.py` の `CHILD_SHEETS` にも足すこと。**
-手編集所有だが、**母板に置かれる側のピンはコードが持っている**。片方だけだと親子で
+手編集所有だが、**ルートに置かれる側のピンはコードが持っている**。片方だけだと親子で
 ピンの対応が取れず `hier_label_mismatch` が出る。
 
 **順序は `build_daughter.py` → `build_motherboard.py`。**
-娘基板のファイルを母板がシートとして参照するので、回路を変えたときはこの順が自然。
-ただし**逆順でも母板単独でも結果はバイト一致する**（2026-09-04 実測）。親を書くのは
-`build_motherboard.py` だけになったため。入れ子化より前にあった
-「逆順で 900 行規模の並べ替え差分」「1巡目が過渡状態でラベルが二重に入る」は
-**どちらも解消した**。
+娘基板のファイルをルートがシートとして参照するので、回路を変えたときはこの順が自然。
+ただし**逆順でもルート単独でも結果はバイト一致する**（中間階層廃止後も同様）。
 
 **⚠ KiCad で開いて保存した後の再生成だけは未検証。** 回したら
 `kicad-run.sh erc` の件数が期待値（下の表）に戻ることを確認すること。
 
 `ControlPanel` / `PowerModule` / `OutputStage` / `AmpBank` は**解体済みで `AudioV2/legacy/` に凍結**。
-親からは参照されていないが、**`build_motherboard.py` が素材として読むので直すと設計に届く**
-（2026-09-03 に PPTC 追加でここを編集し、実際に母板へ反映された）。直したら必ず回すこと。
+ルートからは参照されていないが、**`build_motherboard.py` が素材として読むので直すと設計に届く**
+（2026-09-03 に PPTC 追加でここを編集し、実際に反映された）。直したら必ず回すこと。
 編集時の注意は [AudioV2/legacy/README.md](AudioV2/legacy/README.md)。
 
 **⚠ 生成スクリプトは KiCad の標準シンボルライブラリを読む。** macOS / Windows / Linux の
@@ -123,7 +119,7 @@ python3 AudioV2/scripts/sch_helpers.py     # 見つかった場所と、探し�
 
 **⚠ 配線の検証に `sch_drift.py` を使ってはいけない。** ワイヤもジャンクションも比較対象外。
 
-**⚠ `sch_edit.prune()` を生成シートに使ってはいけない**（`MotherBoard` / `AmpBankSwitch` /
+**⚠ `sch_edit.prune()` を生成シートに使ってはいけない**（`AudioV2Case` / `AmpBankSwitch` /
 `AmpBankRelay` / `AmpChannel`）。**黙って大量のラベルを消す。**
 
 この設計は生成コードの `net_at()` 方式で**ラベルをピン先に直置き**しており、ワイヤに
@@ -162,7 +158,7 @@ docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 | | |
 |---|---|
 | `check_sexpr.py -q AudioV2` | **問題 0**。ファイル数は環境で増える — `AudioV2/.kicad-mcp/` の作業ファイルや、KiCad を開いているときの `_autosave-*` を拾うため。**素の状態で 13、2026-09-06 の実測は 15**（増分は `.kicad-mcp/visual-diff-*-before.kicad_sch` の2件）。どちらも gitignore 済みだが `check_sexpr` はディレクトリを見るので数に出る |
-| `kicad-run.sh erc` | **11 件**（2026-09-07 に 29→17→11。17→11 は外部入力端子台 `J_IN401` を入れて `COMMON_L/R` が1ピンでなくなり `isolated_pin_label` が 9→1 になった分。**残る11件は全部宣言済みの型** — `label_dangling` 6 は親の箱外スタブ（[AGENT_HANDOFF.md](AudioV2/AGENT_HANDOFF.md) 参照）、`ground_pin_not_ground` 3 は ±15V アナログSWの VSS が `-15V` で正常、`isolated_pin_label` 1 は `DEST_SENSE_MUTE_NC`（ミュート位置なので意図的に開放）、`multiple_net_names` 1 は `3V3`/`PICO_3V3` の意図的な別名重ね（`build_ui_move.py` が置いた）） |
+| `kicad-run.sh erc` | **5 件**（2026-09-09 に母板中間階層を廃止し親スタブ6本を消して 11→5。**残る5件は全部宣言済みの型** — `ground_pin_not_ground` 3 は ±15V アナログSWの VSS が `-15V` で正常、`isolated_pin_label` 1 は `DEST_SENSE_MUTE_NC`（ミュート位置なので意図的に開放）、`multiple_net_names` 1 は `3V3`/`PICO_3V3` の意図的な別名重ね（`build_ui_move.py` が置いた）） |
 | `kicad-run.sh netlist` | **部品 391 個・重複 0・注釈警告なし**（2026-09-04 に D-g のヒューズ＋バルクで 371→373、2026-09-06 に D-f の PPTC で 373→374、2026-09-07 に PT2314E のトーン網をDS通りに組み直して抵抗5本減り 374→369、同日 U1607 の入力コンデンサ C1645 で 369→370、D403 の直列抵抗 R401 で 370→371、外部入力端子台 J_IN401 で 371→372、U1604(MBC2596 バック)+C1644+F1603 を削除し NT1603 を足して 372→370。計測タップのバッファ U1611(OPA1656)+R1659/R1660(100k)+C1646/C1647 を足し MCLK_SENSE の R1605 を外して 370→374。2026-09-08 に HP バッファ U501+R501-504+C501-506 で 374→385、I²C レベルシフタ Q401/Q402+R412/R413 で 385→389。2026-09-09 に ENC_INTA/INTB の 10k プルアップ R1661/R1662 で 389→391。`PWR_FLAG` は仮想なので計上外。**`gen_parts_bom.py` が PARTS.md に書く「部品総数」は NetTie 4個も除くので 4 少ない（387）**） |
 | `sch_import.py --roundtrip AudioV2/*.kicad_sch` | **全部 OK** |
 

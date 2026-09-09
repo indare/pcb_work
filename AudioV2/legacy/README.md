@@ -1,12 +1,12 @@
-# legacy/ — 母板へ統合済みの旧シート（凍結。編集しない）
+# legacy/ — ルート基板へ統合済みの旧シート（凍結。編集しない）
 
-`MotherBoard.kicad_sch` を組み立てるための**素材**。設計の一部ではなく、
-親（`AudioV2Case.kicad_sch`）からも参照されていない。
+`AudioV2Case.kicad_sch`（旧 `MotherBoard` の中身）を組み立てるための**素材**。
+設計の一部ではなく、ルートからもシートとしては参照されていない。
 
 | ファイル | 状態 | `build_motherboard.py` が読むか |
 |---|---|---|
 | `PowerModule.kicad_sch` | 2026-09-03 に母板へ統合。**手描きの配線ごと移設済み** | **読む**（`(0, 0)`） |
-| `OutputStage.kicad_sch` | 同上。`+111.76 mm` 平行移動して母板の下半分に入っている | **読む**（`(0, 111.76)`） |
+| `OutputStage.kicad_sch` | 同上。`+111.76 mm` 平行移動して下半分に入っている | **読む**（`(0, 111.76)`） |
 | `ControlPanelAnalog.kicad_sch` | 同上。`+355.6 mm` 右へ | **読む**（`(355.6, 0)`） |
 | `AmpBank.kicad_sch` | 娘基板2版（`build_daughter.py`）に置き換わった | **読まない**。完全に記録だけ |
 
@@ -14,8 +14,8 @@
 `endpoint_off_grid` が 46 件出た（2026-09-03 実測）。
 
 **⚠ ここは「凍結した素材」であって「無効なファイル」ではない。**
-[`../scripts/build_motherboard.py`](../scripts/build_motherboard.py) が**読んで母板に取り込む**ので、
-**ここを直すと設計に届く**（2026-09-03 に PPTC 追加でここを編集し、実際に母板へ反映された）。
+[`../scripts/build_motherboard.py`](../scripts/build_motherboard.py) が**読んでルートに取り込む**ので、
+**ここを直すと設計に届く**（2026-09-03 に PPTC 追加でここを編集し、実際に反映された）。
 
 編集するなら次を守ること。
 
