@@ -150,7 +150,7 @@ def _on_seg(pt: tuple[float, float], a: tuple[float, float], b: tuple[float, flo
 def prune(sheet: sch_import.Sheet, verbose: bool = False) -> dict[str, int]:
     """浮いたワイヤ・ジャンクション・ラベルを収束するまで落とす。
 
-    ⚠⚠ **生成シートに使ってはいけない**（MotherBoard / AmpBankSwitch /
+    ⚠⚠ **生成シートに使ってはいけない**（`AudioV2Case` / AmpBankSwitch /
     AmpBankRelay / AmpChannel）。生成コードの `net_at()` 方式は**ラベルを
     ピン先に直置き**してワイヤに乗せないので、ここの「ワイヤに触れていない
     ラベルは浮き」という判定が**設計の本体を浮きと誤認して落とす**。
