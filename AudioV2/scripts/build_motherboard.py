@@ -404,8 +404,13 @@ def build(dry_run: bool = False) -> str:
             need = sy + 2.54 + (max(len(lefts), len(rights)) - 1) * 2.54
             if need > sy + sh:
                 raise ValueError(f"{name}: シートピンが枠の外（枠 {sy}..{sy+sh} / 最終ピン {need}）")
+            # AmpBankRelay は当面 BOM・基板から外す（アナログSW版を優先）。
+            # シート属性は再生成で消えるのでここで固定する。
+            on_board = in_bom = name != "AmpBankRelay"
             elements.append(sch_import.Element(
-                "sheet", sheet_block(inst, name, fname, sx, sy, sw, sh, blk_pins, "1"),
+                "sheet", sheet_block(
+                    inst, name, fname, sx, sy, sw, sh, blk_pins, "1",
+                    in_bom=in_bom, on_board=on_board),
                 None, name, (sx, sy)))
     finally:
         scaffold.uid = saved_sc2

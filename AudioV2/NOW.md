@@ -18,6 +18,7 @@
   （2026-09-09 に中間 `MotherBoard` を廃止。箱外 I/O はルート上のコネクタで閉じる）
 - 所有権・再生成: [CLAUDE.md](../CLAUDE.md)
 - 期待値の正も CLAUDE.md（ERC・部品数など）。ずれたら先に `kicad-run.sh version`
+- **AmpBankRelay は当面 BOM・基板から除外**（シート `in_bom`/`on_board`=no。アナログSW版を優先。再生成は `build_motherboard.py` が維持）
 
 ## 電源（ゲート1）
 

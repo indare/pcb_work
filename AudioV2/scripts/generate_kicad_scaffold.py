@@ -206,6 +206,9 @@ def sheet_block(
     h: float,
     pins: list[tuple[str, str, float, float, int]],
     page: str,
+    *,
+    in_bom: bool = True,
+    on_board: bool = True,
 ) -> str:
     pin_lines = []
     for pname, ptype, px, py, pangle in pins:
@@ -231,8 +234,8 @@ def sheet_block(
 \t\t(at {x} {y})
 \t\t(size {w} {h})
 \t\t(exclude_from_sim no)
-\t\t(in_bom yes)
-\t\t(on_board yes)
+\t\t(in_bom {'yes' if in_bom else 'no'})
+\t\t(on_board {'yes' if on_board else 'no'})
 \t\t(dnp no)
 \t\t(stroke
 \t\t\t(width 0.1524)

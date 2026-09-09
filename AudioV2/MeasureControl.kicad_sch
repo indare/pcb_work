@@ -3636,7 +3636,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:RotaryEncoder_Switch"
+		(symbol "Device:RotaryEncoder_Switch_MP"
 			(pin_names
 				(offset 0.254)
 				(hide yes)
@@ -3656,7 +3656,7 @@
 					)
 				)
 			)
-			(property "Value" "RotaryEncoder_Switch"
+			(property "Value" "RotaryEncoder_Switch_MP"
 				(at 0 -6.604 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3688,7 +3688,7 @@
 					)
 				)
 			)
-			(property "Description" "Rotary encoder, dual channel, incremental quadrate outputs, with switch"
+			(property "Description" "Rotary encoder, dual channel, incremental quadrate outputs, with switch and MP Pin"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3721,7 +3721,7 @@
 					)
 				)
 			)
-			(symbol "RotaryEncoder_Switch_0_1"
+			(symbol "RotaryEncoder_Switch_MP_0_1"
 				(rectangle
 					(start -5.08 5.08)
 					(end 5.08 -5.08)
@@ -3946,7 +3946,7 @@
 					)
 				)
 			)
-			(symbol "RotaryEncoder_Switch_1_1"
+			(symbol "RotaryEncoder_Switch_MP_1_1"
 				(pin passive line
 					(at -7.62 2.54 0)
 					(length 2.54)
@@ -3994,6 +3994,24 @@
 						)
 					)
 					(number "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "MP"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "MP"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -11866,7 +11884,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "RotaryEncoder_Switch_0_1"
+		(symbol "RotaryEncoder_Switch_MP_0_1"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -11925,7 +11943,7 @@
 					)
 				)
 			)
-			(symbol "RotaryEncoder_Switch_0_1_1_1"
+			(symbol "RotaryEncoder_Switch_MP_0_1_1_1"
 				(rectangle
 					(start -5.08 5.08)
 					(end 5.08 -5.08)
@@ -12152,7 +12170,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "RotaryEncoder_Switch_1_1"
+		(symbol "RotaryEncoder_Switch_MP_1_1"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -12211,7 +12229,7 @@
 					)
 				)
 			)
-			(symbol "RotaryEncoder_Switch_1_1_1_1"
+			(symbol "RotaryEncoder_Switch_MP_1_1_1_1"
 				(pin passive line
 					(at -7.62 2.54 0)
 					(length 2.54)
@@ -12259,6 +12277,24 @@
 						)
 					)
 					(number "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "MP"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "MP"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -15993,12 +16029,6 @@
 		(uuid "6e4b22d1-11a1-4b74-8369-edfb7d8be382")
 	)
 	(junction
-		(at 302.26 44.45)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6f505877-9f7e-4052-aa2b-fffa9550221d")
-	)
-	(junction
 		(at 107.95 31.75)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -16105,12 +16135,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8f9d8108-6c8d-4cd3-a0d1-a301e84c6d01")
-	)
-	(junction
-		(at 257.81 54.61)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "90e2c0fd-9a1d-4b60-843f-41d6f88c977a")
 	)
 	(junction
 		(at 130.81 138.43)
@@ -16243,12 +16267,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b3870dda-01c6-4115-9c1e-10fbce2dd66f")
-	)
-	(junction
-		(at 262.89 44.45)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b5b8ae9e-f9d5-4da7-94b2-70594f27f4b9")
 	)
 	(junction
 		(at 81.28 204.47)
@@ -16407,12 +16425,6 @@
 		(uuid "e4a21098-1407-492a-9a46-531ef56e0bd9")
 	)
 	(junction
-		(at 429.26 39.37)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e5cc166b-fe73-496f-be15-29c71ba21ca9")
-	)
-	(junction
 		(at 77.47 31.75)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -16447,12 +16459,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f80331c0-8ab0-450d-912f-806585f68bc7")
-	)
-	(junction
-		(at 302.26 54.61)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "facb2b24-c9a2-4373-ab1b-976d7e128434")
 	)
 	(junction
 		(at 107.95 54.61)
@@ -16497,6 +16503,14 @@
 		(uuid "7445f34f-f9d7-5180-a81c-069f278026ae")
 	)
 	(no_connect
+		(at 294.64 190.5)
+		(uuid "7696a0a1-c2f8-5ecd-acd9-e24e8c0d1567")
+	)
+	(no_connect
+		(at 248.92 175.26)
+		(uuid "7ef10f74-0dcd-58e3-b887-cd68b11decf3")
+	)
+	(no_connect
 		(at 132.08 360.68)
 		(uuid "813d1c7c-12fe-5a01-bf46-8a6be3a0f22d")
 	)
@@ -16531,6 +16545,10 @@
 	(no_connect
 		(at 194.31 168.91)
 		(uuid "f18d2ffe-8f37-4769-aa6e-29dbff72a4a0")
+	)
+	(no_connect
+		(at 248.92 147.32)
+		(uuid "f855c8b1-03bb-55ae-bd0a-a943dfec4c3c")
 	)
 	(no_connect
 		(at 271.78 129.54)
@@ -16748,16 +16766,6 @@
 	)
 	(wire
 		(pts
-			(xy 270.51 74.93) (xy 271.78 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0fca9a16-1a9f-4c8d-bec6-322810298eda")
-	)
-	(wire
-		(pts
 			(xy 318.77 59.69) (xy 325.12 59.69)
 		)
 		(stroke
@@ -16965,16 +16973,6 @@
 			(type default)
 		)
 		(uuid "1ff9c1cc-e6be-4157-880c-a0e85ed8c4fd")
-	)
-	(wire
-		(pts
-			(xy 302.26 48.26) (xy 302.26 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "211aeb4f-270d-4aa1-a072-85f58eac44d4")
 	)
 	(wire
 		(pts
@@ -17588,6 +17586,16 @@
 	)
 	(wire
 		(pts
+			(xy 262.89 58.42) (xy 262.89 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "42700e9f-f565-54af-be31-a5c6e136abc9")
+	)
+	(wire
+		(pts
 			(xy 135.89 185.42) (xy 144.78 185.42)
 		)
 		(stroke
@@ -17978,6 +17986,16 @@
 	)
 	(wire
 		(pts
+			(xy 262.89 44.45) (xy 262.89 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "617804ba-4dc8-58fe-a7d8-bd7f9ba48ecb")
+	)
+	(wire
+		(pts
 			(xy 144.78 38.1) (xy 152.4 38.1)
 		)
 		(stroke
@@ -18248,7 +18266,7 @@
 	)
 	(wire
 		(pts
-			(xy 302.26 54.61) (xy 302.26 76.2)
+			(xy 302.26 48.26) (xy 302.26 76.2)
 		)
 		(stroke
 			(width 0)
@@ -18378,7 +18396,7 @@
 	)
 	(wire
 		(pts
-			(xy 270.51 74.93) (xy 257.81 74.93)
+			(xy 257.81 74.93) (xy 271.78 74.93)
 		)
 		(stroke
 			(width 0)
@@ -20266,6 +20284,16 @@
 		)
 		(uuid "05e9ed87-0c5f-43d9-9193-09fe25275ed9")
 	)
+	(label "PD_12V_MEAS"
+		(at 254 62.23 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "080c7c3b-6389-56df-aa81-451bddce5279")
+	)
 	(label "LCD_RST"
 		(at 247.65 170.18 180)
 		(effects
@@ -20476,6 +20504,16 @@
 		)
 		(uuid "22b7e7ca-62bf-4098-8a28-5ecd712226a2")
 	)
+	(label "ENC_INTB"
+		(at 294.64 157.48 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "23a4848d-765a-58d3-916a-f15bce46c9c3")
+	)
 	(label "ADC_V_IN"
 		(at 229.87 44.45 180)
 		(effects
@@ -20495,6 +20533,16 @@
 			(justify right bottom)
 		)
 		(uuid "2545d672-e17f-554d-94f6-9458876e1bfb")
+	)
+	(label "A_GND"
+		(at 5.08 120.65 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "257abcf2-9ce7-5338-8efb-9545e9cb3241")
 	)
 	(label "ADC_GND"
 		(at 148.59 45.72 180)
@@ -20576,6 +20624,16 @@
 		)
 		(uuid "31d5a60e-e00e-4b84-8522-fe71ba087956")
 	)
+	(label "PD_12V_MEAS"
+		(at 255.27 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "32103070-f906-5089-bc82-baa12c33581d")
+	)
 	(label "VINR+"
 		(at 165.1 54.61 180)
 		(effects
@@ -20616,6 +20674,16 @@
 		)
 		(uuid "3596bdfa-0bcc-5914-862f-035bd32382f0")
 	)
+	(label "ADC_GND"
+		(at 281.94 49.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "36926157-51d6-5dd8-b3b3-c4bc647e5c4e")
+	)
 	(label "ADC_nRST"
 		(at 421.64 69.85 180)
 		(effects
@@ -20635,6 +20703,16 @@
 			(justify left)
 		)
 		(uuid "3855afa3-b3a5-497f-918b-fd74d92b57c7")
+	)
+	(label "ENC_INTA"
+		(at 106.68 335.28 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3950941e-b0b8-5de6-9b02-8550ab019b44")
 	)
 	(label "ADC_BCK"
 		(at 207.01 46.99 0)
@@ -20665,6 +20743,26 @@
 			(justify left bottom)
 		)
 		(uuid "3c4b9722-1456-5795-a563-782369e2fc86")
+	)
+	(label "AUDIO_L_IN"
+		(at 5.08 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3fb2aed2-9bab-5de3-986f-d9d2709f62d7")
+	)
+	(label "ENC_INTB"
+		(at 325.12 384.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4003e147-2028-5544-ba4a-7e74c40533c0")
 	)
 	(label "TP_SCL"
 		(at 194.31 184.15 180)
@@ -20755,6 +20853,16 @@
 			(justify left)
 		)
 		(uuid "4cb4eb8a-b1f7-4f05-a943-4bc52db8e208")
+	)
+	(label "-15V_A"
+		(at 20.32 140.97 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4cc7b661-348c-56d0-ad35-404e18d297f2")
 	)
 	(label "TP_RST"
 		(at 194.31 189.23 180)
@@ -20936,6 +21044,16 @@
 		)
 		(uuid "5d8f7ba1-1628-5473-9bf2-e47616473567")
 	)
+	(label "+15V_A"
+		(at 20.32 130.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5dd910cf-707d-5b41-8101-649cfac278de")
+	)
 	(label "3V3"
 		(at 106.68 358.14 180)
 		(effects
@@ -20965,6 +21083,16 @@
 			(justify right bottom)
 		)
 		(uuid "5f671ea5-8b86-564a-8c86-7ea6545f6e5e")
+	)
+	(label "D_GND"
+		(at 200.66 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "60943be4-21c1-5f3e-bfac-428af9938037")
 	)
 	(label "ENC3_SW"
 		(at 320.04 337.82 0)
@@ -21026,6 +21154,26 @@
 		)
 		(uuid "689ec753-9459-5278-a1a2-1749bd44de9b")
 	)
+	(label "ADC_BUF_R"
+		(at 27.94 41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6908d891-4cd6-5cd1-86db-b64742d3f58b")
+	)
+	(label "AUDIO_L_IN"
+		(at 12.7 113.03 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6bc02eb0-7d78-5a67-94a5-f0ea4cc25362")
+	)
 	(label "VCOML"
 		(at 104.14 124.46 180)
 		(effects
@@ -21065,6 +21213,16 @@
 			(justify right)
 		)
 		(uuid "6c2f3618-85c0-41ac-a66e-9c7f47997f29")
+	)
+	(label "ADC_BUF_R"
+		(at 12.7 44.45 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6c71c4d4-7882-5c60-a932-6210b9f57da1")
 	)
 	(label "D_GND"
 		(at 500 362.86 0)
@@ -21175,6 +21333,26 @@
 			(justify left bottom)
 		)
 		(uuid "7c17a9de-3001-5da5-a4c3-0e9b1d69fdc1")
+	)
+	(label "PD_12V_MEAS"
+		(at 262.89 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7cf6db60-a70c-5551-b503-c0e8a2ff1df4")
+	)
+	(label "3V3"
+		(at 309.88 377.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "833a3e59-0c70-5ab8-aabb-d450db0eecef")
 	)
 	(label "DEST_ADC"
 		(at 381 384.81 0)
@@ -21306,6 +21484,16 @@
 		)
 		(uuid "8e103448-f11a-40b9-b28b-c034e7e68e69")
 	)
+	(label "ENC_INTA"
+		(at 309.88 384.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8e86bed5-f1c8-5992-aad6-8d6f8c1f4e7b")
+	)
 	(label "ENC1_B"
 		(at 213.36 342.9 180)
 		(effects
@@ -21376,6 +21564,16 @@
 		)
 		(uuid "98b05488-fad3-40a8-bae9-9d7b27975208")
 	)
+	(label "ADC_BUF_L"
+		(at 27.94 115.57 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "995d9e26-66ed-5197-87d9-712ef7eb7cab")
+	)
 	(label "3V3"
 		(at 279.4 377.19 180)
 		(effects
@@ -21396,6 +21594,16 @@
 		)
 		(uuid "9d6f2b03-1ede-55cc-93e7-0fc4c6fba460")
 	)
+	(label "A_GND"
+		(at 10.16 135.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9dc5239a-a3e3-528d-a287-efbb9f0fea04")
+	)
 	(label "I2C_SCL"
 		(at 500 347.62 0)
 		(effects
@@ -21405,6 +21613,16 @@
 			(justify left bottom)
 		)
 		(uuid "9e3b74fa-07db-5f16-9d26-3d2d505139ff")
+	)
+	(label "ENC_INTB"
+		(at 106.68 337.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9ed21488-8936-55bd-a2a4-4b1a57752c69")
 	)
 	(label "D_GND"
 		(at 401.32 384.81 0)
@@ -21495,6 +21713,16 @@
 			(justify right)
 		)
 		(uuid "b095a751-3b9b-4984-ac11-00ed1bcef45a")
+	)
+	(label "AUDIO_R_IN"
+		(at 12.7 39.37 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b1b42484-ddb2-5eb6-88d0-c02db08cedd0")
 	)
 	(label "LED_DEST1_A"
 		(at 119.38 384.81 180)
@@ -21606,6 +21834,16 @@
 		)
 		(uuid "c39f16ca-42a8-5cde-9461-215a1c775c37")
 	)
+	(label "AUDIO_R_IN"
+		(at 5.08 39.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c484add0-633a-5e1e-8fcc-b48b5d918744")
+	)
 	(label "ENC1_SW"
 		(at 228.6 337.82 0)
 		(effects
@@ -21615,6 +21853,16 @@
 			(justify left bottom)
 		)
 		(uuid "c66b36af-9119-564d-88c1-3f9dc293a7ac")
+	)
+	(label "D_GND"
+		(at 254 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c6dde913-c2b4-5709-ad46-565ca7a520ad")
 	)
 	(label "A_GND"
 		(at 133.35 193.04 180)
@@ -21676,6 +21924,16 @@
 		)
 		(uuid "c98c432d-edeb-4cdb-88c7-6496d479c4a8")
 	)
+	(label "A_GND"
+		(at 5.08 46.99 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ca63edca-7717-54d6-ba97-3a2c9dd0507a")
+	)
 	(label "+5V_A"
 		(at 179.07 88.9 180)
 		(effects
@@ -21685,6 +21943,16 @@
 			(justify right)
 		)
 		(uuid "cc37f53b-6a20-403c-8832-41ebe7d7d28e")
+	)
+	(label "D_GND"
+		(at 270.51 72.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ccb3de00-e9d5-5094-a77f-b5b02f6e7a9d")
 	)
 	(label "I2C_SDA"
 		(at 106.68 322.58 180)
@@ -21716,6 +21984,16 @@
 		)
 		(uuid "cdf5c64c-d18d-478f-ad8e-b57365460794")
 	)
+	(label "A_GND"
+		(at 195.58 82.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ce40298d-e6e7-51a8-b43d-d59dc0a295b0")
+	)
 	(label "LCD_CS"
 		(at 247.65 165.1 180)
 		(effects
@@ -21735,6 +22013,16 @@
 			(justify right)
 		)
 		(uuid "d015968d-8565-47fe-8b39-bb6e0a4bf95c")
+	)
+	(label "ENC_INTA"
+		(at 294.64 154.94 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d14ec962-b97a-5049-98c6-feee71b44546")
 	)
 	(label "LED_DEST2_A"
 		(at 160.02 384.81 180)
@@ -21826,6 +22114,16 @@
 		)
 		(uuid "daec6444-2717-4bee-b31a-828869318fcf")
 	)
+	(label "+15V_A"
+		(at 302.26 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dc360270-25a5-5674-bc37-d9da7ea282d0")
+	)
 	(label "ENC1_A"
 		(at 132.08 320.04 0)
 		(effects
@@ -21835,6 +22133,16 @@
 			(justify left bottom)
 		)
 		(uuid "dcdae06b-2bb9-5168-a341-98533349726e")
+	)
+	(label "3V3"
+		(at 325.12 377.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dde0bd3a-c032-581f-bf0e-d252ea2a9e30")
 	)
 	(label "A_GND"
 		(at 203.2 73.66 0)
@@ -21855,6 +22163,16 @@
 			(justify left)
 		)
 		(uuid "e0b14515-89f7-428d-9ee5-f8aabc3b093a")
+	)
+	(label "ADC_BUF_L"
+		(at 12.7 118.11 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e284e732-a9de-5e54-b4c5-74bc1611fd6d")
 	)
 	(label "VINL+"
 		(at 165.1 39.37 180)
@@ -21936,6 +22254,16 @@
 		)
 		(uuid "ec295249-bdbc-4707-8427-e514bd596c8a")
 	)
+	(label "A_GND"
+		(at 10.16 138.43 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ee1e8b36-f117-5b2e-b925-645ef5ed820c")
+	)
 	(label "DEST_SENSE_LINE"
 		(at 360.68 384.81 0)
 		(effects
@@ -21956,6 +22284,16 @@
 		)
 		(uuid "f1da12d9-eedb-54f0-8467-6bc4a66b3908")
 	)
+	(label "-15V_A"
+		(at 10.16 146.05 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f2920800-1ab0-575e-b636-988dad49ee34")
+	)
 	(label "+5V_D"
 		(at 266.7 111.76 90)
 		(effects
@@ -21975,6 +22313,16 @@
 			(justify left bottom)
 		)
 		(uuid "f7416040-9049-5190-b782-9d88bf93956e")
+	)
+	(label "+15V_A"
+		(at 10.16 128.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f7f45f85-1c70-535c-ac64-3c44b0f6bbe9")
 	)
 	(label "ADC_nRST"
 		(at 207.01 55.88 0)
@@ -22714,10 +23062,6 @@
 			)
 		)
 	)
-	(no_connect
-		(at 248.92 147.32)
-		(uuid "f855c8b1-03bb-55ae-bd0a-a943dfec4c3c")
-	)
 	(symbol
 		(lib_id "MeasurementADC_Extras:ASFL1-12.288MHZ")
 		(at 406.4 39.37 0)
@@ -22958,6 +23302,85 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
 					(reference "C1620")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 10.16 132.08 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "14d681da-1b87-5bb3-99f6-e28c62896afb")
+		(property "Reference" "C1646"
+			(at 12.7 130.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 12.7 133.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 10.16 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 10.16 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U1611 の +15V_A デカップリング"
+			(at 10.16 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ce46506f-9fa1-5690-8513-bf92ce40df6e")
+		)
+		(pin "2"
+			(uuid "9f117d10-4397-5a89-b7bb-cea38ff0b57b")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "C1646")
 					(unit 1)
 				)
 			)
@@ -23221,6 +23644,103 @@
 		)
 	)
 	(symbol
+		(lib_id "MeasurementADC1804:OPA1656")
+		(at 20.32 115.57 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1e54dee4-1bbe-51a2-bb06-fee67a965ab4")
+		(property "Reference" "U1611"
+			(at 25.4 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA1656"
+			(at 26.67 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
+			(at 20.32 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 20.32 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→約30k（RV501 50k ∥ R603 220k ∥ R1659 100k）に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−115.5dB（spice/switch_thd.py --rload 30.4e3 実測）、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない（負荷は R1612/R1614 系の抵抗で容量性ではなく、OPA1656 は CL 100 pF まで規定内。DS Electrical Characteristics）。2026-09-07"
+			(at 20.32 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b1b759d1-5d63-54ad-9aa7-f7ec9e22aa59")
+		)
+		(pin "2"
+			(uuid "f047b527-aa53-548f-8265-abfc692d0d95")
+		)
+		(pin "3"
+			(uuid "4ca0b3b9-a2f7-5701-ad4d-68b02f5b018f")
+		)
+		(pin "5"
+			(uuid "30915e0c-bba7-5809-9da4-9d6e8bdc30a6")
+		)
+		(pin "4"
+			(uuid "c90e45b2-4332-5a69-aa03-7b58d0a6c99e")
+		)
+		(pin "7"
+			(uuid "23c6ccc3-ae17-5363-9541-6f663801e279")
+		)
+		(pin "6"
+			(uuid "c6fe8063-5c24-593e-8578-48db0f6c4ea9")
+		)
+		(pin "8"
+			(uuid "58a203d7-27cd-557a-955f-2d42f5d8f80e")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "U1611")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 95.25 31.75 270)
 		(unit 1)
@@ -23452,6 +23972,85 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
 					(reference "R1619")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 198.12 82.55 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "20e79880-0cf5-5a93-9452-2c2d58f80dfe")
+		(property "Reference" "NT1603"
+			(at 196.85 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "A_GND-D_GND"
+			(at 196.85 86.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
+			(at 198.12 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 198.12 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "A_GND と D_GND の唯一の結合点。2026-09-07 に U1604(MBC2596 非絶縁バック)を削除した時点で新設した — それまでこの結合は U1604 の内部で起きていて、置き場所を選べなかった。結合点の数は1のままで、場所が選べるようになっただけ（A6/D28 の趣旨は保たれている）。⚠ PCB では NT1601(A_GND-ADC_GND)の隣に置くこと。I2S の帰り(D_GND -> A_GND -> ADC_GND)が2ホップになるので、2つの NetTie が離れるとその間の A_GND 銅箔がループ面積になる。"
+			(at 198.12 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f440f330-77b3-54c2-9703-3d9505acf83a")
+		)
+		(pin "2"
+			(uuid "052d80b0-46ef-552c-ad1e-6fc36b88107f")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "NT1603")
 					(unit 1)
 				)
 			)
@@ -24101,6 +24700,165 @@
 	)
 	(symbol
 		(lib_id "Device:C")
+		(at 254 66.04 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "35f89689-034b-5b75-bbe8-00b3acd1aa45")
+		(property "Reference" "C1645"
+			(at 251.714 64.008 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10uF 50V"
+			(at 257.302 68.072 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 254 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 254 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U1607(BP5293-50) の入力コンデンサ CIN。DS p.2 推奨 10uF。帰り先は D_GND（U1607 の GND と同じ）。PD_GND に落とすと入力の脈流ループが NT1602 を通ってしまう。"
+			(at 254 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "771b0c80-fe41-508a-98c0-11c0378c7be4")
+		)
+		(pin "2"
+			(uuid "4130f003-6762-51fb-95e7-c6bb2d823e5e")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "C1645")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 309.88 381 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3729e942-d83f-5da2-bfc1-db6dbc8b5014")
+		(property "Reference" "R1661"
+			(at 309.88 378.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 309.88 383.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U1610 MCP23017 ENC_INTA open-drain pull-up to 3V3"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6d7b9036-7edd-52b7-9fac-7d33da1bd75d")
+		)
+		(pin "2"
+			(uuid "1b7fd675-0045-55e8-8513-33f4b4a2f8a8")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "R1661")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
 		(at 82.55 54.61 270)
 		(unit 1)
 		(body_style 1)
@@ -24358,8 +25116,8 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 63.5 233.68 270)
-		(mirror y)
+		(at 63.5 233.68 90)
+		(mirror x)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -24520,8 +25278,8 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x03")
-		(at 106.68 233.68 270)
-		(mirror y)
+		(at 106.68 233.68 90)
+		(mirror x)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -24861,6 +25619,103 @@
 		)
 	)
 	(symbol
+		(lib_id "MeasurementADC1804:OPA1656")
+		(at 20.32 41.91 0)
+		(unit 2)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "491c8259-8a77-52bc-b38b-ae1e649d64d4")
+		(property "Reference" "U1611"
+			(at 25.4 44.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA1656"
+			(at 26.67 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
+			(at 20.32 41.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 20.32 41.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→約30k（RV501 50k ∥ R603 220k ∥ R1659 100k）に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−115.5dB（spice/switch_thd.py --rload 30.4e3 実測）、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない（負荷は R1612/R1614 系の抵抗で容量性ではなく、OPA1656 は CL 100 pF まで規定内。DS Electrical Characteristics）。2026-09-07"
+			(at 20.32 41.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "79f135ea-d4da-5716-9d6a-2b8b247552d3")
+		)
+		(pin "2"
+			(uuid "3c13996a-9b4d-5650-8553-1c0d8db4c795")
+		)
+		(pin "3"
+			(uuid "d9c9c399-bf81-5b8f-a2a8-0088ac3e6004")
+		)
+		(pin "5"
+			(uuid "4f1d6c2d-d7c3-51a4-8d5a-80965cc211db")
+		)
+		(pin "4"
+			(uuid "7381c438-69c1-5c45-a34a-07b5db59124a")
+		)
+		(pin "7"
+			(uuid "4ea70e26-afd6-5f63-826c-7eea932c0729")
+		)
+		(pin "6"
+			(uuid "936a386a-0cdc-53d3-89ca-51d305873468")
+		)
+		(pin "8"
+			(uuid "1fcaf0a1-375a-5d16-8471-75158b2e81a7")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "U1611")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 279.4 381 0)
 		(unit 1)
@@ -25014,6 +25869,164 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
 					(reference "C1601")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 5.08 116.84 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "52f330ee-ddc6-5e0d-baeb-5526ff5262fd")
+		(property "Reference" "R1659"
+			(at 7.62 115.57 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100k"
+			(at 7.62 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 5.08 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 5.08 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U1611 L バッファの入力バイアス（v1 R805 相当）。J1601 を抜いても入力が浮かない"
+			(at 5.08 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4a8e352a-406f-575b-8746-51408f80c854")
+		)
+		(pin "2"
+			(uuid "2d8bf908-7512-59b5-a914-eb6ac40d2fe7")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "R1659")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 5.08 43.18 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "54719764-f540-5b47-8e31-aac3556eed70")
+		(property "Reference" "R1660"
+			(at 7.62 41.91 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100k"
+			(at 7.62 44.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 5.08 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 5.08 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U1611 R バッファの入力バイアス（v1 R810 相当）"
+			(at 5.08 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "413a2d5e-1ed8-5cb1-8c90-6ba9cf94895e")
+		)
+		(pin "2"
+			(uuid "16aabb62-d687-5d6e-92fd-bbb6fdac899c")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "R1660")
 					(unit 1)
 				)
 			)
@@ -25848,115 +26861,6 @@
 			)
 		)
 	)
-	(label "D_GND"
-		(at 270.51 72.39 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ccb3de00-e9d5-5094-a77f-b5b02f6e7a9d")
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 254 66.04 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "35f89689-034b-5b75-bbe8-00b3acd1aa45")
-		(property "Reference" "C1645"
-			(at 251.714 64.008 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10uF 50V"
-			(at 257.302 68.072 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 254 66.04 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 66.04 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "U1607(BP5293-50) の入力コンデンサ CIN。DS p.2 推奨 10uF。帰り先は D_GND（U1607 の GND と同じ）。PD_GND に落とすと入力の脈流ループが NT1602 を通ってしまう。"
-			(at 254 66.04 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "771b0c80-fe41-508a-98c0-11c0378c7be4")
-		)
-		(pin "2"
-			(uuid "4130f003-6762-51fb-95e7-c6bb2d823e5e")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "C1645")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "PD_12V_MEAS"
-		(at 254 62.23 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "080c7c3b-6389-56df-aa81-451bddce5279")
-	)
-	(label "D_GND"
-		(at 254 69.85 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c6dde913-c2b4-5709-ad46-565ca7a520ad")
-	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 233.68 44.45 0)
@@ -26114,8 +27018,38 @@
 			)
 		)
 	)
+	(label "D_GND"
+		(at 220.98 347.98 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fe24d740-f9d3-4bdf-88cf-21499e747337")
+	)
+	(label "D_GND"
+		(at 266.7 347.98 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c691ae2f-9dca-4aa0-99c4-2d2f9e02fb0f")
+	)
+	(label "D_GND"
+		(at 312.42 347.98 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "060cad8a-713a-429d-a8f5-a327d9c3ee5c")
+	)
 	(symbol
-		(lib_id "Device:RotaryEncoder_Switch")
+		(lib_id "Device:RotaryEncoder_Switch_MP")
 		(at 266.7 340.36 0)
 		(unit 1)
 		(body_style 1)
@@ -26187,6 +27121,9 @@
 		)
 		(pin "C"
 			(uuid "0ceb2a2b-6dc3-5bc9-8689-19c7fa06cb66")
+		)
+		(pin "MP"
+			(uuid "344d5623-e47c-401b-9439-db86baf09b61")
 		)
 		(pin "S1"
 			(uuid "a04295fb-e403-5b83-960e-b515901a0190")
@@ -26284,6 +27221,85 @@
 	)
 	(symbol
 		(lib_id "Device:C")
+		(at 10.16 142.24 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "687d7d7d-911c-5f3e-8e6b-2d4f11aa204e")
+		(property "Reference" "C1647"
+			(at 12.7 140.97 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 12.7 143.51 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 10.16 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 10.16 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U1611 の -15V_A デカップリング"
+			(at 10.16 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "cb2e140e-5b81-5a6c-88c8-111085ee0c2e")
+		)
+		(pin "2"
+			(uuid "d61378d1-a9c0-54fb-a074-34ad311ffea2")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "C1647")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
 		(at 254 49.53 0)
 		(unit 1)
 		(body_style 1)
@@ -26357,6 +27373,103 @@
 				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
 					(reference "C1612")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MeasurementADC1804:OPA1656")
+		(at 20.32 135.89 0)
+		(unit 3)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "68c52882-952f-5e57-b529-377ab0fd4f28")
+		(property "Reference" "U1611"
+			(at 25.4 138.43 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA1656"
+			(at 26.67 132.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
+			(at 20.32 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 20.32 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→約30k（RV501 50k ∥ R603 220k ∥ R1659 100k）に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−115.5dB（spice/switch_thd.py --rload 30.4e3 実測）、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない（負荷は R1612/R1614 系の抵抗で容量性ではなく、OPA1656 は CL 100 pF まで規定内。DS Electrical Characteristics）。2026-09-07"
+			(at 20.32 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e2390a09-c9d2-53ba-b77c-e9e246a8cc99")
+		)
+		(pin "2"
+			(uuid "5fab32e4-b5ad-5be6-8cbc-db838779d940")
+		)
+		(pin "3"
+			(uuid "716f6e8b-f7da-5f66-a8a6-9f41982b0dcf")
+		)
+		(pin "5"
+			(uuid "2561cb5e-c4a8-578f-b001-9ee07f721aea")
+		)
+		(pin "4"
+			(uuid "f4214264-21ca-53d7-9a5b-e0c71b916591")
+		)
+		(pin "7"
+			(uuid "2bf2c63a-f97a-5929-8114-6400c47b96e3")
+		)
+		(pin "6"
+			(uuid "35e9c1fc-246e-51ca-acff-fa9449f1c6be")
+		)
+		(pin "8"
+			(uuid "6482d25c-61b9-5a25-a31e-d96ee5340c95")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "U1611")
+					(unit 3)
 				)
 			)
 		)
@@ -27237,7 +28350,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:RotaryEncoder_Switch")
+		(lib_id "Device:RotaryEncoder_Switch_MP")
 		(at 220.98 340.36 0)
 		(unit 1)
 		(body_style 1)
@@ -27309,6 +28422,9 @@
 		)
 		(pin "C"
 			(uuid "a2536e32-b297-5081-b634-94c5d11bc4bb")
+		)
+		(pin "MP"
+			(uuid "dcca73b9-c14f-4dbf-86c6-9d4c98ae2cff")
 		)
 		(pin "S1"
 			(uuid "477a1ee7-59e6-5347-add5-bcd533831a28")
@@ -27662,7 +28778,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:RotaryEncoder_Switch")
+		(lib_id "Device:RotaryEncoder_Switch_MP")
 		(at 312.42 340.36 0)
 		(unit 1)
 		(body_style 1)
@@ -27734,6 +28850,9 @@
 		)
 		(pin "C"
 			(uuid "f40e76b4-cdbe-505c-8685-f4df76a0db3c")
+		)
+		(pin "MP"
+			(uuid "81bb3e8a-7eba-4bcf-8baa-e27f1df81ce3")
 		)
 		(pin "S1"
 			(uuid "47658c5b-ed97-5da5-8568-8df5631bf8e8")
@@ -28360,6 +29479,85 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
 					(reference "C1637")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 281.94 49.53 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a346afe8-887f-5b0d-87b5-6878a87e2add")
+		(property "Reference" "#FLG1604"
+			(at 281.94 46.99 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 281.94 44.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 281.94 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 281.94 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "ADC_GND は NT1601 で A_GND に結合しているが、KiCad の NetTie は passive なので ERC に駆動が伝わらない。2026-09-07 に U1604(非絶縁バック)を消したことで ADC_GND 上の power_output ピンが無くなったため置いた。"
+			(at 281.94 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "213c8370-9918-53f4-93f0-11b15a0328de")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "#FLG1604")
 					(unit 1)
 				)
 			)
@@ -29608,6 +30806,85 @@
 				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
 					(reference "U1608")
 					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Fuse")
+		(at 262.89 54.61 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d12634c8-024e-53ff-94d6-5b457a163e9c")
+		(property "Reference" "F1602"
+			(at 257.81 54.61 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PPTC 0.5A hold"
+			(at 267.97 54.61 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:PPTC_Radial_D7.9mm_T3.1mm_P5.08mm"
+			(at 67.818 223.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 66.04 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "計測側 +5V_D（U1607）入口の PPTC。ラジアル PPTC。Littelfuse RXEF050（Ih 0.50 A / It 1.0 A / 72 V）。Bourns MF-R050 も同寸で可。FP は DigiKey の寸法（φ7.4〜7.9×3.1、ピッチ 5.05〜5.10）から起こした Library の自作。2026-09-09 に軸リード FP から直した"
+			(at 66.04 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "e5340b33-e096-5830-8574-ecf693f98e43")
+		)
+		(pin "1"
+			(uuid "0026ea2b-14b8-5ec0-8c7e-d3c81756b07d")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "F1602")
+					(unit 1)
 				)
 			)
 		)
@@ -31111,6 +32388,165 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 325.12 381 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "efc93b29-2881-54b9-a314-4f1f4b21f8b4")
+		(property "Reference" "R1662"
+			(at 325.12 378.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 325.12 383.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "U1610 MCP23017 ENC_INTB open-drain pull-up to 3V3"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d00366a1-2c03-545c-a178-a95f4e4b4dd4")
+		)
+		(pin "2"
+			(uuid "078312cf-c3d5-5db9-a2bf-638ca45906e4")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "R1662")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 255.27 60.96 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f10d0fdb-2271-5c0b-be9d-07d9df7f7d11")
+		(property "Reference" "#FLG1602"
+			(at 255.27 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 255.27 55.88 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 266.7 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 266.7 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 266.7 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d71e7c93-22f5-5485-8130-13d102bf7b6f")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "#FLG1602")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 140.97 104.14 270)
 		(unit 1)
 		(body_style 1)
@@ -31427,1426 +32863,5 @@
 				)
 			)
 		)
-	)
-	(symbol
-		(lib_id "Device:Fuse")
-		(at 262.89 54.61 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "d12634c8-024e-53ff-94d6-5b457a163e9c")
-		(property "Reference" "F1602"
-			(at 257.81 54.61 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PPTC 0.5A hold"
-			(at 267.97 54.61 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Library:PPTC_Radial_D7.9mm_T3.1mm_P5.08mm"
-			(at 67.818 223.52 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 66.04 223.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "計測側 +5V_D（U1607）入口の PPTC。ラジアル PPTC。Littelfuse RXEF050（Ih 0.50 A / It 1.0 A / 72 V）。Bourns MF-R050 も同寸で可。FP は DigiKey の寸法（φ7.4〜7.9×3.1、ピッチ 5.05〜5.10）から起こした Library の自作。2026-09-09 に軸リード FP から直した"
-			(at 66.04 223.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "e5340b33-e096-5830-8574-ecf693f98e43")
-		)
-		(pin "1"
-			(uuid "0026ea2b-14b8-5ec0-8c7e-d3c81756b07d")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "F1602")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 262.89 44.45) (xy 262.89 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "617804ba-4dc8-58fe-a7d8-bd7f9ba48ecb")
-	)
-	(wire
-		(pts
-			(xy 262.89 58.42) (xy 262.89 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "42700e9f-f565-54af-be31-a5c6e136abc9")
-	)
-	(label "PD_12V_MEAS"
-		(at 262.89 60.96 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7cf6db60-a70c-5551-b503-c0e8a2ff1df4")
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 255.27 60.96 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f10d0fdb-2271-5c0b-be9d-07d9df7f7d11")
-		(property "Reference" "#FLG1602"
-			(at 255.27 58.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 255.27 55.88 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 266.7 125.73 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 266.7 125.73 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 266.7 125.73 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d71e7c93-22f5-5485-8130-13d102bf7b6f")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "#FLG1602")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "PD_12V_MEAS"
-		(at 255.27 60.96 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "32103070-f906-5089-bc82-baa12c33581d")
-	)
-	(label "ENC_INTA"
-		(at 106.68 335.28 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "3950941e-b0b8-5de6-9b02-8550ab019b44")
-	)
-	(label "ENC_INTB"
-		(at 106.68 337.82 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9ed21488-8936-55bd-a2a4-4b1a57752c69")
-	)
-	(label "ENC_INTA"
-		(at 294.64 154.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d14ec962-b97a-5049-98c6-feee71b44546")
-	)
-	(label "ENC_INTB"
-		(at 294.64 157.48 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "23a4848d-765a-58d3-916a-f15bce46c9c3")
-	)
-	(no_connect
-		(at 294.64 190.5)
-		(uuid "7696a0a1-c2f8-5ecd-acd9-e24e8c0d1567")
-	)
-	(label "+15V_A"
-		(at 302.26 38.1 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dc360270-25a5-5674-bc37-d9da7ea282d0")
-	)
-	(symbol
-		(lib_id "Device:NetTie_2")
-		(at 198.12 82.55 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "20e79880-0cf5-5a93-9452-2c2d58f80dfe")
-		(property "Reference" "NT1603"
-			(at 196.85 78.74 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "A_GND-D_GND"
-			(at 196.85 86.36 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at 198.12 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 198.12 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "A_GND と D_GND の唯一の結合点。2026-09-07 に U1604(MBC2596 非絶縁バック)を削除した時点で新設した — それまでこの結合は U1604 の内部で起きていて、置き場所を選べなかった。結合点の数は1のままで、場所が選べるようになっただけ（A6/D28 の趣旨は保たれている）。⚠ PCB では NT1601(A_GND-ADC_GND)の隣に置くこと。I2S の帰り(D_GND -> A_GND -> ADC_GND)が2ホップになるので、2つの NetTie が離れるとその間の A_GND 銅箔がループ面積になる。"
-			(at 198.12 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "f440f330-77b3-54c2-9703-3d9505acf83a")
-		)
-		(pin "2"
-			(uuid "052d80b0-46ef-552c-ad1e-6fc36b88107f")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "NT1603")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "A_GND"
-		(at 195.58 82.55 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "ce40298d-e6e7-51a8-b43d-d59dc0a295b0")
-	)
-	(label "D_GND"
-		(at 200.66 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "60943be4-21c1-5f3e-bfac-428af9938037")
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 281.94 49.53 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a346afe8-887f-5b0d-87b5-6878a87e2add")
-		(property "Reference" "#FLG1604"
-			(at 281.94 46.99 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 281.94 44.45 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 281.94 49.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 281.94 49.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "ADC_GND は NT1601 で A_GND に結合しているが、KiCad の NetTie は passive なので ERC に駆動が伝わらない。2026-09-07 に U1604(非絶縁バック)を消したことで ADC_GND 上の power_output ピンが無くなったため置いた。"
-			(at 281.94 49.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "213c8370-9918-53f4-93f0-11b15a0328de")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "#FLG1604")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "ADC_GND"
-		(at 281.94 49.53 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "36926157-51d6-5dd8-b3b3-c4bc647e5c4e")
-	)
-	(no_connect
-		(at 248.92 175.26)
-		(uuid "7ef10f74-0dcd-58e3-b887-cd68b11decf3")
-	)
-	(label "ADC_BUF_L"
-		(at 27.94 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "995d9e26-66ed-5197-87d9-712ef7eb7cab")
-	)
-	(label "ADC_BUF_L"
-		(at 12.7 118.11 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e284e732-a9de-5e54-b4c5-74bc1611fd6d")
-	)
-	(label "AUDIO_L_IN"
-		(at 12.7 113.03 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6bc02eb0-7d78-5a67-94a5-f0ea4cc25362")
-	)
-	(symbol
-		(lib_id "MeasurementADC1804:OPA1656")
-		(at 20.32 115.57 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "1e54dee4-1bbe-51a2-bb06-fee67a965ab4")
-		(property "Reference" "U1611"
-			(at 25.4 118.11 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "OPA1656"
-			(at 26.67 111.76 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 20.32 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 20.32 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→約30k（RV501 50k ∥ R603 220k ∥ R1659 100k）に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−115.5dB（spice/switch_thd.py --rload 30.4e3 実測）、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない（負荷は R1612/R1614 系の抵抗で容量性ではなく、OPA1656 は CL 100 pF まで規定内。DS Electrical Characteristics）。2026-09-07"
-			(at 20.32 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "b1b759d1-5d63-54ad-9aa7-f7ec9e22aa59")
-		)
-		(pin "2"
-			(uuid "f047b527-aa53-548f-8265-abfc692d0d95")
-		)
-		(pin "3"
-			(uuid "4ca0b3b9-a2f7-5701-ad4d-68b02f5b018f")
-		)
-		(pin "5"
-			(uuid "30915e0c-bba7-5809-9da4-9d6e8bdc30a6")
-		)
-		(pin "4"
-			(uuid "c90e45b2-4332-5a69-aa03-7b58d0a6c99e")
-		)
-		(pin "7"
-			(uuid "23c6ccc3-ae17-5363-9541-6f663801e279")
-		)
-		(pin "6"
-			(uuid "c6fe8063-5c24-593e-8578-48db0f6c4ea9")
-		)
-		(pin "8"
-			(uuid "58a203d7-27cd-557a-955f-2d42f5d8f80e")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "U1611")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "ADC_BUF_R"
-		(at 27.94 41.91 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6908d891-4cd6-5cd1-86db-b64742d3f58b")
-	)
-	(label "ADC_BUF_R"
-		(at 12.7 44.45 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6c71c4d4-7882-5c60-a932-6210b9f57da1")
-	)
-	(label "AUDIO_R_IN"
-		(at 12.7 39.37 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b1b42484-ddb2-5eb6-88d0-c02db08cedd0")
-	)
-	(symbol
-		(lib_id "MeasurementADC1804:OPA1656")
-		(at 20.32 41.91 0)
-		(unit 2)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "491c8259-8a77-52bc-b38b-ae1e649d64d4")
-		(property "Reference" "U1611"
-			(at 25.4 44.45 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "OPA1656"
-			(at 26.67 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 20.32 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 20.32 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→約30k（RV501 50k ∥ R603 220k ∥ R1659 100k）に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−115.5dB（spice/switch_thd.py --rload 30.4e3 実測）、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない（負荷は R1612/R1614 系の抵抗で容量性ではなく、OPA1656 は CL 100 pF まで規定内。DS Electrical Characteristics）。2026-09-07"
-			(at 20.32 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "79f135ea-d4da-5716-9d6a-2b8b247552d3")
-		)
-		(pin "2"
-			(uuid "3c13996a-9b4d-5650-8553-1c0d8db4c795")
-		)
-		(pin "3"
-			(uuid "d9c9c399-bf81-5b8f-a2a8-0088ac3e6004")
-		)
-		(pin "5"
-			(uuid "4f1d6c2d-d7c3-51a4-8d5a-80965cc211db")
-		)
-		(pin "4"
-			(uuid "7381c438-69c1-5c45-a34a-07b5db59124a")
-		)
-		(pin "7"
-			(uuid "4ea70e26-afd6-5f63-826c-7eea932c0729")
-		)
-		(pin "6"
-			(uuid "936a386a-0cdc-53d3-89ca-51d305873468")
-		)
-		(pin "8"
-			(uuid "1fcaf0a1-375a-5d16-8471-75158b2e81a7")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "U1611")
-					(unit 2)
-				)
-			)
-		)
-	)
-	(label "+15V_A"
-		(at 20.32 130.81 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5dd910cf-707d-5b41-8101-649cfac278de")
-	)
-	(label "-15V_A"
-		(at 20.32 140.97 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4cc7b661-348c-56d0-ad35-404e18d297f2")
-	)
-	(symbol
-		(lib_id "MeasurementADC1804:OPA1656")
-		(at 20.32 135.89 0)
-		(unit 3)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "68c52882-952f-5e57-b529-377ab0fd4f28")
-		(property "Reference" "U1611"
-			(at 25.4 138.43 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "OPA1656"
-			(at 26.67 132.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 20.32 135.89 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 20.32 135.89 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "計測タップの「+」側バッファ（v1 の AdcBuffer を復元）。ユニティフォロワ、入力 100k→A_GND。音声バスから見た負荷を 1.87k→約30k（RV501 50k ∥ R603 220k ∥ R1659 100k）に戻し、両ブランチが 10µF を見る源インピーダンスを揃える（Vg 除去 20Hz 10.5→43dB、TMUX7612 の H3 −94.9→−115.5dB（spice/switch_thd.py --rload 30.4e3 実測）、低域 39→17Hz）。v1 の出力 47Ω は対称性のため付けない（負荷は R1612/R1614 系の抵抗で容量性ではなく、OPA1656 は CL 100 pF まで規定内。DS Electrical Characteristics）。2026-09-07"
-			(at 20.32 135.89 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e2390a09-c9d2-53ba-b77c-e9e246a8cc99")
-		)
-		(pin "2"
-			(uuid "5fab32e4-b5ad-5be6-8cbc-db838779d940")
-		)
-		(pin "3"
-			(uuid "716f6e8b-f7da-5f66-a8a6-9f41982b0dcf")
-		)
-		(pin "5"
-			(uuid "2561cb5e-c4a8-578f-b001-9ee07f721aea")
-		)
-		(pin "4"
-			(uuid "f4214264-21ca-53d7-9a5b-e0c71b916591")
-		)
-		(pin "7"
-			(uuid "2bf2c63a-f97a-5929-8114-6400c47b96e3")
-		)
-		(pin "6"
-			(uuid "35e9c1fc-246e-51ca-acff-fa9449f1c6be")
-		)
-		(pin "8"
-			(uuid "6482d25c-61b9-5a25-a31e-d96ee5340c95")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "U1611")
-					(unit 3)
-				)
-			)
-		)
-	)
-	(label "AUDIO_L_IN"
-		(at 5.08 113.03 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3fb2aed2-9bab-5de3-986f-d9d2709f62d7")
-	)
-	(label "A_GND"
-		(at 5.08 120.65 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "257abcf2-9ce7-5338-8efb-9545e9cb3241")
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 5.08 116.84 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "52f330ee-ddc6-5e0d-baeb-5526ff5262fd")
-		(property "Reference" "R1659"
-			(at 7.62 115.57 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100k"
-			(at 7.62 118.11 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 5.08 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 5.08 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "U1611 L バッファの入力バイアス（v1 R805 相当）。J1601 を抜いても入力が浮かない"
-			(at 5.08 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "4a8e352a-406f-575b-8746-51408f80c854")
-		)
-		(pin "2"
-			(uuid "2d8bf908-7512-59b5-a914-eb6ac40d2fe7")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "R1659")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "AUDIO_R_IN"
-		(at 5.08 39.37 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c484add0-633a-5e1e-8fcc-b48b5d918744")
-	)
-	(label "A_GND"
-		(at 5.08 46.99 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ca63edca-7717-54d6-ba97-3a2c9dd0507a")
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 5.08 43.18 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "54719764-f540-5b47-8e31-aac3556eed70")
-		(property "Reference" "R1660"
-			(at 7.62 41.91 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100k"
-			(at 7.62 44.45 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 5.08 43.18 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 5.08 43.18 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "U1611 R バッファの入力バイアス（v1 R810 相当）"
-			(at 5.08 43.18 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "413a2d5e-1ed8-5cb1-8c90-6ba9cf94895e")
-		)
-		(pin "2"
-			(uuid "16aabb62-d687-5d6e-92fd-bbb6fdac899c")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "R1660")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "+15V_A"
-		(at 10.16 128.27 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f7f45f85-1c70-535c-ac64-3c44b0f6bbe9")
-	)
-	(label "A_GND"
-		(at 10.16 135.89 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9dc5239a-a3e3-528d-a287-efbb9f0fea04")
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 10.16 132.08 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "14d681da-1b87-5bb3-99f6-e28c62896afb")
-		(property "Reference" "C1646"
-			(at 12.7 130.81 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 12.7 133.35 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 10.16 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 10.16 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "U1611 の +15V_A デカップリング"
-			(at 10.16 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "ce46506f-9fa1-5690-8513-bf92ce40df6e")
-		)
-		(pin "2"
-			(uuid "9f117d10-4397-5a89-b7bb-cea38ff0b57b")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "C1646")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "A_GND"
-		(at 10.16 138.43 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ee1e8b36-f117-5b2e-b925-645ef5ed820c")
-	)
-	(label "-15V_A"
-		(at 10.16 146.05 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f2920800-1ab0-575e-b636-988dad49ee34")
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 10.16 142.24 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "687d7d7d-911c-5f3e-8e6b-2d4f11aa204e")
-		(property "Reference" "C1647"
-			(at 12.7 140.97 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 12.7 143.51 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 10.16 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 10.16 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "U1611 の -15V_A デカップリング"
-			(at 10.16 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "cb2e140e-5b81-5a6c-88c8-111085ee0c2e")
-		)
-		(pin "2"
-			(uuid "d61378d1-a9c0-54fb-a074-34ad311ffea2")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "C1647")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 309.88 381.0 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3729e942-d83f-5da2-bfc1-db6dbc8b5014")
-		(property "Reference" "R1661"
-			(at 309.88 378.46 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Value" "10k"
-			(at 309.88 383.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Description" "U1610 MCP23017 ENC_INTA open-drain pull-up to 3V3"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(pin "1"
-			(uuid "6d7b9036-7edd-52b7-9fac-7d33da1bd75d")
-		)
-		(pin "2"
-			(uuid "1b7fd675-0045-55e8-8513-33f4b4a2f8a8")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "R1661")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "3V3"
-		(at 309.88 377.19 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "833a3e59-0c70-5ab8-aabb-d450db0eecef")
-	)
-	(label "ENC_INTA"
-		(at 309.88 384.81 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8e86bed5-f1c8-5992-aad6-8d6f8c1f4e7b")
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 325.12 381.0 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "efc93b29-2881-54b9-a314-4f1f4b21f8b4")
-		(property "Reference" "R1662"
-			(at 325.12 378.46 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Value" "10k"
-			(at 325.12 383.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(property "Description" "U1610 MCP23017 ENC_INTB open-drain pull-up to 3V3"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-
-		(pin "1"
-			(uuid "d00366a1-2c03-545c-a178-a95f4e4b4dd4")
-		)
-		(pin "2"
-			(uuid "078312cf-c3d5-5db9-a2bf-638ca45906e4")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
-					(reference "R1662")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "3V3"
-		(at 325.12 377.19 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dde0bd3a-c032-581f-bf0e-d252ea2a9e30")
-	)
-	(label "ENC_INTB"
-		(at 325.12 384.81 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4003e147-2028-5544-ba4a-7e74c40533c0")
 	)
 )
