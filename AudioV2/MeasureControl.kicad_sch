@@ -20284,6 +20284,16 @@
 		)
 		(uuid "05e9ed87-0c5f-43d9-9193-09fe25275ed9")
 	)
+	(label "D_GND"
+		(at 312.42 347.98 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "060cad8a-713a-429d-a8f5-a327d9c3ee5c")
+	)
 	(label "PD_12V_MEAS"
 		(at 254 62.23 0)
 		(effects
@@ -21855,6 +21865,16 @@
 		(uuid "c66b36af-9119-564d-88c1-3f9dc293a7ac")
 	)
 	(label "D_GND"
+		(at 266.7 347.98 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c691ae2f-9dca-4aa0-99c4-2d2f9e02fb0f")
+	)
+	(label "D_GND"
 		(at 254 69.85 0)
 		(effects
 			(font
@@ -22373,6 +22393,16 @@
 			(justify left)
 		)
 		(uuid "fcc39859-a426-4313-9596-295cf1aac301")
+	)
+	(label "D_GND"
+		(at 220.98 347.98 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fe24d740-f9d3-4bdf-88cf-21499e747337")
 	)
 	(label "TP_RST"
 		(at 247.65 185.42 180)
@@ -27017,36 +27047,6 @@
 				)
 			)
 		)
-	)
-	(label "D_GND"
-		(at 220.98 347.98 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fe24d740-f9d3-4bdf-88cf-21499e747337")
-	)
-	(label "D_GND"
-		(at 266.7 347.98 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c691ae2f-9dca-4aa0-99c4-2d2f9e02fb0f")
-	)
-	(label "D_GND"
-		(at 312.42 347.98 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "060cad8a-713a-429d-a8f5-a327d9c3ee5c")
 	)
 	(symbol
 		(lib_id "Device:RotaryEncoder_Switch_MP")
