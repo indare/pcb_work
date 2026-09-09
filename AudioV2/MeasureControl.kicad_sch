@@ -22984,7 +22984,7 @@
 				)
 			)
 		)
-		(property "Value" "T1A slow"
+		(property "Value" "T1A slow 5x20"
 			(at 63.754 223.52 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22994,7 +22994,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal"
+		(property "Footprint" "Fuse:Fuseholder_Cylinder-5x20mm_Schurter_0031_8201_Horizontal_Open"
 			(at 67.818 223.52 90)
 			(hide yes)
 			(show_name no)
@@ -23016,7 +23016,7 @@
 				)
 			)
 		)
-		(property "Description" "Fuse"
+		(property "Description" "計測側 12V 入口（J1602）のヒューズ。J1602 を外すなら一緒に消える。ホルダは Schurter OGN 0031.8201（基板用 5×20 オープン型、DigiKey 在庫 6 万・¥240、KiCad 標準 FP）。中身は 5×20 ガラス管スローブロー T1A（例: Bel 0652C1000/1600-11、Littelfuse 0218 系、秋月の 5.2×20 スロー品も挿さる）。2026-09-09 に軸リード FP からホルダ FP へ直した"
 			(at 66.04 223.52 0)
 			(hide yes)
 			(show_name no)
@@ -31459,7 +31459,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal"
+		(property "Footprint" "Library:PPTC_Radial_D7.9mm_T3.1mm_P5.08mm"
 			(at 67.818 223.52 90)
 			(hide yes)
 			(show_name no)
@@ -31481,7 +31481,7 @@
 				)
 			)
 		)
-		(property "Description" "Fuse"
+		(property "Description" "計測側 +5V_D（U1607）入口の PPTC。ラジアル PPTC。Littelfuse RXEF050（Ih 0.50 A / It 1.0 A / 72 V）。Bourns MF-R050 も同寸で可。FP は DigiKey の寸法（φ7.4〜7.9×3.1、ピッチ 5.05〜5.10）から起こした Library の自作。2026-09-09 に軸リード FP から直した"
 			(at 66.04 223.52 0)
 			(hide yes)
 			(show_name no)

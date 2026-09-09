@@ -1,0 +1,85 @@
+(footprint "PPTC_Radial_D7.9mm_T3.1mm_P5.08mm"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "PPTC resettable fuse, radial disc, lead spacing 5.08mm (parts: 5.05-5.10mm), body up to 7.9mm dia x 3.1mm thick. Fits Littelfuse RXEF010/030/040/050 and Bourns MF-R010/030/040/050 (DigiKey parametric data 2026-09-09: Size 7.40-7.90mm Dia x 3.00-3.10mm T, Lead Spacing 5.05/5.10mm; maker datasheets not fetched). Drill 1.1mm gives slack for the pitch tolerance.")
+	(tags "PPTC polyfuse resettable radial RXEF MF-R 5.08mm")
+	(property "Reference" "REF**"
+		(at 2.54 -3.3 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "PPTC_Radial_D7.9mm_T3.1mm_P5.08mm"
+		(at 2.54 3.3 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start -1.68 -1.8)
+		(end 6.76 1.8)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+	)
+	(fp_rect
+		(start -1.95 -2.05)
+		(end 7.03 2.05)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_rect
+		(start -1.41 -1.55)
+		(end 6.49 1.55)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 2.54 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 2 2)
+		(drill 1.1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+	)
+	(pad "2" thru_hole circle
+		(at 5.08 0)
+		(size 2 2)
+		(drill 1.1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+	)
+	(embedded_fonts no)
+)
