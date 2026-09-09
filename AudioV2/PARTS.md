@@ -268,7 +268,7 @@ Amp 選択後 L/R
 | C403,C404,C410,C411 | 100n | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 4 |  |
 | C405,C406,C407,C409 | 2.2u | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 4 |  |
 | C408,C412 | 2.7n | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 |  |
-| C501,C502 | 470uF 25V NP | `Capacitor_THT:CP_Radial_D10.0mm_P5.00mm` | 2 | HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（DECISIONS） / HP 出力の DC ブロック（v1 C902）。無極性電解 |
+| C501,C502 | 470uF 25V NP | `Capacitor_THT:CP_Radial_D16.0mm_P7.50mm` | 2 | HP 出力の DC ブロック（v1 C901/C902）。無極性電解。保護用（DECISIONS）。FP は Ø16/P7.5（2026-09-10）で Muse ES `UES1E471MHM` が入る |
 | C503,C504 | 10uF 25V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 | U501 の +15V ローカルバルク（v1 C903） / U501 の -15V ローカルバルク（v1 C905 相当） |
 | C601,C604,C701,C704,C801,C804,C901,C904,C1001,C1004,C1101,C1104,C1201,C1204,C1301,C1304,C1401,C1404,C1501,C1504 | 2.2uF film | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 20 | L output coupling (before switch) / R output coupling (before switch) |
 | C602,C605,C702,C705,C802,C805,C902,C905,C1002,C1005,C1102,C1105,C1202,C1205,C1302,C1305,C1402,C1405,C1502,C1505 | 1uF film | `Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT` | 20 | L input film coupling / R input film coupling |

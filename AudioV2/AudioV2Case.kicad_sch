@@ -19186,7 +19186,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+		(property "Footprint" "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm"
 			(at 96.52 212.09 0)
 			(hide yes)
 			(show_name no)
@@ -19208,7 +19208,7 @@
 				)
 			)
 		)
-		(property "Description" "HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（DECISIONS）"
+		(property "Description" "HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（DECISIONS）。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ"
 			(at 96.52 212.09 0)
 			(hide yes)
 			(show_name no)
@@ -22628,7 +22628,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+		(property "Footprint" "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm"
 			(at 96.52 232.41 0)
 			(hide yes)
 			(show_name no)
@@ -22650,7 +22650,7 @@
 				)
 			)
 		)
-		(property "Description" "HP 出力の DC ブロック（v1 C902）。無極性電解"
+		(property "Description" "HP 出力の DC ブロック（v1 C902）。無極性電解。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ"
 			(at 96.52 232.41 0)
 			(hide yes)
 			(show_name no)

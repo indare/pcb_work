@@ -7065,14 +7065,14 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+	(footprint "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm"
 		(layer "F.Cu")
 		(uuid "2056ba57-bf22-4480-b4be-bf9f36e635e2")
 		(at 10 25)
-		(descr "CP, Radial series, Radial, pin pitch=5.00mm, diameter=10mm, height=16mm, Electrolytic Capacitor")
-		(tags "CP Radial series Radial pin pitch 5.00mm diameter 10mm height 16mm Electrolytic Capacitor")
+		(descr "CP, Radial series, Radial, pin pitch=7.50mm, diameter=16mm, height=25mm, Electrolytic Capacitor")
+		(tags "CP Radial series Radial pin pitch 7.50mm diameter 16mm height 25mm Electrolytic Capacitor")
 		(property "Reference" "C501"
-			(at 2.5 -6.25 0)
+			(at 3.75 -9.25 0)
 			(layer "F.SilkS")
 			(uuid "d1a856b0-db95-4a16-aca2-6d127cf70b4c")
 			(effects
@@ -7083,7 +7083,7 @@
 			)
 		)
 		(property "Value" "470uF 25V NP"
-			(at 2.5 6.25 0)
+			(at 3.75 9.25 0)
 			(layer "F.Fab")
 			(uuid "f821b990-6845-4f56-935e-0d40137cf085")
 			(effects
@@ -9060,7 +9060,7 @@
 			(uuid "794d980d-baae-4716-8cdc-b1f3450bc151")
 		)
 		(fp_circle
-			(center 2.5 0)
+			(center 3.75 0)
 			(end 7.62 0)
 			(stroke
 				(width 0.12)
@@ -9071,7 +9071,7 @@
 			(uuid "704751d8-6484-473b-9968-d8f2b6eb1c2f")
 		)
 		(fp_circle
-			(center 2.5 0)
+			(center 3.75 0)
 			(end 7.75 0)
 			(stroke
 				(width 0.05)
@@ -9102,7 +9102,7 @@
 			(uuid "92e893c9-433a-4d39-b764-08752d85fe0b")
 		)
 		(fp_circle
-			(center 2.5 0)
+			(center 3.75 0)
 			(end 7.5 0)
 			(stroke
 				(width 0.1)
@@ -9125,8 +9125,8 @@
 		)
 		(pad "1" thru_hole roundrect
 			(at 0 0)
-			(size 2 2)
-			(drill 1)
+			(size 2.4 2.4)
+			(drill 1.2)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(roundrect_rratio 0.125)
@@ -9135,9 +9135,9 @@
 			(uuid "d2a81959-d0ef-4feb-aeb0-4b052b03aa99")
 		)
 		(pad "2" thru_hole circle
-			(at 5 0)
-			(size 2 2)
-			(drill 1)
+			(at 7.5 0)
+			(size 2.4 2.4)
+			(drill 1.2)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net "/PHONE_L")
@@ -9145,7 +9145,7 @@
 			(uuid "1c8a8d13-7418-4306-9568-80eb42fb4a88")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D10.0mm_P5.00mm.step"
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D16.0mm_P7.50mm.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -30398,14 +30398,14 @@
 			)
 		)
 	)
-	(footprint "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+	(footprint "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm"
 		(layer "F.Cu")
 		(uuid "6fd4e41d-3b38-4f42-bf9f-ea6559aba5df")
 		(at 25 25)
-		(descr "CP, Radial series, Radial, pin pitch=5.00mm, diameter=10mm, height=16mm, Electrolytic Capacitor")
-		(tags "CP Radial series Radial pin pitch 5.00mm diameter 10mm height 16mm Electrolytic Capacitor")
+		(descr "CP, Radial series, Radial, pin pitch=7.50mm, diameter=16mm, height=25mm, Electrolytic Capacitor")
+		(tags "CP Radial series Radial pin pitch 7.50mm diameter 16mm height 25mm Electrolytic Capacitor")
 		(property "Reference" "C502"
-			(at 2.5 -6.25 0)
+			(at 3.75 -9.25 0)
 			(layer "F.SilkS")
 			(uuid "b9b285b6-aa28-41b4-9d3f-f793baf93eb6")
 			(effects
@@ -30416,7 +30416,7 @@
 			)
 		)
 		(property "Value" "470uF 25V NP"
-			(at 2.5 6.25 0)
+			(at 3.75 9.25 0)
 			(layer "F.Fab")
 			(uuid "a8bc8f40-2567-4588-be9e-d938224efb35")
 			(effects
@@ -32393,7 +32393,7 @@
 			(uuid "959609f6-d3b0-43cc-ae49-9a65408f3af6")
 		)
 		(fp_circle
-			(center 2.5 0)
+			(center 3.75 0)
 			(end 7.62 0)
 			(stroke
 				(width 0.12)
@@ -32404,7 +32404,7 @@
 			(uuid "4ae9bcf0-4ecd-4592-99ea-88f70432a8df")
 		)
 		(fp_circle
-			(center 2.5 0)
+			(center 3.75 0)
 			(end 7.75 0)
 			(stroke
 				(width 0.05)
@@ -32435,7 +32435,7 @@
 			(uuid "e6d54272-134b-499c-a252-ffbbba039d30")
 		)
 		(fp_circle
-			(center 2.5 0)
+			(center 3.75 0)
 			(end 7.5 0)
 			(stroke
 				(width 0.1)
@@ -32458,8 +32458,8 @@
 		)
 		(pad "1" thru_hole roundrect
 			(at 0 0)
-			(size 2 2)
-			(drill 1)
+			(size 2.4 2.4)
+			(drill 1.2)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(roundrect_rratio 0.125)
@@ -32468,9 +32468,9 @@
 			(uuid "1db1e024-6e88-4d57-aae2-aa663def0405")
 		)
 		(pad "2" thru_hole circle
-			(at 5 0)
-			(size 2 2)
-			(drill 1)
+			(at 7.5 0)
+			(size 2.4 2.4)
+			(drill 1.2)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net "/PHONE_R")
@@ -32478,7 +32478,7 @@
 			(uuid "a9955c5d-d6a0-4e7b-80c0-6a95c37960af")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D10.0mm_P5.00mm.step"
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D16.0mm_P7.50mm.step"
 			(offset
 				(xyz 0 0 0)
 			)
