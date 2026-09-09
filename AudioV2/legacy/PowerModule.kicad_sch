@@ -2795,7 +2795,7 @@
 				)
 			)
 		)
-		(property "Value" "T1.6A slow 5x20"
+		(property "Value" "F2A fast 5x20"
 			(at 68.58 91.44 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2827,7 +2827,7 @@
 				)
 			)
 		)
-		(property "Description" "入口ヒューズ（PD 12V → U201 REC20K）。ホルダは Schurter OGN 0031.8201（基板用 5×20 オープン型、DigiKey 在庫 6 万・¥240、KiCad 標準 FP）。中身は 5×20 ガラス管スローブロー T1.6A（例: Bel 0652C1000/1600-11、Littelfuse 0218 系、秋月の 5.2×20 スロー品も挿さる）。2026-09-09 に軸リード FP からホルダ FP へ直した"
+		(property "Description" "入口ヒューズ（PD 12V → U201 REC20K）。ホルダは Schurter OGN 0031.8201（基板用 5×20 オープン型、KiCad 標準 FP）。中身は 5×20 ガラス管速断 F2A（例: 秋月 MF51NR 250V2A / Littelfuse 0217.002HXP 系）。ホルダ FP は 2026-09-09。定格は入手性で T1.6A スロー→F2A 速断（2026-09-09）"
 			(at -12.7 45.72 0)
 			(hide yes)
 			(show_name no)
