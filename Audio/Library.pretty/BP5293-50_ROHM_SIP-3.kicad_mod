@@ -1,7 +1,7 @@
 (footprint "BP5293-50_ROHM_SIP-3"
   (version 20241229)
   (generator "kicad-footprint-editor")
-  (descr "ROHM BP5293-xx, 3-pin SIP DC/DC module. 2.54mm pitch. Pin1=VIN, 2=GND, 3=VOUT. Drill 0.9mm, land 2.0mm. Body outline is approximate keepout.")
+  (descr "ROHM BP5293-xx, 3-pin SIP DC/DC module. Equal 2.54mm pitch (P1-P2-P3). Pin1=VIN, 2=GND, 3=VOUT. Drill 0.9mm / land 2.0mm per DS recommended land. Body outline is approximate keepout.")
   (tags "ROHM BP5293 BP5293-50 DC-DC Buck SIP-3 2.54mm")
   (attr through_hole)
   (fp_text reference "REF**" (at 1.81 -4.5 0) (layer "F.SilkS")

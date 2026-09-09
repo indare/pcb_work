@@ -250,7 +250,7 @@ Amp 選択後 L/R
 **手で編集しないでください**（次の再生成で消えます）。値・フットプリント・役割を直すときは KiCad の回路図側を直し、
 `python3 AudioV2/scripts/gen_parts_bom.py` で再生成します。
 
-行数 98 / 部品総数 385。
+行数 98 / 部品総数 387。
 
 > `Refs` 列と `Value` / `Role` 列に**位置の対応はありません**。kicad-cli はグループ内の値を重複除去してアルファベット順に並べるため、「n 番目の参照 = n 番目の役割」とは読めません。
 
@@ -277,7 +277,7 @@ Amp 選択後 L/R
 | C1603 | 10uF 10V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 1 | LT1763-3.3 OUT bulk, >=10V X7R 1206 |
 | C1606,C1619 | 10uF 50V X7R | `Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder` | 2 | LT1763 IN bulk / 16V X7R 1206 (6.7V rail) |
 | C1609,C1620,C1627,C1632 | 1.8nF C0G | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 4 | LPF C0G/NP0 ceramic |
-| C1610 | 47uF 35V | `Capacitor_THT:CP_Radial_D8.0mm_P3.50mm` | 1 | BP5293/MBC2596 input bulk. 15V rail -> 35V rating. Return on ADC_GND_IN. |
+| C1610 | 47uF 35V | `Capacitor_THT:CP_Radial_D8.0mm_P3.50mm` | 1 | ADC_V_IN bulk 47uF 35V. Return on ADC_GND_IN. |
 | C1611,C1631,C1633 | 10uF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 3 | U704/U705 VIN mid-freq ceramic 10uF (unpolarized), return ADC_GND_IN. Parallel with C723 bulk and C725 100nF.,積セラ 10uF50V 3216（秋月 117338・購入済）。U708(XC8107) 入力コンデンサ CIN。データシート推奨 1.0uF 以上、VIN-VSS 間を最短で。,積セラ 10uF50V 3216（秋月 117338・購入済）。U708(XC8107) 出力コンデンサ CL。データシート推奨 1.0uF 以上、IC 直近に配置。 |
 | C1616 | 10uF 16V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 1 | LT1763-5 OUT bulk, 10V or 16V X7R 1206 |
 | C1621 | 47uF | `Capacitor_THT:CP_Radial_D8.0mm_P3.50mm` | 1 | 導電性高分子アルミ固体電解コンデンサー OS-CON相当 47uF16V以上 +5V_D |
@@ -318,7 +318,7 @@ Amp 選択後 L/R
 | Q401,Q402 | BSS138 | `Package_TO_SOT_SMD:SOT-23` | 2 | I²C SCL 側の双方向レベルシフタ。役目・理由は Q401（SDA 側）と同じ / I²C 双方向レベルシフタ（2026-09-08）。S=Pico 側 3V3 バス、D=PT2314E 側 9V バス、G=3V3。PT2314E の VIH min 3.0 V に対し 3.3 V プルアップでは余裕 0.3 V しか無いので、PT 側を VCC_TONE(9V) で釣る。P82B96 を使わないのは Sx 側 VOL 0.8–1.0 V が PT2314E VIL max 1.0 V / RP2350 VIL 0.8 V を食い切るため（DECISIONS）。 SDA。 |
 | R401 | 2.2k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 1 | D403(12V パネル LED)の直列抵抗。素の LED でも 12V 直結で壊れないようにする。(12-Vf2)/2.2k = 約 4.5mA。抵抗内蔵の 12V LED を挿しても点く（やや暗い）。 |
 | R410,R411 | 5.6k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 |  |
-| R412,R413,R1611,R1656,R1657 | 10k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 5 | ADC_nRST pull-up 10k / 1206 / PT2314E 側 I²C SCL のプルアップ（9V=VCC_TONE） / PT2314E 側 I²C SDA のプルアップ（9V=VCC_TONE）。10k: 0.9 mA / 立ち上がり ~0.3 µs（100 kbit/s） |
+| R412,R413,R1611,R1656,R1657,R1661,R1662 | 10k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 7 | ADC_nRST pull-up 10k / 1206 / PT2314E 側 I²C SCL のプルアップ（9V=VCC_TONE） / PT2314E 側 I²C SDA のプルアップ（9V=VCC_TONE）。10k: 0.9 mA / 立ち上がり ~0.3 µs（100 kbit/s） / U1610 MCP23017 ENC_INTA open-drain pull-up to 3V3 / U1610 MCP23017 ENC_INTB open-drain pull-up to 3V3 |
 | R501,R502 | 10R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | HP 出力の直列抵抗（v1 R901）。ケーブル容量からの分離 / HP 出力の直列抵抗（v1 R903） |
 | R503,R504,R601,R607,R701,R707,R801,R807,R901,R907,R1001,R1007,R1101,R1107,R1201,R1207,R1301,R1307,R1401,R1407,R1501,R1507,R1620,R1659,R1660 | 100k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 25 | HP ジャック側ノードのブリード（v1 R902）。未接続時に C501 の DC を落とす / HP ジャック側ノードのブリード（v1 R904） / L non-inverting bias / R non-inverting bias / U1611 L バッファの入力バイアス（v1 R805 相当）。J1601 を抜いても入力が浮かない / U1611 R バッファの入力バイアス（v1 R810 相当） / U708(XC8107) CE プルダウン。Active High なので Pico GPIO が Hi-Z の間は LCD OFF がデフォルト。CE に内部プルダウンは無いため必須。 |
 | R602,R608,R702,R708,R802,R808,R902,R908,R1002,R1008,R1102,R1108,R1202,R1208,R1302,R1308,R1402,R1408,R1502,R1508 | 47R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 20 | L output isolation / R output isolation |

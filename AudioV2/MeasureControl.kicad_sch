@@ -12,7 +12,7 @@
 		(comment 1 "階層モジュール: アンバランス・ステレオ入力 → 差動 PCM1804 モジュール")
 		(comment 2 "共立 ADC_1804_F マニュアル p.7 の基準インターフェースに基づく")
 		(comment 3 "ASFL1 12.288MHz MCLK。ADCマスタ 48k/256fs。ジャンパ S/M=L, OSR2=L OSR1=H OSR0=H")
-		(comment 4 "電源: ADC_VIN→MBC2596→LT1763×2(+3V3_A先行/+5V_A)。+5V_D=BP5293。D701 SOD-123 ショットキ +5V_D→VSYS。U708=XC8107 LCD、U709=TPS3307-33D（3.3V+5V 監視 SO-8）")
+		(comment 4 "電源: +15V→LT1763×2(+3V3_A先行/+5V_A)。+5V_D=BP5293。D1601 ショットキ +5V_D→VSYS。U1609=XC8107 LCD、U1605=TPS3307-33D（3.3V+5V 監視 SO-8）。旧 U1604(MBC2596) は削除済み")
 	)
 	(lib_symbols
 		(symbol "ADC1804_F_MODULE_0_1"
@@ -745,7 +745,7 @@
 					)
 				)
 			)
-			(property "Description" "ROHM BP5293-50, 5V 1A non-isolated buck DC/DC converter module, SIP-3. Pin 1=VIN, 2=GND, 3=VOUT. Non-uniform pitch: 2.54mm (P1-P2), 5.08mm (P2-P3)."
+			(property "Description" "ROHM BP5293-50, 5V 1A non-isolated buck DC/DC converter module, SIP-3. Pin 1=VIN, 2=GND, 3=VOUT. Equal 2.54mm pitch. DS recommended land: drill 0.9mm / pad 2.0mm."
 				(at 0 -12.7 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -15560,7 +15560,7 @@
 		)
 		(uuid "20c6921b-fcd4-43f6-9cfc-0a14db139453")
 	)
-	(text "A3 Pico2 横置き: 南列 1-20 西→東 / 北列 21-40 東→西。VSYS=+5V_D via D1601 ショットキ, GND=D_GND | GP0=ADC_DATA GP1=ADC_BCK GP2=ADC_LRCK | GP3/GP4=NC(旧 LCD SPI) | GP5=LCD_CS GP6=LCD_DC GP7=LCD_RST GP8=LCD_EN | GP9=NC（旧 MCLK_SENSE、2026-09-07 削除） | GP10=TP_SDA GP11=TP_SCL GP12=TP_INT GP13=TP_RST | GP15=ADC_nMR (TPS3307 ~MR, OD, H は駆動しない) | GP16=ENC_INTA GP17=ENC_INTB (U1610 MCP23017 割り込み) | GP18=LCD_SCK GP19=LCD_MOSI (SPI0)"
+	(text "A3 Pico2 横置き: 南列 1-20 西→東 / 北列 21-40 東→西。VSYS=+5V_D via D1601 ショットキ, GND=D_GND | GP0=ADC_DATA GP1=ADC_BCK GP2=ADC_LRCK | GP3/GP4=NC(旧 LCD SPI) | GP5=LCD_CS GP6=LCD_DC GP7=LCD_RST GP8=LCD_EN | GP9=NC（旧 MCLK_SENSE、2026-09-07 削除） | GP10=TP_SDA GP11=TP_SCL GP12=TP_INT GP13=TP_RST | GP15=ADC_nMR (TPS3307 ~MR, OD, H は駆動しない) | GP16=ENC_INTA GP17=ENC_INTB (U1610 MCP23017 割り込み、外付け 10k→3V3) | GP18=LCD_SCK GP19=LCD_MOSI (SPI0) | GP20=I2C_SDA GP21=I2C_SCL | GP26=DEST_ADC"
 		(exclude_from_sim no)
 		(at 171.45 213.36 0)
 		(effects
@@ -28904,7 +28904,7 @@
 				)
 			)
 		)
-		(property "Description" "BP5293/MBC2596 input bulk. 15V rail -> 35V rating. Return on ADC_GND_IN."
+		(property "Description" "ADC_V_IN bulk 47uF 35V. Return on ADC_GND_IN."
 			(at 237.49 49.53 0)
 			(hide yes)
 			(show_name no)
@@ -32638,5 +32638,215 @@
 				)
 			)
 		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 309.88 381.0 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3729e942-d83f-5da2-bfc1-db6dbc8b5014")
+		(property "Reference" "R1661"
+			(at 309.88 378.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "10k"
+			(at 309.88 383.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "U1610 MCP23017 ENC_INTA open-drain pull-up to 3V3"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "6d7b9036-7edd-52b7-9fac-7d33da1bd75d")
+		)
+		(pin "2"
+			(uuid "1b7fd675-0045-55e8-8513-33f4b4a2f8a8")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "R1661")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "3V3"
+		(at 309.88 377.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "833a3e59-0c70-5ab8-aabb-d450db0eecef")
+	)
+	(label "ENC_INTA"
+		(at 309.88 384.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8e86bed5-f1c8-5992-aad6-8d6f8c1f4e7b")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 325.12 381.0 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "efc93b29-2881-54b9-a314-4f1f4b21f8b4")
+		(property "Reference" "R1662"
+			(at 325.12 378.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "10k"
+			(at 325.12 383.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" "U1610 MCP23017 ENC_INTB open-drain pull-up to 3V3"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "d00366a1-2c03-545c-a178-a95f4e4b4dd4")
+		)
+		(pin "2"
+			(uuid "078312cf-c3d5-5db9-a2bf-638ca45906e4")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/43e41fda-fe26-43e3-950a-c017f3070bbf"
+					(reference "R1662")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "3V3"
+		(at 325.12 377.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dde0bd3a-c032-581f-bf0e-d252ea2a9e30")
+	)
+	(label "ENC_INTB"
+		(at 325.12 384.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4003e147-2028-5544-ba4a-7e74c40533c0")
 	)
 )

@@ -639,7 +639,7 @@
 					)
 				)
 			)
-			(property "Description" "ROHM BP5293-50, 5V 1A non-isolated buck DC/DC converter module, SIP-3. Pin 1=VIN, 2=GND, 3=VOUT. Non-uniform pitch: 2.54mm (P1-P2), 5.08mm (P2-P3)."
+			(property "Description" "ROHM BP5293-50, 5V 1A non-isolated buck DC/DC converter module, SIP-3. Pin 1=VIN, 2=GND, 3=VOUT. Equal 2.54mm pitch. DS recommended land: drill 0.9mm / pad 2.0mm."
 				(at 0 -12.7 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3620,7 +3620,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "ControlPanel — label-wired (DECISIONS manual volume)\nPT2314 / Pico2 / ENC×3 / 2.42″ OLED I2C / DEST ladder+LED / PWR SW\nJ_OLED501: 1=GND 2=3V3 3=SCL 4=SDA. ENC→GP0-8, DEST_ADC→GP26, LED→GP14/15.\nConnectivity = local labels on pin tips (grid-snapped)."
+	(text "ControlPanelAnalog — tone / DEST / PWR（UI は MeasureControl へ移設済み）\nPT2314E / SW402 PWR / D403 パネル LED / BP5293-50(+5V_COIL) / DEST 機械 SW\nENC×3・OLED・DEST ladder+LED・I²C マスタは MeasureControl（MCP23017 0x22 → ENC_INTA/B）。\nConnectivity = local labels on pin tips (grid-snapped)."
 		(exclude_from_sim no)
 		(at 25.4 25.4 0)
 		(effects
