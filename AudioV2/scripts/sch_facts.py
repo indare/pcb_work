@@ -201,13 +201,17 @@ def _place(px: float, py: float, ix: float, iy: float, rot: float,
     KiCad の実ファイルで検証済み: 全シートのピンが wire / label / junction / no_connect に載る。
     """
     x, y = px, -py
-    if mx:
-        y = -y
-    if my:
-        x = -x
     a = math.radians(rot)
     ca, sa = math.cos(a), math.sin(a)
-    return pt(ix + x * ca + y * sa, iy - x * sa + y * ca)
+    dx, dy = x * ca + y * sa, -x * sa + y * ca
+    # ⚠ ミラーは回転の**後**に図面座標で掛かる（2026-09-09 に kicad-cli のネットリストで確認:
+    #    MeasureControl の J1602 = rot 270 + mirror y は、回転後の dx が反転した位置で結線される）。
+    #    回転前に掛けると rot 90/270 で反転する軸が入れ替わる。rot 0/180 では前後どちらでも同じ。
+    if my:
+        dx = -dx
+    if mx:
+        dy = -dy
+    return pt(ix + dx, iy + dy)
 
 
 def load_sheet(path: Path) -> SheetFile:

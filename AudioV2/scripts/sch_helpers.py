@@ -109,12 +109,19 @@ def grid(x: float, step: float = 2.54) -> float:
 def _rotate_point(ox: float, oy: float, rot: int) -> tuple[float, float]:
     if rot == 0:
         return ox, oy
+    # KiCad の回転は y 下向きの図面座標で反時計回り。lib 座標 (px, py) は
+    # 呼び出し側で py の符号を反転して渡される（ox=px, oy=-py）。
+    #   90:  (x, y) -> ( y, -x)      270: (x, y) -> (-y,  x)
+    # 2026-09-09 まで 90 と 270 の式が入れ替わっていた。対称な 2 ピン部品では
+    # ピン先の集合が同じになるので気づかず、非対称な部品（例 MeasureControl の
+    # J1602、rot 270）で実図のワイヤ端と食い違って発覚。実図 5 枚の rot 90/270
+    # 全ピンに対する命中率で検証済み（scratch の rot_check）。
     if rot == 90:
-        return -oy, ox
+        return oy, -ox
     if rot == 180:
         return -ox, -oy
     if rot == 270:
-        return oy, -ox
+        return -oy, ox
     return ox, oy
 
 

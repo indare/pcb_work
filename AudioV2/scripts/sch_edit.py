@@ -122,7 +122,20 @@ def symbol_tips(el: sch_import.Element) -> list[tuple[float, float]]:
     lib = re.search(r'\(lib_id "([^"]+)"\)', el.text).group(1)
     at = re.search(r"\(at (-?[\d.]+) (-?[\d.]+) (-?[\d.]+)\)", el.text)
     x, y, rot = float(at.group(1)), float(at.group(2)), int(float(at.group(3)))
-    return [pin_connect(x, y, rot, px, py) for px, py in lib_pins(lib).values()]
+    # (mirror x|y) は回転の後に図面座標で掛かる（sch_facts._place と同じ。2026-09-09 に
+    # kicad-cli のネットリストで確認）。ヘッダ部だけを見る（プロパティ内の文字列を拾わない）。
+    head = el.text[:el.text.find("(property")] if "(property" in el.text else el.text
+    mir = re.search(r"\(mirror ([xy])\)", head)
+    out = []
+    for px, py in lib_pins(lib).values():
+        tx, ty = pin_connect(x, y, rot, px, py)
+        dx, dy = tx - x, ty - y
+        if mir and mir.group(1) == "y":
+            dx = -dx
+        if mir and mir.group(1) == "x":
+            dy = -dy
+        out.append((x + dx, y + dy))
+    return out
 
 
 def _on_seg(pt: tuple[float, float], a: tuple[float, float], b: tuple[float, float]) -> bool:
