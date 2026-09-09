@@ -1,6 +1,6 @@
 # AudioV2 — いま（現況）
 
-**更新:** 2026-09-09  
+**更新:** 2026-09-10  
 **このファイルが「いま何待ちか／次の一手」の正。** 履歴・理由・長い文脈は
 [AGENT_HANDOFF.md](AGENT_HANDOFF.md) / [DECISIONS.md](DECISIONS.md)。  
 回路図から導出できる数値はここに書かない（[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。
@@ -16,9 +16,11 @@
 
 - 階層: `AudioV2Case` → {`MeasureControl`, `AmpBankSwitch`, `AmpBankRelay`}
   （2026-09-09 に中間 `MotherBoard` を廃止。箱外 I/O はルート上のコネクタで閉じる）
-- 所有権・再生成: [CLAUDE.md](../CLAUDE.md)
+- 所有権: [CLAUDE.md](../CLAUDE.md)
+- ⚠ **KiCad で保存したあとに `build_*.py` を回すとプロジェクト／回路図が壊れる。**
+  変更は **ピンポイント**（該当シンボルの FP・Value・配線だけ）。全面再生成しない
 - 期待値の正も CLAUDE.md（ERC・部品数など）。ずれたら先に `kicad-run.sh version`
-- **AmpBankRelay は当面 BOM・基板から除外**（シート `in_bom`/`on_board`=no。アナログSW版を優先。再生成は `build_motherboard.py` が維持）
+- **AmpBankRelay は当面 BOM・基板から除外**（シート `in_bom`/`on_board`=no。アナログSW版を優先）
 
 ## 電源（ゲート1）
 
