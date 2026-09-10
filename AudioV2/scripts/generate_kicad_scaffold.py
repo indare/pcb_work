@@ -209,7 +209,13 @@ def sheet_block(
     *,
     in_bom: bool = True,
     on_board: bool = True,
+    parent_path: str | None = None,
 ) -> str:
+    # instances のパスは「このシートを置いた親までの道のり」。ルート直下なら
+    # `/<ルートの uuid>` だが、孫シート（AmpCh は AmpBank* の中）では
+    # `/<ルート>/<親シートの uuid>` と一段深い。省略すると KiCad が開いたときに
+    # 補正して保存し、そのたびに差分が出る（2026-09-10 に実測）。
+    inst_path = parent_path if parent_path is not None else f"/{PARENT}"
     pin_lines = []
     for pname, ptype, px, py, pangle in pins:
         justify = "left"
@@ -270,7 +276,7 @@ def sheet_block(
 {pins_str}
 \t\t(instances
 \t\t\t(project "{PROJECT}"
-\t\t\t\t(path "/{PARENT}"
+\t\t\t\t(path "{inst_path}"
 \t\t\t\t\t(page "{page}")
 \t\t\t\t)
 \t\t\t)

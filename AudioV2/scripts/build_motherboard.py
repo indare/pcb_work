@@ -395,7 +395,9 @@ def build(dry_run: bool = False) -> str:
     # --- 子シート3枚を母板の中に置く（2026-09-04）---
     saved_sc2, scaffold.uid = scaffold.uid, uid
     try:
-        for name, fname, inst, (sx, sy), (sw, sh), pins in CHILD_SHEETS:
+        # ページ番号はルートを 1 として、その直下のシートが並び順に 2, 3, 4…。
+        # 娘の中の AmpCh は 5 から続く（build_daughter.VARIANT の page_base）。
+        for page, (name, fname, inst, (sx, sy), (sw, sh), pins) in enumerate(CHILD_SHEETS, 2):
             lefts = [x for x in pins if x[2] == "L"]
             rights = [x for x in pins if x[2] == "R"]
             blk_pins = []
@@ -415,7 +417,7 @@ def build(dry_run: bool = False) -> str:
             on_board = in_bom = name != "AmpBankRelay"
             elements.append(sch_import.Element(
                 "sheet", sheet_block(
-                    inst, name, fname, sx, sy, sw, sh, blk_pins, "1",
+                    inst, name, fname, sx, sy, sw, sh, blk_pins, str(page),
                     in_bom=in_bom, on_board=on_board),
                 None, name, (sx, sy)))
     finally:
@@ -443,7 +445,10 @@ def build(dry_run: bool = False) -> str:
 
     header = (f'\n\t(version 20260306)\n\t(generator "eeschema")\n\t(generator_version "10.0")\n'
               f'\t(uuid "{PARENT}")\n\t(paper "{PAPER}")\n{lib}')
-    footer = '\t(sheet_instances\n\t\t(path "/"\n\t\t\t(page "1")\n\t\t)\n\t)\n'
+    # embedded_fonts はルートシートにだけ付く（子シートには無い）。
+    # 落とすと KiCad が保存時に足すので、そのぶん差分が出る。
+    footer = ('\t(sheet_instances\n\t\t(path "/"\n\t\t\t(page "1")\n\t\t)\n\t)\n'
+              '\t(embedded_fonts no)\n')
     return "(kicad_sch" + header + "".join(e.text for e in elements) + footer + ")\n"
 
 
@@ -481,6 +486,8 @@ def main() -> int:
     if out:
         sch_helpers.write_sch(ROOT / "AudioV2Case.kicad_sch", out)
         print(f"書き出し: AudioV2/AudioV2Case.kicad_sch ({len(out)} bytes)")
+        sch_helpers.canonicalize_sch([ROOT / "AudioV2Case.kicad_sch"])
+        print("正準化: AudioV2Case.kicad_sch を kicad-cli sch upgrade に通した")
     for note in rewrite_child_instance_paths():
         print(f"  {note}")
     mother = ROOT / "MotherBoard.kicad_sch"

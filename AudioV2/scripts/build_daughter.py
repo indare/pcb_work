@@ -56,6 +56,9 @@ VARIANT = {
         chan_refs=[6, 7, 8, 9],          # 参照の百の位（6xx..9xx）
         suffix="301",
         slot=1,
+        # KiCad はページ番号を階層の浅い順に振る。ルート=1、その直下の
+        # MeasureControl / AmpBankSwitch / AmpBankRelay が 2/3/4、その次の段が 5 から。
+        page_base=5,
     ),
     RELAY: dict(
         name="AmpBankRelay",
@@ -65,6 +68,7 @@ VARIANT = {
         chan_refs=[11, 12, 13, 14],
         suffix="302",
         slot=2,
+        page_base=9,                     # AmpBankSwitch の 4 枚（5..8）の次
     ),
 }
 
@@ -213,7 +217,8 @@ class Builder:
             saved, scaffold.uid = scaffold.uid, uid
             try:
                 blk = sheet_block(cu, f"AmpCh{j+1}", "AmpChannel.kicad_sch",
-                                  sx, sy, 76.2, 30.48, pins, "1")
+                                  sx, sy, 76.2, 30.48, pins,
+                                  str(c["page_base"] + j), parent_path=self.path)
             finally:
                 scaffold.uid = saved
             self.els.append(sch_import.Element("sheet", blk, None, f"AmpCh{j+1}", (sx, sy)))
@@ -448,13 +453,18 @@ def _build_all(a) -> int:
     parent = ""
     if a.dry_run:
         return 0
+    written = []
     for name, text in outs.items():
         if len(text) < 1000:          # 空や欠けたものを書き込まない安全弁
             raise SystemExit(f"{name}: 生成結果が短すぎる（{len(text)} bytes）")
         sch_helpers.write_sch(ROOT / f"{name}.kicad_sch", text)
+        written.append(ROOT / f"{name}.kicad_sch")
         print(f"書き出し: AudioV2/{name}.kicad_sch ({len(text)} bytes)")
     sch_helpers.write_sch(ROOT / "AmpChannel.kicad_sch", chan)
+    written.append(ROOT / "AmpChannel.kicad_sch")
     print("書き換え: AmpChannel.kicad_sch（親は build_motherboard.py が扱う）")
+    sch_helpers.canonicalize_sch(written)
+    print(f"正準化: {len(written)} 枚を kicad-cli sch upgrade に通した")
     return 0
 
 

@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import os
 import re
+import shutil
+import subprocess
 import sys
 import uuid
 from functools import lru_cache
@@ -96,6 +98,103 @@ def write_sch(path: Path, text: str) -> None:
     作業ツリーは汚れる）。**生成物の書き出しは必ずここを通すこと。**
     """
     path.write_text(text, encoding="utf-8", newline="\n")
+
+
+# --- KiCad の正準形へ揃える --------------------------------------------------
+# このスクリプト群は `.kicad_sym` から抜いたシンボル本体をそのまま貼って
+# `lib_symbols` を組み立てる。ところが `.kicad_sym` と `.kicad_sch` の中の
+# `lib_symbols` は方言が違う（シンボルごとの embedded_fonts / exclude_from_sim /
+# in_bom / on_board / in_pos_files / duplicate_pin_numbers_are_jumpers、
+# プロパティごとの show_name / do_not_autoplace が `.kicad_sym` には無い。
+# インデントも一段深い）。KiCad は読むときは寛容だが、**保存すると自分の正準形へ
+# 書き戻す**。放っておくと「KiCad で開いて保存 → 3万行の差分 → 再生成 → 元に戻る」
+# を永久に往復する（2026-09-10 に実測）。
+#
+# 正準形を Python で書き起こすと KiCad の版に追随できないので、KiCad 自身に
+# 揃えさせる。`kicad-cli sch upgrade` は冪等（2回目はバイト一致）。
+
+_CLI_ENV = "KICAD_CLI"                      # このリポジトリ独自。最優先
+
+
+def _kicad_cli_candidates():
+    """(パス, どこ由来か) を優先順に返す。存在確認はしない。"""
+    val = os.environ.get(_CLI_ENV)
+    if val:
+        yield Path(val), f"環境変数 {_CLI_ENV}"
+
+    which = shutil.which("kicad-cli")
+    if which:
+        yield Path(which), "PATH"
+
+    yield (Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli"),
+           "macOS 既定")
+
+    seen = set()
+    for base in (os.environ.get("ProgramW6432"), os.environ.get("ProgramFiles"),
+                 r"C:\Program Files"):
+        if not base or base in seen:
+            continue
+        seen.add(base)
+        kicad = Path(base) / "KiCad"
+        try:
+            vers = sorted((d for d in kicad.iterdir() if d.is_dir()),
+                          key=_ver_key, reverse=True)
+        except OSError:
+            continue
+        for ver in vers:
+            yield ver / "bin" / "kicad-cli.exe", f"Windows KiCad {ver.name}"
+
+    yield Path("/usr/bin/kicad-cli"), "Linux 既定"
+
+
+@lru_cache(maxsize=1)
+def kicad_cli() -> Path:
+    """`kicad-cli` の場所。見つからなければ試した場所を添えて落とす。"""
+    tried = []
+    for path, why in _kicad_cli_candidates():
+        if path.is_file():
+            return path
+        tried.append(f"    {why}: {path}")
+    raise FileNotFoundError(
+        "kicad-cli が見つかりません。生成物を KiCad の正準形へ揃えるのに要ります。\n"
+        "  探した場所（この順）:\n" + "\n".join(tried) + "\n\n"
+        f"  KiCad を入れるか、{_CLI_ENV} で明示してください:\n"
+        f"    macOS/Linux:  export {_CLI_ENV}=/path/to/kicad-cli\n"
+        "  自己診断:  python3 AudioV2/scripts/sch_helpers.py"
+    )
+
+
+def canonicalize_sch(paths: list[Path]) -> None:
+    """書き出した `.kicad_sch` を KiCad 自身に正準形へ書き直させる。
+
+    **生成の最後に必ず通すこと。** 通さないと KiCad で開いて保存しただけで
+    数万行の差分が出る。`sch upgrade` は階層を辿らないので、シートは1枚ずつ渡す。
+    """
+    cli = kicad_cli()
+    for path in paths:
+        before = path.read_text(encoding="utf-8")
+        proc = subprocess.run(
+            [str(cli), "sch", "upgrade", "--force", str(path)],
+            capture_output=True, text=True,
+        )
+        if proc.returncode != 0:
+            raise RuntimeError(
+                f"kicad-cli sch upgrade に失敗しました: {path}\n{proc.stderr.strip()}"
+            )
+        text = path.read_text(encoding="utf-8")
+        # `sch upgrade` はルートの (embedded_fonts no) を落とすが、KiCad の GUI は
+        # 保存時に必ず書く。落としたままだと開いて保存しただけで差分が出るので戻す。
+        # 深さで見分けること — シンボル定義の中にも同じ行があり、素朴な部分文字列
+        # 検索だとそちらに当たって「有る」と誤判定する。
+        top = "\t(embedded_fonts no)"
+
+        def has_top(s: str) -> bool:
+            return any(ln == top for ln in s.splitlines())
+
+        if has_top(before) and not has_top(text):
+            text = text.rstrip()[:-1].rstrip() + "\n" + top + "\n)\n"
+        # kicad-cli の改行に依存しない。write_sch と同じ LF の保証をここでも掛ける。
+        write_sch(path, text)
 
 
 def new_uid() -> str:

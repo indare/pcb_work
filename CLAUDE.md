@@ -87,8 +87,16 @@ AudioV2Case（旧 MotherBoard の中身）
 娘基板のファイルをルートがシートとして参照するので、回路を変えたときはこの順が自然。
 ただし**逆順でもルート単独でも結果はバイト一致する**（中間階層廃止後も同様）。
 
-**⚠ KiCad で開いて保存した後の再生成だけは未検証。** 回したら
-`kicad-run.sh erc` の件数が期待値（下の表）に戻ることを確認すること。
+**生成物は KiCad の正準形で書き出す（2026-09-10）。** 生成は最後に
+`sch_helpers.canonicalize_sch()`（＝`kicad-cli sch upgrade`）を通る。**`kicad-cli` が
+無いと落ちる**（`KICAD_CLI` で明示できる。自己診断は `sch_helpers.py` 単体実行）。
+
+これが無いと、**KiCad で開いて保存しただけで 3 万行の差分が出て、再生成すると元へ戻る**
+往復が起きる。原因はスクリプトが `.kicad_sym` からシンボル本体をそのまま貼っていること
+（`.kicad_sch` の `lib_symbols` とは方言が違い、シンボルごとの `embedded_fonts` /
+`in_bom` などが欠ける）。KiCad は読むときは寛容だが保存で自分の形に直す。
+**生成物と KiCad の保存結果が 5 枚ともバイト一致することを 2026-09-10 に実測した。**
+ここがずれたら、まず `kicad-cli` の版を疑うこと。
 
 `ControlPanel` / `PowerModule` / `OutputStage` / `AmpBank` は**解体済みで `AudioV2/legacy/` に凍結**。
 ルートからは参照されていないが、**`build_motherboard.py` が素材として読むので直すと設計に届く**
@@ -111,8 +119,9 @@ python3 AudioV2/scripts/sch_helpers.py     # 見つかった場所と、探し�
 - **`sch_edit.py`** — 部品単位の編集。ピン座標は KiCad のシンボルから直読み（`extends` も辿る）
 - **`netlist_partition.py`** — ネットリストを「ピン集合の集合」で比較。**統合・移設の検証はこれ**
 - **`sch_helpers.py`** — 生成の土台。単体で回すと**シンボルライブラリの探索を自己診断**する
-  （新しいマシンで最初にこれ）。**生成物の書き出しは `write_sch()` を通すこと** —
-  素の `write_text` は Windows で CRLF になり、内容が同じでも全ファイルが変更扱いになる
+  （新しいマシンで最初にこれ。`kicad-cli` の探索も見る）。**生成物の書き出しは `write_sch()`
+  を通すこと** — 素の `write_text` は Windows で CRLF になり、内容が同じでも全ファイルが
+  変更扱いになる。**書き出しの最後は `canonicalize_sch()`**（上の「正準形」を参照）
 - **`sch_facts.py`** — 回路図から機械的に導出できる事実を出す（階層の枚数・部品数・レールごとの
   容量・親子のシート界面・未接続ピン・1本のネットに載った別名）。**読み取り専用。査読の入口**。
   裏の取れ方と限界はスクリプト先頭の docstring にある。**ERC の正はこれではなく `kicad-run.sh erc`**
