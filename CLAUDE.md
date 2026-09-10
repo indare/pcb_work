@@ -159,7 +159,8 @@ docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 |---|---|
 | `check_sexpr.py -q AudioV2` | **問題 0**。ファイル数は環境で増える — `AudioV2/.kicad-mcp/` の作業ファイルや、KiCad を開いているときの `_autosave-*` を拾うため。**素の状態で 13、2026-09-06 の実測は 15**（増分は `.kicad-mcp/visual-diff-*-before.kicad_sch` の2件）。どちらも gitignore 済みだが `check_sexpr` はディレクトリを見るので数に出る |
 | `kicad-run.sh erc` | **4 件**（2026-09-10 に娘を 4ch 化して `U313` が消え、`ground_pin_not_ground` が 3→2。**残る4件は全部宣言済みの型** — `ground_pin_not_ground` 2 は ±15V アナログSWの VSS が `-15V` で正常、`isolated_pin_label` 1 は `DEST_SENSE_MUTE_NC`（ミュート位置なので意図的に開放）、`multiple_net_names` 1 は `3V3`/`PICO_3V3` の意図的な別名重ね（`build_ui_move.py` が置いた）） |
-| `kicad-run.sh netlist` | **部品 261 個・重複 0・注釈警告なし**（2026-09-10 に AmpCh×5→×4、`TMUX7612` ×3→×2、母板スロット 3 口。`AmpBankRelay` は `on_board`/`in_bom`=no のままこの netlist に出ない。回路図インスタンスは `sch_facts.py` で 350＝リレー 4ch シート込み。`PWR_FLAG` は仮想なので計上外。**`gen_parts_bom.py` が PARTS.md に書く「部品総数」は NetTie も除く**） |
+| `kicad-run.sh netlist` | **部品 265 個・重複 0・注釈警告なし**（2026-09-10 に AmpCh×5→×4、`TMUX7612` ×3→×2、母板スロット 3 口で 261 になり、同日 娘基板の M3 取付穴 `H301`–`H304` を足して 265。取付穴はピンが無いので ERC 件数は動かない。`AmpBankRelay` は `on_board`/`in_bom`=no のままこの netlist に出ない。回路図インスタンスは `sch_facts.py` で **358**＝リレー側の取付穴 4 個込み。`PWR_FLAG` は仮想なので計上外。**`gen_parts_bom.py` が PARTS.md に書く「部品総数」は NetTie も除く**） |
+| PCB のフットプリント数 | **265**（netlist と一致）。`kicad-cli pcb drc` の `schematic_parity` が **0 件**であることが正。⚠ **`pcb_sync_from_schematic` は足すだけで、回路図から消えた部品を PCB から消さない** |
 | `sch_import.py --roundtrip AudioV2/*.kicad_sch` | **全部 OK** |
 
 イメージがあれば Docker(KiCad 10.0.6)、無ければホストの `kicad-cli` で動く。

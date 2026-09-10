@@ -550,6 +550,10 @@ def _flatten_extends_symbol(
     return body
 
 
+# ピンを持たないのが正常な型。ここに書いたものだけ下のピン検査を免除する。
+PINLESS_OK = {"Mechanical:MountingHole"}
+
+
 def embed_lib_symbols(lib_ids: list[str]) -> str:
     """Build (lib_symbols ...) with pin-complete definitions (extends flattened)."""
     chunks: list[str] = ["\t(lib_symbols"]
@@ -571,10 +575,13 @@ def embed_lib_symbols(lib_ids: list[str]) -> str:
             text = _read_symbol_text(file_lib, file_name)
             body = _extract_symbol_body(text, lib, embed_name, file_name)
         # Flattened body must contain pins for netlist/BOM.
-        if "(pin " not in body and "(pin\n" not in body and "(pin\t" not in body:
-            # also match "(pin power_in" etc.
-            if not re.search(r"\(pin\s+\w+", body):
-                raise ValueError(f"embed {lib_id}: flattened body has no pins")
+        # 例外は PINLESS_OK だけ。このガードは extends の展開が失敗した body を
+        # 捕まえるためのもので、機構部品のように本当にピンが無い型と区別がつかない。
+        if lib_id not in PINLESS_OK:
+            if "(pin " not in body and "(pin\n" not in body and "(pin\t" not in body:
+                # also match "(pin power_in" etc.
+                if not re.search(r"\(pin\s+\w+", body):
+                    raise ValueError(f"embed {lib_id}: flattened body has no pins")
         chunks.append(_indent_symbol_body(_sanitize_embed_body(body)))
 
     chunks.append("\t)")

@@ -3484,6 +3484,118 @@
 					)
 				)
 			)
+		(symbol "Mechanical:MountingHole"
+				(pin_names
+					(offset 1.016)
+				)
+				(exclude_from_sim no)
+				(in_bom no)
+				(on_board yes)
+				(in_pos_files yes)
+				(duplicate_pin_numbers_are_jumpers no)
+				(property "Reference" "H"
+					(at 0 5.08 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Value" "MountingHole"
+					(at 0 3.175 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Footprint" ""
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Datasheet" ""
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Description" "Mounting Hole without connection"
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "ki_keywords" "mounting hole"
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "ki_fp_filters" "MountingHole*"
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(symbol "MountingHole_0_1"
+					(circle
+						(center 0 0)
+						(radius 1.27)
+						(stroke
+							(width 1.27)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+				)
+				(embedded_fonts no)
+			)
+			(symbol "MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
 			(symbol "TMUX7612_0_1"
 				(rectangle
 					(start -7.62 15.24)
@@ -6604,6 +6716,334 @@
 		(at 347.98 116.84)
 		(uuid "6bd7b4f4-8ce9-501f-9485-7a1d1994e27f")
 	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 340.36 160.02 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ff74f4fe-8c7e-51ba-98d3-d04dbc6636f0")
+		(property "Reference" "H301"
+			(at 340.36 157.48000000000002 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "M3"
+			(at 340.36 162.56 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "f2d1f969-59a6-5eab-8160-ee7d0a9869de")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
+					(reference "H301")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 353.06 160.02 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "209dc763-4420-524d-b13f-26d79873a6c2")
+		(property "Reference" "H302"
+			(at 353.06 157.48000000000002 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "M3"
+			(at 353.06 162.56 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "f24468d6-b1d1-55f6-bbdd-02fcf0404ae5")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
+					(reference "H302")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 365.76 160.02 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5e3b19f2-a0c4-5ff7-a268-0619af139b7b")
+		(property "Reference" "H303"
+			(at 365.76 157.48000000000002 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "M3"
+			(at 365.76 162.56 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "c13dd2aa-d28d-5a4d-ba80-3d285ff5702d")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
+					(reference "H303")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 378.46 160.02 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b951316d-e787-5a24-9fed-bc4e98d379a0")
+		(property "Reference" "H304"
+			(at 378.46000000000004 157.48000000000002 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Value" "M3"
+			(at 378.46000000000004 162.56 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+
+		(pin "1"
+			(uuid "8d6eea79-1b4b-530c-a1ae-5ea84ea73cc2")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
+					(reference "H304")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(hierarchical_label "TONE_L"
 		(shape input)
 		(at 419.1 40.64 0)
@@ -6613,7 +7053,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f2d1f969-59a6-5eab-8160-ee7d0a9869de")
+		(uuid "5e737e18-9b1f-53bb-b634-dece8da418f1")
 	)
 	(label "TONE_L"
 		(at 419.1 40.64 0)
@@ -6623,7 +7063,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "ff74f4fe-8c7e-51ba-98d3-d04dbc6636f0")
+		(uuid "8c5649aa-0422-53fc-a824-995688f10e7b")
 	)
 	(hierarchical_label "TONE_R"
 		(shape input)
@@ -6634,7 +7074,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f24468d6-b1d1-55f6-bbdd-02fcf0404ae5")
+		(uuid "86d26f6a-84e1-5d1c-8ca9-c14fb9ebc81d")
 	)
 	(label "TONE_R"
 		(at 419.1 48.26 0)
@@ -6644,7 +7084,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "209dc763-4420-524d-b13f-26d79873a6c2")
+		(uuid "9473fa31-089c-54a4-869e-0fa5ceef6680")
 	)
 	(hierarchical_label "AMP_SEL_L"
 		(shape output)
@@ -6655,7 +7095,7 @@
 			)
 			(justify left)
 		)
-		(uuid "c13dd2aa-d28d-5a4d-ba80-3d285ff5702d")
+		(uuid "52d5b3ef-0aab-54fe-be0f-ac443d08c36a")
 	)
 	(label "AMP_SEL_L"
 		(at 419.1 55.88 0)
@@ -6665,7 +7105,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5e3b19f2-a0c4-5ff7-a268-0619af139b7b")
+		(uuid "04ab5549-decd-5188-86f9-895d86f84317")
 	)
 	(hierarchical_label "AMP_SEL_R"
 		(shape output)
@@ -6676,7 +7116,7 @@
 			)
 			(justify left)
 		)
-		(uuid "8d6eea79-1b4b-530c-a1ae-5ea84ea73cc2")
+		(uuid "21a213e5-f93d-55ff-bd3d-b4c52b212e38")
 	)
 	(label "AMP_SEL_R"
 		(at 419.1 63.5 0)
@@ -6686,7 +7126,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "b951316d-e787-5a24-9fed-bc4e98d379a0")
+		(uuid "212f48c9-57e0-5139-99d1-5cd3a4d7cdd9")
 	)
 	(hierarchical_label "+15V"
 		(shape input)
@@ -6697,7 +7137,7 @@
 			)
 			(justify left)
 		)
-		(uuid "5e737e18-9b1f-53bb-b634-dece8da418f1")
+		(uuid "9998a7ff-f337-59e0-ae59-5be788cf3070")
 	)
 	(label "+15V"
 		(at 419.1 71.12 0)
@@ -6707,7 +7147,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "8c5649aa-0422-53fc-a824-995688f10e7b")
+		(uuid "a3e85d6f-c6a8-53f6-bec5-91e027f35dd2")
 	)
 	(hierarchical_label "-15V"
 		(shape input)
@@ -6718,7 +7158,7 @@
 			)
 			(justify left)
 		)
-		(uuid "86d26f6a-84e1-5d1c-8ca9-c14fb9ebc81d")
+		(uuid "93ce7792-73df-5c3a-bad8-034ae4e8411a")
 	)
 	(label "-15V"
 		(at 419.1 78.74000000000001 0)
@@ -6728,7 +7168,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "9473fa31-089c-54a4-869e-0fa5ceef6680")
+		(uuid "f7a545cf-d4f5-5405-92b5-09fc2bdb9db5")
 	)
 	(hierarchical_label "A_GND"
 		(shape bidirectional)
@@ -6739,7 +7179,7 @@
 			)
 			(justify left)
 		)
-		(uuid "52d5b3ef-0aab-54fe-be0f-ac443d08c36a")
+		(uuid "d0aaa5be-89fe-51c9-b6d5-03e74a3a3c25")
 	)
 	(label "A_GND"
 		(at 419.1 86.36 0)
@@ -6749,7 +7189,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "04ab5549-decd-5188-86f9-895d86f84317")
+		(uuid "6b91a0e8-dbdc-5647-aa4c-460ae8e32350")
 	)
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
@@ -6760,7 +7200,7 @@
 			)
 			(justify left)
 		)
-		(uuid "21a213e5-f93d-55ff-bd3d-b4c52b212e38")
+		(uuid "6aba3d52-2f1f-511f-90f3-843be3594709")
 	)
 	(label "I2C_SDA"
 		(at 419.1 93.98 0)
@@ -6770,7 +7210,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "212f48c9-57e0-5139-99d1-5cd3a4d7cdd9")
+		(uuid "161a968d-b1c7-51b5-bc45-c0a3dea12d11")
 	)
 	(hierarchical_label "I2C_SCL"
 		(shape bidirectional)
@@ -6781,7 +7221,7 @@
 			)
 			(justify left)
 		)
-		(uuid "9998a7ff-f337-59e0-ae59-5be788cf3070")
+		(uuid "59fcbfb3-e707-5d26-aad5-cdc62807a694")
 	)
 	(label "I2C_SCL"
 		(at 419.1 101.6 0)
@@ -6791,7 +7231,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a3e85d6f-c6a8-53f6-bec5-91e027f35dd2")
+		(uuid "9309cbc2-8f28-58fd-a04f-8e1392c01dfc")
 	)
 	(hierarchical_label "D_GND"
 		(shape input)
@@ -6802,7 +7242,7 @@
 			)
 			(justify left)
 		)
-		(uuid "93ce7792-73df-5c3a-bad8-034ae4e8411a")
+		(uuid "5091d71b-12aa-5eef-a61c-2525b4a176a2")
 	)
 	(label "D_GND"
 		(at 419.1 109.22 0)
@@ -6812,7 +7252,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "f7a545cf-d4f5-5405-92b5-09fc2bdb9db5")
+		(uuid "1e4d0c2f-b79e-503f-8ffa-92439f85a545")
 	)
 	(hierarchical_label "3V3"
 		(shape input)
@@ -6823,7 +7263,7 @@
 			)
 			(justify left)
 		)
-		(uuid "d0aaa5be-89fe-51c9-b6d5-03e74a3a3c25")
+		(uuid "afcb6312-2c7d-59aa-8021-a9a74bc3d414")
 	)
 	(label "3V3"
 		(at 419.1 116.84 0)
@@ -6833,7 +7273,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "6b91a0e8-dbdc-5647-aa4c-460ae8e32350")
+		(uuid "1e68c805-3841-5d1b-b895-b9e40dd4fecc")
 	)
 	(hierarchical_label "ADDR0"
 		(shape input)
@@ -6844,7 +7284,7 @@
 			)
 			(justify left)
 		)
-		(uuid "6aba3d52-2f1f-511f-90f3-843be3594709")
+		(uuid "3091a82f-3c0b-5434-b396-5c6342ecf485")
 	)
 	(label "ADDR0"
 		(at 419.1 124.46000000000001 0)
@@ -6854,7 +7294,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "161a968d-b1c7-51b5-bc45-c0a3dea12d11")
+		(uuid "d08eb6cd-6642-5d2d-a8b6-c41f226dfb4e")
 	)
 	(hierarchical_label "ADDR1"
 		(shape input)
@@ -6865,7 +7305,7 @@
 			)
 			(justify left)
 		)
-		(uuid "59fcbfb3-e707-5d26-aad5-cdc62807a694")
+		(uuid "e044361d-b908-56b3-8795-b07deacc65b2")
 	)
 	(label "ADDR1"
 		(at 419.1 132.07999999999998 0)
@@ -6875,7 +7315,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "9309cbc2-8f28-58fd-a04f-8e1392c01dfc")
+		(uuid "ac8b0af0-4450-55c0-8452-e2f092d2fe7e")
 	)
 	(sheet_instances
 		(path "/"

@@ -276,6 +276,16 @@ class Builder:
                    ["5", "6"] if self.v == SWITCH else None,
                    footprint="Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical")
 
+        # --- 取付穴（A2: M3 φ3.2 を四隅、端から 5.0 mm）---
+        # ピンが無いのでネットは持たない。v1 と同じく回路図にシンボルを置いて
+        # PCB とフットプリントの対応を取る（board 側だけに足すと parity が崩れる）。
+        # ⚠ 穴の実座標は外形に依存するので PCB が正。ここは「4個あること」だけ。
+        for i in range(4):
+            self.place("Mechanical:MountingHole",
+                       f"H{300 + (c['slot'] - 1) * 10 + i + 1}", "M3",
+                       340.36 + i * 12.7, 160.02, {},
+                       footprint="MountingHole:MountingHole_3.2mm_M3")
+
         # --- 階層ピン ---
         hier = HIER + (HIER_RELAY_EXTRA if self.v == RELAY else [])
         saved, scaffold.uid = scaffold.uid, uid
