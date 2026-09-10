@@ -1968,7 +1968,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "03cb6d94-a549-41ac-9fed-18c5a5db93e7")
-		(at 354.69 192.31)
+		(at 361.69 182.94)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C609"
@@ -2109,7 +2109,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "04519cc6-642e-4d09-8045-0990d7651249")
-		(at 371.31 209.69 180)
+		(at 378.31 200.32 180)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C709"
@@ -2250,7 +2250,7 @@
 	(footprint "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 		(layer "F.Cu")
 		(uuid "05a8ddee-2574-45ce-a0c3-4076213abae0")
-		(at 432.65 185.14 90)
+		(at 439.65 175.77 90)
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*2.5mm^2, Capacitor, http://www.wima.com/EN/WIMA_FKS_2.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 2.5mm Capacitor")
 		(property "Reference" "C804"
@@ -2571,7 +2571,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "08179f2a-eef7-47ea-ae36-8c0cb90537a5")
-		(at 354.29 230.62)
+		(at 361.29 221.25)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C707"
@@ -2712,7 +2712,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "08313941-bc54-49be-9721-129298839d33")
-		(at 400.98 173.86 180)
+		(at 407.98 164.49 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R802"
@@ -3093,7 +3093,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "0a700bbe-0fce-4816-8dd2-1414b6d850c0")
-		(at 354.23 214.88 180)
+		(at 361.23 205.51 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R707"
@@ -3392,7 +3392,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "0c55527c-32ff-4693-80b9-59dfca17c2a2")
-		(at 349.08 216.52 90)
+		(at 356.08 207.15 90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R710"
@@ -3533,7 +3533,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "0cd62b48-477d-478f-8cbe-e3265c9b9971")
-		(at 391.65 146.275 90)
+		(at 400.0 142.54 90)
 		(descr "Through hole straight pin header, 2x06, 2.54mm pitch, double rows")
 		(tags "Through hole pin header THT 2x06 2.54mm double row")
 		(property "Reference" "J_PWR301"
@@ -3904,7 +3904,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "0dce3131-19f2-4d96-94d6-94e61de8c1e1")
-		(at 397.95 192.17)
+		(at 404.95 182.8)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R809"
@@ -4361,7 +4361,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "120e813e-7226-4442-9a7c-ae6782518058")
-		(at 425.08 223.41)
+		(at 432.08 214.04)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R904"
@@ -5204,7 +5204,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "15cb74b5-f9b1-4be5-bf31-422187c19b08")
-		(at 371.14 221.28 90)
+		(at 378.14 211.91 90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R706"
@@ -5345,7 +5345,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "15e4b70b-7cfb-4596-9375-a037dfca566c")
-		(at 404.71 187.34 180)
+		(at 411.71 177.97 180)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C810"
@@ -6118,7 +6118,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "1ee35081-3fe3-465f-b0e5-3a2ae890759b")
-		(at 348.0 198.5)
+		(at 355.0 189.13)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C311"
@@ -6276,7 +6276,7 @@
 	(footprint "Capacitor_SMD:CP_Elec_10x12.6"
 		(layer "F.Cu")
 		(uuid "1f809f37-00a4-488e-8364-0e97c88c5be8")
-		(at 352.0 161.5)
+		(at 401.8 152.6)
 		(descr "SMD capacitor, aluminum electrolytic, Panasonic F12, 10.0x12.6mm")
 		(tags "capacitor electrolytic")
 		(property "Reference" "C_BULK_P301"
@@ -9659,7 +9659,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "205d0c48-55f1-4a88-9b19-8331dbf07601")
-		(at 425.1 217.47 180)
+		(at 432.1 208.1 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R901"
@@ -9800,7 +9800,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "20741fc1-63b0-4175-b52a-6f27f9c2a7a1")
-		(at 404.81 219.76 -90)
+		(at 411.81 210.39 -90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R912"
@@ -10099,7 +10099,7 @@
 	(footprint "Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT"
 		(layer "F.Cu")
 		(uuid "214bfe01-7eeb-40b0-aaf5-6dddd3845730")
-		(at 359.86 192.65)
+		(at 366.86 183.28)
 		(descr "C, Rect series, Radial, pin pitch=10.00mm, length*width=11.0*4.2mm^2, Capacitor, https://en.tdk.eu/inf/20/20/db/fc_2009/MKT_B32560_564.pdf")
 		(tags "C Rect series Radial pin pitch 10.00mm length 11.0mm width 4.2mm Capacitor")
 		(property "Reference" "C605"
@@ -10440,7 +10440,7 @@
 	(footprint "Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
 		(layer "F.Cu")
 		(uuid "224d7760-e24f-4645-b690-ae15aaf6eb1a")
-		(at 363 201)
+		(at 370.0 191.63)
 		(descr "TSSOP, 16 Pin (https://www.jedec.org/document_search?search_api_views_fulltext=MO-153)")
 		(tags "TSSOP SO JEDEC-MO-153-AB Texas_PW0016A Microchip-ST Toshiba-TSSOP16-P-0044-0.65A NXP-SOT403-1 Infineon-P-TSSOP-16-800")
 		(property "Reference" "U311"
@@ -12671,7 +12671,7 @@
 	(footprint "Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT"
 		(layer "F.Cu")
 		(uuid "2d87c802-6b99-408e-a74d-e4232c0df6e9")
-		(at 356.73 171.98)
+		(at 363.73 162.61)
 		(descr "C, Rect series, Radial, pin pitch=10.00mm, length*width=11.0*4.2mm^2, Capacitor, https://en.tdk.eu/inf/20/20/db/fc_2009/MKT_B32560_564.pdf")
 		(tags "C Rect series Radial pin pitch 10.00mm length 11.0mm width 4.2mm Capacitor")
 		(property "Reference" "C602"
@@ -13442,7 +13442,7 @@
 	(footprint "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 		(layer "F.Cu")
 		(uuid "2eb9dc3c-74ef-4ac0-a794-aada7a60a275")
-		(at 343.35 216.86 -90)
+		(at 350.35 207.49 -90)
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*2.5mm^2, Capacitor, http://www.wima.com/EN/WIMA_FKS_2.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 2.5mm Capacitor")
 		(property "Reference" "C704"
@@ -13605,7 +13605,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "2f923a3c-086b-44af-90c1-162712fc78e6")
-		(at 354.86 180.72 -90)
+		(at 361.86 171.35 -90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R606"
@@ -13904,7 +13904,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "316d6dc4-cb1f-4bee-8d09-9bc19024f1ce")
-		(at 400.9 184.53)
+		(at 407.9 175.16)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R801"
@@ -14727,7 +14727,7 @@
 	(footprint "Capacitor_SMD:CP_Elec_10x12.6"
 		(layer "F.Cu")
 		(uuid "3279f9c6-38ec-429d-9025-6a53e588ac50")
-		(at 368.0 161.5)
+		(at 416.8 152.6)
 		(descr "SMD capacitor, aluminum electrolytic, Panasonic F12, 10.0x12.6mm")
 		(tags "capacitor electrolytic")
 		(property "Reference" "C_BULK_N301"
@@ -15174,7 +15174,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "329beb5d-a420-468d-884a-969a697bbbec")
-		(at 371.77 187.12)
+		(at 378.77 177.75)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R607"
@@ -17567,7 +17567,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "4138fa64-8ec5-4889-a9e5-f22fdf649e78")
-		(at 404.39 225.13 180)
+		(at 411.39 215.76 180)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C908"
@@ -18826,7 +18826,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "48942e9b-c76c-43ce-9580-3fc46cc8e677")
-		(at 376.92 185.48 -90)
+		(at 383.92 176.11 -90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R610"
@@ -18967,7 +18967,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "49fccf19-2321-4136-b3b3-320c53e067d3")
-		(at 344.63 178.44 180)
+		(at 351.63 169.07 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R603"
@@ -19108,7 +19108,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "4aa78c60-5531-4c45-8581-d627507a8312")
-		(at 399.08 216.52 90)
+		(at 406.08 207.15 90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R910"
@@ -19407,7 +19407,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "4d08f2ed-9de9-4bec-ad34-4f8c1834186e")
-		(at 350.9 184.53)
+		(at 357.9 175.16)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R601"
@@ -19760,7 +19760,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "4efe62b5-5bc6-40cc-bb93-a6c006734edf")
-		(at 398.0 203.0)
+		(at 405.0 193.63)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C314"
@@ -19918,7 +19918,7 @@
 	(footprint "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 		(layer "F.Cu")
 		(uuid "4f58b2c2-c926-4d6b-9419-b1d963bbded1")
-		(at 393.35 216.86 -90)
+		(at 400.35 207.49 -90)
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*2.5mm^2, Capacitor, http://www.wima.com/EN/WIMA_FKS_2.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 2.5mm Capacitor")
 		(property "Reference" "C904"
@@ -20081,7 +20081,7 @@
 	(footprint "Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
 		(layer "F.Cu")
 		(uuid "4f8fc500-a629-40c7-861e-78b55e8e7479")
-		(at 413 201)
+		(at 420.0 191.63)
 		(descr "TSSOP, 16 Pin (https://www.jedec.org/document_search?search_api_views_fulltext=MO-153)")
 		(tags "TSSOP SO JEDEC-MO-153-AB Texas_PW0016A Microchip-ST Toshiba-TSSOP16-P-0044-0.65A NXP-SOT403-1 Infineon-P-TSSOP-16-800")
 		(property "Reference" "U312"
@@ -20744,7 +20744,7 @@
 	(footprint "Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT"
 		(layer "F.Cu")
 		(uuid "5215d4af-ab59-4871-99fc-da539348e230")
-		(at 416.14 209.35 180)
+		(at 423.14 199.98 180)
 		(descr "C, Rect series, Radial, pin pitch=10.00mm, length*width=11.0*4.2mm^2, Capacitor, https://en.tdk.eu/inf/20/20/db/fc_2009/MKT_B32560_564.pdf")
 		(tags "C Rect series Radial pin pitch 10.00mm length 11.0mm width 4.2mm Capacitor")
 		(property "Reference" "C905"
@@ -20927,7 +20927,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "528ff4c8-d3c3-4c0a-b697-6f4dc3dc145e")
-		(at 354.81 219.76 -90)
+		(at 361.81 210.39 -90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R712"
@@ -21384,7 +21384,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "552e4530-7e06-449c-8827-840c0e15e561")
-		(at 399.18 222.03)
+		(at 406.18 212.66)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R908"
@@ -21683,7 +21683,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "55ce39d1-6145-4850-bb15-0c01eb79cd9c")
-		(at 375.08 223.41)
+		(at 382.08 214.04)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R704"
@@ -22540,7 +22540,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "59eba76f-bcb8-48f7-a504-5a56d7b96387")
-		(at 371.29 214.66)
+		(at 378.29 205.29)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C710"
@@ -24748,7 +24748,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "5ffb382c-a663-4ae1-81bc-73b7d143b089")
-		(at 431.37 223.56)
+		(at 438.37 214.19)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R903"
@@ -24889,7 +24889,7 @@
 	(footprint "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 		(layer "F.Cu")
 		(uuid "63c8a160-9760-4ca4-b25e-be0e8c96c42d")
-		(at 343.36 188.22 90)
+		(at 350.36 178.85 90)
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*2.5mm^2, Capacitor, http://www.wima.com/EN/WIMA_FKS_2.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 2.5mm Capacitor")
 		(property "Reference" "C601"
@@ -25270,7 +25270,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "64f8ac82-a78e-4fff-bb7f-5ace5bd571d8")
-		(at 404.86 180.72 -90)
+		(at 411.86 171.35 -90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R806"
@@ -25569,7 +25569,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "651fd334-f1a0-4459-acae-4097f10dfa3d")
-		(at 404.29 230.62)
+		(at 411.29 221.25)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C907"
@@ -25710,7 +25710,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "65f03e60-6e4c-4c81-8775-7aec5f15485d")
-		(at 350.98 173.86 180)
+		(at 357.98 164.49 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R602"
@@ -26621,7 +26621,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "6724aff7-5d74-44de-bc93-50d98c51ffd7")
-		(at 426.82 179.97 180)
+		(at 433.82 170.6 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R808"
@@ -26762,7 +26762,7 @@
 	(footprint "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 		(layer "F.Cu")
 		(uuid "677ee16b-2322-4481-8deb-323f7d1c7e1f")
-		(at 382.65 185.14 90)
+		(at 389.65 175.77 90)
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*2.5mm^2, Capacitor, http://www.wima.com/EN/WIMA_FKS_2.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 2.5mm Capacitor")
 		(property "Reference" "C604"
@@ -26925,7 +26925,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "67eaf53a-9899-4f7b-88fb-81d098b690cf")
-		(at 350.92 178.59 180)
+		(at 357.92 169.22 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R604"
@@ -28074,7 +28074,7 @@
 	(footprint "Package_DIP:DIP-8_W7.62mm_Socket"
 		(layer "F.Cu")
 		(uuid "6bf4ae0f-ac88-4b3a-97a6-c2c15a101b05")
-		(at 416.81 222.55 180)
+		(at 423.81 213.18 180)
 		(descr "8-lead though-hole mounted DIP package, row spacing 7.62mm (300 mils), Socket")
 		(tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket")
 		(property "Reference" "AMP901"
@@ -28386,7 +28386,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "6c105fbe-5b35-4e6c-a951-7f3037ffc984")
-		(at 421.61 176.87)
+		(at 428.61 167.5)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C808"
@@ -28527,7 +28527,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "6d2277e0-d4f7-462f-9eba-d14fdf0b8567")
-		(at 381.37 223.56)
+		(at 388.37 214.19)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R703"
@@ -28668,7 +28668,7 @@
 	(footprint "Package_DIP:DIP-28_W7.62mm"
 		(layer "F.Cu")
 		(uuid "6f88ee74-4b0e-4ede-9d0e-9a71b0731039")
-		(at 347.49 148.805 90)
+		(at 351.53 154.405 90)
 		(descr "28-lead though-hole mounted DIP package, row spacing 7.62mm (300 mils)")
 		(tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil")
 		(property "Reference" "U_IO301"
@@ -32747,7 +32747,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "73d0ae14-ede3-48d5-b75b-36834a58dba2")
-		(at 421.29 214.66)
+		(at 428.29 205.29)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C910"
@@ -32888,7 +32888,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "73d94287-f9a8-4265-b43a-be1348fd6a08")
-		(at 375.1 217.47 180)
+		(at 382.1 208.1 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R701"
@@ -33029,7 +33029,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "78f48998-94d1-4049-a90f-ae636c7ee754")
-		(at 376.82 179.97 180)
+		(at 383.82 170.6 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R608"
@@ -34708,7 +34708,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "7e803a8a-e211-4880-b94e-a109fd0cefde")
-		(at 404.69 192.31)
+		(at 411.69 182.94)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C809"
@@ -34849,7 +34849,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "7e9cc473-5135-4fd8-b69f-c0efa6054d81")
-		(at 398.0 198.5)
+		(at 405.0 189.13)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C313"
@@ -35165,7 +35165,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "7fd85d3e-5959-4bdb-bfa1-748c8b3f799b")
-		(at 371.19 182.24 90)
+		(at 378.19 172.87 90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R612"
@@ -36838,7 +36838,7 @@
 	(footprint "Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT"
 		(layer "F.Cu")
 		(uuid "829d2661-8069-4912-b11b-3660fc825208")
-		(at 369.27 230.02 180)
+		(at 376.27 220.65 180)
 		(descr "C, Rect series, Radial, pin pitch=10.00mm, length*width=11.0*4.2mm^2, Capacitor, https://en.tdk.eu/inf/20/20/db/fc_2009/MKT_B32560_564.pdf")
 		(tags "C Rect series Radial pin pitch 10.00mm length 11.0mm width 4.2mm Capacitor")
 		(property "Reference" "C702"
@@ -37587,7 +37587,7 @@
 	(footprint "Package_DIP:DIP-8_W7.62mm_Socket"
 		(layer "F.Cu")
 		(uuid "847a11c7-c6ea-4619-a2e0-21bba0dda583")
-		(at 359.19 179.45)
+		(at 366.19 170.08)
 		(descr "8-lead though-hole mounted DIP package, row spacing 7.62mm (300 mils), Socket")
 		(tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket")
 		(property "Reference" "AMP601"
@@ -39185,7 +39185,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "8c82f362-02e5-461f-bc2b-75f3c1015791")
-		(at 414.92 146.275 90)
+		(at 360.0 230.0 90)
 		(descr "Through hole straight pin header, 2x05, 2.54mm pitch, double rows")
 		(tags "Through hole pin header THT 2x05 2.54mm double row")
 		(property "Reference" "J_ANA301"
@@ -40256,7 +40256,7 @@
 	(footprint "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 		(layer "F.Cu")
 		(uuid "8f9f4300-1130-4469-9930-c226d0c6a45a")
-		(at 393.36 188.22 90)
+		(at 400.36 178.85 90)
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*2.5mm^2, Capacitor, http://www.wima.com/EN/WIMA_FKS_2.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 2.5mm Capacitor")
 		(property "Reference" "C801"
@@ -42161,7 +42161,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "911cebc4-8652-41cc-9549-0ffcd367bac5")
-		(at 400.92 178.59 180)
+		(at 407.92 169.22 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R804"
@@ -45374,7 +45374,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "9a464b9a-ed11-40d2-adc9-9dd6f29a1cce")
-		(at 347.95 192.17)
+		(at 354.95 182.8)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R609"
@@ -46173,7 +46173,7 @@
 	(footprint "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 		(layer "F.Cu")
 		(uuid "a3b593b6-bb2c-4c69-a81d-5ddfee3d5c6b")
-		(at 382.64 213.78 -90)
+		(at 389.64 204.41 -90)
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*2.5mm^2, Capacitor, http://www.wima.com/EN/WIMA_FKS_2.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 2.5mm Capacitor")
 		(property "Reference" "C701"
@@ -46622,7 +46622,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "a7900ee2-0d6c-4d92-9f3a-4e5d92aa5561")
-		(at 371.71 171.38 180)
+		(at 378.71 162.01 180)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C607"
@@ -46763,7 +46763,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "a8c1f39f-a7b8-4b27-b4cc-925cd176eee1")
-		(at 375.02 228.14)
+		(at 382.02 218.77)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R702"
@@ -47942,7 +47942,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "ad91a9c5-5946-45a3-ae56-4dadaa2e02f1")
-		(at 394.63 178.44 180)
+		(at 401.63 169.07 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R803"
@@ -48083,7 +48083,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "ae2a54e8-be5b-4a3a-8243-ae24802757df")
-		(at 426.92 185.48 -90)
+		(at 433.92 176.11 -90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R810"
@@ -48584,7 +48584,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "aef367ae-caa5-46b0-b3ac-406d0ac978f6")
-		(at 371.61 176.87)
+		(at 378.61 167.5)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C608"
@@ -52841,7 +52841,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "bcc7b631-8dea-4ffd-87c2-8ed3f8278ded")
-		(at 425.02 228.14)
+		(at 432.02 218.77)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R902"
@@ -53456,7 +53456,7 @@
 	(footprint "Package_DIP:DIP-8_W7.62mm_Socket"
 		(layer "F.Cu")
 		(uuid "bf1abb7a-0c65-4105-8445-68e375a590dc")
-		(at 409.19 179.45)
+		(at 416.19 170.08)
 		(descr "8-lead though-hole mounted DIP package, row spacing 7.62mm (300 mils), Socket")
 		(tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket")
 		(property "Reference" "AMP801"
@@ -53768,7 +53768,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "bfd8b1dc-929f-4e54-af6f-cc2774ce0729")
-		(at 354.39 225.13 180)
+		(at 361.39 215.76 180)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C708"
@@ -53909,7 +53909,7 @@
 	(footprint "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 		(layer "F.Cu")
 		(uuid "c027f393-3ff7-4431-b424-f38561b73db9")
-		(at 432.64 213.78 -90)
+		(at 439.64 204.41 -90)
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*2.5mm^2, Capacitor, http://www.wima.com/EN/WIMA_FKS_2.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 2.5mm Capacitor")
 		(property "Reference" "C901"
@@ -54647,7 +54647,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "c32101e0-882d-4b22-a441-e76073dde69a")
-		(at 428.05 209.83 180)
+		(at 435.05 200.46 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R909"
@@ -55670,7 +55670,7 @@
 	(footprint "Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT"
 		(layer "F.Cu")
 		(uuid "c8c10249-d04c-490f-b163-b4a710634732")
-		(at 419.27 230.02 180)
+		(at 426.27 220.65 180)
 		(descr "C, Rect series, Radial, pin pitch=10.00mm, length*width=11.0*4.2mm^2, Capacitor, https://en.tdk.eu/inf/20/20/db/fc_2009/MKT_B32560_564.pdf")
 		(tags "C Rect series Radial pin pitch 10.00mm length 11.0mm width 4.2mm Capacitor")
 		(property "Reference" "C902"
@@ -56169,7 +56169,7 @@
 	(footprint "Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT"
 		(layer "F.Cu")
 		(uuid "ce8bf856-ae2e-441b-b59d-bbf266d67353")
-		(at 406.73 171.98)
+		(at 413.73 162.61)
 		(descr "C, Rect series, Radial, pin pitch=10.00mm, length*width=11.0*4.2mm^2, Capacitor, https://en.tdk.eu/inf/20/20/db/fc_2009/MKT_B32560_564.pdf")
 		(tags "C Rect series Radial pin pitch 10.00mm length 11.0mm width 4.2mm Capacitor")
 		(property "Reference" "C802"
@@ -56453,7 +56453,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "cf5c74f4-6eb3-429d-a85c-451786426f6a")
-		(at 421.77 187.12)
+		(at 428.77 177.75)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R807"
@@ -57325,7 +57325,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "d5d53762-f217-4266-be8f-622c60b3c9b5")
-		(at 421.19 182.24 90)
+		(at 428.19 172.87 90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R812"
@@ -57844,7 +57844,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "d8cfc924-27eb-49ab-92f3-3a71f4d6ebfb")
-		(at 354.71 187.34 180)
+		(at 361.71 177.97 180)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C610"
@@ -63328,7 +63328,7 @@
 	(footprint "Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT"
 		(layer "F.Cu")
 		(uuid "e28b2279-572d-4d29-bf83-26b20a4e97fb")
-		(at 366.14 209.35 180)
+		(at 373.14 199.98 180)
 		(descr "C, Rect series, Radial, pin pitch=10.00mm, length*width=11.0*4.2mm^2, Capacitor, https://en.tdk.eu/inf/20/20/db/fc_2009/MKT_B32560_564.pdf")
 		(tags "C Rect series Radial pin pitch 10.00mm length 11.0mm width 4.2mm Capacitor")
 		(property "Reference" "C705"
@@ -64364,7 +64364,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "e4656105-1b05-4fd9-9dd2-1d5daedc9b82")
-		(at 421.31 209.69 180)
+		(at 428.31 200.32 180)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C909"
@@ -64663,7 +64663,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "e5cf54a0-64dd-40f5-ba0f-d524446895d2")
-		(at 364.0 152.5)
+		(at 373.12 158.005)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C_IO301"
@@ -64979,7 +64979,7 @@
 	(footprint "Package_DIP:DIP-8_W7.62mm_Socket"
 		(layer "F.Cu")
 		(uuid "e63eefdc-7344-4a27-87be-585ecbafe4cf")
-		(at 366.81 222.55 180)
+		(at 373.81 213.18 180)
 		(descr "8-lead though-hole mounted DIP package, row spacing 7.62mm (300 mils), Socket")
 		(tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket")
 		(property "Reference" "AMP701"
@@ -65291,7 +65291,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "e66eb7b1-9123-44d1-a5ee-049ae9340e47")
-		(at 348.0 203.0)
+		(at 355.0 193.63)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C312"
@@ -66393,7 +66393,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "ecb174ce-c6ae-4fc7-ac40-4f798a24c5f2")
-		(at 378.05 209.83 180)
+		(at 385.05 200.46 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R709"
@@ -67499,7 +67499,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "eda71cc5-fb1f-4bbc-8391-843b1dc5a52b")
-		(at 421.14 221.28 90)
+		(at 428.14 211.91 90)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R906"
@@ -69771,7 +69771,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "f36f98cd-fb84-47b5-ac71-aa6a70b8a949")
-		(at 404.23 214.88 180)
+		(at 411.23 205.51 180)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R907"
@@ -70537,7 +70537,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "f52dde68-1d70-4538-a650-42dd464ede61")
-		(at 421.71 171.38 180)
+		(at 428.71 162.01 180)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C807"
@@ -70678,7 +70678,7 @@
 	(footprint "Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT"
 		(layer "F.Cu")
 		(uuid "f5f636da-2171-4893-a2a1-79aff8981f39")
-		(at 409.86 192.65)
+		(at 416.86 183.28)
 		(descr "C, Rect series, Radial, pin pitch=10.00mm, length*width=11.0*4.2mm^2, Capacitor, https://en.tdk.eu/inf/20/20/db/fc_2009/MKT_B32560_564.pdf")
 		(tags "C Rect series Radial pin pitch 10.00mm length 11.0mm width 4.2mm Capacitor")
 		(property "Reference" "C805"
@@ -71012,7 +71012,7 @@
 	(footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "f96e18c9-75f8-4334-93d0-0d318466f728")
-		(at 349.18 222.03)
+		(at 356.18 212.66)
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R708"
@@ -72999,8 +72999,8 @@
 		)
 	)
 	(gr_rect
-		(start 340 130)
-		(end 440 230)
+		(start 340.0 130.0)
+		(end 450.0 240.0)
 		(stroke
 			(width 0.05)
 			(type default)
