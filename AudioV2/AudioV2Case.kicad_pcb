@@ -3533,7 +3533,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "0cd62b48-477d-478f-8cbe-e3265c9b9971")
-		(at 39 102)
+		(at 391.65 146.275 90)
 		(descr "Through hole straight pin header, 2x06, 2.54mm pitch, double rows")
 		(tags "Through hole pin header THT 2x06 2.54mm double row")
 		(property "Reference" "J_PWR301"
@@ -6118,7 +6118,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "1ee35081-3fe3-465f-b0e5-3a2ae890759b")
-		(at 15 90)
+		(at 348.0 198.5)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C311"
@@ -6276,7 +6276,7 @@
 	(footprint "Capacitor_SMD:CP_Elec_10x12.6"
 		(layer "F.Cu")
 		(uuid "1f809f37-00a4-488e-8364-0e97c88c5be8")
-		(at 99 90)
+		(at 352.0 161.5)
 		(descr "SMD capacitor, aluminum electrolytic, Panasonic F12, 10.0x12.6mm")
 		(tags "capacitor electrolytic")
 		(property "Reference" "C_BULK_P301"
@@ -14727,7 +14727,7 @@
 	(footprint "Capacitor_SMD:CP_Elec_10x12.6"
 		(layer "F.Cu")
 		(uuid "3279f9c6-38ec-429d-9025-6a53e588ac50")
-		(at 87 90)
+		(at 368.0 161.5)
 		(descr "SMD capacitor, aluminum electrolytic, Panasonic F12, 10.0x12.6mm")
 		(tags "capacitor electrolytic")
 		(property "Reference" "C_BULK_N301"
@@ -19760,7 +19760,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "4efe62b5-5bc6-40cc-bb93-a6c006734edf")
-		(at 51 90)
+		(at 398.0 203.0)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C314"
@@ -28668,7 +28668,7 @@
 	(footprint "Package_DIP:DIP-28_W7.62mm"
 		(layer "F.Cu")
 		(uuid "6f88ee74-4b0e-4ede-9d0e-9a71b0731039")
-		(at 244.98 112.9 -90)
+		(at 347.49 148.805 90)
 		(descr "28-lead though-hole mounted DIP package, row spacing 7.62mm (300 mils)")
 		(tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil")
 		(property "Reference" "U_IO301"
@@ -34849,7 +34849,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "7e9cc473-5135-4fd8-b69f-c0efa6054d81")
-		(at 39 90)
+		(at 398.0 198.5)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C313"
@@ -39185,7 +39185,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "8c82f362-02e5-461f-bc2b-75f3c1015791")
-		(at 27 102)
+		(at 414.92 146.275 90)
 		(descr "Through hole straight pin header, 2x05, 2.54mm pitch, double rows")
 		(tags "Through hole pin header THT 2x05 2.54mm double row")
 		(property "Reference" "J_ANA301"
@@ -64663,7 +64663,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "e5cf54a0-64dd-40f5-ba0f-d524446895d2")
-		(at 15 102)
+		(at 364.0 152.5)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C_IO301"
@@ -65291,7 +65291,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 		(layer "F.Cu")
 		(uuid "e66eb7b1-9123-44d1-a5ee-049ae9340e47")
-		(at 27 90)
+		(at 348.0 203.0)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor handsolder")
 		(property "Reference" "C312"
