@@ -4701,7 +4701,7 @@
 		(uuid "10532db9-354f-51a2-8913-45353981cbac")
 	)
 	(label "SEL_CH4"
-		(at 200.66 302.26 180)
+		(at 200.66 279.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4741,7 +4741,7 @@
 		(uuid "161a968d-b1c7-51b5-bc45-c0a3dea12d11")
 	)
 	(label "SEL_CH2"
-		(at 137.16 294.64 180)
+		(at 137.16 302.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4801,26 +4801,26 @@
 		(uuid "227bfa42-2826-5a79-9011-1d3c2234ff30")
 	)
 	(label "CH3_OUT_L"
-		(at 200.66 281.94 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2377703d-33dd-5788-9915-368753e57c43")
-	)
-	(label "AMP_SEL_L"
-		(at 162.56 295.91 0)
+		(at 226.06 288.29 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
+		(uuid "2377703d-33dd-5788-9915-368753e57c43")
+	)
+	(label "SEL_CH1"
+		(at 137.16 294.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
 		(uuid "311ec901-9d99-5240-b7b6-0d94eccde357")
 	)
-	(label "CH1_OUT_R"
+	(label "AMP_SEL_L"
 		(at 137.16 289.56 180)
 		(effects
 			(font
@@ -4840,8 +4840,8 @@
 		)
 		(uuid "31ff215d-12ec-5d17-b5a5-4a3041402b23")
 	)
-	(label "SEL_CH3"
-		(at 200.66 279.4 180)
+	(label "AMP_SEL_L"
+		(at 200.66 304.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4851,12 +4851,12 @@
 		(uuid "32a3fefd-67b1-53c2-9667-84f46a251d57")
 	)
 	(label "AMP_SEL_R"
-		(at 226.06 288.29 0)
+		(at 200.66 297.18 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "33277d7c-019c-5b83-b4f4-27727ec99b5a")
 	)
@@ -4940,8 +4940,8 @@
 		)
 		(uuid "5165fcdb-21df-5f4a-a9e1-1274b0d1581a")
 	)
-	(label "AMP_SEL_R"
-		(at 226.06 303.53 0)
+	(label "CH4_OUT_R"
+		(at 226.06 280.67 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5020,8 +5020,8 @@
 		)
 		(uuid "64f51cf6-f9b0-5f6b-b94b-878432b5b66d")
 	)
-	(label "SEL_CH3"
-		(at 200.66 287.02 180)
+	(label "AMP_SEL_R"
+		(at 200.66 281.94 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5090,8 +5090,8 @@
 		)
 		(uuid "78c8d7bd-ef28-5f79-8813-7eee2967b398")
 	)
-	(label "AMP_SEL_L"
-		(at 226.06 280.67 0)
+	(label "CH3_OUT_R"
+		(at 226.06 295.91 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5100,13 +5100,13 @@
 		)
 		(uuid "7e722cb9-4184-5166-b40b-27e33f307443")
 	)
-	(label "AMP_SEL_L"
-		(at 226.06 295.91 0)
+	(label "SEL_CH3"
+		(at 200.66 294.64 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "7edb5055-a3be-5f22-9e2d-97fd557c8177")
 	)
@@ -5130,13 +5130,13 @@
 		)
 		(uuid "836f68c7-3151-5b50-9d92-bee9df35b9e2")
 	)
-	(label "CH4_OUT_R"
-		(at 200.66 304.8 180)
+	(label "CH4_OUT_L"
+		(at 226.06 303.53 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "84843c4e-60cf-5429-bb77-07b972ab4f26")
 	)
@@ -5190,8 +5190,8 @@
 		)
 		(uuid "8e31a6df-54bf-560b-a0e1-4788cf18c8cb")
 	)
-	(label "AMP_SEL_L"
-		(at 162.56 280.67 0)
+	(label "CH1_OUT_R"
+		(at 162.56 295.91 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5211,12 +5211,12 @@
 		(uuid "9309cbc2-8f28-58fd-a04f-8e1392c01dfc")
 	)
 	(label "AMP_SEL_R"
-		(at 162.56 288.29 0)
+		(at 137.16 297.18 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "93d317e8-2205-565b-a621-f27c5c2459c2")
 	)
@@ -5330,7 +5330,7 @@
 		)
 		(uuid "a93e88c2-3e74-5bbd-b931-981409d8113a")
 	)
-	(label "CH3_OUT_R"
+	(label "AMP_SEL_L"
 		(at 200.66 289.56 180)
 		(effects
 			(font
@@ -5350,8 +5350,8 @@
 		)
 		(uuid "aa9bce34-06fe-5421-b89c-d00caed57009")
 	)
-	(label "AMP_SEL_R"
-		(at 162.56 303.53 0)
+	(label "CH2_OUT_R"
+		(at 162.56 280.67 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5420,8 +5420,8 @@
 		)
 		(uuid "af65e6fb-12ae-5e39-9537-7918b2b4ccaf")
 	)
-	(label "SEL_CH1"
-		(at 137.16 279.4 180)
+	(label "AMP_SEL_L"
+		(at 137.16 304.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5491,7 +5491,7 @@
 		(uuid "bb070c83-736e-5c8f-87fd-85c219b692c5")
 	)
 	(label "SEL_CH2"
-		(at 137.16 302.26 180)
+		(at 137.16 279.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5670,8 +5670,8 @@
 		)
 		(uuid "d08eb6cd-6642-5d2d-a8b6-c41f226dfb4e")
 	)
-	(label "CH2_OUT_L"
-		(at 137.16 297.18 180)
+	(label "SEL_CH1"
+		(at 137.16 287.02 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5680,8 +5680,8 @@
 		)
 		(uuid "d13e2a00-0009-5074-aa47-b3d6329da382")
 	)
-	(label "CH4_OUT_L"
-		(at 200.66 297.18 180)
+	(label "SEL_CH3"
+		(at 200.66 287.02 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5700,8 +5700,8 @@
 		)
 		(uuid "dc04ebac-62ee-55c1-8770-3797c7f9715f")
 	)
-	(label "SEL_CH1"
-		(at 137.16 287.02 180)
+	(label "AMP_SEL_R"
+		(at 137.16 281.94 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5731,22 +5731,22 @@
 		(uuid "e70e8184-4359-5f57-911a-9beb56170194")
 	)
 	(label "CH1_OUT_L"
-		(at 137.16 281.94 180)
+		(at 162.56 288.29 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "e87f7424-c568-59c4-ab42-58b196e5a72c")
 	)
-	(label "CH2_OUT_R"
-		(at 137.16 304.8 180)
+	(label "CH2_OUT_L"
+		(at 162.56 303.53 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "eb5e32c2-962c-57e8-ac8b-b7bcb1f6febb")
 	)
@@ -5771,7 +5771,7 @@
 		(uuid "ed4a07e8-e63e-573f-81b9-430f3b84c945")
 	)
 	(label "SEL_CH4"
-		(at 200.66 294.64 180)
+		(at 200.66 302.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
