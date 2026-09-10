@@ -90,11 +90,17 @@ SLOT_PWR_NETS = {
     7: "I2C_SDA",  8: "D_GND",
     9: "I2C_SCL", 10: "3V3",
 }
-# スロット番号 -> (ADDR0, ADDR1)。0x20 と 0x21。
-SLOT_ADDR = {1: ("D_GND", "D_GND"), 2: ("3V3", "D_GND")}
+# スロット番号 -> (ADDR0, ADDR1)。MCP23017 の A2 は娘側で D_GND 固定なので
+# 0x20 / 0x21 / 0x22（3枚目）。0x23 は未使用。
+SLOT_ADDR = {
+    1: ("D_GND", "D_GND"),  # 0x20  スイッチ版のシートピンもここ
+    2: ("3V3", "D_GND"),    # 0x21  リレー版のシートピンもここ
+    3: ("D_GND", "3V3"),    # 0x22  3枚目（同じ 4ch スイッチ版を挿す）
+}
 # (スロット番号, J_ANA の位置, J_PWR の位置)
 SLOTS = [(1, (215.9, 50.8), (215.9, 96.52)),
-         (2, (279.4, 50.8), (279.4, 96.52))]
+         (2, (279.4, 50.8), (279.4, 96.52)),
+         (3, (342.9, 50.8), (342.9, 96.52))]
 NETTIE_AT = (215.9, 154.94)   # GND_COIL <-> D_GND
 # --- 子シート（ルート直下）-----------------------------------------------
 # 2026-09-04 に母板の子へ入れ、2026-09-09 に母板ごとルートへ繰り上げた。
@@ -237,7 +243,7 @@ def _lib_pin_tips(lib_id: str, sx: float, sy: float, rot: int = 0) -> dict[str, 
 
 
 def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
-    """娘基板スロット2組と、コイル帰路の NetTie を組み立てる（D18 / D19 / D21）。"""
+    """娘基板スロット3組と、コイル帰路の NetTie を組み立てる（D18 / D21）。"""
     els: list[sch_import.Element] = []
     hier_names: list[str] = []
     path = ROOT_PATH
@@ -304,7 +310,7 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
         # 子シートが母板の中に入ったので、これらは母板内のネットになり、
         # 階層ラベルは不要（親にピンが無く hier_label_mismatch になる）。
         # 単独のローカルラベルも浮くだけ（label_dangling）。
-        # これらのネットは J_PWR101/102（スロットコネクタ）・NT101・U402 側に
+        # これらのネットは J_PWR101/102/103（スロットコネクタ）・NT101・U402 側に
         # 実体があるので、ここで置く必要はない。定義は経緯の記録として残す。
     finally:
         sch_helpers.new_uid = saved_new

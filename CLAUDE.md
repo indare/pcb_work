@@ -158,8 +158,8 @@ docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 | | |
 |---|---|
 | `check_sexpr.py -q AudioV2` | **問題 0**。ファイル数は環境で増える — `AudioV2/.kicad-mcp/` の作業ファイルや、KiCad を開いているときの `_autosave-*` を拾うため。**素の状態で 13、2026-09-06 の実測は 15**（増分は `.kicad-mcp/visual-diff-*-before.kicad_sch` の2件）。どちらも gitignore 済みだが `check_sexpr` はディレクトリを見るので数に出る |
-| `kicad-run.sh erc` | **5 件**（2026-09-09 に母板中間階層を廃止し親スタブ6本を消して 11→5。**残る5件は全部宣言済みの型** — `ground_pin_not_ground` 3 は ±15V アナログSWの VSS が `-15V` で正常、`isolated_pin_label` 1 は `DEST_SENSE_MUTE_NC`（ミュート位置なので意図的に開放）、`multiple_net_names` 1 は `3V3`/`PICO_3V3` の意図的な別名重ね（`build_ui_move.py` が置いた）） |
-| `kicad-run.sh netlist` | **部品 391 個・重複 0・注釈警告なし**（2026-09-04 に D-g のヒューズ＋バルクで 371→373、2026-09-06 に D-f の PPTC で 373→374、2026-09-07 に PT2314E のトーン網をDS通りに組み直して抵抗5本減り 374→369、同日 U1607 の入力コンデンサ C1645 で 369→370、D403 の直列抵抗 R401 で 370→371、外部入力端子台 J_IN401 で 371→372、U1604(MBC2596 バック)+C1644+F1603 を削除し NT1603 を足して 372→370。計測タップのバッファ U1611(OPA1656)+R1659/R1660(100k)+C1646/C1647 を足し MCLK_SENSE の R1605 を外して 370→374。2026-09-08 に HP バッファ U501+R501-504+C501-506 で 374→385、I²C レベルシフタ Q401/Q402+R412/R413 で 385→389。2026-09-09 に ENC_INTA/INTB の 10k プルアップ R1661/R1662 で 389→391。`PWR_FLAG` は仮想なので計上外。**`gen_parts_bom.py` が PARTS.md に書く「部品総数」は NetTie 4個も除くので 4 少ない（387）**） |
+| `kicad-run.sh erc` | **4 件**（2026-09-10 に娘を 4ch 化して `U313` が消え、`ground_pin_not_ground` が 3→2。**残る4件は全部宣言済みの型** — `ground_pin_not_ground` 2 は ±15V アナログSWの VSS が `-15V` で正常、`isolated_pin_label` 1 は `DEST_SENSE_MUTE_NC`（ミュート位置なので意図的に開放）、`multiple_net_names` 1 は `3V3`/`PICO_3V3` の意図的な別名重ね（`build_ui_move.py` が置いた）） |
+| `kicad-run.sh netlist` | **部品 261 個・重複 0・注釈警告なし**（2026-09-10 に AmpCh×5→×4、`TMUX7612` ×3→×2、母板スロット 3 口。`AmpBankRelay` は `on_board`/`in_bom`=no のままこの netlist に出ない。回路図インスタンスは `sch_facts.py` で 350＝リレー 4ch シート込み。`PWR_FLAG` は仮想なので計上外。**`gen_parts_bom.py` が PARTS.md に書く「部品総数」は NetTie も除く**） |
 | `sch_import.py --roundtrip AudioV2/*.kicad_sch` | **全部 OK** |
 
 イメージがあれば Docker(KiCad 10.0.6)、無ければホストの `kicad-cli` で動く。
