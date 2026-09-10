@@ -2,7 +2,9 @@
 """案C: U311 の D ピン引き出し + CH1/CH2 カップリング/47Ω/220k を北南へ置く。
 
 前提: apply_tmux_plan_c_pcb.py 済み（TMUX 90°・ネット同期）。
+      place_a2_slot_connectors.py 済み（北=J_ANA / 南=J_PWR）。
 クリアランスは詰めない。TSSOP パッド上ビア禁止。
+AMP_SEL: 南北 S 短絡は東西の短い縦。本線は北の J_ANA301 へ（kivu 型）。
 """
 from __future__ import annotations
 
@@ -28,6 +30,8 @@ REWRITE = {
     "Net-(AMP701-Pad1)",
     "Net-(AMP701-Pad7)",
 }
+# AMP_SEL 本線は J_ANA301（北）まで伸ばすので、削除窓を北方向に広めに取る
+REWRITE_WINDOW = (35.0, 55.0)  # (|dx|, |dy|) from U311
 
 
 def mm(x, y):
@@ -87,13 +91,14 @@ def main() -> None:
 
     # --- 旧配線削除（U311 近傍の対象ネット） ---
     ux, uy = to_mm(fp("U311").GetPosition())
+    wx, wy = REWRITE_WINDOW
     doomed = []
     for t in board.GetTracks():
         if t.GetNetname() not in REWRITE:
             continue
         for end in (t.GetStart(), t.GetEnd()):
             ex, ey = to_mm(end)
-            if abs(ex - ux) < 25 and abs(ey - uy) < 30:
+            if abs(ex - ux) < wx and abs(ey - uy) < wy:
                 doomed.append(t)
                 break
     for t in doomed:
@@ -160,7 +165,7 @@ def main() -> None:
     stitch_out("R702", "AMP701", "1", "R706", "1", "AMP701-Pad1")
     stitch_out("R708", "AMP701", "7", "R712", "2", "AMP701-Pad7")
 
-    # AMP_SEL: 同一辺の S 同士は近いので、南北を東西の外側で結ぶ
+    # AMP_SEL: 南北 S の短絡は東西の短い縦だけ（本線とは分離）
     # L: pin14 (北) ↔ pin6 (南) — 西へ出して縦
     p14, p6 = pad("U311", "14"), pad("U311", "6")
     x14, y14 = to_mm(p14.GetPosition())
@@ -178,6 +183,21 @@ def main() -> None:
     pts = [p11.GetPosition(), mm(xe, y11), mm(xe, y3), p3.GetPosition()]
     for a, b in zip(pts, pts[1:]):
         add_track(a, b, p11.GetNetCode())
+
+    # 本線（kivu 型）: 北辺の S から北の J_ANA301 へ
+    # A2: J_ANA はカード北辺。pin7=AMP_SEL_L / pin10=AMP_SEL_R
+    j7 = pad("J_ANA301", "7")
+    j10 = pad("J_ANA301", "10")
+    # 北辺ピン → いったん真北へ出してからコネクタへ（タイルを跨がない）
+    for src, dst in ((p14, j7), (p11, j10)):
+        sx, sy = to_mm(src.GetPosition())
+        dx, dy = to_mm(dst.GetPosition())
+        # 北へ（Y 減）クリアしてから X 合わせ
+        y_bus = min(sy, dy) - 2.0
+        pts = [src.GetPosition(), mm(sx, y_bus), mm(dx, y_bus), dst.GetPosition()]
+        for a, b in zip(pts, pts[1:]):
+            if a != b:
+                add_track(a, b, src.GetNetCode())
 
     board.Save(str(PCB))
 
