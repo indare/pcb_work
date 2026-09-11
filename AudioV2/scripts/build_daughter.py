@@ -92,26 +92,26 @@ MCP_NC_ALWAYS = ["11", "14", "19", "20"]                     # NC / INTB / INTA
 
 TMUX = "AudioV2:TMUX7612"
 # 案C（2026-09-11）: PCB 配置に合わせてピンを組み直す。
-# - PCB 上の TMUX は **90°**（KiCad）: 北辺=ピン9–16、南辺=ピン1–8
-# - S↔D 入れ替え: D=各ch出力（Amp側へ引き出し）、S=共通バス AMP_SEL
-# - 北辺（奇数）=スイッチ2+3、南辺（偶数）=スイッチ1+4
-# - SEL: 奇数=SEL2+SEL3、偶数=SEL1+SEL4
-# - L/R: 北DIP(0°)は L西R東。南DIP(180°)は基板上 L東R西 → 南辺だけ L/R を入れ替え
+# - PCB 上の TMUX は **270°**（KiCad）: 北辺=ピン1–8＝CH{a}、南辺=ピン9–16＝CH{b}
+#   （ピン1側を Amp 0°＝ch1/ch3 に向ける）
+# - S=後続（各ch出力→フィルム）。D=共通バス AMP_SEL（同一ネットで短絡してよいのは D 同士）
+# - SEL: ch{a}=SEL1+SEL4、ch{b}=SEL2+SEL3
+# - L/R: 北DIP(0°)は L西R東。南DIP(180°)は基板上 L東R西
 TMUX_MAP = {
-    # 奇数 ch{a}: 北辺（D2/D3・S2/S3・SEL2/SEL3）
-    "15": "CH{a}_OUT_L",  # D2 西
-    "10": "CH{a}_OUT_R",  # D3 東
-    "14": "AMP_SEL_L",    # S2
-    "11": "AMP_SEL_R",    # S3
-    "16": "SEL_CH{a}",    # SEL2
-    "9": "SEL_CH{a}",     # SEL3
-    # 偶数 ch{b}: 南辺（D1/D4・S1/S4・SEL1/SEL4）※180° DIP 向けに L=東
-    "7": "CH{b}_OUT_L",   # D4 東
-    "2": "CH{b}_OUT_R",   # D1 西
-    "6": "AMP_SEL_L",     # S4
-    "3": "AMP_SEL_R",     # S1
-    "8": "SEL_CH{b}",     # SEL4
-    "1": "SEL_CH{b}",     # SEL1
+    # CH{a} ピン1–8（270°の北）
+    "6": "CH{a}_OUT_L",   # S4 西寄り → フィルム
+    "3": "CH{a}_OUT_R",   # S1 東寄り → フィルム
+    "7": "AMP_SEL_L",     # D4
+    "2": "AMP_SEL_R",     # D1
+    "8": "SEL_CH{a}",     # SEL4
+    "1": "SEL_CH{a}",     # SEL1
+    # CH{b} ピン9–16（270°の南）※180° DIP 向けに L=東
+    "14": "CH{b}_OUT_L",  # S2 東 → フィルム
+    "11": "CH{b}_OUT_R",  # S3 西 → フィルム
+    "15": "AMP_SEL_L",    # D2
+    "10": "AMP_SEL_R",    # D3
+    "16": "SEL_CH{b}",    # SEL2
+    "9": "SEL_CH{b}",     # SEL3
     "13": "+15V",
     "4": "-15V",
     "5": "A_GND",

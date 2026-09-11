@@ -51,10 +51,11 @@ def main() -> None:
     # P10 フィルム: rot0 で pad2 = pad1+(10,0)、rot180 で pad2 = pad1+(-10,0)
     # Amp 脇・バイアス抵抗の外側に置き、電源ピン列は避ける
     place("C602", 348.06, 176.47, 0)     # pad2@(358.06,176.47) → R601 / AMP601.3
-    # CH3 タイル手前・Amp601 東（U_IO の巨大シルクは無視して本体空きを使う）
-    place("C605", 396.00, 180.00, 180)   # pad2@(386.00,180.00) → R607 / AMP601.5
-    place("C702", 395.55, 208.10, 180)    # pad2@(385.55,208.10) → R701 / AMP701.3
-    place("C705", 342.00, 218.00, 0)      # pad2@(352.00,218.00) Amp701 南・板内
+    # pad2 をバイアス抵抗の Amp 側パッドに載せる（GND パッドを横断しない）
+    # C605 は R608（出力 47Ω）の北。Y=180 だと R608 に乗る。
+    place("C605", 387.22, 165.00, 180)   # pad2@(377.22,165.00) = R607.1 の X。GND パッドを横断しない
+    place("C702", 390.55, 211.50, 180)   # pad2@(380.55,211.50) → 北へ R701.2（GND を跨がない）
+    place("C705", 352.78, 218.00, 0)     # pad2@(362.78,218.00) = R707.1 の X（GND を横断しない）
 
     # 旧配線削除（対象ネット全体。TONE バスは触らない）
     doomed = [t for t in board.GetTracks() if t.GetNetname() in REWRITE]
@@ -83,39 +84,39 @@ def main() -> None:
     def link(a, b):
         add_track(a.GetPosition(), b.GetPosition(), a.GetNetCode())
 
-    # C602.2 → R601.2 → AMP601.3
-    link(pad("C602", "2"), pad("R601", "2"))
-    ortho(pad("R601", "2").GetPosition(), pad("AMP601", "3").GetPosition(),
+    # C602: R601 の Amp 側パッドだけに触る（GND パッドを横断しない）
+    p_c = pad("C602", "2")
+    p_r = next(p for p in fp("R601").Pads() if "A_GND" not in p.GetNetname())
+    add_track(p_c.GetPosition(), mm(to_mm(p_r.GetPosition())[0], to_mm(p_c.GetPosition())[1]),
+              p_c.GetNetCode())
+    add_track(mm(to_mm(p_r.GetPosition())[0], to_mm(p_c.GetPosition())[1]),
+              p_r.GetPosition(), p_c.GetNetCode())
+    ortho(p_r.GetPosition(), pad("AMP601", "3").GetPosition(),
           pad("AMP601", "3").GetNetCode(), first="y")
 
-    # C605.2 → 西へ → R607.1 → AMP601.5（+15V パッドの真上は通らない）
+    # C605.2 → 南へ R607 の東 → 西へ R607.1 → AMP601.5
     p_c = pad("C605", "2").GetPosition()
     p_r = pad("R607", "1").GetPosition()
     p_a = pad("AMP601", "5").GetPosition()
     nc = pad("AMP601", "5").GetNetCode()
     cx, cy = to_mm(p_c)
     rx, ry = to_mm(p_r)
-    ax, ay = to_mm(p_a)
-    # まず y=180 のまま R607 の東まで、その後 R607 / Amp へ
-    add_track(p_c, mm(rx + 1.0, cy), nc)
-    add_track(mm(rx + 1.0, cy), mm(rx + 1.0, ry), nc)
-    add_track(mm(rx + 1.0, ry), p_r, nc)
+    add_track(p_c, mm(cx, ry), nc)
+    add_track(mm(cx, ry), p_r, nc)
     ortho(p_r, p_a, nc, first="x")
 
-    # C702.2 → R701.2 → AMP701.3
-    link(pad("C702", "2"), pad("R701", "2"))
+    # C702.2 → 北へ R701.2（同じ X。GND パッドは東なので跨がない）
+    add_track(pad("C702", "2").GetPosition(), pad("R701", "2").GetPosition(),
+              pad("R701", "2").GetNetCode())
     ortho(pad("R701", "2").GetPosition(), pad("AMP701", "3").GetPosition(),
           pad("AMP701", "3").GetNetCode(), first="y")
 
-    # C705.2 → 北へ → R707.1 → AMP701.5
+    # C705.2 → 北へ R707.1（同じ X）→ AMP701.5
     p_c = pad("C705", "2").GetPosition()
     p_r = pad("R707", "1").GetPosition()
     p_a = pad("AMP701", "5").GetPosition()
     nc = pad("AMP701", "5").GetNetCode()
-    cx, cy = to_mm(p_c)
-    rx, ry = to_mm(p_r)
-    add_track(p_c, mm(cx, ry), nc)
-    add_track(mm(cx, ry), p_r, nc)
+    add_track(p_c, p_r, nc)
     ortho(p_r, p_a, nc, first="x")
 
     board.Save(str(PCB))

@@ -1216,16 +1216,6 @@
 	)
 	(wire
 		(pts
-			(xy 134.62 115.57) (xy 132.08 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0fa4844c-8f29-4592-aa9c-1d42e62d9bf1")
-	)
-	(wire
-		(pts
 			(xy 97.79 76.2) (xy 100.33 76.2)
 		)
 		(stroke
@@ -1273,16 +1263,6 @@
 			(type default)
 		)
 		(uuid "25d338f2-90a0-4adc-8f8c-c9e35878af5d")
-	)
-	(wire
-		(pts
-			(xy 121.92 115.57) (xy 124.46 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "299a3e74-e398-44a1-a2c1-a6126efc9d67")
 	)
 	(wire
 		(pts
@@ -1373,16 +1353,6 @@
 			(type default)
 		)
 		(uuid "6d3ea91f-326e-43b8-9a21-7df326d282c4")
-	)
-	(wire
-		(pts
-			(xy 120.65 157.48) (xy 120.65 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6d679d24-ec24-46a0-a0d6-18e9a6a79ee3")
 	)
 	(wire
 		(pts
@@ -1616,16 +1586,6 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 154.94) (xy 127 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ef5a2ff4-50a2-457e-93b6-13d67014e63d")
-	)
-	(wire
-		(pts
 			(xy 38.1 128.27) (xy 50.8 128.27)
 		)
 		(stroke
@@ -1673,16 +1633,6 @@
 			(type default)
 		)
 		(uuid "fc23acf6-6415-492d-9edf-236a44a2682c")
-	)
-	(wire
-		(pts
-			(xy 127 162.56) (xy 127 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fcedebbb-8db5-4a5e-834e-5cc7604cb71a")
 	)
 	(label "-15V"
 		(at 40.64 146.05 270)
@@ -1734,26 +1684,6 @@
 		)
 		(uuid "51905663-0164-42ac-8bc0-80828e6d9a31")
 	)
-	(label "-15V"
-		(at 120.65 157.48 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "705b195d-1d83-41ab-9bf2-406210834dc9")
-	)
-	(label "+15V"
-		(at 134.62 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "738cc2c0-f6ab-4d85-a13e-881801ecb56e")
-	)
 	(label "A_GND"
 		(at 72.39 26.67 180)
 		(effects
@@ -1793,26 +1723,6 @@
 			(justify left bottom)
 		)
 		(uuid "a1307e34-51f9-4a55-aa7d-d0a983bc1f09")
-	)
-	(label "A_GND"
-		(at 127 165.1 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a48d2291-71a5-4e65-b3b7-5daee6d27dac")
-	)
-	(label "A_GND"
-		(at 121.92 115.57 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c4380538-04c8-42d7-a123-b1dda0979aac")
 	)
 	(label "A_GND"
 		(at 72.39 53.34 180)
@@ -2903,113 +2813,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 128.27 115.57 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "87dbc2c5-dedd-4b87-a93b-1f7a6fbe3f48")
-		(property "Reference" "C607"
-			(at 124.46 111.76 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 124.46 119.38 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 95.25 280.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 95.25 280.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "switch VDD local decoupling"
-			(at 95.25 280.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "37a2b8ad-abe5-43d2-8c3c-0138ee06f8e5")
-		)
-		(pin "2"
-			(uuid "cc42f9f0-bca5-47bd-8c1a-421061af4dda")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000020-0020-4020-8020-000000000020"
-					(reference "C607")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000021-0021-4021-8021-000000000021"
-					(reference "C707")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000022-0022-4022-8022-000000000022"
-					(reference "C807")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000023-0023-4023-8023-000000000023"
-					(reference "C907")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013/a1000030-0030-4030-8030-000000000030"
-					(reference "C1007")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013/a1000031-0031-4031-8031-000000000031"
-					(reference "C1107")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013/a1000032-0032-4032-8032-000000000032"
-					(reference "C1207")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013/a1000033-0033-4033-8033-000000000033"
-					(reference "C1307")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 127 81.28 0)
 		(unit 1)
@@ -3664,114 +3467,6 @@
 				)
 				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013/a1000033-0033-4033-8033-000000000033"
 					(reference "C1302")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 127 158.75 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "caa67b2f-375f-4175-91b5-07a4fdc10e54")
-		(property "Reference" "C610"
-			(at 127 156.21 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 127 161.29 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at -50.8 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at -50.8 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "op amp V- local decoupling"
-			(at -50.8 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "5fba70e4-102a-421b-8322-f013213737bb")
-		)
-		(pin "2"
-			(uuid "202d1fd9-f507-4bb9-b60d-c985d05d1fd2")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000020-0020-4020-8020-000000000020"
-					(reference "C610")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000021-0021-4021-8021-000000000021"
-					(reference "C710")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000022-0022-4022-8022-000000000022"
-					(reference "C810")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011/a1000023-0023-4023-8023-000000000023"
-					(reference "C910")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013/a1000030-0030-4030-8030-000000000030"
-					(reference "C1010")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013/a1000031-0031-4031-8031-000000000031"
-					(reference "C1110")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013/a1000032-0032-4032-8032-000000000032"
-					(reference "C1210")
-					(unit 1)
-				)
-				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013/a1000033-0033-4033-8033-000000000033"
-					(reference "C1310")
 					(unit 1)
 				)
 			)

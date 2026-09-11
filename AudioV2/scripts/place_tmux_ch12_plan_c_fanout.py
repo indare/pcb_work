@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""案C: U311 の D ピン引き出し + CH1/CH2 カップリング/47Ω/220k を北南へ置く。
+"""案C: U311 の S ピン引き出し + CH1/CH2 カップリング/47Ω/220k を北南へ置く。
 
-前提: apply_tmux_plan_c_pcb.py 済み（TMUX 90°・ネット同期）。
+前提: apply_tmux_plan_c_pcb.py 済み（TMUX 270°・ネット同期）。
       place_a2_slot_connectors.py 済み（北=J_ANA / 南=J_PWR）。
 クリアランスは詰めない。TSSOP パッド上ビア禁止。
-AMP_SEL: 南北 S 短絡は東西の短い縦。本線は北の J_ANA301 へ（kivu 型）。
+S=各ch出力（表・フィルム）。D=AMP_SEL バス（裏で短絡してよい）。
+AMP_SEL: 南北 D 短絡はパッケージの外側を回す（パッド列に沿わせない）。
+本線はビアで B.Cu へ落とし、北の J_ANA301（PTH）へ。±15V も裏前提（未配線）。
 """
 from __future__ import annotations
 
@@ -66,28 +68,33 @@ def main() -> None:
         f.SetOrientationDegrees(rot)
         f.SetPosition(mm(x, y))
 
-    # --- 配置（TMUX 北=CH1 / 南=CH2、余裕） ---
-    # フィルム: CH パッドを D ピン x に揃え、Amp 側を外へ
-    # C601 pad1=Amp pad2=CH rot0 → CH が東。CH をピン15 x に: pad2@(368.38,183.0) → pad1@363.38
-    place("C601", 363.38, 183.00, 0)
-    # C604 pad1=CH pad2=Amp rot0 → Amp 東。CH@(371.63,183.0)
-    place("C604", 371.63, 183.00, 0)
-    # C704 pad1=CH pad2=Amp / rot180 → Amp 西。CH@(368.38,200.0) → Amp@363.38
-    place("C704", 368.38, 200.00, 180)
-    # C701 pad1=Amp pad2=CH / rot180 → CH 西。CH@(371.63,200.0) → Amp@376.63
-    place("C701", 376.63, 200.00, 180)
+    # --- 配置（TMUX 北=CH1=ピン1–8 / 南=CH2=ピン9–16） ---
+    # フィルム: CH パッドを S ピン x に揃え、Amp 側を外へ（FKS2 P5）
+    pitch = 5.0
+    s6x, _ = to_mm(pad("U311", "6").GetPosition())    # S4 CH1_OUT_L 西
+    s3x, _ = to_mm(pad("U311", "3").GetPosition())    # S1 CH1_OUT_R 東
+    s14x, _ = to_mm(pad("U311", "14").GetPosition())  # S2 CH2_OUT_L 東
+    s11x, _ = to_mm(pad("U311", "11").GetPosition())  # S3 CH2_OUT_R 西
+    # C601 pad1=Amp pad2=CH rot0 → CH が東
+    place("C601", s6x - pitch, 183.00, 0)
+    # C604 pad1=CH pad2=Amp rot0 → Amp 東
+    place("C604", s3x, 183.00, 0)
+    # C704 pad1=CH pad2=Amp / rot180 → Amp 西（CH2 R）
+    place("C704", s11x, 200.00, 180)
+    # C701 pad1=Amp pad2=CH / rot180 → CH 西（CH2 L、本体は東）
+    place("C701", s14x + pitch, 200.00, 180)
 
     # 47Ω（DIP 本体の外・カップリングとのあいだ）
     place("R602", 360.50, 181.00, -90)  # Amp 西外
-    place("R608", 381.50, 181.50, 90)   # Amp 東外・R607 から離す
-    place("R702", 381.50, 202.20, 90)   # Amp701 東外
+    place("R608", 386.00, 181.50, 90)   # Amp 東外・R704/R612 から離す
+    place("R702", 386.00, 202.20, 90)   # Amp701 東外・R704 から離す
     place("R708", 358.00, 202.00, -90)  # Amp701 西外・R707 から離す
 
-    # 220k（CH 近傍・表面）
-    place("R603", 366.00, 185.50, 180)  # pad1東寄り CH1_L
-    place("R609", 374.00, 185.50, 0)
-    place("R709", 366.00, 197.50, 180)
-    place("R703", 374.00, 197.50, 0)
+    # 220k はフィルムの外側。TMUX 北のビア通り道を空ける。
+    place("R603", 362.00, 180.50, 180)
+    place("R609", 378.00, 180.50, 0)
+    place("R709", 362.00, 202.50, 180)
+    place("R703", 378.00, 202.50, 0)
 
     # --- 旧配線削除（U311 近傍の対象ネット） ---
     ux, uy = to_mm(fp("U311").GetPosition())
@@ -126,11 +133,11 @@ def main() -> None:
     def link(a, b):
         add_track(a.GetPosition(), b.GetPosition(), a.GetNetCode())
 
-    # D → CH パッド（北へ/南へまっすぐ）
-    link(pad("U311", "15"), pad("C601", "2"))
-    link(pad("U311", "10"), pad("C604", "1"))
-    link(pad("U311", "2"), pad("C704", "1"))
-    link(pad("U311", "7"), pad("C701", "2"))
+    # S → CH パッド（北へ/南へまっすぐ）
+    link(pad("U311", "6"), pad("C601", "2"))
+    link(pad("U311", "3"), pad("C604", "1"))
+    link(pad("U311", "11"), pad("C704", "1"))
+    link(pad("U311", "14"), pad("C701", "2"))
 
     # 220k
     link(pad("R603", "1"), pad("C601", "2"))
@@ -165,39 +172,56 @@ def main() -> None:
     stitch_out("R702", "AMP701", "1", "R706", "1", "AMP701-Pad1")
     stitch_out("R708", "AMP701", "7", "R712", "2", "AMP701-Pad7")
 
-    # AMP_SEL: 南北 S の短絡は東西の短い縦だけ（本線とは分離）
-    # L: pin14 (北) ↔ pin6 (南) — 西へ出して縦
-    p14, p6 = pad("U311", "14"), pad("U311", "6")
-    x14, y14 = to_mm(p14.GetPosition())
-    x6, y6 = to_mm(p6.GetPosition())
-    xw = min(x14, x6) - 3.0
-    pts = [p14.GetPosition(), mm(xw, y14), mm(xw, y6), p6.GetPosition()]
-    for a, b in zip(pts, pts[1:]):
-        add_track(a, b, p14.GetNetCode())
+    # AMP_SEL: D ピン。ピン列に沿わせない。表はパッケージの外まで出してビア。
+    # 南北短絡と本線は B.Cu（±15V と同じ層。S/TONE は表のまま）。
+    p7, p15 = pad("U311", "7"), pad("U311", "15")   # D4 北 L / D2 南 L
+    p2, p10 = pad("U311", "2"), pad("U311", "10")   # D1 北 R / D3 南 R
+    _, y7 = to_mm(p7.GetPosition())
+    _, y15 = to_mm(p15.GetPosition())
+    _, y2 = to_mm(p2.GetPosition())
+    _, y10 = to_mm(p10.GetPosition())
+    y_n = min(y7, y2) - 2.5
+    y_s_l = y15 + 2.5
+    y_s_r = y10 + 4.5                   # L/R の南スタブが同じ Y で交差しない
+    xw = 363.0
+    xe = 377.0
 
-    # R: pin11 (北) ↔ pin3 (南) — 東へ出して縦
-    p11, p3 = pad("U311", "11"), pad("U311", "3")
-    x11, y11 = to_mm(p11.GetPosition())
-    x3, y3 = to_mm(p3.GetPosition())
-    xe = max(x11, x3) + 3.0
-    pts = [p11.GetPosition(), mm(xe, y11), mm(xe, y3), p3.GetPosition()]
-    for a, b in zip(pts, pts[1:]):
-        add_track(a, b, p11.GetNetCode())
+    def add_via(x, y, netcode):
+        v = pcbnew.PCB_VIA(board)
+        v.SetPosition(mm(x, y))
+        v.SetViaType(pcbnew.VIATYPE_THROUGH)
+        v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu)
+        v.SetWidth(pcbnew.FromMM(0.6))
+        v.SetDrill(pcbnew.FromMM(0.3))
+        v.SetNetCode(netcode)
+        board.Add(v)
 
-    # 本線（kivu 型）: 北辺の S から北の J_ANA301 へ
-    # A2: J_ANA はカード北辺。pin7=AMP_SEL_L / pin10=AMP_SEL_R
-    j7 = pad("J_ANA301", "7")
-    j10 = pad("J_ANA301", "10")
-    # 北辺ピン → いったん真北へ出してからコネクタへ（タイルを跨がない）
-    for src, dst in ((p14, j7), (p11, j10)):
+    def stub_via(src, vx, vy):
         sx, sy = to_mm(src.GetPosition())
-        dx, dy = to_mm(dst.GetPosition())
-        # 北へ（Y 減）クリアしてから X 合わせ
-        y_bus = min(sy, dy) - 2.0
-        pts = [src.GetPosition(), mm(sx, y_bus), mm(dx, y_bus), dst.GetPosition()]
-        for a, b in zip(pts, pts[1:]):
-            if a != b:
-                add_track(a, b, src.GetNetCode())
+        add_track(src.GetPosition(), mm(sx, vy), src.GetNetCode())
+        add_track(mm(sx, vy), mm(vx, vy), src.GetNetCode())
+        add_via(vx, vy, src.GetNetCode())
+
+    stub_via(p7, xw, y_n)
+    stub_via(p15, xw, y_s_l)
+    stub_via(p2, xe, y_n)
+    stub_via(p10, xe, y_s_r)
+    add_track(mm(xw, y_n), mm(xw, y_s_l), p7.GetNetCode(), layer=pcbnew.B_Cu)
+    add_track(mm(xe, y_n), mm(xe, y_s_r), p2.GetNetCode(), layer=pcbnew.B_Cu)
+
+    # 本線: 北ビアから J_ANA へ。PTH なので裏からパッドに入れる。
+    # ピン列（奇数 x=360 / 偶数 x=362.54）を横に走らせない。
+    j7 = pad("J_ANA301", "7")    # AMP_SEL_L
+    j10 = pad("J_ANA301", "10")  # AMP_SEL_R
+    j7x, j7y = to_mm(j7.GetPosition())
+    j10x, j10y = to_mm(j10.GetPosition())
+    xl, xr = 346.0, j10x + 3.0         # L は C602 の西。ピン列を横に走らせない
+    add_track(mm(xw, y_n), mm(xl, y_n), p7.GetNetCode(), layer=pcbnew.B_Cu)
+    add_track(mm(xl, y_n), mm(xl, j7y), p7.GetNetCode(), layer=pcbnew.B_Cu)
+    add_track(mm(xl, j7y), j7.GetPosition(), p7.GetNetCode(), layer=pcbnew.B_Cu)
+    add_track(mm(xe, y_n), mm(xr, y_n), p2.GetNetCode(), layer=pcbnew.B_Cu)
+    add_track(mm(xr, y_n), mm(xr, j10y), p2.GetNetCode(), layer=pcbnew.B_Cu)
+    add_track(mm(xr, j10y), j10.GetPosition(), p2.GetNetCode(), layer=pcbnew.B_Cu)
 
     board.Save(str(PCB))
 

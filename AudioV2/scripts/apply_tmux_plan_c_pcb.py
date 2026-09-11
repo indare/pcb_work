@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""案C: PCB 上の TMUX を 90° にし、TMUX_MAP どおりにパッドネットを張り直す。
+"""案C: PCB 上の TMUX を 270° にし、TMUX_MAP どおりにパッドネットを張り直す。
 
 回路図は build_daughter 済み前提。旧モデルBの近傍配線は消す（引き出しから再開）。
+`--skip-decap` でデカップの再配置を飛ばす（電源を先に詰めている途中など、
+盤面の他の部品を動かしたくないとき）。
 """
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -42,6 +45,11 @@ def pcb_net_name(tmpl: str, a: int, b: int) -> str:
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--skip-decap", action="store_true",
+                    help="デカップ（C311..C314）を動かさない")
+    args = ap.parse_args()
+
     board = pcbnew.LoadBoard(str(PCB))
     fps = {f.GetReference(): f for f in board.GetFootprints()}
 
@@ -50,10 +58,10 @@ def main() -> None:
         for tmpl in TMUX_MAP.values():
             rewrite_nets.add(pcb_net_name(tmpl, a, b))
 
-    # 1) ネット張り直し + 90°
+    # 1) ネット張り直し + 270°（ピン1–8が北＝CH{a}）
     for ref, (a, b) in TMUX_CHS.items():
         fp = fps[ref]
-        fp.SetOrientationDegrees(90)
+        fp.SetOrientationDegrees(270)
         for pad in fp.Pads():
             num = pad.GetNumber()
             if num not in TMUX_MAP:
@@ -63,13 +71,13 @@ def main() -> None:
             if net is None:
                 raise SystemExit(f"net not found: {nname} ({ref}.pad{num})")
             pad.SetNet(net)
-        print(f"{ref}: rot=90 nets updated (ch{a}/{b})")
+        print(f"{ref}: rot=270 nets updated (ch{a}/{b})")
 
     # 2) デカップを電源ピン直下（裏面）へ
-    for ref, caps in DECAP.items():
+    for ref, caps in ({} if args.skip_decap else DECAP).items():
         u = fps[ref]
         ux, uy = to_mm(u.GetPosition())
-        # 90°: VDD=13 北辺、VSS=4 / GND=5 南辺
+        # 270°: VSS=4 北辺、VDD=13 南辺
         p13 = next(p for p in u.Pads() if p.GetNumber() == "13")
         p4 = next(p for p in u.Pads() if p.GetNumber() == "4")
         for cref, which in caps.items():
@@ -111,7 +119,7 @@ def main() -> None:
     u = fps["U311"]
     cx, cy = to_mm(u.GetPosition())
     print("U311 pad check:")
-    for num in ("15", "10", "7", "2", "14", "11", "6", "3"):
+    for num in ("6", "3", "7", "2", "14", "11", "15", "10"):
         p = next(p for p in u.Pads() if p.GetNumber() == num)
         x, y = to_mm(p.GetPosition())
         print(f"  pin{num} ({x:.3f},{y:.3f}) {'N' if y < cy else 'S'}{'W' if x < cx else 'E'} {p.GetNetname()}")
