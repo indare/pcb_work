@@ -43,8 +43,11 @@ def uid() -> str:
     return str(uuid.uuid5(_UID_NS, f"ampchannel/{_seq}"))
 
 
-# 1µF はフィルムだと P5.00 には入らない。10mm ピッチの MKT へ。
-FILM_1U_FP = "Capacitor_THT:C_Rect_L11.0mm_W4.2mm_P10.00mm_MKT"
+# TDK B32529 同系統（PET / P5）。入力 1µF・出力 2.2µF。
+# 1µF: B32529C0105J000（7.3×4.5×H9.5）→ L7.2 / W4.5
+# 2.2µF: B32529D0225…（7.8×7.8×H13）→ L7.2 / W7.2（旧 W2.5 は誤り）
+FILM_1U_FP = "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+FILM_2U2_FP = "Capacitor_THT:C_Rect_L7.2mm_W7.2mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 
 # --- D23: 値の変更 -------------------------------------------------------
 REVALUE = [
