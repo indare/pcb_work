@@ -26,9 +26,11 @@ XML = OUT / "audiov2_pcb.xml"
 
 # 配置グループ → (origin_x, origin_y, pitch, cols)
 # KiCad: Y 下向き。
+# 親ラフ（2026-09-13）: root_power は娘 bbox(340–450) を避け (200,15)。
+# AmpBank / AmpCh の再配置は place_parent_rough.py では行わない（娘 v0.1 凍結）。
 LAYOUT: dict[str, tuple[float, float, float, int]] = {
     "root_audio": (15.0, 15.0, 12.0, 10),
-    "root_power": (320.0, 15.0, 14.0, 8),
+    "root_power": (200.0, 15.0, 14.0, 8),
     "amp_bank": (15.0, 90.0, 12.0, 8),
     # AmpCh タイルは別計算
     "root_out": (15.0, 250.0, 14.0, 8),
