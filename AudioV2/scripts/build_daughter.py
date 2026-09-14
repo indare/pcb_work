@@ -77,8 +77,12 @@ VARIANT = {
 # 母板とはコネクタ対でも繋がっているので、ピン番号がズレても ERC にも
 # ネットリストにも出ず、基板が出来上がってから分かる。
 ANA_NETS = dict(SLOT_ANA_NETS)
-# 11/12（番地）は娘基板だけが持つ。母板はスロットごとに D_GND / 3V3 へ落とす（D21）。
+# 11/12（番地）はリレー版だけが使う。スイッチ版は親MCPから 13..16 で SEL を受ける。
 PWR_NETS = {**SLOT_PWR_NETS, 11: "ADDR0", 12: "ADDR1"}
+SWITCH_PWR_NETS = {
+    1: "+15V", 2: "A_GND", 3: "-15V", 4: "A_GND",
+    **{12 + ch: f"SEL_CH{ch}" for ch in range(1, N_CH + 1)},
+}
 
 # --- MCP23017 -----------------------------------------------------------
 # スイッチ版は 1ch=1ビット（4本）、リレー版は 1ch=2ビット（SET/RESET で 8本）。
@@ -151,12 +155,15 @@ CHAN_PINS = [("TONE_L", "input", "L"), ("TONE_R", "input", "L"),
              ("+15V", "input", "L"), ("-15V", "input", "L"), ("A_GND", "bidirectional", "L"),
              ("OUT_L", "output", "R"), ("OUT_R", "output", "R")]
 
-HIER = [("TONE_L", "input"), ("TONE_R", "input"),
-        ("AMP_SEL_L", "output"), ("AMP_SEL_R", "output"),
-        ("+15V", "input"), ("-15V", "input"), ("A_GND", "bidirectional"),
-        ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
-        ("D_GND", "input"), ("3V3", "input"), ("ADDR0", "input"), ("ADDR1", "input")]
-HIER_RELAY_EXTRA = [("+5V_COIL", "input"), ("GND_COIL", "bidirectional")]
+HIER_BASE = [("TONE_L", "input"), ("TONE_R", "input"),
+             ("AMP_SEL_L", "output"), ("AMP_SEL_R", "output"),
+             ("+15V", "input"), ("-15V", "input"), ("A_GND", "bidirectional")]
+HIER_SWITCH_EXTRA = [(f"SEL_CH{ch}", "input") for ch in range(1, N_CH + 1)]
+HIER_RELAY_EXTRA = [
+    ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
+    ("D_GND", "input"), ("3V3", "input"), ("ADDR0", "input"), ("ADDR1", "input"),
+    ("+5V_COIL", "input"), ("GND_COIL", "bidirectional"),
+]
 
 
 def _label(name: str, x: float, y: float, left: bool) -> str:
@@ -243,20 +250,17 @@ class Builder:
                 scaffold.uid = saved
             self.els.append(sch_import.Element("sheet", blk, None, f"AmpCh{j+1}", (sx, sy)))
 
-        # --- MCP23017 ---
-        mcp = dict(MCP_COMMON)
-        if self.v == SWITCH:
-            for i in range(N_CH):
-                mcp[GPA[i]] = f"SEL_CH{i+1}"
-            nc = GPA[N_CH:] + GPB + MCP_NC_ALWAYS
-        else:
+        # --- MCP23017（リレー版のみ）---
+        # スイッチ版の SEL は親の MCP23017 から J_PWR pin13..16 で受ける。
+        if self.v == RELAY:
+            mcp = dict(MCP_COMMON)
             for i in range(N_CH):
                 mcp[GPA[i]] = f"CH{i+1}_SET"
                 mcp[GPB[i]] = f"CH{i+1}_RST"
             nc = GPA[N_CH:] + GPB[N_CH:] + MCP_NC_ALWAYS
-        self.place(MCP, f"U_IO{sfx}", "MCP23017", 200.66, 213.36, mcp, nc,
-                   footprint="Package_DIP:DIP-28_W7.62mm")
-        self.cap(f"C_IO{sfx}", "100nF", 236.22, 213.36, "3V3", "D_GND")
+            self.place(MCP, f"U_IO{sfx}", "MCP23017", 200.66, 213.36, mcp, nc,
+                       footprint="Package_DIP:DIP-28_W7.62mm")
+            self.cap(f"C_IO{sfx}", "100nF", 236.22, 213.36, "3V3", "D_GND")
         self.cap(f"C_BULK_P{sfx}", "100uF 35V", 251.46, 213.36, "+15V", "A_GND", True)
         self.cap(f"C_BULK_N{sfx}", "100uF 35V", 266.7, 213.36, "A_GND", "-15V", True)
 
@@ -293,13 +297,12 @@ class Builder:
         self.place("Connector_Generic:Conn_02x05_Odd_Even", f"J_ANA{sfx}",
                    f"SLOT ANA (D18)", 340.36, 60.96, ANA_NETS,
                    footprint="Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical")
-        pwr = dict(PWR_NETS)
-        if self.v == SWITCH:          # スイッチ版はコイル線を使わない
-            pwr = {k: v for k, v in pwr.items() if v not in ("+5V_COIL", "GND_COIL")}
-        self.place("Connector_Generic:Conn_02x06_Odd_Even", f"J_PWR{sfx}",
+        pwr = SWITCH_PWR_NETS if self.v == SWITCH else PWR_NETS
+        used = set(pwr)
+        self.place("Connector_Generic:Conn_02x08_Odd_Even", f"J_PWR{sfx}",
                    f"SLOT PWR/CTRL (D18)", 340.36, 116.84, pwr,
-                   ["5", "6"] if self.v == SWITCH else None,
-                   footprint="Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical")
+                   [str(pin) for pin in range(1, 17) if pin not in used],
+                   footprint="Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical")
 
         # --- 取付穴（A2: M3 φ3.2 を四隅、端から 5.0 mm）---
         # ピンが無いのでネットは持たない。v1 と同じく回路図にシンボルを置いて
@@ -312,7 +315,7 @@ class Builder:
                        footprint="MountingHole:MountingHole_3.2mm_M3")
 
         # --- 階層ピン ---
-        hier = HIER + (HIER_RELAY_EXTRA if self.v == RELAY else [])
+        hier = HIER_BASE + (HIER_RELAY_EXTRA if self.v == RELAY else HIER_SWITCH_EXTRA)
         saved, scaffold.uid = scaffold.uid, uid
         try:
             for i, (nm, shape) in enumerate(hier):
@@ -409,7 +412,7 @@ def patch_parent() -> str:
     try:
         for v, (sx, sy), (w, h) in PARENT_SHEETS:
             cfg = VARIANT[v]
-            hier = HIER + (HIER_RELAY_EXTRA if v == RELAY else [])
+            hier = HIER_BASE + (HIER_RELAY_EXTRA if v == RELAY else HIER_SWITCH_EXTRA)
             pins = []
             li = ri = 0
             for nm, shape in hier:
