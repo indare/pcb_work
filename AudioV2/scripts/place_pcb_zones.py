@@ -45,10 +45,20 @@ AMPCH_PITCH = 12.0
 AMPCH_COLS = 5
 
 PANEL_REFS = {
+    # 親下辺に残るもの（Pico USB・テストポイント）
+    "A1602", "TP1601",
+}
+# FrontPanel 子基板上（place_frontpanel_pcb.py）
+FRONTPANEL_REFS = {
     "ENC1601", "ENC1602", "ENC1603",
-    "A1602", "LCDDisplay1601", "J_OLED1601",
-    "D1610", "D1611", "SW1601", "TP1601",
-    "RV501", "RV502", "SW501", "SW502", "SW402",
+    "RV501", "RV502",
+    "SW501", "SW402",
+    "D403", "R401",
+    "U1610", "C1650", "R1661", "R1662",
+    "D1610", "D1611", "R1651", "R1652",
+    "J_OLED1601", "LCDDisplay1601",
+    "U1609", "R1620", "C1631", "C1633", "C1630", "C1629",
+    "J_PNL1602", "J_PNL_A1602",
 }
 STAR_REFS = {"NT1601", "NT1602", "NT1603"}
 
@@ -85,6 +95,8 @@ def group_for(ref: str, sheetpath: str) -> str:
     """sheetpath 優先。ルートだけ音声/電源/出力に分割。"""
     if ref in STAR_REFS:
         return "star"
+    if ref in FRONTPANEL_REFS:
+        return "frontpanel"
     if ref in PANEL_REFS or ref.startswith("R165"):
         return "panel"
 
@@ -95,6 +107,8 @@ def group_for(ref: str, sheetpath: str) -> str:
         return f"ampch{m.group(1)}" if m else "amp_bank"
     if sp.startswith("/AmpBankSwitch"):
         return "amp_bank"
+    if "/FrontPanel" in sp:
+        return "frontpanel"
     if sp.startswith("/MeasureControl"):
         return "meas"
 

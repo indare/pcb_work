@@ -17,6 +17,7 @@ PCB = ROOT / "AudioV2" / "AudioV2Case.kicad_pcb"
 # 親外枠 + 娘カード外形（同一ファイル上の編集用。製造は板ごとに切り出す）
 OUTLINE_PARENT = (5.0, 5.0, 455.0, 455.0)
 OUTLINE_DAUGHTER = (340.0, 130.0, 450.0, 240.0)
+OUTLINE_FRONTPANEL = (15.0, 470.0, 165.0, 620.0)  # 150×150（place_frontpanel_pcb.py と一致）
 
 # 配置グループ → (origin_x, origin_y, pitch, cols) — 娘 bbox 340–450×130–240 を避ける
 LAYOUT: dict[str, tuple[float, float, float, int]] = {
@@ -36,6 +37,18 @@ SLOT_REFS = {
 # sheetpath が XML に無いことがある娘取付穴
 DAUGHTER_HOLE_REFS = {"H301", "H302", "H303", "H304"}
 
+# FrontPanel 子基板（place_frontpanel_pcb.py が載せる）。親ラフでは動かさない
+FRONTPANEL_REFS = {
+    "ENC1601", "ENC1602", "ENC1603",
+    "RV501", "RV502",
+    "SW501", "SW402",
+    "D403", "R401",
+    "U1610", "C1650", "R1661", "R1662",
+    "D1610", "D1611", "R1651", "R1652",
+    "J_OLED1601", "LCDDisplay1601",
+    "U1609", "R1620", "C1631", "C1633", "C1630", "C1629",
+    "J_PNL1602", "J_PNL_A1602",
+}
 
 def main() -> int:
     for ver in ("10.0", "9.0"):
@@ -57,7 +70,8 @@ def main() -> int:
     for fp in board.Footprints():
         ref = fp.GetReference()
         sp = sheet_of.get(ref, "/")
-        if sp.startswith("/AmpBankSwitch") or ref in SLOT_REFS or ref in DAUGHTER_HOLE_REFS:
+        if sp.startswith("/AmpBankSwitch") or ref in SLOT_REFS or ref in DAUGHTER_HOLE_REFS \
+                or ref in FRONTPANEL_REFS:
             before[ref] = (
                 pcbnew.ToMM(fp.GetPosition().x),
                 pcbnew.ToMM(fp.GetPosition().y),
@@ -80,6 +94,7 @@ def main() -> int:
 
     add_rect(*OUTLINE_PARENT)
     add_rect(*OUTLINE_DAUGHTER)
+    add_rect(*OUTLINE_FRONTPANEL)
     x0, y0, x1, y1 = OUTLINE_PARENT
 
     # --- group & place parent only ---
@@ -89,7 +104,7 @@ def main() -> int:
         ref = fp.GetReference()
         sp = sheet_of.get(ref, "/")
         g = group_for(ref, sp)
-        if ref in SLOT_REFS or ref in DAUGHTER_HOLE_REFS:
+        if ref in SLOT_REFS or ref in DAUGHTER_HOLE_REFS or ref in FRONTPANEL_REFS:
             frozen += 1
             continue
         if g.startswith("ampch") or g == "amp_bank":

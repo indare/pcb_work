@@ -117,13 +117,20 @@ NETTIE_AT = (215.9, 154.94)   # GND_COIL <-> D_GND
 # (名前, ファイル, インスタンス UUID, 位置, 大きさ, [(シートピン名, 種別, 左右, ルート側のネット)])
 CHILD_SHEETS = [
     ("MeasureControl", "MeasureControl.kicad_sch",
-     "43e41fda-fe26-43e3-950a-c017f3070bbf", (400.0, 220.0), (45.72, 33.02), [
+     "43e41fda-fe26-43e3-950a-c017f3070bbf", (400.0, 220.0), (45.72, 55.88), [
          ("+15V_A", "input", "L", "+15V"), ("-15V_A", "input", "L", "-15V"),
          ("ADC_GND_IN", "input", "L", "PD_GND"), ("ADC_V_IN", "input", "L", "PD_12V_SW"),
          ("AUDIO_L_IN", "input", "L", "AMP_SEL_L"), ("AUDIO_R_IN", "input", "L", "AMP_SEL_R"),
          ("A_GND", "bidirectional", "L", "A_GND"),
          ("I2C_SDA", "bidirectional", "R", "I2C_SDA"), ("I2C_SCL", "bidirectional", "R", "I2C_SCL"),
          ("3V3", "output", "R", "3V3"), ("D_GND", "bidirectional", "R", "D_GND"),
+         ("+5V_D", "output", "R", "+5V_D"),
+         ("ENC_INTA", "input", "R", "ENC_INTA"), ("ENC_INTB", "input", "R", "ENC_INTB"),
+         ("LCD_CS", "output", "R", "LCD_CS"), ("LCD_DC", "output", "R", "LCD_DC"),
+         ("LCD_RST", "output", "R", "LCD_RST"), ("LCD_EN", "output", "R", "LCD_EN"),
+         ("LCD_SCK", "output", "R", "LCD_SCK"), ("LCD_MOSI", "output", "R", "LCD_MOSI"),
+         ("TP_SDA", "bidirectional", "R", "TP_SDA"), ("TP_SCL", "bidirectional", "R", "TP_SCL"),
+         ("TP_INT", "input", "R", "TP_INT"), ("TP_RST", "output", "R", "TP_RST"),
      ]),
     ("AmpBankSwitch", "AmpBankSwitch.kicad_sch",
      "a1000011-0011-4011-8011-000000000011", (400.0, 270.0), (45.72, 40.64), [
@@ -147,6 +154,36 @@ CHILD_SHEETS = [
          ("ADDR0", "input", "L", "3V3"), ("ADDR1", "input", "L", "D_GND"),
          ("+5V_COIL", "input", "L", "+5V_COIL"), ("GND_COIL", "bidirectional", "L", "GND_COIL"),
          ("AMP_SEL_L", "output", "R", "AMP_SEL_L"), ("AMP_SEL_R", "output", "R", "AMP_SEL_R"),
+     ]),
+    ("FrontPanel", "FrontPanel.kicad_sch",
+     "b2000020-0020-4020-8020-000000000020", (470.0, 160.0), (55.88, 76.2), [
+         ("3V3", "input", "L", "3V3"),
+         ("+5V_D", "input", "L", "+5V_D"),
+         ("D_GND", "bidirectional", "L", "D_GND"),
+         ("I2C_SDA", "bidirectional", "L", "I2C_SDA"),
+         ("I2C_SCL", "bidirectional", "L", "I2C_SCL"),
+         ("ENC_INTA", "output", "L", "ENC_INTA"),
+         ("ENC_INTB", "output", "L", "ENC_INTB"),
+         ("LCD_CS", "input", "L", "LCD_CS"),
+         ("LCD_DC", "input", "L", "LCD_DC"),
+         ("LCD_RST", "input", "L", "LCD_RST"),
+         ("LCD_EN", "input", "L", "LCD_EN"),
+         ("LCD_SCK", "input", "L", "LCD_SCK"),
+         ("LCD_MOSI", "input", "L", "LCD_MOSI"),
+         ("TP_SDA", "bidirectional", "L", "TP_SDA"),
+         ("TP_SCL", "bidirectional", "L", "TP_SCL"),
+         ("TP_INT", "output", "L", "TP_INT"),
+         ("TP_RST", "input", "L", "TP_RST"),
+         ("AMP_SEL_L", "input", "L", "AMP_SEL_L"),
+         ("AMP_SEL_R", "input", "L", "AMP_SEL_R"),
+         ("PHONE_BUF_L", "input", "L", "PHONE_BUF_L"),
+         ("PHONE_BUF_R", "input", "L", "PHONE_BUF_R"),
+         ("LINE_L", "output", "L", "LINE_L"),
+         ("LINE_R", "output", "L", "LINE_R"),
+         ("A_GND", "bidirectional", "L", "A_GND"),
+         ("PD_12V", "input", "L", "PD_12V"),
+         ("PD_12V_SW", "bidirectional", "L", "PD_12V_SW"),
+         ("PD_GND", "bidirectional", "L", "PD_GND")
      ]),
 ]
 
@@ -179,7 +216,7 @@ SLOT_HIER = [("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
 # 親から外すシート。母板へ統合された3枚と、母板自身（再実行を冪等にするため）、
 # そして 2026-09-04 に**母板の子へ移した3枚**。
 REPLACED_SHEETS = ("PowerModule", "OutputStage", "ControlPanel", "MotherBoard",
-                   "MeasureControl", "AmpBankSwitch", "AmpBankRelay")
+                   "MeasureControl", "AmpBankSwitch", "AmpBankRelay", "FrontPanel")
 
 # ControlPanel が母板に入ったことで、作る側と使う側の両方が母板の中に収まった
 # ネット。階層ピンに残すと親で行き先の無いピンになるのでローカルへ落とす。
@@ -532,7 +569,7 @@ def rewrite_child_instance_paths() -> list[str]:
     notes: list[str] = []
     old = f"/{PARENT}/{UUID_MOTHER_INST}/"
     new = f"/{PARENT}/"
-    for fname in ("MeasureControl.kicad_sch",):
+    for fname in ("MeasureControl.kicad_sch", "FrontPanel.kicad_sch"):
         path = ROOT / fname
         text = path.read_text(encoding="utf-8")
         if old not in text:

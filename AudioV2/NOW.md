@@ -1,6 +1,6 @@
 # AudioV2 — いま（現況）
 
-**更新:** 2026-09-14  
+**更新:** 2026-09-15  
 **このファイルが「いま何待ちか／次の一手」の正。** 履歴・理由・長い文脈は
 [AGENT_HANDOFF.md](AGENT_HANDOFF.md) / [DECISIONS.md](DECISIONS.md)。  
 回路図から導出できる数値はここに書かない（[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。
@@ -14,8 +14,11 @@
 
 ## 回路図・検証（期待）
 
-- 階層: `AudioV2Case` → {`MeasureControl`, `AmpBankSwitch`, `AmpBankRelay`}
+- 階層: `AudioV2Case` → {`MeasureControl`, `FrontPanel`, `AmpBankSwitch`, `AmpBankRelay`}
   （2026-09-09 に中間 `MotherBoard` を廃止。箱外 I/O はルート上のコネクタで閉じる）
+  **2026-09-15:** **`FrontPanel` を母板直下へ**（MeasureControl の子ではない）。操作系は FP、
+  Pico／計測は MC。デジは母板上で MC↔FP（`ENC_INT*`／LCD／TP／`+5V_D` ほか）、
+  アナログ／PWR は母板↔FP。物理コネクタ `J_PNL*`／`J_PNL_A*` も母板側へ移した
 - 所有権: [CLAUDE.md](../CLAUDE.md)
 - ⚠ **KiCad で保存したあとに `build_*.py` を回すとプロジェクト／回路図が壊れる。**
   変更は **ピンポイント**（該当シンボルの FP・Value・配線だけ）。全面再生成しない
@@ -25,6 +28,13 @@
 - **PCB 進捗（親ラフ）:** 2026-09-13 案 B — Edge.Cuts を **`(5,5)–(455,455)`** に拡張（**娘 110×110 の Edge も併存**）。
   親だけ再グリッド（`place_parent_rough.py`）。娘 `/AmpBankSwitch` とスロット `J_ANA/J_PWR 101–103` は座標固定。
   電源ゾーン原点は娘回避で `(200,15)`。スロット X・3×110 段構成は未決。配線・ベタはまだ
+- **PCB 進捗（FrontPanel）:** 2026-09-15 — Edge **`(15,470)–(165,620)` 150×150**。
+  **大枠（左→右）:** `PWR`→`ENC_CH`→`LCD`→`BASS`→`TREBLE`→`VOL×2`→`DEST`→母板右端`HP`/`LINE`。
+  SW/ENC 本体 FP 済み。配線・ベタは未着手。
+  ⚠ **2026-09-15 03:00 PCB を `AudioV2Case-2026-09-15_023248` バックアップから復元。**
+  XH 列分割スクリプトが旧 PinHeader を残したまま追加し、原点に `REF**`（BP5293 残骸）×2 が付いた。
+  回路図の渡りは XH×2（奇数列 `_1`／偶数列 `_2`）。参照末尾 `A`/`B` は KiCad がユニット接尾辞と誤認するので使わない。
+  表示/音量/HP·LINE も XH。PCB から旧 `J_PNL1601/1602`・`J_PNL_A1601/1602`（分割前 PinHeader）を削除済み
 - **PCB 配線の順:** 先に娘＝**アナログSW（`AmpBankSwitch` / AmpCh）**を配線 → その後親（ルート電源・音声・MeasureControl）
 - **AmpCh タイルの置き方が確定**（2026-09-11 案C）: `TMUX7612` は PCB 上 **270°**
   （北辺＝ピン1–8＝CH1/CH3、南辺＝ピン9–16＝CH2/CH4）。
@@ -120,21 +130,27 @@
 ## 箱の I/O（2026-09-07 に入力側が埋まった）
 
 - 入力 `J_IN401`・出力 `J_HP501` / `J_LINE501`。**3つとも L / `A_GND` / R の 3P**（出力側は 2026-09-08 に 2P→3P）。
-  全部 Phoenix MKDS-1,5
+  入力は Phoenix MKDS-1,5。**HP／LINE は JST XH 3P**（2026-09-15、パネルジャックへケーブル）
 - **HP は `U501` バッファ越し**（2026-09-08 に v1 から 5xx で移設。DIP-8 ソケット・標準実装 `OPA1652`・
   10 Ω＋470 µF NP）。`C501`/`C502` の FP は **Ø16 / P7.5**（2026-09-10、Muse ES `UES1E471MHM` が入る）。LINE はバッファ無しで `RV502` 直出し
 - **フットプリント未設定は 0**
-- ⚠ **パネル部品は2種類ある。** ヘッダ（現物は箱配線・基板の位置は自由）= `RV501/502`・
-  `SW402`・`SW501/502`・`SW1601`。**基板実装（本体が基板に載る）= `ENC1601-1603`
-  （EC11 垂直・軸20mm）・`D1610/D1611/D403`（5mm LED）・`A1602`（Pico の USB）**。
-  後者があるので **`MeasureControl` はフロントパネルの直後に固定される** — 基板の
-  置き場を動かす検討をするときは、まずここを見ること
+-   ⚠ **パネル操作は FrontPanel 子基板に集約**（垂直実装→物理パネルへネジ止め）。
+  ENC／RV／DEST・PWR SW／DEST LED／OLED・LCD／`U1609`／`J_PNL*`（メイトは母板上）。
+  **DEST は DPDT ON–ON 1本（`SW501`）で PHONE↔LINE。** MUTE 位置は捨てた（電源断は PWR SW）。
+  位置センスラダーは廃止（`DEST_ADC` は MC 側で `D_GND` へプル、ファームは無視でよい）。
+  **パネル部品 FP（2026-09-15）:** DEST=`Cosland 2MD1`（秋月 104028）／PWR=`Cosland 2MS1`（秋月 100300、片側 NC で ON–OFF）／
+  ENC=EC11E 垂直押し・**軸 L=25**・**パネルナット無し**（基板当接 ≈4.5 mm vs トグル≈9 mm を軸長で吸収）。
+  FP は `Library:SW_Toggle_Cosland_2MD*`／既存 EC11 H20mm パッド流用。
+  **RV501/502（2026-09-15 確定）:** FrontPanel PCB は **`JST XH 6P`（`B6B-XH-A`）**。
+  ポット本体は**ユニバーサル基板**→XH ケーブルで接続。垂直 2連 A50k 直付けは捨てた。
+  **母板上:** Pico（`A1602`）と計測島は `MeasureControl`。パネル界面コネクタはルート
 
 ## 次に手を動かすなら
 
 | 優先 | 内容 | 備考 |
 |---|---|---|
 | **1** | **B5** — 娘（`AmpBankSwitch`）から配線 | 4ch タイル＋`U311`/`U312`。アナログSW基板を先に、その後親 |
+| 並行 | FrontPanel 配線・ベタ | 渡り XH 列分割済み。表示・音量・HP/LINE も XH |
 | **確定** | リレーは **`AZ850P2-5` に固定**（v1 と同じ石、2026-09-09） | 接点ピンの使い方（3/8・4/7、2/9 開放、5/6 コイル）は v1 のネットリストと同一。**外形が同じ `TQ2-L2` は COM/NC/NO の番号が違うので挿さない**（挿すと SET/RESET の意味が反転する）。回路図の Description にも書いた |
 | **確定** | ヒューズ / PPTC の型番と FP（2026-09-09） | 5×20 ガラス管: `F201` **F2A 速断**・`F1601` T1A、ホルダは **Schurter OGN `0031.8201`**。PPTC 3 個は **Littelfuse `RXEF050` / `RXEF040` / `RXEF010`**、FP は `Library:PPTC_Radial_D7.9mm_T3.1mm_P5.08mm`。⚠ コイル枝は 0.40 A。`F201` は入手性＋2Aなら速断でよい、で T1.6A スロー→F2A |
 | 並行可 | G8（USB DAC）外してスパーが消えるか | **スパーの発生源は未特定**（`U1604` 説は実測で否定済み） |

@@ -64,8 +64,9 @@ HANDOFF や DECISIONS を追記しただけでは進捗に数えない。
 ```
 AudioV2Case（旧 MotherBoard の中身）
 ├─ MeasureControl
-├─ AmpBankSwitch  └─ AmpCh1-5
-└─ AmpBankRelay   └─ AmpCh1-5
+├─ FrontPanel
+├─ AmpBankSwitch  └─ AmpCh1-4
+└─ AmpBankRelay   └─ AmpCh1-4
 ```
 
 **KiCad の階層シートは配置を縛らない。** どれを別基板に切り出すかは PCB を起こす
@@ -76,10 +77,11 @@ AudioV2Case（旧 MotherBoard の中身）
 | `AudioV2Case`（ルート） | **`scripts/build_motherboard.py`**（冪等・再実行でバイト一致） |
 | `AmpBankSwitch` / `AmpBankRelay` | **`scripts/build_daughter.py`**（同上） |
 | `MeasureControl` | 生成対象外。**KiCad で直接いじってよい** |
+| `FrontPanel` | 生成対象外。**KiCad で直接いじってよい**（母板直下。操作系＝ENC/RV/SW/表示。母板↔パネルは `J_PNL`＋`J_PNL_A`） |
 
 **生成対象のシートを手で直さないこと。** 回すと上書きされる。回路を変えるならスクリプトを直す。
 
-**⚠ `MeasureControl` にシートピンを足したら `build_motherboard.py` の `CHILD_SHEETS` にも足すこと。**
+**⚠ `MeasureControl` / `FrontPanel` にシートピンを足したら `build_motherboard.py` の `CHILD_SHEETS` にも足すこと。**
 手編集所有だが、**ルートに置かれる側のピンはコードが持っている**。片方だけだと親子で
 ピンの対応が取れず `hier_label_mismatch` が出る。
 
