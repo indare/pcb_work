@@ -1,6 +1,6 @@
 # AudioV2 — いま（現況）
 
-**更新:** 2026-09-15  
+**更新:** 2026-09-19  
 **このファイルが「いま何待ちか／次の一手」の正。** 履歴・理由・長い文脈は
 [AGENT_HANDOFF.md](AGENT_HANDOFF.md) / [DECISIONS.md](DECISIONS.md)。  
 回路図から導出できる数値はここに書かない（[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。
@@ -11,6 +11,13 @@
 
 オペアンプ10個を電子的に切り替えて音の差を楽しむ箱。**計測器ではない。**
 切替素子の優劣は耳で決める。
+
+## 部品調達（[issue #38](https://github.com/indare/pcb_work/issues/38)）
+
+- **PRECISION / MATCH / SPEC** の正は [PARTS.md §0c](PARTS.md)
+- AmpChannel `Rf`/`Rg` は **0.1%**（図上 `20k 0.1%`）。`D-i` 閉じた
+- 1 µF / 2.2 µF film は **PET・B32529・P5 のまま**＋LCR 選別（MATCH）。FP 変更なし
+- ADC 1.8 nF C0G・HP 470 µF NP・ADC 経路 10 µF NP も MATCH（選別条件は PARTS）
 
 ## 回路図・検証（期待）
 
