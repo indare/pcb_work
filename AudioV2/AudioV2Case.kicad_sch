@@ -15640,7 +15640,7 @@
 		)
 		(uuid "156acd7b-a1d5-4af9-a972-ea5c94072606")
 	)
-	(text "ControlPanelAnalog — tone / DEST / PWR（UI は MeasureControl へ移設済み）\nPT2314E / SW402 PWR / D403 パネル LED / BP5293-50(+5V_COIL) / DEST 機械 SW\nENC×3・OLED・DEST ladder+LED・I²C マスタは MeasureControl（MCP23017 0x22 → ENC_INTA/B）。\nConnectivity = local labels on pin tips (grid-snapped)."
+	(text "ControlPanelAnalog — tone / DEST / PWR（UI は MeasureControl へ移設済み）\nPT2314E / SW402 PWR / D403 パネル LED / BP5293-50(+5V_COIL) / DEST 機械 SW\nENC×3・DEST LED・I²C マスタは FrontPanel/MeasureControl（MCP23017 0x22 → ENC_INTA/B）。状態表示は Waveshare LCD（OLED廃止・Switch/Relay 共通）。\nConnectivity = local labels on pin tips (grid-snapped)."
 		(exclude_from_sim no)
 		(at 381 25.4 0)
 		(effects
