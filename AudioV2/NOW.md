@@ -15,8 +15,9 @@
 ## UI（表示）
 
 - **操作は従来どおり**（ENC×3 / DEST SW / ポット）。AmpBankSwitch・AmpBankRelay 共通の FrontPanel
-- **状態表示（CH / DEST / Bass / Treble）は Waveshare LCD に寄せる**（ファーム未実装可）
+- **状態表示（CH / DEST / Bass / Treble）は Waveshare LCD に寄せる**
 - **2.42″ OLED（`J_OLED`）は回路図・PCB から削除**（I²C は MCP / PT / 娘向けのまま）
+- **ファーム置き場:** [`firmware/`](firmware/)（骨格。Switch/Relay 共通 API）
 
 ## 部品調達（[issue #38](https://github.com/indare/pcb_work/issues/38)）
 
