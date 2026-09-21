@@ -19,6 +19,13 @@
 - **2.42″ OLED（`J_OLED`）は回路図・PCB から削除**（I²C は MCP / PT / 娘向けのまま）
 - **ファーム置き場:** [`firmware/`](firmware/)（骨格。Switch/Relay 共通 API）
 
+## AmpBank 番地（ジャンパ 6 段）
+
+- **旧 D21（スロット側 ADDR）はやめ、娘基板の A0/A1/A2 ジャンパで番地を決める**（縦積み B 向け）
+- 両版とも娘に MCP23017。スイッチ版 SEL も娘 MCP（親 `U_IO101` 廃止）
+- UI MCP は **0x22** のまま。娘は **0x20 / 0x21 / 0x23 / 0x24 / 0x25 / 0x26**
+- コネクタ pin 11..16（旧 ADDR/SEL）は母板・娘とも N.C.
+
 ## 部品調達（[issue #38](https://github.com/indare/pcb_work/issues/38)）
 
 - **PRECISION / MATCH / SPEC** の正は [PARTS.md §0c](PARTS.md)

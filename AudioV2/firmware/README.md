@@ -11,6 +11,7 @@
 | 表示 | Waveshare LCD に CH / DEST / Bass / Treble（OLED なし） |
 | Amp 切替 | **Switch / Relay 共通 API**（`amp_select.py`）。裏の I²C／SEL だけ差し替え |
 | I²C0 | PT2314E 同居のため **100 kHz**（OLED が居ないので足りる） |
+| 娘番地 | **ジャンパ A0/A1/A2・6 段**（0x20/21/23/24/25/26。UI 0x22 除外） |
 | 計測 | スペアナ／キャプチャは後で同じ LCD 上にモード追加。当面は `Audio/measurement_fw/` |
 
 ピン・アドレスの正は回路図（MeasureControl の Pico 注記、FrontPanel の MCP）。  

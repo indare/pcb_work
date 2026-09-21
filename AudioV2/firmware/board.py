@@ -9,12 +9,19 @@ I2C_SDA = 20
 I2C_SCL = 21
 I2C_FREQ_HZ = 100_000
 
-# FrontPanel MCP23017（UI）。値の正は図上のストラップ。
+# FrontPanel MCP23017（UI）。ストラップ固定 **0x22**（娘ジャンパから除外）。
 MCP_UI_ADDR = 0x22
 
-# 娘スロット MCP（母板 ADDR ストラップ）。Switch / Relay 共通の番地空間。
-# ⚠ UI も 0x22 — スロット3 とぶつかるなら回路側で直す。ファームはスキャンで確認。
-SLOT_MCP_ADDR = (0x20, 0x21, 0x22)
+# 娘 AmpBank MCP — 基板ジャンパ A2/A1/A0（6 段）。UI 0x22 を飛ばす。
+# Bridged12=GND=0 / 2-3 bridge=3V3=1。出荷時オール GND → 0x20。
+AMP_ADDR_TIERS = (
+    0x20,  # 000 tier1
+    0x21,  # 001 tier2
+    0x23,  # 011 tier3
+    0x24,  # 100 tier4
+    0x25,  # 101 tier5
+    0x26,  # 110 tier6
+)
 
 # ENC INT（MCP OD → Pico）
 ENC_INTA = 16
