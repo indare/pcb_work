@@ -1,6 +1,6 @@
 # AudioV2 — いま（現況）
 
-**更新:** 2026-09-20  
+**更新:** 2026-09-21  
 **このファイルが「いま何待ちか／次の一手」の正。** 履歴・理由・長い文脈は
 [AGENT_HANDOFF.md](AGENT_HANDOFF.md) / [DECISIONS.md](DECISIONS.md)。  
 回路図から導出できる数値はここに書かない（[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。
@@ -18,6 +18,13 @@
 - **状態表示（CH / DEST / Bass / Treble）は Waveshare LCD に寄せる**
 - **2.42″ OLED（`J_OLED`）は回路図・PCB から削除**（I²C は MCP / PT / 娘向けのまま）
 - **ファーム置き場:** [`firmware/`](firmware/)（骨格。Switch/Relay 共通 API）
+
+## AmpBank 番地（ジャンパ 6 段）
+
+- **旧 D21（スロット側 ADDR）はやめ、娘基板の A0/A1/A2 ジャンパで番地を決める**（縦積み B 向け）
+- 両版とも娘に MCP23017。スイッチ版 SEL も娘 MCP（親 `U_IO101` 廃止）
+- UI MCP は **0x22** のまま。娘は **0x20 / 0x21 / 0x23 / 0x24 / 0x25 / 0x26**
+- コネクタ pin 11..16（旧 ADDR/SEL）は母板・娘とも N.C.
 
 ## 部品調達（[issue #38](https://github.com/indare/pcb_work/issues/38)）
 

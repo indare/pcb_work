@@ -73,8 +73,8 @@ PAPER = "A2"   # ControlPanel を取り込んで A3 では収まらなくなっ�
 
 # --- 娘基板スロット（D18 のピン割当）------------------------------------
 #
-# 両版で完全に同一のヘッダ。2x8 のうち、スイッチ版は SEL_CH1..4、
-# リレー版は I²C / ADDR / コイル電源を使う。未使用側のピンは N.C.。
+# 両版で完全に同一のヘッダ。2x8 のうち、
+# 1..10 = 電源 / I²C、11..16 = N.C.（旧 ADDR・SEL。番地は娘ジャンパ、SEL は娘 MCP）。
 # アナログ4本は、直交する隣接ピンが3方向とも A_GND になるよう千鳥に置いてある
 # （標準の 2xNN フットプリントは 奇数=1列目 / 偶数=2列目 で行が y に進む）。
 SLOT_ANA_NETS = {
@@ -84,7 +84,6 @@ SLOT_ANA_NETS = {
     7: "AMP_SEL_L", 8: "A_GND",
     9: "A_GND", 10: "AMP_SEL_R",
 }
-# 11/12 はリレー版の番地。13..16 はスイッチ版へ返す SEL。
 SLOT_PWR_NETS = {
     1: "+15V",     2: "A_GND",
     3: "-15V",     4: "A_GND",
@@ -92,17 +91,9 @@ SLOT_PWR_NETS = {
     7: "I2C_SDA",  8: "D_GND",
     9: "I2C_SCL", 10: "3V3",
 }
-# スロット番号 -> (ADDR0, ADDR1)。MCP23017 の A2 は娘側で D_GND 固定なので
-# 0x20 / 0x21 / 0x22（3枚目）。0x23 は未使用。
-SLOT_ADDR = {
-    1: ("D_GND", "D_GND"),  # 0x20  スイッチ版のシートピンもここ
-    2: ("3V3", "D_GND"),    # 0x21  リレー版のシートピンもここ
-    3: ("D_GND", "3V3"),    # 0x22  3枚目（同じ 4ch スイッチ版を挿す）
-}
-SLOT_SEL_NETS = {
-    slot: {12 + ch: f"SLOT{slot}_SEL_CH{ch}" for ch in range(1, 5)}
-    for slot in range(1, 4)
-}
+# 旧スロット番地・SEL（廃止）。ピン 11..16 は母板・娘とも N.C.。
+SLOT_ADDR = {}
+SLOT_SEL_NETS = {}
 # (スロット番号, J_ANA の位置, J_PWR の位置)
 # A2: ANA 北 / PWR 南、ΔY = 92.38−10.00 = 82.38（2x8 の南端は旧2x6と同じ）。
 # 3 枚×110 の横並びは未決 — ここは嵌合の上下関係だけの正。X は仮。
@@ -137,10 +128,8 @@ CHILD_SHEETS = [
          ("TONE_L", "input", "L", "TONE_L"), ("TONE_R", "input", "L", "TONE_R"),
          ("+15V", "input", "L", "+15V"), ("-15V", "input", "L", "-15V"),
          ("A_GND", "bidirectional", "L", "A_GND"),
-         ("SEL_CH1", "input", "L", "SLOT1_SEL_CH1"),
-         ("SEL_CH2", "input", "L", "SLOT1_SEL_CH2"),
-         ("SEL_CH3", "input", "L", "SLOT1_SEL_CH3"),
-         ("SEL_CH4", "input", "L", "SLOT1_SEL_CH4"),
+         ("I2C_SDA", "bidirectional", "L", "I2C_SDA"), ("I2C_SCL", "bidirectional", "L", "I2C_SCL"),
+         ("D_GND", "input", "L", "D_GND"), ("3V3", "input", "L", "3V3"),
          ("AMP_SEL_L", "output", "R", "AMP_SEL_L"), ("AMP_SEL_R", "output", "R", "AMP_SEL_R"),
      ]),
     ("AmpBankRelay", "AmpBankRelay.kicad_sch",
@@ -150,8 +139,6 @@ CHILD_SHEETS = [
          ("A_GND", "bidirectional", "L", "A_GND"),
          ("I2C_SDA", "bidirectional", "L", "I2C_SDA"), ("I2C_SCL", "bidirectional", "L", "I2C_SCL"),
          ("D_GND", "input", "L", "D_GND"), ("3V3", "input", "L", "3V3"),
-         # リレー版 = 0x21（ADDR0 が 3V3）
-         ("ADDR0", "input", "L", "3V3"), ("ADDR1", "input", "L", "D_GND"),
          ("+5V_COIL", "input", "L", "+5V_COIL"), ("GND_COIL", "bidirectional", "L", "GND_COIL"),
          ("AMP_SEL_L", "output", "R", "AMP_SEL_L"), ("AMP_SEL_R", "output", "R", "AMP_SEL_R"),
      ]),
@@ -309,10 +296,7 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
                 ("Connector_Generic:Conn_02x05_Odd_Even", f"J_ANA10{slot}",
                  f"SLOT{slot} ANA (D18)", ana_at, SLOT_ANA_NETS, SLOT_FP_ANA),
                 ("Connector_Generic:Conn_02x08_Odd_Even", f"J_PWR10{slot}",
-                 f"SLOT{slot} PWR/CTRL (D18)", pwr_at,
-                 {**SLOT_PWR_NETS, 11: SLOT_ADDR[slot][0], 12: SLOT_ADDR[slot][1],
-                  **SLOT_SEL_NETS[slot]},
-                 SLOT_FP_PWR),
+                 f"SLOT{slot} PWR/CTRL (D18)", pwr_at, SLOT_PWR_NETS, SLOT_FP_PWR),
             ):
                 connector_el = sch_import.Element(
                     "symbol",
@@ -333,56 +317,15 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
                         _plain_label(net, x, y, 180 if left else 0,
                                      "right" if left else "left"),
                         None, net, (x, y)))
+                # J_PWR pin 11..16 = N.C.（旧 ADDR / SEL）
+                if ref.startswith("J_PWR"):
+                    for num in range(11, 17):
+                        x, y = tips[str(num)]
+                        els.append(sch_import.Element(
+                            "no_connect", _no_connect(x, y), None, None, (x, y)))
 
-        # スイッチ版3スロットの SEL（4本×3）を親側の1個で駆動する。
-        # 0x23: UI の 0x22、およびリレー娘のスロット番地 0x20..0x22 と衝突しない。
-        mx, my = 335.28, 170.18
-        mcp_nets = {
-            "13": "I2C_SDA", "12": "I2C_SCL",
-            "15": "3V3", "16": "3V3", "17": "D_GND",
-            "18": "3V3", "9": "3V3", "10": "D_GND",
-        }
-        gpio = ["21", "22", "23", "24", "25", "26", "27", "28",
-                "1", "2", "3", "4"]
-        for pin, net in zip(gpio, (
-                f"SLOT{slot}_SEL_CH{ch}"
-                for slot in range(1, 4)
-                for ch in range(1, 5))):
-            mcp_nets[pin] = net
-        mcp_lib = "Interface_Expansion:MCP23017x-x-SP"
-        mcp_el = sch_import.Element(
-            "symbol",
-            symbol_inst_v10(mcp_lib, "U_IO101", "MCP23017 (SW SEL 0x23)",
-                            mx, my, 0, path,
-                            footprint="Package_DIP:DIP-28_W7.62mm"),
-            "U_IO101", None, (mx, my))
-        els.append(mcp_el)
-        tips = dict(zip(sch_edit.lib_pins(mcp_lib).keys(),
-                        sch_edit.symbol_tips(mcp_el)))
-        for num, net in mcp_nets.items():
-            x, y = tips[num]
-            left = x < mx
-            els.append(sch_import.Element(
-                "label", _plain_label(net, x, y, 180 if left else 0,
-                                      "right" if left else "left"),
-                None, net, (x, y)))
-        for num in ("5", "6", "7", "8", "11", "14", "19", "20"):
-            x, y = tips[num]
-            els.append(sch_import.Element("no_connect", _no_connect(x, y),
-                                          None, None, (x, y)))
-
-        # MCP23017 の VDD-VSS 直近デカップ。
-        cx, cy = 373.38, 170.18
-        els.append(sch_import.Element(
-            "symbol",
-            symbol_inst_v10("Device:C", "C_IO101", "100nF", cx, cy, 0, path,
-                            footprint="Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"),
-            "C_IO101", None, (cx, cy)))
-        ctips = _lib_pin_tips("Device:C", cx, cy)
-        for num, net in (("1", "3V3"), ("2", "D_GND")):
-            x, y = ctips[num]
-            els.append(sch_import.Element(
-                "label", _plain_label(net, x, y, 0, "left"), None, net, (x, y)))
+        # スイッチ版 SEL は娘 MCP に移した（親 U_IO101 廃止）。
+        # 番地も娘ジャンパ（6 段）。ここには MCP を置かない。
 
         nx, ny = NETTIE_AT
         els.append(sch_import.Element(
