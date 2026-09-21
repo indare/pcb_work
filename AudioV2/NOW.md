@@ -1,6 +1,6 @@
 # AudioV2 — いま（現況）
 
-**更新:** 2026-09-19  
+**更新:** 2026-09-20  
 **このファイルが「いま何待ちか／次の一手」の正。** 履歴・理由・長い文脈は
 [AGENT_HANDOFF.md](AGENT_HANDOFF.md) / [DECISIONS.md](DECISIONS.md)。  
 回路図から導出できる数値はここに書かない（[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。
@@ -11,6 +11,13 @@
 
 オペアンプ10個を電子的に切り替えて音の差を楽しむ箱。**計測器ではない。**
 切替素子の優劣は耳で決める。
+
+## UI（表示）
+
+- **操作は従来どおり**（ENC×3 / DEST SW / ポット）。AmpBankSwitch・AmpBankRelay 共通の FrontPanel
+- **状態表示（CH / DEST / Bass / Treble）は Waveshare LCD に寄せる**
+- **2.42″ OLED（`J_OLED`）は回路図・PCB から削除**（I²C は MCP / PT / 娘向けのまま）
+- **ファーム置き場:** [`firmware/`](firmware/)（骨格。Switch/Relay 共通 API）
 
 ## 部品調達（[issue #38](https://github.com/indare/pcb_work/issues/38)）
 
@@ -132,7 +139,7 @@
 - トーンを回すのは **`ENC_BASS` / `ENC_TREBLE`**（`ENC1602` が `ENC_VOL` になっていたのを
   2026-09-07 に直した。音量は手回しポット、ボリューム段はインサートで飛ばしている）
 - UI の MCP23017 は `INTA`/`INTB` を Pico へ引いた。**I²C は PT2314E 由来で 100 kbit/s 止まり**
-  なので、エンコーダをポーリングで読むと OLED と同居できない。**INT は外付け 10k→`3V3`**
+  なので、エンコーダをポーリングで読むと I²C バスを塞ぐ。**INT は外付け 10k→`3V3`**
   （2026-09-09。OD なので内部プルだけに頼らない）
 - **`DGND`(25) はチップの足元で `A_GND` へ ＋ I²C 境界にレベルシフタ（2026-09-08 実装）。** PT 側は
   `I2C_SDA_9V`/`I2C_SCL_9V`、10k → `VCC_TONE`（9 V）。**⚠ 素子は記録の「P82B96 級」ではなく `BSS138` ×2** —
@@ -148,7 +155,7 @@
   10 Ω＋470 µF NP）。`C501`/`C502` の FP は **Ø16 / P7.5**（2026-09-10、Muse ES `UES1E471MHM` が入る）。LINE はバッファ無しで `RV502` 直出し
 - **フットプリント未設定は 0**
 -   ⚠ **パネル操作は FrontPanel 子基板に集約**（垂直実装→物理パネルへネジ止め）。
-  ENC／RV／DEST・PWR SW／DEST LED／OLED・LCD／`U1609`／`J_PNL*`（メイトは母板上）。
+  ENC／RV／DEST・PWR SW／DEST LED／LCD／`U1609`／`J_PNL*`（メイトは母板上）。OLED は廃止。
   **DEST は DPDT ON–ON 1本（`SW501`）で PHONE↔LINE。** MUTE 位置は捨てた（電源断は PWR SW）。
   位置センスラダーは廃止（`DEST_ADC` は MC 側で `D_GND` へプル、ファームは無視でよい）。
   **パネル部品 FP（2026-09-15）:** DEST=`Cosland 2MD1`（秋月 104028）／PWR=`Cosland 2MS1`（秋月 100300、片側 NC で ON–OFF）／

@@ -33433,16 +33433,6 @@
 		)
 		(uuid "0a0bc676-6bb9-58d3-935c-44bd03cd8c70")
 	)
-	(label "I2C_SDA"
-		(at 226.06 386.08 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0aed4fb4-dfcc-5be5-984e-089589531f21")
-	)
 	(label "LED_DEST2_A"
 		(at 163.83 396.24 0)
 		(effects
@@ -33562,16 +33552,6 @@
 			(justify right bottom)
 		)
 		(uuid "332e9b67-2bb1-57ac-98b5-b52d21c3c47e")
-	)
-	(label "D_GND"
-		(at 226.06 378.46 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3453739b-705e-55d6-97a0-0a15c2a47eaf")
 	)
 	(label "A_GND"
 		(at 436.88 342.9 180)
@@ -33893,16 +33873,6 @@
 		)
 		(uuid "673f06d0-5455-50ff-877c-d63bd3dd47eb")
 	)
-	(label "3V3"
-		(at 226.06 381 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6782969b-a5c9-55bf-a610-54a5b41bce0b")
-	)
 	(label "LCD_VCC"
 		(at 124.46 153.67 180)
 		(effects
@@ -34002,16 +33972,6 @@
 			(justify right)
 		)
 		(uuid "861838a0-a270-4161-9523-a24f88d2fe4a")
-	)
-	(label "I2C_SCL"
-		(at 226.06 383.54 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8705de46-503f-5c1e-be60-cd4ef1e1ef13")
 	)
 	(label "ENC3_SW"
 		(at 132.08 342.9 0)
@@ -36811,92 +36771,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x04_Pin")
-		(at 220.98 381 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a9016686-634d-56ac-ac05-3c02a12e6d32")
-		(property "Reference" "J_OLED1601"
-			(at 220 378.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.42 OLED I2C GND/3V3/SCL/SDA"
-			(at 220 383.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "a80f06e6-0b4c-5395-bdd3-09e9fb0595c7")
-		)
-		(pin "2"
-			(uuid "6f8f0b0b-b5f2-5c95-b246-0f933bfdba6a")
-		)
-		(pin "3"
-			(uuid "cb7b7d91-fd33-5ffb-895b-e5c9bbc24280")
-		)
-		(pin "4"
-			(uuid "28f5c0b3-6642-5624-8b3c-65f55a67d58e")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001/b2000020-0020-4020-8020-000000000020"
-					(reference "J_OLED1601")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector_Generic:Conn_01x08")
 		(at 457.2 372.11 0)
 		(unit 1)
@@ -37856,4 +37730,14 @@
 			)
 		)
 	)
-)
+	(text "UI表示: Waveshare LCD（CH/DEST/Bass/Treble）。操作は ENC×3 / DEST SW / ポットのまま。\n2.42 OLED（J_OLED）は廃止。FrontPanel は AmpBankSwitch / AmpBankRelay 共通。"
+		(exclude_from_sim no)
+		(at 50.8 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7b4f429a-1758-4d66-9cd2-55db7fbec28a")
+	))

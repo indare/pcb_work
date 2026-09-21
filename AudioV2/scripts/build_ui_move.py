@@ -144,11 +144,7 @@ class MC:
                 self.place("Device:LED", dref, f"DEST {i+1}", x, y0 + 55.88,
                            {"2": f"{net}_A", "1": net},
                            fp="LED_THT:LED_D5.0mm")
-            # OLED（パネル実装、I2C）
-            self.place("Connector:Conn_01x04_Pin", "J_OLED1601",
-                       "2.42 OLED I2C GND/3V3/SCL/SDA", 220.0, y0 + 40.64,
-                       {"1": "D_GND", "2": "3V3", "3": "I2C_SCL", "4": "I2C_SDA"},
-                       fp="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical")
+            # OLED は 2026-09-20 廃止（状態表示は Waveshare LCD。再実行しても戻さない）
             # I2C プルアップ（マスタの直近へ移した）
             for i, (ref, net) in enumerate((("R1653", "I2C_SDA"), ("R1654", "I2C_SCL"))):
                 self.place("Device:R", ref, "4.7k", 280.0 + i * 15.24, y0 + 40.64,
