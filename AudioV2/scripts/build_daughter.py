@@ -2,10 +2,9 @@
 """娘基板（4ch）を2種つくる — B3a（スイッチ版）と B3b（リレー版）。
 
 1枚は **AmpCh ×4**（`TMUX7612` ×2 を使い切る / リレーは ×4 とドライバ1個）。
-I²C 番地は **基板上のジャンパ A0/A1/A2（6 段）** で決める（縦積み B 用。旧 D21 スロット番地はやめる）。
-UI MCP（0x22）を避けた 6 アドレス: **0x20 / 0x21 / 0x23 / 0x24 / 0x25 / 0x26**。
-両版とも娘に MCP23017 を載せ、スイッチ版の SEL もここで駆動する（親 U_IO101 は廃止）。
-`AmpChannel` は D22 で両版共通。違うのは切替段だけ。
+母板スロットは 3 口。番地は娘の A0/A1/A2 ジャンパ（縦積み向け。UI 0x22 を避け
+0x20 / 0x21 / 0x23 / 0x24 / 0x25 / 0x26）。同じスイッチ版を最大 6 段まで積める。
+D9 のとおりリレー版とも混ぜられる。`AmpChannel` は D22 で両版共通。違うのは切替段だけ。
 
 結線は**ピン先のラベル**で行う（ワイヤは引かない）。`AmpBank` も `ControlPanel` も
 同じ流儀で、ネットリストで検証できる。
@@ -78,12 +77,16 @@ VARIANT = {
 # 母板とはコネクタ対でも繋がっているので、ピン番号がズレても ERC にも
 # ネットリストにも出ず、基板が出来上がってから分かる。
 ANA_NETS = dict(SLOT_ANA_NETS)
-# 両版とも I²C / 3V3 / D_GND を使う。ADDR・旧 SEL ピン（11..16）は娘側 N.C.（番地はジャンパ）。
+# pin 11..16 は N.C.（旧 ADDR/SEL）。番地は娘ジャンパ、SEL は娘 MCP（スイッチ）/ 無し（リレー）。
 PWR_NETS = dict(SLOT_PWR_NETS)
+SWITCH_PWR_NETS = {
+    1: "+15V", 2: "A_GND", 3: "-15V", 4: "A_GND",
+    **{12 + ch: f"SEL_CH{ch}" for ch in range(1, N_CH + 1)},
+}
 
 # --- MCP23017 -----------------------------------------------------------
-# スイッチ版は 1ch=1ビット（SEL×4）、リレー版は 1ch=2ビット（SET/RESET×4）。
-# 番地 A0/A1/A2 は基板ジャンパ（ADDR_A*）。コネクタの ADDR ピンは使わない。
+# スイッチ版は 1ch=1ビット（4本）、リレー版は 1ch=2ビット（SET/RESET で 8本）。
+# 番地は縦積み向けに娘上の A0/A1/A2 ジャンパ（ADDR_A*）。スロットからは来ない。
 MCP = "Interface_Expansion:MCP23017x-x-SP"
 MCP_COMMON = {"13": "I2C_SDA", "12": "I2C_SCL",
               "15": "ADDR_A0", "16": "ADDR_A1", "17": "ADDR_A2",
@@ -91,11 +94,14 @@ MCP_COMMON = {"13": "I2C_SDA", "12": "I2C_SCL",
 GPA = ["21", "22", "23", "24", "25", "26", "27", "28"]        # GPA0..GPA7
 GPB = ["1", "2", "3", "4", "5", "6", "7", "8"]               # GPB0..GPB7
 MCP_NC_ALWAYS = ["11", "14", "19", "20"]                     # NC / INTB / INTA
-
-# 3 極ソルダージャンパ: 1=D_GND / 2=ADDR_Ax / 3=3V3。Bridged12＝出荷時 Low。
-# 6 段（UI 0x22 を除く）: 000=0x20, 001=0x21, 011=0x23, 100=0x24, 101=0x25, 110=0x26
-JP_ADDR = "Jumper:SolderJumper_3_Bridged12"
-JP_FP = "Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels"
+ADDR_JUMPER = "Jumper:SolderJumper_3_Bridged12"
+ADDR_JUMPER_FP = "Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels"
+# ジャンパ配置（Switch 手置きと同一座標）。pin1=D_GND / pin2=ADDR_Ax / pin3=3V3。
+ADDR_JUMPER_AT = {
+    "A0": (170.18, 190.5),
+    "A1": (190.5, 190.5),
+    "A2": (210.82, 190.5),
+}
 
 TMUX = "AudioV2:TMUX7612"
 # 案C（2026-09-11、2026-09-13 更新）: PCB 配置に合わせてピンを組み直す。
@@ -161,15 +167,12 @@ CHAN_PINS = [("TONE_L", "input", "L"), ("TONE_R", "input", "L"),
 HIER_BASE = [("TONE_L", "input"), ("TONE_R", "input"),
              ("AMP_SEL_L", "output"), ("AMP_SEL_R", "output"),
              ("+15V", "input"), ("-15V", "input"), ("A_GND", "bidirectional")]
-# 両版とも I²C はコネクタ経由。SEL / ADDR は娘内（ジャンパ＋MCP）。
-HIER_DIG_EXTRA = [
+HIER_SWITCH_EXTRA = [(f"SEL_CH{ch}", "input") for ch in range(1, N_CH + 1)]
+HIER_RELAY_EXTRA = [
     ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
     ("D_GND", "input"), ("3V3", "input"),
-]
-HIER_RELAY_EXTRA = HIER_DIG_EXTRA + [
     ("+5V_COIL", "input"), ("GND_COIL", "bidirectional"),
 ]
-HIER_SWITCH_EXTRA = list(HIER_DIG_EXTRA)
 
 
 def _label(name: str, x: float, y: float, left: bool) -> str:
@@ -256,38 +259,44 @@ class Builder:
                 scaffold.uid = saved
             self.els.append(sch_import.Element("sheet", blk, None, f"AmpCh{j+1}", (sx, sy)))
 
-        # --- MCP23017（両版）+ 番地ジャンパ A0/A1/A2 ---
-        mcp = dict(MCP_COMMON)
-        if self.v == SWITCH:
-            for i in range(N_CH):
-                mcp[GPA[i]] = f"SEL_CH{i+1}"
-            nc = GPA[N_CH:] + GPB[:] + MCP_NC_ALWAYS
-        else:
-            for i in range(N_CH):
-                mcp[GPA[i]] = f"CH{i+1}_SET"
-                mcp[GPB[i]] = f"CH{i+1}_RST"
-            nc = GPA[N_CH:] + GPB[N_CH:] + MCP_NC_ALWAYS
-        self.place(MCP, f"U_IO{sfx}", "MCP23017", 200.66, 213.36, mcp, nc,
-                   footprint="Package_DIP:DIP-28_W7.62mm")
-        self.cap(f"C_IO{sfx}", "100nF", 236.22, 213.36, "3V3", "D_GND")
-        # 出荷時 Bridged12 = A*=GND → 0x20（段1）。表はシート注記。
-        for i, bit in enumerate(("A0", "A1", "A2")):
-            self.place(JP_ADDR, f"JP_ADDR_{bit}{sfx}", f"ADDR {bit}",
-                       170.18 + i * 20.32, 190.5,
-                       {"1": "D_GND", "2": f"ADDR_{bit}", "3": "3V3"},
-                       footprint=JP_FP)
-        self.els.append(sch_import.Element(
-            "text",
-            '\t(text "I2C ADDR jumpers (skip UI 0x22):\\n'
-            '  tier1 000→0x20  tier2 001→0x21  tier3 011→0x23\\n'
-            '  tier4 100→0x24  tier5 101→0x25  tier6 110→0x26\\n'
-            '  (A2 A1 A0; Bridged12=GND=0, bridge 2-3 for 1)"\n'
-            '\t\t(exclude_from_sim no)\n'
-            '\t\t(at 152.4 175.26 0)\n'
-            '\t\t(effects\n\t\t\t(font\n\t\t\t\t(size 1.27 1.27)\n\t\t\t)\n'
-            '\t\t\t(justify left bottom)\n\t\t)\n'
-            f'\t\t(uuid "{uid()}")\n\t)\n',
-            None, None, (152.4, 175.26)))
+        # --- MCP23017（リレー版のみ）---
+        # スイッチ版の MCP / ADDR ジャンパは手置き（再生成で消さない）。
+        if self.v == RELAY:
+            mcp = dict(MCP_COMMON)
+            # DIP 0° で U321 を右に置くと、MCP 右列 28→20 と ULN 左列 1→9 が
+            # 2.54 mm ピッチで向かい合う。I1..I8 = GPA7..GPA0。
+            # ピン20 INTA は ULN ピン9 GND と位置だけ揃う（ネットは別・NC）。
+            # ピン15–19（A0/A1/A2/~RESET/INTB）はドライバより南に余る。GPB は未使用。
+            for i, ch in enumerate(range(1, N_CH + 1)):
+                mcp[GPA[7 - i * 2]] = f"CH{ch}_SET"
+                mcp[GPA[6 - i * 2]] = f"CH{ch}_RST"
+            nc = GPB + MCP_NC_ALWAYS
+            self.place(MCP, f"U_IO{sfx}", "MCP23017", 200.66, 213.36, mcp, nc,
+                       footprint="Package_DIP:DIP-28_W7.62mm")
+            self.cap(f"C_IO{sfx}", "100nF", 236.22, 213.36, "3V3", "D_GND")
+            # I2C ADDR ジャンパ（縦積み。Bridged12=GND=0、2-3 で 1）
+            for bit, (jx, jy) in ADDR_JUMPER_AT.items():
+                self.place(ADDR_JUMPER, f"JP_ADDR_{bit}{sfx}", f"ADDR {bit}",
+                           jx, jy,
+                           {"1": "D_GND", "2": f"ADDR_{bit}", "3": "3V3"},
+                           footprint=ADDR_JUMPER_FP)
+            self.els.append(sch_import.Element(
+                "text",
+                '\t(text "I2C ADDR jumpers (skip UI 0x22):\\n'
+                '  tier1 000→0x20  tier2 001→0x21  tier3 011→0x23\\n'
+                '  tier4 100→0x24  tier5 101→0x25  tier6 110→0x26\\n'
+                '  (A2 A1 A0; Bridged12=GND=0, bridge 2-3 for 1)"\n'
+                '\t\t(exclude_from_sim no)\n'
+                '\t\t(at 152.4 175.26 0)\n'
+                '\t\t(effects\n'
+                '\t\t\t(font\n'
+                '\t\t\t\t(size 1.27 1.27)\n'
+                '\t\t\t)\n'
+                '\t\t\t(justify left bottom)\n'
+                '\t\t)\n'
+                f'\t\t(uuid "{uid()}")\n'
+                '\t)\n',
+                None, None, (152.4, 175.26)))
         self.cap(f"C_BULK_P{sfx}", "100uF 35V", 251.46, 213.36, "+15V", "A_GND", True)
         self.cap(f"C_BULK_N{sfx}", "100uF 35V", 266.7, 213.36, "A_GND", "-15V", True)
 
@@ -324,10 +333,11 @@ class Builder:
         self.place("Connector_Generic:Conn_02x05_Odd_Even", f"J_ANA{sfx}",
                    f"SLOT ANA (D18)", 340.36, 60.96, ANA_NETS,
                    footprint="Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical")
-        # pin 11..16: 旧 ADDR/SEL。番地はジャンパ、SEL は娘 MCP なので N.C.
+        pwr = SWITCH_PWR_NETS if self.v == SWITCH else PWR_NETS
+        used = set(pwr)
         self.place("Connector_Generic:Conn_02x08_Odd_Even", f"J_PWR{sfx}",
-                   f"SLOT PWR/CTRL (D18)", 340.36, 116.84, PWR_NETS,
-                   [str(pin) for pin in range(11, 17)],
+                   f"SLOT PWR/CTRL (D18)", 340.36, 116.84, pwr,
+                   [str(pin) for pin in range(1, 17) if pin not in used],
                    footprint="Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical")
 
         # --- 取付穴（A2: M3 φ3.2 を四隅、端から 5.0 mm）---
@@ -405,8 +415,11 @@ PARENT_SHEETS = [
     (RELAY, (160.0, 150.0), (35.56, 114.3)),
 ]
 
-# 親側でシートピンに置くラベル（patch_parent 用・現行は未使用）。
-# 番地は娘ジャンパ。親へ出すのは電源・I²C・コイルだけ。
+# 親側でシートピンに置くラベル。娘基板の階層ピン名をそのまま使うと**両スロットが
+# 同じネットに合流してしまう**ものを、ここで差し替える。
+#   - ADDR0/ADDR1 は廃止（縦積みは娘ジャンパ）。残っているのは記録用の旧表。
+#   - +5V_COIL / GND_COIL は母板側と同名（2026-09-04 に母板を +5V -> +5V_COIL へ
+#     揃えたので恒等。以前は母板が +5V で名前が食い違っていた）
 PARENT_NET = {
     SWITCH: {},
     RELAY: {"+5V_COIL": "+5V_COIL", "GND_COIL": "GND_COIL"},

@@ -32879,6 +32879,17 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "UI表示: Waveshare LCD（CH/DEST/Bass/Treble）。操作は ENC×3 / DEST SW / ポットのまま。\n2.42 OLED（J_OLED）は廃止。FrontPanel は AmpBankSwitch / AmpBankRelay 共通。"
+		(exclude_from_sim no)
+		(at 50.8 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7b4f429a-1758-4d66-9cd2-55db7fbec28a")
+	)
 	(junction
 		(at 337.82 134.62)
 		(diameter 0)
@@ -37730,14 +37741,4 @@
 			)
 		)
 	)
-	(text "UI表示: Waveshare LCD（CH/DEST/Bass/Treble）。操作は ENC×3 / DEST SW / ポットのまま。\n2.42 OLED（J_OLED）は廃止。FrontPanel は AmpBankSwitch / AmpBankRelay 共通。"
-		(exclude_from_sim no)
-		(at 50.8 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7b4f429a-1758-4d66-9cd2-55db7fbec28a")
-	))
+)
