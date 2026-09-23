@@ -17,6 +17,12 @@
 ピン・アドレスの正は回路図（MeasureControl の Pico 注記、FrontPanel の MCP）。  
 ここに数値を複製しない（[SOURCE_OF_TRUTH.md](../../SOURCE_OF_TRUTH.md)）。
 
+### Switch SEL（起動）
+
+外付け SEL→`D_GND` プルは回路に置かない（TMUX7612 内蔵プルダウン）。  
+実装時は I²C 直後に娘 MCP の SEL 用 GPIO を**出力＋既知値**にし、`apply(既定ch)` を早く呼ぶ。  
+詳細は [`amp_select.py`](amp_select.py) 先頭。
+
 ## ディレクトリ
 
 ```

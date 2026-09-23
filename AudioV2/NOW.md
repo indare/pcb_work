@@ -18,6 +18,7 @@
 - **状態表示（CH / DEST / Bass / Treble）は Waveshare LCD に寄せる**
 - **2.42″ OLED（`J_OLED`）は回路図・PCB から削除**（I²C は MCP / PT / 娘向けのまま）
 - **ファーム置き場:** [`firmware/`](firmware/)（骨格。Switch/Relay 共通 API）
+  - Switch SEL の外付けプルは無し。起動時は娘 MCP をすぐ出力＋既知値（[`firmware/amp_select.py`](firmware/amp_select.py)）
 
 ## AmpBank 番地（ジャンパ 6 段）
 

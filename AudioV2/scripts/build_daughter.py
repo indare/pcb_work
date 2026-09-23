@@ -79,10 +79,8 @@ VARIANT = {
 ANA_NETS = dict(SLOT_ANA_NETS)
 # pin 11..16 は N.C.（旧 ADDR/SEL）。番地は娘ジャンパ、SEL は娘 MCP（スイッチ）/ 無し（リレー）。
 PWR_NETS = dict(SLOT_PWR_NETS)
-SWITCH_PWR_NETS = {
-    1: "+15V", 2: "A_GND", 3: "-15V", 4: "A_GND",
-    **{12 + ch: f"SEL_CH{ch}" for ch in range(1, N_CH + 1)},
-}
+# スイッチ版もコネクタ割当はリレーと同じ（SEL はコネクタに出さない）。
+SWITCH_PWR_NETS = dict(SLOT_PWR_NETS)
 
 # --- MCP23017 -----------------------------------------------------------
 # スイッチ版は 1ch=1ビット（4本）、リレー版は 1ch=2ビット（SET/RESET で 8本）。
