@@ -327,16 +327,19 @@ class Builder:
             self.cap("C321", "100uF 25V", 320.0, 340.0, "+5V_COIL", "GND_COIL", True)
             self.cap("C322", "100nF", 335.0, 340.0, "+5V_COIL", "GND_COIL")
 
-        # --- D18 のヘッダ（娘基板側の受け）---
+        # --- D18 のヘッダ（娘基板側のオス。ピン長は FP に出ない発注属性）---
+        # A5 案a: ロングテール約11mm で基板間15mm。J_ANA は金メッキ（音声）。
         self.place("Connector_Generic:Conn_02x05_Odd_Even", f"J_ANA{sfx}",
                    f"SLOT ANA (D18)", 340.36, 60.96, ANA_NETS,
-                   footprint="Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical")
+                   footprint="Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical",
+                   description="基板間15mm用ロングテール（約11mm）・金メッキ。母板ソケットと対（A5案a）")
         pwr = SWITCH_PWR_NETS if self.v == SWITCH else PWR_NETS
         used = set(pwr)
         self.place("Connector_Generic:Conn_02x08_Odd_Even", f"J_PWR{sfx}",
                    f"SLOT PWR/CTRL (D18)", 340.36, 116.84, pwr,
                    [str(pin) for pin in range(1, 17) if pin not in used],
-                   footprint="Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical")
+                   footprint="Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical",
+                   description="基板間15mm用ロングテール（約11mm）。母板ソケットと対（A5案a）")
 
         # --- 取付穴（A2: M3 φ3.2 を四隅、端から 5.0 mm）---
         # ピンが無いのでネットは持たない。v1 と同じく回路図にシンボルを置いて

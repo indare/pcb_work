@@ -124,7 +124,7 @@ CHILD_SHEETS = [
          ("TP_INT", "input", "R", "TP_INT"), ("TP_RST", "output", "R", "TP_RST"),
      ]),
     ("AmpBankSwitch", "AmpBankSwitch.kicad_sch",
-     "a1000011-0011-4011-8011-000000000011", (400.0, 270.0), (45.72, 40.64), [
+     "a1000011-0011-4011-8011-000000000011", (400.0, 270.0), (45.72, 45.72), [
          ("TONE_L", "input", "L", "TONE_L"), ("TONE_R", "input", "L", "TONE_R"),
          ("+15V", "input", "L", "+15V"), ("-15V", "input", "L", "-15V"),
          ("A_GND", "bidirectional", "L", "A_GND"),
@@ -292,18 +292,19 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
     saved_sc, scaffold.uid = scaffold.uid, uid
     try:
         for slot, ana_at, pwr_at in SLOTS:
-            for lib, ref, value, at, nets, fp in (
+            for lib, ref, value, at, nets, fp, desc in (
                 ("Connector_Generic:Conn_02x05_Odd_Even", f"J_ANA10{slot}",
-                 f"SLOT{slot} ANA (D18)", ana_at, SLOT_ANA_NETS, SLOT_FP_ANA),
+                 f"SLOT{slot} ANA (D18)", ana_at, SLOT_ANA_NETS, SLOT_FP_ANA,
+                 "標準高さソケット（約8.5mm）・金メッキ。娘ロングテールと対（A5案a）"),
                 ("Connector_Generic:Conn_02x08_Odd_Even", f"J_PWR10{slot}",
-                 f"SLOT{slot} PWR/CTRL (D18)", pwr_at, SLOT_PWR_NETS, SLOT_FP_PWR),
+                 f"SLOT{slot} PWR/CTRL (D18)", pwr_at, SLOT_PWR_NETS, SLOT_FP_PWR,
+                 "標準高さソケット（約8.5mm）。娘ロングテールと対（A5案a）"),
             ):
                 connector_el = sch_import.Element(
                     "symbol",
                     symbol_inst_v10(lib, ref, value, at[0], at[1], 0, path,
-                                    footprint=fp),
-                    ref, None, at)
-                els.append(connector_el)
+                                    footprint=fp, description=desc),
+                    ref, None, at)                els.append(connector_el)
                 # KiCad 10 の正準化後のピン長を含め、実際のシンボルから先端を取る。
                 # ライブラリS式の座標を直接読むと 0.8 mm ずれて全ピンが浮く。
                 tips = dict(zip(sch_edit.lib_pins(lib).keys(),

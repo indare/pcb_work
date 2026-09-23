@@ -46488,6 +46488,46 @@
 		)
 		(uuid "30e819f7-35f0-5db3-9f2d-d306707017f9")
 	)
+	(label "I2C_SDA"
+		(at 400 285.24 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "55965ef8-0195-465e-a50f-75d33328b210")
+	)
+	(label "I2C_SCL"
+		(at 400 287.78 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "84bfcfd5-2b31-4900-a66a-54a5ab783da4")
+	)
+	(label "D_GND"
+		(at 400 290.32 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b0db0d77-c3e3-44e0-b9c6-7f506a47b650")
+	)
+	(label "3V3"
+		(at 400 292.86 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8c36e66b-a73c-425f-b036-2456b9871357")
+	)
 	(label "+15V"
 		(at 144.78 74.93 90)
 		(effects
@@ -46667,16 +46707,6 @@
 			(justify left bottom)
 		)
 		(uuid "3acfe042-0e93-5842-9d3c-cd41506e1fcf")
-	)
-	(label "3V3"
-		(at 322.58 187.96 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "3c208c1f-4fac-5e0e-b8a0-a2ac6bd4aebd")
 	)
 	(label "COMMON_R"
 		(at 449.58 118.11 0)
@@ -46988,16 +47018,6 @@
 		)
 		(uuid "58186ba4-3a0c-56b6-a8e5-99c4c89324ab")
 	)
-	(label "3V3"
-		(at 322.58 172.72 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "58548317-f7de-58ce-a5fb-3471893e8d84")
-	)
 	(label "LCD_CS"
 		(at 445.72 240.32 0)
 		(effects
@@ -47237,16 +47257,6 @@
 			(justify left bottom)
 		)
 		(uuid "7283a597-ece0-5540-9f83-514942ec8b2b")
-	)
-	(label "I2C_SDA"
-		(at 322.58 152.4 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "73c57056-0570-521e-b3cf-edb98498fae4")
 	)
 	(label "LCD_SCK"
 		(at 470 190.48 180)
@@ -47527,16 +47537,6 @@
 			(justify left bottom)
 		)
 		(uuid "86771230-cc2e-454b-b616-4dd3efa265d2")
-	)
-	(label "D_GND"
-		(at 322.58 190.5 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "86970f26-a88e-56ae-bc48-00ab6bfa8520")
 	)
 	(label "PD_12V_COIL"
 		(at 129.54 66.04 0)
@@ -48488,16 +48488,6 @@
 		)
 		(uuid "cfee0f1b-b48b-5de9-ab4d-dc8c3cc3a9d9")
 	)
-	(label "D_GND"
-		(at 335.28 195.58 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d02404d9-787f-54e0-a5ec-de6b4fc1a812")
-	)
 	(label "PT_BOUT_L"
 		(at 490.22 102.87 0)
 		(effects
@@ -48819,16 +48809,6 @@
 		(uuid "e7dadd29-178b-48b0-8cf4-d7d1258cfee3")
 	)
 	(label "3V3"
-		(at 322.58 185.42 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e8e099c0-7716-5737-a2eb-377b061fba66")
-	)
-	(label "3V3"
 		(at 177.8 124.46 0)
 		(effects
 			(font
@@ -49008,16 +48988,6 @@
 		)
 		(uuid "f7b9e20a-b9b2-40a1-916b-2193bee8857c")
 	)
-	(label "3V3"
-		(at 335.28 144.78 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f8bbc8f1-df9c-5172-ac0a-f27e2afcbdae")
-	)
 	(label "A_GND"
 		(at 109.22 215.9 0)
 		(effects
@@ -49117,16 +49087,6 @@
 			(justify right bottom)
 		)
 		(uuid "fd32e4ee-50c9-5418-a25e-7b9f31201c29")
-	)
-	(label "I2C_SCL"
-		(at 322.58 149.86 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "fd9a49a4-f3c1-5946-afab-10a214269264")
 	)
 	(label "I2C_SCL"
 		(at 165.1 124.46 180)
@@ -51371,7 +51331,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "標準高さソケット（約8.5mm）。娘ロングテールと対（A5案a）"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -51813,7 +51773,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "標準高さソケット（約8.5mm）・金メッキ。娘ロングテールと対（A5案a）"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -52552,7 +52512,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "標準高さソケット（約8.5mm）・金メッキ。娘ロングテールと対（A5案a）"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -53485,7 +53445,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "標準高さソケット（約8.5mm）・金メッキ。娘ロングテールと対（A5案a）"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -53923,7 +53883,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "標準高さソケット（約8.5mm）。娘ロングテールと対（A5案a）"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -55037,7 +54997,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "標準高さソケット（約8.5mm）。娘ロングテールと対（A5案a）"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -55586,7 +55546,7 @@
 	)
 	(sheet
 		(at 400 270)
-		(size 45.72 40.64)
+		(size 45.72 45.72)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -55611,7 +55571,7 @@
 			)
 		)
 		(property "Sheetfile" "AmpBankSwitch.kicad_sch"
-			(at 422.86 313.18 0)
+			(at 422.86 318.26 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -55664,6 +55624,46 @@
 		(pin "A_GND" bidirectional
 			(at 400 282.7 180)
 			(uuid "147dc11a-50f5-5c6c-83c6-128049c652aa")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 400 285.24 180)
+			(uuid "55465b22-3fad-4d53-bd16-54929832c70a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 400 287.78 180)
+			(uuid "14a6e319-e6da-4b28-9f9e-b6d73c190157")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "D_GND" input
+			(at 400 290.32 180)
+			(uuid "4a0e5dab-23e2-4aef-b596-e65db706c75c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "3V3" input
+			(at 400 292.86 180)
+			(uuid "3fd0592f-1e1b-4533-b488-00a17b65fe4b")
 			(effects
 				(font
 					(size 1.27 1.27)
