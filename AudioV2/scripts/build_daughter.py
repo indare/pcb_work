@@ -95,11 +95,20 @@ MCP_NC_ALWAYS = ["11", "14", "19", "20"]                     # NC / INTB / INTA
 ADDR_JUMPER = "Jumper:SolderJumper_3_Bridged12"
 ADDR_JUMPER_FP = "Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels"
 # ジャンパ配置（Switch 手置きと同一座標）。pin1=D_GND / pin2=ADDR_Ax / pin3=3V3。
+# 参照名は版で分ける（Switch=`S_ADDR_A*`、Relay=`R_ADDR_A*`）。旧 `JP_ADDR_A*{suffix}` は廃止。
 ADDR_JUMPER_AT = {
     "A0": (170.18, 190.5),
     "A1": (190.5, 190.5),
     "A2": (210.82, 190.5),
 }
+# 回路図・PCB シルク共有の番地早見（A2/A1/A0。Bridged12=GND=0、2-3 で 1。UI 0x22 は使わない）
+ADDR_JUMPER_NOTE = (
+    "I2C ADDR A2/A1/A0\\n"
+    "0/0/0=0x20 0/0/1=0x21\\n"
+    "0/1/1=0x23 1/0/0=0x24\\n"
+    "1/0/1=0x25 1/1/0=0x26\\n"
+    "skip 0x22  12=0 23=1"
+)
 
 TMUX = "AudioV2:TMUX7612"
 # 案C（2026-09-11、2026-09-13 更新）: PCB 配置に合わせてピンを組み直す。
@@ -261,7 +270,7 @@ class Builder:
             self.els.append(sch_import.Element("sheet", blk, None, f"AmpCh{j+1}", (sx, sy)))
 
         # --- MCP23017（リレー版のみ）---
-        # スイッチ版の MCP / ADDR ジャンパは手置き（再生成で消さない）。
+        # スイッチ版の MCP / ADDR ジャンパ（`S_ADDR_A*`）は手置き（再生成で消さない）。
         if self.v == RELAY:
             mcp = dict(MCP_COMMON)
             # DIP 0° で U321 を右に置くと、MCP 右列 28→20 と ULN 左列 1→9 が
@@ -275,18 +284,15 @@ class Builder:
             self.place(MCP, f"U_IO{sfx}", "MCP23017", 200.66, 213.36, mcp, nc,
                        footprint="Package_DIP:DIP-28_W7.62mm")
             self.cap(f"C_IO{sfx}", "100nF", 236.22, 213.36, "3V3", "D_GND")
-            # I2C ADDR ジャンパ（縦積み。Bridged12=GND=0、2-3 で 1）
+            # I2C ADDR ジャンパ（縦積み。参照は R_ADDR_A*）
             for bit, (jx, jy) in ADDR_JUMPER_AT.items():
-                self.place(ADDR_JUMPER, f"JP_ADDR_{bit}{sfx}", f"ADDR {bit}",
+                self.place(ADDR_JUMPER, f"R_ADDR_{bit}", f"ADDR {bit}",
                            jx, jy,
                            {"1": "D_GND", "2": f"ADDR_{bit}", "3": "3V3"},
                            footprint=ADDR_JUMPER_FP)
             self.els.append(sch_import.Element(
                 "text",
-                '\t(text "I2C ADDR jumpers (skip UI 0x22):\\n'
-                '  tier1 000→0x20  tier2 001→0x21  tier3 011→0x23\\n'
-                '  tier4 100→0x24  tier5 101→0x25  tier6 110→0x26\\n'
-                '  (A2 A1 A0; Bridged12=GND=0, bridge 2-3 for 1)"\n'
+                f'\t(text "{ADDR_JUMPER_NOTE}"\n'
                 '\t\t(exclude_from_sim no)\n'
                 '\t\t(at 152.4 175.26 0)\n'
                 '\t\t(effects\n'
