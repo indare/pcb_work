@@ -46488,46 +46488,6 @@
 		)
 		(uuid "30e819f7-35f0-5db3-9f2d-d306707017f9")
 	)
-	(label "I2C_SDA"
-		(at 400 285.24 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "55965ef8-0195-465e-a50f-75d33328b210")
-	)
-	(label "I2C_SCL"
-		(at 400 287.78 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "84bfcfd5-2b31-4900-a66a-54a5ab783da4")
-	)
-	(label "D_GND"
-		(at 400 290.32 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b0db0d77-c3e3-44e0-b9c6-7f506a47b650")
-	)
-	(label "3V3"
-		(at 400 292.86 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8c36e66b-a73c-425f-b036-2456b9871357")
-	)
 	(label "+15V"
 		(at 144.78 74.93 90)
 		(effects
@@ -46967,6 +46927,16 @@
 			(justify right bottom)
 		)
 		(uuid "550e3c2f-9549-5f85-a265-86fc2141022d")
+	)
+	(label "I2C_SDA"
+		(at 400 285.24 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "55965ef8-0195-465e-a50f-75d33328b210")
 	)
 	(label "AMP_SEL_L"
 		(at 445.72 272.54 0)
@@ -47518,6 +47488,16 @@
 		)
 		(uuid "83ffd43f-2a61-4185-a5a1-74069b4706b2")
 	)
+	(label "I2C_SCL"
+		(at 400 287.78 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "84bfcfd5-2b31-4900-a66a-54a5ab783da4")
+	)
 	(label "LCD_MOSI"
 		(at 276.86 165.1 180)
 		(effects
@@ -47647,6 +47627,16 @@
 			(justify left bottom)
 		)
 		(uuid "8bce620c-9817-57ca-ad8d-5928cca2336f")
+	)
+	(label "3V3"
+		(at 400 292.86 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8c36e66b-a73c-425f-b036-2456b9871357")
 	)
 	(label "TONE_L"
 		(at 45.72 38.1 180)
@@ -48077,6 +48067,16 @@
 			(justify left bottom)
 		)
 		(uuid "b05ebbd4-6b98-5862-8447-2f34822b085c")
+	)
+	(label "D_GND"
+		(at 400 290.32 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b0db0d77-c3e3-44e0-b9c6-7f506a47b650")
 	)
 	(label "GND_COIL"
 		(at 213.36 154.94 180)
@@ -51331,7 +51331,7 @@
 				)
 			)
 		)
-		(property "Description" "標準高さソケット（約8.5mm）。娘ロングテールと対（A5案a）"
+		(property "Description" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -51773,7 +51773,7 @@
 				)
 			)
 		)
-		(property "Description" "標準高さソケット（約8.5mm）・金メッキ。娘ロングテールと対（A5案a）"
+		(property "Description" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -52512,7 +52512,7 @@
 				)
 			)
 		)
-		(property "Description" "標準高さソケット（約8.5mm）・金メッキ。娘ロングテールと対（A5案a）"
+		(property "Description" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -53445,7 +53445,7 @@
 				)
 			)
 		)
-		(property "Description" "標準高さソケット（約8.5mm）・金メッキ。娘ロングテールと対（A5案a）"
+		(property "Description" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -53883,7 +53883,7 @@
 				)
 			)
 		)
-		(property "Description" "標準高さソケット（約8.5mm）。娘ロングテールと対（A5案a）"
+		(property "Description" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -54997,7 +54997,7 @@
 				)
 			)
 		)
-		(property "Description" "標準高さソケット（約8.5mm）。娘ロングテールと対（A5案a）"
+		(property "Description" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)

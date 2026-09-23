@@ -6910,6 +6910,16 @@
 		(at 284.48 281.94)
 		(uuid "fdf8c22d-5b1d-50b0-bfe4-5ac7dc4d9293")
 	)
+	(label "CH1_OUT_R"
+		(at 149.86 297.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "000f33b1-619b-4b72-9a84-30be0e23816f")
+	)
 	(label "A_GND"
 		(at 335.28 55.88 180)
 		(effects
@@ -6950,6 +6960,16 @@
 		)
 		(uuid "021ff6f3-87a2-5950-a446-750f12693bdf")
 	)
+	(label "CH4_RST"
+		(at 238.76 194.31 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "02bc9134-d190-451b-a2b7-32c6ff32da02")
+	)
 	(label "3V3"
 		(at 419.1 116.84 0)
 		(effects
@@ -6969,6 +6989,16 @@
 			(justify right bottom)
 		)
 		(uuid "0543822e-dbc7-507f-a04a-e70a93058e34")
+	)
+	(label "CH2_OUT_L"
+		(at 205.74 297.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "067bd150-ff3b-4308-ada1-a8037a168c94")
 	)
 	(label "AMP_SEL_R"
 		(at 208.28 281.94 0)
@@ -7060,16 +7090,6 @@
 		)
 		(uuid "1385b9bf-71c7-5db5-b4fe-42a2cfd63a7a")
 	)
-	(label "CH1_SET"
-		(at 238.76 179.07 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "1547ae70-4bdd-5287-b11b-fc677fd7c31f")
-	)
 	(label "CH4_OUT_L"
 		(at 114.3 137.16 0)
 		(effects
@@ -7120,6 +7140,26 @@
 		)
 		(uuid "1bce1104-3a32-5216-a368-07a22116bc8b")
 	)
+	(label "CH1_OUT_L"
+		(at 160.02 297.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1c1001a6-d608-4664-a8b5-78e242a120e7")
+	)
+	(label "CH2_RSTC"
+		(at 259.08 184.15 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1d343365-00b4-44d9-a04b-3f05d235fa0a")
+	)
 	(label "TONE_L"
 		(at 335.28 58.42 180)
 		(effects
@@ -7131,7 +7171,7 @@
 		(uuid "1dbae1be-6bf2-5f0f-9b3e-9842e0a5c410")
 	)
 	(label "CH1_RST"
-		(at 213.36 208.28 0)
+		(at 213.36 210.82 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7141,7 +7181,7 @@
 		(uuid "1e2b2f4c-1a31-4853-9aa5-e7acea667290")
 	)
 	(label "CH2_SET"
-		(at 213.36 205.74 0)
+		(at 213.36 203.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7161,7 +7201,7 @@
 		(uuid "1e99ceae-aaa5-5396-992b-c5425632ab75")
 	)
 	(label "CH2_RST"
-		(at 213.36 203.2 0)
+		(at 213.36 205.74 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7179,6 +7219,16 @@
 			(justify right bottom)
 		)
 		(uuid "287b4f06-ec81-5ab8-821c-18f3ed7de9ae")
+	)
+	(label "CH2_SET"
+		(at 238.76 186.69 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2c153353-30db-40a7-8700-7fe2056d0902")
 	)
 	(label "I2C_SCL"
 		(at 419.1 101.6 0)
@@ -7210,18 +7260,18 @@
 		)
 		(uuid "32fa6258-2e61-57d1-981c-09d838184189")
 	)
-	(label "CH4_SET"
-		(at 238.76 194.31 180)
+	(label "CH4_OUT_L"
+		(at 297.18 297.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "337d3770-693f-5440-b8a9-044cb3419f44")
+		(uuid "34701d9b-8b16-4a91-9acd-67ba5e85fc9e")
 	)
 	(label "CH4_SET"
-		(at 213.36 195.58 0)
+		(at 213.36 193.04 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7229,6 +7279,16 @@
 			(justify left bottom)
 		)
 		(uuid "36877c18-52c5-44e1-9810-4b123bb0899c")
+	)
+	(label "CH2_RST"
+		(at 238.76 184.15 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "39b68939-6b60-4a8e-98ae-3097d1302d5b")
 	)
 	(label "GND_COIL"
 		(at 347.98 114.3 0)
@@ -7250,16 +7310,6 @@
 		)
 		(uuid "3b9312ca-6abd-5d40-b3cd-146acec456cf")
 	)
-	(label "CH2_RSTC"
-		(at 259.08 186.69 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3c5c8359-1f2a-5223-b8b0-9530d85e0600")
-	)
 	(label "A_GND"
 		(at 347.98 63.5 0)
 		(effects
@@ -7271,7 +7321,7 @@
 		(uuid "40fafb8a-04bd-557f-a455-34900f8ea9f7")
 	)
 	(label "CH4_RST"
-		(at 213.36 193.04 0)
+		(at 213.36 195.58 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7310,15 +7360,25 @@
 		)
 		(uuid "431ea195-52f0-5237-b23b-468073f07cd0")
 	)
-	(label "CH4_RSTC"
-		(at 259.08 196.85 0)
+	(label "CH3_SETC"
+		(at 259.08 191.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "47cf9aca-aa41-5eea-8653-743c43e13c02")
+		(uuid "44f30c61-acb2-4740-8db0-ec910354089a")
+	)
+	(label "CH3_RSTC"
+		(at 259.08 189.23 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "48293130-e10f-457e-bb06-ee7150f7b61c")
 	)
 	(label "A_GND"
 		(at 347.98 58.42 0)
@@ -7350,16 +7410,6 @@
 		)
 		(uuid "4f7c0b8b-f3c9-5fd9-aa87-18159df953d6")
 	)
-	(label "CH2_OUT_L"
-		(at 195.58 297.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "5035c5fd-b0bc-5539-9f2d-9c121adaca53")
-	)
 	(label "D_GND"
 		(at 419.1 109.22 0)
 		(effects
@@ -7369,6 +7419,16 @@
 			(justify left bottom)
 		)
 		(uuid "52da66c7-3725-5319-b5b6-f91a751fc2d9")
+	)
+	(label "CH3_OUT_L"
+		(at 251.46 297.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "54b353fc-a607-49cd-aabf-315c90e76329")
 	)
 	(label "-15V"
 		(at 38.1 45.72 180)
@@ -7480,16 +7540,6 @@
 		)
 		(uuid "60b4bf42-33d2-554b-b1d7-5963f670cc5e")
 	)
-	(label "CH3_OUT_R"
-		(at 251.46 297.18 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "64a1a023-5fd0-523a-9031-422f2f95cb84")
-	)
 	(label "TONE_L"
 		(at 38.1 30.48 180)
 		(effects
@@ -7509,6 +7559,16 @@
 			(justify left bottom)
 		)
 		(uuid "67a33d95-93bc-5213-a800-41e2cb85e5ed")
+	)
+	(label "CH1_RSTC"
+		(at 259.08 179.07 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "69385af3-be49-485a-9b97-0d6ce3cba078")
 	)
 	(label "I2C_SCL"
 		(at 335.28 119.38 180)
@@ -7570,15 +7630,15 @@
 		)
 		(uuid "6c28c0f5-5fe5-5058-adc6-1676b12a267b")
 	)
-	(label "CH1_OUT_L"
-		(at 149.86 297.18 180)
+	(label "CH4_SETC"
+		(at 259.08 196.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
-		(uuid "6d2dde75-d23d-5731-bdab-a1a1b4aff583")
+		(uuid "6cdcfc0f-f115-443d-911e-989a731a505c")
 	)
 	(label "CH4_SETC"
 		(at 279.4 297.18 180)
@@ -7610,6 +7670,16 @@
 		)
 		(uuid "72c684f9-5aea-5dbb-92b8-be897928c1d1")
 	)
+	(label "CH4_OUT_R"
+		(at 287.02 297.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "79a34fa9-4e9f-41b5-b3aa-17a29d2210c3")
+	)
 	(label "TONE_R"
 		(at 347.98 60.96 0)
 		(effects
@@ -7630,6 +7700,16 @@
 		)
 		(uuid "7b618f77-42f4-548a-b457-3077bf498ece")
 	)
+	(label "CH3_RST"
+		(at 238.76 189.23 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7c558287-c008-4bed-9f86-93678ee81262")
+	)
 	(label "TONE_R"
 		(at 38.1 35.56 180)
 		(effects
@@ -7639,16 +7719,6 @@
 			(justify right bottom)
 		)
 		(uuid "7e41115e-4142-595f-8cd8-80fef6b7d4a2")
-	)
-	(label "CH3_OUT_L"
-		(at 241.3 297.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7e654209-c852-5ead-a2ad-57a3a4c4e8ee")
 	)
 	(label "+15V"
 		(at 335.28 109.22 180)
@@ -7710,15 +7780,15 @@
 		)
 		(uuid "8903febe-3455-5f28-ab54-03c566165fa4")
 	)
-	(label "CH2_SET"
-		(at 238.76 184.15 180)
+	(label "CH2_OUT_R"
+		(at 195.58 297.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "8b0d7b08-7b8c-5e4f-828c-35af690400ae")
+		(uuid "8960679d-285e-455c-be21-39bae047f102")
 	)
 	(label "+15V"
 		(at 38.1 76.2 180)
@@ -7750,16 +7820,6 @@
 		)
 		(uuid "8d6eea79-1b4b-530c-a1ae-5ea84ea73cc2")
 	)
-	(label "CH2_RST"
-		(at 238.76 186.69 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8e4d7754-8710-5d61-ba8c-d52a9a381bbb")
-	)
 	(label "D_GND"
 		(at 236.22 217.17 0)
 		(effects
@@ -7769,6 +7829,16 @@
 			(justify left bottom)
 		)
 		(uuid "8e71ef36-cb58-550b-ad18-9a91ec4647a8")
+	)
+	(label "CH2_SETC"
+		(at 259.08 186.69 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8f396555-d7fa-41d7-86e7-c88e208c0d35")
 	)
 	(label "3V3"
 		(at 236.22 209.55 0)
@@ -7810,16 +7880,6 @@
 		)
 		(uuid "9a5c772c-7980-5513-912b-cb804ad80dfe")
 	)
-	(label "CH3_SET"
-		(at 238.76 189.23 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9bd0f6ec-2f90-59bf-a0ea-c4198283d381")
-	)
 	(label "I2C_SDA"
 		(at 187.96 195.58 180)
 		(effects
@@ -7849,6 +7909,16 @@
 			(justify right bottom)
 		)
 		(uuid "a2942611-1794-520a-aa3e-998ab402a05e")
+	)
+	(label "CH4_SET"
+		(at 238.76 196.85 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a30998dd-00ca-4e11-aea8-1e8acc3ab4a9")
 	)
 	(label "-15V"
 		(at 38.1 81.28 180)
@@ -7890,6 +7960,16 @@
 		)
 		(uuid "acdf588d-ea75-50f3-8bc8-82c3c3d23344")
 	)
+	(label "CH1_SETC"
+		(at 259.08 181.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b15f4b40-581b-4143-92e0-0d85d002a7bc")
+	)
 	(label "TONE_L"
 		(at 38.1 66.04 180)
 		(effects
@@ -7899,6 +7979,16 @@
 			(justify right bottom)
 		)
 		(uuid "b2e10308-a7c3-542d-87b4-3776914bf46f")
+	)
+	(label "CH3_OUT_R"
+		(at 241.3 297.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b6dfc980-fc53-44fb-86f7-60524f2f1a6d")
 	)
 	(label "A_GND"
 		(at 38.1 50.8 180)
@@ -7941,7 +8031,7 @@
 		(uuid "bd399f59-bd5d-5d8a-86d8-6f0d3d196873")
 	)
 	(label "CH3_RST"
-		(at 213.36 198.12 0)
+		(at 213.36 200.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7970,16 +8060,6 @@
 		)
 		(uuid "c13dd2aa-d28d-5a4d-ba80-3d285ff5702d")
 	)
-	(label "CH1_SETC"
-		(at 259.08 179.07 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c1800b4e-bc49-527d-bc4e-6bf590070b2a")
-	)
 	(label "A_GND"
 		(at 266.7 209.55 0)
 		(effects
@@ -8000,6 +8080,16 @@
 		)
 		(uuid "c308cc21-efd8-5bc7-96ab-8a1a1c7586c4")
 	)
+	(label "CH1_RST"
+		(at 238.76 179.07 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c65f446a-d499-43d9-bc06-1e6a62749731")
+	)
 	(label "-15V"
 		(at 419.1 78.74 0)
 		(effects
@@ -8019,26 +8109,6 @@
 			(justify left bottom)
 		)
 		(uuid "c6a8875a-a629-5ded-a38c-c80fdc4a0d76")
-	)
-	(label "CH4_OUT_L"
-		(at 287.02 297.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c79159fe-db49-5cfa-a546-4527a63caab2")
-	)
-	(label "CH4_SETC"
-		(at 259.08 194.31 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ca624614-09e9-5eea-9ebd-96e920565961")
 	)
 	(label "CH2_OUT_L"
 		(at 114.3 66.04 0)
@@ -8100,18 +8170,18 @@
 		)
 		(uuid "d16dd67f-da74-5f14-ad0f-f9aa07759191")
 	)
-	(label "CH3_RSTC"
-		(at 259.08 191.77 0)
+	(label "CH3_SET"
+		(at 238.76 191.77 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
-		(uuid "d53c38e8-2229-5708-98b7-e62baeb1fdc4")
+		(uuid "d1d4a5ab-37b7-4667-baa9-eda768acf78d")
 	)
 	(label "CH1_SET"
-		(at 213.36 210.82 0)
+		(at 213.36 208.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8130,16 +8200,6 @@
 		)
 		(uuid "d7e35f59-a770-5cdc-8d06-88c7f227ef62")
 	)
-	(label "CH2_SETC"
-		(at 259.08 184.15 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "db12e8dc-69c1-5682-a85f-b75b6b934eaf")
-	)
 	(label "3V3"
 		(at 175.26 190.5 0)
 		(effects
@@ -8149,16 +8209,6 @@
 			(justify left bottom)
 		)
 		(uuid "dc2a7b55-ba3d-5b85-8a0d-0e0fac34ca79")
-	)
-	(label "CH3_SETC"
-		(at 259.08 189.23 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "df1933a8-ae6b-5252-b985-0beb0bf0b65a")
 	)
 	(label "A_GND"
 		(at 347.98 109.22 0)
@@ -8170,28 +8220,8 @@
 		)
 		(uuid "dfd64981-00a1-5f9e-8247-711e44f5a869")
 	)
-	(label "CH3_RST"
-		(at 238.76 191.77 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e001b3fb-8dbb-51ce-8616-f72dd5e251e4")
-	)
-	(label "CH4_OUT_R"
-		(at 297.18 297.18 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e125fc4f-75c2-5bc3-8d68-b5c0911623d4")
-	)
 	(label "CH3_SET"
-		(at 213.36 200.66 0)
+		(at 213.36 198.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8199,16 +8229,6 @@
 			(justify left bottom)
 		)
 		(uuid "e1e3d90b-e641-4ae0-8066-8ea0b62f1472")
-	)
-	(label "CH4_RST"
-		(at 238.76 196.85 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e242b324-b4c6-5596-a04c-ca869a2828f2")
 	)
 	(label "A_GND"
 		(at 335.28 66.04 180)
@@ -8230,6 +8250,16 @@
 		)
 		(uuid "e3147f78-8c34-5fa8-a550-3f49e7e67aed")
 	)
+	(label "CH4_RSTC"
+		(at 259.08 194.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ea570549-5db0-44e9-b4a6-c49ed3570532")
+	)
 	(label "D_GND"
 		(at 185.42 190.5 180)
 		(effects
@@ -8239,16 +8269,6 @@
 			(justify right bottom)
 		)
 		(uuid "eae0e704-537c-547d-82fe-7ddf26809361")
-	)
-	(label "CH1_RSTC"
-		(at 259.08 181.61 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ed24c306-63ea-5b95-b697-eb4b049a1134")
 	)
 	(label "TONE_R"
 		(at 419.1 48.26 0)
@@ -8290,16 +8310,6 @@
 		)
 		(uuid "f19e5ece-64a9-5495-bead-8c19dd933def")
 	)
-	(label "CH2_OUT_R"
-		(at 205.74 297.18 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f2837e1e-1c78-57eb-baf1-29777a2e9e52")
-	)
 	(label "AMP_SEL_R"
 		(at 347.98 66.04 0)
 		(effects
@@ -8310,6 +8320,16 @@
 		)
 		(uuid "f30b20c9-0fe9-5035-a747-f2488cfdd999")
 	)
+	(label "CH1_SET"
+		(at 238.76 181.61 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f6e3d511-b576-4c03-b01d-a18944ee421c")
+	)
 	(label "TONE_R"
 		(at 38.1 142.24 180)
 		(effects
@@ -8319,26 +8339,6 @@
 			(justify right bottom)
 		)
 		(uuid "f7a545cf-d4f5-5405-92b5-09fc2bdb9db5")
-	)
-	(label "CH1_OUT_R"
-		(at 160.02 297.18 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f9b8029a-4276-5e2f-9c56-c49b707b26d4")
-	)
-	(label "CH1_RST"
-		(at 238.76 181.61 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "fa05084c-49b5-57e0-b1a2-ca77b15a9a4b")
 	)
 	(label "ADDR_A1"
 		(at 190.5 194.31 0)
@@ -9750,7 +9750,7 @@
 				)
 			)
 		)
-		(property "Description" "基板間15mm用ロングテール（約11mm）。母板ソケットと対（A5案a）"
+		(property "Description" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -9872,7 +9872,7 @@
 				)
 			)
 		)
-		(property "Description" "基板間15mm用ロングテール（約11mm）・金メッキ。母板ソケットと対（A5案a）"
+		(property "Description" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
