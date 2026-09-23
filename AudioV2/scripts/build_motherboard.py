@@ -304,7 +304,8 @@ def daughter_slots() -> tuple[list[sch_import.Element], list[str]]:
                     "symbol",
                     symbol_inst_v10(lib, ref, value, at[0], at[1], 0, path,
                                     footprint=fp, description=desc),
-                    ref, None, at)                els.append(connector_el)
+                    ref, None, at)
+                els.append(connector_el)
                 # KiCad 10 の正準化後のピン長を含め、実際のシンボルから先端を取る。
                 # ライブラリS式の座標を直接読むと 0.8 mm ずれて全ピンが浮く。
                 tips = dict(zip(sch_edit.lib_pins(lib).keys(),
