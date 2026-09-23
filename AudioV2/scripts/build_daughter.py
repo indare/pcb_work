@@ -94,12 +94,19 @@ GPB = ["1", "2", "3", "4", "5", "6", "7", "8"]               # GPB0..GPB7
 MCP_NC_ALWAYS = ["11", "14", "19", "20"]                     # NC / INTB / INTA
 ADDR_JUMPER = "Jumper:SolderJumper_3_Bridged12"
 ADDR_JUMPER_FP = "Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels"
-# ジャンパ配置（Switch 手置きと同一座標）。pin1=D_GND / pin2=ADDR_Ax / pin3=3V3。
-# 参照名は版で分ける（Switch=`S_ADDR_A*`、Relay=`R_ADDR_A*`）。旧 `JP_ADDR_A*{suffix}` は廃止。
+# ジャンパ: pin1=D_GND / pin2=ADDR_Ax / pin3=3V3。参照は版で分ける（S_ADDR_* / R_ADDR_*）。
+# 座標の正は現行 sch（縦一列）。
 ADDR_JUMPER_AT = {
-    "A0": (170.18, 190.5),
-    "A1": (190.5, 190.5),
-    "A2": (210.82, 190.5),
+    SWITCH: {
+        "A0": (160.02, 187.96),
+        "A1": (160.02, 199.39),
+        "A2": (160.02, 210.82),
+    },
+    RELAY: {
+        "A0": (157.48, 189.23),
+        "A1": (157.48, 201.93),
+        "A2": (157.48, 214.63),
+    },
 }
 # 回路図・PCB シルク共有の番地早見（A2/A1/A0。Bridged12=GND=0、2-3 で 1。UI 0x22 は使わない）
 ADDR_JUMPER_NOTE = (
@@ -177,10 +184,13 @@ CHAN_PINS = [("TONE_L", "input", "L"), ("TONE_R", "input", "L"),
 HIER_BASE = [("TONE_L", "input"), ("TONE_R", "input"),
              ("AMP_SEL_L", "output"), ("AMP_SEL_R", "output"),
              ("+15V", "input"), ("-15V", "input"), ("A_GND", "bidirectional")]
-HIER_SWITCH_EXTRA = [(f"SEL_CH{ch}", "input") for ch in range(1, N_CH + 1)]
-HIER_RELAY_EXTRA = [
+# SEL は娘 MCP→TMUX の内部ネット（親シートピンには出さない）。I²C/3V3/D_GND は両版共通。
+HIER_DIGITAL = [
     ("I2C_SDA", "bidirectional"), ("I2C_SCL", "bidirectional"),
     ("D_GND", "input"), ("3V3", "input"),
+]
+HIER_SWITCH_EXTRA = list(HIER_DIGITAL)
+HIER_RELAY_EXTRA = list(HIER_DIGITAL) + [
     ("+5V_COIL", "input"), ("GND_COIL", "bidirectional"),
 ]
 
@@ -269,41 +279,44 @@ class Builder:
                 scaffold.uid = saved
             self.els.append(sch_import.Element("sheet", blk, None, f"AmpCh{j+1}", (sx, sy)))
 
-        # --- MCP23017（リレー版のみ）---
-        # スイッチ版の MCP / ADDR ジャンパ（`S_ADDR_A*`）は手置き（再生成で消さない）。
-        if self.v == RELAY:
-            mcp = dict(MCP_COMMON)
+        # --- MCP23017 + ADDR ジャンパ（両版）---
+        # Switch: GPB0..3 = SEL_CH1..4（GPA 未使用）。Relay: GPA に SET/RST。
+        mcp = dict(MCP_COMMON)
+        if self.v == SWITCH:
+            for i, ch in enumerate(range(1, N_CH + 1)):
+                mcp[GPB[i]] = f"SEL_CH{ch}"
+            nc = GPA + GPB[N_CH:] + MCP_NC_ALWAYS
+            addr_prefix = "S_ADDR"
+        else:
             # DIP 0° で U321 を右に置くと、MCP 右列 28→20 と ULN 左列 1→9 が
             # 2.54 mm ピッチで向かい合う。I1=SET→SETC、I2=RST→RSTC（DS どおり）。
-            # ピン20 INTA は ULN ピン9 GND と位置だけ揃う（ネットは別・NC）。
-            # ピン15–19（A0/A1/A2/~RESET/INTB）はドライバより南に余る。GPB は未使用。
             for i, ch in enumerate(range(1, N_CH + 1)):
                 mcp[GPA[7 - i * 2]] = f"CH{ch}_SET"
                 mcp[GPA[6 - i * 2]] = f"CH{ch}_RST"
             nc = GPB + MCP_NC_ALWAYS
-            self.place(MCP, f"U_IO{sfx}", "MCP23017", 200.66, 213.36, mcp, nc,
-                       footprint="Package_DIP:DIP-28_W7.62mm")
-            self.cap(f"C_IO{sfx}", "100nF", 236.22, 213.36, "3V3", "D_GND")
-            # I2C ADDR ジャンパ（縦積み。参照は R_ADDR_A*）
-            for bit, (jx, jy) in ADDR_JUMPER_AT.items():
-                self.place(ADDR_JUMPER, f"R_ADDR_{bit}", f"ADDR {bit}",
-                           jx, jy,
-                           {"1": "D_GND", "2": f"ADDR_{bit}", "3": "3V3"},
-                           footprint=ADDR_JUMPER_FP)
-            self.els.append(sch_import.Element(
-                "text",
-                f'\t(text "{ADDR_JUMPER_NOTE}"\n'
-                '\t\t(exclude_from_sim no)\n'
-                '\t\t(at 152.4 175.26 0)\n'
-                '\t\t(effects\n'
-                '\t\t\t(font\n'
-                '\t\t\t\t(size 1.27 1.27)\n'
-                '\t\t\t)\n'
-                '\t\t\t(justify left bottom)\n'
-                '\t\t)\n'
-                f'\t\t(uuid "{uid()}")\n'
-                '\t)\n',
-                None, None, (152.4, 175.26)))
+            addr_prefix = "R_ADDR"
+        self.place(MCP, f"U_IO{sfx}", "MCP23017", 200.66, 213.36, mcp, nc,
+                   footprint="Package_DIP:DIP-28_W7.62mm")
+        self.cap(f"C_IO{sfx}", "100nF", 236.22, 213.36, "3V3", "D_GND")
+        for bit, (jx, jy) in ADDR_JUMPER_AT[self.v].items():
+            self.place(ADDR_JUMPER, f"{addr_prefix}_{bit}", f"ADDR {bit}",
+                       jx, jy,
+                       {"1": "D_GND", "2": f"ADDR_{bit}", "3": "3V3"},
+                       footprint=ADDR_JUMPER_FP)
+        self.els.append(sch_import.Element(
+            "text",
+            f'\t(text "{ADDR_JUMPER_NOTE}"\n'
+            '\t\t(exclude_from_sim no)\n'
+            '\t\t(at 152.4 175.26 0)\n'
+            '\t\t(effects\n'
+            '\t\t\t(font\n'
+            '\t\t\t\t(size 1.27 1.27)\n'
+            '\t\t\t)\n'
+            '\t\t\t(justify left bottom)\n'
+            '\t\t)\n'
+            f'\t\t(uuid "{uid()}")\n'
+            '\t)\n',
+            None, None, (152.4, 175.26)))
         self.cap(f"C_BULK_P{sfx}", "100uF 35V", 251.46, 213.36, "+15V", "A_GND", True)
         self.cap(f"C_BULK_N{sfx}", "100uF 35V", 266.7, 213.36, "A_GND", "-15V", True)
 
