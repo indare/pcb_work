@@ -537,6 +537,10 @@
       {
         "netclass": "Default",
         "pattern": "/MeasurementADC/D_GND"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/AMP_SEL_R"
       }
     ]
   },

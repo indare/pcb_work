@@ -7000,16 +7000,6 @@
 		)
 		(uuid "067bd150-ff3b-4308-ada1-a8037a168c94")
 	)
-	(label "AMP_SEL_R"
-		(at 208.28 281.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "06f77004-92e5-5832-ab7b-4f51e42d5232")
-	)
 	(label "3V3"
 		(at 187.96 215.9 180)
 		(effects
@@ -7050,6 +7040,16 @@
 		)
 		(uuid "0e5eaac1-ec00-50a5-845b-df6c98d0e557")
 	)
+	(label "AMP_SEL_R"
+		(at 152.4 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0eb0d981-5f9a-47b3-a65c-d929f82ca873")
+	)
 	(label "D_GND"
 		(at 200.66 238.76 0)
 		(effects
@@ -7079,6 +7079,16 @@
 			(justify left bottom)
 		)
 		(uuid "1096fc4c-3943-5160-a3da-a51841d36ad7")
+	)
+	(label "AMP_SEL_L"
+		(at 254 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "11afde92-947e-4c77-9bf5-a78d4202a424")
 	)
 	(label "CH3_SETC"
 		(at 233.68 297.18 180)
@@ -7460,16 +7470,6 @@
 		)
 		(uuid "5774f6e6-d948-5aeb-9ed6-3f91cdc30e56")
 	)
-	(label "AMP_SEL_R"
-		(at 299.72 281.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5849e576-2bf5-50b2-afcc-3fd85c768759")
-	)
 	(label "ADDR_A2"
 		(at 210.82 194.31 0)
 		(effects
@@ -7479,16 +7479,6 @@
 			(justify left bottom)
 		)
 		(uuid "588b5ce3-4341-5aed-a684-bd8bd9c395d9")
-	)
-	(label "AMP_SEL_R"
-		(at 162.56 281.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "58da3f02-ea1d-5a3a-8852-a7c492426bd1")
 	)
 	(label "CH4_OUT_R"
 		(at 114.3 142.24 0)
@@ -7550,16 +7540,6 @@
 		)
 		(uuid "677805e9-7369-5291-9322-5f390f898c88")
 	)
-	(label "AMP_SEL_L"
-		(at 289.56 281.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "67a33d95-93bc-5213-a800-41e2cb85e5ed")
-	)
 	(label "CH1_RSTC"
 		(at 259.08 179.07 0)
 		(effects
@@ -7599,16 +7579,6 @@
 			(justify right bottom)
 		)
 		(uuid "6ae6805e-6344-5c59-92d9-29426703da6c")
-	)
-	(label "AMP_SEL_L"
-		(at 243.84 281.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6aff3892-68e9-5fff-a5ae-e2d8aa7bc152")
 	)
 	(label "-15V"
 		(at 38.1 152.4 180)
@@ -7861,6 +7831,16 @@
 		(uuid "93ce7792-73df-5c3a-bad8-034ae4e8411a")
 	)
 	(label "AMP_SEL_L"
+		(at 208.28 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "95d9f2eb-2180-4dab-ac9c-e547cd0cfbab")
+	)
+	(label "AMP_SEL_L"
 		(at 335.28 63.5 180)
 		(effects
 			(font
@@ -7920,6 +7900,16 @@
 		)
 		(uuid "a30998dd-00ca-4e11-aea8-1e8acc3ab4a9")
 	)
+	(label "AMP_SEL_R"
+		(at 289.56 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a3146b42-36f9-44bf-ab3d-2bcd6a08e64b")
+	)
 	(label "-15V"
 		(at 38.1 81.28 180)
 		(effects
@@ -7949,6 +7939,16 @@
 			(justify right bottom)
 		)
 		(uuid "a7570f93-e2d1-5ce0-9897-83c6294a20b7")
+	)
+	(label "AMP_SEL_R"
+		(at 198.12 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a82f3ea6-5253-4441-9f88-4f5e360f8e33")
 	)
 	(label "CH2_OUT_R"
 		(at 114.3 71.12 0)
@@ -7999,16 +7999,6 @@
 			(justify right bottom)
 		)
 		(uuid "b7e7e82a-533b-51b4-8f3f-e8db760b06e1")
-	)
-	(label "AMP_SEL_L"
-		(at 152.4 281.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b8e2bdf3-780d-56a1-addd-197f3880f1af")
 	)
 	(label "-15V"
 		(at 38.1 116.84 180)
@@ -8130,16 +8120,6 @@
 		)
 		(uuid "ce66df2f-34bf-55d1-b6c0-5f4c199d3c68")
 	)
-	(label "AMP_SEL_R"
-		(at 254 281.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cfc39157-c112-5df7-af6c-ce93467ddb11")
-	)
 	(label "+15V"
 		(at 38.1 147.32 180)
 		(effects
@@ -8189,6 +8169,26 @@
 			(justify left bottom)
 		)
 		(uuid "d5775851-043e-429e-9d11-397b0a072c02")
+	)
+	(label "AMP_SEL_L"
+		(at 162.56 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d6678d58-065a-4b1f-a34a-3d1699241762")
+	)
+	(label "AMP_SEL_L"
+		(at 299.72 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d76d9eb9-b931-462c-95a7-b7888d32f192")
 	)
 	(label "GND_COIL"
 		(at 419.1 147.32 0)
@@ -8280,6 +8280,16 @@
 		)
 		(uuid "ed590ce3-3824-5628-9df9-fae8d1129633")
 	)
+	(label "AMP_SEL_R"
+		(at 243.84 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ee4057a4-ac12-4a28-86c9-bd655e87d593")
+	)
 	(label "-15V"
 		(at 335.28 111.76 180)
 		(effects
@@ -8349,16 +8359,6 @@
 			(justify left bottom)
 		)
 		(uuid "fac62098-fc3c-5fa1-9846-001ad5948032")
-	)
-	(label "AMP_SEL_L"
-		(at 198.12 281.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fad4e73a-2983-55dd-82c5-61773d6c412a")
 	)
 	(label "ADDR_A0"
 		(at 170.18 194.31 0)
