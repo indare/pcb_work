@@ -6910,6 +6910,36 @@
 		(at 284.48 281.94)
 		(uuid "fdf8c22d-5b1d-50b0-bfe4-5ac7dc4d9293")
 	)
+	(wire
+		(pts
+			(xy 157.48 220.98) (xy 157.48 218.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5003d807-fe76-466c-ab9f-cc9ff940a797")
+	)
+	(wire
+		(pts
+			(xy 157.48 208.28) (xy 157.48 205.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "674ac311-62c6-4030-a057-89bf96f2c701")
+	)
+	(wire
+		(pts
+			(xy 157.48 195.58) (xy 157.48 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f17510c-999d-471d-90f4-2815325631ac")
+	)
 	(label "CH1_OUT_R"
 		(at 149.86 297.18 270)
 		(effects
@@ -7021,7 +7051,7 @@
 		(uuid "0c543299-d890-587e-b14c-4e74814064e7")
 	)
 	(label "D_GND"
-		(at 205.74 190.5 180)
+		(at 152.4 214.63 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7461,7 +7491,7 @@
 		(uuid "57906551-086d-4816-8dfe-ba34bdd39b7a")
 	)
 	(label "ADDR_A2"
-		(at 210.82 194.31 0)
+		(at 157.48 220.98 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7631,7 +7661,7 @@
 		(uuid "712903a1-431f-5e0c-91f5-f774c05bdec0")
 	)
 	(label "3V3"
-		(at 195.58 190.5 0)
+		(at 162.56 201.93 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7701,7 +7731,7 @@
 		(uuid "8026129a-dc27-5392-bf82-52d6092af032")
 	)
 	(label "D_GND"
-		(at 165.1 190.5 180)
+		(at 152.4 189.23 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8101,7 +8131,7 @@
 		(uuid "cc98adf4-ba11-57c1-870c-8405b5567338")
 	)
 	(label "3V3"
-		(at 215.9 190.5 0)
+		(at 162.56 214.63 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8191,7 +8221,7 @@
 		(uuid "d7e35f59-a770-5cdc-8d06-88c7f227ef62")
 	)
 	(label "3V3"
-		(at 175.26 190.5 0)
+		(at 162.56 189.23 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8261,7 +8291,7 @@
 		(uuid "ea570549-5db0-44e9-b4a6-c49ed3570532")
 	)
 	(label "D_GND"
-		(at 185.42 190.5 180)
+		(at 152.4 201.93 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8351,7 +8381,7 @@
 		(uuid "f7a545cf-d4f5-5405-92b5-09fc2bdb9db5")
 	)
 	(label "ADDR_A1"
-		(at 190.5 194.31 0)
+		(at 157.48 208.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8361,7 +8391,7 @@
 		(uuid "fac62098-fc3c-5fa1-9846-001ad5948032")
 	)
 	(label "ADDR_A0"
-		(at 170.18 194.31 0)
+		(at 157.48 195.58 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8933,7 +8963,7 @@
 	)
 	(symbol
 		(lib_id "Jumper:SolderJumper_3_Bridged12")
-		(at 170.18 190.5 0)
+		(at 157.48 189.23 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8943,8 +8973,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "74fbc779-5332-5cec-80c9-e234f5da583f")
-		(property "Reference" "JP_ADDR_A0302"
-			(at 170.18 187.96 0)
+		(property "Reference" "R_ADDR_A0"
+			(at 157.48 186.69 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8954,7 +8984,7 @@
 			)
 		)
 		(property "Value" "ADDR A0"
-			(at 170.18 193.04 0)
+			(at 157.48 191.77 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8964,7 +8994,7 @@
 			)
 		)
 		(property "Footprint" "Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels"
-			(at 0 0 0)
+			(at -12.7 -1.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8975,7 +9005,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at -12.7 -1.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8986,7 +9016,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at -12.7 -1.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9008,7 +9038,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013"
-					(reference "JP_ADDR_A0302")
+					(reference "R_ADDR_A0")
 					(unit 1)
 				)
 			)
@@ -9016,7 +9046,7 @@
 	)
 	(symbol
 		(lib_id "Jumper:SolderJumper_3_Bridged12")
-		(at 190.5 190.5 0)
+		(at 157.48 201.93 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9026,8 +9056,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8838441d-6124-5197-b6f1-33c5924866a1")
-		(property "Reference" "JP_ADDR_A1302"
-			(at 190.5 187.96 0)
+		(property "Reference" "R_ADDR_A1"
+			(at 157.48 199.39 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9037,7 +9067,7 @@
 			)
 		)
 		(property "Value" "ADDR A1"
-			(at 190.5 193.04 0)
+			(at 157.48 204.47 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9047,7 +9077,7 @@
 			)
 		)
 		(property "Footprint" "Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels"
-			(at 0 0 0)
+			(at -33.02 11.43 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9058,7 +9088,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at -33.02 11.43 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9069,7 +9099,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at -33.02 11.43 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9091,7 +9121,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013"
-					(reference "JP_ADDR_A1302")
+					(reference "R_ADDR_A1")
 					(unit 1)
 				)
 			)
@@ -9615,7 +9645,7 @@
 	)
 	(symbol
 		(lib_id "Jumper:SolderJumper_3_Bridged12")
-		(at 210.82 190.5 0)
+		(at 157.48 214.63 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9625,8 +9655,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d1767b9b-216a-5c25-bf00-233435f45968")
-		(property "Reference" "JP_ADDR_A2302"
-			(at 210.82 187.96 0)
+		(property "Reference" "R_ADDR_A2"
+			(at 157.48 212.09 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9636,7 +9666,7 @@
 			)
 		)
 		(property "Value" "ADDR A2"
-			(at 210.82 193.04 0)
+			(at 157.48 217.17 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9646,7 +9676,7 @@
 			)
 		)
 		(property "Footprint" "Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels"
-			(at 0 0 0)
+			(at -53.34 24.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9657,7 +9687,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at -53.34 24.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9668,7 +9698,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at -53.34 24.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9690,7 +9720,7 @@
 		(instances
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000013-0013-4013-8013-000000000013"
-					(reference "JP_ADDR_A2302")
+					(reference "R_ADDR_A2")
 					(unit 1)
 				)
 			)
