@@ -129,23 +129,26 @@ TMUX_MAP = {
 }
 
 RELAY_SYM = "Relay:AZ850P2-x"
-# v1 の RelayBoard から復元したピン割当（K305 のラベルで確認）:
-#   コイル 1(+5V)-5(RST 側) / 10(+5V)-6(SET 側)、接点 3(COM)-2/4 と 8(COM)-9/7
+# AZ850P2 DS（端子側・reset 図示）:
+#   SET コイル = 1(+)–5(−)、RESET コイル = 10(+)–6(−)
+#   reset 状態の接点 = 3–4 / 8–7。SET パルスで 3–2 / 8–9 へ遷移。
 #
-# ⚠ 接点は **ch 出力を COM に、共通バスを NO に**入れる。逆（バスを COM）にすると
+# ネット名は DS どおり pin5=SETC / pin6=RSTC。
+# バス（AMP_SEL）は reset 側の 4/7 に置き、SET 側 2/9 は開放（現行 sch・PCB）。
+# → 選択＝RSTC パルス、切断＝SETC パルス。FW はこれに合わせる（「SET＝選ぶ」ならビット入替）。
+#
+# ⚠ 接点は **ch 出力を COM に、共通バスを投側に**入れる。逆（バスを COM）にすると
 #    非選択 ch が共通バスを自分の反対接点へ落としてしまう。
-# ⚠ 2/4 と 9/7 のどちらが NO かはシンボルにピン名が無く確認できていない。
-#    「COM の外側 = NO（SET で導通）」として組んである。**製造前に FP で要確認。**
-RELAY_MAP = {"1": "+5V_COIL", "5": "CH{n}_RSTC", "10": "+5V_COIL", "6": "CH{n}_SETC",
-             "3": "CH{n}_OUT_L", "4": "AMP_SEL_L",
-             "8": "CH{n}_OUT_R", "7": "AMP_SEL_R"}
+RELAY_MAP = {"1": "+5V_COIL", "5": "CH{n}_SETC", "10": "+5V_COIL", "6": "CH{n}_RSTC",
+             "3": "CH{n}_OUT_R", "4": "AMP_SEL_R",
+             "8": "CH{n}_OUT_L", "7": "AMP_SEL_L"}
 RELAY_NC = ["2", "9"]
-# 石は v1 と同じ AZ850P2-5 に固定（2026-09-09 ユーザー確定）。接点ピンの使い方（3/8・4/7 を使い
-# 2/9 を開放）とコイル（1-5 / 10-6）は v1 のネットリストと同一で、v1 実機で動いている組み合わせ。
-RELAY_DESC = ("双コイル・ラッチングリレー。v1 と同じ AZ850P2-5 に固定（2026-09-09）。接点 3/8・4/7 を使い 2/9 は開放、"
-              "コイル 1-5 / 10-6 —— v1 のネットリストと同一の使い方で、v1 実機で動作実績あり。"
-              "⚠ 外形（FRT5）が同じセカンドソース（TQ2-L2 など）は接点の COM/NC/NO のピン番号が同じとは限らず、"
-              "挿すと SET/RESET の意味が反転しうる。AZ850P2-5 以外を挿さない。")
+# 石は AZ850P2-5 に固定（2026-09-09）。TQ2-L2 は接点 NC/NO 番号が違いうるので挿さない。
+RELAY_DESC = ("双コイル・ラッチングリレー。AZ850P2-5 固定（2026-09-09）。"
+              "コイルは DS どおり SET=1–5=SETC / RESET=10–6=RSTC。"
+              "接点は COM=3/8、reset 側 4/7=AMP_SEL、SET 側 2/9 開放。"
+              "選択は RSTC パルス（バスが reset 側のため）。"
+              "⚠ 外形（FRT5）が同じ TQ2-L2 などは COM/NC/NO が同じとは限らない。AZ850P2-5 以外を挿さない。")
 
 # ⚠ ULN2803A ではなく TBD62083APG（ピン互換のドロップイン）を使う。
 #    §2.7-3 で「ULN2803 のダーリントンが約 1V 落とすので 40℃ 超で AZ850 の
@@ -262,7 +265,7 @@ class Builder:
         if self.v == RELAY:
             mcp = dict(MCP_COMMON)
             # DIP 0° で U321 を右に置くと、MCP 右列 28→20 と ULN 左列 1→9 が
-            # 2.54 mm ピッチで向かい合う。I1..I8 = GPA7..GPA0。
+            # 2.54 mm ピッチで向かい合う。I1=SET→SETC、I2=RST→RSTC（DS どおり）。
             # ピン20 INTA は ULN ピン9 GND と位置だけ揃う（ネットは別・NC）。
             # ピン15–19（A0/A1/A2/~RESET/INTB）はドライバより南に余る。GPB は未使用。
             for i, ch in enumerate(range(1, N_CH + 1)):
@@ -317,6 +320,7 @@ class Builder:
                            footprint="Relay_THT:Relay_DPDT_FRT5",
                            description=RELAY_DESC)
             nets = {"9": "GND_COIL", "10": "+5V_COIL"}
+            # I1/O18=SET/SETC→リレー pin5、I2/O17=RST/RSTC→リレー pin6（DS どおり）
             for k, ch in enumerate(range(1, N_CH + 1)):
                 nets[DRV_IN[k * 2]] = f"CH{ch}_SET"
                 nets[DRV_IN[k * 2 + 1]] = f"CH{ch}_RST"

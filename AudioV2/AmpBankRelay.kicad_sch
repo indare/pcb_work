@@ -6911,7 +6911,7 @@
 		(uuid "fdf8c22d-5b1d-50b0-bfe4-5ac7dc4d9293")
 	)
 	(label "CH1_OUT_R"
-		(at 149.86 297.18 180)
+		(at 149.86 297.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6961,7 +6961,7 @@
 		(uuid "021ff6f3-87a2-5950-a446-750f12693bdf")
 	)
 	(label "CH4_RST"
-		(at 238.76 194.31 180)
+		(at 238.76 196.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6981,7 +6981,7 @@
 		(uuid "02db6e2f-963e-5c41-95ad-1c46cd2a970c")
 	)
 	(label "+5V_COIL"
-		(at 182.88 297.18 180)
+		(at 182.88 297.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7061,12 +7061,12 @@
 		(uuid "0ec86731-5626-5f62-9505-d6f7b854f338")
 	)
 	(label "+5V_COIL"
-		(at 274.32 281.94 180)
+		(at 274.32 281.94 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "0ee5e514-e6e7-5916-af7f-5772082bc354")
 	)
@@ -7090,15 +7090,15 @@
 		)
 		(uuid "11afde92-947e-4c77-9bf5-a78d4202a424")
 	)
-	(label "CH3_SETC"
-		(at 233.68 297.18 180)
+	(label "CH4_SETC"
+		(at 279.4 281.94 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
-		(uuid "1385b9bf-71c7-5db5-b4fe-42a2cfd63a7a")
+		(uuid "15e2e2a4-d077-4a65-9bb9-dd8c223635e5")
 	)
 	(label "CH4_OUT_L"
 		(at 114.3 137.16 0)
@@ -7109,16 +7109,6 @@
 			(justify left bottom)
 		)
 		(uuid "161a968d-b1c7-51b5-bc45-c0a3dea12d11")
-	)
-	(label "CH1_SETC"
-		(at 142.24 297.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "18a9df5d-8e3d-5b70-b102-38e53022ddf7")
 	)
 	(label "I2C_SCL"
 		(at 187.96 193.04 180)
@@ -7151,17 +7141,17 @@
 		(uuid "1bce1104-3a32-5216-a368-07a22116bc8b")
 	)
 	(label "CH1_OUT_L"
-		(at 160.02 297.18 0)
+		(at 160.02 297.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "1c1001a6-d608-4664-a8b5-78e242a120e7")
 	)
 	(label "CH2_RSTC"
-		(at 259.08 184.15 0)
+		(at 259.08 186.69 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7181,7 +7171,7 @@
 		(uuid "1dbae1be-6bf2-5f0f-9b3e-9842e0a5c410")
 	)
 	(label "CH1_RST"
-		(at 213.36 210.82 0)
+		(at 213.36 208.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7191,7 +7181,7 @@
 		(uuid "1e2b2f4c-1a31-4853-9aa5-e7acea667290")
 	)
 	(label "CH2_SET"
-		(at 213.36 203.2 0)
+		(at 213.36 205.74 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7210,8 +7200,18 @@
 		)
 		(uuid "1e99ceae-aaa5-5396-992b-c5425632ab75")
 	)
+	(label "CH3_RSTC"
+		(at 233.68 297.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "203e697f-bdb4-40b4-a3a4-edbc33b7d3f2")
+	)
 	(label "CH2_RST"
-		(at 213.36 205.74 0)
+		(at 213.36 203.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7220,18 +7220,8 @@
 		)
 		(uuid "26a69954-e3eb-4040-bc7e-301f80d78009")
 	)
-	(label "CH1_RSTC"
-		(at 142.24 281.94 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "287b4f06-ec81-5ab8-821c-18f3ed7de9ae")
-	)
 	(label "CH2_SET"
-		(at 238.76 186.69 180)
+		(at 238.76 184.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7251,7 +7241,7 @@
 		(uuid "2cc6245a-ac53-58a3-9429-68592c1cd978")
 	)
 	(label "+5V_COIL"
-		(at 274.32 297.18 180)
+		(at 274.32 297.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7281,7 +7271,7 @@
 		(uuid "34701d9b-8b16-4a91-9acd-67ba5e85fc9e")
 	)
 	(label "CH4_SET"
-		(at 213.36 193.04 0)
+		(at 213.36 195.58 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7291,7 +7281,7 @@
 		(uuid "36877c18-52c5-44e1-9810-4b123bb0899c")
 	)
 	(label "CH2_RST"
-		(at 238.76 184.15 180)
+		(at 238.76 186.69 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7331,7 +7321,7 @@
 		(uuid "40fafb8a-04bd-557f-a455-34900f8ea9f7")
 	)
 	(label "CH4_RST"
-		(at 213.36 195.58 0)
+		(at 213.36 193.04 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7341,7 +7331,7 @@
 		(uuid "41ce4936-0c30-41a7-b79e-68a260c4c476")
 	)
 	(label "+5V_COIL"
-		(at 137.16 297.18 180)
+		(at 137.16 297.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7349,16 +7339,6 @@
 			(justify right bottom)
 		)
 		(uuid "42310b93-34b9-5b2c-89a0-dcee3bc7d2d0")
-	)
-	(label "CH3_RSTC"
-		(at 233.68 281.94 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "42eec737-83e6-5b00-a141-64151093139f")
 	)
 	(label "+5V_COIL"
 		(at 335.28 336.55 0)
@@ -7371,7 +7351,7 @@
 		(uuid "431ea195-52f0-5237-b23b-468073f07cd0")
 	)
 	(label "CH3_SETC"
-		(at 259.08 191.77 0)
+		(at 259.08 189.23 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7381,7 +7361,7 @@
 		(uuid "44f30c61-acb2-4740-8db0-ec910354089a")
 	)
 	(label "CH3_RSTC"
-		(at 259.08 189.23 0)
+		(at 259.08 191.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7401,12 +7381,12 @@
 		(uuid "4a17f17c-972a-5edf-8d3a-950d9267ffa8")
 	)
 	(label "+5V_COIL"
-		(at 228.6 281.94 180)
+		(at 228.6 281.94 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "4f60d127-b395-55b5-a132-f79f02507f95")
 	)
@@ -7470,6 +7450,16 @@
 		)
 		(uuid "5774f6e6-d948-5aeb-9ed6-3f91cdc30e56")
 	)
+	(label "CH3_SETC"
+		(at 233.68 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "57906551-086d-4816-8dfe-ba34bdd39b7a")
+	)
 	(label "ADDR_A2"
 		(at 210.82 194.31 0)
 		(effects
@@ -7530,6 +7520,26 @@
 		)
 		(uuid "60b4bf42-33d2-554b-b1d7-5963f670cc5e")
 	)
+	(label "CH4_RSTC"
+		(at 279.4 297.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "62a581d7-3e2a-4e28-90be-e1fa02221d4f")
+	)
+	(label "CH1_SETC"
+		(at 142.24 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "66ecdce8-5c53-45e0-a5a6-e933fa3be827")
+	)
 	(label "TONE_L"
 		(at 38.1 30.48 180)
 		(effects
@@ -7541,7 +7551,7 @@
 		(uuid "677805e9-7369-5291-9322-5f390f898c88")
 	)
 	(label "CH1_RSTC"
-		(at 259.08 179.07 0)
+		(at 259.08 181.61 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7601,7 +7611,7 @@
 		(uuid "6c28c0f5-5fe5-5058-adc6-1676b12a267b")
 	)
 	(label "CH4_SETC"
-		(at 259.08 196.85 0)
+		(at 259.08 194.31 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7610,18 +7620,8 @@
 		)
 		(uuid "6cdcfc0f-f115-443d-911e-989a731a505c")
 	)
-	(label "CH4_SETC"
-		(at 279.4 297.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6e027f3d-38f8-565e-8e92-000810be3ad8")
-	)
 	(label "+5V_COIL"
-		(at 228.6 297.18 180)
+		(at 228.6 297.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7660,18 +7660,8 @@
 		)
 		(uuid "7a04d9ad-c14c-54c0-8821-5a186c44060e")
 	)
-	(label "CH2_RSTC"
-		(at 187.96 281.94 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7b618f77-42f4-548a-b457-3077bf498ece")
-	)
 	(label "CH3_RST"
-		(at 238.76 189.23 180)
+		(at 238.76 191.77 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7741,12 +7731,12 @@
 		(uuid "86d26f6a-84e1-5d1c-8ca9-c14fb9ebc81d")
 	)
 	(label "+5V_COIL"
-		(at 182.88 281.94 180)
+		(at 182.88 281.94 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "8903febe-3455-5f28-ab54-03c566165fa4")
 	)
@@ -7801,7 +7791,7 @@
 		(uuid "8e71ef36-cb58-550b-ad18-9a91ec4647a8")
 	)
 	(label "CH2_SETC"
-		(at 259.08 186.69 0)
+		(at 259.08 184.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7809,6 +7799,16 @@
 			(justify left bottom)
 		)
 		(uuid "8f396555-d7fa-41d7-86e7-c88e208c0d35")
+	)
+	(label "CH2_RSTC"
+		(at 187.96 297.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9163c178-3698-4e06-9188-715f03d0b846")
 	)
 	(label "3V3"
 		(at 236.22 209.55 0)
@@ -7819,6 +7819,16 @@
 			(justify left bottom)
 		)
 		(uuid "91847e73-80eb-5212-95e2-9d3a84a66f76")
+	)
+	(label "CH1_RSTC"
+		(at 142.24 297.18 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "929f6899-46e0-48cc-9f60-4f3b10515379")
 	)
 	(label "TONE_L"
 		(at 38.1 137.16 180)
@@ -7851,12 +7861,12 @@
 		(uuid "97324373-c37c-55a2-aa62-b370460c2d10")
 	)
 	(label "+5V_COIL"
-		(at 137.16 281.94 180)
+		(at 137.16 281.94 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "9a5c772c-7980-5513-912b-cb804ad80dfe")
 	)
@@ -7870,28 +7880,8 @@
 		)
 		(uuid "9c4f05a3-c3fb-58ed-91a9-67cbb3d50440")
 	)
-	(label "CH4_RSTC"
-		(at 279.4 281.94 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a09f7775-0451-5a3c-86be-065fdc94faf9")
-	)
-	(label "CH2_SETC"
-		(at 187.96 297.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a2942611-1794-520a-aa3e-998ab402a05e")
-	)
 	(label "CH4_SET"
-		(at 238.76 196.85 180)
+		(at 238.76 194.31 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7961,7 +7951,7 @@
 		(uuid "acdf588d-ea75-50f3-8bc8-82c3c3d23344")
 	)
 	(label "CH1_SETC"
-		(at 259.08 181.61 0)
+		(at 259.08 179.07 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8021,7 +8011,7 @@
 		(uuid "bd399f59-bd5d-5d8a-86d8-6f0d3d196873")
 	)
 	(label "CH3_RST"
-		(at 213.36 200.66 0)
+		(at 213.36 198.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8071,7 +8061,7 @@
 		(uuid "c308cc21-efd8-5bc7-96ab-8a1a1c7586c4")
 	)
 	(label "CH1_RST"
-		(at 238.76 179.07 180)
+		(at 238.76 181.61 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8151,7 +8141,7 @@
 		(uuid "d16dd67f-da74-5f14-ad0f-f9aa07759191")
 	)
 	(label "CH3_SET"
-		(at 238.76 191.77 180)
+		(at 238.76 189.23 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8161,7 +8151,7 @@
 		(uuid "d1d4a5ab-37b7-4667-baa9-eda768acf78d")
 	)
 	(label "CH1_SET"
-		(at 213.36 208.28 0)
+		(at 213.36 210.82 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8221,7 +8211,7 @@
 		(uuid "dfd64981-00a1-5f9e-8247-711e44f5a869")
 	)
 	(label "CH3_SET"
-		(at 213.36 198.12 0)
+		(at 213.36 200.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8250,8 +8240,18 @@
 		)
 		(uuid "e3147f78-8c34-5fa8-a550-3f49e7e67aed")
 	)
+	(label "CH2_SETC"
+		(at 187.96 281.94 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e36c8cdb-dc9a-4b5c-9c00-3a5ccef9f1a8")
+	)
 	(label "CH4_RSTC"
-		(at 259.08 194.31 0)
+		(at 259.08 196.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8331,7 +8331,7 @@
 		(uuid "f30b20c9-0fe9-5035-a747-f2488cfdd999")
 	)
 	(label "CH1_SET"
-		(at 238.76 181.61 180)
+		(at 238.76 179.07 180)
 		(effects
 			(font
 				(size 1.27 1.27)
