@@ -1,9 +1,10 @@
 # オペアンプ データシート（手持ち在庫）
 
-**更新:** 2026-08-31  
-**対応リスト:** [OPAMP_INVENTORY.md](../../OPAMP_INVENTORY.md)
+**更新:** 2026-09-24  
+**対応リスト:** [OPAMP_INVENTORY.md](../../OPAMP_INVENTORY.md)  
+**高速寄り DS 精査:** [OPAMP_FAST_DS_REVIEW.md](../../OPAMP_FAST_DS_REVIEW.md)
 
-オフライン参照用。AmpModule / AdcBuffer 差し替え候補の一次資料。
+オフライン参照用。AmpModule / AdcBuffer / AudioV2 AmpChannel 差し替え候補の一次資料。
 
 ## 索引
 
@@ -24,6 +25,7 @@
 | OPA2140 AIDR DIP | [TI_OPA2140.pdf](TI_OPA2140.pdf) | TI OPAx140 |
 | MUSE01（2→1 DIP） | [NJR_MUSES01.pdf](NJR_MUSES01.pdf) | 製品 DS 名は **MUSES01**。[製品ページ](https://www.nisshinbo-microdevices.co.jp/ja/products/operational-amplifier/spec/?product=muses01) |
 | MUSE03（2→DIP・2ch） | [NJR_MUSES03.pdf](NJR_MUSES03.pdf) | 製品 DS 名は **MUSES03**。J-FET シングル。[製品ページ](https://www.nisshinbo-microdevices.co.jp/ja/products/operational-amplifier/spec/?product=muses03) |
+| AD797×2 | （ローカル未保管） | Analog Devices。[Rev.K PDF](https://www.analog.com/media/en/technical-documentation/data-sheets/ad797.pdf)。取得後に `ADI_AD797.pdf` として置く |
 
 ### MUSES03 DS 要点
 
