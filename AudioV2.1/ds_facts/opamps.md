@@ -1,6 +1,7 @@
 # 手持ちオペアンプ（ソケットに挿す石）— DS の事実
 
 2026-09-25 収集。値は DS の原文で裏が取れたものだけ。設計判断は書かない。
+2026-09-25 にページ画像と照合した（照合結果 [verify_opamps.md](verify_opamps.md)、その再判定 [../review/ds_errata_review.md](../review/ds_errata_review.md)）。その結果で直した行・足した行は、行末に 〔2026-09-25 照合で訂正〕／〔2026-09-25 照合で追加〕 を付けた。
 
 - 対象: `Audio/OPAMP_INVENTORY.md` の手持ちリストの石（＋ NE5532 本家）。DS は `Audio/datasheets/opamps/`
 - **出典のページは PDF のページ番号**（1 始まり）。TI/ADI/NJR とも、この版では印刷ページ番号と一致している
@@ -57,9 +58,11 @@
 | 同相入力電圧範囲 | min ±12 V / typ ±13 V | ±15 V、25°C | MIN / TYP | p.2 | `Common Mode Input Voltage Range VICM ± 12 ± 13 - V` |
 | 同相入力電圧（絶対最大） | V+/V- | — | RATING | p.2 | `Common Mode Input Voltage Range VICM V+/V- V` |
 | 差動入力（絶対最大） | ±0.5 V | Ta = 25°C | RATING | p.2 | `Differential Input Voltage Range VID ±0.5 V` |
+| 入力保護 | 入力間に逆並列ダイオード（p.1 等価回路）。ボルテージフォロワでは電源投入時の入力ダイオード破壊を避けるため、非反転入力に電流制限抵抗（図は 1 kΩ） | — | —（本文・図） | p.1 EQUIVALENT CIRCUIT、p.5 NOTICE・Fig.1 | "When used in voltage follower circuit, put a current limit resistor into non-inverting input terminal in order to avoid inside input diode destruction when the power supply is turned on. ( ref.Fig.1 )" 〔2026-09-25 照合で追加〕 |
+| V+ 開放時の過電流 | V+ が開放で、入力と V− の電位差が大きく、入力に 1 kΩ 以上の抵抗が無く、V+ 端子が低インピーダンスにつながっていると、内部の寄生回路で過電流が流れ焼損しうる。対策は SBD の挿入（Fig.4-1/4-2）か 1 kΩ 以上の入力抵抗（Fig.5） | — | —（本文） | p.6 Countermeasure to Excess Current by Parasitic Circuit | "When the NJM5532 V+ is open (Fig.2), the NJM5532 may be burnt flowing the excess current by internal parasitic circuit(Fig.3)." / "Between input terminal and V- voltage difference is higher." / "Input terminal has no resistance of 1kΩ or more." / "V+ terminal is connected with low impedance." 〔2026-09-25 照合で追加〕 |
 | 出力短絡電流 | typ 38 mA | ±15 V、25°C | TYP | p.2 | `Short Circuit Output Current IOS - 38 - mA` |
 
-探したが DS に無かった項目: 入力保護ダイオードの有無の記述、出力短絡の継続時間の規定、全温度での出力振幅の規定値（温度はグラフのみ）、静止電流がパッケージ全体か 1 回路かの明記。
+探したが DS に無かった項目: 出力短絡の継続時間の規定、全温度での出力振幅の規定値（温度はグラフのみ）、静止電流がパッケージ全体か 1 回路かの明記。 〔2026-09-25 照合で訂正〕
 
 ---
 
@@ -99,7 +102,7 @@
 | 出力電圧振幅（RL = 10 kΩ） | 正側 (V+) – 1.2 V、負側 (V–) + 0.5 V（レール基準）。typ 値なし | ±15 V、RL = 10 kΩ、25°C | 正側は MIN 列位置（左寄せ）、負側は MAX 列位置（右寄せ）。1 セルにまたがる表記 | p.8 §5.7 | `VO Voltage output RL = 10kΩ Positive (V+) – 1.2` / `Negative (V–) + 0.5` |
 | 出力電圧振幅（RL = 2 kΩ） | 正側 (V+) – 1.5 V、負側 (V–) + 1.2 V（レール基準）。typ 値なし | ±15 V、RL = 2 kΩ、25°C | 同上 | p.8 §5.7 | `RL = 2kΩ Positive (V+) – 1.5` / `Negative (V–) + 1.2` |
 | 参考: AOL の試験条件の出力範囲 | RL = 10 kΩ: –14.5 V ≤ VO ≤ 13.8 V、RL = 2 kΩ: –13.8 V ≤ VO ≤ 13.5 V で AOL min 104 dB | ±15 V、25°C | MIN | p.7 §5.7 | `RL = 10kΩ, –14.5V ≤ VO ≤ 13.8V 104 120` / `RL = 2kΩ, –13.8V ≤ VO ≤ 13.5V 104 120`（振幅の規定ではない） |
-| 参考: Headroom | typ 21.3 dBu | THD < 0.01%、RL = 2 kΩ、"VS = 18V"（原文どおり） | TYP | p.7 §5.7 | `Headroom(1) THD < 0.01%, RL = 2kΩ, VS = 18V 21.3 dBu`、注(1) "dBu = 20 × log (Vrms / 0.7746) where Vrms is the maximum output voltage for which THD+Noise is less than 0.01%." |
+| 参考: Headroom | typ 21.3 dBu | THD < 0.01%、RL = 2 kΩ、"VS = 18V"（原文どおり）。**DS 内の食い違い:** p.13 §6.2.1 と p.9 Figure 5-4 は VS = ±18 V・THD+N < 0.01 % で 11.7 Vrms = 23.6 dBu。表の 21.3 dBu（= 9.0 Vrms）とは 2.3 dB 違う。表の "VS = 18V" の意味（±18 V か 18 V 単電源か）は DS から決められない | TYP | p.7 §5.7、p.13 §6.2.1、p.9 Figure 5-4 | `Headroom(1) THD < 0.01%, RL = 2kΩ, VS = 18V 21.3 dBu`、注(1) "dBu = 20 × log (Vrms / 0.7746) where Vrms is the maximum output voltage for which THD+Noise is less than 0.01%." / p.13 "…maximum allowable output voltage level of 11.7Vrms (THD+Noise < 0.01%), have a headroom specification of 23.6dBu. See Figure 5-4." / Figure 5-4 凡例 "VS = ±18V, RL = 2kΩ, f = 1kHz" "OPA134 – 11.7Vrms" 〔2026-09-25 照合で訂正〕 |
 | 本文の記述 | レールから 1 V 以内 | — | —（本文） | p.13 §6.1 | "the OPA134 has a wide output swing, to within 1V of the rails" |
 | グラフ: 最大出力電圧 vs 周波数 | 低域で ±15 V: 約 27.5 Vpp、±5 V: 約 8.5 Vpp、±2.5 V: 約 3.5 Vpp（目読み） | RL = 2 kΩ（ページ既定）、25°C | typ（グラフ） | p.11 Figure 5-13 | "Maximum output voltage without slew-rate induced distortion" |
 | 同相入力電圧範囲 | min (V–) + 2.5 V / typ ±13 V / max (V+) – 3.5 V | ±15 V、25°C | MIN / TYP / MAX | p.7 §5.7 | `VCM Common-mode voltage (V–) + 2.5 ±13 (V+) – 3.5 V` |
@@ -127,6 +130,7 @@
 | 本文の記述 | 2 kΩ でレールから 250 mV 以内 | — | —（本文） | p.1 | "offering rail-to-rail output swing to within 250 mV of the power supplies with a 2‑kΩ load" |
 | グラフ: 出力電圧 vs 出力電流（吐き／吸い） | 0 mA で縦軸 18 V／–18 V から始まる曲線（25°C で 吐き 約 90 mA、吸い 約 100 mA で急落。目読み） | ページ見出しの既定は VS = ±15 V だが、**図中に電源電圧の表記なし**、曲線は ±18 V 相当の位置から始まる | typ（グラフ） | p.13 Figure 6-32, 6-33 | 図題 "Output Voltage vs Output Current (Sourcing)" / "(Sinking)" |
 | グラフ: 最大出力電圧 vs 周波数 | 低域で VS = ±18 V の線が 約 36、±15 V の線が 約 30（縦軸ラベルは "Output Voltage (VP)"。目読み） | RL = 2 kΩ（ページ既定） | typ（グラフ） | p.8 Figure 6-4 | 凡例 "Vs=±18 V / Vs=±15 V / Vs=±2.25 V" |
+| グラフ: THD+N Ratio vs Output Amplitude | 6 本（G = ±1、600 Ω / 2 kΩ / 10 kΩ）。約 7〜8 Vrms から上がり始め、10 Vrms 付近で急増（目読み。横軸 "Output Amplitude (VRMS)"） | ページ見出し VS = ±15 V, RL = 2 kΩ | typ（グラフ） | p.9 Figure 6-8 | ページ見出し "VS = ±15 V, RL = 2 kΩ" 〔2026-09-25 照合で追加〕 |
 | 同相入力電圧範囲 | (V–) 〜 (V+) – 2.25 V | ±18 V、25°C | MIN / MAX | p.6 §6.6 | `VCM Common-mode voltage range (V–) (V+) – 2.25 V` |
 | 入力電圧（絶対最大） | (V–) – 0.5 〜 (V+) + 0.5 V、入力電流 ±10 mA | — | MIN / MAX | p.4 §6.1 | `Input (V–) – 0.5 (V+) + 0.5 V` / `Input (all pins except power-supply pins) –10 10 mA` |
 | 差動入力（絶対最大） | 規定なし | — | — | — | — |
@@ -151,7 +155,7 @@
 | 静止電流 | typ ±10.5 mA / max ±12 mA（**total both amplifiers**。原文も ± 付き） | ±15 V、IO = 0、25°C | TYP / MAX | p.5 §6.5 | `Current, total both amplifiers IO = 0 ±10.5 ±12 mA` |
 | 出力電圧振幅 | min ±11 V / typ ±12 V | ±15 V、RL = 600 Ω、25°C | MIN / TYP | p.5 §6.5 | `Voltage output RL = 600 Ω ±11 ±12 V` |
 | 出力電流 | typ ±35 mA | ±15 V、VO = ±12 V、25°C | TYP | p.5 §6.5 | `Current output VO = ±12 V ±35 mA` |
-| グラフ: 最大出力電圧振幅 vs 周波数 | 低域で 約 26 Vp-p（目読み。負荷の表記なし） | VS = ±15 V、25°C | typ（グラフ） | p.8 Figure 15 | 図題 "Maximum Output Voltage Swing vs Frequency"、図中 "VS = ±15V" |
+| グラフ: 最大出力電圧振幅 vs 周波数 | 低域（10 kHz〜約 300 kHz）で約 24 Vp-p（目読み。負荷の表記なし） | VS = ±15 V、25°C | typ（グラフ） | p.8 Figure 15 | 図題 "Maximum Output Voltage Swing vs Frequency"、図中 "VS = ±15V" 〔2026-09-25 照合で訂正〕 |
 | 同相入力電圧範囲 | min ±12 V / typ ±13 V | ±15 V、25°C | MIN / TYP | p.5 §6.5 | `Common-mode input range ±12 ±13 V` |
 | 入力電圧（絶対最大） | (V–)–1 〜 (V+)+1 V | — | MIN / MAX | p.4 §6.1 | `Input voltage (V–)–1 (V+)+1 V` |
 | 差動入力（絶対最大） | 規定なし | — | — | — | — |
@@ -177,6 +181,7 @@
 | 出力電圧振幅（RL = 10 kΩ） | ±18 V: typ ±17.1 V、±22 V: typ ±21.2 V（Limit なし） | 25°C | Typical | p.4 | `RL = 10kΩ VS = ±18V ±17.1` / `VS = ±22V ±21.2` |
 | グラフ: 出力電圧 vs 負荷抵抗（±15 V） | 600 Ω 約 9.9 Vrms、2 kΩ 約 10.1 Vrms、10 kΩ 約 10.2 Vrms（目読み） | VCC = 15 V, VEE = –15 V、THD+N = 1% | typ（グラフ） | p.20 Figure 95 | 図題 "Output Voltage vs Load Resistance VCC = 15V, VEE = –15V THD+N = 1%" |
 | グラフ: 出力電圧 vs 負荷抵抗（**±12 V**） | 600 Ω 約 7.8 Vrms、2 kΩ 約 7.9 Vrms、10 kΩ 約 8.0 Vrms（目読み） | VCC = 12 V, VEE = –12 V、THD+N = 1% | typ（グラフ） | p.20 Figure 96 | 図題 "Output Voltage vs Load Resistance VCC = 12V, VEE = –12V THD+N = 1%" |
+| グラフ: THD+N vs Output Voltage（**±12 V**） | Figure 4 = 2 kΩ、Figure 8 = 600 Ω、Figure 12 = 10 kΩ。2 kΩ で約 7〜8 V から急増（目読み。横軸の単位は "V" のみで rms か peak かの表記なし） | VCC = 12 V, VEE = –12 V | typ（グラフ） | p.5 Figure 4・8、p.6 Figure 12 | 図題 "THD+N vs Output Voltage VCC = 12V, VEE = –12V RL = 2kΩ" ほか 〔2026-09-25 照合で追加〕 |
 | グラフ: 出力電圧 vs 総電源電圧 | RL = 2 kΩ / 600 Ω / 10 kΩ の 3 枚（THD+N = 1%、縦軸 VRMS）。総電源 24 V で約 8 Vrms（目読み） | THD+N = 1% | typ（グラフ） | p.21 Figure 99–101 | 図題 "Output Voltage vs Total Power Supply Voltage RL = 2kΩ, THD+N = 1%" ほか |
 | 同相入力電圧範囲 | ±18 V: typ +17.1 / –16.9 V、Limit (V+) – 2.0 / (V-) + 2.0 V (min)。±22 V: typ +21.0 / –20.8 V、Limit 同 | 25°C | Typical / Limit | p.4 | `VIN-CM Common-Mode Input Voltage Range VS = ±18V +17.1 (V+) – 2.0 V (min) –16.9 (V-) + 2.0 V (min)` |
 | 入力電圧（絶対最大） | (V-) – 0.7 V 〜 (V+) + 0.7 V | — | — | p.3 | `Input Voltage (V-) - 0.7V to (V+) + 0.7V` |
@@ -185,7 +190,7 @@
 | 瞬時短絡電流 | typ +53 / –42 mA | 表の既定（±18 V / ±22 V）、25°C | Typical | p.4 | `IOUT-CC Instantaneous Short Circuit Current +53 –42 mA` |
 | 出力短絡（絶対最大） | Continuous（GND へ、パッケージ内の何回路でも） | — | — | p.3 | `Output Short Circuit (4) Continuous`、注(4) "Amplifier output connected to GND, any number of amplifiers within a package." |
 
-探したが DS に無かった項目: **±15 V・±12 V での出力振幅の規定値**（表は ±18 V と ±22 V だけ。±15/±12 V はグラフのみで THD+N = 1% の Vrms 表記）、±18 V での出力振幅の Limit、全温度での出力振幅、差動入力電圧の絶対最大、入力保護ダイオードの記述。
+探したが DS に無かった項目: **±15 V・±12 V での出力振幅の規定値**（表は ±18 V と ±22 V だけ。±15/±12 V はグラフのみ: THD+N = 1% の Vrms 表記の Figure 95/96 と、±12 V の THD+N vs Output Voltage の Figure 4・8・12）、±18 V での出力振幅の Limit、全温度での出力振幅、差動入力電圧の絶対最大、入力保護ダイオードの記述。 〔2026-09-25 照合で訂正〕
 
 ---
 
@@ -206,11 +211,12 @@
 | 同相入力電圧範囲 | (V–) + 0.5 V 〜 (V+) – 2 V | ±15 V、25°C | MIN / MAX | p.7 §6.6 | `VCM Common-mode voltage range (V–) + 0.5 (V+) – 2 V` |
 | 入力電圧（絶対最大） | (V–) – 0.5 〜 (V+) + 0.5 V、入力電流 ±10 mA | — | MIN / MAX | p.5 §6.1 | `Input (V–) – 0.5 (V+) + 0.5 V` / `Input (all pins except power-supply pins) –10 10 mA` |
 | 差動入力（絶対最大） | 規定なし | — | — | — | — |
+| 入力保護（本文） | 入力間に back-to-back ダイオード。G = 1 など低利得で入力が速く動くと順バイアスになりうるので、入力信号電流を 10 mA 以下に制限（入力直列抵抗か帰還抵抗で）。ESD 用の current-steering diodes の説明は別に §7.3.3 | — | —（本文） | p.15 §7.3.2・Figure 36 | "The input terminals of the OPA1652 and OPA1654 are protected from excessive differential voltage with back-to-back diodes, as Figure 36 illustrates. … in low-gain or G = 1 circuits, fast ramping input signals can forward bias these diodes … the input signal current must be limited to 10 mA or less." 〔2026-09-25 照合で追加〕 |
 | 出力電流 | 表では「See Typical Characteristics」 | — | — | p.7 §6.6 | `IOUT Output current See Typical Characteristics mA` |
 | 出力短絡電流 | typ ±50 mA（1 チャンネルずつ） | ±15 V、25°C | TYP | p.7 §6.6 | `ISC Short-circuit current (3) ±50 mA`、注(3) "One channel at a time." |
 | 出力短絡（絶対最大） | Continuous（VS/2 へ、1 パッケージ 1 回路） | — | — | p.5 §6.1 | `Output short-circuit (2) Continuous`、注(2) "Short-circuit to VS / 2 (ground in symmetrical dual supply setups), one amplifier per package." |
 
-探したが DS に無かった項目: 出力振幅の typ 値・全温度での規定値、±15 V 以外での出力振幅の規定値、差動入力電圧の絶対最大、入力間の保護ダイオードの記述。
+探したが DS に無かった項目: 出力振幅の typ 値・全温度での規定値、±15 V 以外での出力振幅の規定値、差動入力電圧の絶対最大。 〔2026-09-25 照合で訂正〕
 
 ---
 
@@ -226,7 +232,7 @@
 | 出力電圧振幅（25°C） | min ±11.5 V / typ ±12.3 V | ±15 V、**RL = 1 kΩ**、25°C | MIN / TYP | p.7 §5.6 | `VO Output voltage RL = 1kΩ ±11.5 ±12.3 V` |
 | 出力電圧振幅（全温度） | min ±11 V / typ ±11.5 V | ±15 V、RL = 1 kΩ、TA = –25〜+85°C | MIN / TYP | p.7 §5.6 | `TA = –25°C to +85°C ±11 ±11.5` |
 | 出力電流 | typ ±30 mA | ±15 V、–10 V < VO < +10 V、25°C | TYP | p.7 §5.6 | `IO Current output –10V < VO < +10V ±30 mA` |
-| グラフ: 最大出力電圧 vs 周波数 | 低域で OPA627 は 約 25 Vp-p（目読み） | VS = ±15 V、RL = 10 kΩ（ページ既定は「TA = 25°C and VS = ±15V」） | typ（グラフ） | p.16 Figure 5-23 | 図題 "Maximum Output Voltage vs Frequency" |
+| グラフ: 最大出力電圧 vs 周波数 | OPA627 は 100 kHz〜約 1.5 MHz の平坦部で約 25 Vp-p（目読み。横軸は 100 kHz から。負荷の記載なし） | VS = ±15 V、25°C（ページ既定 "at TA = 25°C and VS = ±15V (unless otherwise noted)"） | typ（グラフ） | p.16 Figure 5-23 | 図題 "Maximum Output Voltage vs Frequency" 〔2026-09-25 照合で訂正〕 |
 | 同相入力電圧範囲 | 25°C: min ±11 V / typ ±11.5 V、全温度: min ±10.5 V / typ ±11 V | ±15 V、TA = –25〜+85°C（全温度） | MIN / TYP | p.6 §5.6 | `VCM Common-mode voltage ±11 ±11.5` / `TA = –25°C to +85°C ±10.5 ±11 V` |
 | 入力電圧（絶対最大） | Common-mode (V–) – 0.5 〜 (V+) + 0.5 V、入力ピン電流 ±10 mA | — | MIN / MAX | p.4 §5.1 | `Input voltage Common-mode (V–) – 0.5 (V+) + 0.5` / `Input pin current ±10 mA` |
 | 差動入力（絶対最大） | (V+) – (V–) | — | MAX | p.4 §5.1 | `Differential (V+) – (V–)` |
@@ -250,16 +256,17 @@
 | 出力電圧振幅（RL = 10 kΩ） | (V–) + 0.2 V 〜 (V+) – 0.2 V（レール基準）。typ 値なし | VS = ±2.25〜±18 V、RL = 10 kΩ、AOL ≥ 114 dB、25°C | MIN 列 / MAX 列 | p.6 | `VOUT Voltage output RL = 10 kΩ, AOL ≥ 114 dB (V–) + 0.2 (V+) – 0.2 V` |
 | 出力電圧振幅（RL = 2 kΩ） | (V–) + 0.6 V 〜 (V+) – 0.6 V（レール基準）。typ 値なし | VS = ±2.25〜±18 V、RL = 2 kΩ、AOL ≥ 110 dB、25°C | MIN 列 / MAX 列 | p.6 | `RL = 2 kΩ, AOL ≥ 110 dB (V–) + 0.6 (V+) – 0.6 V` |
 | 本文の記述 | 2 kΩ でレールから 600 mV 以内 | — | —（本文） | p.1 | "The OPA1611 and OPA1612 offer rail-to-rail output swing to within 600 mV with a 2-kΩ load" |
-| グラフ: 出力電圧 vs 出力電流 | 25°C で 0〜約 45 mA の範囲で 約 +14.1 V / 約 –14.6 V（目読み） | VS = ±15 V、"Dual version with both channels driven simultaneously" | typ（グラフ） | p.11 Figure 27 | 図題 "Output Voltage vs Output Current" |
+| グラフ: 出力電圧 vs 出力電流 | 25°C の線で、0〜約 45 mA の範囲で約 +14.35〜+14.2 V / 約 –14.3〜–14.2 V（目読み。+85°C の線は負側が約 –14.0 V まで上がる） | VS = ±15 V、"Dual version with both channels driven simultaneously" | typ（グラフ） | p.11 Figure 27 | 図題 "Output Voltage vs Output Current" 〔2026-09-25 照合で訂正〕 |
 | グラフ: 最大出力電圧 vs 周波数 | 低域で VS = ±15 V: 約 28.8 Vpp（目読み）。±5 V・±2.25 V の線もある | RL = 2 kΩ（ページ既定） | typ（グラフ） | p.7 Figure 4 | 図中 "Maximum output voltage range without slew-rate induced distortion"、縦軸 "Output Voltage (VPP)" |
 | 同相入力電圧範囲 | (V–) + 2 V 〜 (V+) – 2 V | VS = ±2.25〜±18 V、25°C | MIN / MAX | p.5 §6.4 | `VCM Common-mode voltage range (V–) + 2 (V+) – 2 V` |
 | 入力電圧（絶対最大） | (V–) – 0.5 〜 (V+) + 0.5 V、入力電流 ±10 mA | — | MIN / MAX | p.4 §6.1 | `Input voltage (V–) – 0.5 (V+) + 0.5 V` / `Input current (all pins except power-supply pins) ±10 mA` |
 | 差動入力（絶対最大） | 規定なし（差動入力インピーダンスは typ 20k ‖ 8 Ω ‖ pF） | — | — | p.5 §6.4 | `Differential 20k || 8 Ω || pF` |
+| 入力保護（本文） | 入力間に back-to-back ダイオード。G = +1 など低利得で入力が速く動くと順バイアスになりうるので、入力信号電流を 10 mA 以下に制限（入力直列抵抗か帰還抵抗で）。現象の図は Typical Characteristics の Figure 17。ESD 用 steering diodes の説明は別に p.13 | — | —（本文） | p.14 §7.3.4・Figure 31 | "The input terminals of the OPA1611 and the OPA1612 are protected from excessive differential voltage with back-to-back diodes, as Figure 31 shows. … If the input signal is fast enough to create this forward bias condition, the input signal current must be limited to 10 mA or less." 〔2026-09-25 照合で追加〕 |
 | 出力電流 | 表では「See Figure 27」 | — | — | p.6 | `IOUT Output current See Figure 27 mA` |
 | 出力短絡電流 | typ +55 mA / –62 mA | 25°C | TYP | p.6 | `ISC Short-circuit current +55 mA` / `–62 mA` |
 | 出力短絡（絶対最大） | Continuous（VS/2 へ、1 パッケージ 1 回路） | — | — | p.4 §6.1 | `Output short-circuit (2) Continuous`、注(2) "Short-circuit to VS / 2 (ground in symmetrical dual supply setups), one amplifier per package." |
 
-探したが DS に無かった項目: 出力振幅の typ 値・全温度での規定値、差動入力電圧の絶対最大、入力間の保護ダイオードの有無の記述（ESD 用 steering diodes の説明 p.13 のみ）。
+探したが DS に無かった項目: 出力振幅の typ 値・全温度での規定値、差動入力電圧の絶対最大。 〔2026-09-25 照合で訂正〕
 
 ---
 
@@ -304,6 +311,7 @@ Note 9: "The LT1364C/LT1365C are guaranteed to meet specified performance from 0
 | 出力電圧振幅（RL = 10 kΩ） | (V–) + 0.2 V 〜 (V+) – 0.2 V（レール基準）。typ 値なし | VS = 4.5〜36 V、RL = 10 kΩ、AOL ≥ 108 dB、25°C | MIN 列 / MAX 列 | p.7 §6.7 | `VO Voltage output RL = 10 kΩ, AOL ≥ 108 dB (V–) + 0.2 (V+) – 0.2` |
 | 出力電圧振幅（RL = 2 kΩ） | (V–) + 0.35 V 〜 (V+) – 0.35 V（レール基準）。typ 値なし | VS = 4.5〜36 V、RL = 2 kΩ、AOL ≥ 108 dB、25°C | MIN 列 / MAX 列 | p.7 §6.7 | `RL = 2 kΩ, AOL ≥ 108 dB (V–) + 0.35 (V+) – 0.35 V` |
 | グラフ: 出力電圧振幅 vs 出力電流 | 25°C で 約 30 mA まで 約 +17.5 V / 約 –17.7 V 付近（目読み） | "(Maximum Supply)"、ページ既定 VS = ±18 V | typ（グラフ） | p.10 Figure 6-6 | 図題 "Output Voltage Swing vs Output Current (Maximum Supply)" |
+| グラフ: 最大出力電圧 vs 周波数 | 低域で VS = ±15 V の線が約 29 Vpp（目読み。縦軸 "Output Voltage (VPP)"）。ほか ±5 V・±2.25 V の線 | ページ既定は ±18 V だが線に ±15 V と明記 | typ（グラフ） | p.12 Figure 6-22 | 図題 "Maximum Output Voltage vs Frequency" 〔2026-09-25 照合で追加〕 |
 | 同相入力電圧範囲 | (V–) – 0.1 V 〜 (V+) – 3.5 V | VS = 4.5〜36 V、TA = –40〜+125°C | MIN / MAX | p.7 §6.7 | `VCM Common-mode voltage TA = –40°C to +125°C (V–) – 0.1 (V+) – 3.5 V` |
 | 入力電圧（絶対最大） | (V–) – 0.5 〜 (V+) + 0.5 V、電流 ±10 mA | — | MIN / MAX | p.5 §6.1 | `Signal input pins(2) Voltage (V–) – 0.5 (V+) + 0.5 V` / `Current ±10 mA`、注(2) "Input pins are diode-clamped to the power-supply rails. Input signals that can swing more than 0.5 V beyond the supply rails must be current limited to 10 mA or less." |
 | 差動入力（絶対最大） | 規定なし | — | — | — | — |
@@ -353,7 +361,7 @@ Note 9: "The LT1364C/LT1365C are guaranteed to meet specified performance from 0
 | 出力電圧振幅 2 | min ±10 V / typ ±12.5 V | ±15 V、RL = 2 kΩ、25°C | MIN / TYP | p.2 | `Max Output Voltage 2 VOM2 RL=2kΩ ±10 ±12.5 - V` |
 | グラフ: 最大出力電圧 vs 温度（RL = 2 kΩ） | 25°C で ±15 V: 約 +14 / 約 –13.3 V、±16 V: 約 +15 / 約 –14.5 V、±9 V: 約 +8 / 約 –7.4 V（目読み） | Gv = open, RL = 2kohm to 0V | typ（グラフ） | p.11 | 図題 "MAXIMUM OUTPUT VOLTAGE vs TEMPERATURE (SUPPLY VOLTAGE) Gv=open,RL=2kohm to 0V" |
 | グラフ: 最大出力電圧 vs 温度（RL = 10 kΩ） | 25°C で ±15 V: 約 +14 / 約 –13.5 V（目読み）。±16 V・±9 V の線もある | Gv = open, RL = 10kohm to 0V | typ（グラフ） | p.11 | 図題 "MAXIMUM OUTPUT VOLTAGE vs TEMPERATURE (SUPPLY VOLTAGE) Gv=open,RL=10kohm to 0V" |
-| グラフ: 最大出力電圧 vs 負荷抵抗 | ±16 V・±15 V・±9 V の 3 枚（温度別）。±15 V で 2 kΩ 約 +13.5 / 約 –13 V（目読み） | Gv = open, RL to 0V | typ（グラフ） | p.10、p.11 | 図題 "MAXIMUM OUTPUT VOLTAGE vs LOAD RESISTANCE (TEMPERATURE) V+/V-=±15V,Gv=open,RL to 0V" ほか |
+| グラフ: 最大出力電圧 vs 負荷抵抗 | ±16 V・±15 V・±9 V の 3 枚（温度別）。±15 V で 2 kΩ 約 +14.0 / 約 –13.1 V（目読み。温度 3 本の幅 ±0.2 V） | Gv = open, RL to 0V | typ（グラフ） | p.10、p.11 | 図題 "MAXIMUM OUTPUT VOLTAGE vs LOAD RESISTANCE (TEMPERATURE) V+/V-=±15V,Gv=open,RL to 0V" ほか 〔2026-09-25 照合で訂正〕 |
 | 同相入力電圧範囲 | min ±8 V / typ ±9.5 V（CMR ≥ 60 dB） | ±15 V、25°C | MIN / TYP | p.2 | `Input Common Mode Voltage Range VICM CMR≥60dB ±8 ±9.5 - V` |
 | 同相入力電圧（絶対最大） | ±15 V（Note1） | — | RATING | p.2 | `Common Mode Input Voltage VICM ±15 (Note1) V`、"(Note1) For supply Voltages less than ±15 V, the maximum input voltage is equal to the Supply Voltage." |
 | 差動入力（絶対最大） | ±30 V | — | RATING | p.2 | `Differential Input Voltage VID ±30 V` |

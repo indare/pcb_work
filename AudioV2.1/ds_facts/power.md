@@ -1,6 +1,7 @@
 # 電源系 — データシートの事実
 
 2026-09-25 収集。値は DS の原文で裏が取れたものだけ。設計判断は書かない。
+2026-09-25 にページ画像と照合した（照合結果 [verify_power.md](verify_power.md)、その再判定 [../review/ds_errata_review.md](../review/ds_errata_review.md)）。その結果で直した行・足した行は、行末に 〔2026-09-25 照合で訂正〕／〔2026-09-25 照合で追加〕 を付けた。
 
 - 出典のページは PDF のページ番号（どの DS も印刷ページ番号と一致）。PDF はすべて `AudioV2.1/datasheets/` にある。
 - 「列」はその値が表のどの列に印刷されているか。表に min/typ/max の列が無いものは「値の列のみ」と書き、値に付いた `typ.` などの字句はそのまま残した。
@@ -32,7 +33,7 @@
 | 入力フィルタ | capacitor | — | Min〜Max の結合セル | p2 | "Input Filter ... capacitor" |
 | 入力電圧範囲 | 9 / 12 / 18 VDC | nom. Vin = 12VDC | Min / Typ / Max | p2 | "Input Voltage Range nom. Vin= ... 12VDC 9VDC 12VDC 18VDC" |
 | 入力サージ電圧 | 25 VDC | 1 second max.、nom. Vin = 12VDC | Max | p2 | "Input Surge Voltage 1 second max. nom. Vin= ... 12VDC ... 25VDC" |
-| 無負荷入力電流（"Quiescent Current"） | 55 mA | nom. Vin の2行目。**条件欄の印字は "2VDC"**（行の並びは 5VDC / 2VDC / 24VDC / 48VDC で、12VDC の位置。画像でも "2VDC"） | **Max** | p2 | "Quiescent Current nom. Vin= 5VDC 2VDC 24VDC 48VDC ... 105mA 55mA 28mA 14mA" |
+| "Quiescent Current"（DS の字句のまま。負荷の条件は書かれていない。値の大きさからは無負荷時と読めるが DS はそう書いていない） | 55 mA | nom. Vin の2行目。**条件欄の印字は "2VDC"**（行の並びは 5VDC / 2VDC / 24VDC / 48VDC で、12VDC の位置。画像でも "2VDC"） | **Max** | p2 | "Quiescent Current nom. Vin= 5VDC 2VDC 24VDC 48VDC ... 105mA 55mA 28mA 14mA" 〔2026-09-25 照合で訂正〕 |
 | 出力電圧トリム | +10 % / -8 % | Trim up / Trim down、"see calculation on next page" | Max | p2 | "Output Voltage Trimming see calculation on next page Trim up +10% Trim down -8%" |
 | 起動時間 | 2 ms | — | Typ | p2 | "Start-up Time 2ms" |
 | 低電圧ロックアウト | ON 9 VDC / OFF 7 VDC | nom. Vin = 12V | Typ | p2 | "nom. Vin= 12V DC-DC ON 9VDC DC-DC OFF 7VDC" |
@@ -141,9 +142,11 @@
 | OUT – GND | -0.3 / 33 V | — | MIN / MAX | p5 | "OUT pin to GND pin –0.3 33 V" |
 | OUT – IN | -36 / 0.3 V | — | MIN / MAX | p5 | "OUT pin to IN pin –36 0.3 V" |
 | FB – GND | -0.3 / 2 V | — | MIN / MAX | p5 | "FB pin to GND pin –0.3 2 V" |
+| FB – IN | -36 / 0.3 V | — | MIN / MAX | p5 | "FB pin to IN pin –36 0.3 V" 〔2026-09-25 照合で追加〕 |
 | EN – IN | -36 / 0.3 V | — | MIN / MAX | p5 | "EN pin to IN pin –36 0.3 V" |
 | EN – GND | -0.3 / 36 V | — | MIN / MAX | p5 | "EN pin to GND pin –0.3 36 V" |
 | NR/SS – GND | -0.3 / 2 V | — | MIN / MAX | p5 | "NR/SS pin to GND pin –0.3 2 V" |
+| NR/SS – IN | -36 / 0.3 V | — | MIN / MAX | p5 | "NR/SS pin to IN pin –36 0.3 V" 〔2026-09-25 照合で追加〕 |
 | TJ | -40 / 125 °C | Operating virtual junction | MIN / MAX | p5 | "Operating virtual junction, TJ –40 125 °C" |
 
 ### 推奨動作条件（p5）
@@ -196,7 +199,7 @@
 | PSRR（表） | 72 dB | VIN = 6.2 V, VOUT(nom) = 5 V, COUT = 10 µF, CNR/SS = CFF = 10 nF, f = 120 Hz（IOUT は見出し条件の 1 mA） | TYP | p6 | "PSRR Power-supply rejection ratio VIN = 6.2 V, VOUT(nom) = 5 V, COUT = 10 μF, CNR/SS = CFF (4) = 10 nF, f = 120 Hz 72 dB" |
 | 熱遮断 | 170 °C / 150 °C | 上昇時遮断 / 下降時復帰 | TYP | p6 | "Tsd ... Shutdown, temperature increasing 170 ... Reset, temperature decreasing 150" |
 | 雑音（Features） | 12.7 µVRMS（20 Hz〜20 kHz）/ 15.4 µVRMS（10 Hz〜100 kHz） | Features 欄には条件なし | — | p1 | "Noise: – 12.7 μVRMS (20 Hz to 20 kHz) – 15.4 μVRMS (10 Hz to 100 kHz)" |
-| PSRR（Features） | 72 dB (120 Hz)、≥ 52 dB (10 Hz〜400 kHz) | 9.1.5 で Figure 29 の構成（入出力 10 µF 以上、CNR・CFF 10 nF）の結果とされている | — | p1, p14 | "– ≥ 52 dB (10 Hz to 400 kHz)" / "The solution illustrated in Figure 29 delivers minimum noise levels of 15.4 μVRMS and power-supply rejection levels above 52 dB from 10 Hz to 400 kHz" |
+| PSRR（Features） | 72 dB (120 Hz)、≥ 52 dB (10 Hz〜400 kHz) | 9.1.5 で Figure 29 の構成（入出力 10 µF 以上、CNR・CFF 10 nF）の結果とされている。**DS 内の食い違い:** この文が参照する Figure 18（VOUT = 5 V, IOUT = 150 mA, COUT = 10 µF, CNR/SS = CFF = 10 nF）は 400 kHz で約 50 dB（目読み）。52 dB の条件は DS に書かれていない | — | p1, p14 | "– ≥ 52 dB (10 Hz to 400 kHz)" / "The solution illustrated in Figure 29 delivers minimum noise levels of 15.4 μVRMS and power-supply rejection levels above 52 dB from 10 Hz to 400 kHz; see Figure 18 and Figure 25" 〔2026-09-25 照合で訂正〕 |
 
 ### PSRR のグラフ（p9、**目読み**。値は dB）
 
@@ -245,7 +248,7 @@
 - ソフトスタートの式の適用範囲（CNR/SS の範囲・CFF ありの場合）
 - PSRR の表の値は 120 Hz の 1 点のみ。100 kHz 以上の保証値は無い（グラフの typ のみ）
 - 出力コンデンサの上限容量（設計例 Eq. 8 に「電流制限による立ち上がり時間」から出す 35 µF の計算例はあるが、規定値ではない）
-- EN の閾値のヒステリシスの規定値（Figure 13 のグラフのみ）
+- EN の閾値のヒステリシス: 規定値もグラフも無い（Figure 13 は ON/OFF の境界を 1 本の線で示すだけ。25°C で約 1.7 V、目読み） 〔2026-09-25 照合で訂正〕
 
 ---
 
@@ -272,9 +275,11 @@
 | OUT – GND | -33 / 0.3 V | — | MIN / MAX | p5 | "OUT pin to GND pin –33 0.3 V" |
 | OUT – IN | -0.3 / 36 V | — | MIN / MAX | p5 | "OUT pin to IN pin –0.3 36 V" |
 | FB – GND | -2 / 0.3 V | — | MIN / MAX | p5 | "FB pin to GND pin –2 0.3 V" |
+| FB – IN | -0.3 / 36 V | — | MIN / MAX | p5 | "FB pin to IN pin –0.3 36 V" 〔2026-09-25 照合で追加〕 |
 | EN – IN | -0.3 / 36 V | — | MIN / MAX | p5 | "EN pin to IN pin –0.3 36 V" |
 | **EN – GND** | **-36 / 36 V** | — | MIN / MAX | p5 | "EN pin to GND pin –36 36 V" |
 | NR/SS – GND | -2 / 0.3 V | — | MIN / MAX | p5 | "NR/SS pin to GND pin –2 0.3 V" |
+| NR/SS – IN | -0.3 / 36 V | — | MIN / MAX | p5 | "NR/SS pin to IN pin –0.3 36 V" 〔2026-09-25 照合で追加〕 |
 | TJ | -40 / 125 °C | — | MIN / MAX | p5 | "Operating virtual junction, TJ –40 125 °C" |
 
 ### 推奨動作条件（p6、画像で確認）
@@ -322,7 +327,7 @@
 | 出力雑音 | 17.5 µVRMS | VIN = -6.2 V, VOUT(nom) = -5 V, COUT = 10 µF, CNR/SS = CFF = 10 nF, 10 Hz〜100 kHz | TYP | p7 | "... CNR/SS = CFF (5) = 10 nF, BW = 10 Hz to 100 kHz 17.5 μVRMS" |
 | PSRR（表） | 72 dB | VIN = -6.2 V, VOUT(nom) = -5 V, COUT = 10 µF, CNR/SS = CFF = 10 nF, f = 120 Hz | TYP | p7 | "PSRR ... f = 120 Hz 72 dB" |
 | 熱遮断 | 170 / 150 °C | 上昇時 / 下降時 | TYP | p7 | "TSD ... 170 ... 150 °C" |
-| PSRR（Features） | 72 dB (120 Hz)、≥ 55 dB (10 Hz〜700 kHz) | 9.1.3 で Figure 32 の構成（10 µF 以上・10 nF）の結果とされている | — | p1, p18 | "– ≥ 55 dB (10 Hz to 700 kHz)" / "delivers minimum noise levels of 15.1 μVRMS and power-supply rejection levels above 55 dB from 10 Hz to 700 kHz" |
+| PSRR（Features） | 72 dB (120 Hz)、≥ 55 dB (10 Hz〜700 kHz) | 9.1.3 で Figure 32 の構成（10 µF 以上・10 nF）の結果とされている。**DS 内の食い違い:** この文が参照する Figure 18（VOUT = −5 V, IOUT = 200 mA, COUT = 10 µF, CNR/SS = CFF = 10 nF）は 400 kHz で約 54 dB、**700 kHz で約 45 dB**（目読み）。Figure 14（COUT = 10 µF, CFF = 0）も 700 kHz で約 45 dB | — | p1, p18 | "– ≥ 55 dB (10 Hz to 700 kHz)" / "delivers minimum noise levels of 15.1 μVRMS and power-supply rejection levels above 55 dB from 10 Hz to 700 kHz; see Figure 18 and Figure 26" 〔2026-09-25 照合で訂正〕 |
 | 雑音（Features） | 14 µVRMS（20 Hz〜20 kHz）/ 15.1 µVRMS（10 Hz〜100 kHz） | 条件なし | — | p1 | "– 14 μVRMS (20 Hz to 20 kHz) – 15.1 μVRMS (10 Hz to 100 kHz)" |
 
 ### PSRR のグラフ（p10、**目読み**。値は dB。縦軸は 10〜90 dB）
@@ -347,6 +352,7 @@
 | 1 % 抵抗の例 | VOUT = -15 V: R1 = 118 kΩ, R2 = 10 kΩ | Table 2 | — | p17 | "–15 118 10" |
 | ソフトスタート時間 | tSS (ms) = 0.9 × CNR/SS (nF) | Equation 1。Figure 29 は CFF なしの場合 | — | p15 | "tSS (ms) = 0.9 × CNR/SS (nF)" / "Figure 29 shows the relationship between the CNR/SS size and the start-up time without a CFF." |
 | 設計例のソフトスタート | 14 ms、CSS = 15 nF（原文の数値のまま） | Equation 6 | — | p21 | "tSS (ms) = 0.9 × CNR/SS = 14 ms CSS = 15 nF" |
+| 設計例の COUT(max) | 15.4 µF（**設計例（VOUT = 2 V、tSS = 14 ms）での目安で、規定値ではない**）。電流制限での立ち上がりをソフトスタート時間の 2 桁下（140 µs）に置く前提。Eq.8 は ICL(min) = 220 mA を使う（Eq.7 と TPS7A49 の同じ設計例は ICL(max)） | Equation 7・8 | — | p21 | "For the soft-start to dominate the start-up conditions, ideally place the start-up time as a result of the current limit at two decades below the soft-start time (at 140 µs)." / Eq.8 "COUT(max) = tSS(CL) × ICL(min) / VOUT = 140 µs × 220 mA / 2V = 15.4 µF"（抽出テキストでは µ が "m" に化ける） 〔2026-09-25 照合で追加〕 |
 | CIN / COUT | 最小 2.2 µF、10 µF を強く推奨 | — | — | p18 | "achieve stability with a minimum input and output capacitance of 2.2 μF; however, TI highly recommends using a 10-μF capacitor to maximize ac performance." |
 | コンデンサの種類 | 低 ESR、X7R / X5R を推奨。高 ESR は PSRR を悪化 | — | — | p17 | "Ceramic capacitors with X7R and X5R dielectrics are preferred." / "High-ESR capacitors can degrade PSRR." |
 | CNR/SS・CFF | 安定には不要、10 nF を強く推奨 | — | — | p18 | "Although noise-reduction and feed-forward capacitors (CNR/SS and CFF, respectively) are not needed to achieve stability, TI highly recommends using 10-nF capacitors" |
@@ -356,7 +362,7 @@
 
 | 項目 | 値 | 条件 | 列 | 出典 | 原文の引用 |
 |---|---|---|---|---|---|
-| Do's and Don'ts | 2.2 µF 以上を IN・OUT の近くに／10 mm 以内／EN を浮かせない／NR/SS に抵抗・誘導性の負荷をつけない | 9.3 | — | p23 | "Do not place the input or output capacitor more than 10 mm away from the regulator." "Do not float the enable (EN) pin." "Do not resistively or inductively load the NR/SS pin." |
+| Do's and Don'ts | 2.2 µF 以上を IN・OUT の近くに／コンデンサとピンの間に他の部品を置かない（§10）／10 mm 以内／EN を浮かせない／NR/SS に抵抗・誘導性の負荷をつけない | 9.3・10 | — | p23 §9.3・§10 | "Do not place the input or output capacitor more than 10 mm away from the regulator." "Do not float the enable (EN) pin." "Do not resistively or inductively load the NR/SS pin." / §10: "The input and output supplies must also be bypassed with at least a 2.2-μF capacitor located near the input and output pins. There must be no other components located between these capacitors and the pins." 〔2026-09-25 照合で訂正〕 |
 | 全コンデンサの配置 | CIN・COUT・CNR/SS・CFF をデバイスの近く、同じ面。反対面に置かない。ビア・長い配線は避ける | 11.1 | — | p24 | "Every capacitor (CIN, COUT, CNR/SS, and CFF) must be placed as close as possible to the device and on the same side of the PCB as the regulator itself." |
 | GND と PowerPAD | GND ピンを直下の PowerPAD に直結、PowerPAD は直下の複数ビアで内層 GND へ | 11.1 | — | p24 | "The GND pin must be tied directly to the PowerPAD under the device. The PowerPAD must be connected to any internal PCB ground planes using multiple vias directly under the device." |
 | GND プレーン | VIN 側と VOUT 側を分け、GND ピンで一点接続 | 11.1.1 | — | p24 | "separate ground planes for VIN and VOUT, with each ground plane star-connected only at the GND pin of the device." |
@@ -374,7 +380,7 @@
 
 ## 4. ADI（旧 Linear）LT1763
 
-出典: `ADI_LT1763.pdf`（全 22 ページ。**各ページ下の版記号は "1763fg"**、Revision History の最新行は "G 5/10"。`datasheets/README.md` の記述 "`1763fh`" とは版記号が違う — 本ファイルで見えるのは Rev G）
+出典: `ADI_LT1763.pdf`（全 22 ページ。**各ページ下の版記号は "1763fg"**、Revision History の最新行は "G 5/10"。`datasheets/README.md` の記述 "`1763fh`" とは版記号が違う — 本ファイルで見えるのは Rev G）。PDF は Linear Technology の Rev G（"1763fg"）を第三者サイト（BDTIC）が配布したもの（`pdfinfo` の Author が "www.BDTIC.com"、各ページ下に "www.BDTIC.com/Linear" の透かし）。ADI の現行版ではない 〔2026-09-25 照合で訂正〕
 
 **EC 表（p4〜p6）の見出し条件:** *"The ● denotes the specifications which apply over the full operating temperature range, otherwise specifications are at TA = 25°C. (Note 2)"*（p5 の表は画像で ● と列を確認）
 
@@ -404,17 +410,19 @@
 | SHDN ピン電流 | 0.1 µA / 1 µA | VSHDN = 0V ／ VSHDN = 20V | TYP | p5 | "SHDN Pin Current (Note 9) VSHDN = 0V 0.1 μA VSHDN = 20V 1 μA" |
 | シャットダウン時静止電流 | 0.1 / 1 µA | VIN = 6V, VSHDN = 0V | TYP / MAX | p5 | "Quiescent Current in Shutdown VIN = 6V, VSHDN = 0V 0.1 1 μA" |
 | SHDN の未接続 | 未接続ならシャットダウン。未使用時は VIN へ | ピン説明 | — | p14 | "If unused, the SHDN pin must be connected to VIN. The device will be in the low power shutdown state if the SHDN pin is not connected." |
-| Ripple Rejection | 50 / 65 dB | VIN – VOUT = 1.5V (Avg), VRIPPLE = 0.5VP-P, fRIPPLE = 120Hz, ILOAD = 500mA | MIN / TYP | p5 | "Ripple Rejection VIN – VOUT = 1.5V (Avg), VRIPPLE = 0.5VP-P, fRIPPLE = 120Hz, ILOAD = 500mA 50 65 dB" |
+| Ripple Rejection | 50 / 65 dB | VIN – VOUT = 1.5V (Avg), VRIPPLE = 0.5VP-P, fRIPPLE = 120Hz, ILOAD = 500mA。**TA = 25°C（● なし。全温度の規定ではない）** | MIN / TYP | p5（画像で確認） | "Ripple Rejection VIN – VOUT = 1.5V (Avg), VRIPPLE = 0.5VP-P, fRIPPLE = 120Hz, ILOAD = 500mA 50 65 dB" 〔2026-09-25 照合で訂正〕 |
+| グラフ: Input Ripple Rejection vs 周波数（目読み） | COUT = 10 µF で 100 kHz 約 37〜41 dB、200 kHz 約 28〜32 dB、1 MHz 約 21〜22 dB（CBYP による差は 30 kHz 以上でほぼ無い）。左図（CBYP = 0、COUT = 10 µF / 4.7 µF）の 10 µF の線は 1 kHz 約 49、約 30 kHz に約 49 dB の山。右図（COUT = 10 µF、CBYP = 0.01 µF / 1000 pF / 100 pF）は 30 kHz 以上で 3 本が重なる | IL = 500 mA、VIN = VOUT(NOMINAL) + 1 V + 50 mVRMS（2 枚とも） | typ（グラフ） | p11 | 図題 "Input Ripple Rejection" 〔2026-09-25 照合で追加〕 |
 | 熱抵抗（DE、12-Lead DFN） | θJA = 40 °C/W、θJC = 5 °C/W、TJMAX = 125 °C | ピン配置図の注記 | — | p2（画像で確認） | "TJMAX = 125°C, θJA = 40°C/W, θJC = 5°C/W" |
 | 熱抵抗（S8） | θJA = 70 °C/W、θJC = 35 °C/W、TJMAX = 150 °C | 同上 | — | p2（画像で確認） | "TJMAX = 150°C, θJA = 70°C/W, θJC = 35°C/W" |
 | θJA（DE、銅面積別） | 40 / 45 / 50 / 60 °C/W | 表面銅 2500 / 1000 / 225 / 100 mm²、裏面 2500 mm²、基板 2500 mm²。静止空気、3/32" FR-4、1 oz | — | p17 | "Table 1. DE Package, 12-Lead DFN ... 2500mm2 2500mm2 2500mm2 40°C/W ..." / "All measurements were taken in still air on 3/32" FR-4 board with one ounce copper." |
 | θJA（S8、銅面積別） | 60 / 60 / 68 / 74 / 86 °C/W | 表面銅 2500 / 1000 / 225 / 100 / 50 mm²、他同上 | — | p18 | "Table 2. SO-8 Package, 8-Lead SO 2500mm2 ... 60°C/W ... 50mm2 ... 86°C/W" |
 | 出力コンデンサ | 最小 3.3 µF・ESR 3 Ω 以下を推奨。CBYP 100 pF で 4.7 µF、1000 pF 以上で 6.8 µF | — | — | p16 | "A minimum output capacitor of 3.3μF with an ESR of 3Ω, or less, is recommended to prevent oscillations." / "For 100pF of bypass capacitance, 4.7μF of output capacitor is recommended. With a 1000pF bypass capacitor or larger, a 6.8μF output capacitor is recommended." |
+| 出力コンデンサの安定域（目読み） | 最大 ESR は 3 Ω。最小 ESR は CBYP で決まり、ESR ≈ 0（セラミック）で安定になる COUT は CBYP = 0 で約 3 µF 以上、100 pF で約 4 µF、330 pF で約 5 µF、1000 pF 以上で約 6 µF 以上（横軸は 10 µF まで） | Figure 3 の網掛けが安定域。同じページの本文に 16 V・10 µF の Y5V の実効容量の記述（Figure 4・5） | — | p16 Figure 3 | "The shaded region of Figure 3 defines the range over which the LT1763 regulators are stable. The minimum ESR needed is defined by the amount of bypass capacitance used, while the maximum ESR is 3Ω." / "When used with a 5V regulator, a 16V 10µF Y5V capacitor can exhibit an effective value as low as 1µF to 2µF for the DC bias voltage applied and over the operating temperature range." 〔2026-09-25 照合で追加〕 |
 
 ### 探したが DS に無かった項目（LT1763）
 
 - SHDN 閾値の Off→On の MIN 値、On→Off の MAX 値（表の該当欄は空）
-- GND ピン電流の VIN = 20 V 付近での規定値（試験は VIN = VOUT(NOMINAL) のみ）
+- GND ピン電流の VIN = 20 V 付近での規定値（試験は VIN = VOUT(NOMINAL) と 2.3 V（C/I）／2.35 V（MP）の大きい方、電流源負荷（Note 7）。これより高い VIN の規定値は無い） 〔2026-09-25 照合で訂正〕
 - `1763fh`（Rev H）のファイル — リポジトリの PDF は Rev G（"1763fg"）
 
 ---

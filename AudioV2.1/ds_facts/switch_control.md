@@ -1,6 +1,7 @@
 # 切り替え・制御・音声 IC — データシートの事実
 
 2026-09-25 収集。値は DS の原文で裏が取れたものだけ。設計判断は書かない。
+2026-09-25 にページ画像と照合した（照合結果 [verify_switch_control.md](verify_switch_control.md)、その再判定 [../review/ds_errata_review.md](../review/ds_errata_review.md)）。その結果で直した行・足した行は、行末に 〔2026-09-25 照合で訂正〕／〔2026-09-25 照合で追加〕 を付けた。
 
 - 表は `pdftotext -layout` で抜き、**min/typ/max の列はすべてページ画像（pdftoppm）で目視して確かめた**。
 - 「列」欄は DS の表で値が載っている列。空欄の列は書かない（例: typ 列が空なら typ は DS に無い）。
@@ -79,14 +80,15 @@
 | RON（12 V 単電源） | 1.15 / 1.6 Ω（25°C）、1.75 / 2 / 2.3 Ω | VS = 3〜9 V | typ / max、温度行 max | p15 §5.13 | "VS = 3 V to 9 V ... 25°C 1.15 1.6 ... 1.75 ... 2 ... 2.3" |
 | RON FLAT（12 V 単電源） | 0.084 Ω（25°C）、0.13 / 0.15 / 0.16 Ω | VS = 3〜9 V | 25°C typ、温度行 max | p15 §5.13 | "RON FLAT ... 25°C 0.084 ... 0.13 ... 0.15 ... 0.16" |
 | 平坦域の説明（本文） | 概ね VSS+5 V〜VDD–5 V | — | — | p27 §7.3.4 | "The flattest on-resistance region extends roughly from 5 V above VSS to 5 V below VDD. As long as this headroom is maintained, the TMUX7612 exhibits an extremely linear response." |
+| DS 内の食い違い: Figure 5-1 の 25°C の線（**画像で目読み**） | 約 0.95 Ω（VS = –10〜+10 V で水平）。表 §5.7 の typ 1.1 Ω・Figure 5-4 の底（約 1.1 Ω）と合わない。数値の根拠には表を使う | VDD = 15 V, VSS = –15 V（温度別の線のうち 25°C） | グラフ | p17 Figure 5-1 | 図題 "Figure 5-1. On-Resistance vs Source or Drain Operational Voltage"、図中 "VDD=15V, VSS=-15V" 〔2026-09-25 照合で追加〕 |
 
 ### Figure 5-4（Ron vs VS/VD、両電源 ±10/±12/±13.5/±15/±16.5 V、TA = 25°C）— **画像で目読み**
 
 出典: TI_TMUX7612.pdf p17 Figure 5-4 "On-Resistance vs Source or Drain Voltage for dual supply"、凡例 "VDD/SS = ±10V / ±12V / ±13.5V / ±15V / ±16.5V"、"TA = 25°"。縦軸 1〜7.5 Ω（0.5 Ω 目盛り）、横軸 –20〜20 V（5 V 目盛り）。400〜900 dpi に拡大して読んだ。読み取り誤差は横軸 ±0.3〜0.5 V 程度。
 
-平坦部の底はどの曲線も約 1.1 Ω（目読み）。**正側（VDD 側）は急峻に 7.5 Ω 超まで立ち上がる。負側（VSS 側）は立ち上がりが小さく、端で約 1.25 Ω に上がるだけ**（目読み）。
+平坦部の底はどの曲線も約 1.1 Ω（目読み）。**正側（VDD 側）は急峻に立ち上がり、約 7.4 Ω（軸上限 7.5 Ω のすぐ下）で水平になって VDD まで続く。この水平部は測定上限か作図の打ち切りとみられ、実際の Ron を表すものではない（目読み）。負側（VSS 側）は立ち上がりが小さく、端で約 1.25 Ω に上がるだけ**（目読み）。 〔2026-09-25 照合で訂正〕
 
-| 電源 | 正側: 底から離れ始める VS（目読み） | 正側: 1.5 Ω を越える VS（目読み） | 正側: 縦に立ち上がる（〜7.5 Ω）VS（目読み） | 負側: 端（VSS）での Ron と、底に戻る VS（目読み） |
+| 電源 | 正側: 底から離れ始める VS（目読み） | 正側: 1.5 Ω を越える VS（目読み） | 正側: 縦に立ち上がる（〜7.4 Ω で頭打ち）VS（目読み） | 負側: 端（VSS）での Ron と、底に戻る VS（目読み） 〔2026-09-25 照合で訂正〕 |
 |---|---|---|---|---|
 | ±10 V | 約 +5.6 V | 約 +8.1 V | 約 +8.7〜9.0 V | VSS 端 約 1.25 Ω、約 –6 V で底へ |
 | ±12 V | 約 +7.6 V | 約 +10.0 V | 約 +10.6〜11 V | VSS 端 約 1.25 Ω、約 –8 V で底へ |
@@ -170,7 +172,7 @@
 | コイル極性 | 固定 | — | — | p2 NOTES 5 | "Relay has fixed coil polarity" |
 | 感動 | Must Operate 未満でも吸引しうる | — | — | p2 NOTES 3 | "Relay may pull in with less than “Must Operate” value." |
 | コイル並列サプレッサ | 復帰時間が延びる | — | — | p2 NOTES 4 | "Coil suppression circuits such as diodes, etc. in parallel to the coil will lengthen the release time." |
-| 接点定格（抵抗負荷、max） | 30 W または 62.5 VA、開閉電流 1 A、通電電流 2 A、開閉電圧 220 VDC または 250 VAC | resistive load | max | p1 CONTACTS | "Ratings (max.) (resistive load) switched power 30 W or 62.5 VA switched current 1A carry current 2A switched voltage 220 VDC* or 250 VAC" |
+| 接点定格（抵抗負荷、max） | 30 W または 62.5 VA、開閉電流 1 A、通電電流 2 A、開閉電圧 220 VDC または 250 VAC | resistive load。220 VDC には注: 30 VDC を越える開閉は要相談（"\* Note: If switching voltage is greater than 30 VDC, special precautions must be taken. Please contact the factory."） | max | p1 CONTACTS | "Ratings (max.) (resistive load) switched power 30 W or 62.5 VA switched current 1A carry current 2A switched voltage 220 VDC* or 250 VAC" 〔2026-09-25 照合で訂正〕 |
 | 定格負荷（UL, CUR） | 1 A at 30 VDC、0.5 A at 125 VAC（抵抗負荷） | — | — | p1 | "UL, CUR 1 A at 30 VDC, resistive 0.5 A at 125 VAC, resistive" |
 | 最小開閉 | 10 mV、10 µA | — | — | p1 | "Minimum switching voltage 10 mV current 10 µA" |
 | 接点材質 | AgPd（銀パラジウム）、金クラッド | — | — | p1 | "Contact materials AgPd - silver palladium, gold clad" |
@@ -225,7 +227,7 @@
 | クランプ接続 | 各出力のクランプダイオードのカソードは COMMON ピン（等価回路） | — | — | p2 Equivalent circuit | 等価回路図 "COMMON / Clamp diode / OUTPUT" |
 | 許容損失 PD | PG 1.47 W、FG 0.96 W、FNG 0.96 W、FWG 1.31 W | Ta = 25 °C | 定格値 | p3 | "Power dissipation PD PG (Note1) 1.47 FG (Note2) 0.96 FNG (Note3) 0.96 FWG (Note4) 1.31 W" |
 | PD の軽減 | PG 11.8 mW/°C、FG 7.7 mW/°C、FNG 7.7 mW/°C、FWG 10.48 mW/°C（Ta > 25 °C） | PG/FG は Device alone、FNG/FWG は上記基板 | — | p3 注 1〜4 | "Note1: Device alone. When Ta exceeds 25 °C, it is necessary to do the derating with 11.8 mW/°C." ほか |
-| tON / tOFF | 0.4 µs / 0.8 µs | VOUT = 50 V, RL = 125 Ω, CL = 15 pF | typ | p5 | "Turn−on delay tON ... ― 0.4 ―" / "Turn−off delay tOFF ... ― 0.8 ―" |
+| tON / tOFF | 0.4 µs / 0.8 µs | VOUT = 50 V, RL = 125 Ω, CL = 15 pF。試験回路 8（p7）: 入力パルス 50 µs・Duty 10 %・**VIH = 5.0 V**・tr ≤ 5 ns・tf ≤ 10 ns。CL はプローブ・基板を含む | typ | p5 | "Turn−on delay tON ... ― 0.4 ―" / "Turn−off delay tOFF ... ― 0.8 ―" / p7 "Note 1: Pulse width 50 μs, Duty cycle 10%"、"TBD62083A series 5.0 V"、"Note 2: CL includes the probe and the test board capacitance." 〔2026-09-25 照合で訂正〕 |
 | 動作温度 | –40〜85 °C | — | — | p3 | "Operating temperature Topr −40 to 85 °C" |
 | 保護回路 | 過電流・過電圧保護は内蔵しない | — | — | p7 Precautions | "This IC does not include built-in protection circuits for excess current or overvoltage." |
 
@@ -250,7 +252,7 @@
 | POR 後の IODIRA / IODIRB | 1111 1111（全ピン入力） | POR/RST 値 | — | p16 Table 3-2/3-3、p17 Table 3-4/3-5 | "IODIRA 00 IO7 ... IO0 1111 1111" / "IODIRB ... 1111 1111" |
 | IODIR ビットの意味 | 1 = 入力、0 = 出力 | — | — | p18 Register 3-1 | "1 = Pin is configured as an input. 0 = Pin is configured as an output." |
 | Features の記述 | I/O は既定で入力 | — | — | p1 | "I/O pins default to input" |
-| POR 後のその他レジスタ | IPOL、GPINTEN、DEFVAL、INTCON、IOCON、GPPU、INTF、INTCAP、GPIO、OLAT はすべて 0000 0000 | POR/RST 値 | — | p17 Table 3-4/3-5 | 例 "IOCON 05 BANK MIRROR SEQOP DISSLW HAEN ODR INTPOL — 0000 0000"、"OLATA 0A ... 0000 0000" |
+| POR 後のその他レジスタ | IPOL、GPINTEN、DEFVAL、INTCON、IOCON、GPPU、INTF、INTCAP、GPIO、OLAT はすべて 0000 0000 | POR/RST 値 | — | p16 Table 3-2/3-3、p17 Table 3-4、p17〜18 Table 3-5 | 例 "IOCON 05 BANK MIRROR SEQOP DISSLW HAEN ODR INTPOL — 0000 0000"、"OLATA 0A ... 0000 0000"（引用の番地は BANK = 1 の Table 3-4 のもの。POR 後は BANK = 0 なので番地は Table 3-5: IOCON 0x0A/0x0B、OLATA 0x14） 〔2026-09-25 照合で訂正〕 |
 | 内部プルアップ | あり（GPPU で ch ごとに有効化、入力設定時のみ）。本文は 100 kΩ | — | — | p22 §3.5.7 | "If a bit is set and the corresponding pin is configured as an input, the corresponding port pin is internally pulled up with a 100 kΩ resistor." |
 | 内部プルアップの既定 | 無効（GPPU = 0000 0000、R/W-0） | POR | — | p16 Table 3-2/3-3、p22 Register 3-7 | "GPPUA 06 PU7 ... PU0 0000 0000" / "R/W-0 R/W-0 ..." / "1 = Pull-up enabled" |
 | プルアップ電流 IPU | 40 µA / 75 µA / 115 µA | VDD = 5V, GP pins = VSS | min / typ / max | p4 D070 | "D070 GPIO weak pull-up current IPU 40 75 115 µA VDD = 5V GP pins = VSS" |
@@ -346,7 +348,7 @@
 | 内部 POR | VDD > 2 V (typ) かつ VCC > 4 V (typ) で自動初期化。RST は内部プルダウン | — | typ | p18 POWER-ON AND RESET FUNCTIONS | "initialization (reset) is performed automatically at the time when the power supply VDD exceeds 2 V (typical) and VCC exceeds 4 V (typical)." / "Because an internal pulldown resistor terminates RST, no connection of RST is equivalent to a low-level input." |
 | POR とクロック | 電源投入と同時にシステムクロックが必要（VDD>2 V, VCC>4 V, RST=H より前に 3 クロック以上） | — | — | p18 | "the system clock must be supplied as soon as power is supplied; more specifically, at least three system clocks are required prior to VDD > 2 V, VCC > 4 V, and RST = high." |
 | 電源のバイパス | 0.1 µF セラミック＋10 µF タンタルをピン近くに。電源は共通 1 系統を推奨 | — | — | p29 BOARD DESIGN AND LAYOUT CONSIDERATIONS | "should be bypassed to the corresponding ground pins with 0.1-μF ceramic and 10-μF tantalum capacitors placed as close to the pins as possible" / "using one common power supply is recommended to avoid unexpected power-supply trouble like latch-up or power-supply sequence." |
-| DS 内の記載の食い違い（事実として） | 代表特性曲線の見出しが "VCC = 3.3 V, VDD = 5 V" となっている（推奨条件と逆） | — | — | p9〜11 TYPICAL PERFORMANCE CURVES | "All specifications at TA = 25°C, VCC = 3.3 V, VDD = 5 V, master mode, fS = 48 kHz, system clock = 256 fS, 24-bit data" |
+| DS 内の記載の食い違い（事実として） | 代表特性曲線の見出しが "VCC = 3.3 V, VDD = 5 V" となっている（推奨条件と逆）。p15 の見出しは "VCC = 5 V, VDD = 3.3 V" で推奨条件と同じ向き | — | — | p9〜12 の TYPICAL PERFORMANCE CURVES（SINGLE / DUAL / QUAD / DSD の各見出し）。p15 | "All specifications at TA = 25°C, VCC = 3.3 V, VDD = 5 V, master mode, fS = 48 kHz, system clock = 256 fS, 24-bit data"（p11 下段・p12 は fS の句が無い短い形） 〔2026-09-25 照合で訂正〕 |
 | ADC1804_F モジュールの電源 | 3.3 V・5 V（2 電源） | — | — | 共立 デジット製品ページ https://digit.kyohritsu.com/PRODUCT/ADC1804_F.html（2026-09-25 取得） | "電源電圧：3.3V・5V（2電源）" |
 | ADC1804_F 組立説明書 | 電源は +3.3 V と +5 V の 2 電源 | — | — | http://www.kyohritsu.jp/eclib/DIGIT/KIT/adc1804f.pdf（ADC_1804_F_160802）p1 | "電源は+3.3Vと+5Vの2電源です。" / "電源 :+3.3V、+5V(2電源)" |
 
