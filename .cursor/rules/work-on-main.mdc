@@ -11,11 +11,10 @@ alwaysApply: true
 - シート所有権の正は **[CLAUDE.md](../../CLAUDE.md)** の表。シートはルート＋子3枚で、2026-09-09 に
   中間の `MotherBoard` を廃止し `AudioV2Case` → {`MeasureControl`, `AmpBankSwitch`, `AmpBankRelay`} になった。
 - `generate_kicad_scaffold.py` は再実行しない。
-- 再生成は **`build_daughter.py` → `build_motherboard.py`** の順（どちらも `AudioV2/scripts/`）。
-  - **どのシートを誰が作るかは [CLAUDE.md](../../CLAUDE.md) の表が正**（ここに表を複製しない。2箇所あると片方が腐る）
-  - 生成対象のシートを手で直さない。回すと上書きされる。回路を変えるならスクリプトを直す
-  - ⚠ **`MeasureControl` にシートピンを足したら `build_motherboard.py` の `CHILD_SHEETS` にも足す。**
-    手編集所有だが、母板に置かれる側のピンはコードが持っている
+- **どのシートを誰が作るかは [CLAUDE.md](../../CLAUDE.md) の表が正**（ここに表を複製しない。2箇所あると片方が腐る）
+  - ⚠ **`build_motherboard.py` を回さない**（2026-09-24 にルートは手編集所有へ切替。回すと 09-15 以降の変更が消え電気的に別物になる。安全弁で止まる）
+  - ⚠ **`build_daughter.py` で娘を全面再生成しない**（図の見た目修正が生成物より新しい）。足すものは生成スクリプトに書き、その要素だけ図へ差し込む
+  - ⚠ 子シートにシートピンを足したら、ルートのシートシンボルにも KiCad で足す
 - ⚠ **`wire_circuit_design.py` を再生成に使わない。** 旧構成のロジックの記録として残っているだけで、`GENERATED` が空なのでどのシートも書き出さない。
   さらに `--force-parent` を渡すと親から **`MeasureControl` シートが消える**（スクリプト内のコメント自身がそう書いている）。`control` の出力先 `ControlPanel.kicad_sch` はもう存在しないパス。
 - 回路図の事実（階層の枚数・部品数・レール容量・未接続ピン）は **`python3 AudioV2/scripts/sch_facts.py all`** で出す。読み取り専用。査読エージェントの定義は `.claude/agents/sch-review.md`（Cursor からも読える）

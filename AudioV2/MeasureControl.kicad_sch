@@ -45261,7 +45261,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 390.48) (xy 525.08 390.48)
+			(xy 520.7 391.16) (xy 525.78 391.16)
 		)
 		(stroke
 			(width 0)
@@ -45281,7 +45281,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 380.32) (xy 525.08 380.32)
+			(xy 520.7 381) (xy 525.78 381)
 		)
 		(stroke
 			(width 0)
@@ -45981,7 +45981,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 372.7) (xy 525.08 372.7)
+			(xy 520.7 373.38) (xy 525.78 373.38)
 		)
 		(stroke
 			(width 0)
@@ -46131,7 +46131,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 382.86) (xy 525.08 382.86)
+			(xy 520.7 383.54) (xy 525.78 383.54)
 		)
 		(stroke
 			(width 0)
@@ -46211,7 +46211,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 377.78) (xy 525.08 377.78)
+			(xy 520.7 378.46) (xy 525.78 378.46)
 		)
 		(stroke
 			(width 0)
@@ -46301,7 +46301,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 367.62) (xy 525.08 367.62)
+			(xy 520.7 368.3) (xy 525.78 368.3)
 		)
 		(stroke
 			(width 0)
@@ -46351,7 +46351,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 362.54) (xy 525.08 362.54)
+			(xy 520.7 363.22) (xy 525.78 363.22)
 		)
 		(stroke
 			(width 0)
@@ -46851,7 +46851,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 365.08) (xy 525.08 365.08)
+			(xy 520.7 365.76) (xy 525.78 365.76)
 		)
 		(stroke
 			(width 0)
@@ -47141,7 +47141,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 360) (xy 525.08 360)
+			(xy 520.7 360.68) (xy 525.78 360.68)
 		)
 		(stroke
 			(width 0)
@@ -48151,7 +48151,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 370.16) (xy 525.08 370.16)
+			(xy 520.7 370.84) (xy 525.78 370.84)
 		)
 		(stroke
 			(width 0)
@@ -48421,7 +48421,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 375.24) (xy 525.08 375.24)
+			(xy 520.7 375.92) (xy 525.78 375.92)
 		)
 		(stroke
 			(width 0)
@@ -48511,7 +48511,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 387.94) (xy 525.08 387.94)
+			(xy 520.7 388.62) (xy 525.78 388.62)
 		)
 		(stroke
 			(width 0)
@@ -48521,7 +48521,7 @@
 	)
 	(wire
 		(pts
-			(xy 520 385.4) (xy 525.08 385.4)
+			(xy 520.7 386.08) (xy 525.78 386.08)
 		)
 		(stroke
 			(width 0)
@@ -48600,7 +48600,7 @@
 		(uuid "0882126d-9d15-4ea3-be31-ca935d9bd328")
 	)
 	(label "TP_INT"
-		(at 525.08 387.94 0)
+		(at 525.78 388.62 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -48920,7 +48920,7 @@
 		(uuid "44ba8806-812d-4a1b-a1fc-8f0795403bcb")
 	)
 	(label "LCD_CS"
-		(at 525.08 367.62 0)
+		(at 525.78 368.3 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49070,7 +49070,7 @@
 		(uuid "62322fb6-29b8-5a09-9ed1-4a7e0cab004a")
 	)
 	(label "ENC_INTA"
-		(at 525.08 362.54 0)
+		(at 525.78 363.22 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49240,7 +49240,7 @@
 		(uuid "7cf6db60-a70c-5551-b503-c0e8a2ff1df4")
 	)
 	(label "LCD_DC"
-		(at 525.08 370.16 0)
+		(at 525.78 370.84 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49250,7 +49250,7 @@
 		(uuid "7ed9231b-a27a-542f-ba6d-b58e573e906c")
 	)
 	(label "ENC_INTB"
-		(at 525.08 365.08 0)
+		(at 525.78 365.76 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49260,7 +49260,7 @@
 		(uuid "83d9bbbb-f4d5-53a9-a905-5dda395e17bc")
 	)
 	(label "LCD_SCK"
-		(at 525.08 377.78 0)
+		(at 525.78 378.46 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49430,7 +49430,7 @@
 		(uuid "9e3b74fa-07db-5f16-9d26-3d2d505139ff")
 	)
 	(label "LCD_RST"
-		(at 525.08 372.7 0)
+		(at 525.78 373.38 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49480,7 +49480,7 @@
 		(uuid "ab64d28c-df72-4908-bca6-dd97fe6e5fe7")
 	)
 	(label "LCD_MOSI"
-		(at 525.08 380.32 0)
+		(at 525.78 381 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49560,7 +49560,7 @@
 		(uuid "bd92a0d1-fe15-45c2-ad44-edf44133ca7a")
 	)
 	(label "TP_SCL"
-		(at 525.08 385.4 0)
+		(at 525.78 386.08 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49620,7 +49620,7 @@
 		(uuid "c738b0aa-6b13-4215-9e64-77ca05d6d9c1")
 	)
 	(label "TP_SDA"
-		(at 525.08 382.86 0)
+		(at 525.78 383.54 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49640,7 +49640,7 @@
 		(uuid "c98c432d-edeb-4cdb-88c7-6496d479c4a8")
 	)
 	(label "LCD_EN"
-		(at 525.08 375.24 0)
+		(at 525.78 375.92 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49710,7 +49710,7 @@
 		(uuid "ce40298d-e6e7-51a8-b43d-d59dc0a295b0")
 	)
 	(label "TP_RST"
-		(at 525.08 390.48 0)
+		(at 525.78 391.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -49830,7 +49830,7 @@
 		(uuid "e284e732-a9de-5e54-b4c5-74bc1611fd6d")
 	)
 	(label "+5V_D"
-		(at 525.08 360 0)
+		(at 525.78 360.68 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50012,7 +50012,7 @@
 	)
 	(hierarchical_label "LCD_EN"
 		(shape output)
-		(at 520 375.24 0)
+		(at 520.7 375.92 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50023,7 +50023,7 @@
 	)
 	(hierarchical_label "TP_SCL"
 		(shape bidirectional)
-		(at 520 385.4 0)
+		(at 520.7 386.08 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50056,7 +50056,7 @@
 	)
 	(hierarchical_label "TP_SDA"
 		(shape bidirectional)
-		(at 520 382.86 0)
+		(at 520.7 383.54 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50067,7 +50067,7 @@
 	)
 	(hierarchical_label "LCD_MOSI"
 		(shape output)
-		(at 520 380.32 0)
+		(at 520.7 381 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50089,7 +50089,7 @@
 	)
 	(hierarchical_label "ENC_INTB"
 		(shape input)
-		(at 520 365.08 0)
+		(at 520.7 365.76 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50100,7 +50100,7 @@
 	)
 	(hierarchical_label "LCD_DC"
 		(shape output)
-		(at 520 370.16 0)
+		(at 520.7 370.84 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50122,7 +50122,7 @@
 	)
 	(hierarchical_label "LCD_SCK"
 		(shape output)
-		(at 520 377.78 0)
+		(at 520.7 378.46 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50133,7 +50133,7 @@
 	)
 	(hierarchical_label "+5V_D"
 		(shape output)
-		(at 520 360 0)
+		(at 520.7 360.68 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50155,7 +50155,7 @@
 	)
 	(hierarchical_label "LCD_RST"
 		(shape output)
-		(at 520 372.7 0)
+		(at 520.7 373.38 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50166,7 +50166,7 @@
 	)
 	(hierarchical_label "ENC_INTA"
 		(shape input)
-		(at 520 362.54 0)
+		(at 520.7 363.22 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50177,7 +50177,7 @@
 	)
 	(hierarchical_label "LCD_CS"
 		(shape output)
-		(at 520 367.62 0)
+		(at 520.7 368.3 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50221,7 +50221,7 @@
 	)
 	(hierarchical_label "TP_INT"
 		(shape input)
-		(at 520 387.94 0)
+		(at 520.7 388.62 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50254,7 +50254,7 @@
 	)
 	(hierarchical_label "TP_RST"
 		(shape output)
-		(at 520 390.48 0)
+		(at 520.7 391.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)

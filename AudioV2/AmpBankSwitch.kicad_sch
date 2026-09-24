@@ -5496,6 +5496,16 @@
 		)
 		(uuid "083aba71-f9af-5982-9d70-04439b951d88")
 	)
+	(label "+15V"
+		(at 114.3 311.15 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0962f465-3b78-5cd7-a59d-169c5206b918")
+	)
 	(label "ADDR_A0"
 		(at 187.96 228.6 180)
 		(effects
@@ -5575,6 +5585,16 @@
 			(justify right bottom)
 		)
 		(uuid "1cb24a7c-8f18-58dc-bc50-2279e64ae283")
+	)
+	(label "A_GND"
+		(at 121.92 311.15 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1d7bd1e8-f014-54da-9118-7d66a8cc06c3")
 	)
 	(label "A_GND"
 		(at 347.98 109.22 0)
@@ -5906,6 +5926,26 @@
 		)
 		(uuid "6f8f298a-2a8d-5a61-b58c-1e1d8585dd7a")
 	)
+	(label "-15V"
+		(at 121.92 318.77 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "714aa543-dc9b-5562-be23-ff7637da361f")
+	)
+	(label "A_GND"
+		(at 114.3 318.77 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "74d7c72e-7586-58cc-b796-5e6855d23dbc")
+	)
 	(label "AMP_SEL_L"
 		(at 162.56 295.91 0)
 		(effects
@@ -5975,6 +6015,16 @@
 			(justify left bottom)
 		)
 		(uuid "8b437a4b-0aa3-557b-9285-2ea516be81a1")
+	)
+	(label "-15V"
+		(at 185.42 318.77 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8d126f2b-cd6d-590b-9275-7f686438ea23")
 	)
 	(label "TONE_L"
 		(at 38.1 137.16 180)
@@ -6265,6 +6315,26 @@
 			(justify right bottom)
 		)
 		(uuid "af65e6fb-12ae-5e39-9537-7918b2b4ccaf")
+	)
+	(label "A_GND"
+		(at 185.42 311.15 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b03ebf71-2374-5558-8e63-afb35bb79e49")
+	)
+	(label "A_GND"
+		(at 177.8 318.77 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b1f853bf-8d68-5a29-b661-b6dc824d43ba")
 	)
 	(label "A_GND"
 		(at 347.98 58.42 0)
@@ -6665,6 +6735,16 @@
 			(justify right bottom)
 		)
 		(uuid "f5565045-bdee-50eb-b1ef-e3c6f2899cf5")
+	)
+	(label "+15V"
+		(at 177.8 311.15 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f5b70f59-ca97-5776-8d49-f86c68460366")
 	)
 	(label "GND_COIL"
 		(at 347.98 114.3 0)
@@ -7433,7 +7513,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -7513,7 +7593,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -7556,6 +7636,86 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
 					(reference "C314")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 185.42 314.96 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "929e919f-5d24-53dd-b996-8442f17c409c")
+		(property "Reference" "C318"
+			(at 185.88 312.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1uF 50V X7R"
+			(at 185.88 317.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4e6a2eae-8e0e-5157-9c69-c691ba4f4165")
+		)
+		(pin "2"
+			(uuid "da15a43c-bcf9-5acc-94dc-a916388f4db1")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
+					(reference "C318")
 					(unit 1)
 				)
 			)
@@ -7751,7 +7911,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -8027,7 +8187,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -8070,6 +8230,86 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
 					(reference "C313")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 177.8 314.96 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c2a9dd49-94ef-5632-ad86-e73a5d4172a6")
+		(property "Reference" "C317"
+			(at 178.26 312.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1uF 50V X7R"
+			(at 178.26 317.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0c6e7d4a-9a5a-574c-8a93-2b18b4c3e466")
+		)
+		(pin "2"
+			(uuid "aed4de47-cdff-557e-adb0-aaad8589bf2d")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
+					(reference "C317")
 					(unit 1)
 				)
 			)
@@ -8492,6 +8732,166 @@
 	)
 	(symbol
 		(lib_id "Device:C")
+		(at 114.3 314.96 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ec48789a-0a26-5223-9765-bdde348ec451")
+		(property "Reference" "C315"
+			(at 114.76 312.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1uF 50V X7R"
+			(at 114.76 317.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e78fa50b-4bdd-5a92-8948-146f8cba9e04")
+		)
+		(pin "2"
+			(uuid "10209b6c-330b-54d7-a358-afa3de1ed7c8")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
+					(reference "C315")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 121.92 314.96 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f97f3349-831f-59d6-8d68-83f5927a3e4a")
+		(property "Reference" "C316"
+			(at 122.38 312.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1uF 50V X7R"
+			(at 122.38 317.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d87e29ea-b80e-5cfe-bcc5-3ca16d550e35")
+		)
+		(pin "2"
+			(uuid "6f986611-3f1e-5bd2-bded-72ca0446ed33")
+		)
+		(instances
+			(project "AudioV2Case"
+				(path "/a1000001-0001-4001-8001-000000000001/a1000011-0011-4011-8011-000000000011"
+					(reference "C316")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
 		(at 129.54 314.96 0)
 		(unit 1)
 		(body_style 1)
@@ -8522,7 +8922,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)

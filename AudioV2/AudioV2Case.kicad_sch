@@ -44897,10 +44897,6 @@
 		(uuid "fb59ef55-99ae-4168-a806-90400a0d664d")
 	)
 	(no_connect
-		(at 347.98 149.86)
-		(uuid "01874144-4271-5f41-a3a9-222dbafba142")
-	)
-	(no_connect
 		(at 502.92 130.81)
 		(uuid "06701f0f-41c8-5122-90f6-6289e90536da")
 	)
@@ -44929,24 +44925,8 @@
 		(uuid "2f8fbc0a-57d1-5030-aa95-5452121f545a")
 	)
 	(no_connect
-		(at 347.98 165.1)
-		(uuid "31d03057-036a-5a9d-92b3-023a55f48a1e")
-	)
-	(no_connect
-		(at 347.98 182.88)
-		(uuid "32069166-6eff-557a-8213-dae5a9a11e6d")
-	)
-	(no_connect
 		(at 365.76 210.82)
 		(uuid "3343ccf7-4987-5259-8985-5ae8fbf1af8a")
-	)
-	(no_connect
-		(at 347.98 162.56)
-		(uuid "36909e9a-b25c-560a-bd4f-588991d9af24")
-	)
-	(no_connect
-		(at 347.98 180.34)
-		(uuid "371cd66a-0c37-50e4-a774-46d01e383f19")
 	)
 	(no_connect
 		(at 502.92 133.35)
@@ -44955,10 +44935,6 @@
 	(no_connect
 		(at 502.92 125.73)
 		(uuid "3aad7a99-6526-5ba5-bba7-f0839cf8ea64")
-	)
-	(no_connect
-		(at 325.12 154.94)
-		(uuid "3d2b5731-e05e-582b-81e1-105090410b24")
 	)
 	(no_connect
 		(at 528.32 128.27)
@@ -44981,28 +44957,8 @@
 		(uuid "5463fc89-123c-5b5d-8510-4c73544d5da6")
 	)
 	(no_connect
-		(at 347.98 172.72)
-		(uuid "55709d2b-da07-5f2e-a7bc-2eeef7d56538")
-	)
-	(no_connect
 		(at 276.86 172.72)
 		(uuid "57ccbfca-87a0-566c-8e35-a8824330f48e")
-	)
-	(no_connect
-		(at 347.98 175.26)
-		(uuid "5b969dee-e6e3-5c46-9e0f-c2a870c33a10")
-	)
-	(no_connect
-		(at 347.98 154.94)
-		(uuid "619e3621-efe2-5690-a092-72872551d616")
-	)
-	(no_connect
-		(at 347.98 157.48)
-		(uuid "61cb8a0d-ba4e-51ef-a1b5-84de17af9035")
-	)
-	(no_connect
-		(at 322.58 165.1)
-		(uuid "645592f0-a740-5720-9680-605955270793")
 	)
 	(no_connect
 		(at 45.72 127)
@@ -45011,22 +44967,6 @@
 	(no_connect
 		(at 502.92 123.19)
 		(uuid "67de1fc2-4428-5ad8-8fbd-33218fe74b9d")
-	)
-	(no_connect
-		(at 347.98 160.02)
-		(uuid "69bdfe9b-ea43-51cc-b325-016c0fdcb2c4")
-	)
-	(no_connect
-		(at 325.12 157.48)
-		(uuid "74348312-19ca-5f1d-8720-c2c22820a144")
-	)
-	(no_connect
-		(at 347.98 190.5)
-		(uuid "8314112c-7e66-524b-8af5-1ece248bfcdd")
-	)
-	(no_connect
-		(at 347.98 185.42)
-		(uuid "85a425eb-c32e-52ca-8d0c-cb863ff4a789")
 	)
 	(no_connect
 		(at 365.76 203.2)
@@ -45049,18 +44989,6 @@
 		(uuid "92edc68b-f828-52d1-bf1b-84ab8d9b2bd6")
 	)
 	(no_connect
-		(at 347.98 152.4)
-		(uuid "9b15091d-2c21-5fae-839d-bb5f4805f0c6")
-	)
-	(no_connect
-		(at 322.58 167.64)
-		(uuid "9b36d40b-05e4-5830-86a9-e566c3332f59")
-	)
-	(no_connect
-		(at 347.98 177.8)
-		(uuid "a24a1364-c2b0-5634-b763-88ad43eb1cf0")
-	)
-	(no_connect
 		(at 406.4 203.2)
 		(uuid "b75014e7-5d59-5ef9-b3c1-09cfba5089fc")
 	)
@@ -45081,20 +45009,12 @@
 		(uuid "cc78f730-565c-51f3-b695-dbd934b16324")
 	)
 	(no_connect
-		(at 347.98 167.64)
-		(uuid "dac1e3f3-f30e-54d1-ab2b-c425fad5d5f8")
-	)
-	(no_connect
 		(at 58.42 127)
 		(uuid "dcf39bf6-db67-4ee5-99da-dec457a90253")
 	)
 	(no_connect
 		(at 502.92 120.65)
 		(uuid "e04b4c76-2c1b-5ee4-ad71-6eb13f382acf")
-	)
-	(no_connect
-		(at 347.98 187.96)
-		(uuid "e168ee6a-b8fc-5708-8cf8-f40fcde28133")
 	)
 	(no_connect
 		(at 502.92 118.11)
@@ -46570,16 +46490,6 @@
 		)
 		(uuid "45d7ab13-12f1-5af6-a7b3-d5676fda0eee")
 	)
-	(label "3V3"
-		(at 373.38 166.37 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "45d7d042-bcdc-5b84-927f-c809d930c47c")
-	)
 	(label "PT_LIN"
 		(at 528.32 130.81 0)
 		(effects
@@ -46699,16 +46609,6 @@
 			(justify left bottom)
 		)
 		(uuid "4e667291-0d1c-53c3-a234-87003704b6c3")
-	)
-	(label "D_GND"
-		(at 373.38 173.99 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4ed5c2d8-9ea1-56c8-9078-a66bce9af407")
 	)
 	(label "PD_GND"
 		(at 78.74 78.74 0)
@@ -52407,86 +52307,6 @@
 			(project "AudioV2Case"
 				(path "/a1000001-0001-4001-8001-000000000001"
 					(reference "C506")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 373.38 170.18 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8aa08b4d-ee69-530b-bde4-e653ff3d6408")
-		(property "Reference" "C_IO101"
-			(at 373.38 167.64 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 373.38 172.72 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6cb1661e-31d3-5bc7-a046-e1594799ef1e")
-		)
-		(pin "2"
-			(uuid "26f16493-81b9-5d3a-8dbb-be411867a13d")
-		)
-		(instances
-			(project "AudioV2Case"
-				(path "/a1000001-0001-4001-8001-000000000001"
-					(reference "C_IO101")
 					(unit 1)
 				)
 			)

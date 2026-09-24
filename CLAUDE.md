@@ -74,20 +74,15 @@ AudioV2Case（旧 MotherBoard の中身）
 
 | シート | 誰が作るか |
 |---|---|
-| `AudioV2Case`（ルート） | **`scripts/build_motherboard.py`**（冪等・再実行でバイト一致） |
-| `AmpBankSwitch` / `AmpBankRelay` | **`scripts/build_daughter.py`**（同上） |
+| `AudioV2Case`（ルート） | **手編集所有（2026-09-24 に切替）。KiCad で直接／ピンポイント**。`build_motherboard.py` は 09-15 以降の変更を持たず、回すと電気的に別物（3 口スロット等）へ戻るので**安全弁で止まる** |
+| `AmpBankSwitch` / `AmpBankRelay` | **`scripts/build_daughter.py`**。ただし**コミット済みの図は手の見た目修正が生成物より新しい**（電気的には一致、2026-09-24 実測）。全面再生成せず、足すものは生成スクリプトに書いたうえで**その要素だけ差し込む**。新しい要素の UUID は `fixed_uids()` で通し番号から切り離す |
 | `MeasureControl` | 生成対象外。**KiCad で直接いじってよい** |
 | `FrontPanel` | 生成対象外。**KiCad で直接いじってよい**（母板直下。操作系＝ENC/RV/SW/表示。母板↔パネルは `J_PNL`＋`J_PNL_A`） |
 
-**生成対象のシートを手で直さないこと。** 回すと上書きされる。回路を変えるならスクリプトを直す。
+**娘基板の回路を変えるときは生成スクリプトも直すこと**（生成スクリプトが回路の正。図だけ直すと次の再生成で消える）。
 
-**⚠ `MeasureControl` / `FrontPanel` にシートピンを足したら `build_motherboard.py` の `CHILD_SHEETS` にも足すこと。**
-手編集所有だが、**ルートに置かれる側のピンはコードが持っている**。片方だけだと親子で
-ピンの対応が取れず `hier_label_mismatch` が出る。
-
-**順序は `build_daughter.py` → `build_motherboard.py`。**
-娘基板のファイルをルートがシートとして参照するので、回路を変えたときはこの順が自然。
-ただし**逆順でもルート単独でも結果はバイト一致する**（中間階層廃止後も同様）。
+**⚠ 子シートにシートピンを足したら、ルートのシートシンボルにも KiCad で足すこと。**
+片方だけだと親子でピンの対応が取れず `hier_label_mismatch` が出る（`sch_facts.py` の「親子のシート界面」で確かめる）。
 
 **生成物は KiCad の正準形で書き出す（2026-09-10）。** 生成は最後に
 `sch_helpers.canonicalize_sch()`（＝`kicad-cli sch upgrade`）を通る。**`kicad-cli` が
@@ -101,8 +96,7 @@ AudioV2Case（旧 MotherBoard の中身）
 ここがずれたら、まず `kicad-cli` の版を疑うこと。
 
 `ControlPanel` / `PowerModule` / `OutputStage` / `AmpBank` は**解体済みで `AudioV2/legacy/` に凍結**。
-ルートからは参照されていないが、**`build_motherboard.py` が素材として読むので直すと設計に届く**
-（2026-09-03 に PPTC 追加でここを編集し、実際に反映された）。直したら必ず回すこと。
+ルートからは参照されていない。`build_motherboard.py` の素材だったが、**ルートが手編集所有になったので（2026-09-24）ここを直しても設計には届かない**。
 編集時の注意は [AudioV2/legacy/README.md](AudioV2/legacy/README.md)。
 
 **⚠ 生成スクリプトは KiCad の標準シンボルライブラリを読む。** macOS / Windows / Linux の
@@ -163,16 +157,18 @@ docker/kicad-cloud-build/kicad-run.sh erc        # AudioV2 全体の ERC
 docker/kicad-cloud-build/kicad-run.sh netlist    # ネットリスト出力
 ```
 
-**2026-09-03 時点の期待値**（これと違ったら何かが変わっている）。**`kicad-cli` 10.0.6・`KICAD_BACKEND=local`（このマシンのホスト KiCad）で実測した値**。版が変われば ERC 件数は動くので、ずれたら先に `kicad-run.sh version` を見ること。
-**2026-09-06 に Windows（Git Bash・Docker 無し・同 10.0.6）でも同じ値になることを確認した**:
+**2026-09-24 時点の期待値**（これと違ったら何かが変わっている。**回路図を変えたコミットで一緒に更新すること** —
+09-10 から 09-24 まで更新されず、その間に ERC が 4→59 件、部品数が 265→352 に動いたのを誰も拾えなかった）。
+**`kicad-cli` 10.0.6・`KICAD_BACKEND=local` で実測した値**。版が変われば ERC 件数は動くので、ずれたら先に `kicad-run.sh version` を見ること:
 
 | | |
 |---|---|
-| `check_sexpr.py -q AudioV2` | **問題 0**。ファイル数は環境で増える — `AudioV2/.kicad-mcp/` の作業ファイルや、KiCad を開いているときの `_autosave-*` を拾うため。**素の状態で 13、2026-09-06 の実測は 15**（増分は `.kicad-mcp/visual-diff-*-before.kicad_sch` の2件）。どちらも gitignore 済みだが `check_sexpr` はディレクトリを見るので数に出る |
-| `kicad-run.sh erc` | **4 件**（2026-09-10 に娘を 4ch 化して `U313` が消え、`ground_pin_not_ground` が 3→2。**残る4件は全部宣言済みの型** — `ground_pin_not_ground` 2 は ±15V アナログSWの VSS が `-15V` で正常、`isolated_pin_label` 1 は `DEST_SENSE_MUTE_NC`（ミュート位置なので意図的に開放）、`multiple_net_names` 1 は `3V3`/`PICO_3V3` の意図的な別名重ね（`build_ui_move.py` が置いた）） |
-| `kicad-run.sh netlist` | **部品 265 個・重複 0・注釈警告なし**（2026-09-10 に AmpCh×5→×4、`TMUX7612` ×3→×2、母板スロット 3 口で 261 になり、同日 娘基板の M3 取付穴 `H301`–`H304` を足して 265。取付穴はピンが無いので ERC 件数は動かない。`AmpBankRelay` は `on_board`/`in_bom`=no のままこの netlist に出ない。回路図インスタンスは `sch_facts.py` で **358**＝リレー側の取付穴 4 個込み。`PWR_FLAG` は仮想なので計上外。**`gen_parts_bom.py` が PARTS.md に書く「部品総数」は NetTie も除く**） |
-| PCB のフットプリント数 | **265**（netlist と一致）。`kicad-cli pcb drc` の `schematic_parity` が **0 件**であることが正。⚠ **`pcb_sync_from_schematic` は足すだけで、回路図から消えた部品を PCB から消さない** |
+| `check_sexpr.py -q AudioV2` | **問題 0**。ファイル数は素の状態で 13（`AudioV2/.kicad-mcp/` の作業ファイルや KiCad の `_autosave-*` があると増える。どちらも gitignore 済み） |
+| `kicad-run.sh erc` | **5 件、全部宣言済みの型** — `ground_pin_not_ground` 2 は ±15V アナログSWの VSS が `-15V` で正常、`multiple_net_names` 1 は `3V3`/`PICO_3V3` の意図的な別名重ね、`isolated_pin_label` 2 は `AmpBankRelay` の AmpCh4 シートピンの `TONE_L`/`TONE_R`（ネットは全 ch に届いていることを netlist で確認済み）。⚠ ERC の JSON は座標・長さを 1/100 で出し、`sheets[].path` も当てにならない — 場所は項目の `uuid` で引くこと |
+| `kicad-run.sh netlist` | **部品 355 個・重複 0・注釈警告なし**（NetTie 4 を含む。2026-09-23 から `AmpBankRelay` を BOM・基板に含める＝シートの `in_bom`/`on_board`=yes）。回路図インスタンスは `sch_facts.py` で同じく **355**。`PWR_FLAG` は仮想なので計上外。**`gen_parts_bom.py` が PARTS.md に書く「部品総数」は NetTie も除く** |
+| PCB のフットプリント数 | **355**（netlist と一致）。`kicad-cli pcb drc` の `schematic_parity` が **0 件**であることが正。⚠ **`pcb_sync_from_schematic` は足すだけで、回路図から消えた部品を PCB から消さない**。⚠ `update_pcb_from_sch.py` は逆に**回路図の基板対象外を PCB から消し、パッドにネットも付けない** — 部品を足すときは `place_tmux_1u.py` のようにネットと KIID パスつきで足す |
 | `sch_import.py --roundtrip AudioV2/*.kicad_sch` | **全部 OK** |
+| `gen_parts_bom.py --check` | **OK**（回路図を変えたら回して PARTS.md をコミットする） |
 
 イメージがあれば Docker(KiCad 10.0.6)、無ければホストの `kicad-cli` で動く。
 出力は `out/`（gitignore 済み）。詳細は [docker/kicad-cloud-build/README.md](docker/kicad-cloud-build/README.md)。
