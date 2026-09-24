@@ -7,10 +7,10 @@
   PSRR のグラフ（TPS7A49 p9、TPS7A30 p10）と L78 Figure 28（p31）は 300 dpi にして、枠線と格子線を画素で探して軸を合わせ、
   指定の周波数（温度）の列で曲線の画素を拾って換算した（PIL が壊れていたので PPM を素の Python で読んだ）。power.md の数値は見ずに読み、あとで突き合わせた。
   寸法図（RS6 p7）は 400 dpi で拡大した。作業ファイルは scratchpad の `verify_power/` にある。
-- 照合した行: **表の行 244 行**（power.md の表の全データ行。PSRR グラフは曲線 1 本＝1 行）＋ **表の外の記述 9 件**（各 DS の出典行・見出し条件・「同じ DS の中での食い違い」）＝ **253 件**
-- 判定の内訳: **一致 253**（うち注記つき 9）／誤り 0／条件の誤り 0／列の誤り 0／引用が無い 0／確かめられず 0
-- 注記つきの 9 件は、値・列・ページは正しいが、言い回しが DS の字句より一歩踏み込んでいるもの（例: DS は "Quiescent Current" と書いているのに「無負荷」と書き足している）。判定を変えるほどではないが、各行の「DS の実際」の欄に書いた。
-- 「探したが DS に無かった項目」は 27 項目すべて、たしかに DS に無かった（規定値としては無い）。ただし、それに近い情報（典型値のグラフや設計例）が DS にあるものを、最後の節にまとめた。
+- 照合した行: **表の行 246 行**（power.md の表の全データ行。PSRR グラフは曲線 1 本＝1 行）＋ **表の外の記述 15 件**（各 DS の出典行・表の見出し条件・グラフの下の原文引用・「同じ DS の中での食い違い」）＝ **261 件**
+- 判定の内訳: **一致 261**（うち「一致（注記）」7）／誤り 0／条件の誤り 0／列の誤り 0／引用が無い 0／確かめられず 0
+- 「一致（注記）」の 7 件は、値・列・条件・ページは正しいが、言い回しが DS の字句より一歩踏み込んでいる、または同じ DS の別の箇所と合わないもの（例: DS は "Quiescent Current" としか書いていないのに「無負荷」と書き足している）。判定を変えるほどではない。中身は各行の「DS の実際」の欄に書いた。
+- 「探したが DS に無かった項目」の 25 項目は、どれも**規定値としては**たしかに DS に無かった。ただし近い情報（典型値のグラフや設計例）が DS にあるものがあり、最後の節にまとめた。
 
 凡例: 「同上」は「power.md の値・列・条件・ページのとおり」という意味。引用は DS の画像から読んだ原文。
 
@@ -130,7 +130,7 @@
 | TPS7A49 | PSRR（表） | 72 dB、f=120 Hz、IOUT は見出しの 1 mA | 一致 | p6 TYP。行の条件に IOUT は無いので見出しの 1 mA が効く、という読みも正しい | "PSRR ... VIN = 6.2 V, VOUT(nom) = 5 V, COUT = 10 μF, CNR/SS = CFF (4) = 10 nF, f = 120 Hz 72 dB" |
 | TPS7A49 | 熱遮断 | 170 / 150 °C | 一致 | p6 TYP | "Shutdown, temperature increasing 170 / Reset, temperature decreasing 150" |
 | TPS7A49 | 雑音（Features） | 12.7 µVRMS（20 Hz〜20 kHz）/ 15.4 µVRMS（10 Hz〜100 kHz） | 一致 | p1 | "12.7 μVRMS (20 Hz to 20 kHz) – 15.4 μVRMS (10 Hz to 100 kHz)" |
-| TPS7A49 | PSRR（Features） | 72 dB (120 Hz)、≥ 52 dB (10 Hz〜400 kHz)、9.1.5 の Figure 29 構成 | 一致 | p1・p14。**注記:** 同じ DS のグラフ（p9 Figure 14・18、IOUT=150 mA、10 µF/10 nF）では 400 kHz で約 50 dB と読め、52 dB を下回る（最後の「参考」節） | "≥ 52 dB (10 Hz to 400 kHz)" / "The solution illustrated in Figure 29 delivers minimum noise levels of 15.4 μVRMS and power-supply rejection levels above 52 dB from 10 Hz to 400 kHz" |
+| TPS7A49 | PSRR（Features） | 72 dB (120 Hz)、≥ 52 dB (10 Hz〜400 kHz)、9.1.5 の Figure 29 構成 | 一致（注記） | p1・p14。**注記:** 同じ DS のグラフ（p9 Figure 14・18、IOUT=150 mA、10 µF/10 nF）では 400 kHz で約 50 dB と読め、52 dB を下回る（最後の「参考」節） | "≥ 52 dB (10 Hz to 400 kHz)" / "The solution illustrated in Figure 29 delivers minimum noise levels of 15.4 μVRMS and power-supply rejection levels above 52 dB from 10 Hz to 400 kHz" |
 | TPS7A49 | Fig14 COUT=10µF（目読み） | 73 / 71 / 59 / 54 / 62 / 50 | 一致 | p9。自分の読み: 72.6 / 71.5 / 58.6 / 54.1 / 61.9 / 50.2。山は 211 kHz・62.8 dB。引き出し線は 200 kHz 付近の山を指す（ピンクの曲線） | 凡例 "VOUT = 5V VIN = 6.2V IOUT = 150mA CNR/SS = 10nF CFF = 10nF"、"COUT = 10μF" |
 | TPS7A49 | Fig14 COUT=2.2µF（目読み） | 70 / 69 / 61 / 48 / 44 / 46 | 一致 | p9。自分の読み: 69.8 / 69.1 / 61.4 / 48.2 / 43.7 / 46.0。山は 542 kHz・51.4 dB | "COUT = 2.2μF" |
 | TPS7A49 | Fig16 CNR/SS=10nF（目読み） | 70 / 69 / 61 / 54 / 61 / 52 | 一致 | p9。自分の読み: 70.1 / 68.8 / 60.9 / 53.8 / 60.8 / 51.8 | 凡例 "VOUT = 1.2V VIN = 3.2V IOUT = 150mA COUT = 10μF CFF = 0nF" |
@@ -205,7 +205,7 @@
 | TPS7A30 | 出力雑音（-5 V 出力） | 17.5 µVRMS | 一致 | p7 TYP | "VIN = –6.2 V, VOUT(nom) = –5 V, COUT = 10 μF, CNR/SS = CFF (5) = 10 nF, BW = 10 Hz to 100 kHz 17.5 μVRMS" |
 | TPS7A30 | PSRR（表） | 72 dB、f=120 Hz | 一致 | p7 TYP | "PSRR ... VIN = –6.2 V, VOUT(nom) = –5 V, COUT = 10 μF, CNR/SS = CFF (5) = 10 nF, f = 120 Hz 72 dB" |
 | TPS7A30 | 熱遮断 | 170 / 150 °C | 一致 | p7 | "TSD ... 170 ... 150 °C" |
-| TPS7A30 | PSRR（Features） | 72 dB、≥ 55 dB（10 Hz〜700 kHz） | 一致 | p1・p18 9.1.3。**注記:** p10 Figure 18（CFF=10 nF）は 400 kHz で約 54 dB、Figure 14/16（CFF=0）は 100 kHz で約 53 dB と読め、55 dB を下回る（最後の「参考」節） | "≥ 55 dB (10 Hz to 700 kHz)" / "delivers minimum noise levels of 15.1 μVRMS and power-supply rejection levels above 55 dB from 10 Hz to 700 kHz" |
+| TPS7A30 | PSRR（Features） | 72 dB、≥ 55 dB（10 Hz〜700 kHz） | 一致（注記） | p1・p18 9.1.3。**注記:** p10 Figure 18（CFF=10 nF）は 400 kHz で約 54 dB、Figure 14/16（CFF=0）は 100 kHz で約 53 dB と読め、55 dB を下回る（最後の「参考」節） | "≥ 55 dB (10 Hz to 700 kHz)" / "delivers minimum noise levels of 15.1 μVRMS and power-supply rejection levels above 55 dB from 10 Hz to 700 kHz" |
 | TPS7A30 | 雑音（Features） | 14 / 15.1 µVRMS | 一致 | p1 | "14 μVRMS (20 Hz to 20 kHz) – 15.1 μVRMS (10 Hz to 100 kHz)" |
 | TPS7A30 | Fig14 COUT=10µF（目読み） | 69 / 68 / 60 / 53 / 57 / 57、山 約 300 kHz・約 62 dB | 一致 | p10。自分の読み: 68.7 / 67.8 / 60.1 / 53.3 / 57.7 / 56.3、山 278 kHz・62.6 dB。軸 10〜90 dB | 凡例 "VOUT = –5V VIN = –6.2V IOUT = 200mA CNR/SS = 10nF CFF = 0μF" |
 | TPS7A30 | Fig14 COUT=2.2µF（目読み） | 69 / 68 / 61 / 49 / 45 / 46、山 約 600 kHz・約 53 dB | 一致 | p10。自分の読み: 69.3 / 68.4 / 60.6 / 48.6 / 45.0 / 46.6、山 610 kHz・53.4 dB | "COUT = 2.2μF" |
@@ -306,7 +306,7 @@
 
 ## 無いとされていたが DS にあった項目
 
-**「探したが DS に無かった」とされた 27 項目のうち、規定値として実は DS にあったものは無かった。** 全文検索（pdftotext）と該当ページの画像で確かめた
+**「探したが DS に無かった」とされた 25 項目のうち、規定値として実は DS にあったものは無かった。** 全文検索（pdftotext）と該当ページの画像で確かめた
 （RS6 の "fuse" は 0 件、TPS7A30 の "ESR" は "High-ESR capacitors can degrade PSRR." ほかの定性的な文だけ、L7809C の表に VI 範囲・Vd の Max・Id の Typ の行は無い、など）。
 
 ただし、規定値ではないが近い情報が DS にあるものが次のとおり。power.md の書き方（「規定値は無い」）は正しいが、読む人は「何も無い」と受け取りかねない。
@@ -317,7 +317,8 @@
 | LT1763 | SHDN 閾値の Off→On の MIN、On→Off の MAX | 規定値は無い。p10 に **SHDN Pin Threshold（On-to-Off / Off-to-On）の温度特性グラフ**（典型値。Off-to-On は 1 mA と 500 mA の 2 本、-50 °C で約 0.8 V が最大） |
 | TPS7A49 | ソフトスタートの式の適用範囲 | 規定は無い。p10 に Figure 19・20 "Capacitor-Programmable Soft-Start" の波形（VOUT = 1.2 V、VIN = 3 V、IOUT = 100 mA、COUT = 10 µF、CNR/SS = 0 nF / 10 nF）がある |
 | TPS7A49 | 出力コンデンサの上限容量 | power.md のとおり規定値は無く、設計例 Eq.8（p17）で ICL(max) = 500 mA を使って 35 µF。**TPS7A30 の同じ設計例（p21 Eq.8）は ICL(min) = 220 mA を使って 15.4 µF** で、power.md の TPS7A30 の節にはこの対の値が載っていない |
-| TPS7A49 | PSRR の 100 kHz 以上の保証値 | 保証値は無い。p16 9.1.10 に「オーディオ帯で PSRR > 55 dB」という文がある（"The very high power-supply ratio (> 55 dB) and low noise at the audio band ... see Figure 18."）。規定ではなく説明文 |
+| TPS7A49 | EN の閾値のヒステリシスの規定値（「Figure 13 のグラフのみ」） | 規定値が無いのは正しい。ただし括弧の中は少しずれている: p9 Figure 13 は ON と OFF の境目の線が 1 本（25 °C で約 1.7 V、-40 °C で約 1.9 V、125 °C で約 1.4 V）で、**ヒステリシスはグラフでも示されていない** |
+| TPS7A49 | PSRR の 100 kHz 以上の保証値 | 保証値は無い。p16 9.1.10 に「オーディオ帯で PSRR > 55 dB」という文がある（"The very high power-supply rejection ratio (> 55 dB) and low noise at the audio band of the TPS7A49 maximize device performance for audio applications; see Figure 18."）。規定ではなく説明文 |
 
 ### power.md に載っていないが、同じページにあって設計に効きそうなもの（参考）
 
