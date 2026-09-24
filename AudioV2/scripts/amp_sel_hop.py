@@ -12,6 +12,7 @@
   apply    明示した経路点で1ホップ入れる。パッドから旧ビアまでの F を落とし、パッド直近に
            新ビアを打って B で合流させる（F ファンアウトは短い直線か 45° 折れ、既定の上限 4 mm）。不要になった旧ビアと B の尻尾は消す。
            衝突があれば保存しない。Switch 内のゾーンだけ再充填して保存
+  rebend   既存の B 折れ線を同じ両端の別の折れ線に差し替える（交差角の手直しなど）
   drc      kicad-cli の DRC を基準リビジョンと比べる（新しい違反 0・基板ごとの未接続数が不変なら 0 で終わる）
 
     python3 AudioV2/scripts/amp_sel_hop.py report
@@ -277,6 +278,47 @@ DIRS = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
 def octilinear(a, b, tol_deg=0.5) -> bool:
     ang = math.degrees(math.atan2(b[1] - a[1], b[0] - a[0])) % 45.0
     return ang < tol_deg or ang > 45.0 - tol_deg
+
+
+def _intersect(a, b, c, d):
+    r = (b[0] - a[0], b[1] - a[1])
+    q = (d[0] - c[0], d[1] - c[1])
+    den = r[0] * q[1] - r[1] * q[0]
+    if abs(den) < 1e-12:
+        return None
+    t = ((c[0] - a[0]) * q[1] - (c[1] - a[1]) * q[0]) / den
+    u = ((c[0] - a[0]) * r[1] - (c[1] - a[1]) * r[0]) / den
+    return (a[0] + t * r[0], a[1] + t * r[1]) if 0 <= t <= 1 and 0 <= u <= 1 else None
+
+
+def crossings(board, pts, layer):
+    """経路 pts（layer 上）が反対層の SEL_CH* / アナログと交わる点と角度。§8.5: SEL とは直角だけ。"""
+    other = F if layer == B else B
+    names = {}
+    for t in board.GetTracks():
+        if not is_via(t) and t.GetLayer() == other:
+            names[(xy(t.GetStart()), xy(t.GetEnd()))] = t.GetNetname()
+    res = []
+    for (c, d, L) in _segs(board, lambda n: "SEL_CH" in n or "_OUT_" in n or "TONE_" in n):
+        if L != other:
+            continue
+        for a, e in zip(pts, pts[1:]):
+            x = _intersect(a, e, c, d)
+            if x is not None:
+                a1 = math.atan2(e[1] - a[1], e[0] - a[0])
+                a2 = math.atan2(d[1] - c[1], d[0] - c[0])
+                res.append((names.get((c, d), "?"), x, abs((math.degrees(a1 - a2) + 90) % 180 - 90)))
+    return res
+
+
+def check_crossings(board, pts, layer, tol=5.0) -> list[str]:
+    bad = []
+    for net, x, ang in crossings(board, pts, layer):
+        tag = f"{net} と ({x[0]:.2f},{x[1]:.2f}) で {ang:.0f}°"
+        print(f"  交差: {tag}")
+        if "SEL_CH" in net and ang < 90 - tol:
+            bad.append(f"SEL と直角でない交差: {tag}")
+    return bad
 
 
 def astar(board, net: str, start, goal, grid=0.1, margin=3.0, width=0.2):
@@ -594,6 +636,8 @@ def cmd_apply(a) -> int:
         problems += [f"F escape {p}->{q}: {h}" for h in obs.seg_hits(F, p, q, mm(width), clr)]
     for p, q in zip(path, path[1:]):
         problems += [f"B {p}->{q}: {h}" for h in obs.seg_hits(B, p, q, mm(width), clr)]
+    problems += check_crossings(board, path, B)
+    problems += check_crossings(board, escape, F)
     if problems:
         print("衝突あり。保存しない:")
         for pr in problems:
@@ -628,6 +672,50 @@ def cmd_apply(a) -> int:
         return 0
     n = refill(board, sheet_region(board, "AmpBankSwitch") if a.refill == "AmpBankSwitch" else sheet_region(board, a.refill))
     print(f"  ゾーン再充填: {a.refill} 内 {n} 枚")
+    board.Save(str(a.board))
+    print(f"保存: {a.board}")
+    return 0
+
+
+def cmd_rebend(a) -> int:
+    """既存の B 折れ線（同ネット）を、同じ両端の別の折れ線に差し替える。"""
+    board = load(a.board)
+    netcode = board.GetNetcodeFromNetname(a.net)
+    old, new_pts = a.old, a.new
+    if not (near(old[0], new_pts[0]) and near(old[-1], new_pts[-1])):
+        raise SystemExit("--old と --new の両端を揃える")
+    for p, q in zip(new_pts, new_pts[1:]):
+        if not octilinear(p, q):
+            raise SystemExit(f"45°/直交でない区間: {p} -> {q}")
+    for s1, s2, s3 in zip(new_pts, new_pts[1:], new_pts[2:]):
+        if (s2[0] - s1[0]) * (s3[0] - s2[0]) + (s2[1] - s1[1]) * (s3[1] - s2[1]) <= 1e-9:
+            raise SystemExit(f"{s2} の角が 90° 以上")
+    segs = []
+    for p, q in zip(old, old[1:]):
+        hit = [t for t in board.GetTracks() if not is_via(t) and t.GetNetCode() == netcode and t.GetLayer() == B
+               and ((near(xy(t.GetStart()), p) and near(xy(t.GetEnd()), q)) or (near(xy(t.GetStart()), q) and near(xy(t.GetEnd()), p)))]
+        if len(hit) != 1:
+            raise SystemExit(f"B 区間 {p}->{q} が {len(hit)} 本（1本を期待）")
+        segs.append(hit[0])
+    width = segs[0].GetWidth()
+    obs = Obstacles(board, netcode, layers=(B,))
+    clr = design(board)["clr"]
+    problems = [f"B {p}->{q}: {h}" for p, q in zip(new_pts, new_pts[1:]) for h in obs.seg_hits(B, p, q, mm(width), clr)]
+    problems += check_crossings(board, new_pts, B)
+    if problems:
+        print("衝突あり。保存しない:")
+        for pr in problems:
+            print("  ", pr)
+        return 2
+    for t in segs:
+        board.Remove(t)
+    for p, q in zip(new_pts, new_pts[1:]):
+        add_track(board, p, q, B, width, netcode)
+    print(f"{a.net}: B {len(segs)} 区間 → {len(new_pts) - 1} 区間")
+    if a.dry_run:
+        print("dry-run: 保存しない")
+        return 0
+    print(f"  ゾーン再充填: {refill(board, sheet_region(board, a.refill))} 枚")
     board.Save(str(a.board))
     print(f"保存: {a.board}")
     return 0
@@ -725,10 +813,16 @@ def main() -> int:
     p.add_argument("--max-escape", type=float, default=4.0, help="F ファンアウトの長さの上限 [mm]")
     p.add_argument("--refill", default="AmpBankSwitch", help="再充填するゾーンの基板（シート名）")
     p.add_argument("--dry-run", action="store_true")
+    p = sub.add_parser("rebend")
+    p.add_argument("--net", required=True, choices=NETS)
+    p.add_argument("--old", type=parse_pt, nargs="+", required=True, help="いまの B 折れ線")
+    p.add_argument("--new", type=parse_pt, nargs="+", required=True, help="差し替え後（両端は同じ）")
+    p.add_argument("--refill", default="AmpBankSwitch")
+    p.add_argument("--dry-run", action="store_true")
     p = sub.add_parser("drc")
     p.add_argument("--base", default="HEAD", help="比べる基準のリビジョン")
     a = ap.parse_args()
-    return {"report": cmd_report, "propose": cmd_propose, "apply": cmd_apply, "drc": cmd_drc}[a.cmd](a)
+    return {"report": cmd_report, "propose": cmd_propose, "apply": cmd_apply, "rebend": cmd_rebend, "drc": cmd_drc}[a.cmd](a)
 
 
 if __name__ == "__main__":
