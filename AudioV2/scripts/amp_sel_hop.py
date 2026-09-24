@@ -10,7 +10,7 @@
   report   基板ごとの AMP_SEL の F/B 長・ビア数と、SEL_CH*・アナログ（CH*_OUT_* / TONE_*）との並走長
   propose  B.Cu 上で A* 探索して経路点を出す（保存しない）。45°/直交のみ、SEL との並走に罰則
   apply    明示した経路点で1ホップ入れる。パッドから旧ビアまでの F を落とし、パッド直近に
-           新ビアを打って B で合流させる。不要になった旧ビアと B の尻尾は消す。
+           新ビアを打って B で合流させる（F ファンアウトは短い直線か 45° 折れ、既定の上限 4 mm）。不要になった旧ビアと B の尻尾は消す。
            衝突があれば保存しない。Switch 内のゾーンだけ再充填して保存
   drc      kicad-cli の DRC を基準リビジョンと比べる（新しい違反 0・基板ごとの未接続数が不変なら 0 で終わる）
 
@@ -561,11 +561,15 @@ def cmd_apply(a) -> int:
             raise SystemExit(f"{s2} の角が 90° 以上")
 
     chain, old_via = f_chain(board, pad)
-    first = chain[0]
-    fs, fe = xy(first.GetStart()), xy(first.GetEnd())
-    if not on_segment(via_pt, fs, fe):
-        raise SystemExit(f"新ビア {via_pt} がパッドから出る最初の F 区間 {fs}->{fe} の上に無い")
-    width = first.GetWidth()
+    width = chain[0].GetWidth()
+    # F のファンアウト: パッド中心 →（--escape の折れ点）→ 新ビア。45°/直交のみ
+    escape = [padpt] + list(a.escape or []) + [via_pt]
+    for p, q in zip(escape, escape[1:]):
+        if not octilinear(p, q):
+            raise SystemExit(f"ファンアウトが 45°/直交でない: {p} -> {q}")
+    esc = sum(math.hypot(q[0] - p[0], q[1] - p[1]) for p, q in zip(escape, escape[1:]))
+    if esc > a.max_escape:
+        raise SystemExit(f"ファンアウト {esc:.2f} mm が上限 {a.max_escape} mm を超える（F の本線を残すことになる）")
     old_via_pt = xy(old_via.GetPosition())
     print(f"{a.pad} {net}: F {len(chain)} 本・{sum(mm(t.GetLength()) for t in chain):.2f} mm → 旧ビア {old_via_pt}")
 
@@ -586,7 +590,8 @@ def cmd_apply(a) -> int:
     obs = Obstacles(board, netcode, ignore=ignore)
     problems = []
     problems += [f"via: {h}" for h in obs.via_hits(via_pt, mm(old_via.GetWidth(F)), mm(old_via.GetDrill()), clr, d["hole2hole"])]
-    problems += [f"F escape: {h}" for h in obs.seg_hits(F, padpt, via_pt, mm(width), clr)]
+    for p, q in zip(escape, escape[1:]):
+        problems += [f"F escape {p}->{q}: {h}" for h in obs.seg_hits(F, p, q, mm(width), clr)]
     for p, q in zip(path, path[1:]):
         problems += [f"B {p}->{q}: {h}" for h in obs.seg_hits(B, p, q, mm(width), clr)]
     if problems:
@@ -598,7 +603,8 @@ def cmd_apply(a) -> int:
     # 編集
     for t in chain:
         board.Remove(t)
-    add_track(board, padpt, via_pt, F, width, netcode)
+    for p, q in zip(escape, escape[1:]):
+        add_track(board, p, q, F, width, netcode)
     add_via_like(board, via_pt, old_via, netcode)
     new = [add_track(board, p, q, B, width, netcode) for p, q in zip(path, path[1:])]
     for t in mid:
@@ -614,7 +620,6 @@ def cmd_apply(a) -> int:
         removed_tail = prune_tail(board, netcode, old_via_pt, keep=new)
         for s, e in removed_tail:
             print(f"  行き止まりの B {s}->{e} を削除")
-    esc = math.hypot(via_pt[0] - padpt[0], via_pt[1] - padpt[1])
     blen = sum(math.hypot(q[0] - p[0], q[1] - p[1]) for p, q in zip(path, path[1:]))
     print(f"  F ファンアウト {esc:.2f} mm ＋ 新ビア {via_pt} ＋ B {blen:.2f} mm（{len(path) - 1} 区間）")
 
@@ -716,6 +721,8 @@ def main() -> int:
     p.add_argument("--pad", required=True, help="REF:番号（例 U311:7）")
     p.add_argument("--via", type=parse_pt, required=True)
     p.add_argument("--path", type=parse_pt, nargs="+", required=True, help="B の経路点（始点=新ビア、終点=合流点）")
+    p.add_argument("--escape", type=parse_pt, nargs="*", help="F ファンアウトの折れ点（パッドと新ビアの間。既定は直線）")
+    p.add_argument("--max-escape", type=float, default=4.0, help="F ファンアウトの長さの上限 [mm]")
     p.add_argument("--refill", default="AmpBankSwitch", help="再充填するゾーンの基板（シート名）")
     p.add_argument("--dry-run", action="store_true")
     p = sub.add_parser("drc")
