@@ -380,7 +380,7 @@ class Builder:
             self.place(DRV, "U321", DRV_VALUE, 150.0, 340.0, nets, None,
                        footprint="Package_DIP:DIP-18_W7.62mm")
             self.cap("C321", "100uF 25V", 320.0, 340.0, "+5V_COIL", "GND_COIL", True)
-            self.cap("C322", "100nF", 335.0, 340.0, "+5V_COIL", "GND_COIL")
+            self.cap("C322", "100nF", 335.0, 340.0, "+5V_COIL", "GND_COIL", footprint=C0603)
 
         # --- D18 のヘッダ（娘基板側のオス。ピン長は FP に出ない発注属性）---
         # A5 案a: ロングテール約11mm で基板間15mm。J_ANA は金メッキ（音声）。
