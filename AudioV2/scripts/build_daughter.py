@@ -320,7 +320,7 @@ class Builder:
             addr_prefix = "R_ADDR"
         self.place(MCP, f"U_IO{sfx}", "MCP23017", 200.66, 213.36, mcp, nc,
                    footprint="Package_DIP:DIP-28_W7.62mm")
-        self.cap(f"C_IO{sfx}", "100nF", 236.22, 213.36, "3V3", "D_GND")
+        self.cap(f"C_IO{sfx}", "100nF", 236.22, 213.36, "3V3", "D_GND", footprint=C0603)
         for bit, (jx, jy) in ADDR_JUMPER_AT[self.v].items():
             self.place(ADDR_JUMPER, f"{addr_prefix}_{bit}", f"ADDR {bit}",
                        jx, jy,

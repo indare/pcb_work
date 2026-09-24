@@ -303,7 +303,7 @@ Amp 選択後 L/R
 | C201,C205,C207 | 47u | `Capacitor_THT:CP_Radial_D8.0mm_P3.50mm` | 3 |  |
 | C202,C204,C206,C208,C402 | 0.1u | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 5 |  |
 | C203 | 10u | `Capacitor_THT:CP_Radial_D5.0mm_P2.00mm` | 1 |  |
-| C311,C312,C313,C314,C322 | 100nF | `Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder` | 5 |  |
+| C311,C312,C313,C314,C322,C_IO301,C_IO302 | 100nF | `Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder` | 7 |  |
 | C315,C316,C317,C318 | 1uF 50V X7R | `Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder` | 4 |  |
 | C321 | 100uF 25V | `Capacitor_SMD:CP_Elec_10x12.6` | 1 |  |
 | C401 | 22u | `Capacitor_THT:CP_Radial_D6.3mm_P2.50mm` | 1 |  |
@@ -312,7 +312,7 @@ Amp 選択後 L/R
 | C408,C412 | 2.7n | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 |  |
 | C501,C502 | 470uF 25V NP | `Capacitor_THT:CP_Radial_D16.0mm_P7.50mm` | 2 | HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（DECISIONS）。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ / HP 出力の DC ブロック（v1 C902）。無極性電解。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ |
 | C503,C504 | 10uF 25V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 | U501 の +15V ローカルバルク（v1 C903） / U501 の -15V ローカルバルク（v1 C905 相当） |
-| C505,C506,C608,C609,C708,C709,C808,C809,C908,C909,C1008,C1009,C1108,C1109,C1208,C1209,C1308,C1309,C1604,C1605,C1607,C1612,C1614,C1615,C1617,C1618,C1622,C1624,C1625,C1629,C1634,C1636,C1637,C1638,C1639,C1641,C1642,C1643,C1646,C1647,C1650,C_IO301,C_IO302 | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 43 | A701 +3V3_A local bypass 100nF / 1206 / A701 +5V_A local bypass 100nF / 1206 / U1611 の +15V_A デカップリング / U1611 の -15V_A デカップリング / U501 の +15V デカップリング / U501 の -15V デカップリング（v1 C906） / U704/U705 VIN HF bypass 100nF / return ADC_GND_IN. / U709 VDD bypass 100nF / VCOML bypass to ADC_GND / VCOMR bypass to ADC_GND / op amp V+ local decoupling / switch VSS local decoupling |
+| C505,C506,C608,C609,C708,C709,C808,C809,C908,C909,C1008,C1009,C1108,C1109,C1208,C1209,C1308,C1309,C1604,C1605,C1607,C1612,C1614,C1615,C1617,C1618,C1622,C1624,C1625,C1629,C1634,C1636,C1637,C1638,C1639,C1641,C1642,C1643,C1646,C1647,C1650 | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 41 | A701 +3V3_A local bypass 100nF / 1206 / A701 +5V_A local bypass 100nF / 1206 / U1611 の +15V_A デカップリング / U1611 の -15V_A デカップリング / U501 の +15V デカップリング / U501 の -15V デカップリング（v1 C906） / U704/U705 VIN HF bypass 100nF / return ADC_GND_IN. / U709 VDD bypass 100nF / VCOML bypass to ADC_GND / VCOMR bypass to ADC_GND / op amp V+ local decoupling / switch VSS local decoupling |
 | C601,C604,C701,C704,C801,C804,C901,C904,C1001,C1004,C1101,C1104,C1201,C1204,C1301,C1304 | 2.2uF film | `Capacitor_THT:C_Rect_L7.2mm_W7.2mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 16 | L output coupling (before switch) / R output coupling (before switch) |
 | C602,C605,C702,C705,C802,C805,C902,C905,C1002,C1005,C1102,C1105,C1202,C1205,C1302,C1305 | 1uF film | `Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 16 | L input film coupling / R input film coupling |
 | C1601,C1608,C1623 | 10nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 3 | Y701 VDD bypass 10nF (ASFL1 データシート指定: pin2-pin4 間) |

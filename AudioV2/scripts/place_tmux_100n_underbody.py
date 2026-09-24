@@ -55,8 +55,8 @@ def swap_to_0603(board, ref, x, y, rot):
     if old.GetFPIDAsString() == C0603:
         raise SystemExit(f"{ref} は既に 0603（適用済み）")
     nets = {p.GetNumber(): p.GetNetname() for p in old.Pads()}
-    path, sn, sf, val = old.GetPath(), old.GetSheetname(), old.GetSheetfile(), old.GetValue()
-    board.Remove(old)
+    path = pcbnew.KIID_PATH(old.GetPath().AsString())
+    sn, sf, val = old.GetSheetname(), old.GetSheetfile(), old.GetValue()
     fp = p1u.load_fp(C0603)
     lib, name = C0603.split(":", 1)
     fp.SetFPID(pcbnew.LIB_ID(lib, name))
@@ -71,6 +71,9 @@ def swap_to_0603(board, ref, x, y, rot):
     fp.SetOrientationDegrees(rot)
     for p in fp.Pads():
         p.SetNet(board.FindNet(nets[p.GetNumber()]))
+    # Remove() だと外した部品の Python ラッパーが回収されるときに SWIG の型表が壊れ、以後の
+    # FOOTPRINT / PADS が 'SwigPyObject' になる（2026-09-24 に切り分け）。Delete() で C++ 側ごと消す
+    board.Delete(old)
     return fp
 
 
