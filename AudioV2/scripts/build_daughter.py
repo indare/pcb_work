@@ -350,8 +350,9 @@ class Builder:
                 nets = {num: tmpl.format(a=a, b=b) for num, tmpl in TMUX_MAP.items()}
                 self.place(TMUX, ref, "TMUX7612", 150.0 + i * 63.5, 290.0, nets, ["12"],
                            footprint="Package_SO:TSSOP-16_4.4x5mm_P0.65mm")
-                self.cap(f"C{311+i*2}", "100nF", 130.0 + i * 63.5, 315.0, "+15V", "A_GND")
-                self.cap(f"C{312+i*2}", "100nF", 137.62 + i * 63.5, 315.0, "A_GND", "-15V")
+                # 100 nF は 0603 にして TMUX 本体直下の裏へ（2026-09-24。パッド列の内側にビアを出し、ピンの足元で受ける）
+                self.cap(f"C{311+i*2}", "100nF", 130.0 + i * 63.5, 315.0, "+15V", "A_GND", footprint=C0603)
+                self.cap(f"C{312+i*2}", "100nF", 137.62 + i * 63.5, 315.0, "A_GND", "-15V", footprint=C0603)
                 # 2026-09-24: DS p34 推奨の 1 µF（0.1 µF と両方。小さい方をピン直近）。
                 # 決定は DECISIONS「TMUX7612 に 1 µF / 50 V / X7R を追加（スイッチ版のみ）」。
                 # サイズは 0603（ユーザー指示。ピンに寄せられ ESL も下がる）。⚠ 50 V X7R の 0603 は
