@@ -95,8 +95,11 @@
      R はリレー内・L はリレー間を降りるしかない）。L を南から K301/K302 へ入れる道は無い。経路探索は `scripts/sel_route2l.py`
      GPIO 拡張（MCP23017）の 100 nF も **0603 で VDD/VSS の足2本の真上（裏）**へ（Switch/Relay 両方、`scripts/place_mcp_decap.py`）。
      I2C・アドレス線は短くアナログから離れていて手を入れていない
-  3. **議論中（2026-09-25）: 高速娘**（AmpChannel の Rf/Rg 違いの実装、[`Audio/OPAMP_FAST_DS_REVIEW.md`](../Audio/OPAMP_FAST_DS_REVIEW.md)）。
-     PCB 共通で組むなら **Cf（Rf 並列）と追加デカップの DNP 足場**を今の PCB に入れるか、網とバイアス（AD797 の不平衡条件）をどうするか
+  3. **高速娘**（AmpChannel の Rf/Rg 違いの実装、[`Audio/OPAMP_FAST_DS_REVIEW.md`](../Audio/OPAMP_FAST_DS_REVIEW.md)）。
+     **電源は決定（2026-09-25・未実装）**: ±15 V は REC20K の出力そのまま（265 kHz・100 mVp-p、後段フィルタ無し）なので、
+     娘の入口に **LC を常設**＋その後ろに **正負 LDO の足場**（DNP＋0 Ω で ±15 V／実装で ±12 V、娘のレール全体）。
+     ±12 V で組んだ Switch 娘は TMUX の膝が下がり精密 DIRECT の上限が約 5.6 Vrms（高振幅は ±15 V ビルドで測る）。
+     **議論中**: Cf（Rf 並列）の足場、高速娘の網（2 k / 1 k）、バイアス（AD797 の不平衡条件）
   **対象の切り方:** パッド／部品からのファンアウトは残してよい。ファンアウトが**次のビアまたは次部品に入った以降**の本線を B.Cu へ。
   デカップ遠さ・電源細さは後回し。減点しない: C808 表・M3 keepout・娘 A↔D タイなし・Amp デカップ裏・TSSOP パッド上ビア無し
 - **娘は 4ch / 親スロットは ANA・PWR 各1**（2026-09-23: 旧 102/103 を外し `J_ANA101`/`J_PWR101` のみ）。
