@@ -12,6 +12,8 @@
   apply    明示した経路点で1ホップ入れる。パッドから旧ビアまでの F を落とし、パッド直近に
            新ビアを打って B で合流させる（F ファンアウトは短い直線か 45° 折れ、既定の上限 4 mm）。不要になった旧ビアと B の尻尾は消す。
            衝突があれば保存しない。Switch 内のゾーンだけ再充填して保存
+  tie      同じ部品の南北 D を本体の下で F 直結し、要らなくなった古い枝を分岐点まで消す
+           （TSSOP は底面パッドが無いので本体下は空いている。DS §8.5 に禁止条項なし）
   rebend   既存の B 折れ線を同じ両端の別の折れ線に差し替える（交差角の手直しなど）
   drc      kicad-cli の DRC を基準リビジョンと比べる（新しい違反 0・基板ごとの未接続数が不変なら 0 で終わる）
 
@@ -453,6 +455,11 @@ def cmd_propose(a) -> int:
 # apply
 # ---------------------------------------------------------------------------
 
+def uid(o) -> str:
+    """SWIG のラッパーは呼ぶたびに別物なので、id() ではなく UUID で見分ける。"""
+    return o.m_Uuid.AsString()
+
+
 def pad_of(board, spec: str):
     ref, num = spec.split(":")
     fp = board.FindFootprintByReference(ref)
@@ -466,10 +473,10 @@ def pad_of(board, spec: str):
 
 def touching(board, netcode, pt, layer=None, exclude=()):
     """pt に端点がある同ネットのトラック（layer 指定可）。"""
-    ex = {id(e) for e in exclude}
+    ex = {uid(e) for e in exclude}
     out = []
     for t in board.GetTracks():
-        if t.GetNetCode() != netcode or is_via(t) or id(t) in ex:
+        if t.GetNetCode() != netcode or is_via(t) or uid(t) in ex:
             continue
         if layer is not None and t.GetLayer() != layer:
             continue
@@ -552,12 +559,12 @@ def add_via_like(board, pos, sample, netcode):
 def prune_tail(board, netcode, pt, keep):
     """pt から伸びる B の尻尾（行き止まり）を消す。分岐・パッド・ビア・keep に当たったら止める。"""
     removed = []
-    keep_ids = {id(k) for k in keep}
+    keep_ids = {uid(k) for k in keep}
     while True:
         if via_at(board, netcode, pt) is not None or pad_at(board, netcode, pt, B) is not None:
             return removed
         ts = touching(board, netcode, pt, B)
-        if len(ts) != 1 or id(ts[0]) in keep_ids:
+        if len(ts) != 1 or uid(ts[0]) in keep_ids:
             return removed
         t = ts[0]
         s, e = xy(t.GetStart()), xy(t.GetEnd())
@@ -721,6 +728,115 @@ def cmd_rebend(a) -> int:
     return 0
 
 
+def _connected_at(board, netcode, pt, layers, skip):
+    """pt で同ネットにつながるもの（端点のトラック・ビア・パッド・pt を途中に含むトラック）。"""
+    ends, mids, vias, pads = [], [], [], []
+    for t in board.GetTracks():
+        if t.GetNetCode() != netcode or uid(t) in skip:
+            continue
+        if is_via(t):
+            if near(xy(t.GetPosition()), pt):
+                vias.append(t)
+            continue
+        if t.GetLayer() not in layers:
+            continue
+        s, e = xy(t.GetStart()), xy(t.GetEnd())
+        if near(s, pt) or near(e, pt):
+            ends.append(t)
+        elif on_segment(pt, s, e):
+            mids.append(t)
+    for fp in board.GetFootprints():
+        for p in fp.Pads():
+            if p.GetNetCode() == netcode and uid(p) not in skip and any(p.IsOnLayer(L) for L in layers) and p.HitTest(P(*pt)):
+                pads.append(p)
+    return ends, mids, vias, pads
+
+
+def prune_branch(board, netcode, start, layers, skip, dry_run_log):
+    """start から、分岐・パッド・端に当たるまで銅を辿って消す。途中に T 字の接続があればそこで切って止める。"""
+    pt, layers, skip = start, set(layers), set(skip)
+    removed = []
+    while True:
+        ends, mids, vias, pads = _connected_at(board, netcode, pt, layers, skip)
+        if pads or mids or len(ends) + len(vias) != 1:
+            return removed
+        if vias:
+            v = vias[0]
+            removed.append(f"ビア {xy(v.GetPosition())}")
+            skip.add(uid(v))
+            board.Remove(v)
+            layers = {F, B}
+            continue
+        t = ends[0]
+        s, e = xy(t.GetStart()), xy(t.GetEnd())
+        far = e if near(s, pt) else s
+        # このトラックの途中に他の銅の端がつながっていれば（T 字）、そこから先は残す
+        tees = []
+        for o in board.GetTracks():
+            if uid(o) == uid(t) or o.GetNetCode() != netcode or uid(o) in skip:
+                continue
+            cands = [xy(o.GetPosition())] if is_via(o) else ([xy(o.GetStart()), xy(o.GetEnd())] if o.GetLayer() == t.GetLayer() else [])
+            for c in cands:
+                if on_segment(c, s, e) and not near(c, s) and not near(c, e):
+                    tees.append(c)
+        if tees:
+            cut = min(tees, key=lambda c: math.hypot(c[0] - pt[0], c[1] - pt[1]))
+            width, layer = t.GetWidth(), t.GetLayer()
+            board.Remove(t)
+            kept = add_track(board, cut, far, layer, width, netcode)
+            removed.append(f"{'F' if layer == F else 'B'} {pt}->{cut}（T 字で切って残りは保持）")
+            # 残した区間にすっぽり重なる同ネットの短い区間は、切り口の外に端が浮くので消す
+            for o in list(board.GetTracks()):
+                if is_via(o) or o.GetNetCode() != netcode or o.GetLayer() != layer or uid(o) == uid(kept):
+                    continue
+                os_, oe = xy(o.GetStart()), xy(o.GetEnd())
+                if on_segment(os_, cut, far) and on_segment(oe, cut, far):
+                    removed.append(f"{'F' if layer == F else 'B'} {os_}->{oe}（残した区間と重複）")
+                    board.Remove(o)
+            return removed
+        removed.append(f"{'F' if t.GetLayer() == F else 'B'} {s}->{e}")
+        skip.add(uid(t))
+        layers = {t.GetLayer()}
+        board.Remove(t)
+        pt = far
+
+
+def cmd_tie(a) -> int:
+    """同じネットの D パッド2つを本体の下で F 直結し、--drop 側の古い引き回しを分岐点まで消す。"""
+    board = load(a.board)
+    pa, pb = pad_of(board, a.drop), pad_of(board, a.keep)
+    if pa.GetNetCode() != pb.GetNetCode() or pa.GetNetname() not in NETS:
+        raise SystemExit("同じ AMP_SEL ネットのパッド2つを渡す")
+    if pa.GetParentFootprint().GetReference() != pb.GetParentFootprint().GetReference():
+        raise SystemExit("同じ部品の中だけ（本体下の南北 D 直結）")
+    netcode = pa.GetNetCode()
+    A, Bp = xy(pa.GetPosition()), xy(pb.GetPosition())
+    if not octilinear(A, Bp):
+        raise SystemExit("パッド間が 45°/直交でない")
+    old = [t for t in touching(board, netcode, A, F)]
+    width = old[0].GetWidth() if old else iu(0.2)
+    obs = Obstacles(board, netcode, layers=(F,))
+    problems = [f"F {A}->{Bp}: {h}" for h in obs.seg_hits(F, A, Bp, mm(width), design(board)["clr"])]
+    problems += check_crossings(board, [A, Bp], F)
+    if problems:
+        print("衝突あり。保存しない:")
+        for pr in problems:
+            print("  ", pr)
+        return 2
+    tie = add_track(board, A, Bp, F, width, netcode)
+    removed = prune_branch(board, netcode, A, {F}, {uid(tie), uid(pa)}, None)
+    print(f"{a.drop}↔{a.keep} を F {math.hypot(Bp[0] - A[0], Bp[1] - A[1]):.2f} mm で直結。消したもの:")
+    for r in removed:
+        print("  ", r)
+    if a.dry_run:
+        print("dry-run: 保存しない")
+        return 0
+    print(f"  ゾーン再充填: {refill(board, sheet_region(board, a.refill))} 枚")
+    board.Save(str(a.board))
+    print(f"保存: {a.board}")
+    return 0
+
+
 # ---------------------------------------------------------------------------
 # drc（基準リビジョンと比べる）
 # ---------------------------------------------------------------------------
@@ -819,10 +935,15 @@ def main() -> int:
     p.add_argument("--new", type=parse_pt, nargs="+", required=True, help="差し替え後（両端は同じ）")
     p.add_argument("--refill", default="AmpBankSwitch")
     p.add_argument("--dry-run", action="store_true")
+    p = sub.add_parser("tie")
+    p.add_argument("--drop", required=True, help="古い引き回しを消す側のパッド（例 U311:2）")
+    p.add_argument("--keep", required=True, help="つなぎ先のパッド（例 U311:15）")
+    p.add_argument("--refill", default="AmpBankSwitch")
+    p.add_argument("--dry-run", action="store_true")
     p = sub.add_parser("drc")
     p.add_argument("--base", default="HEAD", help="比べる基準のリビジョン")
     a = ap.parse_args()
-    return {"report": cmd_report, "propose": cmd_propose, "apply": cmd_apply, "rebend": cmd_rebend, "drc": cmd_drc}[a.cmd](a)
+    return {"report": cmd_report, "propose": cmd_propose, "apply": cmd_apply, "rebend": cmd_rebend, "tie": cmd_tie, "drc": cmd_drc}[a.cmd](a)
 
 
 if __name__ == "__main__":
