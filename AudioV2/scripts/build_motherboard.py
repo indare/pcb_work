@@ -529,7 +529,18 @@ def rewrite_child_instance_paths() -> list[str]:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--overwrite-hand-owned-root", action="store_true",
+                    help="手編集所有のルートを承知で上書きする（通常は使わない）")
     a = ap.parse_args()
+    # 2026-09-24: ルート（AudioV2Case）は手編集所有に切り替えた。09-15 以降の変更
+    # （FrontPanel の母板直下化・XH 分割・スロット1口化・MCP の娘移設・Relay を BOM/基板へ）を
+    # このスクリプトは持っておらず、回すと電気的に別物（3 口スロット等）へ戻る。
+    # 素材（SLOT_*_NETS / _merge_lib_symbols など）は build_daughter.py から import されるので残す。
+    if not a.dry_run and not a.overwrite_hand_owned_root:
+        raise SystemExit(
+            "build_motherboard.py: ルートは手編集所有です（CLAUDE.md「シートの所有権」）。\n"
+            "  回すと 09-15 以降の変更が消え、電気的に別物になります。KiCad で直接直してください。\n"
+            "  承知で上書きするときだけ --overwrite-hand-owned-root")
     out = build(dry_run=a.dry_run)
     if a.dry_run:
         return 0

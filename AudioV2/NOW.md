@@ -42,10 +42,10 @@
   Pico／計測は MC。デジは母板上で MC↔FP（`ENC_INT*`／LCD／TP／`+5V_D` ほか）、
   アナログ／PWR は母板↔FP。物理コネクタ `J_PNL*`／`J_PNL_A*` も母板側へ移した
 - 所有権: [CLAUDE.md](../CLAUDE.md)
-- ⚠ **KiCad で保存したあとに `build_*.py` を回すとプロジェクト／回路図が壊れる。**
-  変更は **ピンポイント**（該当シンボルの FP・Value・配線だけ）。全面再生成しない
+- ⚠ **ルートは手編集所有**（2026-09-24。`build_motherboard.py` は安全弁で止まる）。娘は `build_daughter.py` が回路の正だが、
+  **全面再生成しない** — 足すものはスクリプトに書き、その要素だけ図へ差し込む（**ピンポイント**）
 - 期待値の正も CLAUDE.md（ERC・部品数など）。ずれたら先に `kicad-run.sh version`
-- **AmpBankRelay は当面 BOM・基板から除外**（シート `in_bom`/`on_board`=no。アナログSW版を優先）
+- **AmpBankRelay も BOM・基板に含める**（2026-09-23 からシート `in_bom`/`on_board`=yes。PCB の Relay 娘の配置・配線も進行中）
 - **PCB ゾーン配置**（2026-09-10）: **下辺＝パネル**、**左上＝ルート音声**、**右上＝ルート電源**、中央＝`AmpBankSwitch`→`AmpCh1..5` タイル、その下＝Out→MeasureControl。`place_pcb_zones.py`（**sheetpath 優先**）
 - **PCB 進捗（親ラフ）:** 2026-09-13 案 B — Edge.Cuts を **`(5,5)–(455,455)`** に拡張（**娘 Edge も併存**）。
   親だけ再グリッド（`place_parent_rough.py`）。娘 `/AmpBankSwitch` とスロット `J_ANA/J_PWR 101–103` は座標固定。

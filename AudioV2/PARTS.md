@@ -291,7 +291,7 @@ Amp 選択後 L/R
 **手で編集しないでください**（次の再生成で消えます）。値・フットプリント・役割を直すときは KiCad の回路図側を直し、
 `python3 AudioV2/scripts/gen_parts_bom.py` で再生成します。
 
-行数 102 / 部品総数 261。
+行数 105 / 部品総数 351。
 
 > `Refs` 列と `Value` / `Role` 列に**位置の対応はありません**。kicad-cli はグループ内の値を重複除去してアルファベット順に並べるため、「n 番目の参照 = n 番目の役割」とは読めません。
 
@@ -299,19 +299,22 @@ Amp 選択後 L/R
 |---|---|---|---|---|
 | A1601 | ADC1804_F_MODULE | `Library:ADC1804_F_KYOHRITSU_56x33mm` | 1 | 共立 ADC1804_F PCM1804 module — Library:ADC1804_F_KYOHRITSU_56x33mm (measured) |
 | A1602 | Pico2 | `Module:RaspberryPi_Pico_Common_THT` | 1 |  |
-| AMP601,AMP701,AMP801,AMP901 | NE5532 / DIP-8 compatible | `Package_DIP:DIP-8_W7.62mm_Socket` | 4 | Socketed dual op amp under test |
+| AMP601,AMP701,AMP801,AMP901,AMP1001,AMP1101,AMP1201,AMP1301 | NE5532 / DIP-8 compatible | `Package_DIP:DIP-8_W7.62mm_Socket` | 8 | Socketed dual op amp under test |
 | C201,C205,C207 | 47u | `Capacitor_THT:CP_Radial_D8.0mm_P3.50mm` | 3 |  |
 | C202,C204,C206,C208,C402 | 0.1u | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 5 |  |
 | C203 | 10u | `Capacitor_THT:CP_Radial_D5.0mm_P2.00mm` | 1 |  |
-| C311,C312,C313,C314,C505,C506,C608,C609,C708,C709,C808,C809,C908,C909,C1604,C1605,C1607,C1612,C1614,C1615,C1617,C1618,C1622,C1624,C1625,C1629,C1634,C1636,C1637,C1638,C1639,C1641,C1642,C1643,C1646,C1647,C1650,C_IO101 | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 38 | A701 +3V3_A local bypass 100nF / 1206 / A701 +5V_A local bypass 100nF / 1206 / U1611 の +15V_A デカップリング / U1611 の -15V_A デカップリング / U501 の +15V デカップリング / U501 の -15V デカップリング（v1 C906） / U704/U705 VIN HF bypass 100nF / return ADC_GND_IN. / U709 VDD bypass 100nF / VCOML bypass to ADC_GND / VCOMR bypass to ADC_GND / op amp V+ local decoupling / switch VSS local decoupling |
+| C311,C312,C313,C314 | 100nF | `Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder` | 4 |  |
+| C315,C316,C317,C318 | 1uF 50V X7R | `Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder` | 4 |  |
+| C321 | 100uF 25V | `Capacitor_SMD:CP_Elec_10x12.6` | 1 |  |
+| C322,C505,C506,C608,C609,C708,C709,C808,C809,C908,C909,C1008,C1009,C1108,C1109,C1208,C1209,C1308,C1309,C1604,C1605,C1607,C1612,C1614,C1615,C1617,C1618,C1622,C1624,C1625,C1629,C1634,C1636,C1637,C1638,C1639,C1641,C1642,C1643,C1646,C1647,C1650,C_IO301,C_IO302 | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 44 | A701 +3V3_A local bypass 100nF / 1206 / A701 +5V_A local bypass 100nF / 1206 / U1611 の +15V_A デカップリング / U1611 の -15V_A デカップリング / U501 の +15V デカップリング / U501 の -15V デカップリング（v1 C906） / U704/U705 VIN HF bypass 100nF / return ADC_GND_IN. / U709 VDD bypass 100nF / VCOML bypass to ADC_GND / VCOMR bypass to ADC_GND / op amp V+ local decoupling / switch VSS local decoupling |
 | C401 | 22u | `Capacitor_THT:CP_Radial_D6.3mm_P2.50mm` | 1 |  |
 | C403,C404,C410,C411 | 100n | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 4 |  |
 | C405,C406,C407,C409 | 2.2u | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 4 |  |
 | C408,C412 | 2.7n | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 |  |
 | C501,C502 | 470uF 25V NP | `Capacitor_THT:CP_Radial_D16.0mm_P7.50mm` | 2 | HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（DECISIONS）。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ / HP 出力の DC ブロック（v1 C902）。無極性電解。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ |
 | C503,C504 | 10uF 25V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 | U501 の +15V ローカルバルク（v1 C903） / U501 の -15V ローカルバルク（v1 C905 相当） |
-| C601,C604,C701,C704,C801,C804,C901,C904 | 2.2uF film | `Capacitor_THT:C_Rect_L7.2mm_W7.2mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 8 | L output coupling (before switch) / R output coupling (before switch) |
-| C602,C605,C702,C705,C802,C805,C902,C905 | 1uF film | `Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 8 | L input film coupling / R input film coupling |
+| C601,C604,C701,C704,C801,C804,C901,C904,C1001,C1004,C1101,C1104,C1201,C1204,C1301,C1304 | 2.2uF film | `Capacitor_THT:C_Rect_L7.2mm_W7.2mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 16 | L output coupling (before switch) / R output coupling (before switch) |
+| C602,C605,C702,C705,C802,C805,C902,C905,C1002,C1005,C1102,C1105,C1202,C1205,C1302,C1305 | 1uF film | `Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 16 | L input film coupling / R input film coupling |
 | C1601,C1608,C1623 | 10nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 3 | Y701 VDD bypass 10nF (ASFL1 データシート指定: pin2-pin4 間) |
 | C1602,C1613,C1626,C1628 | 10uF 25V NP | `Capacitor_THT:C_Radial_D5.0mm_H7.0mm_P2.00mm` | 4 | AC couple unpolarized 10uF 25V (not polar electrolytic) |
 | C1603 | 10uF 10V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 1 | LT1763-3.3 OUT bulk, >=10V X7R 1206 |
@@ -324,7 +327,7 @@ Amp 選択後 L/R
 | C1630 | 22uF | `Capacitor_THT:CP_Radial_D6.3mm_P2.50mm` | 1 | 導電性高分子アルミ固体電解コンデンサー OS-CON相当 22uF16V以上 LCD_VCC |
 | C1635,C1640 | 10uF 50V | `Capacitor_THT:CP_Radial_D5.0mm_P2.00mm` | 2 | 導電性高分子アルミ固体電解コンデンサー ハイブリッド相当 10μF50V +15V_A / 導電性高分子アルミ固体電解コンデンサー ハイブリッド相当 10μF50V -15V_A |
 | C1645 | 10uF 50V | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 1 | U1607(BP5293-50) の入力コンデンサ CIN。DS p.2 推奨 10uF。帰り先は D_GND（U1607 の GND と同じ）。PD_GND に落とすと入力の脈流ループが NT1602 を通ってしまう。 |
-| C_BULK_N301,C_BULK_P301 | 100uF 35V | `Capacitor_SMD:CP_Elec_10x12.6` | 2 |  |
+| C_BULK_N301,C_BULK_N302,C_BULK_P301,C_BULK_P302 | 100uF 35V | `Capacitor_SMD:CP_Elec_10x12.6` | 4 |  |
 | D403 | 12V panel LED | `LED_THT:LED_D5.0mm` | 1 |  |
 | D1601 | RB160M-30 | `Diode_SMD:D_SOD-123` | 1 | SOD-123 Schottky, +5V_D anode -> Pico VSYS cathode. Blocks USB backfeed into +5V_D. |
 | D1610 | DEST 1 | `LED_THT:LED_D5.0mm` | 1 |  |
@@ -337,22 +340,19 @@ Amp 選択後 L/R
 | F203 | PPTC 0.1A hold | `Library:PPTC_Radial_D7.9mm_T3.1mm_P5.08mm` | 1 | +9V LDO（U202）入口の PPTC。ラジアル PPTC。Littelfuse RXEF010（Ih 0.10 A / It 0.20 A / 60 V）。Bourns MF-R010 も同寸で可。FP は DigiKey の寸法（φ7.4〜7.9×3.1、ピッチ 5.05〜5.10）から起こした Library の自作。2026-09-09 に軸リード FP から直した |
 | F1601 | T1A slow 5x20 | `Fuse:Fuseholder_Cylinder-5x20mm_Schurter_0031_8201_Horizontal_Open` | 1 | 計測側 12V 入口（J1602）のヒューズ。J1602 を外すなら一緒に消える。ホルダは Schurter OGN 0031.8201（基板用 5×20 オープン型、DigiKey 在庫 6 万・¥240、KiCad 標準 FP）。中身は 5×20 ガラス管スローブロー T1A（例: Bel 0652C1000/1600-11、Littelfuse 0218 系、秋月の 5.2×20 スロー品も挿さる）。2026-09-09 に軸リード FP からホルダ FP へ直した |
 | F1602 | PPTC 0.5A hold | `Library:PPTC_Radial_D7.9mm_T3.1mm_P5.08mm` | 1 | 計測側 +5V_D（U1607）入口の PPTC。ラジアル PPTC。Littelfuse RXEF050（Ih 0.50 A / It 1.0 A / 72 V）。Bourns MF-R050 も同寸で可。FP は DigiKey の寸法（φ7.4〜7.9×3.1、ピッチ 5.05〜5.10）から起こした Library の自作。2026-09-09 に軸リード FP から直した |
-| H301,H302,H303,H304 | M3 | `MountingHole:MountingHole_3.2mm_M3` | 4 |  |
+| H301,H302,H303,H304,H311,H312,H313,H314 | M3 | `MountingHole:MountingHole_3.2mm_M3` | 8 |  |
 | J201 | +15/A_GND/-15 out | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 |  |
 | J202 | PD module in (1=GND 2=+12V) | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 |  |
 | J1601 | AUDIO | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/) |
 | J1602 | V_IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal` | 1 | 計測側の 12V 入口（F1601 経由で U1607 へ）。1=PD_GND / 2=+12V —— 母板 J202（1=GND 2=+12V）と同じ並び。2026-09-09 に揃えた。残すか外すかは B5 のハーネス判断 |
 | J1603 | 15_V_IN | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 計測側の ±15V 入口。1=+15V_A / 2=A_GND / 3=-15V_A —— 母板 J201（+15/A_GND/-15）と同じ並び。2026-09-09 にミラーで揃えた（それまで逆だった）。残すか外すかは B5 のハーネス判断 |
 | J_ANA101 | SLOT1 ANA (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical` | 1 |  |
-| J_ANA102 | SLOT2 ANA (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical` | 1 |  |
-| J_ANA103 | SLOT3 ANA (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical` | 1 |  |
-| J_ANA301 | SLOT ANA (D18) | `Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical` | 1 |  |
+| J_ANA301,J_ANA302 | SLOT ANA (D18) | `Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical` | 2 |  |
 | J_HP501 | HP OUT | `Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical` | 1 | ヘッドホン出力端子（箱のパネルのジャックへ）。1=PHONE_L / 2=A_GND / 3=PHONE_R。U501 バッファの出力（10Ω・470µF NP 経由）。2026-09-08 に 2P→3P（帰路を入れた。J_IN401/J_RAIL501 と同じ流儀）。旧 Value「to Audio HP Buffer」= 図の外の v1 バッファは同日 U501 として取り込んだ |
 | J_IN401 | AUDIO IN L/R | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 箱の外部音声入力。1=L / 2=A_GND / 3=R。ここから結合C経由で PT2314E の LIN/RIN へ入る（セレクタとボリューム段は LOUT/ROUT->LIN/RIN のインサートで飛ばしている）。L と R の間に GND を挟むため 3P にした。 |
 | J_LCD1601,J_PNL_A1602_2 | LCD cable A (XH8) | `Connector_JST:JST_XH_B8B-XH-A_1x08_P2.50mm_Vertical` | 2 |  |
 | J_LCD1602 | LCD cable B (XH8) | `Connector_JST:JST_XH_B8B-XH-A_1x08_P2.50mm_Vertical` | 1 |  |
 | J_LINE501 | LINE OUT | `Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical` | 1 | ライン出力端子（箱のパネルへ）。1=LINE_L / 2=A_GND / 3=LINE_R。RV502 直出し（バッファ無し）。2026-09-08 に 2P→3P（帰路を入れた） |
-| J_OLED1601 | 2.42 OLED I2C GND/3V3/SCL/SDA | `Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical` | 1 |  |
 | J_PNL1601_1,J_PNL1602_1 | FrontPanel digital A (odd) | `Connector_JST:JST_XH_B10B-XH-A_1x10_P2.50mm_Vertical` | 2 |  |
 | J_PNL1601_2,J_PNL1602_2 | FrontPanel digital B (even) | `Connector_JST:JST_XH_B10B-XH-A_1x10_P2.50mm_Vertical` | 2 |  |
 | J_PNL_A1601_1,J_PNL_A1602_1 | FrontPanel analog A (odd) | `Connector_JST:JST_XH_B8B-XH-A_1x08_P2.50mm_Vertical` | 2 |  |
@@ -360,19 +360,18 @@ Amp 選択後 L/R
 | J_PNL_P1601,J_PNL_P1611 | FrontPanel 12V raw | `Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical` | 2 |  |
 | J_PNL_P1602,J_PNL_P1612 | FrontPanel 12V switched | `Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical` | 2 |  |
 | J_PWR101 | SLOT1 PWR/CTRL (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x08_P2.54mm_Vertical` | 1 |  |
-| J_PWR102 | SLOT2 PWR/CTRL (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x08_P2.54mm_Vertical` | 1 |  |
-| J_PWR103 | SLOT3 PWR/CTRL (D18) | `Connector_PinSocket_2.54mm:PinSocket_2x08_P2.54mm_Vertical` | 1 |  |
-| J_PWR301 | SLOT PWR/CTRL (D18) | `Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical` | 1 |  |
+| J_PWR301,J_PWR302 | SLOT PWR/CTRL (D18) | `Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical` | 2 |  |
 | J_RAIL501 | AMP_SEL OUT | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 選択された Amp 出力の取り出し端子。1=AMP_SEL_L / 2=A_GND / 3=AMP_SEL_R で、DEST スイッチ(SW501/SW502)の手前。旧 Value の RAIL IN と旧記述の +12V/A_GND/-12V は、娘基板がスロット直結(J_PWR/J_ANA)になる前の名残で電源ではない。A_GND 極を持つ唯一の音声取り出し口。 |
+| K301,K302,K303,K304 | AZ850P2-5 | `Relay_THT:Relay_DPDT_FRT5` | 4 | 双コイル・ラッチングリレー。v1 と同じ AZ850P2-5 に固定（2026-09-09）。接点 3/8・4/7 を使い 2/9 は開放、コイル 1-5 / 10-6 —— v1 のネットリストと同一の使い方で、v1 実機で動作実績あり。⚠ 外形（FRT5）が同じセカンドソース（TQ2-L2 など）は接点の COM/NC/NO のピン番号が同じとは限らず、挿すと SET/RESET の意味が反転しうる。AZ850P2-5 以外を挿さない。 |
 | Q401,Q402 | BSS138 | `Package_TO_SOT_SMD:SOT-23` | 2 | I²C SCL 側の双方向レベルシフタ。役目・理由は Q401（SDA 側）と同じ / I²C 双方向レベルシフタ（2026-09-08）。S=Pico 側 3V3 バス、D=PT2314E 側 9V バス、G=3V3。PT2314E の VIH min 3.0 V に対し 3.3 V プルアップでは余裕 0.3 V しか無いので、PT 側を VCC_TONE(9V) で釣る。P82B96 を使わないのは Sx 側 VOL 0.8–1.0 V が PT2314E VIL max 1.0 V / RP2350 VIL 0.8 V を食い切るため（DECISIONS）。 SDA。 |
 | R401,R1651,R1652 | 1k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 3 |  |
 | R410,R411 | 5.6k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 |  |
 | R412,R413,R1611,R1657,R1661,R1662 | 10k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 6 | ADC_nRST pull-up 10k / 1206 / PT2314E 側 I²C SCL のプルアップ（9V=VCC_TONE） / PT2314E 側 I²C SDA のプルアップ（9V=VCC_TONE）。10k: 0.9 mA / 立ち上がり ~0.3 µs（100 kbit/s） / U1610 MCP23017 ENC_INTA open-drain pull-up to 3V3 / U1610 MCP23017 ENC_INTB open-drain pull-up to 3V3 |
 | R501,R502 | 10R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 | HP 出力の直列抵抗（v1 R901）。ケーブル容量からの分離 / HP 出力の直列抵抗（v1 R903） |
-| R503,R504,R601,R607,R701,R707,R801,R807,R901,R907,R1620,R1659,R1660 | 100k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 13 | HP ジャック側ノードのブリード（v1 R902）。未接続時に C501 の DC を落とす / HP ジャック側ノードのブリード（v1 R904） / L non-inverting bias / R non-inverting bias / U1611 L バッファの入力バイアス（v1 R805 相当）。J1601 を抜いても入力が浮かない / U1611 R バッファの入力バイアス（v1 R810 相当） / U708(XC8107) CE プルダウン。Active High なので Pico GPIO が Hi-Z の間は LCD OFF がデフォルト。CE に内部プルダウンは無いため必須。 |
-| R602,R608,R702,R708,R802,R808,R902,R908 | 47R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 8 | L output isolation / R output isolation |
-| R603,R609,R703,R709,R803,R809,R903,R909 | 220k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 8 | L output pulldown (before switch) / R output pulldown (before switch) |
-| R604,R606,R610,R612,R704,R706,R710,R712,R804,R806,R810,R812,R904,R906,R910,R912 | 20k 0.1% | `Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder` | 16 | L feedback Rf; default 20k 0.1% = GAIN 2 / L gain resistor Rg; GAIN=1+Rf/Rg / R feedback Rf; default 20k 0.1% = GAIN 2 / R gain resistor Rg; GAIN=1+Rf/Rg |
+| R503,R504,R601,R607,R701,R707,R801,R807,R901,R907,R1001,R1007,R1101,R1107,R1201,R1207,R1301,R1307,R1620,R1659,R1660 | 100k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 21 | HP ジャック側ノードのブリード（v1 R902）。未接続時に C501 の DC を落とす / HP ジャック側ノードのブリード（v1 R904） / L non-inverting bias / R non-inverting bias / U1611 L バッファの入力バイアス（v1 R805 相当）。J1601 を抜いても入力が浮かない / U1611 R バッファの入力バイアス（v1 R810 相当） / U708(XC8107) CE プルダウン。Active High なので Pico GPIO が Hi-Z の間は LCD OFF がデフォルト。CE に内部プルダウンは無いため必須。 |
+| R602,R608,R702,R708,R802,R808,R902,R908,R1002,R1008,R1102,R1108,R1202,R1208,R1302,R1308 | 47R | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 16 | L output isolation / R output isolation |
+| R603,R609,R703,R709,R803,R809,R903,R909,R1003,R1009,R1103,R1109,R1203,R1209,R1303,R1309 | 220k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 16 | L output pulldown (before switch) / R output pulldown (before switch) |
+| R604,R606,R610,R612,R704,R706,R710,R712,R804,R806,R810,R812,R904,R906,R910,R912,R1004,R1006,R1010,R1012,R1104,R1106,R1110,R1112,R1204,R1206,R1210,R1212,R1304,R1306,R1310,R1312 | 20k 0.1% | `Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder` | 32 | L feedback Rf; default 20k 0.1% = GAIN 2 / L gain resistor Rg; GAIN=1+Rf/Rg / R feedback Rf; default 20k 0.1% = GAIN 2 / R gain resistor Rg; GAIN=1+Rf/Rg |
 | R1601,R1606,R1612,R1615 | 4.7k 0.1% | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 |  |
 | R1602,R1608,R1613,R1617 | 47 | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 | OPA to ADC VIN series 47 / 1206 |
 | R1603,R1609,R1614,R1618 | 6.19k 0.1% | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 4 |  |
@@ -381,12 +380,16 @@ Amp 選択後 L/R
 | R1653,R1654 | 4.7k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 |  |
 | RV501 | A50k Dual HP | `Connector_JST:JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical` | 1 |  |
 | RV502 | A50k Dual LINE | `Connector_JST:JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical` | 1 |  |
+| R_ADDR_A0,S_ADDR_A0 | ADDR A0 | `Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels` | 2 |  |
+| R_ADDR_A1,S_ADDR_A1 | ADDR A1 | `Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels` | 2 |  |
+| R_ADDR_A2,S_ADDR_A2 | ADDR A2 | `Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm_NumberLabels` | 2 |  |
 | SW402 | Cosland 2MS1 PWR | `Library:SW_Toggle_Cosland_2MS1_VS2_SPDT` | 1 | PWR Cosland 2MS1-T1-B4-VS2-Q-E-S (Akizuki 100300) SPDT ON-ON; COM=PD_12V, throw=PD_12V_SW, other throw NC. |
 | SW501 | Cosland 2MD1 DEST | `Library:SW_Toggle_Cosland_2MD1_VS2_DPDT` | 1 | DEST PHONE/LINE DPDT ON-ON. Cosland 2MD1-T1-B4-VS2-Q-E (Akizuki 104028). |
 | TP1601 | ADC_MCLK | `TestPoint:TestPoint_Pad_D1.5mm` | 1 | ADC_MCLK probe pad after R718. |
 | U201 | REC20K-2415DZ | `Library:REC20K-Z_1in_THT` | 1 | Recom REC20K-2415DZ isolated DC/DC, 9-36Vin, ±15V/±667mA (20W), eff 88% typ, DIP 1in x 1in, Cout ±3000uF/rail, pin3=CTRL open=ON。REC10K-2415DAW/H2（±333mA・Cout ±270uF）から 2026-09-07 に差し替えた。理由は独立に3つ: ①ソケット10個が常時通電なので ±333mA だと 1ソケットあたり 27mA しか使えず、在庫の MUSES03（20mA）で既に窮屈 ②実レール容量 259.8uF が Cout ±270uF の 96% ③計測系の電源を +15V へ寄せる余地。ピン配置は REC10K と同一で、推奨穴が Ø1.0 -> Ø1.4 になるのでフットプリントも替えた（Ø1.4 なら REC10K も挿さる） |
 | U202 | L7809CV +9V | `Package_TO_SOT_THT:TO-220-3_Vertical` | 1 |  |
 | U311,U312 | TMUX7612 | `Package_SO:TSSOP-16_4.4x5mm_P0.65mm` | 2 |  |
+| U321 | TBD62083APG | `Package_DIP:DIP-18_W7.62mm` | 1 |  |
 | U402 | PT2314E | `Package_SO:SOIC-28W_7.5x17.9mm_P1.27mm` | 1 | SOP-28 300 mil（表面実装。無印 PT2314 の DIP 版は入手不可）。LCSC C90034。トーン段だけ使う — 入力セレクタとボリューム段は LOUT/ROUT -> LIN/RIN の インサート点で飛ばしていて、未使用12ピンには no_connect を立ててある。 DGND(25) は 2026-09-08 にチップの足元で A_GND へ（旧 D_GND）。I²C は Q401/Q402 レベルシフタ越しに 9V（VCC_TONE）プルアップの I2C_SDA_9V/I2C_SCL_9V で受ける。 |
 | U403 | BP5293-50 +5V | `Library:BP5293-50_ROHM_SIP-3` | 1 |  |
 | U501 | OPA1652 | `Package_DIP:DIP-8_W7.62mm_Socket` | 1 | HP バッファ（v1 HeadphoneBufferModule AMP901 の移設・2026-09-08）。ユニティフォロワ ×2（A=L, B=R）。DIP-8 ソケットで AmpChannel と同じ。標準実装は OPA1652（DIP 化モジュール、出力 ±30 mA）。入力は RV501 ワイパー（PHONE_BUF_L/R）、出力は 10Ω→470µF NP→PHONE_L/R。⚠ 比較セッション中は差し替えない（10 石すべてに共通に掛かる）。 |
@@ -397,7 +400,7 @@ Amp 選択後 L/R
 | U1607 | BP5293-50 | `Library:BP5293-50_ROHM_SIP-3` | 1 |  |
 | U1609 | XC8107AC20MR-G | `Package_TO_SOT_SMD:SOT-23-5_HandSoldering` | 1 | LCD/タッチ用ロードスイッチ。秋月 131334。CE=LCD_EN は Active High（VCEH 1.5V min なので Pico 3.3V で直接ON）。R717 100k で CE プルダウン＝起動時 OFF。ソフトスタート 0.6ms typ で LCD_VCC バルクへの突入電流を抑制。C740(CIN)/C739(CL) は 10uF 3216 を IC 直近に。FLG 未使用。 |
 | U1610 | MCP23017 (UI 0x22) | `Package_DIP:DIP-28_W7.62mm` | 1 |  |
-| U_IO101 | MCP23017 (SW SEL 0x23) | `Package_DIP:DIP-28_W7.62mm` | 1 |  |
+| U_IO301,U_IO302 | MCP23017 | `Package_DIP:DIP-28_W7.62mm` | 2 |  |
 | Y1601 | ASFL1-12.288MHZ-EC-T | `Library:Oscillator_SMD_Abracon_ASFL-4Pin_5.0x3.2mm_HandSoldering` | 1 | Abracon ASFL1 12.288MHz CMOS osc, 3.3V. pin1=Tri-State (H/open=発振), pin4=Vdd. データシート指定: pin2-pin4 間に 0.01uF バイパス |
 <!-- END GENERATED: case-bom -->
 
