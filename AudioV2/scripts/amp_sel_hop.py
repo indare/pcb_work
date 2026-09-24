@@ -872,7 +872,10 @@ def _summ(rep: dict) -> tuple[Counter, Counter, int]:
     （ratsnest のどの端を代表に出すかは実行ごとに変わるので、位置や基板では比べない）。"""
     vio = Counter()
     for v in rep.get("violations", []):
-        vio[(v["type"], tuple(sorted(i["description"] for i in v.get("items", []))))] += 1
+        # 同じ部品の複数パッドが同時に当たっているとき、DRC はどれか1つだけを報告し、どれを選ぶかは
+        # ファイル内の並びで変わる。パッド番号とそのネットは落として部品単位で比べる
+        vio[(v["type"], tuple(sorted(re.sub(r"Pad \S+ \[[^\]]*\] of (\S+)", r"Pad of \1", i["description"])
+                                     for i in v.get("items", []))))] += 1
     unc = Counter()
     for v in rep.get("unconnected_items", []):
         m = re.search(r"\[([^\]]*)\]", v.get("items", [{}])[0].get("description", ""))
