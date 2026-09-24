@@ -15,6 +15,7 @@ D9 のとおりリレー版とも混ぜられる。`AmpChannel` は D22 で両�
 from __future__ import annotations
 
 import argparse
+import contextlib
 import re
 import sys
 import uuid
@@ -37,10 +38,31 @@ _seq = 0
 _NS = uuid.UUID("b2000013-0013-4013-8013-000000000013")
 
 
+_fixed: list[list] = []   # [[接頭辞, 番号], ...]。fixed_uids() の間だけ使う
+
+
 def uid() -> str:
+    if _fixed:
+        _fixed[-1][1] += 1
+        return str(uuid.uuid5(_NS, f"{_fixed[-1][0]}/{_fixed[-1][1]}"))
     global _seq
     _seq += 1
     return str(uuid.uuid5(_NS, f"daughter/{_seq}"))
+
+
+@contextlib.contextmanager
+def fixed_uids(prefix: str):
+    """後から足す部品の UUID を通し番号から切り離す。
+
+    `uid()` は通し番号なので、途中に部品を足すと**そこから後ろ（Relay 版まで）の UUID が全部ずれる**。
+    PCB の部品は回路図のシンボル UUID（KIID パス）で結ばれているので、ずれると次の再生成で
+    PCB との対応が切れる。後から足すものはこの中で作り、既存の番号を進めない。
+    """
+    _fixed.append([prefix, 0])
+    try:
+        yield
+    finally:
+        _fixed.pop()
 
 
 # --- 版ごとの定義 -------------------------------------------------------
@@ -118,6 +140,7 @@ ADDR_JUMPER_NOTE = (
 )
 
 TMUX = "AudioV2:TMUX7612"
+C0603 = "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 # 案C（2026-09-11、2026-09-13 更新）: PCB 配置に合わせてピンを組み直す。
 # - PCB 上の TMUX は **270°**（KiCad）: 北辺=ピン1–8＝CH{a}、南辺=ピン9–16＝CH{b}
 #   （ピン1側を Amp 0°＝ch1/ch3 に向ける）
@@ -237,10 +260,10 @@ class Builder:
             self.els.append(sch_import.Element("no_connect", _nc(tx, ty), None, None, (tx, ty)))
 
     def cap(self, ref: str, value: str, x: float, y: float, hi: str, lo: str,
-            polarized: bool = False) -> None:
+            polarized: bool = False, footprint: str = "") -> None:
         lib = "Device:C_Polarized" if polarized else "Device:C"
-        fp = ("Capacitor_SMD:CP_Elec_10x12.6" if polarized else
-              "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
+        fp = footprint or ("Capacitor_SMD:CP_Elec_10x12.6" if polarized else
+                           "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
         el = sch_import.Element(
             "symbol", symbol_inst_v10(lib, ref, value, x, y, 0, self.path, footprint=fp),
             ref, None, (x, y))
@@ -329,6 +352,14 @@ class Builder:
                            footprint="Package_SO:TSSOP-16_4.4x5mm_P0.65mm")
                 self.cap(f"C{311+i*2}", "100nF", 130.0 + i * 63.5, 315.0, "+15V", "A_GND")
                 self.cap(f"C{312+i*2}", "100nF", 137.62 + i * 63.5, 315.0, "A_GND", "-15V")
+                # 2026-09-24: DS p34 推奨の 1 µF（0.1 µF と両方。小さい方をピン直近）。
+                # 決定は DECISIONS「TMUX7612 に 1 µF / 50 V / X7R を追加（スイッチ版のみ）」。
+                # サイズは 0603（ユーザー指示。ピンに寄せられ ESL も下がる）。⚠ 50 V X7R の 0603 は
+                # 15 V の DC バイアスで実効容量が大きく落ちる — 発注時に DC バイアス特性で選ぶ
+                with fixed_uids(f"tmux_1u/{ref}"):
+                    for k, (hi, lo) in enumerate((("+15V", "A_GND"), ("A_GND", "-15V"))):
+                        self.cap(f"C{315+i*2+k}", "1uF 50V X7R", 114.76 + k * 7.62 + i * 63.5, 315.0,
+                                 hi, lo, footprint=C0603)
         else:
             for n in range(1, N_CH + 1):
                 self.place(RELAY_SYM, f"K{300+n}", "AZ850P2-5",
