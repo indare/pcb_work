@@ -66,14 +66,15 @@ def style(net: str, layer: int):
 
 
 def render_svg(board, x0, y0, x1, y1, pxmm) -> tuple[str, int, int]:
-    W, H = round((x1 - x0) * pxmm), round((y1 - y0) * pxmm)
     fs = max(0.6, 11 / pxmm)
+    strip = fs * 2.2  # 図の下に凡例の帯
+    W, H = round((x1 - x0) * pxmm), round((y1 - y0 + strip) * pxmm)
 
     def inr(x, y, m=2.0):
         return x0 - m <= x <= x1 + m and y0 - m <= y <= y1 + m
 
     s = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="{x0} {y0} {x1 - x0} {y1 - y0}">',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="{x0} {y0} {x1 - x0} {y1 - y0 + strip}">',
         f'<rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}" fill="white"/>',
     ]
     step = 5 if pxmm < 30 else 1
@@ -153,11 +154,12 @@ def render_svg(board, x0, y0, x1, y1, pxmm) -> tuple[str, int, int]:
                 s.append(f'<text x="{qx + 0.4:.2f}" y="{qy - 0.4:.2f}" font-size="{fs:.2f}" font-family="sans-serif">{ref}.{p.GetNumber()} {html.escape(p.GetNetname().lstrip("/").replace("AMP_SEL_", ""))}</text>')
     lg = [("#d00000", "AMP_SEL_L F"), ("#0040ff", "AMP_SEL_L B"), ("#ff8000", "AMP_SEL_R F"),
           ("#00a0a0", "AMP_SEL_R B"), ("#ff40c0", "SEL_CH F"), ("#8000c0", "SEL_CH B")]
-    lx, ly = x1 - fs * 9, y1 - fs * (len(lg) * 1.3 + 2.2)
-    s.append(f'<rect x="{lx - fs * 0.5}" y="{ly - fs * 1.2}" width="{fs * 9.5}" height="{fs * (len(lg) * 1.3 + 3)}" fill="white" opacity="0.9"/>')
-    for i, (c, t) in enumerate(lg):
-        s.append(f'<text x="{lx}" y="{ly + i * fs * 1.3}" font-size="{fs}" font-family="sans-serif" fill="{c}">{t}</text>')
-    s.append(f'<text x="{lx}" y="{ly + len(lg) * fs * 1.3}" font-size="{fs * 0.8}" font-family="sans-serif" fill="#888">淡赤=F 淡青=B 黒丸=AMP_SEL ビア</text>')
+    s.append(f'<rect x="{x0}" y="{y1}" width="{x1 - x0}" height="{strip}" fill="white"/>')
+    lx, ly = x0 + fs * 0.5, y1 + fs * 1.4
+    for c, t in lg:
+        s.append(f'<text x="{lx}" y="{ly}" font-size="{fs * 0.7}" font-family="sans-serif" fill="{c}">{t}</text>')
+        lx += fs * 0.7 * (len(t) * 0.6 + 1.0)
+    s.append(f'<text x="{lx}" y="{ly}" font-size="{fs * 0.6}" font-family="sans-serif" fill="#888">淡赤=F 淡青=B 黒丸=AMP_SEL ビア</text>')
     s.append("</svg>")
     return "\n".join(s), W, H
 
