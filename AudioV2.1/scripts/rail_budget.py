@@ -67,6 +67,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--root", type=Path, default=ROOT)
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--adc-from-pd", action="store_true",
+                    help="計測系の LDO（+3V3_A / +5V_A）を ±15 V ではなく PD 12 V から取る案（v2.1 の C）")
     a = ap.parse_args()
     d = sch_facts.Design(a.root)
     by_net = {n.name: n for n in d.nets}
@@ -119,8 +121,11 @@ def main() -> int:
         fixed["+15V"][1] += load_m + iq_m
     ldo_iq = [sum(SUBRAIL[r][1][i] for r in ("+3V3_A", "+5V_A")) for i in (0, 1)]
     other_a = [fixed["+3V3_A"][i] + fixed["+5V_A"][i] for i in (0, 1)]
-    fixed["+15V"][0] += adc_typ + ldo_iq[0] + other_a[0]
-    fixed["+15V"][1] += adc_max + ldo_iq[1] + other_a[1]
+    if a.adc_from_pd:
+        print(f"※ --adc-from-pd: 計測系の LDO の入力（typ {adc_typ + ldo_iq[0] + other_a[0]:.1f} / max {adc_max + ldo_iq[1] + other_a[1]:.1f} mA）は PD 12 V 側へ（±15 V に積まない）")
+    else:
+        fixed["+15V"][0] += adc_typ + ldo_iq[0] + other_a[0]
+        fixed["+15V"][1] += adc_max + ldo_iq[1] + other_a[1]
 
     out = {"fixed_mA": {r: fixed[r] for r in TOP}, "sockets_in_schematic": len(sockets), "scenarios": []}
     print(f"回路図: ソケット {len(sockets)} 個（{', '.join(sorted(sockets))}）")
