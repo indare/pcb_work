@@ -4,6 +4,10 @@
 検討日: 2026-08-25 / 検証: KiCad 10.0.1（kicad-cli DRC + pcbnew 実測）  
 手持ち石: [`OPAMP_INVENTORY.md`](OPAMP_INVENTORY.md)（2026-08-31 申告）
 
+**⚠ AudioV2 `AmpChannel`（ゲイン 2・Rf/Rg=20 k）の高速石判断は、この文書ではなく
+[`OPAMP_FAST_DS_REVIEW.md`](OPAMP_FAST_DS_REVIEW.md)（2026-09-24 DS 精査）を正とする。**
+本稿は v1 Amp 島（図面上 47 k/10 k、実装は 10 k/10 k）の記録。
+
 この文書は「C34/C35 の 470µF が大きい」という話から始めて、耐圧・銘柄・オペアンプ選定まで
 追いかけた結果をまとめたもの。**結論だけ読むなら「6. リファイン案」へ。**
 
