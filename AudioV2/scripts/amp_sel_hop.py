@@ -14,7 +14,7 @@
            衝突があれば保存しない。Switch 内のゾーンだけ再充填して保存
   tie      同じ部品の南北 D を本体の下で F 直結し、要らなくなった古い枝を分岐点まで消す
            （TSSOP は底面パッドが無いので本体下は空いている。DS §8.5 に禁止条項なし）
-  rebend   既存の B 折れ線を同じ両端の別の折れ線に差し替える（交差角の手直しなど）
+  rebend   既存の折れ線（既定 B、--layer F も可）を同じ両端の別の折れ線に差し替える（交差角の手直しなど）
   drc      kicad-cli の DRC を基準リビジョンと比べる（新しい違反 0・基板ごとの未接続数が不変なら 0 で終わる）
 
     python3 AudioV2/scripts/amp_sel_hop.py report
@@ -293,15 +293,17 @@ def _intersect(a, b, c, d):
     return (a[0] + t * r[0], a[1] + t * r[1]) if 0 <= t <= 1 and 0 <= u <= 1 else None
 
 
-def crossings(board, pts, layer):
-    """経路 pts（layer 上）が反対層の SEL_CH* / アナログと交わる点と角度。§8.5: SEL とは直角だけ。"""
+def crossings(board, pts, layer, own: str = ""):
+    """経路 pts（layer 上）が反対層の SEL_CH* / アナログ（もう一方の AMP_SEL を含む）と交わる点と角度。
+    §8.5: SEL とは直角だけ。アナログどうしも直角が望ましい（SCAA082 p14: 隣の層どうしも 90°）。"""
     other = F if layer == B else B
     names = {}
     for t in board.GetTracks():
         if not is_via(t) and t.GetLayer() == other:
             names[(xy(t.GetStart()), xy(t.GetEnd()))] = t.GetNetname()
     res = []
-    for (c, d, L) in _segs(board, lambda n: "SEL_CH" in n or "_OUT_" in n or "TONE_" in n):
+    for (c, d, L) in _segs(board, lambda n: ("SEL_CH" in n or "_OUT_" in n or "TONE_" in n
+                                            or (n in NETS and n != own))):
         if L != other:
             continue
         for a, e in zip(pts, pts[1:]):
@@ -313,13 +315,15 @@ def crossings(board, pts, layer):
     return res
 
 
-def check_crossings(board, pts, layer, tol=5.0) -> list[str]:
+def check_crossings(board, pts, layer, tol=5.0, own: str = "", strict_analog: bool = False) -> list[str]:
     bad = []
-    for net, x, ang in crossings(board, pts, layer):
+    for net, x, ang in crossings(board, pts, layer, own):
         tag = f"{net} と ({x[0]:.2f},{x[1]:.2f}) で {ang:.0f}°"
         print(f"  交差: {tag}")
         if "SEL_CH" in net and ang < 90 - tol:
             bad.append(f"SEL と直角でない交差: {tag}")
+        elif strict_analog and ang < 90 - tol:
+            bad.append(f"アナログと直角でない交差: {tag}")
     return bad
 
 
@@ -685,8 +689,9 @@ def cmd_apply(a) -> int:
 
 
 def cmd_rebend(a) -> int:
-    """既存の B 折れ線（同ネット）を、同じ両端の別の折れ線に差し替える。"""
+    """既存の折れ線（同ネット・同じ層。既定 B）を、同じ両端の別の折れ線に差し替える。"""
     board = load(a.board)
+    LY = F if a.layer == "F" else B
     netcode = board.GetNetcodeFromNetname(a.net)
     old, new_pts = a.old, a.new
     if not (near(old[0], new_pts[0]) and near(old[-1], new_pts[-1])):
@@ -699,16 +704,16 @@ def cmd_rebend(a) -> int:
             raise SystemExit(f"{s2} の角が 90° 以上")
     segs = []
     for p, q in zip(old, old[1:]):
-        hit = [t for t in board.GetTracks() if not is_via(t) and t.GetNetCode() == netcode and t.GetLayer() == B
+        hit = [t for t in board.GetTracks() if not is_via(t) and t.GetNetCode() == netcode and t.GetLayer() == LY
                and ((near(xy(t.GetStart()), p) and near(xy(t.GetEnd()), q)) or (near(xy(t.GetStart()), q) and near(xy(t.GetEnd()), p)))]
         if len(hit) != 1:
-            raise SystemExit(f"B 区間 {p}->{q} が {len(hit)} 本（1本を期待）")
+            raise SystemExit(f"{a.layer} 区間 {p}->{q} が {len(hit)} 本（1本を期待）")
         segs.append(hit[0])
     width = segs[0].GetWidth()
-    obs = Obstacles(board, netcode, layers=(B,))
+    obs = Obstacles(board, netcode, layers=(LY,))
     clr = design(board)["clr"]
-    problems = [f"B {p}->{q}: {h}" for p, q in zip(new_pts, new_pts[1:]) for h in obs.seg_hits(B, p, q, mm(width), clr)]
-    problems += check_crossings(board, new_pts, B)
+    problems = [f"{a.layer} {p}->{q}: {h}" for p, q in zip(new_pts, new_pts[1:]) for h in obs.seg_hits(LY, p, q, mm(width), clr)]
+    problems += check_crossings(board, new_pts, LY, own=a.net, strict_analog=a.strict_analog)
     if problems:
         print("衝突あり。保存しない:")
         for pr in problems:
@@ -717,8 +722,8 @@ def cmd_rebend(a) -> int:
     for t in segs:
         board.Remove(t)
     for p, q in zip(new_pts, new_pts[1:]):
-        add_track(board, p, q, B, width, netcode)
-    print(f"{a.net}: B {len(segs)} 区間 → {len(new_pts) - 1} 区間")
+        add_track(board, p, q, LY, width, netcode)
+    print(f"{a.net}: {a.layer} {len(segs)} 区間 → {len(new_pts) - 1} 区間")
     if a.dry_run:
         print("dry-run: 保存しない")
         return 0
@@ -934,8 +939,10 @@ def main() -> int:
     p.add_argument("--dry-run", action="store_true")
     p = sub.add_parser("rebend")
     p.add_argument("--net", required=True, choices=NETS)
-    p.add_argument("--old", type=parse_pt, nargs="+", required=True, help="いまの B 折れ線")
+    p.add_argument("--old", type=parse_pt, nargs="+", required=True, help="いまの折れ線")
     p.add_argument("--new", type=parse_pt, nargs="+", required=True, help="差し替え後（両端は同じ）")
+    p.add_argument("--layer", choices=("B", "F"), default="B")
+    p.add_argument("--strict-analog", action="store_true", help="アナログとの交差も直角以外は保存しない")
     p.add_argument("--refill", default="AmpBankSwitch")
     p.add_argument("--dry-run", action="store_true")
     p = sub.add_parser("tie")
