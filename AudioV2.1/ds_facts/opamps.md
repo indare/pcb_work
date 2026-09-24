@@ -431,6 +431,7 @@ Note 9: "The LT1364C/LT1365C are guaranteed to meet specified performance from 0
 | 出力電圧振幅 | min ±2.5 V / typ ±3 V | ±5 V、RLOAD = 600 Ω、25°C | MIN / TYP（A・B とも） | p.3 Table 2 | `RLOAD = 600 Ω ±5 V ±2.5 ±3 ±2.5 ±3 V` |
 | グラフ: 出力電圧振幅 vs 電源電圧 | **±12 V で** 約 10.8 V（–VOUT の線）/ 約 10.4 V（+VOUT の線）（目読み。どちらの線がどちらかはラベル位置からの判断）。**負荷の表記なし** | 負荷記載なし | typ（グラフ） | p.6 Figure 4 | 図題 "Output Voltage Swing vs. Supply Voltage"、縦軸 "OUTPUT VOLTAGE SWING (±V)" |
 | グラフ: 出力電圧振幅 vs 負荷抵抗 | VS = ±15 V で 約 200 Ω 以上 約 27 Vp-p、VS = ±5 V で 約 6 Vp-p 前後（目読み） | VS = ±15V / ±5 | typ（グラフ） | p.6 Figure 5 | 図題 "Output Voltage Swing vs. Load Resistance"、縦軸 "OUTPUT VOLTAGE SWING (V p-p)" |
+| グラフ: 0.01 % 歪みでの出力電圧 vs 電源電圧 | **±12 V で約 7.5 Vrms**（≈ 10.6 Vpk。目読み。±10 V で約 6.0、±15 V で約 9.4 Vrms） | f = 1 kHz、RL = 600 Ω、G = +10（図中表記） | typ（グラフ） | p.7 Figure 10 | 図題 "Output Voltage vs. Supply Voltage for 0.01% Distortion"、縦軸 "OUTPUT VOLTAGE (V rms)" 〔2026-09-25 照合で追加：±12 V 判定の否定側査読が指摘、親が画像で再読〕 |
 | 同相入力電圧範囲 | ±15 V: min ±11 / typ ±12 V、±5 V: min ±2.5 / typ ±3 V | 25°C | MIN / TYP（A・B とも） | p.3 Table 2 | `INPUT COMMON-MODE VOLTAGE RANGE ±15 V ±11 ±12 ±11 ±12 V` / `±5 V ±2.5 ±3 ±2.5 ±3 V` |
 | 入力電圧（絶対最大） | ±VS | — | — | p.5 Table 3 | `Input Voltage ±VS` |
 | 差動入力（絶対最大） | **±0.7 V**。入力は逆並列（back-to-back）ダイオードで保護、内部に電流制限抵抗なし | — | — | p.5 Table 3 | `Differential Input Voltage1 ±0.7 V`、注1 "The AD797 inputs are protected by back-to-back diodes. To achieve low noise, internal current-limiting resistors are not incorporated into the design of this amplifier. If the differential input voltage exceeds ±0.7 V, the input current should be limited to less than 25 mA by series protection resistors. Note, however, that this degrades the low noise performance of the device." |
@@ -495,4 +496,4 @@ Note 9: "The LT1364C/LT1365C are guaranteed to meet specified performance from 0
 | AD797 | ±15 V | RLOAD = 600 Ω | 25°C | ±11 V | ±13 V | 絶対値 | AD_AD797.pdf p.3 |
 | AD797 | ±5 V | RLOAD = 600 Ω | 25°C | ±2.5 V | ±3 V | 絶対値 | AD_AD797.pdf p.3 |
 
-**±12 V（またはそれを含む電源範囲）での規定値があるのは**、表の電源条件が範囲になっている OPA1612（±2.25〜±18 V）と OPA2140（4.5〜36 V）の 2 つだけ。ほかは ±12 V の規定値が DS に無い（グラフがあるのは NJM5532・NJM4580・LME49860（Vrms, THD+N = 1%）・LT1364（レール基準）・AD797（負荷不明）。上の各石の節を参照）。
+**±12 V（またはそれを含む電源範囲）での規定値があるのは**、表の電源条件が範囲になっている OPA1612（±2.25〜±18 V）と OPA2140（4.5〜36 V）の 2 つだけ。ほかは ±12 V の規定値が DS に無い（グラフがあるのは NJM5532・NJM4580・LME49860（Vrms, THD+N = 1%）・LT1364（レール基準）・AD797（振幅 vs 電源は負荷不明、0.01 % 歪みの Figure 10 は RL = 600 Ω）。上の各石の節を参照）。
