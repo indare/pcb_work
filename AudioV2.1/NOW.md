@@ -1,7 +1,15 @@
-# AudioV2 — いま（現況）
+# AudioV2.1 — いま（現況）
 
-**更新:** 2026-09-24  
-**2026-09-25: 電源ゲート構成の検討は `AudioV2.1/`（v2 の全コピー）で行う**（[AudioV2.1/NOW.md](../AudioV2.1/NOW.md)）。v2 はこのまま残す。  
+**更新:** 2026-09-25  
+**v2.1 は v2（`AudioV2/`）の全コピー**（2026-09-25、`claude/vibrant-cray-axng64` 上で作成）。v2 はそのまま残す。
+コピー側のスクリプトは `AudioV2.1/` を指すように書き換え済み（KiCad のシンボルライブラリ名 `AudioV2` は据え置き）。
+`kicad-run.sh erc` の既定は v2 なので、v2.1 は `kicad-run.sh erc AudioV2.1/AudioV2Case.kicad_sch` と明示する。
+
+**v2.1 で検討すること（この順）**: **選んだ ch だけ電源と入力を生かす**構成を採る（2026-09-25 決定）。それに伴い
+1. **±15 V の負荷の積み上げ**を回路図と DS から作り直す（常時通電の前提が消える）
+2. **DC-DC の選び直し**（軽負荷・正負非対称・絶縁容量・出力容量上限。`scripts/dcdc_survey.py`）
+3. **ch ごとの電源ゲート**（EN 付き正負 LDO＋出力クランプ）と**入力の切り替え**（Switch: TMUX、Relay: ラッチングリレー）
+
 **このファイルが「いま何待ちか／次の一手」の正。** 履歴・理由・長い文脈は
 [AGENT_HANDOFF.md](AGENT_HANDOFF.md) / [DECISIONS.md](DECISIONS.md)。  
 回路図から導出できる数値はここに書かない（[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。

@@ -72,3 +72,5 @@ _autosave-*
 Audio/measurement_fw/cap_*.txt
 # 試験音は make_tone.py で再生成できる（rng シード固定で決定的）
 Audio/measurement_fw/*.wav
+AudioV2.1/output/
+AudioV2.1/.kicad-mcp/
