@@ -27,7 +27,7 @@
 | **OPA2140AIDR** 2 回路 JFET DIP | DIP 化／変換実装 | 可 | [PDF](datasheets/opamps/TI_OPA2140.pdf) |
 | **MUSE01**（×2 → 1×DIP 変換） | シングル相当 **2 個**を 1 個の DIP-8 に挿す変換基板。表記は MUSE01（MUSES01 ではない） | 可（変換ごと Amp ソケットへ） | [PDF](datasheets/opamps/NJR_MUSES01.pdf) |
 | **MUSE03**（×2 → DIP 化・2ch 変換基板） | シングル相当 **2 個**を DIP 化し 2ch にした変換基板あり。表記は MUSE03（製品 DS 名は **MUSES03**）。J-FET、en 7.5 nV/√Hz、GBW 12 MHz、SR 35 V/µs、Vs ±3.5〜±18（[DS 要点](datasheets/opamps/README.md#muses03-ds-要点)） | 可（変換ごと Amp ソケットへ） | [PDF](datasheets/opamps/NJR_MUSES03.pdf) |
-| **AD797**（シングル×2） | 超低ノイズ。L/R で **2 個**（Dual 化変換）。ゲイン 2 は DS Table 6 で可。詳細は FAST 精査 | 可（変換基板。20 k 網では電流ノイズ不利） | メーカー PDF（ローカル未保管。リンクは FAST 精査） |
+| **AD797**（シングル×2） | 超低ノイズ。L/R で **2 個**（Dual 化変換）。ゲイン 2 は DS Table 6 で可。詳細は FAST 精査 | 可（変換基板。20 k 網では電流ノイズ不利） | [PDF](datasheets/opamps/AD_AD797.pdf) |
 
 ## AudioV2 ±15 V 電源での可否
 
@@ -90,4 +90,5 @@ AudioV2 のアナログレールは **±15 V**（2026-09-01 に ±12 V から変
 | 2026-08-31 | MUSE03 = 2 石→DIP 化・2ch 変換基板あり、と追記 |
 | 2026-08-31 | MUSE03 DS 要点・製品ページ参照を `datasheets/opamps/README.md` に追加 |
 | 2026-09-24 | AD797 を手持ちに追加。FAST DS 精査へリンク。AudioV2 20 k 前提の注意に更新 |
+| 2026-09-25 | AD797 の DS（Rev. K）を `datasheets/opamps/AD_AD797.pdf` に保管 |
 | 2026-09-25 | 電源可否表を ±15 V（AudioV2 の現行レール）で見直し。±12 V は 09-01 に廃止済みだった |
