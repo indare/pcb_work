@@ -32957,10 +32957,6 @@
 		(uuid "1ef091be-edd6-55c7-98a3-2e1b545dfd8f")
 	)
 	(no_connect
-		(at 194.31 161.29)
-		(uuid "31e2210a-ff65-4c22-960f-b409e6534e87")
-	)
-	(no_connect
 		(at 477.52 373.38)
 		(uuid "3f194691-1790-5b26-9168-c4bc4aa6ff15")
 	)
@@ -33017,10 +33013,6 @@
 		(uuid "bed79375-a339-55ed-b93c-f603adc34d33")
 	)
 	(no_connect
-		(at 194.31 156.21)
-		(uuid "c1375874-89bc-4e11-be02-f7dd23ecd49e")
-	)
-	(no_connect
 		(at 355.6 146.05)
 		(uuid "c8107020-0000-4a01-b001-000000000020")
 	)
@@ -33040,20 +33032,6 @@
 		(at 132.08 353.06)
 		(uuid "d5b2a88a-663e-583b-adce-d230fe3b7fd7")
 	)
-	(no_connect
-		(at 194.31 168.91)
-		(uuid "f18d2ffe-8f37-4769-aa6e-29dbff72a4a0")
-	)
-	(wire
-		(pts
-			(xy 194.31 189.23) (xy 196.85 189.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "001fffcc-59bc-4f49-8d53-98b52a84c5c3")
-	)
 	(wire
 		(pts
 			(xy 330.2 134.62) (xy 337.82 134.62)
@@ -33063,66 +33041,6 @@
 			(type default)
 		)
 		(uuid "061ea323-2d4c-449c-8eaf-8eeb15e74d5f")
-	)
-	(wire
-		(pts
-			(xy 194.31 179.07) (xy 196.85 179.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "07df7c02-089f-42fe-956a-ac56b8817934")
-	)
-	(wire
-		(pts
-			(xy 194.31 186.69) (xy 196.85 186.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0abac860-a2a2-4222-951e-27e7a45d37e7")
-	)
-	(wire
-		(pts
-			(xy 194.31 168.91) (xy 196.85 168.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0ad2632b-8dcd-4af9-bd5a-b4f645137637")
-	)
-	(wire
-		(pts
-			(xy 194.31 166.37) (xy 196.85 166.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "19483354-1b1b-4fdf-a8d0-aaf77a326297")
-	)
-	(wire
-		(pts
-			(xy 194.31 176.53) (xy 196.85 176.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1995c0af-d7c5-4b51-a7f3-e93ee2d5ba8d")
-	)
-	(wire
-		(pts
-			(xy 194.31 184.15) (xy 196.85 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "23944e36-66c1-4f73-a72c-c27afc6f0634")
 	)
 	(wire
 		(pts
@@ -33166,16 +33084,6 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 171.45) (xy 196.85 171.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "52049c83-2ea7-4d01-8463-c6417375fcae")
-	)
-	(wire
-		(pts
 			(xy 345.44 152.4) (xy 345.44 157.48)
 		)
 		(stroke
@@ -33196,26 +33104,6 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 153.67) (xy 196.85 153.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "823d9f48-3f28-40d7-b246-e0938a0791cc")
-	)
-	(wire
-		(pts
-			(xy 194.31 181.61) (xy 196.85 181.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8c717d34-dfc1-47ae-b8f7-f788443271ae")
-	)
-	(wire
-		(pts
 			(xy 345.44 157.48) (xy 350.52 157.48)
 		)
 		(stroke
@@ -33223,36 +33111,6 @@
 			(type default)
 		)
 		(uuid "9586a6b4-a264-4596-bb4c-44c1de6ed655")
-	)
-	(wire
-		(pts
-			(xy 194.31 158.75) (xy 196.85 158.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a5ee1d75-b508-4b37-947c-7b4a93d3cdb4")
-	)
-	(wire
-		(pts
-			(xy 194.31 173.99) (xy 196.85 173.99)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "addcf429-623b-4ff2-b664-e725625bdda3")
-	)
-	(wire
-		(pts
-			(xy 194.31 163.83) (xy 196.85 163.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c3a28f45-943f-48e1-9966-92b9d76c6581")
 	)
 	(wire
 		(pts
@@ -33356,26 +33214,6 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 161.29) (xy 196.85 161.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cef3f9bc-2205-4196-b208-a3b8c89ca4b6")
-	)
-	(wire
-		(pts
-			(xy 194.31 156.21) (xy 196.85 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "df5da779-821c-4f67-8164-cd8e4e8e1b7d")
-	)
-	(wire
-		(pts
 			(xy 355.6 134.62) (xy 355.6 140.97)
 		)
 		(stroke
@@ -33393,16 +33231,6 @@
 			(type default)
 		)
 		(uuid "f92633b3-64e0-434e-b817-86f3c3ea2764")
-	)
-	(label "LCD_VCC"
-		(at 194.31 179.07 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "0213d002-3486-4650-ac3c-035b59bc8785")
 	)
 	(label "AMP_SEL_R"
 		(at 365.76 383.54 180)
@@ -33464,16 +33292,6 @@
 		)
 		(uuid "0fe10ddd-7f9a-568a-9449-ad2dcc70c439")
 	)
-	(label "D_GND"
-		(at 194.31 158.75 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "0fe57c83-0926-4258-8d7d-a258be4d00f6")
-	)
 	(label "LED_DEST1"
 		(at 132.08 347.98 0)
 		(effects
@@ -33533,16 +33351,6 @@
 			(justify right bottom)
 		)
 		(uuid "2e2e05c3-5dd8-5b02-8767-93bedb10217f")
-	)
-	(label "LCD_SCK"
-		(at 194.31 166.37 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "2ee7f511-8034-4caa-9144-ffebc907b56d")
 	)
 	(label "LINE_PRE_L"
 		(at 429.26 342.9 180)
@@ -33604,16 +33412,6 @@
 		)
 		(uuid "4003e147-2028-5544-ba4a-7e74c40533c0")
 	)
-	(label "TP_SCL"
-		(at 194.31 184.15 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "403ea758-496c-4d6b-8575-88cb903f2ae6")
-	)
 	(label "LCD_VCC"
 		(at 323.85 134.62 180)
 		(effects
@@ -33623,16 +33421,6 @@
 			(justify right)
 		)
 		(uuid "40e76dcd-eb8f-4c86-a5de-e58a18280c41")
-	)
-	(label "TP_INT"
-		(at 194.31 186.69 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "41b7277a-3aa0-4aa2-87aa-066474e40142")
 	)
 	(label "PHONE_PRE_R"
 		(at 375.92 381 0)
@@ -33683,26 +33471,6 @@
 			(justify right bottom)
 		)
 		(uuid "4ab7ba97-2a76-5b47-ba05-289dcd868ea0")
-	)
-	(label "TP_RST"
-		(at 194.31 189.23 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "4f0e55a5-03f9-471f-8b4c-d202d538efbb")
-	)
-	(label "TP_SDA"
-		(at 194.31 181.61 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "5092b11e-7533-4317-b77a-5fb6b1f3060d")
 	)
 	(label "ENC3_A"
 		(at 304.8 337.82 180)
@@ -33904,16 +33672,6 @@
 		)
 		(uuid "689ec753-9459-5278-a1a2-1749bd44de9b")
 	)
-	(label "LCD_MOSI"
-		(at 194.31 163.83 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "6bd90d9a-1a86-485e-a2bc-edd5e2cc9952")
-	)
 	(label "PHONE_BUF_L"
 		(at 392.43 337.82 180)
 		(effects
@@ -33974,16 +33732,6 @@
 		)
 		(uuid "833a3e59-0c70-5ab8-aabb-d450db0eecef")
 	)
-	(label "LCD_RST"
-		(at 194.31 176.53 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "861838a0-a270-4161-9523-a24f88d2fe4a")
-	)
 	(label "ENC3_SW"
 		(at 132.08 342.9 0)
 		(effects
@@ -34043,16 +33791,6 @@
 			(justify right bottom)
 		)
 		(uuid "96260054-b585-55a9-b76c-50d6c0853d7d")
-	)
-	(label "LCD_CS"
-		(at 194.31 171.45 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "9704a959-0a6b-479f-9852-62c420c1e007")
 	)
 	(label "A_GND"
 		(at 396.24 342.9 180)
@@ -34294,16 +34032,6 @@
 		)
 		(uuid "cfea81b2-490a-44ef-b8ab-dde7fc4aa479")
 	)
-	(label "LCD_DC"
-		(at 194.31 173.99 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d015968d-8565-47fe-8b39-bb6e0a4bf95c")
-	)
 	(label "LED_DEST2_A"
 		(at 160.02 384.81 180)
 		(effects
@@ -34463,16 +34191,6 @@
 			(justify right)
 		)
 		(uuid "fa47d8c0-950b-48db-9f84-1ddfc4d9a56e")
-	)
-	(label "LCD_VCC"
-		(at 195.58 153.67 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "fc6b8d58-a74f-447f-987b-d67f0b3bd206")
 	)
 	(label "D_GND"
 		(at 220.98 347.98 90)
