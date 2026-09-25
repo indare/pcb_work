@@ -52,7 +52,7 @@ import numpy as np
 from scipy.interpolate import PchipInterpolator
 
 DATA = Path(__file__).resolve().parent / "data"
-GAIN = 2.0            # AmpBank 1ch のゲイン（20k/20k、DECISIONS.md §8）
+GAIN = 2.0            # AmpBank 1ch のゲイン（20k/20k、AudioV2/DECISIONS.md §8）
 R_ISO = 47.0          # 出力直列抵抗 R602/R607
 F0 = 1000.0           # 試験周波数
 

@@ -659,7 +659,7 @@ def control_panel_wired() -> str:
 
     body = f"""{embed_lib_symbols(CTRL_LIBS)}
 {text_note(25.4, 25.4, [
-    "ControlPanel — label-wired (DECISIONS manual volume)",
+    "ControlPanel — label-wired (v2 の DECISIONS manual volume)",
     "PT2314 / Pico2 / ENC×3 / 2.42″ OLED I2C / DEST ladder+LED / PWR SW",
     "J_OLED401: 1=GND 2=3V3 3=SCL 4=SDA. ENC→GP0-8, DEST_ADC→GP26, LED→GP14/15.",
     "Connectivity = local labels on pin tips (grid-snapped).",

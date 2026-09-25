@@ -2,7 +2,7 @@
 
 **目的:** ピン番号・部品値をデータシートと突き合わせ、手回し音量構成で ERC/配線を詰める。
 
-**方針（2026-08-30）:** 最終出力ボリュームは **A50k デュアル ×2**、DEST は **トグル + ラダー ADC**。[DECISIONS.md](DECISIONS.md) §2・§3・§10。PGA / digipot は不採用。
+**方針（2026-08-30）:** 最終出力ボリュームは **A50k デュアル ×2**、DEST は **トグル + ラダー ADC**。[AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md) §2・§3・§10。PGA / digipot は不採用。
 
 **参照 DS:** `datasheets/` ローカル PDF。KiCad シンボルは **標準 lib 優先**。カスタムのみ `AudioV2.kicad_sym`（PT2314 28pin / REC20K-2415DAW / TMUX7612 / CH224_50224）と `Audio/BP5293_ROHM`。
 
@@ -31,7 +31,7 @@
 | **SW_SP3T**×2 | KiCad: COM=3, throws=1(PHONE)/2(MUTE)/4(LINE) | 旧 Audio SW101(DP3T) を L/R 2個に分割 | ✅ |
 | **R_Potentiometer_Dual** | 1/3=A, 4/6=B, 2/5=wiper | CW←SW, CCW→A_GND, wiper→OUT | ✅ |
 | **DEST ラダー** | [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) | Rh/Rl=10k, Rs=1k | ✅ |
-| Pico GPIO | DECISIONS §10 | ENC×3 + DEST_ADC/LED | ✅ ドキュメント一致（配線はドラフト） |
+| Pico GPIO | v2 の DECISIONS §10 | ENC×3 + DEST_ADC/LED | ✅ ドキュメント一致（配線はドラフト） |
 | DKMW / CH224 / 7809 | PowerModule | 既存 | ✅ |
 
 ---
@@ -85,7 +85,7 @@ AMP_SEL_L ── SW601 (SP3T) / AMP_SEL_R ── SW602 (SP3T)
 ## 4. PowerModule — 部品値（変更なし）
 
 USB-C → CH224 → PD_12V → PWR SW → F201 → **REC20K-2415DZ** → **±15 V** / A_GND。
-（2026-09-01 に ±12 V から変更。理由は [DECISIONS.md](DECISIONS.md) §8。回路図のネット名も `+15V`/`-15V` に改名済み）  
+（2026-09-01 に ±12 V から変更。理由は [AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md) §8。回路図のネット名も `+15V`/`-15V` に改名済み）  
 +15 V → LM7809 → VCC_TONE（+9 V）。
 
 ### RelayBoard — **廃止**（2026-09-01、`AmpBank` へ統合。AGENT_HANDOFF §2.9）

@@ -354,7 +354,7 @@ class Builder:
                 self.cap(f"C{311+i*2}", "100nF", 130.0 + i * 63.5, 315.0, "+15V", "A_GND", footprint=C0603)
                 self.cap(f"C{312+i*2}", "100nF", 137.62 + i * 63.5, 315.0, "A_GND", "-15V", footprint=C0603)
                 # 2026-09-24: DS p34 推奨の 1 µF（0.1 µF と両方。小さい方をピン直近）。
-                # 決定は DECISIONS「TMUX7612 に 1 µF / 50 V / X7R を追加（スイッチ版のみ）」。
+                # 決定は v2 の DECISIONS「TMUX7612 に 1 µF / 50 V / X7R を追加（スイッチ版のみ）」。
                 # サイズは 0603（ユーザー指示。ピンに寄せられ ESL も下がる）。⚠ 50 V X7R の 0603 は
                 # 15 V の DC バイアスで実効容量が大きく落ちる — 発注時に DC バイアス特性で選ぶ
                 with fixed_uids(f"tmux_1u/{ref}"):

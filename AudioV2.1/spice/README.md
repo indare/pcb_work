@@ -1,7 +1,7 @@
 # AudioV2 回路シミュレーション
 
 設計判断の根拠として回した ngspice ネットリスト。**判断そのものは
-[AGENT_HANDOFF.md](../AGENT_HANDOFF.md) §2.9 と [DECISIONS.md](../DECISIONS.md) §11.1 が正。**
+[AGENT_HANDOFF.md](../AGENT_HANDOFF.md) §2.9 と [AudioV2/DECISIONS.md](../../AudioV2/DECISIONS.md) §11.1 が正。**
 ここはその根拠となった波形を再現するためのもの。
 
 ```bash
@@ -462,7 +462,7 @@ THD+N は*比*なので振幅が上がるほど（雑音支配から外れて）
 > ただし差が 25 dB あるので、抽出誤差 2〜3 dB では結論は逆転しない
 > （3Vrms での校正差が 2.4 dB）。
 
-**この掃引から経路ごとの振幅上限が決まる**（[`DECISIONS.md` §11.1a](../DECISIONS.md)）:
+**この掃引から経路ごとの振幅上限が決まる**（[`AudioV2/DECISIONS.md` §11.1a](../../AudioV2/DECISIONS.md)）:
 **通常 4〜5 Vrms / 精密 DIRECT 約 7 Vrms（10 Vpk）/ フルレンジ 9.2 Vrms はリレー等**。
 **`TMUX7612` を「4〜5 Vrms まで」に縛る必要はない。**
 

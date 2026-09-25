@@ -4,7 +4,7 @@
 
 **実装の型（既存 `Audio/` と同じ）:** RV / SW_DEST / ENC / PWR SW は **パネル実装**。基板はヘッダ＋リード。RK27 を Control PCB に直付けしない。
 
-参照: [DECISIONS.md](DECISIONS.md) §0・§3・§9・§10、[CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md)、[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。
+参照: [AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md) §0・§3・§9・§10、[CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md)、[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。
 
 > **この文書の読み方 — どこが生成で、どこが手書きか**
 >
@@ -112,7 +112,7 @@ AudioV2 はオペアンプ以外の部品差が比較結果へ混入しないこ
 
 | 役割 | シリーズ／条件 | 選別 |
 |---|---|---|
-| AmpChannel 入力カップリング **1 µF film** | **PET（MKT）・P5**。採用: TDK `B32529C0105J000`。FP は図どおり L7.2/W4.5/P5。PP は歪み差が見えず巨大になるので採らない（[DECISIONS.md](DECISIONS.md)） | C 一次 → D/ESR 二次確認 |
+| AmpChannel 入力カップリング **1 µF film** | **PET（MKT）・P5**。採用: TDK `B32529C0105J000`。FP は図どおり L7.2/W4.5/P5。PP は歪み差が見えず巨大になるので採らない（[AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md)） | C 一次 → D/ESR 二次確認 |
 | AmpChannel 出力カップリング **2.2 µF film** | 同系統 TDK `B32529D0225…`（P5）。FP は L7.2/W7.2/P5。公称 ±5〜10% で足りるが、**低域カットオフ差は容量差そのもの**なので選別する | 同上 |
 | ADC LPF **1.8 nF C0G** | C0G/NP0・1206。公称 ±5% 級を買い、**ch / L/R で C を揃える** | C @ 同一周波数 |
 | HP 出力 **470 µF NP** | Muse ES `UES1E471MHM` 想定（Ø16/P7.5）。**L/R をペア選別** | C + ESR |
@@ -127,7 +127,7 @@ AudioV2 はオペアンプ以外の部品差が比較結果へ混入しないこ
 
 ## 1. 表示デバイス（v1 実装あり・確定）
 
-AudioV2 は **表示が 2 系統**。DECISIONS の「OLED×2」は言い方が粗い — 実体は次。
+AudioV2 は **表示が 2 系統**。v2 の DECISIONS の「OLED×2」は言い方が粗い — 実体は次。
 
 | 役割 | 部品 | v1 実装 | AudioV2 での置き場 |
 |---|---|---|---|
@@ -159,7 +159,7 @@ AudioV2 は **表示が 2 系統**。DECISIONS の「OLED×2」は言い方が�
 | 接続 | GH1.25 15P 付属 → 基板側 **1×15 ピンヘッダ**（`Audio/MeasurementADC_Extras:WAVESHARE-29318`） |
 | 電源 | 3.3 / 5 V（オンボード LDO・レベルシフタ）。計測盤では `LCD_EN` で VCC 切 |
 
-AudioV2 では **計測 Pico 配下のまま**。操作 Pico の I²C0 / SPI には載せない（DECISIONS §6・独立計測）。
+AudioV2 では **計測 Pico 配下のまま**。操作 Pico の I²C0 / SPI には載せない（v2 の DECISIONS §6・独立計測）。
 
 ---
 
@@ -172,7 +172,7 @@ AudioV2 では **計測 Pico 配下のまま**。操作 Pico の I²C0 / SPI に
 | 機能 | **3PDT ON-OFF-ON**（中央オープン＝MUTE） |
 | 端子 | はんだラグ、パネル 1/4-40（穴 **φ6.35 mm**） |
 | 定格 | 5 A / 120 VAC — 音声 0.14 mA に対し余裕。銀接点（QE）で可 |
-| 並び（DECISIONS） | **上 LINE / 中 MUTE / 下 PHONE** |
+| 並び（v2 の DECISIONS） | **上 LINE / 中 MUTE / 下 PHONE** |
 | KiCad | 論理は `SW_DP3T`（L/R）+ `SW_SP3T`（センス）。**1 個の現物** |
 
 **C&K 端子 → AudioV2 ネット**（DS: Pos1=2-3/5-6/8-9、Pos3=2-1/5-4/8-7、COM=2/5/8）
@@ -220,7 +220,7 @@ AudioV2 では **計測 Pico 配下のまま**。操作 Pico の I²C0 / SPI に
 |---|---|
 | RK27 欠品・高い | パネル用 **A50k デュアル**ならピン互換で可（台湾 Alpha RD901 系など）。カーブが **A** であること |
 | 現行機と見た目を揃える | Alps **RK097 デュアル A50k**（水平ピン）。9 mm で「目立たない」。回路は同一 |
-| A100k | 可（DECISIONS）。中点 Zout が上がるので **A50k 優先** |
+| A100k | 可（v2 の DECISIONS）。中点 Zout が上がるので **A50k 優先** |
 
 RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュアルは RK27 の方が型番が取りやすい**。
 
@@ -228,25 +228,25 @@ RK097 のカタログ現役は 10 kΩ デュアルが多く、**A50k デュア�
 
 | 用途 | 第一候補 | 理由 |
 |---|---|---|
-| **ENC×3** | 秋月 **EC11 系・押し SW 付き**（D カット、固定足東西） | DECISIONS どおり。PPR は CH/Bass/Treble では何周でも可。購入品の寸法で FP を切る |
+| **ENC×3** | 秋月 **EC11 系・押し SW 付き**（D カット、固定足東西） | v2 の DECISIONS どおり。PPR は CH/Bass/Treble では何周でも可。購入品の寸法で FP を切る |
 | **操作 Pico** | **Raspberry Pi Pico 2**（RP2350、**W なし**、SC0915 相当） | Wi-Fi 不要。ヘッダ後付け可 |
 | **OLED（制御）** | **2.42″ 128×64 I²C**（SSD1309、SSD1306 互換）— [AliExpress 例](https://a.aliexpress.com/_c3yp3JiX) / item `4000002579405` | v1 `Control/` と同じ。`WIDTH=128 HEIGHT=64`、addr **0x3C**、GP20/21。**0.96″ でも動くが、現行機は 2.42″** |
 | **LCD（スペアナ）** | **Waveshare 29318**（スイッチサイエンス [10138](https://www.switch-science.com/products/10138)） | v1 `Audio/measurement_fw/`。ST7796S SPI + FT6336U I²C。**MeasurementADC 流用**（AudioV2 Control には載せない） |
 | **PWR SW** | **C&K 7101SYZQE**（SPDT ON-ON、5 A、ラグ）を SPST として使用 | 12 V / **~1 A**（`REC10K` 10 W。旧 `DKMW20` 20 W では ~2 A）。5 A 品なので余裕は十分。ミニ信号 SW 禁止 |
-| **12 V LED** | **12 V 内蔵抵抗付き 5 mm**（緑または青、~10 mA） | DECISIONS §9。素 LED なら 680 Ω–1 kΩ |
+| **12 V LED** | **12 V 内蔵抵抗付き 5 mm**（緑または青、~10 mA） | v2 の DECISIONS §9。素 LED なら 680 Ω–1 kΩ |
 | **DEST LED×2** | 3 mm 通常 LED（Vf≈2 V）+ 既存 **1 kΩ** | 3.3 V で ~1.3 mA。暗ければ 330 Ω に落とす |
 | **AZ850** | **AZ850P2-5**（秋月 118017） | コイル **5 V** / 125 Ω / ~40 mA。`TBD62083APG` + BP5293-50 と一致。**12 V コイルは使わない**。電源は母板の `BP5293-50` が `PD_12V_SW` から作る **`+5V_COIL`** で、帰路は専用の `GND_COIL`（`NT101` で1点結合）。娘基板側に 100 µF + 100 nF のローカルバイパスがあるので、パルスとフライバックは娘基板内で閉じる |
 | **MCP23017** | **`MCP23017-E/SP`**（DIP-28） | JP A1/A0 で 0x20–0x23（最大4枚）。A2=0。UI 側は 0x22。**個数は回路図から導出できるので §4.1 の部品表を見る** |
-| **DIP-28 ソケット** | **板バネ（dual-wipe）型**、28 pos / 行間隔 0.300"（7.62 mm） | 挿さるのは `MCP23017` だけ＝ I²C のデジタルなので接触抵抗も歪みも効かない。品番は発注時（[DECISIONS.md](DECISIONS.md)「DIP-28 ソケット」） |
+| **DIP-28 ソケット** | **板バネ（dual-wipe）型**、28 pos / 行間隔 0.300"（7.62 mm） | 挿さるのは `MCP23017` だけ＝ I²C のデジタルなので接触抵抗も歪みも効かない。品番は発注時（[AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md)「DIP-28 ソケット」） |
 | **リレードライバ** | **`TBD62083APG`**（DIP-18。`ULN2803` とピン互換） | **`ULN2803` は不採用**（D24）。ダーリントンの約 1 V 降下では 40 ℃ 超で `AZ850` の Must Operate を満たさない。DMOS なら 40 mA で 0.13 V。**1枚に2個要る**（5ch×2コイル=10本 > 8ch。D25 — 4ch/枚なら1個で済んだ分のコスト） |
-| **PT2314E** | **PT2314E SOP-28 300 mil**（回路値 `PT2314E`） | 無印 DIP は入手不可。2026-09-07 に E へ確定（[DECISIONS.md](DECISIONS.md)「トーン」） |
+| **PT2314E** | **PT2314E SOP-28 300 mil**（回路値 `PT2314E`） | 無印 DIP は入手不可。2026-09-07 に E へ確定（[AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md)「トーン」） |
 | **+9 V LDO** | **ST `L7809CV`**（TO-220） | 入力は **+15 V**（`U202.1 → /+15V`）。PT2314 typ 30 mA → 散逸 **(15−9)×30 mA ≈ 0.18 W**。TO-220 なら放熱器なしで余裕。⚠ TI の `LM78xx` は廃番系なので**回路図の Value も `L7809CV` に揃えてある**（KiCad のシンボル名 `Regulator_Linear:LM7809_TO220` は 78xx 共通の型で、そのまま使える）。**⚠ 2026-09-05 に予備として `NJM7809FA`（Nisshinbo/JRC）を購入。これは `TO-220F`（フルモールド）で `L7809CV` の `TO-220` とは別パッケージ。** ピン配置は同じ（1=IN / 2=GND / 3=OUT）だが、**フットプリントは `TO-220F-3_Vertical` に差し替えが要る**。タブが絶縁されているのでシャーシへ直付けするなら絶縁ワッシャが不要という利点はある。散逸 0.18 W なので放熱はどちらでも問題にならない。**実装に使うと決めるまで回路図は `L7809CV` のまま置く** |
-| **一次ヒューズ**（PD 入力〜DC-DC 間） | **5×20 mm `F2 A` 速断**（ガラス管＋ホルダ。**ホルダは Schurter OGN `0031.8201`**。中身は秋月 `MF51NR 250V2A` や Littelfuse `0217.002` 系）**確定 2026-09-04、ホルダ 2026-09-09、定格・特性は 2026-09-09 に T1.6A スロー→F2A 速断（入手性＋2Aなら突入猶予は要らない）** | 想定 0.75〜1.00 A に対し余裕。`REC20K` 全能力 1.89 A では定格付近。旧 `T3.15 A` は PD 能力全域で切れず実質「保護なし」だった。導出は [DECISIONS.md](DECISIONS.md) §8 |
-| **各コンバータ手前のリセッタブル** | **PPTC** — `+5V_D` に **0.5 A** / `+5V_COIL` に **0.40 A**（0.35 A の品が無い。2026-09-09） / `+9V` に **0.1 A**（I_hold）**確定 2026-09-04**。**型番 2026-09-09: Littelfuse `RXEF050` / `RXEF040` / `RXEF010`（Bourns `MF-R050` / `MF-R040` / `MF-R010` も同寸で可）、FP は `Library:PPTC_Radial_D7.9mm_T3.1mm_P5.08mm`（自作。DigiKey 寸法から）** | 立ち上げ中はプローブを当てるので自己復帰品にする（一発品だと外して交換になる）。**2026-09-06 に全枝が回路図へ入った**（最後まで残っていた `+9V` 枝 = D-f）。詳細と根拠は [DECISIONS.md](DECISIONS.md) §8 |
+| **一次ヒューズ**（PD 入力〜DC-DC 間） | **5×20 mm `F2 A` 速断**（ガラス管＋ホルダ。**ホルダは Schurter OGN `0031.8201`**。中身は秋月 `MF51NR 250V2A` や Littelfuse `0217.002` 系）**確定 2026-09-04、ホルダ 2026-09-09、定格・特性は 2026-09-09 に T1.6A スロー→F2A 速断（入手性＋2Aなら突入猶予は要らない）** | 想定 0.75〜1.00 A に対し余裕。`REC20K` 全能力 1.89 A では定格付近。旧 `T3.15 A` は PD 能力全域で切れず実質「保護なし」だった。導出は [AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md) §8 |
+| **各コンバータ手前のリセッタブル** | **PPTC** — `+5V_D` に **0.5 A** / `+5V_COIL` に **0.40 A**（0.35 A の品が無い。2026-09-09） / `+9V` に **0.1 A**（I_hold）**確定 2026-09-04**。**型番 2026-09-09: Littelfuse `RXEF050` / `RXEF040` / `RXEF010`（Bourns `MF-R050` / `MF-R040` / `MF-R010` も同寸で可）、FP は `Library:PPTC_Radial_D7.9mm_T3.1mm_P5.08mm`（自作。DigiKey 寸法から）** | 立ち上げ中はプローブを当てるので自己復帰品にする（一発品だと外して交換になる）。**2026-09-06 に全枝が回路図へ入った**（最後まで残っていた `+9V` 枝 = D-f）。詳細と根拠は [AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md) §8 |
 | **BP5293** | **BP5293-50**（秋月 111188） | 現行 Audio と同じ +5 V |
-| **DC-DC** | **`REC10K-2415DAW/H2`**（Recom、±15 V / ±333 mA、1″×1″ 6-DIP） | **2026-09-02 に `DKMW20F-15` から変更**（[DECISIONS.md](DECISIONS.md) §8）。穴位置は旧品と同一で差し替え可。DigiKey `945-REC10K-2415DAW/H2-ND` |
+| **DC-DC** | **`REC10K-2415DAW/H2`**（Recom、±15 V / ±333 mA、1″×1″ 6-DIP） | **2026-09-02 に `DKMW20F-15` から変更**（[AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md) §8）。穴位置は旧品と同一で差し替え可。DigiKey `945-REC10K-2415DAW/H2-ND` |
 | **PD 給電モジュール** | **ストロベリーリナックス `50224`**（CH224K。DS: [`datasheets/StrawberryLinux_CH224K_manual.pdf`](datasheets/StrawberryLinux_CH224K_manual.pdf)） | **外付けモジュールとして使う。** 板上に USB-C / CH224K チップは載せず、受けの端子（`PD module in`）で 12 V を受ける。**部品は当初と同じで、変わったのは実装形態だけ**（基板内蔵 → 外付け、2026-09-04 訂正）。12 V/15 V のジャンパはモジュール側 |
-| **PD 供給元（AC アダプタ）** | **UGREEN 卓上急速充電器 200 W Type-C 6C2A 8ポート PPS** | 手持ちの実機。⚠ **多ポート充電器は総出力を分配する**ので、他ポートに何を挿すかでネゴシエートされるプロファイルが変わりうる。**12 V 固定が出るかは実機で確認する**（多ポート品は 5/9/15/20 V のみで 12 V を持たない機種がある）。出ない場合のフォールバックは **15 V 一本**（**⚠ 9 V を選んではいけない** —— `REC10K` の UVLO 起動閾値の上限が 9 V で、境界そのもの。2026-09-04 にデータシートで確認。[DECISIONS.md](DECISIONS.md)「PD 入力 — どの電圧で受けるか」）。**15 V で確定させるならこのパネル LED も直すこと**（12 V 品なので 30 % 過電流になる）。**実機はいま 15 V が入っている**（2026-09-04 実測） |
+| **PD 供給元（AC アダプタ）** | **UGREEN 卓上急速充電器 200 W Type-C 6C2A 8ポート PPS** | 手持ちの実機。⚠ **多ポート充電器は総出力を分配する**ので、他ポートに何を挿すかでネゴシエートされるプロファイルが変わりうる。**12 V 固定が出るかは実機で確認する**（多ポート品は 5/9/15/20 V のみで 12 V を持たない機種がある）。出ない場合のフォールバックは **15 V 一本**（**⚠ 9 V を選んではいけない** —— `REC10K` の UVLO 起動閾値の上限が 9 V で、境界そのもの。2026-09-04 にデータシートで確認。[AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md)「PD 入力 — どの電圧で受けるか」）。**15 V で確定させるならこのパネル LED も直すこと**（12 V 品なので 30 % 過電流になる）。**実機はいま 15 V が入っている**（2026-09-04 実測） |
 | **USB-C** | USB2.0 16P レセプタクル（KiCad `USB_C_Receptacle_USB2.0_16P`） | CC はモジュール側。基板は VBUS/GND が主 |
 | **ラダー R** | 10 k / 10 k / 1 k **1%**（1206 可） | ±5% でも間隔は足りるが、初号は 1% |
 | **J_I2C（旧 ControlPanel↔RelayBoard 5P。⚠ 両シートは解体済みで、基板間はヘッダのスタックへ変更。この行は v1 の実績の記録）** | **Phoenix Contact MKDS-1,5シリーズ**（5.08 mmピッチ、ネジ式）互換品または同一品。KiCad FP: `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-N-5.08_1xNN_P5.08mm_Horizontal`（Nはピン数、5Pなら`5`/`05`） | `Audio/Controll.kicad_sch`（v1の「リレー＋端子台＋ULN」原型）で13箇所使用実績あり。フェルール対応で、スター配線をControlPanel側1コネクタ＋箱内フェルール束ね/スプリッタで実現する方針（WIRING.md）と合う |
@@ -310,7 +310,7 @@ Amp 選択後 L/R
 | C403,C404,C410,C411 | 100n | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 4 |  |
 | C405,C406,C407,C409 | 2.2u | `Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 4 |  |
 | C408,C412 | 2.7n | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 |  |
-| C501,C502 | 470uF 25V NP | `Capacitor_THT:CP_Radial_D16.0mm_P7.50mm` | 2 | HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（DECISIONS）。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ / HP 出力の DC ブロック（v1 C902）。無極性電解。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ |
+| C501,C502 | 470uF 25V NP | `Capacitor_THT:CP_Radial_D16.0mm_P7.50mm` | 2 | HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（v2 の DECISIONS）。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ / HP 出力の DC ブロック（v1 C902）。無極性電解。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ |
 | C503,C504 | 10uF 25V X7R | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 2 | U501 の +15V ローカルバルク（v1 C903） / U501 の -15V ローカルバルク（v1 C905 相当） |
 | C505,C506,C608,C609,C708,C709,C808,C809,C908,C909,C1008,C1009,C1108,C1109,C1208,C1209,C1308,C1309,C1604,C1605,C1607,C1612,C1614,C1615,C1617,C1618,C1622,C1624,C1625,C1629,C1634,C1636,C1637,C1638,C1639,C1641,C1642,C1643,C1646,C1647,C1650 | 100nF | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 41 | A701 +3V3_A local bypass 100nF / 1206 / A701 +5V_A local bypass 100nF / 1206 / U1611 の +15V_A デカップリング / U1611 の -15V_A デカップリング / U501 の +15V デカップリング / U501 の -15V デカップリング（v1 C906） / U704/U705 VIN HF bypass 100nF / return ADC_GND_IN. / U709 VDD bypass 100nF / VCOML bypass to ADC_GND / VCOMR bypass to ADC_GND / op amp V+ local decoupling / switch VSS local decoupling |
 | C601,C604,C701,C704,C801,C804,C901,C904,C1001,C1004,C1101,C1104,C1201,C1204,C1301,C1304 | 2.2uF film | `Capacitor_THT:C_Rect_L7.2mm_W7.2mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` | 16 | L output coupling (before switch) / R output coupling (before switch) |
@@ -363,7 +363,7 @@ Amp 選択後 L/R
 | J_PWR301,J_PWR302 | SLOT PWR/CTRL (D18) | `Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical` | 2 |  |
 | J_RAIL501 | AMP_SEL OUT | `TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal` | 1 | 選択された Amp 出力の取り出し端子。1=AMP_SEL_L / 2=A_GND / 3=AMP_SEL_R で、DEST スイッチ(SW501/SW502)の手前。旧 Value の RAIL IN と旧記述の +12V/A_GND/-12V は、娘基板がスロット直結(J_PWR/J_ANA)になる前の名残で電源ではない。A_GND 極を持つ唯一の音声取り出し口。 |
 | K301,K302,K303,K304 | AZ850P2-5 | `Relay_THT:Relay_DPDT_FRT5` | 4 | 双コイル・ラッチングリレー。v1 と同じ AZ850P2-5 に固定（2026-09-09）。接点 3/8・4/7 を使い 2/9 は開放、コイル 1-5 / 10-6 —— v1 のネットリストと同一の使い方で、v1 実機で動作実績あり。⚠ 外形（FRT5）が同じセカンドソース（TQ2-L2 など）は接点の COM/NC/NO のピン番号が同じとは限らず、挿すと SET/RESET の意味が反転しうる。AZ850P2-5 以外を挿さない。 |
-| Q401,Q402 | BSS138 | `Package_TO_SOT_SMD:SOT-23` | 2 | I²C SCL 側の双方向レベルシフタ。役目・理由は Q401（SDA 側）と同じ / I²C 双方向レベルシフタ（2026-09-08）。S=Pico 側 3V3 バス、D=PT2314E 側 9V バス、G=3V3。PT2314E の VIH min 3.0 V に対し 3.3 V プルアップでは余裕 0.3 V しか無いので、PT 側を VCC_TONE(9V) で釣る。P82B96 を使わないのは Sx 側 VOL 0.8–1.0 V が PT2314E VIL max 1.0 V / RP2350 VIL 0.8 V を食い切るため（DECISIONS）。 SDA。 |
+| Q401,Q402 | BSS138 | `Package_TO_SOT_SMD:SOT-23` | 2 | I²C SCL 側の双方向レベルシフタ。役目・理由は Q401（SDA 側）と同じ / I²C 双方向レベルシフタ（2026-09-08）。S=Pico 側 3V3 バス、D=PT2314E 側 9V バス、G=3V3。PT2314E の VIH min 3.0 V に対し 3.3 V プルアップでは余裕 0.3 V しか無いので、PT 側を VCC_TONE(9V) で釣る。P82B96 を使わないのは Sx 側 VOL 0.8–1.0 V が PT2314E VIL max 1.0 V / RP2350 VIL 0.8 V を食い切るため（v2 の DECISIONS）。 SDA。 |
 | R401,R1651,R1652 | 1k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 3 |  |
 | R410,R411 | 5.6k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 2 |  |
 | R412,R413,R1611,R1657,R1661,R1662 | 10k | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 6 | ADC_nRST pull-up 10k / 1206 / PT2314E 側 I²C SCL のプルアップ（9V=VCC_TONE） / PT2314E 側 I²C SDA のプルアップ（9V=VCC_TONE）。10k: 0.9 mA / 立ち上がり ~0.3 µs（100 kbit/s） / U1610 MCP23017 ENC_INTA open-drain pull-up to 3V3 / U1610 MCP23017 ENC_INTB open-drain pull-up to 3V3 |
@@ -465,12 +465,12 @@ Amp 選択後 L/R
 
 **Nano の使い道として残るもの:**
 
-- **USB アイソレーションの切り分け治具**（`DECISIONS.md` の USB グラウンドループ仮説の検証）
+- **USB アイソレーションの切り分け治具**（`AudioV2/DECISIONS.md` の USB グラウンドループ仮説の検証）
 - 将来 `ControlPanel` を作り直すときの選択肢
 
 > **MCU を1個に統合する案は「あり」**（2026-09-03 に見解を訂正）。
 > 一度「計測基板を隔離したいのに UI を集めるのは逆行」と書いたが、**根拠が弱かった**。
-> 詳細と理由は [`DECISIONS.md`](DECISIONS.md)「MCU 統合は成立する」。
+> 詳細と理由は [`AudioV2/DECISIONS.md`](../AudioV2/DECISIONS.md)「MCU 統合は成立する」。
 
 ## 5. まだ買わなくてよい / レイアウト時
 

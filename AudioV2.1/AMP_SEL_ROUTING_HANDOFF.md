@@ -64,4 +64,4 @@ C808 表非対称・M3 keepout 内・娘に A↔D NetTie なし・Amp デカッ�
 
 - [NOW.md](NOW.md) — 現況（短い）
 - `.cursor/skills/audiov2-pcb-layout/SKILL.md` と `reference.md`
-- 回路図査読（娘2枚）: FATAL なし。SHOULD_FIX は Switch TMUX 直近 1 µF 欠（DECISIONS との差）など。音声トランクとは別枠
+- 回路図査読（娘2枚）: FATAL なし。SHOULD_FIX は Switch TMUX 直近 1 µF 欠（v2 の DECISIONS との差）など。音声トランクとは別枠

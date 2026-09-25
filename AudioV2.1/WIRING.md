@@ -20,8 +20,8 @@
 > 基板間はワイヤではなく**ヘッダのスタック**。**PC への USB は 2本→1本。**
 >
 > シート構成と所有権の正は [`CLAUDE.md`](../CLAUDE.md)、決定と理由は
-> [`DECISIONS.md`](DECISIONS.md)。**下の「基板構成」以降は書き直しが未着手なので、
-> 箱配線を実際に決めるときは信用せず DECISIONS と現図を見ること。**
+> [`AudioV2/DECISIONS.md`](../AudioV2/DECISIONS.md)。**下の「基板構成」以降は書き直しが未着手なので、
+> 箱配線を実際に決めるときは信用せず v2 の DECISIONS と現図を見ること。**
 >
 > 変わらないもの: **音量ポット・行き先スイッチ・入出力ジャックはパネル実装でリード戻し**。
 
@@ -49,12 +49,12 @@
 
 > **⚠ 2026-09-03: この記述は実態と食い違っている。** 計測基板が v1 の「GND 案A（非絶縁）」を
 > 引き継いでいるため、`A_GND ─NT1601─ ADC_GND ─U1604(非絶縁バック)─ PD_GND` で**実際には繋がっている**。
-> 揃え方は `DECISIONS.md`「A6 — NetTie は足さない」の末尾を読むこと。
+> 揃え方は `AudioV2/DECISIONS.md`「A6 — NetTie は足さない」の末尾を読むこと。
 
 ## A_GND / D_GND の分離（2026-08-31 確定）
 
 `D_GND`（デジタル）と `A_GND`（アナログ・音声・±15 V 帰路）は
-**システム全体で1箇所だけ** NetTie で結合する（[DECISIONS.md](DECISIONS.md) G1/G2）。
+**システム全体で1箇所だけ** NetTie で結合する（[AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md) G1/G2）。
 
 - **NetTie 位置: ~~ControlPanel~~ → 計測/制御基板**（`D_GND` の発生源＝**計測 Pico** の直近）。
   2026-09-03 の D27（Pico を計測側へ寄せる）で発生源ごと移動した。原則は変わっていない。
@@ -107,8 +107,8 @@ AmpBank の基板パターンで、切替素子はオペアンプの直近にあ
 | 基板 | 接続 | 備考 |
 |---|---|---|
 | HeadphoneBufferModule | OutputStage `to Audio HP Buffer` ＋ ±15 V | |
-| AdcBuffer / MeasurementADC | ±15 V ＋ 測定タップ（**位置 MD で固定**） | 別電源系統。**⚠ 2026-09-03 にスタック化へ方針変更**（[DECISIONS.md](DECISIONS.md)）。回路は v1 `rev 0.4` のまま、**外形とヘッダだけ AudioV2 のスタック規格へ合わせる**。この行のワイヤ接続は暫定 |
-| v1 RelayBoard / AmpModule | **±15 V と音声で直結できる** | v1 の AmpModule は `NE5532` ＋受動部品だけで、電源は `AMP_V+_IN`/`AMP_V-_IN` という電圧非依存のネット名で受ける。**新旧アーキテクチャの実機比較用**（[DECISIONS.md §8](DECISIONS.md)） |
+| AdcBuffer / MeasurementADC | ±15 V ＋ 測定タップ（**位置 MD で固定**） | 別電源系統。**⚠ 2026-09-03 にスタック化へ方針変更**（[AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md)）。回路は v1 `rev 0.4` のまま、**外形とヘッダだけ AudioV2 のスタック規格へ合わせる**。この行のワイヤ接続は暫定 |
+| v1 RelayBoard / AmpModule | **±15 V と音声で直結できる** | v1 の AmpModule は `NE5532` ＋受動部品だけで、電源は `AMP_V+_IN`/`AMP_V-_IN` という電圧非依存のネット名で受ける。**新旧アーキテクチャの実機比較用**（[AudioV2/DECISIONS.md §8](../AudioV2/DECISIONS.md)） |
 
 ## 意図的未決
 

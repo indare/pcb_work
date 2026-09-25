@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[1] / "AudioV2Case.kicad_sch"
 TOP = ("+15V", "-15V")
 
 # 1 個あたりの電流 [mA]（typ, max）。キーは (lib_id, value) の value を優先して照合。
-# 出典の「DECISIONS」は AudioV2.1/DECISIONS.md（DS を引いて記録済みの行）
+# 出典の「v2 の DECISIONS」は AudioV2/DECISIONS.md（v2 の決定ログ。DS を引いて記録済みの行）
 PER_PART = {
     # value / lib の一部 : {レール役割: (typ, max)} と出典
     "OPA1656": ({"+": (7.8, 9.2), "-": (7.8, 9.2)},
@@ -42,14 +42,14 @@ PER_PART = {
     "TPS3307": ({"+": (0.015, 0.03)}, "監視 IC。µA 級（DS 未照合・影響なし）"),
 }
 # PCM1804 モジュール（A1601）と発振器（Y1601）は +5V_A / +3V3_A の合計で持つ（内訳の typ が DS から取れない）
-ADC_TOTAL = ((59.0, 84.0), "DECISIONS「電流はデータシートから積み上がった」: PCM1804 VCC max 45 + VDD max 20 "
+ADC_TOTAL = ((59.0, 84.0), "v2 の DECISIONS「電流はデータシートから積み上がった」: PCM1804 VCC max 45 + VDD max 20 "
              "＋ 発振器 max 15 ＝ ≤84 mA（typ ≈59）")
 # ソケット（AmpChannel のデュアルオペアンプ）1 個あたり
 SOCKET = {"NE5532": ((6.0, 16.0), "Audio/datasheets/opamps/TI_NE5532.pdf ICC total VO=0 無負荷 6/16 mA"),
-          "在庫の最悪": ((20.0, 20.0), "DECISIONS「在庫石の最悪 Icc を実読」MUSES03 変換基板 10 mA max × 2")}
+          "在庫の最悪": ((20.0, 20.0), "v2 の DECISIONS「在庫石の最悪 Icc を実読」MUSES03 変換基板 10 mA max × 2")}
 # 下位レール: レール名 → (レギュレータの参照, 自己消費 (typ, max) [mA], 出典)
 SUBRAIL = {
-    "VCC_TONE": ("U202", (5.0, 8.0), "L7809 の Iq。**一次 DS 未入手（web 由来）** — DECISIONS も同じ注記"),
+    "VCC_TONE": ("U202", (5.0, 8.0), "L7809 の Iq。**一次 DS 未入手（web 由来）** — v2 の DECISIONS も同じ注記"),
     "+3V3_A": ("U1603", (0.8, 1.3), "AudioV2.1/datasheets/ADI_LT1763.pdf GND Pin Current（35 mA 付近の内挿）"),
     "+5V_A": ("U1606", (1.1, 1.6), "AudioV2.1/datasheets/ADI_LT1763.pdf GND Pin Current @50 mA"),
 }

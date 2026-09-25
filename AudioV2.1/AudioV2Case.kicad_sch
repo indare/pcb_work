@@ -44700,7 +44700,7 @@
 		)
 		(uuid "4908ff2a-405c-4290-99a3-3098c556b1db")
 	)
-	(text "I²C レベルシフタ（2026-09-08）: Pico 側 3V3 バス I2C_SDA/SCL（プルアップは MeasureControl の R1653/R1654 4.7k）↔ PT2314E 側 9V バス I2C_SDA_9V/SCL_9V（R412/R413 10k → VCC_TONE）。BSS138 ゲート=3V3。同時に U402 pin25 DGND をチップの足元で A_GND へ（旧 D_GND）。片方だけでは成立しない（DECISIONS「DGND はチップの足元で A_GND へ」）。"
+	(text "I²C レベルシフタ（2026-09-08）: Pico 側 3V3 バス I2C_SDA/SCL（プルアップは MeasureControl の R1653/R1654 4.7k）↔ PT2314E 側 9V バス I2C_SDA_9V/SCL_9V（R412/R413 10k → VCC_TONE）。BSS138 ゲート=3V3。同時に U402 pin25 DGND をチップの足元で A_GND へ（旧 D_GND）。片方だけでは成立しない（v2 の DECISIONS「DGND はチップの足元で A_GND へ」）。"
 		(exclude_from_sim no)
 		(at 441.96 158.75 0)
 		(effects
@@ -49806,7 +49806,7 @@
 				)
 			)
 		)
-		(property "Description" "HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（DECISIONS）。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ"
+		(property "Description" "HP 出力の DC ブロック（v1 C901）。無極性電解。役目はオフセットではなく素子故障時の保護（v2 の DECISIONS）。FP は Ø16/P7.5（2026-09-10）— Muse ES UES1E471MHM（470µF 25V BP）が入るサイズ"
 			(at 96.52 212.09 0)
 			(hide yes)
 			(show_name no)
@@ -50376,7 +50376,7 @@
 				)
 			)
 		)
-		(property "Description" "I²C 双方向レベルシフタ（2026-09-08）。S=Pico 側 3V3 バス、D=PT2314E 側 9V バス、G=3V3。PT2314E の VIH min 3.0 V に対し 3.3 V プルアップでは余裕 0.3 V しか無いので、PT 側を VCC_TONE(9V) で釣る。P82B96 を使わないのは Sx 側 VOL 0.8–1.0 V が PT2314E VIL max 1.0 V / RP2350 VIL 0.8 V を食い切るため（DECISIONS）。 SDA。"
+		(property "Description" "I²C 双方向レベルシフタ（2026-09-08）。S=Pico 側 3V3 バス、D=PT2314E 側 9V バス、G=3V3。PT2314E の VIH min 3.0 V に対し 3.3 V プルアップでは余裕 0.3 V しか無いので、PT 側を VCC_TONE(9V) で釣る。P82B96 を使わないのは Sx 側 VOL 0.8–1.0 V が PT2314E VIL max 1.0 V / RP2350 VIL 0.8 V を食い切るため（v2 の DECISIONS）。 SDA。"
 			(at 447.04 146.05 0)
 			(hide yes)
 			(show_name no)

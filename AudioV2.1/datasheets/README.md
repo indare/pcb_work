@@ -1,6 +1,6 @@
 # AudioV2 予定部品 — データシート
 
-設計判断（[DECISIONS.md](../DECISIONS.md)）で確定・想定している部品の一次資料。オフライン参照用にローカル PDF を置く。
+設計判断（[AudioV2/DECISIONS.md](../../AudioV2/DECISIONS.md)）で確定・想定している部品の一次資料。オフライン参照用にローカル PDF を置く。
 
 ## 電源・PD
 
@@ -15,7 +15,7 @@
 `dcdc_survey.py` で 431 件を引き、±12 V 両レール・MOQ 1・在庫あり・12 V 入力対応の
 220 件から実読した分。**選定の決め手になる `Cout`（最大容量負荷）・軽負荷での `Fsw` の
 扱い・絶縁容量・最小負荷は、どれも DigiKey API には無くデータシートにしかない。**
-だからここに置いてある。経緯と比較は [DECISIONS.md](../DECISIONS.md)。
+だからここに置いてある。経緯と比較は [AudioV2/DECISIONS.md](../../AudioV2/DECISIONS.md)。
 
 **⚠ この表の数値は ±12 V 両出力版のもの。** 同じ系列でも単出力版・±15 V 版では `Cout` が
 まるで違う（TEL 10WI は単出力 12 V が 560 µF、±12 V dual は 390 µF。EC7AW は単出力 24S12 が
@@ -48,14 +48,14 @@
 
 **⚠ 絶縁容量は候補ごとに桁ではなく倍で違う。** この設計の絶縁は `PD_GND` と `A_GND` を
 分ける構造そのもので、効くのは耐電圧（functional）ではなく**絶縁容量**の方
-（[DECISIONS.md](../DECISIONS.md) の否定側査読）。**Aimtec 2品は 2000 pF で Recom / Cincon の2倍。**
+（[AudioV2/DECISIONS.md](../../AudioV2/DECISIONS.md) の否定側査読）。**Aimtec 2品は 2000 pF で Recom / Cincon の2倍。**
 安いのはこの2品だが、**この設計がいちばん気にしている欄で最下位**にいる。
 
 **`U1604` の下流 LDO**（置き換え候補の足切りを決める）:
 
 | 部品 | ローカル | この設計に効く数字 |
 |---|---|---|
-| **LT1763**（ADI） | [ADI_LT1763.pdf](ADI_LT1763.pdf)（`1763fh`） | **⚠ `LT1763-5` の実負荷での規定は `6V < VIN < 20V, 1mA < ILOAD < 500mA`**（p4）。`VIN=5.5V` の行は `ILOAD=1mA` のときだけ。**これで固定 6 V の三端子が全部落ちる**（[DECISIONS.md](../DECISIONS.md)「6 V の壁」）。Ripple Rejection **50 min / 65 typ dB**（p5、条件に `CBYP` は入っていない）。Figure 3（p16）が「容量を増やせば最小 ESR は 0 に近づく」を示す |
+| **LT1763**（ADI） | [ADI_LT1763.pdf](ADI_LT1763.pdf)（`1763fh`） | **⚠ `LT1763-5` の実負荷での規定は `6V < VIN < 20V, 1mA < ILOAD < 500mA`**（p4）。`VIN=5.5V` の行は `ILOAD=1mA` のときだけ。**これで固定 6 V の三端子が全部落ちる**（[AudioV2/DECISIONS.md](../../AudioV2/DECISIONS.md)「6 V の壁」）。Ripple Rejection **50 min / 65 typ dB**（p5、条件に `CBYP` は入っていない）。Figure 3（p16）が「容量を増やせば最小 ESR は 0 に近づく」を示す |
 
 ⚠ `analog.com` はこの環境から不通（接続自体が落ちる）。**DigiKey API の `DatasheetUrl` で正しい版（`1763fh`）を特定し、`bdtic.com` のミラーから取得**した。
 
@@ -156,7 +156,7 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 
 | 部品 | 用途 | ローカル | 取得元 |
 |---|---|---|---|
-| **PT2314E SOP-28** | Bass / Treble（I²C、Amp 前） | **[Princeton_PT2314E.pdf](Princeton_PT2314E.pdf)** | PT2314E V1.0 / 2010-01 / **15ページ完全版**。ELECTRICAL CHARACTERISTICS あり（`VIH` min 3 V・`RL` 5 kΩ・THD 0.03 % 等 → [DECISIONS.md](../DECISIONS.md)「トーン」） |
+| **PT2314E SOP-28** | Bass / Treble（I²C、Amp 前） | **[Princeton_PT2314E.pdf](Princeton_PT2314E.pdf)** | PT2314E V1.0 / 2010-01 / **15ページ完全版**。ELECTRICAL CHARACTERISTICS あり（`VIH` min 3 V・`RL` 5 kΩ・THD 0.03 % 等 → [AudioV2/DECISIONS.md](../../AudioV2/DECISIONS.md)「トーン」） |
 | ~~PT2314 DIP-28~~ | 無印（**不採用**。参考） | [Princeton_PT2314.pdf](Princeton_PT2314.pdf) | v1.1 の**3ページ抜粋**。ピン配置とアプリケーション回路のみで**電気的特性が無い**。ピン配置は E と同一 |
 | **Alps RK27112A00CF** ×2 | HP / LINE 手回し音量（A50k Dual） | （メーカーカタログ） | [PARTS.md](../PARTS.md) |
 | **C&K 7303SYZQE** | DEST 3PDT ON-OFF-ON | [C&K 7000 Series](https://media.digikey.com/pdf/Data%20Sheets/C&K/7000%20Mini%20Toggle%20Series.pdf) | [PARTS.md](../PARTS.md) |
@@ -164,7 +164,7 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 
 ## アンプ切替（統合1枚基板）
 
-2026-09-01 にアーキテクチャを刷新し、リレー盤とアンプ基板を1枚へ統合した（[DECISIONS.md](../DECISIONS.md) §11.1）。
+2026-09-01 にアーキテクチャを刷新し、リレー盤とアンプ基板を1枚へ統合した（[AudioV2/DECISIONS.md](../../AudioV2/DECISIONS.md) §11.1）。
 切替はラッチングリレーからアナログスイッチICへ変更。
 
 | 部品 | 用途 | ローカル | 取得元 |
