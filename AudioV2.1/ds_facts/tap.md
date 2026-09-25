@@ -1,6 +1,7 @@
 # スペアナ ADC（PCM1804）への信号タップ候補 — データシートの事実
 
 2026-09-25 収集。値は DS の原文で裏が取れたものだけ。設計判断は書かない。
+2026-09-25 に独立照合（[verify_tap.md](verify_tap.md)）と再照合（[../review/tap_errata_review.md](../review/tap_errata_review.md)）を済ませ、直した行は〔2026-09-25 照合で訂正〕、足した行は〔2026-09-25 照合で追加〕を最後の欄に付けた。
 対象は Q2（差動抵抗タップ＋高 CMRR 差動アンプ）／Q3（アイソレーション・アンプ）／Q4（デジタル・アイソレータ）／Q5（小型ライン・トランス）。
 
 - 出典のページは **PDF のページ番号**。印刷ページ番号とずれる DS はその都度「PDF pN（印刷 pM）」と書いた（ミラーから取った ADI の一部は、先頭付近に ADI の "Product Page Quick Links" ページが 1 枚挟まっていて 1 ずれる）。PDF はすべて `AudioV2.1/datasheets/tap/` にある。
@@ -67,16 +68,17 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 電源電圧（推奨） | 単電源 4〜36 V／両電源 ±2〜±18 V | — | MIN / MAX | p4 §6.3 | "Single-supply 4 36 / Dual-supply ±2 ±18" |
 | THD+N | 0.000025 % / −132 dB | G = 1, f = 1 kHz, VOUT = 3.5 VRMS, RL = 2 kΩ, 80-kHz measurement bandwidth | TYP | p5 §6.5（画像で確認） | "G = 1, f = 1 kHz, VOUT = 3.5 VRMS, RL = 2 kΩ, 80-kHz measurement bandwidth 0.000025% –132 dB" |
 | THD+N | 0.000025 % / −132 dB | 同上、RL = 600 Ω | TYP | p5 | 同表 |
-| THD+N vs 周波数 | 20 Hz〜2 kHz で約 −128 dB（目読み。10 kΩ/2 kΩ/600 Ω 負荷、G = ±1） | 3.5 VRMS, 80-kHz measurement bandwidth | グラフ | p9 Figure 14（画像で確認） | "Figure 14. THD+N Ratio vs Frequency" / "3.5 VRMS, 80-kHz measurement bandwidth" |
+| THD+N vs 周波数 | 利得で 2 群に分かれる。G = −1（破線 3 本）約 −126 dB、G = +1（実線 3 本）約 −132.5 dB（20 Hz〜約 1 kHz で平坦）。10 kΩ/2 kΩ/600 Ω の負荷による差はほぼ無い。G = +1 は約 1 kHz から上がり 2 kHz で約 −131 dB、20 kHz で約 −118 dB（目読み） | 3.5 VRMS, 80-kHz measurement bandwidth | グラフ | p9 Figure 14（画像で確認） | "Figure 14. THD+N Ratio vs Frequency" / "3.5 VRMS, 80-kHz measurement bandwidth"〔2026-09-25 照合で訂正〕 |
 | 入力電圧雑音 | 2.1 µVPP | f = 20 Hz to 20 kHz | TYP | p5 | "Input voltage noise f = 20 Hz to 20 kHz 2.1 μVPP" |
 | 入力電圧雑音密度 | 6.5 / 3.5 / 2.8 nV/√Hz | f = 10 Hz / 100 Hz / 1 kHz | TYP | p5 | "f = 10 Hz 6.5 / f = 100 Hz 3.5 / f = 1 kHz 2.8 nV/√Hz" |
 | 入力電流雑音密度 | 1.6 / 0.8 pA/√Hz | f = 10 Hz / 1 kHz | TYP | p5 | "f = 10 Hz 1.6 / f = 1 kHz 0.8 pA/√Hz" |
 | CMRR（オペアンプ単体） | 108 / 127 dB | (V–) + 1.5 V ≤ VCM ≤ (V+) – 1 V, TA = –40°C to 125°C, VS = ±18 V | MIN / TYP | p5 | "CMRR Common-mode rejection ratio ... VS = ±18 V 108 127 dB" |
 | CMRR vs 周波数（オペアンプ単体、入力換算） | 約 127 dB（〜100 Hz）、約 115 dB（1 kHz）、約 97 dB（10 kHz）、約 78 dB（100 kHz）（目読み） | TA = 25°C, VS = ±18 V, RL = 2 kΩ | グラフ | p10 Figure 22（画像で確認） | "Figure 22. CMRR vs Frequency (Referred to Input)" |
-| 入力インピーダンス（オペアンプ単体） | 差動 60k ‖ 0.8、同相 500M ‖ 0.9（Ω ‖ pF） | — | TYP | p6 | "Differential 60k || 0.8 / Common-mode 500M || 0.9 Ω || pF" |
+| 入力インピーダンス（オペアンプ単体） | 差動 60k ‖ 0.8、同相 500M ‖ 0.9（Ω ‖ pF） | — | TYP | p6 | "Differential 60k \|\| 0.8 / Common-mode 500M \|\| 0.9 Ω \|\| pF" |
 | 抵抗ペアの比マッチング | 0.004 % / 0.02 %（TA = –40〜125°C で max 0.023 %） | Resistors in same pair | TYP / MAX | p6 | "Resistor ratio matching (3) Resistors in same pair 0.004% 0.02%" |
 | 抵抗ペアの比の温度係数 | ±0.07 / ±0.15 ppm/°C | 同上 | TYP / MAX | p6 | "Resistors in same pair ±0.07 ±0.15 ppm/°C" |
 | 個別抵抗値 | 0.84 / 1 / 1.15 kΩ | — | MIN / TYP / MAX | p6 | "Individual resistor value 0.84 1 1.15 kΩ" |
+| 同じ石の全抵抗の最大–最小マッチング | 典型分布のヒストグラム（0.05 % 刻み）。山は約 0.15〜0.25 %、大半は約 0.35 % 以下、裾は約 1.5 % まで（目読み。規定値ではない） | 同じ石で最も大きい抵抗値と最も小さい抵抗値の組 | グラフ | p21 §8.1.2 Figure 52（画像で確認） | "Figure 52 shows a typical distribution of the worst-case matching across all resistors on a single INA1620." / "Figure 52. Matching Histogram, Maximum to Minimum"〔2026-09-25 照合で追加〕 |
 | 静止電流（1 ch あたり） | 2.6 / 3.3 mA（−40〜125°C で max 4.2） | VEN = 2 V, IOUT = 0 A | TYP / MAX | p6 | "Quiescent current (per channel) VEN = 2 V, IOUT = 0 A 2.6 3.3 mA" |
 
 ## Q2-2. TI INA1650/INA1651（SoundPlus 差動ライン・レシーバ、G = 1）
@@ -88,20 +90,24 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 電源電圧（推奨） | 4.5 (±2.25)〜36 (±18) V | — | MIN / MAX | p5 §6.3 | "Supply voltage (V+ – V–) 4.5 (±2.25) 36 (±18) V" |
 | THD+N | 0.00039 % / −108.1 dB | VO = 3 VRMS, f = 1kHz, 90-kHz measurement bandwidth, VS = ±18 V | TYP | p6（画像で確認） | "VO = 3 VRMS, f = 1kHz, 90-kHz measurement bandwidth, VS = ±18 V 0.00039% –108.1 dB" |
 | THD+N | 0.000174 % / −115.2 dB | VIN = 22 dBu (9.7516 VRMS), FIN = 1 kHz, VS = ±18 V, 90-kHz measurement bandwidth | TYP | p6 | "VIN = 22 dBu (9.7516 VRMS) , FIN = 1 kHz, VS = ±18 V, 90-kHz measurement bandwidth 0.000174% –115.2 dB" |
-| THD+N vs 周波数 | 20 Hz〜10 kHz で約 0.0004 %（約 −108 dB）、ほぼ平坦（目読み） | 3 VRMS, 90-kHz Measurement Bandwidth, 600 Ω / 2 kΩ | グラフ | p9 Figure 12（画像で確認） | "3 VRMS, 90-kHz Measurement Bandwidth" |
-| THD+N vs 出力振幅 | 1 VRMS で約 −100 dB、10 VRMS 付近で約 −112 dB（目読み。振幅に反比例して下がる形） | 1 kHz, 90-kHz Measurement Bandwidth | グラフ | p10 Figure 14 | "1 kHz, 90-kHz Measurement Bandwidth" |
+| THD+N vs 周波数 | 2 kΩ: 20 Hz〜10 kHz で約 −108 dB（約 0.0004 %）で平坦。600 Ω: 20 Hz で約 −106.3 dB、中域で約 −108 dB、10 kHz で約 −106.5 dB、20 kHz で約 −101 dB（目読み） | 3 VRMS, 90-kHz Measurement Bandwidth, 600 Ω / 2 kΩ | グラフ | p9 Figure 12（画像で確認） | "3 VRMS, 90-kHz Measurement Bandwidth"〔2026-09-25 照合で訂正〕 |
+| THD+N vs 出力振幅 | 1 VRMS で約 −100 dB。振幅に反比例して下がり、最小は約 9.7 VRMS の約 −115 dB。その直後に約 −111〜−112 dB へ跳ね、約 11.5 VRMS で急増（目読み） | 1 kHz, 90-kHz Measurement Bandwidth | グラフ | p10 Figure 14（画像で確認） | "1 kHz, 90-kHz Measurement Bandwidth"〔2026-09-25 照合で訂正〕 |
 | 出力電圧雑音 | 4.5 µVRMS / −104.7 dBu | f = 20 Hz to 20 kHz, no weighting | TYP | p6 | "Output voltage noise f = 20 Hz to 20 kHz, no weighting 4.5 μVRMS –104.7 dBu" |
 | 出力電圧雑音密度 | 47 / 31 nV/√Hz | f = 100 Hz / 1 kHz | TYP | p6 | "Output voltage noise density(2) f = 100 Hz 47 / f = 1 kHz 31 nV/√Hz" |
 | CMRR | 85 / 91 dB（−40〜125°C: 82 / 89） | (V–) + 0.25 V ≤ VCM ≤ (V+) – 2 V, REF and COM pins connected to ground, VS = ±18 V | MIN / TYP | p6 | "REF and COM pins connected to ground, VS = ±18 V 85 91 dB" |
 | CMRR | 82 / 86 dB（−40〜125°C: 76 / 84） | 同、REF and COM pins connected to VMID(OUT) | MIN / TYP | p6 | "connected to VMID(OUT), VS = ±18 V 82 86" |
 | CMRR（信号源不整合） | 84 dB | 同（ground）、RS mismatch = 20 Ω | TYP | p6 | "RS mismatch = 20 Ω 84 dB" |
-| CMRR vs 周波数 | REF/COM→GND: 約 91 dB（10 Hz〜1 kHz）、約 88 dB（10 kHz）、約 78 dB（100 kHz）。REF/COM→VMID: 約 86 dB（〜10 kHz）（目読み） | TA = 25°C, VS = ±18 V | グラフ | p9 Figure 9（画像で確認） | "Figure 9. Common-Mode Rejection Ratio vs Frequency" |
+| CMRR vs 周波数 | REF/COM→GND: 約 91 dB（10 Hz〜1 kHz）、約 89 dB（10 kHz）、約 73.5 dB（100 kHz。約 78 dB になるのは約 60 kHz）。REF/COM→VMID: 約 86 dB（〜1 kHz）、約 85 dB（10 kHz）、約 74.5 dB（100 kHz）（目読み） | TA = 25°C, VS = ±18 V | グラフ | p9 Figure 9（画像で確認） | "Figure 9. Common-Mode Rejection Ratio vs Frequency"〔2026-09-25 照合で訂正〕 |
 | CMRR と RCOM（本文） | 20 Ω の不整合で 92 dB → 83.7 dB（RCOM = 0）、89.6 dB（RCOM = 1 MΩ） | Figure 43 | 本文 | p18 §8.1.2 | "a 20-Ω source impedance mismatch degrades the CMRR from 92 dB to 83.7 dB. However, if RCOM has a value of 1 MΩ, the CMRR only degrades to 89.6 dB" |
 | 入力インピーダンス | 差動 850 / 1000 / 1150 kΩ、同相 212.5 / 250 / 287.5 kΩ | — | MIN / TYP / MAX | p7（画像で確認） | "Differential 850 1000 1150 kΩ / Common-mode 212.5 250 287.5 kΩ" |
 | 入力抵抗の不整合 | 0.01 % / 0.25 % | — | TYP / MAX | p7 | "Input resistance mismatch 0.01% 0.25%" |
 | 利得誤差 | 0.04 % / 0.05 % | 25°C | TYP / MAX | p6 | "Gain error 0.04% 0.05%" |
 | 利得非直線性 | 1 / 5 ppm | VS = ±18 V, –10 V < VO < 10 V | TYP / MAX | p6 | "Gain nonlinearity VS = ±18 V, –10 V < VO < 10 V (2) 1 5 ppm" |
 | 静止電流 | INA1650: 8 / 10.5 / 12 mA（−40〜125°C で max 14） | IOUT = 0 A | MIN / TYP / MAX | p7 | "IOUT = 0 A, INA1650 8 10.5 12 ... 14 mA"（「1 ch あたり」の字句は無い） |
+| CMRR（応用回路の実測、本文） | 1 kHz で 94 dB（信号源不整合なし）、10 Ω の不整合で 92 dB | 1-VRMS Common-Mode Signal（Figure 53） | 本文 | p23 §8.2.1.3（図は p24 Figure 53） | "The measured CMRR of the circuit (Figure 53) at 1 kHz equals 94 dB without any source impedance mismatch. Adding a 10-Ω source impedance mismatch degrades the CMRR at 1 kHz to 92 dB."〔2026-09-25 照合で追加〕 |
+| THD+N vs 周波数（応用回路） | 22 dBu（9.75 VRMS）: 20 Hz で約 −111.7 dB、中域で約 −115 dB、約 7 kHz から上昇。4 dBu（1.23 VRMS）: 約 −101.6 dB で平坦（目読み。本文は 4 dBu で −101.6 dB、22 dBu・1 kHz で −115.2 dB） | 90-kHz Measurement Bandwidth | グラフ・本文 | p24 Figure 54（画像で確認）、本文 p23 | "For a 4-dBu (1.23 VRMS) input signal level, the THD+N remains flat at –101.6 dB (0.0008%) over the measured frequency range."〔2026-09-25 照合で追加〕 |
+| 個別高調波（出力スペクトル） | 22 dBu 出力: HD2 −111.2 dBu（−133.2 dBc）、HD3 −120.1 dBu（−142.1 dBc）、HD4 −130.7 dBu（−152.7 dBc）（図中の印字）。4 dBu 出力では 2 次が −140 dBu の雑音床からかろうじて見える程度（本文） | 22–dBu / 4–dBu Output Amplitude。基本波は図から約 1 kHz（図に周波数の印字は無い） | 図中の印字・本文 | p24 Figure 56, 57（画像で確認）、本文 p23 | "The largest harmonic in this case is the second at –111.2 dBu, or –133.2 dB relative to the fundamental."〔2026-09-25 照合で追加〕 |
+| THD+N と雑音（本文） | 1 kHz の THD+N vs 出力振幅は分析器の雑音床に届く 5 VRMS まで一定の傾きで下がり、本文はこれを「高調波ではなく素子の雑音が THD+N を決めている」と説明している | Figure 55（1 kHz、22-kHz Measurement Bandwidth） | 本文 | p23 §8.2.1.3 | "The constant downward slope indicates that noise from the device dominates THD+N at this frequency instead of distortion harmonics."〔2026-09-25 照合で追加〕 |
 
 ## Q2-3. TI INA134/INA2134（差動ライン・レシーバ、0 dB）
 
@@ -113,7 +119,7 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | Noise Floor | −100 dBu | 20kHz BW | TYP | p2 | "Noise Floor(1) 20kHz BW –100 dBu" |
 | 出力雑音電圧 | 7 µVrms（20 Hz〜20 kHz）／52 nV/√Hz（1 kHz） | 注 (2) アンプの電流雑音と抵抗網の熱雑音を含む | TYP | p2 | "f = 20Hz to 20kHz 7 µVrms / f = 1kHz 52 nV/√HZ" |
 | CMR | 74 / 90 dB | VCM = ±31V, RS = 0Ω | MIN / TYP | p2 | "Common-Mode Rejection VCM = ±31V, RS = 0Ω 74 90 dB" |
-| CMR vs 周波数 | 約 90 dB（1〜10 kHz）、約 86 dB（20 kHz）、約 70 dB（100 kHz）（目読み） | TA = +25°C, VS = ±18V | グラフ | p5（画像で確認） | "COMMON-MODE REJECTION vs FREQUENCY" |
+| CMR vs 周波数 | 約 90.5 dB（1〜10 kHz）、約 85 dB（20 kHz）、約 70 dB（100 kHz）（目読み） | TA = +25°C, VS = ±18V | グラフ | p5（画像で確認） | "COMMON-MODE REJECTION vs FREQUENCY"〔2026-09-25 照合で訂正〕 |
 | CMR と信号源不整合（本文） | 10 Ω の不整合で典型品が約 74 dB | — | 本文 | p8 | "A 10Ω mismatch in source impedance will degrade the common-mode rejection of a typical device to approximately 74dB." |
 | THD+N vs 周波数 | VO = 10Vrms で 20 Hz〜約 5 kHz ほぼ 0.0005〜0.0006 %、20 kHz で 0.001〜0.002 %（負荷で違う）（目読み） | TA = +25°C, VS = ±18V | グラフ | p4 | "TOTAL HARMONIC DISTORTION+NOISE vs FREQUENCY" / "VO = 10Vrms" |
 | 高調波成分 vs 周波数 | VO = 1Vrms、RL = 2kΩ の 2 次: 1 kHz で約 0.00006 %。"noise limited" の線は約 0.00004 %（目読み） | — | グラフ | p4 | "HARMONIC DISTORTION PRODUCTS vs FREQUENCY" / "VO = 1Vrms" |
@@ -132,10 +138,10 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | Noise Floor, RTO | −106 dBu | 20kHz BW | TYP | p2 | "Noise Floor, RTO(1) 20kHz BW –106 dBu" |
 | 出力雑音電圧 | 3.5 µVrms（20 Hz〜20 kHz）／26 nV/√Hz（1 kHz） | — | TYP | p2 | "f = 20Hz to 20kHz 3.5 µVrms / f = 1kHz 26 nV/√HZ" |
 | CMR | 74 / 90 dB | VCM = ±46.5V, RS = 0Ω | MIN / TYP | p2 | "Common-Mode Rejection VCM = ±46.5V, RS = 0Ω 74 90 dB" |
-| CMR vs 周波数（RTO） | 約 90 dB（1 kHz〜約 90 kHz）、1 MHz で約 64 dB（目読み） | G = 1/2 | グラフ | p5（画像で確認） | "COMMON-MODE REJECTION vs FREQUENCY" / "RTO" |
+| CMR vs 周波数（RTO） | 約 91 dB（1 kHz〜約 55 kHz）、100 kHz で約 87.5 dB、1 MHz で約 64 dB（目読み） | G = 1/2 | グラフ | p5（画像で確認） | "COMMON-MODE REJECTION vs FREQUENCY" / "RTO"〔2026-09-25 照合で訂正〕 |
 | CMR と信号源不整合（本文） | 5 Ω の不整合で約 77 dB（RTO） | — | 本文 | p8 | "A 5Ω mismatch in source impedance will degrade the common-mode rejection of a typical device to approximately 77dB (RTO)." |
 | THD+N vs 周波数 | VO = 5Vrms で約 0.0005 %（〜数 kHz）、20 kHz で約 0.001 %（目読み） | — | グラフ | p4 | "VO = 5Vrms" |
-| 高調波成分 vs 周波数 | VO = 1Vrms の 2 次: 20 Hz で約 0.00017 %、1 kHz で約 0.00005 %（目読み） | — | グラフ | p4 | "HARMONIC DISTORTION PRODUCTS vs FREQUENCY" |
+| 高調波成分 vs 周波数 | VO = 1Vrms の 2 次: 20 Hz で約 0.00018 %、約 800 Hz から上は約 0.00007 %（1 kHz で約 0.00007 %）。3 次（"Noise Limited" の破線）は約 0.00004 %（目読み） | — | グラフ | p4（画像で確認） | "HARMONIC DISTORTION PRODUCTS vs FREQUENCY"〔2026-09-25 照合で訂正〕 |
 | 入力インピーダンス | 差動 24 kΩ、同相 18 kΩ | 注 (4) 比マッチ、絶対値 ±25 % | TYP | p2 | "Differential 24 kΩ / Common-Mode 18 kΩ" |
 | 利得 | 0.5 V/V、誤差 ±0.01 / ±0.1 % | VO = –10V to 10V | TYP / MAX | p2 | "Initial 0.5 V/V / Error VO = –10V to 10V ±0.01 ±0.1 %" |
 | 電源電圧範囲／静止電流 | ±4〜±18 V／±2.4 / ±2.9 mA（アンプ 1 個あたり） | IO = 0 | MIN・MAX／TYP・MAX | p2 | "Voltage Range ±4 ±18 V / Quiescent Current (per Amplifier) IO = 0 ±2.4 ±2.9 mA" |
@@ -166,10 +172,10 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 |---|---|---|---|---|---|
 | CMR | 80 / 100 dB（−40〜+85°C: 75 / 90） | VCM = ±10 V | Min / Typ | p2（画像で確認） | "COMMON-MODE REJECTION CMR VCM = ±10 V 80 100 dB" |
 | CMR（Features） | DC 100、60 Hz 100、20 kHz 70、40 kHz 62 dB typ | — | 字句 "typ" | p1 | "DC: 100 dB typ / 60 Hz: 100 dB typ / 20 kHz: 70 dB typ / 40 kHz: 62 dB typ" |
-| CMR vs 周波数 | 約 100 dB（〜1 kHz）、約 72 dB（20 kHz）、約 55 dB（100 kHz）（目読み） | TA = 25°C, VS = ±15V | グラフ | p3（画像で確認） | "Common-Mode Rejection vs. Frequency" |
+| CMR vs 周波数 | 約 100 dB（〜約 200 Hz）、約 96 dB（1 kHz）、約 72 dB（20 kHz）、約 57 dB（100 kHz）（目読み） | TA = 25°C, VS = ±15V | グラフ | p3（画像で確認） | "Common-Mode Rejection vs. Frequency"〔2026-09-25 照合で訂正〕 |
 | CMR と信号源不整合（本文） | 5 Ω の不整合で DC CMR が 20 dB 劣化 | — | 本文 | p6 | "even a 5 Ω imbalance will degrade CMR by 20 dB" |
 | THD | 0.001 %（RL = 100 kΩ）、0.01 %（RL = 600 Ω） | 振幅・周波数・帯域の記載なし | Typ | p2 | "TOTAL HARMONIC DISTORTION RL = 100 kΩ 0.001 / THD RL = 600 Ω 0.01 %" |
-| THD+N vs 周波数 | RL = 100 kΩ: 20 Hz〜約 1 kHz で約 0.001 %、20 kHz で約 0.002 %。RL = 600 Ω: 20 kHz で約 0.01 %（目読み。振幅・帯域の記載なし） | TA = +25°C, VS = ±15V, AV = −1 | グラフ（Audio Precision 画面） | p3 | "Total Harmonic Distortion vs. Frequency" |
+| THD+N vs 周波数 | 低域は両負荷とも約 0.0008 %。RL = 100 kΩ: 20 kHz で約 0.002 %。RL = 600 Ω: 約 500 Hz から上がり、10 kHz で約 0.009 %、20 kHz で約 0.017 %（目読み。振幅・帯域の記載なし） | TA = +25°C, VS = ±15V, AV = −1 | グラフ（Audio Precision 画面） | p3（画像で確認） | "Total Harmonic Distortion vs. Frequency"〔2026-09-25 照合で訂正〕 |
 | 電圧雑音密度 | 約 22 nV/√Hz（約 200 Hz 以上）（目読み。RTI/RTO の記載なし） | TA = +25°C, VS = ±15V | グラフ | p5（画像で確認） | "Voltage Noise Density vs. Frequency" |
 | 利得誤差 | 0.001 / 0.01 % | No Load, VIN = ±10 V, RS = 0 Ω | Typ / Max | p2 | "GAIN ERROR No Load, VIN = ±10 V, RS = 0 Ω 0.001 0.01 %" |
 | 電源電流 | 2.5 / 3.5 mA | No Load | Typ / Max | p2 | "SUPPLY CURRENT ISY No Load 2.5 3.5 mA" |
@@ -185,9 +191,11 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | THD+N | 0.0006 % | VIN = 10 V rms, RL = 10 kΩ, f = 1 kHz | Typ | p2（画像で確認） | "THD+N VIN = 10 V rms, RL = 10 kΩ, f = 1 kHz 0.0006 %" |
 | SNR | −107.3 dBu | 0 dBu = 0.775 V rms, 20 kHz BW, RTI | Typ | p2 | "Signal-to-Noise Ratio SNR 0 dBu = 0.775 V rms, 20 kHz BW, RTI –107.3 dBu" |
 | THD+N vs 周波数 | 20 Hz で約 0.0008 %、100 Hz〜2 kHz で約 0.0006 %、20 kHz で約 0.002〜0.004 %（2 本の線）（目読み） | VS = ±15 V, VIN = 10 V rms, with 80 kHz Filter | グラフ | p3 Figure 3（画像で確認） | "Figure 3. THD+N vs. Frequency (VS = ±15 V, VIN = 10 V rms, with 80 kHz Filter)" |
+| THD+N vs 振幅（Headroom） | 0 dBu で約 0.0019 %、振幅とともに下がり（途中にレンジ切替とみられる段差）約 28 dBu で約 0.0005 %、約 29 dBu で急増（目読み。横軸 "AMPL(dBu)"、周波数の記載なし） | VS = ±15 V, RL = 10 kΩ, with 80 kHz Filter | グラフ（Audio Precision 画面） | p3 Figure 4（画像で確認） | "Figure 4. Headroom (VS = ±15 V, RL = 10 kΩ, with 80 kHz Filter)"〔2026-09-25 照合で追加〕 |
+| THD+N vs 負荷 | 10 kΩ 以上で約 0.00045 %、1 kΩ で約 0.0011 %、約 300 Ω 未満で急増（目読み） | VS = ±15 V, VIN = 10 V rms, 1 kHz Sine, 80 kHz Filter | グラフ | p3 Figure 6（画像で確認） | "Figure 6. THD+N vs. Load (VS = ±15 V, VIN = 10 V rms, with 1 kHz Sine, 80 kHz Filter)"〔2026-09-25 照合で追加〕 |
 | CMR | dc 70 / 90、60 Hz 90、20 kHz 85、400 kHz 60 dB | VCM = ±10 V, RTO | Min / Typ | p2 | "CMR VCM = ±10 V, RTO f = dc 70 90 / f = 60 Hz 90 / f = 20 kHz 85 / f = 400 kHz 60" |
 | CMR vs 周波数 | 約 88 dB（〜10 kHz）、約 70 dB（100 kHz）（目読み） | VS = ±15V, TA = +25°C | グラフ | p4 Figure 10 | "Figure 10. Common-Mode Rejection vs. Frequency" |
-| CMR と信号源不整合（本文） | 5 Ω の不整合で dc CMRR 71 dB | — | 本文 | p6 | "a 5 Ω source imbalance will result in a CMRR of 71 dB at dc" |
+| CMR と信号源不整合（本文） | 5 Ω の不整合で dc CMRR 71 dB | — | 本文 | p7（印刷 −7−、APPLICATIONS INFORMATION） | "a 5 Ω source imbalance will result in a CMRR of 71 dB at dc"〔2026-09-25 照合で訂正〕 |
 | 電圧雑音密度 | 約 14 nV/√Hz（1 kHz）（目読み） | VS = ±15V, TA = +25°C | グラフ | p5 Figure 16（画像で確認） | "Figure 16. Voltage Noise Density vs. Frequency" |
 | 入力電圧範囲 | 同相 ±15 V、差動 ±28 V | — | Typ | p2 | "Input Voltage Range IVR Common Mode ±15 / Differential ±28 V" |
 | 利得精度 | −0.1 / 0.03 / 0.1 % | — | Min / Typ / Max | p2 | "Gain Accuracy –0.1 0.03 0.1 %" |
@@ -205,21 +213,22 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | Noise Floor, RTO | G = ½: −106、G = 2: −100 dBu | 20 kHz BW | Typ | PDF p4 | "Noise Floor, RTO2 20 kHz BW −106 −100 dBu" |
 | 出力電圧雑音（RTO） | G = ½: 3.5 µV rms（20 Hz〜20 kHz）・26 nV/√Hz（1 kHz）。G = 2: 7 µV rms・52 nV/√Hz | 注 1: アンプの電圧・電流雑音と内部抵抗の雑音を含む | Typ | PDF p4 | "Output Voltage Noise (Referred to Output) f = 20 Hz to 20 kHz 3.5 7 µV rms / f = 1 kHz 26 52 nV/√Hz" |
 | CMRR | G = ½: 77 / 86 dB、G = 2: 83 / 92 dB | VCM = ±40 V, RS = 0 Ω, referred to input | Min / Typ | PDF p4 | "Common-Mode Rejection Ratio VCM = ±40 V, RS = 0 Ω, referred to input 77 86 83 92 dB" |
-| CMRR vs 周波数（入力換算） | G = ½: 約 94 dB（〜約 15 kHz）、100 kHz で約 80 dB。G = 2: 約 100 dB（〜約 15 kHz）（目読み） | — | グラフ | PDF p8 Figure 15（画像で確認） | "Figure 15. Common-Mode Rejection Ratio vs. Frequency, Referred to Input" |
+| CMRR vs 周波数（入力換算） | G = ½: 約 94 dB（〜約 20 kHz で平坦）。G = 2: 約 100 dB（〜約 12 kHz で平坦）。100 kHz では両方とも約 83 dB（目読み） | — | グラフ | PDF p8 Figure 15（画像で確認） | "Figure 15. Common-Mode Rejection Ratio vs. Frequency, Referred to Input"〔2026-09-25 照合で訂正〕 |
 | THD + N vs 周波数（22 kHz フィルタ） | 20 Hz〜20 kHz で G = ½ 約 0.00025 %、G = 2 約 0.00035 %（目読み） | 22kHz FILTER, VOUT = 10V p-p, RL = 600Ω | グラフ | PDF p11 Figure 32（画像で確認） | "Figure 32. THD + N vs. Frequency, Filter = 22k Hz" |
 | 高調波成分 vs 周波数（G = ½） | 3 次（全負荷）約 0.00025 %、2 次（600 Ω）約 0.00005 %、2 次（100 kΩ/2 kΩ）約 0.00002 %（20 Hz〜10 kHz、目読み） | GAIN = ½, VOUT = 10V p-p | グラフ | PDF p12 Figure 36（画像で確認） | "Figure 36. Harmonic Distortion Products vs. Frequency, G = ½" |
+| THD + N vs 出力振幅（G = ½） | 0 dBu で約 0.0006 %、振幅とともに下がり、約 19〜20 dBu で最小 約 0.00018 %（約 −115 dB）。RL = 600 Ω は約 21.5 dBu、"RL = 2kΩ, 100Ω"（原文の印字）は約 22 dBu で急増（目読み） | GAIN = ½, f = 1kHz | グラフ | PDF p11 Figure 34（画像で確認） | "Figure 34. THD + N vs. Output Amplitude, G = ½"〔2026-09-25 照合で追加〕 |
 | 入力インピーダンス | G = ½: 差動 36 kΩ・同相 9 kΩ、G = 2: 差動 9 kΩ・同相 9 kΩ | VCM = 0 V。注 6: 片側入力だけの同相インピーダンスは 18 kΩ。注 5: 抵抗は比マッチ、絶対精度 ±20 % | Typ | PDF p4 | "Differential VCM = 0 V 36 9 kΩ / Common Mode6 9 9 kΩ" / "6 ... The common-mode impedance at only one input is 18 kΩ." |
 | 利得誤差／非直線性 | 0.03 %（max）／2 ppm | 非直線性: VOUT = 10 V p-p, 600 Ω load | Max／Typ | PDF p4 | "Gain Error 0.03 0.03 % / Gain Nonlinearity VOUT = 10 V p-p, 600 Ω load 2 2 ppm" |
 | 電源電流（アンプ 1 個あたり） | 2.3 / 2.6 mA | — | Typ / Max | PDF p4 | "Supply Current (per Amplifier) 2.3 2.6 mA" |
 
 ### Q2 で探したが DS に無かった項目
 
-- INA1620: **内蔵抵抗で差動アンプを組んだときの CMRR**（表の CMRR はオペアンプ単体。抵抗ペアのマッチングだけ規定）
+- INA1620: **内蔵抵抗で差動アンプを組んだときの CMRR**（表の CMRR はオペアンプ単体。抵抗ペアのマッチングだけ規定。ペアをまたぐ抵抗どうしのマッチングは p21 Figure 52 に典型分布のグラフだけがある）〔2026-09-25 照合で訂正〕
 - INA134 / INA137: THD+N の**測定帯域**（表・グラフとも記載なし）
 - SSM2141: THD の振幅・周波数・測定帯域、**入力インピーダンス**（ブロック図の 25 kΩ のみ）、雑音密度の表の値（グラフのみ）
 - SSM2143: 差動・同相の入力インピーダンスの表の値（ブロック図の 12 k/6 k のみ）
 - THAT 1200: 雑音密度、CMRR・THD の周波数特性グラフ
-- どの DS にも、**20〜50 Hz・7〜9 Vpk 相当での THD の規定値は無い**（グラフで読めるのは INA1620 Fig 14、INA1650 Fig 12、INA134/137、SSM2143 Fig 3、AD8274 Fig 32/36）
+- どの DS にも、**20〜50 Hz・7〜9 Vpk 相当での THD の規定値は無い**（グラフで読めるのは INA1620 Fig 14、INA1650 Fig 12・Fig 54、INA134/137、SSM2141 の THD vs 周波数（p3、振幅の記載なし）、SSM2143 Fig 3、AD8274 Fig 32/36）〔2026-09-25 照合で訂正〕
 
 ---
 
@@ -246,7 +255,7 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | THD vs 電源電圧 | 約 −85〜−88 dB（目読み） | 同上 | グラフ | p16 Figure 7-21 | "Figure 7-21. Total Harmonic Distortion vs Supply Voltage" |
 | 出力帯域 | AMC1311: 100 / 220 kHz、AMC1311B: 220 / 275 kHz | — | MIN / TYP | p10 | "BW Output bandwidth AMC1311 100 220 / AMC1311B 220 275 kHz" |
 | バリア容量 CIO | ~1.5 pF | VIO = 0.5 VPP at 1 MHz | 値の列のみ | p8 §7.6 | "CIO Barrier capacitance, VIO = 0.5 VPP at 1 MHz ~1.5 pF" |
-| 高圧側電流 IDD1 | 7.1 / 9.7 mA | 4.5 V < VDD1 < 5.5 V, SHTDN = low | TYP / MAX | p11 | "4.5 V < VDD1 < 5.5 V, SHTDN = low 7.1 9.7" |
+| 高圧側電流 IDD1 | 7.1 / 9.7 mA（4.5〜5.5 V）、AMC1311B のみ 6.0 / 8.4 mA（3.0〜3.6 V） | 4.5 V < VDD1 < 5.5 V, SHTDN = low／3.0 V < VDD1 < 3.6 V, SHTDN = low, AMC1311B only | TYP / MAX | p11 | "4.5 V < VDD1 < 5.5 V, SHTDN = low 7.1 9.7" / "3.0 V < VDD1 < 3.6 V, SHTDN = low, AMC1311B only 6.0 8.4"〔2026-09-25 照合で訂正〕 |
 | 低圧側電流 IDD2 | 5.3 / 7.2 mA（3.0〜3.6 V）、5.9 / 8.1 mA（4.5〜5.5 V） | — | TYP / MAX | p11 | "3.0 V < VDD2 < 3.6 V 5.3 7.2 / 4.5 V < VDD2 < 5.5 V 5.9 8.1" |
 | 高圧側電源の作り方（本文） | 高圧側の接地基準電源か、VDD2 から絶縁 DC/DC（SN6501＋トランスの例）で作る | — | 本文 | p27 | "Alternatively, the high-side supply can be generated from the low-side supply (VDD2) by an isolated DC/DC converter." |
 | 内部の周波数（本文） | 内部 ΔΣ 変調器のサンプリング 20 MHz、バリアを渡る搬送波 480 MHz | — | 本文 | p25, p21 | "(20 MHz) of the internal ΔΣ modulator" / "The nominal frequency of the carrier used inside the AMC1311 is 480 MHz." |
@@ -305,7 +314,7 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 |---|---|---|---|---|---|
 | 電源 | 低圧側 VDD 3.0 / 3.3 / 5.5 V のみ（高圧側は内蔵 DC/DC） | VDD to GND | MIN / NOM / MAX | p4 §5.3 | "VDD Low-side supply voltage VDD to GND 3.0 3.3 5.5 V" |
 | 線形入力範囲 VFSR | −1〜1 V（差動）、クリップ前 ±1.25 V | VIN = VINP – VINN | MIN / MAX（クリップは NOM） | p4 | "VFSR Specified linear differential full-scale voltage –1 1 V" |
-| 動作同相入力 | −1.4〜1.6 V（VINP = VINN）、−0.925〜0.725 V（\|VINP – VINN\| = 1.0 V） | (VINP + VINN) / 2 to HGND | MIN / MAX | p4 | "VINP = VINN –1.4 1.6 / |VINP – VINN| = 1.0 V (2) –0.925 0.725 V" |
+| 動作同相入力 | −1.4〜1.6 V（VINP = VINN）、−0.925〜0.725 V（\|VINP – VINN\| = 1.0 V） | (VINP + VINN) / 2 to HGND | MIN / MAX | p4 | "VINP = VINN –1.4 1.6 / \|VINP – VINN\| = 1.0 V (2) –0.925 0.725 V" |
 | 入力抵抗 | 片側 0.1 / 0.8 GΩ、差動 0.1 / 1.2 GΩ | — | MIN / TYP | p8 | "RIN Single-ended input resistance INN = HGND 0.1 0.8 / RIND Differential input resistance 0.1 1.2 GΩ" |
 | 利得／誤差 | 2 V/V／−0.2 / −0.08 / 0.2 % | TA = 25°C | MIN / TYP / MAX | p8 | "Nominal gain 2 V/V / EG Gain error TA = 25°C –0.2% –0.08% 0.2%" |
 | 非直線性 | −0.02 / 0.01 / 0.02 % | — | MIN / TYP / MAX | p8 | "Nonlinearity –0.02% 0.01% 0.02%" |
@@ -320,7 +329,7 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | バリア容量 CIO | ~4.5 pF | VIO = 0.5 VPP at 1MHz | 値の列のみ | p6 | "CIO VIO = 0.5 VPP at 1MHz ~4.5 pF" |
 | 電源電流 IDD | 28.5 / 41 mA（HLDO 無負荷）、30.5 / 43 mA（HLDO 1 mA 負荷） | — | TYP / MAX | p9 | "IDD Low-side supply current No external load on HLDO 28.5 41 mA" |
 | 補助回路に取れる電流 IH | 1 mA（3 V ≤ VDD < 4.5 V）、4.3 mA（4.5 V ≤ VDD ≤ 5.5 V） | load connected from HLDO_OUT to HGND, non-switching | MAX | p9 | "IH High-side supply current for auxiliary circuitry ... 1 / ... 4.3 mA" |
-| DC/DC の方式（本文） | spread-spectrum、共振器の周波数は ΔΣ 変調器に同期。**周波数の数値は無い** | — | 本文 | p22 §6.3.4 | "The DC/DC converter uses a spread-spectrum clock generation technique to reduce the spectral density of the electromagnetic radiation. The resonator frequency is synchronous to the operation of the ΔΣ modulator" |
+| DC/DC の方式（本文） | spread-spectrum、共振器の周波数は ΔΣ 変調器に同期。**DC/DC の周波数の数値は無い**。同期先の ΔΣ 変調器のサンプリング周波数 20 MHz は p25 の本文（入力フィルタの節）にある | — | 本文 | p22 §6.3.4、p25 §7.2.2.1 | "The DC/DC converter uses a spread-spectrum clock generation technique to reduce the spectral density of the electromagnetic radiation. The resonator frequency is synchronous to the operation of the ΔΣ modulator" / "the sampling frequency (20 MHz) of the internal ΔΣ modulator"〔2026-09-25 照合で訂正〕 |
 | EMI（Features） | CISPR-11 と CISPR-25 に適合 | — | — | p1 | "Meets CISPR-11 and CISPR-25 EMI standards" |
 | 搬送波（本文） | 480 MHz | — | 本文 | p19 | "an internally generated, 480-MHz carrier" |
 
@@ -340,12 +349,13 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | SFDR | 79 / 96 dB | VIN = 2 VPP, fIN = 1 kHz | MIN / TYP | p8 | "SFDR Spurious-free dynamic range VIN = 2 VPP, fIN = 1 kHz 79 96 dB" |
 | SNR・SINAD vs 入力周波数 | SNR 約 84 dB（10 Hz〜約 3 kHz）、SINAD 約 83.5 dB（〜1 kHz）→10 kHz で約 80.5 dB（目読み） | sinc3, OSR = 256, 16-bit | グラフ | p14 Figure 6-20（画像で確認） | "Figure 6-20. Signal-to-Noise Ratio and Signal-to-Noise + Distortion vs Input Signal Frequency" |
 | 雑音密度 | 約 1〜2 × 10² nVrms/√Hz（0.1〜約 30 kHz）、それより上で上昇（目読み） | sinc3, OSR = 1; Frequency bin-width equals 1 Hz、入力を HGND に短絡 | グラフ | p16 Figure 6-34（画像で確認） | "Figure 6-34. Noise Density With Both Inputs Shorted to HGND" |
+| 周波数スペクトル（1 kHz 入力） | 基本波 約 −3 dBV。2 次（2 kHz）約 −115 dBV、3 次（3 kHz）約 −109 dBV、4 次 約 −120.5 dBV、5 次 約 −119.5 dBV、6 次 約 −125 dBV、約 17 kHz に約 −124 dBV の線。雑音床は約 −130〜−135 dBV（目読み） | sinc3, OSR = 256, VIN = 2 VPP | グラフ | p16 Figure 6-35（400 dpi の画像で確認） | "Figure 6-35. Frequency Spectrum With 1-kHz Input Signal"〔2026-09-25 照合で追加〕 |
 | INL | 差動 −4〜4 LSB、単端 −6〜6 LSB | Resolution: 16 bits | MIN / MAX | p8 | "INL Integral nonlinearity Differential measurement; Resolution: 16 bits –4 4" |
 | 利得誤差 | −0.2〜0.2 % | TA = 25°C | MIN / MAX | p8 | "EG Gain error TA = 25°C –0.2% 0.2%" |
 | CMRR | −104 dB（0 Hz）、−89 dB（10 kHz, –0.5 V ≤ VIN ≤ 0.5 V） | INP = INN | TYP | p8 | "CMRR ... fIN = 0 Hz ... –104 / fIN = 10 kHz, –0.5 V ≤ VIN ≤ 0.5 V –89 dB" |
 | バリア容量 CIO | ~4.5 pF | VIO = 0.5 VPP at 1 MHz | 値の列のみ | p6 | "CIO VIO = 0.5 VPP at 1 MHz ~4.5 pF" |
 | 電源電流 IDD | 28.5 / 42.5 mA（HLDO 無負荷）、30.5 / 44.5 mA（1 mA 負荷） | — | TYP / MAX | p9 | "IDD Low-side supply current no external load on HLDO 28.5 42.5" |
-| DC/DC の方式（本文） | spread-spectrum、共振器は ΔΣ 変調器に同期。**周波数の数値は無い** | — | 本文 | p23 | "The DC/DC converter uses a spread-spectrum clock generation technique ... The resonator frequency is synchronized to the operation of the ΔΣ modulator" |
+| DC/DC の方式（本文） | spread-spectrum、共振器は ΔΣ 変調器に同期。**DC/DC の周波数の数値は無い**。変調器のクロックは外部の CLKIN（上の行の 9 / 20 / 21 MHz） | — | 本文 | p23（CLKIN は p4） | "The DC/DC converter uses a spread-spectrum clock generation technique ... The resonator frequency is synchronized to the operation of the ΔΣ modulator"〔2026-09-25 照合で訂正〕 |
 | 搬送波（本文） | 480 MHz | — | 本文 | p21 | "carrier used inside the AMC3336 is 480 MHz." |
 
 ## Q3-6. ADI AD215（変調搬送波＋トランス結合、±15 V 絶縁電源出力つき）
@@ -365,8 +375,10 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 帯域 | 100 / 120 kHz | G = 1 V/V, 20 V pk-pk Signal | Min / Typ | PDF p3 | "Full Signal Bandwidth (–3 dB) G = 1 V/V, 20 V pk-pk Signal 100 120 kHz" |
 | IMRR | RS ≤ 100 Ω: 120 dB（60 Hz）/ 100 dB（1 kHz）/ 80 dB（10 kHz）。RS ≤ 1 kΩ: 105 / 85 / 65 dB | G = 1 V/V | Typ | PDF p3 | "IMRR (Isolation Mode Rejection Ratio) RS ≤ 100 Ω (IN+ & IN–), G = 1 V/V, 60 Hz 120 dB" |
 | 同相入力インピーダンス | 2 ‖ 4.5 GΩ ‖ pF | — | Typ | PDF p3 | "Common Mode 2i4.5 GΩipF"（画像で 2‖4.5） |
+| 差動入力インピーダンス | 16 MΩ | G = 1 V/V | Typ | PDF p3（画像で確認） | "INPUT IMPEDANCE Differential G = 1 V/V 16 MΩ"〔2026-09-25 照合で追加〕 |
+| 入力オペアンプの CMRR | 100 dB | 条件の記載なし | Typ | PDF p3（画像で確認） | "CMRR of Input Op Amp 100 dB"〔2026-09-25 照合で追加〕 |
 | 同相容量（本文） | 4.5 pF（dc/dc 電源の絶縁を含む） | — | 本文 | PDF p1 | "Both grades feature a low common-mode capacitance of 4.5 pF inclusive of the dc/dc power isolation." |
-| 絶縁側電源（出力） | ±15 V（±14.25 / ±15 / ±17.25 V、無負荷）、±10 mA | — | Min / Typ / Max | PDF p4 | "ISOLATED POWER OUTPUT8 Voltage No Load ± 14.25 ± 15 ± 17.25 V / Current at Rated Supply Voltage2, 9 ± 10 mA" |
+| 絶縁側電源（出力） | ±15 V（±14.25 / ±15 / ±17.25 V、無負荷）、±10 mA。注 9: 電源電圧が ±15 V dc 以上なら ±15 mA まで取れる | — | 電圧は Min / Typ / Max、電流 ±10 mA は Typ 列のみ（画像で確認） | PDF p4 | "ISOLATED POWER OUTPUT8 Voltage No Load ± 14.25 ± 15 ± 17.25 V / Current at Rated Supply Voltage2, 9 ± 10 mA" / "9 With an input power supply voltage greater than or equal ± 15 V dc, the AD215 may supply up to ± 15 mA from the isolated power supplies."〔2026-09-25 照合で訂正〕 |
 | 絶縁側電源のリップル | 50 mV rms | 1 MHz Bandwidth, No Load | Typ | PDF p4 | "Ripple 1 MHz Bandwidth, No Load2 50 mV rms" |
 | 搬送波・電源発振（本文・図） | 信号の搬送波 約 430 kHz、ブロック図の電源発振器 "430kHz"、出力 LPF "150kHz" | — | 本文・図 | PDF p5, p1 | "it is modulated at a carrier frequency of approximately 430 kHz" |
 | バリア容量（CIO の表の値） | — | — | — | — | DS に無い（同相容量 4.5 pF の本文と、同相インピーダンス 2‖4.5 GΩ‖pF のみ） |
@@ -384,6 +396,7 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 出力 −3 dB 帯域 | A/S/WS: 100 / 200 kHz、B/T/WT: 250 / 400 kHz | — | Min / Typ | PDF p4 | "B, T, and WT Grades 250 400 kHz" |
 | 雑音 | EAOUT 1.7 mV rms、EAOUT2 4.8 mV rms | See Figure 15（帯域の記載は表に無い） | Typ | PDF p4 | "Noise, EAOUT See Figure 15 1.7 mV rms" |
 | 入力範囲（op amp 同相） | 0.35〜1.5 V | — | Min / Max | PDF p4 | "Input Common-Mode Range 0.35 1.5 V" |
+| op amp の同相除去 | 72 dB | 条件の記載なし | Typ | PDF p4（印刷 p3、画像で確認） | "OP AMP ... Common-Mode Rejection 72 dB"〔2026-09-25 照合で追加〕 |
 | 入出力間容量 CI-O | 2.2 pF | f = 1 MHz | 値の列（Typ） | PDF p6（印刷 p5） | "Input-to-Output1 CI-O 2.2 pF f = 1 MHz" |
 | 絶縁アンプ回路（本文） | 入力側アンプをユニティ・バッファにした構成。線形アイソレータは約 400 kHz に極 | — | 本文 | PDF p15（印刷 p14） | "the linear isolator ... introduces a pole at approximately 400 kHz" |
 | THD / SNR | — | — | — | — | DS に無い |
@@ -419,9 +432,12 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 帯域 | 50 / 100 kHz | VIN+ = 200 mVpk-pk | Min / Typ | p8（画像で確認） | "VOUT Bandwidth (–3 dB) BW 50 100 — kHz VIN+ = 200 mVpk-pk" |
 | 出力雑音 | 31.5 mVrms | VIN+ = 0.0V。注 a: チョッパ雑音（典型 400 kHz）と ΣΔ 量子化雑音 | Typ | p8 | "VOUT Noise NOUT — 31.5 — mVrms VIN+ = 0.0V" / "(typically 400 kHz at room temperature)" |
 | 入力 DC 同相除去 | 76 dB | — | Typ | p7 | "Input DC Common-Mode CMRRIN — 76 — dB" |
+| 入力インピーダンス | 500 kΩ | — | Typ | p7（画像で確認） | "Equivalent Input Impedance RIN — 500 — kΩ"〔2026-09-25 照合で追加〕 |
+| クリップ前の最大入力 | 308.0 mV | Figure 10 | Typ | p7（画像で確認） | "Maximum Input Voltage before VOUT Clipping \|VIN+\|MAX — 308.0 — mV"〔2026-09-25 照合で追加〕 |
+| 雑音密度（FAQ の本文） | 約 500 nV/√Hz（20 kHz 未満、入力換算。印字は "nV/s Hz"） | — | 本文（FAQ） | p19 "Accuracy" の 1.（画像で確認） | "The noise spectral density is roughly 500 nV/s Hz below 20 kHz (input referred)."〔2026-09-25 照合で追加〕 |
 | 入出力間容量 CI-O | 1.2 pF | ƒ = 1 MHz | Typ | p9 | "Capacitance (Input-Output) CI-O — 1.2 — pF ƒ = 1 MHz" |
 | 電源電流 | IDD1 10.86 / 16.0 mA（VIN+ = 400 mV）、IDD2 11.56 / 16.0 mA（VIN+ = –400 mV） | — | Typ / Max | p7 | "Input Supply Current IDD1 — 10.86 16.0 mA VIN+ = 400 mV" |
-| THD / SNR | — | — | — | — | DS に無い |
+| THD / SNR | — | — | — | p19 | 規定値は DS に無い。p19 の FAQ "Can the signal to noise ratio be improved?" に後段フィルタで雑音を下げる説明と、上の雑音密度の記述があるだけ〔2026-09-25 照合で訂正〕 |
 
 ## Q3-10. Skyworks（旧 Silicon Labs）Si8920（シャント用、±100 / ±200 mV）
 
@@ -438,7 +454,7 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 非直線性 | A: 0.04 / 0.15 %、B: 0.025 / 0.1 % | — | Typ / Max | p6 | "Nonlinearity Si8920A 0.04 0.15 / Si8920B 0.025 0.1 %" |
 | 出力雑音 | A: 0.14 / 0.28 mVrms、B: 0.10 / 0.20 mVrms | 100 kHz bandwidth | Typ / Max | p6 | "Output Noise Si8920A 100 kHz bandwidth 0.14 0.28 mVrms" |
 | 入出力間容量 CIO | 1 pF（GW DIP-8）、1 pF（WB SOIC-16） | f = 1 MHz | パッケージ列（画像で確認） | p13 Table 4.6 | "Capacitance (Input-Output)2 CIO f = 1 MHz 1 1 pF" |
-| 高圧側電源 | 入力側 VDDA が別に要る（図の "Isolated Supply"） | — | 図の記載 | p7 | "Isolated Supply" |
+| 高圧側電源 | 入力側 VDDA が別に要る（本文。例はゲート駆動の浮動電源 24 V からレギュレータで約 5 V を作る。p7 の "Isolated Supply" は CMTI 試験回路 Figure 4.1 の記載） | — | 本文・図の記載 | p5、p7 Figure 4.1 | "Since the input and output of the Si8920 are galvanically isolated from each other, separate power supplies are necessary on each side." / "Figure 4.1. Common-Mode Transient Immunity Characterization Circuit"〔2026-09-25 照合で訂正〕 |
 | THD / SNR | — | — | — | — | DS に無い |
 
 ### Q3 で探したが DS に無かった項目
@@ -447,8 +463,8 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 - THD: ACPL-C87x、HCPL-7800、Si8920、ADuM3190 は THD の規定なし
 - SNR: ISO224、AD215、ACPL-C87x、HCPL-7800、Si8920、ADuM3190 は SNR の規定なし
 - AD215 のバリア容量 CIO（「同相容量 4.5 pF」の本文と同相インピーダンスのみ）
-- AMC3330 / AMC3336 の **DC/DC の動作周波数の数値**（spread-spectrum とだけ書いてある）、放射の数値（CISPR 適合の記載のみ）
-- 雑音密度の表の値: AMC1311 / AMC1300 / AMC3330 / AMC3336 はグラフのみ（表は帯域積分の µVrms）。ACPL-C87x、HCPL-7800、Si8920 は密度なし
+- AMC3330 / AMC3336 の **DC/DC の動作周波数の数値**（spread-spectrum とだけ書いてある。同期先の変調器のクロックは、AMC3330 が 20 MHz（p25 本文）、AMC3336 が外部 CLKIN 9〜21 MHz）、放射の数値（CISPR 適合の記載のみ）〔2026-09-25 照合で訂正〕
+- 雑音密度の表の値: AMC1311 / AMC1300 / AMC3330 / AMC3336 はグラフのみ（表は帯域積分の µVrms）。ACPL-C87x、Si8920 は密度なし。HCPL-7800 は表に無く、p19 の FAQ に約 500 nV/√Hz の記述だけがある〔2026-09-25 照合で訂正〕
 
 ---
 
@@ -463,7 +479,7 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 電源 | VCC1, VCC2 2.25〜5.5 V | — | MIN / MAX | p7 §5.3（画像で確認） | "VCC1, VCC2 Supply Voltage 2.25 5.5 V" |
 | データレート（推奨動作条件） | **表は MAX 50 Mbps、注 (2) は 100 Mbps** | — | MAX | p7（画像で確認） | "DR Data Rate(2) 50 Mbps" / "(2) 100 Mbps is the maximum specified data rate, although higher data rates are possible." |
 | 伝搬遅延 | 3.3 V: 6 / 13.5 / 18.5 ns（5 V: 6 / 12.7 / 17、2.5 V: 7.5 / 14 / 21） | See Figure 6-1 | MIN / TYP / MAX | p20 §5.16（5 V は p19、2.5 V は p21） | "tPLH, tPHL Propagation delay time 6 13.5 18.5 ns" |
-| パルス幅歪み PWD | 5.9 ns | 各電源 | MAX | p19〜p21 | "PWD Pulse width distortion(1) |tPHL – tPLH| 5.9 ns" |
+| パルス幅歪み PWD | 5.9 ns | 各電源 | MAX | p19〜p21 | "PWD Pulse width distortion(1) \|tPHL – tPLH\| 5.9 ns" |
 | 時間間隔誤差 tie | 1.4 ns（5 V）、1.3 ns（3.3 V）、1.5 ns（2.5 V） | 2^16 – 1 PRBS data at 100 Mbps | TYP | p19, p20, p21 | "tie Time interval error 216 – 1 PRBS data at 100 Mbps 1.3 ns" |
 | スキュー | tsk(o) 4.4 ns、tsk(pp) 5 ns（3.3 V） | — | MAX | p20 | "tsk(o) ... Same-direction channels 4.4 ns / tsk(pp) Part-to-part skew time(3) 5 ns" |
 | バリア容量 CIO | ≅1 pF（DW-16 / DUW-16 / DBQ-16 とも） | VIO = 0.4 x sin (2πft), f = 1 MHz | パッケージ列 | p9 §5.6 | "CIO Barrier capacitance, input to output(6) VIO = 0.4 x sin (2πft), f = 1 MHz ≅1 ≅1 ≅1 pF" |
@@ -479,10 +495,11 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 |---|---|---|---|---|---|
 | データレート | 0〜100 Mbps | — | MIN / MAX | p7 §5.3 | "DR(2) Data Rate 0 100 Mbps" |
 | 伝搬遅延 | 3.3 V: 6 / 12 / 18.5 ns（5 V: 6 / 11 / 17、2.5 V: 7.5 / 13 / 21） | — | MIN / TYP / MAX | p20（p19, p21） | "tPLH, tPHL Propagation delay time 6 12 18.5 ns" |
-| PWD | 3.3 V: 0.5 / 5.9 ns（5 V: 0.4 / 5.9、2.5 V: 0.6 / 5.9） | — | TYP / MAX | p20 | "PWD Pulse width distortion(1) |tPHL – tPLH| 0.5 5.9 ns" |
+| PWD | 3.3 V: 0.5 / 5.9 ns（5 V: 0.4 / 5.9、2.5 V: 0.6 / 5.9） | — | TYP / MAX | p20 | "PWD Pulse width distortion(1) \|tPHL – tPLH\| 0.5 5.9 ns" |
 | tie | 1.3 ns（5 V・3.3 V・2.5 V とも） | 2^16 – 1 PRBS data at 100 Mbps | TYP | p19〜p21 | "tie Time interval error 216 – 1 PRBS data at 100 Mbps 1.3 ns" |
 | バリア容量 CIO | ~1.1 pF（DW-16）、~0.9 pF（DBQ-16） | VIO = 0.4 x sin (2πft), f = 1 MHz | パッケージ列 | p9 | "CIO Barrier capacitance, input to output(6) ... ~1.1 ~0.9 pF" |
 | 電源電流（ISO7762、3.3 V） | 1 Mbps: ICC1 4.4 / 6.6、ICC2 3.9 / 6.3。10 Mbps: 5.2 / 7.5、5.4 / 8.1。100 Mbps: 12.9 / 16.9、19.5 / 26 mA | All channels switching with square wave clock input; CL = 15 pF | TYP / MAX | p16 §5.12 | "100 Mbps ICC1 12.9 16.9 / ICC2 19.5 26" |
+| ピーク・ツー・ピーク出力ジッタ vs データレート | 2.5 / 3.3 / 5 V の立上り・立下りの 6 本。10 Mbps で約 0.76〜0.94 ns、50 Mbps で約 0.93〜1.09 ns、100 Mbps で約 1.09〜1.29 ns（立上りが低く、立下りが高い）（目読み。典型値のグラフ） | TA = 25°C | グラフ | p25 Figure 5-17（300 dpi の画像で確認） | "Figure 5-17. Peak-to-Peak Output Jitter vs Data Rate"〔2026-09-25 照合で追加〕 |
 
 ## Q4-3. TI ISO1540 / ISO1541（I2C アイソレータ）
 
@@ -513,8 +530,8 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 項目 | 値 | 条件 | 列 | 出典 | 原文の引用 |
 |---|---|---|---|---|---|
 | 最大データレート | ARW 1 Mbps、BRW 10 Mbps、CRW 90 / 120 Mbps | CL = 15 pF, CMOS signal levels。注 3: 規定 PWD を保証する最速レート | Min（CRW は Min / Typ） | p5（画像で確認） | "ADuM1400CRW/... Maximum Data Rate3 90 120 Mbps" |
-| 伝搬遅延（CRW） | 5 V: 18 / 27 / 32 ns、3 V: 20 / 34 / 45 ns | CL = 15 pF | Min / Typ / Max | p5, p8 | "Propagation Delay4 tPHL, tPLH 18 27 32 ns" |
-| PWD（CRW） | 5 V・3 V とも 0.5 / 2 ns | CL = 15 pF | Typ / Max | p5, p8 | "Pulse Width Distortion, |tPLH − tPHL|4 PWD 0.5 2 ns" |
+| 伝搬遅延（CRW） | 5 V: 18 / 27 / 32 ns、3 V: 20 / 34 / 45 ns | CL = 15 pF | Min / Typ / Max | p5（5 V）, p7（3 V） | "Propagation Delay4 tPHL, tPLH 18 27 32 ns"〔2026-09-25 照合で訂正〕 |
+| PWD（CRW） | 5 V・3 V とも 0.5 / 2 ns | CL = 15 pF | Typ / Max | p5（5 V）, p7（3 V） | "Pulse Width Distortion, \|tPLH − tPHL\|4 PWD 0.5 2 ns"〔2026-09-25 照合で訂正〕 |
 | リフレッシュ・レート | 1.2 Mbps（5 V）、1.1 Mbps（3 V 表） | — | Typ | p5, p8 | "Refresh Rate fr 1.2 Mbps" |
 | 入出力間容量 CI-O | 2.2 pF | f = 1 MHz | 値の列（Typ） | p20 | "Capacitance (Input to Output)1 CI-O 2.2 pF f = 1 MHz" |
 | 電源電流（ADuM1400、5 V） | 10 Mbps: IDD1 8.6 / 10.6、IDD2 2.6 / 3.5 mA（5 MHz logic signal freq.）。90 Mbps: IDD1 70 / 100、IDD2 18 / 25 mA（45 MHz） | 4 ch 合計 | Typ / Max | p4 Table 1 | "90 Mbps (CRW Grade Only) VDD1 Supply Current IDD1 (90) 70 100 mA 45 MHz logic signal freq." |
@@ -544,6 +561,8 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 最大 I2C バス周波数 | 1.7 MHz | — | Max | p15 | "Maximum I2C Bus Frequency Fmax — — 1.7 MHz" |
 | 伝搬遅延（3.3 V） | A→B 立上り 44 / 55、立下り 17 / 29、B→A 立上り 30 / 40、立下り 14 / 27 ns | No bus capacitance, R1 = 806, R2 = 499 | Typ / Max | p15 | "3.3 V Operation Tphab ... 44 55 ns" |
 | 非 I2C チャネル | 0〜10 Mbps、伝搬遅延 max 20 ns（Si8602/05/06） | — | Min・Max／Max | p16 Table 5.4 | "Maximum Data Rate 0 — 10 Mbps / Propagation Delay tPHL, tPLH — — 20 ns" |
+| 非 I2C チャネルの PWD | 12 ns | See Figure 5.1 | Max | p16 Table 5.4（画像で確認） | "Pulse Width Distortion \|tPLH – tPHL\| PWD — — 12 ns"〔2026-09-25 照合で追加〕 |
+| 非 I2C チャネルのピーク・アイ・ジッタ | 350 ps | — | Typ | p16 Table 5.4（画像で確認） | "Peak Eye Diagram Jitter tJIT(PK) — 350 — ps"〔2026-09-25 照合で追加〕 |
 | 入出力間容量 CIO | 1.0 pF（NB SOIC-8）、2.0 pF（NB SOIC-16）、2.0 pF（WB SOIC-16） | f = 1 MHz | パッケージ列 | p19 | "Capacitance (Input-Output)2 CIO f = 1 ΜΗz 1.0 2.0 2.0 pF" |
 | 電源電流（Si8600） | 1.7 MHz: Idda 3.3 / 5.0、Iddb 2.6 / 3.9 mA | All channels = 1.7 MHz | Typ / Max | p13 | "All channels = 1.7 MHz AVDD Current Idda 3.3 5.0 mA / BVDD Current Iddb 2.6 3.9" |
 
@@ -583,7 +602,7 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 変換器の入力電流 | 5 V→5 V: 225 / 316 mA（110 mA 負荷）。3.3→3.3: 143 / 216 mA（60 mA 負荷） | — | TYP / MAX | p14 §7.10 | "VDD = 5 V, VSEL = VISOOUT ILOAD = 110 mA 225 316 mA" |
 | 伝搬遅延／PWD（3.3 V） | 6 / 11 / 16.2 ns、PWD 0.6 / 4.7 ns | — | MIN / TYP / MAX、TYP / MAX | p28 §7.20 | "tPLH, tPHL Propagation delay time ... 6 11 16.2 ns / PWD ... 0.6 4.7 ns" |
 | バリア容量 CIO | ~3.5 pF | VIO = 0.4 × sin (2πft), f = 1 MHz | 値の列のみ | p11 | "CIO Barrier capacitance, input to output(5) VIO = 0.4 × sin (2πft), f = 1 MHz ~3.5 pF" |
-| ジッタ／tie | — | — | — | — | DS に無い |
+| 時間間隔誤差 tie | 0.7 ns（5 V）、0.65 ns（3.3 V）、0.7 ns（2.5 V）、0.7 ns（1.8 V） | 2^16 – 1 PRBS data at 100 Mbps | TYP | p27 §7.19、p28 §7.20（画像で確認）、p29 §7.21、p30 §7.22 | "tie Time interval error 216 – 1 PRBS data at 100 Mbps 0.65 ns"〔2026-09-25 照合で訂正〕 |
 
 ## Q4-10. TI ISOW1044（絶縁 CAN FD トランシーバ＋DC/DC 内蔵）
 
@@ -598,13 +617,14 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | VISOOUT | 4.75 / 5 / 5.25 V | EN=VDD, STB, TXD, IN floating | MIN / TYP / MAX | p10 | "VISOOUT Isolated Output supply voltage EN=VDD, STB, TXD, IN floating 4.75 5 5.25 V" |
 | 外部に取れる電流 | 20 mA | VDD = 4.5 to 5.5V, CAN full loaded 60Ω, TXD toggling 5Mbps, IN toggling 10Mbps | TYP | p10 | "Iout Extra current available on Visoout ... 20 mA" |
 | 変換器の電源電流 | 76 / 123 mA（TXD 1 Mbps）、26 / 46 mA（recessive） | RL = 60Ω | TYP / MAX | p13 §6.10 | "IDD TXD = 1Mbps 50% duty square wave, RL = 60Ω 76 123 mA" |
+| GPIO チャネルの PWD | 3.5 / 10 ns | — | TYP / MAX | p15 | "GPIO Channel ... PWD Pulse Width distortion, \|tPLH- tPHL\| 3.5 10 ns"〔2026-09-25 照合で追加〕 |
 | バリア容量 CIO | ≅3.5 pF | VIO = 0.4 sin (2πft), f = 1MHz | 値の列のみ | p8 | "CIO Barrier capacitance, input to output(5) VIO = 0.4 sin (2πft), f = 1MHz ≅3.5 pF" |
 
 ### Q4 で探したが DS に無かった項目
 
-- **周期ジッタ／位相雑音（クロック信号を通したときの jitter、たとえば 24.576 MHz の MCLK 相当）**はどの DS にも規定が無い。あるのは ISO7741 / ISO7762 の tie（100 Mbps PRBS の時間間隔誤差）と Si864x のピーク・アイ・ジッタ 350 ps だけ
-- ADuM1400、ADuM5401、ISOW7741 はジッタ・tie の規定なし
-- 放射の**数値**（dBµV/m）: ISOW7741 / ISOW1044 は CISPR 適合の記載とグラフ（ISOW1044 Figure 9-4 は未読）、ADuM5401 は本文の注意のみ
+- **周期ジッタ／位相雑音（クロック信号を通したときの jitter、たとえば 24.576 MHz の MCLK 相当）**はどの DS にも規定が無い。あるのは ISO7741 / ISO7762 / ISOW7741 の tie（100 Mbps PRBS の時間間隔誤差）、Si864x と Si860x（非 I2C チャネル）のピーク・アイ・ジッタ 350 ps、ISO7762 の出力ジッタ vs データレートのグラフ（p25 Figure 5-17、典型値）だけ〔2026-09-25 照合で訂正〕
+- ADuM1400、ADuM5401 はジッタ・tie の規定なし（全文に jitter / time interval error の語が無い）〔2026-09-25 照合で訂正〕
+- 放射の**数値**（dBµV/m）: ISOW7741 / ISOW1044 は CISPR 適合の記載とグラフ（ISOW1044 Figure 9-4 は p35 の "ISOW1044 Radiated Emissions Versus CISPR32B Line"。p11 の VCM などの行も "See Figure 9-4 and Table 9-1" とこの番号を参照している）、ADuM5401 は本文の注意のみ〔2026-09-25 照合で訂正〕
 - ISO7741 のデータレートは推奨動作条件の表（50 Mbps）と注（100 Mbps）が食い違う（原文のまま）
 
 ---
@@ -624,8 +644,8 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 | 振幅特性（1 kHz 基準） | 20 Hz: −0.15 / −0.04 / 0.0 dB、20 kHz: −0.15 / −0.05 / 0.0 dB | +4 dBu, test circuit 1, Rs=600 Ω | MIN / TYP / MAX | p2 | "20 Hz, +4 dBu, test circuit 1, Rs=600 Ω –0.15 dB –0.04 dB 0.0 dB" |
 | THD | 1 kHz: <0.001 %、20 Hz: 0.025 % / 0.10 % | +4 dBu, test circuit 1, Rs=600 Ω | TYPICAL（20 Hz は TYP / MAX） | p2 | "Distortion (THD) 1 kHz ... <0.001% / 20 Hz ... 0.025% 0.10%" |
 | 20 Hz 最大入力 | +18 / +20 dBu | 1% THD, test circuit 1, Rs=600 Ω | MIN / TYP | p2 | "Maximum 20 Hz input level 1% THD ... +18 dBu +20 dBu" |
-| THD+N vs 周波数 | +4 dBu: 20 Hz 約 0.025 %、約 60 Hz で 0.004 %、約 130 Hz で 0.001 %。+14 dBu: 20 Hz 約 0.055 %、50 Hz 約 0.012 %。+20 dBu: 20 Hz 約 1 %、約 30 Hz で 0.1 %（目読み） | "THD at FIXED INPUT LEVELS" | グラフ（Audio Precision） | p2（画像で確認） | "THD at FIXED INPUT LEVELS THD+N (%) vs FREQUENCY (Hz)" |
-| THD+N vs 入力レベル | 20 Hz: 約 0.02〜0.025 %（−25〜+5 dBu）、30 Hz: 約 0.012 %、50 Hz: 約 0.005 %（〜+10 dBu 付近まで平坦）（目読み） | "THD at FIXED FREQUENCIES" | グラフ | p2 | "THD at FIXED FREQUENCIES THD+N (%) vs INPUT LEVEL(dBu)" |
+| THD+N vs 周波数 | +4 dBu: 20 Hz 約 0.023 %、60 Hz 約 0.0045 %、130 Hz 約 0.0016 %、図の下限 0.001 % に届くのは約 240 Hz。+14 dBu: 20 Hz 約 0.052 %、50 Hz 約 0.010 %。+20 dBu: 20 Hz 約 1 %、0.1 % を切るのは約 27 Hz（30 Hz で約 0.06 %）（目読み） | "THD at FIXED INPUT LEVELS" | グラフ（Audio Precision） | p2（400〜800 dpi の画像で確認） | "THD at FIXED INPUT LEVELS THD+N (%) vs FREQUENCY (Hz)"〔2026-09-25 照合で訂正〕 |
+| THD+N vs 入力レベル | 20 Hz: 約 0.021〜0.024 %、30 Hz: 約 0.012〜0.014 %、50 Hz: −15〜約 +8 dBu で約 0.006 %（−25 dBu で約 0.0043 %）。上がり始めるのは 20 Hz で約 +5 dBu、30 Hz で約 +7 dBu、50 Hz で約 +10 dBu（目読み） | "THD at FIXED FREQUENCIES" | グラフ | p2（画像で確認） | "THD at FIXED FREQUENCIES THD+N (%) vs INPUT LEVEL(dBu)"〔2026-09-25 照合で訂正〕 |
 | CMRR（50 Ω 平衡信号源） | 60 Hz 107 dB、3 kHz 65 / 73 dB | test circuit 2 | TYP（3 kHz は MIN / TYP） | p2 | "60 Hz, test circuit 2 107 dB / 3 kHz, test circuit 2 65 dB 73 dB" |
 | CMRR（600 Ω 不平衡信号源） | 60 Hz 100 dB、3 kHz 68 dB | test circuit 3 | TYP | p2 | "60 Hz, test circuit 3 100 dB / 3 kHz, test circuit 3 68 dB" |
 | 出力インピーダンス | 2.34 kΩ | 1 kHz, test circuit 1, Rs=50 Ω | TYP | p2 | "Output impedance, Zo ... 2.34 kΩ" |
@@ -700,6 +720,6 @@ analog.com は proxy 経由で接続が切られた（HTTP/2 `INTERNAL_ERROR`、
 
 - **一次–二次間の巻線間容量**: どの DS にも無い（Jensen は巻線–シールド・ケース間のみ、Lundahl・Hammond・Triad は容量の記載なし）
 - THD の周波数・レベル依存: Lundahl は 50 Hz の 2 点（+20 / +30 dBu）のみ、Hammond 101 と Triad TY-250P は THD の記載なし、TY-146P は 275 Hz〜3.5 kHz のみ
-- 20〜50 Hz での THD のグラフ: Jensen JT-11P-1 だけ（p2 の 2 枚）
+- 20〜50 Hz での THD のグラフ: Jensen JT-11P-1（p2 の 2 枚）と Hammond 560G（`Hammond_560.pdf` p3 の "560G Rs-150 Rl=150 THD+N"。縦軸の表記が線形 −20〜50「%」で、数値としては読めない）〔2026-09-25 照合で訂正〕
 - 磁気シールドの減衰量: Jensen（30 dB）以外は無い（Lundahl はミューメタル缶、Hammond はハムバッキング構造の記載のみ）
 - CMRR: Jensen（50 Ω / 600 Ω 信号源）と Lundahl（接続例の >60 dB）以外は無い（TY-146P は縦平衡 >45 db）
