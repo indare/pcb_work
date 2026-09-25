@@ -1,0 +1,48 @@
+ii        n=1 RS6@80%:  16.1ms RS6@100%:   9.5ms TMR9@80%:   6.7ms TMR9@100%:   4.7ms TMR10WI@80%:   5.6ms TMR10WI@100%:   4.0ms REC20K@80%:   2.1ms REC20K@100%:   1.6ms 
+ii        n=2 RS6@80%:  19.4ms RS6@100%:  11.4ms TMR9@80%:   8.1ms TMR9@100%:   5.6ms TMR10WI@80%:   6.8ms TMR10WI@100%:   4.8ms REC20K@80%:   2.6ms REC20K@100%:   2.0ms 
+ii        n=4 RS6@80%:  26.3ms RS6@100%:  15.4ms TMR9@80%:  10.9ms TMR9@100%:   7.5ms TMR10WI@80%:   9.1ms TMR10WI@100%:   6.5ms REC20K@80%:   3.4ms REC20K@100%:   2.6ms 
+i         n=1 RS6@80%:  25.3ms RS6@100%:  12.1ms TMR9@80%:   7.9ms TMR9@100%:   5.2ms TMR10WI@80%:   6.5ms TMR10WI@100%:   4.4ms REC20K@80%:   2.3ms REC20K@100%:   1.7ms 
+i         n=2 RS6@80%:  58.3ms RS6@100%:  16.8ms TMR9@80%:   9.8ms TMR9@100%:   6.0ms TMR10WI@80%:   7.7ms TMR10WI@100%:   5.0ms REC20K@80%:   2.4ms REC20K@100%:   1.8ms 
+i         n=4 RS6@80%:   不可  RS6@100%:  64.2ms TMR9@80%:  17.8ms TMR9@100%:   8.5ms TMR10WI@80%:  12.0ms TMR10WI@100%:   6.6ms REC20K@80%:   2.8ms REC20K@100%:   2.0ms 
+i-direct  n=1 RS6@80%:  20.2ms RS6@100%:   9.8ms TMR9@80%:   6.5ms TMR9@100%:   4.3ms TMR10WI@80%:   5.3ms TMR10WI@100%:   3.6ms REC20K@80%:   1.9ms REC20K@100%:   1.4ms 
+i-direct  n=2 RS6@80%:  45.4ms RS6@100%:  13.7ms TMR9@80%:   8.0ms TMR9@100%:   5.0ms TMR10WI@80%:   6.3ms TMR10WI@100%:   4.1ms REC20K@80%:   2.0ms REC20K@100%:   1.5ms 
+i-direct  n=4 RS6@80%:   不可  RS6@100%:  50.4ms TMR9@80%:  14.6ms TMR9@100%:   7.1ms TMR10WI@80%:   9.9ms TMR10WI@100%:   5.5ms REC20K@80%:   2.3ms REC20K@100%:   1.7ms 
+RS6 150-301% (HP clip 314%)
+TMR9 100-201% (HP clip 209%)
+TMR10WI 90-181% (HP clip 188%)
+REC20K 45-90% (HP clip 94%)
+RS6 25 ii typ ok
+RS6 25 ii typ n4 ok
+RS6 25 ii light need 2.8 mA -> 5.36 kΩ 0.04 W
+RS6 25 i n2 typ ok
+RS6 25 i n4 typ ok
+RS6 25 i n4 light ok
+RS6 25 noboard typ need 4.3 mA -> 3.49 kΩ 0.06 W
+TMR9 25 ii typ need 22.5 mA -> 0.67 kΩ 0.34 W
+TMR9 25 ii typ n4 need 21.5 mA -> 0.70 kΩ 0.32 W
+TMR9 25 ii light need 27.8 mA -> 0.54 kΩ 0.42 W
+TMR9 25 i n2 typ need 16.2 mA -> 0.93 kΩ 0.24 W
+TMR9 25 i n4 typ need 3.5 mA -> 4.29 kΩ 0.05 W
+TMR9 25 i n4 light need 17.4 mA -> 0.86 kΩ 0.26 W
+TMR9 25 noboard typ need 29.3 mA -> 0.51 kΩ 0.44 W
+TMR10WI 25 ii typ need 30.8 mA -> 0.49 kΩ 0.46 W
+TMR10WI 25 ii typ n4 need 29.8 mA -> 0.50 kΩ 0.45 W
+TMR10WI 25 ii light need 36.0 mA -> 0.42 kΩ 0.54 W
+TMR10WI 25 i n2 typ need 24.5 mA -> 0.61 kΩ 0.37 W
+TMR10WI 25 i n4 typ need 11.8 mA -> 1.28 kΩ 0.18 W
+TMR10WI 25 i n4 light need 25.6 mA -> 0.58 kΩ 0.38 W
+TMR10WI 25 noboard typ need 37.5 mA -> 0.40 kΩ 0.56 W
+REC20K 25 ii typ need 114.2 mA -> 0.13 kΩ 1.71 W
+REC20K 25 ii typ n4 need 113.2 mA -> 0.13 kΩ 1.70 W
+REC20K 25 ii light need 119.5 mA -> 0.13 kΩ 1.79 W
+REC20K 25 i n2 typ need 108.0 mA -> 0.14 kΩ 1.62 W
+REC20K 25 i n4 typ need 95.2 mA -> 0.16 kΩ 1.43 W
+REC20K 25 i n4 light need 109.2 mA -> 0.14 kΩ 1.64 W
+REC20K 25 noboard typ need 121.0 mA -> 0.12 kΩ 1.82 W
+REC20K 10 ii typ need 14.2 mA -> 1.06 kΩ 0.21 W
+REC20K 10 ii typ n4 need 13.2 mA -> 1.14 kΩ 0.20 W
+REC20K 10 ii light need 19.5 mA -> 0.77 kΩ 0.29 W
+REC20K 10 i n2 typ need 7.9 mA -> 1.90 kΩ 0.12 W
+REC20K 10 i n4 typ ok
+REC20K 10 i n4 light need 9.1 mA -> 1.65 kΩ 0.14 W
+REC20K 10 noboard typ need 21.0 mA -> 0.71 kΩ 0.32 W

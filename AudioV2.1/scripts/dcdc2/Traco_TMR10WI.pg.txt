@@ -1,0 +1,306 @@
+p1: DC/DC Converter                                                                            TMR 10WI Series, 10 Watt
+p1: 
+p1: 
+p1: • Ultra compact 10 Watt converter in
+p1:    SIP-8 casing
+p1: • High power density of 3,89W/cm³
+p1: • Wide 4:1 input voltage ranges
+p1: • I/O-isolation 1500 VDC
+p1: • High efficiency (up to 89%) for low                                                                           UL 62368-1 IEC 62368-1
+p1:    thermal loss
+p1:                                                       The TMR 10WI series is a family of isolated 10W DC/DC converter modules
+p1: • Operating temperature range -40°C to                with regulated output, featuring wide 4:1 input voltage ranges. The product
+p1:    +70°C (without derating)
+p1:                                                       offers a very high power density of 3.98W/cm³ in an ultra-compact SIP-8
+p1: • Fully regulated outputs                             package occupying only 2.0 cm² (0.3 square inch) of board space. An excellent
+p1:                                                       efficiency of up to 89% allows for an extended operating temperature range of
+p1: • Remote On/Off control                               –40° to +70°C without derating under natural convection conditions. Further
+p1: • Indefinite short circuit protection                 features include remote On/Off control, continuous short circuit protection and
+p1:                                                       an I/O isolation voltage of 1500 VDC. The very compact dimensions of these
+p1: • 3-year product warranty                             converters make them an ideal solution for many space critical applications in
+p1:                                                       communication equipment, instrumentation and industrial electronics.
+p1: 
+p1: 
+p1: Models
+p1:          Order Code               Input Voltage                   Output 1                       Output 2                Efficiency
+p1:                                       Range                Vnom              Imax           Vnom            Imax            typ.
+p1:        TMR 10-1211WI                                     5.1 VDC          2'000 mA                                         89 %
+p1:        TMR 10-1212WI                                      12 VDC           833 mA                                          89 %
+p1:        TMR 10-1213WI                4.5 - 18 VDC          15 VDC           666 mA                                          89 %
+p1:        TMR 10-1215WI               (12 VDC nom.)          24 VDC           416 mA                                          89 %
+p1:        TMR 10-1222WI                                     +12 VDC           416 mA          –12 VDC        416 mA           88 %
+p1:        TMR 10-1223WI                                     +15 VDC           333 mA          –15 VDC        333 mA           89 %
+p1:        TMR 10-2411WI                                     5.1 VDC          2'000 mA                                         88 %
+p1:        TMR 10-2412WI                                      12 VDC           833 mA                                          89 %
+p1:        TMR 10-2413WI                 9 - 36 VDC           15 VDC           666 mA                                          89 %
+p1:        TMR 10-2415WI               (24 VDC nom.)          24 VDC           416 mA                                          88 %
+p1:        TMR 10-2422WI                                     +12 VDC           416 mA          –12 VDC        416 mA           88 %
+p1:        TMR 10-2423WI                                     +15 VDC           333 mA          –15 VDC        333 mA           88 %
+p1:        TMR 10-4811WI                                     5.1 VDC          2'000 mA                                         88 %
+p1:        TMR 10-4812WI                                      12 VDC           833 mA                                          89 %
+p1:        TMR 10-4813WI                18 - 75 VDC           15 VDC           666 mA                                          89 %
+p1:        TMR 10-4815WI               (48 VDC nom.)          24 VDC           416 mA                                          89 %
+p1:        TMR 10-4822WI                                     +12 VDC           416 mA          –12 VDC        416 mA           89 %
+p1:        TMR 10-4823WI                                     +15 VDC           333 mA          –15 VDC        333 mA           89 %
+p1: 
+p1: Note    - If the input will be switched electromechanically, use an external 68 μF / 100 V / KZE capacitor to reduce voltage transient.
+p1: 
+p1: 
+p1: 
+p1: 
+p1: www.tracopower.com                                           July 2, 2026                                                   Page 1 / 5
+p1:                                                                                                  TMR 10WI Series, 10 Watt
+p2: 
+p2: 
+p2: Input Specifications
+p2: Input Current                   - At no load                               12 Vin models: 16 mA typ. / 24 mA max.
+p2:                                                                            24 Vin models: 8 mA typ. / 13 mA max.
+p2:                                                                            48 Vin models: 5 mA typ. / 10 mA max.
+p2:                                 - At full load                             12 Vin models: 936 mA typ. / 967 mA max.
+p2:                                                                            24 Vin models: 473 mA typ. / 494 mA max.
+p2:                                                                            48 Vin models: 234 mA typ. / 247 mA max.
+p2: Surge Voltage                                                              12 Vin models: 25 VDC max. (1 s max.)
+p2:                                                                            24 Vin models: 50 VDC max. (1 s max.)
+p2:                                                                            48 Vin models: 100 VDC max. (1 s max.)
+p2: Start-up Voltage                                                           12 Vin models: 4.1 VDC - 4.5 VDC
+p2:                                                                            24 Vin models: 8 VDC - 9 VDC
+p2:                                                                            48 Vin models: 17 VDC - 18 VDC
+p2: Under Voltage Lockout                                                      12 Vin models: 3.7 - 4.3 VDC max.
+p2:                                                                            24 Vin models: 7.5 - 8.5 VDC max.
+p2:                                                                            48 Vin models: 15.5 - 16.5 VDC max.
+p2: Recommended Input Fuse                                                     12 Vin models: 5'000 mA (slow blow)
+p2:                                                                            24 Vin models: 2'500 mA (slow blow)
+p2:                                                                            48 Vin models: 1'500 mA (slow blow)
+p2:                                                                                           (The need of an external fuse has to be assessed
+p2:                                                                                           in the final application.)
+p2: Input Filter                                                                              Internal Capacitor
+p2: 
+p2: Output Specifications
+p2: Voltage Set Accuracy                                                                      ±1% max.
+p2: Regulation                      - Input Variation (Vmin - Vmax)     single output models: 0.8% max.
+p2:                                                                       dual output models: 0.8% max.
+p2:                                 - Load Variation (0 - 100%)         single output models: 1% max.
+p2:                                                                       dual output models: 1% max. (Output 1)
+p2:                                                                                           1% max. (Output 2)
+p2:                                 - Voltage Balance                     dual output models: 2% max.
+p2:                                   (symmetrical load)
+p2:                                 - Cross Regulation                    dual output models: 5% max.
+p2:                                   (25% / 100% asym. load)
+p2: Ripple and Noise                - single output                          5.1 Vout models: 100 mVp-p max. (w/ 1uF)
+p2: (20 MHz Bandwidth)                                                       12 Vout models: 140 mVp-p max. (w/ 1uF)
+p2:                                                                          15 Vout models: 140 mVp-p max. (w/ 1uF)
+p2:                                                                          24 Vout models: 140 mVp-p max. (w/ 1uF)
+p2:                                 - dual output                      12 / -12 Vout models: 140 / 140 mVp-p max. (w/ 1uF)
+p2:                                                                    15 / -15 Vout models: 140 / 140 mVp-p max. (w/ 1uF)
+p2:                                 - single output                          5.1 Vout models: 80 mVp-p typ. (w/ 1uF)
+p2:                                                                          12 Vout models: 100 mVp-p typ. (w/ 1uF)
+p2:                                                                          15 Vout models: 100 mVp-p typ. (w/ 1uF)
+p2:                                                                          24 Vout models: 100 mVp-p typ. (w/ 1uF)
+p2:                                 - dual output                      12 / -12 Vout models: 100 / 100 mVp-p typ. (w/ 1uF)
+p2:                                                                    15 / -15 Vout models: 100 / 100 mVp-p typ. (w/ 1uF)
+p2: Capacitive Load                 - single output                          5.1 Vout models: 3'900 µF max.
+p2:                                                                          12 Vout models: 680 µF max.
+p2:                                                                          15 Vout models: 470 µF max.
+p2:                                                                          24 Vout models: 180 µF max.
+p2:                                 - dual output                      12 / -12 Vout models: 390 / 390 µF max.
+p2:                                                                    15 / -15 Vout models: 220 / 220 µF max.
+p2: Minimum Load                                                                              Not required
+p2: Temperature Coefficient                                                                   ±0.02 %/K max.
+p2: Hold-up Time                                                                              1 ms min. (12 Vin models)
+p2:                                                                                           1.2 ms min. (24 Vin models)
+p2:                                                                                           5.5 ms min. (48 Vin models)
+p2: 
+p2: All specifications valid at nominal voltage, resistive full load and +25°C after warm-up time, unless otherwise stated.
+p2: 
+p2: www.tracopower.com                                                July 2, 2026                                                 Page 2 / 5
+p2:                                                                                                  TMR 10WI Series, 10 Watt
+p3: 
+p3: Start-up Time                                                                               30 ms typ. / 50 ms max.
+p3: Start-up Overshoot Voltage                                                                  5% max.
+p3: Short Circuit Protection                                                                    Continuous, Automatic recovery
+p3: Overload Protection                                                                         Switch off after 4 s delay, automatic restart
+p3: Output Current Limitation                                                                   110 - 180% of Iout max.
+p3: Overvoltage Protection                                                                      140% typ. of Vout nom.
+p3: Transient Response         - Response Deviation                                             5% max. (75% to 100% Load Step)
+p3:                            - Response Time                                                  500 µs max. (75% to 100% Load Step)
+p3: 
+p3: 
+p3: Safety Specifications
+p3: Standards                       - IT / Multimedia Equipment                                 EN 62368-1
+p3:                                                                                             IEC 62368-1
+p3:                                                                                             UL 62368-1
+p3:                                 - Certification Documents                                   www.tracopower.com/tmr10wi-safety-cert/
+p3: Energy Source                   - Output, acc. to 62368-1                                   ES1
+p3: Power Source                    - Output, acc. to 62368-1                                   PS1
+p3: Pollution Degree                                                                            PD 3
+p3: Over Voltage Category                                                                       Not mains connected
+p3: 
+p3: EMC Specifications
+p3: EMI (Emissions)                                                                              EN 61000-6-4 (Generic Industrial)
+p3:                                 - Conducted Emissions                                        EN 55032 class A (with external filter)
+p3:                                 - Radiated Emissions                                         EN 55032 class A (with external filter)
+p3:                                                                    External filter proposal: www.tracopower.com/tmr10wi-emc-filter/
+p3: EMS (Immunity)                                                                               EN 55035 (Multimedia)
+p3:                                 - Electrostatic Discharge                               Air: EN 61000-4-2, ±8 kV, perf. criteria A
+p3:                                                                                     Contact: EN 61000-4-2, ±6 kV, perf. criteria A
+p3:                                 - RF Electromagnetic Field                                   EN 61000-4-3, 10 V/m, perf. criteria A
+p3:                                 - EFT (Burst) / Surge                                        EN 61000-4-4, ±2 kV, perf. criteria A
+p3:                                                                                              EN 61000-4-5, ±2 kV, perf. criteria A
+p3:                                                                    External filter proposal: www.tracopower.com/tmr10wi-emc-filter/
+p3:                                 - Conducted RF Disturbances                                  EN 61000-4-6, 10 Vrms, perf. criteria A
+p3:                                 - PF Magnetic Field                             Continuous: EN 61000-4-8, 100 A/m, perf. criteria A
+p3:                                                                                         1 s: EN 61000-4-8, 1000 A/m, perf. criteria A
+p3: EMC / Environmental             - Certification Documents                                    www.tracopower.com/tmr10wi-emc-cert/
+p3: 
+p3: 
+p3: General Specifications
+p3: Relative Humidity                                                                          95% max. (non condensing)
+p3: Temperature Ranges              - Operating Temperature                                    –40°C to +85°C
+p3:                                 - Approved Ambient Temp.                       62368-1: +65°C max. (5.1 Vout models)
+p3:                                                                                62368-1: +70°C max. (other models)
+p3:                                 - Case Temperature                                         +105°C max.
+p3:                                 - Storage Temperature                                      –50°C to +125°C
+p3: Power Derating                  - High Temperature                                         Depending on model
+p3:                                                                      See application note: www.tracopower.com/tmr10wi-cc/
+p3: Cooling System                                                                             Natural convection (20 LFM)
+p3: Remote Control                  - Voltage Controlled Remote                                On: 3.5 to 12 VDC or open circuit
+p3:                                   (passive = on)                                           Off: 0 to 1.2 VDC or short circuit
+p3:                                                                                            Refers to 'Remote' and '-Vin' Pin
+p3:                                 - Off Idle Input Current                                   0.5 mA max.
+p3:                                 - Remote Pin Input Current                                 -0.5 to 0.5 mA
+p3: Altitude During Operation                                                                  6'000 m max.
+p3: Regulator Topology                                                                         Flyback Converter
+p3: Switching Frequency                                                                        390 - 450 kHz (PWM)
+p3:                                                                                            420 kHz typ. (PWM)
+p3: 
+p3: 
+p3: All specifications valid at nominal voltage, resistive full load and +25°C after warm-up time, unless otherwise stated.
+p3: 
+p3: www.tracopower.com                                               July 2, 2026                                                     Page 3 / 5
+p3:                                                                                                  TMR 10WI Series, 10 Watt
+p4: 
+p4: Insulation System                                                                          Functional Insulation
+p4: Isolation Test Voltage          - Input to Output, 60 s                                    1'500 VDC
+p4:                                 - Input to Output, 1 s                                     1'800 VDC
+p4:                                 - Input to Case, 60 s                                      1'500 VDC
+p4:                                 - Output to Case, 60 s                                     1'500 VDC
+p4: Creepage                        - Input to Output                                          0.7 mm min.
+p4: Clearance                       - Input to Output                                          1.5 mm min.
+p4: Isolation Resistance            - Input to Output, 500 VDC                                 1'000 MΩ min.
+p4: Isolation Capacitance           - Input to Output, 100 kHz, 1 V                            1'000 pF typ.
+p4:                                                                                            1'500 pF max.
+p4: Distance Through Isolation                                                                 1.5 mm
+p4: Reliability                - Calculated MTBF                                               1'590'000 h (MIL-HDBK-217F, ground benign)
+p4: Washing Process                                                                            According to Cleaning Guideline
+p4:                                                                                            www.tracopower.com/info/cleaning.pdf
+p4: Environment                     - Vibration                                                IPC-9592B
+p4:                                                                                            2.4 g, 3 axis, random waveform, 30 min
+p4:                                 - Mechanical Shock                                         IPC-9592B
+p4:                                                                                            30 g, 3 axis, half sine, 11 ms
+p4:                                 - Thermal Shock                                            IPC-9592B
+p4:                                                                                            -40 to +125°C, 100 cycles, 30 min each
+p4: Housing Material                                                                           Plastic (UL 94 V-0 rated)
+p4: Potting Material                                                                           Silicone (UL 94 V-0 rated)
+p4: Pin Material                                                                               Phosphor Bronze (C5191)
+p4: Pin Foundation Plating                                                                     Nickel (1 - 3 µm)
+p4: Pin Surface Plating                                                                        Tin (3 - 5 µm), matte
+p4: Housing Type                                                                               Plastic Case
+p4: Mounting Type                                                                              PCB Mount
+p4: Connection Type                                                                            THD (Through-Hole Device)
+p4: Footprint Type                                                                             SIP8
+p4: Soldering Profile                                                                          Lead-Free Reflow Soldering (acc. J-STD-020E)
+p4:                                                                                            245°C max. (Tc)
+p4:                                                                                            10 s max. (tp, at Tp - 5°C)
+p4:                                                                      See application note: www.tracopower.com/info/reflow-soldering.pdf
+p4: Weight                                                                                     7g
+p4: Thermal Impedance        - Case to Ambient                                                 26.39 K/W typ.
+p4: Environmental Compliance - REACH Declaration                                               www.tracopower.com/info/reach-declaration.pdf
+p4:                                                                                            REACH SVHC list compliant
+p4:                                                                                            REACH Annex XVII compliant
+p4:                                 - RoHS Declaration                                         www.tracopower.com/info/rohs-declaration.pdf
+p4:                                                                                            Exemptions: 7(a)
+p4:                                                                                            (RoHS exemptions refer to the component
+p4:                                                                                            concentration only, not to the overall
+p4:                                                                                            concentration in the product (O5A rule).)
+p4:                                 - SCIP Reference Number                                    be5cadb1-00ed-482a-9818-2ba04826a37f
+p4: 
+p4: Additional Information
+p4: Supporting Documents                                                                        www.tracopower.com/overview/tmr10wi
+p4: Frequently Asked Questions                                                                  www.tracopower.com/glossary-faq
+p4: Glossary                                                                                    www.tracopower.com/info/glossary.pdf
+p4: Service Portal                                                                              www.tracoserviceportal.com
+p4: 
+p4: 
+p4: 
+p4: 
+p4: All specifications valid at nominal voltage, resistive full load and +25°C after warm-up time, unless otherwise stated.
+p4: 
+p4: www.tracopower.com                                                July 2, 2026                                                Page 4 / 5
+p4:                                                                                                 TMR 10WI Series, 10 Watt
+p5: 
+p5: 
+p5: Outline Dimensions
+p5:                               21.8 (0.86)
+p5:                                                                                                                   Pinout
+p5:                                                                                                  Pin         Single               Dual
+p5:                                                                                                   1                     –Vin
+p5:                                                                                                   2                     +Vin
+p5: 
+p5: 
+p5: 
+p5: 
+p5:                                                                                   12.0 (0.47)
+p5:                                                                                                   3                 Remote On/Off
+p5:                                                                                                   5                      NC
+p5:                                                                                                   6                    +Vout
+p5: 
+p5: 
+p5: 
+p5: 
+p5:                                                                     0.5 (0.02)
+p5:                                                                                                   7           –Vout            Common
+p5:                                                                                                   8            NC                –Vout
+p5:                                                                                                 NC: Not connected
+p5: 
+p5: 
+p5:                                                                                  4.1 (0.16)
+p5:                                                                                                 Avoid routing PCB traces under the conver-
+p5:                                                                                                 ter.
+p5: 
+p5: 
+p5:           2×2.54          5.08 (0.200)       3×2.54 (2×0.100)
+p5:           (2×0.100)
+p5: 
+p5:                           20.8 (0.82)                               0.5 (0.02)
+p5: 
+p5: 
+p5: 
+p5: 
+p5:                       0.50 (0.020)
+p5:                                                                                  9.6 (0.38)
+p5: 
+p5: 
+p5: 
+p5: 
+p5:                       0.40 (0.016)
+p5:                                                                     2.5 (0.98)
+p5: 
+p5: 
+p5: 
+p5: 
+p5:       1         2     3                  5        6      7      8
+p5:                               BOTTOM VIEW
+p5: 
+p5: 
+p5: Dimensions in mm (inch)
+p5: Tolerances: x.x ±0.5 (x.xx ±0.02)
+p5:             x.xx ±0.25 (x.xxx ±0.01)
+p5: Pin tolerances: ±0.25 (±0.01)
+p5: 
+p5: 
+p5: 
+p5: 
+p5:  © Copyright 2026 Traco Electronic AG                                                            Speciﬁcations can be changed without notice.
+p5:                                                                                                                            Rev. July 2, 2026
+p5:                                                                 www.tracopower.com                                               Page 5 / 5
+p5: 

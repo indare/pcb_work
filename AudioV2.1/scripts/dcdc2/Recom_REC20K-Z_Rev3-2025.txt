@@ -1,0 +1,731 @@
+Technical Data Sheet
+REC20K Series ◊ Regulated DC-DC Converter
+20W ◊ Isolated Output ◊ 4:1 Input                                                                                                   DC/DC Converter
+FEATURES
+
+
+
+
+ • Industry standard 20W 1”x1” package
+ • Derates to 105°C ambient temperature
+ • Wide 4:1 input
+ • ON/OFF control pin, UVLO, SCP
+ • 3 year warranty
+
+
+
+
+                                                                                            Dimensions (LxWxH): 25.4 x 25.4 x 10.2mm (1.0 x 1.0 x 0.40 inch)
+                                                                                                                18g (0.04 lbs)
+APPLICATIONS                                                                           SAFETY & EMC
+
+
+
+                                                                                                                       E224736
+
+
+
+
+ DESCRIPTION
+The REC20K series are high power density, wide input voltage range 20W DC/DC converters in an industry standard 1”x1” case size. Despite their small
+size, the REC20K converters are fully specified devices with output currents up to 5 amps, high efficiency, no minimum load, 2000VDC/1min isolation,
+tight regulation, and low ripple/noise figures. The outputs are also fully protected against short circuits, overcurrent, and overvoltage, and the single output
+version offers a ±10% trim range. These converters fit well in industrial applications where board space is at a premium.
+
+
+SELECTION GUIDE
+Part                                                     Input      nom. Output                   Output               Efficiency (1)        max. Capacitive
+Number                                              Voltage Range     Voltage                    Current                    typ.                Load (2)
+                                                         [VDC]         [VDC]                      [mA]                      [%]                   [µF]
+REC20K-243.3SZ                                          9-36            3.3                       5000                      86                     20000
+REC20K-2405SZ                                           9-36            5                         4000                      88                     13000
+REC20K-2409SZ                                           9-36            9                         2222                      88                     3000
+REC20K-2412SZ                                           9-36            12                        1667                      87                     4000
+REC20K-2415SZ                                           9-36            15                        1333                      88                     5000
+REC20K-2424SZ                                           9-36            24                         833                      88                     4000
+REC20K-2412DZ                                           9-36           ±12                        ±833                      88                     ±4000
+REC20K-2415DZ                                           9-36           ±15                        ±667                      88                     ±3000
+REC20K-483.3SZ                                         18-75            3.3                       5000                      87                     15000
+REC20K-4805SZ                                          18-75            5                         4000                      88                     20000
+REC20K-4809SZ                                          18-75            9                         2222                      89                     4000
+REC20K-4812SZ                                          18-75            12                        1667                      89                     4000
+
+copyright © RECOM Power GmbH, all rights reserved
+www.recom-power.com                                                           Rev. 3-2025                                                                      Page 1
+Technical Data Sheet
+REC20K Series ◊ Regulated DC-DC Converter
+20W ◊ Isolated Output ◊ 4:1 Input                                                                                                              DC/DC Converter
+SELECTION GUIDE
+Part                                                      Input                  Output                     Output              Efficiency (1)           max. Capacitive
+Number                                               Voltage Range               Voltage                   Current                   typ.                   Load (2)
+                                                          [VDC]                   [VDC]                     [mA]                     [%]                      [µF]
+REC20K-4815SZ                                            18-75                     15                        1333                     91                       3000
+REC20K-4824SZ                                            18-75                     24                        833                      89                       4000
+REC20K-4812DZ                                            18-75                    ±12                       ±833                      87                       ±3000
+REC20K-4815DZ                                            18-75                    ±15                       ±667                      87                       ±4000
+
+                                                        Note1: Efficiency is tested at nominal input and full load at +25°C ambient
+                                                        Note2: Max Cap Load is tested at nominal input and full resistive load
+
+
+
+
+MODEL NUMBERING
+
+                                                                         REC20K-__ __ _Z
+                                                    nom. Output Power                                                Single or Dual
+                                                     nom. Input Voltage
+                                                    nom. Output Voltage
+
+
+
+
+BASIC CHARACTERISTICS (measured @ TAMB= 25°C, nom. VIN, full load and after warm-up unless otherwise stated)
+Parameter                                                                             Condition                                        Min.            Typ.            Max.
+Internal Input Filter                                                                                                                                                  capacitor
+                                                                                  nom. VIN= 24VDC                                      9VDC                           36VDC
+Input Voltage Range
+                                                                                  nom. VIN= 48VDC                                     18VDC                           75VDC
+                                                                                                      DC-DC ON                         8VDC                         8.5VDC
+                                                         nom. VIN= 24VDC
+                                                                                                      DC-DC OFF                       6.5VDC                          8VDC
+Input Under Voltage Lockout (UVLO)
+                                                                                                      DC-DC ON                        16VDC                           17VDC
+                                                         nom. VIN= 48VDC
+                                                                                                      DC-DC OFF                       14.5VDC                         16VDC
+                                                                                  nom. VIN= 24VDC                                                                   950mA
+Input Current
+                                                                                  nom. VIN= 48VDC                                                                   450mA
+Quiescent Current                                                                                                                                      5mA            11mA
+                                                                                 nom. VOUT= 3.3VDC                                                                    16.5W
+Output Power
+                                                                                         others                                                                        20W
+Output Voltage Trimming                                      single output only, refer to „Output Voltage Trimming“                    -10%                           +10%
+Minimum Load                                                                                                                            0%
+Start-up time                                                                                                                                          20ms           50ms
+                                                                                     DC-DC ON                                                   Open or 2.5VDC< VCTRL <12VDC
+ON/OFF CTRL
+                                                                                     DC-DC OFF                                             Short to -VIN or 0VDC< VCTRL <0.8VDC
+Input Current of CTRL Pin                                                            DC-DC ON                                                                         100µA
+Standby Current                                                                      DC-DC OFF                                                         2mA            10mA
+Internal Operating Frequency                                                                                                                          265kHz
+                                                                                nom. VOUT= 3.3VDC @ nom. VIN= 24VDC/48VDC                            30mVp-p
+                                                           20MHz BW,             nom. VOUT= 5VDC @ nom. VIN= 24VDC/48VDC                             70mVp-p
+Output Ripple and Noise (3)
+                                                           @ full load                      2424SZ @ nom. VIN= 24VDC                                160mVp-p
+                                                                                                        others                                      100mVp-p
+
+                                  Note3: Measurements are made with a 0.1μF MLCC & 10μF E-cap in parallel across output. (low ESR)
+                                  		 The test setup can have an impact on ripple noise values (placement of scope probe, capacitors, it's
+                                  		 specifications, wires, PCB tracks, distances, etc.)
+
+
+copyright © RECOM Power GmbH, all rights reserved
+www.recom-power.com                                                                     Rev. 3-2025                                                                       Page 2
+Technical Data Sheet
+REC20K Series ◊ Regulated DC-DC Converter
+20W ◊ Isolated Output ◊ 4:1 Input                                                                                                                             DC/DC Converter
+BASIC CHARACTERISTICS (measured @ TAMB= 25°C, nom. VIN, full load and after warm-up unless otherwise stated)
+
+   Efficiency vs. Load
+                                                    REC20K-2405SZ                                                                                  REC20K-4805SZ
+                           100                                                                                            100
+                            90                                                                                            90
+                            80                                                                                            80
+                            70                                                                                            70
+          Efficiency [%]
+
+
+
+
+                                                                                                         Efficiency [%]
+                            60                                                                                            60
+                            50                                                                                            50
+                            40                                                                                            40
+                                                                                                                                                                           48Vin
+                            30                                                                                            30                                               18Vin
+                            20                                             24Vin                                          20                                               24Vin
+                                                                           9Vin                                                                                            36Vin
+                            10                                             36Vin                                          10                                               75Vin
+                             0                                                                                             0
+                                 0   10   20   30    40   50   60     70   80   90   100                                        0   10   20   30    40   50   60     70   80   90   100
+                                                    Output Load [%]                                                                                Output Load [%]
+
+
+                                                    REC20K-2412SZ                                                                                  REC20K-4812SZ
+                           100                                                                                            100
+                           90                                                                                             90
+                           80                                                                                             80
+                           70                                                                                             70
+          Efficiency [%]
+
+
+
+
+                                                                                                         Efficiency [%]
+
+
+
+
+                           60                                                                                             60
+                           50                                                                                             50
+                           40                                                                                             40
+                                                                                                                                                                          48Vin
+                           30                                                                                             30
+                                                                                                                                                                          18Vin
+                           20                                              24Vin                                          20                                              24Vin
+                                                                           9Vin                                                                                           36Vin
+                           10                                              36Vin                                          10                                              75Vin
+                            0                                                                                              0
+                                 0   10   20   30    40   50   60     70   80   90   100                                        0   10   20   30    40   50   60     70   80   90   100
+                                                    Output Load [%]                                                                                Output Load [%]
+
+
+                                                    REC20K-2424SZ                                                                                  REC20K-4824SZ
+                           100                                                                                            100
+                           90                                                                                             90
+                           80                                                                                             80
+                           70                                                                                             70
+          Efficiency [%]
+
+
+
+
+                                                                                                         Efficiency [%]
+
+
+
+
+                           60                                                                                             60
+                           50                                                                                             50
+                           40                                                                                             40
+                                                                                                                                                                           48Vin
+                           30                                                                                             30                                               18Vin
+                           20                                              24Vin                                          20                                               Vin
+                                                                           9Vin                                                                                            36Vin
+                           10                                              36Vin                                          10                                               75Vin
+                            0                                                                                              0
+                                 0   10   20   30    40   50   60     70   80   90   100                                        0   10   20   30    40   50   60     70   80   90   100
+                                                    Output Load [%]                                                                                Output Load [%]
+
+
+copyright © RECOM Power GmbH, all rights reserved
+www.recom-power.com                                                                        Rev. 3-2025                                                                                    Page 3
+             Technical Data Sheet
+             REC20K Series ◊ Regulated DC-DC Converter
+             20W ◊ Isolated Output ◊ 4:1 Input                                                                                                                                                                                                                                            DC/DC Converter
+             OUTPUT VOLTAGE TRIMMING
+                     The REC20K-SZ series (single output only) offers the feature of trimming the output voltage over a range between ±10% by using external trim resistors.
+                     The values for trim resistors shown in trim tables below are according to standard E96 values; therefore, the specified voltage may slightly vary.
+                                                                                                                    Trim up                                                                                   Trim down
+                                                                                                                                                                                                                         +VOUT +VOUT
+
+
+                                                                                                                    R1             R1                                                        R1             R1                                   Rdown Rdown
+
+                                                                                                                                             Trim           Trim                                                         Trim               Trim
+                                                                                                      Vref     Vref                                                                Vref    Vref
+                                                                                                                            R3               R3                                                      R3                  R3
+
+                                                                                                                    R2             R2                          Rup           Rup             R2             R2
+
+                                                                                                                                             -VOUT          -VOUT
+
+
+
+                                                                                                                                                                                    Model                                 Voutnom [VDC] R1 [Ω] R2 [Ω] R3 [Ω] VREF [VDC]
+                                                                                                                                                                                    REC20K-243.3SZ                                                                                                   20k
+                                                                                                                                                                                                                                        3.3                           8k45          5k1                                       1.24
+                                               Voutnom                       = nominal output voltage [VDC]                                                                         REC20K-483.3SZ                                                                                                   10k
+                                               Voutset                       = trimmed output voltage [VDC]                                                                         REC20K-2405SZ                                                                                                    20k
+                                                                                                                                                                                                                                           5                              7k5       7k5
+                                               Vref                          = reference voltage                                   [VDC]                                            REC20K-4805SZ                                                                                                    10k
+                                                                                                                                                                                    REC20K-2409SZ                                                                                                    10k2
+                                               Rup                           = trim up resistor                                    [Ω]                                                                                                     9                          6k45          2k49
+                                                                                                                                                                                    REC20K-4809SZ                                                                                                     10k
+                                               Rdown                         = trim down resistor                                  [Ω]
+                                                                                                                                                                                    REC20K-2412SZ                                                                                                    10k2
+                                               R1, R2, R3 = internal resistors                                                     [Ω]                                                                                                   12                           9k53          2k49                                        2.5
+                                                                                                                                                                                    REC20K-4812SZ                                                                                                     10k
+                                               ku                            = trim up factor                                      []                                               REC20K-2415SZ                                                                                                    10k2
+                                               kd                            = trim down factor                                    []                                                                                                    15                           25k5          5k1
+                                                                                                                                                                                    REC20K-4815SZ                                                                                                     10k
+                                                                                                                                                                                    REC20K-2424SZ                                                                                                    10k2
+                                                                                                                                                                                                                                         24                          21k43          2k49
+                                                                                                                                                                                    REC20K-4824SZ                                                                                                     10k
+
+
+                  Calculation:
+                        UP                                                                                                         kd                                                              DOWN
+                                                       𝑽𝑽𝑽𝑽𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓                                                            𝒌𝒌𝒌𝒌𝒖𝒖𝒖𝒖 × 𝑹𝑹𝑹𝑹𝟐𝟐𝟐𝟐                                                     𝑽𝑽𝑽𝑽𝑽𝑽𝑽𝑽𝒖𝒖𝒖𝒖𝑽𝑽𝑽𝑽𝒔𝒔𝒔𝒔𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓 − 𝑽𝑽𝑽𝑽𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓                                                     𝒌𝒌𝒌𝒌𝒅𝒅𝒅𝒅 × 𝑹𝑹𝑹𝑹𝟏𝟏𝟏𝟏
+                        𝒌𝒌𝒌𝒌𝒖𝒖𝒖𝒖 = �                                                   � × 𝑹𝑹𝑹𝑹𝟏𝟏𝟏𝟏             𝑹𝑹𝑹𝑹𝒖𝒖𝒖𝒖𝒖𝒖𝒖𝒖 = �                       � − 𝑹𝑹𝑹𝑹𝟑𝟑𝟑𝟑                         𝒌𝒌𝒌𝒌𝒅𝒅𝒅𝒅 = �                                                   � × 𝑹𝑹𝑹𝑹𝟐𝟐𝟐𝟐             𝑹𝑹𝑹𝑹𝒅𝒅𝒅𝒅𝑽𝑽𝑽𝑽𝒅𝒅𝒅𝒅𝒅𝒅𝒅𝒅 = �                       � − 𝑹𝑹𝑹𝑹𝟑𝟑𝟑𝟑
+                                       𝑽𝑽𝑽𝑽𝑽𝑽𝑽𝑽𝒖𝒖𝒖𝒖𝑽𝑽𝑽𝑽𝒔𝒔𝒔𝒔𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓 − 𝑽𝑽𝑽𝑽𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓                                             𝑹𝑹𝑹𝑹𝟐𝟐𝟐𝟐 − 𝒌𝒌𝒌𝒌𝒖𝒖𝒖𝒖                                                                     𝑽𝑽𝑽𝑽𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓                                                                    𝑹𝑹𝑹𝑹𝟏𝟏𝟏𝟏 − 𝒌𝒌𝒌𝒌𝒅𝒅𝒅𝒅
+
+
+
+                                 Practical Example REC20K-2405SZ trim up 10%:                                                                                                              Practical Example REC20K-2405SZ trim down -10%:
+                                 VOUTnom= 5VDC, Voutset= 5.5VDC           kd                                                                                                               VOUTnom= 5VDC, Voutset= 4.5VDC
+
+                                                  𝑽𝑽𝑽𝑽𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓                                                                                                                                                   𝑽𝑽𝑽𝑽𝑽𝑽𝑽𝑽𝒖𝒖𝒖𝒖𝑽𝑽𝑽𝑽𝒔𝒔𝒔𝒔𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓 − 𝑽𝑽𝑽𝑽𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓
+                     𝒌𝒌𝒌𝒌𝒖𝒖𝒖𝒖 = �                                                  � × 𝑹𝑹𝑹𝑹𝟏𝟏𝟏𝟏                                                                              𝒌𝒌𝒌𝒌𝒅𝒅𝒅𝒅 = �                                                                            � × 𝑹𝑹𝑹𝑹𝟐𝟐𝟐𝟐
+Example UP REC20K-2405SZ          𝑽𝑽𝑽𝑽𝑽𝑽𝑽𝑽𝒖𝒖𝒖𝒖𝑽𝑽𝑽𝑽 𝒔𝒔𝒔𝒔𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓 − 𝑽𝑽𝑽𝑽𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓                                                                       Example DOWN REC20K-2405SZ                                                  𝑽𝑽𝑽𝑽𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓𝒓
+
+                                                                         6.25 × 7.5𝑘𝑘𝑘𝑘Ω                                                                                                                                          6 × 7.5𝑘𝑘𝑘𝑘Ω
+                                                𝑅𝑅𝑅𝑅𝑢𝑢𝑢𝑢𝑢𝑢𝑢𝑢 = �                         � − 20𝑘𝑘𝑘𝑘Ω = 17.5𝑘𝑘𝑘𝑘Ω                                                                                  𝑅𝑅𝑅𝑅𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑 = �                     � − 20𝑘𝑘𝑘𝑘Ω = 10𝑘𝑘𝑘𝑘Ω
+                                                                         7.5𝑘𝑘𝑘𝑘Ω − 6.25                                                                                                                                          7.5𝑘𝑘𝑘𝑘Ω − 6
+                                                                    Rup according to E96 ≈ 17k4Ω                                                                                                        Rdown according to E96 ≈ 10kΩ
+
+
+
+                             VOUTnom= 3.3VDC
+                                                                     Trim up
+                                                                      Voutset                                3.63          3.60                  3.56                 3.53          3.50       3.47                  3.43                      3.40                       3.37       3.33                [VDC]
+                                                                      Rup (E96)                              10k5          12k4                 16k2                  19k6         23k7       29k4                   42k2                     57k6                        86k6      210k                       [Ω]
+
+                                                                     Trim down
+                                                                      Voutset                                2.97          3.00                  3.04                 3.07          3.10       3.14                  3.17                      3.20                       3.23       3.27                [VDC]
+                                                                      Rdown (E96)                            18k7          22k1                   28k                 34k          41k2       54k9                   71k5                     100k                        147k      374k                       [Ω]
+
+
+
+
+             copyright © RECOM Power GmbH, all rights reserved
+             www.recom-power.com                                                                                                                                             Rev. 3-2025                                                                                                                                                          Page 4
+Technical Data Sheet
+REC20K Series ◊ Regulated DC-DC Converter
+20W ◊ Isolated Output ◊ 4:1 Input                                                                                                   DC/DC Converter
+OUTPUT VOLTAGE TRIMMING
+
+           VOUTnom= 5VDC
+                       Trim up
+                        Voutset                     5.50    5.45    5.40    5.35        5.30      5.25    5.20    5.15    5.10    5.05    [VDC]
+                        Rup (E96)                   17k4    21k5    26k7    33k2        42k2      54k9    73k2    105k    169k    357k     [Ω]
+
+                              Trim down
+                               Voutset              4.50    4.55    4.60    4.65        4.70      4.75    4.80    4.85    4.90    4.95    [VDC]
+                               Rdown (E96)          10k     14k     19k6    26k1        34k8      47k5    66k5    97k6    162k    348k     [Ω]
+
+
+
+           VOUTnom= 9VDC
+                              Trim up
+                               Voutset              9.90    9.81    9.72    9.63        9.54      9.45    9.36    9.27    9.18    9.09    [VDC]
+                               Rup (E96)            7k5     9k31    11k8    14k7        18k7      24k3    31k6    44k2    69k8    133k     [Ω]
+
+                              Trim down
+                               Voutset              8.10    8.19    8.28    8.37        8.46      8.55    8.64    8.73    8.82    8.91    [VDC]
+                               Rdown (E96)          31k6    36k5    44k2    52k3        64k9      80k6    107k    154k    249k    619k     [Ω]
+
+
+
+           VOUTnom= 12VDC
+                       Trim up
+                        Voutset                     13.20   13.08   12.96   12.84      12.72      12.60   12.48   12.36   12.24   12.12   [VDC]
+                        Rup (E96)                   9k76    11k8    14k7    18k2        22k6      23k2    39k2    54k9    88k7    182k     [Ω]
+
+                              Trim down
+                               Voutset              10.80   10.92   11.04   11.16      11.28      11.40   11.52   11.64   11.76   11.88   [VDC]
+                               Rdown (E96)          56k2    63k4    75k     88k7        105k      130k    169k    232k    357k    750k     [Ω]
+
+
+
+           VOUTnom= 15VDC
+                       Trim up
+                        Voutset                     16.50   16.35   16.20   16.05      15.90      15.75   15.60   15.45   15.30   15.15   [VDC]
+                        Rup (E96)                   32k4    37k4    43k2    49k9        60k4      75k     95k3    130k    200k    412k     [Ω]
+
+                              Trim down
+                               Voutset              13.50   13.65   13.80   13.95      14.10      14.25   14.40   14.55   14.70   14.85   [VDC]
+                               Rdown (E96)          178k    200k    232k    267k        316k      392k    499k    681k    1M02    2M1      [Ω]
+
+
+
+           VOUTnom= 24VDC
+                       Trim up
+                        Voutset                     26.40   26.16   25.92   25.68      25.44      25.20   24.96   24.72   24.48   24.24   [VDC]
+                        Rup (E96)                   12k4    15k     18k2    22k2        27k4      35k7    46k4    66k5    105k    232k     [Ω]
+
+                              Trim down
+                               Voutset              21.60   21.84   22.08   22.32      22.56      22.80   23.04   23.28   23.52   23.76   [VDC]
+                               Rdown (E96)          158k    182k    205k    243k        287k      348k    442k    590k    909k    1M78     [Ω]
+
+
+
+
+copyright © RECOM Power GmbH, all rights reserved
+www.recom-power.com                                                                 Rev. 3-2025                                                   Page 5
+Technical Data Sheet
+REC20K Series ◊ Regulated DC-DC Converter
+20W ◊ Isolated Output ◊ 4:1 Input                                                                                                            DC/DC Converter
+REGULATIONS
+Parameter                                                                            Condition                                                                           Value
+Output Accuracy                                                                                                                                                    ±1.0% typ.
+Line Regulation                                                           low line to high line, full load                                           ±0.1% typ. / ±1.0% max.
+                                                                                                             VOUT= 3.3VDC                            ±0.3% typ. / ±1.0% max.
+                                                                                       single output          VOUT= 5VDC                            ±0.15% typ. / ±1.0% max.
+                                                                                                                   others                            ±0.1% typ. / ±1.0% max.
+Load Regulation (4)                                      10% to 100% load                                     +VOUT= 5VDC                            ±0.1% typ. / ±1.0% max.
+                                                                                                              -VOUT= 5VDC                            ±0.5% typ. / ±1.5% max.
+                                                                                        dual output
+                                                                                                              +VOUT, others                          ±0.1% typ. / ±1.0% max.
+                                                                                                              -VOUT, others                          ±0.3% typ. / ±1.0% max.
+Cross Regulation                                                  dual output only, asymetrical load 25%/100%                                                      ±3.0% typ.
+                                                                               VIN= 3.3VDC, VIN= 5VDC                                                             200mV max.
+Transient Response                                                                     others                                                                     400mV max.
+                                                                                   recovery time                                                                    450µs typ.
+
+
+                                          Note4: Operation below 10% load will not harm the converter, but specifications may not be met
+
+
+
+
+PROTECTIONS (6)
+Parameter                                                                      Condition                                                                                 Value
+Short Circuit Protection (SCP)                                                                                          hiccup mode, auto recovery after faul condition removed
+Over Voltage Protection (OVP)                                         110%-180% of nom. VOUT                                                              zener diode clamping
+                                                                          nom. VIN= 24VDC                                                              230% max. of rated IOUT
+Over Current Protection (OCP)
+                                                                          nom. VIN= 48VDC                                                               225% may. of rated IOUT
+Isolation Voltage (5)                                  I/P to O/P, according to 62368-1                1 minute                                                         2kVDC
+Isolation Resistance                                                  I/P to O/P, VISO= 500VDC                                                                       1GΩ min.
+Isolation Capacitance                                                  I/P to O/P, 100kHz/0.1V                                                                     2000pF typ.
+Insulation Grade                                                       according to 62368-1                                                                              basic
+
+                         Note5: For repeat Hi-Pot testing, reduce the time and/or the test voltage
+                         Note6: Refer to local safety regulations if input over-current protections is also required. Recommended fuse: slow blow type
+
+
+
+
+ENVIRONMENTAL
+Parameter                                                                               Condition                                                                        Value
+Operating Temperature Range         (7)
+                                                               with derating                        refer to „Derating Graph“                                -40°C to +105°C
+Maximum Case Temperature                                                                                                                                              +125°C
+Operating Altitude                                                                according to 62368-1                                                                 5000m
+Operating Humidity                                                                   non-condensing                                                            5-95% RH max.
+Pollution Degree                                                                                                                                                          PD2
+Shock                                                                                                                                              according to MIL-STD-810F
+Vibration                                                                                                                                          according to MIL-STD-810F
+                                                            according to MIL-HDBK-217F, G.B.                      nom. VIN= 24VDC                            1100 x 103 hours
+MTBF
+                                                                      TAMB= +25°C                                 nom. VIN= 48VDC                            1500 x 103 hours
+
+                                                            Note7: Test PCB: 160mm x 100mm 70µm, double-layer
+
+
+copyright © RECOM Power GmbH, all rights reserved
+www.recom-power.com                                                                  Rev. 3-2025                                                                        Page 6
+Technical Data Sheet
+REC20K Series ◊ Regulated DC-DC Converter
+20W ◊ Isolated Output ◊ 4:1 Input                                                                                                                  DC/DC Converter
+ENVIRONMENTAL
+   Derating Graph
+   (@ Chamber and natural convection 0.1m/s)
+
+                                  REC20K-243.3SZ, REC20K-2405SZ, REC20K-2424SZ                                             REC20K-2415SZ, REC20K-2415DZ, REC20K-2412DZ
+
+                            100                                                                                      100
+                            90                                                                                       90
+                            80                                                                                       80
+
+                            70                                                                                       70
+
+
+
+
+                                                                                                   Output Load [%]
+          Output Load [%]
+
+
+
+
+                            60                                                                                       60
+
+                            50                                                                                       50
+
+                            40                                                                                       40
+
+                            30                                                                                       30
+
+                            20            24-36Vin                                                                   20
+                                          24Vin
+                            10            9-24Vin                                                                    10            9-36Vin
+                             0                                                                                        0
+                              -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110                                     -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110
+                                                                             105                                                        Ambient Temperature [°C]      105
+                                               Ambient Temperature [°C]
+
+
+                                                 REC20K-2412SZ                                                                           REC20K-4809SZ
+                            100                                                                                      100
+                            90                                                                                       90
+                            80                                                                                       80
+
+                            70                                                                                       70
+                                                                                                   Output Load [%]
+          Output Load [%]
+
+
+
+
+                            60                                                                                       60
+
+                            50                                                                                       50
+
+                            40                                                                                       40
+
+                            30                                                                                       30
+
+                            20                                                                                       20
+                                          24-36Vin
+                            10            9-24Vin                                                                    10            18-75Vin
+                             0                                                                                        0
+                              -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110                                     -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110
+                                                                                                                                                                      105
+                                               Ambient Temperature [°C]65 75 105                                                        Ambient Temperature [°C]
+
+
+                                                 REC20K-4812SZ                                                                   REC20K-4815SZ, REC20K-4824SZ
+                            100                                                                                      100
+                            90                                                                                       90
+                            80                                                                                       80
+                            70                                                                                       70
+          Output Load [%]
+
+
+
+
+                                                                                                   Output Load [%]
+
+
+
+
+                            60                                                                                       60
+                            50                                                                                       50
+                            40                                                                                       40
+                            30                                                                                       30
+                            20                                                                                       20
+                                          18-75Vin                                                                                 48-75Vin
+                            10                                                                                       10            18-48Vin
+                             0                                                                                        0
+                              -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110                                     -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110
+                                               Ambient Temperature [°C] 75   105                                                        Ambient Temperature [°C]      105
+
+
+copyright © RECOM Power GmbH, all rights reserved
+www.recom-power.com                                                                  Rev. 3-2025                                                                          Page 7
+     Technical Data Sheet
+     REC20K Series ◊ Regulated DC-DC Converter
+     20W ◊ Isolated Output ◊ 4:1 Input                                                                                                                                                        DC/DC Converter
+     ENVIRONMENTAL
+          Derating Graph
+          (@ Chamber and natural convection 0.1m/s)
+
+                                                                REC20K-2409SZ                                                                              REC20K-4812DZ, REC20K-4815DZ, REC20K-483.3SZ
+                                    100                                                                                                             100
+                                    90                                                                                                              90
+                                    80                                                                                                              80
+                                    70                                                                                                              70
+                  Output Load [%]
+
+
+
+
+                                                                                                                                  Output Load [%]
+                                    60                                                                                                              60
+                                    50                                                                                                              50
+                                    40                                                                                                              40
+                                    30                                                                                                              30
+                                    20                                                                                                              20
+                                                         9-36Vin                                                                                                        48-75Vin
+                                    10                                                                                                              10                  18-48Vin
+                                        0                                                                                                            0
+                                         -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110                                                         -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110
+                                                          Ambient Temperature [°C] 78   105                                                                            Ambient Temperature [°C] 75   105
+
+
+
+
+     SAFETY AND CERTIFICATIONS
+     Certificate Type (Safety)                                                                                                                        Report Number                                                Standard
+     Audio/Video, information and communication technology equipment - Part1: Safety requirements                                                                                                 UL62368-1:2019 3rd Edition
+                                                                                                                                                     E491408-A6031-UL
+     3rd Edition                                                                                                                                                                   CAN/CSA-C22.2 No. 62368-1-19 3rd Edition
+     Audio/Video, information and communication technology equipment - Part1: Safety requirements
+                                                                                                                                                                                                 IEC62368-1:2018 3rd Edition
+     3rd Edition (CB Scheme)
+                                                                                                                                                           230427003
+     Audio/Video, information and communication technology equipment - Part1: Safety requirements
+                                                                                                                                                                                              EN IEC 62368-1:2020+A11:2020
+     3rd Edition
+     RoHS2                                                                                                                                                                                  RoHS 2011/65/EU + AM2015/863
+
+     EMC Compliance                                                                                                                                         Condition                                     Standard/Criterion
+                                                                                                                                             with external filter, refer to                                EN55032, Class A
+     Electromagnetic Compatibility of Multimedia Equipment - Emission Requirements
+                                                                                                                                             below filter suggestions (8)                                  EN55032, Class B
+
+          EMC filter suggsestion according to EN55032, Class A
+                                                                             C4
+
+                                               L1
+           +Vin                                                                                            +Vout
+                                                                     +Vin                     +Vout                                                   Component List Class A
+                                          C1               C2       C3                                                                                     C1       L1        C2         C3      C4, C5
+                                +
+
+
+
+
+                                                                +
+
+
+
+
+                                                                                                                                                          150µF   22µH       10µF       47µF      4.7nF
+                                                                     -Vin                     -Vout
+           -Vin                                                                                            -Vout
+
+                                                                             C5
+
+
+          EMC filter suggsestion according to EN55032, Class B
+Class B                                                                                               C5
+
+                                               L1                CMC1
+           +Vin                                                                                                                  +Vout
+                                                                                       +Vin                         +Vout                             Component List Class B
+                                          C1               C2               C3        C4                                                                   C1       L1        C2        CMC1       C3       C4    C5, C6
+                                                                                  +
+                                    +
+
+
+
+
+                                                                                                                                                          150µF   22µH       10µF       120µH     10µF     4µF     4.7nF
+                                                                                       -Vin                         -Vout
+           -Vin                                                                                                                  -Vout
+
+                                                                                                      C6
+
+
+                                                    Note8: Filter suggestions are valid for REC20K-2405SZ only. For other part numbers, please contact RECOM for advice.
+
+     copyright © RECOM Power GmbH, all rights reserved
+     www.recom-power.com                                                                                           Rev. 3-2025                                                                                        Page 8
+Technical Data Sheet
+REC20K Series ◊ Regulated DC-DC Converter
+20W ◊ Isolated Output ◊ 4:1 Input                                                                                                                                                           DC/DC Converter
+DIMENSION & PHYSICAL CHARACTERISTICS
+Parameter                                                                                                            Type                                                                                                          Value
+                                                                                                                      case                                                                                        plastic, (UL94 V-0)
+Material                                                                                                             potting                                                                                    silicone, (UL94 V-0)
+                                                                                                                      PCB                                                                                            FR4, (UL94 V-0)
+                                                                                                                                                                                                           25.4 x 25.4 x 10.2mm
+Dimension (LxWxH)
+                                                                                                                                                                                                             1.0 x 1.0 x 0.40inch
+                                                                                                                                                                                                                                18g typ.
+Weight
+                                                                                                                                                                                                                                0.04 lbs
+
+     Dimension Drawing (mm)
+                                                       25.4
+
+
+
+
+                                                                                                                                                                                     Pinning Information
+                                                                                                                                                                           Pin #              Single                 Dual
+                                                           embossed logo                                                                                                     1                 +Vin                  +Vin
+                                                                                      25.4
+
+
+
+
+                                                                                                                                                                             2                 -Vin                   -Vin
+                                                                                                                                                                             3                CTRL                   CTRL
+                                           Pin1 ID
+                                                                                                                                                                             4                -Vout                  -Vout
+                                                                                                                                                                             5                 TRIM                  COM
+                                                                                                                                                                             6                +Vout                  +Vout
+                                                                                      10.2
+                                                                                      5.6
+
+
+
+
+                                                8x 2.54=20.32                                                         1.0 ±0.1
+
+                                                                                                                        Recommended Footprint Details
+                                                                                                                                       26 min.
+                         2.54                                       2.54
+
+
+                                                                                                                             3                              4
+                                                                           6
+                 10.2
+
+
+
+
+                                                                7.62
+                        5.08
+
+
+
+
+                                                                                       10.16
+
+
+
+                                                                                                      2.54
+
+
+
+
+                                       1
+                                                                                                                             2
+                                                                                                                                                                           26 min.
+
+
+
+
+                                                                           5
+                                                                                                                                                            5
+                                       2                                                                     +0.15           1
+                                                                                       10.16
+
+
+
+
+                                                                                                    Ø1.4 0
+                        7.62
+
+
+
+
+                                       3                                   4
+                                                                                                                                                            6
+                                                                                                                                                                                                                     Tolerances:
+                                                                                                                                                                                                                  x.x= ±0.5mm
+                                                                                                                                                                                                               x.xx= ±0.25mm
+                                                                                                        2.54
+
+
+PACKAGING INFORMATION
+Parameter                                                                                                            Type                                                                                                          Value
+Packaging Dimension (LxWxH)                                                                                           tube                                                                               520.0 x 27.5 x 19.3mm
+Packaging Quantity                                                                                                                                                                                                                 18pcs
+Storage Temperature Range                                                                                                                                                                                         -55°C to +125°C
+Storage Humidity                                                                                             non-condensing                                                                                             95% RH max.
+
+The product information and specifications may be subject to changes even without prior written notice.The product has been designed for various applications; its suitability lies in the responsibility of each customer. The products
+ are not authorized for use in safety-critical applications without RECOM’s explicit written consent. A safety-critical application is an application where a failure may reasonably be expected to endanger or cause loss of life, inflict
+      bodily harm or damage property. The applicant shall indemnify and hold harmless RECOM, its affiliated companies and its representatives against any damage claims in connection with the unauthorized use of RECOM
+                                                                                               products in such safety-critical applications.
+
+copyright © RECOM Power GmbH, all rights reserved
+www.recom-power.com                                                                                             Rev. 3-2025                                                                                                        Page 9
+
