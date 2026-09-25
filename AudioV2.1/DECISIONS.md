@@ -1,4890 +1,744 @@
-# AudioV2 判断メモ
+# AudioV2.1 決定ログ（DECISIONS）
 
-前提（合意寄り）:
+> **これは v2.1 自身の決定ログ（2026-09-25 から）。** v2 の決定ログは [../AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md)（変更していない）。
+> このファイルは、v2 の全コピーのときにできた v2 の決定ログの写し（バイト一致）を置き換えたもの。
 
-- スペアナ用 Pico 2 は独立（負荷・ノイズ・GND 島が違う）
-- ラッチングリレーで多系統 Amp のうち **1 系統だけ有効**は残す
-- **操作側 Pico は 1 台**（リレー用の子 Pico は置かない）
-- ~~音量はエンコーダー化を検討~~ → **2026-08-30 確定: 最終出力ボリュームは手回しポット**（§2・§3）
-- `Audio/` は参考のまま残し、ここは新規プロジェクト
-
-### 決定ログ
-
-| 項目 | 状態 | 内容 |
-|---|---|---|
-| 基板の切り方 | **確定** | **B** 論理分割。**物理: Relay 5+5×2、Control+Output 同居**（§11） |
-| 切替信号の渡し方 | **確定** | Pico 1 台 + **I²C GPIO 拡張（B2-exp）** + ULN |
-| CH / 電源 / 音声切替 | **確定** | ラッチングリレー（1 系統のみ有効） |
-| CH 操作 | **確定** | **ENC_CH**（現行どおり）。**回して候補変更、押して確定**（確定で音声＋電源リレー適用） |
-| 音量 | **確定** | Amp 後。**A50k デュアルポット ×2**（HP / LINE）。**OLED に音量は出さない**（物理ノブがインジケータ） |
-| 出力先 | **確定** | **トグル ON-OFF-ON（3PDT）**。センス: **Rh/Rl=10k, Rs=1k → ADC** + **LED×2** + OLED。[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。**DEST ラッチング不要** |
-| トーン | **確定** | **T1: PT2314 系**（Amp 前）。ENC_BASS / ENC_TREBLE → I²C |
-| 音量 IC | **見送り** | PGA2310 / digipot は **採用しない**（手回しに変更）。過去比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) |
-| 電源レール | **確定** | アナログ **±15 V**（DC-DC は **`REC10K-2415DAW/H2`**、2026-09-02 に `DKMW20F-15` から変更。§8）。2026-08-31 に ±12 V としたが §8 の理由が失効したため戻した |
-| PD 給電 | **確定** | **PD モジュール外付け**（板上は受けの端子だけ）。当初は「基板内蔵（USB-C + CH224K / 50224 相当）」で確定していたが、**2026-09-04 に外付けへ訂正** — 回路図が先に外付けになっており、CH224K / USB-C は現行のネットリストに存在しない。§6・§8 |
-| エンコーダー | **確定** | 汎用 **EC11 系**。**×3**（CH / BASS / TREBLE）。HP / LINE / DEST は手回し |
-| ENC 配線 | **確定** | **A/B/SW すべて Pico GPIO 直結**（§10）。I²C 集約は見送り |
-| Amp / HP | **確定（2026-09-01更新）** | **Amp 10ch と切替を1枚の基板に統合**（旧: Amp×10枚 + RelayBoard×2枚）。HP は `Audio/` 基板を物理流用 |
-| 切替方式 | **枠は確定 / 素子は両案** | **切替は信号経路で行い、電源は常時給電**（2026-09-01 確定・維持）。切るのは**出力だけで、入力はブロードキャスト**（B0・B1、2026-09-03 に「入力も出力も切替」から変更）。**切替素子はリレー版とアナログスイッチ版の両方を起こす**（§11.1a・D3。2026-09-01 の「アナログスイッチ確定・ラッチングリレー不採用」は 2026-09-02 夕に前提が崩れて差し戻した） |
-| 表示 | **確定** | **制御 = 2.42″ OLED 128×64 I²C**（SSD1309 / SSD1306 互換）。**スペアナ = Waveshare 29318 LCD**（計測盤・独立）。[PARTS.md](PARTS.md) |
-| 電源 UI | **確定** | **パワースイッチ＋12V LED** |
-| ULN2803 | 役割固定 | コイル電流増幅のみ（**CH 系統のみ**。DEST は機械 SW） |
+- 2026-09-25: エージェントの下書き（[review/DECISIONS_v21_draft.md](review/DECISIONS_v21_draft.md)）に、否定側査読（[review/DECISIONS_v21_review.md](review/DECISIONS_v21_review.md)）とユーザーの回答を反映して置いた
+- 現況（いま何待ちか・次の一手）の正は [NOW.md](NOW.md)。この文書は「何を決めたか・なぜか・何を捨てたか」だけを持つ
+- 回路図から導出できる事実（ネットリスト・参照・部品数・部品値）は書かない（[../SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。部品は機能名かネット名で書く。**選定として決めた型番**（RS6-1215D など）と、決定を支える DS の数値は書き、出典を付ける
+- v2 の決定は本文を写さず、**v2 の行番号と見出しの語**で示す。リンク先はファイルの先頭で、行へは飛ばない（行番号は凍結された v2 のもの）
+- **`[NOW] Lnn` はコミット `a63caac` の NOW.md の行番号**（`git show a63caac:AudioV2.1/NOW.md`）。この文書を置いたときに NOW の「v2.1 で決まったこと」を短い要旨へ差し替えたので、今の NOW.md とは行が合わない
 
 ---
 
-## 0. 操作系統まとめ（確定）
+## 0. v2.1 とは
 
-### アクチュエータ（何が動くか）
+### 0-1 目的
 
-| 対象 | 仕組み |
+オペアンプを電子的に切り替えて、音の差を耳で楽しむ箱。**計測器ではない。** 切替素子の優劣も耳で決める（[NOW.md](NOW.md)「装置」）。
+計測系（ADC・スペアナ）は表示と簡易分析のためにあり、**本線（聴く経路）を汚さないことが計測の精度より優先**する（§4-2）。
+
+### 0-2 v2 との関係
+
+- `AudioV2.1/` は 2026-09-25 に `AudioV2/` を**全部コピー**して作った。v2 は残す（[../CLAUDE.md](../CLAUDE.md)、[NOW.md](NOW.md) 冒頭）
+- 目的は「選んだ ch だけ電源と入力を生かす」構成の検討。v2 は「全ソケット常時通電・入力はブロードキャスト」だった（v2 L28 決定ログ「切替方式」）
+- v2 の決定のうち、v2.1 でもそのまま効くものは §7、成り立たなくなったものは §8 に表で置いた（棚卸し: [review/decisions_audit_1.md](review/decisions_audit_1.md)・[_2](review/decisions_audit_2.md)・[_3](review/decisions_audit_3.md) とそれぞれの `_review`。**査読が監査を直したところは査読を採った**）
+
+### 0-3 読み方
+
+各項目は次の形で書く。
+
+| 欄 | 中身 |
 |---|---|
-| CH 選択（どの Amp を活かすか） | ラッチングリレー（音声） |
-| その系統の電源 | ラッチングリレー（電源） |
-| 出力先 PHONE / LINE / MUTE | **機械 SW（2P3T / DP3T）** で音声接点を切替。`A_GND` 共有。**ラッチング不要** |
-| HP 音量 | **デュアルポット**（Amp 後 → HeadphoneBuffer 前）。固定パッドは **0 Ω**（§9） |
-| LINE 音量 | **デュアルポット**（Amp 後 → LINE） |
-| バクサンドール（Bass/Treble） | **PT2314**（I²C）。制御 OLED に状態表示 |
-| スペアナ表示 | 計測 Pico 側（独立） |
+| **決定** | 1〜3 行 |
+| **理由** | いちばん強い理由 1 つ |
+| **根拠** | `ds_facts/`・`review/`・`spice/`・`scripts/`・DS へのリンク |
+| **前提・外れる条件** | これが崩れたら見直す |
+| **却下した案** | 1 案 1 行、理由とリンク |
+| **状態** | 下の表のどれか。1 項目に複数あるときは箇条に割る |
 
-### 操作子・表示（人が触るもの）
-
-| 部品 | 役割 |
+| 状態 | 意味 |
 |---|---|
-| **ENC_CH** | CH 選択。**回す＝候補、押す＝確定**（確定時に音声＋電源ラッチング適用） |
-| **RV_HP**（目立つ物理ノブ） | HP 音量。**OLED 非表示** |
-| **RV_LINE**（目立つ物理ノブ） | LINE 音量。**OLED 非表示** |
-| **SW_DEST** | 出力先。**トグル ON-OFF-ON（3PDT 推奨）**。上=LINE / 中=MUTE / 下=PHONE |
-| **DEST LED ×2** | **LINE** / **PHONE**。MUTE = 両方消灯。Pico GPIO 駆動（ADC 読取と連動） |
-| **ENC_BASS** | トーン Bass。制御 OLED に表示 |
-| **ENC_TREBLE** | トーン Treble。制御 OLED に表示 |
-| **OLED 制御用** | **2.42″ 128×64 I²C**（v1 `Control/`）。CH / DEST / Bass / Treble。音量なし |
-| **LCD スペアナ** | **Waveshare 29318**（v1 `measurement_fw/`）。計測 Pico 配下。AudioV2 図には載せない |
-| **PWR SW + 12V LED** | 本体電源スイッチ。12V LED で ON 視認 |
+| **決定** | ユーザーが決めた。条件つきのものは条件を書く |
+| **いったんの決め** | 推奨をユーザーが受けた（「よい」「おすすめで」「良さそう」）もの、査読で出た値を仮に採ったもの |
+| **未決（推奨）** | 推奨はあるが、ユーザーは決めていない |
+| **未決** | 推奨もまだ無い |
+| **要実測** | 実測の結果で決める |
+| **v2 の却下を引き継ぐ** | v2 で却下され、v2.1 で個別の判断はしていない |
+| **DS の制約** | DS が求めること。判断ではない |
 
-```text
-[操作パネル]
-  ENC_CH   RV_HP   RV_LINE   SW_DEST(+LED×2)   ENC_BASS  ENC_TREBLE   OLED_制御   PWR+12V LED
-      \      |        |            |                 /         /            |            |
-       \     |        |     ADC+GPIO LED              /         /             |            |
-        ======== Pico 操作 1台 ========（表示・制御）============      （電源系）
-                       | I2C
-              +--------+----------+-----------+
-              |        |          |           |
-           トーン系   GPIO拡張    OLED     （音量はアナログのみ・Pico 非接続）
-                          |
-                    ULN→ラッチング（CH のみ）
-```
-
-エンコーダーは **3 個**（CH / BASS / TREBLE）。**§10 確定: GPIO 直結**。I²C 集約は見送り。
-
-### DEST ルール（確定・2026-08-30 更新）
-
-| 項目 | 内容 |
-|---|---|
-| 音声切替 | **トグル ON-OFF-ON**（接点が音声を切る）。旧 `Audio/` SW101 の 3 択をトグル化 |
-| 並び | **上 LINE / 中 MUTE / 下 PHONE**（中央オープン＝MUTE） |
-| 位置検知 | **A 案: Rh/Rl/Rs ラダー → Pico ADC** — 詳細 [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)。**採用: Rh=Rl=10k, Rs=1k** |
-| OLED | ADC 結果を **DEST: LINE / MUTE / PHONE** として表示 |
-| LED | Pico が ADC に合わせて **LINE LED / PHONE LED** を点灯。MUTE = 消灯 |
-| 起動 | トグルの物理位置がそのまま DEST（ラッチング復帰不要） |
-| その他表示 | CH / Bass / Treble はループ表示可。**音量は OLED に出さない** |
-| 極数 | **3PDT**（L/R 音声 + センス 1 極）。第一: **C&K 7303SYZQE**（[PARTS.md](PARTS.md)）。欠品時は DPDT+SPDT 分割 |
-
-### 出力先にリレーは必要か → **不要（機械 SW 確定）**
-
-| 項目 | 内容 |
-|---|---|
-| 素子 | **3PDT ON-OFF-ON**（第一: C&K **7303SYZQE**）。パネル実装。基板は 2×4（音声）+ センス 3P + リード |
-| 置き場所 | **出力段 / 前面パネル**（旧 SW101） |
-| 役割 | `A_GND` は共有のまま、**音声の出口**だけ切替 |
-| MUTE | 中央位置＝両経路オフ（接点オープン） |
-| 検知 | 抵抗ラダー → ADC。LED / OLED はファーム駆動 |
-
-ENC_DEST + DEST ラッチングリレー案は **見送り**。
-
-### 操作系統の残り穴
-
-1. ~~12V LED の取り出し元~~ → **§9 確定**
-2. ~~ENC 配線~~ → **§10 確定（GPIO 直結・×3）**
-3. ~~物理基板分割~~ → **§11 Q1=B, Q2=A**。I²C トポロジー（Q3）・端子詳細は **設計時**
-4. ~~PT2314 外部 C/R（トーン）~~ → **2026-09-07 に組み直した。**
-   **⚠ ここに書いてあった「DS 値（2.4 k / 2.7 nF / 100 n / 2.2 µF / REF 5.6 k+22 µ）を反映済み」は
-   値の一覧は合っていたが割り当てが違っていた。** 2.4 k は本来「使わないセレクタ入力の直列抵抗」、
-   5.6 k は「低音網の集約点」。それが 2.4 k→トーン網、5.6 k→REF になっていた。
-   結果、**`BOUT`/`BIN` を結ぶ集約点が無く、`BIN`→BASS→`BOUT` の外付け帰還路が成立していなかった**。
-   正しい網は DS のアプリケーション回路のとおり（無印 PT2314 / PT2314E で同一）:
-   `BOUT`─[100 n]─●─[5.6 k]─GND─[100 n]─`BIN` / `TREB`─[2.7 n]─GND / `REF`─[22 µ]─GND。
-   **定数の正は回路図**（[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。ここに再掲しない
-5. ~~±12 V 化に伴う HP 固定パッド~~ → **§9 確定（0 Ω。ポット回転域を実機で確認）**
-6. ~~**SW_DEST 品種**~~ → **C&K 7303SYZQE**（3PDT ON-OFF-ON）。ラダー **10k/10k/1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) / [PARTS.md](PARTS.md)）
-7. ~~**RV_HP / RV_LINE**~~ → **Alps RK27112A00CF** ×2（A50k Dual / パネル＋ヘッダ）
-8. ~~**KiCad** — 手回し構成へ改訂済み（素案）。ERC・未使用 PT2314 入力は残り~~
-   → **2026-09-07 に未使用 PT2314 入力を解消**（使わない12ピンに `no_connect`）。
-   ERC 件数の正は [CLAUDE.md](../CLAUDE.md) の期待値表
+略記: [NOW] = 上の注のとおり（コミット `a63caac` の [NOW.md](NOW.md)）、[pow] = [ds_facts/power.md](ds_facts/power.md)、[sw] = [ds_facts/switch_control.md](ds_facts/switch_control.md)、[op] = [ds_facts/opamps.md](ds_facts/opamps.md)、[tap] = [ds_facts/tap.md](ds_facts/tap.md)、[bnd] = [ds_facts/boundary.md](ds_facts/boundary.md)（照合 [verify_boundary.md](ds_facts/verify_boundary.md)）。`ds_facts/relay4.md` は**未照合**なので根拠に使っていない。
+§10 の未決・実測は `V21-未決-nn`・`V21-実測-nn` で呼ぶ（他の査読ファイルの記号と衝突させないため）。
 
 ---
 
-## 8. 電源（±15 V・PD 差し替え）— **確定（2026-09-01 に ±12 V から変更）**
+## 1. 設計の根本
 
-### 確定内容
+### 1-1 コールドスタンバイ — 電源要求の違う回路を切り替える
 
-| 項目 | 内容 |
-|---|---|
-| アナログレール | **±15 V**（v1 `Audio/` と同じ）。**⚠ 2026-09-04: ±15 V を選んだ理由が3つとも消えた。→ しかし 2026-09-05 の否定側査読で ±12 V 側に重い障害が3件出た（`TMUX7612` の膝が電源に追従／`+9V` が規定入力範囲を割る／改名が4箇所＋シンボルライブラリ）。「有力」ではなくなった。依然として未決** → 「±15 V の理由は3つとも消えた」。**⚠ 2026-09-05 の再探索で第3の道が出た** —— ±15 V のまま `REC20K-2415DZ` へ替えれば `Cout` の宿題だけ閉じられる（`TMUX7612` の膝も改名も触らない）。「2026-09-05 の再探索」を参照 |
-| DC-DC | **`REC20K-2415DZ`**（Recom、±15 V / **±667 mA** / 20 W / 効率 88 % typ / Cout **±3000 µF**、1″×1″ 6-DIP）**確定 2026-09-07**。旧: `REC10K-2415DAW/H2`（±333 mA・Cout ±270 µF、2026-09-02〜09-07）／その前: `DKMW20F-15`（±660 mA、¥5,116）。**差し替えの理由は下の「ソケットあたりの電流予算」** |
-| PD 入力 | **PD モジュール外付け** — **ストロベリーリナックス `50224`**（CH224K）を外付けで使い、12 V を板上の受け端子へ入れる。**板上に USB-C / CH224K チップは載せない**（部品は当初と同じで、変わったのは実装形態だけ）。12 V のジャンパ設定はモジュール側。受け端子 → ヒューズ → DC-DC。**どの電圧で受けるかは「PD 入力 — どの電圧で受けるか」**（12 V 確定。9 V は不可） |
-| パネル 12 V LED | PD モジュールの **12 V** → **PWR SW**（操作パネル）→ LED + DC-DC 一次（§9）。`PD_GND` |
+- **決定**: 解く問題を「電源要求の違う回路を同じバスへ切り替えること」と置く。非選択の回路は**電源ごと落とし**、バスとの境目には「電源が無いときにも切れている素子」を置く（コールドスタンバイ）。回路ごとに自分の電源（LDO で電圧を選ぶ）を持たせて同じバスに混ぜる
+- **理由**: v2 の形では、非選択の回路が境目の素子（TMUX7612）を生かすために通電していた（ホットスタンバイ）。TMUX7612 の DS には**電源を切ったときの漏れ・高インピーダンスの規定が無く**、端子はレールへダイオードでクランプされている
+- **根拠**: [NOW] L22「設計の根本」／[bnd] §1.1（TMUX7612: 電源断時の規定なし、"Pins are diode-clamped to the power-supply rails."、電源シーケンスは任意）。[NOW] L22 は「議論中」と書いているが、境目の素子（ラッチングリレー）と 1 枚の ch 数（4）は L24 で決まった
+- **前提・外れる条件**: 境目の素子が電源断でも切れていること（§2-1 のラッチングリレー）。境目の外（親）の PT2314E と計測系は常時通電。TMUX7612 は娘の上で電源リレーの後ろにあり、**選んだ娘の中では ch の EN で切らずに通電したまま**、選んでいない娘では電源ごと落ち、境目のリレーでバスから切られる
+- **却下した案**: v2 の「全 ch 常時通電・入力ブロードキャスト」— 選んだ ch だけを生かす目的と逆（v2 L28 決定ログ「切替方式」、L2861「11.1 切替アーキテクチャ」）
+- **状態**: 決定（ユーザー判断 2026-09-25）
 
-### 【確定】電源の要求は「合計 mA」ではなく **「ソケット1個あたり何 mA」**（2026-09-07）
+### 1-2 同時に生かすのは厳密に 1 ch
 
-**この箱はオペアンプを差し替えて聴く箱で、入力ブロードキャスト＋出力のみ MUX なので
-10 個が常時通電する。** だから `+15V` の要求は「`NE5532` ×10」ではなく
-**「挿す石 × 10 個ぶん、常時」**。レールの余裕は**1ソケットあたり何 mA 使えるか**に
-翻訳しないと、装置の目的（何を挿せるか）と噛み合わない。
+- **決定**: 電源と入力を生かすのは**選んだ 1 ch だけ**。ファームは全 OFF → 1 ch ON。温めておく ch は作らない。ハードは ch ごとに独立して切れる。ヘッドホンは 32 Ω を想定
+- **理由**: 主電源（RS6-1215D、±200 mA）の予算がこの前提で成り立つ（§3-1）。温めておく ch を許すと、同時に通電できる数が DC-DC の型番で決まってしまう（最悪の石で 5 ch、80 % で使うなら 3 ch という見積もりがあった）
+- **根拠**: [NOW] L9／[review/rejected_review.md](review/rejected_review.md) #5・[rejected_review_review.md](review/rejected_review_review.md) #5（温める数の見積もりと訂正）
+- **前提・外れる条件**: 石の熱の整定（通電してから音が落ち着くまで）が許せる長さであること。v2 の反対理由「今つけた石と、ずっとついていた石を比べる」（v2 L3979、L3965「電源カット…反対理由が入れ替わる」の節の表）はハードでは解けず、切り替えてから聴くまでの待ち時間の問題として残る（[rejected_review_review.md](review/rejected_review_review.md) §6 U2、V21-実測-09）
+- **却下した案**: 「最低 1 ch、温める数はファームが決める」— 同上（DC-DC の余裕を食う）
+- **状態**: 決定（ユーザー判断 2026-09-25）
 
-在庫石の `Icc`（[`Audio/datasheets/opamps/`](../Audio/datasheets/opamps/) の一次資料）:
+### 1-3 制御の木は 2 段
 
-| 石 | 1ソケットあたり |
-|---|---:|
-| **`MUSES03`**（10 mA max ×2 の変換基板） | **20 mA** ← 在庫の最悪 |
-| `NE5532` | 16 mA（`ICC` total、`VO`=0 無負荷。typ 6 mA） |
-| `OPA627` ×2 | 15 mA |
-| `LT1364` | 15 mA |
-| （参考）`OPA1656` | `IQ` 3.9 mA/ch typ・4.6 mA max → dual で 9.2 mA/pkg max |
+- **決定**: 1 段目＝**基板（娘）1 枚だけ ON**、2 段目＝**その基板の中で 1 ch だけ**。どちらも「全リセット → 1 つだけセット」のブレーク・ビフォア・メイク
+- **理由**: 選んだ 1 ch だけ給電する形なら、1 段目の故障（別の基板にも電源が入る）でも ch の EN が 2 つ目の関門になる（[review/dcdc_2stage_review.md](review/dcdc_2stage_review.md) 要約 3）。逆に基板をまたぐ排他が無いと、娘 4 枚が 1 ch ずつ ON の最悪で RS6 の +15 V が定格の 110 % になり、過負荷保護（150 %）は働かない
+- **根拠**: [NOW] L24／[review/bulk_parent_sim.md](review/bulk_parent_sim.md) §0.3（4 枚 110 %、2 枚以下なら 89 %）／[review/dcdc_2stage.md](review/dcdc_2stage.md)・[_review](review/dcdc_2stage_review.md)
+- **前提・外れる条件**: 1 段目・2 段目の中身は §2
+- **却下した案**: 親のスロットごとの電源スイッチで 1 段目を作る案 — §2-1 の縦積みリレーに差し替えた（[NOW] L24「旧 N1/N2 は不要」、§2-1 の却下欄）
+- **状態**: 決定（ユーザー判断 2026-09-25）
 
-固定側（ソケット以外で `+15V` に載るもの）は **35〜63 mA**
-（「オーディオプロセッサ系 35 mA」＋ `OPA1656` ×3 = 27.6 mA max。両者が重複しているかは未確認）。
-以下は保守側の 63 mA で計算した。
+### 1-4 基板は 1 種類、1 枚 4 ch、切替素子の聴き比べはしない
 
-**1ソケットあたりに使える電流:**
+- **決定**: 娘は 1 種類だけ（中は TMUX7612 で ch を選ぶ）、1 枚 4 ch。ch ごとのリレーの基板と、切替素子の聴き比べは v2.1 ではやらない
+- **理由**: ユーザーの判断（[NOW] L24–25）
+- **根拠**: [NOW] L24「決定（2026-09-25、差し替え）: DC-DC は RS6、1 枚 4 ch、基板は 1 種類だけ」、L25
+- **前提・外れる条件**: —
+- **却下した案**: v2 の「リレー版とスイッチ版を別 PCB 2 種で起こし、実機で比べる」（v2 L4462「リレー版とアナログスイッチ版を別設計として両方起こす」・L4502「別 PCB 2種として起こす」）— v2.1 の目的から外した／ch ごとにラッチングリレーを置く娘（[review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #11）— 同上
+- **状態**: 決定（ユーザー判断 2026-09-25）
 
-| | 計測系の電源はそのまま | 計測系の LDO を `+15V` へ（+80 mA） | さらに `+5V_D` も `+15V` へ（計 +176 mA） |
-|---|---:|---:|---:|
-| `REC10K`（±333 mA） | 27.0 mA | 19.0 mA | 9.4 mA |
-| **`REC20K`（±667 mA）** | 60.4 mA | 52.4 mA | **42.8 mA** |
+### 1-5 DIRECT（PT2314E を飛ばす経路）は聴くためのライン入力用
 
-**`REC10K` では、計測系を触らなくても 27 mA/socket しか出ない。** 在庫の `MUSES03`（20 mA）は
-通るが、ディスクリート DIP-8 モジュールは入らない。計測系の電源を `+15V` へ寄せると
-`NE5532` の max 16 mA すら割る。**「差し替えて遊ぶ」という装置の目的に対して `REC10K` は
-最初から窮屈だった** —— 計測系の話が窮屈さを作ったのではなく、表に出しただけ。
+- **決定**: DIRECT はライン入力を聴くための経路とする。v2 の「経路ごとの振幅上限」のうち**精密 DIRECT・フルレンジ DIRECT は要件から外す**。PT2314E を通る通常経路の上限の考え方は残る
+- **理由**: 装置は計測器ではない（§0-1）。精密 DIRECT は TMUX の膝の近くまで振る運用のためのもので、耳で比べる用途には要らない
+- **根拠**: [NOW] L18／[review/decisions_audit_3_review.md](review/decisions_audit_3_review.md)（v2 L4569「経路ごとの振幅上限」は「無効」ではなく「前提変更」。無効なのは DIRECT の 2 行だけ）
+- **前提・外れる条件**: DIRECT の置き場所・切替の形、ライン入力の振幅の定義（2 Vrms か、それ以上か）は未決（V21-未決-14、[NOW] L27、[review/rejected_review.md](review/rejected_review.md) §3.4）
+- **却下した案**: —
+- **状態**:
+  - 決定: DIRECT は聴くためのライン入力用、精密／フルレンジ DIRECT は要件外（ユーザー判断 2026-09-25）
+  - 未決: 置き方（V21-未決-14）
 
-### 【確定】`U1604`（MBC2596-01 非絶縁バック）を削除。ADC の LDO は `+15V` 直結（2026-09-07）
+---
 
-**消した理由は2つで、どちらも「電源が足りない」とは無関係。**
+## 2. 制御の木
 
-1. ~~1.2 kHz スパーの最有力容疑者~~ → **この理由は成立しない。** 軽負荷パルススキップ説は
-   **同じ 2026-09-07 に実測で否定されている**（下の「`U1604` の軽負荷スキップは否定」。
-   出力に 330 Ω を並列で +20 mA を足し、A-B-A でスパーの周波数が動かなかった）。
-   **スパーの発生源は未特定**で、`U1604` を消して消える保証は無い。
-   （2026-09-07 に削除を決めたときこの否定を見落としていた。理由は 2 だけで足りる）
-2. **`ADC_GND` を `PD_GND` に溶接している唯一の部品だった。** この記録自身が
-   「リレーのパルス電流が結合チェーン全体、つまり ADC のアナログ星点を通っていた」と
-   名指ししていたチェーン（`A_GND`─NT1601─`ADC_GND`─**U1604 の内部**─`PD_GND`─NT1602─`D_GND`）の中央
+### 2-1 1 段目: 縦積みの各娘に電源用ラッチングリレー → レールがそろってから音声用
 
-**変更の中身:**
+- **決定**: ±15 V は全段に常時通す。各娘で **電源用ラッチングリレー（DPDT 1 個、+15 V と −15 V に 1 極ずつ）** をセット → 両レールがそろってから **音声用ラッチングリレー（DPDT 2 個、`TONE_L/R` と `AMP_SEL_L/R` の 4 本）** をセット。リセット（NC 側）は切り離し。**コイルの電源（`+5V_COIL`）と全リセットは常時系統から出す**（電源の無い娘にもリセットが届く）
+- **理由**: ラッチングなら聴取中に音声の近くを制御電流が流れない（ユーザーの好み）
+- **根拠**: [NOW] L24／[review/arch_zero_base.md](review/arch_zero_base.md) §1.1「ユーザーはラッチングリレーを好む」／[review/stack_relay_power.md](review/stack_relay_power.md)・[_review](review/stack_relay_power_review.md)
+- **前提・外れる条件**:
+  - ラッチングリレーは衝撃・前歴で状態が変わりうる（G6K・TQ の DS が「リセット位置で出荷、衝撃で変わりうる、初期化せよ」と明記 [bnd] §3、[verify_boundary.md](ds_facts/verify_boundary.md) 要約）。**電源投入時とすべての切替で全リセットから始める**こと（§6）
+  - 縦積みで上下・隣のリレーは **5 mm 以上離す**（AZ850 p2 が隣接 5.0 mm を推奨、Panasonic・Omron も近接の影響を明記。[review/stack_relay_power_review.md](review/stack_relay_power_review.md) §3 (c)、[review/rail_detect_review.md](review/rail_detect_review.md) §1 の表）。PCB を起こすときの制約
+- **却下した案**:
+  - 親のスロットごとの電源 IC（TPS26600 eFuse）— 内部にチャージポンプがあり周波数も DS に無い（電源経路に発振器・チャージポンプを置かない要件に反する）（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §0.1）
+  - スロットごとの ±15 V スイッチ（LM5067／ディスクリート、発振器なしで合格。[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6 冒頭・§6.1）— [NOW] L24 で電源リレーに差し替えた。**差し替えの理由の記録は無い**
+  - 境目を非ラッチングリレー／電源断保護つきアナログ SW／PhotoMOS にする案 — [NOW] L22 の候補で、L24 でラッチングリレーに決めた。**個別の却下理由の記録は無い**（DS 事実は [bnd]）
+- **状態**:
+  - 決定: 電源用 → 音声用の縦積みラッチングリレー、コイル電源と全リセットは常時系統から（ユーザー判断 2026-09-25、[NOW] L24）
+  - DS の制約: リレーの間隔 5 mm 以上
 
-| | 前 | 後 |
+### 2-2 リレーの品種 — 音声用は AZ850P2-5（v2 から）、電源用も同じ石を推奨
+
+- **決定**: 音声用は `AZ850P2-5`（v1/v2 と同じ石）。電源用にも同じ石を使う方向（推奨）
+- **理由**: 直列 R を 15 Ω 以上にすれば電源の役でも突入のピークが抵抗負荷の開閉電流 1 A の内に入り（22 Ω で 0.68 A）、音声の役は最小開閉 10 mV / 10 µA・AgPd 金クラッド。2 コイル型なので今のシンク型ドライバ（TBD62083A）で SET/RESET とも駆動でき、FP・BOM・駆動が 1 種で済む
+- **根拠**: [review/stack_relay_power.md](review/stack_relay_power.md) §0.1-5・§1.4／[sw] §2（AZ850）／[NOW] L222（v2 から引き継いだ「リレーは AZ850P2-5 に固定（2026-09-09）」）
+- **前提・外れる条件**: 容量負荷のメイクは DS の規定の外（1 A は抵抗負荷）。**実機のメイク回数試験**が最終的な根拠（[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 1-3・1-4、V21-実測-11）。直列 R を 15 Ω 未満にするなら電源用だけ 2 A 級（TQ2SA-L2）
+- **却下した案**: Omron G6KU・Fujitsu FTR-B3 — 単巻線ラッチで極性反転の駆動が要り、シンク型ドライバでは組めない（[review/stack_relay_power.md](review/stack_relay_power.md) §1.1）／`TQ2-L2` を AZ850 の FP に挿す — COM/NC/NO のピン番号が違い SET/RESET が反転する（[NOW] L222）
+- **状態**:
+  - 決定: 音声用は AZ850P2-5（v2 の確定 2026-09-09 を引き継ぐ、[NOW] L222）
+  - 未決（推奨）: 電源用にも AZ850P2-5。推奨は両役、容量負荷のメイク試験で決める（V21-未決-05、V21-実測-11）
+
+### 2-3 配線: COM＝娘側、NO＝バス（スタック）、NC＝抵抗越しに GND
+
+- **決定**: 音声・電源とも、接点の COM を娘側、NO をバス側、NC を抵抗越しに GND へ。リセット状態で娘側の音声の節とレールが抵抗で放電される
+- **理由**: この向きなら NC の抵抗はセット・リセットのどちらの状態でもバスに載らない（バスに見えるのは開いた NO 接点だけ）。逆にするとバスを抵抗で負荷する
+- **根拠**: [review/stack_relay_power.md](review/stack_relay_power.md) §0.1-6・§5.1／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-1・5-2（AZ850 p2 の図と v1 のピンの使い方で確認）
+- **前提・外れる条件**: 抵抗値は推奨どまり（音声 10 kΩ、レール 2.2 kΩ）
+- **却下した案**: 逆向きの配線 — NC の抵抗が並列でバスを負荷する（[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-2）
+- **状態**:
+  - いったんの決め: 配線の向き
+  - 未決: 抵抗値（V21-未決-04）
+
+### 2-4 電源接点に直列 22 Ω（ヒューズ抵抗）、NO（スタック）側
+
+- **決定**: 電源接点の後ろに各レール **22 Ω**。品種は**ヒューズ抵抗**（突入パルスには耐え、2 W 連続で開く）。**±15 V は DPDT 1 個で切り、22 Ω は NO（スタック）側へ置く**
+- **理由**: 22 Ω で突入のピークが 0.68 A（接点の開閉電流 1 A の 68 %）。NO 側に置けば、リレーの中でどこの極間が短絡しても ±15 V の間に 44 Ω 以上が入る
+- **根拠**: [NOW] L25／[review/stack_relay_power.md](review/stack_relay_power.md) §1.3（R ごとの突入のピーク）／[review/rail_detect.md](review/rail_detect.md) §0.4／[review/rail_detect_review.md](review/rail_detect_review.md) 冒頭のユーザー決定 (3)・§6（極間短絡のときの 22 Ω の電力。耐パルスの 1206 では焼けるので溶断型が要る）／[spice/stack_relay/](spice/stack_relay/)
+- **前提・外れる条件**: 査読の範囲は 15〜33 Ω。22 Ω は [review/stack_relay_power.md](review/stack_relay_power.md) の推奨を採ったもの（33 Ω を退ける理由は、しきい値を下げた後は残っていない: [_review](review/stack_relay_power_review.md) 3-4・§4、[review/rail_detect_review.md](review/rail_detect_review.md) 要約 5）。最悪の角でも LDO のヘッドルームは目安（≥ 1 V、DS の設計例の "for optimal performance"）を満たす（[_review](review/stack_relay_power_review.md) 3-2〜3-4）。**ヒューズ抵抗の品番の単発パルス曲線は未収集**
+- **却下した案**:
+  - 4.7〜10 Ω — 突入のピーク 1.48〜3.10 A は DS の保証の外（抵抗負荷の開閉 1 A を物差しにすると超える）。RS6 が 300 mA で頭打ちなら、娘のバルク無しでも親の +15 V は 9.8〜10.7 V まで落ちる〔仮定〕（[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 1-3・2-2）
+  - 22 Ω を COM 側 — 極間短絡が ±15 V の直結になる（[review/rail_detect.md](review/rail_detect.md) §0.4）
+  - ±15 V を DPDT 2 個に分ける — ユーザーが 1 個のままを選んだ
+- **状態**:
+  - 決定: ±15 V は DPDT 1 個・22 Ω は NO 側（[review/rail_detect_review.md](review/rail_detect_review.md) 冒頭のユーザー決定 (3)）
+  - いったんの決め: 22 Ω・ヒューズ抵抗（[NOW] L25）
+
+### 2-5 制御線は全段共通、各娘はジャンパで自分の段を選ぶ
+
+- **決定**: 制御線は全段に同じ番号で素通しする。電源用 SET は段ごと（4 本）で、各娘はジャンパで 1 本を選ぶ。**リセットは音声用（ARST）と電源用（PRST）の 2 本で、どちらも全段共通**。ch 選択線は共通。音声用 SET は共通 1 本（§2-6）。スタックの制御・電源のコネクタは **2×12（24 本、[NOW] L25）**
+- **理由**: 縦積みで各娘が同じピンを見るので、段ごとに違う線を通すなら番号をずらす仕掛けが要る。全段共通＋ジャンパなら娘の基板は 1 種類のまま
+- **根拠**: [NOW] L24・L25／[review/stack_relay_power.md](review/stack_relay_power.md) §7.2（線の表）・§5.3（リセットの順番）／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 6-1・7-2（音声 SET を共通にしても 21 本で 2×10 には入らない）。[NOW] L24 の「RESET 共通 1 本」は古い（順番をファームで守るには 2 本要る）
+- **前提・外れる条件**:
+  - 24 本の内訳は下書きの算術〔計算〕: [review/stack_relay_power.md](review/stack_relay_power.md) §7.2 の 24 本（段ごとの音声 SET 4 本を含む）から 3 本を引いた 21 本（`PG_N` を含む）に、`MON_P`・`MON_N`・`RAIL_OK`（§5-2・§5-3）を足した数。`PG_N` を残すか、予備の GND を何本にするかは未確定（V21-未決-22）
+  - 娘の MCP23017 を残して I²C を通すなら 2 本増えて入らない（同 §7.2、V21-未決-03）。電源用 SET と音声用 SET で選ぶ段を食い違えない配置が要る（同 §7.2）
+- **却下した案**: 今の 2×8 のまま — 本数が足りない（同 §7）／親にスロット 4 口を横に並べるバックプレーン — 縦積みに決めた（[review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #15 は横並びを推していた）
+- **状態**:
+  - 決定: 全段共通・ジャンパで段を選ぶ（[NOW] L24）
+  - いったんの決め: 2×12・24 本（[NOW] L25。音声 SET を共通 1 本にした決定の帰結）
+
+### 2-6 音声用 SET は全段共通の 1 本（査読で D10 と呼んだ件）
+
+- **決定**: 音声用リレーの SET は**スタック全段に共通の 1 本**。条件: 音声 SET は「全リセット（全娘の電源リレーと音声リレー）→ 選んだ娘の電源 SET → レール良好 → 共通の音声 SET」の**1 つの手順の中でだけ出す**（ファームの責務、§6-2）
+- **理由**: レールの無い娘は B1（§5-4）で音声 SET のコイルに電源が来ないので、共通の SET が届いても**セットできない**。共通線だけに残る弱点（選んでいない娘の電源リレーが衝撃でラッチすると、その娘でも B1 が通る）は、上の手順が必ず全リセットから始まることで消える
+- **根拠**: ユーザー判断（2026-09-25「共通で破綻しないならそれで決定」）／[NOW] L25／[review/stack_relay_power.md](review/stack_relay_power.md) §7.2（共通案の弱点）／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 7-4（段ごとの SET でも、衝撃でセットされた音声リレーは消せない）／[review/rail_detect_review.md](review/rail_detect_review.md) §3.3（B1）
+- **前提・外れる条件**: 聴取中に衝撃で別の娘の電源リレーがラッチすると、その娘はレールが立ち、共通の ch 選択でその娘の ch の LDO も入る（音声リレーはリセットのままなのでバスには出ない）。RS6 の負荷は最悪 2 ch 分で +15 V 89 %（HP 最大、[review/bulk_parent_sim.md](review/bulk_parent_sim.md) §0.3）。次の切替の全リセットで切れる。ジャンパの重複で 2 枚が同じ段を選ぶ事故は [review/stack_relay_power.md](review/stack_relay_power.md) §7.2 の弱点として残る
+- **却下した案**: 段ごとの音声 SET（4 本）— 衝撃でラッチした音声リレーはどちらでも防げず、残る弱点はファームの手順で消せるので、ピンを 3 本使う理由が弱い
+- **状態**: 決定（条件つき、ユーザー判断 2026-09-25）
+
+### 2-7 全リセット → 1 つだけセット。リセットの順番はファーム
+
+- **決定**: 切替はいつも全リセットから。リセットの順番（音声を先・電源を後）は**ファームで守り、ハードは足場だけ**置く。パルス幅もファーム（§6）
+- **理由**: 娘のバルクを外したので、電源接点が開いてから LDO が落ち始めるまで 0.4〜3.8 ms しかなく、リセット時間と同じ桁。同時に切るとバスに制御されない過渡が出うる。ただし**壊れはしない**ので、ハードで保証するのは必須ではなく保険
+- **根拠**: [NOW] L25／[review/stack_relay_power.md](review/stack_relay_power.md) §0.1-7・§5.3／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 6-1（ファームの ARST → 20 ms → PRST で足りる）
+- **前提・外れる条件**: ハードで順序を保証する（PRST が音声のリセットも叩き、電源だけ 10 ms 遅らせる）かは未決（V21-未決-06、[review/rail_detect.md](review/rail_detect.md) §0.5 D6）
+- **却下した案**: —
+- **状態**: いったんの決め（[NOW] L25）
+
+### 2-8 2 段目: 娘の中は TMUX7612 で ch を選び、選んだ ch の石だけ LDO の EN で給電
+
+- **決定**: 娘の中の ch 選択は TMUX7612。ch の**出力だけでなく入力も**切る（入出力 L/R＝ch あたり 1 パッケージ）。選んだ ch のソケットだけ、ch ごとの正負 LDO（TPS7A49／TPS7A30）の EN で給電する。TMUX は娘の電源リレーの後ろの ±15 V（LDO の前）に載り、**選んだ娘の中では常時（ch の EN では切らない）**。選んでいない娘では電源ごと落ち、境目のリレーでバスから切られる
+- **理由**: 電源を落とした石の入力が共有の `TONE` バスにつながったままだと、どの石でも入力の絶対最大を越え、入力保護ダイオード越しにバスを低いインピーダンスで負荷する（PT2314E の最小負荷 5 kΩ を大きく割る）。アナログスイッチ自身も、バスにつながっている間は通電していないとスイッチがクランプになる
+- **根拠**: [NOW] L9・L17・L25／[review/pm12_judgement.md](review/pm12_judgement.md) §5・[_review](review/pm12_judgement_review.md) §E／[review/ds_errata_review.md](review/ds_errata_review.md) O1〜O3（OPA1652・OPA1612・NJM5532 の入力保護ダイオード）／[review/dcdc_2stage_review.md](review/dcdc_2stage_review.md) 1.1（ch に 1 パッケージ、娘の上なので板スイッチの後ろに載る）／v2 L3999「入力クランプ」・L4048「アナログスイッチ自身は常時通電にすること」
+- **前提・外れる条件**: 電源を切った石の出力も ESD 構造でレールにつながるので、出力も切る（v2 L2871「なぜ入力だけでなく出力も切るか」）。正側 LDO だけが切れて負側が残る状態は NJM5532 の DS が注意する形（[review/pm12_judgement.md](review/pm12_judgement.md) §5.3-2）
+- **却下した案**: 出力だけ切る（v2 の図）— 電源の無い石の入力に信号がかかる（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-2）／ch ごとの絶縁 DC-DC — 同時に生きる ch が 1 つなら守る相手が無い（[review/rejected_review.md](review/rejected_review.md) N1）
+- **状態**: 決定（ユーザー判断 2026-09-25）
+
+### 2-9 EN は娘の切られたレールから作る。1 ch だけ ON のデコーダは既定 OFF
+
+- **決定**: ch の LDO の EN の論理は娘の切られたレール（電源リレーの後ろ）から給電し、**EN が LDO の IN を超えない形にする**。娘ごとに「1 ch だけ ON できる」デコーダを置き、有効化の既定は OFF。レールが落ちたら EN も切る（§5-5）
+- **理由**: TPS7A49 の絶対最大は「EN – IN −36 / +0.3 V」。`3V3` が生きていて ±15 V が無いとき（主電源スイッチ OFF で Pico が USB だけで動く場合、RS6 が保護で止まっている間）に 3.3 V の EN を出すと定格を破る。起動の順序では防げず、DC-DC の型番でも直らない
+- **根拠**: [NOW] L15・L25／[pow] §2（TPS7A49 絶対最大 EN–IN、VEN(high) 2.1 V、VEN ≤ VIN）・§3（TPS7A30 EN–IN −0.3/+36 V）／[review/main_power_compare_review.md](review/main_power_compare_review.md) 1-6・§3.3／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6 冒頭・§6.2・§6.3-1
+- **前提・外れる条件**: EN 保護は要る（ユーザー決定、[review/arch_zero_base.md](review/arch_zero_base.md) 冒頭）。手段は「EN をレールから作る」（決定）で、[NOW] L15 の直列 R＋EN→IN ショットキー＋プルダウンは査読の読みでは不要（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.2）。残すかは未決。**1 ch だけ**をハードで守るのは娘の中だけで、娘をまたぐ排他は §2-6・§6 に残る
+- **却下した案**: ファームの規約だけで排他する — MCP23017 の POR 後は全ピンが入力で、プルダウンが守るのはリセット中だけ。ファームのバグ（ポートに全ビット 1 を書く等）には効かない（[review/main_power_compare_review.md](review/main_power_compare_review.md) 1-5）
+- **状態**:
+  - 決定: EN の論理を娘の切られたレールから給電（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6 冒頭のユーザー決定、[NOW] L25）。1 ch だけ ON のデコーダ・既定 OFF（[NOW] L15）
+  - 未決: デコーダの素子と置き場所、娘の 3.3 V の作り方（発振器・チャージポンプの無いもの）、直列 R＋ショットキーを残すか（V21-未決-02、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4 A1）
+
+### 2-10 切替の間は音声を GND へ落とすミュート
+
+- **決定**: 切替の間は、音声を GND へ落として無音にする
+- **理由**: 過渡の出どころ（TMUX と境目のリレーの切替、LDO の立ち上がり、出力結合の整定、娘のレールの切替）は全部 `AMP_SEL` バスに出るので、バスより上流の PT2314E のミュートでは消せない
+- **根拠**: [NOW] L25／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-5／参考製品 [datasheets/reference/Kyohritsu_KP-HAMP61_manual.pdf](datasheets/reference/Kyohritsu_KP-HAMP61_manual.pdf) — PDF p2（本文テキスト層）「切り替え時はオペアンプの電源の切り替えと音声回路の切り替えを行いますが、…1 秒程度の無音期間（音声回路を安全な GND 信号と接続）が取られる構造」、PDF p3（画像、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6 で読んだもの）「選択されていないオペアンプが、電源も含めて回路から完全に切り離されている」。操作子はスイッチ 1 個（p1）。無音を検出して電源を切る機構がある（p1・p2）
+- **前提・外れる条件**:
+  - `AMP_SEL` を直接 GND に落とすと、選んだ石の出力を結合コンデンサ越しに交流短絡するので避ける（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-5）
+  - ミュートの長さの 2τ/3τ は τ 0.48 s の場合。NC 10 kΩ を採り、TMUX で ch を選んでから音声リレーをセットする順なら τ は約 21 ms で、待ちはずっと短くなりうる（[review/stack_relay_power.md](review/stack_relay_power.md) §0.1-6、[_review](review/stack_relay_power_review.md) 5-3）。実測（V21-実測-12）で決める
+- **却下した案**: —
+- **状態**:
+  - 決定: 方針（切替の間は GND へ落とすミュート）
+  - 未決: 場所（ポットの前／HP 入力と LINE 出力／HP 出力の後ろ）、素子（常開・常閉・ラッチング・半導体）、時間（V21-未決-01、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4）
+
+### 2-11 `TONE` バスに 100 kΩ のプルダウン
+
+- **決定**: 親の `TONE_L/R` に 100 kΩ で GND への DC の基準を置く
+- **理由**: `TONE` バスは直列のコンデンサに挟まれて DC が浮いている（査読時の回路図で確認: [review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-4）。音声リレーをセットした瞬間に娘側（NC 抵抗で 0 V）とバスの DC の段差が入りうる
+- **根拠**: [NOW] L25／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-4／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.1（20 Hz で約 −0.08 dB、PT2314E の最小負荷 5 kΩ の内側）
+- **前提・外れる条件**: —
+- **却下した案**: —
+- **状態**: いったんの決め（[NOW] L25）
+
+---
+
+## 3. 電源
+
+### 3-1 主電源の DC-DC は RS6-1215D
+
+- **決定**: ±15 V の絶縁 DC-DC は `RS6-1215D`（入手できれば）。SIP8 の新しいフットプリント（推奨穴 Ø1.00 +0.15/−0 mm）を作る
+- **理由**: 1 ch の設計点で出力の合計が定格の **36〜63 %** で、候補の中で軽負荷の領域からいちばん遠い（軽負荷の振る舞いを決めるのは片側ではなく合計の電力）。あわせて最大容量性負荷 ±660 µF（出力ごと）、絶縁容量 110 pF max
+- **根拠**: [NOW] L14／[review/main_power_compare.md](review/main_power_compare.md)・[_review](review/main_power_compare_review.md) §3.1（理由の順番を直した）／[pow] §1（±200 mA、9–18 V、±660 µF、110 pF max、内部動作周波数「0-100% load」Min 200 kHz、起動 2 ms、UVLO ON 9 V typ、OLP 150 %、SIP8 のピン配置と穴径。CTRL は開放で ON）／[scripts/rail_budget.py](scripts/rail_budget.py)（`--adc-from-pd`）／[scripts/dcdc2/](scripts/dcdc2/)
+- **前提・外れる条件**:
+  - ADC の LDO を ±15 V に載せない（§4-4。載せると定格に入らない）
+  - 突入をどこまで出せるか・OLP の形（出力ごとか合計か、定電流かヒカップか）は要実測（V21-実測-01）。8 ch が同時に入る故障では +15 V が定格の 136〜161 % のまま流れ続けうるので、§2-9 のデコーダと §6 の手順で防ぐ
+  - 今のフットプリント（1″×1″）にも、リポジトリにある SIP8 の FP（穴 Ø0.8）にも合わないので、新しい FP が要る
+  - v2 L476 の 6 W 低 Ciso 群（10〜20 pF）は 1 ch 通電で候補の電力帯に入ったが、比較に入れていない（§8 の L468 行、V21-未決-21）
+- **却下した案**:
+  - `TMR 9-1223` — Cout ±200 µF でレールの見込みの上側を超えうる、500 kHz は全負荷の値で軽負荷の記載が無い、金属ケース（[review/main_power_compare.md](review/main_power_compare.md) §2.1、[_review](review/main_power_compare_review.md) 1-3）（次点。絶縁容量 50 pF max は RS6 より良い。−15 V は軽負荷側でベンチ確認が要る、[_review](review/main_power_compare_review.md) §3.1）
+  - `TMR 10-1223WI` — Cout ±220 µF、絶縁容量 1000 pF typ、4.1〜4.5 V で起動するので PD が交渉する前の 5 V で動いてしまう（同上）
+  - `REC20K-2415DZ`（v2 の石）— 1 ch では −15 V が定格の約 8 % で DS の Note4（10 % 未満は仕様を満たさないことがある）より下、絶縁容量 2000 pF typ（同上、[review/dcdc_2stage_review.md](review/dcdc_2stage_review.md) 1.2）
+  - Mornsun `URA` — v2 と同じく NFND（v2 L1674「Mornsun の落選理由は NFND に差し替える」）。「軽負荷で周波数を下げる」は決め手ではない（[review/rejected_review_review.md](review/rejected_review_review.md) #12）
+  - ±15 V を 2 台に分ける（ソケット用と常時系）— HP バッファの電流は分けても共有側に残る（[review/rejected_review_review.md](review/rejected_review_review.md) N4）
+- **状態**: 決定（ユーザー判断 2026-09-25、入手できれば）
+
+### 3-2 PD は 12 V 固定
+
+- **決定**: PD の受け電圧は 12 V に固定する（他の設定にしない）
+- **理由**: ADC の LDO（LT1763）を PD 12 V から直接取るので、IN の絶対最大 ±20 V に対して 20 V 設定は許容差の分だけ超えうる。RS6 の入力範囲も 9〜18 V（サージ 25 V は 1 秒まで）
+- **根拠**: [NOW] L11／[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §1 の表（LT1763 の IN 絶対最大）・§7.4／[pow] §1（RS6 入力範囲）
+- **前提・外れる条件**: PD モジュールは交渉前に 5 V を出す。主電源スイッチを入れたまま USB-C を挿すと、その間 ADC 側だけが立つ（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §7.4「PD の 5 V の窓」）。RS6 は UVLO で止まっている
+- **却下した案**:
+  - 20 V — LT1763 の絶対最大を許容差の分だけ超えうる
+  - 15 V — LT1763・RS6 とも範囲内だが、固定にした（v2 L594「PD 入力 — どの電圧で受けるか」、L662「12 V が出なかったときの手順」の 15 V は v2.1 では使わない）。15 V を退ける理由の記録は無い
+- **状態**: いったんの決め（[NOW] L11）
+
+### 3-3 PT2314E・計測は生の ±15 V、TMUX は娘の切られた ±15 V、ソケットは ch ごとの LDO で ±12 V
+
+- **決定**: ±15 V はそのまま、親の PT2314E（9 V レギュレータ経由）と計測系、娘の TMUX7612 に使う（TMUX は娘の電源リレーの後ろ。選んだ娘の中では ch の EN で切らない、§2-8）。ソケットは ch ごとの正負 LDO（TPS7A49／TPS7A30）で ±12 V。LDO の出力電圧は帰還の分圧で決まるので、ch ごとに選べる
+- **理由**: ±12 V を DC-DC で直に作ると TMUX7612 の平坦域の膝がレールに追従して下がる（DS 本文: 平坦域は「概ね VSS+5 V〜VDD−5 V」。Figure 5-4 の目読みで Ron が底から離れ始めるのは ±15 V で約 +10.6 V、±12 V で約 +7.6 V）。ソケットだけを LDO の後ろで ±12 V にすれば膝は動かず、ch ごとの EN（§2-8）と PSRR も LDO が持つ
+- **根拠**: [NOW] L17・L22／[sw] §1（平坦域の本文、Figure 5-4）／[pow] §2（TPS7A49 の出力電圧の式 R1 = R2 (VOUT/VFB − 1)、PSRR 72 dB @120 Hz）・§3（TPS7A30）／[review/rejected_review.md](review/rejected_review.md) #9／[review/pm12_judgement.md](review/pm12_judgement.md)・[_review](review/pm12_judgement_review.md)
+- **前提・外れる条件**: ±12 V で電源範囲から外れる石は無い。ただし ±12 V で振幅が保証されるのは OPA1612・OPA2140 だけ。最悪要求（9.45 Vpk）と LDO の総合精度 ±2.5 % を入れると、余裕が正で残るのは保証の 2 石と typ グラフの 5 石。推定 min の石は 0 dB 前後か負（[review/pm12_judgement_review.md](review/pm12_judgement_review.md) 要約 3・5・6、A 表）。TPS7A49 の IOUT は 150 mA まで（[pow] §2）
+- **却下した案**:
+  - ±12 V の DC-DC で系全体を ±12 V（v2 L700「±15 V の理由は3つとも消えた…±12 V 側にも重い障害」〜L916、`REC10K-2412DAW/H2` ほか）— TMUX の膝が下がる。PT2314E の 9 V レギュレータ（L7809）の入力も 11.5 V（出力の許容差を保証する試験条件の下限）を割る（v2 L855「`+9V`…が規定入力範囲を割る」。11.5 V の読みは §9 #5）
+  - `NSD10-12D12` — 2″×1″ で新しいフットプリント、最小負荷 20 mA/レール（1 ch 運転と合わない）、±12 V 出力（v2 L1609「`NSD10-12D12` の落選理由を作り直した」、[review/decisions_audit_1.md](review/decisions_audit_1.md)）
+- **状態**: 決定（ユーザー判断 2026-09-25）
+
+### 3-4 PT2314E は +15 V → L7809 のまま
+
+- **決定**: PT2314E の電源は今までどおり +15 V から L7809 で 9 V
+- **理由**: 電源だけ一次側（PD）へ移すと、PT2314E の帰り電流がグランドの木の中の唯一の橋を通る（v2 で一度潰したバグの再導入）
+- **根拠**: v2 L1456「副次案『`+9V` 枝を `+15V` から外す』は一度潰したバグの再導入」／[review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 修正の要点 1（L1456 は「却下の再検討」ではなく維持）／[review/rejected_review_review.md](review/rejected_review_review.md) #8
+- **前提・外れる条件**: +15 V の負荷を非対称にする唯一の塊がこれ（+15 V だけに 35〜48 mA）で、動かせない（[review/main_power_compare.md](review/main_power_compare.md) §3.2）
+- **却下した案**: PT2314E を PD 12 V 側へ — 上の理由
+- **状態**: 決定（ユーザー判断 2026-09-25。[review/decisions_audit_1.md](review/decisions_audit_1.md) の決定⑤）
+
+### 3-5 娘のダンパのバルクは外す
+
+- **決定**: 娘の ±15 V のバルク（ダンパ）を外す
+- **理由**: 直列 R が 1 Ω 以上なら、どの角でも親→娘の伝達に共振の山が無い。バルクを残すと突入の電荷が増えて親の落ち込みを大きくするだけになる
+- **根拠**: [NOW] L25／[review/stack_relay_power.md](review/stack_relay_power.md) §0.1-3・§4（1 Ω 以上で 144/144 組とも山なし、22 Ω・バルク無しで fsw 帯 −42.7 dB 以下）／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 4-1（安定性の懸念なし）／[spice/stack_relay/](spice/stack_relay/)
+- **前提・外れる条件**: ch LDO の CIN は 10 µF（DS の強い推奨、[pow] §2）。リセット時に電源接点が開いてから LDO が落ちるまでの余裕は小さくなる（§2-7）
+- **却下した案**: 娘ごとに RC ダンパ（35〜45 µF・0.1〜0.2 Ω）— [NOW] L19–20 の旧方針。直列 22 Ω を入れた後は突入を増やすだけ（上の根拠）／親だけにバルク（直列 R なし、**ユーザー案**）— 共振が娘の側に残り、親を盛っても直らない（[review/bulk_parent_sim.md](review/bulk_parent_sim.md) §0.1・§0.2）
+- **状態**: いったんの決め（[NOW] L19 の「残す」を L25 で差し替え）
+
+### 3-6 親の +15 V/−15 V に +100 µF は任意
+
+- **決定**: 親のバルク +100 µF は足場として置けるようにし、**要否は RS6 の突入を実測して決める**。実測は基板を起こす前に
+- **理由**: 22 Ω・娘のバルク無しなら、RS6 が 300 mA で頭打ちでも親の最低は約 12.25 V で、PT2314E の 9 V は動かない。+100 µF が効くのは RS6 の OLP がヒカップ型か 300 mA 以下で頭打ちするときの保険だけ
+- **根拠**: [NOW] L25／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 2-5・2-6（L7809 の挙動モデル）・2-3（どの R でも RS6 の電流は 300 mA を超える）
+- **前提・外れる条件**: RS6 の出力インピーダンスと電流制限の形は DS に無く、シミュレーションは〔仮定〕の上（[review/stack_relay_power.md](review/stack_relay_power.md) §8）
+- **却下した案**: 必須にする（[review/stack_relay_power.md](review/stack_relay_power.md) §0.2 の推奨）— 査読で任意に格下げ
+- **状態**:
+  - いったんの決め: 任意＝足場を置く（[NOW] L25）
+  - 要実測: 実装するか。基板を起こす前に（V21-実測-01）
+
+### 3-7 ch LDO: CNR/SS は必須、後ろの容量は合計 22 µF 以下
+
+- **決定**: ch の LDO には CNR/SS（10 nF）を付ける。LDO の出力側の容量は合計 22 µF 以下
+- **理由**: CNR 無しだと立ち上がりが電流制限になり、娘のレールが 8.6〜12.6 V まで落ちる。DS 上は安定に必須ではないが、この構成では必須
+- **根拠**: [NOW] L25／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 4-4・2.4（自作の LDO 起動モデル）／[pow] §2（tSS = 1.4 × CNR[nF] ms）
+- **前提・外れる条件**: 22 µF の上限は、レール良好のしきい値を 13.0 V に置いていたときの制約。しきい値を約 10.5 V に下げた（§5-1）後は制約が消える、と査読が支持している（[review/rail_detect.md](review/rail_detect.md) §0.2、[review/rail_detect_review.md](review/rail_detect_review.md) 要約 5）
+- **却下した案**: —
+- **状態**: いったんの決め（CNR/SS 必須・合計 22 µF 以下: [NOW] L25）。**ただし 22 µF の前提（しきい値 13.0 V）はしきい値を下げたことで消えた** → 上限を外すかはユーザー確認待ち（V21-未決-07）
+
+### 3-8 コイル電源は L7805C（PD 12 V からのリニア）
+
+- **決定**: `+5V_COIL` は `BP5293-50` をやめて `L7805C`。入力側の PPTC は、コイルの最悪の同時通電（約 560 mA・30 ms）で切れない値にする
+- **理由**: `+5V_COIL` は全娘へ配られ、娘の上でリレーの間を音声の近くに通る。BP5293 は 570 kHz の内部発振器を持ち、軽負荷で間欠動作に入る。聴取中はコイル電流が 0 なので、スイッチングの無いリニアで足りる
+- **根拠**: [NOW] L25／[review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #9／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §0.1（BP5293 の発振器）・§6.1／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 7-3（最悪 46.7 mA × 12 ＝ 560 mA、リニアでは入力電流＝出力電流で、今の PPTC 0.4 A 保持をパルスの間超える）
+- **前提・外れる条件**: PPTC のトリップ曲線は未照合
+- **却下した案**: BP5293 のまま — 発振器（上の理由）
+- **状態**: いったんの決め（[NOW] L25）
+
+### 3-9 電源系統の独立は b-1、PD 入口に CMC の足場
+
+- **決定**: 「電源系統の独立」は **b-1**（系統ごとに自分のレギュレータ、グランドは 1 点で結ぶ木）と読む。PD の受け端子の直後にコモンモードチョークの足場（0 Ω で素通し）を置く
+- **理由**: ADC のグランドの付け替え（§4-4）で ADC の LDO の直流が `A_GND` を通らなくなり、b-1 が成り立つ形になった。ガルバニックに切る読み（b-2・b-3）が効くかは、PD 充電器が音に出ているかで決まり、誰も測っていない
+- **根拠**: [NOW] L16／[review/rejected_review.md](review/rejected_review.md) §0（b-1/b-2 の定義）／[review/rejected_review_review.md](review/rejected_review_review.md) §2（b-3〜b-6）／[review/main_power_compare.md](review/main_power_compare.md) §4／[_review](review/main_power_compare_review.md) 1-7（「字義どおり」なのは ADC の LDO の直流についてだけ。AFE は ±15 V から取って `ADC_GND` へ帰る）
+- **前提・外れる条件**: PD 充電器の A-B-A（V21-実測-03）で差が高域なら CMC を実装、音声帯なら b-3（PD だけを絶縁）を検討。木が成り立つのはシャーシを 1 点で落とすときだけ（パネル部品の金属部・ジャックのスリーブ・PD モジュールのシェルがパネルに触れる閉路）（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §3.2・§8-1）
+- **却下した案**: b-2（一次と音声側を電気的に切る）— ADC の LDO を PD から取る決定と両立しない（帰り道が無くなる）（[review/rejected_review.md](review/rejected_review.md) §3.1-4）
+- **状態**:
+  - いったんの決め: b-1 の読み、CMC の足場（0 Ω で実装）（推奨をユーザーが受けた、2026-09-25）
+  - 要実測: CMC を実装するか（V21-実測-03）
+
+### 3-10 −15 V のプリロード抵抗は足場（DNP、3.0 kΩ）
+
+- **決定**: DC-DC の −Vout と COM の足元に 3.0 kΩ の足場を置き、実装しない（±15 V 間のブリーダではなく −15 V と COM の間のプリロード）
+- **理由**: RS6 のクロスレギュレーションは「25 % to 100 % load」で typ だけ規定。1 ch・typ・無音の −15 V は 26.2〜26.7 % で、INA1650 が min 側に振れるか軽い石を挿すと 25 % を割る（軽い端 23.6 %）。3.0 kΩ（5 mA、75 mW）を入れれば軽い端でも 26 % を超える
+- **根拠**: [NOW] L16／[review/main_power_compare.md](review/main_power_compare.md) §3.4／[review/dcdc_2stage_review.md](review/dcdc_2stage_review.md) 要約 5・1.2
+- **前提・外れる条件**: −15 V が軽いときに電圧がどちらへ振れるかは DS に無い。電圧の偏り自体は、±15 V に直結の負荷をどれも止めない（[review/main_power_compare.md](review/main_power_compare.md) §3.3）。実装は実測で決める（V21-実測-02）
+- **却下した案**: —
+- **状態**:
+  - いったんの決め: 足場（DNP）（推奨をユーザーが受けた、2026-09-25）
+  - 要実測: 実装するか（V21-実測-02）
+
+### 3-11 ヘッドホンバッファの電源に RC の足場
+
+- **決定**: ヘッドホンバッファ（OPA1652）の電源に自前の RC を入れられる足場を置く
+- **理由**: 32 Ω を鳴らす信号電流（各レール平均 5〜25 mA、瞬時 16〜80 mA）は音声帯で変わる負荷として共有の ±15 V に載る。加えて 32 Ω に連続で出すとバッファの接合温度が定格を超える
+- **根拠**: [NOW] L16／[review/main_power_compare.md](review/main_power_compare.md) §1.4・§4（b-5）／[review/main_power_compare_review.md](review/main_power_compare_review.md) 1-2・§3.5（連続正弦で約 0.82 W・+117 °C）
+- **前提・外れる条件**: LINE 出力に HP と相関する成分が出るかは未測定（V21-実測-08）。HP の帰りをバッファのデカップの GND へ寄せる配線と組にしないと効きが半分（同 1-7）
+- **却下した案**: —
+- **状態**:
+  - いったんの決め: 足場（推奨をユーザーが受けた、2026-09-25）
+  - 要実測: 実装するか（V21-実測-08）
+
+---
+
+## 4. ADC 経路
+
+### 4-1 タップは今の位置（`AMP_SEL_L/R`、ポットの前）
+
+- **決定**: 計測のタップは `AMP_SEL_L/R`（ch 選択の直後、DEST スイッチ・音量ポット・HP バッファの手前）のまま
+- **理由**: ユーザーの判断
+- **根拠**: [NOW] L12／[review/tap_facts.md](review/tap_facts.md) §1.1（v1 もポットの前で取っていた）
+- **前提・外れる条件**: 本線に直接触るのは計測タップのバッファ（OPA1656 フォロワ）だけ。バス負荷は v2 と同じ
+- **却下した案**: —
+- **状態**: 決定（ユーザー判断 2026-09-25）
+
+### 4-2 ADC 経路に絶対の品質は求めない。優先は本線を汚さないこと
+
+- **決定**: ADC 経路は LCD のスペアナ・VU メーター・USB で Pico 経由の簡易分析ができれば足りる。**本線を汚さないことを優先**する
+- **理由**: 装置は計測器ではない（§0-1）
+- **根拠**: [NOW] L13・L33／参考値: ソケットの抜き差しで再現できる範囲は記録上 −106 dBc（H3 の差の検出限界、v1 仮配線、n=1）（[review/tap_facts.md](review/tap_facts.md) §4.1）
+- **前提・外れる条件**: −106 dBc は「差の再現性」で、鎖の絶対歪みではない。v1 は鎖のベースライン −76 dBc のまま −106 の差を出した（[review/tap_compare_review.md](review/tap_compare_review.md) 2-2・2-3）
+- **却下した案**: 分解能を上げること自体を目的にする — v2 L4140「そもそも: 測定系が答えるべき問いには既に答えが出ている」と同じ
+- **状態**: 決定（ユーザー判断 2026-09-25）
+
+### 4-3 結合は差動（INA1650 をタップのバッファの後ろ）、片側（今の形）に戻せる足場
+
+- **決定**: タップのバッファの後ろに INA1650 を置き、− 入力を GND センス線へ、REF を `ADC_GND` へ。逆相を作る反転段は残し、その基準を `ADC_GND` へ移す。ジャンパ／0 Ω で今の片側（Q1）へ戻せる形にする
+- **理由**: ch 側のグランドと計測側の `A_GND` の差は、今の片側では信号と直列に乗る（除去 0 dB）。差動なら DS の CMRR（85 dB min、±18 V 条件）で落ち、REF を `ADC_GND` に取れば ADC の電源・グランドの置き場が自由になる（§4-4 の付け替えの前提）
+- **根拠**: [NOW] L12／[review/tap_compare.md](review/tap_compare.md) §2.2・[_review](review/tap_compare_review.md) §2.1（「43 dB」は別の差の値で、Q1 の ch↔計測側の差は 0 dB）／[review/adc_gnd_retree.md](review/adc_gnd_retree.md) §2・[_review](review/adc_gnd_retree_review.md) §4／[tap] Q2-2（INA1650: CMRR 85/91 dB、IQ 10.5/12 mA、入力バッファ内蔵）
+- **前提・外れる条件**: **そのグランド差が実際に効いているかは測っていない**（V21-実測-07）。効いていなければ Q2 は保険で、実績があるのは Q1（v1 の同じ形で −106 を出した）だけ（[review/tap_compare_review.md](review/tap_compare_review.md) §3）。±15 V での CMRR の規定値は無い
+- **却下した案**: INA1620・SSM2141・SSM2143・AD8274・INA134/137・THAT1200 — 入力インピーダンスが低く両脚にバッファが要る、差動アンプとしての CMRR の規定が無い、個別高調波の規定が無い、など（[review/tap_compare.md](review/tap_compare.md) §2.2）／絶縁系の結合は §4-10
+- **状態**:
+  - 決定: Q2（差動）と、Q1 に戻せる足場（ユーザー判断 2026-09-25）
+  - いったんの決め: REF を `ADC_GND`・反転段の基準を `ADC_GND` へ（提案で査読が支持したもの）
+  - 未決: GND センス点と切替の形（V21-未決-08）
+
+### 4-4 ADC の LDO は PD 12 V（主電源スイッチの後ろ）から。ADC のグランドの木を付け替える
+
+- **決定**: 計測系の LDO（`+3V3_A` / `+5V_A`）は PD 12 V（ネット `PD_12V_SW`、主電源スイッチの後ろ）から取る。`ADC_GND`–`A_GND` の NetTie をやめ、**グランド選択の 1×3 ヘッダ**で Q2 は `ADC_GND` を `D_GND` 側の葉に、Q1 へ戻すときは `A_GND` 側へ結ぶ
+- **理由**: RS6 で ADC を +15 V に載せると、1 ch・max・無音で約 212 mA（定格の 106 %）、HP 最大で約 237 mA（119 %）〔計算: [review/main_power_compare.md](review/main_power_compare.md) §1.5 の 124.8／150.2 mA ＋ `rail_budget.py` の ADC 枝 max 86.9 mA〕。**定格に入らない**。記録の 197.7 mA／98.9 % は INA1650 を足す前の値（§9 #31）
+- **根拠**: [NOW] L10／[review/adc_gnd_retree.md](review/adc_gnd_retree.md) §0.1・§3・[_review](review/adc_gnd_retree_review.md) §0・§3（骨格は覆らなかった。付け替え後は ADC の直流の帰りが `ADC_GND` → ヘッダ → `D_GND` → `PD_GND` と帰り、`A_GND` を通らない）／[review/DECISIONS_v21_review.md](review/DECISIONS_v21_review.md) B2（212 mA の算術）／[scripts/rail_budget.py](scripts/rail_budget.py) `--adc-from-pd`
+- **前提・外れる条件**: 1×3 ヘッダ＋シャント 1 個なら、Q1・Q2 を同時に結ぶ閉路は物理的に起きない（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §3.1）。「木」はガルバニックな話で、DC-DC の絶縁容量の輪・`±15V_AFE` の R・筐体の閉路は別（同 §3.2）。PD 給電では電源断のたびに「±15 V はあるが ADC の電源が無い」窓が開く（§4-6）
+- **却下した案**:
+  - ADC の LDO を +15 V のまま（v2 L171「非絶縁バック…を削除。ADC の LDO は `+15V` 直結」）— 上の理由（RS6 の定格に入らない）
+  - `ADC_GND` を `PD_GND` へ結ぶ — 木にはなるが I²S の帰りが 2 ホップになる（[review/adc_gnd_retree.md](review/adc_gnd_retree.md) §3.1）
+  - ADC 枝の電源に絶縁 DC-DC（v2 L1293「…を別の DC-DC に替える案」・L2107「絶縁コンバータで置き換える案について」）— b-1 の読み（§3-9）では要らない。スイッチング源が 1 つ増える（[review/rejected_review.md](review/rejected_review.md) #2）
+- **状態**: 決定（PD 12 V から・付け替えの方向: ユーザー判断 2026-09-25）
+
+### 4-5 ADC の枝に PPTC を新設
+
+- **決定**: PD 12 V から ADC の LDO へ行く枝に PPTC を置く
+- **理由**: PD 本線（受け端子 → 主電源スイッチ → `PD_12V_SW`）には枝より手前のヒューズが無く、他の枝はそれぞれ自分の保護を持つ。ADC の枝だけが無保護になる。v2 の「戻さない」は LDO が +15 V（DC-DC の短絡保護の後ろ）にあることが前提だった
+- **根拠**: [NOW] L10–11／[review/adc_gnd_retree.md](review/adc_gnd_retree.md) §6.1・[_review](review/adc_gnd_retree_review.md) §2・§7.4／v2 L226「ADC 枝の PPTC は戻さない」
+- **前提・外れる条件**: 定格は PPTC の DS（温度ディレーティング）を取ってから（hold 0.25 A 級が候補、未照合）。LDO 前の直列 R はフォールト電流を受けるのでパルス定格のある品（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §6.2）
+- **却下した案**: 計測の 5 V レギュレータ入口の PPTC の後ろ（`PD_12V_MEAS`）から取る — PPTC は増えないが、ADC の枝の短絡で Pico も落ち、5 V レギュレータの入力脈流の隣になる（同 §7.4 の表・§10-4）
+- **状態**: いったんの決め（[NOW] L11）
+
+### 4-6 ADC 前の直列 47 Ω → 100 Ω（電源断ごとの窓は許す）
+
+- **決定**: ADC を直接駆動するドライバと ADC 入力の間の直列抵抗を 47 Ω から 100 Ω にする。電源を切るたびに開く窓は許す
+- **理由**: PD 給電では電源断のとき ADC の電源が ±15 V より先に落ち、その間（約 15〜40 ms）ドライバの出力が ADC 入力のクランプへ流れる。フルスケールで 14〜16 mA pk と PCM1804 の絶対最大 ±10 mA を超えるが、100 Ω なら 6.5 mA
+- **根拠**: [NOW] L11／[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §7.1・§7.4（代償は ADC 入力 10 kΩ との分圧 −0.09 dB と DS の値からの逸脱）
+- **前提・外れる条件**: この構成では 47 Ω はドライバの帰還ループの外にあるので電流を制限できる（DS の図はループの中）（同 §9 訂正の一覧、47 Ω の行）
+- **却下した案**: ドライバを `+5V_A` の単電源にする — 構造で解けるが `+5V_A` の負荷と ADC の VCC への信号電流が増え、過剰（同 §7.4 (b)）／何もしない — 窓は「事故のときだけ」ではなく電源を切るたびに開く（同 (c)）
+- **状態**:
+  - いったんの決め: 100 Ω、窓は許す（[NOW] L11）
+  - 未決: VCOM とドライバ +IN の間の 1 kΩ（逆向きの窓の保険。RS6 なら故障時だけの保険）（同 (d)、V21-未決-10）
+
+### 4-7 `±15V_AFE` の直列は 22〜33 Ω
+
+- **決定**: ADC 側のオペアンプ（INA1650・反転段・ドライバ）の ±15 V デカップを `ADC_GND` に揃え、その手前に各レール 22〜33 Ω の直列抵抗（`±15V_AFE`）
+- **理由**: デカップを `ADC_GND` に置くと、±15 V のリップル電流が `ADC_GND` → `D_GND` → `A_GND` と渡り、その大きさはほぼ Vripple / R。4.7 Ω だと 265 kHz で最大 10〜21 mA p-p を `A_GND` の星点へ入れるが、22〜33 Ω なら 1.5〜4.5 mA p-p
+- **根拠**: [NOW] L11／[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §6.1（表）・§9 C3
+- **前提・外れる条件**: 33 Ω で V+ が約 13.7 V まで下がっても、INA1650 の同相の上限（V+ − 2 V）はフルスケール 7.74 Vpk の上（同 §1 の表）。ADC の HF の電流（ドライバのキックバック）は `ADC_GND` の中で閉じる（[review/adc_gnd_retree.md](review/adc_gnd_retree.md) §4）
+- **却下した案**: 4.7 Ω — 上の理由／フェライトビーズ — 265 kHz ではほとんど効かない（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §6.1）
+- **状態**: いったんの決め（[NOW] L11）
+
+### 4-8 INA1650 の RCOM は 0 Ω（1 MΩ に替えられる足場）
+
+- **決定**: INA1650 の COM は 0 Ω で `ADC_GND` へ。1 MΩ に替えられるフットプリントにする
+- **理由**: RCOM = 0 ならセンス線が切れても Q1 相当に落ちるだけで、センス線の電流は nA 級。1 MΩ だと断線で −9.5 dB になり、センス線に約 6 µA pk/ch の信号電流が出る
+- **根拠**: [NOW] L11／[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §4・§9 C1・C2・§10-6／[tap] Q2-2（20 Ω の不整合で 83.7 dB、RCOM 1 MΩ で 89.6 dB）
+- **前提・外れる条件**: 源インピーダンスの不整合は 1 Ω 未満の見込みで、RCOM の差は小さい（同 §1 の表）
+- **却下した案**: 1 MΩ（[review/adc_gnd_retree.md](review/adc_gnd_retree.md) の推奨）— 上の理由で仮置きは 0 Ω
+- **状態**: いったんの決め（仮置き、[NOW] L11）
+
+### 4-9 計測側の予備 12 V 入口は残し、主電源スイッチを迂回する旨を注記
+
+- **決定**: 計測側の予備 12 V 入口とそのヒューズは残し、「ここから給電すると主電源スイッチを迂回する（受け端子から給電しているときはスイッチ後の 12 V が出ている端子になる）」と図に注記する
+- **理由**: 予備入口はスイッチ後の `PD_12V_SW` につながっている（査読時の回路図、[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §2）
+- **根拠**: [NOW] L11／[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §2（副作用）・§10-7
+- **前提・外れる条件**: 両方から同時に給電すると電源が並列になる（同 §2）
+- **却下した案**: —
+- **状態**: いったんの決め（仮置き、[NOW] L11）
+
+### 4-10 却下した結合・絶縁の案
+
+- **決定**: 計測タップの経路は、絶縁アンプ・信号トランス・デジタル絶縁・ADC の絶縁島のどれも採らない
+- **理由**: どれも −106 dBc（差の検出）を良くする根拠が記録に無く、ADC の電源の置き場を先に決めてしまうか、ADC の隣に新しい高周波源を置く
+- **根拠**: [review/tap_compare.md](review/tap_compare.md) §2.3〜§2.5・[_review](review/tap_compare_review.md) §2・§3／[review/rejected_review.md](review/rejected_review.md) #1・[_review](review/rejected_review_review.md) #1
+- **前提・外れる条件**: b-2（ガルバニックに切る）を採るなら見直す（§3-9）
+- **却下した案**:
+  - 絶縁アンプ（ISO224B・AMC3330 ほか）— DS の THD は −84 dB（10 kHz）で 1 kHz 未満の規定が無い。ISO224 の雑音は DS の中で 3 倍食い違い、悪い方なら雑音だけで −106 を割る。内部の ΔΣ・搬送波・DC-DC が ADC の隣に来る（[review/tap_compare_review.md](review/tap_compare_review.md) 6-1・6-2）
+  - ライン・トランス（JT-11P-1）— 1 kHz の「<0.001 %」は typ 列で、1320 Hz の H3 とその安定性は DS に無い。二次側にバッファが要り、寸法も不明（同 3-5・6-3）
+  - デジタル絶縁（ISO7741 を I²S に）— −106 に効く筋が記録から立たず（「本命」の記録は ADC 自身の床の話）、ADC の電源を ±15 V 側に固定する。部品代ほぼゼロの比較相手（ADC 出力への直列抵抗）がある（同 5-4〜5-6、§3「別枠」）
+  - ADC を絶縁した島（v2 L290「【却下】ADC を絶縁した島にする案」）— 却下のまま。島が動かすのは測定床の実用律速より下の部分で、装置は計測器ではない（[review/rejected_review.md](review/rejected_review.md) #1）。RS6 で絶縁容量が下がっても「島の性能は DC-DC の絶縁容量で決まる」構図は残る（[review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 修正の要点 4）
+  - PT2314E 境界の絶縁 I²C（`ADuM1250` 級、v2 L2474、L2444「`DGND`(25) はチップの足元で `A_GND` へ」の節）— b-1 なら理由（`D_GND` はどのみち娘へ引く）は成り立ち、むしろ強まる（[review/decisions_audit_2_review.md](review/decisions_audit_2_review.md) 3.3）
+  - USB アイソレータ（`ADuM3160`）— USB を抜いた A/B で床の差 2.9 dB（n=1）（[review/rejected_review_review.md](review/rejected_review_review.md) #10）
+- **状態**: v2 の却下を引き継ぐ（v2.1 で個別の判断はしていない。Q2 の選択はこれらを退けた判断ではない）。絶縁アンプ・トランス・デジタル絶縁は v2.1 の査読の順位で採っていないだけで、ユーザーは判断していない
+
+---
+
+## 5. 監視と連動
+
+### 5-1 レール検知はしきい値つき、しきい値は下げる
+
+- **決定**: 娘の ±レールの検知はしきい値で行い、立ち上がり（遅延つき）で音声 SET を許し、立ち下がり（即時）で音声を自動リセット。+ と − の両方。しきい値は 13.0 V から下げる。検知の分圧は **0.1 %**、ただし他の公差・不良にも耐える作りにする
+- **理由**: 立ち下がりのしきい値を約 10.5 V まで下げると、ch LDO の起動時の落ち込み（最悪 13.44 V）から離れて迷惑トリップしない。分圧 1 % だと立ち下がり帯の下端が約 10 V を割る
+- **根拠**: [NOW] L25／[review/rail_detect.md](review/rail_detect.md) 冒頭（ユーザー決定）・§0.2（0.1 % で帯 10.24〜10.79 V / 11.68〜12.22 V（+））／[review/rail_detect_review.md](review/rail_detect_review.md) 冒頭（ユーザー決定）・要約 3・§2（帯の重なりの判定は不要な条件、1 % の弱点は下端だけ）
+- **前提・外れる条件**: 13.0 V のしきい値（[review/stack_relay_power.md](review/stack_relay_power.md) §0.2）は公差込みで窓の上端に張り付いていた（[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 3-7）。EN の保護（EN ≤ IN + 0.3 V）だけなら、しきい値を高く置く必要は DS 上は無い
+- **却下した案**: 13.0 V — 上の理由
+- **状態**:
+  - 決定: しきい値で検知・しきい値を下げる・分圧 0.1 %（ユーザー判断 2026-09-25）
+  - 値は案: 立ち上がり ≈ ±12 V・遅延 10〜20 ms／立ち下がり ≈ ±10.5 V（[NOW] L25）
+
+### 5-2 レールは Pico が読む（共通の `MON_P`/`MON_N`、LM4040 で比率校正）
+
+- **決定**: 各娘の分圧したレールをダイオード OR でスタック共通の `MON_P`/`MON_N` に載せ、Pico の ADC で読む。**ADC0 の `DEST_ADC` を解放**して LM4040-2.5 を読み、比率で校正する。しきい値・遅延・読みの妥当性の判定はファーム
+- **理由**: 娘の部品が監視 IC 案の約半分で、しきい値をファームで変えられ、読みの妥当性（張り付き・片側だけ等）を見て誤「良」の多くを検出できる
+- **根拠**: [NOW] L25／[review/rail_detect_review.md](review/rail_detect_review.md) §7・§8-1（(c) を第一候補）
+- **前提・外れる条件**: RP2350 の ADC はオフセット・利得・INL の規定が無く、比率校正が前提。Pico の 3V3 の公差はどの DS にも無い（V21-実測-04）。`DEST_ADC` は v2 で位置センスラダーを廃止した後の空きで、ファームは読んでいない（[NOW] L208）。Pico 2 の `AGND` の扱いは Pico 2 の DS で確かめる（リポジトリに無い）（[review/rail_detect_review.md](review/rail_detect_review.md) §7.1・§10）
+- **却下した案**:
+  - (a) 娘ごとに窓型の監視 IC（TPS3701 ＋ TPS3808 ＋ LM4040）— 単一の不良（オープンドレインの配線の開放、基準側の抵抗の開放、LM4040 の短絡など）で誤「良」になる経路が 4 つ以上あり、TPS3808 の遅延は CT の公差込みで 9.1〜23.4 ms と 10〜20 ms に入らない。娘 1 枚で IC 約 10 個（[review/rail_detect_review.md](review/rail_detect_review.md) §3.2・§2-3・§1 表）
+  - (b) Pico だけ（I²C 経由で切る）— 突然の断では EN が切れる前にレールが割れる（I²C の書き込み 0.29 ms ＋ 待ち 最大約 0.9 ms に対し 0.20 ms）。ファームが止まると何も守られない（同 §7.4・§7.5）
+  - ディスクリート（ツェナー＋トランジスタ）だけで精度の層を作る — ツェナーの公差で下端 10 V を守れない（[review/rail_detect.md](review/rail_detect.md) §2.2）
+- **状態**: いったんの決め（[NOW] L25）
+
+### 5-3 `RAIL_OK` を Pico から直接（Pico が High を出している間だけ「良」）
+
+- **決定**: Pico の空き GPIO から直接 `RAIL_OK` をスタックへ出す。**Pico が能動的に High を出している間だけ「良」**（外付けプルダウン）。娘の上で EN の許可と音声 SET のゲートに AND し、立ち下がりで音声リレーをリセット。Pico のリセット・停止で全段の音声がリセットされる
+- **理由**: I²C（100 kbit/s・共用）経由では突然の断に間に合わない。直結の GPIO なら EN が 0.1〜0.2 ms で切れる。既定が「不良」なのでフェイルセーフの向き
+- **根拠**: [NOW] L25／[review/rail_detect_review.md](review/rail_detect_review.md) §7.4・§7.5・§9 R3
+- **前提・外れる条件**: ファームがハングして High を出し続ける形は残る → §5-4 の後ろ盾で塞ぐ。BOOTSEL・デバッガの停止・起動中はウォッチドッグも助けない（同 §7.5）
+- **却下した案**: 娘がオープンドレインで引き下げる PG 線 — 電源の無い娘が線を放すと既定が「良」になる向き（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-3）
+- **状態**: いったんの決め（[NOW] L25）
+
+### 5-4 精度の要らない後ろ盾（B1・B2）
+
+- **決定**: **B1**: 音声 SET のコイル電源を、娘の ±レールがおおむねある（約 ±7 V を越える）ときだけ ON になる PMOS 越しにする（ツェナー＋トランジスタ）。どこが開放しても SET 不可に倒れる。RESET のコイル電源は常時の `+5V_COIL` のまま。**B2**: その「レールがある」信号の立ち下がりでもリセットの単安定を撃つ
+- **理由**: 精度の層（§5-2）が誤「良」で固まっても、電源の無い娘の音声がバスにつながる形をハードで消せる。AZ850P2 は SET と RESET のコイルの＋端子が別ピンなので、SET 側だけをゲートできる
+- **根拠**: [NOW] L25／[review/rail_detect_review.md](review/rail_detect_review.md) §3.3・§8-2／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-6
+- **前提・外れる条件**: 部品の DS は未収集。TBD62083A のクランプの COMMON をどちらへ繋ぐかは要整理（同上）。B1 は §2-6（音声 SET を共通にした決定）の理由そのもの
+- **却下した案**: —
+- **状態**: いったんの決め（[NOW] L25）
+
+### 5-5 レールが落ちたら音声を自動リセット、EN も切る
+
+- **決定**: レールが落ちたら音声リレーをハードで自動リセットする。同じ信号で ch の LDO の EN も切る
+- **理由**: 接点の瞬断や衝撃で電源が切れても、音声がバスにつながったまま・ミュートも掛かっていない状態が残る。EN を切らないと EN が IN を超えうる（§2-9）
+- **根拠**: [NOW] L25／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 6-3（自動リセットの経路が無いという指摘）／[review/rail_detect.md](review/rail_detect.md) §0.3／[review/rail_detect_review.md](review/rail_detect_review.md) §8-1
+- **前提・外れる条件**: 律速はリレーの復帰時間（AZ850 は 1 ms typ、max は DS に無い、V21-実測-05）。SET と RESET のコイル電流の重なりは µs ではなく sub-ms〜ms になりうるが、リセットパルスが長いので最後はリセットで終わる（[review/rail_detect_review.md](review/rail_detect_review.md) 2-4）。電源リレーまで自動で切るかは未決（[review/rail_detect.md](review/rail_detect.md) §0.5 D5、V21-未決-06）
+- **却下した案**: —
+- **状態**: いったんの決め（[NOW] L25）
+
+### 5-6 TBD62083A は 5 V 振幅で駆動（`+5V_COIL` の AHCT を 1 段）
+
+- **決定**: コイルドライバ TBD62083A の入力を、`+5V_COIL` で動く AHCT 系を 1 段通して 5 V 振幅にする
+- **理由**: TBD62083A の出力電圧（VDS）は VIN = 5 V の条件でしか規定されていない。3.3 V 駆動で保証されるのは「100 mA で VOUT = 2 V」だけで、コイル端の電圧が感動電圧に届く保証が無い。自動リセットという安全機能がこの保証外に乗っていた
+- **根拠**: [NOW] L25／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §0.2-5／[review/rail_detect_review.md](review/rail_detect_review.md) §5-1・§8-3／[sw] §3（TBD62083A）
+- **前提・外れる条件**: AHCT の DS は未収集。LVC を 5 V で動かすと 3.3 V の信号を受けられない（同 §5-1）。TBD62083A は VCC ピンが無く入力電圧だけで動くので、電源の無い娘にもリセットが届く（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.1）
+- **却下した案**: 3.3 V で直接駆動 — 上の理由（v1/v2 で動いた実績はありうるが DS の保証ではない）
+- **状態**: いったんの決め（[NOW] L25）
+
+### 5-7 ±15 V の有無を Pico へ知らせる
+
+- **決定**: ±15 V（スタックの常時側）の有無を Pico が読めるようにし、ファームは ±15 V が無い間は電源 SET も EN も出さない
+- **理由**: Pico は USB だけで動くので、主電源 OFF でも `3V3` と制御線が生きている（§2-9 の EN–IN の件）
+- **根拠**: [NOW] L15／[review/main_power_compare_review.md](review/main_power_compare_review.md) §3.3
+- **前提・外れる条件**: 形は未決（`MON_P`/`MON_N` で兼ねるか、親の +15 V を別に分圧して読むか）
+- **却下した案**: —
+- **状態**:
+  - 決定: 検知線を置く（[NOW] L15）
+  - 未決: 形（V21-未決-23）
+
+---
+
+## 6. ファームの責務
+
+ハードが保証することと、ファームが守ることを分けて置く。ハードの後ろ盾は「ファームが間違えたときに壊さない・つながない」ためのもので、手順そのものはファームが持つ。
+
+### 6-1 ハードが保証すること（ファームに依らない）
+
+各行の状態は右端の項目の状態に従う。
+
+| 何を | どうやって | 項目 |
 |---|---|---|
-| ADC の LDO 入力 | `PD_12V_SW` →`F1603`→ `U1604`(バック) → 中間レール 約 6.8 V | **`+15V` 直結** |
-| 消えた部品 | — | `U1604` / `C1644`(47 µF) / `F1603`(PPTC 0.15 A) / `#FLG1603` |
-| 足した部品 | — | **`NT1603`**（`A_GND`↔`D_GND`）/ `#FLG1604`（`ADC_GND` の PWR_FLAG） |
-| `C1606` / `C1619` | 10 µF **16 V** X7R / 1206 | **10 µF 50 V X7R / 1210**（15 V レールに 16 V 品は使えない） |
-| 部品数 | 372 | **370** |
+| レールの無い娘は音声 SET できない | B1（音声 SET のコイル電源をレールでゲート） | §5-4 |
+| レールが落ちたら音声リセット、EN 切り | B2 と `RAIL_OK` の立ち下がりで単安定 → RESET コイル。EN の許可にも AND | §5-4・§5-5 |
+| Pico が止まったら全段の音声リセット | `RAIL_OK` は Pico が High を出している間だけ良 | §5-3 |
+| 電源の無い娘にもリセットが届く | コイル電源と全リセットは常時系統、TBD62083A は VCC 無し | §2-1・§5-6 |
+| EN が LDO の IN を超えない | EN の論理を娘の切られたレールから | §2-9 |
+| 娘の中で同時に ON は 1 ch まで、既定 OFF | デコーダ | §2-9 |
+| 切ったノードが浮かない | NC 抵抗 → GND、`TONE` バスに 100 kΩ | §2-3・§2-11 |
+| 極間短絡で ±15 V を直結しない | 22 Ω を NO 側、溶断型 | §2-4 |
 
-`LT1763` は規定入力 **1.8–20 V**、`IN` / `SHDN` の絶対最大 **±20 V**、
-入出力差 **±20 V**（[`ADI_LT1763.pdf`](datasheets/ADI_LT1763.pdf)）。15 V 入力は規定内。
-リニア損失は `U1603` **0.41 W**・`U1606` **0.45 W**、SO-8 の θJA 70 °C/W で温度上昇 29 / 31 °C。
+### 6-2 ファームが守ること
 
-#### ⚠ `NT1603` を足したのは A6/D28 に反しない
+- **厳密に 1 ch**: 全 OFF → 1 ch ON。温めておく ch は作らない（§1-2）。状態: 決定
+- **切替の手順（娘をまたぐとき）**: ミュート → **全リセット（全娘の音声リレーと電源リレー。音声が先・電源が後、例: ARST → 20 ms → PRST）** → 選んだ娘の電源 SET → レール良好（立ち上がりのしきい値 ＋ 遅延）→ ch 選択 → 整定待ち → **共通の音声 SET** → ミュート解除（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-9、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 6-1）。状態: 決定（全リセットから始め、音声 SET をこの中でだけ出す: §2-6）／いったんの決め（音声を先・電源を後の順: §2-7）
+- **音声 SET の規則**: 音声 SET は、上の「全リセット → 電源 SET → レール良好 → 共通の音声 SET」の 1 つの手順の中でだけ出す。それ以外で音声 SET を出さない（§2-6）。状態: 決定（ユーザー判断 2026-09-25）
+- **同じ娘の中で ch を変えるとき**: ミュート → ch を全 OFF → 番地 → ch を ON（TMUX と LDO の EN が同時に切り替わる）→ LDO の立ち上がり（CNR 10 nF で正側 14 ms・負側 9 ms、[pow] §2・§3）＋整定待ち → ミュート解除。境目のリレーは動かさない（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-9）。状態: 未決（推奨。[NOW] に無い）
+- **パルス幅**: コイルのパルスは 20 ms 以上（Panasonic の「セット・リセット時間の 5 倍以上」、AZ850 の typ 2 ms の 10 倍）。SET と RESET のコイルに同時に電圧を加えない（[review/stack_relay_power.md](review/stack_relay_power.md) §6、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 8-1、[bnd] §3.3 TQ）。状態: 未決（推奨。[NOW] に無い、V21-未決-24）
+- **EN を上げる条件**: ±15 V があることを確かめてから（主電源スイッチ OFF で Pico が USB だけで動いているときに EN を上げない）（§2-9・§5-7、[review/main_power_compare_review.md](review/main_power_compare_review.md) 1-6）。状態: 決定（§5-7）
+- **レール監視**: `MON_P`/`MON_N` を読み、LM4040 を ADC0 で読んで比率校正。しきい値（案: 約 ±12 V / 約 ±10.5 V）と遅延をファームで持つ。張り付き・片側だけなどの妥当性を見る。`RAIL_OK` は能動的に High を出し、異常では落とす（§5-1〜§5-3）。状態: いったんの決め
+- **迷惑トリップを無限に再試行しない**（誤「不良」で EN 切り → 回復 → 良 → EN → 落ち込み…を繰り返しうる）（[review/rail_detect_review.md](review/rail_detect_review.md) §3.1）。状態: 未決（推奨）
+- **電源投入時**: 全リセットから始める（ラッチングリレーは停電前・衝撃の状態を保持しうる、§2-1）。PT2314E には電源投入後 50 ms は I²C を送らない（v2 L2592「電源投入後 Td ≈ 50 ms は叩かない」、[sw] §5）。PT2314E の I²C は 100 kbit/s（3.3 V ロジック × VDD 9 V で Standard）。状態: 決定（全リセット: §2-1）／v2 から引き継ぎ（PT2314E）
+- **運用**: 娘は電源を切ってから抜き挿しする。挿したら起動し直す（起動時の全リセットで前歴を消す。セットのまま外した娘を電源の入った箱へ挿すと、音声が前歴のままバスにつながり、起動時のリセットは走らない）（[review/stack_relay_power_review.md](review/stack_relay_power_review.md) §3 (e)）。状態: 未決（推奨、V21-未決-25）
+- **待ち時間の目安**: ch の入力結合の整定は 5τ で 0.5 s 級。ミュートの長さは τ の取り方で変わる（§2-10 の前提）。状態: 未決（V21-未決-01、V21-実測-12）
 
-A6/D28 の「**足す NetTie は無い**」は、**`A_GND`↔`D_GND` の結合が `U1604` の内部を
-通っている前提**で書かれている。`U1604` を消すとグランドが2島に割れる:
+---
 
-```
-   A_GND + ADC_GND        /        PD_GND + D_GND + GND_COIL
-```
+## 7. v2 から引き継ぐもの
 
-`TMUX7612` の `SEL` しきい値は**自分の GND ピン（= `A_GND`）基準**（VIH 1.3 V / VIL 0.8 V、
-絶対最大 `VSEL` −0.5 V、[`TI_TMUX7612.pdf`](datasheets/TI_TMUX7612.pdf)）なのに、駆動は
-`D_GND` 基準の `MCP23017`。橋が無いと **ESD クランプが事実上の結合点になる**。
+本文は v2 のまま。行番号は [../AudioV2/DECISIONS.md](../AudioV2/DECISIONS.md)。判定は棚卸し（[audit_1](review/decisions_audit_1.md)・[_review](review/decisions_audit_1_review.md)／[audit_2](review/decisions_audit_2.md)・[_review](review/decisions_audit_2_review.md)／[audit_3](review/decisions_audit_3.md)・[_review](review/decisions_audit_3_review.md)）の「維持」。「前提変更」で原則だけ引き継ぐものはそう書いた。
 
-**`A_GND`↔`D_GND` の結合点の数は 1 のまま。** 変わったのは場所で、
-「スイッチングレギュレータの内部（選べない）」から「**置き場所を選べる NetTie**」になった。
-**A6/D28 の趣旨（結合は1点）は保たれ、形が良くなっている。**
+**UI・操作（v2.1 でも変わらない）**
+- ENC×3（CH / BASS / TREBLE）、回して候補・押して確定 — L25 決定ログ「エンコーダー」、L2137「ロータリエンコーダー（×3）」、L2648「5. エンコーダー操作の意味」。確定で入るのが入力切替と LDO の EN になるだけ
+- 音量は Amp の後の手回し A50k デュアル ×2、IC にしない — L2334「2. 音量をどこに置くか」、L2380「3. 音量方式」〜L2413（「なぜ IC をやめたか」の節の末尾。PGA2310／digipot の見送り。理由は UI・コスト・SNR で v2.1 でも成立）
+- 出力段: PHONE はバッファ、LINE は直結、ゲインなし／バッファも DIP-8 ソケット — L1077「出力段」、L1123「バッファも DIP-8 ソケットにする」、L1167「バッファの石は OPA1652」
+- DEST は機械スイッチ、リレーは要らない — L93「出力先にリレーは必要か」
+- トーンは PT2314E、`DGND` はチップの足元で `A_GND` へ、I²C 境界は `BSS138` のレベルシフタ — L2415「トーン（確定）: T1 PT2314 系」（配置の記述は古い。PT2314E は ch 選択の前で全 ch に配る）、L2426（同じ節の「PT2314E へ替えた理由」）、L2444「`DGND`(25) はチップの足元で `A_GND` へ」、L2499「実装…バッファは `BSS138` ×2」（`P82B96`・`PCA9306` 等の見送りも成立）
+- HP 固定パッドは廃止、DNP で後付け — L2180「9.2 HP 固定 −20 dB パッド」（ソケット ±12 V でむしろ当時の条件どおり）
 
-木は 5 ノード・4 辺のまま（閉路なし）:
+**計測（v2.1 の Q1 の土台）**
+- タップの「+」側バッファを戻した — L354「計測タップの『+』側バッファを戻した」
+- 前段入力抵抗 6.19k（PT2314E 経路について）— L404「ADC のヘッドルーム約 5 dB 不足を直した」、L417（同じ節の「実装」）
+- `MCLK_SENSE` を落とした — L448「`MCLK_SENSE` を落とした」
 
-```
-GND_COIL ─NT101─ D_GND ─NT1602─ PD_GND        （PD 一次側）
-                   └───NT1603─── A_GND ─NT1601─ ADC_GND
-```
+**部品選定の理屈**
+- 2.2 µF フィルムは公差ではなく耐圧で選ぶ — L4374「2.2 µF フィルムは公差ではなく耐圧で選ぶ」〜L4411「効くのは体積で、体積は耐圧で決まる」
+- 受動部品は回路が固まってから DigiKey API でまとめて選ぶ — L4302「受動部品の型番選定は回路確定後に DigiKey API でまとめて」
+- DIP-28 ソケットは 0.300"、板バネ型 — L4211「DIP-28 ソケットは 0.300"」、L4243「選定 — 板バネ（dual-wipe）型に変更」
+- 却下のまま: 7806 — L1381「6 V の壁 — `7806` は使えない」／Aimtec — L1622「Aimtec 4品は…Marketplace 出品」／CCG・PYBE10 — L1632「やり残しは全部潰した」／`T3.15 A` — L1877「`T3.15 A` を捨てた理由」／`NSD10-12D12` — L1609「落選理由を作り直した」／Mornsun — L1674「落選理由は NFND に差し替える」
 
-**⚠ PCB では `NT1601` と `NT1603` を隣に置くこと。** I²S の帰り
-（`D_GND` → `A_GND` → `ADC_GND`）が**3ホップから2ホップに減った**が、
-2つの NetTie が離れるとその間の `A_GND` 銅箔がそのままループ面積になる。
+**回路の原則**
+- 電源を切るなら出力も切る（ESD でレールにつながる）— L2871（L2861「11.1 切替アーキテクチャ」の節の「なぜ入力だけでなく出力も切るか」）
+- 電源を切るなら入力も切る（入力クランプ）— L3986「電源は入力を、音声は出力を制御する…ただし入力も切ること」、L3999「失敗はスイッチの外で起きる — 入力クランプ」
+- アナログスイッチ自身は常時通電 — L4048「アナログスイッチ自身は常時通電にすること」（v2.1 では「バスにつながっている間は」と読む。選んでいない娘の TMUX は電源ごと落ち、境目のリレーで切られる、§2-8）
+- 出力側スイッチは 47 Ω の後ろ — L4720（L4649「実装への波及」の節）
+- ブレーク・ビフォア・メイクはファームで — L4724（同じ節の「break-before-make はファームウェアで担保する」）
+- グランドの結合は木（2 箇所目は閉路）、同居は結合ではない — L3433「NetTie は足さない。同居は結合ではない」、L3449「原則は生きている。場所が移っただけ」、L3463「同居は結合ではない」、L3478「回路図では表せないので、ルールとして残す」（査読で「却下の再検討」から維持へ直した）
+- シャーシアースは 1 点（原則だけ。L3415 の木の記述は古い）— L3415「PCB を起こすときの申し送り — アースをきちんと処理する」
+- I²S の帰り・クロック結合の注意 — L3213（L3200「測定系…もスタックへ取り込む」の節の注意）、L3369「ノイズが実際に通る経路」、L3384「効く順」、L3396「境界は遅い信号のところに置く」
+- 基板間はワイヤでなくヘッダのスタック、DIP ソケットに手が届くこと — L3159「基板間はワイヤではなくヘッダのスタッキングへ」、L3177「最大の制約: DIP ソケット 10 個へのアクセス」
+- ヘッダの挿抜寿命は制約にならない — L3858「挿抜寿命」。電流は縦積みで突入 0.68 A・コイル 560 mA のパルスが加わるので、品番の DS で確かめる（[review/stack_relay_power.md](review/stack_relay_power.md) §7.3）
 
-#### 【確定】ADC 枝の PPTC は戻さない — LDO が保護そのもの（2026-09-07）
+**道具・手順の警告**
+- 同じ仕様でも絶縁容量が桁で違う、サフィックス違いに注意 — L502「部品選定の罠」
+- レール容量は `sch_facts.py rails` で毎回数え直す（数値を書かない）— L1464「レール容量を数えるときの罠」、L1592「レール容量はそのつど回路図から数え直すこと」
+- Recom の表の Fsw 欄で比べない（見出しは full load）— L1573「`Fsw` の欄で候補を比べてはいけない」
+- 同じ前提を渡した並列の一致は独立の裏付けにならない、探索範囲の指定が盲点になる — L1518「この決着の作り方（信頼度）」、L1725「どう検証したか」
+- 「USB で 23 dB」を DC-DC 不要の論拠にしない（再現は 2.9 dB）— L1510「『USB で 23 dB 動く』を DC-DC 不要の論拠に使ってはいけない」
+- 参照番号は「最大値＋1」で採らない、PPTC 下流の PWR_FLAG — L1854（L1840「実装」の節）
+- 買ったことを採用の根拠にしない — L4333「2026-09-05 の発注判断」、L4358「I/O エキスパンダも同じ — 買ったことは採用の根拠にならない」
+- TMUX7612 の DS は表を取り違えやすい（±15 V 表と ±20 V 表、平坦度の条件は VS ±10 V）— L4694（L4649「実装への波及」の節の切替素子の段落）
 
-`F1603`（PPTC 0.15 A）は `U1604` 専用だったので一緒に消えた。**戻さない。**
-理由は「必要性」: PPTC が守っていた相手（スイッチャの入力）が消え、残った `LT1763` ×2 は
-**自分で保護を持っている**（[`ADI_LT1763.pdf`](datasheets/ADI_LT1763.pdf): current limiting /
-thermal limiting / Output Short-Circuit Duration **Indefinite**）。
+---
 
-| 故障 | PPTC 無し（採用） | PPTC 有り | 差 |
+## 8. v2.1 では成り立たない v2 の決定
+
+| v2 の決定（行番号と見出しの語） | 何が崩すか | v2.1 の扱い |
+|---|---|---|
+| L28 決定ログ「切替方式」: 電源は常時給電、入力はブロードキャスト | 選んだ ch だけ電源と入力を生かす | §1-1、§1-2、§2-8 |
+| L2861「11.1 切替アーキテクチャ」の「電源は常時給電」、L4660（L4649「実装への波及」の節の「なぜ電源を切らないか」） | 同上。LDO の EN で切るので接点を通らない | §2-8 |
+| L17 決定ログ「CH / 電源 / 音声切替」・L41–42（L37「アクチュエータ」の表）「ラッチングリレーで 1 系統だけ有効（電源もリレー）」 | 考え方は戻る。手段が「娘ごとの電源リレー（1 段目）＋ ch ごとの LDO の EN（2 段目）」に変わる（査読で「無効」から「前提変更」へ） | §1-3、§2-1、§2-8 |
+| L3601「出力のみ MUX へ揃える」（v2 の B0）「入力ブロードキャスト＋出力のみ MUX」 | 入力も切る | §2-8 |
+| L3569「入力トポロジは A案＋1µF フィルム」（v2 の B1）「入力 220 kΩ を撤去」 | 撤去の主な理由（入力スイッチが無い）が消えた | `TONE` バスに 100 kΩ（§2-11）。ch 側の 220 kΩ を戻すかは未決（V21-未決-13） |
+| L4462「リレー版とアナログスイッチ版を別設計として両方起こす」・L4502「別 PCB 2種として起こす」 | ユーザー決定（[NOW] L24–25: 基板は 1 種類、聴き比べはしない）。監査の判定は「維持」だった（決定より前） | §1-4 |
+| L3869「娘基板の接続方式 — A（横並び・直結）で確定」、L3884（L3877「接続方式 — 4案のうち3案が落ちた」の表の行）縦積み B は番地衝突で却下 | 番地は v2 で娘のジャンパに移り、却下理由が消えた | 縦積みを採用（§2-1、§2-5）。DIP ソケットへ手が届くこと（L3177）は条件として残る（V21-未決-20） |
+| L249「`REC20K-2415DZ` へ差し替え」・L1539「`REC20K-2415DZ` — ±15 V のまま」 | 1 ch 運転で −15 V が DS の範囲から最も遠い、絶縁容量 2000 pF | RS6-1215D（§3-1） |
+| L138「電源の要求は『合計 mA』ではなく『ソケット1個あたり何 mA』」（10 個常時通電） | 常時負荷は 1 ch 分。律速は ch の LDO ではなく RS6（査読で訂正） | §3-1 |
+| L468「絶縁 DC-DC の絶縁容量 — 探索結果」の「低 Ciso 品は 6 W 上限でこの電力帯に代替が無い」 | 1 ch 通電で ±200 mA 帯に入り、L476 の 6 W 低 Ciso 群（10〜20 pF）も候補になった。RS6（110 pF max）はこの群より 5〜10 倍悪い。**この群を比較に入れなかった理由は記録に無い**（[review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 修正の要点 3） | V21-未決-21 |
+| L1014「v1 の `MCW03-12D15` は別の軽負荷問題」の節、L1042「AudioV2 はこれを継承しない」 | v2.1 は選んだ ch だけ給電で、軽負荷を継承する | 合計の負荷率で選ぶ（§3-1）、−15 V のプリロード足場（§3-10） |
+| L171「非絶縁バック…を削除。ADC の LDO は `+15V` 直結」 | RS6 の +15 V に入らない | PD 12 V から（§4-4） |
+| L198（`A_GND`–`D_GND` の NetTie を足した節）の木 | ADC の帰りが PD 側になる | グランドの木の付け替え（§4-4） |
+| L226「ADC 枝の PPTC は戻さない」 | 前提（LDO が DC-DC の短絡保護の後ろ）が消えた | PPTC 新設（§4-5） |
+| L290「【却下】ADC を絶縁した島にする案」 | 理由②（絶縁容量）は弱まるが、①③と費用対効果は成立 | **却下のまま**（§4-10） |
+| L2380「3. 音量方式」〜L2413 PGA2310／digipot の見送り | 理由はすべて成立（±5 V 問題は振幅の上限の話で、専用電源でも解けない） | **却下のまま**（§7） |
+| L3965「電源カット…反対理由が入れ替わる」〜L4088（L4076「この構成が要るのは 16ch 以上のときだけ」の節の末尾）「選んでいない ch の電源を切るのは 16 ch 以上のときだけ」 | 構造の反対理由（ESD・入力クランプ）は入出力のスイッチで消えた | **採用**（§1-1）。熱の揃い・整定はファームの問題（§1-2） |
+| L3955「結論の候補 — 6ch × 2 = 12ch」・L4076「16ch 以上のときだけ」の 6ch×2・電源カットなし | 入力 TMUX が ch ごとに要る、RS6 の ±200 mA を超える | 採らない |
+| L4569「経路ごとの振幅上限」 | 精密／フルレンジ DIRECT は要件外（通常経路の行は残る） | §1-5 |
+| L700「±15 V の理由は3つとも消えた…±12 V 側にも重い障害…未決」〜L916 | 生の ±15 V（PT2314E・計測・娘の TMUX）＋ ch の LDO で ±12 V に決着 | §3-3 |
+| L4345「`+9V` 三端子が『使わなくなるかもしれない』理由」 | レールは ±15 V のまま、PT2314E は L7809 のまま | §3-4 |
+| L4630（L4620「2026-09-01 の『アナログスイッチへ』の判断が不十分だった点」の表の行）TMUX4821 の却下理由「OFF 漏れ」 | OFF 側に信号が無いので不成立。2 mm QFN の理由は成立 | 却下のまま（TMUX7612 を選択） |
+| L3492「残る食い違い（A6 とは分けて扱う）」の「`ISO7741`＋ADC の電源を二次側へ」 | ADC の LDO を PD（一次側）から取る決定と逆向き。09-07 の島の却下理由 ①③ も残る | 採らない（§3-9、§4-10） |
+| L2329（L2322「C. 3 枚構成」の節の本文）B2-exp（娘の MCP23017）、L4358「I/O エキスパンダも同じ」 | 娘のロジックを親からのレベル線だけにする案が候補 | 未決（V21-未決-03） |
+| L1742「懸念と扱い（2026-08-31 に ±12 V へ移したときの記録）」 | ソケットは ±12 V に戻るので、最大出力の低下はソケット側でまた当たる | §3-3 の前提 |
+
+---
+
+## 9. 訂正された記録
+
+査読・照合で直った記録。v2 の本文や過去の査読を読むときは、この表の読みを使う。
+
+| # | 誤っていた記録 | 正しい読み | 出典 |
 |---|---|---|---|
-| LDO 出力の短絡（`+3V3_A`/`+5V_A`）← 最もありうる | LDO が電流制限＋サーマルで自己防衛。`+15V` の消費は 500 mA 級で `REC20K` の 667 mA 内。**アンプは動き続ける** | 同じ | 無し |
-| LDO 自身の IN→OUT 短絡 | 15 V が ADC に入る | **同じ**（PPTC は電圧を止めない） | 無し |
-| **LDO 入力側（`+15V` 枝）の短絡 — 原因は問わない**: `C1606`/`C1619` の X7R 割れ、立ち上げ時のプローブ滑り、はんだブリッジ | `REC20K` の SCP → **ヒカップ・自動復帰**（[`Recom_REC20K-Z_Rev3-2025.pdf`](datasheets/Recom_REC20K-Z_Rev3-2025.pdf) PROTECTIONS 表。OCP は **230 % max of rated IOUT**、nom. VIN=24 V 行。48 V 行の 225 % は別条件）。±15V ごと落ちてアンプも止まるが破壊は無い | 枝だけ切れてアンプは動き続ける | **ここだけ** |
-
-**1・2行目は PPTC の有無で結果が変わらないので、判定材料にならない。**「LDO は自己保護する」は PPTC を外す理由ではなく、
-外しても失うものが無い理由（2026-09-08 に言い直した）。判定は3行目だけ: 15 V 枝の短絡は X7R 割れに限らず
-**組み立て・立ち上げの事故でも起こる**が、結果はヒカップからの自動復帰で破壊ではない。
-**このリスクは飲む**（2026-09-07 判断、2026-09-08 に条件を広げて再確認）。
-
-⚠ **この設計の「枝ごとに PPTC」の流儀（`F201`/`F202`/`F203`/`F1601`/`F1602`）の唯一の例外。**
-他の枝は**スイッチャか外部端子**を食わせているのが理由で、**LDO 直結の枝はここが初めて**。
-流儀が崩れたのではなく、守る対象の種類が違う。戻すなら `+15V` → LDO 入力に 1 個で、
-2〜5 Ω の降下は 15 V 入力の `LT1763` に影響しない（一行で戻せる）。
-
-### 【確定】`REC20K-2415DZ` へ差し替え（2026-09-07）
-
-**独立した3つの理由が同じ結論に集まった:**
-
-1. **ソケットあたりの予算**（上）。`REC20K` で 42.8 mA/socket 出る
-2. **`Cout` の宿題。** 実レール容量は差し替え時点で `+15V` / `-15V` とも 259.8 µF（`REC10K` の **Cout ±270 µF の 96 %**）。**同日の `U1604` 削除で `C1606`/`C1619`（計 20.2 µF）が 中間レールから `+15V` へ載り、いまは `+15V` 280.0 µF / `-15V` 259.8 µF**（`sch_facts.py rails`）。**`REC10K` なら 103.7 % で上限超え** — この理由は差し替え後にさらに強まった。**この記録が長く使ってきた「102 µF」は古い**
-   （娘基板のバルクが入る前の値）。`REC20K` は **±3000 µF** で 11 倍の余裕
-3. **計測系の電源を `+15V` へ寄せる余地**（`U1604` = 非絶縁バック = 1.2 kHz スパーの容疑者を
-   設計から消せる。これ自体はまだ未実施）
-
-**差し替えの中身**（[`Recom_REC20K-Z_Rev3-2025.pdf`](datasheets/Recom_REC20K-Z_Rev3-2025.pdf) p.9 と
-[`Recom_REC10K-AW_Rev2-2025.pdf`](datasheets/Recom_REC10K-AW_Rev2-2025.pdf) p.9 を突き合わせた）:
-
-| | `REC10K-2415DAW/H2` | `REC20K-2415DZ` |
-|---|---|---|
-| 入力 | 9–36 V | **9–36 V**（同じ） |
-| 出力 | ±15 V / ±333 mA | ±15 V / **±667 mA** |
-| 効率 typ | 87 % | 88 % |
-| `Cout` max | ±270 µF | **±3000 µF** |
-| ピン | 1=+Vin 2=−Vin 3=CTRL 4=−Vout 5=COM 6=+Vout | **同一** |
-| 推奨穴 | **Ø1.0** +0.15/0 | **Ø1.4** +0.15/0 |
-| パッド座標 | — | **同一** |
-
-**⚠ 違うのは推奨穴だけ。** `NOW.md` は以前から「PCB の穴径は `REC20K` 互換（Ø1.4）」と
-書いていたが、**フットプリント（`REC10K-AW_1in_THT`）は `drill 1.0` のままで、意図が
-実装されていなかった**（2026-09-07 に発見）。`Library:REC20K-Z_1in_THT` を新設し、
-穴 Ø1.4・パッド 2.2 mm（環状部 0.4 mm 維持）にした。**Ø1.4 なら `REC10K`（ピン径 0.6）も
-挿さる**ので、この 1 個で両方を実装できる = 「`REC10K` は後から戻せる」が本当に成立する。
-
-**⚠ `F201`（入口 T1.6A）は据え置いたが、意味が変わった。** 12 V 入力・効率 88 % で:
-
-| 状態 | `Pout` | 入力電流 | `F201` T1.6A に対して |
-|---|---:|---:|---:|
-| いまの想定（10×20 mA ＋ 固定 63 mA） | 7.9 W | 0.75 A | 47 % |
-| 計測系を `+15V` へ寄せたとき | 10.5 W | 1.00 A | 62 % |
-| **`REC20K` を使い切ったとき** | 20.0 W | **1.89 A** | **118 %** |
-
-**つまり `F201` が「`REC20K` の能力ではなく設計予算」を上限にしている。** 意図的にそうするなら
-このままでよい（`REC20K` の全能力を使う前にヒューズが切れる）。全能力を使いたくなったら
-`F201` を上げること。**この判断はまだしていない。**
-
-### 【却下】ADC を絶縁した島にする案（2026-09-07）
-
-`U1604` を消したあと「グランドを厳密に分けるなら各所にアイソレータが要るのでは」から出た案。
-**絶縁 ±15V ＋ 絶縁ロジック電源 ＋ I²S アイソレータで `ADC_GND` を浮かせる。**
-並列4本（境界の確定 / 絶縁 DC-DC / I²S アイソレータ / 否定側）で探索し、**却下した。**
-
-#### 却下の理由（独立に3つ）
-
-**① `A_GND`↔`ADC_GND` 差（Vg）の除去を律速しているのは絶縁ではない。源インピーダンスの非対称。**
-
-計測前段は `TI_PCM1804.pdf` p.29 **Figure 44「Application Circuit for Single-Ended Input」の逐語コピー**
-（4.7k/4.7k → 10µF → 3.3k / 1k+1800pF → 47Ω）。`U1602`（位相反転）の `+IN` が `A_GND` なので、
-**Vg は両ブランチに係数 1 で乗り、原理的に純コモンモードになる**（設計は正しい）。
-
-除去比を律速するのは、**「−」枝が `U1602` 出力（≒0 Ω）から 10µF を見るのに対し、
-「+」枝は `AMP_SEL` の生インピーダンス越しに見る**という非対称:
-
-| f | `AMP_SEL` の源 \|Zs\| | **現状の Vg 除去比** | 「+」もバッファで受けたら |
-|---|---:|---:|---:|
-| 20 Hz | 2727 Ω | **10.5 dB** | 43.3 dB |
-| 50 Hz | 1355 Ω | 14.7 dB | 43.1 dB |
-| 1 kHz | 86 Ω | 37.8 dB | 43.0 dB |
-| 1.2 kHz | 76 Ω | **38.8 dB** | 43.0 dB |
-| 20 kHz | 48 Ω | 42.9 dB | 43.0 dB |
-
-（`Zs` = `R602` 47Ω ＋ `TMUX7612` Ron 1.1Ω ＋ `C601` 2.2µF、と `R1612`∥`R603`∥`RV501` の並列。
-親エージェント自身の計算。理想オペアンプ・集中定数 Vg。**確度: 中**）
-
-**低域ほど 10µF のリアクタンスが効いて非対称が拡大する。** 島は `Zs` を1 Ωも変えないので、
-**この律速に一切触れない。**
-
-⚠ 否定側査読は「律速は抵抗公差（0.1%）で 1 kHz 54 dB」と出したが、**支配項を見落としていた**。
-2つは矛盾せず、**源インピーダンスを直すと次に公差が律速になる**（54 dB がその床）。
-
-**② 島の絶縁性能は DC-DC の絶縁容量が単独で決め、それは今より悪い。**
-
-| | Ciso | 150 kHz での Z |
-|---|---|---|
-| デジタルアイソレータ（`ISO7741` 級） | **≈1 pF** | 1.06 MΩ |
-| **`REC20K-2415DZ`（現行）** | **2000 pF typ**（I/P to O/P, 100 kHz / 0.1 V） | **531 Ω** |
-
-**比は 2000 倍。** アイソレータで 0.9 pF と 2.0 pF を比べる意味はない。
-**ほぼ 0 Ω の意図した1点結合（`NT1601`）を、531 Ω の分布結合に置き換える**ことになる。
-
-**③ 動機だったスパーの発生源が未特定。**
-`U1604` の軽負荷スキップ説は 2026-09-07 に実測で否定済み（下の節）。
-**島が避けようとしていた機構は、実証されていない。**
-
-#### 費用対効果 — 律速の下を直す案だった
-
-`Audio/MeasurementADC_BRINGUP.md` の実測（v1 実機）:
-
-```
-−76  dBc  ベースライン H3
-−106 dBc  DIP ソケットの抜き差し再現性  ← 実用分解能
-−111 dBc  測定雑音
-−117 dBc  スパーを消せた場合
-```
-
-**島が最良で触れるのは −111 → −117 dBc で、実用律速より 5〜11 dB 下。**
-しかも −106 dBc は機械要因なので、基板を作り直しても同じソケットを使う限り改善しない。
+| 1 | 計測側の予備 12 V 入口のヒューズ（記録上の参照 `F1601`）が箱全体の上流・マスターヒューズで、ADC の LDO の上流にある（`rejected_review.md` #7、`rejected_review_review.md` #7、`decisions_audit_1.md`・`_review.md`、NOW の旧記述） | **誤り。** そのヒューズは予備入口（記録上の参照 `J1602`）と `PD_12V_SW` の間だけにある。PD 本線（受け端子 → 主電源スイッチ → `PD_12V_SW`）には枝より手前のヒューズが無い。PPTC を戻す結論は、上流が無保護という別の理由でむしろ強まる | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §2 |
+| 2 | RS6 の「200 kHz」は軽負荷でも 200 kHz 以上を DS が保証 | 条件欄「0-100% load」・**Min 列に 1 値だけ**。試験条件も、バースト（間欠）の包絡の有無も書いていない。「DS の字句が候補中で最も強い」が正確 | [pow] §1、[review/main_power_compare_review.md](review/main_power_compare_review.md) 1-3 |
+| 3 | RS6 の「無負荷入力電流 55 mA」 | DS の字句は "Quiescent Current"、**Max 列**、条件欄の印字は "2VDC"（12 V の位置）。負荷の条件は書かれていない | [review/ds_errata_review.md](review/ds_errata_review.md) P1 |
+| 4 | RS6 の UVLO ON 9 V は REC10K と同じ比 | RS6 の 9 V は **Typ**（REC10K の 9 V は max だった） | [review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) L655 の行 |
+| 5 | L7809 の規定入力範囲の下限 11.5 V | **入力範囲の規定項目は無い。** 11.5 V は出力電圧 8.55〜9.45 V を保証する試験条件の下限。実際に出力が落ちるのはドロップアウト（約 1.5〜1.6 V、目読み）＋入口の PPTC の降下を割ったとき | [pow] §5（L7809C）、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 2-4 |
+| 6 | TMUX7612 の膝は「レールから約 4.2 V 内側」 | DS 本文は "roughly 5 V"、Figure 5-4 の目読みで ±15 V の正側は約 +10.6 V。幅は「どこを膝と呼ぶか」の定義の差 | [review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 数値の検証、[sw] §1 |
+| 7 | 「1 ch 運転の律速は ch ごとの LDO（150 mA）」 | 律速は RS6（+15 V の残り約 109 mA < 150 mA） | [review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 修正の要点 2 |
+| 8 | 「8 ch 故障で OLP の 150 % 領域に入る」／「136〜149 % の帯だけ保護が働かない」 | 8 ch の max 積みの全域で、+15 V は定格の 136〜161 % のまま流れ続けうる（OLP が出力ごとか合計かは DS に無い） | [review/rejected_review_review.md](review/rejected_review_review.md) #5、[review/main_power_compare_review.md](review/main_power_compare_review.md) 1-5 |
+| 9 | ch LDO のソフトスタート電流「8.6 µA」 | **8.6 mA** | [review/main_power_compare_review.md](review/main_power_compare_review.md) 1-4 |
+| 10 | 「1 ch で −15 V は RS6 の約 21 %」 | INA1650 を足す前の数字。足すと typ・無音で約 26.7 % | [review/main_power_compare.md](review/main_power_compare.md) §1.5 |
+| 11 | 記録上のグランド差の除去「約 43 dB」を Q1 の値として Q2 と比べる | 43 dB は `A_GND`↔`ADC_GND` の差で、47 Ω 付きの構成の値らしい（確度 中）。Q2 が落とす ch 側↔計測側の差は、Q1 では 0 dB | [review/tap_compare_review.md](review/tap_compare_review.md) §2.1 の表・4-4 |
+| 12 | `ADC_BCK` は 6.144 MHz（v2 L3375、L3369「ノイズが実際に通る経路」の表の行） | マスター動作で BCK は 64 fS ＝ 3.072 MHz。6.144 MHz は変調器の 128 fS | [review/tap_compare.md](review/tap_compare.md) §2.4、[_review](review/tap_compare_review.md) 1-4 |
+| 13 | JT-11P-1 の「1 kHz <0.001 %」は上限 | **TYPICAL 列**。+14 dBu・+20 dBu の曲線もある | [review/tap_compare_review.md](review/tap_compare_review.md) 3-5 |
+| 14 | ISO224B の雑音は 3 µV/√Hz で −106 を割らない | 同じ DS の出力雑音から出すと入力換算約 9 µV/√Hz（3 倍の食い違い）。悪い方なら雑音だけで −106 を割る | [review/tap_compare_review.md](review/tap_compare_review.md) 6-2 |
+| 15 | 「今の図では ±15 V と ADC の電源は一緒に来る」 | LT1763 は CBYP 10 nF で起動に 15 ms かかり、v2 の図でも投入時は ADC が遅れる。PD 給電で新しく開くのは**電源断**の窓 | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §9 C5 |
+| 16 | 「RCOM 1 MΩ ならセンス線が切れても Q1 相当」「センス線は nA 級」 | RCOM 1 MΩ では断線で −9.5 dB、センス線に約 6.2 µA pk/ch。Q1 相当・nA は RCOM = 0 のとき | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §9 C1・C2 |
+| 17 | 「`±15V_AFE` の RC で電流を絞る」「LDO 前の RC でリップルを PD 側で閉じる」 | 前者の 35 dB は電圧の減衰で、渡る電流は ≈ Vripple/R。後者は LDO 足元の MLCC のほうが低インピーダンスで、大半が `ADC_GND` を回る | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §9 C3・C4 |
+| 18 | 直列 4.7〜10 Ω は「接点の DS の定格を超える」 | DS の 1 A は抵抗負荷の開閉電流で、メイク時の減衰する突入を規定していない。「DS の保証の外。1 A を代理の物差しにすると超える」 | [review/stack_relay_power_review.md](review/stack_relay_power_review.md) 1-3 |
+| 19 | 「24 mA での LDO の VDO は DS に無い」「ヘッドルーム ≥ 1 V が規定」 | TPS7A49・TPS7A30 とも VDO の典型曲線がある（24 mA で約 0.12〜0.2 V）。≥ 1 V は設計例の "for optimal performance" の目安 | [review/stack_relay_power_review.md](review/stack_relay_power_review.md) 3-2・3-3 |
+| 20 | 「音声 SET を共通 1 本にすれば 2×10 に収まる」「コイルの最悪は 480 mA」 | 24 − 3 ＝ 21 本で 2×10 には入らない。コイルの最悪は L7805C の上限 5.25 V・コイル −10 % で 46.7 mA × 12 ＝ 560 mA | [review/stack_relay_power_review.md](review/stack_relay_power_review.md) 7-2・7-3 |
+| 21 | 「SET/RESET の同時通電は 1 µs 未満」「TPS3808 で 10〜20 ms の遅延」 | 前者はドライバ入力の話で、コイル電流の重なりは L/R で決まり DS から上限が出ない。後者は CT の公差込みで 9.1〜23.4 ms | [review/rail_detect_review.md](review/rail_detect_review.md) §2-3・§2-4 |
+| 22 | `DEST_ADC`（ADC0）は使用中 | 実質空いている（v2 で位置センスラダーを廃止し、ファームも読まない。査読時の確認は [review/rail_detect_review.md](review/rail_detect_review.md) §7.1）。v2.1 では LM4040 の比率校正に使う（§5-2） | [review/rail_detect_review.md](review/rail_detect_review.md) §7.1 |
+| 23 | `ADC_nRST` は Pico が駆動する | 監視 IC の出力とプルアップだけ。Pico が叩くのは `ADC_nMR` | [review/rejected_review_review.md](review/rejected_review_review.md) N3 |
+| 24 | OPA1652・OPA1612・NJM5532 に入力保護ダイオードの記述は無い（ds_facts の旧版） | **ある**（back-to-back、入力電流 ≤ 10 mA／NJM5532 は投入時の入力ダイオードと V+ 開放時の注意）。ch ごとに電源を落とす構成に直接効く | [review/ds_errata_review.md](review/ds_errata_review.md) O1〜O3 |
+| 25 | PT2314 の入力抵抗 30/40/50 kΩ を PT2314E の DS と食い違うとした（監査） | 30/40/50 は旧 PT2314 の音量入力 `RIV` として正しい。PT2314E で比べる行は `RIN`（VOL = 0 dB）13/20/27 kΩ | [review/decisions_audit_3_review.md](review/decisions_audit_3_review.md) 覆した点 2 |
+| 26 | 「PT2314 のクリップ 2〜2.5 Vrms」は誤記 | 旧 PT2314 の DS の値。PT2314E では VOMAX min 2.3 / typ 2.6 Vrms（部品を替えたことによるずれ） | [review/decisions_audit_3_review.md](review/decisions_audit_3_review.md) 覆した点 3 |
+| 27 | 「KiCad 標準に W5.0 は無い（W4.5 が最大）」 | W7.2 も汎用の W5.0 も標準にある | [review/decisions_audit_3_review.md](review/decisions_audit_3_review.md) 覆した点 4 |
+| 28 | 参考製品の「約 1 秒のミュート・音声回路を GND に落とす」は PDF で確認できない（`arch_zero_base_review.md` §6） | PDF p2 のテキスト層に原文がある（PyMuPDF で抽出して確認）: 「1 秒程度の無音期間（音声回路を安全な GND 信号と接続）」 | [datasheets/reference/Kyohritsu_KP-HAMP61_manual.pdf](datasheets/reference/Kyohritsu_KP-HAMP61_manual.pdf) p2 |
+| 29 | ヘッドホンバッファの「最大」「上限」の負荷の行を定常として扱う | 32 Ω に連続で出すと接合温度が定格を超えるので定常にはならない（DC-DC を大きめに見る上限としてだけ使う） | [review/main_power_compare_review.md](review/main_power_compare_review.md) 1-2 |
+| 30 | TPS7A30 の電流定格 200 mA | 推奨動作条件は 200 mA だが、同じ DS の 8.1 Overview は 150 mA（DS 内の食い違い） | [review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 数値の検証 |
+| 31 | 「RS6 で ADC を +15 V に載せると 197.7 mA＝98.9 %、余裕が無いだけで入る」 | 197.7 mA は INA1650・入力 TMUX・ch LDO の自己消費を足す前の値。足すと 1 ch・max・無音で約 212 mA（106 %）、HP 最大で約 237 mA（119 %）〔計算〕で、定格に入らない | [review/DECISIONS_v21_review.md](review/DECISIONS_v21_review.md) B2、[review/main_power_compare.md](review/main_power_compare.md) §1.5 |
 
 ---
 
-### 【確定】計測タップの「+」側バッファを戻した — v1 に在って AudioV2 で落ちていた（2026-09-07 実装）
+## 10. 未決・要実測
 
-**島の探索から出た、島より遥かに安い答え。** 2本のエージェントが別経路で同じ結論に着いた。
+### 10-1 実測するもの（安い順・基板を起こす前に要るものを先に）
 
-| | v1（`Audio/`） | AudioV2 |
-|---|---|---|
-| タップ | バス → **`OPA1652` ユニティバッファ**（100k バイアス）→ ADC 前段 | **バッファ無し。`R1612` 4.7k ＋ `C1628` 10µF をバスに直付け** |
-| 音声バスから見た負荷 | **100 kΩ** | **1.87 kΩ** |
-
-⚠ **この記録は2箇所で「母板に `AdcBuffer` を載せる」と書いているが、回路図に `OPA1652` は 0 個。
-ドキュメント側がステールだった。**（2026-09-08 追記: いま回路図にある `OPA1652` は HP バッファ `U501` の Value。計測タップの石は `OPA1656` `U1611`）
-
-**バッファ1個で3つ直る:**
-
-| | 現状 | バッファ後 |
-|---|---|---|
-| Vg 除去（20 / 50 / 1k Hz） | 10.5 / 14.7 / 37.8 dB | **43.3 / 43.1 / 43.0 dB** |
-| `TMUX7612` の H3（`spice/switch_thd.py` を実負荷で実行） | **−94.9 dB**（`--rload 1.87e3`） | −119.7 dB（`--rload 50e3`） |
-| `AmpChannel` 出力の低域 −3 dB（`C601` 2.2µF と組む） | **39 Hz** | 17 Hz（4.7k のみ）／1.78 Hz（タップ無し） |
-
-**H3 −94.9 dB は実用律速 −106 dBc より 11 dB 上に出る。**
-つまり**測定系が測定対象の歪みを持ち上げている。** さらに DUT が見る負荷が
-50 kΩ → 1.87 kΩ に変わっており、**全 DUT の動作点が変わる**変更が意図的な判断として記録されていない。
-
-
-#### 実装（2026-09-07）
-
-`U1611`（OPA1656 dual、設計内の計測用オペアンプと同じ）を **ユニティフォロワ**で `AMP_SEL_L/R` と前段の間に入れた。
-挿入は `MeasureControl` の `AUDIO_L_IN`/`AUDIO_R_IN` ラベル1枚ずつを新ネット **`ADC_BUF_L/R`** に
-改名するだけで済んだ（下流の `R1612`/`C1628`・`R1601`/`C1613` が丸ごと移り、バスには
-`J1601`・階層ピン・バッファ入力だけが残る。ワイヤは切っていない）。
-
-| | |
-|---|---|
-| 入力バイアス | `R1659`/`R1660` 100k → `A_GND`（v1 の `R805`/`R810` 相当。`J1601` を抜いても入力が浮かない） |
-| デカップリング | `C1646`/`C1647` 100nF（`+15V_A`/`-15V_A` → `A_GND`） |
-| **出力 47Ω** | **付けない。** v1 にはあったが、「−」枝は `U1602` の出力（0 Ω）から 10µF を見るので、「+」枝にも 0 Ω で揃えるため。付けると除去比が 43 dB で頭打ちになる（親エージェントの計算）。**安定性の面でも要らない**: `U1611` の負荷は `R1612` 4.7k と、10µF 越しの `R1614` 6.19k ＝ 抵抗負荷で、容量は配線分だけ。`OPA1656` の CL 規定 100 pF（`TI_OPA1656.pdf` Electrical Characteristics）の内側 |
-| バスから見た負荷 | 1.87 kΩ → **約 30 kΩ**（`RV501` 50k ∥ `R603` 220k ∥ `R1659` 100k） |
-
-**`spice/switch_thd.py` を新負荷で回した実測**（`--rload 30.4e3`、pchip、Rbias 47k）:
-
-| | 旧 1.87 kΩ | **新 30.4 kΩ** | 差 |
-|---|---:|---:|---:|
-| `TMUX7612` THD | −90.6 dB | **−111.0 dB** | +20.4 dB |
-| `TMUX7612` H3 | −94.9 dB | **−115.5 dB** | **+20.6 dB** |
-
-**H3 は実用律速 −106 dBc の下に戻った。** 検証: ERC 11 件（変化なし）・部品 374・冪等性バイト一致。
-
----
-
-### 【確定】ADC のヘッドルーム約 5 dB 不足を直した — 前段入力抵抗 3.3k → 6.19k（2026-09-07）
-
-| | 値 | 出典 |
-|---|---|---|
-| ADC のフルスケール（バス換算） | 差動 5 Vpp = 1.768 Vrms ÷ 前段ゲイン 0.606 = **2.92 Vrms** | `TI_PCM1804.pdf` ＋ 回路図の実値 |
-| `PT2314E` の最大出力 `VOMAX`（THD=1%） | **min 2.3 / typ 2.6 Vrms** | `Princeton_PT2314E.pdf`（一次） |
-| `AmpChannel` のゲイン | **2**（`R606`/`R604` = 20k/20k、非反転） | 回路図 |
-| **バスに出る最大** | **4.6〜5.2 Vrms ＝ +4.0〜+5.0 dBFS** | 上の積 |
-
-v1 の実測記録と一致する（`MeasurementADC_BRINGUP.md`「NJM4580 … **+5.4 dBFS** … ADC FS 超え。**不可**」）。
-
-**測定を実際に止めた実績のある不具合が、前段の抵抗比（3.3k / 1k の対）の変更で直る。**
-
-#### 実装（2026-09-07）
-
-`R1614`/`R1618`/`R1603`/`R1609` を **3.3k → 6.19k（0.1 % E96）**。帰還の 1k と 1.8nF は触らないので
-**LPF の極（88.4 kHz）は不変**。10µF との HPF は 4.82 → 2.57 Hz（下がる方向）。
-
-| | 前 | 後 |
-|---|---:|---:|
-| 枝ゲイン（1k / Rin） | 0.303 | 0.1616 |
-| 差動ゲイン | 0.606 | **0.323** |
-| **ADC FS のバス換算** | 2.92 Vrms | **5.47 Vrms** |
-| `PT2314E` typ 2.6 Vrms × ゲイン 2 = 5.2 Vrms に対して | **+5.0 dBFS（超過）** | **−0.4 dBFS（0.4 dB 余裕）** |
-
-`PT2314E` の `VOMAX` min 2.3 Vrms（4.6 Vrms）なら 1.5 dB 余裕。感度は 5.4 dB 落ちるが、
-比較器としての用途（相対比較）には影響しない。
-
-**⚠ 「−0.4 dBFS」は typ 基準で、余裕の確定ではない（2026-09-08 追記）。** DS は `VOMAX` の max を書いていない
-（min 2.3 / typ 2.6 / max 空欄）。`AmpChannel` のゲイン 2 は 1 % 抵抗で最悪 2.02（+0.09 dB）。仮に `VOMAX` が
-typ の +15 %（3.0 Vrms）に振れると、バスは 6.04 Vrms ＝ **+0.9 dBFS で超える**。
-
-| 前段入力抵抗 | ADC FS（バス換算） | typ 5.2 Vrms に対して | 仮の最悪 6.04 Vrms に対して | 10µF との HPF |
-|---|---:|---:|---:|---:|
-| **6.19k（現行）** | 5.47 Vrms | −0.4 dBFS | **+0.9 dBFS（超過）** | 2.57 Hz |
-| 7.5k | 6.63 Vrms | −2.1 dBFS | −0.8 dBFS | 2.12 Hz |
-
-**→ 6.19k で確定（2026-09-08、ユーザー判断）。** 理由は2つ。①6.19k で FS を超える領域は `VOMAX` の定義（THD=1 %）どおり
-PT2314E 自身が歪んでいる最上端だけで、以前の +5 dB 超過（測定が止まった）とは深刻さが違う。②7.5k は同じ信号に対する測定 SNR を
-さらに 1.7 dB 落とす（ADC の雑音床は dBFS で固定）。切替素子の H3 を −115 dB 級で見る用途では床側に効くので、上側の仮定的な振れより床を取った。
-「仮の最悪 +15 %」は DS の数字ではなくこの記録が置いた目安。
-
----
-
-### 【確定】`MCLK_SENSE` を落とした — 誰も読んでいなかった（2026-09-07 実装）
-
-`Audio/measurement_fw/` の全 `.py` を検索した結果、**GP9 を読むコードは存在しない**
-（`lcd.py` / `lcd_test.py` / `adc_check.py` に「触るな」のコメントだけ）。
-一方 `ADC_nMR`(GP15) は `i2s_rx.py` の `reset()` が実際に使っている。
-
-同じ情報は BCK から取れる（master mode で BCK = SCKI/4）。落とすと:
-- **12.288 MHz が `ADC_GND` → `A_GND` → `D_GND` を渡る経路が消える**（部品代ゼロ）
-- `ADC_MCLK` ノードから `R1605` 1kΩ の枝とスタブが減る（ジッタに効く方向）
-
-失うのは「発振器の死」と「ADC/配線の死」をソフトで区別する能力だが、**現状も区別していない。**
-
-#### 実装（2026-09-07）
-
-`R1605`（1k）と `MCLK_SENSE` のラベル2枚・スタブ3本を外し、`A1602.12`（GP9）を `no_connect`。
-`ADC_MCLK` は `A1601.7` / `R1604.2` / `TP1601.1` の3ピンに閉じた（`TP1601` は残るのでスコープでは見られる）。
-ERC 11 件は不変（`pin_not_connected` は出ていない）。
-
----
-
-### 絶縁 DC-DC の絶縁容量 — 探索結果（2026-09-07）
-
-**同じ「絶縁・スルーホール・±15V」の中で 1.5 pF 〜 2500 pF、3桁ちがう。**
-
-| | Ciso | 備考 |
-|---|---|---|
-| Recom `RxxP2xx` | **1.5〜10 pF** | Recom 自身が "Very low isolation capacitance" で売っている。**2 W まで** |
-| Murata `MEJ2` / `MGJ2` | 3〜4 pF | 2 W |
-| MeanWell `MDD06F-15` / XP `JMR03` / P-Duke `MPP06` | 10〜20 pF | **6 W（±200 mA）が上限** |
-| 旧 `REC10K-AW` | 1000 pF | |
-| **現行 `REC20K-2415DZ`** | **2000 pF** | **母集団の最悪から2番目**（最悪は同じ Recom の `REC6K-RW` 2500 pF） |
-
-**⚠ しかし、この電力帯に代替が無い。** 低 Ciso 品は **6 W / ±200 mA が上限**で、
-この設計の要求は `+15V` 側 **343 mA**（ソケット10個＋固定＋ADC の LDO）。
-**「1ソケットあたりの予算」を捨てない限り Ciso は選べない。**
-
-**⚠ ただし効き方は限定的。`U201` の絶縁障壁は設計上すでにバイパスされている:**
-
-```
-PD_GND ─NT1602─ D_GND ─NT1603─ A_GND
-```
-
-可聴帯ではこのネットタイ経路（≒0 Ω）が完全に支配する。**Ciso が効くのはスイッチング帯以上**で、
-そこを通った CM 電流は**この2段を通って帰る**。
-
-#### ⚠ B5 への申し送り: **NetTie 3つ（`NT1601` / `NT1602` / `NT1603`）を近接させる**
-
-理由が3つ重なった:
-1. I²S の帰り（`D_GND` → `A_GND` → `ADC_GND`）が `NT1603` → `NT1601` の2ホップ
-2. `U403`（リレー 5V）の入力帰路が `GND_COIL` → `NT101` → `D_GND` → `NT1602` → `PD_GND`
-3. `U201` の Ciso を通った CM 電流が `NT1603` → `NT1602` で帰る
-
-**古典的な1点アース。3つが離れるとその間の銅箔がそのままループ面積になる。**
-
-#### 部品選定の罠（発注前に必ず見ること）
-
-- **XP `ITP0324D15`（40 pF）と `ITU0324D15`（2000 pF）は、同じメーカ・同じ 3 W・
-  同じ ±15V/±100 mA・同じ 9–36 V・価格差 ¥109。** パラメトリック欄では見分けがつかない
-- **Recom `RS-1215D` は無印 250 pF / `/H3` 60 pF。サフィックス1つで 4 倍**
-- **絶縁容量の測定条件が揃っていない。** Traco だけ 1 V、Cincon `EC7AW` だけ 10 kHz/0.25 V、
-  Cincon `EC2SA/4SBW`・MeanWell・TDK は条件を書いていない。**横並びで比べてはいけない**
-
-#### 道具のバグ（未修正）
-
-**`scripts/dcdc_survey.py` の `collect()` が DigiKey の「Offset + Limit ≤ 300」を見ていない。**
-10〜20 W ではビンあたり 300 件未満だったので露出しなかったが、**1〜3 W では HTTP 400 で落ちる**
-（1 W ビン 189 件・3 W ビン 224 件、`±12V` も含めると 300 超）。
-docstring 自身が「300 件を超える母集団は軸で分割が要る」と書いているのに、コードが上限を見ていない。
-
-#### 環境（2026-09-07 時点。この記録の他の箇所より新しい）
-
-- **DigiKey は API が通る**（`DIGIKEY_CLIENT_ID`/`SECRET` が環境変数にある）。**web サイトは 403**
-- **`recom-power.com` は通る**（この記録の「プロキシが拒否した」は古い）
-- `tracopower.com` / `product.tdk.com` / `mouser.com` / `analog.com` は **403 または 503**。
-  **Traco と ADi（iCoupler）の絶縁容量は一次資料で取れていない**
-
-### 2026-09-01: ±15 V へ戻した理由
-
-**主因は v1 資産との互換。** v1（`Audio/`）は ±15 V 系で、`PowerModule` が `+15V_OUT`/`-15V_OUT`、
-`Controll`（リレー盤）が `AMP_V+_IN`/`AMP_V-_IN` で受けて各アンプへ配っている。AudioV2 を ±15 V に
-戻すと **v1 のリレー盤とアンプ基板がそのまま繋がり、新旧アーキテクチャを実機で比較できる**
-（§11.1 でリレー → アナログスイッチIC へ変えるため、この比較手段の価値が高い）。
-
-> **⚠ 2026-09-02 訂正 — この「互換」は ±15 V を要求しない。**
-> v1 `Audio/AmpModule.kicad_sch` の中身は `NE5532` + 抵抗 + コンデンサ + コネクタだけで、
-> レギュレータも電圧固有の部品も無い。電源は `AMP_PWR` から **`AMP_V+_IN`/`AMP_V-_IN` という
-> 電圧非依存のネット名**で入る。NE5532 は ±3〜±20 V 動作なので **±12 V でもそのまま繋がる**。
-> つまり実機比較が要求するのは「**± 両電源であること**」だけで、電圧値ではない。
-> **±15 V に技術的な必須要件は無い。** 残る理由は下の2つだけ。
-
-副次的に、±12 V 化で「許容」としていた出力 2〜3 dB の低下が回復し、切替IC（TMUX7612）も
-データシートの保証条件（±15 V）に入る。ただし **IC 側は ±4.5〜±25 V 動作なので ±12 V でも動く**。
-IC の要求ではない。
-
-### 2026-09-02: DC-DC を `REC10K-2415DAW/H2` に変更
-
-**発端は「`DKMW20F-15` は結構良いお値段」という指摘。** 実勢 ¥5,116 に対し ¥2,404 で、**53 % 減**。
-
-| | `DKMW20F-15`（旧） | `REC10K-2415DAW/H2`（新） |
-|---|---|---|
-| 価格 | ¥5,116 | **¥2,404** |
-| 出力 | ±15 V ±660 mA（20 W） | ±15 V ±333 mA（10 W） |
-| 負荷率（実負荷 208 mA） | 32 % | **62 %** |
-| 最大容量負荷 Cout | 650 µF | **±270 µF** |
-| リップル&ノイズ | 100 mVp-p | 100 mVp-p |
-| 効率 / Fsw | — | 87 % / 350 kHz |
-| 入力 / 絶縁 | 9–36 V | 9–36 V / 1.6 kVDC |
-| 保護 | — | SCP, OVP(110–180 %Vo), OCP(150 %Io), UVLO |
-| DigiKey 在庫 | 26 | 177（`945-REC10K-2415DAW/H2-ND`、MOQ 1） |
-
-**選定の決め手は「最大容量負荷 Cout ≥ 102 µF」。** 現行設計のレール容量が片側 102 µF
-（AmpBank 入口バルク 100 µF + 各 IC 直近 100 nF ×20、ネットリスト実測）あるため、
-**Cout 100 µF の品は全て使えない**。この足切りで多数が落ちた（TDK-Lambda CC/CCG 系、
-MinMax MIWI06 系、Aimtec AM10GH、Mornsun の 6 W 系）。100 µF は小容量品の定番値。
-
-**電流余裕は落ちる（32 % → 62 %）が、常時給電の前提は維持できる。** 一方 ±12 V 版
-（`REC10K-2412DAW/H2`、同価格・±417 mA・Cout ±470 µF）を採らなかったのは、
-全シートの `+15V`/`-15V` 改名をやり直すことになるのと、出力 2〜3 dB のヘッドルームを
-失うため。**±15 V を選ぶ理由は「ヘッドルーム 2〜3 dB」と「改名の出戻り回避」の2つだけで、
-技術的な必須要件ではない**（v1 実機比較は ± 両電源であればよい。上の訂正を参照）。
-
-不採用にした主な候補と理由は [AGENT_HANDOFF.md §2.10](AGENT_HANDOFF.md)。
-探索は [`scripts/dcdc_survey.py`](scripts/dcdc_survey.py) で引き直せる。
-**ライブ API なので結果は当時と変わる** — 固定してあるのは上の表と、
-ベンダのデータを読むときの罠（[PARTS.md](PARTS.md) §0b）。
-
-#### `REC10K` の CTRL 論理 — **確認済み。配線変更は不要**（2026-09-04）
-
-データシート [Rev. 2-2025](datasheets/Recom_REC10K-AW_Rev2-2025.pdf)（リポジトリに置いた）p.2 の
-`ON/OFF CTRL` 行。
-
-| | データシートの記載 |
-|---|---|
-| **DC-DC ON** | **Open** or 2.5 VDC < V_CTRL < 12 VDC |
-| DC-DC OFF | Short to −V_IN or 0 < V_CTRL < 0.5 VDC |
-| CTRL の入力電流（ON時） | 100 µA |
-| スタンバイ電流（OFF時） | 50 µA |
-
-**オープン = ON。`DKMW20` の `R.C.` と同じ極性だった。**
-`U201.3` はいま未接続（`unconnected-(U201-CTRL-Pad3)`）で、**それが正しい**。
-常時給電なので固定配線も要らない。ピン配置（Dual: 1 +Vin / 2 −Vin / 3 CTRL /
-4 −Vout / 5 COM / 6 +Vout）も**リポジトリのシンボルと一致**していた。
-
-> **⚠ 同じページの UVLO から「PD の 9 V は使えない」が出た。**
-> どの電圧で受けるかの整理は下の **「PD 入力 — どの電圧で受けるか」** にまとめてある。
-
-### PD 入力 — どの電圧で受けるか（**確定: 12 V**。2026-09-04）
-
-PD の標準プロファイルは 5 / 9 / 12 / 15 / 20 V。`REC10K` の入力範囲は 9〜36 V なので
-**12 / 15 / 20 V が候補**、9 V は UVLO の境界で不可、5 V は論外。
-**採るのは 12 V。理由は効率ではない**（下の3つの制約）。
-
-> **⚠ 実機はいま 15 V が入っている**（2026-09-04 実測）。設計は 12 V のままで、
-> ヒューズ等の計算も 12 V（＝最悪値）で通してあるので**そのまま有効**。
-> ただし**パネルの 12 V LED は 15 V だと 30 % 過電流**なので、
-> 15 V で確定させるならそこを直すこと。
-
-#### なぜ 9 V が使えないか — UVLO
-
-データシート [Rev. 2-2025](datasheets/Recom_REC10K-AW_Rev2-2025.pdf) p.2 の UVLO:
-
-| nom. V_IN = 24 V 版 | |
-|---|---|
-| DC-DC **ON** | 8 VDC（min）〜 **9 VDC（max）** |
-| DC-DC OFF | 7 VDC 〜 7.5 VDC |
-
-**起動閾値の上限が 9 V。** 入力範囲は 9–36 V なので、**9 V は起動できるかどうかの境界そのもの**。
-PD の 12 V が出ない場合のフォールバックは **15 V 一本**で、**9 V を選んではいけない**
-（多ポート充電器は 5/9/15/20 V しか持たない機種がある —— [PARTS.md](PARTS.md)）。
-5 V は UVLO 以下で論外。
-
-#### どの PD プロファイルを選ぶか — **12 V。理由は効率ではない**（2026-09-04）
-
-**効率だけ見れば高いほうが良い。** `REC10K` の公称は **24 V** で、データシートのカーブも
-9 / 24 / 36 V で描かれている。4:1 入力の絶縁コンバータは**下端がいちばん効率が落ちる**
-（同じ電力を低い電圧で取る＝入力電流が増え、導通損が電流の2乗で効く）。
-PD のプロファイルなら **20 V > 15 V > 12 V** の順に `REC10K` は有利。
-
-**それでも 12 V を採る。効率が判断基準にならないから。**
-
-| | |
-|---|---|
-| 効果が小さすぎる | 総負荷 7 W 級。85 % → 88 % で **250 mW**。この箱は既に数 W 捨てており熱的に無意味 |
-| **この設計の痛みは効率ではない** | 困っているのは **−76 dBc のスパーと雑音床** |
-
-実際に電圧を縛っているのは次の3つ。
-
-**① パネルの 12 V LED**（§9 で設計に入っている。内蔵抵抗付き 5 mm）
-
-| 入力 | LED 電流（Vf 2 V・内蔵抵抗 830 Ω 相当） |
-|---|---:|
-| 12 V | 12 mA（設計値） |
-| 15 V | **16 mA（+30 %）** |
-| 20 V | **22 mA（+80 %）** |
-
-**⚠ つまり 15 V へフォールバックすると、この LED を別部品にするか直列抵抗を足すことになる。**
-「15 V へ落とせばよい」だけでは済まない。
-
-**② 入力を上げるとスパーの容疑が悪化する方向**（効率より重要）
-
-`U1604`（`MBC2596`、LM2596 系）の**軽負荷パルススキップ**が 1.2 kHz スパーの容疑
-（この節の「⚠ 疑い」）。**入力電圧を上げると降圧比が大きくなり、同じ軽負荷でもスキップに深く入る。**
-つまり**効率で 20 V を選ぶと雑音で損をする。**
-（`U1604` を `+15V` からの三端子へ替えるなら `+15V` は DC-DC の出力なので PD 電圧とは無関係になる。）
-
-**③ 記録済みの電流計算はすべて 12 V**。12 V が最悪値（電流が最大）なので、**上げるぶんには安全側**。
-
-#### ⚠ UVLO の余裕は心配しなくてよい（前段の記述の補正）
-
-12 V は UVLO 起動閾値の上限（9 V）の 1.33 倍で、一見余裕が薄い。**が、PD は安定化電源。**
-12 V 契約なら 11.4 V（±5 %）を保ち、保てなければ電圧を垂らすのではなく**契約を落とす**。
-バッテリーのように UVLO へ向かって沈まないので **1.3 倍で十分**。
-**UVLO の数字が効いたのは「9 V を除外できたこと」だけで、15 V を推す根拠にはならない。**
-
-#### 12 V が出なかったときの手順
-
-| | |
-|---|---|
-| 12 V が出る | **そのまま。何も変えない** |
-| 出ない → **15 V** | ⚠ パネル LED の部品か直列抵抗を見直す／⚠ **`BP5293-50` の最大入力を確認**（**記録が無い**。データシートを見ること）／⚠ `MBC2596` モジュールの入力コンデンサの耐圧を**現物のマーキングで**確認（安物は 25 V 品がある）／電流は 20 % 下がるのでヒューズはそのまま有効 |
-| 9 V | **不可**（UVLO 境界） |
-| 5 V | 不可 |
-| 20 V | `REC10K` の効率は最良だが他が全部悪化。**採らない** |
-
-#### 📌 `REC10K` は「昇圧」ではない
-
-12 V 入力・±15 V 出力なので昇圧に見えるが、**トランス絶縁のフライバックで、
-入力 9〜36 V のどこでも出力は ±15 V**。24 V 入力なら降圧している。**出力は入力に追従しない。**
-この部品を選んだ理由は電圧ではなく**絶縁**（1.6 kVDC が `PD_GND` と `A_GND` を切る＝
-グランド構造の骨格。A6 / D28）。
-
-**⚠ そしてその絶縁は `U1604` が一箇所だけバイパスしている**（非絶縁バックなので `IN−` と
-`OUT−` が同一ノード）。`U1604` を三端子へ替えたい理由の半分はここ ——
-スイッチングが消える。**⚠ ただし「絶縁の穴も塞がる」は誤りだった**（2026-09-06 訂正）——
-一次側に置く限り負荷電流の帰路として `PD_GND ≡ ADC_GND` が要るので、**橋がモジュール内部から
-銅箔に変わるだけ**。下の「`ADC_GND = PD_GND` が保たれる」と両立していなかった。
-
-**設計の 12 V は UVLO 上限の 1.33 倍**で、余裕は大きくない。実機が 15 V で回っているのは
-この点では好都合（1.67 倍）。
-
-その他、記録と一致していた値: 効率 87 %・Fsw 350 kHz・Cout ±270 µF・
-リップル 100 mVp-p・**最小負荷 0 %**（負荷が軽いこの設計で効いてくる）・起動 15〜20 ms。
-入力電流は nom 24 V で 500 mA typ ＝ 12 V なら約 1 A で、`F201` を **0.96 A** から
-選んだ計算と合っている。
-
-#### 2026-08-31 に ±12 V とした理由が、いま成立するか
-
-| 当時の理由 | 現在 |
-|---|---|
-| Amp / HP 基板を再設計せず同系列で電流余裕が増える（830 mA vs 660 mA） | **失効**。§11.1 で Amp 基板を再設計する。10台常時給電でも 80〜200 mA で ±660 mA の 12〜30 %。余裕は十分 |
-| ±12 V の方が Amp 最大がやや低く、ポット回転域が使いやすい | **一部有効**。±15 V に戻すと出力が上がりポット使用域が下端に寄る可能性がある。対処は §9 が既に決めている（HP 固定パッドは 0 Ω、実機で下端しか使えないなら DNP で −10 dB 後付け） |
-
-### ⚠ ±15 V の理由は3つとも消えた（2026-09-04）— **ただし ±12 V 側にも重い障害が出た（2026-09-05）。未決**
-
-> **⚠ 2026-09-05 の否定側査読で、この節が「±12 V が有力」とした前提が崩れた。**
-> **「型番の差し替えだけで済む」は成立しない。** 下の3つの ⚠⚠ 節を必ず読むこと:
-> **①`TMUX7612` の膝が電源に追従する**（精密 DIRECT が −165 → −116 dB）、
-> **②レール容量は 102 µF でなく約 250 µF**（現行 ±15 V 品もすでに上限すれすれ）、
-> **③`+9V` の `L7809CV` が規定入力範囲 11.5 V を割る**。
-> **①は ±12 V を採るなら振幅の3段階構成そのものを組み直す話になる。**
-
-**これは決定ではない。反論が全部片付いた状態の記録。**
-**⚠ 数値の正はこの節。他所（ch 数・発熱・D-f・PARTS.md）は参照だけにして複製しないこと。**
-
-| ±15 V を選んだ理由 | 状態 |
-|---|---|
-| ① v1 資産との互換 | **2026-09-02 に撤回済み**（上の訂正。`NE5532` は ±3〜±20 V で、電源は電圧非依存のネット名で入る） |
-| ② ヘッドルーム 2〜3 dB | **2026-09-04 に消えた**（下記） |
-| ③ 改名の出戻り回避 | **残るのはこれだけ。しかも生成スクリプトで当時より安い** |
-
-#### ② が消えた理由 — ヘッドルームは元から使っていない
-
-| | |
-|---|---:|
-| 実際の最大 | PT2314 のクリップ 2〜2.5 Vrms × ゲイン2 ＝ **4〜5 Vrms** |
-| ±12 V の能力 | `NE5532` はレールから約 1.5 V まで振れる ＝ **約 7.4 Vrms** |
-| **余り** | **3.4 dB が未使用** |
-
-そして §9 は「**±15 V に戻すと出力が上がりポット使用域が下端に寄る**」「実機で下端しか
-使えないなら **DNP で −10 dB 後付け**」と書いている。**余分な出力はパッドで捨てる予定だった。**
-2〜3 dB 下がるのは望んでいる方向。
-
-**バッファは後段にいる。** `OutputStage` の中身は `J_HP501`（"to Audio HP Buffer"）・
-`J_LINE501`・DEST スイッチだけで、**ヘッドホンバッファは基板の外**（v1 の
-`HeadphoneBufferModule`）。**最終レベルはそこで決まるので、アンプ段のレールでは決まらない。**
-
-#### 替えると何が良くなるか（`REC10K-2412DAW/H2`。**同価格**）
-
-| | `2415DAW/H2`（現行） | `2412DAW/H2` |
-|---|---|---|
-| 出力電流 | ±333 mA | **±417 mA（+25 %）** |
-| 1ch の散逸（＝ レール電圧 × Iq） | 30 V × Iq | **24 V × Iq（−20 %）** |
-| `Cout` 上限 | ±270 µF | **±470 µF（+74 %）** |
-| 効率 typ | 87 % | 85 % |
-
-#### ⚠ さらに、±12 V なら DC-DC の候補が広がる
-
-**`REC10K` を選んだ決め手は「`Cout` ≥ 102 µF」で、この足切りで多数が落ちた** ——
-TDK-Lambda CC/CCG 系、MinMax MIWI06 系、Aimtec AM10GH、Mornsun の 6 W 系。
-**`Cout` 100 µF は小容量品の定番値**だった。
-
-**そして同じ品種でも ±12 V 版のほうが `Cout` 上限が高い**（`REC10K` 自身が ±270 → ±470 µF）。
-**±15 V で落ちた候補が ±12 V では通る可能性がある。**
-
-→ **±12 V にするなら [`scripts/dcdc_survey.py`](scripts/dcdc_survey.py) を引き直すこと。**
-既知の罠は下の §2.10 相当の記録にある（**DigiKey API の入手性フィールドは信用できない**／
-**MOQ で順位が変わる**／**ベンダのデータを読むときの罠**は [PARTS.md](PARTS.md) §0b）。
-`Cout` の要求 102 µF はレール電圧に依存しないが、**ch 数を増やすなら 100 nF の数が増える**ので
-少し上がる（20ch でも +2 µF 程度）。
-
-#### その他、否定側査読で出た要確認（2026-09-05）
-
-| # | 内容 |
-|---|---|
-| **(a) 負荷電流の基準が2系統混ざっている** | 負荷率表は 10ch を **208 mA**、12ch を **275 mA** としているが、後者は「12×20 ＋ 35」＝ 20 mA/ch ＋ オーディオプロセッサ系 35 mA という**別基準**。同じ基準で 10ch を出すと **235 mA** で、417 mA に対し **50% ではなく 56%**。**同じ表の中で基準が混ざっている** |
-| **(b) 在庫石の最悪 `Icc` を実読** | ソケット1個あたり最大は **MUSES03 の 20 mA**（10 mA max ×2 の変換基板）。NE5532 16 mA、OPA627 ×2 で 15 mA、LT1364 15 mA。**「20 mA/ch」は最悪値そのもの**で、「実測寄りの 15 mA/ch なら約 20ch」は最悪ケースを含まない。**`Iq` はレールを下げてもほぼ変わらない**（内部電流源が Vbe・抵抗基準）ので「±12 V でも電流据え置き」という前提自体は妥当 |
-| **(c) ADC 側の確認が部品を間違えている** | 「`OPA1652` は ±2.25〜±18 V」とあるが、`+15V_A`/`-15V_A` に繋がっているのは **`OPA1656`**（`OPA1652` は v1 `AdcBuffer` の側）。結論は偶然同じだが**回路図を見ずに書かれた行**。さらに確認に使った振幅「4〜5 Vrms」は精密 DIRECT の **7 Vrms** と一致していない |
-| **(d) 「バッファは後段だからレールで決まらない」は成立しない** | ②（ヘッドルーム）を消した論理だが、`WIRING.md` は **`HeadphoneBufferModule` に ±15 V を配っている**と明記。レールを下げれば**バッファ自身の天井も 20% 下がる**。実害は別問題（`NJM4556A` は ±4〜±18 V で壊れはしない） |
-| **(e) `NSD10-12D12` の落選理由が自分の基準と矛盾** | **効率 77%** で失う熱は ±12 V・208 mA で **0.27 W**。ところが同じ文書が別の箇所で「85→88% で 250 mW。この箱は既に数 W 捨てており**熱的に無意味**」と、**ほぼ同じ大きさの差を明示的に無視すると決めている。** **絶縁 1.0 kVDC** も、Recom の絶縁グレードは **functional**（耐電圧値）で、グランド分離に効くのは**絶縁容量**（1000 pF typ）の方。記録はその欄を**どの候補についても比べていない**。しかも同じ文書が「**その絶縁は `U1604` が一箇所だけバイパスしている**」と書いている。**落選させるにしても理由を作り直す必要がある** |
-| **(f) 未記録の、±12 V に有利な材料** | `Recom_REC10K-AW_Rev2-2025.pdf` **p8** の EN55032 Class B 用 **EMC フィルタ推奨表は `REC10K-2412DAW/H2` を明記しているが、`REC10K-2415DAW/H2` は載っていない**（Note 7: 記載型番以外は問い合わせ）。いま入力側は 47 µF ＋ 0.1 µF だけでフィルタは無い。**ノイズを追っているこの箱では、推奨回路が公表されている型番へ移れることは実利** |
-
-**⚠ 価格・在庫・DigiKey 品番は査読で確認できていない**（`digikey.com` / `mouser.com` /
-`recom-power.com` がプロキシ拒否）。`L7809` の一次 PDF も取得できず、
-**Vi min 11.5 V とドロップアウト 2 V @ 1 A は web 検索由来。発注前に一次資料で裏取りすること。**
-
-#### ⚠⚠ `TMUX7612` の `Ron` 平坦領域の「膝」は**電源電圧に追従する** — ±12 V 化の最大の障害（2026-09-05、否定側査読で判明）
-
-**記録は膝 ±11 V を素子固有の定数として扱ってきたが、データシートの実データは違う。**
-
-[`datasheets/TI_TMUX7612.pdf`](datasheets/TI_TMUX7612.pdf) **p17 Figure 5-4**（"On-Resistance vs
-Source or Drain Voltage for dual supply"）は **±10 / ±12 / ±13.5 / ±15 / ±16.5 V の5本**を描いている。
-[`spice/data/tmux7612_ron_curve.json`](spice/data/tmux7612_ron_curve.json) は**このうち ±15 V の1本だけ**を
-抽出したもので、[`spice/switch_thd.py`](spice/switch_thd.py) 冒頭が「Figure 5-4、**±15V 電源**」と自分で明記している。
-
-5本すべてを抽出した結果:
-
-| 電源 | 平坦領域の上端（正側） | レールからの距離 |
-|---|---:|---:|
-| ±10 V | +5.9 V | 4.10 V |
-| **±12 V** | **+7.9 V** | 4.10 V |
-| ±13.5 V | +9.3 V | 4.21 V |
-| **±15 V** | **+10.8 V**（記録の「膝 ±11 V」と一致） | 4.21 V |
-| ±16.5 V | +12.3 V | 4.21 V |
-
-**膝は「レールから約 4.2 V 内側」で、電源に比例して動く。**
-±15 V での +10.8 V が記録の「±11 V」と一致することが、抽出と校正が正しいことの裏付け。
-
-**抽出の妥当性検証:** 再抽出した ±15 V 曲線を `switch_thd.py` に食わせると
-9.2 Vrms で **−115.2 dB** / 7.0 Vrms で **−164.9 dB** となり、下の「経路ごとの振幅上限」節の
-記載値（−115 dB / −162 dB）を再現する。同じ手続きで ±12 V 曲線を通した結果:
-
-| 出力 | Vpk | ±15 V | **±12 V** |
-|---:|---:|---:|---:|
-| 4.0 Vrms | 5.66 | −164 dB | −169 dB |
-| 5.0 Vrms | 7.07 | −164 dB | −169 dB |
-| 5.6 Vrms | 7.92 | −165 dB | **−146 dB** |
-| 6.0 Vrms | 8.49 | −166 dB | **−133 dB** |
-| **7.0 Vrms（記録の精密 DIRECT 上限）** | 9.90 | −165 dB | **−116 dB** |
-| 7.4 Vrms（±12 V の `NE5532` フルスイング） | 10.47 | −165 dB | **−107 dB** |
-
-**帰結。** 「精密 DIRECT 約 7 Vrms／`TMUX7612` 可／膝の明確に内側／−167 dB 級」は、
-±12 V では **−116 dB** になる。これは**フルレンジ経路を「`TMUX7612` 不可、リレー等」と決めた
-根拠の −119.7 dB とほぼ同じ水準**。**±12 V 化は、D4 が禁じた領域へ精密経路をそのまま落とし込む。**
-
-**逃げ道は無い。** [`scripts/build_daughter.py`](scripts/build_daughter.py) の `TMUX_MAP` は
-`"13": "+15V"` / `"4": "-15V"` で、**MUX はアナログレールから直接給電されている。**
-
-**採るとしたらの選択肢（どれも「型番差し替えだけ」ではなくなる）:**
-
-| 案 | 失うもの |
-|---|---|
-| 精密 DIRECT の上限を 7 → **5〜5.6 Vrms** へ下げる | 3段階の振幅表が実質2段階に潰れる |
-| 精密経路をリレー版に限定する | A/B 比較装置としての対称性が崩れる |
-| MUX だけ別レールにする | ±12 V 化の動機（発熱・部品選択肢）を失う |
-
-**⚠ `spice/data/tmux7612_ron_curve.json` と `switch_thd.py` は ±15 V 前提。**
-改名だけして曲線を差し替えないと、**歪みの解析が黙って古い前提のまま回り続ける。**
-
-#### ⚠⚠ レール容量は 102 µF ではなく**約 250 µF**。現行の ±15 V 品はすでに上限すれすれ（2026-09-05、査読）
-
-**「片側 102 µF」は 2026-09-02 時点、`legacy/AmpBank` が1枚だった頃の値。**
-D19（娘基板 5ch×2枚）以降、`MotherBoard` は `AmpBankSwitch` と `AmpBankRelay` を**両方**
-インスタンス化し、各々が `AmpChannel` ×5 を持つ。実際に数えると:
-
-| 場所 | 各レール |
-|---|---:|
-| `MotherBoard`（DC-DC 出力直近 47 µF ＋ 0.1 µF） | 47.1 µF |
-| `AmpBankSwitch`（バルク 100 µF ＋ 100 nF ×3） | 100.3 µF |
-| `AmpBankRelay`（バルク 100 µF） | 100.0 µF |
-| `AmpChannel` ×10 | 2.0 µF |
-| `MeasureControl` | 0.1 µF |
-| **合計** | **約 249.5 µF** |
-
-`REC10K-2415DAW/H2` の max Capacitive Load は **±270 µF**。**公称で 92%。**
-しかもバルクはアルミ電解（公差 ±20% が普通）なので、**上振れ品で約 296 µF ＞ 270 µF。**
-
-**帰結:**
-1. **現行の ±15 V 設計そのものが Cout 上限すれすれ／超過している**
-2. **2026-09-02 の足切り基準「Cout ≥ 102 µF」が 2.4 倍過小だった。**
-   この基準で落とした候補も、通した候補も、評価し直しになる
-3. 「ch 数を増やしても 20ch で +2 µF 程度」は**スケーリングの仮定が誤り**。
-   `build_daughter.py` は**娘基板1枚につきバルク 100 µF ×2 を必ず置く**ので、
-   増えるのは 100 nF ではなく**バルク**。娘基板3枚なら +100 µF/レール
-
-**方向としては ±12 V 案に有利**（2412DAW は ±470 µF）だが、**判断の根拠になった数字が
-全部書き直しになるので、「同じ根拠のまま型番だけ替える」ことはできない。**
-
-#### ⚠⚠ `+9V`（`L7809CV`）が**規定入力範囲を割る** — ±12 V ではじめて発生（2026-09-05、査読）
-
-「ヘッドルームが 6 V → 3 V。**30 mA なら成立見込み**」は、**最悪ケースを積むと通らない。**
-
-**L7809 側**（⚠ 一次 PDF はプロキシで取得できず web 由来。**発注前に一次資料で裏取り**）:
-- **規定入力範囲の下限は 11.5 V**（電気的特性表の試験条件が `Vi = 11.5〜25 V`）
-- **ドロップアウト 2 V は `Io = 1 A` での値。30 mA での規定は表に無い**
-
-**REC10K 側の公差スタック**（`Recom_REC10K-AW_Rev2-2025.pdf` p6 REGULATIONS）:
-Output Accuracy ±1.0% typ ／ Line Reg ±1.0% max ／ Load Reg ±1.0% max ／
-**Cross Regulation（dual, 10–100% load, ±12V）±6.0% max** ／ Ripple 100 mVp-p
-
-最悪: 12 × (1 − .01 − .01 − .01 − .06) = **10.92 V**、さらに D-f の PPTC（0.1 A 級で数 Ω）の
-0.06〜0.15 V とリップル谷 50 mV を引いて **約 10.7〜10.8 V**。
-**クロスレギュレーションを無視しても 11.49 V で、11.5 V にちょうど届かない。**
-±15 V なら 13.6 V なので、**この論点は ±12 V 化ではじめて発生する。**
-
-**⚠ さらに「`U1604` を `+9V` 共有へ」案と衝突する。** あちらは `+9V` の負荷を 30 → 約 100 mA に
-増やす案だが、**±12 V に一言も触れていない**（逆もまた然り）。**両方採ると、規定外の入力電圧で
-100 mA を取ることになる。**
-
-実務的には `L7809CV` を LDO（`LM2940-9` 等）へ替えるか取り出し元を変える**部品変更**が要る。
-
-#### ⚠ 改名の手作業は「2箇所」ではない — 最低4箇所＋シンボルライブラリ（2026-09-05、査読）
-
-「生成シート（`MotherBoard`/`AmpBank*`/**`AmpChannel`**）はコードの定数。手作業は
-`MeasureControl` と `legacy/*` の2箇所だけ」——**`AmpChannel` が生成物だという前提が誤り。**
-
-`build_daughter.py` の `rewrite_ampchannel_instances()` は docstring どおり
-**`instances`（参照とパス）しか書き換えず、ラベルは触らない。**
-`AmpChannel.kicad_sch` を作った `build_ampchannel.py` は自身で
-「**一度きりの移行スクリプトで、冪等ではない**」と宣言している。
-
-| ファイル | `+15V`/`-15V`/`+15V_A`/`-15V_A` の出現 | 記録の扱い |
-|---|---:|---|
-| `MeasureControl.kicad_sch` | 10 | 記録済み |
-| **`AmpChannel.kicad_sch`** | **6** | **「コードの定数」と誤記** |
-| `legacy/AmpBank.kicad_sch` | 66 | 記録済み |
-| `legacy/ControlPanelAnalog.kicad_sch` | 4 | 記録済み |
-| `legacy/PowerModule.kicad_sch` | 6 | 記録済み |
-| **`AudioV2.kicad_sym`** | シンボル名 `REC10K-2415DAW` ×7 ＋ Description | **未記録** |
-
-`AmpChannel` を直さないと、`build_daughter.py` の `CHAN_PINS` が置く親側ピン名と
-子側の階層ラベルが食い違い、**`hier_label_mismatch` が出る。**
-
-**⚠ そして「grep で数える」こと自体が安全でない実例がある。**
-`MotherBoard.kicad_sch`（素材は `legacy/OutputStage.kicad_sch`）の `RAIL IN` コネクタの
-Description は、いまも **`"From PowerModule J201: +12V / A_GND / -12V ..."`**。
-2026-09-01 の ±12 V→±15 V 改名で取り残された残骸で、**`15V` で grep しても出てこない。**
-**前回の改名が既に取りこぼしている**ので、「今度は2箇所だけ」という見積りは信用できない。
-
-#### 替える前に確認すること
-
-| | 判定 |
-|---|---|
-| `TMUX7612` | ~~±4.5〜±25 V。「±12 V でも動く」と既記載~~ **⚠ この確認は不十分だった。動作範囲しか見ておらず、この素子を選んだ理由そのもの（`Ron` 平坦度）を確認していない。下の「⚠⚠ 膝は電源に追従する」を読むこと。** |
-| 在庫の石 | 在庫表に「**±12 V 電源定格は全石 OK**」と既記載 |
-| ADC 側（`+15V_A`/`-15V_A`） | `OPA1652` は ±2.25〜±18 V。信号 4〜5 Vrms で余裕 |
-| **`U202`（`L7809`、+9 V）** | **⚠ ヘッドルームが 6 V → 3 V に減る。** 30 mA なら成立見込みだが **D-f（PPTC を直列に入れる）と併せて見ること**。なお**散逸は 0.18 W → 0.09 W に半減** |
-| 改名の範囲 | 生成シート（`MotherBoard`/`AmpBank*`/`AmpChannel`）はコードの定数。**手作業は `MeasureControl`（手編集所有）と `legacy/*`（母板の素材）の2箇所だけ** |
-
-> **⚠ 波及先。** ch 数の上限（電源由来が 約15ch → **約20ch**）、発熱、D-f、`PARTS.md`。
-> **この節の数値を他所へ写さないこと**（CLAUDE.md 冒頭の「2箇所に書くと片方が腐る」）。
-
-#### ±12 V の DC-DC を探し直した結果 — **`REC10K-2412DAW/H2` に戻ってきた**（2026-09-04）
-
-`dcdc_survey.py` を ±12 V 込みで引き直し **358 件**（`out/dcdc_12v.csv`）。
-`HenLv` は既に見送り済み（下の「`WRFD` は Cout 以外の理由でも見送り」）なので除外し、
-MOQ 1・±12 V・417 mA 以上で上位を当たった。
-
-##### ⚠⚠ 選定の軸が変わった —— **「軽負荷でスイッチング周波数を下げるか」が第一基準**
-
-**Mornsun の2系列とも、データシートに同じ一文がある。**
-
-> *"Switching frequency is measured at full load. **The module reduces the switching
-> frequency for light load (below 50%) efficiency improvement.**"*
-> （`URA_LD-20WR3` p.3 注①／`URA_ZP-10WR3` 注①。**系列ぐるみの仕様**）
-
-**これは `MBC2596` のパルススキップと同じ系統の挙動で、いま 1.2 kHz スパーの第一容疑者と
-して疑っているものそのもの。** そしてこの設計の負荷率は構造上あきらかに軽負荷側に入る:
-
-| | 大きい方（834 mA） | 現行級（417 mA） |
-|---|---|---|
-| 10ch（208 mA） | **25 %** ⚠ | 50 % |
-| 12ch（275 mA） | **33 %** ⚠ | **66 %** ✓ |
-| 20ch（435 mA） | 52 % | 104 %（超過） |
-
-**⚠ 大きいコンバータを選ぶとかえって軽負荷領域へ落ちる。** 直感に反するので注意。
-**電流の余裕は「多いほど良い」ではない。**
-
-##### 比較（すべてデータシート実読。2026-09-04）
-
-| | **`REC10K-2412DAW/H2`** | `URA2412ZP-10WR3` | `URA2412LD-20WR3` | `NSD10-12D12` |
-|---|---|---|---|---|
-| メーカ | Recom | Mornsun | Mornsun | MEAN WELL |
-| 価格（MOQ1） | ¥2,404 | ¥2,030 | ¥2,464 | **¥1,644** |
-| 出力 | ±417 mA | ±416 mA | **±834 mA** | ±420 mA |
-| `Cout` 上限 | ±470 µF | 470 µF | 800 µF | **±1000 µF** |
-| 効率 | 85 % | 85/87 % | 86/88 % | **77 %** ⚠ |
-| **絶縁** | **1.6 kVDC** | 1.5 kVDC | 1.5 kVDC | **1.0 kVDC** ⚠ |
-| `Fsw` | 350 kHz | 350 kHz **⚠軽負荷で低下** | 270 kHz **⚠軽負荷で低下** | 350 kHz（記載なし） |
-| `CTRL` | open = ON | open = ON | open = ON | **open = ON**（ON は +5.5V min **または開放**） |
-| 起動電圧 | 9 V max | 9 V max | 9 V max | — |
-| 最小負荷 | **0 %** | — | 0 | **20 mA/レール** |
-| 寸法 | 25.4×25.4×10.2 | 32.0×20.0×10.8 | **50.8×25.4×11.8**（2"×1"） | 小 |
-| 在庫 | 87 | 7 | 64 | 85 |
-
-##### 結論 — **±12 V 化は `REC10K-2412DAW/H2` への型番差し替えで済む**
-
-- **Mornsun 2品は落選。** 軽負荷で周波数を変えると明記しており、**この箱がいま追っている
-  問題を自分で作りに行くことになる。** `LD` は 2"×1" と面積も倍
-- **`NSD10-12D12` は惜しい。** 最安・`Cout` ±1000 µF・軽負荷の記載なし・`open = ON` だが、
-  **効率 77 %（＝発熱で不利。±12 V 化の狙いの一つが熱だった）**と
-  **絶縁 1.0 kVDC（3品中最弱。ここの絶縁は `PD_GND` と `A_GND` を分ける構造そのもの）**で見送り
-- **`REC10K-2412DAW/H2` が総合で最も強い。** 絶縁最高・軽負荷の記載なし・効率 85 %・1"×1"・
-  在庫 87・MOQ 1。**しかも現行と同系列なので変更は型番の差し替えだけ**
-
-> **⚠ 「記載が無い」は「やらない」の証明ではない。**
-> Recom も MEAN WELL も軽負荷の周波数について何も書いていないだけで、
-> **Mornsun が明記しているのに対して「言っていない」という差**にすぎない。
-> **これは証拠であって証明ではない。** 実機で確かめる筋は `U1604` の切り分け
-> （出力に数百 Ω を足してスパーが動くか見る）と同じ手が使える。
-
-##### ~~2026-09-05 追記 — 効率曲線が積極的な証拠になる~~ → **撤回（同日、否定側査読）**
-
-**この主張は誤りだった。2つの理由があり、どちらも単独で結論を覆す。**
-
-**(1) 曲線を取り違えていた。** 「9Vin が 10% で約 63%、5% で約 45%」と読んだが、
-**それは 24Vin（黒）の値**（60.1% / 48.7%）。ベジエを実際にサンプリングして軸を目盛
-ラベル座標で校正し直すと、**9Vin は 10% で 70.4%、5% で 58.4% と、3本の中で軽負荷では
-最も高い**。凡例は色見本の y 座標で同定、黒(24Vin)の全負荷 85.7% が p1 の
-「Efficiency typ 85%」＋ Note1「nominal input で測定」と一致することが校正の裏付け。
-
-**「4:1 入力は下端がいちばん効率が落ちる」は全負荷では正しいが、軽負荷では逆転する**
-（軽負荷損は入力電圧に比例するスイッチング/磁化損が支配、全負荷は電流の2乗の導通損が支配）。
-**この図はその逆転そのものを示していた。**
-
-**(2) そもそも識別力が無い。** 仮に数値が合っていても「固定周波数の証拠」にはならない。
-軽負荷の効率低下は**普遍的**で、支配するのは負荷に依存しない固定損 —— このデータシート
-だけでも `Quiescent Current 5 mA`（p2）＝ 12V 入力で 60 mW あり、10% 負荷（出力 1W）では
-静止電流だけで数 % を食う。**周波数を折り返す機種でもこれは減らない。**
-バーストモードでも効率は落ちる（折り返しは「固定周波数よりマシ」にするだけ）。
-**「落ちる/落ちない」の二値では両者を区別できない。**
-
-**→ 元の留保「これは証拠であって証明ではない」をそのまま維持する。格上げする材料は無い。**
-
-> **⚠ ただしこの論点は設計上ほぼ空振り**でもある。動作点は 10ch で 50〜56%、12ch で 66% と
-> 軽負荷域に入らない。**触るとしたら電源カット案（§「電源カット構成」）を採ったときだけ**で、
-> そのとき −レールは **4.8%** まで落ちる。**周波数挙動を心配すべきなのはそこ。**
-> そして**電源カット案と DC-DC 選定を結ぶ記述は、どの文書にも無い。**
-
-##### ⚠ Recom の「最小負荷 0%」は Note 4 と食い違う（2026-09-05、査読）
-
-記録は「最小負荷 **0%**」を売り文句にしているが、同じデータシート **p6 Note 4** は
-**"Operation below 10% load will not harm the converter, but specifications may not be met"**。
-Load Regulation も Cross Regulation も **10〜100% 負荷でしか規定されていない**。
-**「壊れない」と「規格を満たす」は別。** 上の電源カット案（−レール 4.8%）は規定範囲の外で、
-しかも +/− が 2.75:1 の非対称になる。
-
-##### ⚠ v1 の `MCW03-12D15` は別の軽負荷問題を持っている（2026-09-04。**実機で使用中と確認済み**）
-
-**AudioV2 には入っていないが、A1 とスパーの実測は v1 の実機で取っている**ので、
-測定結果を読むときに効いてくる。
-
-`MCW03-12D15`（Minmax 3W 級。[`../Audio/MCW03.pdf`](../Audio/MCW03.pdf) がリポジトリにある）:
-
-| | |
-|---|---|
-| 出力 | ±15 V、**Min ±25 mA / Max ±100 mA** |
-| `Fsw` | 300 kHz typ。**軽負荷で周波数を下げる記載は無い**（Mornsun とは違う） |
-| `Cout` 上限 | **±15 V で 47 µF**（`PowerModule_TEC3_REDESIGN.md` が置換した理由そのもの） |
-| 効率 / 絶縁 | 83 % / 1600 VDC |
-
-**⚠ 最小負荷 ±25 mA が明記されている（定格 ±100 mA の 25 %）。**
-そして v1 は [`../Audio/MeasurementADC_STATUS.md`](../Audio/MeasurementADC_STATUS.md) の
-箱内配線方針どおり **「選択中の Amp だけ」に給電**している:
-
-- 選択中のオペアンプ 1個（**石により 4〜20 mA と幅がある**）
-- 計測フロントエンド（`OPA1656` ×2）
-
-**合計およそ 20〜35 mA/レールで、最小負荷 ±25 mA の境界上。**
-
-> **⚠⚠ しかも負荷は「どの石を選んだか」で変わる。**
-> 石を替えると `MCW03` の負荷率が変わり、レギュレーションの状態も変わる ——
-> **オペアンプを比べているつもりで電源の状態も一緒に替えている**可能性がある。
-> **1.2 kHz スパーの容疑者として `MBC2596` と並べて見る価値がある。**
-
-**AudioV2 はこれを継承しない。** `REC10K` は**最小負荷 0 %** で、しかも 62 % で回っている。
-**新しい DC-DC を選ぶときは「最小負荷」も見ること** —— Mornsun の周波数低下と並ぶ**第二の軸**。
-
-#### ⚠⚠ DEST 検知ラダーの極と投が入れ替わっている —— PHONE と LINE が区別できない（2026-09-06、査読の副産物）
-
-**バッファ取り込みの査読で、無関係な不具合が1件出た。ERC には出ない**（すべて passive で電気的には正当）。
-
-`Switch:SW_SP3T` は **pin 3 だけが極**（母板の `lib_symbols` でピン座標を確認。pin3 は x=−5.08、
-他3本は x=+5.08）。`SW501`/`SW502` はこれに従って **pin3 = `AMP_SEL_*`**（上流の唯一の源）で正しい。
-ところが `SW1601`（Value = "DEST sense (3PDT 3rd pole, same body as SW501/SW502)"）は:
-
-| ピン | 実配線 | あるべき（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) の意図） |
-|---|---|---|
-| **3（極）** | `DEST_SENSE_LINE` | **`DEST_ADC`** |
-| 1（投） | `DEST_SENSE_PHONE` | 同じ |
-| 2（投） | **`DEST_ADC`** | 開放 |
-| 4（投） | `DEST_SENSE_MUTE_NC`（1ピンネット） | **`DEST_SENSE_LINE`** |
-
-**極と投が入れ替わっている。** しかも `SW501` は **pin2 が開放＝MUTE** なのに `SW1601` は
-**pin4 を "MUTE_NC" と名付けており、どの投が MUTE かが2つの極で食い違っている。**
-
-**帰結（分圧計算）:**
-
-| つまみ | 実配線での `DEST_ADC` | 文書の公称 |
-|---|---:|---:|
-| PHONE | **1.650 V** | 0.275 V |
-| MUTE | **3.025 V** | 1.650 V |
-| LINE | **1.650 V** | 3.025 V |
-
-**PHONE と LINE が同じ電圧で区別できず、MUTE が LINE と誤判定される。**
-
-**直す場所:** `MeasureControl.kicad_sch` は**生成対象外・手編集所有**（[CLAUDE.md](../CLAUDE.md)）なので
-KiCad で直接直せる。`DEST_ADC` を pin3 へ、`DEST_SENSE_LINE` を pin4 へ、pin2 を開放にすれば
-文書の 0.275 / 1.650 / 3.025 V が出る。
-
-#### 【確定】出力段 —— **PHONE はバッファ、LINE は直結、ゲインなし**（2026-09-06、ユーザー判断）
-
-| 出口 | 決定 | 理由 |
-|---|---|---|
-| **LINE** | **バッファを入れない。直結のまま**（＝現状から変更なし） | **アクティブスピーカー前提**（[PARTS.md](PARTS.md) §0a）。相手がアンプを内蔵しているので、ポットの `Zout` が高くても実害が出にくい |
-| **PHONE** | **`OPA1652` のユニティゲイン・バッファを V2 へ移設** | ワイパー（最大 12.5 kΩ）が 64〜120 Ω を直接駆動するのは成立しない |
-| **ゲイン** | **付けない（ユニティ）** | 実機2機種で 115〜118 dB SPL 出る。**足りないのではなく過剰**で、付けるとポットの使用域がさらに下端へ寄る |
-| **ボリューム** | **HP と LINE で独立。これは既に満たされている** | `RV501`/`RV502` が別部品で、`SW501`/`SW502` の別の投から給電されている（`PHONE_PRE_L/R` と `LINE_PRE_L/R` は別ネット） |
-
-##### 構造としては「バッファ有りのジャック」と「バッファ無しのジャック」（ユーザー整理）
-
-**`SW501`/`SW502` は ON-OFF-ON で DEST を排他に選ぶ**（PHONE / MUTE / LINE）。
-つまり出力段は**2つの独立した出口**で、片方にバッファが入り、片方は直結、というだけ。
-**非対称に見えるが、同時に効くことはない。**
-
-- PHONE を選ぶと `LINE_PRE_L/R` が開放になり、`RV502` のワイパーには信号が来ない
-- LINE を選ぶと `PHONE_PRE_L/R` が開放になり、バッファの入力は `RV501` 経由で `A_GND` を見る
-
-**この見方だと、査読が挙げた「共用すると遊んでいる側のポットが生きている側を短絡する」は
-二重に無関係**（IC を共用しないうえ、スイッチが排他にしている）。
-
-##### ボリューム（`RV501`/`RV502`）まわりで確定した事実
-
-**出力段の話が何度もボリュームに戻ったのは脱線ではなく、`A50k` のワイパーが
-出力経路で支配的なインピーダンスだから。** `AmpChannel` の 47 Ω も接点も、
-12.5 kΩ に対しては無視できる。**出力の疑問はすべてここを通る。**
-
-| 事実 | 値・根拠 |
-|---|---|
-| 素子 | **A カーブ 50 kΩ デュアル**、パネル実装・基板はヘッダ（[PARTS.md](PARTS.md) §0） |
-| **ワイパーの源インピーダンス** | **電気的中点で最大 `R/4` = 12.5 kΩ**。ここが全ての起点 |
-| **バッファはカーブも直す** | バッファの入力インピーダンスは十分高いので**ポットが無負荷になり、A カーブが設計どおり効く**。周波数特性と並ぶ、バッファのもう1つの効能 |
-| **熱雑音はポットが支配する** | 12.5 kΩ の熱雑音は **2.04 µVrms**（20 kHz 帯域）。`OPA1652` 自身は **4.5 nV/√Hz @1 kHz**（`TI_OPA1652.pdf` p7）で **0.64 µVrms**。**ポットが約 3 倍。バッファの雑音スペックを追いかけても意味がない** |
-| その雑音は問題か | 90 dB SPL 聴取時で **−94 dB**、フルスケールに対して **−131 dB**。**可聴でも測定律速でもない**（実用律速は −106 dBc） |
-| レベル | **過剰**。§9.2 の「回転下端しか使えない」「必要なら **DNP で −10 dB 後付け**」がそのまま生きている |
-
-**この決定で消える論点:**
-
-- **`OPA1652` は1個で足りる**（デュアルを HP の L/R で使い切る）。査読が指摘した
-  「LINE もやるなら IC がもう1個」「共用すると遊んでいる側のポットが生きている側を短絡する」は**発生しない**
-- **レール容量は差し引きゼロ**（v1 バッファは `J201` 経由で既に同じレールに載っている）。
-  現行 `REC10K` の `Cout` を割る心配も**発生しない**
-- **`iLoud` の入力インピーダンスが不明**（メーカー・国内代理店とも非公表。実機の仕様表は出力側のみ）
-  という未知数は**残るが、直結を選んだので設計判断には効かない**。効くのは
-  「つまみの位置で 20 kHz の応答が 0〜2.4 dB 動く」ことを嫌う場合だけで、**それは実機で確かめてから**
-
-##### バッファも **DIP-8 ソケット**にする（2026-09-06、ユーザー判断）
-
-**`AmpChannel` と同じ `Package_DIP:DIP-8_W7.62mm_Socket`** を使う。**在庫の DIP 化モジュールが
-そのまま挿せる**ので、`OPA1652` の選択に賭けなくて済む。標準実装は `OPA1652`（DIP 化モジュール）。
-
-**⚠ ソケットにしたことで新しく効く点が3つある:**
-
-1. **バッファは 10 石すべてに共通に掛かる。** 比較セッションの途中で差し替えると
-   **前段の差とバッファの差が分離できなくなる。** **1回の比較の中では固定すること。**
-   （狙って比べるぶんには構わない —— それはそれで1つの実験）
-2. **駆動能力は挿した石で決まる。** 64 Ω（Cloud III）を大音量（110 dB SPL）で鳴らすと
-   **約 15 mA peak** 要る。**在庫には出力電流の小さい石もある**ので、
-   **挿す前にその石の出力電流を確かめること。** 足りない石を挿すと歪む
-3. **ピッチはモジュール寸法で決まる**（素の DIP-8 ではなくピンヘッダに載った小基板なので）。
-   上の「ソケットのピッチはモジュール寸法で決まる」と同じ罠。**レイアウト時に実物寸法で確認**
-
-**⚠ 出力カップリングは残す。** `OPA1652` の `VOS` は **±0.5 mV typ / ±1.5 mV max**（`TI_OPA1652.pdf` p7）で、
-64 Ω でも 23 µA。**オフセットのためには要らない。残る役目は「素子が壊れてレールが出たときの保護」だけ。**
-64〜120 Ω なら `470 µF` の弊害も小さい（20 Hz・110 dB SPL でコンデンサ両端は 0.14 Vrms 級。
-査読が挙げた「1.18 Vpk がかかる」は 32 Ω・70 mA の話で、**この実機構成では起きない**）。
-
----
-
-#### HP バッファを AudioV2 へ取り込む — **採る。ただし「コピー」ではなく「番号を振り直して移設」**（2026-09-06、ユーザー提案 → 査読済み）
-
-**現状（`sch_facts.py` 実測）:** AudioV2 の回路図の中に**バッファは1個も無い**。
-
-| 出力 | いまの経路 |
-|---|---|
-| ヘッドホン | `RV501`（A50k）ワイパー → `PHONE_L/R` → `J_HP501`（`Screw_Terminal_01x02`、Value = **"to Audio HP Buffer"**）→ **図の外の v1 モジュール** → v1 の `J103` ジャック |
-| ライン | `RV502` ワイパー → `LINE_L/R` → `J_LINE501`（"LINE OUT"）→ **バッファ無しで直出し** |
-
-##### ⚠⚠ 取り込む一番の理由は「出力不足」ではない —— **`PHONE_L/R` が2つの役を兼ねている矛盾**
-
-`PHONE_L` に載っているのは `RV501.2`（ワイパー）と `J_HP501.1` の2ピンだけ。
-ところが**同じネットが親までシートピンで上がっていて、`build_motherboard.py` の
-`MOTHER_PINS_R` はそこに `# 出力ジャック（パネル）` と書いている**。一方 `WIRING.md` は
-「HP は図の外の v1 バッファへ行く」と書く。**同じ1本が「バッファ入力」と「パネル HP ジャック」の
-両方だと言われている。**
-
-**両方を実配線すると、最大 12.5 kΩ のワイパーが 32 Ω のジャックを直接駆動する。**
-**取り込むと `PHONE_L/R` がバッファ出力（低インピーダンス）になり、パネルへ出す意味が初めて成立する。**
-**これが取り込みの最強の根拠。** PCB を起こす（B5）ときにどちらを信じるかで実装が変わる問題が消える。
-
-##### バッファの石は **OPA1652**（DIP 化モジュール）。実機2機種で余裕を確認済み（2026-09-06）
-
-**繋ぐ実機が確定した**（[PARTS.md](PARTS.md) §0a）ので、駆動能力を実機の数字で検算した。
-
-`OPA1652` の出力駆動能力は **±30 mA**（`TI_OPA1652.pdf` p1、`ISC` ±50 mA は p7）。直列 10 Ω 込みで:
-
-| | 上限 | 通常聴取（90 dB SPL）で要る出力電流 |
-|---|---|---|
-| **HD 560S（120 Ω）** | **118 dB SPL**（2.55 Vrms / 54 mW） | **0.8 mA** |
-| **Cloud III（64 Ω）** | **115 dB SPL**（1.36 Vrms / 28.8 mW） | **1.3 mA** |
-| （参考）DS の THD 試験条件 `600 Ω / 3 Vrms` | — | 5 mA |
-
-**⚠ 「`OPA1652` は `RL=2 kΩ` 規定で THD 曲線も 600 Ω まで」という懸念は、この2機種には当たらない。**
-**通常聴取の出力電流はデータシートの試験条件より少なく**、大音量（110 dB）でも 8〜13 mA で `±30 mA` の半分以下。
-**32 Ω の低能率を想定したときだけ問題になる話だった。**
-
-**⚠ `OPA1652` に DIP パッケージは無い**（DigiKey は SOIC-8 / VSSOP-8 のみ）。
-在庫欄の「DIP 化モジュール」＝変換基板前提。**フットプリントはモジュール寸法で決まる。**
-
-##### ⚠ 「出力が足りなければゲインで」は、回路図からは支持されない
-
-- **LINE**: `RV502` 全開なら上側レッグ 0 Ω で**損失ゼロ**。最大レベル＝アンプ最大（4〜9.2 Vrms）で、
-  民生 −10 dBV に対し **10〜17 dB 上**。足りないのではなく**過剰**
-- **HP（32 Ω）**: 律速は電圧ではなく**出力電流**。`NJM4556A` を 70 mA peak とすると
-  32 Ω で **約 78 mW（115 dB SPL 級）**が上限で、**バッファ入力を何 Vrms にしても動かない**
-- そして §9.2 は既に「A50k は**回転下端しか使えない**」「必要なら **DNP で −10 dB 後付け**」と書いている。
-  **記録は一貫してレベル過剰を問題にしている。ゲインを足すとその問題が悪化する**
-
-**⚠ ゲインが効く条件はある** —— 300 Ω 級の低能率ヘッドホンを **PT2314 経由（最大 4〜5 Vrms）**で使う場合。
-**これは「先に何を繋ぐか」で決まり、回路図には書かれていない。** 決めるならそこから。
-
-**⚠ 副作用:** 計測 ADC のタップは `AMP_SEL_L/R`（**ポットの前**）。バッファにゲインを置くと
-**ADC が最終レベルをますます見なくなる。**
-
-##### ⚠⚠ [重大] v1 のシートをそのままコピーすると**参照が9件衝突する**
-
-`AMP901` / `R901` / `R902` / `R903` / `R904` / `C901` / `C902` / `C904` / `C905` は
-**AudioV2 の `AmpChannel` が既に使っている**（`sch_facts.py pin` で実測）。**値も全然違う**
-（v1 の `R901` は 10 Ω、AudioV2 の `R901` は 100 kΩ）。
-
-**`CLAUDE.md` の期待値「重複 0」が壊れる。「コピー」ではなく「5xx 系へ振り直して移設」。**
-
-##### 直す場所
-
-**`AudioV2/legacy/OutputStage.kicad_sch`**（手描き・部品7個。参照は既に 5xx で統一されている）。
-`build_motherboard.py` L60 が `(0.0, 111.76)` で平行移動して母板へ持ってくるので、**スクリプトは無改造**。
-
-- `RV501.2/5` → 新ネット（例 `PHONE_BUF_L/R`）→ フォロワ入力
-- フォロワ出力 → 10 Ω → 470 µF NP → **`PHONE_L/R`**（**この名前を保てば親のシートピンも
-  `MOTHER_PINS_R` も無改造**）
-- `100 kΩ` → `A_GND`、`10 µF` ＋ `0.1 µF` を各レールへ
-- **`J_HP501` を `Screw_Terminal_01x03`（L / `A_GND` / R）へ** —— 同じシートの `J_RAIL501` は
-  既に 3P で中央が `A_GND` なのに、**出力側2つだけ帰路が入っていない**
-
-**⚠ この環境では `build_motherboard.py` が走らない**（macOS の KiCad シンボルパスを見に行く）。
-**実装は KiCad のあるマシンで。** 回した後 `netlist` の部品数が **373 → 384**（HP のみ）になる。
-
-##### 実装（2026-09-08）
-
-上の「直す場所」どおり `legacy/OutputStage.kicad_sch` に置き、`build_daughter.py` → `build_motherboard.py` で母板へ。
-**この環境で回った**（KiCad の標準シンボルは `sch_helpers.py` の自動探索で見つかる。「走らない」は 2026-09-06 時点の話）。
-
-| | |
-|---|---|
-| 石 | `U501` `OPA1652`（`Amplifier_Operational:NE5532` シンボル・`Package_DIP:DIP-8_W7.62mm_Socket`。`AmpChannel` と同じソケット） |
-| 入力 | `RV501.2/5` → **`PHONE_BUF_L/R`**（ワイパー側のラベル2枚を改名しただけ。ワイヤは切っていない） |
-| 出力 | `U501` → `R501`/`R502` 10 Ω → `C501`/`C502` 470 µF NP（`CP_Radial_D10.0mm_P5.00mm`）→ **`PHONE_L/R`**（`J_HP501` と親ピン。名前を保ったので `MOTHER_PINS_R` 無改造） |
-| ブリード | `R503`/`R504` 100k → `A_GND` |
-| デカップリング | `C503`/`C504` 10 µF X7R ＋ `C505`/`C506` 100 nF（±15V → `A_GND`） |
-| `J_HP501` / `J_LINE501` | `Screw_Terminal_01x03`（L / `A_GND` / R）へ。Value は `HP OUT` / `LINE OUT` |
-| 検証 | ERC 11 件（変化なし）・部品 374 → 385（I²C シフタと合わせて 389）・重複 0・冪等性バイト一致・母板で座標の偶然一致なし |
-
-v1 の `NJM4556A` は持ってこない（DIP 化モジュールの `OPA1652` が標準実装。DIP-8 ソケットなので在庫の石も挿さる）。
-LINE はバッファ無しのまま（下）。
-
-##### LINE も buffer するなら IC がもう1個要る。**共用はできない**
-
-`NJM4556A` は dual で HP の L/R で使い切る。そして**共用しようとすると壊れる** ——
-DEST は排他（`SW501` pin2 開放＝MUTE）だが、**遊んでいる側のポットの下側レッグ `k·50 kΩ` は残る**ので、
-**遊んでいる側のつまみが最小だと生きている側の出力が `A_GND` へ短絡される。**
-`SW501/SW502` は単極で、パネルスイッチは既に3極を使い切っている（L音声・R音声・DEST検知）。
-
-**⚠ そして LINE 用に `NJM4556A` は要らない**（10 kΩ 級を駆動するだけ）。板の標準石 `NE5532` で足りる。
-**`470 µF NP` もそのまま持ってくるのは不適合** —— 10 kΩ では `f_c` = 0.034 Hz で桁が3つ過剰。
-**2.2〜4.7 µF のフィルムで足りる。**
-
-##### レール容量 —— **HP の取り込みは差し引きゼロ**
-
-v1 バッファは `J201` のハーネスで**既に同じレールにぶら下がっている**。取り込みは**位置が変わるだけ**。
-**増えるのは LINE 用に2個目を足したときだけ**で、そこで初めて現行 `REC10K` の `Cout` を割る
-（ただし DC-DC は未決で、`REC20K-2415DZ` なら制約自体が消える）。
-
-##### ⚠ `J201` は取り込んでも消えない
-
-`WIRING.md` は `J201` の ±15 V を **3系統**に配っている（①HP バッファ ②計測 ADC 系 ③v1 の
-`RelayBoard`/`AmpModule`＝新旧比較用）。**①を取り込んでも②③が残る。**
-上の「2回回して足す」は**有効なまま**（足す対象から HP バッファぶんが抜けるだけ）。
-
-#### 【決着】ch 数 × 切替素子 × DC-DC —— **どの組み合わせも音声に届かない。届いているのは `U1604`**（2026-09-05）
-
-**この3つを別々に議論して何度も蒸し返していたので、3観点（ノイズ経路／切替素子／予算）を
-並行に走らせ、統合し、否定側査読を掛けて閉じた。以下が正。**
-
-##### 問いの立て方が間違っていた
-
-「音声に影響を与えない組み合わせはどれか」は**選択肢の問題ではなく閾値の問題**。
-**閾値を書いた瞬間に答えが出る。**
-
-閾値を **−120 dBc**（実測ビン床 −117.7 dBFS の 2 dB 下。`Audio/MeasurementADC_BRINGUP.md`）に置くと:
-
-| 経路 | 寄与 | 判定 |
-|---|---|---|
-| **DC-DC の型番差**（4候補） | −166 dBc 以下、候補間の差 0.4〜3.6 dB | **合格。どれを選んでもよい** |
-| **アンプ段の共通インピーダンス**（10石ぶん合計） | −139〜−149 dBc | **合格**（20〜29 dB の余裕） |
-| **HP バッファのレール共有**（`J201` の先） | 1 Vrms で −128 dBc、**2 Vrms で −118〜−122 dBc** | **⚠ 境界。床に触る** |
-| **`U1604`（`MBC2596`）** | **正常構成の実測スパー −73.6 dBc**（閾値から 46 dB 上） | **✗ 桁が違う** |
-
-**→ ch 数（10/12/16）も、切替素子（スイッチ/リレー）も、DC-DC の型番も、
-この閾値では音声に届かない。「どれを選ぶか」を議論する意味が無い。**
-**届いているのは `U1604` で、届きかけているのは HP バッファのレール共有。**
-
-**⚠ `U1604` は新発見ではない。** 上の「`U1604` が絶縁をバイパスしている」節と
-[WIRING.md](WIRING.md) に既にあり、**直し方も4通り書いてある**。
-**止まっている理由は1つだけ —— `U1604` の負荷電流の実測1点。**
-**この節の結論は「DC-DC を選び直す前に、それを測れ」に尽きる。**
-
-##### `U1604` を別の DC-DC に替える案 —— **計算した。そして筋が悪い**（2026-09-05）
-
-上の決着で「届いているのは `U1604`」となったので、**絶縁型 DC-DC への置き換えを前提に
-二次側の容量を計算させた。結果、この方向は採らない。**
-
-###### `Cout` は足切りにならない —— 桁が2つ違う
-
-新コンバータの `Cout` に効くのは**中間レール（`U1604` 出力 〜 `LT1763` ×2 の入力）だけ**。
-LDO の**出力側**（`+5V_A` / `+3V3_A`）は LDO が間に挟まるので `Cout` ではない。**この区別が要点。**
-
-中間レールに乗っているのは **10 µF ×2 ＋ 100 nF ×2 の 20 µF 級**（回路図から数えること。
-ネット名は無い —— **label が無い無名ネット**で、図中注記が `MBC2596 6.6-6.8V`）。
-`REC10K` の `±270 µF` に対して**2桁下**で、市販の絶縁 DC-DC の max cap load は 100〜2500 µF が普通。
-**この数字で落ちる候補は事実上存在しない。**
-
-**→ 足切りになるのは `Cout` ではなく「軽負荷でバースト／スキップに入らないこと」で、
-それはいま疑っている故障モードそのもの。** データシートで保証できない買い物になる。
-
-###### 電流はデータシートから積み上がった（**実測待ちの欠測値の代わりにはならない**）
-
-| | 出典 |
-|---|---|
-| `+5V_A` 枝: `PCM1804` VCC **max 45 mA** | `TI_PCM1804.pdf` p8（ICC, VCC=5V） |
-| `+3V3_A` 枝: `PCM1804` VDD **max 20 mA** ＋ 発振器 **max 15 mA** | 同 p8（IDD, single rate）／`ASFL1` DS p1 |
-| **合計 ≤ 84 mA（max）／≈ 59 mA（typ）**、出力 0.56 W | |
-
-**⚠ 記録の見積もり「60〜90 mA」は合計こそ当たっていたが、内訳が両方向にずれていた**
-（発振器を 20〜30 mA としていたが DS max は 15 mA、ADC を 40〜60 mA としていたが 65 mA）。
-**合計が偶然一致していただけ。**
-
-**副産物: `D-g` の `F1603` = PPTC 0.15 A の根拠だった「入力最悪 60 mA」は、
-この積み上げ（12 V・η85 % で 55 mA）で裏が取れた。現行トポロジのままなら妥当。**
-
-###### ⚠⚠ 絶縁型を単独で入れると、グランドが2つの島に割れる
-
-`A_GND` と `D_GND` を結ぶ橋は **`NT1601` → `U1604` 内部 → `NT1602` の1本だけ**（A6 節）。
-`U1604` を絶縁型にすると:
-
-- **島 A** = `ADC_GND` ＋ `A_GND` ＝ **±15 V 系すべて、音声すべて**
-- **島 B** = `PD_GND` / `D_GND` / Pico / USB
-
-**ところが `A1601`（島 A）と `A1602`（島 B）の間を I2S が4本渡っている**
-（`ADC_DATA` / `ADC_BCK` / `ADC_LRCK` / `ADC_MCLK`）。
-**島を切ると、12.288 MHz / 3.072 MHz の帰路が信号線4本だけになる。**
-外に残る低インピーダンス経路は `A_GND` → 音声ケーブル → PC → USB → `D_GND` で、
-**これは実測が「基準が長く弱い」と判定した構成そのもの**（USB を抜くと床が 23 dB 悪化する話の裏返し）。
-
-**→ 絶縁を本物にするのは `ISO7741` ＋ ADC 電源の二次側移設と**セットで B5**。単独で入れてはいけない。**
-
-**⚠ そもそも `REC10K` の絶縁容量 1000 pF は 150 kHz で 1.06 kΩ。
-一次と二次はスイッチング周波数帯では既に結合している。** 絶縁を1箇所足しても「本物になる」わけではない。
-
-**⚠ 2026-09-07 追記: 採用品を `REC20K-2415DZ` に替えたので、この数字は倍悪くなった** ——
-**2000 pF typ**（条件: I/P to O/P, 100 kHz / 0.1 V。[`Recom_REC20K-Z_Rev3-2025.pdf`](datasheets/Recom_REC20K-Z_Rev3-2025.pdf) p.6）で、
-**150 kHz で 531 Ω・内部動作 265 kHz で 300 Ω**。
-比較のためデジタルアイソレータの `Ciso` は **≈1 pF**（TI ISO774x / ISO776x）で、**2000 倍の開き**がある。
-**つまり「島の絶縁性能」は絶縁 DC-DC が単独で決めていて、アイソレータの品種選定では動かない。**
-この節の結論（単独で入れてはいけない）は**弱まるどころか強くなっている**。
-
-###### ⚠ 切り分けの手順に数字の誤りがあった —— 「抜けさせる」と「動かす」は別物
-
-記録の「出力に数百 Ω を足して**スキップから抜けさせる**」は、抵抗値が2桁足りない。
-LM2596 系の CCM 境界 `I_crit = Vo(1−D)/(2·L·fsw)`（`D=0.55`, `fsw=150 kHz`）は
-**33 µH で 300 mA / 100 µH で 99 mA**。いまの負荷は 59〜84 mA なので、
-**330 Ω を足しても +20 mA で境界の 1/5〜1/15 にしか届かない。**
-本当に抜けさせるには 20〜30 Ω・1.5〜2.5 W が要り、**「部品を買わない」ではなくなる**
-（しかも次号基板では `F1603` 0.15 A が先に落ちる）。
-
-**ただし「動かす」なら 330 Ω で足りる。** バーストの繰り返し周波数は負荷にほぼ比例するので、
-+20 mA で **+25〜33 %**（1205 Hz → 1500〜1600 Hz）。観測されているセッション間ドリフトは
-**1175 → 1263 Hz の 7 %** なので、**桁で区別が付く。**
-
-###### **推奨する順序 —— `OUT+` を1本浮かせる1回の作業で2つ片付く**
-
-1. **`U705` の `OUT+` を浮かせて電流計を直列に入れる** → 3つを止めている欠測値が取れる
-   （積み上げ予測 59〜84 mA との照合。2026-09-04 に 0.6 mA と出たのは**並列に入れたため**で、
-   期待値のちょうど 1/100 だったのが証拠）
-2. **そのままベンチのリニア電源で 6.6 V を中間レールへ注入して FFT を取り直す**
-   → **スパーが消えれば `U1604` が犯人と確定。残れば無罪**で、容疑者は PD 充電器か外部ループへ移る
-
-**抵抗も買わず、CCM に入れる必要もなく、仮説を二値で潰せる。**
-
-3. **有罪なら三端子化**（`PD_12V_ADC` に**一次側のまま**置く）。`ADC_GND = PD_GND` が保たれるので
-   `NT1601`/`NT1602` は無変更 —— **ただし GND ピンを持つ固定電圧品に限る**（下の「6 V の壁」を参照）。
-   **⚠ ただしリニアは `Iin = Iout` なので入力電流が 55 → 90 mA に上がる。`F1603` を 0.15 A → 0.25 A へ**
-   （0.15 A のままだと 60 ℃ hold 105 mA に対し余裕 17 % で、**同じ表が「0.1 A は余裕 17 % だから
-   却下」とした数字と同じ**）。`F1601` の 1 A は据え置きで足りる。
-
-**⚠⚠ 6 V の壁 —— `7806` は使えない**（2026-09-06、否定側査読）
-
-**下流 `LT1763-5` の実負荷での規定は `6V < VIN < 20V, 1mA < ILOAD < 500mA`**
-（データシート `1763fh` p4。`VIN=5.5V` の行は `ILOAD=1mA` のときだけ）。**これで固定 6 V 品が全部落ちる:**
-
-| 候補 | `VO` min | 判定 |
-|---|---:|---|
-| `NJM7806FA` | **5.75 V** | **✗ 6 V を割る** |
-| ROHM `BD60FC0WFP`（6.0 V ±1 %） | **5.94 V** | **✗ 同じく割る** |
-| `LM317` を 6.5 V に設定 | **6.10 V**（`Vref` 1.2〜1.3 V ＋ 抵抗 1 %） | **△ 余裕 100 mV しかない** |
-| **`NJM7808FA`** | **7.7 V** | **○ 本命。12 V 設計にも実機 15 V にも入る** |
-| `NJM7809FA`（**予備が手元にある**） | 8.65 V | **⚠ 規定入力下限 11.5 V。設計値 12 V では PPTC 降下で割る** —— `L7809` で既に踏んだ罠と同じ |
-| 現行 `MBC2596`（6.8 V） | 6.8 V | 0.8 V の余裕 |
-
-**物理的には動く**（ドロップアウトには余裕がある）。**割るのは「規定の窓」**だが、
-**ADC の基準を作っている石の保証範囲を外して使う判断を、記録に書かずに通してはいけない。**
-
-**⚠ 以前ここに書いていた「`7806` で `NJM7800` の推奨容量を既に上回るからコンデンサ変更ゼロ」は
-根拠として不十分だった** —— `NJM7800` p6 は **ESR も安定性に効く**と書き、p7 の `STABLE REGION` 図は
-**最小 ESR ≈ 0.03 Ω** を示す。**ただしその図の条件は `Co = 0.1 µF`** で、現行の中間レール（20 µF 級）
-には適用できない。**同じ設計の `LT1763` が「容量を増やせば最小 ESR は 0 に近づく」と明示している**
-（`1763fh` p16 Figure 3）。**`7806` が落ちるのは ESR ではなく上の 6 V の壁。**
-
-**⚠ `LM317` を採る場合の注意**（否定側査読）:
-- **`LM317KCS`（TO-220）は "legacy chip"** で、120 Hz リプル除去は **57 dB typ・MIN 規定なし**。
-  `NJM7806FA` の **65 dB MIN** より悪い。**AC 特性で劣る石への差し替えになる**
-- **`LM317` には GND ピンが無い。** `ADC_GND` と `PD_GND` を結ぶ唯一の橋が消えるので、
-  **ネットタイの追加が要る**（`sch_facts.py` 実測: 当時の設計全体の `NetTie_2` は3個。2026-09-07 の `NT1603` 追加で4個）
-- 出力雑音 195 µVrms（`NJM7806` は 45 µVrms）。**ただし下流 `LT1763` の RR 50 dB min で埋もれる**
-- **タブが `OUTPUT` 電位**（`78xx` は GND）。C1（シャーシアース）が未着手なので後で踏みうる
-
-**どの候補でも BOM に要るもの:** 入力ピン直近の **0.1 µF**（現状 `PD_12V_ADC` には 47 µF 電解1個だけ）。
-
-**⚠ 三端子化と「`+9V` 共有」は同じではない。** `+9V` は `+15V` 由来＝**二次側**なので、
-共有すると `A_GND ↔ PD_GND` の橋が消え、上の島分離を起こす。**一次側のまま置くのが最小変更。**
-
-##### 決めたこと
-
-| # | 決めたこと | 根拠 |
-|---|---|---|
-| **1** | **DC-DC は現行 `REC10K-2415DAW/H2` 据え置き** | ¥0・ドロップイン・変更ゼロ。**上表のとおり型番差は閾値に届かない** |
-| **2** | **バルクは娘基板に残す**（DC-DC 出口へ集約しない） | **ローカルでないと効かないから** —— 娘基板のセラミック（1.3 µF 級）とコネクタ L（100〜300 nH）の反共振が **240〜310 kHz** で `Fsw` と重なる。これを潰すのがバルクの仕事 |
-| **3** | **バルクの値は µF ではなく要求で決める** | **`C ≥ 15 µF`（ローカルセラミックの約10倍）・`ESR 0.3〜0.5 Ω @100 kHz`・`Cout` 予算内**。**⚠「47 µF」に導出根拠は無い**。同一シリーズなら `ESR ∝ 1/C` なので、容量を半分にすると ESR は約2倍になる —— **値だけ変えると狙いが外れる** |
-| **4** | **`TMUX7612` に 1 µF / 50 V / X7R / 1206 を追加**（スイッチ版のみ） | `TI_TMUX7612.pdf` **p34 のメーカー推奨**（0.1 µF と 1 µF の両方）に合わせるだけ。**⚠ Figure 5-19 の 27〜31 dB を根拠にしてはいけない** —— あれは **p26 Figure 6-11 が示すとおり「0.1 µF あり」対「デカップリング無し」**の差で、**現行設計は既に 0.1 µF を持っている**（`build_daughter.py`）。**その 27〜31 dB は既に取ってある** |
-| **5** | **ch 数を決める前に、設計基準を決める** | 下の「⚠ 負荷率で候補を選んではいけない」を参照 |
-
-##### ⚠⚠ 負荷率（50 % 閾値）で候補を選んではいけない —— **ソケット機では成立しない**
-
-Mornsun を落とした「軽負荷 50 % 未満」を選定基準に使うと**自分を刺す**、というのが
-第2ラウンドの指摘だった。**さらに悪い。ソケットに何を挿すかで負荷率が動く。**
-
-在庫12種のデータシート max で 1 ソケット **4.0〜20 mA**。10ch・現行 `REC10K` で:
-
-| 挿す石 | +15 V の負荷率 | −15 V |
-|---|---:|---:|
-| 一番軽い石 ×10 | **39 %** | **25 %** |
-| 中くらい ×10 | 54 % | 40 % |
-| 一番重い石 ×10 | 87 % | 73 % |
-
-**現行品ですら「今日この瞬間に閾値の内側」になりうる。** 負荷率は**選定基準にならない**。
-**`REC20K` / `CCG15` / `EC4SBW` の却下理由からも負荷率を外すこと**（外さないと基準が非対称）。
-
-**正しい問いは「50 % を割るか」ではなく「この個体が軽負荷でバースト／スキップに入るか」**で、
-それは `U1604` の切り分けと同じ手 —— **出力に数百 Ω を足して抜けさせ、床が動くか見る** —— で測れる。
-
-##### ⚠ ch 数は DC-DC を縛らない。**縛るのは娘基板の枚数**
-
-容量は ch 数ではなく**枚数**に比例する（`AmpChannel` は 0.2 µF/ch、`build_daughter.py` は
-**1枚につき各レール 100 µF**）。**母板のスロットは2個なので、枚数は自動的に2枚に固定される。**
-
-**ただし 12ch を出すなら設計基準を先に決めること。** ソケット定格（20 mA/ch）で積むと
-**12ch は +15 V が 99〜106 %、−15 V が 85〜92 %、そして 10 W モジュールの合計出力電力が 99 %**
-で現行品に入らない。在庫12種の実体で積めば入る。**基準が変われば判定が変わる** ——
-**「20 mA の石を買い足さない」を設計制約として明記するか、10ch に留めるかのどちらか。**
-
-##### ⚠ 副次案「`+9V` 枝を `+15V` から外す」は**一度潰したバグの再導入**
-
-`PT2314` のアナロググランドは `A_GND`。**電源だけ一次側へ移すと、その 40 mA の帰路が
-`A_GND` と `PD_GND` を結ぶ唯一の橋（`NT1601`→`U1604`→`NT1602`）を通る。**
-2026-09-04 に `+5V_COIL` でまったく同じことを是正した（上の「リレーのパルス電流が
-結合チェーン全体を通っていた」）。**移すなら PT2314 のアナロググランドも一緒に移す話**になり、
-副次ではなく設計の骨格の話になる。**この形のまま実行しないこと。**
-
-##### レール容量を数えるときの罠（**数値は書かない。腐るので**）
-
-**⚠ 2026-09-06 に道具ができた。手で数えず [`scripts/sch_facts.py`](scripts/sch_facts.py) を使うこと。**
-
-```bash
-python3 AudioV2/scripts/sch_facts.py rails    # レールごとの容量の積み上げ
-```
-
-**この道具は上の議論で人手が出した値を独立に再現した**（`+15V`/`-15V` とも同じ値、
-`U1604` の中間レール ＝ 無名ネット `(C1605.1)` も同じ値）。**手で数える理由はもう無い。**
-
-**⚠⚠ `J201` の先は「数えなくてよい」ではない。2回回して足す。**
-
-**`J201` は `Conn_01x03_Pin`（`+15V` / `A_GND` / `-15V`）＝ ハーネスの端**で、
-**階層シートのリンクではない**。だから**ルートを1つ指定する限り、どちらか片方しか見えない** ——
-これは道具の限界ではなく、**繋いでいるのがケーブルだという設計上の事実**で、
-回路図からは推論できない。**2回回して、ハーネスが結ぶネットどうしを足す:**
-
-```bash
-python3 AudioV2/scripts/sch_facts.py rails                                  # AudioV2 側
-python3 AudioV2/scripts/sch_facts.py rails --root Audio/AudioCase.kicad_sch # v1 側
-```
-
-ハーネスの対応は **AudioV2 の `+15V`/`-15V`/`A_GND` ↔ v1 の `V+_IN`/`V-_IN`/`GND`**
-（v1 側の `HeadphoneBufferModule` の `C903`/`C905` がそこに載っている）。
-
-**⚠ ただし v1 側の `V+_IN` には v1 の `PowerModule` のバルク等も載っている。**
-**AudioV2 の実装で実際に何が繋がるかは [WIRING.md](WIRING.md) の話で、回路図からは決まらない。**
-**足す前に、どのモジュールをハーネスで繋ぐのかを確かめること。**
-
-**⚠ 以前ここに「だから機械的には出てこない＝数えない理由が確定した」と書いたのは誤り**
-（2026-09-06 訂正）。**道具のルート指定という都合を、設計上の「数えなくてよい理由」に
-すり替えていた。** レールは実際に基板の外へ出るので、**数える必要は消えない。**
-
-3体制が独立に数えて一致したが、**3体制とも同じ1点を見落とした。**
-
-1. **`MeasureControl` にはデカップリング以外の電解がある**（10 µF 級が2個）
-2. **`J201`（`+15/-15/A_GND out`）の先の `HeadphoneBufferModule` を数えていない** ——
-   `C903`/`C905` 10 µF X7R ＋ `C904`/`C906` 0.1 µF。**入れると現行 `REC10K` の `Cout ±270 µF` の
-   ちょうど 100 %。** 上の節が「数えないなら、その理由を書くこと」と指定していたのに、
-   **3体制とも未処理のまま一致した**
-3. `+15V_A`/`-15V_A` は母板の `+15V`/`-15V` と同一ネット。別レール扱いしない
-
-**⚠ そして `Cout` を触る前に、現行のまま実機が起動するかを1回測る選択肢がある。**
-`REC10K` は OCP 150 % 自動復帰・SCP hiccup（p6）。**超過が実際に起動不良になるかは測れば分かる。**
-
-##### ⚠ 「USB で 23 dB 動く」を DC-DC 不要の論拠に使ってはいけない
-
-`Audio/MeasurementADC_BRINGUP.md` の 23 dB は **「正常構成」と「グランド基準を失った故障構成」の差**
-（同文書の結論は **「USB は挿したまま使う」**）。**日常のばらつきではない。**
-これを「DC-DC の 3.6 dB は無意味」の根拠にすると、**「今は見えない」を「永久に無関係」に
-すり替える**ことになる。**正しい論法は上の閾値表** —— 床 −117.7 dBFS・実用律速 −106 dBc に対して
-各経路が何 dB 下か、で判定する。
-
-##### この決着の作り方（信頼度）
-
-3観点を互いに見せずに走らせ、**3本とも「現行据え置き＋バルク削減」に一致した。
-だがその一致は独立の裏付けではなかった** —— 3本に同じ前提（レール容量の見積り、
-候補4型番の閉じた表、20 mA/ch、「部品を選ぶ」という問いの形）を渡していたため。
-**同じ入力に同じ関数を掛ければ、独立に走らせても同じ答えが出る。**
-
-否定側査読が、3本が揃って見落としたものを5件見つけた: Figure 6-11 の "capacitor" が何か／
-`J201` の先／負荷率が石で 25〜87 % 動くこと／23 dB が故障側の数字であること／
-帰還分圧 40 kΩ と計測系 4.7 kΩ という実際の負荷。**上の表はすべて査読後の値。**
-
-#### 2026-09-05 の再探索 — **±12 V ではなく、±15 V のまま `Cout` を直す方向へ**
-
-`AGENT_HANDOFF.md` の「すぐやること」に従って DigiKey API を引き直した。
-**±12 V 化を支持する材料は出なかった。代わりに、±15 V のままで `Cout` の宿題を
-閉じられる型番が見つかった。** 検証は3体制でやった（下の「どう検証したか」）。
-
-**⚠ ただし第2ラウンドの査読で、その型番（`REC20K-2415DZ`）の根拠に穴が見つかっている。**
-**先に「第2ラウンドの査読」節を読むこと。** 選択肢は3つ＋「バルクを減らす」の4つあり、
-**まだ決めていない。**
-
-##### ⚠⚠ `REC20K-2415DZ` —— ±15 V のまま、型番差し替えだけで `Cout` が片づく
-
-`REC20K-Z` は `REC10K-AW` の 20 W 兄弟。**同じ Recom・同じ 1"×1"・同じ Dual ピン配置**
-（1 +Vin / 2 −Vin / 3 CTRL / 4 −Vout / 5 COM / 6 +Vout。[`Recom_REC20K-Z_Rev3-2025.pdf`](datasheets/Recom_REC20K-Z_Rev3-2025.pdf) p9）。
-
-| | `REC20K-2415DZ` | 現行 `REC10K-2415DAW/H2` |
-|---|---|---|
-| `Cout` | **±3000 µF** | ±270 µF |
-| 出力 | ±15 V **±667 mA** | ±15 V ±333 mA |
-| 効率 / `Fsw` / 最小負荷 | 88 % / 265 kHz / 0 % | 87 % / 350 kHz / 0 % |
-| 絶縁 | **2 kVDC・grade `basic`** | 1.6 kVDC・grade `functional` |
-| **絶縁容量** | **2000 pF** ⚠ | 1000 pF |
-| ピン径 | Ø1.4 / 厚 1.0 mm ⚠ | Ø1.0 / 0.6 mm |
-| 価格 | ¥3,620（**+¥1,216**） | ¥2,404 |
-
-**これが効くのは「`TMUX7612` の膝も `L7809` の入力下限も改名4箇所も、一切触らない」から。**
-±12 V 化が抱えている障害①③④を全部回避して、`Cout` の余裕だけを 11 倍にする。
-
-**代償は2つ。** ①**絶縁容量が 1000 → 2000 pF に倍増する** —— ここの絶縁は `PD_GND` と
-`A_GND` を分ける構造そのもので、効くのは耐電圧ではなく絶縁容量の方（査読 (e)）。
-つまり**この案は「容量の宿題」を「絶縁容量の悪化」と交換している。** ②ピン径が違うので
-フットプリントの穴径は別（**PCB 未設計なので実害なし**）。
-
-**それまでの記録が「±15 V 側は逃げ道が乏しい」としていたのは誤り** —— `REC10K` 系列しか
-見ていなかった。同じ見落としが ±12 V 側にもあり、**`REC20K-2412DZ` は `Cout ±4000 µF`**
-（¥3,620・±833 mA・88 %）で、下で「±12 V なら妥当」とする `REC10K-2412DAW/H2` の 8.5 倍ある。
-
-##### ±12 V を採る場合は `REC10K-2412DAW/H2` で妥当（2026-09-04 の結論は再現した）
-
-**コンテキストを与えないエージェントに独立に選び直させたところ、同じ型番に到達した**
-（母集団 358 件も一致）。`Cout ±470 µF`・最小負荷 0 %・絶縁容量 1000 pF・1"×1"・
-DigiKey 直販・MOQ 1。**ただし上のとおり `REC20K-2412DZ` を見ていない結論なので、
-±12 V を本気で採るならそちらと比べ直すこと。**
-
-##### ⚠⚠ `Fsw` の欄で候補を比べてはいけない —— **識別力がゼロだった**
-
-「Aimtec は `@100% load` と条件付き、Recom は条件が書いていない」という差は**見せかけ**。
-**Recom は同じ条件を表の見出しに書いている:**
-
-> `REC10K-AW.pdf` p2 / `REC20K-Z.pdf` p2 —— *"BASIC CHARACTERISTICS (measured @ TAMB= 25°C,
-> nom. VIN, **full load** and after warm-up unless otherwise stated)"*
-
-Cincon（p2 冒頭）も Traco（各ページ脚注）も同じ全負荷注記がある。**実読した候補は全部
-全負荷規定。** しかも Recom の 350 kHz は **Max. 列**（Min./Typ. 欄は空）で、軽負荷で
-下がることと矛盾しない。**この欄で意味があるのは2つだけ:**
-
-- **Mornsun 2系列だけが「軽負荷（50 % 以下）で周波数を下げる」と明記**している（不採用の根拠）
-- **Traco `TEL`/`TMR` だけが `(PWM)` と明記**している（PFM／バーストではない、という積極的な主張）
-
-**それ以外の「書いていない」は全部同じ**で、優劣を付ける材料にならない。
-既存の「記載が無いは、やらないの証明ではない」という留保は、**そもそも比較が成立していなかった**
-ぶんだけ、さらに弱い。
-
-##### ⚠ レール容量は**そのつど回路図から数え直すこと**（数値をここに書かない）
-
-これは回路図から機械的に導出できる値なので、ドキュメントに数値を置くと腐る
-（[SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。**実際に腐っていた** —— 上の
-「レール容量は 102 µF ではなく約 250 µF」の内訳は **`MeasureControl` を 0.1 µF と数え落としている**
-（実際は 10 µF 級の電解が2個ある）。**独立した2体制が同じ数え落としを指摘した。**
-
-数えるときに踏む罠が2つある:
-
-1. **`MeasureControl` にはデカップリング以外の電解がある。** 100 nF だけだと思って数えない
-2. **`J201`（Value = `+15/-15/A_GND out`）でレールは基板の外へ出る。** 先にある
-   `HeadphoneBufferModule` の容量を数えるかどうかで答えが変わる。**数えないなら、その理由を書くこと**
-
-**結論の向きは数え直しても変わらない: 現行 `REC10K-2415DAW/H2` の `Cout ±270 µF` は
-公称でほぼ上限、電解の上振れで超過する。** ±12 V を採るかどうかと無関係に、
-**レール容量の見直しか DC-DC の差し替えかは独立に必要。**
-
-##### `NSD10-12D12` の落選理由を作り直した（査読 (e) への回答）
-
-要確認 (e) が「落選理由が自分の基準と矛盾する」と指摘していた件。**一次資料に当たったら、
-理由の中身が2つとも間違っていた。**
-
-| 記録 | 一次資料 |
-|---|---|
-| 寸法「**小**」 | **50.8×25.4×10 mm（2"×1"）**（`NSD10-D-SPEC` p1）。`REC10K` の 1"×1" の**倍**。同じ表が `URA2412LD-20WR3` を「2"×1" と面積も倍」で落としており、**基準が非対称だった** |
-| 効率 77 % で「失う熱は 0.27 W」 | **再現できない。** 独立した2体制が **0.56〜0.74 W** を出した（0.27 W は片レールだけの計算に見える）。**自分の「250 mW は熱的に無意味」という基準の 2〜3 倍**なので、**落選理由としては成立する。ただし数字を直してから** |
-
-**落選は維持する。** 決め手は熱でも絶縁でもなく、**2"×1"（新フットプリントが要る）**と
-**最小負荷 20 mA/レール**（電源カット案と両立しない）の2点。**¥760 安いのと釣り合うかは設計判断。**
-
-##### Aimtec 4品は **DigiKey 直販ではなく Marketplace 出品**だった
-
-`AM10TW-2412DLPZ`（¥1,581）と `AM15CW-2412DLPZ`（¥1,890）は候補中で最安だが、
-**在庫を持っているのは DigiKey ではなく出品者**。判別法は
-[PARTS.md](PARTS.md) §0b の「販売元」の行に書いた。**記録にある `AM10TW` の在庫誤認はこれ。**
-
-**それとは別に、Aimtec 2品は絶縁容量が 2000 pF** で Recom / Cincon の2倍
-（`AM10TW-LPZ` p2 / `AM15CW-LPZ` p3）。`Fsw` の差が消えた（上）いま、
-**Aimtec を落とす理由はこの欄と販売元の2つ。**
-
-##### やり残しは全部潰した（第2ラウンド）
-
-- **TDK-Lambda `CCG`** → **評価済み。落選。** `Cout` は足切りの10倍以上あって問題ないが、
-  価格・**OVP なし**・**`RC` が負論理**（`/P` は DigiKey 在庫なし）・**絶縁容量が非公表**で落ちる
-- **`PYBE10-Q24-D12`（Bel）** → **読んだ。落選。** 実体は CUI 側にある。**NFND** に加え、
-  p3 note 9 が Mornsun と同じ「50 % 未満で周波数が下がる」を書いている
-- **Mornsun** → **一次資料で確認。ただし落選理由は NFND へ差し替え**（上）
-- **`+9V` の三端子** → ST 純正は入手不能なので、**実際に買える `NJM7809FA` で確認**。
-  規定入力範囲の下限は**同じ 11.5 V**（新旧2版で照合）。**障害③は石を替えても消えない**
-- **`www.digikey.com` / `.jp` は 403 のまま**で、実ページでの在庫確認はできない。
-  ただし Marketplace 出品かどうかは API だけで判別できる（[PARTS.md](PARTS.md) §0b）。
-  **実ページが要るのは発注直前の在庫・納期確認だけ**
-
-##### ⚠⚠ 第2ラウンドの査読 —— **主結論の根拠に穴が見つかった**（2026-09-05）
-
-上の「やり残し」を潰したうえで、もう一度否定側査読に掛けた。**`REC20K-2415DZ` という
-選択そのものは残る。だが根拠の形が変わる。**
-
-###### ⚠⚠ 軽負荷 `Fsw` の基準は、**自分の推薦を刺す**
-
-Mornsun を落とした根拠は「**軽負荷（50 % 以下）で周波数を下げる**と明記している」だった
-（一次資料で確認済み。`Mornsun_URA_ZP-10WR3.pdf` p3 注①）。**この基準を自分の推薦に当てると:**
-
-| | 出力 | 実負荷 208 mA | 最悪 277 mA |
-|---|---|---:|---:|
-| 現行 `REC10K-2415DAW/H2` | ±333 mA | 62 % | 83 % |
-| **主結論 `REC20K-2415DZ`** | ±667 mA | **31 %** ⚠ | **42 %** ⚠ |
-| `CCG15-24-15D` | ±500 mA | 42 % ⚠ | 55 % |
-| `EC4SBW-24D15` | ±660 mA | 32 % ⚠ | 42 % ⚠ |
-
-**`REC20K` は Mornsun を落とした閾値の内側で回る。** そして `REC20K-Z.pdf` p2 は
-`Internal Operating Frequency 265kHz` の単一値で、**軽負荷でどうなるかを書いていない。**
-この文書自身が別の箇所で「**記載が無いは、やらないの証明ではない**」と結論している。
-
-**さらに向きが悪い。** 2026-09-02 に `DKMW20`→`REC10K` を「負荷率 32 % → 62 %」を
-**改善として**記録した。`REC10K`→`REC20K` は **62 % → 31 %** で、**その改善を打ち消す方向。**
-`MBC2596` の軽負荷パルススキップを 1.2 kHz スパーの第一容疑者にしている設計で、
-**電源をわざと軽負荷側へ動かすことになる。**
-
-→ **`REC20K-2415DZ` を採るなら、この穴を承知の上で採ること。** 「Mornsun は落として
-`REC20K` は通す」を正当化する材料は、いまのところ**無い**。
-
-###### Mornsun の落選理由は **NFND に差し替える**
-
-DigiKey の `URA` 品は **26 品すべてが「新規設計向けに不適合」**（`NormallyStocking=False`・
-`BackOrderNotAllowed=True`。2026-09-05 に API で全数確認）。**軽負荷 `Fsw` を持ち出すまでもなく
-落ちる。** 同じ判定を `PYBE10-Q24-D12` には適用していたのに Mornsun には適用していなかった
-（基準の非対称）。
-
-**軽負荷 `Fsw` の注は「参考」へ降格する** —— *メーカーが正直に書いた唯一の例*としては
-価値があるが、**落選の決定打として使うと上の穴が開く。**
-
-**⚠ 副作用がひとつ。** `URA2415LD-20WHR3` は**絶縁容量 1050 pF**で、`REC20K` 案の代償
-（1000 → 2000 pF）を消せる候補だった。NFND で落ちるので結論は変わらないが、
-**軽負荷 `Fsw` だけで落としていたら「絶縁容量を悪化させる方を選んだ」ことになっていた。**
-
-###### ±15 V の選択肢は3つある（`Cout` ≥ 420 µF・直販・NFND でない・MOQ 1）
-
-| | **`REC20K-2415DZ`** | `CCG15-24-15D` | `EC4SBW-24D15` |
+| ID | 何を | 決まるもの | 出典 |
 |---|---|---|---|
-| `Cout`（片レール） | **±3000 µF** | ±1000 µF | 650 µF |
-| 出力 | ±667 mA | ±500 mA | ±660 mA |
-| 効率 | 88 % | **90 %** | 89 % |
-| **絶縁容量** | 2000 pF ⚠ | **1000 pF**（取説 p17。当初「非公表」は誤り） | 1500 pF |
-| **軽負荷 `Fsw`** | 記載なし | **取説 p4 が `(fixed)` と明記** | **p1 に "Fixed Switching Frequency" を明記** |
-| CTRL | **開放 = ON**（配線不要） | **⚠ 短絡 = ON**（`/P` は DigiKey 在庫なし） | **開放 = ON** |
-| OVP / OCP | あり / 150 % | **⚠ なし** / hiccup >105 % | Zener・TVS / 連続短絡可 |
-| ピン配置 | **現行と同一（ドロップイン）** | 別 | **別**（6番が Remote） |
-| 価格 / 在庫 | **¥3,620** / 162 | ¥5,082 / 108 | ¥6,979 / 53 |
+| V21-実測-01 | **RS6 の突入**（娘の電源リレーのメイクでどこまで出すか）と **OLP の形**（出力ごとか合計か、定電流かヒカップか） | 親 +100 µF の要否（§3-6）、22 Ω での親の落ち込み、極間短絡時の 22 Ω の電力（§2-4）。**基板を起こす前に** | [NOW] L25、[review/stack_relay_power.md](review/stack_relay_power.md) §8、[review/rail_detect_review.md](review/rail_detect_review.md) §10-5 |
+| V21-実測-02 | **RS6 の軽負荷での −15 V**（1 ch・無音・軽い石）の電圧と波形、周波数（バーストの有無） | プリロードの実装（§3-10） | [review/rejected_review.md](review/rejected_review.md) §4 D4、[review/main_power_compare_review.md](review/main_power_compare_review.md) §4-1 |
+| V21-実測-03 | **PD 充電器 ↔ 12 V のリニア電源／電池の A-B-A（最低 2 回）**、音声出力の床とスパーを外の機材で。差の周波数 | CMC の実装（§3-9）、b-3 の要否 | [review/rejected_review_review.md](review/rejected_review_review.md) §6、[review/main_power_compare.md](review/main_power_compare.md) §4 |
+| V21-実測-04 | **Pico の 3V3 の公差**（Pico 2 基板の DS がリポジトリに無い） | 比率校正の前提、監視のしきい値の誤差 | [review/rail_detect.md](review/rail_detect.md) §0.5 D8、[review/rail_detect_review.md](review/rail_detect_review.md) §10-1 |
+| V21-実測-05 | **AZ850 のコイルのインダクタンスと最大リセット時間** | SET/RESET の重なり、自動リセットの時間予算（§5-5） | [review/rail_detect_review.md](review/rail_detect_review.md) §10-3 |
+| V21-実測-06 | ADC のデジタル動作が音声出力に漏れているか（I²S の 3 本を Pico 側で外す A-B-A。**リセット保持の形は使わない**: 1.37 s でパワーダウンに入る） | デジタル絶縁・直列抵抗の要否 | [review/tap_compare_review.md](review/tap_compare_review.md) 6-6・§4-D |
+| V21-実測-07 | ch 側グランドと計測側 `A_GND` の差（タップ入力の短絡点を変えた無信号キャプチャ 2 通り） | Q2 が保険か実益か（§4-3）。v1 での負の結果だけが強い | [review/tap_compare_review.md](review/tap_compare_review.md) 6-5 |
+| V21-実測-08 | HP 32 Ω を鳴らす／外すで LINE 出力の A-B-A、TMUX・L7809 のピンの ±15 V の AC | HP バッファの RC の実装（§3-11） | [review/main_power_compare.md](review/main_power_compare.md) §4 (b-5) |
+| V21-実測-09 | 石の熱の整定（通電してから何秒で H3・音が落ち着くか） | 切り替えてから聴くまでの待ち（§1-2） | [review/rejected_review_review.md](review/rejected_review_review.md) §6 U2 |
+| V21-実測-10 | ADC 系の実電流（電流計を直列に 1 回） | ADC 枝の PPTC・LDO 前の R の定格（§4-5） | [review/rejected_review_review.md](review/rejected_review_review.md) §6 |
+| V21-実測-11 | 容量負荷のメイク回数試験（22 Ω・AZ850） | 電源用リレーの品種（§2-2） | [review/stack_relay_power_review.md](review/stack_relay_power_review.md) 1-4 |
+| V21-実測-12 | ch を ON してからの出力 DC の整定（NC 10 kΩ・選んでから音声リレーをセットする順も含めて） | ミュートの長さ（§2-10） | [review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-3 |
 
-**`REC20K` は最安・最大 `Cout`・唯一のドロップイン。** `EC4SBW` は **+¥3,359** で
-**絶縁容量が良く（1500 pF）、固定周波数を明言している唯一の候補** —— つまり
-**「容量の宿題を絶縁容量の悪化と交換する」のは必然ではない。**
-`CCG` の落選理由は**価格・OVP なし・CTRL 負論理の3つ**に減る（**「絶縁容量非公表」は誤りだった** —— 取説 p17 に 1000 pF があり、**この欄では候補中で最良**）。
-**⚠ `REC20K-2415DZ` にはメーカーの EMC フィルタ推奨が無い**（p8 Note8「`REC20K-2405SZ` only」）。
+DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品番（単発パルス曲線）、PPTC（RXEF 系）の温度別 hold 電流、AHCT 系、PMOS・ツェナー（B1）、RB160M-30、TPS3307 の MR、Pico 2 基板、5×20 F2A の溶断 I²t、娘の 3.3 V を作る素子（発振器なし）、2.54 mm スタックヘッダの接点定格（突入 0.68 A・コイル 560 mA のパルス、[review/stack_relay_power.md](review/stack_relay_power.md) §7.3）。確かめる事実: PT2314E の POR 直後の音量状態、PCM1804 の VCOM の駆動能力、RS6 の入手性（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §10-11、[review/rail_detect_review.md](review/rail_detect_review.md) §10、[review/main_power_compare_review.md](review/main_power_compare_review.md) §5）。
 
-###### ⚠ 第4の道 —— **バルクを減らして現行品のままにする**
+### 10-2 決めること
 
-そもそも 20 W 級へ上げる理由は `Cout` だけで、**レール容量は設計の選択**である
-（娘基板1枚につきバルク 100 µF ×2 を `build_daughter.py` が必ず置く）。
-**バルクを減らせば現行 `REC10K-2415DAW/H2` が `Cout` に収まり、負荷率 62 % も維持される。**
-上の3案はいずれも**負荷率を半分に落とす**ので、**この道だけが軽負荷の穴を作らない。**
-上の再探索はこの道を検討していない。**着手前に比較すること。**
-
-###### 第2ラウンドで直した記録
-
-| | 誤り | 正 |
-|---|---|---|
-| TDK-Lambda `CC`/`CCG` | 「`Cout` ≥ 102 µF の足切りで落ちた」 | **誤り。** `±12V ±1200 µF` / `±15V ±1000 µF` で足切りの10倍以上。**落ちる理由が無かった** |
-| 同上（このセッション） | 「この環境から取得不能と確定」 | **誤り。** `docs.rs-online.com` に取説、`4donline.ihs.com` にカタログ。**認証なしで取れる。4つ試して諦めたのが早すぎた** |
-| `CCG` の `RC` ピン | 「DigiKey 属性由来なので裏取り待ち」 | **手元の PDF 2本の p1 に書いてあった**（*"Standard: Low = ON, Open = OFF"*）。**欄の名前だけ見て行を読まなかった** |
-| `Cout` の「±」表記 | 「Aimtec と Cincon は未解決」 | **解決。** Aimtec は同じ PDF の**単出力行が同じ 470 µF**（単出力はレール1本 ⇒ 片レール値）。Cincon は3系列とも `Cout ≒ 片レール電流 × 1 µF/mA` で一貫。**どちらも片レール。未解決は 0 件** |
-
-##### どう検証したか（この節の信頼度）
-
-3体制でやった。**互いの結果は見せていない。**
-
-| | 役割 | 出したもの |
-|---|---|---|
-| 否定側査読 | 結論を壊しに行く | **`REC20K` の見落とし**、`Fsw` 欄の無意味さ、足切りの分子・分母の誤り |
-| ブラインド数値抽出 | 期待値を与えず PDF から数値だけ読む | **Aimtec の絶縁容量 2000 pF**（「記載なし」は誤り）、Recom の 350 kHz が **Max. 列** |
-| ブラインド結論再現 | 独立に選び直す | 母集団 358 件と `REC10K-2412DAW/H2` を**再現**。**Marketplace 判別法**、`MeasureControl` の数え落とし |
-
-**一致したもの:** `Cout ±470 / ±270`、EMC フィルタ推奨に `2412DAW` があって `2415DAW` が無いこと、
-`MeasureControl` の数え落とし、`NSD10` の寸法と熱の誤り。
-
-**割れたもの:** レール容量の合計（`J201` の先を数えるかで約 10 µF 変わる）。
-**片方しか気づかなかったもの:** `REC20K` は否定側査読だけ。**ブラインド再現側は ±12 V に
-絞られていたので ±15 V の兄弟を見ていない** —— 探索範囲の指定がそのまま盲点になった実例。
-
-### 懸念と扱い（**2026-08-31 に ±12 V へ移したときの記録**）
-
-> **⚠ 下表は ±12 V 前提の記録で、そのままでは現行と食い違う。**
-> 2026-09-01 に **±15 V へ戻した**ので、電圧値を根拠にした行は失効している
-> （出力 2〜3 dB の低下は回復し、計測系にも PT2314 の派生元にも ±15 V を配る）。
-> 「Amp 基板は再設計しない」も §11.1 で失効した（上の「±12 V とした理由が、いま成立するか」）。
-> **いま有効なのは上の「確定内容」と、下表のうち HP 固定パッド = 0 Ω（§9）だけ。**
-> PT2314 の電源は `VCC_TONE`（+9 V 級）を作る方針で決着している（[CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md) §4）。
-
-| 懸念 | 当時の扱い |
-|---|---|
-| Amp ×10 の最大出力が **約 2〜3 dB 低下**（≈6〜7 Vrms 級） | 許容。**Amp 基板は再設計しない**（§6）。±12 V を端子で供給するだけ |
-| HP 固定パッド | **廃止（0 Ω）**（§9）。実機で下端しか使えないなら DNP で −10 dB 後付け |
-| MeasurementADC の ±15 V ラベル | AudioV2 PowerModule から **±12 V** を配る。計測モジュールは OPA1656 等 ±12 V で動作確認 |
-| PT2314 電源 | データシート推奨に合わせて **9 V 級単一系 or ±12 V からの派生**を PowerModule で決める |
-
-### 信号・電源の流れ（±15 V・`REC10K-2415DAW/H2` 版）
-
-電源部は 2026-09-03 の刷新で母板へ統合された（旧 `PowerModule` シート）。
-
-```text
-[母板 電源部]
-  [PD モジュール(外付・12V)] ──► 受け端子 ── ヒューズ ── REC10K-2415DAW/H2 ── ±15V / A_GND ──► 端子台（箱配線）
-        │                                    │
-        └── PD_12V ──(ケーブル)──► [操作パネル] PWR SW ──► 12V LED
-                                              └──（SW 後）──► DC-DC の +Vin（板上は SW 前でも可・起こし時に一本化）
-
-Amp 10ch ── ±15 V を常時給電（切替素子と基板構成は §11.1 / §11.1a）
-HP Buffer / 計測 ── Audio/ 製造済み基板を ±15V 端子で接続
-
-CH ──► PT2314 ──► Amp(10ch) ──► SW_DEST ──┬─ RV_HP ──► HeadphoneBuffer → PHONE
-                                           └─ RV_LINE ──────────────────► LINE OUT
-```
-
-### 各コンバータ手前のヒューズ — **確定（2026-09-04）**
-
-**各コンバータの入力に個別に入れる**（ユーザー方針）。1本の親ヒューズで束ねない。
-
-> **⚠ 実機はいま 15 V が入っている**（2026-09-04 にユーザーが実測。PD は 15 V）。
-> 設計は 12 V 前提のままで、**下の表の入力電流も 12 V で計算してある**。
-> **これは意図的に安全側** —— 同じ電力なら電圧が低いほど電流が大きいので、
-> **12 V で選んだヒューズは 15 V 運用をそのまま覆う**（15 V なら電流は 20 % 下がる）。
-> 電圧をどちらに確定させるかは別の判断（`AGENT_HANDOFF.md` の「±15 V を選ぶ理由」）。
-
-| 位置 | 守る対象 | 定常負荷 | 確定 |
+| ID | 決めること | 選択肢 | 出典 |
 |---|---|---|---|
-| `PD_12V_SW` → `U201` | `REC10K` → ±15 V | **0.96 A** | **ガラス管 T1.6 A**（5×20、ホルダ） |
-| `PD_12V_SW` → `U1607` | +5V_D（Pico / LCD） | ~0.25–0.3 A | **PPTC I_hold 0.5 A** |
-| `PD_12V_SW` → `U403` | `+5V_COIL`（リレーコイル） | ~0.16 A ピーク | **PPTC I_hold 0.35 A** |
-| `+15V` → `U202` | +9 V（PT2314） | ~0.03 A | **PPTC I_hold 0.1 A** |
-| PD 入力 → 計測基板 | **基板全体のバックストップ**（`F1601`） | 0.31 A | **ガラス管 1 A**（2026-09-04 追記） |
-| `PD_12V_SW` → `U1604` | +6.8 V（ADC・発振器）（`F1603`／D-g） | ~0.06 A | **PPTC I_hold 0.15 A**（2026-09-04 確定） |
-
-負荷の出どころ: DC-DC は 10 W ÷ η 0.87 = 11.5 W を 12 V で。+5V_D は 5 V 側 ~0.5 A を
-η 85 % で 12 V 換算。コイルは 5 V/400 mA（5個同時）を 15 V→12 V 換算。PT2314 は typ 30 mA。
-`U1604` は 6.8 V × 90 mA を η 85 % で 12 V 換算。`F1601` は下2つの合計（0.06 + 0.245）。
-
-##### ⚠ `F1601` は負荷ではなく「協調」で決まる（2026-09-04）
-
-**回路図の `F1601` は Value が `"Fuse"` のままで、定格がどこにも記録されていなかった**
-（実機 v1 の `F701` も同じ）。上の電源ツリー図は 2026-09-04 まで `F1601(T1.6A)` と書いていたが、
-**その T1.6A は `F201`（PowerModule のガラス管）の値で、図の誤り**。直した。
-
-**1 A は負荷から見ると設計最悪値（0.31 A）の 3.2 倍で緩い。それで正しい。**
-`F1601` の役目はこの枝を守ることではなく、**基板全体のバックストップ**だから。
-実際の保護は各コンバータ手前の PPTC が担う（それがこの節の方針）。
-
-バックストップは**下流より先に切れてはいけない**ので、下流の hold の合計より上に置く:
-
-| | |
-|---|---:|
-| `F1602`（`U1607` 前） | 0.5 A hold |
-| `F1603`（`U1604` 前） | 0.15 A hold |
-| 合計 | 0.65 A |
-| **`F1601` はこれより上 →** | **1 A** |
-
-**⚠ 下流の PPTC を小さくしたら `F1601` も見直すこと。** `F1602` の 0.5 A は
-「+5V_D が 5 V 側 0.5 A」という**設計値**から来ていて、実負荷（Pico ＋ LCD で 0.2 A 級）
-とは 2 倍以上違う可能性がある。**実測できたらここから連鎖して全部下げられる。**
-
-##### D-g の定格 — **PPTC 0.15 A**（2026-09-04 確定。実測ではなく定格から）
-
-`U1604` の入力電流は最悪 60 mA。§8 の採り方（定常負荷の 1.5〜2 倍を公称 hold に取り、
-60 ℃ の 0.7 倍低下はその中に吸収させる）に当てると 90〜120 mA。
-
-| 候補 | 公称/定常 | 60 ℃ の hold | 判定 |
-|---|---:|---:|---|
-| 0.1 A | 1.7× | 70 mA | **余裕 17 %。誤動作する** |
-| **0.15 A** | **2.5×** | **105 mA** | **採用。** 帯をやや超えるが、下は狭すぎる |
-
-トリップは約 0.3 A で `F1601`（1 A）より十分下。直列抵抗 2〜5 Ω は 60 mA で 0.1〜0.3 V の
-降下にしかならず、12 V 入力に対して効かない。
-
-**⚠ 実装は `U1604` 直近のローカルバルクとセットで**（この節の「PPTC はバルクの下流に入っている」）。
-
-> **この2つは実測ではなく定格から出した数字。** `U1604` の負荷電流が測れたら検算すること
-> （2026-09-04 に実測を試みたが、テスタが直列にならず断念。経緯は下の「未決」）。
-
-###### 実装（2026-09-04 完了）
-
-| 追加したもの | |
-|---|---|
-| `F1603` | `Device:Fuse` / `PPTC 0.15A hold` を `(265.43, 34.29)` **r90**。**走行線の上へ迂回**（`ADC_V_IN` の直線上は 6.35 mm しか無く 7.62 mm の素子が入らない —— D-f と同じ罠） |
-| `C1644` | ローカルバルク 47 µF 35V。**ヒューズの下流**（`U1604` 直近）。PPTC は 2〜5 Ω なので、コンバータの入力パルスはヒューズ越しではなく手前で供給する |
-| `#FLG1603` | **`PWR_FLAG`。無いと ERC が `power_pin_not_driven` を出す** —— PPTC は受動素子なので、直列に入れて切れた下流ネットには駆動源が居なくなる（`F1602` の `#FLG1602` と同じ処置） |
-| `PD_12V_ADC` | ヒューズ下流の新ネット名（`F1602` 下流の `PD_12V_MEAS` と同じ命名） |
-| `F1601` の Value | `"Fuse"`（定格未記入）→ **`T1A slow`** |
-
-**検証**: ERC 29 件で実装前と同一。部品 371 → **373**（重複0・注釈警告なし）。
-**ネットリストの分割の差分は狙った1点だけ** —— `U1604.1` が `PD_12V_SW` から
-`PD_12V_ADC` へ移った。それ以外は完全一致。
-
-> **⚠ 参照番号は「最大値＋1」で採ってはいけない。** `C16xx` は
-> **C1601–C1643 と C1650 が使用中でギャップがある**。最初 `C1613` を採って既存と衝突し、
-> ネットリストが重複参照になった。**空き番号は実物を列挙して確かめること。**
->
-> **⚠ 重複判定は「同じ参照が複数ある」では出せない。** マルチユニット部品
-> （`U1601` / `U1602` / `U1608`）は同じ参照で複数のブロックを持つのが正しい。
-> `(unit N)` が違うかどうかで区別する。
-
-> **📌 フットプリントは `F1602` に合わせて `R_Axial_DIN0411`（12.70 mm ピッチ軸型）にした。**
-> PPTC の実物は普通ラジアルのディスクなので、**部品を選ぶときに見直すこと**（`F1602` も同じ）。
-> PCB はまだ起こしていないので、いま直す必要は無い。
-
-#### なぜ主系だけガラス管で、他は PPTC か
-
-- **主系（`U201`）はハード開放が要る。** PPTC は開放せず動作も遅い。ホルダ式なので交換に
-  はんだは不要
-- **小系は PPTC（自己復帰）。** いまはプローブを当てながらの立ち上げ中
-  （`ASFL` 空中配線・LCD の SPI をヘッダから飛ばし）で、一発品だと**ミスのたびに基板から
-  外して交換**になる
-- PPTC の温度による hold 低下（60 ℃ で 0.7 倍程度）は、定常負荷の 1.5〜2 倍で取ってあるので余裕
-- PPTC の直列抵抗（0.35 A 級で ~0.5 Ω、0.1 A 級で数 Ω）は、`U403`（12→5 V）も
-  `U202`（15→9 V、6 V ヘッドルーム）も余裕があり効かない
-
-#### `T3.15 A` を捨てた理由
-
-旧 `DKMW20`（20 W・一次 ~2 A）で選んだ定格で、`REC10K`（10 W・一次 ~1 A）には**3 倍で緩い**。
-PD ポートの供給能力は 12 V/3〜5 A 級なので**故障電流もその範囲**に収まり、`T3.15 A` は
-その全域で切れない = 実質「保護なし」だった。`T1.6 A` なら 3 A で数秒、5 A で瞬時。
-定常 0.96 A に対して 60 % なので誤断のリスクも低い。
-
-#### 突入電流は制約にならない（実測ではなく実物からの計算）
-
-DC-DC 入力側の容量は `C205` 47 µF + `C206` 0.1 µF。蓄積エネルギーは
-½CV² = ½ × 47 µF × 12² ≈ **3.4 mJ**、配線抵抗 0.1 Ω 想定で I²t ≈ **0.03 A²s**。
-5×20 mm スローブローの溶断 I²t は桁で 5〜15 A²s 級なので **2桁以上の余裕**がある。
-（モジュール内部の入力容量は記録がないので外部 47 µF で見積り。それが支配的）
-
-#### 15 V へ変えたら
-
-`T1.6 A` はそのまま使える（0.77 A = 48 %）。ただし **9 V にすると 1.28 A = 80 % で
-近すぎる**ので、9 V を使うなら 2 A へ上げる。
-
-#### 実装状況（2026-09-04）
-
-| | 状態 |
-|---|---|
-| `F201`（`U201` 前・T1.6 A） | **実装済み**（Value 更新） |
-| `F202`（`U403` 前・PPTC 0.35 A） | **実装済み**。`legacy/PowerModule` に置き、`PD_12V_SW` → `PD_12V_COIL` |
-| `F1602`（`U1607` 前・PPTC 0.5 A） | **実装済み**。`MeasureControl` の縦配線を分割、`PD_12V_SW` → `PD_12V_MEAS` |
-| `F1601`（計測基板入口・T1 A） | **実装済み**（2026-09-04 に Value を記入。それまで `"Fuse"` で定格が無かった） |
-| `F1603`（`U1604` 前・PPTC 0.15 A） | **実装済み**（2026-09-04、D-g）。`PD_12V_SW` → `PD_12V_ADC`。**走行線の上へ迂回**。`C1644`（ローカルバルク）と `#FLG1603` をセットで |
-| `U202` 前（PPTC 0.1 A） | ✅ **2026-09-06 実装**（D-f）。走行線から立ち上げて上で迂回し縦置き（2.54 mm のスタブには 7.62 mm の素子が入らないため。D-g と同じ手）。下流に `PWR_FLAG` を1つ。**⚠ 保護の欠落ではなく方針の対称性**。**⚠ 定格はゲート3で再判定**（`+9V` 共有なら 0.2〜0.25 A）。±12 V 化でヘッドルームは 6 V → 3 V に減るが、直列抵抗の落ちは 30 mA で 0.06〜0.15 V |
-
-`PD_12V_COIL` / `PD_12V_MEAS` には `PWR_FLAG`（`#FLG0202` / `#FLG1602`）を置いた。
-PPTC は受動素子なので、これが無いと KiCad が「電源が駆動していない」と判定する。
-
-> ⚠ **`U1604`（`MBC2596-01`、計測系の降圧）はヒューズの外**。`PD_12V_SW` に直付けで、
-> 上流は `F1601` のみ。「各コンバータの手前」を徹底するならここにも要る。**未判断。**
-
-#### 【集約】計測/制御基板の電源ツリー（2026-09-04 に回路を追って作図）
-
-**この図はどこにも無かった。** ネットリストを辿って組み立てたもの。電源まわりを触る前にここを読む。
-
-```
-PD入力 ─ F1601(1A) ─── PD_12V_SW ─┬─ C1610 47µ / C1611 10µ / C1612 100n   ← 共通バルク
-                                    │
-  静か・軽い（60〜90mA 見積もり）     ├─【U1604 MBC2596】─┬─ U1603 LT1763-3.3 → +3V3_A ─┬ A1601 ADC1804_F
-  ⚠ ヒューズ無し（D-g）              │  非絶縁バック      │                              ├ Y1601 ASFL1 12.288MHz
-  ⚠ IN-/OUT- が同一ノード            │                   │                              └ U1605 TPS3307 監視IC
-     → PD_GND ↔ ADC_GND を橋渡し     │                   └─ U1606 LT1763-5   → +5V_A  ── A1601 ADC1804_F
-     ＝ REC10K の絶縁をバイパス       │
-                                    │
-  騒がしい・重い（0.25〜0.3A）        └─ F1602(PPTC 0.5A) ─【U1607 BP5293-50】─ +5V_D ─┬─ D1601 → A1602 Pico VSYS
-                                                                                       └─ U1609 XC8107 ─ LCD_VCC
-                                                                                          CE=GP8 / 100k PD    ├ LCD VCC
-                                                                                                              └ バックライト
-```
-
-##### 読み方（間違えやすいところ）
-
-| | |
-|---|---|
-| **5V は2系統ある** | `+5V_A`（ADC 用、`LT1763-5`）と `+5V_D`（Pico/LCD 用、`BP5293`）。**Pico は前者ではない** |
-| **静かな側と騒がしい側は既にレギュレータで分かれている** | 改造するなら静かな側（`U1604` 配下）だけで済む |
-| **`U1609` は電源生成ではない** | LCD の**ロードスイッチ**。`CE`=GP8（Active High）、`R1620` 100k プルダウンで既定 OFF。VCC とバックライトの両方を切れる |
-| **`SCKI` がリセット回路のクロック** | `PCM1804` は SCKI が無いとリセットが解除されない。`Y1601` が止まると ADC は起きない。`MCLK_SENSE`(GP9) はその確認口（**駆動禁止**、`R1605` 1k 直列） |
-| **`+3V3_A` は清浄レール** | `PCM1804`・水晶・監視IC 専用。**系の `3V3` に流用してはいけない**（D27。系の `3V3` は Pico の 3V3_OUT から） |
-
-##### 2026-09-04 に確定したこと
-
-- **`U1604` は絶縁をバイパスしている。** 非絶縁バックなので `IN-`(`PD_GND`) と `OUT-`(`ADC_GND`) が
-  内部で同一ノード。`REC10K` の 1.6kVDC がここで無効化されている（A6 の節）
-- **監視IC（`TPS3307-33`）は必須ではない。** `PCM1804` は**内部パワーオンリセット**を持つ
-  （DS p.18: `VDD>2V` / `VCC>4V` で自動。`RST` は内部プルダウンで未接続＝Low 相当）。
-  実機は初号で `U710` の1番ピンをリフトして**監視IC を殺した状態**で測定できていた。
-  `RST` が要るのは `OSR`／インターフェースモード／データフォーマットを変えるときとパワーダウンのみで、
-  いまはどれも使っていない
-- **`RST` は実機では Pico 直結。** `GP15` オープンドレイン ＋ `R1611` 10k プルアップ。
-  rev 0.4 の回路図だけが監視IC 経由になっている
-- **`U1609` は「入れたけど使っていない」。** 回路は既定 OFF で正しいが、`lcd.py:42` の
-  `Pin(8, Pin.OUT, value=1)` で起動時に即 ON になる。**測定中に LCD を電源ごと落とす**という
-  本来の狙いを使うコードが無い。使うなら `lcd.en.value(0)` の一行
-- **PPTC はバルクの下流に入っている。** 実機（`Audio/split/AudioCase_6_measurement_adc`）は
-  「ヒューズ → バルク → DC-DC」。回路図の `F1602` / `F202` は**下流にローカルバルクが無い**。
-  PPTC は抵抗（0.35A 級で ~0.5Ω）なので、**実装するならコンバータ直近のバルクとセット**にする
-
-##### ~~未決 —— どれも `U1604` の負荷電流ひとつで決まる~~ →【閉じた】**測る必要が無くなった**（2026-09-07）
-
-**この数値を待っている判断は、もう1つも無い。** 塞いでいた4件の行き先:
-
-| 塞がれていたもの | 決着 |
-|---|---|
-| 軽負荷スキップ説の裏取り | **否定**（負荷を足して周波数が動くかで直接答えが出た。電流は要らなかった） |
-| `U1604` をリニアに替えるか | 動機は「スイッチングを消してスパーの容疑者を減らす」。**その容疑者ではなかった**ので消滅 |
-| `F203` の定格 | 引き上げは「`+9V` 共有＝リニア化」の場合だけ。**0.1 A で確定** |
-| `F1602` との協調 | 下流が変わらないので現状維持 |
-
-**残る弱い理由**: `F1603`（0.15 A）の定格が未検証の積み上げ推定 60〜90 mA に乗っている。
-ただし入力側は 12 V 換算で 50 mA 前後で**3 倍のマージン**があり、発注や PCB を止める理由にならない。
-
-**⚠ 箱の中が犯人と分かったら `U1604` は再浮上しうる**（`AGENT_HANDOFF.md`「並行してやれる安い切り分け」）。そのときは
-電流計を直列に入れる —— `U705` の `OUT−` の足を1本外す。**並列に当てるのは短絡**（2026-09-04 に踏んだ罠）。
-
-以下は当時の記録。
-
-> **2026-09-04: 実測を試みて取れなかった。** D-g だけは定格から決めて先に進めた（上の節）。
-> 残る2つ（リニア化・スキップ説の裏取り）は実測待ちのまま。
->
-> **踏んだ罠 — 電流は「当てて測る」ことができない。** 活線のまま `U705` の OUT+ 付近に
-> プローブを当てて **0.6 mA** と出た。これは電流計（200 mA レンジのシャントは 1 Ω 前後）が
-> **生きた銅箔（0.01 Ω 級）と並列**になり、1 % だけ横取りした値。**期待値 60〜90 mA の
-> ちょうど 1/100** で、数字自体が「並列に入っている」と言っていた。
-> **桁が2つずれたら、疑うのは回路ではなく自分の直列性。**
->
-> ⚠ そのプローブが OUT+ と GND に触れていたら、**6.8 V を 1 Ω で短絡**していた。
->
-> **開ける場所**: `J702`（`V_IN`）は Phoenix のネジ端子台なので、はんだ不要で確実に直列に
-> できる（ただし取れるのは基板全体の総電流）。`U705` の枝単独は**モジュールの OUT+ を
-> 1本浮かせる**しかない。繋いでから電源 ON の順で、`mA` 端子のヒューズ定格（期待 130〜170 mA）
-> と突入電流に注意。
-
-| | 何が決まるか |
-|---|---|
-| ~~**D-g**~~ | **2026-09-04 に定格から確定 → PPTC 0.15 A**（上の節）。場所は走行線の上へ迂回、`F1603` を `(265.43, 34.29)` r90 |
-| **リニア化の可否** | `MBC2596` → 三端子。散逸 = (Vin−6)×I。**スイッチングが消える＝スパーの容疑者が消える** |
-| **軽負荷スキップ説の裏取り** | 出力に数百Ωを足してスキップから抜けさせ、スパーが動くか見る |
-
-見積もりの内訳（**裏が取れていない**）:
-
-| | 概算 |
-|---|---:|
-| `ADC1804_F`（5V＋3.3V） | 40〜60 mA |
-| `ASFL1-12.288MHz` 発振器（3.3V） | 20〜30 mA |
-| `TPS3307-33` 監視IC | 数十 µA |
-| **合計** | **60〜90 mA** |
-
-**発振器が意外と食う**のがポイント。
-
-#### ~~⚠ 疑い（未検証）~~ →【決着】`U1604` の軽負荷スキップは**否定**（2026-09-07 実測）
-
-**実測して否定された。** バックの出力に 330 Ω を並列に架けて **+20 mA** を足し、スパーの周波数が
-動くかを A-B-A で見た（`../Audio/MeasurementADC_BRINGUP.md`「【再実測】2026-09-07」が正）。
-
-**負荷が 60〜90 mA でバースト周波数が負荷に比例するなら +22〜33 % 動くはずが、効果は 0.3 % 未満で
-セッションのドリフト（同条件の2群間で 3.77 Hz）に埋没した。** 逆算すると「元の負荷が 6 A 以上」と
-いう非現実的な値になるので、**比例モデルの方が成り立っていない。**
-
-**⚠ 副作用として負荷電流の値は得られていない。** この手は「バースト周波数が負荷に比例する」ことを
-前提に逆算する方式だったので、前提が崩れると数値も出ない。**ただしこの数値を待っている判断は
-もう無い**（上の「【閉じた】測る必要が無くなった」）。必要になったら電流計を直列に入れる ——
-`U705` の `OUT−` の足を1本外す。**並列に当てるのは短絡。**
-
-以下は仮説を立てた時点の記録。**「なぜ疑ったか」の筋は残す価値があるので置いておく。**
-
-##### なぜ疑うか
-
-`U1604`（`MBC2596-01`）は **LM2596 系の完成モジュール**で、**軽負荷でパルススキップに入る**系統。
-スキップの繰り返し周期は**負荷と温度で動く**。
-
-観測されている自走スプリアスは
-[`../Audio/MeasurementADC_BRINGUP.md`](../Audio/MeasurementADC_BRINGUP.md) のとおり
-**1174.8 → 1205.7 → 1212.4 → 1262.7 Hz とセッションをまたいで動く**。この「非同期・自走・
-ゆっくりドリフト」はスキップ動作の特徴とよく合う。
-
-**そして経路が最短。**
-
-| | |
-|---|---|
-| `U1604` の負荷 | `U1603`(LT1763-3.3) と `U1606`(LT1763-5) の2本だけ。**その先も数十 mA と軽い** |
-| `U1604` の GND | **非絶縁バックなので `IN-`(`PD_GND`) と `OUT-`(`ADC_GND`) が内部で同一ノード** |
-| 効き方 | スキップのリップルが**アナログのグランド基準（`ADC_GND`→`NT1601`→`A_GND`）に直接乗る**。
-電源経由なら PSRR で救われるが、**グランドが動くとそのまま信号になる** |
-
-**⚠ 2026-09-07 に A1 の抜線結果が再現しなかった**（床の悪化も、スパーの 35 dB 増も出ない。
-`../Audio/MeasurementADC_BRINGUP.md`「【再実測】2026-09-07」）。**却下そのものは維持される。
-理由が入れ替わるだけ** —— A1 は「抜くと 23 dB 悪化するから逆効果」、2026-09-07 は「抜いても
-スパーが変わらない＝USB は無関係だから効かない」。**後者の方が強い理由。**
-揺らいだのは A1 の読み方（「USB がグランドの基準を与えている」）の方で、床の悪化は 23 dB ではなく
-**2.9 dB** だった。これは**PC のグランドに依存していない**という良い知らせでもある。
-
-A1 で「USB を抜いても消えない（むしろ悪化する）」と分かったので、残る候補は
-**PD 充電器**か**この基板の電源**。PD 充電器のノイズは `REC10K` の絶縁を通らないと来ないが、
-**`U1604` は `ADC_GND` そのものを作っている。**
-
-##### 切り分け方（部品を買わずにできる）
-
-**`U1604` の出力に負荷を足して、スキップから抜けさせる。** 数百 Ω を `Net-(U1603-IN)` に
-ぶら下げれば連続導通モードに入る。それでスパーが**動く／消える**なら当たり。
-
-##### 素性の分かる資料が無い
-
-| | |
-|---|---|
-| 入手 | 秋月 131750、¥1,900 ×2 |
-| FP | **実測で起こした**（`Library:MBC2596-01_TAEJIN_43x21mm`、角から3.5mm・穴≈φ1.3） |
-| データシート | **記録に無い** |
-
-**だから定格も実測で決めるしかない。** 既存3つ（`U1607`/`U403`/`U202`）は負荷が記録されているが、
-`U1604` は**モジュール自身の消費も分からない**ので、データシートから積めない。
-
-##### 【調べた】`U1604` を三端子で置き換える場合 — `+9V` 共有の可否（2026-09-04）
-
-`U1604` を**リニアに替えればスイッチングそのものが消える**（上の疑いが当たっていれば直る）。
-そのとき既存の `+9V`（`VCC_TONE`、`U202` = `L7809CV`）を分けてもらう案が出たので、
-**過去に分けた理由があるかを調べた。**
-
-**結論: 意図して分けた記録は無い。**
-
-| | |
-|---|---|
-| `+9V` の存在理由 | **`PT2314` の VDD が typ 9 V（6–10 V）で ±15 V 直結不可**、それだけ（[CIRCUIT_DESIGN.md](CIRCUIT_DESIGN.md) §4） |
-| ADC 電源を分けた理由 | **記録に無い。** v1 の `MeasurementADC` は**独立したモジュール**で自前の入力（`PD_12V`）から `MBC2596`→`LT1763`×2 を作っていた。**別基板だったから結果的に分かれていた**だけで、同じ設計文脈に無かった |
-
-##### 数字（共有した場合）
-
-| | いま | 共有後 |
-|---|---|---|
-| `L7809CV` の散逸 | **0.18 W**（`PT2314` の Is typ 30 mA、+15V 入力） | **約 0.6 W**（＋ADC 側の見積もり 70 mA） |
-| 放熱 | TO-220 で余裕 | **TO-220 で余裕**（放熱器なしでも足りる） |
-| `U202` 手前の PPTC（D-f） | 0.1 A（**2026-09-06 実装済み**） | **0.2〜0.25 A へ上げ直しが要る**（Value 1行の変更で済む） |
-
-中間レールとして `+9V` は使える（`LT1763-5` のドロップアウトは 100 mA で約 0.3 V なので
-5.3 V 以上あればよい）。**LDO への入力が既にリニアになるので PSRR はむしろ効きやすい。**
-
-##### ただし「共有してよい」は新しく判断が要る
-
-過去の決定を引き継げないので、次を自分で確かめること。
-
-- **`PT2314` は I²C で叩かれる制御 IC。** ロジックのスパイクが `+9V` に乗る可能性。
-  ただし `LT1763` の PSRR（1 kHz で 60 dB 級）が挟まる
-- **故障の影響範囲が広がる。** `L7809CV` が飛ぶと `PT2314` と ADC が同時に落ちる（いまは独立）
-- **突入。** `LT1763` の出力バルクぶんが `+9V` に乗る
-
-##### 絶縁コンバータで置き換える案について
-
-**絶縁コンバータもスイッチングなので、スパーの可能性そのものは残る**（素性の分かる
-モジュールに替える価値はある）。**スイッチングを消したいならリニア一択。**
-
-そして **どちらも単独では絶縁を戻せない。** `A1601`(ADC_GND) → `A1602`(D_GND) の
-**I2S 4本が境界をまたぐので、信号の帰路がドメインを結ぶ**（A6 の節）。
-絶縁を本物にするなら `ISO7741`（¥448）が要る。
-
-**素直なのは逆方向かもしれない —— 全部を二次側に寄せ、一次側を「PD 入力と `REC10K` の一次だけ」にする。**
-そうすれば境界をまたぐ信号が無くなり `ISO7741` も要らない。USB は二次側に繋がるが、
-**A1 で「基準が要る」と分かった**のでそれはむしろ望ましい。
-（`U1607` は 0.25–0.3 A でリニアには替えられないので、スイッチングのまま二次側へ移す形になる。）
-
-##### 全部の前提になっている欠けた数字
-
-**`U1604` の負荷電流が記録に無い。** これ1つで3つ止まっている。
-
-- 三端子にした場合の**損失と放熱**
-- D-g の**ヒューズ定格**
-- 「スキップ域にいるか」の**裏取り**
-
-**装置は組んであるので `U1604` の入力電流はテスタで測れる。**
-
-##### B5 で消えるかもしれない
-
-「絶縁を本物にする」を選ぶなら、**`U1604` の入力を二次側へ移す**ことになる
-（[A6 の節](#確定a6--nettie-は足さない同居は結合ではない2026-09-03)で見つけた、
-`REC10K` の絶縁をここがバイパスしている件）。**素子ごと動くので、ヒューズの位置も作り直しになる。**
-
-### ロータリエンコーダー（×3）
-
-| 項目 | 内容 |
-|---|---|
-| 品種 | 秋月 **EC11 系・押し SW 付き**（固定足東西、A/B/SW 南北、垂直 D カット）。正確な販売コードは在庫次第 |
-| 本数 | **ENC_CH / ENC_BASS / ENC_TREBLE**（HP / LINE / DEST は手回し） |
-| 資料 | 機械図のみ（販売ページ）。[datasheets/RotaryEncoder_EC11_generic.md](datasheets/RotaryEncoder_EC11_generic.md) |
-
----
-
-## 9. 12V LED・HP 固定パッド — **確定**
-
-### 9.1 パネル 12V LED
-
-| 項目 | 決定 |
-|---|---|
-| PD | **モジュール外付け**（§6・§8）。板上に USB-C / CH224K は載せない。12 V 設定はモジュール側 |
-| 配線 | PD モジュール出力 → 受け端子 → **`PD_12V`** → **操作パネル PWR SW** → 戻り **`PD_12V_SW`** → 板上のヒューズ → DC-DC |
-| LED | SW 後段で **12 V パネル LED** → `PD_GND`（SW と LED を並列分岐しても可） |
-| GND | **`PD_GND`**（PD モジュールの − = DC-DC の `−Vin`）。**`A_GND` とは直結しない** — 絶縁 DC-DC（1.6 kVDC）の一次／二次で、混ぜると A1 で問題になったループを自分で作る。`PD_GND` は PD 入口で `D_GND` と NetTie 一点、`A_GND` は ADC 近傍で `ADC_GND` と NetTie 一点。**足す NetTie は無い**（A6 / D28） |
-| LED 部品 | **12 V 内蔵抵抗付き 5 mm**（≈10–15 mA）。素 LED なら **680 Ω–1 kΩ** |
-| SW | **C&K 7101SYZQE**（5 A SPDT を SPST として使用）。**ON** = 一次＋LED。**OFF** = ±12 V 負荷切（USB 挿入時 CH224 は生きうる） |
-
-CH224 の **PG** 端子は「PD ネゴシエーション成功」用。**電源 ON 表示は PWR SW 後の 12 V LED** と役割分担（PG を別 LED にしてもよいが必須ではない）。
-
-PD アダプタが 12 V を出せない場合はジャンパ **15 V** に変更（LED は内蔵 R 品なら僅かに明るくなる。定電流 LED なら問題小）。
-
-**DC-DC 側は入力電圧の制約にならない。** `REC10K-2415DAW/H2` は **9–36 V 入力**で、
-PD モジュールが出せるどのプロファイルでも成立する（公称 24 V に近いほど入力電流は減り、
-効率も少し良い）。つまり**入力電圧を決めているのは DC-DC ではなく、下の2つ**:
-
-| 実際の制約 | 内容 |
-|---|---|
-| **パネル LED** | 選定してあるのが **12 V 内蔵抵抗付き**（§2.3）。内蔵 R は 12 V で設計されているので 15 V では電流が **約 1.3 倍**（Vf≈2 V として）。**上の行のとおり「僅かに明るくなる」程度**で致命的ではないが、厳密にやるなら別品番か外部抵抗。**ここが 12 V を選んでいる主因** |
-| **ネット名** | `PD_12V` / `PD_12V_SW` が電圧を名前に含んでいる。変えるなら回路図のラベルごと改名（designator と違いネット名は設計者が決めた名前なので、腐らせないために変えるなら変える） |
-
-**供給元は UGREEN 卓上急速充電器 200 W Type-C 6C2A 8ポート PPS**（手持ちの実機）。
-⚠ **多ポート充電器は総出力を分配する**ので、他ポートに何を挿すかでネゴシエート結果が
-変わりうる。**12 V 固定プロファイルが出るかは実機で確認する**（多ポート品には 12 V を
-持たない機種がある）。出なければ上のジャンパを上げる — DC-DC は困らないので、
-動くのは上の表の2点と、一次電流（12 V で 0.96 A → 15 V で 0.77 A）に伴う
-ヒューズ定格の検討だけ。
-
-### 9.2 HP 固定 −20 dB パッド（未決 #2）
-
-現行 Audio（`Audio/README.md`）: **8.2 kΩ 直列 + 910 Ω 並列 ≈ −20 dB**。目的は **A50k ポットが回転下端しか使えない**問題（±15 V・Amp ≈9.2 Vrms 時）。
-
-AudioV2 は **手回しポット + ±12 V**（Amp ≈6.5–7 Vrms）。旧 ±15 V より最大が ≈2–3 dB 低いので、**固定 −20 dB は過剰**。
-
-| 条件 | ±15 V（Audio） | ±12 V（AudioV2） |
-|---|---|---|
-| Amp 最大（目安） | ≈9.2 Vrms | **≈6.5–7 Vrms** |
-| −20 dB パッド後の最大 | ≈0.92 Vrms | **≈0.65–0.70 Vrms** |
-| 32 Ω 時の最大出力 | ≈26 mW | **≈15 mW** |
-
-| 項目 | 決定 |
-|---|---|
-| 固定パッド | **廃止（0 Ω バイパス）** |
-| 信号経路 | `Amp → SW_DEST → RV_HP → HeadphoneBuffer → PHONE`（`Audio/` バッファ流用） |
-| 実機で下端しか使えない場合 | Audio 互換の **8.2 kΩ + 910 Ω パッド位置を DNP 実装**し、必要なら **−10 dB（1.8 kΩ + 910 Ω）** を後付け |
-
-LINE 経路に固定パッドはもともと無し（`SW_DEST → RV_LINE → LINE OUT`）。
-
-**音量は OLED に出さない。** 物理ノブ（RV_HP / RV_LINE）を前面の主操作子として目立たせる。
-
----
-
-## 10. ENC×3 配線 — **確定: GPIO 直結**
-
-### 採用案
-
-| 案 | 内容 | 結果 |
-|---|---|---|
-| **E-GPIO** | A / B / SW を **Pico GP へ直結**（内部プルアップ） | **採用** |
-| E-I²C | MCP23017 等で A/B/SW を集約 | **見送り** |
-| E-PIO | 配線は直結、**デコードのみ PIO** | 配線は E-GPIO と同じ。ファーム実装時のオプション |
-
-### E-I²C を見送る理由
-
-| 問題 | 内容 |
-|---|---|
-| A/B の速度 | クアドラチャは **ms 以下の遷移**。MCP23017 経由だと I²C 読出し（数十〜数百 µs）＋ **OLED 描画（≈25 ms 占有）** とぶつかり、**パルス取りこぼし**しやすい |
-| リレー用 MCP23017 との混同 | 盤上の MCP23017 は **コイル駆動出力**。ENC を載せると **操作パネル ↔ リレー盤**に高頻度 I²C が増え、配線も複雑 |
-| ピン数 | ENC×3 + DEST ADC/LED でも **余裕あり**（下表）。SW を I²C に逃がす必然がない |
-| 実績 | 現行 `Control/main.py` は **GP22/26/27 直結ポーリング**で CH 選択が動いている |
-
-**A/B は GPIO 直結が必須。**
-
-### ピン割当（操作 Pico 2）— 2026-08-30 更新
-
-| GPIO | 信号 | 備考 |
-|---|---|---|
-| GP20 / GP21 | I²C0 SDA / SCL | OLED（0x3C/0x3D）、**リレー盤 MCP23017**、PT2314 |
-| GP0 / GP1 | **ENC_CH** A / B | |
-| GP2 | **ENC_CH** SW | |
-| GP3 / GP4 | **ENC_BASS** A / B | |
-| GP5 | **ENC_BASS** SW | |
-| GP6 / GP7 | **ENC_TREBLE** A / B | |
-| GP8 | **ENC_TREBLE** SW | |
-| **GP26** | **DEST_ADC**（ADC0） | 抵抗ラダー → LINE / MUTE / PHONE 判定 |
-| **GP14** | **LED_LINE** | DEST = LINE で点灯 |
-| **GP15** | **LED_PHONE** | DEST = PHONE で点灯 |
-| GP9–GP13, GP16–GP19, GP22, GP27, GP28 | **予備** | PWR SW 状態 / PG / 将来拡張 |
-
-**ENC×3 = 9 本 + I²C 2 + DEST ADC 1 + LED 2 ≈ 14 / 26 本。** SPI（旧 PGA）は不要。空きが多い。
-
-### DEST 検知（A 案）— **確定: 10k / 10k / 1k**
-
-詳細・シミュレーション: [DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md) / `scripts/dest_ladder_sim.py`
-
-```text
-3V3 ── Rh(10k) ──●── Rl(10k) ── GND
-                 │
-                ADC GP26
-                 │
-                 ├── Rs(1k) ── SW_LINE  ── 3V3
-                 └── Rs(1k) ── SW_PHONE ── GND
-```
-
-| 位置 | 公称 ADC | LED | OLED |
-|---|---|---|---|
-| LINE | **3.03 V** | LINE ON | `DEST: LINE` |
-| MUTE | **1.65 V** | 両方 OFF | `DEST: MUTE` |
-| PHONE | **0.28 V** | PHONE ON | `DEST: PHONE` |
-
-しきい値（±5% 抵抗でも間隔 ≈1.3 V）: `>2.37 V`→LINE / `<0.93 V`→PHONE / 他→MUTE。
-
-音声接点とは **別極**（3PDT の 3 極目）。
-
-### 基板・ケーブル
-
-| 項目 | 内容 |
-|---|---|
-| ENC | 操作パネルに **×3**。Pico へ **2.54 mm ヘッダ** |
-| 各 ENC | **1= A, 2= B, 3= SW, 4= 3V3, 5= GND**（現行 J13 と同型） |
-| SW_DEST | パネル実装。基板は **2×4 ヘッダ**（音声）+ **検知用 1〜2P**（`Audio/README.md` SW101 表を流用） |
-| RV_HP / RV_LINE | パネル実装のデュアルポット。基板は音声ピンのみ（**ADC 接続なし**） |
-| プルアップ | Pico **内部プルアップ ON**（ENC） |
-| ファーム | ENC は **ポーリング**（現行拡張）。DEST は **ADC ポーリング ≈50 ms** |
-
-### I²C0 バス上のデバイス（参考）
-
-| デバイス | 所在 | 役割 |
-|---|---|---|
-| SSD1306 | 操作パネル | 制御 OLED |
-| MCP23017 | **リレー盤** | ラッチングコイルビット → ULN（**CH のみ**） |
-| PT2314 | 操作／トーン基板 | Bass / Treble |
-
-ENC・DEST・音量は **I²C バスに載せない**。
-
----
-
-## 1. 基板の切り方（いちばん大きい判断）
-
-### A. Controll 型一体（Pico + リレー + 端子台 + UI ヘッダ）
-
-いまの `Controll.kicad_sch` に近い。digipot も同じシート／基板に足す。
-
-| メリット | デメリット |
-|---|---|
-| 配線・コネクタが最少 | 1 枚が混在信号になりやすい（`CTRL_GND` と `A_GND`） |
-| 既存回路・ファームをほぼ流用 | 改版のたびにリレー基板も触る |
-| I²C digipot なら GPIO 不足にならない（バス相乗り） | アナログ音量が乗るとレイアウトが窮屈 |
-
-### B. リレー＋端子台だけの基板 ／ Pico・ENC・OLED・digipot は別基板（有力）
-
-リレー盤は「コイル駆動 + 接点の端子台」に徹する。知能は操作基板へ。
-
-| メリット | デメリット |
-|---|---|
-| リレー盤が単純・改版しやすい（接点配線の箱物向き） | 基板間ケーブルが増える（コイル用 GPIO 束、またはバス化が必要） |
-| デジタル電流とラッチング・サージをアナログ音量から遠ざけやすい | 「誰がコイルを叩くか」を決める必要がある（下記 1-付記） |
-| リレーだけ先に起こして箱配線を進められる | コネクタピンアサインの設計コスト |
-
-**1-付記: 切替信号を外から渡すときの受け側（いまここ）**
-
-ケーブルを細くするには、リレー盤上で「コマンド → 各コイルの短パルス」に展開する必要がある。ULN の手前に置くのは次のどちらか。
-
-| 副案 | 内容 | メリット | デメリット |
-|---|---|---|---|
-| **B2-exp**（I²C GPIO 拡張） | MCP23017 等 + ULN。マスターがビットを書いてパルス相当を出す | ファームがマスター側に集約。部品が安い。ブートローダ不要 | パルス幅・排他（他 CH を落とす順）をマスターが面倒を見る。I²C トラブル時のフェイルセーフを決めにくい |
-| **B2-mcu**（子 MCU） | 盤上の安い MCU（Pico 小／既存子 Pico 発想）+ ULN。マスターは「CH n」等を I²C で投げる | パルス・排他・起動時デフォルトを盤側で完結。現行 `Control/slave.py` の延長 | ファームが 2 つ。電源・リセット・アドレス管理が増える |
-| ~~B1~~ | GPIO 20 本直結 | — | 束が太いので見送り寄り |
-| ~~デコーダ IC のみ~~ | 74HC138 等で番地デコード | 線は減る | ラッチングのワンショット／誤パルス対策が基板論理になり、拡張より得しにくい |
-
-### C. 3 枚構成（リレー盤 / 操作+Pico / 音量 digipot）
-
-| メリット | デメリット |
-|---|---|
-| `A_GND` 境界を基板単位で切りやすい | コネクタと筐体設計が重い |
-| 音量段だけ後から差し替え可能 | 過剰分割になりやすい（この規模だと B で足りることが多い） |
-
-**確定:** 基板は **B**。受け側は **B2-exp（I²C GPIO 拡張）**。  
-理由: ラッチング 20 台級も親 Pico 1 台 + 拡張 IC で足りる。盤側に子 MCU を置く必然がない。パルス幅・排他・起動時 Reset は親ファームの規約にする。
-
----
-
-## 2. 音量をどこに置くか — **確定: Amp 後・手回しポット**
-
-Amp は ×10・**±12 V** 系（旧 Audio は ±15 V）。
-
-### A. Amp **前**（入力減衰）
-
-| メリット | デメリット |
-|---|---|
-| 小信号で足りる | 全系統の Amp 入力前なので、リレー切替の **前か後か**で意味が変わる |
-| 部品が安い | 測定タップ（Amp 後）のレベルは音量と連動しない／するを要設計 |
-| | 「聴感音量」と「Amp 出力フルスケール」がずれる |
-
-### B. Amp **後**・現行 `RV601`/`RV602` 位置（出力減衰）
-
-| メリット | デメリット |
-|---|---|
-| いまの聴感・HP バッファの関係をほぼ維持 | 信号振幅が大きい（ただし **パッシブなら電源制約なし**） |
-| PHONE / LINE の意味が現行どおり | |
-
-### C. PHONE と LINE で別減衰
-
-| メリット | デメリット |
-|---|---|
-| 用途ごとに最適レベル | 部品・前面ノブが 2 系統 |
-| 現行デュアル 2 個の役割分担を維持 | |
-
-**確定: B + C + 手回し。** Amp 後で、LINE と HP は **別デュアルポット**。ヘッドホンは現行どおり **「HeadphoneBuffer に入れる量を絞る」**（バッファ後にポットを置かない）。固定 −20 dB パッドは **廃止**（§9）。
-
-信号のイメージ:
-
-```text
-[選ばれた Amp 出力]
-        ├─（測定タップ：音量非連動のまま可）
-        └─ SW_DEST（LINE / MUTE / PHONE）
-                ├─ RV_HP ──► HeadphoneBuffer → PHONE
-                └─ RV_LINE ──────────────────► LINE OUT
-
-同じ Pico が:
-  ・DEST 位置（ADC）→ OLED + LED
-  ・CH 選択 + その系統の電源リレー（GPIO拡張経由）
-  ・Bass / Treble（PT2314）
-  ・音量は触らない（物理ノブのみ）
-```
-
----
-
-## 3. 音量方式 — **確定: 手回しデュアルポット（PGA / digipot 見送り）**
-
-**2026-08-30:** 最終出力ボリューム段は **手動運用**でよい、と判断。遠隔操作が要らないなら **PGA2310 / digipot は信号経路に入れる理由がない**。
-
-### 確定内容
-
-| 項目 | 内容 |
-|---|---|
-| 方式 | **デュアルポット ×2**（HP / LINE）。**A カーブ（ログ）50 kΩ** 想定（旧 Audio `A50k_Dual` と同系） |
-| 配置 | Amp 出力後・`SW_DEST` 後。HP は HeadphoneBuffer **前** |
-| OLED | **音量は表示しない**（物理ノブを目立たせる） |
-| DEST | **トグル ON-OFF-ON** + 抵抗ラダー ADC + LED×2 + OLED（§0・§10・[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)） |
-| 見送り | PGA2310PA、PGA2311、MCP45HV51、ENC_HP / ENC_LINE / ENC_DEST |
-
-### ポット選定（2026-08-30）
-
-| 項目 | 決定 |
-|---|---|
-| カーブ | **A（オーディオ / 対数）** — 聴感が対数なのでボリュームは A。B（リニア）はトーンやバランス向き |
-| 抵抗値 | **50 kΩ デュアル**（第一候補）。100 kΩ も可だが Amp 負荷は軽い一方、中点 Zout が約 25 kΩ と高くノイズ拾いやすい。10 kΩ は Amp にやや重い |
-| 入手性 | パネル用 **A50k / A100k デュアル**はどちらも流通多い。AudioV2 は旧機踏襲で **A50k** |
-| 品種 | **第一: Alps RK27112A00CF**（A50k Dual / RK27 27 mm）。代替は [PARTS.md](PARTS.md) |
-| 固定パッド | **0 Ω**（§9）。回転下端しか使えない実機なら −10 dB DNP |
-
-### なぜ IC をやめたか
-
-| 論点 | 内容 |
-|---|---|
-| コスト | PGA2310PA ×2 は IC だけで数万円級。手動ならポット代のみ |
-| 電源 | パッシブ分圧は **±12 V / 7 Vrms でも問題なし**（±5 V 問題が消える） |
-| SNR | 「後段で絞ると有利」は IC でもポットでも同じ |
-| UI | エンコーダ音量は OLED 連動が前提。**ノブを主操作子にする**ならデジタル不要 |
-
-過去の B vs C（digipot vs PGA）比較は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md) に残す（**採用決定ではなく調査アーカイブ**）。
-
-### トーン（確定）: T1 PT2314 系
-
-**品種は `PT2314E`（SOP-28 300 mil）に確定（2026-09-07）。**
-
-| | |
-|---|---|
-| 配置 | **CH 選択後・Amp 前**（小信号） |
-| 操作 | ENC_BASS / ENC_TREBLE → I²C。制御 OLED に dB |
-| レンジ | おおよそ ±14 dB、2 dB 段 |
-| 注意 | TDA7313 系の **1 バイトコマンド** I²C。音量機能は 0 dB 固定で Bass/Treble のみ使う |
-
-無印 `PT2314` から `PT2314E` へ替えた理由と、替えても効かないこと:
-
-| | |
-|---|---|
-| 替えた理由 | **無印は買えない。** DigiKey はフォーラムでモデレータ自身が調達困難と回答し TDA7440 を代替に挙げている。LCSC / JLCPCB にあるのは E のみ（LCSC `C90034`、JLCPCB では Extended part） |
-| ピン | **28本すべて番号・名前とも無印と同一。** I²C の 26/27 が `DATA`/`CLK` → `SDA`/`SCL` に改名されただけ。DS も "Improved and replace PT2314 and PT2314A" と明記 |
-| 外付け網 | **無印と同一**。上の §7-4 で組み直したものがそのまま使える |
-| パッケージ | **DIP が無い。SOP-28 300 mil のみ**。ソケットに挿す前提は消えた（下の「DIP-28 ソケット」も参照） |
-| 電源 | VDD 4–10 V。`VCC_TONE`（+9 V）はそのまま範囲内 |
-
-**⚠ 使わない機能は使わないまま。** 4入力セレクタ・音量・バランスは `LOUT`/`ROUT` ごと未接続で
-孤立させてある（12ピンに `no_connect`）。**切替は TMUX7612 とリレーの比較そのものが実験の対象**なので、
-ここにセレクタを足すと信号経路が2本になって比較が壊れる。音量は後段のアナログポット。
-
-```text
-CH 選択 ──► [PT2314 Bass/Treble] ──► Amp ──► SW_DEST ──► RV_HP / RV_LINE ──► 出力
-```
-
-##### 【確定】`DGND`(25) はチップの足元で `A_GND` へ。I²C は境界にバッファを置く（2026-09-07）
-
-**いまは `pin2 AGND → A_GND` / `pin25 DGND → D_GND` に分かれている。** 電源は `L7809`
-（GND = `A_GND`）から来るので、DGND ぶんの帰路は回路図上これしかない:
-
-```
-U402.25 → D_GND → NT1602 → PD_GND → U1604内部 → ADC_GND → NT1601 → A_GND → U202.2
-```
-
-**母板と計測基板は別基板**（§11 の分割。横に並べて ±15V・測定タップ・I²C で繋ぐ）なので、
-この経路は**基板間ケーブルを跨ぐ**。ダイ内部で AGND–DGND が繋がっていれば、
-そこが2本目の橋になり **2枚の基板とケーブルを囲む閉路**ができる。
-
-**どちらに転んでも同じ対策になるので、ダイの状態を確かめずに決めてよい:**
-
-| ダイ | 対策を入れると |
-|---|---|
-| 繋がっている | **閉路が消える。入れないと困る** |
-| 繋がっていない | 閉路は元から無いが、DGND の帰路が3ホップ・2基板跨ぎ → **チップ直下に短縮**。入れても困らない |
-
-対策は2つで1組。片方だけでは成立しない:
-
-1. **`pin25 DGND` を `pin2 AGND` と同じく `A_GND` へ**（チップの足元で1点）
-2. **I²C の境界にバッファを置き、PT2314 側は 9 V プルアップ**にする
-
-**なぜ 2 が要るか** —— 1 だけだと I²C のしきい値の基準が Pico（`D_GND`）と別になり、
-基板間のオフセットが **VIH 余裕 0.3 V** を食う。バッファを挟むと、しきい値が
-「絶対値 3.0 V」から「I²C の常識的なしきい値」に置き換わって余裕が桁で増える。
-**DS 本文の「プルアップは正電源へ」がまさにこの形。**
-
-**⚠ バッファはグランドを分離しない。** `P82B96` 級は 8 ピンで GND は1本
-（pin4）。効くのは**しきい値の置き換え**であって絶縁ではない。
-グランドを本当に切るなら絶縁 I²C（`ADuM1250` 級）が要るが、`D_GND` は娘基板
-スロットのためどのみち母板へ引くので、1+2 のほうが素直。
-
-**バッファは閉路と独立に元が取れる。** VIH 余裕 0.3 V は
-ダイの状態に関係なく実在する（DS p.12）。
-
-**根拠と確度:**
-
-| | 確度 |
-|---|---|
-| VIH min 3.0 V / 余裕 0.3 V | **一次資料**（[`datasheets/Princeton_PT2314E.pdf`](datasheets/Princeton_PT2314E.pdf) p.12） |
-| `DGND` は I²C デコーダにしか繋がらない（＝流れる電流は小さい） | **一次資料**（同 p.2 BLOCK DIAGRAM。`AGND` は VDD/REF 分圧器と `BIAS` の帰り先） |
-| 閉路が2枚の基板を囲む | **回路図から確定**（上記の経路と §11 の分割） |
-| ダイ内部で AGND–DGND が繋がっている | **推論。**「別電源で絶縁したら発熱して壊れた」という報告が diyAudio と Arduino フォーラムに複数あり、機序として筋が通る（絶縁すると帰路がボンディングワイヤしか無くなる）。**Princeton の DS はダイ内部について何も書いていない** |
-
-**確かめるなら**（急がない。後追いの確認）: 未通電の実物で `pin2`–`pin25` の抵抗を測る。
-
-**⚠ この設計は焼損の条件には当たらない。** フォーラムの事例は AGND–DGND を
-**完全に絶縁**した場合。こちらは3ホップだが繋がっており、しかもアナログ電流は
-`pin2 → A_GND` へ直接帰るので、ダイに電流が集中しない。
-
-**B5 への影響:** バッファの置き場（母板側）と 9 V プルアップの配置が要る。
-
-##### 実装（2026-09-08）— バッファは **`BSS138` ×2 の双方向レベルシフタ**。`P82B96` は数字が合わない
-
-1 と 2 を同時に入れた（`legacy/ControlPanelAnalog.kicad_sch` → 母板へ再生成）:
-
-| | |
-|---|---|
-| 1. `DGND` | `U402.25` のピン先ラベルを `D_GND` → **`A_GND`**。`ControlPanelAnalog` の `D_GND` 利用者はこれで 0 |
-| 2. I²C | `Q401`/`Q402` `BSS138`（S=Pico 側 `I2C_SDA`/`I2C_SCL` 3V3 バス、D=PT 側 **`I2C_SDA_9V`/`I2C_SCL_9V`**、G=`3V3`）。PT 側プルアップ `R412`/`R413` 10k → `VCC_TONE`（9 V）。Pico 側プルアップは既存 `R1653`/`R1654` 4.7k のまま |
-
-**「P82B96 級」と書いていたが、`P82B96` 自身は採らなかった。** TI の DS（P82B96、Electrical Characteristics の VCC 3〜3.6 V 表）で
-Sx/Sy 側の VOL は **0.8 typ / 1.0 max V @ 3 mA、0.67 / 0.79 V @ 0.2 mA**、Sx 側の入力しきい値は 0.6〜0.7 V（VCC 非依存）。
-Rx 側のしきい値は 0.42 / 0.58 × VCC、Tx は普通のオープンドレイン。つまり **Sx/Sy 側にぶら下がる石は 0.8〜1.0 V の「低」を読まされる**:
-
-| Sx 側に置く石 | その VIL max | 余裕 |
-|---|---|---|
-| `PT2314E`（VDD 9 V） | 1.0 V（DS p.12） | **0〜0.2 V**（プルアップ電流で変わる） |
-| `RP2350`（IOVDD 3.3 V） | 0.8 V（DS） | **負** |
-
-どちらの向きに置いても片側が紙の上で割れる。`P82B96` の Sx 側は I²C 規格の VIL = 0.3 VDD（≥ 0.99 V @ 3.3 V）を
-前提にしていて、RP2350 の 0.8 V も PT2314E の 1.0 V もそれより厳しい。
-
-MOSFET シフタは低レベルが**駆動側の VOL ＋ FET の飲み込み**で決まる:
-
-| 方向 | 受け側が見る低 | 余裕 |
-|---|---|---|
-| Pico → PT（コマンド） | Pico VOL **typ 0.2 V / max 0.5 V**（[`RaspberryPi_RP2350.pdf`](datasheets/RaspberryPi_RP2350.pdf) GPIO 表、IOVDD 3.3 V、IOL は駆動設定値。実際の吸い込みは約 1.6 mA で最小設定 2 mA 未満）＋ Rds·I（数十 mV）＋ `D_GND`−`A_GND` の差 | PT2314E VIL 1.0 V まで **typ 0.75 V / max 0.45 V** |
-| PT → Pico（ACK） | `Vack` 0.4 V（DS、Rpu 3 kΩ 条件。10k ならもっと低い）＋ 数十 mV | RP2350 VIL 0.8 V まで **≈ 0.3 V** |
-
-PT 側の高は 9 V プルアップなので **VIH 3.0 V に対し 6 V** の余裕（ここが元々の目的）。**⚠ これで I²C が Fast（400 kbit/s）になるとは言えない。** DS p.7 の DATA RATE 表は「MCU レベル × VDD」で、9 V の行は無く、注記が「design guarantee only, not fully tested」。3.3 V × 9 V ＝ Standard のまま、が保守的な読み。表の内側で Fast が付くのは 5 V × 9 V（PT 側を 5 V にする案）か 3.3 V × VDD 7 V（VDD を下げる案）だけ。`BSS138` は Vgs(th) max 1.5 V・VDS 50 V で、
-ゲート 3.3 V・ソース 0.4 V でも Vgs 2.9 V で導通する。10k × 約 30 pF で立ち上がり 0.3 µs（Standard mode の 1 µs 内。
-この設計は 100 kbit/s 止まり）。
-
-**戻すなら**（`P82B96` に）: Pico を Tx/Rx 側（VCC=`3V3`）、PT を Sx/Sy 側 9 V プルアップにして、プルアップを 47k 級にし
-Sx の VOL を 0.79 V max に抑える必要がある。**記録の「P82B96 級」から外れたのはエージェントの判断なので、ユーザーに提示した。**
-
-**→ 2026-09-08 に `BSS138` で確定（ユーザー・Claude・Cursor の3者合意）。** B に戻す動機は論理余裕ではなく FET の D–S 短絡で 9 V が 3.3 V バスへ出る故障経路だけ。PCA9306 / TXS0102 は高圧側 5.5 V までで 9 V には使えず、しかも中身は同じ通過型（TXS0102 DS: N-channel pass-gate）なので直結経路は残る。3.3 V 側の 3.6 V ツェナーは B5 前の必須ではなく入れない。故障電圧まで下げたいなら次に見るのは「PT 側 5 V × 専用 IC（LDO 追加）」。
-
-**B5 で残るもの:** `Q401`/`Q402`/`R412`/`R413` は `U402` の足元。`3V3` を母板の PT2314 側まで引く（`3V3` は娘基板スロットで既に母板に来ている）。
-
-##### PT2314E の電気的特性（一次資料。2026-09-07 に完全版 DS を入手）
-
-**[`datasheets/Princeton_PT2314E.pdf`](datasheets/Princeton_PT2314E.pdf)（V1.0 / 2010-01 / 15ページ）。**
-無印の DS はピン配置とアプリケーション回路だけの3ページ抜粋で、**電気的特性が載っていない**。
-E の完全版で初めて数値の裏が取れた。以下は DS の記載値（回路図からは導けないので、ここに置く）。
-
-| 項目 | 値（条件） | 効き先 |
-|---|---|---|
-| `VIH` / `VIL` | **min 3 V** / max 1 V（VDD=9 V） | I²C を `3V3` でプルアップしている件。**余裕 0.3 V**（Pico の SMPS 精度 ±3 % なら最悪 3.2 V で 0.2 V） |
-| `IIN` | ±5 µA | 入力電流は無視できる。プルアップ抵抗での降下は効かない |
-| `Vack` | 0.4 V（**Rpull up=3 kΩ** 条件） | DS の想定が 3 kΩ 級。現状 4.7 kΩ なので ACK 側は余裕 |
-| **`RL` 最小** | **5 kΩ**（`OUT_L`/`OUT_R`、および `LOUT`/`ROUT` で Vo=2 Vrms） | 下の「入力ブロードキャスト」を参照。**従来の「10 kΩ が下限」という前提は E では緩む** |
-| `VOMAX` | 2.3〜2.6 Vrms（THD=1 %） | 既存の「クリップ 2〜2.5 Vrms」の裏が取れた |
-| `VOUT` の DC | **0.5 × VDD** | `REF` = 1/2 VDD と整合。VDD 9 V なら 4.5 V |
-| `THD` | typ 0.03 %（Vin=1 Vrms、全ゲイン 0 dB） | 約 −70 dB。**10ch 共通に乗るので A/B 比較は歪めないが、差の下限を決める** |
-| `SNR` | typ 100 dBV（A-weighted） | 同上 |
-| `Cs`（チャンネル分離） | typ 100 dB | |
-| `Ct`（I²C クロストーク） | typ 90 dB | I²C のデジタルが音声へ漏れる量 |
-| `PSRR` | typ 75 dB（**`CREF`=22 µF**、100 Hz） | `REF` の 22 µF はこの条件。§7-4 で外した 5.6 k はここにも効いていた可能性 |
-| Bass の帰還抵抗 | `RB` 34/44/58 kΩ | 外付け網（`BOUT`─100 n─●─5.6 k─GND）と組む内部値 |
-
-**⚠ `VIH` の余裕が薄いのは、3.3 V 駆動で 9 V 動作の石を叩いているため。** DS 本文の
-「プルアップは正電源（＝9 V）へ」をそのままやると Pico と `MCP23017` の 3.3 V ピンに
-9 V が乗るので採れない。**上の「`DGND` はチップの足元で `A_GND` へ」で決めたバッファが、
-ここも同時に解く。**
-
-##### ファーム実装時の制約（PT2314 制御を書くときに読む）
-
-**まだ実装されていない。** `Control/` に PT2314 への言及はゼロ（2026-09-07 時点）。
-書き始めるときに以下2つを踏むので、ここに置く。どちらも DS 由来で回路図からは導けない。
-
-**1. I²C の速度 —— いまの構成では 100 kbit/s まで**
-
-DS p.7 の DATA RATE 表（`x`=不可 / `S`=Standard 100k のみ / `F`=Fast 400k 可）:
-
-| MCU Level \ VDD | 4V | 5V | 6V | 7V | 8V | 9V | 10V |
-|---|---|---|---|---|---|---|---|
-| 2.5 V | F | F | x | x | x | x | x |
-| **3.3 V** | F | F | F | F | **S** | **S** | x |
-| 5 V | x | F | F | F | F | F | F |
-
-この設計は **3.3 V × VDD 9 V ＝ `S`**。`Control/protocol.py` の `I2C_FREQ = 400_000` は
-**保証外**になる。ただし 400 kHz は OLED のための設定（同ファイルのコメント:
-100 kHz だと SSD1306 の 1 KB フレーム書き込みがタイムアウトする）なので、
-**単純に落とすと OLED が壊れる。**
-
-選べる形:
-
-- **バッファ導入後は消える問題。** PT2314 側が 9 V 級になれば表の下段（`F`）に入る。
-  上の決定を実装すれば速度制約は無くなる
-- 実装がバッファより先になるなら、**PT2314 アクセス時だけ 100 kHz に切り替える**か
-  **バスを分ける**。⚠ **どちらも実機が無いと実証できない**ので、実機が来るまで
-  ファームは触らない（2026-09-07 判断）
-
-**2. 電源投入後 `Td ≈ 50 ms` は叩かない**
-
-DS p.7「I2C BUS INITIAL TIME」: 電源が入るたびに内部デコーダのリセットに時間が要り、
-**その間の I²C アクセスは禁止**。時間は `REF` ピンの容量（`CREF`）と `Td` で決まり、
-**推奨 Td は 50 ms**。この設計の `CREF` は 22 µF。起動シーケンスに待ちを入れること。
-
-<details>
-<summary>旧 §3（PGA2310 確定時の要約・参考）</summary>
-
-以前は **C: PGA2310PA ×2** を確定していた。B（MCP45HV51）はアドレス衝突・THD 無記載で見送り。手動化により本節は上記に置き換え。詳細は [VOLUME_IC_COMPARISON.md](VOLUME_IC_COMPARISON.md)。
-
-| 候補 | 理由 |
-|---|---|
-| DS1882 | LINE 側 Amp 後は ±7 V 不足。HP のみなら可だが統一しない |
-| SPI digipot 単体 | GPIO より SPI を PGA に寄せた方が音向き（当時） |
-
-</details>
-
----
-
-## 4. 操作 Pico の置き場と役割分担
-
-| 案 | 操作 Pico が持つもの | リレー盤 |
-|---|---|---|
-| **P1** | ENC / OLED /（必要なら）リレー GPIO | 端子台＋ULN＋リレーのみ |
-| **P2** | ENC / OLED / I²C マスター / DEST ADC+LED | 子 MCU or GPIO 拡張でラッチング駆動 |
-| **P3** | 現行どおりリレー盤上の Pico（UI ヘッダだけ外出し） | 一体 |
-
-計測 Pico 2 はどれでも触らない。
-
-**GPIO メモ（更新 2026-08-30）:** **基板 B 分割 + B2-exp** 確定後、コイル線は操作 Pico から消えている。手回し化で SPI / ENC×3 分が空き、**≈14 / 26 本**（§10）。
-
-| 用途 | 本数 |
-|---|---|
-| I²C0（OLED制御 / MCP23017 / PT2314）GP20/GP21 | 2 |
-| ENC ×3（CH / BASS / TREBLE）A/B/SW | **9** |
-| DEST ADC + LED×2 | **3** |
-| **合計** | **≈14 / 26** |
-
-**ENC 割当（確定）:** **ENC_CH / ENC_BASS / ENC_TREBLE**。HP / LINE は物理ポット、DEST は機械 SW。パワースイッチに **12V LED**。
-
-<details>
-<summary>旧 ENC 割当案（ENC×6・参考）</summary>
-
-| 案 | 内容 |
-|---|---|
-| E1 | ENC 1 個をモード切替で共有 |
-| E2 | ENC_HP / ENC_LINE を音量専用（当時） |
-| 確定（旧） | ENC×6（CH / HP / LINE / DEST / BASS / TREBLE） |
-
-</details>
-
-**GPIO 直結で収まる。** A/B は I²C 不可。詳細ピン表は §10。
-
----
-
-## 5. エンコーダー操作の意味 — **確定: ENC×3 + 手回し音量/DEST**
-
-| 案 | 内容 | 結果 |
-|---|---|---|
-| E1 | 1 つの ENC をモード切替で使い回す | 見送り |
-| E2（旧） | ENC_HP / ENC_LINE を音量専用 | **見送り**（手回しポットに変更） |
-| E3 | ENC=CH、音量はポットのまま | **採用寄り**（DEST も機械 SW） |
-
-**確定（2026-08-30）:** **ENC×3**（CH / BASS / TREBLE）。**RV_HP / RV_LINE** は目立つ物理ノブ。**SW_DEST** + LED + OLED。CH は回して変更・押して確定。Bass/Treble は独立 ENC＋制御 OLED。パワースイッチに **12V LED**。
-
----
-
-## 6. KiCad 起こし範囲 — **確定（D1.5）**
-
-ユーザー確定（2026-08-30）: **操作系 ＋ PowerModule 再設計**。
-**2026-08-31更新:** Amp はバルク未対応の旧基板を流用せず、AudioV2版を再版する。HP/計測は `Audio/` 物理流用。
-
-### 6.8 確定内容
-
-| 項目 | 決定 |
-|---|---|
-| **Q1 スコープ** | **A — D1.5** |
-| **Amp / HP** | Amp は `AudioV2/AmpModule` を代表1シート＋独立PCBとして管理し**×10製造**。HP は `Audio/` 製造済み基板を ±12 V 端子で接続 |
-| **PowerModule** | **`Audio/PowerModule` からのコピー改変ではなく再設計**。±12 V（DKMW20F-12）、**USB-C + CH224K（50224 相当）を基板内蔵** |
-| **Q2 CH224** | **基板内蔵**（50224 実装枠 or CH224K 直付け） |
-| **Q3 親の Amp** | **代表1シートを載せる**（回路/BOM参照、現物×10）。選択配線は Relay 端子IF |
-
-### 6.9 AudioV2 で起こす KiCad（確定リスト）
-
-| # | シート | 物理 PCB | 内容 |
-|---|---|---|---|
-| 1 | `RelayBoard.kicad_sch` | **×2**（5+5） | ラッチ + ULN + MCP23017 + Amp入力/電源端子 + **TONE_L/R IN** |
-| 2 | `ControlPanel.kicad_sch` | **×1** | Pico2 / ENC×3 / OLED / PT2314 / **RV・SW_DEST ヘッダ** / DEST LED / PWR SW / 12 V LED |
-| 3 | `OutputStage.kicad_sch` | **Control と同一 PCB** | **SW_DEST 音声配線 + 抵抗ラダー**（論理シートは分離可。**DEST ラッチングは廃止**） |
-| 4 | `PowerModule.kicad_sch` | **×1** | 再設計 — USB-C、CH224K、F201、DKMW20F-12 |
-| 5 | `AudioV2Case.kicad_sch` | — | 階層親 + 箱配線（Amp はテキストのみ） |
-
-**新規発注 PCB: 14 枚**（Relay×2 + Control×1 + Power×1 + **Amp×10**）。設計は5種類。
-
-**ファーム:** 新規 `AudioV2/control_fw/`（`Control/` は現行機用に凍結）。
-
----
-
-### 6.0–6.7 検討メモ（選択前の記録）
-
-| 確定事項 | 起こしへの意味 |
-|---|---|
-| Amp / HP **`Audio/` 流用** | 回路図を丸ごとコピーする必然は **弱い** |
-| 電源 **±12 V**（DKMW20F-12 + CH224） | 現行 `Audio/PowerModule`（**F-15**）を **そのまま刺すと設計と矛盾** |
-| 計測 **独立** | `MeasurementADC` は AudioV2 親に載せなくてよい |
-| 箱配線 OK | `MeasurementADC_STATUS.md` と同型で **端子台＋配線 MD** で足りる |
-| `Audio/` は生きた参照 | **二重メンテ**は D2 で顕在化 |
-
-`Audio/` には **9 シート**（`AudioCase` + 子 8）。split は **6 基板**（`regenerate_split_gerbers.py` は `Audio/` 専用）。
-
----
-
-### 6.1 選択肢（4 案）
-
-| 記号 | 名称 | 一言 |
-|:---:|---|---|
-| **A** | **D1.5**（推奨候補） | 操作系 **＋ PowerModule だけ** AudioV2 化。Amp/HP/計測は流用 |
-| **B** | **D1** 純粋 | 操作系のみ KiCad。電源も **Audio 製 ±15 V 基板**を流用（設計矛盾を引き受ける） |
-| **C** | **D2** | Power / Amp / HP まで **コピーして親でネット閉じ**（二重メンテ大） |
-| **D** | **D3 → A** | 先に **空プロジェクト＋シンボル**だけ。すぐ A の中身へ |
-
-#### 各案で AudioV2 に「起こす」もの
-
-| ブロック | A D1.5 | B D1 | C D2 | D D3 |
-|---|:---:|:---:|:---:|:---:|
-| リレー盤（B、MCP23017 + ULN + ラッチ） | ✅ | ✅ | ✅ | 枠のみ |
-| 操作パネル（Pico2 / ENC×3 / OLED / PT2314 / 手回し音量・DEST） | ✅ | ✅ | ✅ | 枠のみ・**手回し化要改訂** |
-| 出力段ラッチング（DEST） | ✅ | ✅ | ✅ | — |
-| **PowerModule（±12 V / CH224）** | ✅ | ❌ 流用 | ✅ コピー改変 | — |
-| AmpModule | 端子 IF | 端子 IF | ✅ コピー | — |
-| HeadphoneBuffer | 端子 IF | 端子 IF | ✅ コピー | — |
-| AdcBuffer / 計測 | 接続表 | 接続表 | コピー or IF | — |
-| 親シート（箱配線・端子台） | ✅ 新規 | ✅ 新規 | ✅ コピー改変 | 空 |
-| **kicad-cli netlist が閉じる** | 部分 | 部分 | **全体** | 否 |
-
-#### 向いている人（サブエージェント合意）
-
-| 選ぶなら | 向いている人 |
-|---|---|
-| **A D1.5** | ±12 V を設計どおり新基板にしたい。**初号を早く**、Amp/HP は発注済み流用 |
-| **B D1** | **新規発注ゼロ**のプロトのみ。±15 V 運用 or 手配線 ±12 V を自分で引き受ける |
-| **C D2** | ERC・一式 BOM・引き継ぎ優先。**二重メンテ OK** |
-| **D D3→A** | ライブラリ／シンボル整備から入りたい（数日で A に移行） |
-
----
-
-### 6.2 比較（リスク・工数）
-
-| 観点 | A D1.5 | B D1 | C D2 |
-|---|---|---|---|
-| ±12 V 整合 | **◎** | **✗〜△**（F-15 流用） | ○（コピー＋ラベル整理） |
-| 初号までの工数 | **中** | **最小** | **最大** |
-| 長期メンテ | **低** | 低 | **高**（Amp 5k 行級×2） |
-| 箱配線 MD の重要度 | 中（新 IF 必須） | **高** | 低 |
-| split Gerber 再構築 | 新板のみ | なし | **6 板すべて再検討** |
-| 「Amp 流用」方針 | **一致** | 一致 | **矛盾しやすい** |
-
-**両サブエージェント共通:** 純 D1 は速いが **±12 V 確定と Audio 電源流用が両立しない**。**第一候補は A（D1.5）**。C（D2）は「閉ネットリストが最優先」のときだけ。
-
----
-
-### 6.3 A（D1.5）を選んだ場合の具体像
-
-**KiCad 新規シート（目安 4–5 + 親）**
-
-1. `RelayBoard.kicad_sch` — `Controll` から ULN / ラッチ / 端子台 / **MCP23017**（子 Pico **削除**）
-2. `ControlPanel.kicad_sch` — Pico2 / ENC×3 / OLED / PT2314 / RV・SW_DEST ヘッダ / DEST LED
-3. `OutputStage.kicad_sch` — DEST 用ラッチング（PHONE / LINE / MUTE）
-4. `PowerModule.kicad_sch` — `Audio/PowerModule.kicad_sch` を **コピー改変**（F-12、CH224、§9 配線）
-5. `AudioV2Case.kicad_sch` — 上記＋**箱配線**（端子台、信号ラベル、注記）
-
-**`Audio/` 製造済みを物理流用（図は端子 IF のみ）**
-
-- `AmpModule` / `HeadphoneBufferModule` / `AdcBufferModule` / `MeasurementADC1804_Module`
-
-**ファーム**
-
-- 新規 **`AudioV2/control_fw/`**（`Control/` は現行機用に凍結）
-- `measurement_fw/` は触らない
-
-**箱内配線**
-
-- `MeasurementADC_STATUS.md` §「箱内配線方針」と同型の MD を AudioV2 に追加（±12 V 版）
-
----
-
-### 6.4 サブ判断（A を選ぶ場合・後でよい）
-
-| # | 論点 | 選択肢 |
-|---|---|---|
-| S1 | CH224 [50224] | **a)** PowerModule に **移設**　**b)** 端子台 **ワイヤ**（§9 どちらも可） |
-| S2 | 親シートの Amp | **a)** 端子台＋テキストのみ（STATUS 型）　**b)** `../Audio/AmpModule.kicad_sch` **階層リンク**（編集一元・パス依存） |
-
----
-
-### 6.5 エージェント推奨（確信度・参考）
-
-| 順位 | 案 | 確信度 | 理由 |
-|:---:|---|:---:|---|
-| 1 | **A D1.5** | 75% | ±12 V 確定・Amp 流用・メンテ最小の **交点** |
-| 2 | D3→A | 70% | シンボル先行が好みなら。中身は A と同じ |
-| 3 | C D2 | 20% | 閉ネットリスト最優先時のみ |
-| 4 | B D1 | 15% | プロト限定・電源矛盾を理解した上 |
-
----
-
-### 6.6 質問（→ §6.8 で確定済み）
-
-~~Q1=A, Q2=基板内蔵, Q3=Amp 載せない~~
-
----
-
-### 6.7 旧表（D1 / D2 / D3 定義・参照）
-
-| 案 | 範囲 | メリデメ |
-|---|---|---|
-| **D1** | 操作系だけ（リレー盤 ± 操作/音量） | 早い。Amp/電源は `Audio/` 参照のまま箱で繋ぐ |
-| **D2** | D1 + Amp/HP/電源もコピーして親シートまで | 単体でネットリストが閉じる。メンテ二重化 |
-| **D3** | 空のプロジェクト枠 + シンボルだけ先 | 最速だが判断が終わるまで中身が空 |
-
-**D1.5** = D1 ＋ **PowerModule のみ** AudioV2（§6.1 の **A**）。
-
----
-
-## 11. 物理基板分割・基板間接続 — **一部確定**
-
-**論理分割 B** は確定。**Q1・Q2 は確定、Q3（I²C トポロジー）は回路・基板設計まで保留。**
-
-### 11.7 確定内容（ユーザー 2026-08-30）
-
-| 項目 | 決定 |
-|---|---|
-| **Q1 Relay 物理枚数** | **B — 5ch × 2 枚**（現 Controll 2 段型。ケーシング向き） |
-| **Q2 OutputStage 物理位置** | **A — ControlPanel と同一 PCB**（SW_DEST / ポット同居）。**PCB レイアウト時に B（独立板）へ変更可** |
-| **Q3 I²C トポロジー** | **保留** — 回路・基板レイアウト時に決定 |
-| **物理分割全体** | **PC + PB + Amp再版** — Relay 2 + Control 1（Output同居）+ Power 1 + Amp 10 → **新規14 PCB** |
-
-KiCad シートは §6.9 の **OutputStage 分割を維持**（論理ブロック）。物理実装は **ControlPanel PCB 上**。
-
-| 新規 PCB | 枚数 | 内容 |
-|---|---:|---|
-| PowerModule | 1 | ±12 V、CH224 内蔵 |
-| RelayBoard | **2** | 5ch ずつ。MCP23017 + ULN + ラッチ + Amp 端子台 |
-| ControlPanel | 1 | Pico / ENC×3 / OLED / PT2314 / **RV・SW_DEST ヘッダ** / DEST LED |
-| AmpModule | **10** | ±12 V、ゲイン2（20k/20k）、100 µF/rail + 100 nF + 1 nF、DIP-8ソケット |
-| **合計** | **14** | HP / 計測は `Audio/` 流用。Q2-B なら Output **+1** |
-
----
-
-### 11.8 CH 選択 — Amp **入力＋電源を同時切替**（2026-08-31確定）
-
-未給電Ampへ信号を印加しないため、各CHの音声リレーは **PT2314後のTONE_L/Rを選択Amp入力へ接続**する。電源リレーも同じSET/RESET信号で必ず連動させる。
-
-| 項目 | 内容 |
-|---|---|
-| 信号 | `COMMON_L/R（外部入力）→ PT2314 → TONE_L/R → 音声リレー → 選択Amp J701` |
-| 電源 | `PowerModule J201 → RelayBoard J_RAIL 3P → 電源リレー → 選択Amp J703`。A_GNDは非切替で各`J_PWR`-2へ直結 |
-| 連動 | 1chにつきaudio/power AZ850のSET同士・RESET同士を束ね、MCP23017×1 + ULN2803×2で駆動 |
-| コイル | ControlPanel BP5293の+5 Vを`J_I2C` 5Pで供給。1 ULN出力あたり2コイル並列（約80 mA） |
-| 出力 | Amp J702（47 Ω＋470 µF後）は箱配線で`AMP_SEL_L/R`へ共通化 |
-| ファーム | **排他** — 全CH Reset後、対象CHを100 ms Set。コイルは保持通電しない |
-| アドレス | JP302=A1、JP301=A0（開=0）。00=0x20 A / 01=0x21 B / 10=0x22 C / 11=0x23 D。A2はGND固定 |
-| PCB | **1種を使い回し。** JPそばの **F.Silk に上記早見表**を必ず入れる（実装時の番地衝突防止） |
-
-測定タップ（Amp 後 AdcBuffer）は **リレー前**または分配器で別系統 — 箱配線 MD で位置を固定。
-
----
-
-### 11.1 切替アーキテクチャ — 統合1枚基板（2026-09-01 確定）
-
-**決定:** RelayBoard（5ch×2枚）と AmpModule（×10枚）を廃止し、10ch 分のアンプと切替素子を
-載せた1枚の基板 **`AmpBank`** に統合する。入力と出力の両方をアナログスイッチで切り替え、電源は常時給電。
-
-**なぜ12枚構成をやめたか:**
-12枚に分かれていたのは v1 の「既にあるアンプ基板を流用する」制約の名残で、AudioV2 は
-アンプ基板を新規設計するため理由が消えている。「アンプ基板を5枚作る」のも JLCPCB の
-最小ロットが5枚だったからで、1種類の基板を5枚もらう仕組みである以上、統合の妨げにならない。
-
-**なぜ入力だけでなく出力も切るか:**
-旧仕様は入力と電源のみを切り替え、アンプ出力は箱配線で常時共通だった。この構成は
-「電源を切れば切り離される」という前提に立っているが、オペアンプの出力ピンは電源が
-切れても内部の ESD／基板ダイオードでレールに繋がっているため、前提が成り立たない。
-v1 で顕在化しなかったのは**実基板にバルクコンデンサが実装されていなかった**ためで
-（回路図には `e1f965e` で OS-CON 120 µF が追加されたが、製造した `AudioCase_4_amp` の
-ガーバーは追加前の状態）、AudioV2 が高速石対策に 100 µF を足した時点で条件が変わっていた。
-出力を切れば電源状態に依存しない分離が得られ、バルクの可否を議論する必要も無くなる。
-
-**なぜラッチングリレーをやめるか:** ~~（2026-09-01 の判断。下の 2026-09-02 で撤回）~~
-v1 でラッチングを選んだ理由は「通常リレーはコイル電流を流し続けるのでノイズになる」。
-アナログスイッチはコイル自体が無く消費は漏れ電流のみなので、**この要件をより良く満たす**。
-1枚に集約するとリレーは面積を食いすぎる（20個+ドライバ5個で 27.5 cm² 対 8ch スイッチIC
-5個で 3.0 cm²）ことも決め手。代償は信号経路の直列抵抗が 50 mΩ（−120 dB）から
-1.5〜2 Ω（−88 dB）に増えることだが、負荷 50 kΩ・信号電流 140 µA なので降下は 294 µV に留まる。
-
-### 11.1a 切替素子 — **リレー版とアナログスイッチ版の両方を検討する**（2026-09-02）
-
-**方針: どちらか一方に絞らず、両案を並行して検討する。**
-**基板として両方を設計してもよい**（ユーザー判断、2026-09-02）。JLCPCB の最小ロットが5枚なので、
-リレー版とアナログスイッチ版を別々に起こして実機で聴き比べる選択肢が現実的にある。
-**1枚基板への統合（`AmpBank`）はどちらでも維持。** 議論しているのは切替素子だけ。
-
-> **経緯:** 2026-09-02 の日中に一度「ラッチング DPDT リレー ×20 に確定」としたが、
-> 同日夕方の [issue #33](https://github.com/indare/pcb_work/issues/33) の比較で
-> **選定の前提が崩れた**（下記）。リレーの利点は消えていないので、両案を残す。
-
-#### 前提が変わった点（issue #33）
-
-1. **9.2 Vrms は通常経路では到達しない。** PT2314 のクリップが 2〜2.5 Vrms なので
-   ゲイン2 なら **DUT 出力の実上限は 4〜5 Vrms**。9.2 Vrms に届くのは帰還抵抗を上げた
-   高ゲイン設定か、PT2314 を飛ばす DIRECT 経路のときだけ。
-   **この実レベルなら `TMUX7612` は −166.5 dB** で、「9.2 Vrms で 47 dB 損する」という
-   リレー選定の根拠の一つが成立しない
-2. **測定床の議論は3回間違えた。3つの床を混ぜないのが結論**（2026-09-03、issue #33）。
-   詳細は [`spice/README.md`](spice/README.md)「判定の基準線」。ここは要約のみ。
-
-   **⚠ ①②とも「確定した測定床」ではない。理想化した概算で、実測で置き換えるもの。**
-
-   | # | 量 | 概算値 | FFT長で下がるか | 性質 |
-   |---|---|---:|---|---|
-   | ① | 理想化した bin noise floor | 約 −137 dBFS | **下がる** | **雑音**。白色仮定の概算 |
-   | ② | PCM1804 の **THD+N 基準値** | typ −102 dB | **下がらない** | **歪み+雑音の総量** |
-   | ③ | 前段 PT2314 の歪み | −60 dB | — | 通常経路では常にこれが支配 |
-
-   ①は `112 dB` が A特性の積分値なので、雑音が白色・平坦と仮定しない限り正確な
-   1bin floor は決まらない（ΔΣ は雑音整形で高域が持ち上がる）。②は THD+N の基準値であって
-   「絶対 THD の床」ではない。**どちらも実測で置き換えること。**
-
-   **取り下げた主張3つ:**
-   - ~~「測定床は DR ≈ 112 dB」~~ — DR は**広帯域の雑音**指標で、歪みの床ではない
-   - ~~「処理利得 30.1 dB を足して −142.1 dBFS」~~ — 処理利得が効くのは**ランダム雑音だけ**。
-     ADC 自身の高調波は離散トーンなので下がらない（実使用 N は 1024、窓は Hann）
-   - ~~「THD+N − SNR = 高調波 −102.6 dB」~~ — **THD+N は無加重**（`fIN=1kHz`、20k LPF+400 HPF、
-     AP System Two）、**SNR/DR は A特性**。条件が違うので引き算できない。
-     **ADC 自身の H2/H3 の実値は不明。**
-
-   **「床より下だから見えない」も誤り。** 同じ次数の成分は複素ベクトル和で残り、
-   同相最悪の誤差は `20log10(1 + 10^(−margin/20))`（13dB→+1.75dB、34dB→+0.17dB）。
-
-   **⚠ ただしこの式を PCM1804 と切替素子にそのまま当てはめてはいけない。**
-   **合成できるのは同じ次数どうし**だが、`−102 dB` は **THD+N の総量**、
-   素子の `−115.2 dB` は **H2〜H9 の RSS**。**総量どうしの合成は意味を持たない。**
-   素子側は次数別に出せる（`switch_compare.py`）が **ADC 側の H2/H3 が未知**なので、
-   実際に何dB動くかは**実測するまで確定しない**。次数別に見ると像が変わる部品もある
-   （`ADG1407` は 9.2Vrms で H2 −133.4 / H3 −96.3 と 37 dB 差の H3 支配。
-   H2 だけなら `TMUX7612` @9.2Vrms より 12 dB 良い）。
-
-   - **落選判定は ADC 側に置かない**（②が確定床でない以上、②を根拠に落とすのは自己矛盾）。
-     代わりに**スイッチ自身の H2/H3 を在庫 DUT の THD と比べる**（ADC 非依存）。
-     **ただしこれも「一次スクリーニング」**——switch 側は `G=2 / 4.0・9.2Vrms / RL 50k`、
-     DUT 側はデータシート値（一般に `G=1 / 3Vrms / RL 2k`）で**条件が揃っていない**。
-     **`DG507B` は差が大きく条件差では覆らないので不適。**
-     `ADG1407` @9.2Vrms は H3 −96.3 dB で高リスク。
-     **⚠ `TMUX7612` も 9.2Vrms では H3 が −119.7 dB まで悪化する**（4Vrms は −166.6 dB）。
-     **振幅を揃えた比較**（`extract_dut_thd.py` で `OPA1612` の DS カーブを抽出）:
-
-     | Vrms | Vpk | switch 最大次数 | OPA1612 THD+N | 差 |
-     |---:|---:|---:|---:|---:|
-     | 4.00 | 5.66 | −166.6 | −139.4 | −27.2 |
-     | 7.00 | 9.90 | −167.2 | −143.4 | −23.8 |
-     | 7.50 | 10.60 | −167.1 | −144.0 | −23.1 |
-     | **7.78** | **11.00** | **−150.5** | −144.4 | **−6.1** |
-     | **7.90** | **11.17** | **−144.9** | −144.5 | **−0.4 ← 交差** |
-     | 8.00 | 11.31 | −141.4 | −144.5 | **+3.1** |
-     | 9.20 | 13.01 | −119.7 | −145.3 | **+25.6** |
-
-     **交差点 7.9 Vrms は `Ron` 平坦領域の膝（±11V = 7.78 Vrms）とほぼ一致する。**
-     膝を越えた瞬間に switch が DUT を上回る。**「膝より下で使う」は数値でも裏付いた。**
-   - **`TMUX7612` @9.2Vrms は「ADC より下だから無条件 OK」ではない**（総量で 13 dB 差）。
-     4〜5 Vrms なら 62 dB 差で、次数別に見ても問題になりようがない ＝ **膝より下で使うのが前提**
-   - **「オペアンプ間の相対比較は成立」も言い過ぎ。** 観測 H2 は `H2_ADC + H2_DUT` の
-     複素ベクトル和で、DUT ごとに振幅・位相が違う。正確には
-     **「ADC の再現性と baseline 除去精度の範囲で相対比較可能」**。
-     大きな THD 差なら十分可能／−130 vs −136 dB はそのままではかなり難しい
-
-   **⚠ ②は実測で確定させること（§5 優先候補2）。** ADC 直結 baseline → 同レベル繰返し測定 →
-   H2/H3 の振幅・位相の再現性。**その再現性が「比較できる THD 差の限界」そのもの。**
-   それまで ②を根拠に部品を落とさない。
-
-#### 両案の比較
-
-| | ラッチリレー ×20 | `TMUX7612` ×5（出力のみ MUX） |
-|---|---|---|
-| 歪み | **構造的にゼロ**（接触抵抗は電圧非依存） | −166.5 dB @4〜5Vrms / −115.2 dB @9.2Vrms |
-| 面積 | **12.6 cm²** | 約 2 cm² |
-| 付帯 | ULN2803 ×3・**20本**の駆動線（基板内で完結）・MCP23017 ×1 追加・`+5V` | 不要（MCP23017 ×1 のまま） |
-| 実装 | **THT・手はんだ・リワーク可** | TSSOP |
-| 調達 | **2社互換＋秋月国内** | TI 単独 |
-| 概算 | **約 ¥4,600**（在庫があるので実質ゼロ） | ¥6,400 |
-
-**どちらを採るかは「面積とドライバ複雑さ」対「実装容易性と調達の堅さ」の判断が主。**
-歪み性能は **4〜5 Vrms の通常運用ではどちらも十分下**なので決め手になりにくい。
-
-ただし**完全に無関係ではない**: `TMUX7612` @9.2Vrms は ②とのマージンが 13 dB しかなく、
-同相最悪で +1.75 dB 動きうる。**「膝（±11V）より下で使う」制約が付く**のに対し、
-リレーには付かない（接触抵抗は電圧非依存）。②が実測で良い方へ動けばこの差は効いてくる。
-
-#### 【集約】2026-09-03 時点の基板構成案
-
-> **この節を書いた時点では、KiCad の回路図が旧4枚**
-> （`PowerModule`/`ControlPanel`/`AmpBank`/`OutputStage`）**のままだった。**
-> **その後、同日の B4'-2 までで刷新は完了し、旧4枚は解体されて `legacy/` に凍結された。**
-> 現行のシート構成とシート所有権は [CLAUDE.md](../CLAUDE.md) が正
-> （母板・娘基板2版・`MeasureControl`・親）。
-> **⚠ 新旧どちらも「4枚」なので、枚数だけでどちらの構成か判別できない。**
-> シート名で確認すること。
->
-> 以下の表は**基板（PCB）としての構成案**で、**PCB は未設計**。
-> [`WIRING.md`](WIRING.md) は旧4枚構成のままなので、着手前に読むときは注意。
-
-| # | 基板 | 載るもの | 接続 |
-|---|---|---|---|
-| 1 | **母板（アナログ）** | PD 入力・DC-DC・`PT2314`・出力段・`AdcBuffer`・娘基板コネクタ | — |
-| 2 | **`AmpBank` 娘基板** ×N | 1ch まるごと（オペアンプ＋帰還＋結合C＋バイアス＋**切替素子**）＋ `MCP23017`＋番地 | **母板へスタック** |
-| 3 | **計測/制御基板（デジタル）** | Pico 2 ×1・`PCM1804`・スペアナ LCD・OLED・エンコーダ | ±15V・測定タップ・I²C |
-| — | パネル | 音量ポット ×2・行き先スイッチ・入出力ジャック | **リード／コネクタで母板へ**（現行どおり） |
-
-**旧4枚構成からの変化（回路図側は 2026-09-03 に実施済み）:**
-
-- `ControlPanel` が**無くなる**（Pico と OLED・エンコーダは計測基板へ、`PT2314` は母板へ）
-- `OutputStage` が**母板に統合**される
-- `AmpBank` が**番地付きの娘基板 ×N** になる
-- 測定系（`AdcBuffer`/`MeasurementADC`）が**箱の外の流用基板から、構成要素へ**
-- **PC への USB が 2本 → 1本**
-
-**この構成が解いていること:**
-
-| 課題 | 解き方 |
-|---|---|
-| 仮配線由来の雑音 | 基板間をヘッダのスタックへ。**アナログで箱をまたぐのは入力ジャックだけ** |
-| 抜き差し・時間ドリフトの交絡（実測で最大の要因） | **リレー娘基板とスイッチ娘基板を同じ箱に混ぜて挿し、同一セッションで比較** |
-| USB グラウンドループ（1205Hz 仮説） | MCU 統合で USB が1本減る |
-| オペアンプ差し替えのアクセス | 娘基板がスタック最上段、ソケット面を上向き |
-| Pico の USB アクセス | 1本だけなのでパネル開口も1箇所 |
-
-**パネル側をリードのままにしてよい理由:** 音量ポットと行き先スイッチは**パッシブで
-出力段の後**（信号レベルが高くインピーダンスも低い）。入出力ジャックは筐体面に
-必要なので構造上リードになる。**ここは雑音の主要因ではない。**
-
-#### 【検討中】全体を1枚にして「オペアンプ部だけ娘基板」（2026-09-03、ユーザー提案）
-
-ノイズを構造で解くなら、**基板を統合して1枚にし、差し替えが要る部分だけスタックする**のが素直。
-
-##### 娘基板の切り分けで結果が全く違う
-
-| 案 | 娘基板に載せるもの | コネクタを渡る信号 | 判断 |
-|---|---|---|---|
-| 案1 | **ソケットだけ** | ch あたり 入/出/V+/V−/GND ＝ **50本以上**。しかも**帰還ループがコネクタを2回またぐ** | **不可** |
-| **案2** | **1ch まるごと**（オペアンプ＋帰還＋結合C＋バイアス＋切替）＝ **`AmpBank` そのもの** | `TONE_L/R`・`AMP_SEL_L/R`・±15V・GND・I²C(4)[＋`+5V`] → **アナログはたった4本** | **これ** |
-
-**案2 は「母板 ＋ `AmpBank` 娘基板」の2段スタック**になる。
-
-##### これが比較装置として効く
-
-**母板は1回設計するだけ。娘基板だけリレー版とスイッチ版を作る。**
-
-- 母板・電源・出力段・測定タップが**完全に同一のまま切替素子だけ変わる**
-- **レイアウト差が比較の交絡にならない**
-- 前に「1枚に両方の足を載せる」を推した理由と同じ効果を、**面積の無駄なしで**得られる
-
-##### さらに: 娘基板を「切替素子が賄えるch数」で分割し、番地を持たせる（2026-09-03、ユーザー提案）
-
-`AmpBank` を 10ch 一体にせず、**素子の粒度で小さく割って複数枚スタックする**。
-**旧 `RelayBoard` は既に番地ストラップを持つ設計だった**（§2.6、0x20–0x23 の 2bit、最大4枚）
-ので、その考え方を戻すことになる。
-
-| 素子 | 粒度 | 1枚あたり |
-|---|---|---|
-| `TMUX7612`（4×SPST） | L と R に各1個要るので **1 IC = 2ch** | 2ch/枚なら IC×1、4ch/枚なら IC×2 |
-| DPDT リレー | 2極で L と R を担当。**1個 = 1ch** | 4ch/枚ならリレー×4 |
-
-`MCP23017` 1個（16bit）が駆動できる上限:
-**アナログスイッチは 16ch**（L/R 連動で 1ch=1本）、**リレーは 8ch**（2コイルで 1ch=2本）。
-番地は `A0–A2` の 3bit で **0x20–0x27 の 8枚**まで（旧設計の 2bit=4枚から拡張できる）。
-
-**素直な候補:**
-
-| 粒度 | 枚数 | 容量 | スイッチ版 | リレー版 |
-|---|---:|---:|---|---|
-| 2ch/枚 | 5 | 10ch | `TMUX7612` ×1 | リレー ×2 |
-| **4ch/枚** | **3** | **12ch** | `TMUX7612` ×2 | リレー ×4 |
-| 5ch/枚 | 2 | 10ch | `TMUX7612` ×3 | リレー ×5 |
-
-##### これの本当の利点: **リレー版とスイッチ版を同じ箱で同時に比べられる**
-
-番地が付いていれば、**母板に「リレー娘基板」と「スイッチ娘基板」を混ぜて挿せる**。
-
-- 電源・出力段・測定タップ・`ControlPanel` が**完全に同一のまま**
-- **同一セッション内で**切替素子だけを比較できる（母板ごと差し替える必要がない）
-- 2026-09-03 の実測で分かったとおり、**時間ドリフトと抜き差しが最大の交絡要因**。
-  それを丸ごと排除できる
-
-**これは母板を2種作るより厳密な比較になる。**
-
-> **⚠ トレードオフ: 枚数が増えるとコネクタ（＝接点）が増える。**
-> 接点を減らすためにスタック化したので、割りすぎると本末転倒。
-> ただし渡るのはバス信号（`TONE_L/R`・`AMP_SEL_L/R`・電源・I²C）で
-> **ch あたりではない**ので、枚数が増えても1枚あたりの信号数は変わらない。
-> **4ch/枚 × 3枚**あたりが妥当か（要検討）。
-
-##### 【訂正】MCU 統合は成立する（2026-09-03、ユーザー指摘で見解を変更）
-
-一度「計測基板はデジタル的に隔離したいのに UI 配線を集めるのは逆行」と書いたが、
-**その根拠は弱かった**。撤回する。ユーザー指摘のとおり
-**GND を適切にアイソレートすれば音源側は汚れない**。理由は3つ。
-
-**1. 導通経路は設計で既に分離してある。**
-`A_GND` と `D_GND` は**システム全体で1箇所だけ** NetTie で結合する設計
-（[`WIRING.md`](WIRING.md)、G1/G2）。OLED やエンコーダの帰路電流は `D_GND` にとどまり、
-`A_GND` へは回らない。**UI を足しても導通結合は増えない。**
-
-**2. 計測基板は既に系で最も騒がしいデジタル基板。**
-**`ST7796S` を SPI 40 MHz で叩いている**（`Audio/measurement_fw/README.md`）。
-そこへ OLED（数百kHz〜数MHz）とエンコーダ（機械接点）を足しても**限界的な増分**でしかない。
-「隔離したい基板」という前提自体が、既に成り立っていなかった。
-
-**3. USB が1本減るのは、いま最も効きそうな対策。**
-2026-09-03 の混入（1205〜1212 Hz）は **USB グラウンドループ仮説**が有力（後述）。
-MCU を1個にすれば **PC への USB 接続が2本→1本**になり、ループの経路が1つ消える。
-**これは仮説が当たっていた場合に直接効く。**
-
-##### 統合した場合のトポロジ
-
-| 基板 | 載るもの |
-|---|---|
-| **母板（アナログ）** | PD 入力・DC-DC・`PT2314`・出力段・`AdcBuffer`・`AmpBank` 娘基板コネクタ |
-| **計測/制御基板（デジタル）** | **Pico 2 ×1**・`PCM1804`・スペアナ LCD・OLED・エンコーダ。**USB は1本** |
-| パネル | ポット・行き先スイッチ（従来どおりリードで戻す） |
-
-繋ぐのは **±15V・測定タップ（アナログ）・I²C** だけ。
-`ControlPanel` という独立基板は無くなる。
-
-**残る注意点:**
-
-- **NetTie の位置を決め直す**。`D_GND` の発生源が計測/制御基板へ移る
-- **アナログの測定タップがデジタル基板へ渡る**のは変わらない。ここが最も敏感な箇所
-- `PCM1804` 自身の AGND/DGND の扱いは従来どおり
-- 計測（FFT・LCD 描画）と UI が同じ MCU で競合する。**第2コアがあるので処理は足りる**が、
-  応答性の設計は要る
-
-##### ⚠ Pico の USB アクセスが制約になる
-
-Pico は**2個**ある（`ControlPanel` の制御用、`MeasurementADC` の計測用）。
-とくに**計測用は `mpremote` で日常的に叩く**（`capture_raw.py` の実行）ので、
-**USB コネクタが筐体外から届く必要がある**。
-
-- 両 Pico の USB を**同じ辺に寄せて**パネル開口を1箇所にまとめる
-- 統合して1枚にする方が、この点は**むしろ楽**（辺を揃えやすい）
-
-##### ⚠⚠ USB は雑音経路でもある — 今日の混入の有力な説明
-
-**測定時、G8 と計測用 Pico は同じ PC の USB に繋がっている。**
-つまり **PC → G8 → アナログ経路 → ADC → Pico → PC** というループが閉じている。
-
-2026-09-03 に観測した **1205〜1212 Hz の自走・ドリフトする混入**（−77.8 dBFS、
-[`Audio/MeasurementADC_BRINGUP.md`](../Audio/MeasurementADC_BRINGUP.md)）は、
-**この USB グラウンドループで説明が付く**可能性が高い。「非同期でゆっくりドリフトする」
-という性質も、PC 側の電源・クロックに由来すると考えると自然。
-
-**検証は簡単:**
-- USB アイソレータを計測用 Pico に入れて、混入が変わるか見る
-- あるいは G8 と Pico を**別の PC / 別のハブ**に分ける
-- Pico を電池駆動にして USB を切る（キャプチャは取れないので、スペアナ表示で見る）
-
-**これが当たりなら、基板レイアウトをどう工夫しても消えない種類の混入**なので、
-先に切り分ける価値がある。
-
-#### 【方針】基板間はワイヤではなくヘッダのスタッキングへ（2026-09-03、ユーザー判断）
-
-**現状の雑音は仮配線とケーシング未了が原因**なので、そこを構造で解く。
-とくに**リレー版を採るならワイヤ配線は避け、ヘッダピン＋メスピンのスタッキング**にする。
-
-**根拠は実測にもある。** 2026-09-03 の測定で**分解能を縛っていたのは機械的再現性**
-（DIP ソケットの抜き差しで −112 dBc、`MeasurementADC_BRINGUP.md`）だった。
-線材・圧着・端子台はいずれも同種の不確かさを持ち込む。**接点を減らす方向は直接効く。**
-
-##### 現状ワイヤで繋いでいるもの（[`WIRING.md`](WIRING.md)）
-
-| 系統 | 現状 | スタック化できるか |
-|---|---|---|
-| アナログ ±15V | PowerModule → AmpBank、端子台 3P | **できる** |
-| I²C | ControlPanel → AmpBank、4P（リレー版は 5P） | できる（ただし低リスク系統） |
-| トーン出力 | ControlPanel `PT2314` → AmpBank、2芯シールド | **ControlPanel がパネル実装なので直接は無理**（下記） |
-| 選択アンプ出力 | AmpBank → OutputStage、2芯シールド | **できる** |
-
-##### ⚠ 最大の制約: DIP ソケット 10 個へのアクセス
-
-**この装置の存在理由がオペアンプの差し替え**なので、`AmpBank` の DIP-8 ソケット 10 個は
-**常に手が届く必要がある**。したがって:
-
-- **`AmpBank` はスタックの最上段**（ソケット面を上向き）に置く
-- その下に `PowerModule` / `OutputStage` を重ねる
-- `ControlPanel` は OLED・エンコーダ・ノブがあるので**フロントパネル実装**。スタックに入れない
-
-##### 検討したい派生案: `PT2314` を `AmpBank` へ移す
-
-スタック化しても **`ControlPanel` の `PT2314` → `AmpBank` のアナログ線は残る**。
-ここが唯一の「箱をまたぐアナログ経路」になる。
-
-`PT2314` は I²C 制御なので**物理的に `ControlPanel` にある必要はない**。
-`AmpBank` 側へ移せば:
-
-- **箱をまたぐアナログ配線が入力ジャック → `AmpBank` の1本だけ**になる
-- `ControlPanel` とは **I²C だけ**（デジタル4〜5線）で繋がる
-- 音声経路が実質すべて基板パターンになる
-
-代償は `AmpBank` の面積増と、`PT2314` 周辺部品の移設。**未検討。**
-
-##### 測定系（`AdcBuffer` / `MeasurementADC`）もスタックへ取り込む
-
-**スペアナ基板もワイヤ接続なので、同じ問題を抱えている。**
-端子台をピンヘッダに替え、**アナログスイッチ版のスタックから測定タップをかすめ取る**
-形にすれば、測定経路のワイヤが消える。
-
-効くと期待できる点:
-
-- `AmpBank` 出力 → `AdcBuffer` → `MeasurementADC` のワイヤが無くなる
-- **実測で ADC-R 経路が L より 6dB 高雑音**だったのは `J703`（±15V 入口）に近い
-  基板北側の配置と整合しており、配線とレイアウトの問題。構造で解ける見込み
-- 1205〜1212 Hz の自走源（電源か VCOM 経由）もワイヤ経由の可能性がある
-
-> **⚠ ただし逆に効く要素がある。** `MeasurementADC` は Pico・LCD・12.288 MHz 発振器・
-> I²S 3.072 MHz を載せた**デジタル基板**。アナログ基板に密着させると
-> **クロック結合が増える方向**に働く。
-> 実測で見つけた **`fs/64` = 750 Hz のスプリアス系列（−80.4 dBFS）は BCK 起因**で、
-> これがまさにその種類の混入。**近づけると悪化しうる。**
->
-> 対策の方向:
-> - 段順で離す（`MeasurementADC` はスタックの端、間に GND 面を持つ基板を挟む）
-> - タップ配線を内層で GND に挟む
-> - `AdcBuffer` までをアナログ側に置き、`MeasurementADC` へは差動で送る
->
-> **「ワイヤを消す」と「デジタルを遠ざける」はトレードオフ。** 段構成で解く。
-
-> **⚠ 測定タップは2版で共通にすること。**
-> リレー版とアナログスイッチ版を比較するのに、測定経路が違うと**それ自体が変数**になる。
-> **タップ位置・ヘッダのピン割当・`AdcBuffer` の実装は両版で同一**にする。
-> （`AdcBuffer` の `OPA1652` は「測定基準は固定推奨」と
->  [`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md) にある。動かさない）
-
-##### 【確定】測定系は「外形とヘッダだけ AudioV2 のスタック規格に合わせる」（2026-09-03、ユーザー判断）
-
-**AudioV2 に測定系のシートは無い。** `AdcBufferModule` と `MeasurementADC1804_Module` は
-`Audio/`（v1）にあり、[`WIRING.md`](WIRING.md) では**流用基板としてワイヤ接続前提**で
-扱われている（「±15V ＋ 測定タップ（位置 MD で固定）」）。スタックに取り込むには
-この前提を変える必要がある。
-
-| 案 | 内容 | 判断 |
-|---|---|---|
-| A. AudioV2 へ回路ごとコピー | スタック前提で再設計 | **不採用**。作業量が大きく、ブリングアップ済みの実績が無駄になる |
-| **B. 外形とヘッダだけ合わせる** | **回路は v1 `rev 0.4` のまま、基板外形・取付穴・ヘッダ位置を AudioV2 のスタック規格へ** | **採用** |
-| C. 変換基板を挟む | 端子台↔スタックヘッダの変換 | **不採用**。**接点が増えるので目的に逆行する** |
-
-> **⚠ D10（MCU 統合）と両立しない部分がある。**
-> 統合すると測定基板に **OLED とエンコーダも載る**ので、「回路そのまま」ではない。
-> **正しくは「回路は v1 から移植し、UI を足す」。**
-> 2026-09-03 に `AudioV2/MeasureControl.kicad_sch` として**コピー済み**
-> （`Audio/` 側は実機の記録として残す）。UI の移設はこれから。
-
-**B を採る理由:** `MeasurementADC` は `rev 0.4` で回路が固まっており、
-PCB 側の残作業は「ASFL の FP を銅箔へ反映」だけ（[`Audio/MeasurementADC_STATUS.md`](../Audio/MeasurementADC_STATUS.md)）。
-**どのみち次号 PCB を起こす**ので、そのときスタック規格へ合わせるのが自然。
-回路は実績のあるものをそのまま使える。
-
-**⚠ 順序を守ること。** スタック規格（段構成・外形・ヘッダ）を先に決める。
-**`MeasurementADC` 次号 PCB を先に起こすと、規格が変わって作り直しになる。**
-
-##### 未決（2026-09-03 に大半が片付いた → 次節「スタック規格 — A2」）
-
-| 論点 | 状態 |
-|---|---|
-| スタック規格そのもの（段構成・外形・取付穴・スペーサ・ピン割当） | **確定**（次節） |
-| `MeasurementADC` を何段目に置くか | **確定。母板の横に並べる**（1段目） |
-| リレー版のコイル `+5V` を版ごとに変えるか共通にするか | **確定。共通**（リレー版の要求を上位集合として採る） |
-| `AdcBuffer` を `MeasurementADC` と同じ段に置くか、アナログ側に寄せるか | **未決** |
-| ヘッダの**部品**選定（電流容量、接触抵抗、挿抜寿命） | **未決。**±15V と音声で要求が違う |
-| `PT2314` 移設の可否 | **未決** |
-
-#### 【保留】計測基板を母板に統合するか — PCB を組むときに判断（2026-09-03）
-
-> **⚠ 2026-09-04 追記: これは2択ではなく4択だった。**
-> 「別基板のまま」「母板に統合」の他に、**「箱の外へ出す」「いまの ADC 実装を捨てて
-> 別設計にする」**がある（どちらも母板が小さくなる方向）。
-> 4つの比較は下の**「まだ検討していない筋 — 計測基板の扱いは4択」**にある。
-
-**判断は先送り。B5（`MeasurementADC` 次号 PCB）を起こすときに決める。** 決め忘れないための記録。
-
-`D11`（測定系は回路そのまま、外形とヘッダだけスタック規格へ）は
-**「回路図だけ持ってくる vs 外形も合わせる」の二択**で決めた。
-**母板に統合する**という第3の選択肢はそのとき検討していない。
-
-##### なぜ論点になるか — 測定タップが接点を通っている
-
-`AUDIO_L_IN`/`AUDIO_R_IN` は `AMP_SEL_L`/`AMP_SEL_R` そのもの、つまり
-**選択されたオペアンプの出力**。系で最も繊細な信号が基板をまたいでいる。
-
-2026-09-03 の実測で**分解能を縛っていたのは機械的再現性**（ソケット抜き差しで −112 dBc）だった。
-接点を減らすためにスタック化したのに、**測る信号そのものが接点を通る**のは筋が通らない可能性がある。
-
-しかも `B4'-1` で境界が **7本 → 11本**に増える（＋`I2C_SDA`/`I2C_SCL`/`3V3`/`D_GND`）。
-
-##### 比較
-
-| | 母板に統合 | 別基板のまま |
-|---|---|---|
-| 測定タップ | **接点ゼロ。銅箔で直結** | ヘッダ1組を通る |
-| 基板をまたぐ信号 | 0 | 11本 |
-| グランド | **1枚のベタ。A6 が完全にレイアウトの話になる** | `NT1601`/`NT1602` の議論が残る |
-| 基板サイズ | 220×150 ＋ 150×100 → **300×200 級。コスト増** | 100×100 枠を活かせる |
-| デジタルの同居 | Pico・40MHz SPI LCD がアナログと同じ板（**D10 で「GND を分離すれば成立」と判断済み**） | 水平距離で分離 |
-
-**B5 でどのみち次号 PCB を起こす**（ASFL の銅箔直し・LCD の SPI 配線・`TPS3307-33` の実装）ので、
-**別基板として起こすか母板の一部として起こすかの差**でしかない。
-
-> **⚠ この保留は回路図の作業を止めない。** `B4'-1` / `B4'-2` はどちらの結論でも同じ内容になる
-> （シートの分け方は基板の分け方と独立に決められる）。
-
-##### 方向は「1枚＋娘基板のスタック」に傾いている（2026-09-03、ユーザー）
-
-> いまは分割基板でワイヤ接続に空中配線なので、そもそもきれいな環境で再生していない。
-> 1枚で再設計することで解決しそう。
-
-数字がそれを支持している。**実測ベースライン H3 −76 dBc に対し `OPA2134` の DS 値は −122 dB で、
-差は 46 dB。** 仮配線とケーシング未了で説明が付く量で、スパーの 6 dB や絶縁の話はこの下に埋もれている。
-
-計測基板の実機はまだ応急配線のまま（`Y701` ASFL が空中配線、LCD の SPI をヘッダから飛ばし、
-`U710` の1番ピンをリフト）。**回路図 rev 0.4 では全部直っていて `MeasureControl` はそのコピー**なので、
-**次号 PCB を起こせばどのみち消える**。つまり統合の追加コストは**基板サイズだけ**。
-
-##### ⚠ 配置がシート分割を決める（依存の向きが逆。2026-09-04）
-
-**普通は回路図が先で配置が後だが、ここは逆。** どこに基板の境界を置くかで、
-**何が境界を渡るか**が変わり、それが回路（ダンパ・グランドピン・電源の引き方）を変える。
-**B5 の結論が出るまで、Pico の置き場所に依存する部分を確定させないこと。**
-
-##### D29 — 階層を物理の入れ子に合わせた（2026-09-04 実施）
-
-上の「依存の向きが逆」は**回路図の構造が悪かったから**でもある。
-
-刷新直後は4枚が**兄弟**で、親に階層ピンが 20 本並んでいた。この形は
-**「ここに基板の境界がある」という物理的な主張**を、B5 の結論より先に書いてしまっている。
-電源も I2C も番地も親を経由して配られるので、「ADC の電源をどこで作るか」を
-考えるだけで親のピン表を触ることになり、**ADC の回路が ADC のことだけを考えられない。**
-
-そこで階層を実態に合わせた。
-
-```
-AudioV2Case（親）＝ COMMON_L/R・PHONE_L/R・LINE_L/R の6本だけ
-└─ MotherBoard
-   ├─ MeasureControl
-   ├─ AmpBankSwitch  └─ AmpCh1-5
-   └─ AmpBankRelay   └─ AmpCh1-5
-```
-
-**KiCad の階層シートは配置を縛らない。** 入れ子は「電気的にどこに属するか」しか
-言っていないので、**どこに境界コネクタを置くかは PCB を起こすときに決められる**。
-上の「B5 の結論が出るまで確定させるな」という制約は、**構造の側からは外れた**
-（回路の中身、特に I2S の渡し方はまだ B5 待ち）。
-
-決まったこと:
-
-- **親は「箱の皮」** — 外界と行き来する音声6本だけ。電源・I2C・`AMP_SEL` バス・
-  番地・`GND_COIL` は全部母板の中で閉じた
-- **電源系統は母板が持つ。** ADC 側は「何 V が何 mA 要る」だけを言えばよく、
-  それをどう作るか（`U1604` を三端子へ替える等）は母板側の判断になる
-- **`MeasureControl` は手編集所有のまま。** ただし**シートピンを足したら
-  `build_motherboard.py` の `CHILD_SHEETS` にも足す**こと（母板側のピンはコードが持つ）
-
-**検証（`40ec4db`）: ネットリストの分割が完全一致**（名前が `/MotherBoard/` 配下へ
-移っただけ）、ERC 29 件・部品 371 個で入れ子化前と同一、再実行がバイト一致。
-
-> **3分割（MeasurePower / MeasureADC / Control）は見送った。** 電源と ADC が
-> 座標で交錯していて（電源 x66–345、ADC x25–424、y はほぼ同じ帯）、
-> **幾何的に切れない**。切るなら 379 本のワイヤを引き直すことになるので、
-> **B5 で `MeasureControl` を描き直すときに一緒にやる。**
-
-
-##### ノイズが実際に通る経路（2026-09-04 に追った）
-
-「ADC を静かにしたいから Pico も静かな電源にすべきか」を検討して、**そうではない**と分かった。
-
-| 信号 | 向き | 性質 |
-|---|---|---|
-| **`ADC_DATA` / `ADC_BCK` / `ADC_LRCK`** | ADC → Pico | **`BCK` 6.144 MHz が常時。ADC 自身が Pico の入力容量を駆動し、その帰還電流が `ADC_GND` を流れる** ← 本命 |
-| `ADC_nRST` | Pico → ADC | **測定中は直流。**初期化時にパルスするだけ |
-| `MCLK_SENSE` | ADC → Pico | `R1605` 1k 直列のセンス。電流は小さい |
-
-**`RST` を理由に Pico 側を静かにする必要は無い**（測定中ずっと直流だから）。
-そして **I2S のスイッチング電流は ADC 自身の出力段が作っている**ので、
-**Pico の電源を綺麗にしても減らない**。Pico 2 のボード上には自前のスイッチング
-レギュレータも載っているので、入力を綺麗にしてもボード上で汚れる。
-
-##### 効く順（投資対効果）
-
-| | 効果 | コスト |
-|---|---|---|
-| **① `ADC_GND` の帰路を短く保つ** | I2S の帰還電流を ADC の直近で閉じる | **銅箔だけ** |
-| **② I2S 3本に直列ダンパ（33Ω 級）** | 立ち上がり電流とリンギングを抑える | 抵抗3個 |
-| **③ 測定中に LCD を電源ごと切る** | SPI 40MHz とバックライトを止める。**部品は既にある**（`U1609`） | **ファーム1行**（`lcd.en.value(0)`） |
-| ④ Pico 側の電源を静かにする | **上の3つより効かない** | レギュレータ交換 |
-
-> **⚠ I2S にダンパが無い。** `SCKI` には `R1604` 33Ω が入っているのに、
-> `ADC_DATA` / `ADC_BCK` / `ADC_LRCK` は**直結**。**非対称なので次号 PCB で入れる価値がある。**
-
-##### 境界は遅い信号のところに置く
-
-Pico に専用の静かな電源は要らない。**要求は「ADC との間に良いグランドがあること」だけ。**
-そして**良いグランドが一番安く手に入るのは同一基板**（1枚の銅箔）。
-
-| 置き方 | 境界を渡るもの |
-|---|---|
-| **Pico を ADC と同居**（いま） | `I2C`（**400 kHz 以下**）・`3V3`/`D_GND`/`+5V`（直流）・`±15V`（直流）・測定タップ（音声帯） |
-| Pico を制御側へ移す | **`I2S` 6.144 MHz ×3** ＋ `RST` ＋ `MCLK_SENSE` |
-
-**6.144 MHz を渡らせるか 400 kHz を渡らせるかの選択。** 移すなら I2S の3本それぞれに
-隣接するグランドピンが要り（D18 の `J_ANA` と同じ考え方）、ヘッダのピンと帰路の
-インダクタンスを買うことになる。
-
-> エンコーダ・OLED・DEST センスは**パネル実装でリード戻し**（D12）なので、
-> **Pico がどの基板にあってもパネルから来る。基板配置の判断材料にはならない。**
-
-**全部を1枚にするなら境界そのものが消えて、この論点も消える。** B5 で決めること。
-
-##### 📌 PCB を起こすときの申し送り — アースをきちんと処理する
-
-**1枚（母板＋計測系）＋ 娘基板のスタック**で起こす前提で、接地は以下を守ること。
-回路図側は A6（D28）で「NetTie を足さない」と決めてあるので、**残りは全部レイアウトの仕事**。
-
-- **シャーシアースは1点だけ。** A1 の実測で「USB を抜くと床が 23 dB 悪化」＝
-  **基準が弱いこと**が主因と分かった。PC に頼らず基準を立てるためにケースへ落とす。
-  **2点で落とすとシャーシ経由のループになる**
-- **`A_GND` ↔ `D_GND` の結合は既にある1本だけ**（`NT1601` → `U1604` → `NT1602`）。
-  母板側で追加しない
-- **コイルのパルス（80 mA 級）は `+5V_COIL` → リレー → `GND_COIL` で閉じる。**
-  `D_GND` のベタへ広げず、`NT101` の1点まで**専用の太い銅箔**で戻す
-- **ADC の帰路は `ADC_GND` のベタ内で閉じ、`NT1601` の1点だけで `A_GND` へ**
-- I2S / SPI の帰路は信号の真下
-- パネルへ戻すリードで `A_GND` と `D_GND` を束ねない／並走させない
-  （`SW401` センス極と `SW501/502` 音声極は同じ 3PDT だが電気的には別系統）
-
-
-#### 【確定】A6 — NetTie は足さない。同居は結合ではない（2026-09-03）
-
-**回路図側でやることは「NetTie を追加しないこと」だけ。** 実際のノイズを決めるのは銅箔とハーネスで、
-回路図の役目は「ループを作らない」「結合を1箇所に決める」の2つに尽きる。
-
-##### 結合は `MeasureControl` の中に既に1本ある
-
-```
-A_GND ─NT1601─ ADC_GND ─U1604─ PD_GND ─NT1602─ MC/D_GND
-                        (MBC2596 は非絶縁バック。IN- と OUT- は同一ノード)
-```
-
-これは v1 が選んだ **「GND 案A（非絶縁）」** の実装そのもの
-（[`../Audio/MeasurementADC_STATUS.md`](../Audio/MeasurementADC_STATUS.md)
-「板上で `A_GND↔ADC_GND` / `ADC_GND_IN↔D_GND`」）。事故ではない。
-
-##### G1/G2 の原則は生きている。場所が移っただけ
-
-G1/G2 は「`D_GND` の**発生源の直近**に1点」で、当時の発生源は `ControlPanel` の操作 Pico だった。
-**D27 で Pico が計測側へ移ると、発生源も計測基板へ移る。** 結合点が自動的に正しい場所へ動くので、
-
-- **`ControlPanel` にも母板にも NetTie を追加してはいけない**（2箇所目になる）
-- `NT101`（`GND_COIL` ↔ `D_GND`）は `D_GND` の**枝**なので閉路を作らない。残してよい
-
-##### 【訂正】「B4'-1 で `D_GND` を統合するとループが閉じる」は誤り
-
-`U402`（`PT2314`）が `A_GND` と `D_GND` の両方にピンを持つのを結合と数えていたが、
-**ネットリスト上は別ネットのまま**（IC のパッケージ内部で繋がるだけで、銅箔は繋がらない）。
-`ControlPanel` に NetTie は無いので、`D_GND` を統合しても閉路はできない。
-
-##### 同居は結合ではない — `SW401` が実例
-
-シートは基板（または物理的なまとまり）を表すだけで、**同じシートに `A_GND` と `D_GND` が
-現れてもネットリスト上は別ネット**。結合するのは NetTie を置いたときだけ。
-
-| 記号 | Value | 系統 |
-|---|---|---|
-| `SW501` | DEST L (PHONE/MUTE/LINE) | 音声・`A_GND` |
-| `SW502` | DEST R (PHONE/MUTE/LINE) | 音声・`A_GND` |
-| `SW401` | **DEST sense (3PDT 3rd pole)** | センス・`D_GND` |
-
-**この3つは同じ1個の 3PDT スイッチ**（C&K 7303SYZQE）。1個の部品の中で
-`A_GND` 系2極と `D_GND` 系1極が物理的に同居しているが、電気的には別。
-ロータリエンコーダも同じで、**パネルに載っているだけ**。
-
-##### 回路図では表せないので、ルールとして残す
-
-| 決まる場所 | 内容 |
-|---|---|
-| **回路図** | ネットの本数と結合点＝**ループが存在するか**。一度1本にしたら PCB では分けられない |
-| **銅箔／ハーネス** | インピーダンス（太く短く）、**帰路電流が実際にどこを通るか**、ベタの切り方 |
-
-- **パネルへ戻すリードで `A_GND` と `D_GND` を束ねない／並走させない。**
-  `SW401`（センス極）の帰路は `D_GND` 側で戻し、`SW501/502`（音声極）の `A_GND` とは別に走らせる
-- **コイルのパルス（80 mA 級）は `+5V_COIL` → リレー → `GND_COIL` で閉じる。**
-  `D_GND` のベタへ広げず、`NT101` の1点まで専用の太い銅箔で戻す
-- **ADC の帰路は `ADC_GND` のベタ内で閉じ、`NT1601` の1点だけで `A_GND` へ**
-- I2S / SPI の帰路は信号の真下
-
-##### 残る食い違い（A6 とは分けて扱う）
-
-[`WIRING.md`](WIRING.md) は「一次（`PD_GND`）と二次（`A_GND`）は DC-DC で絶縁されており、**繋がない**」
-と書いているが、**実態は上記のとおり案A で繋がっている**。どちらかに揃える必要がある。
-
-| | |
-|---|---|
-| 実態に合わせる | 案A を認める。絶縁型 DC-DC は「電源ノイズの絶縁」としてだけ働く |
-| 方針に合わせる | `ISO7741`（¥448）＋ ADC 側電源を二次側へ。**次号 PCB（B5）でまとめてやる** |
-
-**この選択は B4'-1 の前提にはならない。** どちらでも「NetTie を足さない」は同じ。
-
-#### 【確定】Pico は計測側（`A1602`）に寄せる — B4'（2026-09-03、ユーザー判断）
-
-`U401`（`ControlPanel` の操作用 Pico）を削除し、UI を計測/制御基板へ移す。
-
-##### 決め手 — GPIO を数えたら**そのままでは入らなかった**
-
-Pico 2 の使えるピンは GPIO0–22 と 26–28 の **26本**。
-
-| | 使用 | 空き |
-|---|---:|---:|
-| `A1602`（計測） | 15（I2S 3・LCD 6・タッチ 4・MCLK・`ADC_nMR`） | **11** |
-| `U401` が要求 | **14**（ENC×3 で 9・LED 2・I2C 2・`DEST_ADC` 1） | |
-
-ADC が使えるのは 26/27/28 だけなので、エンコーダで埋めると `DEST_ADC` の行き先が消える。
-**統合の実費は `MCP23017` を1個足すこと**（UI 用・番地 **0x22**）。ENC×3 と LED×2 を
-そこへ逃がせば必要 3本／空き 11本で余裕 8本。EC11 は人間の速度（毎秒20ステップ級）なので
-I2C 割り込みで間に合うし、キャプチャは PIO＋DMA なので CPU が取られても取りこぼさない。
-
-##### 統合の実利は2つだけ
-
-| | |
-|---|---|
-| ① USB 2本 → 1本 | **A1（USB グラウンドループ仮説）が当たれば効く。外れれば価値はほぼゼロ** |
-| ② 切替と測定が同じ MCU | 「切替→待ち→キャプチャ→切替→キャプチャ」を1本の接続で回せる。いまは PC が2本の USB を協調させる必要があり、**`mpremote` で片方に繋ぐともう片方のスペアナが止まる** |
-
-**②は2個のままでも不可能ではない**（ポートが2つになるだけ）。ユーザーは②を理由に統合を選択。
-
-> **⚠ ERC の 32 件は統合の理由にならない。** `U401` と `PT2314` の**未使用ピン**なので、
-> `no_connect` を打てば統合しなくても消える。一度「決めないと進めない」と書いたのは誤り。
-
-##### 実装計画（未着手。着手前にこの2点を読むこと）
-
-**1. 系の `3V3` は計測 Pico の `3V3_OUT` から取る。`+3V3_A` には触らない。**
-
-いま系の `/3V3`（I2C プルアップ・OLED・娘基板の `MCP23017`）を駆動しているのは
-**`U401.36`（操作 Pico の 3V3_OUT）だけ**。`U401` を消すと供給源が無くなる。
-計測基板には 3.3V が2系統ある:
-
-| ネット | 出所 | 用途 |
-|---|---|---|
-| `/MeasureControl/+3V3_A` | `LT1763-3.3`（`U1603`） | **`PCM1804`・水晶・監視 IC の清浄レール。ここに I2C と OLED を載せてはいけない** |
-| `/MeasureControl/PICO_3V3` | `A1602` の 3V3_OUT | Pico 自身のみ。**系の `3V3` はこちらから出す** |
-
-**2. `D_GND` の統合は A6 そのもの。いまは2ドメインに分かれている。**
-
-| ネット | 結合点 |
-|---|---|
-| `/D_GND`（`ControlPanel` 側） | 母板の `NT101` で `GND_COIL` へ |
-| `/MeasureControl/D_GND` | `NT1602` で `PD_GND` へ |
-
-**この2つは今日の時点で別ネット。** I2C マスタが計測基板へ移ると同じ `D_GND` に
-なる必要があり、それは A6「`D_GND` の発生源が計測/制御基板へ移る」の実行にあたる。
-**NetTie の位置をどこにするかを決めてから配線すること。**
-
-##### 部品の仕分け（`ControlPanel` 39 部品の行き先）
-
-| 行き先 | 部品 |
-|---|---|
-| **母板** | `PT2314`(U402) と周辺 20点（C401–C412・R407・R410–R415）、`BP5293-50`(U403)＝娘基板のコイル用 `+5V`、パネル `PWR SW`(SW402)、12V パネル LED(D403) |
-| **計測/制御基板** | ENC×3、DEST LED 2＋抵抗（D401/D402・R404/R408）、OLED(J_OLED401)、I2C プルアップ(R401/R402)、DEST センスラダー(SW401・R403・R405・R406・R409)、**新規 `MCP23017`(0x22)** |
-| **削除** | `U401`（Pico） |
-
-段取りは **B4'-1（UI と I2C マスタを計測基板へ）→ B4'-2（`PT2314` と `+5V` を母板へ、`ControlPanel` 廃止）**。
-一度にやると検証できない。
-
-#### 【確定】入力トポロジは A案＋1µF フィルム — B1（2026-09-03）
-
-数値は 2026-09-02 に出揃っていた（[`spice/README.md`](spice/README.md)「`input_topology.py`」）。
-判断は **「`Ib×Rb` の直流オフセットをどこまで嫌うか」**に尽きる、というところで止まっていた。
-
-**決め手は「200mV は交流結合で後段に出ない」こと。** `LT1364CN8` は実際に在庫にある
-（[`../Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)）ので 200mV は仮定ではないが、
-
-- 出力は `47Ω + 2.2µF` で交流結合されるので**後段には出ない**
-- ゲイン 2.0 で 400mV。±15V に対して**ヘッドルームの 4%** しか食わない
-- JFET 系（`OPA2134` / `OPA2140` / `MUSE01` / `MUSE03`）は `Ib` が pA なので**ほぼ 0**。
-  効くのはバイポーラだけ
-
-一方 A案でしか得られない利点が3つある。
-
-| | |
-|---|---|
-| **ch 独立** | B案は共通ノードの直流が「刺さっている全10石の `Ib` の和」で決まる。**1石差し替えると全chが動く**＝比較装置として失格 |
-| **信号路に何も足さない** | C案の共通バッファは **DIRECT 経路の絶対THD に新しい床を作る**。在庫最良の `OPA1612` が −136dB なので、バッファがそれ以上でないと意味がない |
-| **フィルムが使える** | A案だけ必要容量が 0.80µF まで下がる。電解の漏れ×100k は**最大 300mV で `Ib×Rb` より大きい**。「電解の漏れ」は A案の弱点ではなく **A案でだけ回避できる** |
-
-**実装:** 結合C は **1µF フィルム**、バイアスは **`Rb` = 100kΩ**。
-
-> **⚠ 入力側の 220kΩ プルダウンは撤去する。** 入力スイッチが OFF のとき浮くのを
-> 押さえる部品だったが、ブロードキャストではスイッチが無いので不要。しかも残すと
-> 1ch あたり `100k ∥ 220k = 68.75k`、10ch 並列で **6.9k** になり **PT2314 の
-> `RL=10k` 規定を割る**。撤去して 1ch = 100k、10ch 並列で **ちょうど 10.0k**。
->
-> **⚠ 2026-09-07: 後半の `RL` の理屈は `PT2314E` では成立しない**（DS の `RL` 最小は 5 kΩ で、
-> 6.9k は割らない）。**ただし撤去の判断自体は変わらない** —— 主な理由は「ブロードキャストでは
-> 入力スイッチが無いので不要」で、`RL` はあくまで副次的な根拠だった。
-
-#### 【確定】出力のみ MUX へ揃える — B0（2026-09-03）
-
-回路図も生成コードも「入力も出力も MUX」のままだった（`TMUX7612` が 1ch に1個、
-4スイッチを 入力L/R・出力L/R に使い、SEL 4本を1ビットに束ねている）。
-§11.1a の決定は**「入力ブロードキャスト＋出力のみ MUX、`TMUX7612` ×5」**。決定側へ揃える。
-
-##### 構造的な帰結 — `AmpChannel` が両版共通になる
-
-出力のみ MUX にすると **1 IC = 2ch**（4スイッチ ÷ L/R = 2ch）なので、
-**`TMUX7612` は per-channel シートに置けなくなり、娘基板シートへ上がる**。
-
-これは副産物として良い。**`AmpChannel` は「オペアンプ1ch分の回路」だけになり、
-リレー版とスイッチ版で完全に同一**になる。差が出るのは娘基板レベルの切替シートだけ。
-D9（両版を混ぜて挿す）の比較条件がさらに揃う。
-
-##### 検討して捨てた案 — 1 IC = 1ch を保ち、出力に2スイッチずつ並列
-
-`Ron` が半分になるので歪みが 6dB 下がる、と一次近似では考えた。
-**`switch_thd.py` で確かめたら、設計領域では成立しなかった。**
-
-| Vout | 並列 | `Ron`@0V | THD | 改善 |
-|---:|---:|---:|---:|---:|
-| 4.0 Vrms | 1 | 1.11 Ω | −166.2 dB | |
-| 4.0 Vrms | 2 | 0.55 Ω | −168.1 dB | **+1.8 dB** |
-| 7.0 Vrms | 1 | 1.11 Ω | −166.8 dB | |
-| 7.0 Vrms | 2 | 0.55 Ω | −168.3 dB | **+1.5 dB** |
-| 9.2 Vrms | 1 | 1.11 Ω | −115.2 dB | |
-| 9.2 Vrms | 2 | 0.55 Ω | −121.3 dB | +6.0 dB |
-
-**膝の内側では出力直列の 47Ω が支配していて、`Ron` を半分にしてもほとんど動かない。**
-6dB 効くのは膝の外（9.2 Vrms）だけで、そこは D4 で使わないと決めた領域。
-しかも −166.8 と −168.3 はどちらも `PCM1804` の `THD+N`（−102dB）より 65dB 下で、
-**測れない差のために IC を倍（約 $30 増）にすることになる。** 却下。
-
-> 一次近似の「`Ron` 半分＝歪み半分」は**直列抵抗が無い場合の話**だった。
-> §1 の「数値を並べる前に条件を確認する」がまた効いた例。
-
-##### 1ch の回路（新 `AmpChannel`、L側。R は対称）
-
-```
-TONE_L ─┬─ C(1µF film) ─┬─ AMP.3(+)
-        │                └─ Rb(100k) ─ A_GND
-        └─ 他ch へブロードキャスト（10ch 並列で PT2314 から見て 10.0k）
-
-AMP.2(-) ─┬─ Rg(20k) ─ A_GND
-          └─ Rf(20k) ─ AMP.1(OUT)          ゲイン 2.0
-
-AMP.1 ─ 47Ω ─ C(2.2µF film) ─ OUT_L ─┬─ 220k ─ A_GND（OFF時に浮かせない）
-                                       └─ 階層ピン OUT_L (output)
-```
-
-| 変更 | 内容 |
-|---|---|
-| 撤去 | `TMUX7612` ×1、入力の 10µF 電解 ×2、入力の 220k プルダウン ×2 |
-| 変更 | バイアス 1k → **100k**、入力結合C 100nF film → **1µF film**（10µF 電解と並列だったのを1個に） |
-| 階層ピン | `SEL` を削除。`AMP_SEL_L/R`(output) → **`OUT_L`/`OUT_R`**(output、ch ごとに独立) |
-| 部品数 | 1ch あたり 24 → **20** |
-
-##### 切替段（娘基板シート、5ch／`TMUX7612` ×3）
-
-`S` 側が ch ごと、`D` 側が共通バスという現行の使い方をそのまま踏襲する。
-
-```
-chA_OUT_L → S1(3)  D1(2)  → AMP_SEL_L      SEL1(1) + SEL2(16) ← SEL_CH_A
-chA_OUT_R → S2(14) D2(15) → AMP_SEL_R
-chB_OUT_L → S3(11) D3(10) → AMP_SEL_L      SEL3(9) + SEL4(8)  ← SEL_CH_B
-chB_OUT_R → S4(6)  D4(7)  → AMP_SEL_R
-```
-
-5ch なので **IC 3個（スイッチ 12 のうち 10 使用、2つは N.C.）**。
-`MCP23017` は SEL 5本だけなので 1個で足りる（番地はスロットから受ける＝D21）。
-
-#### 【確定】スタック規格 — A2（2026-09-03）
-
-**上の「決める順序」の筆頭。他はすべてこれに従う。** 初版なので PCB レイアウトに
-着手した時点で数値は見直すが、**両版で同一であること**だけは動かさない。
-
-##### 段構成
-
-```
-2段目   AmpBank 娘基板 ×2（横並び、DIP ソケット上向き）
-1段目   母板（アナログ）        計測/制御基板     ← 横に並べる
-```
-
-計測/制御基板を母板の下に敷く案（3段）より**横並び**を採った。計測基板は v1 の資産を
-そのまま持つので `ADC1804_F`(56×33) `MBC2596`(43×21) Pico・LCD を載せて 150×100 mm 級になり、
-**下に敷くと母板もその大きさが要る**。横並びなら高さを稼がずに済み、アナログ／デジタルの
-分離は水平距離で取る。
-
-##### 外形と取付穴
-
-| 基板 | 外形 | 備考 |
-|---|---|---|
-| **`AmpBank` 娘基板** | **100 × 80 mm** | **両版で同一。** 100×100 の価格枠内 |
-| 母板 | 220 × 150 mm 目安 | 娘基板2枚（間隔10mm）＝210mm がスロット幅の下限 |
-| 計測/制御基板 | 150 × 100 mm 目安 | v1 の部品構成から |
-
-- **M3（φ3.2）四隅、端から 5.0 mm。** 娘基板の穴中心は `(5,5) (95,5) (5,75) (95,75)`
-  （左下原点・X右・Y上）
-- **基板間 15 mm。** 娘基板の**真下に背の高い部品を置かない**のが前提で、
-  `REC10K` DC-DC・47µ 電解・`LM7809`(TO-220) は母板の娘基板エリア外へ。
-  実部品高さは発注前に実測で確認する
-
-##### ヘッダのピン割当（両版共通・これが A2 の本体）
-
-**`J_ANA` 2×5（P2.54）** — pin1 = `(20.00, 10.00)`、奇数ピン列 Y=10.00 / 偶数ピン列 Y=12.54、
-X は 2.54 ピッチで +X 方向
-
-| | | | |
-|---:|---|---:|---|
-| 1 | `A_GND` | 2 | `A_GND` |
-| 3 | **`TONE_L`** | 4 | `A_GND` |
-| 5 | `A_GND` | 6 | **`TONE_R`** |
-| 7 | **`AMP_SEL_L`** | 8 | `A_GND` |
-| 9 | `A_GND` | 10 | **`AMP_SEL_R`** |
-
-**4本の信号ピンすべてが、直交する隣接ピン3方向とも `A_GND`** になるよう千鳥に置いた。
-ワイヤをやめる目的がこれなので、GND ピンは6本使う。アンプの**入力(`TONE`)と出力(`AMP_SEL`)の
-間にも必ず GND が入る**ので、コネクタ経由の出力→入力の回り込みも切れる。
-
-**`J_PWR_CTRL` 2×6（P2.54）** — pin1 = `(60.00, 67.46)`、奇数ピン列 Y=67.46 / 偶数ピン列 Y=70.00
-
-| | | | |
-|---:|---|---:|---|
-| 1 | `+15V` | 2 | `A_GND` |
-| 3 | `-15V` | 4 | `A_GND` |
-| 5 | **`+5V_COIL`** | 6 | **`GND_COIL`** |
-| 7 | `SDA` | 8 | `D_GND` |
-| 9 | `SCL` | 10 | `3V3` |
-| 11 | **`ADDR0`** | 12 | **`ADDR1`** |
-
-**2つのコネクタを基板の反対側の辺に置く**ことで、アナログとデジタルを基板の幅ぶん離す。
-機械的にも2辺で支えられる。**ピン数が 2×5 と 2×6 で違い、X 位置も 20.00 と 60.00 でずらして
-あるので、180°回転して挿しても勘合しない**（これがキーイング）。
-
-##### 母板側の実装（2026-09-03、`build_motherboard.py`）
-
-D18 のピン割当を母板へ起こしたときに決まった具体（回路図・ネットリストで確認済み）。
-
-| ヘッダのピン名 | 母板のネット | 出所 |
-|---|---|---|
-| `+5V_COIL` | **`+5V_COIL`** | 母板の `BP5293-50`（旧 `ControlPanel` 由来）。**2026-09-04 に是正** — それまで母板側だけ `+5V` という別名で、しかも入力がアナログ二次の `+15V`・帰路が `D_GND` だった。**⚠ 当初「通電しない」と判定したが誤り** — 上の A6 の結合チェーン（`A_GND`─NT1601─`ADC_GND`─**U1604 の非絶縁バック内部**─`PD_GND`─NT1602─`D_GND`）を通る帰路は存在した。**問題は通電の有無ではなく経路**で、リレーのパルス電流が**結合チェーン全体、つまり ADC のアナログ星点を通って**いた。いまは 入力 `PD_12V_SW` / 帰路 `GND_COIL` / 出力 `+5V_COIL` なので、パルスは `+5V_COIL` → リレー → `GND_COIL` → `NT101` → `D_GND` の中で閉じ、`ADC_GND` / `A_GND` に触れない |
-| `GND_COIL` | **`GND_COIL`**（独立ネット） | `NT101`（`Device:NetTie_2`）で `D_GND` へ1点結合。**A6 / D28 で確定**（NetTie は足さない）。`NT101` は `D_GND` の枝なので閉路を作らない |
-| `SDA` / `SCL` | `I2C_SDA` / `I2C_SCL` | 親（`ControlPanel`） |
-| `3V3` / `D_GND` | `3V3` / `D_GND` | 同上 |
-
-**番地は母板の配線でスロットごとに固定する**（D21）。
-
-| スロット | `ADDR0` | `ADDR1` | I²C アドレス |
-|---|---|---|---|
-| 1 (`J_PWR101`) | `D_GND` | `D_GND` | **0x20** |
-| 2 (`J_PWR102`) | `3V3` | `D_GND` | **0x21** |
-
-母板の階層ピンは 13 → **20 本**になった（`TONE_L`/`TONE_R`/`I2C_SDA`/`I2C_SCL`/`D_GND`/`3V3`/`+5V` が増）。
-`GND_COIL` は `NetTie` で内部に閉じるので階層ピンにしていない。
-
-**ERC は 60 → 56 件に減った。** スロットが `+5V` を消費するようになり、
-`isolated_pin_label` が 4 件消えた（`ControlPanel` が出していた `+5V` の行き先がなかった分）。
-
-> **⚠ ピン番号の並びは標準の 2xNN フットプリント基準**（奇数=1列目・偶数=2列目、行が進む）。
-> 上の表の「信号は直交する隣接3方向とも `A_GND`」はこの並びで成立している。
-> 回路図シンボル（`Connector_Generic:Conn_02x0N_Odd_Even`）は縦向きだが、
-> 番号の隣接関係は同じなので結論は変わらない。
-
-##### 新しく決めた3点
-
-**1. `+5V_COIL` / `GND_COIL` を共通ヘッダに含める（＝リレー版の要求を上位集合として採る）**
-
-この線は 2026-09-01 に「アナログスイッチ化でコイル用 `+5V` は不要」として 5P→4P に減らしていた
-（[`CIRCUIT_DESIGN.md`](CIRCUIT_DESIGN.md)）。**両版を混ぜて挿すと決めた以上、ヘッダは
-リレー版の要求で定義しないと混ぜられない。** スイッチ版はこの2本を未接続にするだけ。
-
-コイル帰路は `D_GND` と**分ける**。2コイルラッチのパルスは 80 mA 級（125Ω ×2 並列 @5V）で、
-I²C の GND に流す理由がない。
-
-**2. 番地は基板側でなくスロット側に持たせる**
-
-旧 `RelayBoard` は 0Ω ストラップで**基板に**番地を焼いていた（§2.6）。今回は
-**母板のスロット配線で決める**（`ADDR0`/`ADDR1` の2本、0x20–0x23 の4スロットまで）。
-
-理由は「両版を差し替えながら比べる」装置だから。番地が基板固定だと**同番地の2枚を同時に
-挿せず、予備基板は再はんだが要る**。スロット側なら**どこに何を挿しても衝突しない**。
-
-**3. 娘基板の粒度を 4ch×3枚 → 5ch×2枚 に変更（A3 も確定）**
-
-面積ではなく**母板の横幅**で決まった。1ch あたりの部品占有面積を積むと 5ch で約 14 cm² しかなく、
-100×80 mm の板には**密度 18% で収まる**。制約は母板側にある。
-
-| 粒度 | 母板の最低幅 | 判定 |
-|---|---:|---|
-| 4ch × 3枚 | 約 320 mm | 母板が大きすぎる |
-| **5ch × 2枚** | **約 210 mm** | **これ** |
-| 10ch × 1枚 | 約 110 mm | スロットが1つになり、混ぜて挿せない |
-
-**5ch×2枚でも比較の狙いは満たせる。** スロット1にリレー版5ch、スロット2にスイッチ版5ch を挿し、
-**両方の ch1 に同じ石を挿せば**、電源・出力段・測定タップが同一のまま切替素子だけを比べられる。
-`MCP23017` 1個の上限（リレー8ch / スイッチ16ch）にも収まる。
-
-##### 未着手の前提（娘基板の回路を起こす前に片付けること）
-
-**`AmpChannel` の回路は「入力も出力も MUX」のまま**で、`TMUX7612` が 1ch につき1個ある
-（4スイッチを 入力L/R・出力L/R に使い、SEL は4本とも1ビットに束ねている。ネットリストで確認）。
-一方この文書の §11.1a は**「入力ブロードキャスト＋出力のみ MUX、`TMUX7612` ×5」**。
-生成スクリプト側（`amp_channel_wired`）も古い形のまま。
-
-**ヘッダを渡る信号は どちらでも `TONE_L/R` と `AMP_SEL_L/R` の4本で変わらないので、
-A2 はこの乖離と独立に確定できる。** ただし娘基板の IC 数（10個→5個）と入力トポロジ（B1）に
-直結するので、**娘基板の回路図を起こす前に**トポロジを揃えること。
-
-#### 【要件】ヘッダの部品選定 — A5（2026-09-03）
-
-D18 でピン割当は決まった。残りは「どのヘッダを買うか」で、論点は**電流容量・接触抵抗・
-挿抜寿命**の3つ。結論から言うと**3つとも制約にならず、実際に効くのは別の2点**だった。
-
-##### 電流容量 — 制約にならない
-
-娘基板1枚（5ch）が引く電流。`±15V` と `A_GND` 以外は桁が違う。
-
-| ネット | 典型 | 最悪 | 備考 |
-|---|---:|---:|---|
-| `+15V` / `-15V` | 100 mA | **230 mA** | 最悪は `AK05`/`LC5` を1ソケットだけ挿した場合。系の上限は DC-DC の ±333 mA |
-| `+5V_COIL` | 0 | 80 mA | **パルスのみ**（2コイルラッチ）。定常はゼロ |
-| `SDA` / `SCL` / `3V3` | 数 mA | | |
-
-`+15V` / `-15V` はヘッダ1本ずつしかないが、2.54 mm 品の一般的な定格は
-**3 A AC/DC・接点あたり**（250 V、接触抵抗 20 mΩ max）なので、**最悪でも 1割**。
-**電流でヘッダを選ぶ必要はない。**
-
-##### 接触抵抗 — 「抵抗値」ではなく「非線形性」が論点
-
-音声ピンを流れる信号電流は極めて小さい。
-
-| ネット | 信号電流 | 条件 |
-|---|---:|---|
-| `TONE_L` / `TONE_R` | 125 µA | `PT2314` 2.5 Vrms ÷ 娘基板の `Rb` 100k×5並列 = 20k |
-| `AMP_SEL_L` / `AMP_SEL_R` | 140 µA | D4 の上限 7 Vrms ÷ 負荷 50k |
-| 同上 | 184 µA | 設計最大 9.2 Vrms のとき |
-
-接触抵抗が 20 mΩ あっても電圧降下は 184 µA × 20 mΩ = **3.7 nV** で、
-**抵抗値そのものは問題にならない**。
-
-**問題は接点が非線形になりうること。** 錫メッキの接点は酸化膜を接触圧で破って
-（フリッティング）導通するので、破れていないと可変抵抗〜整流性を持つ。信号電圧は
-2.5〜9.2 V あるので酸化膜を破るには十分だが、**正弦波は毎周期ゼロクロスを通る**ので、
-そのたびに低電圧・低電流のドライサーキット条件を通過する。ここで非線形性が出ると
-**奇数次高調波**になる——`Ron(V)` の平坦度で議論したのと同じ物理。
-
-**これは金メッキを選ぶ根拠になる。** 切替素子を −166 dB まで追い込んだのに、
-コネクタが −100 dB 級の歪みを足したら全部無駄になる。**接点の非線形性は
-データシートから予測できない**（だから測るのではなく金を買う、という判断になる）。
-
-- **`J_ANA` は金メッキ**（`TONE_L/R`・`AMP_SEL_L/R` が通る）
-- `J_PWR_CTRL` は錫でよい（電源とロジックだけ）
-- **⚠ オス・メスでメッキを揃えること。** 金と錫を勘合させると異種金属接触と硬度差で
-  フレッティング腐食を起こす。**コネクタ単位で揃える**（`J_ANA` は両側金、
-  `J_PWR_CTRL` は両側錫）
-
-##### 挿抜寿命 — D9 のおかげで制約にならない
-
-**D9（両版を同時に挿して電気的に切り替える）が効いている。** 比較のたびに抜き差しするなら
-寿命が効くが、両版が同じ `AMP_SEL` バスに同居していて選択は I²C 番地で行うので、
-**物理的な抜き差しは組み立てと保守のときだけ**。生涯で数十回に収まる。
-
-標準品の金フラッシュ（25〜50 回級）で足りる。**マシンピン（100〜500 回級）は要らない。**
-
-これは D7（機械的再現性が律速）とも整合する。抜き差しが比較の交絡にならない構造に
-してあるので、**コネクタの再現性は A/B 比較に入ってこない**。
-
-#### 娘基板の接続方式 — **A（横並び・直結）で確定**（2026-09-04、ユーザー判断）／ch 数は保留
-
-「母板 220×150 は大きい」から派生した検討。**接続方式は現状の D18（横並び・直結ヘッダ）で
-確定した。** これで **A5（ヘッダの部品選定）の待ちが解けた** —— 娘基板側はロングピンのオス、
-母板側は標準ソケット、という前提で型番選定に進める。
-
-**ch 数（下の節）と計測基板の扱い（さらに下）は保留のまま。**
-
-##### 接続方式 — 4案のうち3案が落ちた
-
-**採用は A。** B と D は下記の理由で成立せず、C は成立するが対価が見合わないと判断した。
-
-| | 対称性 | D21（番地） | 母板 | 音声の接点 |
-|---|---|---|---|---:|
-| **✅ A 横並び・直結**（現状の D18） | ✓ | ✓ | 220×150 | **1組** |
-| B 縦積み・スタッキングヘッダ | ✓ | **✗ 番地が衝突** | 小 | 1組 |
-| **C 両方ケーブル** | ✓ | ✓ | **小** | **2組** |
-| D 片方だけケーブル | **✗ 比較が交絡** | ✓ | 小 | 1組と2組 |
-
-**B が落ちる理由 — 番地。** D21 で番地はスロット側（母板が `ADDR0`/`ADDR1` を
-スロットごとに違う値へ固定。slot1=0x20 / slot2=0x21）に決めてある。**縦積みすると
-2枚が同じピンを見るので同じ番地になり I²C で衝突する。** 直すには基板側ストラップへ
-戻すことになるが、それはまさに D21 が捨てた方式（「差し替えても衝突しない」ため）。
-
-**D が落ちる理由 — 交絡。これが一番気づきにくい。**
-縦積みの番地問題は「2枚目だけケーブルで母板のスロット2へ引く」で回避できる。
-D21 も D18 の「両版で同一」も守れる。**しかし音声経路が非対称になる** ——
-一方のオペアンプはケーブルを通り、他方は通らない。**この箱はオペアンプと切替素子を
-耳で比べるためのものなので、「オペアンプの違い」を聴いているつもりで
-「ケーブルの有無」を聴くことになる。** 母板の大きさを見た人が必ず思いつく案なので、
-落ちる理由ごと書いておく。
-
-##### ケーブル化（C）の評価 — 反論は1つだけ
-
-- **抜き差しの再現性は問題にならない。** D9（両版を同時に挿して I²C で切り替える）の
-  おかげで物理的な勘合は組立と保守のときだけ。上の「挿抜寿命」節と同じ理屈がケーブルにも効く
-- **`J_ANA` のピン配置（信号を GND で挟む千鳥）をケーブルへそのまま持ち込めば**、
-  コネクタで計算した −144 dB の分離は保てる
-- **残る反論は接点の数。これが決め手になった。** 基板→コネクタ→ケーブル→コネクタ→基板で
-  **音声経路の接点が 1組から2組へ増える**。上の金メッキの節が「接点の非線形性はデータシートから
-  予測できない」と書いた量が2倍になる。**金メッキで抑えられる見込みは高いが保証はできない** ——
-  **母板の面積と引き換えにするには重い**、というのが A を採った理由
-- **⚠ ケーブルにしても箱の中に置き場所と取付具は要る。** PCB の差額ほど総額は下がらない
-
-##### ch 数を増やす案 — 動機は実在する
-
-**在庫の DIP 差し替え可が 12 種（[`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)）に対し、
-ソケットは 10。** 全部を同時に載せられていない。
-
-| 制約 | 状態 |
-|---|---|
-| **入力ブロードキャスト** | ~~⚠ 10ch でちょうど 10.0k ＝ PT2314 の `RL` 下限。余裕ゼロ~~ → **2026-09-07: `PT2314E` の DS は `RL` 最小 5 kΩ。10.0k は下限の2倍で余裕あり**（上の「PT2314E の電気的特性」）。増やすなら `Rb` を上げる（N ch なら `Rb ≥ 10k × N`）。**雑音は増えない**（PT2314 の出力抵抗 1.9 Ω が支配するので `Rb` の熱雑音は効かない）が、入力バイアス電流 × `Rb` の**直流オフセットは増え、しかも石ごとに違う** |
-| **`TMUX7612`** | **1 IC = 2ch**（4×SPST を L/R で使う）。**いまの 5ch/枚 は 3 IC のうち半分を捨てている。6ch/枚 なら 3 IC を使い切る** |
-| **リレー版の MCP23017** | 2コイル/ch なので **16 GPIO ＝ 8ch/枚 が上限** |
-| **電源** | ±333 mA に対し実負荷は 62〜71 %。**1ch 増えるごとに約 +20 mA**。⚠ ただし `AK05`/`LC5`（150 mA）用に取ってある予約は**在庫に無い石のためのもの**なので、実際の余裕はもっとある |
-| 娘基板の面積 | 100×80 mm に 6ch が入るかは未確認 |
-
-##### 上限の計算（2026-09-04）
-
-**1枚あたり — 上限は 8ch。リレー版が両版を縛る。**
-
-| 制約 | 1枚あたり | 根拠 |
-|---|---|---|
-| **リレー版の `MCP23017`** | **8ch** | 2コイル/ch × 8 ＝ **16 GPIO ちょうど** |
-| スイッチ版の `MCP23017` | 16ch | L/R 連動で 1ch ＝ 1本 |
-| **D18「両版で同一」** | **→ 8ch に揃う** | **リレー版が両方を縛る** |
-| `TMUX7612` | 制約にならない | 2ch/IC。**8ch ＝ 4個ちょうどで無駄ゼロ** |
-| `TBD62083` | 制約にならない | 8ch/個。16コイル ＝ 2個ちょうど |
-| 面積 100×80 mm | **ここが本当の壁**（下記） | 5ch が入っている。8ch は未確認 |
-
-**→ 1枚 8ch / 2枚 16ch が I/O から出るハード上限。**
-
-**系全体**
-
-| | 上限 |
-|---|---|
-| 電源 ±333 mA | 20 mA/ch なら **約 15ch**、実測寄りの 15 mA/ch なら約 20ch。**⚠ ±12 V 化（上の「±15 V の理由は3つとも消えた」）なら ±417 mA ＋ 散逸 −20 % で約 20ch へ動く** |
-| 入力ブロードキャスト | ~~`Rb` 100k で 10ch がちょうど下限~~ → **`PT2314E` の `RL` 最小は 5 kΩ なので 10ch でも余裕あり**（2026-09-07）。さらに増やすなら `Rb ≥ 5k × N` |
-| **在庫** | **12 種** |
-
-> **⚠ 面積の見積もりに罠がある。在庫 12 種のうち 7 種が DIP 化モジュール**
-> （`OPA828`・`OPA1652`・`OPA627AU`・`OPA1612`・`OPA2140`・`MUSE01`・`MUSE03`）。
-> **素の DIP-8 ではなくピンヘッダに載った小基板**なので、**ソケットのピッチはモジュール寸法で
-> 決まる。** 素の DIP-8 で面積を計算すると足りない（`AK05`/`LC5` が
-> 「18×23 mm 級でソケット直挿しが物理的に厳しい」と既記録なのと同じ話）。
-
-##### 結論の候補 — **6ch × 2 = 12ch がいちばん筋が良い**
-
-- **5ch → 6ch は IC 追加ゼロ** —— `TMUX7612` は 3個のまま**使い切り**（いまは半分捨てている）、
-  `MCP23017` 1個・`TBD62083` 2個も据え置き（12コイル ≤ 16）
-- **12ch ＝ 在庫 12 種**にちょうど一致
-- 電源は 12×20 ＋ 35 ＝ 275 mA（83 %）で**電源カットなしでも入る**
-- 変更は **`Rb` 100k → 120k** とソケット1個ぶんの面積だけ
-
-**16ch（8×2）まで行くなら電源カットが要る**（電源が 15ch で先に尽きる）。
-
-##### 電源カット（未選択chの電源を落とす）— 反対理由が入れ替わる（ユーザー、2026-09-04）
-
-**入れると電源の上限が消える。** 選択中の1chだけなら 20 mA ＋ PT2314 系 35 mA ＝ 55 mA で
-±333 mA に対してほぼ無負荷。**上限が I/O と面積だけになる。**
-
-**⚠ この文書の既存の反対理由は、この文脈では当たらない。**
-下の「出力を切るなら電源を切る理由が無い」節は「電源を切ると放電済みバルクへの突入電流
-（100 µF で 1200 µC）を切替のたびに**接点へ**流す」と書いているが、**それはリレーの接点で
-電源を切る前提**。**専用のロードスイッチで切るなら接点を通らない。**
-
-代わりに別の反対理由が2つ出る。
-
-| | 中身 |
-|---|---|
-| **① 熱状態が揃わない（重い）** | 今つけた石と、ずっとついていた石を比べることになる。**この箱が消そうとしてきた種類の交絡**（D9・金メッキ・接点の再現性は全部これを避けるためだった） |
-| ② 整定とポップ | 入力結合 1 µF × `Rb` 100k で τ ＝ 0.1 s。**切替ごとに 0.5 秒級の整定とポップ**。A/B は素早く行き来したいので直接の劣化 |
-
-**どちらも「全部切る」なら効くが、「一部だけ切る」なら回避できる** ——
-温めておく数 ch は通電したまま、残りを落とす。**電源上限は消え、A/B の対象は常に温まっている。**
-**16ch 以上を狙うならこの形。**
-
-##### 「電源は入力を、音声は出力を制御する」— 成立する。ただし入力も切ること（ユーザー、2026-09-04）
-
-**スイッチが見る範囲では正しい。むしろ `TMUX7612` の要求が大幅に緩む。**
-いまの設計値（設計上限 7 Vrms・±11 V の膝・−166 dBc）は**「通す」と「阻む」の両方**の話だが、
-
-| | いま | 電源カット後 |
-|---|---|---|
-| スイッチが阻むもの | **他chの生きた信号**（OFF アイソレーションが要件） | **何もない。0 V を阻むだけ** |
-| OFF 側の歪み寄与 | 論点 | **消える** |
-| `Coff` のバス負荷 | 残る | 残るが**信号が乗っていない** |
-
-16ch でバスに `Coff` が 16個ぶら下がる問題も、**後ろに信号がなければ性質が変わる。**
-
-###### ⚠ ただし失敗はスイッチの外で起きる —— 入力クランプ
-
-**1ch の回路（上）に入力の直列抵抗が無い。** オペアンプの `+` 入力が 1 µF を介して
-ブロードキャストのノードへ直結している。**電源を 0 V にすると:**
-
-- `+` 入力の ESD クランプダイオードが **±0.6 V でクランプ**する
-- ブロードキャストは設計上限 **7 Vrms ＝ 9.9 Vpk**
-- 1 µF は 1 kHz で 159 Ω なので **(9.9 − 0.6)/159 ≈ 58 mA ピーク**
-
-**2つの意味で駄目。**
-
-1. **ブロードキャストが歪む。** ハードクリップするダイオードがバスに並列に入るので、
-   **選択中の ch の信号まで壊れる**
-2. **オペアンプの入力クランプ電流の絶対最大は普通 ±10 mA 級。石が壊れる**
-
-**直列抵抗での電流制限は不十分。** 10 k を入れてもバスに 10 k の非線形シャントが現れ、
-しかもハードクリップなので少ない電流でも高調波が濃い。100 k まで上げれば量は落ちるが
-熱雑音が効く。**素直に入力を切ること。**
-
-> **📌 これは机上の話ではない。v1 の実機で既に起きている**
-> （[`../Audio/MeasurementADC_BRINGUP.md`](../Audio/MeasurementADC_BRINGUP.md)
-> 「原因: OPA の両電源が未接続で front-end 全体がクランプされていた」）:
->
-> > 「未通電の `OPA1656` は出力が高インピーダンスにはならない。レールが 0V だと
-> > **出力段も入力段も ESD 構造で 0V へクランプ**する」
-> > 「`VCOM` は `PCM1804` の内部基準の出力なので、これが引きずり降ろされていた＝
-> > **変換器の基準そのものが壊されていた**」
->
-> **電源を切ったオペアンプが繋がったままだと何が起きるかは、この基板で実測済み。**
-
-###### 入力を切ると対価が2重に返る
-
-| | いま | 入力も切ると |
-|---|---|---|
-| PT2314 の負荷 | ~~10ch × 100k ＝ 10.0k ＝ 下限ちょうど~~ → **`PT2314E` の `RL` 最小は 5 kΩ。余裕あり** | **生きている ch だけが負荷。`Rb` 100k 据え置きでよい** |
-| 電源 | 約 15ch で尽きる | **選択中のぶんだけ。±333 mA は余裕** |
-| スイッチの OFF 要求 | 要件 | **消える** |
-| **残る上限** | 電源・入力・I/O・面積 | **I/O と面積だけ** |
-
-**`Rb` を 120 k へ上げる話も要らなくなる**（入力バイアス電流 × `Rb` の直流オフセットが
-石ごとに変わる件も回避できる）。
-
-**対価はスイッチ IC が倍。** 8ch なら出力に 4個 ＋ 入力に 4個。`TMUX7612` は qty10 で
-$5.86 なので **+約 $24/枚**。ただし**入力側は電流が流れない**（高インピーダンス）ので
-`Ron` は効かず、効くのは `Coff` と漏れだけ。**より安い素子でよい可能性がある。**
-
-**電源カット自体の副作用（熱状態が揃わない／整定 0.5 秒とポップ）は残る**ので、
-上記の「一部だけ切る」形とセットで考えること。
-
-###### ⚠⚠ アナログスイッチ自身は常時通電にすること
-
-`TMUX7612` は **±15 V で動いている**（ERC の `VSS` 3件が −15V なのはこれ）。
-**入力スイッチを ch のゲートされたレールから給電すると、ch を落としたときにスイッチも死に、
-電源の落ちたアナログスイッチは自分のピンで同じようにブロードキャストをクランプする。**
-問題が1段移動するだけで何も解決しない。
-
-| | 電源 |
-|---|---|
-| 入力スイッチ・出力スイッチ | **常時 ±15 V（切らない）** |
-| **オペアンプのレールだけ** | **ゲートする** |
-
-**つまり電源カットの対象は ch あたり `+15V` と `−15V` の2本。**
-ハイサイドで `+15V`、ローサイドで `−15V` を切り、**`MCP23017` の 3.3 V ロジックから
-レベルシフトして駆動**する。**8ch なら 16 個のゲート素子＋駆動が要る。**
-**ここが電源カットの本当のコストで、スイッチ IC を倍にする話より重い可能性がある。**
-
-```
-TONE ─┬─ [入力SW] ─ C(1µF) ─┬─ AMP(+)       AMP のレールだけ ±15V をゲート
-      │   常時給電            └─ Rb(100k)
-      └─ 他ch へ
-
-AMP ─ 47Ω ─ C(2.2µF) ─ [出力SW] ─ AMP_SEL バス
-                          常時給電
-```
-
-**ch あたり: 入力SW ×2（L/R）＋ 出力SW ×2 ＋ 電源ゲート ×2。**
-
-###### この構成が要るのは 16ch 以上のときだけ
-
-| ch 数 | 必要なもの |
-|---|---|
-| **〜12ch** | **いまの構成のまま。`Rb` を 100k → 120k にするだけ**（電源 83 %・IC 追加ゼロ） |
-| 〜15ch | 同上（`Rb` を上げる。電源が上限） |
-| **16ch〜** | **入力SW ＋ 電源ゲートが要る**（電源が先に尽き、電源を切るとクランプするため） |
-
-**在庫は 12 種なので、16ch は在庫より多い。**
-
-> **⚠ 「入力SWだけ入れて電源カットはしない」は割に合わない。**
-> 得られるのは「PT2314 の負荷が減る」だけで、**`Rb` を上げれば無料で同じ効果**が得られる。
-> **入力SWが要るのは電源カットとセットのときだけ。**
-
-> **⚠ 文書内に実負荷の数字が2つある** —— 「208 mA / 62 %」と、内訳表の
-> 「NE5532×10 ＠20 mA ＋ PT2314 系 35 mA ＝ 235 mA」。ch 数を触るならここを先に一致させること。
-
-##### まだ検討していない筋 — 計測基板の扱いは4択（どれも未検討）
-
-**同じ問い（母板が大きい）に対して、計測基板側の答えが4つある。**
-B5 の保留「計測基板を母板に統合するか」は**このうち2つしか比べていなかった**。
-
-| | 内容 | 母板 |
-|---|---|---|
-| ① 別基板のまま横に並べる | 現状の D18 | 220×150（計測基板ぶんの幅を含む） |
-| ② 母板に統合する | B5 の保留。方向はこちらに傾いていた | 300×200 級（大きくなる） |
-| ③ **箱の外へ出す** | ユーザー、2026-09-04 | **小さくなる** |
-| ④ **いまの ADC 実装を捨てて別設計にする** | ユーザー、2026-09-04 | **小さくなる可能性が高い** |
-
-**④ が思っているより安い理由。** `D11` は「測定系は回路そのまま」と決めて v1 の
-`MeasurementADC1804_Module` を持ってきたが、**その資産価値はもう目減りしている**:
-
-- **実機は応急配線のまま**（`ASFL` 空中配線・LCD の SPI をヘッダから飛ばし・監視IC のピンをリフト）で、
-  この節の上流に「**次号 PCB を起こせばどのみち消える**」「統合の追加コストは基板サイズだけ」と既に書いてある
-- **`MBC2596` は捨てたい部品** —— `REC10K` の絶縁を1箇所バイパスしており、
-  1.2 kHz スパーの容疑者でもある
-- **監視IC（`TPS3307-33`）は不要**と分かっている（`PCM1804` の内部 POR）
-- **3分割（電源/ADC/制御）が幾何的に切れない**のは既存図の座標が交錯しているからで、
-  **描き直すなら最初から3枚**にできる（D29 で B5 送りにした分がタダになる）
-- **D29 で電源系統を母板へ寄せた**ので、新設計の ADC は「何 V が何 mA 要る」だけを言えばよい
-
-つまり **④ は「D29 の続き」でもある。** 逆に失うのは v1 の回路図資産と、
-A1 のベースラインの取り直し（**これは C2 でどのみち予定されている**）。
-
-**⚠ ①〜④ は ch 数の話（上）と独立ではない。** 母板の面積の使い道が競合する。
-
-##### ④ をさらに割ると「測り方そのもの」の枝がある（ユーザー、2026-09-04）
-
-**いまの実装はノイズに弱く、分解能にも別の筋がありそう** —— つまり ④ は
-「同じ `PCM1804` 回路を綺麗に描き直す」だけではない。
-
-**⚠ ただし枝を選ぶ前に A1 の結果を読むこと**（[`../Audio/MeasurementADC_BRINGUP.md`](../Audio/MeasurementADC_BRINGUP.md)）。
-**分解能を縛っていたのは変換器ではなくグランド／基準**だった —— USB を抜くと床が
-−117.7 → −94.8 dBFS、スパーが −73.6 → −38.7 dBc。**USB ケーブルが基準を与えていた。**
-**グランドを直さずに変換器を良くしても効かない。** これが枝を評価する物差しになる。
-
-| 枝 | 何に効くか | A1 との整合 |
-|---|---|---|
-| a. より良い ADC チップ | 変換器の床 | **⚠ 効かない可能性が高い。** 律速が変換器ではない |
-| b. **差動／計装アンプ入力にする** | **同相ノイズの除去** | **A1 が指した方向そのもの。**「ノイズに弱い」への直接の答え |
-| c. **ノッチ（残差）測定** | **歪み測定の実効ダイナミックレンジ** | 基本波を打ち消して残差を増幅する古典的な THD 計の手。**変換器を良くせずに 20〜40 dB 稼げる** |
-| d. 外部の機材で測る（オーディオIF 等） | 床と基準の両方 | **A1 は「PC の基準に頼っていた」と言っている**ので筋は通る。箱の中に測定系を持たない選択 |
-| e. **測定系を作らない／縮小する** | — | 下の「⚠ そもそも」 |
-
-> **⚠ そもそも: 測定系が答えるべき問いには既に答えが出ている。**
-> §1 —— 測定系が載っているのは「切替素子が音を悪くしないか」を確かめるためで、
-> **切替素子の歪みは −166 dBc、聴こえるものからも測れるものからも 60 dB 以上下**。
-> そして **リレー版とスイッチ版の優劣は測定ではなく耳で決める**（D9）。
-> **「分解能を上げる」こと自体が目的になっていないか**を、枝を選ぶ前に確認すること。
-> 分解能が要るのは新しい問いを立てたときだけ。
-
-##### 実際に効く2点（こちらが A5 の本題）
-
-**1. 母板側のフットプリントが未指定**
-
-娘基板側は `PinHeader_2x05/2x06_P2.54mm_Vertical`（オス）が入っているが、
-**母板側は回路図にフットプリントが無い**。母板はメス（ソケット）である必要がある。
-
-**2. 基板間 15 mm は「コネクタが底突きする高さ」ではない**
-
-コネクタが底突き（ヘッダの樹脂がソケットの上面に当たる）した場合、基板間は
-**ソケット本体高さ ＋ ヘッダ樹脂 2.5 mm** で決まる。標準品のソケット高さは
-7.1 / 8.5 / 11 mm 級なので:
-
-| ソケット本体 | 底突きしたときの基板間 |
-|---:|---:|
-| 7.1 mm（低背） | 9.6 mm |
-| **8.5 mm（標準）** | **11.0 mm** |
-| 11 mm（背高） | 13.5 mm |
-
-**どれも 15 mm にならない。** ただしこれは 15 mm が不可能という意味ではなく、
-**15 mm では四隅の M3 スペーサが高さを決め、コネクタは底突きしない**という意味。
-その場合ピンが空隙ぶん余計に伸びていればよい。
-
-| 案 | 構成 | 基板間 | 判定 |
-|---|---|---:|---|
-| **a** | 娘基板に**ロングピン（11 mm 級）のスタッキングヘッダ**、母板に標準 8.5 mm ソケット | **15 mm** | **成立（2026-09-04 に品物で確認）。** 空隙 4 mm ＋ 嵌合 6.5〜7 mm |
-| b | 標準のオスヘッダ＋標準 8.5 mm ソケットで底突きさせる | 11.0 mm | 成立。D18 の 15 mm を 11 mm へ変更することになる |
-
-**2026-09-04: 案a を実在の品物で裏付けた（A5 の最後の宿題）。**
-残っていたのは「`J_ANA` の **2x5** でもロングピン双列品が手に入るか」で、
-2x6 は確認できていたが 2x5 が未確認だった。**2x5 のロングテール双列ソケットは流通しており、
-金メッキ・基板スタック用と明記されたものがある**（テール長 0.414 インチ＝約 10.5 mm）。
-テール 10.5 mm でも「空隙 4 mm ＋ 8.5 mm ソケットへ 6.5 mm 嵌合」で成立する。
-
-**これで「`J_ANA` は金メッキ」と「基板間 15 mm」が両立することが確定した。**
-2x5 が無ければ `J_ANA` を 2x6 にする案もあったが、**それは D18 のキーイング
-（2x5 と 2x6 でピン数が違うので 180° 回転しても勘合しない）を壊す**ので採らずに済んだ。
-
-**⚠ 流通品の情報は代理店の掲載によるもの。発注前にメーカーのデータシートで
-テール長と嵌合深さを確認すること。**
-
-**a なら D18 の 15 mm を変えずに済む。** 代わりにコネクタが機械的な支持を担わないので、
-**四隅の M3 スペーサが高さ精度と保持力を全部持つ**ことになる（もともと D18 は
-M3 四隅を規定しているので前提は満たしている）。
-
-b は「娘基板の真下に背の高い部品を置かない」という D18 の前提の余裕が 4 mm 減る。
-
-**⚠ 嵌合深さは選定した品種のデータシートで確認すること。** 上のピン長・ソケット高さは
-一般に流通している標準品の値で、メーカーによって変わる。
-
-##### 検討して問題ないと分かったもの
-
-**電源帰路が `J_ANA` の GND ピンへ分流する件** — `J_PWR_CTRL` の `A_GND` は2本、
-`J_ANA` は6本で、基板の反対の辺にある。平面抵抗が同等なら帰路の 6/8 = **75% が
-「シールドのつもりの」`J_ANA` 側を流れる**ことになり、一見まずい。
-
-しかし**信号周波数の成分は負荷電流ぶんしかない**（184 µA）。6本並列の接触抵抗
-3.3 mΩ を流れて 0.61 µV、9.2 V に対し **−144 dB**。静止電流 100 mA のぶんは直流なので
-直流オフセットになるだけ。**対策不要。**
-
-**挿抜力** — 2×5 と 2×6 で計 22 ピン。1ピンあたり 1 N 級とすると約 22 N（2 kgf）。
-手で抜けるが、100×80 mm の基板を端から引くと**たわむ**。四隅の M3 を外してから
-垂直に抜くこと、または PCB に指かけを設けることを PCB レイアウト（C1）で考慮する。
-
-#### 【確定】DIP-28 ソケットは 0.300"（narrow）— KiCad 標準フットプリントで載る（2026-09-05）
-
-> **⚠ 2026-09-07: 前提が1つ変わった。`PT2314` が `PT2314E`（SOP-28）になり、DIP-28 から抜けた。**
-> **DIP-28 は4インスタンス→3で、残るのは I/O エキスパンダだけ。**
-> この節の結論のうち「0.300" である」「標準フットプリントで載る」は**そのまま生きている**が、
-> **機械加工ピンを選ぶ理由（下の「意味があるのは1個だけ」）は消えた** ——
-> 音声がソケットを通る DIP-28 がもう無い。**ソケット品種は選び直しになる。未決。**
-
-**設計にある DIP-28 は `Package_DIP:DIP-28_W7.62mm`（0.300"）。**
-I/O エキスパンダ（`MCP23017x-x-SP`、AmpBank-S / AmpBank-R / MeasureControl の3枚）。
-0.600" 品は1つも無い。**インスタンス数の正は回路図**（`sch_facts.py bom`）。
-
-~~**オーディオプロセッサ（`PT2314-D`）**。~~ → **2026-09-07 に SOP-28 へ移行**（上の「トーン」節）。
-
-`PT2314-D`（無印 DIP 版）はデータシートの ORDER INFORMATION が **"28 Pins, DIP, 300mil"**、
-パッケージ図も `eA 0.300 BSC` / `D 1.345–1.400"` だった。**28ピン DIP を 0.600" と決めつけない**
-（コンシューマ向けオーディオ IC は 0.600" が多いので間違えやすい）。この注意は
-`MCP23017x-x-SP` にもそのまま効くので残す。
-
-##### 機械加工ピン（screw machine）ソケットは標準フットプリントに載る
-
-`Package_DIP:DIP-28_W7.62mm` は **drill 0.8 mm / pad 1.6 mm**。
-Adam Tech `ICM-3XX-1-GT-HT` のデータシートは推奨穴 **Ø0.90 [.035]** と書いているが、
-図面から実測したピン形状は:
-
-| | 実測（図面のベクタ寸法、線幅補正後） | 0.8 mm 穴では |
-|---|---|---|
-| 尾（穴に入る側） | **Ø0.50 mm**（仕様の Ø.020 [0.50] と一致） | 片側 0.15 mm クリアランス。入る |
-| 肩（本体直下の太い部分） | **Ø約 1.35 mm** | 1.6 mm パッドの上に載る。穴に落ちない |
-
-**推奨 Ø0.90 は「入れやすさ」の値で、Ø0.80 でも成立する。フットプリント変更は不要。**
-
-##### 選定 — **板バネ（dual-wipe）型に変更（2026-09-07、ユーザー判断）**
-
-**DIP-28 に挿さるのは `MCP23017` 3個だけになり、どれも I²C のデジタル。**
-接触抵抗も歪みも効かないので、**板バネ（dual-wipe）型で足りる**。下の機械加工ピンの
-選定は、音声がソケットを通る `PT2314-D` があった前提のもので、その前提が消えた。
-
-要求は **28 pos / 行間隔 0.300"（7.62 mm）/ 板バネ型**だけ。`Package_DIP:DIP-28_W7.62mm`
-（drill 0.8 mm / pad 1.6 mm）にそのまま載る。**具体的な品番は発注時に決める**
-（この条件を満たすものなら何でもよく、データシートで裏を取るべき仕様が無い）。
-
-**⚠ オペアンプの DIP-8 ソケットは別。** あちらは挿し替えが装置の目的で音声が接点を通るので、
-接点の質が効く（この節の対象外。[PARTS.md](PARTS.md) §4.1 の `DIP-8_W7.62mm_Socket`）。
-
-<details>
-<summary>旧: 機械加工ピンの選定（`PT2314-D` が DIP だった頃・参考）</summary>
-
-**`ICM-328-1-GT-HT`（Adam Tech、28pos、¥341）** を採る。図面の表題欄が
-**"SCREW MACHINE IC SOCKET .300" ROW SPACING"** と明記しており、幅が裏取り済み。
-
-**⚠ 型番表の A / B 列は幅ではなく長さ**（28pos は A=1.400 [35.56] / B=1.300 [33.02]）。
-行間隔 0.300 [7.62] は表ではなく上面図と RECOMMENDED PCB LAYOUT 側にある。**表だけ見ると読み違える。**
-
-効く仕様: 接触抵抗 **≦4 mΩ/接点**、内側接点 **金フラッシュ／Ni 下地**、
-クリップは BeCu 4-finger、3 A/接点、機械寿命 200 サイクル、絶縁体 PPS UL94V-0、60 VAC/DC。
-
-対抗の `BU2810Z-178HT`（On Shore、¥319）も ".300 SPACING MACHINED PIN" で用途は同じ。
-**¥22 差ならデータシートで裏が取れている方**を採る。
-
-</details>
-
-##### ~~機械加工ピンに意味があるのはオーディオプロセッサの1個だけ~~ → **その1個が消えた（2026-09-07）**
-
-以前の理屈: `PT2314-D` は**音声信号がソケットの接点を通る**ので、金メッキ内側接点と 4 mΩ に
-意味がある（A5 の dry-circuit 非線形の議論と同じ理由。金なら酸化被膜のゼロクロス非線形が出ない）。
-I/O エキスパンダ側は **I²C のデジタルだけ**なので接触抵抗も歪みも効かない。安い板バネ
-（dual-wipe）型で十分で、そちらに機械加工ピンの価格を払う理由は無い。
-
-**`PT2314E`（SOP-28）に替わって、音声がソケットを通る DIP-28 は無くなった。**
-残る3個は全部 I/O エキスパンダ＝ I²C のデジタルなので、**この節自身の理屈に従えば
-機械加工ピン（`ICM-328-1-GT-HT` ¥341×3）を選ぶ理由が無い**。板バネ型で足りる。
-
-**ただしソケット品種の選び直しは未決。** 発注前に決めること。
-なお**オペアンプ用の DIP-8 ソケットは別の話**で、そちらは挿し替えが装置の目的なので
-接点の質が効く（この節の対象外）。
-
-**⚠ DIP-8 のオペアンプソケットとは要求が逆。** 28ピンは一度挿したら抜かないので
-機械加工ピンの「固い」挿抜が欠点にならない。オペアンプ側は差し替えが存在理由なので、
-挿抜力と寿命で別に選ぶ（そちらは「手持ちの7個がピンヘッダ載りモジュールで、
-ピッチがモジュール寸法で決まる」制約が先にあり、まだ決まっていない）。
-
-##### 数量
-
-**4個**（I/O エキスパンダ×3 ＋ オーディオプロセッサ×1）。予備込みで6個。
-
-**⚠ AmpBank-R の表の「`MCP23017` ×2」は 1 枚に 2 個ではなく「全 10ch をリレーにした場合の
-娘基板 2 枚ぶん」。** 現行は D9 のとおり**スイッチ版 5ch ＋ リレー版 5ch の混載**なので、
-娘基板は各 1 個（リレー版は 5 個×2 コイル＝10 本 ≦ 16）＋ 計測制御に 1 個で **合計 3 個**。
-10ch→12ch の再検討には影響しない。
-
-#### 【確定】受動部品の型番選定は回路確定後に DigiKey API でまとめて行う（2026-09-05、ユーザー判断）
-
-**カップリングコンデンサとゲイン抵抗は一緒に選ぶ。** どちらも ch 間マッチングという同じ
-評価軸に乗っていて（上節）、**片方だけ先に決めると配分を間違える**。回路が固まってから
-`scripts/digikey_search.py` で一括で引く。
-
-**⚠ 現行スクリプトはキーワード検索だけ。** パラメトリックに絞るには `KeywordSearch` の
-`FilterOptionsRequest`（`ParametricFilters`）対応から入ること。
-**⚠ API の入手性フィールドは信用できない**（§2.10 の AM10TW の件。`ProductUrl` を必ず開く）。
-
-##### 引くときの条件は出揃っている（再導出しないこと）
-
-**ch 出力カップリング（20 個）:**
-
-| 項目 | 条件 | 根拠 |
-|---|---|---|
-| 容量 | 2.2 µF | f0 = 1.78 Hz（負荷 40.7 kΩ） |
-| 公差 | **±10% で足りる** | ±20% でも ch 間 0.030 dB。±5% は無駄 |
-| 耐圧 | **50 V。低いほど良い** | 信号 ±13 Vpk。体積が C×V で効き、**20 個載る** |
-| リード間隔 | 5.00 mm | 母板の面積予算。7.5 mm 以上は成立しない |
-| 誘電体 | **PET(MKT/MKS) で可** | 1 kHz で C 両端は信号の 0.18%。PP との差は −145 dBc で見えない |
-| 幅 | **実測値を取ること** | 現行フットプリントの W2.5 mm は誤り（`D-h`） |
-
-**オーディオプロセッサ出力の 2 個は `D-j` を決めてから**（2.2 µF のままか 4.7 µF か）。
-**入力側の 2 個は 2.2 µF 確定**（IC の入力抵抗が ±25% 振れるので公差を詰める意味が無い）。
-
-**ゲイン抵抗（`Rf`/`Rg` 20k）:** ~~公差が未決（`D-i`）~~ → **【確定】0.1%（2026-09-19、[issue #38](https://github.com/indare/pcb_work/issues/38)）**。
-1% で ch 間 0.174 dB、0.1% で 0.017 dB。**ここが ch 間マッチングの支配項**。
-図上 Value は `20k 0.1%`。調達クラスとフィルム／C0G／HP NP の選別方針は
-[PARTS.md §0c](PARTS.md)（PRECISION / MATCH / SPEC）。
-
-#### 【確定】2026-09-05 の発注判断 — 買うもの／見送るもの
-
-**判断基準は「値が確定しているか」。** 決まっていない部品を先に買うと、決めるときに
-「もう買ったから」が根拠になってしまう。
-
-| | 判断 | 理由 |
-|---|---|---|
-| I/O エキスパンダ（`MCP23017-E/SP`） | **買う（他用途にも使えるので在庫として）** | リレー版・スイッチ版のどちらでも要る。**この選択に影響する未決事項が無い**。**⚠ ただし予備であって「採用しなければならない」訳ではない**（下記） |
-| DIP-28 ソケット | **買う** | 同上。0.300" で確定済み（上節） |
-| +9 V 三端子（`NJM7809FA`） | **予備として買う** | 安売り。ただし**使わなくなる可能性がある**（下記）。予備として持つぶんには損が無い |
-| 出力カップリング 2.2 µF フィルム | **見送る** | **値が確定していない。** `D-j`（オーディオプロセッサ出力を 4.7 µF にするか）と `D-h`（フットプリントの幅が実物と違う）が両方未解決。**片方でも動くと発注数と型番が変わる** |
-
-##### `+9V` 三端子が「使わなくなるかもしれない」理由
-
-`+9V`（`VCC_TONE`）の存在理由は**オーディオプロセッサの VDD が typ 9 V（6–10 V）で
-±15 V に直結できない、それだけ**。したがって次のどれかが動くと消えるか別物になる:
-
-1. **レールが ±12 V になる**（未決）。ヘッドルームが 6 V → 3 V に減る。
-   78xx のドロップアウト規格は 1 A での値なので 30 mA なら通るが、**余裕は無くなる**
-2. **`U1604` を `+9V` 共有に替える**（未決）。散逸が 0.18 W → 約 0.6 W になり、
-   放熱と故障の影響範囲が変わる（`DECISIONS.md`「`+9V` 共有の可否」）
-3. オーディオプロセッサ自体の構成が変わる
-
-**予備として持つのは合理的だが、これを買ったことを上の3つの判断材料にしないこと。**
-
-##### I/O エキスパンダも同じ — 買ったことは採用の根拠にならない
-
-**他用途にも使えるので在庫として買ったもの。** 実装で使わない選択は残っている。
-ただし**どこまで外せるかは切替方式で決まる**:
-
-| | 必要な駆動線 | Pico の空き GPIO で足りるか |
-|---|---|---|
-| AmpBank-R（ラッチングリレー） | **20 本**（2コイル×10個） | **足りない。** 外すならシフトレジスタ等の別手段が要る |
-| AmpBank-S（アナログスイッチ） | 要確認 | 本数しだいでは直結もありうる |
-
-Pico の GPIO は **`GP0`–`GP15` / `GP18` / `GP19` / `GP26` の 19 本が使用済み**で、
-**空きは 7 本**（`GP16` `GP17` `GP20`–`GP22` `GP27` `GP28`）。
-
-**つまり「リレー版を作る」と決めた時点で I/O エキスパンダはほぼ確定する。**
-逆に言うと、**エキスパンダを買ったこと自体はリレー版を選ぶ理由にならない。**
-
-#### 【確定】2.2 µF フィルムは公差ではなく耐圧で選ぶ — 5% は要らない（2026-09-05）
-
-**結論: ±10%・50 V の 5 mm ピッチ品。`WIMA MKS2 2.2µF/50V`（`MKS2B042201F00KSSD`、バルク）。**
-±5% 品（同 `...JSSD`）が同値段なら取ってもいいが、**効果は測れない。**
-
-##### 5% が効かないことの数字
-
-`AMP` 出力 → 47Ω → C(2.2µF) → `OUT_L/R` → 220k プルダウン ∥ 負荷 50k = **40.7 kΩ**、
-f0 = 1.78 Hz。**ch 間マッチングの話**なので、公差が生む ch 間の差は:
-
-| C の公差 | 20 Hz の ch 間差 | 20 Hz の位相差 | 1 kHz |
-|---|---|---|---|
-| ±5% | 0.007 dB | 0.51° | ほぼゼロ |
-| ±10% | 0.014 dB | 1.02° | ほぼゼロ |
-| ±20% | **0.030 dB** | 2.10° | 0.042° |
-
-**比較: ゲイン抵抗 `Rf`/`Rg`（20k/20k）が 1% なら ch 間ゲイン差は 0.174 dB。**
-カップリング C を ±20% から ±5% に締めて稼げる 0.023 dB に対し、**抵抗の 1% は 6 倍効き、
-しかも全周波数で効く。** 金を掛けるならこちら。
-
-**~~⚠ ゲイン抵抗の公差はどこにも書かれていない。~~** → **0.1% に確定**（2026-09-19、上節 `D-i`・[PARTS.md §0c](PARTS.md)）。
-
-##### 誘電体（PP か PET か）も効かない — これは高Z設計の副産物
-
-負荷が 40.7 kΩ と重くないので、**C の両端には信号のごく一部しか掛からない**。
-コンデンサの歪みは両端電圧に比例するので:
-
-| | C 両端の信号割合 | 誘電体固有 −90 dBc なら寄与 |
-|---|---|---|
-| 20 Hz | 8.84 % | −111 dBc |
-| 1 kHz | **0.18 %** | **−145 dBc** |
-| 10 kHz | 0.018 % | −165 dBc |
-
-測定系の分解能は **−106 dBc**（`MeasurementADC_BRINGUP.md`）。**1 kHz で 39 dB 下、
-つまり PET(MKT/MKS) と PP(MKP) の差は原理的に見えない。**
-**PP を選ぶ理由は無い** — そして 2.2 µF の PP は 5 mm ピッチに存在せず、後述のとおり巨大になる。
-
-##### 効くのは体積で、体積は耐圧で決まる
-
-信号は 9.2 Vrms = **±13 Vpk**。50 V で 4 倍近い余裕があり、耐圧を上げても得るものが無い。
-一方フィルムコンの体積は概ね C×V に比例するので、**耐圧を上げた瞬間に基板が破綻する**。
-**20 個載る**ことを忘れないこと。
-
-| 品 | 公差 | 耐圧 | ピッチ | 寸法 L×W×H | 基板占有×20 |
-|---|---|---|---|---|---|
-| **WIMA MKS2 (`MKS2B042201F00KSSD`)** | 10% | 50 V | 5 mm | 7.2×5.0×10.0 | **7.2 cm²** |
-| KEMET R82 (`R82CC4220DQ70K`) | 10% | 50 V | 5 mm | 7.2×6.0×11.0 | 8.6 cm²（**廃止品**） |
-| TDK B32529 (`B32529D0225J189`) | **5%** | 63 V | 5 mm | 7.8×7.8×13.0 | 12.2 cm² |
-| Panasonic (`ECW-FE2W225J`、PP・単価は最安) | **5%** | 450 V | **15 mm** | 17.5×10×15.5 | **35 cm²** |
-
-**⚠ 一番安い ±5% 品（450 V の PP）は、`470 µF` 電解を捨てた理由である 24.5 cm² より広い。**
-単価だけ見て選ぶと、この設計変更そのものが無意味になる。
-
-##### ⚠ 現行フットプリントは幅が半分になっている
-
-`C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2` が付いているが、
-**実物の MKS2 2.2 µF/50 V は W=5.0 mm。** 2.5 mm 幅の MKS2 は 0.1 µF 級までで、
-**シリーズ名だけ合わせた place holder** になっている（PPTC の `R_Axial_DIN0411` と同じ種類の誤り）。
-
-**KiCad 標準に 5 mm ピッチ・W5.0 mm は無い**（この系列は W4.5 mm が最大）。
-W4.5 で 0.5 mm 詰めるか、カスタムを起こすかは PCB（B5）で決める。
-
-**⚠ 「面積 24.5 → 3.6 cm²」という既記述も、この 2.5 mm から出した数字なので誤り。**
-実際は **7.2 cm²**。`470 µF` 電解より 3.4 倍良いという結論は変わらないが、**面積予算は倍**。
-
-##### ⚠ 別件: オーディオプロセッサ出力の 2 個は公差ではなく「値」が合っていない
-
-`PT_OUT_L/R` → C(2.2µF) → `TONE_L/R` の 2 個は、**入力ブロードキャスト化で負荷が変わったのに
-値が追随していない。** `TONE` バスは 10 ch 並列で **10.0 kΩ**（12 ch なら 8.4 kΩ）。
-f0 = 7.2 Hz まで上がっている。
-
-| | 20 Hz | 10 Hz |
-|---|---|---|
-| 系全体（現行・10ch） | **−0.84 dB** | −2.78 dB |
-| うちこの 2 個の寄与 | **−0.75 dB（92%）** | −2.39 dB |
-| 12 ch にすると | −1.09 dB | −3.40 dB |
-
-**この 2 個を 4.7 µF にすると 20 Hz は −0.33 dB（12 ch でも −0.41 dB）。**
-公差の効きも ±20% で 0.49 dB → 0.15 dB に縮む。
-
-**ただしブロードキャストの分岐より前なので、DUT 比較は歪めない**（全 ch に等しく効く）。
-急がないが、**「2.2 µF」で一括発注する前に決めること。**
-
-**オーディオプロセッサ入力側の 2 個（`COMMON_L/R` → `PT_LIN/PT_RIN`）は 2.2 µF のままでよい。**
-IC の入力抵抗が **30/40/50 kΩ（±25%）**とデータシートで振れており、
-20 Hz の減衰は −0.023〜−0.063 dB。**IC 自身のばらつきが C の ±20% より効くので、
-ここで 5% を買う意味は無い。**
-
-#### 【確定】リレー版とアナログスイッチ版を**別設計として両方起こす**（2026-09-03、ユーザー判断）
-
-**どちらか一方に絞らない。** 歪みでは決着が付かないことが実測で確定したため、
-**絶対論で選ばず、両方を設計して実機で比べる**。
-
-| | AmpBank-R（リレー） | AmpBank-S（アナログスイッチ） |
-|---|---|---|
-| 切替素子 | `TQ2-L2-5V` / `AZ850P2-5` ×10 | `TMUX7612` ×5 |
-| 駆動 | ULN2803 ×3 + MCP23017 ×2 | MCP23017 ×1 |
-| I²C | **5P**（`+5V` がコイル用に要る） | 4P |
-| 振幅上限 | **制約なし**（接触抵抗は電圧非依存） | **7 Vrms / 10 Vpk**（膝の内側） |
-| 追加面積 | 12.6 cm² | 約 2 cm² |
-| 費用 | 約 ¥4,600（**在庫があるので実質ゼロ**） | ¥6,400 |
-
-**なぜ絞らないか:**
-
-1. **歪みでは差が付かない。** 2026-09-03 の実機測定でこの測定系の分解能は **−106 dBc**、
-   ベースラインは **−76 dBc**（`MeasurementADC_BRINGUP.md`）。
-   リレー（構造的ゼロ）と `TMUX7612`（−167 dBc @≤7Vrms）の差は**分解能より 60dB 以上下**で、
-   測ることも聴くこともできない。**この軸で選ぶ根拠が無い**
-2. **残る唯一の技術的論点は「コイル電流を `D_GND` に流すか」**で、これは実機で確かめる方が早い
-3. JLCPCB の最小ロットが5枚なので、2種起こしても10枚。**費用より設計工数が支配的**
-
-**共通部と差分:**
-
-- **共通**: 入力ブロードキャスト網、10ch のオペアンプ回路（ソケット・帰還・結合C・バイアス）、
-  電源、出力バス、`A_GND`/`D_GND` 分離
-- **差分**: 出力 MUX 部、ドライバ、GPIO 拡張数、I²C コネクタのピン数
-
-**~~⚠ 未決（次に決めること）~~ → 2026-09-05 に「別 PCB 2種」で確定**（下の節）。差分が出力 MUX 部に限られるので、実装形態に選択肢があった。
-
-| 案 | 利点 | 欠点 |
-|---|---|---|
-| **別 PCB 2種** | 各々最適化できる。面積の無駄なし | レイアウトが2本。**比較にレイアウト差が混入する** |
-| 1枚に両方の足を載せ実装を選ぶ | **レイアウトが同一なので比較の交絡が減る** | 面積が増え、非実装側にスタブが残る |
-| 共通母板＋セレクタ娘基板 | 差分が独立 | **信号経路にコネクタが入る**。比較装置として筋が悪い |
-
-**A/B 比較装置という目的からすると、2番目（1枚に両方）が科学的には有利**
-（レイアウトが変数から外れる）。面積との兼ね合いで決める。
-
-#### 【確定】リレー版とスイッチ版は**別 PCB 2種**として起こす（2026-09-05、ユーザー判断）
-
-**上の3案から1番目を採った。** 上の記述は「2番目が科学的に有利」としていたが、
-**ユーザーが 1番目を選んだ。したがって「比較にレイアウト差が混入する」という欠点は
-承知のうえで受け入れる。** 効きどころは `AMP_SEL` バスで、非選択側の `TMUX7612` は
-OFF でも容量負荷としてバスに繋がったままなので、**2枚のレイアウト差がそのままここに乗る**。
-
-##### 接続端子は共用できる —— 回路図の実データで検証済み（2026-09-05）
-
-D20 の「ヘッダはリレー版の要求を上位集合として共通化」は**方針どおり実装されている**。
-階層ピンを1本ずつ突き合わせた結果:
-
-- **共通 13 本が名前・向きとも完全一致**（食い違いゼロ）。差分はリレー版の +2 本
-  （`+5V_COIL` / `GND_COIL`）だけで、スイッチ版にしか無いピンは無い
-- 母板の2スロットは **22 ピン中 21 ピンが同一ネット**。違うのは `J_PWR` pin11
-  （`ADDR0` = slot1 `D_GND` / slot2 `3V3`）だけで、これは D21 の本体
-- **`+5V_COIL` / `GND_COIL` は両スロットに来ている**ので、**リレー版をどちらのスロットに
-  挿しても動く**（D21 の「差し替えても衝突しない」がヘッダ実装レベルで成立）
-- スイッチ版も **2x6 を物理的に維持**（2x5 に縮めていない）。pin5/6 は `no_connect`
-- フットプリントは母板 `PinSocket_2x05/2x06`（メス）、娘基板 両版とも `PinHeader_2x05/2x06`（オス）
-
-**空きピンは 0 本（22/22）。** 別 PCB 化そのもので増える信号は回路図上に見当たらない
-（バルクは娘基板側、測定タップは母板側で `AMP_SEL` から取るので娘を経由しない、
-`MCP23017` の `INTA`/`INTB` は両版 NC・`~RESET` は基板上で `3V3` 固定）。
-
-##### ⚠ 別 PCB 化で新しく効く問題が2つ
-
-**① ピン割当テーブルが二重にあり、しかも ERC でもネットリストでも検出できない**
-
-`build_motherboard.py`（`SLOT_ANA_NETS`/`SLOT_PWR_NETS`）と `build_daughter.py`
-（`ANA_NETS`/`PWR_NETS`）が**同じ割当を別々のリテラルで持っている**。
-現時点では AST 比較で完全一致しているが、**片方だけ直すと静かに壊れる。**
-
-検出できない理由: 娘基板は **(a) 階層シートピン経由と (b) `J_ANA101`↔`J_ANA301` の
-コネクタ対の二重に母板と繋がっている**。仮に母板 pin3=`TONE_L` / 娘 pin3=`TONE_R` に
-ズレても、**階層ピン経由で正しく繋がるのでネットリストは無傷に見え、基板が出来上がって
-から初めて分かる。**
-
-**そして別 PCB にすると親子の階層が切れ、いま唯一これを守っている
-`hier_label_mismatch` が効かなくなる。この二重テーブルが単一障害点に昇格する。**
-
-→ 対策案（**未実施**）: `build_daughter.py` が `build_motherboard.py` からテーブルを
-import して正を1つにする（`PWR_NETS` の 11/12 だけ `ADDR0`/`ADDR1` に読み替え）。
-
-**② 版の判別手段が無い**
-
-`MCP23017` の A2 は**両版とも `D_GND`**、A0/A1 は D21 でスロット側から来る。つまり
-**I²C アドレスは「どのスロットか」しか教えず、「リレー版かスイッチ版か」は教えない。**
-
-レジスタマップは版で違う（スイッチ版 = `GPA0-4` にレベル5ビット / リレー版 =
-`GPA0-4` に SET・`GPB0-4` に RST のパルス10ビット）。**差し替えて挿せる設計
-（D21 の狙い）である以上、ファームは決め打ちするしかなく、挿し間違えると誤った
-レジスタを叩く。** 空きピンが 0 なので判別線を足すならピンを増やすことになる。
-
-→ 対策案（**未実施・未検証**）: **リレー版だけ `MCP23017` の A2 を `3V3` に上げる**。
-アドレスが 0x21→0x25 になり**スロットと版の両方が読める**。ヘッダは無改造、
-娘基板の配線1本で済む。「決め打ちで運用する」でも構わないので、**判断が要る。**
-
-##### ⚠ この節の周辺でドキュメントが腐っている2件
-
-- D18 の「母板の階層ピンは 13 → **20 本**になった」→ **実際は 6 本**
-  （`COMMON_L/R`・`PHONE_L/R`・`LINE_L/R`）。2026-09-04 の D29 で内部化された後の値に
-  なっていない。同節の「ERC 60→56 件」も現行値 29 件と食い違う（どちらも D29 前の記録）
-- 同節「未着手の前提: `AmpChannel` は入力も出力も MUX のまま、`TMUX7612` が 1ch に1個」
-  → **2世代遅れ。** 現在の `AmpChannel` は MUX を持たず、`TMUX7612` は bank 側に 3 個（2ch/IC）
-- D18 の表は pin7/9 を `SDA`/`SCL` と書いているが実ネット名は `I2C_SDA`/`I2C_SCL`（表記のみ）
-
-#### 経路ごとの振幅上限（2026-09-03 確定、issue #33）
-
-**上の交差点から、経路を3段階に分けるのが自然。**
-
-| 経路 | 振幅上限 | 切替素子 | 根拠 |
-|---|---:|---|---|
-| 通常（PT2314 経由） | **4〜5 Vrms** | どれでも可 | PT2314 のクリップ 2〜2.5 Vrms × ゲイン2 |
-| **精密 DIRECT** | **約 7 Vrms（10 Vpk）** | **`TMUX7612` 可** | **膝（±11V）の明確に内側。その領域で switch 自身が約 −167 dB 級** |
-| フルレンジ DIRECT | 9.2 Vrms（±13 Vpk） | **リレー等**（`TMUX7612` 不可） | 膝を越え、switch 自身が −119.7 dB まで悪化する |
-
-> **⚠ 7 Vrms の根拠は「`OPA1612` より 23.8 dB 下だから」ではない。**
-> その差は設計保証値として扱えない —— `OPA1612` 側は `G=−1, RL=2k` の **THD+N**、
-> 実回路は `G=+2, RL≈50k`、switch 側は **H2/H3 の個別次数**。
-> **`50k` の軽い負荷なら実 `OPA1612` は `2k` 時より良くなる可能性が高く、差は縮む方向。**
->
-> **直接の根拠はスイッチ単独で完結させる:**
-> **7 Vrms = 9.90 Vpk は `TMUX7612` の膝（±11V）の明確に内側で、
-> その領域ではスイッチ自身の歪みが約 −167 dB 級（絶対値）。**
-> こうしておけば、将来 `OPA1612` の 50kΩ 実測がどれだけ良くても設計判断は崩れない。
->
-> **交差点 7.9 Vrms は物理モデルの検証用**（膝 7.78 Vrms と独立に一致したことが、
-> 「膝を外れると急に悪化する」という説明の裏付けになる）。**設計上限の根拠ではない。**
-
-**`TMUX7612` を「4〜5 Vrms まで」に縛る必要はない。** 4〜7.5 Vrms は一貫して −167 dB 級で、
-**7.78 Vrms（±11V）から急激に崩れる**という形がきれいに出ている。
-**10 Vpk を上限に置けば精密 DIRECT 測定にも使える。**
-
-**9.2 Vrms のフルスイングを残したい経路だけ、リレーか別素子にする。**
-リレーは接触抵抗が電圧非依存なので、この振幅制約が付かないのが構造的な利点。
-
-> **⚠ `OPA1612` の値は typical グラフのベクタ抽出**なので、小数点1桁の絶対値として
-> 扱わないこと。9.2 Vrms なら **「概ね −144〜−146 dB 級」**が適切な言い方。
-
-> **⚠ 2026-09-03 訂正: 必要数は半分だった。**
-> 「リレー20個・駆動線40本・28cm²・¥8,900」は**入力側も切り替えていた時代の数字**。
-> 現アーキテクチャは**入力ブロードキャスト＋出力のみ MUX** なので、
-> **DPDT 1個で 1ch の L と R を担当でき、10個で足りる**。
-> 駆動線 20本、ULN2803 ×3、12.6 cm²、約 ¥4,600。
-> **この誤りを根拠にリレー版を一度退けかけた。**
-
-#### リレー版の詳細（採用する場合）
-
-| 項目 | 内容 |
-|---|---|
-| 部品 | `AZ850P2-5`（Zettler、秋月で国内購入可）または **`TQ2-L2-5V`**（Panasonic、DigiKey 在庫1,247） |
-| フットプリント | **`Relay_THT:Relay_DPDT_FRT5`** — v1 `Audio/Controll` で実績あり。両社が同じ 10ピン DIP 配置なので**1つの足で2社セカンドソース** |
-| 接点 | AgPd 金クラッド、初期接触抵抗 < 50 mΩ、最小開閉 10 mV / 10 µA、機械寿命 1×10⁶ |
-| 外形 | 14 × 9 × 5 mm。**10個で約 12.6 cm²** |
-| 駆動 | 2コイルラッチなので **20 本**。ULN2803 ×3 ＋ MCP23017 ×1 追加。**コイル電流はパルス時のみ**。駆動線は AmpBank 内で完結し、ControlPanel へは I²C のまま（ただし `+5V` が要るので 4P→5P） |
-| 費用 | **約 ¥4,600**（ドライバ込、`TQ2-L2-5V` qty25 ¥406 基準）。**ラッチングリレーは v1 の在庫があるので実質ゼロ** |
-
-#### 2026-09-01 の「アナログスイッチへ」の判断が不十分だった点
-
-**上の「代償は −88 dB」という評価が的を外していた。** Ron を*レベル*の問題として扱っていたが、
-実際に効くのは **`Ron(V)` の平坦度**（信号電圧に対する Ron の変動）で、これは*歪み*を生む。
-2026-09-02 にデータシートのグラフを数値抽出して解いた結果
-（[`spice/switch_thd.py`](spice/switch_thd.py) / [`spice/switch_offiso.py`](spice/switch_offiso.py)）:
-
-| 素子 | 通しTHD @9.2Vrms | @7Vrms | 備考 |
-|---|---:|---:|---|
-| `TMUX7612` ×10（¥9,751） | −115 dB | −162 dB | **平坦領域が ±11V で終わる**。9.2Vrms は性能を 47dB 捨てる |
-| `TMUX4821` ×20（¥6,158） | −133dB以下 | 同じ | 全±15Vで平坦。ただし **2mm QFN**・OFF漏れ −47dB@20kHz |
-| `DG412` ×10（¥2,432） | −90 dB | −91 dB | Rbias をいくら上げても出力側で律速。**DUT より悪い** |
-| **ラッチリレー ×20** | **実質ゼロ** | 同じ | 接触抵抗は電圧に依存しないので歪みを生まない |
-
-**リレーを選ぶ理由（安さではない）:**
-
-1. **この問題群が構造的に消える。** 平坦度・信号振幅の膝・OFF アイソレーション・温度依存は
-   すべて半導体スイッチだから生じる。オペアンプを聴き分ける測定器で「スイッチが測定系に
-   入っていない」ことは ¥2,700 の差で買える性質としては安い
-2. **実装リスクが最小。** THT で手はんだでき、リワークもできる。`TMUX4821` の 2mm 角 QFN を
-   露出パッド付きで20個載せるのはリフロー環境が前提になる
-3. **2社セカンドソース＋国内調達。** 上記フットプリント互換。TI 単独ソースより堅い
-4. **v1 で実証済み。** フットプリント・MCP23017・ULN2803・初代 Pico の制御プログラムが使える
-
-**旧判断の2つの理由のうち、1つは解消し1つは残る:**
-- 「コイル電流がノイズになる」→ **ラッチなら解消**（パルス時のみ通電）
-- 「面積を食う」→ **残るが軽い**。12.6 cm²。**入力ブロードキャスト化で必要数が半減した**ため、
-  200×100 mm への拡大は不要になった可能性が高い（要レイアウト検討）
-
-#### 実装への波及
-
-- **`+5V` が AmpBank に必要になる**（コイル駆動）。2026-09-02 に「アナログスイッチ化で不要」
-  として ControlPanel のインタフェースから外したので、**戻すか AmpBank にレギュレータを置く**かの判断が要る
-- ドライバ（ULN2803 ×3）と GPIO 拡張（MCP23017 を1個追加、またはシフトレジスタ）
-- パルス電流用のローカルなリザーバコンデンサ
-- `AmpChannel` / `AmpBank` の回路図から `TMUX7612` を外す（**手編集所有**なので KiCad 側で）
-
-**面積が入らなかった場合の代替:** 出力側だけリレー10個、入力側は `DG412` ＋ Rbias 220k
-（通し −113 dB）。面積 17 cm²・費用 ¥6,492 に下がるが、入力側に Ron(V) の議論が戻る。
-
-**なぜ電源を切らないか:**
-出力を切るなら電源を切る理由が無い。電源を切ると逆に、放電済みのバルクへの突入電流
-（100 µF で 1200 µC）を切替のたびに接点へ流すことになる。
-
-**電流マージン（2026-09-02 実測ベースに更新）**
-
-> **2026-09-02 追記:** DC-DC は `REC10K-2415DAW/H2`（±15 V / **±333 mA**）に変更した（§8）。
-> 以下は `DKMW20F-15`（±660 mA）前提の計算だが、**実負荷 208 mA は 333 mA に対しても
-> 負荷率 62 % で収まる**ので結論は変わらない。
-
-`DKMW20F-15` は ±15 V / **±660 mA**（`DKMW20F-12` の ±830 mA より低いので要再検証だった）。
-
-| 負荷 | +15 V | -15 V |
-|---|---|---|
-| AmpBank: NE5532×10（静止 20 mA/ch 想定） | 200 mA | 200 mA |
-| ControlPanel: LM7809→PT2314 チェーン | ~35 mA | — |
-| BP5293（+5 V 出力、RelayBoard 廃止に伴い現状未使用） | 0 mA | — |
-| **合計 / 定格比** | **~235 mA / 36%** | **200 mA / 30%** |
-
-**オペアンプ差し替えの最悪ケース検討:** AmpBank の10ソケットは比較試聴用に異なる石を挿す前提
-（同一型番を複数ソケットには挿さない）。手持ち在庫（[`Audio/OPAMP_INVENTORY.md`](../Audio/OPAMP_INVENTORY.md)）の
-消費電流は [`Audio/AmpModule_OPAMP_REFINE.md`](../Audio/AmpModule_OPAMP_REFINE.md) §4.4 の実測/データシートベースの
-調査によれば「通常の DIP デュアルは1枚あたり数〜十数 mA」（`OPA1652` は実測 dual 4 mA、`OPA828` ×2 は
-Iq 5.5 mA×2=11 mA）。例外は **AK05/LC5**（出典により 10〜150 mA、実測必須と既記録）だが
-18×23 mm 級でソケット直挿しが物理的に厳しく、複数ch同時挿しは想定しない。
-AK05/LC5 を1chだけ試す極端ケースでも 9ch×15 mA + 150 mA ≈ 285 mA（660 mA 定格の 43%）で収まるため、
-上表の「20 mA/ch」想定は在庫全体を通じて十分安全側。
-
-結論: ±15 V 化後も +15 V 側 36%・-15 V 側 30% で十分な余裕がある。
-
-**副次的な決定:** 出力カップリングは 470 µF 電解 → 2.2 µF フィルム。負荷 50 kΩ に対し
-470 µF は -3dB が 0.0068 Hz と6桁過剰で、2.2 µF でも 1.4 Hz。面積 24.5→3.6 cm² に減り、
-信号経路から大容量電解が消える。
-
-**切替素子: TI `TMUX7612PWR`（TSSOP-16、4回路SPST）で確定（2026-09-01）。**
-1パッケージで1ch分（L入・R入・L出・R出）を賄い、4本の制御ピンを束ねると **GPIO 1本/ch**。
-10ch で 10本なので MCP23017 が1個で足り、SPI デイジーチェーンにする必要は無い。
-
-選定理由:
-- Ron 平坦度（ADG1412 の 0.3 Ω より桁違いに良い）。歪みは Ron の変動分で決まるのでここが効く。
-  **⚠ 2026-09-02 再訂正: 前回の訂正（0.006Ω/0.070Ω）が誤りだった。** その数値は §5.9
-  **`±20 V` 電源の表**のもので、`VS` の値の違いではなく**表そのものが別の電源条件**だった
-  （`AudioV2/datasheets/TI_TMUX7612.pdf` を直接確認：p.7 §5.7=±15V電源 / p.10 §5.9=±20V電源）。
-  当基板の実電源 `±15 V`（§5.7）の flatness は **typ 0.0003 Ω(25°C) / max 0.055 Ω(−40〜+85°C)**
-  ——ただしこの表の測定条件は `VS = −10V〜+10V` までで、実動作点の±13Vはこの表の外（Figure 5-4
-  のグラフでしか読めない）。`switch_thd.py --stage input --rload 1e3 --vout 9.2` で実測
-  （curve-based、eyeball ではない）すると **−136.0 dB**（25°C typ カーブ。旧「常温−104dB」は
-  誤情報だったので撤回）。入出力通しの結果は `spice/README.md` の **−115.2 dB @9.2Vrms** が正
-- チャージインジェクション −2 pC（ADG1412 の 1/10）。切替クリックが小さい
-- VIH 1.3 V max を全温度で保証。MCP23017 の 3.3 V 出力で直結でき、レベル変換が不要
-- **制御ピンに内蔵プルダウン**があり、MCP23017 がリセットで Hi-Z になると自動的に全 OFF になる（フェイルセーフ）
-- Digi-Key JP ¥1,263 と ADG1412（¥1,795）より安い
-- **ADG1412 とピン配置が完全一致**。同じフットプリントで差し替えて比較できる
-
-**入力側スイッチはオペアンプの + 入力直前（高インピーダンス側）に置く。**
-結合コンデンサとバイアス抵抗（1 kΩ）を全 ch 共通にする。現行のように結合 C の手前で切ると
-スイッチが 1 kΩ を負荷に持つことになり、どの IC でも歪みが −70 dB 台に留まる。バイアス抵抗を
-上げて逃げることはできない（熱雑音と電流ノイズがオペアンプ自身のノイズを覆い、
-ノイズの差が聴き分けられなくなる）。非選択オペアンプの + 入力には 1 MΩ 程度のプルダウンを個別に付ける。
-
-**出力側スイッチは既存の 47 Ω 出力アイソレーション抵抗より後**に置く。10 台を束ねるとバスに
-OFF 側 9 個の容量（約 265 pF）がぶら下がるが、オペアンプから見ると 47 Ω がそれを隔離しており
-ポールは 12 MHz 以上。追加の直列抵抗は不要。
-
-**break-before-make はファームウェアで担保する。** IC の BBM 機能は同一パッケージ内で D 端子を
-束ねて 2:1 MUX にしたときにのみ効くもので、10 台を別パッケージに分散する本構成では働かない。
-v1 `Control/relays.py` と同じ「全 OFF → 待つ → 目標 ch を ON」の 2 トランザクションで行う。
-
-### 11.0 用語
-
-| 用語 | 意味 |
-|---|---|
-| **論理分割** | 機能ブロック（Relay / Control / Output / Power）— §6.9 のシート |
-| **物理分割** | **発注する PCB 枚数**と実装位置 |
-| **箱配線** | `Audio/` 流用（Amp×10, HP, 計測）— 原則 **端子台**（`MeasurementADC_STATUS.md` 型） |
-
-### 11.1 接続方式の原則（たたき台）
-
-| 向き | 形式 | 例 |
-|---|---|---|
-| **多数・並列・再配線** | **端子台**（5.08 mm 等） | ±12 V 分配、Amp×10 音声/電源、外部 L/R 入力 |
-| **固定ハーネス・低電圧デジタル** | **コネクタ**（2.54 mm ヘッダ / JST-XH 等） | I²C バス、短いアナログ幹線（4〜8P） |
-| **パネル UI** | **基板実装** | ENC×3、OLED、PWR SW。**RV / SW_DEST はパネル＋ヘッダ** |
-| **PowerModule 一次** | 端子 **PD_12V / PD_GND** ↔ 操作パネル SW | §9。長さ可変なら **2P 端子** or **JST** |
-
-現行 `Controll`: Amp 系は **Phoenix 2P 端子台**、OLED/ENC は **ピンヘッダ**。`PowerModule` J202 は **3P 端子**（± / GND 送出）。
-
----
-
-### 11.2 物理 PCB 分割 — 5 案
-
-| 記号 | 新規 PCB 枚数 | 概要 |
-|:---:|---:|---|
-| **PA** | **4** | §6.9 どおり（Power / Relay / Control / Output 各 1） |
-| **PB** | **3** | OutputStage を **ControlPanel PCB に実装**（シートは分離可） |
-| **PC** | **5〜6** | RelayBoard **5ch×2 枚**（現 Controll 2 段型）+ 他 |
-| **PD** | **3** | Relay + Output を **スイッチング盤 1 枚**に統合 |
-| **PE** | **5** | Tone/Volume を SignalChain として分離 — **過剰分割寄り** |
-
-| 案 | 初号向き | 端子台 | 備考 |
-|---|:---:|---|---|
-| **PA** | ◎ | Relay 1 枚に **70P 級** | 論理と 1:1 |
-| **PB** | ◎ | 同上 | **Q2-A 確定**。SW_DEST / ポットと同居 |
-| **PC** | ◎ | **2 枚に分散** | 箱内 2 段×5ch。各盤MCP23017×1（計2） |
-| **PD** | △ | 1 枚集中 | アナログ幹線が長い |
-| **PE** | ✗ | — | ケーブル増のみ |
-
----
-
-### 11.3 基板間リンク — 端子 vs コネクタ（目安）
-
-| リンク | 推奨 | ピン目安 |
-|---|---|---|
-| PowerModule → 箱内星型 | **端子台 3P** | +12, −12, A_GND |
-| PowerModule ↔ 操作パネル（PD SW） | **端子 2P×2** or **JST 4P** | PD_12V, SW 戻り, GND |
-| ControlPanel ↔ AmpBank（1枚） | **コネクタ 4P** ×1（2026-09-02 更新） | SDA, SCL, 3V3, D_GND。**旧 RelayBoard ×2 前提の 5P（`+5V` 込み）は失効** — `+5V` は AZ850 コイル用で、アナログスイッチ化により不要。相手が1枚なのでスター/デイジーの議論も分岐配線も要らない（WIRING.md） |
-| ControlPanel → RelayBoard | **端子 2P** | TONE_L, TONE_R。2芯シールドのドレインはControlの`A_GND`のみ（`J_RAIL`のGNDと二重にしない） |
-| PowerModule → RelayBoard（×2） | **端子 3P** ×2本 | `J_RAIL` = +12, A_GND, -12。旧Controllは±のみだったが、Amp `J703` を3P 1本で完結させるため`A_GND`も持ち込む |
-| ControlPanel 内 OutputStage | **基板内** | Q2-A。SW_DEST → RV → 外部端子 |
-| RelayBoard ↔ Amp×10 | **端子台** | 電源 3P×10（±12/A_GND）+ 入力音声2P×10 |
-| 外部入力 L/R | **端子台 2〜3P** | STATUS「手前端子台」型 |
-| OutputStage → HP Buffer / LINE | **端子台 2〜3P** | Audio 流用先 |
-
-I²C は **OLED も同バス** — Relay 盤まで **1 本のハーネス**で daisy 可能（下記 Q3）。
-
----
-
-### 11.4 OutputStage の物理位置（Q2）— **確定: A**（手回し化後も維持）
-
-信号順: `… → Amp → **SW_DEST** → RV_HP / RV_LINE → HP Buffer / LINE`
-
-| | 配置 | 向く理由 | 状態 |
-|---|---|---|---|
-| **Q2-A** | ControlPanel **同一 PCB** | SW_DEST・ポット・ヘッダと同居。幹線が短い | **回路図・初号の既定** |
-| **Q2-B** | **HP/LINE 近傍**の独立 PCB | 最終出力ケーブルが短い。`Audio/` 箱内配線と形が近い | **PCB レイアウト時に再検討可** |
-| **Q2-C** | RelayBoard **同居** | 不要（DEST は機械 SW） | 非推奨 |
-
-**手回し化後:** DEST ラッチングリレーは廃止。Q2-A の理由は「パネル部品（SW / ポット / LED）と Pico ADC を同じ板に載せる」に更新。旧「PGA 直後のリレーノイズ」議論は無効。
-
-<details>
-<summary>旧 Q2-A 理由（PGA + DEST リレー時代）</summary>
-
-ラッチングリレーのコイル駆動を PGA2310 直後で完結させ、独立 Output 板へ長い幹線を伸ばさない、としていた。
-
-</details>
-
----
-
-### 11.5 質問（→ §11.7）
-
-~~Q1=B, Q2=A。Q3 は回路・基板設計まで保留。~~
-
----
-
-### 11.6 エージェント所見（§11.7 確定後）
-
-| 項目 | 内容 |
-|---|---|
-| **確定** | **Q1=B + Q2-A** → Relay **2 枚** + Control **1 枚**（Output 同居）。記号上は **PC + PB** |
-| **旧推奨との差** | 旧案は **Q2-B**（Output 独立）＝ Audio 箱配線との見た目整合。**今回は Q2-A で上書き** |
-| **§11.8** | 共通 L/R バスで Relay → Control のアナログは **4P 級** |
-| **Q3** | MCP23017×2 + OLED + PT2314 の I²C — **レイアウト時** |
-| **設計時の注意（Q2-A）** | 前面 PCB サイズ（ポット 2 + SW + ENC×3 + OLED）。音声と DEST 検知の分離。`A_GND` / `D_GND`（§7） |
-| **Q2 レイアウト escape** | **OutputStage は論理シートのまま**起こす。PCB で Control に載らないなら **Q2-B = 独立 PCB 1 枚追加**（計 5 枚）。回路図の net 名は変えず物理配置だけ差し替え |
-
----
-
-## 7. GND
-
-計測側の型を踏襲する前提で、操作系だけ決める。
-
-| 案 | 内容 |
-|---|---|
-| **G1** | リレー盤 = 接点側は各 Amp の `A_GND` 世界、コイル/ULN = `D_GND`（または `CTRL_GND`）。結合は NetTie 一点 |
-| **G2** | digipot アナログ端子 = `A_GND`、ロジック = 操作 Pico の `D_GND`。同様に一点 |
-
-基板を B 分割するほど G1/G2 を基板境界に寄せやすい。G1/G2 は同じ「システム全体で1点」を指しており、**NetTie本体はControlPanel側（D_GNDの発生源=操作Pico直近）に1個だけ**置く（2026-08-31確定、WIRING.md参照）。RelayBoardはA_GND/D_GNDを両方受け取るが結合しない（結合するとNetTieが2箇所目になりグラウンドループになる）。
-
----
-
-## 決めたい順番（提案）
-
-1. ~~操作系統・DEST・トーン・音量 IC~~ → **確定**
-2. ~~12V LED・HP パッド~~ → **§9 確定**
-3. ~~ENC 配線~~ → **§10 確定**
-4. ~~起こし範囲（§6）~~ → **D1.5 確定**
-5. ~~起こし範囲（§6）~~ → **D1.5 確定**
-6. ~~物理基板（§11 Q1/Q2）~~ → **確定**
-7. **I²C トポロジー（§11 Q3）** — 回路・基板設計時
-8. KiCad 起こし
-
----
-
-## 記入欄（決まったらチェック）
-
-> **⚠ この一覧は 2026-08-31 前後までのチェック記録で、以降の変更を反映していない。**
-> 少なくとも 電源レール（±12 V → **±15 V**、DC-DC も `REC10K-2415DAW/H2`）、
-> 基板構成（`AmpBank` 1枚 → **母板＋娘基板**）、切替素子（**リレー版とスイッチ版の両方**）は
-> 動いている。**食い違ったら冒頭の「決定ログ」と §11.1a が正。**
-
-- [x] 基板: **B**
-- [x] 受け側: **B2-exp**
-- [x] CH/電源/音声: **ラッチングリレー**
-- [x] CH 操作: **ENC_CH**（回して変更、押して確定）
-- [x] 音量: **手回しデュアルポット ×2**（RV_HP / RV_LINE）。**OLED 非表示**
-- [x] 出力先操作: **トグル ON-OFF-ON（3PDT）** + **ラダー 10k/10k/1k → ADC** + **LED×2** + OLED
-- [x] DEST 切替: **機械接点**（ラッチングリレー **不要**）
-- [x] トーン: **T1 PT2314 系**（Amp 前）
-- [x] 音量 IC: **見送り**（PGA / digipot 不採用）
-- [x] 電源: **±12 V**（DKMW20F-12）、PD **50224 CH224**（差し替え可）
-- [x] エンコーダー: **EC11 系 ×3**（CH / BASS / TREBLE）
-- [x] Amp: **AudioV2版を再設計し代表1シート＋独立PCB、×10製造**。HPは `Audio/` 物理流用
-- [x] OLED / 表示ループ / PWR+12V LED（表示は **CH / DEST / Bass / Treble**）。制御 = **2.42″ OLED**、スペアナ = **Waveshare 29318**（計測・流用）
-- [x] 12V LED: **CH224 12V → PWR SW 後 → LED + DKMW20**（`PD_GND`）
-- [x] HP 固定パッド: **廃止（0 Ω）**。DNP で −10 dB 後付け可
-- [x] ENC 配線: **GPIO 直結 ×3**（§10 ピン表）
-- [x] **起こし範囲: D1.5 + Amp** — 操作系 + PowerModule + **Amp再版**。HP/計測は `Audio/` 流用
-- [x] CH224: **PowerModule 基板内蔵**
-- [x] **Relay 物理: 5+5 ×2 枚**（§11 Q1-B）
-- [x] **OutputStage: ControlPanel 同一 PCB**（§11 Q2-A）
-- [x] **CH 音声: PT2314後をAmp入力側で選択、電源と連動**（§11.8）
-- [x] **ポット: Alps RK27112A00CF**（A50k Dual / RK27）×2 — [PARTS.md](PARTS.md)
-- [x] **DEST ラダー: Rh=Rl=10k, Rs=1k**（[DEST_SENSE_LADDER.md](DEST_SENSE_LADDER.md)）
-- [x] **SW_DEST 型番: C&K 7303SYZQE**（3PDT ON-OFF-ON）
-- [x] **AZ850 コイル: AZ850P2-5**（5 V、秋月 118017）
-- [x] **I²C トポロジー（§11 Q3）: スター確定**（2026-08-31、WIRING.md）。端子台はPhoenix MKDS-1,5系（v1 `Audio/Controll.kicad_sch`と同一/互換、PARTS.md）
-- [x] **RelayBoard 本配線 / RelayBoard_A・B ERC 0件**
-- [x] **未使用 PT2314 入力**（2026-09-07、12ピンに `no_connect`）
-- [ ] **KiCad ERC残り**（件数の正は [CLAUDE.md](../CLAUDE.md) の期待値表）
-- [x] **DIP-28 ソケットは板バネ（dual-wipe）型**（2026-09-07。`PT2314` が SOP へ移り、
-      挿さるのは `MCP23017` 3個＝ I²C のデジタルだけになったため。品番は発注時）
+| V21-未決-01 | ミュートの場所・素子・時間 | ポットの前／HP 入力と LINE 出力／HP 出力の後ろ、常開・常閉・ラッチング・半導体、時間は τ の取り方次第（約 1 s／1.5 s は τ 0.48 s のとき、NC 10 kΩ なら約 21 ms の τ） | §2-10、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4 |
+| V21-未決-02 | ch のデコーダの置き場所と EN の形、娘の 3.3 V | 娘（2→4 デコーダ＋FET、レールから 3.3 V）／親。直列 R＋ショットキーを残すか | §2-9、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4 A1 |
+| V21-未決-03 | 娘の MCP23017 を残すか（I²C をスタックに通すか） | 残す（コネクタ +2 本で 2×12 に入らない）／親からのレベル線だけ | [NOW] L25、[review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #1、[review/stack_relay_power.md](review/stack_relay_power.md) §7.2 |
+| V21-未決-04 | NC 側の抵抗値 | 音声 10 kΩ（4.7〜22 kΩ）、レール 2.2 kΩ（1〜4.7 kΩ） | §2-3、[review/stack_relay_power.md](review/stack_relay_power.md) §0.2 |
+| V21-未決-05 | 電源リレーの品種（AZ850P2-5 で両役か） | 1 品種（推奨）／電源だけ 2 A 級 | §2-2 |
+| V21-未決-06 | リセットの順序をハードでも保証するか、PRST を音声リセットの OR に入れるか、自動リセットを電源リレーにも入れるか | — | §2-7・§5-5、[review/rail_detect.md](review/rail_detect.md) §0.5 D5・D6 |
+| V21-未決-07 | ch LDO の後ろの容量の上限（22 µF）を外すか | 前提（しきい値 13.0 V）は消えた、という査読の読みを採るか | §3-7 |
+| V21-未決-08 | GND センス点と Q1/Q2 の切替の形 | 娘→母板のコネクタの `A_GND` ピン際 1 点（推奨）／外部取り出し端子の GND／娘に専用ピン。1×3 ヘッダ＋シャント／スライドスイッチ | §4-3、[review/adc_gnd_retree.md](review/adc_gnd_retree.md) §5・§7.4 |
+| V21-未決-09 | 計測側の予備の音声端子（2P、GND 極なし）を 3P にするか外すか | — | [review/adc_gnd_retree.md](review/adc_gnd_retree.md) §7.4-10 |
+| V21-未決-10 | ADC 入力の逆向きの窓の保険（VCOM–ドライバ +IN に 1 kΩ）、I²S の直列抵抗（0 Ω の足場） | — | §4-6、[review/adc_gnd_retree.md](review/adc_gnd_retree.md) §6.4 |
+| V21-未決-11 | LDO 前のフィルタの形 | 入口の電解を低 ESR に／足元を 1 µF に／2 段 | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §6.2・§10-2 |
+| V21-未決-12 | v2.1 の試験レベル | バス 3.70 Vrms（−3.4 dBFS、DUT は v1 より +5.5 dB）／v1 と同じ DUT 振幅（−8.9 dBFS、平均を増やす） | [review/tap_compare_review.md](review/tap_compare_review.md) §2.3・§4-A |
+| V21-未決-13 | ch 側の入力 220 kΩ を戻すか | 入力スイッチを先に閉じ 5τ 待てば聴こえるバスに出る前に吸収される。安い保険 | [review/rejected_review.md](review/rejected_review.md) #6、[_review](review/rejected_review_review.md) #6 |
+| V21-未決-14 | DIRECT の置き方と切替、ライン入力の振幅の定義 | — | §1-5、[NOW] L27 |
+| V21-未決-15 | シャーシを 1 点で落とす先（パネル部品の金属部のグランドの扱いを含む） | — | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §8-1・§10-8 |
+| V21-未決-16 | 入力ヒューズ（今の F2A 速断のままか）と DC-DC 入口の電解の耐圧・ESR | 突入の I²t は 0.007〜0.034 A²s の見積もり。RS6 の DS に推奨ヒューズは無い | [review/main_power_compare_review.md](review/main_power_compare_review.md) 1-6・§4-7 |
+| V21-未決-17 | 娘の最終枚数 | 固定側・レール容量・故障時の ch 数が枚数に比例（電源 SET は 4 本＝4 枚まで） | [review/main_power_compare_review.md](review/main_power_compare_review.md) §4-8、§2-5 |
+| V21-未決-18 | 議論中の回路: Cf の足場、高速娘の網、バイアス | — | [NOW] L28 |
+| V21-未決-19 | PCB: グランドの NetTie 群とグランド選択ヘッダを 1 か所に寄せる、`ADC_GND` の島は 1 か所でしか外とつながらないゾーンに。縦積みのリレーは上下・隣とも 5 mm 以上離す（DS の制約、§2-1） | — | [review/adc_gnd_retree.md](review/adc_gnd_retree.md) §7.4-13、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) §3 (c) |
+| V21-未決-20 | 縦積みで下の段の DIP ソケットに手が届くか（v2 L3177「最大の制約: DIP ソケット 10 個へのアクセス」） | 積み方・段の数・挿し替えの手順 | [review/decisions_audit_3_review.md](review/decisions_audit_3_review.md)（3884 の補足） |
+| V21-未決-21 | 6 W 低 Ciso 群（10〜20 pF、±200 mA 上限）を主電源の比較に入れるか | 軽負荷の振る舞い・Cout・入力範囲を満たすかは誰も見ていない。RS6 はこの群より絶縁容量が 5〜10 倍悪い | §3-1・§8、[review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 修正の要点 3 |
+| V21-未決-22 | 2×12 の内訳（`PG_N` を残すか、予備の GND を何本にするか） | — | §2-5、[review/stack_relay_power.md](review/stack_relay_power.md) §7.2、[review/rail_detect_review.md](review/rail_detect_review.md) §7.3・§7.6 |
+| V21-未決-23 | ±15 V の有無を Pico へ知らせる検知線の形 | `MON_P`/`MON_N` で兼ねる／親の +15 V を別に分圧して読む | §5-7 |
+| V21-未決-24 | コイルのパルス幅 | 20 ms 以上（推奨） | §6-2、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 8-1 |
+| V21-未決-25 | 活線で娘を抜き挿ししない運用 | 電源を切ってから抜き挿し・挿したら起動し直す（推奨） | §6-2、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) §3 (e) |
