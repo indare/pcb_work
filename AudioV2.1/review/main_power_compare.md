@@ -18,12 +18,12 @@
 | [RRR:Lnn] / [RR:Lnn] | `AudioV2.1/review/rejected_review_review.md`／`rejected_review.md` の nn 行 |
 | [GT:Lnn] / [GTR:Lnn] | `AudioV2.1/review/adc_gnd_retree.md`／`adc_gnd_retree_review.md` の nn 行 |
 | [NOW:Lnn] / [DEC:Lnn] | `AudioV2.1/NOW.md`／`AudioV2.1/DECISIONS.md` の nn 行 |
-| [TMR9 pN] | `Audio/datasheets/TMR9_Datasheet.pdf`（July 2, 2026、5 ページ）の p N。**p2・p3・p4 は `pdftoppm -png -r 150` で画像にして列を確認** |
-| [TMR10 pN] | `AudioV2.1/datasheets/Traco_TMR10WI.pdf`（July 2, 2026、5 ページ。`AudioV2/datasheets/` のものとバイト一致）。**p2・p3 は画像で確認** |
+| [TMR9 pN] | `AudioV2.1/datasheets/TMR9_Datasheet.pdf`（July 2, 2026、5 ページ）の p N。**p2・p3・p4 は `pdftoppm -png -r 150` で画像にして列を確認** |
+| [TMR10 pN] | `AudioV2.1/datasheets/Traco_TMR10WI.pdf`（July 2, 2026、5 ページ）。**p2・p3 は画像で確認** |
 | [REC20K pN] | `AudioV2.1/datasheets/Recom_REC20K-Z_Rev3-2025.pdf`（Rev. 3-2025、9 ページ）。**p2・p6 は画像で確認**、p1・p8・p9 は pdftotext |
 | [RS6 pN] | `AudioV2.1/datasheets/Recom_RS6.pdf`。値は [pow] の照合済みの行を使い、**p2・p4 は自分でも画像で見直した**（[pow] と一致） |
-| [TMR6 pN] | `Audio/datasheets/TMR6_Datasheet.pdf`（2018、3 ページ、pdftotext のみ）。参考 |
-| [OPA1652 pN] | `Audio/datasheets/opamps/TI_OPA1652.pdf`（SBOS477B）。p7 は pdftotext、**p12 は画像で目読み** |
+| [TMR6 pN] | `AudioV2.1/datasheets/TMR6_Datasheet.pdf`（2018、3 ページ、pdftotext のみ）。参考 |
+| [OPA1652 pN] | `AudioV2.1/datasheets/opamps/TI_OPA1652.pdf`（SBOS477B）。p7 は pdftotext、**p12 は画像で目読み** |
 | [TPS7A49 p7] / [TPS7A30 p8] | 各 DS の Typical Characteristics。**画像で目読み**（Figure 3・5） |
 | 〔計算〕 | 引用した数値からの算術（式を書く） |
 | 〔推論〕 | DS にも回路図にも書かれていない判断。外れる条件をなるべく書く |
@@ -155,7 +155,7 @@
 | 今の `U201` の FP に挿さるか | **挿さらない**（今は `Library:REC20K-Z_1in_THT`、`AudioV2Case.kicad_sch` L54020、PCB L25417） | 挿さらない | 挿さらない | 挿さる（そのまま） |
 | CTRL（今は `U201.3` が未接続 [SF pin U201]） | 開放 = ON、5 V < Vr < 12 V で OFF、low は不可 [pow:L40–42] | 開放または 0–0.5 V = ON、3–12 V = OFF（−Vin 基準）[TMR9 p3] | 開放または 3.5–12 V = ON、**0–1.2 V または短絡 = OFF（極性が逆）** [TMR10 p3] | 開放または 2.5–12 V = ON、短絡または 0–0.8 V = OFF [REC20K p2] |
 
-- **ピン互換**: RS6・TMR9・TMR10WI は SIP8 の 1/2/3/6/7/8 の機能と位置が同じ（上の行）。CTRL を今と同じく開放にしておけば 3 つとも ON で、**同じ SIP8 の FP で差し替えられる**〔推論: TMR9 金属版はケース脚の穴を足す必要がある〕。リポジトリにある SIP8 の FP は `Audio/Library.pretty/TEC3-1223_SIP8_THT.kicad_mod`（ピン 1,2,3,5,6,7,8、L6）だが**穴は Ø0.8**（L120）で、RS6 の推奨 Ø1.00 +0.15/−0 [pow:L100] に合わない。新しい FP（または穴を広げた派生）が要る
+- **ピン互換**: RS6・TMR9・TMR10WI は SIP8 の 1/2/3/6/7/8 の機能と位置が同じ（上の行）。CTRL を今と同じく開放にしておけば 3 つとも ON で、**同じ SIP8 の FP で差し替えられる**〔推論: TMR9 金属版はケース脚の穴を足す必要がある〕。リポジトリにある SIP8 の FP は `AudioV2.1/lib/Library.pretty/TEC3-1223_SIP8_THT.kicad_mod`（ピン 1,2,3,5,6,7,8、L6）だが**穴は Ø0.8**（L120）で、RS6 の推奨 Ø1.00 +0.15/−0 [pow:L100] に合わない。新しい FP（または穴を広げた派生）が要る
 - **参考: TMR 6-1223**（±200 mA [TMR6 p1]）はスイッチングが **100 kHz min（PFM）** [TMR6 p2] で軽負荷で周波数が動く型。無負荷 55 mA typ（12 V models）、推奨ヒューズ 1.6 A slow（max rating）、Cout 660 µF（各出力）、Ciso 50 pF max [TMR6 p1–p2]。軽負荷の保証が要る v2.1 の基準では外れる
 
 ### 2.2 ヒューズ（今の `F201` F2A 速断）

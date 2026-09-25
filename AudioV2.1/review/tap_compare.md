@@ -288,7 +288,7 @@ VCOM は LPF ドライバの +IN と 100 nF（→ `ADC_GND`）にしか使って
 ## 付録 B. このセッションで回したもの
 
 - `sch_facts.py pin A1601 / Y1601 / A1602 / R1604 / U1605`、`nets --net ADC_MCLK / ADC_BCK / ADC_LRCK / ADC_DATA / ADC_nRST / ADC_nMR / DEST_ADC`
-- `pdftotext -layout`: `AudioV2.1/datasheets/TI_PCM1804.pdf`（p1, p7, p19, p22–23）、`Audio/datasheets/opamps/TI_OPA1656.pdf`（p6）、`AudioV2.1/datasheets/tap/TI_INA1650.pdf`（p1）、`ADI_AD215.pdf`（PDF p13）、`TI_ISO224.pdf`・`TI_AMC1311.pdf`（p1 のパッケージ）
+- `pdftotext -layout`: `AudioV2.1/datasheets/TI_PCM1804.pdf`（p1, p7, p19, p22–23）、`AudioV2.1/datasheets/opamps/TI_OPA1656.pdf`（p6）、`AudioV2.1/datasheets/tap/TI_INA1650.pdf`（p1）、`ADI_AD215.pdf`（PDF p13）、`TI_ISO224.pdf`・`TI_AMC1311.pdf`（p1 のパッケージ）
 - `switch_thd.py --interp pchip`: `--rload` 30.4k / 40.7k / 16.5k / 9.85k × `--vout` 9.2（既定）/ 5.47 / 3.7。H3（Rbias 47k 行）:
 
 | 負荷 | 9.2 Vrms | 5.47 Vrms | 3.7 Vrms |

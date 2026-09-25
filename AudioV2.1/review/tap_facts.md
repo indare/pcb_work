@@ -125,7 +125,7 @@ ADC_GND ─NT1601─ A_GND ─NT1603─ D_GND ─NT1602─ PD_GND
 
 ## 2. タップが本線に掛ける負荷
 
-**タップ単体**（[計算]、定数は [SF bom]、DS は `Audio/datasheets/opamps/TI_OPA1656.pdf` Electrical Characteristics「Common-mode 6 || 1.9 (10^12 Ω || pF)」を pdftotext で確認）:
+**タップ単体**（[計算]、定数は [SF bom]、DS は `AudioV2.1/datasheets/opamps/TI_OPA1656.pdf` Electrical Characteristics「Common-mode 6 || 1.9 (10^12 Ω || pF)」を pdftotext で確認）:
 - `R1659` 100k ∥ OPA1656 同相入力 6×10^12 Ω ∥ 1.9 pF ≈ **100 kΩ**（容量は数 pF ＋配線）。L・R それぞれ
 
 **`AMP_SEL` バス全体**（選択中の1 ch から見た負荷、[計算]）:

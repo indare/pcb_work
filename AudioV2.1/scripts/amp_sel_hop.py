@@ -851,7 +851,6 @@ def _stage(pcb_bytes: bytes, dest: Path) -> Path:
     if dest.exists():
         shutil.rmtree(dest)
     (dest / "AudioV2.1").mkdir(parents=True)
-    os.symlink(ROOT / "Audio", dest / "Audio")
     src = ROOT / "AudioV2.1"
     for e in src.iterdir():
         if e.name in ("AudioV2Case.kicad_pcb", "AudioV2Case.kicad_prl") or e.name.startswith("~"):

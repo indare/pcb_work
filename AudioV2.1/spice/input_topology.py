@@ -41,7 +41,7 @@ V_DC = 4.5             # PT2314 出力の直流電位（データシート DC Vo
 NCH = 10
 F3DB_TARGET = 2.0      # 結合C設計の目標 -3dB 周波数 [Hz]
 
-# 手持ちオペアンプの入力バイアス電流（Audio/datasheets/opamps/ の各データシート）
+# 手持ちオペアンプの入力バイアス電流（AudioV2.1/datasheets/opamps/ の各データシート）
 IB = {
     "LT1364": (600e-9, 2000e-9),
     "NE5532": (200e-9, 800e-9),

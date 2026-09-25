@@ -2,7 +2,7 @@
 
 - 照合日: 2026-09-25
 - 対象: `AudioV2.1/ds_facts/boundary.md`（書き換えていない）
-- DS: `AudioV2.1/datasheets/boundary/` の 14 本と、`AudioV2.1/datasheets/` の `TI_TMUX7612.pdf` / `ADI_MAX14778.pdf` / `Zettler_AZ850.pdf` / `Panasonic_AQW212EH.pdf`（`AudioV2/datasheets/` にも同名のものがある）
+- DS: `AudioV2.1/datasheets/boundary/` の 14 本と、`AudioV2.1/datasheets/` の `TI_TMUX7612.pdf` / `ADI_MAX14778.pdf` / `Zettler_AZ850.pdf` / `Panasonic_AQW212EH.pdf`
 - やり方: 出典に書かれたページをすべて `pdftoppm -png -r 150` で画像にし、表の罫線・列見出し・ページ見出しの条件・脚注を目で確かめた。
   Panasonic TQ は poppler では文字が描かれないので（`pdftotext` は 150 バイト、`pdftoppm` の画像は罫線だけ。boundary.md §3.3 の記述どおり）、scratchpad に置いた PyMuPDF 1.28.2 で本文を抜き、ページ画像も PyMuPDF で描いた。
   「DS に無い」とされた項目は、各 DS の全文（`pdftotext -layout`）をキーワードで探したうえで、該当しそうなページを画像で見た。

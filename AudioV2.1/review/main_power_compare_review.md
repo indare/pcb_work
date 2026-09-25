@@ -12,7 +12,7 @@
 | [RB:Lnn] | `AudioV2.1/scripts/rail_budget.py` の行 |
 | [SF …] | 自分で回した `python3 AudioV2.1/scripts/sch_facts.py pin/nets/rails/bom/tree` |
 | [SCH MC] | `AudioV2.1/MeasureControl.kicad_sch` の部品プロパティ（Description・Footprint）を読んだもの |
-| [RS6 pN] / [TMR9 pN] / [TMR10 pN] / [REC20K pN] / [OPA1652 pN] | 自分で `pdftoppm -png -r 150` で画像にして見たページ（`AudioV2.1/datasheets/Recom_RS6.pdf` 全 7 ページ、`Audio/datasheets/TMR9_Datasheet.pdf` 全 5、`AudioV2.1/datasheets/Traco_TMR10WI.pdf` 全 5、`AudioV2.1/datasheets/Recom_REC20K-Z_Rev3-2025.pdf` p1・p2・p6、`Audio/datasheets/opamps/TI_OPA1652.pdf` p7・p12。OPA1652 の熱抵抗は p5 を pdftotext） |
+| [RS6 pN] / [TMR9 pN] / [TMR10 pN] / [REC20K pN] / [OPA1652 pN] | 自分で `pdftoppm -png -r 150` で画像にして見たページ（`AudioV2.1/datasheets/Recom_RS6.pdf` 全 7 ページ、`AudioV2.1/datasheets/TMR9_Datasheet.pdf` 全 5、`AudioV2.1/datasheets/Traco_TMR10WI.pdf` 全 5、`AudioV2.1/datasheets/Recom_REC20K-Z_Rev3-2025.pdf` p1・p2・p6、`AudioV2.1/datasheets/opamps/TI_OPA1652.pdf` p7・p12。OPA1652 の熱抵抗は p5 を pdftotext） |
 | [pow:Lnn] / [tap:Lnn] / [sw:Lnn] | `AudioV2.1/ds_facts/power.md`／`tap.md`／`switch_control.md` |
 | 〔計算〕〔推論〕 | 比較と同じ使い方 |
 
@@ -70,7 +70,7 @@
 | 無負荷の入力電流 | RS6 55 mA（Max）、TMR9 11 typ、TMR10 16 / 24、REC20K 5 / 11（24 V 条件） | 一致。RS6 の条件欄の印字は "2VDC"（12 V の位置） | 支持 | [RS6 p2]、[TMR9 p2]、[TMR10 p2]、[REC20K p2] |
 | 推奨ヒューズ | RS6 記載なし、TMR9 3150 mA slow、TMR10 5000 mA slow、REC20K slow のみ | 一致。**Traco の値は保護の上限としての推奨**で、「これより小さいと駄目」という意味ではない〔推論〕（§1-6 で突入を見積もる） | 支持（読み方を注記） | [TMR9 p2]、[TMR10 p2]、[REC20K p6] |
 | TMR10WI の 68 µF / 100 V / KZE | 機械接点で入り切りするなら外付け | p1 の Note と一致（目的は電圧の過渡を減らすこと）。TMR10WI 固有の注記で、他の候補の DS には無い | 支持 | [TMR10 p1] |
-| ピン配置 | RS6/TMR9/TMR10 は 1/2/3/6/7/8 が同じ | 一致。RS6 は 1-2-3、4 番なし、5(NC)-6-7-8 で、1〜8 番の中心間は 7×2.54 ＝ 17.78。TMR9 は 1-2-3 のあと 7.62 で 6-7-8（5 番なし）。TMR10WI は 5.08 のあと 5(NC)-6-7-8。**5 番の穴を持つ SIP8 の FP なら 3 つとも挿さる**（TMR9 金属版はケース脚 9/12 とスタンドオフ 10/11 の穴が別に要る）。既存の `TEC3-1223_SIP8_THT` は穴 Ø0.8 で、RS6 の推奨 Ø1.00 +0.15/−0 と合わない | 支持 | [RS6 p7]、[TMR9 p4]、[TMR10 p5]、`Audio/Library.pretty/TEC3-1223_SIP8_THT.kicad_mod` L117–168 |
+| ピン配置 | RS6/TMR9/TMR10 は 1/2/3/6/7/8 が同じ | 一致。RS6 は 1-2-3、4 番なし、5(NC)-6-7-8 で、1〜8 番の中心間は 7×2.54 ＝ 17.78。TMR9 は 1-2-3 のあと 7.62 で 6-7-8（5 番なし）。TMR10WI は 5.08 のあと 5(NC)-6-7-8。**5 番の穴を持つ SIP8 の FP なら 3 つとも挿さる**（TMR9 金属版はケース脚 9/12 とスタンドオフ 10/11 の穴が別に要る）。既存の `TEC3-1223_SIP8_THT` は穴 Ø0.8 で、RS6 の推奨 Ø1.00 +0.15/−0 と合わない | 支持 | [RS6 p7]、[TMR9 p4]、[TMR10 p5]、`AudioV2.1/lib/Library.pretty/TEC3-1223_SIP8_THT.kicad_mod` L117–168 |
 | CTRL | RS6 開放 ON、5 V < Vr < 12 V で OFF、low 不可 ／ TMR9 開放または 0〜0.5 V で ON ／ TMR10 は極性が逆 ／ REC20K | 一致。**RS6 はオープンドレインで OFF にできない**（Note7「low は許されない」）。ハードの非常停止を CTRL でやるなら、5〜12 V を載せる駆動が要る。TMR10WI は短絡で OFF なので、そのまま使える | 支持（含意を追加） | [RS6 p2, p7]、[TMR9 p3]、[TMR10 p3]、[REC20K p2] |
 | RS6 の保護 | OLP 150 %・連続・自動復帰、SCP 連続・自動復帰 | 一致。**OLP の値は「150% load」だけで、min/typ/max も、合計か出力ごとかも書いていない。保護の表に過熱保護は無い**。ディレーティング図は RS6-0505S のもの | 支持（**不足を追加**） | [RS6 p5] |
 | 入力範囲 vs PD 12 V | RS6 9 / 12 / 18 V、UVLO ON 9 / OFF 7 V typ | 一致。UVLO は typ だけ。PD の 12 V は公称から数 % 動き、ケーブル・`SW402` の往復・`F201` で 0.1〜0.2 V 級落ちる〔推論〕。それでも下限 9 V まで約 2 V ある。**逆に効く利点**: PD が 12 V を取り決める前の 5 V の間、RS6 と REC20K は UVLO で止まったまま。TMR10WI は 4.1〜4.5 V で起動して、5 V で動いてしまう | 支持（利点を追加） | [RS6 p2]、[TMR10 p2]、[REC20K p2]、`datasheets/StrawberryLinux_50224_CH224K.md` |

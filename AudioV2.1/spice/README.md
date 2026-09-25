@@ -1,11 +1,11 @@
 # AudioV2 回路シミュレーション
 
-設計判断の根拠として回した ngspice ネットリスト。**判断そのものは
-[AGENT_HANDOFF.md](../AGENT_HANDOFF.md) §2.9 と [AudioV2/DECISIONS.md](../../AudioV2/DECISIONS.md) §11.1 が正。**
-ここはその根拠となった波形を再現するためのもの。
+設計判断の根拠として回した ngspice ネットリスト。**v2.1 の判断そのものは [DECISIONS.md](../DECISIONS.md) が正。**
+ここはその根拠となった波形を再現するためのもの。多くは v2 の構成（全ソケット常時通電）のときに回したもので、
+本文の判定文・「v2 の決定ログ §nn」は v2 のときの記録（v2.1 の決定ではない）。
 
 ```bash
-ngspice -b AudioV2/spice/<file>.cir
+ngspice -b AudioV2.1/spice/<file>.cir
 ```
 
 ## `ampbank_switch_pop.cir` — 出力カップリングの置き場所
@@ -130,7 +130,7 @@ ON のスイッチの THD だけ見ていては足りない。10ch セレクタ�
 
 「入力を10 DUTへ常時ブロードキャストし、出力だけ切替える」構成の検討で、ADG1407（ADI、
 dual 8:1 差動マルチプレクサ、EN付き）が2 IC で10ch分の出力選択を賄える候補として浮上した。
-データシート（`AudioV2/datasheets/ADI_ADG1406_1407.pdf`）の **Figure 10**（VDD=+15V/VSS=−15V
+データシート（`AudioV2.1/datasheets/ADI_ADG1406_1407.pdf`）の **Figure 10**（VDD=+15V/VSS=−15V
 固定、TA=−40/+25/+85/+125℃の4本）をベクタパスから数値抽出した（TMUX7612/DG412と同じ手法。
 目視ではない）。
 
@@ -200,7 +200,7 @@ DG412 よりは5dB良いが同じ弱点を共有する。IC 2個で済むメリ�
 ただしこの数字は条件が混ざっている。**OFF 結合は容量性主体なので漏れは周波数に比例し、
 非選択ソケットに何が刺さっているかで絶対値が変わる。**
 
-    python3 AudioV2/spice/switch_offiso.py --harmonics
+    python3 AudioV2.1/spice/switch_offiso.py --harmonics
 
 基本波 1kHz の THD 試験で実際に見るのは H2=2k / H3=3k / H5=5k:
 
@@ -234,7 +234,7 @@ DIRECT 絶対 THD でも 1kHz 基本波なら余裕があるが、**高域まで
 入力ブロードキャスト＋出力のみMUX構成での最終比較。条件は
 **±15V電源 / ゲイン2 / 出力最大 9.2Vrms(±13Vpk) / 負荷50kΩ / Riso 47Ω / 1kHz**。
 
-    python3 AudioV2/spice/switch_compare.py
+    python3 AudioV2.1/spice/switch_compare.py
 
 | 部品 | IC数 | 確度 | 4.0Vrms | 7.07Vrms | 8.0Vrms | **9.2Vrms** |
 |---|---:|---|---:|---:|---:|---:|
@@ -353,7 +353,7 @@ ADC の高調波と切替素子由来の高調波は、**同じ次数なら複�
 
 `switch_thd.py` は H2 / H3 を総 THD と別に返しているので、素子側は次数別に見られる。
 
-    python3 AudioV2/spice/switch_compare.py
+    python3 AudioV2.1/spice/switch_compare.py
 
 > **⚠ 2026-09-03 に条件バグを修正**（#33）。この表を最初に出したとき
 > `stage="both"` / `rbias=100k` をハードコードしており、**上の総 THD 比較表
@@ -395,7 +395,7 @@ ADC の高調波と切替素子由来の高調波は、**同じ次数なら複�
 >
 > **保守的なふるい分けには使えるが、「その石は測れない」の証明にはならない。**
 
-**DUT 側の条件（`Audio/datasheets/opamps/` で確認済み）:**
+**DUT 側の条件（`AudioV2.1/datasheets/opamps/` で確認済み）:**
 
 | DUT | 値 | 条件 | 出典 |
 |---|---:|---|---|
@@ -413,7 +413,7 @@ ADC の高調波と切替素子由来の高調波は、**同じ次数なら複�
 条件不一致のうち**一番効いていた振幅軸**は、データシートのカーブを抽出すれば揃えられる。
 `OPA1612` p.1「THD+N Ratio vs Output Amplitude」を Ron 曲線と同じベクタ抽出で数値化した。
 
-    python3 AudioV2/spice/extract_dut_thd.py
+    python3 AudioV2.1/spice/extract_dut_thd.py
 
 **校正の検証:** 抽出カーブの `G=+1, RL=2k` @3.0Vrms は **−138.4 dB**。
 データシート実表の規定値（`G=+1, f=1kHz, VO=3Vrms`）は **−136 dB**。2.4 dB 差で妥当。
@@ -462,7 +462,7 @@ THD+N は*比*なので振幅が上がるほど（雑音支配から外れて）
 > ただし差が 25 dB あるので、抽出誤差 2〜3 dB では結論は逆転しない
 > （3Vrms での校正差が 2.4 dB）。
 
-**この掃引から経路ごとの振幅上限が決まる**（[`AudioV2/DECISIONS.md` §11.1a](../../AudioV2/DECISIONS.md)）:
+**この掃引から経路ごとの振幅上限が決まる**（v2 の決定ログ §11.1a。v2.1 での扱いは [DECISIONS.md](../DECISIONS.md) §1-5）:
 **通常 4〜5 Vrms / 精密 DIRECT 約 7 Vrms（10 Vpk）/ フルレンジ 9.2 Vrms はリレー等**。
 **`TMUX7612` を「4〜5 Vrms まで」に縛る必要はない。**
 
@@ -482,7 +482,7 @@ THD+N は*比*なので振幅が上がるほど（雑音支配から外れて）
 負荷 DS 2k vs 実回路 50k、ゲイン DS −1 vs 実回路 +2。
 `LME49860` p.5 と `MUSES02` p.5 にも同種のカーブがあるが未抽出。
 
-    python3 AudioV2/spice/switch_compare.py
+    python3 AudioV2.1/spice/switch_compare.py
 
 | 部品 | Vrms | 最大次数 | NE5532 −94 | MUSES02 −100 | LME49860 −130.5 | OPA1612 −136 |
 |---|---:|---:|---:|---:|---:|---:|

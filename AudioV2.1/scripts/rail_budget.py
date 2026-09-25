@@ -32,9 +32,9 @@ TOP = ("+15V", "-15V")
 PER_PART = {
     # value / lib の一部 : {レール役割: (typ, max)} と出典
     "OPA1656": ({"+": (7.8, 9.2), "-": (7.8, 9.2)},
-                "Audio/datasheets/opamps/TI_OPA1656.pdf 電気的特性 IQ 3.9/4.6 mA per ch × 2"),
+                "AudioV2.1/datasheets/opamps/TI_OPA1656.pdf 電気的特性 IQ 3.9/4.6 mA per ch × 2"),
     "OPA1652": ({"+": (4.0, 5.0), "-": (4.0, 5.0)},
-                "Audio/datasheets/opamps/TI_OPA1652.pdf 電気的特性 IQ 2/2.5 mA per ch × 2"),
+                "AudioV2.1/datasheets/opamps/TI_OPA1652.pdf 電気的特性 IQ 2/2.5 mA per ch × 2"),
     "TMUX7612": ({"+": (0.435, 0.48), "-": (0.34, 0.38)},
                  "AudioV2.1/datasheets/TI_TMUX7612.pdf p7 IDD/ISS all switches ON, ±16.5 V"),
     "PT2314E": ({"+": (30.0, 40.0)},
@@ -45,7 +45,7 @@ PER_PART = {
 ADC_TOTAL = ((59.0, 84.0), "v2 の DECISIONS「電流はデータシートから積み上がった」: PCM1804 VCC max 45 + VDD max 20 "
              "＋ 発振器 max 15 ＝ ≤84 mA（typ ≈59）")
 # ソケット（AmpChannel のデュアルオペアンプ）1 個あたり
-SOCKET = {"NE5532": ((6.0, 16.0), "Audio/datasheets/opamps/TI_NE5532.pdf ICC total VO=0 無負荷 6/16 mA"),
+SOCKET = {"NE5532": ((6.0, 16.0), "AudioV2.1/datasheets/opamps/TI_NE5532.pdf ICC total VO=0 無負荷 6/16 mA"),
           "在庫の最悪": ((20.0, 20.0), "v2 の DECISIONS「在庫石の最悪 Icc を実読」MUSES03 変換基板 10 mA max × 2")}
 # 下位レール: レール名 → (レギュレータの参照, 自己消費 (typ, max) [mA], 出典)
 SUBRAIL = {

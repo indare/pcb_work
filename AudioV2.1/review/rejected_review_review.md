@@ -4,8 +4,8 @@
 
 - 作成: 2026-09-24（エージェント、読み取り専用）。**リポジトリのファイルは何も変更していない**（`git status` クリーンのまま）。出力はこのファイルだけ
 - 自分で回したもの: `sch_facts.py all`／`pin`（NT101, NT1601–1603, U201, F1601, F1602, F201–F203, U1603, U1606, U1607, U403, U202, U1611, U1601, U1602, U1605, Y1601, A1601, U501, R501, R502）／`nets`（PD_12V_SW, PD_12V_MEAS, PD_GND, ADC_GND, ADC_nRST, ADC_nMR, ADC_BCK, ADC_LRCK, ADC_DATA, ADC_MCLK, VINL+）、`rail_budget.py`（素と `--adc-from-pd`）
-- **画像で見たページ**: `Audio/datasheets/TMR9_Datasheet.pdf` p1–p5（`pdftoppm -png -r 150`）、`AudioV2.1/datasheets/Recom_RS6.pdf` p2
-- pdftotext で見たもの: `TI_TMUX7612.pdf` p7、`TI_TPS7A49.pdf` p5、`TI_PCM1804.pdf` 絶対最大定格、`Mornsun_URA_LD-20WR3.pdf` p3、`Recom_REC20K-Z_Rev3-2025.pdf` p2、`Audio/datasheets/TMR6_Datasheet.pdf`、`Traco_TMR10WI.pdf`、`Traco_TEL10WI.pdf`、`Cincon_EC4SBW.pdf`、`Cincon_EC2SBW.pdf`、`CUI_PYBE10.pdf` ほか
+- **画像で見たページ**: `AudioV2.1/datasheets/TMR9_Datasheet.pdf` p1–p5（`pdftoppm -png -r 150`）、`AudioV2.1/datasheets/Recom_RS6.pdf` p2
+- pdftotext で見たもの: `TI_TMUX7612.pdf` p7、`TI_TPS7A49.pdf` p5、`TI_PCM1804.pdf` 絶対最大定格、`Mornsun_URA_LD-20WR3.pdf` p3、`Recom_REC20K-Z_Rev3-2025.pdf` p2、`AudioV2.1/datasheets/TMR6_Datasheet.pdf`、`Traco_TMR10WI.pdf`、`Traco_TEL10WI.pdf`、`Cincon_EC4SBW.pdf`、`Cincon_EC2SBW.pdf`、`CUI_PYBE10.pdf` ほか
 - 読んだ記録: `AudioV2.1/DECISIONS.md`（以下 DEC）の引用行、`Audio/MeasurementADC_BRINGUP.md`（以下 BRINGUP）409–413・424–535 行、`AudioV2.1/ds_facts/power.md`・`switch_control.md`、`AudioV2.1/NOW.md`
 
 **判定の意味**: 支持＝判定と決め手がどちらも成り立つ／修正＝判定か決め手を差し替える必要がある／判定不能＝手元の証拠ではどちらとも言えない（再査読と同じく判定不能とする場合も含む。そのとき決め手の誤りは理由欄に書く）

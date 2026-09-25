@@ -20,7 +20,7 @@
 | [BPS:Lnn] | `AudioV2.1/review/bulk_parent_sim.md` |
 | [NOW:Lnn] | `AudioV2.1/NOW.md` |
 | [RS6 pN] | `AudioV2.1/datasheets/Recom_RS6.pdf`。**自分で pdftotext で開いた**（p1・p2・p5）。**p4 は画像（110 dpi）で見た** |
-| [TMR9 pN] | `Audio/datasheets/TMR9_Datasheet.pdf`（July 2, 2026）。自分で pdftotext で開いた（p1〜p3） |
+| [TMR9 pN] | `AudioV2.1/datasheets/TMR9_Datasheet.pdf`（July 2, 2026）。自分で pdftotext で開いた（p1〜p3） |
 | [TMR10 pN] | `AudioV2.1/datasheets/Traco_TMR10WI.pdf`（July 2, 2026）。自分で pdftotext で開いた（p1〜p4） |
 | [REC20K pN] | `AudioV2.1/datasheets/Recom_REC20K-Z_Rev3-2025.pdf`。自分で pdftotext で開いた（p1・p2・p6）。**p6 は画像（110 dpi）でも見た** |
 | [CALC] / [TSS] | 上の `calc_out.txt` / `tss_out.txt`（算術だけ。入力の出典は §1.1） |

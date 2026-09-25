@@ -108,7 +108,7 @@ def uid() -> str:
 
 def _patch_measurement_adc_lib() -> None:
     """カスタム lib を sch_edit が読めるようにする。"""
-    extras = (ROOT.parent / "Audio" / "MeasurementADC_Extras.kicad_sym")
+    extras = (ROOT / "lib" / "MeasurementADC_Extras.kicad_sym")
     orig = sch_helpers._read_symbol_text
 
     def _read(lib: str, name: str) -> str:

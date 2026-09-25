@@ -422,7 +422,7 @@ def _read_symbol_text(lib: str, name: str) -> str:
     if lib == "AudioV2":
         return (ROOT / "AudioV2.kicad_sym").read_text(encoding="utf-8")
     if lib == "BP5293_ROHM":
-        return (ROOT.parent / "Audio" / "BP5293_ROHM.kicad_sym").read_text(encoding="utf-8")
+        return (ROOT / "lib" / "BP5293_ROHM.kicad_sym").read_text(encoding="utf-8")
     return _read_packed_or_dir(lib, name)
 
 

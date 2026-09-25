@@ -6,7 +6,7 @@
 - 証拠は次だけ:
   - `AudioV2.1/ds_facts/opamps.md`（以下 **[OP]**。節番号＋行の項目名で引く。ページは PDF ページ）
   - `AudioV2.1/ds_facts/switch_control.md`（以下 **[SW]**）
-  - `Audio/OPAMP_INVENTORY.md`（以下 **[INV]**）
+  - 手持ちの在庫表（以下 **[INV]**。当時は v1 の在庫表を読んだ。v2.1 に写したものは `AudioV2.1/OPAMP_STOCK.md`）
   - 回路図 `AudioV2.1/*.kicad_sch`（`python3 AudioV2.1/scripts/sch_facts.py all` / `pin` / `nets` の出力）
 - 記号: **保証**＝DS 表の min（またはレール基準の MIN/MAX 列）がその電源で規定されている／**typ**＝表の typ 値／**目読み**＝グラフから読んだ値（[OP] の読み）／**推定**＝私が計算した値（式を示す）
 

@@ -7,7 +7,7 @@
 - 自分で実行したもの:
   - `python3 AudioV2.1/scripts/sch_facts.py all` ／ `pin <REF>`（NT101, NT1601, NT1602, NT1603, U201, U1603, U1606, U1607, U403, U202, U402, A1601, A1602, U1611, F201–F203, F1601, F1602, U1609, AMP601, C601, C602, R601, R603）／ `bom --by value`
   - `python3 AudioV2.1/scripts/rail_budget.py` と `--adc-from-pd`
-  - `pdftotext -layout`: `Recom_RS6.pdf` p1/p2/p5、`Recom_REC20K-Z_Rev3-2025.pdf` p2/p6、`TI_TMUX7612.pdf` p7、`TI_PGA2310.pdf` p3、`Mornsun_URA_LD-20WR3.pdf` p3、`Audio/datasheets/TMR9_Datasheet.pdf` p1–p3、`Audio/datasheets/TMR6_Datasheet.pdf` p1–p3、ほかリポジトリ内 DC-DC 全 DS の "Isolation Capacitance" 行
+  - `pdftotext -layout`: `Recom_RS6.pdf` p1/p2/p5、`Recom_REC20K-Z_Rev3-2025.pdf` p2/p6、`TI_TMUX7612.pdf` p7、`TI_PGA2310.pdf` p3、`Mornsun_URA_LD-20WR3.pdf` p3、`AudioV2.1/datasheets/TMR9_Datasheet.pdf` p1–p3、`AudioV2.1/datasheets/TMR6_Datasheet.pdf` p1–p3、ほかリポジトリ内 DC-DC 全 DS の "Isolation Capacitance" 行
 
 **出典の書き方**
 
@@ -141,7 +141,7 @@
 | v2 の理由 | 引用（DEC） | v2.1 で成り立つか | なぜ |
 |---|---|---|---|
 | 低 Ciso 品は 6 W / ±200 mA が上限で、要求は +15 V 343 mA | (480–482) | **成立しない** | (a) で 1 ch 通電なら、+15 V は typ 91.1 / max 110.8 mA、−15 V は 55.9 / 62.6 mA（最悪の石、ADC は PD 側）[RB-pd] |
-| Traco の Ciso は一次資料が取れていない | (522) | **成立しない** | `Audio/datasheets/TMR9_Datasheet.pdf`（2026-09-10 にコミット、DS の日付は July 2, 2026）と `TMR6_Datasheet.pdf` がリポジトリにある |
+| Traco の Ciso は一次資料が取れていない | (522) | **成立しない** | `AudioV2.1/datasheets/TMR9_Datasheet.pdf`（2026-09-10 にコミット、DS の日付は July 2, 2026）と `TMR6_Datasheet.pdf` がリポジトリにある |
 
 **型番の比較**（ADC は PD 側の前提）:
 

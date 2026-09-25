@@ -38,7 +38,7 @@ from switch_offiso import coff_from_oiso, solve_broadcast  # noqa: E402
 DATA = Path(__file__).resolve().parent / "data"
 
 #   在庫 DUT の THD+N 公称値。**データシートの参考値であって、この回路の条件ではない。**
-#   条件はデータシートで確認済み（Audio/datasheets/opamps/）。**DUT どうしですら揃っていない**:
+#   条件はデータシートで確認済み（AudioV2.1/datasheets/opamps/）。**DUT どうしですら揃っていない**:
 #
 #     OPA1612  -136.0dB  G=+1,  f=1kHz, VO=3Vrms          TI_OPA1612.pdf p.5
 #     LME49860 -130.5dB  AV=1,  f=1kHz, VOUT=3Vrms, RL=2k TI_LME49860.pdf p.3

@@ -47,7 +47,7 @@ from pathlib import Path
 import numpy as np
 
 DATA = Path(__file__).resolve().parent / "data"
-DS = Path(__file__).resolve().parents[2] / "Audio" / "datasheets" / "opamps"
+DS = Path(__file__).resolve().parents[1] / "datasheets" / "opamps"
 
 #   OPA1612 p.1「THD+N Ratio vs Output Amplitude」
 #   軸校正はラベル中心から: x は 1Vrms が px 203.1、1 decade = 51.2 px。

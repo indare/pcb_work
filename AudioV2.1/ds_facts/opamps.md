@@ -3,7 +3,7 @@
 2026-09-25 収集。値は DS の原文で裏が取れたものだけ。設計判断は書かない。
 2026-09-25 にページ画像と照合した（照合結果 [verify_opamps.md](verify_opamps.md)、その再判定 [../review/ds_errata_review.md](../review/ds_errata_review.md)）。その結果で直した行・足した行は、行末に 〔2026-09-25 照合で訂正〕／〔2026-09-25 照合で追加〕 を付けた。
 
-- 対象: `Audio/OPAMP_INVENTORY.md` の手持ちリストの石（＋ NE5532 本家）。DS は `Audio/datasheets/opamps/`
+- 対象: [OPAMP_STOCK.md](../OPAMP_STOCK.md) の手持ちリストの石（＋ NE5532 本家）。DS は [datasheets/opamps/](../datasheets/opamps/)（作ったときは v1 の在庫表と v1 の DS 置き場を読んだ。2026-09-25 に v2.1 へ写した同じもの）
 - **出典のページは PDF のページ番号**（1 始まり）。TI/ADI/NJR とも、この版では印刷ページ番号と一致している
 - **「列」**は DS の表のどの列に値があるかを、PDF をページ画像にして目で確かめたもの。
   TI の新しい表で「MIN 列」「MAX 列」とあるのは、1 つのセルに左寄せ・右寄せで置かれた値を、位置で読んだもの（下の各項目に注記）
