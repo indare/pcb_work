@@ -13,10 +13,10 @@ v2.1 の決まりごと・検証の期待値は [CLAUDE.md](CLAUDE.md)。`kicad-
 - **v2 から引き継いだもの**は DECISIONS §7（`V21-継-01`〜`31`。どれも v2.1 で再考していない）
 - **未決・要実測**は DECISIONS §10（`V21-未決-nn`・`V21-実測-nn`）。基板を起こす前に要る実測は RS6 の突入と OLP の形（V21-実測-01）
 
-**次にやること**: DECISIONS の決定・いったんの決めを、生成スクリプトと回路図へ入れる
-（娘: 電源用・音声用リレー、ch ごとの電源ゲート一式と入力の切り替え、デコーダ、B1/B2。親: RS6、ADC の電源とグランドの付け替え、`TONE` のプルダウン、L7805C）。
+**2026-09-25**: §10-2 の未決のうち 16 項目を推奨どおり「いったんの決め」にした（娘の MCP・I²C を外す、娘の 2→4 デコーダと EN の形、娘 4 枚、2×12 の内訳 ほか。一覧は [DECISIONS.md](DECISIONS.md) §10-2）。**残る未決はミュート（V21-未決-01）・DIRECT（-14）・縦積みでの DIP ソケットの手の届き（-20）**（ほかに後回しの -06・-12・-15・-18・-19・-21）。
+**次にやること**: 実装の前に、決定・いったんの決めを合わせた**設計全体の評価**。
+その後、生成スクリプトと回路図へ入れる（娘: 電源用・音声用リレー、ch ごとの電源ゲート一式と入力の切り替え、デコーダ、B1/B2。親: RS6、ADC の電源とグランドの付け替え、`TONE` のプルダウン、L7805C）。
 `scripts/` は v2 からの写しで、v2.1 用に新しく書き起こす予定（[CLAUDE.md](CLAUDE.md)）。
-並行して決めるもの: DIRECT バイパスの置き方（V21-未決-14）、ミュート（V21-未決-01）。
 **議論中**: Cf の足場、高速娘の網、バイアス（V21-未決-18。材料は [review/opamp_fast_ds_review_v1.md](review/opamp_fast_ds_review_v1.md)）。
 ついでに直すもの: ルートの PT2314E まわりの 2.2 µF フィルムの FP が細い W2.5 のまま（`review/decisions_audit_3_review.md` 覆した点 4）
 道具: `scripts/rail_budget.py`（±15 V の負荷の積み上げ。`--adc-from-pd`）。根拠データ: `ds_facts/`（照合済み）、査読: `review/`（読み方は [review/README.md](review/README.md)）
@@ -39,7 +39,7 @@ v2.1 の決まりごと・検証の期待値は [CLAUDE.md](CLAUDE.md)。`kicad-
   `FrontPanel` は母板直下（操作系＝ENC/RV/SW/表示）、Pico／計測は `MeasureControl`
 - 所有権と禁止事項: [CLAUDE.md](CLAUDE.md)。**ルートは手編集所有**、娘は `build_daughter.py` が回路の正（全面再生成しない、ピンポイントで差し込む）
 - 娘は **2 版（Switch / Relay）のまま**、どちらも MCP23017 とジャンパ 6 段の番地（UI の MCP は 0x22、娘は 0x20/0x21/0x23〜0x26）。
-  v2.1 では娘は 1 種類で、MCP を残すかは未決（V21-未決-03）
+  v2.1 では娘は 1 種類で、MCP・I²C・番地ジャンパは外す（DECISIONS §2-12）
 - **電源**: DC-DC は `REC20K-2415DZ`（FP `Library:REC20K-Z_1in_THT`）、入口 `F2A` 速断、PPTC 3 個。ADC の LDO は `+15V` 直結で、ADC 枝に PPTC は無い。
   v2.1 ではこれを RS6-1215D・PD 12 V からの ADC 電源・ADC 枝の PPTC へ替える（DECISIONS §3・§4）
 - **トーン**: PT2314E（`SOIC-28W`）。外付け網は DS どおり、`DGND` はチップの足元で `A_GND`、I²C 境界は `BSS138` ×2（PT 側 10 k → `VCC_TONE`）。
