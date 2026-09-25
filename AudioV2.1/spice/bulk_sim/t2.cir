@@ -1,0 +1,19 @@
+t2
+V0 a 0 DC 15
+Lx a b 1u
+Rx b c 0.1
+C1 c 0 10u
+S1 c d ctl 0 SWMOD
+Vctl ctl 0 PULSE(0 1 10u 10n 10n 1 2)
+C2 d 0 10u
+R2 d 0 1e6
+.model SWMOD SW(Ron=5m Roff=1e9 Vt=0.5 Vh=0)
+.control
+set noaskquit
+tran 10n 100u 0 10n
+meas tran vmx MAX v(d) from=0 to=100u
+meas tran imx MAX lx#branch from=0 to=100u
+meas tran v0 FIND v(c) AT=9u
+quit
+.endc
+.end
