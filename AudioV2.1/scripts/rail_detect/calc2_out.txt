@@ -1,0 +1,30 @@
+pos E192 ['1e+06', '3.57e+04', '2.46e+06'] nominal fall/rise 10.426/11.929
+neg E192 ['1.43e+05', '1e+06', '1.1e+05', '2.34e+06'] nominal fall/rise -10.478/-11.985
+node at -16.5 good (VREF-21mV): 0.048 V
+all 0.1%%+TCR                      +fall 10.230..10.785 +rise 11.659..12.219 | -fall -10.801..-10.199 -rise -12.391..-11.445
+divider 0.1%%, hyst R (R3,Rh) 1%%  +fall 10.216..10.796 +rise 11.658..12.221 | -fall -10.802..-10.197 -rise -12.407..-11.433
+all 1%%+TCR                        +fall 9.976..11.051 +rise 11.400..12.496 | -fall -11.152..-9.867 -rise -12.775..-11.088
+
++ fall budget (nominal 10.426):
+  VIT-(INA) 397..403 mV : -0.088 / +0.088
+  VH 2.8..3.4 V         : +0.203 / -0.041
+  IIN +-25 nA           : -0.025 / +0.025
+  R1/R2/R3 +0.1%+TCR     : +0.019 -0.021 +0.002
+  R1/R2/R3 +1%+TCR     : +0.135 -0.149 +0.016
+
+- fall budget (nominal -10.478):
+  VIT+(INB) 397..403 mV : -0.053 / +0.053
+  VREF +-21 mV (B)      : +0.147 / -0.147
+  VREF +-5 mV (B,25C)   : +0.035 / -0.035
+  IIN +-25 nA           : -0.025 / +0.025
+  Rt/Rb/Rg/Rh +0.1%+TCR  : +0.027 -0.020 -0.007 -0.000
+  Rt/Rb/Rg/Rh +1%+TCR  : +0.196 -0.147 -0.048 -0.002
+
+LM4040 feed: IRMIN 65uA(full T) + divider 14.7 uA
+  from 3V3=2.90 via BAT54 VF 0.24: R <= 2.0 k
+  from 3V3=2.90 via BAT54 VF 0.32: R <= 1.0 k
+  from 3V3=3.30 via BAT54 VF 0.24: R <= 7.0 k
+  from 3V3=3.30 via BAT54 VF 0.32: R <= 6.0 k
+  from V+=10.0: R <= 90 k
+  from V+=13.6: R <= 135 k
+  from V+=15.9: R <= 164 k

@@ -1,0 +1,44 @@
+* AmpBank 入力側: 220k プルダウンの置き場所
+* 構造: TONE ─[SW]─ (X) ─ Cc ─┬─ Rb(1k) ─ A_GND
+*                              └─ OpAmp +入力
+* 案P: 220k を SW の後（X点）に置く … 非選択中も結合Cの左極板を 0V に固定
+* 案Q: 220k を SW の前（TONE側）   … 非選択中は X 点が浮く
+* 見るもの: 再接続した瞬間にオペアンプ + 入力へ出る段差
+
+.param Cc=10u Rb=1k Rpd=220k Ron=1.1 Ileak=0.15n
+
+* 音源は PT2314 出力を模し、DC 0V + 1kHz
+Vsrc tone 0 DC 0 SIN(0 1 1k)
+
+* ===== 案P: プルダウンが SW の後 =====
+Sp tone xp ctl 0 sw
+Ilkp 0 xp DC {Ileak}
+Rpp xp 0 {Rpd}
+Cp xp inp {Cc}
+Rbp inp 0 {Rb}
+
+* ===== 案Q: プルダウンが SW の前 =====
+Rpq tone 0 {Rpd}
+Sq tone xq ctl 0 sw
+Ilkq 0 xq DC {Ileak}
+Cq xq inq {Cc}
+Rbq inq 0 {Rb}
+
+.model sw SW vt=1.5 vh=0.1 ron={Ron} roff=1e12
+
+* 0.3秒まで OFF（非選択）→ 0.3秒で ON（再選択）
+Vctl ctl 0 PWL(0 0  4.9999 0  5.0 3.3)
+
+.tran 200u 5.6 0 200u
+.control
+run
+print "=== 再接続直後(5.0-5.3s) にオペアンプ+入力へ出る電圧 ==="
+meas tran pMax MAX v(inp) from=5.0 to=5.3
+meas tran pMin MIN v(inp) from=5.0 to=5.3
+meas tran qMax MAX v(inq) from=5.0 to=5.3
+meas tran qMin MIN v(inq) from=5.0 to=5.3
+print "=== 非選択を5秒続けた時点(4.9s)の結合C左極板の電位 ==="
+meas tran xpV FIND v(xp) AT=4.9
+meas tran xqV FIND v(xq) AT=4.9
+.endc
+.end

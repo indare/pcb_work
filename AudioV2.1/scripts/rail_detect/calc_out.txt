@@ -1,0 +1,81 @@
+=== ideal design (typ thresholds, VH=3.3 V, VREF=2.5 V) ===
+pos ideal R1,R2,R3 = ['1e+06', '3.548e+04', '2.468e+06']
+pos E96  R1,R2,R3 = ['1e+06', '3.57e+04', '2.49e+06']
+pos E96 nominal: fall 10.440 V  rise 11.927 V
+neg ideal Rt,Rb,Rg,Rh = ['1.429e+05', '1e+06', '1.102e+05', '2.351e+06']
+neg E96  Rt,Rb,Rg,Rh = ['1.43e+05', '1e+06', '1.1e+05', '2.37e+06']
+neg E96 nominal: fall -10.480 V  rise -11.969 V
+  node B at V-=-15.00 (good, FB_N=0): 0.133 V
+  node B at V-=-15.75 (good, FB_N=0): 0.091 V
+  node B at V-=-16.50 (good, FB_N=0): 0.048 V
+  node B at V-=0 (not good, FB_N=3.3): 1.078 V
+  I(R1) at 15 V: 14.6 uA ; I(Rb) at -15 V: 15.4 uA ; I(Rt) from VREF: 14.7 uA
+  Thevenin pos node 34.0 k, neg node 57.1 k
+
+=== worst-case bands (TPS3701 / TLV6710) ===
+assumed VCC (feedback VH) 2.80..3.40 V, VOL 0..0.1 V, |IIN| 25 nA
+R 0.1%               | +fall 10.264..10.776  +rise 11.677..12.196 | LM4040B full-T +-21mV: -fall -10.777..-10.227  -rise -12.347..-11.459
+R 0.1%               | +fall 10.264..10.776  +rise 11.677..12.196 | LM4040C full-T +-29mV: -fall -10.833..-10.171  -rise -12.403..-11.403
+R 0.1%+TCR25ppm*35K  | +fall 10.245..10.796  +rise 11.658..12.217 | LM4040B full-T +-21mV: -fall -10.803..-10.202  -rise -12.375..-11.432
+R 0.1%+TCR25ppm*35K  | +fall 10.245..10.796  +rise 11.658..12.217 | LM4040C full-T +-29mV: -fall -10.859..-10.146  -rise -12.431..-11.376
+R 1%                 | +fall 10.066..10.982  +rise 11.476..12.410 | LM4040B full-T +-21mV: -fall -11.047..-9.969  -rise -12.642..-11.182
+R 1%                 | +fall 10.066..10.982  +rise 11.476..12.410 | LM4040C full-T +-29mV: -fall -11.104..-9.914  -rise -12.699..-11.127
+R 1%+TCR100ppm*35K   | +fall 9.991..11.063  +rise 11.399..12.494 | LM4040B full-T +-21mV: -fall -11.154..-9.869  -rise -12.758..-11.076
+R 1%+TCR100ppm*35K   | +fall 9.991..11.063  +rise 11.399..12.494 | LM4040C full-T +-29mV: -fall -11.211..-9.815  -rise -12.815..-11.021
+
+=== same resistors with TPS3700 / TLV6700 thresholds (redesigned for its typ) ===
+pos E96 ['1e+06', '3.48e+04', '2.49e+06']  neg E96 ['1.43e+05', '1e+06', '1.1e+05', '2.37e+06']
+R 0.1%  | +fall 10.250..10.978  +rise 11.846..12.224 | -fall -10.794..-10.209  -rise -12.347..-11.459
+R 1%    | +fall 10.053..11.188  +rise 11.642..12.439 | -fall -11.065..-9.951  -rise -12.642..-11.182
+
+=== negative divider referenced to raw 3V3 (no LM4040), 2 resistors + Rh, for comparison ===
+3V3 +-1%, R 0.1%: -fall -10.970..-10.358  -rise -12.541..-11.590  (R=['1.87e+05', '1e+06', '9.31e+04', '2.37e+06'])
+3V3 +-3%, R 0.1%: -fall -11.324..-10.006  -rise -12.894..-11.238  (R=['1.87e+05', '1e+06', '9.31e+04', '2.37e+06'])
+3V3 +-5%, R 0.1%: -fall -11.678..-9.654  -rise -13.248..-10.886  (R=['1.87e+05', '1e+06', '9.31e+04', '2.37e+06'])
+
+=== sensitivities (neg channel, E96 design) ===
+dVfall/dVIT+ = G/gb = 17.51 ; dVfall/dVREF = -gt/gb = -6.99 ; dVrise/dVH = -gh/gb = -0.422
+pos: dV/dVIT = 29.41 ; dVfall/dVH = -R1/R3 = -0.402
+
+=== time from falling threshold to 9.45 V (board rail after 22 ohm, contact opened) ===
+C   4.6 uF I  23.9 mA Vfall 10.20 ->   0.14 ms
+C   4.6 uF I  23.9 mA Vfall 10.50 ->   0.20 ms
+C   4.6 uF I  23.9 mA Vfall 12.00 ->   0.49 ms
+C   4.6 uF I  23.9 mA Vfall 13.00 ->   0.68 ms
+C   4.6 uF I   2.9 mA Vfall 10.20 ->   1.19 ms
+C   4.6 uF I   2.9 mA Vfall 10.50 ->   1.67 ms
+C   4.6 uF I   2.9 mA Vfall 12.00 ->   4.04 ms
+C   4.6 uF I   2.9 mA Vfall 13.00 ->   5.63 ms
+C  22.7 uF I  23.9 mA Vfall 10.20 ->   0.71 ms
+C  22.7 uF I  23.9 mA Vfall 10.50 ->   1.00 ms
+C  22.7 uF I  23.9 mA Vfall 12.00 ->   2.42 ms
+C  22.7 uF I  23.9 mA Vfall 13.00 ->   3.37 ms
+C  22.7 uF I   2.9 mA Vfall 10.20 ->   5.87 ms
+C  22.7 uF I   2.9 mA Vfall 10.50 ->   8.22 ms
+C  22.7 uF I   2.9 mA Vfall 12.00 ->  19.96 ms
+C  22.7 uF I   2.9 mA Vfall 13.00 ->  27.79 ms
+C  40.3 uF I  23.9 mA Vfall 10.20 ->   1.26 ms
+C  40.3 uF I  23.9 mA Vfall 10.50 ->   1.77 ms
+C  40.3 uF I  23.9 mA Vfall 12.00 ->   4.30 ms
+C  40.3 uF I  23.9 mA Vfall 13.00 ->   5.99 ms
+C  40.3 uF I   2.9 mA Vfall 10.20 ->  10.42 ms
+C  40.3 uF I   2.9 mA Vfall 10.50 ->  14.59 ms
+C  40.3 uF I   2.9 mA Vfall 12.00 ->  35.44 ms
+C  40.3 uF I   2.9 mA Vfall 13.00 ->  49.33 ms
+
+=== TPS3808 CT for delay: tD(s) = CT(nF)/175 + 0.5e-3 ===
+CT 1.5 nF -> typ 9.1 ms ; x0.6..x1.4 (spread of DS CT rows) 5.4..12.7 ms
+CT 2.2 nF -> typ 13.1 ms ; x0.6..x1.4 (spread of DS CT rows) 7.8..18.3 ms
+CT 2.7 nF -> typ 15.9 ms ; x0.6..x1.4 (spread of DS CT rows) 9.6..22.3 ms
+CT 3.3 nF -> typ 19.4 ms ; x0.6..x1.4 (spread of DS CT rows) 11.6..27.1 ms
+
+=== LVC1G123 pulse: tw ~ K*Rext*Cext, K 1.0..1.1 (DS table 10k/0.1uF: 1.0..1.1 ms) ===
+R 100k C 0.33uF ctol  5% -> 31.0..38.5 ms (nom 33.0)
+R 100k C 0.33uF ctol 10% -> 29.4..40.3 ms (nom 33.0)
+R 100k C 0.47uF ctol  5% -> 44.2..54.8 ms (nom 47.0)
+R 100k C 0.47uF ctol 10% -> 41.9..57.4 ms (nom 47.0)
+R 200k C 0.22uF ctol  5% -> 41.4..51.3 ms (nom 44.0)
+R 200k C 0.22uF ctol 10% -> 39.2..53.8 ms (nom 44.0)
+
+=== coil current worst (reviews): 5.25 V / (125 ohm * 0.9) ===
+per coil 46.7 mA; auto reset (2 audio coils) 93.3 mA; 4 boards simultaneously 373.3 mA

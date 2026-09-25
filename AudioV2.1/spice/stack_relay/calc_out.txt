@@ -1,0 +1,144 @@
+== DC 降下と LDO ヘッドルーム（最悪の源 14.25 V − RS6 0.75 Ω×150 mA − 4 段 × 0.05 Ω − 接点 0.1 Ω − Rser）==
+親ノードの最悪 14.137 V（typ 源なら 14.985 V）
+  R=   1 Ω
+           EN 前（TMUX＋ロジック）: 降下 4 mV → VIN 14.13 V, (VIN−12−VDOmax) 1.53 V / typ 1.87 V
+           typ（NE5532 typ 6 mA）: 降下 11 mV → VIN 14.13 V, (VIN−12−VDOmax) 1.53 V / typ 1.87 V
+           max（在庫の最悪 20 mA）: 降下 31 mV → VIN 14.11 V, (VIN−12−VDOmax) 1.51 V / typ 1.85 V
+           I²R（max）0.6 mW, 両レール 1.1 mW
+  R= 2.2 Ω
+           EN 前（TMUX＋ロジック）: 降下 7 mV → VIN 14.13 V, (VIN−12−VDOmax) 1.53 V / typ 1.87 V
+           typ（NE5532 typ 6 mA）: 降下 22 mV → VIN 14.12 V, (VIN−12−VDOmax) 1.52 V / typ 1.86 V
+           max（在庫の最悪 20 mA）: 降下 60 mV → VIN 14.08 V, (VIN−12−VDOmax) 1.48 V / typ 1.82 V
+           I²R（max）1.3 mW, 両レール 2.5 mW
+  R= 4.7 Ω
+           EN 前（TMUX＋ロジック）: 降下 15 mV → VIN 14.12 V, (VIN−12−VDOmax) 1.52 V / typ 1.86 V
+           typ（NE5532 typ 6 mA）: 降下 43 mV → VIN 14.09 V, (VIN−12−VDOmax) 1.49 V / typ 1.83 V
+           max（在庫の最悪 20 mA）: 降下 120 mV → VIN 14.02 V, (VIN−12−VDOmax) 1.42 V / typ 1.76 V
+           I²R（max）2.7 mW, 両レール 5.4 mW
+  R=  10 Ω
+           EN 前（TMUX＋ロジック）: 降下 30 mV → VIN 14.11 V, (VIN−12−VDOmax) 1.51 V / typ 1.85 V
+           typ（NE5532 typ 6 mA）: 降下 89 mV → VIN 14.05 V, (VIN−12−VDOmax) 1.45 V / typ 1.79 V
+           max（在庫の最悪 20 mA）: 降下 246 mV → VIN 13.89 V, (VIN−12−VDOmax) 1.29 V / typ 1.63 V
+           I²R（max）5.7 mW, 両レール 11.4 mW
+  R=  15 Ω
+           EN 前（TMUX＋ロジック）: 降下 45 mV → VIN 14.09 V, (VIN−12−VDOmax) 1.49 V / typ 1.83 V
+           typ（NE5532 typ 6 mA）: 降下 132 mV → VIN 14.01 V, (VIN−12−VDOmax) 1.41 V / typ 1.75 V
+           max（在庫の最悪 20 mA）: 降下 366 mV → VIN 13.77 V, (VIN−12−VDOmax) 1.17 V / typ 1.51 V
+           I²R（max）8.6 mW, 両レール 17.2 mW
+  R=  22 Ω
+           EN 前（TMUX＋ロジック）: 降下 65 mV → VIN 14.07 V, (VIN−12−VDOmax) 1.47 V / typ 1.81 V
+           typ（NE5532 typ 6 mA）: 降下 193 mV → VIN 13.94 V, (VIN−12−VDOmax) 1.34 V / typ 1.68 V
+           max（在庫の最悪 20 mA）: 降下 533 mV → VIN 13.60 V, (VIN−12−VDOmax) 1.00 V / typ 1.34 V
+           I²R（max）12.6 mW, 両レール 25.2 mW
+  R=  33 Ω
+           EN 前（TMUX＋ロジック）: 降下 97 mV → VIN 14.04 V, (VIN−12−VDOmax) 1.44 V / typ 1.78 V
+           typ（NE5532 typ 6 mA）: 降下 288 mV → VIN 13.85 V, (VIN−12−VDOmax) 1.25 V / typ 1.59 V
+           max（在庫の最悪 20 mA）: 降下 797 mV → VIN 13.34 V, (VIN−12−VDOmax) 0.74 V / typ 1.08 V
+           I²R（max）18.9 mW, 両レール 37.8 mW
+  R=  47 Ω
+           EN 前（TMUX＋ロジック）: 降下 138 mV → VIN 14.00 V, (VIN−12−VDOmax) 1.40 V / typ 1.74 V
+           typ（NE5532 typ 6 mA）: 降下 409 mV → VIN 13.73 V, (VIN−12−VDOmax) 1.13 V / typ 1.47 V
+           max（在庫の最悪 20 mA）: 降下 1131 mV → VIN 13.01 V, (VIN−12−VDOmax) 0.41 V / typ 0.75 V
+           I²R（max）26.9 mW, 両レール 53.8 mW
+
+== TMUX の電源（D ノード、±対称と仮定）==
+  R= 4.7: EN 前（TMUX＋ロジック）: VDD ≈ 14.99 V、VDD−VSS ≈ 30.0 V（4.5〜50 V の内）、膝の移動 ≈ -0.01 V（±15 V の約 +10.6 V から）
+  R= 4.7: typ（NE5532 typ 6 mA）: VDD ≈ 14.96 V、VDD−VSS ≈ 29.9 V（4.5〜50 V の内）、膝の移動 ≈ -0.04 V（±15 V の約 +10.6 V から）
+  R= 4.7: max（在庫の最悪 20 mA）: VDD ≈ 14.88 V、VDD−VSS ≈ 29.8 V（4.5〜50 V の内）、膝の移動 ≈ -0.12 V（±15 V の約 +10.6 V から）
+  R=  10: EN 前（TMUX＋ロジック）: VDD ≈ 14.97 V、VDD−VSS ≈ 29.9 V（4.5〜50 V の内）、膝の移動 ≈ -0.03 V（±15 V の約 +10.6 V から）
+  R=  10: typ（NE5532 typ 6 mA）: VDD ≈ 14.91 V、VDD−VSS ≈ 29.8 V（4.5〜50 V の内）、膝の移動 ≈ -0.09 V（±15 V の約 +10.6 V から）
+  R=  10: max（在庫の最悪 20 mA）: VDD ≈ 14.75 V、VDD−VSS ≈ 29.5 V（4.5〜50 V の内）、膝の移動 ≈ -0.25 V（±15 V の約 +10.6 V から）
+  R=  22: EN 前（TMUX＋ロジック）: VDD ≈ 14.93 V、VDD−VSS ≈ 29.9 V（4.5〜50 V の内）、膝の移動 ≈ -0.07 V（±15 V の約 +10.6 V から）
+  R=  22: typ（NE5532 typ 6 mA）: VDD ≈ 14.81 V、VDD−VSS ≈ 29.6 V（4.5〜50 V の内）、膝の移動 ≈ -0.19 V（±15 V の約 +10.6 V から）
+  R=  22: max（在庫の最悪 20 mA）: VDD ≈ 14.47 V、VDD−VSS ≈ 28.9 V（4.5〜50 V の内）、膝の移動 ≈ -0.53 V（±15 V の約 +10.6 V から）
+  R=  33: EN 前（TMUX＋ロジック）: VDD ≈ 14.90 V、VDD−VSS ≈ 29.8 V（4.5〜50 V の内）、膝の移動 ≈ -0.10 V（±15 V の約 +10.6 V から）
+  R=  33: typ（NE5532 typ 6 mA）: VDD ≈ 14.71 V、VDD−VSS ≈ 29.4 V（4.5〜50 V の内）、膝の移動 ≈ -0.29 V（±15 V の約 +10.6 V から）
+  R=  33: max（在庫の最悪 20 mA）: VDD ≈ 14.20 V、VDD−VSS ≈ 28.4 V（4.5〜50 V の内）、膝の移動 ≈ -0.80 V（±15 V の約 +10.6 V から）
+
+== 突入の概算（源 15 V、R_total = Rser＋接点＋4 段＋ESR）==
+  R=   1: Cb=  4.6 µF: Ipk 13.16 A, τ  0.01 ms, I²t 0.456 mA²s(=1e-3 A²s), E_R 0.5 mJ, Ppk 173.1 W
+  R=   1: Cb= 22.7 µF: Ipk 13.16 A, τ  0.03 ms, I²t 2.240 mA²s(=1e-3 A²s), E_R 2.6 mJ, Ppk 173.1 W
+  R=   1: Cb= 49.6 µF: Ipk 13.16 A, τ  0.06 ms, I²t 4.895 mA²s(=1e-3 A²s), E_R 5.6 mJ, Ppk 173.1 W
+  R=   1: Cb= 85.3 µF: Ipk 13.16 A, τ  0.10 ms, I²t 8.418 mA²s(=1e-3 A²s), E_R 9.6 mJ, Ppk 173.1 W
+  R= 2.2: Cb=  4.6 µF: Ipk  6.41 A, τ  0.01 ms, I²t 0.222 mA²s(=1e-3 A²s), E_R 0.5 mJ, Ppk 90.4 W
+  R= 2.2: Cb= 22.7 µF: Ipk  6.41 A, τ  0.05 ms, I²t 1.091 mA²s(=1e-3 A²s), E_R 2.6 mJ, Ppk 90.4 W
+  R= 2.2: Cb= 49.6 µF: Ipk  6.41 A, τ  0.12 ms, I²t 2.385 mA²s(=1e-3 A²s), E_R 5.6 mJ, Ppk 90.4 W
+  R= 2.2: Cb= 85.3 µF: Ipk  6.41 A, τ  0.20 ms, I²t 4.101 mA²s(=1e-3 A²s), E_R 9.6 mJ, Ppk 90.4 W
+  R= 4.7: Cb=  4.6 µF: Ipk  3.10 A, τ  0.02 ms, I²t 0.107 mA²s(=1e-3 A²s), E_R 0.5 mJ, Ppk 45.1 W
+  R= 4.7: Cb= 22.7 µF: Ipk  3.10 A, τ  0.11 ms, I²t 0.528 mA²s(=1e-3 A²s), E_R 2.6 mJ, Ppk 45.1 W
+  R= 4.7: Cb= 49.6 µF: Ipk  3.10 A, τ  0.24 ms, I²t 1.153 mA²s(=1e-3 A²s), E_R 5.6 mJ, Ppk 45.1 W
+  R= 4.7: Cb= 85.3 µF: Ipk  3.10 A, τ  0.41 ms, I²t 1.983 mA²s(=1e-3 A²s), E_R 9.6 mJ, Ppk 45.1 W
+  R=  10: Cb=  4.6 µF: Ipk  1.48 A, τ  0.05 ms, I²t 0.051 mA²s(=1e-3 A²s), E_R 0.5 mJ, Ppk 21.9 W
+  R=  10: Cb= 22.7 µF: Ipk  1.48 A, τ  0.23 ms, I²t 0.252 mA²s(=1e-3 A²s), E_R 2.6 mJ, Ppk 21.9 W
+  R=  10: Cb= 49.6 µF: Ipk  1.48 A, τ  0.50 ms, I²t 0.550 mA²s(=1e-3 A²s), E_R 5.6 mJ, Ppk 21.9 W
+  R=  10: Cb= 85.3 µF: Ipk  1.48 A, τ  0.86 ms, I²t 0.946 mA²s(=1e-3 A²s), E_R 9.6 mJ, Ppk 21.9 W
+  R=  15: Cb=  4.6 µF: Ipk  0.99 A, τ  0.07 ms, I²t 0.034 mA²s(=1e-3 A²s), E_R 0.5 mJ, Ppk 14.7 W
+  R=  15: Cb= 22.7 µF: Ipk  0.99 A, τ  0.34 ms, I²t 0.169 mA²s(=1e-3 A²s), E_R 2.6 mJ, Ppk 14.7 W
+  R=  15: Cb= 49.6 µF: Ipk  0.99 A, τ  0.75 ms, I²t 0.369 mA²s(=1e-3 A²s), E_R 5.6 mJ, Ppk 14.7 W
+  R=  15: Cb= 85.3 µF: Ipk  0.99 A, τ  1.29 ms, I²t 0.634 mA²s(=1e-3 A²s), E_R 9.6 mJ, Ppk 14.7 W
+  R=  22: Cb=  4.6 µF: Ipk  0.68 A, τ  0.10 ms, I²t 0.023 mA²s(=1e-3 A²s), E_R 0.5 mJ, Ppk 10.1 W
+  R=  22: Cb= 22.7 µF: Ipk  0.68 A, τ  0.50 ms, I²t 0.115 mA²s(=1e-3 A²s), E_R 2.6 mJ, Ppk 10.1 W
+  R=  22: Cb= 49.6 µF: Ipk  0.68 A, τ  1.10 ms, I²t 0.252 mA²s(=1e-3 A²s), E_R 5.6 mJ, Ppk 10.1 W
+  R=  22: Cb= 85.3 µF: Ipk  0.68 A, τ  1.89 ms, I²t 0.433 mA²s(=1e-3 A²s), E_R 9.6 mJ, Ppk 10.1 W
+  R=  33: Cb=  4.6 µF: Ipk  0.45 A, τ  0.15 ms, I²t 0.016 mA²s(=1e-3 A²s), E_R 0.5 mJ, Ppk 6.8 W
+  R=  33: Cb= 22.7 µF: Ipk  0.45 A, τ  0.75 ms, I²t 0.077 mA²s(=1e-3 A²s), E_R 2.6 mJ, Ppk 6.8 W
+  R=  33: Cb= 49.6 µF: Ipk  0.45 A, τ  1.64 ms, I²t 0.168 mA²s(=1e-3 A²s), E_R 5.6 mJ, Ppk 6.8 W
+  R=  33: Cb= 85.3 µF: Ipk  0.45 A, τ  2.83 ms, I²t 0.290 mA²s(=1e-3 A²s), E_R 9.6 mJ, Ppk 6.8 W
+
+== リセット時の放電（NC → Rdis、Rser 直列）==
+  Rdis=  470: Cb=  4.6 µF, Rser 10: 接点の電流 31.2 mA、Rdis の初期電力 0.459 W、τ 2 ms、1 V まで 6 ms、E 0.5 mJ
+  Rdis=  470: Cb=  4.6 µF, Rser 22: 接点の電流 30.5 mA、Rdis の初期電力 0.437 W、τ 2 ms、1 V まで 6 ms、E 0.5 mJ
+  Rdis=  470: Cb= 49.6 µF, Rser 10: 接点の電流 31.2 mA、Rdis の初期電力 0.459 W、τ 24 ms、1 V まで 64 ms、E 5.6 mJ
+  Rdis=  470: Cb= 49.6 µF, Rser 22: 接点の電流 30.5 mA、Rdis の初期電力 0.437 W、τ 24 ms、1 V まで 66 ms、E 5.6 mJ
+  Rdis=  470: Cb= 85.3 µF, Rser 10: 接点の電流 31.2 mA、Rdis の初期電力 0.459 W、τ 41 ms、1 V まで 111 ms、E 9.6 mJ
+  Rdis=  470: Cb= 85.3 µF, Rser 22: 接点の電流 30.5 mA、Rdis の初期電力 0.437 W、τ 42 ms、1 V まで 114 ms、E 9.6 mJ
+  Rdis=  470: Cb= 98.8 µF, Rser 10: 接点の電流 31.2 mA、Rdis の初期電力 0.459 W、τ 47 ms、1 V まで 128 ms、E 11.1 mJ
+  Rdis=  470: Cb= 98.8 µF, Rser 22: 接点の電流 30.5 mA、Rdis の初期電力 0.437 W、τ 49 ms、1 V まで 132 ms、E 11.1 mJ
+  Rdis= 1000: Cb=  4.6 µF, Rser 10: 接点の電流 14.9 mA、Rdis の初期電力 0.221 W、τ 5 ms、1 V まで 13 ms、E 0.5 mJ
+  Rdis= 1000: Cb=  4.6 µF, Rser 22: 接点の電流 14.7 mA、Rdis の初期電力 0.215 W、τ 5 ms、1 V まで 13 ms、E 0.5 mJ
+  Rdis= 1000: Cb= 49.6 µF, Rser 10: 接点の電流 14.9 mA、Rdis の初期電力 0.221 W、τ 50 ms、1 V まで 136 ms、E 5.6 mJ
+  Rdis= 1000: Cb= 49.6 µF, Rser 22: 接点の電流 14.7 mA、Rdis の初期電力 0.215 W、τ 51 ms、1 V まで 137 ms、E 5.6 mJ
+  Rdis= 1000: Cb= 85.3 µF, Rser 10: 接点の電流 14.9 mA、Rdis の初期電力 0.221 W、τ 86 ms、1 V まで 233 ms、E 9.6 mJ
+  Rdis= 1000: Cb= 85.3 µF, Rser 22: 接点の電流 14.7 mA、Rdis の初期電力 0.215 W、τ 87 ms、1 V まで 236 ms、E 9.6 mJ
+  Rdis= 1000: Cb= 98.8 µF, Rser 10: 接点の電流 14.9 mA、Rdis の初期電力 0.221 W、τ 100 ms、1 V まで 270 ms、E 11.1 mJ
+  Rdis= 1000: Cb= 98.8 µF, Rser 22: 接点の電流 14.7 mA、Rdis の初期電力 0.215 W、τ 101 ms、1 V まで 273 ms、E 11.1 mJ
+  Rdis= 2200: Cb=  4.6 µF, Rser 10: 接点の電流 6.8 mA、Rdis の初期電力 0.101 W、τ 10 ms、1 V まで 28 ms、E 0.5 mJ
+  Rdis= 2200: Cb=  4.6 µF, Rser 22: 接点の電流 6.8 mA、Rdis の初期電力 0.100 W、τ 10 ms、1 V まで 28 ms、E 0.5 mJ
+  Rdis= 2200: Cb= 49.6 µF, Rser 10: 接点の電流 6.8 mA、Rdis の初期電力 0.101 W、τ 110 ms、1 V まで 297 ms、E 5.6 mJ
+  Rdis= 2200: Cb= 49.6 µF, Rser 22: 接点の電流 6.8 mA、Rdis の初期電力 0.100 W、τ 110 ms、1 V まで 298 ms、E 5.6 mJ
+  Rdis= 2200: Cb= 85.3 µF, Rser 10: 接点の電流 6.8 mA、Rdis の初期電力 0.101 W、τ 189 ms、1 V まで 511 ms、E 9.6 mJ
+  Rdis= 2200: Cb= 85.3 µF, Rser 22: 接点の電流 6.8 mA、Rdis の初期電力 0.100 W、τ 190 ms、1 V まで 513 ms、E 9.6 mJ
+  Rdis= 2200: Cb= 98.8 µF, Rser 10: 接点の電流 6.8 mA、Rdis の初期電力 0.101 W、τ 218 ms、1 V まで 591 ms、E 11.1 mJ
+  Rdis= 2200: Cb= 98.8 µF, Rser 22: 接点の電流 6.8 mA、Rdis の初期電力 0.100 W、τ 220 ms、1 V まで 595 ms、E 11.1 mJ
+  Rdis= 4700: Cb=  4.6 µF, Rser 10: 接点の電流 3.2 mA、Rdis の初期電力 0.048 W、τ 22 ms、1 V まで 59 ms、E 0.5 mJ
+  Rdis= 4700: Cb=  4.6 µF, Rser 22: 接点の電流 3.2 mA、Rdis の初期電力 0.047 W、τ 22 ms、1 V まで 59 ms、E 0.5 mJ
+  Rdis= 4700: Cb= 49.6 µF, Rser 10: 接点の電流 3.2 mA、Rdis の初期電力 0.048 W、τ 234 ms、1 V まで 633 ms、E 5.6 mJ
+  Rdis= 4700: Cb= 49.6 µF, Rser 22: 接点の電流 3.2 mA、Rdis の初期電力 0.047 W、τ 234 ms、1 V まで 634 ms、E 5.6 mJ
+  Rdis= 4700: Cb= 85.3 µF, Rser 10: 接点の電流 3.2 mA、Rdis の初期電力 0.048 W、τ 402 ms、1 V まで 1088 ms、E 9.6 mJ
+  Rdis= 4700: Cb= 85.3 µF, Rser 22: 接点の電流 3.2 mA、Rdis の初期電力 0.047 W、τ 403 ms、1 V まで 1091 ms、E 9.6 mJ
+  Rdis= 4700: Cb= 98.8 µF, Rser 10: 接点の電流 3.2 mA、Rdis の初期電力 0.048 W、τ 465 ms、1 V まで 1260 ms、E 11.1 mJ
+  Rdis= 4700: Cb= 98.8 µF, Rser 22: 接点の電流 3.2 mA、Rdis の初期電力 0.047 W、τ 467 ms、1 V まで 1263 ms、E 11.1 mJ
+
+== NO が開いてから LDO が落ちるまでの保持（娘の C だけ、負荷は max 24 mA、NC の Rdis は無視）==
+  Cb=  4.6 µF, I= 8.6 mA, V0=14.9: 13.5 V まで  0.75 ms、12.6 V（LDO が落ち始める）まで  1.23 ms
+  Cb=  4.6 µF, I= 8.6 mA, V0=14.5: 13.5 V まで  0.53 ms、12.6 V（LDO が落ち始める）まで  1.02 ms
+  Cb=  4.6 µF, I=23.9 mA, V0=14.9: 13.5 V まで  0.27 ms、12.6 V（LDO が落ち始める）まで  0.44 ms
+  Cb=  4.6 µF, I=23.9 mA, V0=14.5: 13.5 V まで  0.19 ms、12.6 V（LDO が落ち始める）まで  0.37 ms
+  Cb= 22.7 µF, I= 8.6 mA, V0=14.9: 13.5 V まで  3.68 ms、12.6 V（LDO が落ち始める）まで  6.04 ms
+  Cb= 22.7 µF, I= 8.6 mA, V0=14.5: 13.5 V まで  2.63 ms、12.6 V（LDO が落ち始める）まで  4.99 ms
+  Cb= 22.7 µF, I=23.9 mA, V0=14.9: 13.5 V まで  1.33 ms、12.6 V（LDO が落ち始める）まで  2.18 ms
+  Cb= 22.7 µF, I=23.9 mA, V0=14.5: 13.5 V まで  0.95 ms、12.6 V（LDO が落ち始める）まで  1.80 ms
+  Cb= 49.6 µF, I= 8.6 mA, V0=14.9: 13.5 V まで  8.04 ms、12.6 V（LDO が落ち始める）まで 13.20 ms
+  Cb= 49.6 µF, I= 8.6 mA, V0=14.5: 13.5 V まで  5.74 ms、12.6 V（LDO が落ち始める）まで 10.91 ms
+  Cb= 49.6 µF, I=23.9 mA, V0=14.9: 13.5 V まで  2.90 ms、12.6 V（LDO が落ち始める）まで  4.77 ms
+  Cb= 49.6 µF, I=23.9 mA, V0=14.5: 13.5 V まで  2.07 ms、12.6 V（LDO が落ち始める）まで  3.94 ms
+  Cb= 85.3 µF, I= 8.6 mA, V0=14.9: 13.5 V まで 13.82 ms、12.6 V（LDO が落ち始める）まで 22.71 ms
+  Cb= 85.3 µF, I= 8.6 mA, V0=14.5: 13.5 V まで  9.87 ms、12.6 V（LDO が落ち始める）まで 18.76 ms
+  Cb= 85.3 µF, I=23.9 mA, V0=14.9: 13.5 V まで  4.99 ms、12.6 V（LDO が落ち始める）まで  8.20 ms
+  Cb= 85.3 µF, I=23.9 mA, V0=14.5: 13.5 V まで  3.57 ms、12.6 V（LDO が落ち始める）まで  6.78 ms
+
+== コイル電流（5 V、同時に通電するコイルの数）==
+  AZ850P2-5（125 Ω）: 1 枚 3 個同時 120 mA / 4 枚の音声リセット 8 個 320 mA / 4 枚の全リセット 12 個 480 mA
+  TQ2-L2-5V PC（40 mA）: 1 枚 3 個同時 120 mA / 4 枚の音声リセット 8 個 320 mA / 4 枚の全リセット 12 個 480 mA
+  TQ2SA-L2-5V SMD（28.1 mA）: 1 枚 3 個同時 84 mA / 4 枚の音声リセット 8 個 225 mA / 4 枚の全リセット 12 個 337 mA
+  G6KU-2 5V（21.1 mA、単巻線）: 1 枚 3 個同時 63 mA / 4 枚の音声リセット 8 個 169 mA / 4 枚の全リセット 12 個 253 mA

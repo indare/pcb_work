@@ -2,6 +2,12 @@
 
 KiCad の基板プロジェクト。現在の作業対象は `AudioV2/`。
 
+### AudioV2.1 を触るとき
+
+- **v2.1 の作業は [AudioV2.1/NOW.md](AudioV2.1/NOW.md) と [AudioV2.1/CLAUDE.md](AudioV2.1/CLAUDE.md) から始める。**
+  所有権・禁止事項・検証の期待値の v2.1 版は `AudioV2.1/CLAUDE.md`（このファイルの表は v2 のもの）
+- **v2.1 の作業中は `AudioV2/` と `Audio/` の文書を文脈として読まない。** v2.1 が頼る事実は v2.1 の中にある
+
 ## 最初に読むもの
 
 - **[AudioV2/NOW.md](AudioV2/NOW.md)** — **いま何待ちか・次の一手**（1画面）。再開はここから

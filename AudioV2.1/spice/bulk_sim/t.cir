@@ -1,0 +1,19 @@
+test
+V0 a 0 DC 15 AC 0
+R1 a b 1
+C1 b 0 1u
+I1 b 0 DC 0 AC 0
+.control
+set noaskquit
+op
+print v(b)
+alter @i1[acmag] = 1
+ac dec 5 1k 1meg
+print vm(b)
+alter @i1[acmag] = 0
+alter @v0[acmag] = 1
+ac dec 5 1k 1meg
+print vm(b)
+quit
+.endc
+.end

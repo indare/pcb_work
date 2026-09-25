@@ -1,0 +1,12 @@
+scaled pos ['4.99e+05', '1.78e+04', '1.23e+06'] nom fall/rise 10.437/11.938
+scaled neg ['7.15e+04', '4.99e+05', '5.49e+04', '1.17e+06'] nom fall/rise -10.450/-11.953
+div 0.1%+TCR, hyst 1%+TCR: +fall 10.240..10.794 +rise 11.679..12.217 | -fall 10.182..10.761 -rise 11.415..12.362
+all 1%+TCR:               +fall 9.999..11.050 +rise 11.421..12.493 | -fall 9.852..11.110 -rise 11.071..12.729
+node B @-16.5 good, VREF-21mV: 0.046 V; @0 V not good: 1.078 V
+node A @15.9 V good FB 3.4: 0.587 V
+I from V+ 29.3 uA, from V- 30.9 uA, from VREF 29.4 uA
+  LM4040 IR with 82k from stack +10.00: 62 uA (divider draw 29.4)
+  LM4040 IR with 82k from stack +13.60: 106 uA (divider draw 29.4)
+  LM4040 IR with 82k from stack +14.25: 114 uA (divider draw 29.4)
+  LM4040 IR with 82k from stack +15.90: 134 uA (divider draw 29.4)
+  node >= -0.3 V needs |V-| <= VREF*Rb/Rt + 0.3*G*Rb = 6.98*VREF + 5.25
