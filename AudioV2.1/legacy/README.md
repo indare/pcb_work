@@ -40,7 +40,7 @@
 
 ```bash
 docker/kicad-cloud-build/kicad-run.sh netlist
-python3 AudioV2/scripts/netlist_partition.py <統合前の.net> out/netlist.net
+python3 AudioV2.1/scripts/netlist_partition.py <統合前の.net> out/netlist.net
 ```
 
 2026-09-03 の統合時は **310 ネットの分割が完全一致**（名前だけ 4 件が

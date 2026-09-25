@@ -507,8 +507,8 @@ git diff origin/main...HEAD -- .gitignore               # AudioV2.1/output/ と 
 ```markdown
 ### AudioV2.1 を触るとき
 
-- **v2.1 の作業は [AudioV2.1/NOW.md](AudioV2.1/NOW.md) から始める。** 決定の正は `AudioV2.1/DECISIONS.md`、DS の事実は `AudioV2.1/ds_facts/`。
-  所有権・検証の期待値・禁止事項の v2.1 版は [AudioV2.1/CLAUDE.md](AudioV2.1/CLAUDE.md)（このファイルの表は v2 のもの）
+- **v2.1 の作業は [AudioV2.1/NOW.md](../NOW.md) から始める。** 決定の正は `AudioV2.1/DECISIONS.md`、DS の事実は `AudioV2.1/ds_facts/`。
+  所有権・検証の期待値・禁止事項の v2.1 版は [AudioV2.1/CLAUDE.md](../CLAUDE.md)（このファイルの表は v2 のもの）
 - **v2.1 の作業中は `AudioV2/` と `Audio/` の文書（NOW・DECISIONS・AGENT_HANDOFF・README ほか）を文脈として読まない。**
   v2.1 が頼る事実は v2.1 の中に書き直してある。見つからなければ v2・v1 を読みに行かず、ユーザーに聞く
 - 共有の道具（`Audio/scripts/check_sexpr.py`・`docker/kicad-cloud-build/kicad-run.sh`）はそのまま使い、対象は `AudioV2.1/…` と明示する
