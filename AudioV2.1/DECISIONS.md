@@ -5,6 +5,7 @@
 
 - 2026-09-25: エージェントの下書き（[review/DECISIONS_v21_draft.md](review/DECISIONS_v21_draft.md)）に、否定側査読（[review/DECISIONS_v21_review.md](review/DECISIONS_v21_review.md)）とユーザーの回答を反映して置いた
 - 2026-09-25: §10-2 の未決 16 項目（-02〜-05・-07〜-11・-13・-16・-17・-22〜-25）の推奨を、ユーザーが「一旦おすすめにしましょう」で受けた。本文の各項目に「いったんの決め（ユーザー判断 2026-09-25）」として入れ、§10-2 の行は ID を残して本文を指す
+- 2026-09-25: 設計全体の評価（[review/design_eval_review.md](review/design_eval_review.md) の統合リスト A1〜A6）のうち A2〜A6 をユーザーが受けた: §5-7 の書き換え（`PD_12V_SW` の検知線）、§5-8（SET/RESET の排他）、§2-15（コイル側の論理を `+5V_COIL` で）、§5-2（`MON` の形・`PG_N`）、§2-10（ミュートの場所と形）。A1 は V21-未決-26
 - 現況（いま何待ちか・次の一手）の正は [NOW.md](NOW.md)。この文書は「何を決めたか・なぜか・何を捨てたか」だけを持つ
 - 回路図から導出できる事実（ネットリスト・参照・部品数・部品値）は書かない（[../SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。部品は機能名かネット名で書く。**選定として決めた型番**（RS6-1215D など）と、決定を支える DS の数値は書き、出典を付ける
 - v2 から引き継いだものは §7、v2.1 では成り立たない v2 の決定と訂正された記録の表は [review/v2_carryover.md](review/v2_carryover.md)。本文で「v2 の『…』」と書くのは v2 でそう決めていたことの呼び名で、v2 の本文は引かない
@@ -167,8 +168,8 @@
 - **理由**: 縦積みで各娘が同じピンを見るので、段ごとに違う線を通すなら番号をずらす仕掛けが要る。全段共通＋ジャンパなら娘の基板は 1 種類のまま
 - **根拠**: [NOW] L24・L25／[review/stack_relay_power.md](review/stack_relay_power.md) §7.2（線の表）・§5.3（リセットの順番）／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 6-1・7-2（音声 SET を共通にしても 21 本で 2×10 には入らない）。[NOW] L24 の「RESET 共通 1 本」は古い（順番をファームで守るには 2 本要る）
 - **前提・外れる条件**:
-  - **24 本の内訳**（娘に I²C を通さない §2-12 の帰結）: `+15V`・`-15V`・`A_GND` ×2（4）／`+5V_COIL`・`GND_COIL`（2）／`3V3`・`D_GND`（2、検知・遅延・ゲートの電源、常時系統）／電源用 SET `PSET1`〜`4`（4、段ごと）／音声用 SET（1、全段共通、§2-6）／`ARST`・`PRST`（2）／`CH_SEL0`・`CH_SEL1`（2）／`CH_EN`（1、娘のデコーダの許可）／`PG_N`（1）／予備の GND（2、`D_GND` か `GND_COIL`）／`MON_P`・`MON_N`・`RAIL_OK`（3、§5-2・§5-3）。出典は [review/stack_relay_power.md](review/stack_relay_power.md) §7.2 の線の表（段ごとの音声 SET 4 本の版）と [review/rail_detect_review.md](review/rail_detect_review.md) §7.3・§7.6（(c) 案で +3 本）。**音声 SET を 1 本にして 3 本を足した合計 24 は下書きの算術**〔計算〕
-  - `PG_N` は [review/stack_relay_power.md](review/stack_relay_power.md) §7.2 の表にある線で、(c) 案（§5-2・§5-3）でも役が残るかは出典に書かれていない（[review/DECISIONS_v21_review.md](review/DECISIONS_v21_review.md) B10）。外せば予備が 1 本増える〔計算〕
+  - **24 本の内訳**（娘に I²C を通さない §2-12 の帰結）: `+15V`・`-15V`・`A_GND` ×2（4）／`+5V_COIL`・`GND_COIL`（2）／`D_GND`（1、Pico からの線の基準。§2-15 でスタックの `3V3` を外したので空いた 1 本は予備）／電源用 SET `PSET1`〜`4`（4、段ごと）／音声用 SET（1、全段共通、§2-6）／`ARST`・`PRST`（2）／`CH_SEL0`・`CH_SEL1`（2）／`CH_EN`（1、娘のデコーダの許可）／`PG_N`（1）／予備の GND（2、`D_GND` か `GND_COIL`）／`MON_P`・`MON_N`・`RAIL_OK`（3、§5-2・§5-3）。出典は [review/stack_relay_power.md](review/stack_relay_power.md) §7.2 の線の表（段ごとの音声 SET 4 本の版）と [review/rail_detect_review.md](review/rail_detect_review.md) §7.3・§7.6（(c) 案で +3 本）。**音声 SET を 1 本にして 3 本を足した合計 24 は下書きの算術**〔計算〕
+  - `PG_N` の役は §5-2 で決めた（「どれかの娘にレールがある」のワイヤード OR。`MON` の妥当性を別経路で見る）
   - 娘の MCP23017 は外した（§2-12）。残して I²C を通すなら 2 本増えて 26 本（2×13）で入らない（[review/stack_relay_power.md](review/stack_relay_power.md) §7.2）
   - ピン配置は [review/stack_relay_power.md](review/stack_relay_power.md) §7.3 の案（段ごとの音声 SET 4 本の版）のままでは合わない。ここでは決めていない。電源用 SET の段を選ぶジャンパは、音声 SET を共通にしたので 1 か所で済む〔推論〕
 - **却下した案**: 今の 2×8 のまま — 本数が足りない（同 §7）／親にスロット 4 口を横に並べるバックプレーン — 縦積みに決めた（[review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #15 は横並びを推していた）
@@ -176,6 +177,7 @@
   - 決定: 全段共通・ジャンパで段を選ぶ（[NOW] L24）
   - いったんの決め: 2×12・24 本（[NOW] L25。音声 SET を共通 1 本にした決定の帰結）
   - いったんの決め（ユーザー判断 2026-09-25。V21-未決-22）: 24 本の内訳は上の並び（`PG_N` と予備の GND 2 本は出典の表のまま）。ピン配置は未確定
+  - いったんの決め（ユーザー判断 2026-09-25。統合リスト A4・A5）: スタックの `3V3` を外して 1 本を予備に、`PG_N` の役を §5-2 に
 
 ### 2-6 音声用 SET は全段共通の 1 本（査読で D10 と呼んだ件）
 
@@ -231,11 +233,15 @@
 - **根拠**: [NOW] L25／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-5／参考製品 [datasheets/reference/Kyohritsu_KP-HAMP61_manual.pdf](datasheets/reference/Kyohritsu_KP-HAMP61_manual.pdf) — PDF p2（本文テキスト層）「切り替え時はオペアンプの電源の切り替えと音声回路の切り替えを行いますが、…1 秒程度の無音期間（音声回路を安全な GND 信号と接続）が取られる構造」、PDF p3（画像、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6 で読んだもの）「選択されていないオペアンプが、電源も含めて回路から完全に切り離されている」。操作子はスイッチ 1 個（p1）。無音を検出して電源を切る機構がある（p1・p2）
 - **前提・外れる条件**:
   - `AMP_SEL` を直接 GND に落とすと、選んだ石の出力を結合コンデンサ越しに交流短絡するので避ける（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-5）
-  - ミュートの長さの 2τ/3τ は τ 0.48 s の場合。NC 10 kΩ を採り、TMUX で ch を選んでから音声リレーをセットする順なら τ は約 21 ms で、待ちはずっと短くなりうる（[review/stack_relay_power.md](review/stack_relay_power.md) §0.1-6、[_review](review/stack_relay_power_review.md) 5-3）。実測（V21-実測-12）で決める
+  - ミュートの長さ: 0.48 s（2.2 µF × 220 kΩ）はバスの負荷を入れない値で、もう設計の値ではない。音声リレーが SET の間の出力結合の τ はバスの負荷込みで約 64 ms、ミュート中は GND 落としが放電路になって 1.1 ms（470 Ω）〜2.3 ms（1 kΩ）〔計算、[review/design_eval_review.md](review/design_eval_review.md) §1.13〕。実測（V21-実測-12）で決める
+  - 1 kΩ と 50 kΩ のポットで −0.17 dB〔計算、同 §1.13〕
+  - 電源断のポップはラッチでも手動でも消えない（B6 で受けるか決める、同 §3 B6）
 - **却下した案**: —
 - **状態**:
   - 決定: 方針（切替の間は GND へ落とすミュート）
-  - 未決: 場所（ポットの前／HP 入力と LINE 出力／HP 出力の後ろ）、素子（常開・常閉・ラッチング・半導体）、時間（V21-未決-01、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4）
+  - いったんの決め（ユーザー判断 2026-09-25。統合リスト A6、V21-未決-01）: 場所は**ポットの前**（1 か所で HP と LINE を覆う）。ポットの前に直列 470 Ω〜1 kΩ、その後ろを **DPDT の接点（L/R）で GND へ落とす**
+  - 未決（推奨）: DPDT を何にするか — 推奨はラッチングリレー AZ850P2-5（ファームが切替の手順の中で掛け外しでき、聴取中のコイル電流は 0）。ユーザーは「DPDT スイッチで GND 落としでもよい」とした。手動のスイッチにすると、切替の手順の中の自動のミュート（§6-2）は掛からない〔推論〕
+  - 未決: 時間（V21-実測-12）
 
 ### 2-11 `TONE` バスに 100 kΩ のプルダウン
 
@@ -277,6 +283,15 @@
 - **前提・外れる条件**: 段差は「入力スイッチを先に閉じ、5τ（0.5 s）待ってから出力スイッチを閉じる」順なら聴こえるバスに出る前に吸収される、という読みで「保険」（[review/rejected_review_review.md](review/rejected_review_review.md) #6）。v2.1 で入力と出力を同じ選択で同時に切り替えるならこの順は取れず、段差はミュート（§2-10）と整定待ち（§6-2）の中に入る〔推論〕。査読の時点では入力スイッチの素子が未定だった（今は TMUX7612、§2-8）
 - **却下した案**: 置かない（v2 の撤去）— 撤去の理由が v2.1 では成り立たない
 - **状態**: いったんの決め（ユーザー判断 2026-09-25。V21-未決-13）
+
+### 2-15 娘のコイル側の論理は `+5V_COIL` で動かす（スタックの `3V3` をやめる）
+
+- **決定**: 娘のコイル側の論理（B1/B2 の検知・単安定・SET/RESET の排他ゲート §5-8・AHCT の 1 段 §5-6）を、スタックの `3V3` ではなく `+5V_COIL` で動かす。親からの 3.3 V の線は TTL しきい値の入力の石で受ける。スタックの `3V3` は通さない。ch のデコーダと EN の FET は今までどおり娘の切られたレール側（§2-9）
+- **理由**: コイル側の論理が働く意味があるのはコイル電源があるときだけ。娘の電源の領域が 3 つから 2 つに減り、境目の Ioff の条件が減る。USB だけで起動したとき、生きた 3.3 V の論理が電源の無い AHCT を駆動する形が消える。スタックのピンが 1 本空く
+- **根拠**: [review/design_eval_review.md](review/design_eval_review.md) §0 A4・§3 A4／[review/design_eval_electrical.md](review/design_eval_electrical.md)（G6）／[review/design_eval_control.md](review/design_eval_control.md)（新-7）
+- **前提・外れる条件**: AHCT／HCT 系の DS は未収集（VCC ＝ 0 での入力の扱い、5 V で 3.3 V 入力を受ける単安定の品。LVC1G123 は 5 V で 3.3 V 入力を保証しない〔推論〕）。`RAIL_OK` など Pico からの線は、`+5V_COIL` が無いときに電源の無い石の入力へ来るので、Ioff か直列抵抗が要る〔推論〕
+- **却下した案**: スタックの `3V3` を常時系統として残し、検知・遅延・ゲートをそこで動かす（今までの §2-5 の内訳）— 上の理由
+- **状態**: いったんの決め（ユーザー判断 2026-09-25。統合リスト A4）
 
 ---
 
@@ -576,7 +591,7 @@
 
 ### 5-2 レールは Pico が読む（共通の `MON_P`/`MON_N`、LM4040 で比率校正）
 
-- **決定**: 各娘の分圧したレールをダイオード OR でスタック共通の `MON_P`/`MON_N` に載せ、Pico の ADC で読む。**ADC0 の `DEST_ADC` を解放**して LM4040-2.5 を読み、比率で校正する。しきい値・遅延・読みの妥当性の判定はファーム
+- **決定**: 各娘の**生の**レールを娘の上のダイオードで OR してスタック共通の `MON_P`/`MON_N` に載せ、**分圧は親**に置いて Pico の ADC で読む。分圧は「正常の最深（−16.5 V 級）でも 0 V から、正常の最高でもフルスケールから離れる」値にし、両端への張り付きをファームで異常とする。`MON_N` の持ち上げの電流は ≤ 50 µA 級、ADC ピンへの注入は上側の抵抗で制限、スタックのピン配置で `MON` を論理線の隣に置かない。`PG_N` は各娘の「両レールあり」で引くワイヤード OR（親でプルアップ）にし、`MON` と矛盾したら異常とする。**ADC0 の `DEST_ADC` を解放**して LM4040-2.5 を読み、比率で校正する。しきい値・遅延・読みの妥当性の判定はファーム
 - **理由**: 娘の部品が監視 IC 案の約半分で、しきい値をファームで変えられ、読みの妥当性（張り付き・片側だけ等）を見て誤「良」の多くを検出できる
 - **根拠**: [NOW] L25／[review/rail_detect_review.md](review/rail_detect_review.md) §7・§8-1（(c) を第一候補）
 - **前提・外れる条件**: RP2350 の ADC はオフセット・利得・INL の規定が無く、比率校正が前提。Pico の 3V3 の公差はどの DS にも無い（V21-実測-04）。`DEST_ADC` は v2 で位置センスラダーを廃止した後の空きで、ファームは読んでいない（[NOW] L208）。Pico 2 の `AGND` の扱いは Pico 2 の DS で確かめる（リポジトリに無い）（[review/rail_detect_review.md](review/rail_detect_review.md) §7.1・§10）
@@ -584,7 +599,9 @@
   - (a) 娘ごとに窓型の監視 IC（TPS3701 ＋ TPS3808 ＋ LM4040）— 単一の不良（オープンドレインの配線の開放、基準側の抵抗の開放、LM4040 の短絡など）で誤「良」になる経路が 4 つ以上あり、TPS3808 の遅延は CT の公差込みで 9.1〜23.4 ms と 10〜20 ms に入らない。娘 1 枚で IC 約 10 個（[review/rail_detect_review.md](review/rail_detect_review.md) §3.2・§2-3・§1 表）
   - (b) Pico だけ（I²C 経由で切る）— 突然の断では EN が切れる前にレールが割れる（I²C の書き込み 0.29 ms ＋ 待ち 最大約 0.9 ms に対し 0.20 ms）。ファームが止まると何も守られない（同 §7.4・§7.5）
   - ディスクリート（ツェナー＋トランジスタ）だけで精度の層を作る — ツェナーの公差で下端 10 V を守れない（[review/rail_detect.md](review/rail_detect.md) §2.2）
-- **状態**: いったんの決め（[NOW] L25）
+- **状態**:
+  - いったんの決め（[NOW] L25）: Pico が共通の `MON_P`/`MON_N` を読む、LM4040 で比率校正
+  - いったんの決め（ユーザー判断 2026-09-25。統合リスト A5）: OR は生のレール側・分圧は親・分圧の制約・`PG_N` の役（[review/design_eval_review.md](review/design_eval_review.md) §0 A5・§3 A5、[review/rail_detect_review.md](review/rail_detect_review.md) §7.3。生のレール側で OR すると VF の効きが 6 倍小さい。`MON_N` の上側 1 本の開放で読みが 0 に張り付いて「深い＝良」に見える形を、`PG_N` の 1 ビットで見分ける）
 
 ### 5-3 `RAIL_OK` を Pico から直接（Pico が High を出している間だけ「良」）
 
@@ -622,19 +639,36 @@
 - **却下した案**: 3.3 V で直接駆動 — 上の理由（v1/v2 で動いた実績はありうるが DS の保証ではない）
 - **状態**: いったんの決め（[NOW] L25）
 
-### 5-7 ±15 V の有無を Pico へ知らせる（`MON_P`/`MON_N` で兼ねる）
+### 5-7 電源の有無は `PD_12V_SW`（主電源スイッチの後ろ）を検知線 1 本で Pico へ
 
-- **決定**: ±15 V（スタックの常時側）の有無を Pico が読めるようにし、ファームは ±15 V が無い間は電源 SET も EN も出さない。形は共通の `MON_P`/`MON_N`（§5-2）で兼ね、検知の線を足さない
-- **理由**: Pico は USB だけで動くので、主電源 OFF でも `3V3` と制御線が生きている（§2-9 の EN–IN の件）
-- **根拠**: [NOW] L15／[review/main_power_compare_review.md](review/main_power_compare_review.md) §3.3（親の +15 V を分圧して空き GPIO へ、の案）／[review/DECISIONS_v21_review.md](review/DECISIONS_v21_review.md) F1（形の 2 択）
+- **決定**: 主電源スイッチの後ろの `PD_12V_SW` を、**しきい値素子つき**（ツェナー＋分圧、または電圧監視 IC のオープンドレイン出力）で約 10 V を境に Pico の GPIO へ 1 本。開放で「無し」に倒れる向き、テブナン ≤ 8.2 kΩ（RP2350-E9）。ファームの規則は 3 つ:
+  - ① 検知の立ち上がりで（RS6 の起動＋余裕の後）全リセットと PT2314E の初期化（50 ms 待ち）
+  - ② 検知が無い間は、コイルのパルス・EN・`RAIL_OK` を出さず制御線を 0 に保つ
+  - ③ 全リセットのあと `MON_P`/`MON_N` が立ち下がりのしきい値（約 10 V）を割ったのを確かめてから電源 SET。割らなければ「リレーが戻らない」故障として止まる
+  - ±15 V そのものは電源 SET の後に `MON_P`/`MON_N` で確かめる。安全（EN が IN を超えない、電源の無い娘をつながない）は EN ≤ IN の構造（§2-9）と B1（§5-4）が持つ
+- **理由**: `PD_12V_SW` は RS6 と L7805C の両方の上流にあり、起動のきっかけ・PD の 5 V の窓・電源断の予告を 1 か所で取れる。USB を先に挿した起動でも、主電源を入れた時点で全リセットが走る。コイル側の故障（L7805C の開放・PPTC のトリップ・電源リレーの溶着）は規則③がハード無しで拾う
+- **根拠**: [review/design_eval_review.md](review/design_eval_review.md) §0 A2・§1.1・§1.11・§1.12・§3 A2／[review/design_eval_control.md](review/design_eval_control.md)（新-2）／[review/design_eval_electrical.md](review/design_eval_electrical.md)（G1・規則③）
 - **前提・外れる条件**:
-  - `MON_P`/`MON_N` が見るのは各娘の電源リレーの後ろのレール（§5-2）。分かるのは選んだ娘に電源 SET を出した後で、**SET を出す前には ±15 V の有無は分からない**〔推論〕。決定の「±15 V が無い間は電源 SET を出さない」はこの形では前もって確かめられず、ファームが守れるのは「電源 SET の後に `MON_P`/`MON_N` で両レールを確かめてから `RAIL_OK` と ch の EN を出す」ところまで〔推論〕
-  - EN–IN の件そのものは、EN を LDO の IN の分圧から作る形（§2-9）で構造的に守られる。この検知はファームの手順のためのもの〔推論〕
-  - Pico が USB だけで先に起動したとき、起動時の全リセット（§6-2）は `+5V_COIL`（PD 12 V から、§3-8）が無くて効かない。全娘の電源リレーがリセットのままなら、後から PD が来たことも `MON_P`/`MON_N` からは見えない〔推論〕
-- **却下した案**: 親の +15 V を別に分圧して Pico の空き GPIO で読む（[review/main_power_compare_review.md](review/main_power_compare_review.md) §3.3）— 線を足さない方を採った
+  - 素の分圧では GPIO が 5 V（PD の窓）と 12 V を分けられない（VIL/VIH の比から両立しない〔計算〕、RP2350 の VIL/VIH のページは未照合）→ しきい値素子は必須
+  - RS6 の UVLO ON の max は DS に無い（typ 9 V だけ、[pow]）
+  - 計測側の予備 12 V 入口（§4-9）は主電源スイッチを迂回して `PD_12V_SW` に入る。そこから給電したときも検知は「有り」になる
+- **却下した案**:
+  - `MON_P`/`MON_N` で兼ねる（2026-09-25 午前のいったんの決め）— 電源 SET の前には ±15 V の有無が分からず、USB を先に挿すと主電源を入れても全リセットが走らない。OR が前の娘のレールを見せると前の娘の石を鳴らす（[review/design_eval_review.md](review/design_eval_review.md) §1.1・§1.11）
+  - PD モジュールの PG — 主電源スイッチの手前（同 §1.7）
+  - `+5V_COIL` を検知 — 起動のきっかけとしては同等だが電源断の予告にならない（同 §2）
+  - 親の +15 V を分圧 — RS6 の保護は見えるが予告にならず、15 V を GPIO へ落とす分圧の注入の管理が要る（同 §2）
 - **状態**:
-  - 決定: ±15 V の有無を Pico が読めるようにする（[NOW] L15 の「検知線」）
-  - いったんの決め（ユーザー判断 2026-09-25。V21-未決-23）: `MON_P`/`MON_N` で兼ねる
+  - 決定: 電源の有無を Pico が読めるようにする（[NOW] L15 の「検知線」）
+  - いったんの決め（ユーザー判断 2026-09-25。統合リスト A2）: `PD_12V_SW` にしきい値素子、規則①②③
+
+### 5-8 娘の SET/RESET の排他をハードに入れる、TBD62083A の COMMON は常時の `+5V_COIL`
+
+- **決定**: 娘の上で、音声 SET ＝ ASET ∧ `RAIL_OK` ∧ ¬(ARST ∨ 単安定の Q)、電源 SET ＝ PSETk ∧ ¬PRST。TBD62083A のクランプの COMMON は切られていない常時の `+5V_COIL`
+- **理由**: ゲート 2〜3 個で「同じリレーの両コイルに同時に電圧」が、ファームのバグにも固まった出力にも依らず消える。今はファームの規則だけ（§6-2）で、B2 の単安定（ハードで撃つ）の間に ASET が来ると重なる
+- **根拠**: [review/design_eval_review.md](review/design_eval_review.md) §0 A3・§3 A3
+- **前提・外れる条件**: 音声 SET の否定側に PRST も入れるかは任意（V21-未決-06 と同じ向き）。COMMON を B1 の PMOS の後ろにすると、PMOS が OFF のとき RESET コイルの逆起電力の逃げ道が消える〔推論〕。ゲートの石は §2-15 の電源と一緒に決まる。AZ850 のコイルの L と最大リセット時間は V21-実測-05
+- **却下した案**: 入れない（ファームの規則だけ）— 上の理由
+- **状態**: いったんの決め（ユーザー判断 2026-09-25。統合リスト A3）
 
 ---
 
@@ -657,6 +691,7 @@
 | 聴取中の娘にクロックのある信号が来ない | 娘に MCP23017・I²C を置かない（静的なレベル線だけ） | §2-12 |
 | 切ったノードが浮かない | NC 抵抗 → GND、`TONE` バスに 100 kΩ、ch の入力側に 220 kΩ | §2-3・§2-11・§2-14 |
 | 極間短絡で ±15 V を直結しない | 22 Ω を NO 側、溶断型 | §2-4 |
+| 同じリレーの SET と RESET のコイルに同時に電圧が掛からない | 娘の排他ゲート（音声 SET ＝ ASET ∧ `RAIL_OK` ∧ ¬(ARST ∨ Q)、電源 SET ＝ PSETk ∧ ¬PRST） | §5-8 |
 
 ### 6-2 ファームが守ること
 
@@ -665,10 +700,11 @@
 - **音声 SET の規則**: 音声 SET は、上の「全リセット → 電源 SET → レール良好 → 共通の音声 SET」の 1 つの手順の中でだけ出す。それ以外で音声 SET を出さない（§2-6）。状態: 決定（ユーザー判断 2026-09-25）
 - **同じ娘の中で ch を変えるとき**: ミュート → ch を全 OFF → 番地 → ch を ON（TMUX と LDO の EN が同時に切り替わる）→ LDO の立ち上がり（CNR 10 nF で正側 14 ms・負側 9 ms、[pow] §2・§3）＋整定待ち → ミュート解除。境目のリレーは動かさない（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-9）。状態: 未決（推奨。[NOW] に無い）
 - **パルス幅**: コイルのパルスは 20 ms（Panasonic の「セット・リセット時間の 5 倍以上」、AZ850 の typ 2 ms の 10 倍）。SET と RESET のコイルに同時に電圧を加えない（[review/stack_relay_power.md](review/stack_relay_power.md) §6、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 8-1、[bnd] §3.3 TQ）。状態: いったんの決め（ユーザー判断 2026-09-25。V21-未決-24）
-- **EN を上げる条件**: ±15 V があることを `MON_P`/`MON_N` で確かめてから（主電源スイッチ OFF で Pico が USB だけで動いているときに EN を上げない）（§2-9・§5-7、[review/main_power_compare_review.md](review/main_power_compare_review.md) 1-6）。状態: 決定（§5-7）
+- **電源の有無（§5-7 の規則①②③）**: ① `PD_12V_SW` の検知の立ち上がりで全リセットと PT2314E の初期化、② 検知が無い間はコイルのパルス・EN・`RAIL_OK` を出さず制御線を 0 に保つ、③ 全リセットのあと `MON_P`/`MON_N` が約 10 V を割ったのを確かめてから電源 SET（割らなければ止まる）。状態: いったんの決め（統合リスト A2）
+- **EN を上げる条件**: 電源 SET の後に両レールを `MON_P`/`MON_N` で確かめてから（主電源スイッチ OFF で Pico が USB だけで動いているときに EN を上げない。これは規則②でも守られる）（§2-9・§5-7、[review/main_power_compare_review.md](review/main_power_compare_review.md) 1-6）。状態: 決定（§5-7）
 - **レール監視**: `MON_P`/`MON_N` を読み、LM4040 を ADC0 で読んで比率校正。しきい値（案: 約 ±12 V / 約 ±10.5 V）と遅延をファームで持つ。張り付き・片側だけなどの妥当性を見る。`RAIL_OK` は能動的に High を出し、異常では落とす（§5-1〜§5-3）。状態: いったんの決め
 - **迷惑トリップを無限に再試行しない**（誤「不良」で EN 切り → 回復 → 良 → EN → 落ち込み…を繰り返しうる）（[review/rail_detect_review.md](review/rail_detect_review.md) §3.1）。状態: 未決（推奨）
-- **電源投入時**: 全リセットから始める（ラッチングリレーは停電前・衝撃の状態を保持しうる、§2-1）。PT2314E には電源投入後 50 ms は I²C を送らない（v2 の「電源投入後 Td ≈ 50 ms は叩かない」、[sw] §5）。PT2314E の I²C は 100 kbit/s（3.3 V ロジック × VDD 9 V で Standard）。状態: 決定（全リセット: §2-1）／v2 から引き継ぎ（PT2314E）
+- **電源投入時**: 全リセットから始める。きっかけは Pico の起動ではなく `PD_12V_SW` の検知の立ち上がり（規則①）（ラッチングリレーは停電前・衝撃の状態を保持しうる、§2-1）。PT2314E には電源投入後 50 ms は I²C を送らない（v2 の「電源投入後 Td ≈ 50 ms は叩かない」、[sw] §5）。PT2314E の I²C は 100 kbit/s（3.3 V ロジック × VDD 9 V で Standard）。状態: 決定（全リセット: §2-1）／v2 から引き継ぎ（PT2314E）
 - **運用**: 娘は電源を切ってから抜き挿しする。挿したら起動し直す（起動時の全リセットで前歴を消す。セットのまま外した娘を電源の入った箱へ挿すと、音声が前歴のままバスにつながり、起動時のリセットは走らない）（[review/stack_relay_power_review.md](review/stack_relay_power_review.md) §3 (e)）。状態: いったんの決め（ユーザー判断 2026-09-25。V21-未決-25）
 - **待ち時間の目安**: ch の入力結合の整定は 5τ で 0.5 s 級。ミュートの長さは τ の取り方で変わる（§2-10 の前提）。状態: 未決（V21-未決-01、V21-実測-12）
 
@@ -849,7 +885,7 @@ DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品
 
 | ID | 決めること | 選択肢 | 出典 |
 |---|---|---|---|
-| V21-未決-01 | ミュートの場所・素子・時間 | ポットの前／HP 入力と LINE 出力／HP 出力の後ろ、常開・常閉・ラッチング・半導体、時間は τ の取り方次第（約 1 s／1.5 s は τ 0.48 s のとき、NC 10 kΩ なら約 21 ms の τ） | §2-10、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4 |
+| V21-未決-01 | ミュートの場所・素子・時間 | **→ §2-10 いったんの決め**（ユーザー判断 2026-09-25、統合リスト A6: ポットの前、直列 470 Ω〜1 kΩ ＋ DPDT の接点で GND 落とし）。残る: DPDT をラッチングリレー（推奨）にするか手動スイッチにするか、時間（V21-実測-12） | §2-10、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4 |
 | V21-未決-02 | ch のデコーダの置き場所と EN の形、娘の 3.3 V | **→ §2-9 いったんの決め**（ユーザー判断 2026-09-25: 娘に 2→4 デコーダ、EN は LDO の IN の分圧を FET で落とす、娘の 3.3 V は切られたレールから発振器の無い LDO、直列 R＋ショットキーは置かない） | §2-9、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4 A1 |
 | V21-未決-03 | 娘の MCP23017 を残すか（I²C をスタックに通すか） | **→ §2-12 いったんの決め**（ユーザー判断 2026-09-25: 外す。親からの静的なレベル線だけ） | [NOW] L25、[review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #1、[review/stack_relay_power.md](review/stack_relay_power.md) §7.2 |
 | V21-未決-04 | NC 側の抵抗値 | **→ §2-3 いったんの決め**（ユーザー判断 2026-09-25: 音声 10 kΩ、レール 2.2 kΩ） | §2-3、[review/stack_relay_power.md](review/stack_relay_power.md) §0.2 |
@@ -862,7 +898,7 @@ DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品
 | V21-未決-11 | LDO 前のフィルタの形 | **→ §4-13 いったんの決め**（ユーザー判断 2026-09-25: 入口のコンデンサを低 ESR に） | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §6.2・§10-2 |
 | V21-未決-12 | v2.1 の試験レベル | バス 3.70 Vrms（−3.4 dBFS、DUT は v1 より +5.5 dB）／v1 と同じ DUT 振幅（−8.9 dBFS、平均を増やす） | [review/tap_compare_review.md](review/tap_compare_review.md) §2.3・§4-A |
 | V21-未決-13 | ch 側の入力 220 kΩ を戻すか | **→ §2-14 いったんの決め**（ユーザー判断 2026-09-25: 戻す） | [review/rejected_review.md](review/rejected_review.md) #6、[_review](review/rejected_review_review.md) #6 |
-| V21-未決-14 | DIRECT の置き方と切替、ライン入力の振幅の定義 | — | §1-5、[NOW] L27 |
+| V21-未決-14 | DIRECT の置き方と切替、ライン入力の振幅の定義 | 方針（ユーザー 2026-09-25）: PT2314E を迂回する経路と、その切替を足す。取り出し点・戻し点・素子・既定・振幅は評価中（`review/direct_bypass.md`） | §1-5、[NOW] L27 |
 | V21-未決-15 | シャーシを 1 点で落とす先（パネル部品の金属部のグランドの扱いを含む） | — | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §8-1・§10-8 |
 | V21-未決-16 | 入力ヒューズ（今の F2A 速断のままか）と DC-DC 入口の電解の耐圧・ESR | **→ §3-12 いったんの決め**（ユーザー判断 2026-09-25: F2A 速断のまま。入口の電解の耐圧・ESR は未決（推奨）） | [review/main_power_compare_review.md](review/main_power_compare_review.md) 1-6・§4-7 |
 | V21-未決-17 | 娘の最終枚数 | **→ §2-13 いったんの決め**（ユーザー判断 2026-09-25: 4 枚） | [review/main_power_compare_review.md](review/main_power_compare_review.md) §4-8、§2-5 |
@@ -871,6 +907,7 @@ DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品
 | V21-未決-20 | 縦積みで下の段の DIP ソケットに手が届くか（V21-継-22） | 積み方・段の数・挿し替えの手順 | [review/decisions_audit_3_review.md](review/decisions_audit_3_review.md)（3884 の補足） |
 | V21-未決-21 | 6 W 低 Ciso 群（10〜20 pF、±200 mA 上限）を主電源の比較に入れるか | 軽負荷の振る舞い・Cout・入力範囲を満たすかは誰も見ていない。RS6 はこの群より絶縁容量が 5〜10 倍悪い | §3-1・[review/v2_carryover.md](review/v2_carryover.md)、[review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 修正の要点 3 |
 | V21-未決-22 | 2×12 の内訳（`PG_N` を残すか、予備の GND を何本にするか） | **→ §2-5 いったんの決め**（ユーザー判断 2026-09-25: 出典の表から音声 SET を 1 本にし `MON_P`・`MON_N`・`RAIL_OK` を足した 24 本〔計算〕。ピン配置は未確定） | §2-5、[review/stack_relay_power.md](review/stack_relay_power.md) §7.2、[review/rail_detect_review.md](review/rail_detect_review.md) §7.3・§7.6 |
-| V21-未決-23 | ±15 V の有無を Pico へ知らせる検知線の形 | **→ §5-7 いったんの決め**（ユーザー判断 2026-09-25: `MON_P`/`MON_N` で兼ねる） | §5-7 |
+| V21-未決-23 | ±15 V の有無を Pico へ知らせる検知線の形 | **→ §5-7 いったんの決め**（ユーザー判断 2026-09-25 午前: `MON_P`/`MON_N` で兼ねる → 同日、統合リスト A2 で `PD_12V_SW` の検知線 1 本＋規則①②③へ差し替え） | §5-7、[review/design_eval_review.md](review/design_eval_review.md) A2 |
 | V21-未決-24 | コイルのパルス幅 | **→ §6-2 いったんの決め**（ユーザー判断 2026-09-25: 20 ms） | §6-2、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 8-1 |
 | V21-未決-25 | 活線で娘を抜き挿ししない運用 | **→ §6-2 いったんの決め**（ユーザー判断 2026-09-25: 電源を切ってから抜き挿し・挿したら起動し直す） | §6-2、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) §3 (e) |
+| V21-未決-26 | 親のレベル線の出どころと Pico のピン割り付け（I²C の分割を含む。統合リスト A1）、タッチパネルを残すか | 推奨は親に制御専用の MCP23017（RESET は Pico の GPIO）。ユーザー（2026-09-25）が「Pico を 2 個使う手もありそう」— 比べて評価中（`review/a1_two_pico.md`） | [review/design_eval_review.md](review/design_eval_review.md) §0 A1・§1.8・§3 A1 |
