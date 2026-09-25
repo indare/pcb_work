@@ -1,5 +1,7 @@
 # 否定側査読: `AudioV2.1/review/rejected_review.md`（v2 却下案の v2.1 再査読）への反論
 
+> **訂正（2026-09-25、`adc_gnd_retree_review.md` でネットリストから確定）:** `F1601` は箱全体の上流ヒューズではない。`F1601` は `J1602`（計測基板の予備 12 V 端子）と `PD_12V_SW` の間だけにある。本線 `J202`→`SW402`→`PD_12V_SW` には枝より手前のヒューズが無い。本文で `F1601` を上流・マスターヒューズとしている箇所はこの訂正で読むこと。
+
 - 作成: 2026-09-24（エージェント、読み取り専用）。**リポジトリのファイルは何も変更していない**（`git status` クリーンのまま）。出力はこのファイルだけ
 - 自分で回したもの: `sch_facts.py all`／`pin`（NT101, NT1601–1603, U201, F1601, F1602, F201–F203, U1603, U1606, U1607, U403, U202, U1611, U1601, U1602, U1605, Y1601, A1601, U501, R501, R502）／`nets`（PD_12V_SW, PD_12V_MEAS, PD_GND, ADC_GND, ADC_nRST, ADC_nMR, ADC_BCK, ADC_LRCK, ADC_DATA, ADC_MCLK, VINL+）、`rail_budget.py`（素と `--adc-from-pd`）
 - **画像で見たページ**: `Audio/datasheets/TMR9_Datasheet.pdf` p1–p5（`pdftoppm -png -r 150`）、`AudioV2.1/datasheets/Recom_RS6.pdf` p2

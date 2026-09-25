@@ -1,5 +1,7 @@
 # decisions_audit_1.md の否定側査読（AudioV2.1/DECISIONS.md 1〜2146 行）
 
+> **訂正（2026-09-25、`adc_gnd_retree_review.md` でネットリストから確定）:** `F1601` は箱全体の上流ヒューズではない。`F1601` は `J1602`（計測基板の予備 12 V 端子）と `PD_12V_SW` の間だけにある。本線 `J202`→`SW402`→`PD_12V_SW` には枝より手前のヒューズが無い。本文で `F1601` を上流・マスターヒューズとしている箇所はこの訂正で読むこと。
+
 2026-09-24。読み取り専用。対象は `AudioV2.1/review/decisions_audit_1.md`（`out/v21/decisions_audit_1.md` と同一内容を確認）。
 行番号は `AudioV2.1/DECISIONS.md`。DS の事実は `AudioV2.1/ds_facts/power.md`・`switch_control.md`・`opamps.md` と、その照合 `verify_*.md`。
 回路図の数値は `python3 AudioV2.1/scripts/sch_facts.py rails` と `python3 AudioV2.1/scripts/rail_budget.py [--adc-from-pd]` をこの査読で回した結果（どちらも読み取りのみ）。
