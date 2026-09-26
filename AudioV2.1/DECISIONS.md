@@ -15,7 +15,7 @@
 - 2026-09-26: ライン入力の振幅を公称 2 Vrms・上限 2.3 Vrms（両経路で共通）に決めた（§1-5）
 - 2026-09-26: ADC 前段の 6.19 k は値のまま、理由を「上限 2.3 Vrms × 2 をフルスケールの −1.5 dB に」に決め直した（V21-継-08）
 - 2026-09-26: `AMP_SEL OUT` の端子を DEST スイッチの直前へ（§4-14）
-- 2026-09-26: DIRECT はトーン 0 dB（TSW は ON のまま固定、§1-6）
+- 2026-09-26: DIRECT は NJW1194 のスルー（§1-6。一度トーン 0 dB と誤って記録し、同日に直した）
 - 現況（いま何待ちか・次の一手）の正は [NOW.md](NOW.md)。この文書は「何を決めたか・なぜか・何を捨てたか」だけを持つ
 - 回路図から導出できる事実（ネットリスト・参照・部品数・部品値）は書かない（[../SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。部品は機能名かネット名で書く。**選定として決めた型番**（RS6-1215D など）と、決定を支える DS の数値は書き、出典を付ける
 - v2 から引き継いだものは §7、v2.1 では成り立たない v2 の決定と訂正された記録の表は [review/v2_carryover.md](review/v2_carryover.md)。本文で「v2 の『…』」と書くのは v2 でそう決めていたことの呼び名で、v2 の本文は引かない
@@ -117,7 +117,7 @@
 
 ### 1-6 トーンは NJW1194
 
-- **決定**: トーンは Nisshinbo **NJW1194**（品番 `NJW1194V-TE1`、SSOP32）。DIRECT はこのチップの中で作る（トーン 0 dB、下の状態の欄）。DIRECT のためのリレー（形 1・形 2）は置かない。トーン部を箱に組み込むか、別の箱として連結するかは設計で詰める
+- **決定**: トーンは Nisshinbo **NJW1194**（品番 `NJW1194V-TE1`、SSOP32）。DIRECT はこのチップの中で作る（トーン段のスルー、下の状態の欄）。DIRECT のためのリレー（形 1・形 2）は置かない。トーン部を箱に組み込むか、別の箱として連結するかは設計で詰める
 - **理由**: DS で確かめた中で、トーン段を飛ばすスルーを持ち、経路に音量段が残って切替の前後を段階で絞れる単体の石はこれだけ（[review/tone_chip_bypass_review.md](review/tone_chip_bypass_review.md)、[review/njw1194_alternatives_review.md](review/njw1194_alternatives_review.md)）。スルー時の最大出力は 3.6 Vrms min〔DS p3〕。入手の心配は Arrow・LCSC で解けた（ユーザー確認 2026-09-26）
 - **根拠**: [datasheets/tone/NJR_NJW1194.pdf](datasheets/tone/NJR_NJW1194.pdf)（Ver.7.4）／[review/tone_options_compare.md](review/tone_options_compare.md)・[_review](review/tone_options_compare_review.md)（4 案の比較）
 - **前提・外れる条件**:
@@ -141,7 +141,7 @@
     2. 3 線（CLOCK・DATA・LATCH）は UI の MCP から。5 V のバッファ（AHCT）の置き場を作り、0 Ω で素通しもできる形にする。実物で 3.3 V 直結を試し、効けば素通し。理由: VIH min 2.5 V〔DS p5〕に対し MCP の VOH の規定（VDD−0.7 V）では余裕が 0.1 V。基準電位（GND か V− か）は DS に明文が無く、GND 基準と読む〔推論、verify §〕
     3. 入力に直列抵抗の置き場（0 Ω で実装、1 kΩ に替えられる）。理由: 入力のクランプのダイオードはパッドの直下にあり、チップの中にクランプより前で電流を絞るものが無い〔DS p6、照合で訂正〕。電源断のときの電流を決めるのは外側だけ
     4. **電源投入時（規則①）に状態をリセット**: トーンチップの全レジスタを書き直す（3 線は読み返せないので毎回全部）。電源を切る前の MUTE は狙わない（3 線を MCP の I²C 経由で叩くと 16 ビットに 400 kHz でも約 4 ms、予告から Pico が止まるまで約 2 ms〔計算〕）。p11 の「電源 ON の前に入力に信号があると初期状態が乱れうる」は、この書き直しで受ける
-  - いったんの決め（ユーザー判断 2026-09-26「ほぼ誤差。制御を考えるとチップに任せた方がよい」）: **DIRECT はトーン 0 dB（Bass・Treble を 0 dB に書くだけ）**。TSW（トーン段のスルー）は ON のまま固定して切り替えない。理由: DS 上の差は高域と雑音だけで小さい（10 kHz の THD がスルー約 0.005 %／トーン 0 dB 約 0.01 %、雑音 1.41／2.2 µV typ〔DS p4・p22 のグラフ、[review/tone_options_compare_review.md](review/tone_options_compare_review.md)〕、1 kHz ではグラフが重なる）。TSW を切り替えなければ「切り替えるときはミュート」（p8）の手順も、切替点の段も要らない。電源投入時の初期値は TSW = 0（スルー）なので、規則①の書き直しで ON にする
+  - いったんの決め（ユーザー判断 2026-09-26「ほぼ誤差。制御を考えるとチップに任せた方がよい」、同日「NJW1194 のスルーを使う」と確認）: **DIRECT は NJW1194 のスルー（TSW でトーン段を飛ばす）**。切り替えはチップのレジスタで行い、DS の「TSW を切り替えるときはミュートを使う」（p8）に従い、チップの音量を MUTE にしてから TSW を書く。切替点の段が聞こえるなら、全リセットの中（全部の娘がバスから離れている間）で書く形に下げる（実物で測る）。DS 上のトーン 0 dB との差は小さい（10 kHz の THD がスルー約 0.005 %／トーン 0 dB 約 0.01 %、雑音 1.41／2.2 µV typ〔DS p4・p22 のグラフ、[review/tone_options_compare_review.md](review/tone_options_compare_review.md)〕）。電源投入時の初期値は TSW = 0（スルー）〔DS p11〕
   - 未決: 電源の無いチップの入力に源が来ることを受けるか（3 の抵抗の値と合わせて）
 
 ---
@@ -984,7 +984,7 @@ DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品
 | V21-未決-11 | LDO 前のフィルタの形 | **→ §4-13 いったんの決め**（ユーザー判断 2026-09-25: 入口のコンデンサを低 ESR に） | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §6.2・§10-2 |
 | V21-未決-12 | v2.1 の試験レベル | バス 3.70 Vrms（−3.4 dBFS、DUT は v1 より +5.5 dB）／v1 と同じ DUT 振幅（−8.9 dBFS、平均を増やす） | [review/tap_compare_review.md](review/tap_compare_review.md) §2.3・§4-A |
 | V21-未決-13 | ch 側の入力 220 kΩ を戻すか | **→ §2-14 いったんの決め**（ユーザー判断 2026-09-25: 戻す） | [review/rejected_review.md](review/rejected_review.md) #6、[_review](review/rejected_review_review.md) #6 |
-| V21-未決-14 | DIRECT の置き方と切替、ライン入力の振幅の定義 | **→ §1-6・§1-5 で決着**（ユーザー判断 2026-09-26: トーンは NJW1194、DIRECT はトーン 0 dB でリレーは置かない。振幅は公称 2 Vrms・上限 2.3 Vrms、両経路で共通） | §1-5・§1-6 |
+| V21-未決-14 | DIRECT の置き方と切替、ライン入力の振幅の定義 | **→ §1-6・§1-5 で決着**（ユーザー判断 2026-09-26: トーンは NJW1194、DIRECT はチップのスルーでリレーは置かない。振幅は公称 2 Vrms・上限 2.3 Vrms、両経路で共通） | §1-5・§1-6 |
 | V21-未決-15 | シャーシを 1 点で落とす先（パネル部品の金属部のグランドの扱いを含む） | — | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §8-1・§10-8 |
 | V21-未決-16 | 入力ヒューズ（今の F2A 速断のままか）と DC-DC 入口の電解の耐圧・ESR | **→ §3-12 いったんの決め**（ユーザー判断 2026-09-25: F2A 速断のまま。入口の電解の耐圧・ESR は未決（推奨）） | [review/main_power_compare_review.md](review/main_power_compare_review.md) 1-6・§4-7 |
 | V21-未決-17 | 娘の最終枚数 | **→ §2-13 いったんの決め**（ユーザー判断 2026-09-25: 4 枚） | [review/main_power_compare_review.md](review/main_power_compare_review.md) §4-8、§2-5 |
