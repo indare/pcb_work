@@ -159,3 +159,16 @@
 - 使わない入力（In2〜4）の処理は DS に無い（応用回路は 4 本とも 10 µF で描いている〔p8〕）— 確かめられず
 - パッケージ: SSOP32・0.65 mm〔p1〕。外形寸法（11 × 7.6 mm）は DS に無く、対象が別の資料から書いた（リポジトリに無い — 確かめられず）。娘に TSSOP の TMUX7612 がすでに載っているので、手付けの難しさとしては新しい種類ではない〔推論〕。ルートの SOIC-28W の場所を描き直す（対象のとおり）
 - 入力の結合: 入力抵抗 min 15 kΩ〔p3〕と今の 2.2 µF で 4.8 Hz〔計算〕。I/O の DC は 0 V〔p6〕だが出力のオフセットの規定は無い → 出力の結合 C は残す〔推論〕
+
+---
+
+## 追記: JLCPCB の在庫（2026-09-26、コーディネータが JLCPCB の部品検索 API で確認）
+
+| 品番 | JLCPCB の部品番号 | 在庫 | 買えるか | 最小 |
+|---|---|---:|---|---:|
+| NJW1194V-TE1（SSOP-32、JRC） | C5184872（LCSC と同じ番号、拡張部品） | **0** | 買える扱い（`isBuyComponent`=1）だが在庫なし。予約の残りは −7 | 4 |
+| NJW1119AV-TE1 | C9900305081（JLCPCB Assembly の出品） | 0 | **不可**（"This product is no longer manufactured."） | 445 |
+| PT2314E（SOP-28-300mil） | C90034（拡張部品） | 116 | 買える | 1 |
+
+- 取得: `POST https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList`（keyword 検索）。LCSC 本体の検索は Access Denied で見られなかった
+- 読み: NJW1194 は JLCPCB/LCSC に登録はあるが在庫 0。NJW1119A は JLCPCB 上では製造終了の扱い。PT2314E は在庫あり
