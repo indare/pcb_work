@@ -310,11 +310,11 @@
     4. IODIR・OLAT を定期的に読み返し、食い違えば RESET から初期化し直す（MCP の POR は 0 V からの立ち上がりしか保証されず、3V3 の浅い瞬断では戻らないことがある）
   - **基本の形**（統合リスト A1）: 制御 MCP の出力はすべて親の側でプルダウン。起動は OLAT＝0 を書いてから IODIR を出力に。`RAIL_OK`・MCP の RESET・検知線は、プルダウン（検知線はテブナン）を ≤ 8.2 kΩ（RP2350-E9、統合リスト B9）
   - UI の MCP は元のバス（BSS138 越しに PT2314E と共用）なので、±15 V が無い間（主電源 OFF で USB だけ）は読めない（I²C の High が MCP の VIH を割る、[review/design_eval_review.md](review/design_eval_review.md) §1.10）。そのとき UI は要らないので受ける
-  - ピンの数〔計算、[review/a1_two_pico_review.md](review/a1_two_pico_review.md) §1.3・§1.4〕: タッチを残すので、Pico の空きは MIRROR を入れて 1 本。制御 MCP は出力 10＋DIRECT 2＋電源断用の GND 落としの足場の線（0〜2）＋入力 `PG_N` 1 で 16 本に入る
+  - ピンの数〔計算、[review/a1_two_pico_review.md](review/a1_two_pico_review.md) §1.3・§1.4〕: タッチを残すので、Pico の空きは MIRROR を入れて 1 本。**Pico に直接つなぐ線が足りなくなったら、Pico を 2 台に分ける形（下の却下した案の 1 行目）で回避する**（ユーザー判断 2026-09-26）。制御 MCP は出力 10＋DIRECT 2＋電源断用の GND 落としの足場の線（0〜2）＋入力 `PG_N` 1 で 16 本に入る
   - 両案に共通の穴は残る: ハング中・デバッガで止めたとき・起動前に、コイルのパルスが止まらず残る窓（ハードの最大パルス幅は無く、WDT 頼み）
   - UI のコードと制御のコードが同じ実行環境にいるので、UI の誤った書き込みで制御 MCP を動かしうる経路は、専用バス（足すもの 2）で遠ざけるが配線では断てない（Pico 2 個の案の利点）
 - **却下した案**:
-  - Pico 2 個（Pico-A＝UI・トーン・計測・USB、Pico-B＝スタックの制御専用、間は UART）— UI の故障の封じ込めでは勝つが、ファーム 2 本・2 石の間の取り決め・新しい電気の経路（UART のプルアップからの逆給電、USB 2 口のグランドのループ）を持ち込み、安全は同等（[review/a1_two_pico_review.md](review/a1_two_pico_review.md) §0.2）
+  - Pico 2 個（Pico-A＝UI・トーン・計測・USB、Pico-B＝スタックの制御専用、間は UART）— **今は採らないが、Pico のピンが足りなくなったときの逃げ道として残す**。採るときは [review/a1_two_pico_review.md](review/a1_two_pico_review.md) §0.2 の必須の修正 7 点を入れる。今採らない理由: UI の故障の封じ込めでは勝つが、ファーム 2 本・2 石の間の取り決め・新しい電気の経路（UART のプルアップからの逆給電、USB 2 口のグランドのループ）を持ち込み、安全は同等（[review/a1_two_pico_review.md](review/a1_two_pico_review.md) §0.2）
   - パルス線を Pico から直接 — 本数が入らない（[review/design_eval_review.md](review/design_eval_review.md) §3 A1 (b)）
   - シフトレジスタ — POR の出力が DS で決まらない品が多い〔推論〕（同 (c)）
 - **状態**:
