@@ -174,3 +174,4 @@
 - 読み: NJW1194 は JLCPCB/LCSC に登録はあるが在庫 0。NJW1119A は JLCPCB 上では製造終了の扱い。PT2314E は在庫あり
 - **2026-09-26 ユーザーの確認**: LCSC の検索（NJW1194）で在庫あり、ただしリードタイムあり（ユーザーが LCSC のページで確認。こちらからは LCSC にアクセスできず、数量・納期は未確認）。→ 採る条件 1（少量を正規の経路で買える）は LCSC で満たす見込み
 - **2026-09-26 訂正**: 上の表の NJW1119A の「製造終了の扱い」は、JLCPCB Assembly 名義の `C99…` の出品に付いた文言で、同じ名義の出品は現行の ADAU1701 にも "no longer manufactured" が付いていた（[tone_chip_newer.md](tone_chip_newer.md)）。**製造終了の根拠にはならない**。Nisshinbo の一覧では NJW1194・NJW1119A とも "Standard" 区分（同）
+- **2026-09-26 ユーザーの確認（2）**: Arrow（正規代理店）に NJW1194V-TE1（SSOP-32）の在庫あり（https://www.arrow.com/ja/products/njw1194v-te1/nisshinbo-micro-devices-inc.html、ユーザーがページで確認。数量・最小発注はこちらでは未確認）。→ 採る条件 1（少量を正規の経路で買える）は Arrow・LCSC の 2 経路で満たす見込み
