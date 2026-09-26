@@ -7,9 +7,9 @@
 - 2026-09-25: §10-2 の未決 16 項目（-02〜-05・-07〜-11・-13・-16・-17・-22〜-25）の推奨を、ユーザーが「一旦おすすめにしましょう」で受けた。本文の各項目に「いったんの決め（ユーザー判断 2026-09-25）」として入れ、§10-2 の行は ID を残して本文を指す
 - 2026-09-25: 設計全体の評価（[review/design_eval_review.md](review/design_eval_review.md) の統合リスト A1〜A6）のうち A2〜A6 をユーザーが受けた: §5-7 の書き換え（`PD_12V_SW` の検知線）、§5-8（SET/RESET の排他）、§2-15（コイル側の論理を `+5V_COIL` で）、§5-2（`MON` の形・`PG_N`）、§2-10（ミュートの場所と形）。A1 は V21-未決-26
 - 2026-09-25: 同じ娘の中の ch 替え（統合リスト B7）を (B)「毎回全リセットから回す」に決めた（ユーザー「安全側は B」）。§6-2 の手順を 1 本にし、§2-10 の無音の作り方を全リセットの中へ移した（ポットの前の GND 落としは切替に使わない。電源断用に置くかは未決）
-- 2026-09-25: DIRECT と A1 の否定側査読で見つかった書き方の誤りを直した: 規則①のきっかけに「起動時にすでに検知が有る」を足した（§5-7・§6-2。Pico は主電源スイッチの後ろから給電されるので、ふつうの電源投入では立ち上がりを見ない）。切替の間の絞りは PT2314E の音量を段階で（§2-10・§6-2）
+- 2026-09-25: DIRECT と A1 の否定側査読で見つかった書き方の誤りを直した: 規則①のきっかけに「起動時にすでに検知が有る」を足した（§5-7・§6-2。Pico は主電源スイッチの後ろから給電されるので、ふつうの電源投入では立ち上がりを見ない）。切替の間の絞りはトーンチップの音量を段階で（§2-10・§6-2）
 - 2026-09-25: A1 を M に決めた（ユーザー: Pico 1 個＋親に制御専用の MCP23017、タッチは残す）→ §2-16。電源断のための GND 落としは足場だけ（§2-10）
-- 2026-09-26: トーンを NJW1194 に決めた（ユーザー）→ §1-6。V21-継-05（PT2314E）を置き換え、PT2314E を前提にした項目を §1-6 に並べた
+- 2026-09-26: トーンを NJW1194 に決めた（ユーザー）→ §1-6。PT2314E は却下し（ユーザー）、それを前提にした記述と V21-継-05・§3-4 を消した
 - 現況（いま何待ちか・次の一手）の正は [NOW.md](NOW.md)。この文書は「何を決めたか・なぜか・何を捨てたか」だけを持つ
 - 回路図から導出できる事実（ネットリスト・参照・部品数・部品値）は書かない（[../SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。部品は機能名かネット名で書く。**選定として決めた型番**（RS6-1215D など）と、決定を支える DS の数値は書き、出典を付ける
 - v2 から引き継いだものは §7、v2.1 では成り立たない v2 の決定と訂正された記録の表は [review/v2_carryover.md](review/v2_carryover.md)。本文で「v2 の『…』」と書くのは v2 でそう決めていたことの呼び名で、v2 の本文は引かない
@@ -66,7 +66,7 @@
 - **決定**: 解く問題を「電源要求の違う回路を同じバスへ切り替えること」と置く。非選択の回路は**電源ごと落とし**、バスとの境目には「電源が無いときにも切れている素子」を置く（コールドスタンバイ）。回路ごとに自分の電源（LDO で電圧を選ぶ）を持たせて同じバスに混ぜる
 - **理由**: v2 の形では、非選択の回路が境目の素子（TMUX7612）を生かすために通電していた（ホットスタンバイ）。TMUX7612 の DS には**電源を切ったときの漏れ・高インピーダンスの規定が無く**、端子はレールへダイオードでクランプされている
 - **根拠**: [NOW] L22「設計の根本」／[bnd] §1.1（TMUX7612: 電源断時の規定なし、"Pins are diode-clamped to the power-supply rails."、電源シーケンスは任意）。[NOW] L22 は「議論中」と書いているが、境目の素子（ラッチングリレー）と 1 枚の ch 数（4）は L24 で決まった
-- **前提・外れる条件**: 境目の素子が電源断でも切れていること（§2-1 のラッチングリレー）。境目の外（親）の PT2314E と計測系は常時通電。TMUX7612 は娘の上で電源リレーの後ろにあり、**選んだ娘の中では ch の EN で切らずに通電したまま**、選んでいない娘では電源ごと落ち、境目のリレーでバスから切られる
+- **前提・外れる条件**: 境目の素子が電源断でも切れていること（§2-1 のラッチングリレー）。境目の外（親）のトーンと計測系は常時通電。TMUX7612 は娘の上で電源リレーの後ろにあり、**選んだ娘の中では ch の EN で切らずに通電したまま**、選んでいない娘では電源ごと落ち、境目のリレーでバスから切られる
 - **却下した案**: v2 の「全 ch 常時通電・入力ブロードキャスト」— 選んだ ch だけを生かす目的と逆
 - **状態**: 決定（ユーザー判断 2026-09-25）
 
@@ -97,9 +97,9 @@
 - **却下した案**: v2 の「リレー版とスイッチ版を別 PCB 2 種で起こし、実機で比べる」— v2.1 の目的から外した／ch ごとにラッチングリレーを置く娘（[review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #11）— 同上
 - **状態**: 決定（ユーザー判断 2026-09-25）
 
-### 1-5 DIRECT（PT2314E を飛ばす経路）は聴くためのライン入力用
+### 1-5 DIRECT（トーン段を通さない経路）は聴くためのライン入力用
 
-- **決定**: DIRECT はライン入力を聴くための経路とする。v2 の「経路ごとの振幅上限」のうち**精密 DIRECT・フルレンジ DIRECT は要件から外す**。PT2314E を通る通常経路の上限の考え方は残る
+- **決定**: DIRECT はライン入力を聴くための経路とする。v2 の「経路ごとの振幅上限」のうち**精密 DIRECT・フルレンジ DIRECT は要件から外す**。トーンを通る通常経路の上限の考え方は残る
 - **理由**: 装置は計測器ではない（§0-1）。精密 DIRECT は TMUX の膝の近くまで振る運用のためのもので、耳で比べる用途には要らない
 - **根拠**: [NOW] L18／[review/decisions_audit_3_review.md](review/decisions_audit_3_review.md)（v2 の「経路ごとの振幅上限」は「無効」ではなく「前提変更」。無効なのは DIRECT の 2 行だけ）
 - **前提・外れる条件**: DIRECT の置き場所・切替の形、ライン入力の振幅の定義（2 Vrms か、それ以上か）は未決（V21-未決-14、[NOW] L27、[review/rejected_review.md](review/rejected_review.md) §3.4）
@@ -111,7 +111,7 @@
 ### 1-6 トーンは NJW1194
 
 - **決定**: トーンは Nisshinbo **NJW1194**（品番 `NJW1194V-TE1`、SSOP32）。DIRECT はこのチップの中で作る（トーン段のスルー、またはトーン 0 dB）。DIRECT のためのリレー（形 1・形 2）は置かない。トーン部を箱に組み込むか、別の箱として連結するかは設計で詰める
-- **理由**: DS で確かめた中で、トーン段を飛ばすスルーを持ち、経路に音量段が残って切替の前後を段階で絞れる単体の石はこれだけ（[review/tone_chip_bypass_review.md](review/tone_chip_bypass_review.md)、[review/njw1194_alternatives_review.md](review/njw1194_alternatives_review.md)）。スルー時の最大出力は 3.6 Vrms min で、PT2314E の 2.3 Vrms min より高い〔DS p3〕。入手の心配は Arrow・LCSC で解けた（ユーザー確認 2026-09-26）
+- **理由**: DS で確かめた中で、トーン段を飛ばすスルーを持ち、経路に音量段が残って切替の前後を段階で絞れる単体の石はこれだけ（[review/tone_chip_bypass_review.md](review/tone_chip_bypass_review.md)、[review/njw1194_alternatives_review.md](review/njw1194_alternatives_review.md)）。スルー時の最大出力は 3.6 Vrms min〔DS p3〕。入手の心配は Arrow・LCSC で解けた（ユーザー確認 2026-09-26）
 - **根拠**: [datasheets/tone/NJR_NJW1194.pdf](datasheets/tone/NJR_NJW1194.pdf)（Ver.7.4）／[review/tone_options_compare.md](review/tone_options_compare.md)・[_review](review/tone_options_compare_review.md)（4 案の比較）
 - **前提・外れる条件**:
   - スルー時に DS が保証するのは最大出力・利得・ch 分離だけ。雑音とクロストークは typ、THD は表に無くグラフだけ（[review/tone_chip_bypass_review.md](review/tone_chip_bypass_review.md)）
@@ -121,12 +121,12 @@
   - 制御は 3 線シリアル（I²C ではない）。UI の MCP23017 の空きから出せるので Pico のピンは増えない。書き込み専用で読み返せないので、ファームが状態を持ち、毎回全部を書く
   - 電源投入時は MUTE で立ち上がる（[review/tone_options_compare_review.md](review/tone_options_compare_review.md)）
   - 実物で測る: 本物か（刻印・電源電流・3 線で音量が効くか）、スルーの切替の段、スルー時の雑音と THD、電源断のときの入力電流
-- **PT2314E を前提にしていて、NJW1194 で見直す項目**: §1-5、§2-10（音量を段階で絞る・DC オフセット）、§2-16（UI の MCP を PT2314E のバスに残す件・±15 V が無いと読めない件）、§3-3・§3-4（9 V の枝）、§6-2（PT2314E の初期化・50 ms・I²C 100 kbit/s）、V21-継-05・V21-継-08（ADC のフルスケールの理由）
+- **NJW1194 の前提で決め直す項目**: §2-10・§6-2（音量を段階で絞る具体と初期化の手順）、§3-3（±7 V の作り方）、V21-継-08（ADC のフルスケールの理由）
 - **却下した案**:
-  - PT2314E＋DIRECT のリレー — トーン経由の歪み（0.03 % typ／0.07 % max）が全 ch に共通で乗り、DIRECT に絞る素子が無い（[review/tone_options_compare_review.md](review/tone_options_compare_review.md)）
+  - PT2314E — **却下**（ユーザー判断 2026-09-26）。トーン経由の歪み（0.03 % typ／0.07 % max）が全 ch に共通で乗り、トーン段のスルーが無い（[review/tone_options_compare_review.md](review/tone_options_compare_review.md)）
   - DSP（PCM1863＋PCM5122 など）— 聴く経路に A/D・D/A と常時のクロックが入る（同）
   - トーンを諦める — ユーザーはトーンを要るとした
-  - 控え（NJW1194 が使えなかったとき）: PT2314E＋NJU72343（NJU72343 の 2 入力セレクタで DIRECT、リレー無し）（[review/njw1194_alternatives_review.md](review/njw1194_alternatives_review.md)）
+  - 控え（NJW1194 が使えなかったとき）: 未定。候補は [review/njw1194_alternatives_review.md](review/njw1194_alternatives_review.md)
 - **状態**:
   - 決定（ユーザー判断 2026-09-26）: トーンは NJW1194
   - 未決: DIRECT をスルーで作るかトーン 0 dB で足りるとするか、電源の無いチップの入力に源が来ることを受けるか、±7 V の作り方、箱に組み込むか連結か
@@ -227,7 +227,7 @@
 ### 2-8 2 段目: 娘の中は TMUX7612 で ch を選び、選んだ ch の石だけ LDO の EN で給電
 
 - **決定**: 娘の中の ch 選択は TMUX7612。ch の**出力だけでなく入力も**切る（入出力 L/R＝ch あたり 1 パッケージ）。選んだ ch のソケットだけ、ch ごとの正負 LDO（TPS7A49／TPS7A30）の EN で給電する。TMUX は娘の電源リレーの後ろの ±15 V（LDO の前）に載り、**選んだ娘の中では常時（ch の EN では切らない）**。選んでいない娘では電源ごと落ち、境目のリレーでバスから切られる
-- **理由**: 電源を落とした石の入力が共有の `TONE` バスにつながったままだと、どの石でも入力の絶対最大を越え、入力保護ダイオード越しにバスを低いインピーダンスで負荷する（PT2314E の最小負荷 5 kΩ を大きく割る）。アナログスイッチ自身も、バスにつながっている間は通電していないとスイッチがクランプになる
+- **理由**: 電源を落とした石の入力が共有の `TONE` バスにつながったままだと、どの石でも入力の絶対最大を越え、入力保護ダイオード越しにバスを低いインピーダンスで負荷する。アナログスイッチ自身も、バスにつながっている間は通電していないとスイッチがクランプになる
 - **根拠**: [NOW] L9・L17・L25／[review/pm12_judgement.md](review/pm12_judgement.md) §5・[_review](review/pm12_judgement_review.md) §E／[review/ds_errata_review.md](review/ds_errata_review.md) O1〜O3（OPA1652・OPA1612・NJM5532 の入力保護ダイオード）／[review/dcdc_2stage_review.md](review/dcdc_2stage_review.md) 1.1（ch に 1 パッケージ、娘の上なので板スイッチの後ろに載る）／V21-継-15（入力クランプ）・V21-継-16（アナログスイッチはバスにつながっている間は通電）
 - **前提・外れる条件**: 電源を切った石の出力も ESD 構造でレールにつながるので、出力も切る（V21-継-14）。正側 LDO だけが切れて負側が残る状態は NJM5532 の DS が注意する形（[review/pm12_judgement.md](review/pm12_judgement.md) §5.3-2）
 - **却下した案**: 出力だけ切る（v2 の図）— 電源の無い石の入力に信号がかかる（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-2）／ch ごとの絶縁 DC-DC — 同時に生きる ch が 1 つなら守る相手が無い（[review/rejected_review.md](review/rejected_review.md) N1）
@@ -255,13 +255,12 @@
 
 ### 2-10 切替の間は無音にする — 全リセットの中で過渡を済ませ、ポットの前の GND 落としは切替に使わない
 
-- **決定**: 切替の間は無音にする。作り方は、全娘の音声リレーを開いた状態（全リセット、§2-7）の中で過渡を全部済ませ、その間は PT2314E の音量を段階で絞る（DS にソフトミュート・ゼロクロスの機能は無く、1 回の書き込みで MUTE にすると PT 経由でも段で消える、[review/direct_bypass_review.md](review/direct_bypass_review.md) §5.4）。バスは切り離されている間 100 kΩ で GND（§2-11、`AMP_SEL` のプルダウン）。**ポットの前の GND 落とし（統合リスト A6 の形）は切替の手順に使わない**
+- **決定**: 切替の間は無音にする。作り方は、全娘の音声リレーを開いた状態（全リセット、§2-7）の中で過渡を全部済ませ、その間はトーンチップ（NJW1194、§1-6）の音量を段階で絞る。バスは切り離されている間 100 kΩ で GND（§2-11、`AMP_SEL` のプルダウン）。**ポットの前の GND 落とし（統合リスト A6 の形）は切替の手順に使わない**
 - **理由**: 同じ娘の中の ch 替えも全リセットから回す（§6-2、統合リスト B7 の (B)）ので、過渡の出どころ（TMUX、LDO の立ち上がり、出力結合の整定、娘のレールの切替）は全部、音声リレーが開いている間に起き、バスに出ない。GND 落としが要るのは境目のリレーを動かさない形（B7 の (A)）だけで、その形はほかの保護も要る（ユーザー判断 2026-09-25「安全側は B。A は別の保護が必要に見える」）
 - **根拠**: [NOW] L25／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-5／参考製品 [datasheets/reference/Kyohritsu_KP-HAMP61_manual.pdf](datasheets/reference/Kyohritsu_KP-HAMP61_manual.pdf) — PDF p2（本文テキスト層）「切り替え時はオペアンプの電源の切り替えと音声回路の切り替えを行いますが、…1 秒程度の無音期間（音声回路を安全な GND 信号と接続）が取られる構造」、PDF p3（画像、[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6 で読んだもの）「選択されていないオペアンプが、電源も含めて回路から完全に切り離されている」。操作子はスイッチ 1 個（p1）。無音を検出して電源を切る機構がある（p1・p2）／[review/design_eval_control.md](review/design_eval_control.md) §2.1・§2.2（手順と所要時間）・§5.1／[review/design_eval_review.md](review/design_eval_review.md) §3 A6・B6・B7
 - **前提・外れる条件**:
-  - 音声 SET の瞬間が静かなのは、接点の両側が DC 0 V（娘側は NC 10 kΩ、バス側は 100 kΩ で GND、出力結合は NC 越しに τ 約 21 ms で整定済み、§2-3）で、信号を PT2314E の減衰器が絞っている間だから〔推論、未査読〕。V21-実測-12 で確かめる
-  - **DIRECT のときは PT2314E の減衰器が経路に無い**。全リセットで音声リレーが開く瞬間と、音声 SET で閉じる瞬間に、生きた信号を切る・つなぐクリックが残る〔推論〕。硬い端の数は、DIRECT のまま ch を替えると 2、DIRECT の切替で 1 で、接点だけで切り替える限りどの順序でも減らない（[review/direct_bypass_review.md](review/direct_bypass_review.md) §5.3）。リレーの GND 落としも同じく硬い切り方なので、置いても消えない。消すには DIRECT の経路になめらかに絞れる素子が要る（V21-未決-14 で扱う）
-  - PT2314E のスピーカアッテネータの DC オフセット（0 dB〜MUTE で 5 mV typ / 10 mV max、[sw] §5）が段になって出うる。絞りは音量で段階に行い、MUTE を使うなら音声リレーが開いてから書く〔推論、[review/direct_bypass_review.md](review/direct_bypass_review.md) §5.4〕
+  - 音声 SET の瞬間が静かなのは、接点の両側が DC 0 V（娘側は NC 10 kΩ、バス側は 100 kΩ で GND、出力結合は NC 越しに τ 約 21 ms で整定済み、§2-3）で、信号をトーンチップの音量が絞っている間だから〔推論、未査読〕。V21-実測-12 で確かめる
+  - DIRECT もトーンチップの音量段を通るので、同じく段階で絞れる。スルーの切替点の段は §1-6 の前提
   - この形で消えないポップ: 電源断（ラッチは最後の状態で残る、統合リスト B6）と、HP バッファ自身の電源の立ち上がり・崩れ
   - `AMP_SEL` を直接 GND に落とすと、選んだ石の出力を結合コンデンサ越しに交流短絡するので避ける（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-5）
 - **却下した案**: 切替の手順の中でポットの前の GND 落としを掛ける形（統合リスト A6 を切替に使う、B7 の (A) の守り）— 上の理由
@@ -275,7 +274,7 @@
 
 - **決定**: 親の `TONE_L/R` に 100 kΩ で GND への DC の基準を置く
 - **理由**: `TONE` バスは直列のコンデンサに挟まれて DC が浮いている（査読時の回路図で確認: [review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-4）。音声リレーをセットした瞬間に娘側（NC 抵抗で 0 V）とバスの DC の段差が入りうる
-- **根拠**: [NOW] L25／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-4／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.1（20 Hz で約 −0.08 dB、PT2314E の最小負荷 5 kΩ の内側）
+- **根拠**: [NOW] L25／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-4／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.1（20 Hz で約 −0.08 dB）
 - **前提・外れる条件**: —
 - **却下した案**: —
 - **状態**: いったんの決め（[NOW] L25）
@@ -283,7 +282,7 @@
 ### 2-12 娘に MCP23017／I²C を置かない。親からの静的なレベル線だけ
 
 - **決定**: 娘から MCP23017 と I²C を外し、娘は親からの静的なレベル線（§2-5 の制御線）だけで動かす。聴取中の娘にクロックのあるデジタル信号は来ない。娘に I²C の番地は無く、番地のジャンパも無い（電源用 SET の段を選ぶジャンパ §2-5 は残る）
-- **理由**: 聴取中に娘へ来るのが DC のレベル線だけになり、クロックもアドレスも来ない。娘に I²C を通すと、バスは PT2314E・UI の MCP と共有なので、トーン操作やエンコーダの読み出しのたびに全娘のコネクタへ SCL/SDA のエッジが来る
+- **理由**: 聴取中に娘へ来るのが DC のレベル線だけになり、クロックもアドレスも来ない。娘に I²C を通すと、バスは UI の MCP と共有なので、エンコーダの読み出しのたびに全娘のコネクタへ SCL/SDA のエッジが来る
 - **根拠**: [review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #1・§3.12（I1 の行: I²C のクロック、常時給電の MCP が電源の無い娘の EN/SEL を駆動する、娘の電源から給電すると生きた I²C に電源の無い MCP がぶら下がる、POR の全リセットは MCP では作れない）／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §3.5（#1 を支持）／[review/stack_relay_power.md](review/stack_relay_power.md) §7.2（MCP を残すなら I²C 2 本で 26 本）
 - **前提・外れる条件**:
   - [review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #1 の「デコードは全部親」は採らない。ch のデコードは娘に置く（§2-9）
@@ -323,7 +322,7 @@
 
 ### 2-16 親のレベル線の出どころは Pico 1 個＋親に制御専用の MCP23017（統合リスト A1 の M）
 
-- **決定**: スタックへのレベル線（`PSET1`〜`4`・音声 SET・`ARST`・`PRST`・`CH_SEL0/1`・`CH_EN`）と DIRECT のリレーの線は、親に置く**制御専用の MCP23017** から出す。Pico から直接出すのは `RAIL_OK`・制御 MCP の RESET の 2 本と、電源の検知（§5-7）の入力 1 本。制御 MCP は**専用の I²C バス**（I2C1）に 1 個だけ置き、UI の MCP は PT2314E と同じ元のバスに残す。**タッチパネルは残す**
+- **決定**: スタックへのレベル線（`PSET1`〜`4`・音声 SET・`ARST`・`PRST`・`CH_SEL0/1`・`CH_EN`）と DIRECT のリレーの線は、親に置く**制御専用の MCP23017** から出す。Pico から直接出すのは `RAIL_OK`・制御 MCP の RESET の 2 本と、電源の検知（§5-7）の入力 1 本。制御 MCP は**専用の I²C バス**（I2C1）に 1 個だけ置き、UI の MCP は元のバスに残す。**タッチパネルは残す**
 - **理由**: 安全は Pico 2 個の案と同等（どちらも、駆動する石がリセットで出力を放し、外付けのプルダウンで 0 に戻る）。そのうえでファームが 1 本で済み、親に常時動くクロックとスイッチング電源の塊を増やさず、RP2350-E9 の影響を受けるピンが 2〜3 本で済む
 - **根拠**: [review/a1_two_pico.md](review/a1_two_pico.md)／[review/a1_two_pico_review.md](review/a1_two_pico_review.md) §0.2・§1.3・§1.4・§3.1〜§3.3／[review/design_eval_review.md](review/design_eval_review.md) §0 A1・§1.8〜§1.10・§3 A1
 - **前提・外れる条件**:
@@ -333,7 +332,7 @@
     3. IOCON.MIRROR で UI の MCP の割り込み 2 本を 1 本にまとめ、Pico の GPIO を 1 本空ける（タッチを残すので、これが無いと Pico の空きは 0 本）
     4. IODIR・OLAT を定期的に読み返し、食い違えば RESET から初期化し直す（MCP の POR は 0 V からの立ち上がりしか保証されず、3V3 の浅い瞬断では戻らないことがある）
   - **基本の形**（統合リスト A1）: 制御 MCP の出力はすべて親の側でプルダウン。起動は OLAT＝0 を書いてから IODIR を出力に。`RAIL_OK`・MCP の RESET・検知線は、プルダウン（検知線はテブナン）を ≤ 8.2 kΩ（RP2350-E9、統合リスト B9）
-  - UI の MCP は元のバス（BSS138 越しに PT2314E と共用）なので、±15 V が無い間（主電源 OFF で USB だけ）は読めない（I²C の High が MCP の VIH を割る、[review/design_eval_review.md](review/design_eval_review.md) §1.10）。そのとき UI は要らないので受ける
+  - NJW1194 の 3 線は UI の MCP の空きから出す（§1-6）。レベルの合わせ方は NJW1194 の DS で確かめる
   - ピンの数〔計算、[review/a1_two_pico_review.md](review/a1_two_pico_review.md) §1.3・§1.4〕: タッチを残すので、Pico の空きは MIRROR を入れて 1 本。**Pico に直接つなぐ線が足りなくなったら、Pico を 2 台に分ける形（下の却下した案の 1 行目）で回避する**（ユーザー判断 2026-09-26）。制御 MCP は出力 10＋DIRECT 2＋電源断用の GND 落としの足場の線（0〜2）＋入力 `PG_N` 1 で 16 本に入る
   - 両案に共通の穴は残る: ハング中・デバッガで止めたとき・起動前に、コイルのパルスが止まらず残る窓（ハードの最大パルス幅は無く、WDT 頼み）
   - UI のコードと制御のコードが同じ実行環境にいるので、UI の誤った書き込みで制御 MCP を動かしうる経路は、専用バス（足すもの 2）で遠ざけるが配線では断てない（Pico 2 個の案の利点）
@@ -378,25 +377,16 @@
   - 15 V — LT1763・RS6 とも範囲内だが、固定にした（v2 の「PD 入力 — どの電圧で受けるか」「12 V が出なかったときの手順」の 15 V は v2.1 では使わない）。15 V を退ける理由の記録は無い
 - **状態**: いったんの決め（[NOW] L11）
 
-### 3-3 PT2314E・計測は生の ±15 V、TMUX は娘の切られた ±15 V、ソケットは ch ごとの LDO で ±12 V
+### 3-3 トーン・計測は生の ±15 V、TMUX は娘の切られた ±15 V、ソケットは ch ごとの LDO で ±12 V
 
-- **決定**: ±15 V はそのまま、親の PT2314E（9 V レギュレータ経由）と計測系、娘の TMUX7612 に使う（TMUX は娘の電源リレーの後ろ。選んだ娘の中では ch の EN で切らない、§2-8）。ソケットは ch ごとの正負 LDO（TPS7A49／TPS7A30）で ±12 V。LDO の出力電圧は帰還の分圧で決まるので、ch ごとに選べる
+- **決定**: ±15 V はそのまま、親のトーン（NJW1194 の ±7 V。作り方は未決、§1-6）と計測系、娘の TMUX7612 に使う（TMUX は娘の電源リレーの後ろ。選んだ娘の中では ch の EN で切らない、§2-8）。ソケットは ch ごとの正負 LDO（TPS7A49／TPS7A30）で ±12 V。LDO の出力電圧は帰還の分圧で決まるので、ch ごとに選べる
 - **理由**: ±12 V を DC-DC で直に作ると TMUX7612 の平坦域の膝がレールに追従して下がる（DS 本文: 平坦域は「概ね VSS+5 V〜VDD−5 V」。Figure 5-4 の目読みで Ron が底から離れ始めるのは ±15 V で約 +10.6 V、±12 V で約 +7.6 V）。ソケットだけを LDO の後ろで ±12 V にすれば膝は動かず、ch ごとの EN（§2-8）と PSRR も LDO が持つ
 - **根拠**: [NOW] L17・L22／[sw] §1（平坦域の本文、Figure 5-4）／[pow] §2（TPS7A49 の出力電圧の式 R1 = R2 (VOUT/VFB − 1)、PSRR 72 dB @120 Hz）・§3（TPS7A30）／[review/rejected_review.md](review/rejected_review.md) #9／[review/pm12_judgement.md](review/pm12_judgement.md)・[_review](review/pm12_judgement_review.md)
 - **前提・外れる条件**: ±12 V で電源範囲から外れる石は無い。ただし ±12 V で振幅が保証されるのは OPA1612・OPA2140 だけ。最悪要求（9.45 Vpk）と LDO の総合精度 ±2.5 % を入れると、余裕が正で残るのは保証の 2 石と typ グラフの 5 石。推定 min の石は 0 dB 前後か負（[review/pm12_judgement_review.md](review/pm12_judgement_review.md) 要約 3・5・6、A 表）。TPS7A49 の IOUT は 150 mA まで（[pow] §2）
 - **却下した案**:
-  - ±12 V の DC-DC で系全体を ±12 V（v2 の「±15 V の理由は3つとも消えた…±12 V 側にも重い障害」の検討、`REC10K-2412DAW/H2` ほか）— TMUX の膝が下がる。PT2314E の 9 V レギュレータ（L7809）の入力も 11.5 V（出力の許容差を保証する試験条件の下限）を割る（v2 の「`+9V`…が規定入力範囲を割る」。11.5 V の読みは [review/v2_carryover.md](review/v2_carryover.md) の訂正 #5）
+  - ±12 V の DC-DC で系全体を ±12 V（v2 の「±15 V の理由は3つとも消えた…±12 V 側にも重い障害」の検討、`REC10K-2412DAW/H2` ほか）— TMUX の膝が下がる
   - `NSD10-12D12` — 2″×1″ で新しいフットプリント、最小負荷 20 mA/レール（1 ch 運転と合わない）、±12 V 出力（V21-継-13、[review/decisions_audit_1.md](review/decisions_audit_1.md)）
 - **状態**: 決定（ユーザー判断 2026-09-25）
-
-### 3-4 PT2314E は +15 V → L7809 のまま（⚠ トーンを NJW1194 にしたので見直す、§1-6）
-
-- **決定**: PT2314E の電源は今までどおり +15 V から L7809 で 9 V
-- **理由**: 電源だけ一次側（PD）へ移すと、PT2314E の帰り電流がグランドの木の中の唯一の橋を通る（v2 で一度潰したバグの再導入）
-- **根拠**: v2 の「副次案『`+9V` 枝を `+15V` から外す』は一度潰したバグの再導入」／[review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 修正の要点 1（この v2 の項は「却下の再検討」ではなく維持）／[review/rejected_review_review.md](review/rejected_review_review.md) #8
-- **前提・外れる条件**: +15 V の負荷を非対称にする唯一の塊がこれ（+15 V だけに 35〜48 mA）で、動かせない（[review/main_power_compare.md](review/main_power_compare.md) §3.2）
-- **却下した案**: PT2314E を PD 12 V 側へ — 上の理由
-- **状態**: 決定（ユーザー判断 2026-09-25。[review/decisions_audit_1.md](review/decisions_audit_1.md) の決定⑤）
 
 ### 3-5 娘のダンパのバルクは外す
 
@@ -410,8 +400,8 @@
 ### 3-6 親の +15 V/−15 V に +100 µF は任意
 
 - **決定**: 親のバルク +100 µF は足場として置けるようにし、**要否は RS6 の突入を実測して決める**。実測は基板を起こす前に
-- **理由**: 22 Ω・娘のバルク無しなら、RS6 が 300 mA で頭打ちでも親の最低は約 12.25 V で、PT2314E の 9 V は動かない。+100 µF が効くのは RS6 の OLP がヒカップ型か 300 mA 以下で頭打ちするときの保険だけ
-- **根拠**: [NOW] L25／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 2-5・2-6（L7809 の挙動モデル）・2-3（どの R でも RS6 の電流は 300 mA を超える）
+- **理由**: 22 Ω・娘のバルク無しなら、RS6 が 300 mA で頭打ちでも親の最低は約 12.25 V。+100 µF が効くのは RS6 の OLP がヒカップ型か 300 mA 以下で頭打ちするときの保険だけ
+- **根拠**: [NOW] L25／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 2-5・2-6・2-3（どの R でも RS6 の電流は 300 mA を超える）
 - **前提・外れる条件**: RS6 の出力インピーダンスと電流制限の形は DS に無く、シミュレーションは〔仮定〕の上（[review/stack_relay_power.md](review/stack_relay_power.md) §8）
 - **却下した案**: 必須にする（[review/stack_relay_power.md](review/stack_relay_power.md) §0.2 の推奨）— 査読で任意に格下げ
 - **状態**:
@@ -592,7 +582,6 @@
   - ライン・トランス（JT-11P-1）— 1 kHz の「<0.001 %」は typ 列で、1320 Hz の H3 とその安定性は DS に無い。二次側にバッファが要り、寸法も不明（同 3-5・6-3）
   - デジタル絶縁（ISO7741 を I²S に）— −106 に効く筋が記録から立たず（「本命」の記録は ADC 自身の床の話）、ADC の電源を ±15 V 側に固定する。部品代ほぼゼロの比較相手（ADC 出力への直列抵抗）がある（同 5-4〜5-6、§3「別枠」）
   - ADC を絶縁した島（v2 の「【却下】ADC を絶縁した島にする案」）— 却下のまま。島が動かすのは測定床の実用律速より下の部分で、装置は計測器ではない（[review/rejected_review.md](review/rejected_review.md) #1）。RS6 で絶縁容量が下がっても「島の性能は DC-DC の絶縁容量で決まる」構図は残る（[review/decisions_audit_1_review.md](review/decisions_audit_1_review.md) 修正の要点 4）
-  - PT2314E 境界の絶縁 I²C（`ADuM1250` 級、v2 の「`DGND`(25) はチップの足元で `A_GND` へ」の節。V21-継-05）— b-1 なら理由（`D_GND` はどのみち娘へ引く）は成り立ち、むしろ強まる（[review/decisions_audit_2_review.md](review/decisions_audit_2_review.md) 3.3）
   - USB アイソレータ（`ADuM3160`）— USB を抜いた A/B で床の差 2.9 dB（n=1）（[review/rejected_review_review.md](review/rejected_review_review.md) #10）
 - **状態**: v2 の却下を引き継ぐ（v2.1 で個別の判断はしていない。Q2 の選択はこれらを退けた判断ではない）。絶縁アンプ・トランス・デジタル絶縁は v2.1 の査読の順位で採っていないだけで、ユーザーは判断していない
 
@@ -694,7 +683,7 @@
 ### 5-7 電源の有無は `PD_12V_SW`（主電源スイッチの後ろ）を検知線 1 本で Pico へ
 
 - **決定**: 主電源スイッチの後ろの `PD_12V_SW` を、**しきい値素子つき**（ツェナー＋分圧、または電圧監視 IC のオープンドレイン出力）で約 10 V を境に Pico の GPIO へ 1 本。開放で「無し」に倒れる向き、テブナン ≤ 8.2 kΩ（RP2350-E9）。ファームの規則は 3 つ:
-  - ① 検知の立ち上がりで、**または Pico の起動時にすでに検知が有れば**（RS6 の起動＋余裕の後）全リセットと PT2314E の初期化（50 ms 待ち）。Pico は主電源スイッチの後ろ（`PD_12V_SW` → PPTC → 5 V レギュレータ → `+5V_D`）から給電されるので、ふつうの電源投入と Pico だけの再起動では立ち上がりを見ない（[review/direct_bypass_review.md](review/direct_bypass_review.md) §6.2、図で確認）
+  - ① 検知の立ち上がりで、**または Pico の起動時にすでに検知が有れば**（RS6 の起動＋余裕の後）全リセットとトーンチップの初期化（NJW1194 は MUTE で立ち上がる。3 線は読み返せないので全部を書く、§1-6）。Pico は主電源スイッチの後ろ（`PD_12V_SW` → PPTC → 5 V レギュレータ → `+5V_D`）から給電されるので、ふつうの電源投入と Pico だけの再起動では立ち上がりを見ない（[review/direct_bypass_review.md](review/direct_bypass_review.md) §6.2、図で確認）
   - ② 検知が無い間は、コイルのパルス・EN・`RAIL_OK` を出さず制御線を 0 に保つ
   - ③ 全リセットのあと `MON_P`/`MON_N` が立ち下がりのしきい値（約 10 V）を割ったのを確かめてから電源 SET。割らなければ「リレーが戻らない」故障として止まる
   - ±15 V そのものは電源 SET の後に `MON_P`/`MON_N` で確かめる。安全（EN が IN を超えない、電源の無い娘をつながない）は EN ≤ IN の構造（§2-9）と B1（§5-4）が持つ
@@ -750,15 +739,15 @@
 ### 6-2 ファームが守ること
 
 - **厳密に 1 ch**: 全 OFF → 1 ch ON。温めておく ch は作らない（§1-2）。状態: 決定
-- **切替の手順（すべての切替。同じ娘の中の ch 替えも）**: PT2314E の音量を段階で絞る → **全リセット（全娘の音声リレーと電源リレー。音声が先・電源が後、例: ARST → 20 ms → PRST）** → 選んだ娘の電源 SET → レール良好（立ち上がりのしきい値 ＋ 遅延）→ ch 選択 → 整定待ち → **共通の音声 SET** → 音量を段階で戻す（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-9、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 6-1）。ポットの前の GND 落としは手順に入れない（§2-10）。状態: 決定（全リセットから始め、音声 SET をこの中でだけ出す: §2-6）／いったんの決め（音声を先・電源を後の順: §2-7）／決定（同じ娘の中でも回す: 下の項）
+- **切替の手順（すべての切替。同じ娘の中の ch 替えも）**: トーンチップの音量を段階で絞る → **全リセット（全娘の音声リレーと電源リレー。音声が先・電源が後、例: ARST → 20 ms → PRST）** → 選んだ娘の電源 SET → レール良好（立ち上がりのしきい値 ＋ 遅延）→ ch 選択 → 整定待ち → **共通の音声 SET** → 音量を段階で戻す（[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.3-9、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 6-1）。ポットの前の GND 落としは手順に入れない（§2-10）。状態: 決定（全リセットから始め、音声 SET をこの中でだけ出す: §2-6）／いったんの決め（音声を先・電源を後の順: §2-7）／決定（同じ娘の中でも回す: 下の項）
 - **音声 SET の規則**: 音声 SET は、上の「全リセット → 電源 SET → レール良好 → 共通の音声 SET」の 1 つの手順の中でだけ出す。それ以外で音声 SET を出さない（§2-6）。状態: 決定（ユーザー判断 2026-09-25）
 - **同じ娘の中で ch を変えるときも、上の手順を回す**（境目のリレーを動かさない形は採らない）。理由: 娘の過渡がいつも開いた音声リレーの向こう側に閉じ込められる／手順が 1 本になり §2-6 の規則が構造で守られる／ほかの娘のラッチに残った状態も毎回消える。代わりに払うもの: 電源リレーが切替のたびに 2 回動く（AZ850 の寿命は機械 1×10^6 回・電気 2×10^5 回（1 A 30 VDC 抵抗負荷）、どちらも min [sw] §2。ここの開閉はその電気の条件より軽い〔推論〕）、所要は 0.25〜0.75 s〔計算、[review/design_eval_control.md](review/design_eval_control.md) §2.1〕（境目のリレーを動かさない形は 0.07〜0.55 s、同 §2.2）、箱からのリレーの音が増える。却下: 境目のリレーを動かさない形 — 過渡が生きたバスに出て、守りがミュート 1 つになる（ユーザー: 別の保護が要る）。状態: 決定（ユーザー判断 2026-09-25「安全側は B」。統合リスト B7 の (B)）
 - **パルス幅**: コイルのパルスは 20 ms（Panasonic の「セット・リセット時間の 5 倍以上」、AZ850 の typ 2 ms の 10 倍）。SET と RESET のコイルに同時に電圧を加えない（[review/stack_relay_power.md](review/stack_relay_power.md) §6、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 8-1、[bnd] §3.3 TQ）。状態: いったんの決め（ユーザー判断 2026-09-25。V21-未決-24）
-- **電源の有無（§5-7 の規則①②③）**: ① `PD_12V_SW` の検知の立ち上がりで、または起動時にすでに検知が有れば、全リセットと PT2314E の初期化、② 検知が無い間はコイルのパルス・EN・`RAIL_OK` を出さず制御線を 0 に保つ、③ 全リセットのあと `MON_P`/`MON_N` が約 10 V を割ったのを確かめてから電源 SET（割らなければ止まる）。状態: いったんの決め（統合リスト A2）
+- **電源の有無（§5-7 の規則①②③）**: ① `PD_12V_SW` の検知の立ち上がりで、または起動時にすでに検知が有れば、全リセットとトーンチップの初期化、② 検知が無い間はコイルのパルス・EN・`RAIL_OK` を出さず制御線を 0 に保つ、③ 全リセットのあと `MON_P`/`MON_N` が約 10 V を割ったのを確かめてから電源 SET（割らなければ止まる）。状態: いったんの決め（統合リスト A2）
 - **EN を上げる条件**: 電源 SET の後に両レールを `MON_P`/`MON_N` で確かめてから（主電源スイッチ OFF で Pico が USB だけで動いているときに EN を上げない。これは規則②でも守られる）（§2-9・§5-7、[review/main_power_compare_review.md](review/main_power_compare_review.md) 1-6）。状態: 決定（§5-7）
 - **レール監視**: `MON_P`/`MON_N` を読み、LM4040 を ADC0 で読んで比率校正。しきい値（案: 約 ±12 V / 約 ±10.5 V）と遅延をファームで持つ。張り付き・片側だけなどの妥当性を見る。`RAIL_OK` は能動的に High を出し、異常では落とす（§5-1〜§5-3）。状態: いったんの決め
 - **迷惑トリップを無限に再試行しない**（誤「不良」で EN 切り → 回復 → 良 → EN → 落ち込み…を繰り返しうる）（[review/rail_detect_review.md](review/rail_detect_review.md) §3.1）。状態: 未決（推奨）
-- **電源投入時**: 全リセットから始める。きっかけは `PD_12V_SW` の検知の立ち上がり、または起動時にすでに検知が有ること（規則①。USB だけで動いている間は走らせない）（ラッチングリレーは停電前・衝撃の状態を保持しうる、§2-1）。PT2314E には電源投入後 50 ms は I²C を送らない（v2 の「電源投入後 Td ≈ 50 ms は叩かない」、[sw] §5）。PT2314E の I²C は 100 kbit/s（3.3 V ロジック × VDD 9 V で Standard）。状態: 決定（全リセット: §2-1）／v2 から引き継ぎ（PT2314E）
+- **電源投入時**: 全リセットから始める。きっかけは `PD_12V_SW` の検知の立ち上がり、または起動時にすでに検知が有ること（規則①。USB だけで動いている間は走らせない）（ラッチングリレーは停電前・衝撃の状態を保持しうる、§2-1）。状態: 決定（全リセット: §2-1）
 - **運用**: 娘は電源を切ってから抜き挿しする。挿したら起動し直す（起動時の全リセットで前歴を消す。セットのまま外した娘を電源の入った箱へ挿すと、音声が前歴のままバスにつながり、起動時のリセットは走らない）（[review/stack_relay_power_review.md](review/stack_relay_power_review.md) §3 (e)）。状態: いったんの決め（ユーザー判断 2026-09-25。V21-未決-25）
 - **待ち時間の目安**: 整定はどちらも音声リレーが開いている間に待つ。入力結合は 5τ で 0.5 s 級、出力結合は NC 10 kΩ 越しに τ 約 21 ms（§2-3）。状態: 未決（V21-実測-12）
 
@@ -792,11 +781,6 @@ v2 から引き継いだ決定。どれも状態は「**v2 から引き継ぎ（
   - 理由: 出口はユーザーが手で選ぶもので、ファームが知る必要が無い。音声経路の接点が増えない
   - 出典: `FrontPanel.kicad_sch`
   - 状態: v2 から引き継ぎ（v2.1 で再考していない）
-- **V21-継-05 トーンは PT2314E。`DGND` はチップの足元で `A_GND`。I²C 境界は BSS138 ×2 のレベルシフタ** — ⚠ **2026-09-26 に §1-6 で NJW1194 に置き換えた**。以下は v2 の記録
-  - 決定: Bass/Treble だけ使い、音量は 0 dB 固定。ch 選択の前に置き、全 ch に配る。PT 側のプルアップは `VCC_TONE`（9 V）へ
-  - 理由: 無印 PT2314 は買えない（E はピン・外付け網とも同じ）。PT2314E の VIH min 3.0 V に 3.3 V のプルアップでは余裕 0.3 V しか無い。P82B96 は Sx 側の VOL 0.8〜1.0 V が PT2314E の VIL max 1.0 V・RP2350 の VIL 0.8 V を食い切る（`PCA9306` 等の見送りも成立）
-  - 出典: [ds_facts/switch_control.md](ds_facts/switch_control.md) §5（PT2314E の VIL/VIH、p12）、[datasheets/Princeton_PT2314E.pdf](datasheets/Princeton_PT2314E.pdf)、[datasheets/RaspberryPi_RP2350.pdf](datasheets/RaspberryPi_RP2350.pdf)。P82B96 の DS はリポジトリに無い（v2 で読んだ値）
-  - 状態: v2 から引き継ぎ（v2.1 で再考していない）
 - **V21-継-06 HP の固定パッドは付けない（0 Ω）。DNP で後から付けられる足場**
   - 理由: ソケットは ±12 V（§3-3）で、固定 −20 dB は過剰
   - 出典: ルート回路図の HP 経路
@@ -808,10 +792,9 @@ v2 から引き継いだ決定。どれも状態は「**v2 から引き継ぎ（
   - 理由: 無いとバスから見た負荷が重くなり、TMUX7612 の H3 が悪くなる
   - 出典: `MeasureControl.kicad_sch`、[ds_facts/tap.md](ds_facts/tap.md)、[review/tap_facts.md](review/tap_facts.md) §2、[datasheets/opamps/TI_OPA1656.pdf](datasheets/opamps/TI_OPA1656.pdf)
   - 状態: v2 から引き継ぎ（v2.1 で再考していない）
-- **V21-継-08 ADC 前段の入力抵抗 6.19 k（PT2314E 経路について）** — ⚠ 理由が PT2314E の VOMAX なので、NJW1194（§1-6）で見直す
-  - 理由: PT2314E の VOMAX typ 2.6 Vrms × Amp ゲイン 2 を ADC のフルスケールに入れる（ヘッドルームの不足を直した）。LPF の極は変えない。DIRECT の振幅は V21-未決-14
-  - 出典: [ds_facts/switch_control.md](ds_facts/switch_control.md) §5（PT2314E の VOMAX）、[datasheets/TI_PCM1804.pdf](datasheets/TI_PCM1804.pdf)、`MeasureControl.kicad_sch`
-  - 状態: v2 から引き継ぎ（v2.1 で再考していない）
+- **V21-継-08 ADC 前段の入力抵抗 6.19 k** — ⚠ 決めた理由は却下したトーンチップの最大出力。NJW1194（§1-6）の前提で決め直す
+  - 出典: [datasheets/TI_PCM1804.pdf](datasheets/TI_PCM1804.pdf)、`MeasureControl.kicad_sch`
+  - 状態: v2 から引き継ぎ（理由は無効。決め直す）
 - **V21-継-09 `MCLK_SENSE` は無い**
   - 理由: ファームが読んでいない。12.288 MHz がグランドの境目を渡る経路が一本減る
   - 出典: `MeasureControl.kicad_sch`、`firmware/board.py`
@@ -927,13 +910,13 @@ v2 から引き継いだ決定。どれも状態は「**v2 から引き継ぎ（
 | V21-実測-05 | **AZ850 のコイルのインダクタンスと最大リセット時間** | SET/RESET の重なり、自動リセットの時間予算（§5-5） | [review/rail_detect_review.md](review/rail_detect_review.md) §10-3 |
 | V21-実測-06 | ADC のデジタル動作が音声出力に漏れているか（I²S の 3 本を Pico 側で外す A-B-A。**リセット保持の形は使わない**: 1.37 s でパワーダウンに入る） | デジタル絶縁・直列抵抗の要否 | [review/tap_compare_review.md](review/tap_compare_review.md) 6-6・§4-D |
 | V21-実測-07 | ch 側グランドと計測側 `A_GND` の差（タップ入力の短絡点を変えた無信号キャプチャ 2 通り） | Q2 が保険か実益か（§4-3）。v1 での負の結果だけが強い | [review/tap_compare_review.md](review/tap_compare_review.md) 6-5 |
-| V21-実測-08 | HP 32 Ω を鳴らす／外すで LINE 出力の A-B-A、TMUX・L7809 のピンの ±15 V の AC | HP バッファの RC の実装（§3-11） | [review/main_power_compare.md](review/main_power_compare.md) §4 (b-5) |
+| V21-実測-08 | HP 32 Ω を鳴らす／外すで LINE 出力の A-B-A、TMUX のピンの ±15 V の AC | HP バッファの RC の実装（§3-11） | [review/main_power_compare.md](review/main_power_compare.md) §4 (b-5) |
 | V21-実測-09 | 石の熱の整定（通電してから何秒で H3・音が落ち着くか） | 切り替えてから聴くまでの待ち（§1-2） | [review/rejected_review_review.md](review/rejected_review_review.md) §6 U2 |
 | V21-実測-10 | ADC 系の実電流（電流計を直列に 1 回） | ADC 枝の PPTC・LDO 前の R の定格（§4-5） | [review/rejected_review_review.md](review/rejected_review_review.md) §6 |
 | V21-実測-11 | 容量負荷のメイク回数試験（22 Ω・AZ850） | 電源用リレーの品種（§2-2） | [review/stack_relay_power_review.md](review/stack_relay_power_review.md) 1-4 |
 | V21-実測-12 | ch を ON してからの出力 DC の整定（NC 10 kΩ・選んでから音声リレーをセットする順も含めて） | ミュートの長さ（§2-10） | [review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-3 |
 
-DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品番（単発パルス曲線）、PPTC（RXEF 系）の温度別 hold 電流、AHCT 系、PMOS・ツェナー（B1）、RB160M-30、TPS3307 の MR、Pico 2 基板、5×20 F2A の溶断 I²t、娘の 3.3 V を作る LDO（発振器なし）、娘の 2→4 デコーダ（Ioff 付き、例 SN74LVC1G139）、EN を落とす小信号 N-FET、2.54 mm スタックヘッダの接点定格（突入 0.68 A・コイル 560 mA のパルス、[review/stack_relay_power.md](review/stack_relay_power.md) §7.3）。確かめる事実: PT2314E の POR 直後の音量状態、PCM1804 の VCOM の駆動能力、RS6 の入手性（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §10-11、[review/rail_detect_review.md](review/rail_detect_review.md) §10、[review/main_power_compare_review.md](review/main_power_compare_review.md) §5）。
+DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品番（単発パルス曲線）、PPTC（RXEF 系）の温度別 hold 電流、AHCT 系、PMOS・ツェナー（B1）、RB160M-30、TPS3307 の MR、Pico 2 基板、5×20 F2A の溶断 I²t、娘の 3.3 V を作る LDO（発振器なし）、娘の 2→4 デコーダ（Ioff 付き、例 SN74LVC1G139）、EN を落とす小信号 N-FET、2.54 mm スタックヘッダの接点定格（突入 0.68 A・コイル 560 mA のパルス、[review/stack_relay_power.md](review/stack_relay_power.md) §7.3）。確かめる事実: PCM1804 の VCOM の駆動能力、RS6 の入手性（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §10-11、[review/rail_detect_review.md](review/rail_detect_review.md) §10、[review/main_power_compare_review.md](review/main_power_compare_review.md) §5）。
 
 ### 10-2 決めること
 
