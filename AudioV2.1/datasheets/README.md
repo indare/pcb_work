@@ -179,6 +179,7 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 | **PT2314E SOP-28** | Bass / Treble（I²C、Amp 前） | **[Princeton_PT2314E.pdf](Princeton_PT2314E.pdf)** | PT2314E V1.0 / 2010-01 / **15ページ完全版**。ELECTRICAL CHARACTERISTICS あり（`VIH` min 3 V・`RL` 5 kΩ・THD 0.03 % 等 → DECISIONS `V21-継-05`） |
 | ~~PT2314 DIP-28~~ | 無印（**不採用**。参考） | [Princeton_PT2314.pdf](Princeton_PT2314.pdf) | v1.1 の**3ページ抜粋**。ピン配置とアプリケーション回路のみで**電気的特性が無い**。ピン配置は E と同一 |
 | NJW1194（候補） | 音量＋トーン、`TSW` でトーンを飛ばす（3 線シリアル、±7 V） | [tone/NJR_NJW1194.pdf](tone/NJR_NJW1194.pdf) | Nisshinbo 製品頁、Ver.7.4（25 頁）、2026-09-26 取得 |
+| NJW1194（日本語版） | 同じ石の日本語版 DS。p8 の注「TONE 設定の ON/OFF 切換時は、IC 後段で MUTE をかけて使用されますことを推奨」は英語版に無い言い回し（[../review/whole_review_2_control.md](../review/whole_review_2_control.md) C-02）。フォントが埋め込まれておらず、日本語はテキスト層でしか読めない | [tone/NJR_NJW1194_J.pdf](tone/NJR_NJW1194_J.pdf) | `nisshinbo-microdevices.co.jp/ja/pdf/datasheet/NJW1194_J.pdf`、Ver.11.3（25 頁、PDF 作成 2013-01）、2026-09-26 取得（md5 `64d29ab1…`） |
 | SSOP32 の外形（NJW1194 のパッケージ） | 外形寸法・ランドの例・テーピング。**NJW1194 の DS には外形図が無い**ので別資料 | [tone/Nisshinbo_SSOP32_package.pdf](tone/Nisshinbo_SSOP32_package.pdf) | Nisshinbo 製品頁の Package（`/en/pdf/package/ssop32.pdf`）、PI-SSOP32-E-A（3 頁、PDF 更新 2022-06-29）、2026-09-26 取得 |
 | NJW1119A（候補） | トーン専用 3 バンド、ch ごとの `TSW`（3 線シリアル、±7 V） | [tone/NJR_NJW1119A.pdf](tone/NJR_NJW1119A.pdf) | Nisshinbo、Ver 2.1（19 頁）、2026-09-26 取得 |
 | NJU7391A（参考） | 音量＋トーン、トーンの OFF の定義が制御表に無い | [tone/NJR_NJU7391A.pdf](tone/NJR_NJU7391A.pdf) | Nisshinbo、18 頁、2026-09-26 取得 |
@@ -212,6 +213,7 @@ v2.1 は娘ごとの電源用・音声用ラッチングリレー（1 段目）�
 | **AZ850P2-5** | ラッチング DPDT（5 V コイル）。娘の電源用・音声用（DECISIONS §2-2） | [Zettler_AZ850.pdf](Zettler_AZ850.pdf)（[detect/AmericanZettler_AZ850.pdf](detect/AmericanZettler_AZ850.pdf) も） | Zettler |
 | **TBD62083A** | コイル駆動（DMOS。ULN2803A とピン互換） | [Toshiba_TBD62083A.pdf](Toshiba_TBD62083A.pdf) | Toshiba |
 | **MCP23017** | I²C GPIO 拡張（UI・娘。娘に残すかは V21-未決-03） | [Microchip_MCP23017.pdf](Microchip_MCP23017.pdf) | [Microchip DS20001952C](https://ww1.microchip.com/downloads/en/devicedoc/20001952c.pdf) |
+| **MCP23017**（今の版） | 同じ石の Rev D。**GPA7・GPB7 は出力専用**（p1・p11 Table 2-1・p18 §3.5.1。Rev C には無い制約、[../review/whole_review_2_control.md](../review/whole_review_2_control.md) C-07） | [Microchip_MCP23017_RevD.pdf](Microchip_MCP23017_RevD.pdf) | Microchip DS20001952D（40 頁、2022-06）、2026-09-26 取得（md5 `f2231aff…`） |
 | ~~ULN2803A~~ | コイル駆動（**不採用**） | [ST_ULN2803A.pdf](ST_ULN2803A.pdf) | ダーリントンの約 1 V 降下が 5 V レールの 20 % を食い、40 ℃ で仕様割れ |
 
 ## UI・MCU
