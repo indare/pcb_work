@@ -179,6 +179,7 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 | **PT2314E SOP-28** | Bass / Treble（I²C、Amp 前） | **[Princeton_PT2314E.pdf](Princeton_PT2314E.pdf)** | PT2314E V1.0 / 2010-01 / **15ページ完全版**。ELECTRICAL CHARACTERISTICS あり（`VIH` min 3 V・`RL` 5 kΩ・THD 0.03 % 等 → DECISIONS `V21-継-05`） |
 | ~~PT2314 DIP-28~~ | 無印（**不採用**。参考） | [Princeton_PT2314.pdf](Princeton_PT2314.pdf) | v1.1 の**3ページ抜粋**。ピン配置とアプリケーション回路のみで**電気的特性が無い**。ピン配置は E と同一 |
 | NJW1194（候補） | 音量＋トーン、`TSW` でトーンを飛ばす（3 線シリアル、±7 V） | [tone/NJR_NJW1194.pdf](tone/NJR_NJW1194.pdf) | Nisshinbo 製品頁、Ver.7.4（25 頁）、2026-09-26 取得 |
+| SSOP32 の外形（NJW1194 のパッケージ） | 外形寸法・ランドの例・テーピング。**NJW1194 の DS には外形図が無い**ので別資料 | [tone/Nisshinbo_SSOP32_package.pdf](tone/Nisshinbo_SSOP32_package.pdf) | Nisshinbo 製品頁の Package（`/en/pdf/package/ssop32.pdf`）、PI-SSOP32-E-A（3 頁、PDF 更新 2022-06-29）、2026-09-26 取得 |
 | NJW1119A（候補） | トーン専用 3 バンド、ch ごとの `TSW`（3 線シリアル、±7 V） | [tone/NJR_NJW1119A.pdf](tone/NJR_NJW1119A.pdf) | Nisshinbo、Ver 2.1（19 頁）、2026-09-26 取得 |
 | NJU7391A（参考） | 音量＋トーン、トーンの OFF の定義が制御表に無い | [tone/NJR_NJU7391A.pdf](tone/NJR_NJU7391A.pdf) | Nisshinbo、18 頁、2026-09-26 取得 |
 | NJW1192 / NJW1201A（除外） | I²C の音量＋トーン、バイパス無し | [tone/NJR_NJW1192.pdf](tone/NJR_NJW1192.pdf)・[tone/NJR_NJW1201A.pdf](tone/NJR_NJW1201A.pdf) | Nisshinbo、2026-09-26 取得 |
