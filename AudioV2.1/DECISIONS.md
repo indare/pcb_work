@@ -9,6 +9,7 @@
 - 2026-09-25: 同じ娘の中の ch 替え（統合リスト B7）を (B)「毎回全リセットから回す」に決めた（ユーザー「安全側は B」）。§6-2 の手順を 1 本にし、§2-10 の無音の作り方を全リセットの中へ移した（ポットの前の GND 落としは切替に使わない。電源断用に置くかは未決）
 - 2026-09-25: DIRECT と A1 の否定側査読で見つかった書き方の誤りを直した: 規則①のきっかけに「起動時にすでに検知が有る」を足した（§5-7・§6-2。Pico は主電源スイッチの後ろから給電されるので、ふつうの電源投入では立ち上がりを見ない）。切替の間の絞りは PT2314E の音量を段階で（§2-10・§6-2）
 - 2026-09-25: A1 を M に決めた（ユーザー: Pico 1 個＋親に制御専用の MCP23017、タッチは残す）→ §2-16。電源断のための GND 落としは足場だけ（§2-10）
+- 2026-09-26: トーンを NJW1194 に決めた（ユーザー）→ §1-6。V21-継-05（PT2314E）を置き換え、PT2314E を前提にした項目を §1-6 に並べた
 - 現況（いま何待ちか・次の一手）の正は [NOW.md](NOW.md)。この文書は「何を決めたか・なぜか・何を捨てたか」だけを持つ
 - 回路図から導出できる事実（ネットリスト・参照・部品数・部品値）は書かない（[../SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。部品は機能名かネット名で書く。**選定として決めた型番**（RS6-1215D など）と、決定を支える DS の数値は書き、出典を付ける
 - v2 から引き継いだものは §7、v2.1 では成り立たない v2 の決定と訂正された記録の表は [review/v2_carryover.md](review/v2_carryover.md)。本文で「v2 の『…』」と書くのは v2 でそう決めていたことの呼び名で、v2 の本文は引かない
@@ -105,7 +106,30 @@
 - **却下した案**: —
 - **状態**:
   - 決定: DIRECT は聴くためのライン入力用、精密／フルレンジ DIRECT は要件外（ユーザー判断 2026-09-25）
-  - 未決: 置き方（V21-未決-14）
+  - 未決: 置き方（V21-未決-14）→ トーンを NJW1194 に決めたので、DIRECT はチップのトーンのスルーかトーン 0 dB で作る（§1-6）
+
+### 1-6 トーンは NJW1194
+
+- **決定**: トーンは Nisshinbo **NJW1194**（品番 `NJW1194V-TE1`、SSOP32）。DIRECT はこのチップの中で作る（トーン段のスルー、またはトーン 0 dB）。DIRECT のためのリレー（形 1・形 2）は置かない。トーン部を箱に組み込むか、別の箱として連結するかは設計で詰める
+- **理由**: DS で確かめた中で、トーン段を飛ばすスルーを持ち、経路に音量段が残って切替の前後を段階で絞れる単体の石はこれだけ（[review/tone_chip_bypass_review.md](review/tone_chip_bypass_review.md)、[review/njw1194_alternatives_review.md](review/njw1194_alternatives_review.md)）。スルー時の最大出力は 3.6 Vrms min で、PT2314E の 2.3 Vrms min より高い〔DS p3〕。入手の心配は Arrow・LCSC で解けた（ユーザー確認 2026-09-26）
+- **根拠**: [datasheets/tone/NJR_NJW1194.pdf](datasheets/tone/NJR_NJW1194.pdf)（Ver.7.4）／[review/tone_options_compare.md](review/tone_options_compare.md)・[_review](review/tone_options_compare_review.md)（4 案の比較）
+- **前提・外れる条件**:
+  - スルー時に DS が保証するのは最大出力・利得・ch 分離だけ。雑音とクロストークは typ、THD は表に無くグラフだけ（[review/tone_chip_bypass_review.md](review/tone_chip_bypass_review.md)）
+  - スルーの切替点は音量段より後ろ。音量を MUTE にすれば音楽の硬い端は出ないが、切替点そのものの DC の段（大きさ不明）は残りうる。確実に消すのは全リセットの中（音声リレーが開いている間）で切り替えたとき（[review/tone_options_compare_review.md](review/tone_options_compare_review.md)）
+  - 電源が無いときの入力の扱いは DS に無い
+  - 電源は ±7 V（±4.5〜±7.5 V〔DS p1〕）。±15 V などから作る
+  - 制御は 3 線シリアル（I²C ではない）。UI の MCP23017 の空きから出せるので Pico のピンは増えない。書き込み専用で読み返せないので、ファームが状態を持ち、毎回全部を書く
+  - 電源投入時は MUTE で立ち上がる（[review/tone_options_compare_review.md](review/tone_options_compare_review.md)）
+  - 実物で測る: 本物か（刻印・電源電流・3 線で音量が効くか）、スルーの切替の段、スルー時の雑音と THD、電源断のときの入力電流
+- **PT2314E を前提にしていて、NJW1194 で見直す項目**: §1-5、§2-10（音量を段階で絞る・DC オフセット）、§2-16（UI の MCP を PT2314E のバスに残す件・±15 V が無いと読めない件）、§3-3・§3-4（9 V の枝）、§6-2（PT2314E の初期化・50 ms・I²C 100 kbit/s）、V21-継-05・V21-継-08（ADC のフルスケールの理由）
+- **却下した案**:
+  - PT2314E＋DIRECT のリレー — トーン経由の歪み（0.03 % typ／0.07 % max）が全 ch に共通で乗り、DIRECT に絞る素子が無い（[review/tone_options_compare_review.md](review/tone_options_compare_review.md)）
+  - DSP（PCM1863＋PCM5122 など）— 聴く経路に A/D・D/A と常時のクロックが入る（同）
+  - トーンを諦める — ユーザーはトーンを要るとした
+  - 控え（NJW1194 が使えなかったとき）: PT2314E＋NJU72343（NJU72343 の 2 入力セレクタで DIRECT、リレー無し）（[review/njw1194_alternatives_review.md](review/njw1194_alternatives_review.md)）
+- **状態**:
+  - 決定（ユーザー判断 2026-09-26）: トーンは NJW1194
+  - 未決: DIRECT をスルーで作るかトーン 0 dB で足りるとするか、電源の無いチップの入力に源が来ることを受けるか、±7 V の作り方、箱に組み込むか連結か
 
 ---
 
@@ -365,7 +389,7 @@
   - `NSD10-12D12` — 2″×1″ で新しいフットプリント、最小負荷 20 mA/レール（1 ch 運転と合わない）、±12 V 出力（V21-継-13、[review/decisions_audit_1.md](review/decisions_audit_1.md)）
 - **状態**: 決定（ユーザー判断 2026-09-25）
 
-### 3-4 PT2314E は +15 V → L7809 のまま
+### 3-4 PT2314E は +15 V → L7809 のまま（⚠ トーンを NJW1194 にしたので見直す、§1-6）
 
 - **決定**: PT2314E の電源は今までどおり +15 V から L7809 で 9 V
 - **理由**: 電源だけ一次側（PD）へ移すと、PT2314E の帰り電流がグランドの木の中の唯一の橋を通る（v2 で一度潰したバグの再導入）
@@ -768,7 +792,7 @@ v2 から引き継いだ決定。どれも状態は「**v2 から引き継ぎ（
   - 理由: 出口はユーザーが手で選ぶもので、ファームが知る必要が無い。音声経路の接点が増えない
   - 出典: `FrontPanel.kicad_sch`
   - 状態: v2 から引き継ぎ（v2.1 で再考していない）
-- **V21-継-05 トーンは PT2314E。`DGND` はチップの足元で `A_GND`。I²C 境界は BSS138 ×2 のレベルシフタ**
+- **V21-継-05 トーンは PT2314E。`DGND` はチップの足元で `A_GND`。I²C 境界は BSS138 ×2 のレベルシフタ** — ⚠ **2026-09-26 に §1-6 で NJW1194 に置き換えた**。以下は v2 の記録
   - 決定: Bass/Treble だけ使い、音量は 0 dB 固定。ch 選択の前に置き、全 ch に配る。PT 側のプルアップは `VCC_TONE`（9 V）へ
   - 理由: 無印 PT2314 は買えない（E はピン・外付け網とも同じ）。PT2314E の VIH min 3.0 V に 3.3 V のプルアップでは余裕 0.3 V しか無い。P82B96 は Sx 側の VOL 0.8〜1.0 V が PT2314E の VIL max 1.0 V・RP2350 の VIL 0.8 V を食い切る（`PCA9306` 等の見送りも成立）
   - 出典: [ds_facts/switch_control.md](ds_facts/switch_control.md) §5（PT2314E の VIL/VIH、p12）、[datasheets/Princeton_PT2314E.pdf](datasheets/Princeton_PT2314E.pdf)、[datasheets/RaspberryPi_RP2350.pdf](datasheets/RaspberryPi_RP2350.pdf)。P82B96 の DS はリポジトリに無い（v2 で読んだ値）
@@ -784,7 +808,7 @@ v2 から引き継いだ決定。どれも状態は「**v2 から引き継ぎ（
   - 理由: 無いとバスから見た負荷が重くなり、TMUX7612 の H3 が悪くなる
   - 出典: `MeasureControl.kicad_sch`、[ds_facts/tap.md](ds_facts/tap.md)、[review/tap_facts.md](review/tap_facts.md) §2、[datasheets/opamps/TI_OPA1656.pdf](datasheets/opamps/TI_OPA1656.pdf)
   - 状態: v2 から引き継ぎ（v2.1 で再考していない）
-- **V21-継-08 ADC 前段の入力抵抗 6.19 k（PT2314E 経路について）**
+- **V21-継-08 ADC 前段の入力抵抗 6.19 k（PT2314E 経路について）** — ⚠ 理由が PT2314E の VOMAX なので、NJW1194（§1-6）で見直す
   - 理由: PT2314E の VOMAX typ 2.6 Vrms × Amp ゲイン 2 を ADC のフルスケールに入れる（ヘッドルームの不足を直した）。LPF の極は変えない。DIRECT の振幅は V21-未決-14
   - 出典: [ds_facts/switch_control.md](ds_facts/switch_control.md) §5（PT2314E の VOMAX）、[datasheets/TI_PCM1804.pdf](datasheets/TI_PCM1804.pdf)、`MeasureControl.kicad_sch`
   - 状態: v2 から引き継ぎ（v2.1 で再考していない）
@@ -928,7 +952,7 @@ DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品
 | V21-未決-11 | LDO 前のフィルタの形 | **→ §4-13 いったんの決め**（ユーザー判断 2026-09-25: 入口のコンデンサを低 ESR に） | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §6.2・§10-2 |
 | V21-未決-12 | v2.1 の試験レベル | バス 3.70 Vrms（−3.4 dBFS、DUT は v1 より +5.5 dB）／v1 と同じ DUT 振幅（−8.9 dBFS、平均を増やす） | [review/tap_compare_review.md](review/tap_compare_review.md) §2.3・§4-A |
 | V21-未決-13 | ch 側の入力 220 kΩ を戻すか | **→ §2-14 いったんの決め**（ユーザー判断 2026-09-25: 戻す） | [review/rejected_review.md](review/rejected_review.md) #6、[_review](review/rejected_review_review.md) #6 |
-| V21-未決-14 | DIRECT の置き方と切替、ライン入力の振幅の定義 | 方針（ユーザー 2026-09-25）: PT2314E を迂回する経路と、その切替を足す。取り出し点・戻し点・素子・既定・振幅は評価中（`review/direct_bypass.md`） | §1-5、[NOW] L27 |
+| V21-未決-14 | DIRECT の置き方と切替、ライン入力の振幅の定義 | **→ §1-6**（ユーザー判断 2026-09-26: トーンは NJW1194、DIRECT はチップの中で作りリレーは置かない）。残る: スルーかトーン 0 dB か、振幅の定義 | §1-5・§1-6 |
 | V21-未決-15 | シャーシを 1 点で落とす先（パネル部品の金属部のグランドの扱いを含む） | — | [review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §8-1・§10-8 |
 | V21-未決-16 | 入力ヒューズ（今の F2A 速断のままか）と DC-DC 入口の電解の耐圧・ESR | **→ §3-12 いったんの決め**（ユーザー判断 2026-09-25: F2A 速断のまま。入口の電解の耐圧・ESR は未決（推奨）） | [review/main_power_compare_review.md](review/main_power_compare_review.md) 1-6・§4-7 |
 | V21-未決-17 | 娘の最終枚数 | **→ §2-13 いったんの決め**（ユーザー判断 2026-09-25: 4 枚） | [review/main_power_compare_review.md](review/main_power_compare_review.md) §4-8、§2-5 |
