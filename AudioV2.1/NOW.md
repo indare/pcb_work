@@ -16,7 +16,7 @@ v2.1 の決まりごと・検証の期待値は [CLAUDE.md](CLAUDE.md)。`kicad-
 **2026-09-25**: 未決 16 項目をいったんの決めにしたあと、設計全体を評価した（統合リスト [review/design_eval_review.md](review/design_eval_review.md) §0）。
 A2〜A6 はユーザーが受け、DECISIONS に入れた（電源の検知は `PD_12V_SW`＋規則①②③ §5-7、SET/RESET の排他 §5-8、コイル側の論理を `+5V_COIL` で §2-15、`MON` の形と `PG_N` §5-2）。同じ娘の中の ch 替えも毎回全リセットから回す（統合リスト B7 の (B)、§6-2）ので、切替の無音は全リセットの中で作り、ポットの前の GND 落としは切替に使わない（§2-10）。
 A1 は **Pico 1 個＋親に制御専用の MCP23017**（タッチは残す、§2-16）。電源断のための GND 落としは足場だけ（§2-10）。
-**DIRECT は査読済み・ユーザーの判断待ち**（V21-未決-14、[review/direct_bypass_review.md](review/direct_bypass_review.md) §0.2）: 形・既定・振幅の定義、DIRECT の切替を全リセットに入れないか、生きた信号の硬い端を受けるか、DIRECT のまま電源を切ったときの手当て、押しスイッチの割り付け（V21-継-01 と一緒に）。
+**トーンと DIRECT**: 本命は NJW1194（トーンのスルーで DIRECT）。ユーザーが実物を数個押さえる（2026-09-26）。控えは PT2314E＋NJU72343（リレー無し）。比較と査読は [review/tone_options_compare_review.md](review/tone_options_compare_review.md)・[review/njw1194_alternatives_review.md](review/njw1194_alternatives_review.md)。未決: トーンは要るか、聴く経路に A/D・D/A を通してよいか、DIRECT をトーン 0 dB で足りるとするか、電源の無いチップの入力に源が来ることを受けるか、V21-継-05（トーンは PT2314E）の見直し。実物が来たら測る: 本物か、スルーの切替の段、雑音、電源断のときの入力電流
 **残る未決**: -20（縦積みの DIP の手の届き、模型）、後回しの -06・-12・-15・-18・-19・-21。B 項目は実装しながら、C 項目は先に測る（統合リスト §3）。
 **次にやること**: DIRECT が決まったら、生成スクリプトと回路図へ入れる（娘: 電源用・音声用リレー、ch ごとの電源ゲート一式と入力の切り替え、デコーダ、B1/B2、排他ゲート。親: RS6、ADC の電源とグランドの付け替え、`TONE` のプルダウン、L7805C、`PD_12V_SW` の検知、制御専用の MCP23017 と電源検知の AND、DIRECT のリレー）。
 `scripts/` は v2 からの写しで、v2.1 用に新しく書き起こす予定（[CLAUDE.md](CLAUDE.md)）。
