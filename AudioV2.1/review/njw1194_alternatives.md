@@ -62,3 +62,21 @@
 - パッケージ: SSOP-B40（JLCPCB の表記 SSOP-40-B）
 - 入手性: JLCPCB `BD3814FV-E2` C2662555 **在庫 10**、最小 1（2026-09-26）
 - 読み〔推論〕: 機能の並び（音量→トーン＋スルー→バッファ）、±7 V、3.6 Vrms min は NJW1194 とほぼ同じ。**NJW1194 より良い点**: 制御が 2 本、バイパスの雑音に max、在庫がある。**悪い点**: トーンが ±14 dB／2 dB（NJW1194 は ±10 dB／1 dB）、音量は 1 dB 刻み（NJW1194 は 0.5 dB）、ゼロクロスの記載なし、**符号表が DS に無い**（どの値でバイパスかを実物で確かめる必要）、DS は 2010 年の Technical Note で現行品かは確かめられず（rohm.com の頁は取れず）、SSOP-B40 は 6 ch 分の足があって大きい
+
+### ROHM の同じ家族（"Sound Processors for Home Theater Systems"、±7 V・2 線）
+
+- **BD3813KS／BD3815KS** — `datasheets/tone/ROHM_BD3813KS.pdf`（No.10081EAT04、2010.06 Rev.A、LCSC の写し）。5.1 ch、入力利得＋6 ch 音量（0〜−95 dB／1 dB）＋FL/FR の Bass/Treble ±14 dB／2 dB、**"Tone Bypass"**（特長 1)、EC の "Tone: By-pass" の行、制御語 2 の D8 が "TONE"）〔DS p1・p3・p6〕。Vomax1 **3.4 min / 4.2 typ Vrms**〔p3〕。±7 V、VEE を先に〔p2〕。2 線（3.3/5 V）〔p1〕。音量は「抵抗ラダーで残留雑音と切替のショック音を減らす」〔p1〕。"For functions except the Master Volume, Treble and Bass controls, use of the MUTE function is recommended."〔p15〕。**パッケージ SQFP56**〔p1・p17〕。符号表（D8 の 0/1 の意味）は**この DS にも無い**。JLCPCB `BD3813KS-E2` C2662580 在庫 0（2026-09-26）→ BD3814FV の兄弟として記録するだけ（QFP・在庫 0）
+- **BD3812F** — 2 ch の音量だけ（0〜−103 dB／1 dB、出力利得、MUTE 端子）、Vomax 3.4 min / 4.2 typ Vrms、±7 V、2 線〔LCSC の DS p1・p2〕。**トーン無し**。SOP-14。JLCPCB C213438 在庫 0。(c)「フェード専用の音量 IC」の型だが在庫が無い
+- **BD3816K1／BD3817KS** — 6.1 ch、"Volume Direct Mode"〔LCSC の DS p1〕、QFP、JLCPCB は "no longer manufactured"・在庫 0 → 読み込んでいない
+- BD3811K1・BD3818KS（QFP、在庫 0、DS 取れず）→ 見ていない
+
+### ほかに在庫のあった品（どれも除外。理由だけ）
+
+| 品番 | DS（取った写し） | T | S | A（最大入力／出力の min） | 除外の理由 |
+|---|---|---|---|---|---|
+| BD3702FV（ROHM、SSOP-28、在庫 100） | LCSC の写し（10 頁）は**日本語フォントが欠けて読めず** | 3 バンド ±20 dB／1 dB（検索の要約。DS で確かめられず） | 確かめられず | 確かめられず | 車載の 7〜9.5 V 単電源の系統〔JLCPCB の説明〕で、既出の BD375xx と同じ形と読む〔推論〕 |
+| PT7313E（Princeton、SOP-28、在庫 250） | LCSC の写し 16 頁 | ±14 dB／2 dB | **無い**（"bypass" は I²C の ACK の説明だけ〔DS p6〕） | VCL **2.3 min / 2.6 typ Vrms**〔DS p11〕 | PT2314E と同じ振幅・バイパス無し。PT2314E の代わりにはなるが改善ではない |
+| TM2348（Titan Micro、SSOP36、在庫 1523） | LCSC の写し（中国語） | ±15 dB／1 dB（低音・高音）〔DS p1〕 | 語が無い（"旁路"・"直通" は出ない） | Vcl **2 min / 2.5 typ Vrms**〔DS p3〕 | 振幅不足（PT2348 の同構成品〔推論〕） |
+| TDA7718N（ST、TSSOP28、在庫 45） | LCSC の写し（Doc ID 16502 Rev 2、40 頁） | 3 バンド | "Off (bypass)" は Anti-alias filter の設定〔DS p30〕。トーンを飛ばす設定は見当たらない | VCL **2 min Vrms**〔DS p9〕 | 振幅不足・バイパス無し |
+| TDA7418（ST、SO20、在庫 20） | LCSC の写し 29 頁 | 3 バンド | 見当たらない（MUX ピンは "mono signal output (before tone filters)"〔DS p19〕） | VCL **1.8 min / 2 typ Vrms**〔DS p8〕 | 振幅不足 |
+| NJW1110・NJW1111（Nisshinbo、SSOP32、在庫 0） | LCSC の写し | — | — | — | 9 入力 3 出力の**セレクタ**（トーン・音量無し）〔各 DS p1〕 |
