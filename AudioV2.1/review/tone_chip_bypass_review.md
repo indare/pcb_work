@@ -172,3 +172,4 @@
 
 - 取得: `POST https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList`（keyword 検索）。LCSC 本体の検索は Access Denied で見られなかった
 - 読み: NJW1194 は JLCPCB/LCSC に登録はあるが在庫 0。NJW1119A は JLCPCB 上では製造終了の扱い。PT2314E は在庫あり
+- **2026-09-26 ユーザーの確認**: LCSC の検索（NJW1194）で在庫あり、ただしリードタイムあり（ユーザーが LCSC のページで確認。こちらからは LCSC にアクセスできず、数量・納期は未確認）。→ 採る条件 1（少量を正規の経路で買える）は LCSC で満たす見込み
