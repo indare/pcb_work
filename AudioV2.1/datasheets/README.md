@@ -15,6 +15,7 @@ DS から読んだ事実（照合済み）は [../ds_facts/](../ds_facts/)、決
 | [tap/](tap/) | 計測タップの結合・絶縁の候補 |
 | [arch/](arch/) | 制御の木（デコーダ・ロードスイッチ・監視）の候補 |
 | [reference/](reference/) | 参考製品の取説 |
+| [tone/](tone/) | トーンチップの候補（バイパスを持つもの。調査は [../review/tone_chip_bypass.md](../review/tone_chip_bypass.md)） |
 
 ## 電源・PD
 
@@ -177,6 +178,14 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 |---|---|---|---|
 | **PT2314E SOP-28** | Bass / Treble（I²C、Amp 前） | **[Princeton_PT2314E.pdf](Princeton_PT2314E.pdf)** | PT2314E V1.0 / 2010-01 / **15ページ完全版**。ELECTRICAL CHARACTERISTICS あり（`VIH` min 3 V・`RL` 5 kΩ・THD 0.03 % 等 → DECISIONS `V21-継-05`） |
 | ~~PT2314 DIP-28~~ | 無印（**不採用**。参考） | [Princeton_PT2314.pdf](Princeton_PT2314.pdf) | v1.1 の**3ページ抜粋**。ピン配置とアプリケーション回路のみで**電気的特性が無い**。ピン配置は E と同一 |
+| NJW1194（候補） | 音量＋トーン、`TSW` でトーンを飛ばす（3 線シリアル、±7 V） | [tone/NJR_NJW1194.pdf](tone/NJR_NJW1194.pdf) | Nisshinbo 製品頁、Ver.7.4（25 頁）、2026-09-26 取得 |
+| NJW1119A（候補） | トーン専用 3 バンド、ch ごとの `TSW`（3 線シリアル、±7 V） | [tone/NJR_NJW1119A.pdf](tone/NJR_NJW1119A.pdf) | Nisshinbo、Ver 2.1（19 頁）、2026-09-26 取得 |
+| NJU7391A（参考） | 音量＋トーン、トーンの OFF の定義が制御表に無い | [tone/NJR_NJU7391A.pdf](tone/NJR_NJU7391A.pdf) | Nisshinbo、18 頁、2026-09-26 取得 |
+| NJW1192 / NJW1201A（除外） | I²C の音量＋トーン、バイパス無し | [tone/NJR_NJW1192.pdf](tone/NJR_NJW1192.pdf)・[tone/NJR_NJW1201A.pdf](tone/NJR_NJW1201A.pdf) | Nisshinbo、2026-09-26 取得 |
+| BD37033FV-M / BD37512FS / BD3490FV / BD3491FS（除外） | I²C のサウンドプロセッサ、バイパス無し | [tone/ROHM_BD37033FV-M.pdf](tone/ROHM_BD37033FV-M.pdf)・[tone/ROHM_BD37512FS.pdf](tone/ROHM_BD37512FS.pdf)・[tone/ROHM_BD3490FV.pdf](tone/ROHM_BD3490FV.pdf)・[tone/ROHM_BD3491FS.pdf](tone/ROHM_BD3491FS.pdf) | fscdn.rohm.com、2026-09-26 取得 |
+| PT2033（参考） | I²C の音量＋トーン、バイパス無し（PT2314E より振幅の余裕） | [tone/Princeton_PT2033.pdf](tone/Princeton_PT2033.pdf) | princeton.com.tw、V1.4 2010-09（15 頁） |
+| PT2322（参考） | 6 ch、"Tone Defeat" | [tone/Princeton_PT2322_excerpt.pdf](tone/Princeton_PT2322_excerpt.pdf) | nikom.biz のミラー、v1.0 2002-11 の **3 頁抜粋**（EC 無し） |
+| TDA7439 / TDA7468（除外） | I²C の音量＋トーン、バイパス無し | [tone/ST_TDA7439.pdf](tone/ST_TDA7439.pdf)・[tone/ST_TDA7468.pdf](tone/ST_TDA7468.pdf) | **ミラー**（ampslab.com Rev.10 2004-06／mikroe Rev.4 2010-04）。st.com は取得失敗 |
 | **Alps RK27112A00CF** ×2 | HP / LINE 手回し音量（A50k Dual） | （メーカーカタログ） | [PARTS.md](../PARTS.md) |
 | **Cosland 2MD1 / 2MS1** | DEST（DPDT ON–ON）／PWR | （秋月の商品ページ） | [PARTS.md](../PARTS.md) §2.1 |
 | ~~PGA2310PA~~ | **不採用**（DECISIONS `V21-継-02`） | [TI_PGA2310.pdf](TI_PGA2310.pdf) | TI |
