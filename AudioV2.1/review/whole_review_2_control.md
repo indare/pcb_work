@@ -6,7 +6,7 @@
 - リポジトリの外から取ったもの（2026-09-26。リポジトリには入れていない）: **MCP23017 DS Rev D**（DS20001952D、2022-06、Microchip の DS の URL から。md5 `f2231aff…`）、**NJW1194 日本語版 DS**（Ver.11.3、`nisshinbo-microdevices.co.jp/ja/pdf/datasheet/NJW1194_J.pdf`。md5 `64d29ab1…`）。日本語版はフォントが埋め込まれておらず画像では日本語が出ないので、テキスト層を pdfminer で読み、画像では英字（TONE・ON/OFF・IC・MUTE）の位置だけ確かめた
 - 読まなかったもの: `AudioV2/`・`Audio/` の文書、`git show` の古い版
 - 自分で回したもの: `python3 AudioV2.1/scripts/sch_facts.py pin U1610`・`pin A1602`・`pin ENC1603`・`pin R1661`・`nets --net LCD_VCC`・`--net +5V_D`・`--net ENC_INTA`・`--net ENC3_B`・`--net ENC1_A`（図は v2 の写しなので、v2.1 に残る Pico・UI の MCP・エンコーダ・LCD の事実だけに使った）。`pdftotext -layout`、`pdftoppm`（NJW1194 p11 の時間図、MCP23017 Rev D p11 を画像で確認）、scratchpad の venv の pdfminer
-- 記号: 〔DS pN〕＝PDF のページ（NJW1194・MCP23017 は印刷のページと同じ）、〔画像で確認〕、〔計算〕、〔推論〕、〔仮定〕、〔確かめられず〕。[SF …]＝`sch_facts.py` の出力（ここだけ designator を書く）。[制]＝`review/design_eval_control.md`、[DER]＝`review/design_eval_review.md`、[A1R]＝`review/a1_two_pico_review.md`、[TCBR]＝`review/tone_chip_bypass_review.md`（行番号はファイルの行）、[pow]＝`ds_facts/power.md`
+- 記号: 〔DS pN〕＝PDF のページ（NJW1194・MCP23017 は印刷のページと同じ）、〔画像で確認〕、〔計算〕、〔推論〕、〔仮定〕、〔確かめられず〕。[SF …]＝`sch_facts.py` の出力（ここだけ designator を書く）。§n・[DEC] §n・DEC §n＝`DECISIONS.md` の節。[制]＝`review/design_eval_control.md`、[DER]＝`review/design_eval_review.md`、[A1R]＝`review/a1_two_pico_review.md`、[TCBR]＝`review/tone_chip_bypass_review.md`（行番号はファイルの行）、[pow]＝`ds_facts/power.md`
 - 重さ: 損傷／聴こえる／無害。起きやすさ: ふつう（ふつうの使い方）／まれ／二重故障。種類: 決定の穴／決定の誤り／記述の誤り／確かめが要る
 
 ---
@@ -245,7 +245,7 @@
 - **PD の 5 V の窓で約 3 V の `+5V_COIL` の論理が誤って SET を出す** — 同じ理由（制御 MCP は RESET、`RAIL_OK`=0）
 - **検知が揺れて制御 MCP の RESET が揺れると出力が暴れる** — RESET のたびに POR の状態（全ピン入力）に戻るだけ。`RAIL_OK` の揺れは C-08 に残した
 - **電源の無い NJW1194 の論理入力に High を入れると V+ を逆給電する** — 等価回路に V+ へのダイオードが無い〔p7〕。形式の定格の話だけ C-05 に残した
-- **§1-6 の 7 の 2.4 s を毎回の切替で待つ** — 待つのは NJW1194 の電源が立った後と、TSW を全リセットの中で書くときだけ（[njw1194_io_review] 18 行）
+- **§1-6 の 7 の 2.4 s を毎回の切替で待つ** — 待つのは NJW1194 の電源が立った後と、TSW を全リセットの中で書くときだけ（`review/njw1194_io_review.md` 18 行）
 - **デバッガの停止・ハングでパルスが残るとコイルや L7805C が壊れる** — AZ850P2-5 の最大連続は 10 V〔p1〕、ARST が固まっても 373 mA で L7805C は熱保護、両コイル同時は §5-8 のゲートが止める（§2-16 の既知の穴のまま）
 
 **文書の小さな点（観点 ④ へ）**: §6-1 の行「Pico が止まったら全段の音声リセット」はリセット・ブラウンアウトのときの話で、ハング・デバッガの停止では成り立たない（§5-3 前提には書いてある）。§1-6 の 4 の「約 4 ms」は 400 kHz・1 回 1 レジスタの値で、今のファームは 100 kHz。
