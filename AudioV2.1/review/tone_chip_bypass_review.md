@@ -173,3 +173,4 @@
 - 取得: `POST https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList`（keyword 検索）。LCSC 本体の検索は Access Denied で見られなかった
 - 読み: NJW1194 は JLCPCB/LCSC に登録はあるが在庫 0。NJW1119A は JLCPCB 上では製造終了の扱い。PT2314E は在庫あり
 - **2026-09-26 ユーザーの確認**: LCSC の検索（NJW1194）で在庫あり、ただしリードタイムあり（ユーザーが LCSC のページで確認。こちらからは LCSC にアクセスできず、数量・納期は未確認）。→ 採る条件 1（少量を正規の経路で買える）は LCSC で満たす見込み
+- **2026-09-26 訂正**: 上の表の NJW1119A の「製造終了の扱い」は、JLCPCB Assembly 名義の `C99…` の出品に付いた文言で、同じ名義の出品は現行の ADAU1701 にも "no longer manufactured" が付いていた（[tone_chip_newer.md](tone_chip_newer.md)）。**製造終了の根拠にはならない**。Nisshinbo の一覧では NJW1194・NJW1119A とも "Standard" 区分（同）

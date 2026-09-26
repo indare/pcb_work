@@ -186,6 +186,12 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 | PT2033（参考） | I²C の音量＋トーン、バイパス無し（PT2314E より振幅の余裕） | [tone/Princeton_PT2033.pdf](tone/Princeton_PT2033.pdf) | princeton.com.tw、V1.4 2010-09（15 頁） |
 | PT2322（参考） | 6 ch、"Tone Defeat" | [tone/Princeton_PT2322_excerpt.pdf](tone/Princeton_PT2322_excerpt.pdf) | nikom.biz のミラー、v1.0 2002-11 の **3 頁抜粋**（EC 無し） |
 | TDA7439 / TDA7468（除外） | I²C の音量＋トーン、バイパス無し | [tone/ST_TDA7439.pdf](tone/ST_TDA7439.pdf)・[tone/ST_TDA7468.pdf](tone/ST_TDA7468.pdf) | **ミラー**（ampslab.com Rev.10 2004-06／mikroe Rev.4 2010-04）。st.com は取得失敗 |
+| BD37534FV（除外、BD375xx 家族の代表） | 車載 I²C の 3 バンド、バイパス無し（調査は [../review/tone_chip_newer.md](../review/tone_chip_newer.md)） | [tone/ROHM_BD37534FV.pdf](tone/ROHM_BD37534FV.pdf) | fscdn.rohm.com、16.Dec.2015 Rev.001、2026-09-26 取得 |
+| TDA7719（除外、参考） | 車載 I²C の 3 バンド、"Direct path"（フィルタと音量を飛ばす） | [tone/ST_TDA7719.pdf](tone/ST_TDA7719.pdf) | **ミラー**（rlocman.ru）、Doc ID 13698 Rev 4 2009-04。st.com は取得失敗 |
+| PCM1863（別の道 (b)） | ADC、単端 2.1 Vrms FS、TSSOP-30 | [tone/TI_PCM186x.pdf](tone/TI_PCM186x.pdf) | ti.com、SLAS831D（2018-03 改訂）、2026-09-26 取得 |
+| PCM5122（別の道 (b)） | DAC、2.1 Vrms 出力、内蔵の biquad、TSSOP-28 | [tone/TI_PCM512x.pdf](tone/TI_PCM512x.pdf) | ti.com、SLAS763C（2018-10 改訂）、2026-09-26 取得 |
+| ADAU1701（別の道 (b)） | SigmaDSP（ADC 2・DAC 4）、LQFP-48 | [tone/ADI_ADAU1701_Rev0.pdf](tone/ADI_ADAU1701_Rev0.pdf) | **Digi-Key のミラー、Rev. 0（2006-10）＝旧版**。analog.com は取得失敗 |
+| MCP41HV51（別の道 (a)） | ±18 V のデジタルポテンショメータ（7/8 bit、SPI）、TSSOP-14 | [tone/Microchip_MCP41HVX1.pdf](tone/Microchip_MCP41HVX1.pdf) | ww1.microchip.com、DS20005207B（2013–2015）、2026-09-26 取得 |
 | **Alps RK27112A00CF** ×2 | HP / LINE 手回し音量（A50k Dual） | （メーカーカタログ） | [PARTS.md](../PARTS.md) |
 | **Cosland 2MD1 / 2MS1** | DEST（DPDT ON–ON）／PWR | （秋月の商品ページ） | [PARTS.md](../PARTS.md) §2.1 |
 | ~~PGA2310PA~~ | **不採用**（DECISIONS `V21-継-02`） | [TI_PGA2310.pdf](TI_PGA2310.pdf) | TI |
