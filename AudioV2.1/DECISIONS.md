@@ -13,6 +13,7 @@
 - 2026-09-26: 電源ルートを R1 に決めた（§3-13）。HP バッファは今のまま、`+5V_D` は BP5293 のまま、充電器の C1〜C4 に 12 V/3 A があることを確認（ユーザー）
 - 2026-09-26: 枝の保護を PPTC から速断のチップヒューズへ（PD 12 V 側の 3 枝、§3-14）。±15 V 側は置かない
 - 2026-09-26: ライン入力の振幅を公称 2 Vrms・上限 2.3 Vrms（両経路で共通）に決めた（§1-5）
+- 2026-09-26: ADC 前段の 6.19 k は値のまま、理由を「上限 2.3 Vrms × 2 をフルスケールの −1.5 dB に」に決め直した（V21-継-08）
 - 現況（いま何待ちか・次の一手）の正は [NOW.md](NOW.md)。この文書は「何を決めたか・なぜか・何を捨てたか」だけを持つ
 - 回路図から導出できる事実（ネットリスト・参照・部品数・部品値）は書かない（[../SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。部品は機能名かネット名で書く。**選定として決めた型番**（RS6-1215D など）と、決定を支える DS の数値は書き、出典を付ける
 - v2 から引き継いだものは §7、v2.1 では成り立たない v2 の決定と訂正された記録の表は [review/v2_carryover.md](review/v2_carryover.md)。本文で「v2 の『…』」と書くのは v2 でそう決めていたことの呼び名で、v2 の本文は引かない
@@ -125,7 +126,7 @@
   - 制御は 3 線シリアル（I²C ではない）。UI の MCP23017 の空きから出せるので Pico のピンは増えない。書き込み専用で読み返せないので、ファームが状態を持ち、毎回全部を書く
   - 電源投入時は MUTE で立ち上がる（[review/tone_options_compare_review.md](review/tone_options_compare_review.md)）
   - 実物で測る: 本物か（刻印・電源電流・3 線で音量が効くか）、スルーの切替の段、スルー時の雑音と THD、電源断のときの入力電流
-- **NJW1194 の前提で決め直す項目**: §2-10・§6-2（音量を段階で絞る具体）、V21-継-08（ADC のフルスケールの理由）
+- **NJW1194 の前提で決め直す項目**: §2-10・§6-2（音量を段階で絞る具体）
 - **却下した案**:
   - PT2314E — **却下**（ユーザー判断 2026-09-26）。トーン経由の歪み（0.03 % typ／0.07 % max）が全 ch に共通で乗り、トーン段のスルーが無い（[review/tone_options_compare_review.md](review/tone_options_compare_review.md)）
   - DSP（PCM1863＋PCM5122 など）— 聴く経路に A/D・D/A と常時のクロックが入る（同）
@@ -826,9 +827,11 @@ v2 から引き継いだ決定。どれも状態は「**v2 から引き継ぎ（
   - 理由: 無いとバスから見た負荷が重くなり、TMUX7612 の H3 が悪くなる
   - 出典: `MeasureControl.kicad_sch`、[ds_facts/tap.md](ds_facts/tap.md)、[review/tap_facts.md](review/tap_facts.md) §2、[datasheets/opamps/TI_OPA1656.pdf](datasheets/opamps/TI_OPA1656.pdf)
   - 状態: v2 から引き継ぎ（v2.1 で再考していない）
-- **V21-継-08 ADC 前段の入力抵抗 6.19 k** — ⚠ 決めた理由は却下したトーンチップの最大出力。NJW1194（§1-6）の前提で決め直す
-  - 出典: [datasheets/TI_PCM1804.pdf](datasheets/TI_PCM1804.pdf)、`MeasureControl.kicad_sch`
-  - 状態: v2 から引き継ぎ（理由は無効。決め直す）
+- **V21-継-08 ADC 前段の入力抵抗 6.19 k のまま（2026-09-26 に理由を決め直した）**
+  - 理由: ライン入力の上限 2.3 Vrms（§1-5）× ch のゲイン 2 ＝ `AMP_SEL` で 4.6 Vrms（6.51 Vpk）を、ADC のフルスケールの −1.5 dB に収める。フルスケールは `AMP_SEL` 換算で 5.47 Vrms〔計算: ドライバの利得 1 k／6.19 k ＝ 0.1616、差動で ×2 ＝ 0.3231、PCM1804 の差動 ±2.5 V ＝ 1.768 Vrms ÷ 0.3231〕。公称 2 Vrms で −2.7 dBFS、頭を打つのは入力 2.74 Vrms。用途はスペアナ・VU・簡易分析（§4-2）なので 1.5 dB の余裕で足り、抵抗を下げてフルスケールを広げるとふつうの 2 Vrms での読みの余白を損するだけ
+  - Q2（INA1650 の差動、§4-3）を入れても段の利得は変わらない: INA1650 は G = 1（利得誤差 0.05 % max〔[ds_facts/tap.md](ds_facts/tap.md) Q2-2、DS p6〕）で、タップのバッファ（G = 1）とドライバの間に入るだけ。6.51 Vpk は INA1650 の出力の振れ（±18 V で 11.5 Vrms まで THD の図がある、同）の内側〔推論: `±15V_AFE` の直列 22〜33 Ω の降下を見ても余る〕
+  - 出典: [ds_facts/tap.md](ds_facts/tap.md) Q2-2、[datasheets/TI_PCM1804.pdf](datasheets/TI_PCM1804.pdf)、[review/direct_bypass_review.md](review/direct_bypass_review.md) §3.1（同じ算術の再現）、`MeasureControl.kicad_sch`（ドライバの 1 k・6.19 k）
+  - 状態: いったんの決め（ユーザー判断 2026-09-26。値は v2 から引き継ぎ、理由を v2.1 で決め直した）
 - **V21-継-09 `MCLK_SENSE` は無い**
   - 理由: ファームが読んでいない。12.288 MHz がグランドの境目を渡る経路が一本減る
   - 出典: `MeasureControl.kicad_sch`、`firmware/board.py`
