@@ -27,3 +27,10 @@ v1 実機の測定の事実は [tap_facts.md](tap_facts.md) に写してある�
 
 - [cn_dac_amp_survey.md](cn_dac_amp_survey.md) — 中国製 DAC 内蔵アンプの音量・EQ・エフェクト・切替を、製品と部品の両側から調べた記録（2026-09-25）。PT2314E の音量段と電源投入時について DS から分かったこと（§5）、未決への材料（§6）
 - [product_board_layout.md](product_board_layout.md) — 製品基板の内部写真と一次資料から学べる配線（2026-09-25）。v2.1 と違うところ（§3）
+
+## 決定の全体の否定側査読（2026-09-26、実装の前）
+
+- [whole_review.md](whole_review.md) — **統合リスト**（決めてもらうこと U-01〜U-15、ファームの規則と小さな回路 F-01〜F-12、文書の直し、§10 に足すもの、棄却したもの）。まずここから
+- Claude の 5 観点: [whole_review_1_power.md](whole_review_1_power.md)（電源と故障）・[whole_review_2_control.md](whole_review_2_control.md)（制御・ファーム・手順）・[whole_review_3_audio.md](whole_review_3_audio.md)（音声の経路）・[whole_review_4_docs.md](whole_review_4_docs.md)（DECISIONS の整合）・[whole_review_5_parts.md](whole_review_5_parts.md)（部品・熱・実装）
+- Cursor の 7 観点（並行、main の #47）: [cursor_neg_INDEX.md](cursor_neg_INDEX.md)
+- 反証（指摘を DS・計算・シミュレーションまで降りて確かめたもの）: [whole_review_verify_A_power_off.md](whole_review_verify_A_power_off.md)（電源断の LDO）・[whole_review_verify_B_protection.md](whole_review_verify_B_protection.md)（保護と故障）・[whole_review_verify_C_control_audio.md](whole_review_verify_C_control_audio.md)（制御・トーンチップ・音声）・[whole_review_verify_D_mech_parts.md](whole_review_verify_D_mech_parts.md)（機械・部品）
