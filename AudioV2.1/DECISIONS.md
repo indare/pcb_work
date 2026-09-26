@@ -11,6 +11,7 @@
 - 2026-09-25: A1 を M に決めた（ユーザー: Pico 1 個＋親に制御専用の MCP23017、タッチは残す）→ §2-16。電源断のための GND 落としは足場だけ（§2-10）
 - 2026-09-26: トーンを NJW1194 に決めた（ユーザー）→ §1-6。同日、同居・±7 V は ±15 V から LDO・3 線のバッファの置き場・入力の直列抵抗の置き場・電源投入時に状態をリセット、をいったんの決めに。PT2314E は却下し（ユーザー）、それを前提にした記述と V21-継-05・§3-4 を消した
 - 2026-09-26: 電源ルートを R1 に決めた（§3-13）。HP バッファは今のまま、`+5V_D` は BP5293 のまま、充電器の C1〜C4 に 12 V/3 A があることを確認（ユーザー）
+- 2026-09-26: 枝の保護を PPTC から速断のチップヒューズへ（PD 12 V 側の 3 枝、§3-14）。±15 V 側は置かない
 - 現況（いま何待ちか・次の一手）の正は [NOW.md](NOW.md)。この文書は「何を決めたか・なぜか・何を捨てたか」だけを持つ
 - 回路図から導出できる事実（ネットリスト・参照・部品数・部品値）は書かない（[../SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md)）。部品は機能名かネット名で書く。**選定として決めた型番**（RS6-1215D など）と、決定を支える DS の数値は書き、出典を付ける
 - v2 から引き継いだものは §7、v2.1 では成り立たない v2 の決定と訂正された記録の表は [review/v2_carryover.md](review/v2_carryover.md)。本文で「v2 の『…』」と書くのは v2 でそう決めていたことの呼び名で、v2 の本文は引かない
@@ -427,10 +428,10 @@
 
 ### 3-8 コイル電源は L7805C（PD 12 V からのリニア）
 
-- **決定**: `+5V_COIL` は `BP5293-50` をやめて `L7805C`。入力側の PPTC は、コイルの最悪の同時通電（約 560 mA・30 ms）で切れない値にする
+- **決定**: `+5V_COIL` は `BP5293-50` をやめて `L7805C`。入力側の保護は PPTC をやめて**速断のチップヒューズ**（§3-14）。コイルの最悪の同時通電（約 560 mA・30 ms）で切れない値にする。`+5V_COIL` にクランプ（ツェナーか TVS）を置き、L7805C の短絡故障で 12 V が素通しになったらクランプが導通してヒューズを切る（統合リスト B3）
 - **理由**: `+5V_COIL` は全娘へ配られ、娘の上でリレーの間を音声の近くに通る。BP5293 は 570 kHz の内部発振器を持ち、軽負荷で間欠動作に入る。聴取中はコイル電流が 0 なので、スイッチングの無いリニアで足りる
 - **根拠**: [NOW] L25／[review/arch_zero_base.md](review/arch_zero_base.md) §0.1 #9／[review/arch_zero_base_review.md](review/arch_zero_base_review.md) §0.1（BP5293 の発振器）・§6.1／[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 7-3（最悪 46.7 mA × 12 ＝ 560 mA、リニアでは入力電流＝出力電流で、今の PPTC 0.4 A 保持をパルスの間超える）
-- **前提・外れる条件**: PPTC のトリップ曲線は未照合
+- **前提・外れる条件**: チップヒューズのパルス定格（I²t）は DS を取ってから。コイルを通電したままにするファームの誤り（560 mA 連続）ではヒューズは切れず、L7805C の過熱保護が先に効く見込み〔推論、ST L78 の DS で要確認〕
 - **却下した案**: BP5293 のまま — 発振器（上の理由）
 - **状態**: いったんの決め（[NOW] L25）
 
@@ -498,6 +499,14 @@
 - **却下した案**: HP バッファだけを ±10 V の LDO へ（熱の対策。連続正弦を出し続けないので要らない）／HP を別の DC-DC から（無音時にほぼ無負荷になり軽負荷の問題を作る）／`+5V_D` をリニアに（0.7〜1.8 W の損失で放熱が要る）
 - **状態**: 決定（ユーザー判断 2026-09-26）
 
+### 3-14 枝の保護は PPTC をやめる — PD 12 V 側の枝は速断のチップヒューズ、±15 V 側は置かない
+
+- **決定**: PD 12 V（主電源スイッチの後ろ）から分かれる 3 つの枝（コイルの L7805C、`+5V_D` の BP5293、計測の ADC の LDO）の保護を、PPTC から**速断のチップヒューズ**に替える。±15 V 側の枝には置かない（旧トーンの 9 V の PPTC は PT2314E と一緒に消える）。コイルの枝は `+5V_COIL` のクランプと組にする（§3-8）
+- **理由**: PPTC は直列の抵抗で、電流と温度で値が変わる（ユーザー判断 2026-09-26）。ヒューズ代わりの IC（eFuse）は多くが内部にチャージポンプを持ち、「電源経路に発振器・チャージポンプを置かない」要件（§2-1 の却下した案の TPS26600 と同じ理由）に反する。何も置かないと、PD 12 V 側の上流の守りは充電器の過電流保護（3 A 級）だけで、細い枝の配線が先に焼けうる〔推論〕。±15 V 側は RS6 の過負荷保護・LDO の電流制限・スタックの 22 Ω のヒューズ抵抗（§2-4）で守られる
+- **前提・外れる条件**: チップヒューズで足りるかは、各枝のふつうの電流・突入・パルス（コイルの最悪 560 mA・30 ms、§3-8）に対して切れない定格と、短絡で切れる定格の間に品があるか次第（DS を取ってから）。足りなければ、その枝だけ 5×20 のホルダか別の素子を考え直す。ヒューズは一度切れたら交換（交換のしやすさは PCB で考える）
+- **却下した案**: PPTC — 上の理由／eFuse — チャージポンプ（上の理由。チャージポンプの無い品が見つかれば見直す）／枝に何も置かない — PD 12 V 側の上流の守りが充電器だけになる
+- **状態**: いったんの決め（ユーザー判断 2026-09-26「チップタイプのヒューズでいけるならそれがいい」）
+
 ---
 
 ## 4. ADC 経路
@@ -547,13 +556,13 @@
   - ADC 枝の電源に絶縁 DC-DC（v2 の「…を別の DC-DC に替える案」「絶縁コンバータで置き換える案について」）— b-1 の読み（§3-9）では要らない。スイッチング源が 1 つ増える（[review/rejected_review.md](review/rejected_review.md) #2）
 - **状態**: 決定（PD 12 V から・付け替えの方向: ユーザー判断 2026-09-25）
 
-### 4-5 ADC の枝に PPTC を新設
+### 4-5 ADC の枝にヒューズを新設
 
-- **決定**: PD 12 V から ADC の LDO へ行く枝に PPTC を置く
+- **決定**: PD 12 V から ADC の LDO へ行く枝に保護を置く。素子は PPTC ではなく**速断のチップヒューズ**（§3-14）。後ろの RC の R（§4-13）は本物の抵抗のまま、別に置く
 - **理由**: PD 本線（受け端子 → 主電源スイッチ → `PD_12V_SW`）には枝より手前のヒューズが無く、他の枝はそれぞれ自分の保護を持つ。ADC の枝だけが無保護になる。v2 の「戻さない」は LDO が +15 V（DC-DC の短絡保護の後ろ）にあることが前提だった
 - **根拠**: [NOW] L10–11／[review/adc_gnd_retree.md](review/adc_gnd_retree.md) §6.1・[_review](review/adc_gnd_retree_review.md) §2・§7.4／v2 の「ADC 枝の PPTC は戻さない」（[review/v2_carryover.md](review/v2_carryover.md)）
-- **前提・外れる条件**: 定格は PPTC の DS（温度ディレーティング）を取ってから（hold 0.25 A 級が候補、未照合）。LDO 前の直列 R はフォールト電流を受けるのでパルス定格のある品（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §6.2）
-- **却下した案**: 計測の 5 V レギュレータ入口の PPTC の後ろ（`PD_12V_MEAS`）から取る — PPTC は増えないが、ADC の枝の短絡で Pico も落ち、5 V レギュレータの入力脈流の隣になる（同 §7.4 の表・§10-4）
+- **前提・外れる条件**: 定格はチップヒューズの DS を取ってから（2026-09-26 に PPTC から切り替え。PPTC のときの候補は hold 0.25 A 級だった）。LDO 前の直列 R はフォールト電流を受けるのでパルス定格のある品（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §6.2）
+- **却下した案**: 計測の 5 V レギュレータ入口の保護の後ろ（`PD_12V_MEAS`）から取る — 保護は増えないが、ADC の枝の短絡で Pico も落ち、5 V レギュレータの入力脈流の隣になる（同 §7.4 の表・§10-4）
 - **状態**: いったんの決め（[NOW] L11）
 
 ### 4-6 ADC 前の直列 47 Ω → 100 Ω（電源断ごとの窓は許す）
@@ -935,11 +944,11 @@ v2 から引き継いだ決定。どれも状態は「**v2 から引き継ぎ（
 | V21-実測-07 | ch 側グランドと計測側 `A_GND` の差（タップ入力の短絡点を変えた無信号キャプチャ 2 通り） | Q2 が保険か実益か（§4-3）。v1 での負の結果だけが強い | [review/tap_compare_review.md](review/tap_compare_review.md) 6-5 |
 | V21-実測-08 | HP 32 Ω を鳴らす／外すで LINE 出力の A-B-A、TMUX のピンの ±15 V の AC | HP バッファの RC の実装（§3-11） | [review/main_power_compare.md](review/main_power_compare.md) §4 (b-5) |
 | V21-実測-09 | 石の熱の整定（通電してから何秒で H3・音が落ち着くか） | 切り替えてから聴くまでの待ち（§1-2） | [review/rejected_review_review.md](review/rejected_review_review.md) §6 U2 |
-| V21-実測-10 | ADC 系の実電流（電流計を直列に 1 回） | ADC 枝の PPTC・LDO 前の R の定格（§4-5） | [review/rejected_review_review.md](review/rejected_review_review.md) §6 |
+| V21-実測-10 | ADC 系の実電流（電流計を直列に 1 回） | ADC 枝のヒューズ・LDO 前の R の定格（§4-5） | [review/rejected_review_review.md](review/rejected_review_review.md) §6 |
 | V21-実測-11 | 容量負荷のメイク回数試験（22 Ω・AZ850） | 電源用リレーの品種（§2-2） | [review/stack_relay_power_review.md](review/stack_relay_power_review.md) 1-4 |
 | V21-実測-12 | ch を ON してからの出力 DC の整定（NC 10 kΩ・選んでから音声リレーをセットする順も含めて） | ミュートの長さ（§2-10） | [review/arch_zero_base_review.md](review/arch_zero_base_review.md) §6.4、[review/stack_relay_power_review.md](review/stack_relay_power_review.md) 5-3 |
 
-DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品番（単発パルス曲線）、PPTC（RXEF 系）の温度別 hold 電流、AHCT 系、PMOS・ツェナー（B1）、RB160M-30、TPS3307 の MR、Pico 2 基板、5×20 F2A の溶断 I²t、娘の 3.3 V を作る LDO（発振器なし）、娘の 2→4 デコーダ（Ioff 付き、例 SN74LVC1G139）、EN を落とす小信号 N-FET、2.54 mm スタックヘッダの接点定格（突入 0.68 A・コイル 560 mA のパルス、[review/stack_relay_power.md](review/stack_relay_power.md) §7.3）。確かめる事実: PCM1804 の VCOM の駆動能力、RS6 の入手性（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §10-11、[review/rail_detect_review.md](review/rail_detect_review.md) §10、[review/main_power_compare_review.md](review/main_power_compare_review.md) §5）。
+DS を取るもの（リポジトリに無い）: 22 Ω ヒューズ抵抗の品番（単発パルス曲線）、速断のチップヒューズ（PD 12 V の 3 枝。定格電流・I²t・溶断特性、§3-14）、AHCT 系、PMOS・ツェナー（B1）、RB160M-30、TPS3307 の MR、Pico 2 基板、5×20 F2A の溶断 I²t、娘の 3.3 V を作る LDO（発振器なし）、娘の 2→4 デコーダ（Ioff 付き、例 SN74LVC1G139）、EN を落とす小信号 N-FET、2.54 mm スタックヘッダの接点定格（突入 0.68 A・コイル 560 mA のパルス、[review/stack_relay_power.md](review/stack_relay_power.md) §7.3）。確かめる事実: PCM1804 の VCOM の駆動能力、RS6 の入手性（[review/adc_gnd_retree_review.md](review/adc_gnd_retree_review.md) §10-11、[review/rail_detect_review.md](review/rail_detect_review.md) §10、[review/main_power_compare_review.md](review/main_power_compare_review.md) §5）。
 
 ### 10-2 決めること
 

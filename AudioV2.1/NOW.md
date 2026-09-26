@@ -44,7 +44,7 @@ A1 は **Pico 1 個＋親に制御専用の MCP23017**（タッチは残す、§
 - 娘は **2 版（Switch / Relay）のまま**、どちらも MCP23017 とジャンパ 6 段の番地（UI の MCP は 0x22、娘は 0x20/0x21/0x23〜0x26）。
   v2.1 では娘は 1 種類で、MCP・I²C・番地ジャンパは外す（DECISIONS §2-12）
 - **電源**: DC-DC は `REC20K-2415DZ`（FP `Library:REC20K-Z_1in_THT`）、入口 `F2A` 速断、PPTC 3 個。ADC の LDO は `+15V` 直結で、ADC 枝に PPTC は無い。
-  v2.1 ではこれを RS6-1215D・PD 12 V からの ADC 電源・ADC 枝の PPTC へ替える（DECISIONS §3・§4）
+  v2.1 ではこれを RS6-1215D・PD 12 V からの ADC 電源へ替え、PD 12 V 側の枝の保護は PPTC をやめて速断のチップヒューズにする（DECISIONS §3・§4、§3-14）
 - **トーン**: 図にはまだ v2 の PT2314E が載っている（却下済み。実装で NJW1194 に置き換える、DECISIONS §1-6）
   UI の MCP23017 の `INTA`/`INTB` は Pico へ（外付け 10 k → `3V3`）
 - **箱の I/O**: 入力 `J_IN401`（Phoenix MKDS-1,5）、HP／LINE は JST XH 3P（パネルジャックへケーブル）。3 つとも L / `A_GND` / R。
