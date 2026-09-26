@@ -192,6 +192,11 @@ part numbers only. For other part numbers, please contact RECOM for advice."*
 | PCM5122（別の道 (b)） | DAC、2.1 Vrms 出力、内蔵の biquad、TSSOP-28 | [tone/TI_PCM512x.pdf](tone/TI_PCM512x.pdf) | ti.com、SLAS763C（2018-10 改訂）、2026-09-26 取得 |
 | ADAU1701（別の道 (b)） | SigmaDSP（ADC 2・DAC 4）、LQFP-48 | [tone/ADI_ADAU1701_Rev0.pdf](tone/ADI_ADAU1701_Rev0.pdf) | **Digi-Key のミラー、Rev. 0（2006-10）＝旧版**。analog.com は取得失敗 |
 | MCP41HV51（別の道 (a)） | ±18 V のデジタルポテンショメータ（7/8 bit、SPI）、TSSOP-14 | [tone/Microchip_MCP41HVX1.pdf](tone/Microchip_MCP41HVX1.pdf) | ww1.microchip.com、DS20005207B（2013–2015）、2026-09-26 取得 |
+| BD3814FV（NJW1194 の代替候補） | 6 ch 音量＋FL/FR の Bass/Treble、"Tone: By-pass"（±7 V、2 線）。符号表は無い（調査は [../review/njw1194_alternatives.md](../review/njw1194_alternatives.md)） | [tone/ROHM_BD3814FV.pdf](tone/ROHM_BD3814FV.pdf) | **LCSC の写し**、Technical Note No.10081EAT05 2010.06 Rev.A、2026-09-26 取得。rohm.com は 404 |
+| BD3813KS（参考、BD3814FV の兄弟） | 5.1 ch、"Tone Bypass"、SQFP56 | [tone/ROHM_BD3813KS.pdf](tone/ROHM_BD3813KS.pdf) | **LCSC の写し**、No.10081EAT04 2010.06 Rev.A、2026-09-26 取得 |
+| NJU72343（組み合わせのフェード段） | 8 ch 電子ボリューム、ゼロクロス、I²C 形式の 2 線、±4.5〜±7.5 V | [tone/NJR_NJU72343.pdf](tone/NJR_NJU72343.pdf) | Nisshinbo、Ver.2.6E（16 頁）、2026-09-26 取得 |
+| NJW1195A（組み合わせのフェード段） | 4 ch 電子ボリューム＋4 入力 2 出力セレクタ、3 線、±3.5〜±7.5 V | [tone/NJR_NJW1195A.pdf](tone/NJR_NJW1195A.pdf) | Nisshinbo（20 頁）、2026-09-26 取得 |
+| PGA2320（組み合わせのフェード段） | 2 ch 音量、±15 V、ゼロクロス（16 ms で打ち切り）、SPI、SOL-16 | [tone/TI_PGA2320.pdf](tone/TI_PGA2320.pdf) | **LCSC の写し**、SBOS312B 2004-12（22 頁）、2026-09-26 取得 |
 | **Alps RK27112A00CF** ×2 | HP / LINE 手回し音量（A50k Dual） | （メーカーカタログ） | [PARTS.md](../PARTS.md) |
 | **Cosland 2MD1 / 2MS1** | DEST（DPDT ON–ON）／PWR | （秋月の商品ページ） | [PARTS.md](../PARTS.md) §2.1 |
 | ~~PGA2310PA~~ | **不採用**（DECISIONS `V21-継-02`） | [TI_PGA2310.pdf](TI_PGA2310.pdf) | TI |
